@@ -1,0 +1,8 @@
+{
+  "jobname": "COMPARE2",
+  "fileAssignments": {
+    "IN1":     "input.dat",
+    "IN2":     "input2.dat",
+    "LISTING": "listing.prn"
+  }
+}

@@ -1,0 +1,345 @@
+﻿      ***------------------------------------------------------------***
+      ***                   -- ARCHIINSERT --                        ***
+      ***             INSERTION DES CHERCHEUSES DANS                 ***
+      ***                LA TABLE CHERCHEUSE                         ***
+      ***                       == U C S ==                          ***
+      ***------------------------------------------------------------***
+      * Type     : BATCH                                               *
+      * Analyste :                                 (INITIALES)         *
+      * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+      * Ecrit le : 04/03/2002                      (dd/mm/ccyy)        *
+      * Release  : 01                              (99)                *
+      * Version  : 001                             (999)               *
+      *----------------------------------------------------------------*
+      * Modifications :                                                *
+      * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+
+      ***------------------------------------------------------------***
+      *                       DESCRIPTION                              *
+      *                       ===========                              *
+      *   INPUT:  chercheuse                                           *
+      ***------------------------------------------------------------***
+
+       Identification division. 
+      *========================*
+       program-id.  ARCHIINSERT.
+
+       Environment division.
+      *====================*
+
+       Configuration section.   
+      *----------------------*  
+       source-computer.  unisys-2200.   
+       object-computer.  unisys-2200 MEMORY 3 MODULES.  
+       special-names.   
+           printer       printer
+           decimal-point comma. 
+    
+       Input-output section.
+      *---------------------*   
+       file-control.
+           select chercheuse assign to disc    ECL-FICREPORT.  *> SSG-STUB [filein,1,1,1]
+       i-o-control. 
+
+       Data division.   
+      *==============*  
+
+       File section.
+      *-------------*   
+      * Fichier chercheuse  
+       FD  chercheuse.  
+        1  no-rch              pic 9(1).  *> SSG-STUB [filein,1,1,2]
+    
+       WORKING-STORAGE SECTION. 
+      *------------------------*
+      *--------------- VARIABLES DE TRAVAIL ----------  
+         1 lecturef                    pic 9 value 0.   
+           88 fin-lecture              value 1. 
+         1 ws-vl-pnt-rep.   
+           3 ws-vl-cpt-lu-cpr         pic 9(10).
+           3 ws-vl-cpt-ins-cpr        pic 9(10).
+           3     pic x(40). 
+      *----------------------------------------------   
+      *---------------- FLAGS ------------------------  
+        77 fl-pre                     pic 9.
+        77 fl-cpr                     pic 9.
+        77 fl-ins-cpr                 pic 9.
+        77 fl-rch-vide                pic 9.
+      *-----------------------------------------------  
+      *------------- DATE ET HEURE -------------------  
+         1 ws-date                     pic 9(8).
+         1 ws-dt-i redefines ws-date.   
+           3 ws-aa-i                   pic 9(4).
+           3 ws-mm-i                   pic 99.  
+           3 ws-jj-i                   pic 99.  
+         1 ws-dt-fr.
+           3 ws-jj-fr                  pic 99.  
+           3    pic x value "/".
+           3 ws-mm-fr                  pic 99.  
+           3    pic x value "/".
+           3 ws-aa-fr                  pic 9(4).
+         1 ws-hre-tot.  
+           3 ws-hre                   pic 9(6). 
+           3     pic 99.
+      *-----------------------------------------------  
+      *-------------- COMPTEURS ----------------------  
+        77 cpt-commit                  PIC 999. 
+        77 cpt-lu                      PIC 9(10).   
+        77 cpt-ins                     pic 9(10).   
+        77 cpt-luf                     PIC z(9)9.   
+        77 cpt-insf                    pic z(9)9.   
+      *-------------------------------------------------------- 
+
+      *  VARIABLES DE CONTROLE RDMS ET ESQL 
+      *-------------------------------------------------------------------------
+
+       01 SQLSTATE                PIC X(05) USAGE DISPLAY.  
+           COPY WS-ESQL-VAR  OF COMMONS.
+
+           COPY ESQL-INVOKE OF COMMONS  
+                REPLACING ==NM-TAB== BY ==CHK_PNT_RST==.
+
+           COPY ESQL-INVOKE OF COMMONS  
+                REPLACING ==NM-TAB== BY ==SCHEMA1==.  *> SSG-STUB [table,1,1,1]
+    
+       PROCEDURE DIVISION.  
+      *==================*  
+        000-main.   
+           open input chercheuse
+           perform 010-init-db thru 010-exit
+           perform 020-init-var thru 020-exit   
+           perform 030-pre-trait thru 030-exit  
+           perform 040-lec-fic thru 040-exit
+           perform 050-rapport thru 050-exit
+           perform 060-fin-db thru 060-exit 
+           close chercheuse 
+           stop run 
+           .
+      *--------- INITIALISATION DE LA DB -----------------  
+        010-init-db.
+           MOVE  "0"                   TO  WS-ESQL-FL-THREAD
+           EXEC SQL 
+                    BEGIN THREAD FOR UDSSRC UPDATE (QUICKLOOKS) 
+           END-EXEC 
+           IF  SQLCODE NOT = 0  
+               PERFORM  999-ESQL-ERR
+               PERFORM  999-ESQL-ABORT  
+           END-IF   
+           MOVE  "1"                   TO  WS-ESQL-FL-THREAD
+           COPY  ESQL-USE              OF  COMMONS. 
+           COPY  ESQL-USE-DYN          OF  COMMONS. 
+           IF  SQLCODE NOT = 0  
+               PERFORM  999-ESQL-ERR
+               PERFORM  999-ESQL-ABORT  
+           END-IF   
+           .
+        010-exit.   
+           exit.
+      *-------- INIT DES VARIABLES -------------
+        020-init-var.   
+           move zeroes to fl-pre
+                          fl-cpr
+                          fl-ins-cpr
+                          fl-rch-vide   
+                          ws-date   
+                          ws-hre
+                          ws-vl-pnt-rep 
+                          cpt-commit
+                          cpt-lu
+                          cpt-ins   
+                          cpt-luf   
+                          cpt-insf  
+           .
+        020-exit.   
+           exit.
+      *----- PREMIERE LECTURE DU FICHIER  --------- 
+        030-pre-trait.  
+           read chercheuse  
+             at end 
+               move 1 to lecturef fl-rch-vide   
+             not at end 
+               move 1 to fl-pre 
+               accept ws-hre-tot from time  
+               perform 100-lec-cpr thru 100-exit
+           end-read 
+           accept ws-date from date yyyymmdd
+           move ws-aa-i to ws-aa-fr 
+           move ws-mm-i to ws-mm-fr 
+           move ws-jj-i to ws-jj-fr 
+           .
+        030-exit.   
+           exit.
+      *---------- LECTURE DU FICHIER ---------  
+        040-lec-fic.
+           perform until fin-lecture
+             add 1 to cpt-lu
+             if fl-cpr = 1  
+               add 1 to ws-vl-cpt-lu-cpr
+               perform until cpt-lu = ws-vl-cpt-lu-cpr  
+                 read chercheuse
+                   at end   
+                     move 1 to lecturef 
+                     move cpt-lu to ws-vl-cpt-lu-cpr
+                   not at end   
+                     add 1 to cpt-lu
+                 end-read   
+               end-perform  
+             end-if 
+             perform 101-ins-rch thru 101-exit  
+             read chercheuse
+               at end   
+                 move 1 to lecturef 
+             end-read   
+           end-perform  
+           if fl-rch-vide = 0   
+             perform 102-del-cpr thru 102-exit  
+           end-if   
+           .
+        040-exit.   
+           exit.
+      *--------------- RAPPORT  --------
+        050-rapport.
+           move cpt-lu to cpt-luf   
+           move cpt-ins to cpt-insf 
+           display "ARCHIINSERT      Rapport       " ws-dt-fr   
+             upon printer   
+           display "tot lu = " cpt-luf upon printer 
+           display "tot ins = " cpt-insf upon printer   
+           .
+        050-exit.   
+           exit.
+      *--------------- FIN CONNECTION DB ------------   
+        060-fin-db. 
+           IF  WS-ESQL-FL-THREAD = "1"  
+             EXEC SQL  END THREAD  END-EXEC 
+             MOVE 0 TO WS-ESQL-FL-THREAD
+           end-if   
+           .
+        060-exit.   
+           exit.
+      *------- LECTURE DU PARAMETRE DE CHK_PNT_RST -------  
+        100-lec-cpr.
+           exec sql 
+             select vl_pnt_rep  
+             into   :ws-vl-pnt-rep  
+             from   chk_pnt_rst 
+             where  mr_prg_maj   =  'ARCHII'
+           end-exec 
+           evaluate sqlcode 
+             when 0 
+               move 1 to fl-cpr 
+               move 0 to fl-ins-cpr 
+               move ws-vl-cpt-ins-cpr to cpt-ins
+             when 100   
+               move 1 to ws-vl-cpt-lu-cpr   
+                         fl-ins-cpr 
+               move 0 to fl-cpr 
+             when other 
+               move "100-lec-cpr" to ws-esql-trace  
+               perform 999-esql-err 
+               perform 999-esql-abort   
+           end-evaluate 
+           .
+        100-exit.   
+      *----------- INSERT DANS LA TABLE CHERCHEUSE ------   
+        101-ins-rch.
+           EXEC SQL 
+                INSERT INTO SCHEMA1  *> SSG-STUB [table,1,1,1]
+                 COLUMNS
+                   (TABLE-ARCH       =     :no-rch)  *> SSG-STUB [table,1,1,2]
+           END-EXEC.
+           evaluate sqlcode 
+             when 0 
+               add 1 to cpt-ins 
+               add 1 to cpt-commit  
+               if cpt-commit > 500  
+                 perform 500-commit thru 500-exit   
+               end-if   
+      *Continue si la cl{ existe!   
+             when -6003 
+               continue 
+             when other 
+               display "no chercheuse: " no-rch upon printer
+               MOVE "101-ins-rch" TO WS-ESQL-TRACE  
+               PERFORM 999-ESQL-ERR 
+               PERFORM 999-ESQL-ABORT   
+           end-evaluate 
+           .
+        101-exit.   
+           exit.
+      *----------- DELETE DU PARAMETRE CPR -------  
+        102-del-cpr.
+           exec sql 
+             delete Chk_Pnt_Rst 
+             where mr_prg_maj = 'ARCHII'
+           end-exec 
+           if sqlcode not = 0   
+              move "102-del-cpr" to ws-esql-trace   
+              perform 999-esql-err  
+              perform 999-esql-abort
+           end-if   
+           .
+        102-exit.   
+           exit.
+      *------------ EFFETUE UN COMMIT DANS LA DB ------------   
+        500-commit. 
+           perform 600-maj-cpr thru 600-exit
+           EXEC SQL COMMIT WORK END-EXEC.   
+           IF SQLCODE NOT = 0   
+              MOVE "500-commit" TO WS-ESQL-TRACE
+              PERFORM 999-ESQL-ERR  
+              PERFORM 999-ESQL-ABORT
+           END-IF   
+           move 0 to cpt-commit 
+           .
+        500-exit.   
+           exit.
+      *------------ MAJ DE CHK_PNT_RST -----------  
+        600-maj-cpr.
+           move cpt-lu to ws-vl-cpt-lu-cpr  
+           move cpt-ins to ws-vl-cpt-ins-cpr
+           if fl-ins-cpr = 1
+             exec sql   
+               insert into chk_pnt_rst  
+                 columns (mr_prg_maj  =  'ARCHII',  
+                          vl_pnt_rep  =  :ws-vl-pnt-rep,
+                          mr_dat_maj  =  :ws-date,  
+                          mr_hre_maj  =  :ws-hre)   
+             end-exec   
+             evaluate sqlcode   
+               when 0   
+                 move 0 to fl-ins-cpr   
+               when 100 
+                 continue   
+               when other   
+               move "600-maj-cpr: insert" to ws-esql-trace  
+               perform 999-esql-err 
+               perform 999-esql-abort   
+             end-evaluate   
+           else 
+             exec sql   
+               update chk_pnt_rst   
+                 columns (vl_pnt_rep  =  :ws-vl-pnt-rep)
+                 where    mr_prg_maj  =  'ARCHII'   
+             end-exec   
+             if sqlcode not = 0 
+                 move "600-maj-cpr: update" to ws-esql-trace
+                 perform 999-esql-err   
+                 perform 999-esql-abort 
+             end-if 
+           end-if   
+           .
+        600-exit.   
+           exit.
+
+      * GESTION DES ERREURS RDMS *  
+      ****************************  
+           COPY  999-ESQL-ERR          OF  COMMONS. 
+
+       999-ESQL-ABORT.  
+      *===============* 
+           CALL "EREABT$".  
+           STOP RUN.

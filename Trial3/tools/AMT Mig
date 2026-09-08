@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMT Migration Process</title>
+<style>
+:root {
+    --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
+    --header-text: #ffffff;
+    --header-text-secondary: #e6f0f5;
+    --header-description: #edf5fa;
+    --page-bg: #f5f9fc;
+    --page-bg-alt: #ffffff;
+    --text-primary: #1a2b3c;
+    --text-secondary: #2f455c;
+    --text-muted: #4f5f6f;
+    --brand: #2d7a9f;
+    --brand-hover: #2b7696;
+    --accent-bg: #e6f3fa;
+    --accent: #2d7a9f;
+    --border: #d0dbe5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
+        --header-text: #ffffff;
+        --header-text-secondary: #cfdbe4;
+        --header-description: #d8e5ed;
+        --page-bg: #121a23;
+        --page-bg-alt: #18242f;
+        --text-primary: #e8f0f7;
+        --text-secondary: #c5d3df;
+        --text-muted: #9fb2c4;
+        --brand: #5bb8e6;
+        --brand-hover: #4aa1c7;
+        --accent-bg: #1f2e3a;
+        --accent: #5bb8e6;
+        --border: #2f4354;
+    }
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--page-bg);
+    color: var(--text-primary);
+}
+.poster-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--page-bg-alt);
+    border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(58,143,183,0.12);
+    overflow: hidden;
+}
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    text-align: center;
+    padding: 56px 32px 40px 32px;
+}
+.header-title {font-size: 48px;font-weight: 900;}
+.header-subtitle {font-size: 22px;color: var(--header-text-secondary);}
+.header-description {font-size: 18px;color: var(--header-description);max-width:700px;margin:10px auto;}
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 24px;
+}
+.column {display:flex;flex-direction:column;gap:20px;}
+.card {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px;
+}
+.section-title {font-weight:700;margin-bottom:10px;}
+.stat-grid {display:flex;gap:12px;flex-wrap:wrap;}
+.stat-card {flex:1 1 45%;background:var(--page-bg);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center;}
+.stat-number {font-size:26px;font-weight:800;color:var(--accent);}
+.stat-label {font-size:12px;color:var(--text-muted);}
+.timeline {border-left:3px solid var(--brand);padding-left:14px;display:flex;flex-direction:column;gap:18px;}
+.timeline-item {position:relative;padding-left:10px;}
+.timeline-item::before {content:'';position:absolute;left:-21px;top:4px;width:12px;height:12px;background:var(--brand);border-radius:50%;box-shadow:0 0 0 4px var(--page-bg-alt),0 0 0 8px var(--accent-bg);}
+.timeline-title {font-weight:700;font-size:14px;}
+.timeline-text {font-size:13px;color:var(--text-secondary);}
+.flow {display:flex;flex-direction:column;gap:10px;}
+.flow-step {background:var(--accent-bg);border:1px solid var(--brand);border-radius:12px;padding:10px;text-align:center;font-size:13px;}
+ul {padding-left:18px;margin:0;}
+li {margin-bottom:6px;color:var(--text-secondary);}
+li::marker {color:var(--brand);}
+@media (max-width: 768px) {
+    .main-content {grid-template-columns:1fr;}
+    * {overflow-wrap:anywhere;}
+}
+:root {
+    /* Light Mode Colors */
+    --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
+    --header-text: #ffffff;
+    --header-text-secondary: #eaf4f9;
+    --header-description: #eff7fc;
+    --page-bg: #f5f9fc;
+    --page-bg-alt: #ffffff;
+    --text-primary: #1a2b3c;
+    --text-secondary: #2f455c;
+    --text-muted: #4f5f6f;
+    --brand: #2d7a9f;
+    --brand-hover: #2b7696;
+    --accent-bg: #e6f3fa;
+    --accent: #2d7a9f;
+    --border: #d0dbe5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode Colors */
+        --header-bg: linear-gradient(135deg, #2b5396 0%, #2b7696d1 100%);
+        --header-text: #ffffff;
+        --header-text-secondary: #cfdbe4;
+        --header-description: #d8e5ed;
+        --page-bg: #121a23;
+        --page-bg-alt: #18242f;
+        --text-primary: #e8f0f7;
+        --text-secondary: #c5d3df;
+        --text-muted: #9fb2c4;
+        --brand: #5bb8e6;
+        --brand-hover: #4aa1c7;
+        --accent-bg: #1f2e3a;
+        --accent: #5bb8e6;
+        --border: #2f4354;
+    }
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'SF Pro Display', 'SF Pro', sans-serif;
+    background: var(--page-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+.poster-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--page-bg-alt);
+    border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(58,143,183,0.12);
+    padding: 0;
+    overflow: hidden;
+}
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    text-align: center;
+    padding: 56px 32px 40px 32px;
+    position: relative;
+}
+.header-title {
+    font-size: clamp(40px, 6vw, 60px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+}
+.header-subtitle {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--header-text-secondary);
+}
+.header-description {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--header-description);
+}
+/* Stat Card Component */
+.stat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+}
+.stat-card {
+    flex: 1 1 45%;
+    background: var(--page-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 16px;
+    text-align: center;
+}
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+}
+.stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+/* Timeline Component - Dual-Layer Glowing Dot Style */
+.timeline {
+    border-left: 3px solid var(--brand);
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.timeline-item {
+    position: relative;
+    padding-left: 12px;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 4px;
+    width: 15px;
+    height: 15px;
+    background: var(--brand);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 4px var(--page-bg-alt),
+        0 0 0 8px var(--accent-bg);
+}
+.timeline-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+.timeline-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 15px;
+}
+@media (forced-colors: active) {
+  header { background: Canvas; color: CanvasText; }
+  .poster-container,
+  .stat-card { background: Canvas; border: 1px solid CanvasText; box-shadow: none; }
+  .timeline { border-left: 2px solid CanvasText; }
+  .timeline-item::before {
+    background: CanvasText;
+    box-shadow: none;
+    border: 1px solid Canvas;
+  }
+}
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    * {
+        overflow-wrap: anywhere;
+    }
+}
+</style>
+</head>
+<body>
+<div class="poster-container">
+<header>
+<h1 class="header-title">AMT Migration Flow</h1>
+<div class="header-subtitle">ECL / SSG / COBOL → PowerShell & C#</div>
+<div class="header-description">End-to-end transformation pipeline from legacy job control and program logic into AMT-executed PowerShell jobs and generated C# services.</div>
+</header>
+<div class="main-content">
+<div class="column">
+<div class="card">
+<h2 class="section-title">Key Decisions</h2>
+<ul>
+<li><strong>ECL is converted</strong> into PowerShell using AMT libraries</li>
+<li><strong>SSG has dual roles</strong>: orchestration vs COBOL generation</li>
+<li><strong>COBOL path leads</strong> to C# via Lion toolchain</li>
+<li><strong>AMT runtime required</strong> for execution via ComScript</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="section-title">Process Flow</h2>
+<div class="flow">
+<div class="flow-step">Source Intake (ECL / SSG / COBOL)</div>
+<div class="flow-step">Classification & Pattern Detection</div>
+<div class="flow-step">Split: PowerShell vs COBOL Path</div>
+<div class="flow-step">Generation (Scripts & C#)</div>
+<div class="flow-step">AMT Deployment</div>
+<div class="flow-step">Execution via BatchController</div>
+</div>
+</div>
+<div class="card">
+<h2 class="section-title">Exception Cases</h2>
+<ul>
+<li><strong>Dynamic ECL from COBOL</strong> requires manual handling</li>
+<li><strong>Dynamic COBOL from SSG</strong> requires project decisions</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="section-title">Execution Timeline</h2>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-title">Start Modes</div><div class="timeline-text">Control Center, PowerShell, scheduler</div></div>
+<div class="timeline-item"><div class="timeline-title">Job Request</div><div class="timeline-text">Submitted into AMT system</div></div>
+<div class="timeline-item"><div class="timeline-title">Queue Processing</div><div class="timeline-text">Handled via BatchController</div></div>
+<div class="timeline-item"><div class="timeline-title">Execution</div><div class="timeline-text">Runs PowerShell or C# program</div></div>
+<div class="timeline-item"><div class="timeline-title">Outputs</div><div class="timeline-text">Logs, reports, job summaries</div></div>
+</div>
+</div>
+</div>
+<div class="column">
+<div class="card">
+<h2 class="section-title">Conversion Paths</h2>
+<ul>
+<li><strong>Job Control Lane</strong>: ECL/SSG → PowerShell scripts</li>
+<li><strong>Program Logic Lane</strong>: COBOL → Lion → C#</li>
+<li><strong>SSG inside ECL</strong> follows PowerShell path</li>
+<li><strong>SSG generating COBOL</strong> follows C# path</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="section-title">AMT Runtime Components</h2>
+<ul>
+<li><strong>AmtPsEclLib.psm1</strong> for ECL behavior</li>
+<li><strong>AmtPsSortLib.psm1</strong> for sorting</li>
+<li><strong>AmtSettings.xml</strong> configuration</li>
+<li><strong>ComScript connection</strong> to AMT application</li>
+</ul>
+</div>
+<div class="card">
+<h2 class="section-title">Outputs</h2>
+<div class="stat-grid">
+<div class="stat-card"><div class="stat-number">PS</div><div class="stat-label">Run-decks</div></div>
+<div class="stat-card"><div class="stat-number">C#</div><div class="stat-label">Generated Programs</div></div>
+<div class="stat-card"><div class="stat-number">AMT</div><div class="stat-label">Executable Jobs</div></div>
+<div class="stat-card"><div class="stat-number">Logs</div><div class="stat-label">Batch & Events</div></div>
+</div>
+</div>
+<div class="card">
+<h2 class="section-title">COBOL → C# Toolchain</h2>
+<div class="flow">
+<div class="flow-step">Remove SSG Directives</div>
+<div class="flow-step">Convert SSG to Lion</div>
+<div class="flow-step">CobolConverter → .LionSource</div>
+<div class="flow-step">LionDev Parse & Status</div>
+<div class="flow-step">LionDevGenNet → C#</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

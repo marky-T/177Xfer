@@ -1,0 +1,12 @@
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.vs/
+
+# Build artefacts from ad-hoc rebuilds of SsgConverter/Source
+bin/
+obj/
+
+# Note: Trial3/ has its own nested .gitignore (output/, logs/, *.log, *.exe, *.dll)
+# that applies only within Trial3/ - it does NOT affect SsgConverter/Build/**,
+# which must keep its prebuilt .exe/.dll files.

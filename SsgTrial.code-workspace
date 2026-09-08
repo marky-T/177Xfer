@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "name": "Trial3",
+      "path": "Trial3"
+    },
+    {
+      "name": "SsgConverter",
+      "path": "SsgConverter"
+    },
+    {
+      "name": "SSG-Source (read-only)",
+      "path": "SSG-Source"
+    },
+    {
+      "name": "docs",
+      "path": "docs"
+    },
+    {
+      "name": ".github (migration prompts + instructions)",
+      "path": ".github"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.git": true
+    },
+    "search.exclude": {
+      "**/output": true,
+      "**/_baseline": true,
+      "**/_coboldeps": true
+    },
+    "powershell.scriptAnalysis.enable": true,
+    "editor.formatOnSave": false
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.powershell"
+    ]
+  }
+}

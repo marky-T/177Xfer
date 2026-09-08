@@ -1,0 +1,69 @@
+﻿
+       IDENTIFICATION DIVISION.     
+       PROGRAM-ID. LOADIS-ASCII.    
+       AUTHOR. BOURDEAUD HUY 13/05/82.    
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+           SELECT  BDE1  ASSIGN TO  *> SSG-STUB [*I]
+               DISC ECL-TAPEIN.  *> SSG-STUB [INPUT,1,1,1]
+           SELECT DISQ ASSIGN TO DISC  "ECL-TAPEOUT"  *> SSG-STUB [OUTPUT,1,1,1]
+           RESERVE 20 AREAS   
+           ORGANIZATION IS INDEXED  
+            ACCESS  MODE IS DYNAMIC RECORD KEY IS CLEF
+           ALTERNATE RECORD KEY IS CLEG.  
+       DATA DIVISION.   
+       FILE SECTION.    
+       FD  BDE1  *> SSG-STUB [*I]
+           LABEL RECORD STANDARD    
+             BLOCK CONTAINS 1   RECORDS  *> SSG-STUB [INPUT,1,1,3]
+           RECORD CONTAINS 80 CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+           DATA RECORD IS  Z1.  *> SSG-STUB [*I]
+       01  Z1   PIC  X(80).  *> SSG-STUB [*I], [INPUT,1,1,2]
+       FD  DISQ   LABEL RECORD STANDARD   
+           BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+           RECORD  CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+             DATA RECORD IS ZDISQ CLEFA.  
+       01  ZDISQ  PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  CLEFA. 
+           02 CLEF PIC X(1).  *> SSG-STUB [KEYIS,1,1,2]
+           02 CLEG PIC X(1).  *> SSG-STUB [KEYIS,2,1,2]
+           02 CLEH PIC X(1).  *> SSG-STUB [KEYIS,3,1,2]
+       WORKING-STORAGE SECTION.     
+       77  FF  PIC  9(10)  COMP  VALUE 1. 
+       77  CTRIN  PIC  9(10)  COMP  VALUE  0.   
+       01  WREC.  
+           02 FILLER  PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  WREC1     REDEFINES  WREC.     
+           02 KEYA PIC X(1).  *> SSG-STUB [KEYIS,1,1,2]
+           02 KEYB PIC X(1).  *> SSG-STUB [KEYIS,2,1,2]
+           02 KEYC PIC X(1).  *> SSG-STUB [KEYIS,3,1,2]
+       PROCEDURE DIVISION.    
+       DEBUT.     
+           OPEN INPUT  BDE1.  *> SSG-STUB [*I]
+           OPEN  OUTPUT  DISQ.
+       LECT.
+           GO TO LECT1 FINB  DEPENDING  ON FF.  
+       LECT1.     
+           MOVE SPACES TO Z1.  *> SSG-STUB [*I]
+           READ  BDE1  INTO  WREC  AT END ADD 1 TO FF  GO TO LECT.
+           GO TO CONT.  
+       CONT.
+           MOVE KEYA     TO  CLEF.  
+           MOVE KEYB     TO  CLEG.  
+           MOVE KEYC     TO  CLEH.  
+           ADD  1  TO  CTRIN. 
+           WRITE ZDISQ FROM WREC INVALID KEY GO TO  ERRDISQ.
+           MOVE SPACES TO WREC WREC1 ZDISQ.     
+           GO TO LECT.  
+       FINB.
+           DISPLAY 'NB.RECORDS ECRITS'  CTRIN  UPON PRINTER.
+           CLOSE  DISQ. 
+           CLOSE  BDE1.  *> SSG-STUB [*I]
+           STOP RUN.    
+       ERRDISQ.   
+           DISPLAY 'IS.ERROR'  CLEF  UPON  PRINTER.   
+           ENTER ASM 'ABORT'. 

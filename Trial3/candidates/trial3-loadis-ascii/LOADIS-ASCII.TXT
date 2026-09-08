@@ -1,0 +1,70 @@
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. LOADIS-ASCII.
+       AUTHOR BOURDEAUD HUY 17/12/79.   
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.  
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  BDE1  ASSIGN TO   
+               DISC DISC.  
+           SELECT DISQ ASSIGN TO DISC  DISC   
+           ORGANIZATION IS INDEXED  
+           RESERVE 5 AREAS  
+           ACCESS  MODE IS SEQUENTIAL RECORD KEY IS CLEF
+           FILE STATUS IS IO-STAT.  
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  BDE1  
+           LABEL RECORD STANDARD
+             BLOCK CONTAINS 1   RECORDS 
+           RECORD CONTAINS 80 CHARACTERS 
+           DATA RECORD IS  Z1.   
+       01  Z1   PIC  X(80).   
+       FD  DISQ   LABEL RECORD STANDARD 
+           BLOCK CONTAINS 1 RECORDS
+           RECORD  CONTAINS 20 CHARACTERS   
+             DATA RECORD IS ZDISQ CLEF. 
+       01  ZDISQ  PIC  X(20).   
+       01  CLEFA.   
+           02 CLEF PIC X(8).
+           02 FILLER PIC X(0).  
+       WORKING-STORAGE SECTION. 
+       77  FF  PIC  9(10)  COMP  VALUE 1.   
+       77  CTRIN  PIC  9(10)  COMP  VALUE  0.   
+       01  WREC.
+           02 FILLER  PIC  X(20).   
+       01  WREC1     REDEFINES  WREC.   
+           02 KEYA PIC X(8).
+           02 FILLER PIC X(0).  
+       01  IO-STAT. 
+           02 IO-FS1     PIC X VALUE '9'.   
+           02 IO-FS2     PIC X VALUE '9'.   
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT  BDE1. 
+           OPEN  OUTPUT  DISQ.  
+       LECT.
+           GO TO LECT1 FINB  DEPENDING  ON FF.  
+       LECT1.   
+           MOVE SPACES TO Z1.
+           READ  BDE1  INTO  WREC  AT END ADD 1 TO FF  GO TO LECT.  
+           GO TO CONT.  
+       CONT.
+           MOVE KEYA     TO  CLEF.  
+           ADD  1  TO  CTRIN.   
+           WRITE ZDISQ FROM WREC INVALID KEY GO TO  ERRDISQ.
+           MOVE SPACES TO WREC WREC1 ZDISQ. 
+           GO TO LECT.  
+       FINB.
+           DISPLAY 'NB.RECORDS ECRITS'  CTRIN  UPON PRINTER.
+           CLOSE  BDE1.  
+           CLOSE  DISQ. 
+           STOP RUN.
+       ERRDISQ. 
+           DISPLAY 'IS.ERROR         : '  CLEF  UPON  PRINTER.  
+           DISPLAY 'STATUS           : ' IO-FS1 IO-FS2 UPON  PRINTER.   
+           DISPLAY 'RECORD EN ERREUR : ' CTRIN ' EME'  UPON PRINTER.
+           ENTER ASM 'ABORT'.   

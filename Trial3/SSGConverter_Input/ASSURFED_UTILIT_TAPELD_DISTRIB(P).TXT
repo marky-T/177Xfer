@@ -1,0 +1,318 @@
+*DEFINE FILER   
+*SET  FILLCTR TO  [#1]-1
+*IF   FILLCTR  IS SET   
+                     06 FILLER PIC  X([*FILLCTR]).  
+*END
+*END
+*IF   [ASCII]  >  0 
+#ACOB,IPEC    .CFH-COPY,.CFH-COPY   
+*ELSE   
+#ACOB,IPECT  .CFH-COPY,.CFH-COPY
+*END
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. MICHEL.  
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+*IF   [INPUT,1,1,1]  =  CARDREADER  
+           SELECT  TAPEIN  ASSIGN  TO  CARD-READER. 
+*ELSE   
+           SELECT  TAPEIN  ASSIGN  TO  DISC [INPUT,1,1,1].  
+*END
+*IF  [OUTPUT,1,1,1] = CARDPUNCH   OR  [OUTPUT,1,1,1] = PRINTER  
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+           SELECT   TAPEOUT  ASSIGN  TO  PRINTER.   
+*ELSE   
+           SELECT  TAPEOUT  ASSIGN  TO  CARD-PUNCH. 
+*END
+*ELSE   
+           SELECT  TAPEOUT  ASSIGN  TO  DISC [OUTPUT,1,1,1].
+*END
+*IF     [PRINT]  > 0
+*IF   [OUTPUT,1,1,1] = PRINTER  
+*ELSE   
+           SELECT PRINTOUT ASSIGN TO PRINTER.   
+*END
+*END
+       DATA DIVISION.   
+       FILE SECTION.
+*IF   [PRINT]  > 0  
+*IF    [OUTPUT,1,1,1]  = PRINTER
+*ELSE   
+       FD  PRINTOUT 
+           LABEL RECORD OMITTED 
+           DATA RECORD IS LISTE.
+       01  LISTE PIC X(132).
+*END
+*END
+       FD  TAPEIN   
+*IF   [INPUT,1,1,1]  =  CARDREADER  
+           LABEL RECORD OMITTED 
+*IF [FIELDIN] > 0   
+           DATA RECORD IS   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+           REC1[*I] 
+*LOOP   
+           RECIN.   
+*ELSE   
+           DATA RECORD RECIN.   
+*END
+       01  RECIN  PIC  X([INPUT,1,1,2]).
+*IF [FIELDIN] > 0   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+       01  REC1[*I].
+*PROCESS   FILER   [FIELDIN,1,I,1]  
+           06 ZONE[*I] PIC X([FIELDIN,1,I,2]).  
+*LOOP   
+*END
+*ELSE   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS [INPUT,1,1,3]  RECORDS
+*IF [FIELDIN] > 0   
+           DATA RECORD IS   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+           REC1[*I] 
+*LOOP   
+           RECIN.   
+*ELSE   
+           DATA RECORD RECIN.   
+*END
+*IF [FIELDIN] > 0   
+*INCREMENT    I  FROM  1  BY  1  TO [FIELDIN,1] 
+       01     REC1[*I]. 
+*PROCESS          FILER [FIELDIN,1,I,1] 
+*IF  [FIELDIN,1,I]  >  2
+           06  ZONE[*I]  PIC  9([FIELDIN,1,I,2])V9([FIELDIN,1,I,3]).
+*ELSE   
+           06  ZONE[*I]  PIC  X([FIELDIN,1,I,2]).   
+*END
+*LOOP   
+*END
+       01  RECIN   PIC  X([INPUT,1,1,2]).   
+*END
+       FD  TAPEOUT  
+*IF  [OUTPUT,1,1,1] = CARDPUNCH   OR  [OUTPUT,1,1,1] = PRINTER  
+           LABEL  RECORD OMITTED
+*IF [FIELDOUT] > 0  
+           DATA RECORD IS   
+*INCREMENT I  FROM 1  BY 1  TO [FIELDOUT,1] 
+           REC2[*I] 
+*LOOP   
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1 TO  [FIXE,1]   
+           REC3[*I] 
+*LOOP   
+*END
+           RECOUT.  
+*ELSE   
+           DATA RECORD RECOUT.  
+*END
+       01  RECOUT  PIC  X([OUTPUT,1,1,2]).  
+*IF [FIELDOUT] > 0  
+*INCREMENT I  FROM 1 BY 1  TO  [FIELDOUT,1] 
+       01  REC2[*I].
+*PROCESS   FILER   [FIELDOUT,1,I,1] 
+*IF [FIELDOUT,1,I] > 2  
+           06 ZONO[*I] PIC 9([FIELDOUT,1,I,2]),9([FIELDOUT,1,I,3]). 
+*ELSE   
+           06 ZONO[*I] PIC X([FIELDOUT,1,I,2]). 
+*END
+*LOOP   
+*END
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  REC3[*I].
+*PROCESS   FILER  [FIXE,1,I,1]  
+           06 FIXDATA[*I] PIC X([FIXE,1,I,2]).  
+*LOOP   
+*END
+*ELSE   
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS [OUTPUT,1,1,3]  RECORDS  
+*IF [FIELDOUT] > 0  
+           DATA RECORD IS   
+*INCREMENT I  FROM 1  BY 1  TO [FIELDOUT,1] 
+           REC2[*I] 
+*LOOP   
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1 TO  [FIXE,1]   
+           REC3[*I] 
+*LOOP   
+*END
+           RECOUT.  
+*ELSE   
+           DATA RECORD RECOUT.  
+*END
+       01  RECOUT   PIC   X([OUTPUT,1,1,2]).
+*IF [FIELDOUT] > 0  
+*INCREMENT I  FROM 1 BY 1  TO  [FIELDOUT,1] 
+       01  REC2[*I].
+*PROCESS   FILER   [FIELDOUT,1,I,1] 
+*IF  [FIELDOUT,1,I]   =  3  
+           06  ZONO[*I]  PIC 9([FIELDOUT,1,I,2]),9([FIELDOUT,1,I,3]).   
+*ELSE   
+           06 ZONO[*I] PIC X([FIELDOUT,1,I,2]). 
+*END
+*LOOP   
+*END
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  REC3[*I].
+*PROCESS   FILER  [FIXE,1,I,1]  
+           06 FIXDATA[*I] PIC X([FIXE,1,I,2]).  
+*LOOP   
+*END
+*END
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC  S9(10)  COMP  VALUE 0. 
+       77  LNCTR  PIC  S9(2)  VALUE 58. 
+*IF   [MAXCOPY] 
+       01  COPY-LIMIT         PIC 9(10) VALUE [MAXCOPY,1,1,1].  
+*END
+*IF   [OUTPUT,1,1,1] = PRINTER  
+       01  TITLE-LINE         USAGE DISP-1. 
+           03  FILLER         PIC X(4) VALUE 'H,,,'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE SPACES.   
+           03  FILLER         PIC X(12) VALUE '[INPUT,1,1,1]'.  
+           03  FILLER         PIC X(13) VALUE ' TO PRINTER '.   
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE '12 . '.  
+*END
+*IF [SUPCOM] = 0
+*ELSE   
+       01  RECW.
+           02 RECW1   PIC X([INPUT,1,1,2]). 
+           02 RECW2  REDEFINES RECW1.   
+               03  RECW3  OCCURS [INPUT,1,1,2]. 
+                    04  RECW4  PICTURE X.   
+*END
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  TAB1[*I].
+*IF  NOT  [FIXE,1,I]  >  0  OR  [FIXE,1,I,3] = SPACES ; 
+               OR  [FIXE,1,I,3]  =  SPACE   
+           06  FIXED[*I]  PIC  X([FIXE,1,I,2])  VALUE SPACES.   
+*ELSE   
+           06 FIXED[*I]  PIC X([FIXE,1,I,2]) VALUE [FIXE,1,I,3].
+*END
+*LOOP   
+*END
+*IF [FIXE,1,1,3] =  NUM 
+       01  COUNT.   
+           03 COUNTING PIC S9([FIXE,1,1,2])  VALUE 0.   
+           03 COUNTER PIC S9([FIXE,1,1,2]) VALUE [FIXE,1,1,4].  
+*END
+       01   SWITCHES.   
+           03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+       PROCEDURE DIVISION.  
+       DEBUT.   
+*IF  [PRINT]  > 0   
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+*ELSE   
+           OPEN OUTPUT  PRINTOUT.   
+*END
+*END
+           OPEN INPUT TAPEIN.   
+           OPEN  OUTPUT  TAPEOUT.   
+       LECT.
+           MOVE SPACES TO RECOUT.   
+*IF   [FIXE] > 0  AND  [STITRE]  >  0   
+           IF  LNCTR  > 57  
+*INCREMENT  I FROM 1 BY 1  TO  [FIXE,1] 
+           MOVE  FIXED[*I]   TO FIXDATA[*I] 
+*LOOP   
+           WRITE  RECOUT  AFTER  PAGE   
+           MOVE SPACES TO  RECOUT   
+           WRITE  RECOUT  AFTER  2  
+           MOVE 5 TO LNCTR. 
+*END
+           READ  TAPEIN  AT  END  GO TO  FINW.  
+*IF [SUPCOM]  = 0   
+*ELSE   
+           MOVE  RECIN  TO RECW.
+           IF  RECW4 (7) = '*' GO TO LECT.  
+*END
+*IF  [REPSIM]  > 0  
+       REPSIM.  
+*END
+*IF  [FIELDIN]  >  0
+*ELSE   
+           MOVE RECIN TO RECOUT.
+*END
+*IF [FIELDIN] > 0   
+*INCREMENT  I  FROM 1  BY 1 TO [FIELDIN,1]  
+           MOVE                ZONE[*I] TO ZONO[*I].
+*LOOP   
+*END
+*IF  [FIXE]  >  0  AND NOT [STITRE]  > 0
+*IF  [FIXE,1,1,3] = NUM 
+           ADD COUNTER TO COUNTING. 
+           MOVE COUNTING TO FIXED[*1].  
+*END
+*INCREMENT I FROM 1 BY 1 TO [FIXE,1]
+*IF [FIXE,1,I,3]  = ZONE
+           ENTER  SST60  SUBROUTINE REFERENCING '-' FIXDATA[*I].
+*ELSE   
+           MOVE                  FIXED[*I] TO FIXDATA[*I].  
+*END
+*LOOP   
+*END
+*IF     [PRINT] > 0 
+*IF   [OUTPUT,1,1,1] = PRINTER  
+*ELSE   
+           WRITE LISTE  FROM RECOUT AFTER 2.
+*END
+*END
+           ADD 1  TO NB-LUS.
+           ADD 1  TO LNCTR. 
+*IF  [STARTFIELD]  >  0 
+           IF  ZONE2  <  [STARTFIELD,1,1,1] 
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+*END
+*IF  [STARTREC]  >  0   
+           IF  NB-LUS  <  [STARTREC,1,1,1]  
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+*END
+           WRITE RECOUT AFTER 2.
+*IF   [MAXCOPY] 
+           IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.   
+*END
+*IF  [REPSIM]  > 0  
+           IF  NB-LUS  =  [REPSIM,1,1,1]
+           ADD 1  TO LNCTR. 
+           GO TO FINW   
+           ELSE  GO TO REPSIM.  
+*END
+           GO TO LECT.  
+       FINW.
+           DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.   
+           DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.   
+           CLOSE  TAPEIN.   
+           CLOSE  TAPEOUT.  
+           DISPLAY  REC-SKIPPED  UPON  PRINTER. 
+*IF  [PRINT]  > 0   
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+*ELSE   
+           CLOSE PRINTOUT.  
+*END
+*END
+           STOP RUN.
+#MAP    ASSURFED*UTILITASCII.MAP,TPF$.CFH-COPY  
