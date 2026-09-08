@@ -1,4 +1,4 @@
-# EclCobolPipeline
+# Trial3 — EclCobolPipeline
 
 A self-contained, **repeatable** ECL / SSG-COBOL / PowerShell conversion stream.
 This is the hived-off "parallel conversion-stream" activity carved out of the
@@ -7,7 +7,7 @@ AMT 172 migration. It turns Unisys 2200 SSG macro-COBOL hybrid source
 `CobolConverterConsole` tool — driven entirely from a manifest so the whole set
 can be re-run with a single command.
 
-> Companion documentation: [../SSG-ECL-PowerShell-Reference.html](../SSG-ECL-PowerShell-Reference.html)
+> Companion documentation: [../docs/SSG-ECL-PowerShell-Reference.html](../docs/SSG-ECL-PowerShell-Reference.html)
 
 ## Layout
 
