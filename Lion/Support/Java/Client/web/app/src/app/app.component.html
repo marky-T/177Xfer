@@ -1,0 +1,39 @@
+﻿<div
+  [ngClass]="(isDarkTheme | async) ? 'theme-alternate' : 'theme'"
+  [style.background-image]="'url(assets/image/avanade_background_2_1920x1080.jpg)'"
+  class="application"
+>
+  <div class="header">
+    <mat-toolbar [ngClass]="(isDarkTheme | async) ? 'theme-alternate' : 'theme'" color="primary">
+      <div float="left">
+        <span routerLink="/app/dashboard" routerLinkActive="router-link-active" [skipLocationChange]="true">
+          <mat-icon>home</mat-icon>
+        </span>
+      </div>
+      <span class="home-info">{{ getTitle() }}</span>
+      <span class="spacer">
+      <!-- Just a placeholder to separate the header into 3 parts so the clock is centered on the header.
+           Takes up 33% of the header flex container (i.e. the mat-toolbar). -->
+      </span>
+      <mat-slide-toggle
+        (change)="toggleDarkTheme($event.checked)"
+        [checked]="isDarkTheme | async"
+        class="smallerFont"
+        i18n
+      >
+      </mat-slide-toggle>
+      <span class="theme-toggle">Night theme </span>
+      <div float="left">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <span class="user-info">{{ userName }}</span>
+      <mat-icon (click)="logout()" (keydown)="logout()" title="Logout">exit_to_app</mat-icon>
+    </mat-toolbar>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer">
+    <app-message-bar></app-message-bar>
+  </div>
+</div>

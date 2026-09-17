@@ -1,0 +1,35 @@
+{
+	"ApplicationKind": "1",
+	"StartupApp": "<APPNAME>",
+  "FormNameTitleEnabled": true,
+  "ApiUrls": {
+    "application": "/<app>/api/v1/application",
+    "transaction": "/<app>/api/v1/transactions",
+    "job": "/<app>/api/v1/job",
+    "jobQueues": "/<app>/api/v1/jobqueues",
+    "jobManagement": "/<app>/api/v1/jobmanagement",
+    "message": "/<app>/api/v1/message",
+    "configuration": {
+      "base": "/<app>/api/v1/config/basesetup",
+      "basepath": "/<app>/api/v1/config/basepath",
+      "logging": "/<app>/api/v1/config/logging",
+      "runtime": "/<app>/api/v1/config/runtime",
+      "applications": "/<app>/api/v1/config/applications",
+      "config": "/<app>/api/v1/config/config",
+      "database": "/<app>/api/v1/config/database"
+    },
+    "print": {
+      "prints": "/<app>/api/v1/print",
+      "preview": "/<app>/api/v1/print/preview"
+    },
+    "security": {
+      "role": "/<app>/api/v1/security/role",
+      "user": "/<app>/api/v1/security/user",
+      "currentUser": "/<app>/api/v1/security/user/current",
+      "roleApplication": "/<app>/api/v1/security/role/applications",
+      "roleComponent": "/<app>/api/v1/security/role/component",
+      "configuration": "/<app>/api/v1/security/configuration",
+      "userRoles": "/<app>/api/v1/security/user/role"
+    }
+  }
+}

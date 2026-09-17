@@ -1,0 +1,936 @@
+﻿/* **********************************************************
+   * File      : Amt.css                                    *
+   * Date      : 04-01-2023                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Import external component .css files*/
+@import 'AmtButtonGroup.css';
+@import 'AmtCalender.css';
+@import 'AmtChart.css';
+@import 'AmtCheckBox.css';
+@import 'AmtComboBox.css';
+@import 'AmtDynamicForm.css';
+@import 'AmtEditBox.css';
+@import 'AmtFileUploader.css';
+@import 'AmtGroupBox.css';
+@import 'AmtImage.css';
+@import 'AmtLabel.css';
+@import 'AmtListBox.css';
+@import 'AmtListView.css';
+@import 'AmtMemo.css';
+@import 'AmtMenu.css';
+@import 'AmtPageControl.css';
+@import 'AmtPanel.css';
+@import 'AmtPopupForm.css';
+@import 'AmtRadioButtonGroup.css';
+@import 'AmtScrollBox.css';
+@import 'AmtShape.css';
+@import 'AmtError.css';
+@import 'AmtDataGrid.css';
+@import 'AmtMainMenu.css';
+@import 'AvaListView.css';
+
+/*GENERIC AMT SETTINGS*/
+div, span {
+  margin: 0;
+}
+
+  div span {
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+  }
+
+form {
+  padding: 0px;
+  margin: 0px;
+}
+
+table {
+  font-size: inherit !important;
+}
+
+select {
+  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  background: inherit;
+}
+
+
+
+option {
+  /*margin-top:-1px;*/
+  /*margin-bottom:-1px;*/
+}
+
+html {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Body Style*/
+.AmtBody, body {
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+  background-color: #C0C0C0;
+  color: #000000;
+  cursor: default;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.companyHeaderImage {
+  display: block;
+  height: 120px;
+  width: 400px;
+  background: url(default/default-logo.jpg);
+  background-size: 400px 120px;
+  margin-left: 2%;
+  background-repeat: no-repeat;
+}
+
+.PageDiv {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.quitAllComponent {
+  color: red;
+  text-align: left;
+  margin-left: 2%;
+  font-family: Courier New, Sans-Serif;
+}
+
+.quitAllRedirect {
+  text-align: center;
+  margin-top: 15%;
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+}
+
+.quitAllRedirect a{
+    color: blue;
+    text-decoration: underline;
+    font-size: 9pt;
+}
+  .quitAllRedirect a:hover {
+      cursor: pointer;
+  }
+
+.AppTitleBar {
+  display: table;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 16px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #3399CC;
+  color: #363636;
+}
+
+  /*Safari hack*/
+  .AppTitleBar span {
+    white-space: normal;
+  }
+
+.AmtTitleBarRow {
+  display: table-row;
+}
+
+.AmtTitleBarText {
+  float: left;
+}
+
+.AmtLanguageBar {
+  display: table-cell;
+  float: right;
+}
+
+.AmtLanguageButton {
+  height: 20px;
+  line-height: 10px;
+  display: none;
+  background-color: transparent;
+  float: right;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 10pt;
+}
+
+#AmtLanguageButton {
+  color: #363636;
+  font-family: Arial, Verdana, Sans-serif;
+  display: block;
+  float: left;
+}
+
+.AmtLanguageSelect {
+  height: 20px;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 10pt;
+  display: none;
+  float: right;
+}
+
+.AmtMacroBar {
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 8pt;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #E6E6E6;
+  color: #424242;
+  overflow: auto;
+}
+
+.AmtMacroBar_Btn {
+  float: left;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 1px;
+  width: 70px;
+  height: 13px;
+  border: 2px solid;
+  border-radius: 5px;
+  border-color: #D8D8D8;
+}
+
+.AppBodyContentWapperCOBOL {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  right: 0px;
+  bottom: 20px;
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+
+.AppBodyContentWapper {
+  padding: 0;
+  margin: 0;
+  margin-top:20px;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  right: 0px;
+  bottom: 20px;
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+
+.AppBodyContent {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+   /* default color
+     Color in AmtBody is not inherited so set it here */
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+  background-color: #C0C0C0;
+  color: #000000;
+  z-index: 0; /* If not set controls are sometimes displayed behind the AppbodyContent when zindexes are set, did not figure out why */
+}
+#AppBodyContent{
+  overflow:auto;
+}
+.applicationContents {
+  text-align: left;
+  background-color: Green;
+}
+
+.AppStatusBarWrapper {
+  /*min-height: 100%;*/
+  height: auto !important;
+  /*height: 100%;*/
+  margin: 0 auto -20px;
+}
+
+.AppStatusBarFiller {
+  height: 20px;
+}
+
+.AppStatusBar {
+  position: absolute;
+  bottom: 0% !important;
+  height: 20px;
+  width: 100%;
+  clear: both;
+  float: left;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #3399CC;
+  color: #363636;
+  white-space: nowrap; /* Overwritten by the span but needed so large text doesn't wrap */
+}
+
+.AppNotifyBar {
+  position: absolute;
+  bottom: 20px; !important;
+  height: 20px;
+  width: 100%;
+  clear: both;
+  float: left;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #3399CC;
+  color: #363636;
+  z-index : 32000;
+}
+
+
+
+/* To hide the title and status bar uncomment the following settings 
+.AppTitleBar,
+.AppStatusBar {
+  display: none;
+}
+.AppBodyContent {
+  top: 0px;
+  bottom: 0px;
+}
+.AppStatusBarFiller {
+  height: 0px;
+}
+*/
+.AppBodyContentPopup {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+}
+
+/* Cursor */
+.DCursor {
+  cursor: default;
+}
+
+.HCursor {
+  cursor: pointer;
+}
+
+/* accesskey */
+.AmtAccesskey {
+  text-decoration: underline;
+}
+
+.CFontStyle {
+  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+.CFontStyleOver {
+  text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.CFontStyleDown {
+  text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Classes for the highlighting of labels/SME and Dynamic Forms and */
+.AmtReverse {
+   background-color: #808080;
+   color: black;    
+}
+
+/* Set this class if messages starting with ERROR needs to be displayed in other colors*/
+.AmtMessageError {
+}
+
+/* Set this class if messages starting with ATTENTION needs to be displayed in other colors*/
+.AmtMessageAttention {
+}
+
+/* Set this class if messages needs to be displayed in other colors, etc*/
+.AmtMessageOther {
+}
+
+/* STATUSMESSAGE BAR */
+/* Set this class if messages in the statusbar starting needs to be displayed in a certain style*/
+div#oStatusMessage span.AmtMessageOther {
+}
+
+/* Set this class if messages in the statusbar starting with ATTENTION needs to be displayed in a certain style*/
+div#oStatusMessage span.AmtMessageAttention {
+}
+
+
+/* Set this class if messages in the statusbar starting with ERROR needs to be displayed in a certain style*/
+div#oStatusMessage span.AmtMessageError {
+}
+
+/* PAGE2 POPUP */
+/* Set this class if messages in the page2 box starting with ERROR needs to be displayed in a certain style*/
+div#oErrorBox span.AmtMessageError {
+}
+
+/* Set this class if messages in the page2 box starting with ATTENTION needs to be displayed in a certain style*/
+div#oErrorBox span.AmtMessageAttention {
+}
+
+/* Set this class if other messages in the page2 box need to be displayed reverse or in other colors, etc*/
+div#oErrorBox span.AmtMessageOther {
+}
+
+.AmtBlink {
+  color: red !important;
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.AmtBold {
+  font-weight: bold !important;
+}
+
+.AmtUnderline {
+  text-decoration: underline !important;
+}
+
+.AmtItalic {
+  font-style: italic !important;
+}
+
+.AmtSecure {
+  background-color: #808080 !important;
+  color: black !important;
+}
+
+/*Option */
+  .COption {
+}
+
+/*Scrollbar display */
+/*
+  'scroll' displays scrollbars allways. To display scrollbars automaticly, 'auto' can be used
+   instead of 'scroll'
+*/
+.SCROLLBAR_BOTH {
+  overflow: scroll;
+}
+
+.SCROLLBAR_NONE {
+  overflow: hidden;
+}
+
+.SCROLLBAR_HORIZONTAL {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.SCROLLBAR_VERTICAL {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.SCROLLBAR_AUTO {
+  overflow: auto;
+}
+
+.SCROLLBAR_AUTO_HORIZONTAL {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.SCROLLBAR_AUTO_VERTICAL {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.CSS_NONE {
+  border: none;
+}
+
+.CSS_SINGLE {
+  border: black 1px solid;
+}
+
+.CSS_MEDIUM {
+  border: black 2px solid;
+}
+
+.CSS_WIDE {
+  border: black 3px solid;
+}
+
+.CSS_DASHED {
+  border: black 1px dashed;
+}
+
+.CSS_DOTTED {
+  border: black 1px dotted;
+}
+
+.CSS_INSET {
+  border: black 2px inset;
+}
+
+.CSS_OUTSET {
+  border: white 2px outset;
+}
+
+.CSS_RIDGE {
+  border: black 2px ridge;
+}
+
+.CSS_GROOVE {
+  border: black 3px groove;
+}
+
+.CSS_3D {
+  border: black 2px groove;
+}
+
+CSS_UNDERLINE {
+  border-bottom: 1px solid black
+}
+
+/*Alignment */
+.CALM {
+  text-align: left;
+}
+
+.CACM {
+  text-align: center;
+}
+
+.CARM {
+  text-align: right;
+}
+
+.Lrbtngrp {
+}
+
+.Lrdg {
+  position: absolute;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LrdgBut {
+  position: absolute;
+  top: 0px;
+}
+
+.LLabrdgGC {
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgIE {
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgNS {
+  position: absolute;
+  top: -2px;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.Lbtngrp {
+  background-color: transparent;
+}
+
+.Amtbtn {
+  position: absolute;
+  border: 2px outset white;
+}
+
+.AmtPage2 {
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+  width: 65px;
+  z-index: 1160;
+  display: block;
+}
+
+.AmtPage2btn {
+  display: none;
+}
+
+.AmtNotifyBarClose {
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+  width: 65px;
+  z-index: 1160;
+  display: block;
+}
+
+.AmtNotifyBarClosebtn {
+  display: none;
+}
+
+.AmtErrorButton,
+.AmtPrintButton,
+.AmtErrorButtonDesign,
+.AmtPrintButtonDesign {
+  z-index: 1160;
+  float: right;
+  display: block;
+}
+
+.AmtErrorButtonDesign,
+.AmtPrintButtonDesign,
+.AmtPrintButton {
+  display: none;
+}
+
+.AmtPrintScreenButtonDesign {
+  display: none;
+}
+
+/* Report view settings for printing */
+.DoPageBreak {
+  position: relative;
+  page-break-after: always;
+  font-family: Courier New;
+  display: inline;
+}
+
+.Page {
+  position: relative;
+  font-family: Courier New;
+  display: inline;
+}
+
+.Repview {
+  position: relative;
+  background: "transparent url(../images/Amtbackground.jpg) no-repeat top center";
+}
+
+.CByeTable {
+  width: 550px;
+  height: 450px;
+}
+
+.CByeTableCell {
+  text-align: center;
+}
+
+.CByeMessage {
+  color: Red;
+}
+
+.amtAjaxInProcess {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%; /* 100%;  doesn't work in IE6*/
+  height: 100%; /* 100%;  doesn't work in IE6*/
+  background-color: transparent; /* #3399cc; */
+  cursor: wait !important;
+  display: block;
+  text-align: center;
+  line-height: 50%;
+  z-index: 16777271; /* is max in safari 3. 2147483647 (32bit) is safe max (Firefox3 renders higher as 0, Firefox2 kills the element) */
+}
+
+.amtAjaxImage {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%; /* 100%; doesn't work in IE6 */
+  width: 100%; /* 100%; doesn't work in IE6 */
+}
+
+.amtAjaxNotInProcess {
+  display: none;
+}
+
+.modalDialogBackground {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  background-color: #000000; /* #3399cc; */
+  display: none;
+  opacity: .5; /* for FireFox and Opera */
+  filter: opacity(50)
+}
+
+
+/* disabled style*/
+.CDisabled {
+  color: #7c8690 !important;
+  -webkit-text-fill-color: #7c8690 !important;
+  cursor: default !important;
+}
+
+/* To hide password (Dark) fields set the color and background-color to the same value as the main form and hide the border */
+.CPasswordCobolEdit {
+  /*
+  border: none !important;
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  */
+}
+
+/* Non display print option. Don't show the value but allow editing it */
+.CIbmCobolNonDisplayPrint {
+  color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  border: 0px solid !important;
+}
+
+/* An Ibm normal unprotected input field */
+.CIbmCobolNormalUnprotected {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+}
+
+/* An Ibm intensified unprotected input field */
+.CIbmCobolIntensifiedUnprotected {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+  color: #FF0000 !important;
+  font-weight: bold !important;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+}
+
+/* An Ibm text field (editbox) which is made protected */
+.CIbmCobolTextBoxProtected {
+  background-color: inherit !important;
+  border: none !important; /* Remove the border around the input field showing it as a label */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default !important;
+  position: absolute;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+  margin: 0;
+  height: 17px;
+}
+
+/* An Ibm normal protected field. Can be a label or disabled-editbox */
+.CIbmCobolNormalProtected {
+}
+
+/* An Ibm intensified protected field. Can be a label or disabled-editbox */
+.CIbmCobolIntensifiedProtected {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* A-Series SDF output field */
+.CASeriesCobolOutput {
+  background-color: transparent !important;     
+  border: none !important;
+  user-select: none;
+  cursor: default !important; 
+}
+
+/* A-Series SDF static field */
+.CASeriesCobolStatic {
+  user-select: none;
+  cursor: default !important;
+}
+
+/* A-Series SDF output transmittable field */
+.CASeriesCobolOutputTransmittable {
+  background-color: #C0DCC0;
+  user-select: none;
+  cursor: default !important;
+}
+
+/* A-Series SDF input field */
+.CASeriesCobolInput {
+  border: 1px inset !important;  
+}
+
+/* A-Series SDF field highlighter */
+.CASeriesCobolHighlight {
+  font-weight: bold !important;
+}
+
+@media print {
+  #AmtBody * {
+    visibility: hidden;
+    overflow: visible;
+  }
+
+  #PageDiv * {
+    visibility: visible;
+  }
+
+  #AppTitleBar * {
+    visibility: hidden;
+  }
+
+  #AppStatusBarWrapper * {
+    visibility: hidden;
+  }
+
+  #AppStatusBar * {
+    visibility: hidden;
+  }
+
+  #theform * {
+    visibility: visible;
+  }
+
+  [id^="AppBodyContent"] * {
+    visibility: visible;
+  }
+  /* Editable print settings: */
+  [id^="AppBodyContent"] {
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+  }
+
+  .CListView {
+    overflow: hidden !important;
+  }
+
+  .CListViewInvisibleColumn {
+    display: none !important;
+  }
+
+  .NoPrint {
+    display: none !important;
+  }
+
+  .CList {
+    overflow: hidden !important;
+  }
+
+  .CPage {
+    overflow: hidden !important;
+  }
+
+  .CTabStripPlaceHolder {
+    overflow: hidden !important;
+  }
+
+  .CTabStripSub {
+    overflow: hidden !important;
+  }
+
+  .CTabSheetSub {
+    overflow: hidden !important;
+  }
+
+  .CPanel {
+    overflow: hidden !important;
+  }
+
+  .CGroup {
+    overflow: hidden !important;
+  }
+
+  .CScroll {
+    overflow: hidden !important;
+  }
+  /* disabled style - print as black */
+  .CDisabled {
+    background-color: #FFFFFF !important;
+    color: #C0C0C0 !important;
+    -webkit-text-fill-color: #C0C0C0 !important;
+  }
+  /* uncomment this for forcing a print in landscape
+    @page {
+    size: landscape
+  }
+  */
+}
+
+.disabled {
+  color: grey;
+}
+
+.disabled ul {
+  overflow: hidden !important;
+}
+
+/* Hidden div to set cursor state*/
+#AmtHidden {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Full screen div used when page is loading or transmitting */
+.AmtLoadingDiv {
+  position: absolute;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: wait;
+}
+
+.AmtMainComponentDiv {
+    position:absolute;
+    width:100%;
+    height: 100%;
+}

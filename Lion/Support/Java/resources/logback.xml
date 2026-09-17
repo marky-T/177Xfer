@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+    <encoder>
+      <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg MDC: {%mdc}%n
+      </pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+  </appender>
+
+  <property name="app_log_root" value="log/<APPNAME>" />
+  <property name="log_file_name" value="<APPNAME>" />
+  <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+    <file>${app_log_root}/${log_file_name}.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- Filename pattern for each rotated file. Time based rotation is done every day
+      based on the %d format specifier, and multiple rotated files on the same day get an
+      %i index modifier added as well -->
+      <fileNamePattern>${app_log_root}/${log_file_name}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <!-- Rotate a log file when it reaches 100MB in size -->
+      <maxFileSize>100MB</maxFileSize>
+      <!-- Keep at max 30 days worth of history before removing old rotated log files -->
+      <maxHistory>30</maxHistory>
+      <!-- Keep at max 10GB worth of history before removing old rotated log files -->
+      <totalSizeCap>10GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg MDC: {%mdc}%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>8192</queueSize>
+    <neverBlock>true</neverBlock>
+    <appender-ref ref="STDOUT" />
+  </appender>
+
+  <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>8192</queueSize>
+    <neverBlock>true</neverBlock>
+    <appender-ref ref="FILE" />
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="ASYNC_STDOUT"/>
+    <appender-ref ref="ASYNC_FILE"/>
+  </root>
+</configuration>

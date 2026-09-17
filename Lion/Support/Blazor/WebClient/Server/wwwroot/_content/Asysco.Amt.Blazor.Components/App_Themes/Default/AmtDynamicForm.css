@@ -1,0 +1,17 @@
+﻿/* **********************************************************
+   * File      : AmtDynamicForm.css                         *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Dynamic Form */
+.CDynForm {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.CDynFormLabel {
+  color: #00FF00;
+}

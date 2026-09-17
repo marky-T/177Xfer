@@ -1,0 +1,27 @@
+﻿/* **********************************************************
+   * File      : AmtListBox.css                             *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+/*ListBox */
+
+.CList {
+  position: absolute;
+  letter-spacing: 0.2px;
+  box-sizing: border-box !important;
+}
+
+.disabled li:hover {
+  cursor: no-drop;
+}
+
+.disabled li:hover:not(.amthovered) {
+  background-color: white;
+  color: grey;
+  border: 0;
+}
+
+.readonlyListbox{
+    pointer-events: none;
+}

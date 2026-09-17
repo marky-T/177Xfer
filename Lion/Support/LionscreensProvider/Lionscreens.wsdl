@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="LionScreens" targetNamespace="http://www.asysco.com/schemas/lion/lionscreens" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.asysco.com/schemas/lion/lionscreens" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.asysco.com/schemas/lion/lionscreens" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="LogOnRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="Station" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="SessionData" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="Parameter" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Password" type="xs:string"/>
+      <xs:element name="UserCode" type="xs:string"/>
+      <xs:element name="FormResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfMessage"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="ArrayOfField">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="tns:Field"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Field">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Options" type="tns:Options"/>
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string"/>
+        <xs:attribute name="Value" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="Options">
+        <xs:attribute name="Item" type="xs:string"/>
+        <xs:attribute name="Value" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Message" nillable="true" type="tns:Message"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Message">
+        <xs:attribute name="MessageType" type="xs:string"/>
+        <xs:attribute name="Text" type="xs:string"/>
+      </xs:complexType>
+      <xs:element name="Error" type="xs:boolean"/>
+      <xs:element name="FormName" type="xs:string"/>
+      <xs:element name="SessionId" type="xs:string"/>
+      <xs:element name="Station" type="xs:string"/>
+      <xs:element name="LogOffRequest">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="FormRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FormAction" type="tns:FormAction"/>
+      <xs:simpleType name="FormAction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Page2Recall"/>
+          <xs:enumeration value="Transmit"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="FormNamesRequest">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="Forms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="Form" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfMessage"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FormFieldsRequest">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="FieldDefinitions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="FieldDefinition" type="tns:FieldDefinition"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfMessage"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="FieldDefinition">
+        <xs:attribute name="Name" type="xs:string"/>
+        <xs:attribute name="EditType" type="xs:string"/>
+        <xs:attribute name="Length" type="xs:int" use="required"/>
+        <xs:attribute name="Decimals" type="xs:int" use="required"/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ILionScreens_Logon_InputMessage">
+    <wsdl:part name="usercode" type="xsd:string"/>
+    <wsdl:part name="password" type="xsd:string"/>
+    <wsdl:part name="parameter" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="ILionScreens_Logon_OutputMessage">
+    <wsdl:part name="return" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="LogOnRequest">
+    <wsdl:part name="parameters" element="tns:LogOnRequest"/>
+  </wsdl:message>
+  <wsdl:message name="LogOnRequest_Headers">
+    <wsdl:part name="Password" element="tns:Password"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="FormResponse">
+    <wsdl:part name="parameters" element="tns:FormResponse"/>
+  </wsdl:message>
+  <wsdl:message name="FormResponse_Headers">
+    <wsdl:part name="Error" element="tns:Error"/>
+    <wsdl:part name="FormName" element="tns:FormName"/>
+    <wsdl:part name="SessionId" element="tns:SessionId"/>
+    <wsdl:part name="Station" element="tns:Station"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="LogOffRequest">
+    <wsdl:part name="parameters" element="tns:LogOffRequest"/>
+  </wsdl:message>
+  <wsdl:message name="LogOffRequest_Headers">
+    <wsdl:part name="SessionId" element="tns:SessionId"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="ILionScreens_Sendscreen_InputMessage">
+    <wsdl:part name="input" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="ILionScreens_Sendscreen_OutputMessage">
+    <wsdl:part name="return" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="FormRequest">
+    <wsdl:part name="parameters" element="tns:FormRequest"/>
+  </wsdl:message>
+  <wsdl:message name="FormRequest_Headers">
+    <wsdl:part name="FormAction" element="tns:FormAction"/>
+    <wsdl:part name="FormName" element="tns:FormName"/>
+    <wsdl:part name="SessionId" element="tns:SessionId"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="FormNamesRequest">
+    <wsdl:part name="parameters" element="tns:FormNamesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="FormNamesRequest_Headers">
+    <wsdl:part name="SessionId" element="tns:SessionId"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="FormList">
+    <wsdl:part name="parameters" element="tns:Forms"/>
+  </wsdl:message>
+  <wsdl:message name="FormList_Headers">
+    <wsdl:part name="Error" element="tns:Error"/>
+  </wsdl:message>
+  <wsdl:message name="FormFieldsRequest">
+    <wsdl:part name="parameters" element="tns:FormFieldsRequest"/>
+  </wsdl:message>
+  <wsdl:message name="FormFieldsRequest_Headers">
+    <wsdl:part name="FormName" element="tns:FormName"/>
+    <wsdl:part name="SessionId" element="tns:SessionId"/>
+    <wsdl:part name="UserCode" element="tns:UserCode"/>
+  </wsdl:message>
+  <wsdl:message name="FieldList">
+    <wsdl:part name="parameters" element="tns:FieldDefinitions"/>
+  </wsdl:message>
+  <wsdl:message name="FieldList_Headers">
+    <wsdl:part name="Error" element="tns:Error"/>
+    <wsdl:part name="FormName" element="tns:FormName"/>
+  </wsdl:message>
+  <wsdl:message name="ILionScreens_Logoff_InputMessage">
+    <wsdl:part name="usercode" type="xsd:string"/>
+    <wsdl:part name="session" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="ILionScreens_Logoff_OutputMessage">
+    <wsdl:part name="return" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:portType name="ILionScreens">
+    <wsdl:operation name="Logon" parameterOrder="usercode password parameter">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#Logon" message="tns:ILionScreens_Logon_InputMessage"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensLogonResponse" message="tns:ILionScreens_Logon_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AmtLogOn">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#LogonRequest" name="LogOnRequest" message="tns:LogOnRequest"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensLogonRequestResponse" name="FormResponse" message="tns:FormResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AmtLogOff">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#LogoffRequest" name="LogOffRequest" message="tns:LogOffRequest"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensLogoffRequestResponse" name="FormResponse" message="tns:FormResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="Sendscreen" parameterOrder="input">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#Sendscreen" message="tns:ILionScreens_Sendscreen_InputMessage"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensSendscreenResponse" message="tns:ILionScreens_Sendscreen_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AmtSendForm">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#FormRequest" name="FormRequest" message="tns:FormRequest"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensFormRequestResponse" name="FormResponse" message="tns:FormResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AmtGetFormNames">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#GetFormNames" name="FormNamesRequest" message="tns:FormNamesRequest"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensGetFormNamesResponse" name="FormList" message="tns:FormList"/>
+    </wsdl:operation>
+    <wsdl:operation name="AmtGetFormFields">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#GetFormFields" name="FormFieldsRequest" message="tns:FormFieldsRequest"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensGetFormFieldsResponse" name="FieldList" message="tns:FieldList"/>
+    </wsdl:operation>
+    <wsdl:operation name="Logoff" parameterOrder="usercode session">
+      <wsdl:input wsaw:Action="http://www.tempuri.org/wsdl/#Logoff" message="tns:ILionScreens_Logoff_InputMessage"/>
+      <wsdl:output wsaw:Action="http://www.asysco.com/schemas/lion/lionscreensLogoffResponse" message="tns:ILionScreens_Logoff_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ILionScreens" type="tns:ILionScreens">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+    <wsdl:operation name="Logon">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#Logon" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmtLogOn">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#LogonRequest" style="document"/>
+      <wsdl:input name="LogOnRequest">
+        <soap:header message="tns:LogOnRequest_Headers" part="Password" use="literal"/>
+        <soap:header message="tns:LogOnRequest_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FormResponse">
+        <soap:header message="tns:FormResponse_Headers" part="Error" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="FormName" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="Station" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmtLogOff">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#LogoffRequest" style="document"/>
+      <wsdl:input name="LogOffRequest">
+        <soap:header message="tns:LogOffRequest_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:LogOffRequest_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FormResponse">
+        <soap:header message="tns:FormResponse_Headers" part="Error" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="FormName" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="Station" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sendscreen">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#Sendscreen" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmtSendForm">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#FormRequest" style="document"/>
+      <wsdl:input name="FormRequest">
+        <soap:header message="tns:FormRequest_Headers" part="FormAction" use="literal"/>
+        <soap:header message="tns:FormRequest_Headers" part="FormName" use="literal"/>
+        <soap:header message="tns:FormRequest_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormRequest_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FormResponse">
+        <soap:header message="tns:FormResponse_Headers" part="Error" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="FormName" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="Station" use="literal"/>
+        <soap:header message="tns:FormResponse_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmtGetFormNames">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#GetFormNames" style="document"/>
+      <wsdl:input name="FormNamesRequest">
+        <soap:header message="tns:FormNamesRequest_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormNamesRequest_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FormList">
+        <soap:header message="tns:FormList_Headers" part="Error" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmtGetFormFields">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#GetFormFields" style="document"/>
+      <wsdl:input name="FormFieldsRequest">
+        <soap:header message="tns:FormFieldsRequest_Headers" part="FormName" use="literal"/>
+        <soap:header message="tns:FormFieldsRequest_Headers" part="SessionId" use="literal"/>
+        <soap:header message="tns:FormFieldsRequest_Headers" part="UserCode" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FieldList">
+        <soap:header message="tns:FieldList_Headers" part="Error" use="literal"/>
+        <soap:header message="tns:FieldList_Headers" part="FormName" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logoff">
+      <soap:operation soapAction="http://www.tempuri.org/wsdl/#Logoff" style="rpc"/>
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.asysco.com/schemas/lion/lionscreens" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LionScreens">
+    <wsdl:port name="BasicHttpBinding_ILionScreens" binding="tns:BasicHttpBinding_ILionScreens">
+      <soap:address location="http://localhost/LIONPROVIDED/LionScreens.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

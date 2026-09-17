@@ -1,0 +1,210 @@
+﻿/* **********************************************************
+   * File      : AmtDataGrid.css                            *
+   * Date      : 29-09-2022                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/* DataGrid */
+
+.CDataGrid {
+  border: gray 1px outset;
+  overflow: hidden;
+  position: absolute;
+}
+
+.CDataGridHeaderTable {
+  background-color: #c0c0c0;
+  width: 100%;
+  border-color: white;
+  border-width: 1px;
+  table-layout: fixed;
+  position: relative;
+}
+
+.CDataGridScrollDiv {
+  overflow: auto;
+  width: 100%;
+  position: relative;
+}
+
+.CDataGridContentTable {
+  width: 100%;
+  table-layout: fixed;
+  position: relative;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 0px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 0px solid;
+}
+
+.CDataGridHeaderColl {
+  background-color: #c0c0c0;
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+  padding-left: 2px;
+  white-space: pre;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 1px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 1px solid;
+}
+
+  .CDataGridHeaderColl:hover {
+    background-color: #dddddd;
+  }
+
+.CDataGridHeaderCollResize {
+  resize: horizontal;
+}
+
+.CDataGridHeaderCollInVisible {
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0px;
+  white-space: pre;
+  visibility: collapse;
+  border: 0px;
+}
+
+.CDataGridInvisibleColumn {
+  visibility: collapse;
+}
+
+.CDataGridRowCell > *,
+.CDataGridRowCellNoLines > * {
+  width: 100% !important; /*needed to make components scale (may need improvement)*/
+  position: initial !important;
+  padding: 0%;
+}
+
+.CDataGridRowCellComboBox > *,
+.CDataGridRowCellComboBoxNoLines > *,
+.CDataGridRowCellComboBoxSimple > *,
+.CDataGridRowCellComboBoxSimpleNoLines > * {
+  position: initial !important;
+  padding: 0%;
+}
+
+.CDataGridRowCell {
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 2px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: Gray 1px solid;
+  border-left: 1px none;
+  border-right: Gray 1px solid;
+}
+
+.CDataGridRowCellNoLines {
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 1px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: 1px none;
+  border-left: 1px none;
+  border-right: 1px none;
+}
+
+.CDataGridRowCellEditBox {
+  overflow: hidden;
+  padding: 0px;
+  white-space: nowrap;
+}
+
+.CDataGridRowCellComboBoxNoLines {
+  overflow-x: visible !important;
+  padding: 0px;
+  padding-left: 1px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: 1px none;
+  border-left: 1px none;
+  border-right: 1px none;
+}
+
+.CDataGridRowCellComboBox {
+  overflow-x: visible !important;
+  padding: 0px;
+  padding-left: 2px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: Gray 1px solid;
+  border-left: 1px none;
+  border-right: Gray 1px solid;
+}
+
+.CDataGridRowCellComboBoxSimple {
+  overflow: hidden !important;
+  padding: 0px;
+  padding-left: 2px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: Gray 1px solid;
+  border-left: 1px none;
+  border-right: Gray 1px solid;
+}
+
+.CDataGridRowCellComboBoxSimpleNoLines {
+  overflow: hidden !important;
+  padding: 0px;
+  padding-left: 1px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: 1px none;
+  border-left: 1px none;
+  border-right: 1px none;
+}
+
+.CDataGridRowCellTable {
+  width: 100%;
+  border: none;
+}
+
+.CDataGridRowSelected {
+  background-color: royalblue !important;
+}
+
+  .CDataGridRowSelected td {
+    background-color: royalblue !important;
+  }
+
+.ToList {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: table;
+  min-width: inherit;
+}
+
+  .ToList li:hover, .amthovered {
+    background-color: rgb(10, 120, 255);
+    color: white;
+    border-left: none;
+    border-right: none;
+    white-space: pre;
+  }
+
+  .ToList li {
+    position: relative;
+    min-height: 13px;
+    padding: 0px;
+    border: none !important;
+    white-space: pre;
+  }
+
+
+.nochange li:hover:not(.amthovered) {
+  background-color: white;
+  color: black;
+  border: 0;
+}
+
+.CComboBox_ComboContent_container {
+  position: relative !important;
+}

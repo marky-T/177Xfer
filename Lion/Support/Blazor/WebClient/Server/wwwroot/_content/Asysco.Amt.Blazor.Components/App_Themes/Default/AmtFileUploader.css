@@ -1,0 +1,22 @@
+﻿/* **********************************************************
+   * File      : AmtFileUploader.css                                *
+   * Date      : 06-12-2023                                 *
+   * Copyright : Asysco Software BV (http://www.avanade.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+.CFileUploaderHidden {
+    display: none;
+}
+
+.CFileUploaderButton {
+    box-sizing: border-box !important;
+    float: right;
+    position: relative;
+    text-align: center;
+}
+
+/*Add custom styling for the FileUploader textbox below*/
+.CFileUploaderTextbox {
+}
+

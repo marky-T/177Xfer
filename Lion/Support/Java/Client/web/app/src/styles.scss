@@ -1,0 +1,203 @@
+/* Import local Roboto Mono font */
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('./assets/font/roboto/roboto-mono-regular.woff2') format('woff2'),
+  url('./assets/font/roboto/roboto-mono-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* You can add global styles to this file, and also import other style files */
+.grid-container {
+  margin: 0;
+}
+
+.mat-expansion-indicator::after {
+  position: absolute;
+  right: 20px;
+}
+
+.home-button {
+  font-weight: 500;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.mat-row:hover {
+  background-color: #b7cd01;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #b7cd01;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-size {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.fab {
+  right: 20px;
+  bottom: 20px;
+  position: fixed !important;
+  color: white !important;
+}
+
+.form-field-wrapper {
+  padding: 10px;
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.filtered-content-wrapper {
+  margin: 0 auto;
+  padding: 10px 10px 10px 0px;
+}
+
+.button-group {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.page-header {
+  padding: 10px;
+}
+
+amt-list {
+  width: 100%;
+}
+
+app-prints-view {
+  width: 100%;
+}
+
+.simple-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px 0px;
+  grid-template-rows: 60px;
+}
+
+.filters {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(8, 1fr);
+  grid-row: 1;
+}
+
+.buttons {
+  display: grid;
+  grid-template-rows: 40px;
+  grid-template-columns: repeat(18, 1fr);
+  grid-row: 2;
+  grid-row-gap: 10px;
+  height: 40px;
+}
+
+  .buttons > button {
+    width: 100px;
+  }
+
+.filters > .form-field-wrapper {
+  grid-row: 1;
+}
+
+.grid-row-2 {
+  grid-row: 2;
+}
+
+.filter-nav {
+  width: 300px;
+  padding-top: 20px;
+}
+
+  .filter-nav h1 {
+    text-align: center;
+  }
+
+.no-bg {
+  background: none !important;/* Important since it mostly has to override any kind of css background selector */
+}
+
+amt-label-ibm {
+  text-overflow: ellipsis;
+  white-space: pre;
+  font-family: Roboto Mono;
+  font-size: 11pt;
+}
+
+.amt-intensified {
+  font-weight: bold;
+}
+
+input {
+  font-family: Roboto Mono;
+  font-size: 11pt;
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid black;
+}
+
+.normal {
+  background-color: #FFFFFF;
+  border: 1px solid black;
+}
+
+.protected {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
+.non-display-print {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+}
+
+.high-intensity {
+  color: #FF0000 !important;
+  font-weight: bold !important;
+}
+
+.auto-skip {
+  border: 0px solid !important;
+  border: none; /* Remove the border around the input field showing it as a label */
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
+body {
+  font-family: Lucida Console;
+  font-size: 11pt;
+  color: #000000;
+}
+
+.form-container {
+  background-color: #c0c0c0;
+}

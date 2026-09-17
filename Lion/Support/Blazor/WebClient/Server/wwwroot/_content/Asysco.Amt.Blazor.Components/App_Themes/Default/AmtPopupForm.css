@@ -1,0 +1,161 @@
+﻿/* **********************************************************
+   * File      : AmtPopupForm.css                           *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Popup Form */
+.CPopup {
+  position: absolute;
+  background-color: #C0C0C0;
+}
+
+.CPopupLayered {
+  background-color: rgba(40,40,40,0.7); /*Added background-color for debug! Need to be removed unless this is wanted*/
+  position: absolute;
+  z-index: 999999;
+  top: 0px; /*If we have main menu bar. Set to 0px when main menu is not visible*/
+  left: 0px;
+  height: 100%; /*If we have main menu bar. Set to 100% when main menu is not visible*/
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Outer div for popup. Set top to 0px when main menu is disabled!*/
+.CPopupOuterDiv {
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  height: 100%;
+}
+
+.CPopupMainDiv {
+  position: absolute;
+  overflow: hidden;
+  border: 2px solid #dddddd;
+  border-radius: 5px;
+}
+
+.CPopupHeader {
+  background-color: #e9e9e9;
+  color: #333333;
+  font-weight: bold;
+  position: relative;
+  height: 25px;
+  cursor: move;
+  user-select: none;
+}
+
+/* Popup title span */
+.CPopupHeader span {
+  width: 90%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0.3em 0.3em;
+}
+
+/* Popup close button */
+.CPopupHeader button {
+  color: white;
+  background-color: #cc0000;
+  border: none;
+  border-radius: 2px;
+  position: relative;
+  float: right;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 20px;
+  margin: 0.1em 0.2em;
+  height: 20px;
+}
+
+  /* Popup close button hover */
+.CPopupHeader button:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+/* Popupbox settings */
+.AmtErrorFrame {
+  z-index: -1;
+  border: none;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.AmtError,
+.AmtErrorDesign {
+  position: absolute;
+  z-index: 1150;
+  border: 2px outset white;
+  background-color: InfoBackground;
+  overflow: hidden;
+  left: 68px;
+  top: 68px;
+  right: 68px;
+  bottom: 88px;
+  display: none;
+}
+
+.AmtErrorDesign {
+  position: relative;
+}
+
+.AmtErrorBox,
+.AmtErrorBoxDesign {
+  z-index: 1160;
+  border: Inset 2px White;
+  overflow: auto;
+}
+
+.AmtErrorBox {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 50px;
+}
+
+.AmtErrorBoxDesign {
+  display: none;
+}
+
+.AmtMessageBar {
+  z-index: 1160;
+  float: left;
+  display: block;
+  clear: both;
+}
+
+.AmtMessageBarSme {
+  z-index: 1160;
+  float: left;
+  width: 85%;
+  display: block;
+  color: White;
+  font-weight: bold;
+  clear: both;
+}
+
+.AmtPrintScreen {
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+  width: 65px;
+  z-index: 1161;
+  display: inline;
+}
+
+.AmtPrintScreenButtonDesign {
+  display: none;
+}

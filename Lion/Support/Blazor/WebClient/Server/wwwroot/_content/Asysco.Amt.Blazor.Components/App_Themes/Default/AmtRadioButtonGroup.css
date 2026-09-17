@@ -1,0 +1,38 @@
+﻿/* **********************************************************
+   * File      : AmtRadioButtonGroup.css                    *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Radiobutton group */
+.CRadioButtonGroup {
+  position: absolute;
+  background-color: inherit;
+}
+
+.CRadioButton {
+  background-color: transparent;
+}
+
+.radio-group-horizontal {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.radio-group-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.label-left input[type="radio"] {
+  margin-right: 5px;
+  float: inline-end;
+}
+
+.label-right input[type="radio"] {
+  margin-left: 5px;
+}

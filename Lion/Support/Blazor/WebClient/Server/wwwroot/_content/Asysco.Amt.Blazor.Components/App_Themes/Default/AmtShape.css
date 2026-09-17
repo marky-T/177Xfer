@@ -1,0 +1,49 @@
+﻿/* **********************************************************
+   * File      : AmtShape.css                               *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Shape */
+.CShape {
+  position: absolute;
+  border: 1px;
+}
+
+  /*Shape */
+  .CShape.RoundRectangle {
+    border-radius: 10px;
+  }
+
+  /*Shape */
+  .CShape.Circle,
+  .CShape.Ellipse {
+    border-radius: 50%
+  }
+
+  /*Shape */
+  .CShape.Circle {
+
+  }
+
+  /*Shape */
+  .CShape.LineHorizontal {
+    border-bottom-width: 0px !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px !important;
+  }
+
+  /*Shape */
+  .CShape.LineVertical {
+    border-bottom-width: 0px !important;
+    border-top-width: 0px !important;
+    border-right-width: 0px !important;
+  }
+
+  .CShape.Line {
+    
+    border-bottom-width: 0px !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px !important;
+  }

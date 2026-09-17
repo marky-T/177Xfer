@@ -1,0 +1,205 @@
+﻿/* **********************************************************
+   * File      : AmtEditBox.css                             *
+   * Date      : 20-02-2023                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/* is needed to hava a white background within checkbox */
+input {
+  background-color: #FFFFFF;
+  margin: 0px;
+  padding: 0px;
+  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  box-sizing: border-box;
+}
+
+  INPUT::-ms-clear {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  input:focus {
+    box-shadow: 0px 0px 5px #4195fc;
+  }
+
+/*EditBox */
+.CEdit {
+  position: absolute;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  height: 17px;
+}
+
+.CEditBorder3D {
+  border-width: 2px;
+  border-style: inset;
+}
+
+.CEditBorderSingle {
+  border-width: 1px;
+  border-style: Solid;
+  border-color: Black;
+}
+
+.CEditBorderUnderline {
+  border-style: none;
+  border-bottom: solid 1px black;
+}
+
+.CEditBorderNone {
+  border-style: none;
+}
+
+/*EditBox Numeric*/
+.CNumEdit {
+  position: absolute;
+  padding: 0;
+  padding-right: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  height: 17px;
+}
+
+.CNumEditBorderSingle {
+  border-width: 1px;
+  border-style: Solid;
+  border-color: Black;
+}
+
+.CNumEditBorderUnderline {
+  border-style: none;
+  border-bottom: solid 1px black;
+}
+
+.CNumEditBorderNone {
+  border-style: none;
+}
+
+.Iinput {
+  background-color: white;
+  color: black
+}
+
+.IAmtreblboul {
+  background-color: gray;
+  color: red;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtreblbo {
+  background-color: black;
+  color: cyan;
+  font-weight: bold
+}
+
+.IAmtreblul {
+  background-color: gray;
+  color: red;
+  text-decoration: underline
+}
+
+.IAmtreboul {
+  background-color: gray;
+  color: red;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtblboul {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtreul {
+  background-color: gray;
+  color: red;
+  border-bottom: 1px solid black
+}
+
+.IAmtblul {
+  background-color: blue;
+  color: white;
+  border-bottom: 1px solid black
+}
+
+.IAmtboul {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtrebo {
+  background-color: black;
+  color: cyan;
+  font-weight: bold
+}
+
+.IAmtrebl {
+  background-color: black;
+  color: cyan
+}
+
+.IAmtblbo {
+  background-color: white;
+  color: red;
+  font-weight: bold
+}
+
+.IAmtre {
+  background-color: black;
+  color: cyan
+}
+
+.IAmtbo {
+  background-color: white;
+  color: red;
+  font-weight: bold
+}
+
+.IAmtboit {
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.IAmtbl {
+  background-color: white;
+  color: red
+}
+
+.IAmtul {
+  background-color: blue;
+  color: white;
+  border-bottom: 1px solid black
+}
+
+.IAmtse {
+  background-color: black;
+  color: blue
+}
+
+.IAmtit {
+  background-color: white;
+  color: red;
+  font-style: italic
+}
+
+.disabled input:hover {
+  cursor: no-drop;
+}

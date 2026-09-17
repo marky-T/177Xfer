@@ -1,0 +1,81 @@
+﻿/*    AvalistView CSS */
+
+#avaListView {
+  display: block;
+  border: gray 1px outset;
+  overflow: hidden;
+  position: absolute;
+}
+
+.avaListViewHeaderTable {
+  background-color: #c0c0c0; /* needs to be dynamic */
+  width: 100%;
+  border-color: white; /* needs to be dynamic */
+  border-width: 1px;
+  table-layout: fixed;
+  position: relative;
+}
+
+.AvaListViewHeaderColumn {
+  background-color: #c0c0c0; /* needs to be dynamic */
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+  padding-left: 2px;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 1px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 1px solid;
+}
+
+  .avaListViewHeaderColumn:hover {
+    background-color: #dddddd; /* needs to be dynamic */
+  }
+
+.avaListViewHeaderColumnResize {
+  resize: horizontal;
+}
+
+.avaListViewHeaderColumnSpan {
+  display: inline-block;
+  width: 90%;
+}
+
+.avaListViewContent {
+  overflow: auto;
+  background-color: white; /* needs to be dynamic */
+  border: 1px;
+}
+
+.avaListViewContentTable {
+  width: 100%;
+  table-layout: fixed;
+  position: relative;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 0px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 0px solid;
+}
+
+.avaListViewRow {
+}
+
+  .avaListViewRow:focus {
+    outline: none;
+  }
+
+.avaListViewRowSelected {
+  background-color: royalblue !important;
+}
+
+.avaListViewRowCell {
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 2px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: Gray 1px solid;
+  border-left: 1px none;
+  border-right: Gray 1px solid;
+  text-align: left;
+}

@@ -1,0 +1,10 @@
+﻿{
+  "AuthenticationConfig": {
+    "issuer": "http://localhost:8080/realms/AMTRealm",
+    "redirectUri": "http://localhost:4400/<APPNAME>",
+    "clientId": "AMT",
+    "scope": "openid profile email offline_access",
+    "responseType": "code",
+    "claimUserName": "preferred_username"
+  }
+}

@@ -1,0 +1,1913 @@
+﻿/* **********************************************************
+   * File      : Amt.css                                    *
+   * Date      : 21-01-2020                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+input {
+  margin: 0px;
+  padding: 0px;
+  font-family: Courier New, sans-serif;
+  font-size: 11pt;
+}
+
+/* is needed to hava a white background within checkbox */
+input, textarea {
+  background-color: #FFFFFF;
+}
+
+  INPUT::-ms-clear {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  input:focus {
+    box-shadow: 0px 0px 5px #4195fc;
+  }
+
+div, span {
+  margin: 0;
+}
+
+  div span {
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+  }
+
+form {
+  padding: 0px;
+  margin: 0px;
+}
+
+table {
+  font-size: inherit !important;
+}
+
+select {
+  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  background: inherit;
+}
+
+legend {
+  color: inherit;
+  margin-left: 4px;
+}
+
+option {
+  /*margin-top:-1px;*/
+  /*margin-bottom:-1px;*/
+}
+
+html {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Body Style*/
+.AmtBody, body {
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+  background-color: #C0C0C0;
+  color: #000000;
+  cursor: default;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.companyImage {
+  display: none;
+  height: 335px;
+  width: 400px;
+  background: url(default/default-logo.jpg);
+  background-size: 400px 333px;
+  background-repeat: no-repeat;
+}
+
+.PageDiv {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.AppTitleBar {
+  display: table;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #3399CC;
+  color: #363636;
+}
+
+  /*Safari hack*/
+  .AppTitleBar span {
+    white-space: normal;
+  }
+
+.AmtTitleBarRow {
+  display: table-row;
+}
+
+.AmtTitleBarText {
+  float: left;
+}
+
+
+.AmtNotSupportWarning {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.AmtNotSupportWarningButton {
+  background-color: coral;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: .75em;
+}
+
+
+.AmtLanguageBar {
+  display: table-cell;
+  float: right;
+}
+
+.AmtLanguageButton {
+  height: 20px;
+  line-height: 10px;
+  display: none;
+  background-color: transparent;
+  float: right;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 10pt;
+}
+
+#AmtLanguageButton {
+  color: #363636;
+  font-family: Arial, Verdana, Sans-serif;
+  display: block;
+  float: left;
+}
+
+.AmtLanguageSelect {
+  height: 20px;
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 10pt;
+  display: none;
+  float: right;
+}
+
+.AmtMacroBar {
+  font-family: Arial, Verdana, Sans-serif;
+  font-size: 8pt;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #E6E6E6;
+  color: #424242;
+  overflow: auto;
+}
+
+.AmtMacroBar_Btn {
+  float: left;
+  text-align: center;
+  padding: 1px;
+  width: 70px;
+  height: 13px;
+  border: 2px solid;
+  border-radius: 5px;
+  border-color: #D8D8D8;
+}
+
+.AppBodyContentWapper {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  right: 0px;
+  bottom: 20px;
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+
+.AppBodyContent {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  /* default color
+     Color in AmtBody is not inherited so set it here */
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+  background-color: #C0C0C0;
+  color: #000000;
+  letter-spacing: 0.2px;
+}
+
+.applicationContents {
+  text-align: left;
+  background-color: Green;
+}
+
+.AppStatusBarWrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -20px;
+}
+
+.AppStatusBarFiller {
+  height: 20px;
+}
+
+.AppStatusBar {
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  clear: both;
+  float: left;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #3399CC;
+  color: #363636;
+}
+
+/* To hide the title and status bar uncomment the following settings 
+.AppTitleBar,
+.AppStatusBar {
+  display: none;
+}
+.AppBodyContent {
+  top: 0px;
+  bottom: 0px;
+}
+.AppStatusBarFiller {
+  height: 0px;
+}
+*/
+
+.AppBodyContentPopup {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+}
+
+/* Cursor */
+.DCursor {
+  cursor: default;
+}
+
+.HCursor {
+  cursor: pointer;
+  cursor: hand;
+}
+
+/* accesskey */
+.AmtAccesskey {
+  text-decoration: underline;
+}
+
+.CFontStyle {
+  text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.CFontStyleOver {
+  text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.CFontStyleDown {
+  text-decoration: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/*Label */
+.CWebLabelIE78 {
+  background-color: #C0C0C0;
+}
+
+.CWebLabel {
+  background-color: inherit;
+}
+
+.CTextLabel {
+  position: absolute;
+  cursor: default;
+  text-align: left;
+  overflow: hidden;
+}
+
+.CNumLabel {
+  position: absolute;
+  cursor: default;
+  text-align: right;
+  overflow: hidden;
+}
+
+.CTextLabel div,
+.CNumLabel div {
+  width: 100%;
+  height: 100%;
+}
+
+.LabelEvent {
+  cursor: pointer !important;
+}
+
+.LabelHyperLink {
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+
+.CLabelBorderUnderlineWholeField {
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.CLabelBorderSingle {
+  border-width: 1px;
+  border-style: Solid;
+  border-color: Black;
+}
+
+.CLabelBorderUnderline {
+  border-style: none;
+  border-bottom: solid 1px black;
+}
+
+.CLabelBorderNone {
+  border-style: none;
+}
+
+
+
+/* Classes for the highlighting of labels/SME and Dynamic Forms and */
+
+.AmtReverse {
+  background-color: #808080 !important;
+  color: black !important;
+}
+
+.AmtBlink {
+  color: red !important;
+}
+
+.AmtBold {
+  font-weight: bold !important;
+}
+
+.AmtUnderline {
+  text-decoration: underline !important;
+}
+
+.AmtItalic {
+  font-style: italic !important;
+}
+
+.AmtSecure {
+  background-color: #808080 !important;
+  color: black !important;
+}
+
+/* Classes for the highlighting  edit boxes */
+.Iinput {
+  background-color: white;
+  color: black
+}
+
+.IAmtreblboul {
+  background-color: gray;
+  color: red;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtreblbo {
+  background-color: black;
+  color: cyan;
+  font-weight: bold
+}
+
+.IAmtreblul {
+  background-color: gray;
+  color: red;
+  text-decoration: underline
+}
+
+.IAmtreboul {
+  background-color: gray;
+  color: red;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtblboul {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtreul {
+  background-color: gray;
+  color: red;
+  border-bottom: 1px solid black
+}
+
+.IAmtblul {
+  background-color: blue;
+  color: white;
+  border-bottom: 1px solid black
+}
+
+.IAmtboul {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid black
+}
+
+.IAmtrebo {
+  background-color: black;
+  color: cyan;
+  font-weight: bold
+}
+
+.IAmtrebl {
+  background-color: black;
+  color: cyan
+}
+
+.IAmtblbo {
+  background-color: white;
+  color: red;
+  font-weight: bold
+}
+
+.IAmtre {
+  background-color: black;
+  color: cyan
+}
+
+.IAmtbo {
+  background-color: white;
+  color: red;
+  font-weight: bold
+}
+
+.IAmtboit {
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.IAmtbl {
+  background-color: white;
+  color: red
+}
+
+.IAmtul {
+  background-color: blue;
+  color: white;
+  border-bottom: 1px solid black
+}
+
+.IAmtse {
+  background-color: black;
+  color: blue
+}
+
+.IAmtit {
+  background-color: white;
+  color: red;
+  font-style: italic
+}
+
+
+/*EditBox */
+.CEdit {
+  position: absolute;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  height: 17px;
+}
+
+.CEditBorder3D {
+  border-width: 2px;
+  border-style: inset;
+}
+
+.CEditBorderSingle {
+  border-width: 1px;
+  border-style: Solid;
+  border-color: Black;
+}
+
+.CEditBorderUnderline {
+  border-style: none;
+  border-bottom: solid 1px black;
+}
+
+.CEditBorderNone {
+  border-style: none;
+}
+
+
+
+/*EditBox Numeric*/
+.CNumEdit {
+  position: absolute;
+  padding: 0;
+  padding-right: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  height: 17px;
+}
+
+.CNumEditBorderSingle {
+  border-width: 1px;
+  border-style: Solid;
+  border-color: Black;
+}
+
+.CNumEditBorderUnderline {
+  border-style: none;
+  border-bottom: solid 1px black;
+}
+
+.CNumEditBorderNone {
+  border-style: none;
+}
+
+
+
+/*Memo */
+.CMemo {
+  position: absolute;
+  /* Small horizontal padding so the caret stays clear of the border (e.g. at the start
+     of a line after Home) instead of disappearing behind it. box-sizing: border-box keeps
+     the overall control size unchanged. */
+  padding: 0 2px;
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/*Scrollbar display */
+.SCROLLBAR_BOTH {
+  overflow: scroll;
+}
+
+.SCROLLBAR_NONE {
+  overflow: hidden;
+}
+
+.SCROLLBAR_HORIZONTAL {
+  overflow-x: scroll;
+}
+
+.SCROLLBAR_VERTICAL {
+  overflow-y: scroll;
+}
+
+/*Shape */
+.CShape {
+  position: absolute;
+  border: 1px;
+}
+
+  /*Shape */
+  .CShape.RoundRectangle {
+    border-radius: 10px;
+  }
+
+  /*Shape */
+  .CShape.Circle,
+  .CShape.Ellipse {
+    border-radius: 50%
+  }
+
+  /*Shape */
+  .CShape.LineHorizontal {
+    border-bottom-width: 0px !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px !important;
+  }
+
+  .CShape.LineHorizontalEdge {
+    border-bottom-width: 1px !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px !important;
+  }
+
+  /*Shape */
+  .CShape.LineVertical {
+    border-bottom-width: 0px !important;
+    border-top-width: 0px !important;
+    border-right-width: 0px !important;
+  }
+  /*Shape */
+  .CShape.LineVerticalEdge {
+    border-bottom-width: 0px !important;
+    border-top-width: 0px !important;
+    border-right-width: 1px !important;
+  }
+
+
+/*ListBox */
+.CList {
+  position: absolute;
+}
+
+.CComboBox_ComboContent_container li, .CComboBox_ComboContent_container ul {
+  border-style: none !important;
+  border-width: 0px !important;
+}
+
+/*ComboBox */
+.CComboBox {
+  position: absolute !important;
+}
+
+/*created for dropdownlists*/
+.CComboBoxAdvanced {
+  position: absolute !important;
+  background-color: transparent;
+  border: none;
+  border-color: white;
+  border: 1px solid black;
+}
+
+.CComboBox_Inputbox {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+  border: none;
+}
+
+.CComboBox_Input {
+  background: inherit;
+  border: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  height: 19px;
+}
+
+.CComboBox_Image {
+  float: left;
+  width: 18px;
+  height: 19px;
+}
+
+.CComboBox_Dropdown {
+  position: absolute;
+  background-color: transparent;
+  border: black 1px solid;
+  overflow: auto;
+}
+
+.CComboBox_DropdownDiv {
+  position: absolute;
+  z-index: 1100; /*when a popup is displayed the dropdownlist of the underlying form is showed*/
+}
+
+.CComboBox_Dropdown li, .CComboBox_Dropdown ul {
+  border-style: none !important;
+  border-width: 0px !important;
+}
+
+.CComboBox_Dropdown2 {
+  background-color: #CCa1FF;
+  position: relative;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+}
+
+/*Option */
+.COption {
+}
+
+/*Panel */
+.CPanel {
+  position: absolute;
+  background-color: inherit;
+  border-color: white;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+input[type="checkbox"] {
+  -moz-appearance: checkbox;
+}
+
+/*CheckBox */
+.CCheck {
+  position: absolute;
+  border-color: white;
+}
+
+/*GroupBox */
+.CGroup {
+  position: absolute;
+  background-color: inherit;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  margin-top: -2px;
+}
+
+/*ScrollBox */
+.CScroll {
+  position: absolute;
+  background-color: inherit;
+  border-color: white;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+}
+
+/*PageControl */
+.CPage {
+  position: absolute;
+  background-color: inherit;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.CTabStripPlaceHolder {
+  position: absolute;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  border: none;
+  height: auto;
+  z-index: 1010;
+}
+
+.CTabStrip,
+.CTabStripSelected {
+  position: relative;
+  float: left;
+  text-align: center;
+}
+
+.CTabStripSelected {
+  border: none;
+  border-left: white 2px outset;
+  border-top: white 2px outset;
+  border-right: white 2px outset;
+  top: 0px;
+  z-index: 1013;
+}
+
+.CTabStrip {
+  border: none;
+  border-left: white 2px inset;
+  border-top: white 2px inset;
+  border-right: white 2px inset;
+  border-bottom: transparent;
+  top: 0px;
+  z-index: 1012;
+}
+
+.CTabStripSub span {
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-align: center;
+}
+
+.CTabStripSub {
+  overflow: hidden;
+  line-height: auto;
+  cursor: hand;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.CTabSheet {
+  position: absolute;
+  border: white 2px outset;
+  z-index: 1012;
+}
+
+.CTabSheetSub {
+  z-index: 1010;
+  overflow: hidden;
+}
+
+/*Chart */
+.CChart {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+/*Radiobutton group */
+.CRadioButtonGroup {
+  position: absolute;
+  background-color: inherit;
+}
+
+.CRadioButton {
+  background-color: transparent;
+}
+
+/*Image */
+.CImage {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.ImageEvent {
+  cursor: pointer !important;
+}
+
+.ImageHyperLink {
+  cursor: pointer !important;
+}
+
+/*ListView */
+.CListView {
+  border: gray 1px outset;
+  overflow: hidden;
+  position: absolute;
+}
+
+.CListViewHeaderTable {
+  background-color: #c0c0c0;
+  width: 100%;
+  border-color: white;
+  border-width: 1px;
+  table-layout: fixed;
+  position: relative;
+}
+
+.CListViewScrollDiv {
+  overflow: auto;
+  width: 100%;
+  POSITION: relative;
+  position: relative;
+}
+
+.CListViewContentTable {
+  width: 100%;
+  table-layout: fixed;
+  position: relative;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 0px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 0px solid;
+}
+
+.CListViewHeaderColl {
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+  padding-left: 2px;
+  white-space: pre;
+  border-top: Gray 0px solid;
+  border-bottom: Gray 1px solid;
+  border-left: Gray 0px solid;
+  border-right: Gray 1px solid;
+}
+
+.CListViewHeaderCollInVisible {
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0px;
+  white-space: pre;
+  visibility: collapse;
+  border: 0px;
+}
+
+.CListViewInvisibleColumn {
+  visibility: collapse;
+}
+
+
+.CListViewRowCell {
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 2px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: Gray 1px solid;
+  border-left: 1px none;
+  border-right: Gray 1px solid;
+}
+
+.CListViewRowCellNoLines {
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 1px;
+  white-space: nowrap;
+  border-top: 1px none;
+  border-bottom: 1px none;
+  border-left: 1px none;
+  border-right: 1px none;
+}
+
+.CListViewRowCellTable {
+  width: 100%;
+  border: none;
+}
+
+.CListViewRowSelected {
+  background-color: royalblue !important;
+}
+
+  .CListViewRowSelected td {
+    background-color: royalblue !important;
+  }
+
+/*TabbedForm */
+.CTabForm {
+  position: absolute;
+}
+
+/*Dynamic Form */
+.CDynForm {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+/*Popup Form */
+.CPopup {
+  position: absolute;
+}
+
+/*Menu */
+.CMenu {
+  position: absolute;
+}
+
+/*Calendar */
+.CCalendar {
+  position: absolute;
+}
+
+/*Buttongroup */
+.CBtnGrp {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background-color: inherit;
+}
+
+.CBtnGrp div {
+  overflow: hidden;
+}
+
+.CBtnGrp_Btn_Border {
+  border-bottom-color: black !important
+}
+
+.CBtnGrp_Btn:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+}
+/*Scrollbar display */
+/*
+  'scroll' displays scrollbars allways. To display scrollbars automaticly, 'auto' can be used
+   instead of 'scroll'
+*/
+.SCROLLBAR_BOTH {
+  overflow: scroll;
+}
+
+.SCROLLBAR_NONE {
+  overflow: hidden;
+}
+
+.SCROLLBAR_HORIZONTAL {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.SCROLLBAR_VERTICAL {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.CSS_NONE {
+  border: none;
+}
+
+.CSS_SINGLE {
+  border: black 1px solid;
+}
+
+.CSS_MEDIUM {
+  border: black 2px solid;
+}
+
+.CSS_WIDE {
+  border: black 3px solid;
+}
+
+.CSS_DASHED {
+  border: black 1px dashed;
+}
+
+.CSS_DOTTED {
+  border: black 1px dotted;
+}
+
+.CSS_INSET {
+  border: black 2px inset;
+}
+
+.CSS_OUTSET {
+  border: white 2px outset;
+}
+
+.CSS_RIDGE {
+  border: black 2px ridged;
+}
+
+.CSS_GROOVE {
+  border: black 3px groove;
+}
+
+.CSS_3D {
+  border: black 2px groove;
+}
+
+
+/*Alignment */
+.CALM {
+  text-align: left;
+}
+
+.CACM {
+  text-align: center;
+}
+
+.CARM {
+  text-align: right;
+}
+
+.Lrbtngrp {
+}
+
+.Lrdg {
+  position: absolute;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LrdgBut {
+  position: absolute;
+  top: 0px;
+}
+
+.LLabrdgGC {
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgIE {
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgNS {
+  position: absolute;
+  top: -2px;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.Lbtngrp {
+  background-color: transparent;
+}
+
+.Amtbtn {
+  position: absolute;
+  border: 2px outset white;
+}
+
+/* Popupbox settings */
+
+.AmtErrorFrame {
+  z-index: -1;
+  border: none;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.AmtError,
+.AmtErrorDesign {
+  position: absolute;
+  z-index: 1150;
+  border: 2px outset white;
+  background-color: InfoBackground;
+  overflow: hidden;
+  left: 68px;
+  top: 68px;
+  right: 68px;
+  bottom: 88px;
+  display: none;
+}
+
+.AmtErrorDesign {
+  position: relative;
+}
+
+.AmtErrorBox,
+.AmtErrorBoxDesign {
+  z-index: 1160;
+  border: Inset 2px White;
+  overflow: auto;
+}
+
+.AmtErrorBox {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 50px;
+}
+
+.AmtErrorBoxDesign {
+  display: none;
+}
+
+.AmtMessageBar {
+  z-index: 1160;
+  float: left;
+  display: block;
+  clear: both;
+}
+
+.AmtMessageBarSme {
+  z-index: 1160;
+  float: left;
+  width: 85%;
+  display: block;
+  color: White;
+  font-weight: bold;
+  clear: both;
+}
+
+.AmtPage2 {
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+  width: 65px;
+  z-index: 1160;
+  display: block;
+}
+
+.AmtPage2btn {
+  display: none;
+}
+
+.infoButtonGroup,
+.infoButtonGroupDesign {
+  z-index: 1160;
+  border: none;
+  background-color: transparent;
+  margin: 5px 5px 5px 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.infoButtonGroupDesign {
+  display: none;
+}
+
+.AmtErrorButton,
+.AmtPrintButton,
+.AmtErrorButtonDesign,
+.AmtPrintButtonDesign {
+  z-index: 1160;
+  float: right;
+  display: block;
+}
+
+.AmtErrorButtonDesign,
+.AmtPrintButtonDesign,
+.AmtPrintButton {
+  display: none;
+}
+
+.AmtPrintScreen {
+  float: right;
+  margin-top: 0px;
+  margin-right: 5px;
+  width: 65px;
+  z-index: 1161;
+  display: inline;
+}
+
+.AmtPrintScreenButtonDesign {
+  display: none;
+}
+
+/* Report view settings for printing */
+
+.DoPageBreak {
+  position: relative;
+  page-break-after: always;
+  font-family: Courier New;
+  display: inline;
+}
+
+.Page {
+  position: relative;
+  font-family: Courier New;
+  display: inline;
+}
+
+.Repview {
+  position: relative;
+  background: "transparent url(../images/Amtbackground.jpg) no-repeat top center";
+}
+
+.CTrace {
+  position: absolute;
+  top: 670px;
+  left: 0px;
+  background-color: White;
+  height: 70px;
+  overflow-y: auto;
+}
+
+.CByeTable {
+  width: 550px;
+  height: 450px;
+}
+
+.CByeTableCell {
+  text-align: center;
+}
+
+.CByeMessage {
+  color: Red;
+}
+
+.amtAjaxInProcess {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%; /* 100%;  doesn't work in IE6*/
+  height: 100%; /* 100%;  doesn't work in IE6*/
+  background-color: transparent; /* #3399cc; */
+  cursor: wait !important;
+  display: block;
+  text-align: center;
+  line-height: 50%;
+  z-index: 16777271; /* is max in safari 3. 2147483647 (32bit) is safe max (Firefox3 renders higher as 0, Firefox2 kills the element) */
+}
+
+.amtAjaxImage {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%; /* 100%; doesn't work in IE6 */
+  width: 100%; /* 100%; doesn't work in IE6 */
+}
+
+.amtAjaxNotInProcess {
+  display: none;
+}
+
+.modalDialogBackground {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  background-color: #000000; /* #3399cc; */
+  display: none;
+  opacity: .5; /* for FireFox and Opera */
+  filter: alpha(opacity=50);
+}
+
+.parentMenuContainer {
+  border: 0px solid #E4E9EF;
+  border-right: 0px none;
+  padding: 0px;
+  /*width: 184px;*/
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+  z-index: 1100;
+}
+
+  .parentMenuContainer td {
+    padding: 0px;
+  }
+
+  .parentMenuContainer a {
+    outline: none;
+  }
+
+  .parentMenuContainer #tm_subMenuWidthImage {
+    width: 10px;
+  }
+
+.parentMenuItem {
+  /*border-right: 1px solid #E4E9EF;*/
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+}
+
+  .parentMenuItem a:link {
+    color: black;
+  }
+
+  .parentMenuItem a:visited {
+    color: black;
+  }
+
+  .parentMenuItem a:hover {
+    color: black;
+  }
+
+  .parentMenuItem a:active {
+    color: black;
+  }
+
+  .parentMenuItem #tm_contentCell {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+    .parentMenuItem #tm_contentCell a {
+      text-decoration: none;
+    }
+
+  .parentMenuItem #tm_submenuCell {
+    text-align: right;
+    white-space: nowrap;
+    width: 10px;
+    vertical-align: middle;
+    padding-right: 10px;
+  }
+
+.parentMenuItemOver {
+  /*border-right: 1px solid #E4E9EF;*/
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+}
+
+  .parentMenuItemOver #tm_contentCell {
+    cursor: default;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+    .parentMenuItemOver #tm_contentCell a {
+      text-decoration: none;
+    }
+
+  .parentMenuItemOver #tm_submenuCell {
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 10px;
+    padding-right: 10px;
+  }
+
+.menuContainer {
+  padding: 0px;
+  border-top: 1px solid #E4E9EF;
+  border-bottom: 1px solid #E4E9EF;
+  width: 184px;
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+}
+
+  .menuContainer td {
+    padding: 0px;
+  }
+
+  .menuContainer a {
+    outline: none;
+  }
+
+  .menuContainer #tm_subMenuWidthImage {
+    width: 5px;
+  }
+
+.menuItem {
+  border: 0px none;
+  padding: 0px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+}
+
+  .menuItem #tm_contentCell {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+    .menuItem #tm_contentCell a {
+      text-decoration: none;
+    }
+
+  .menuItem #tm_submenuCell {
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 10px;
+    padding-right: 10px; /* <!-- if background image needed --> 		background-image: url('submenu.gif'); 		background-repeat: no-repeat; 		background-position: 0px 5px; 		*/
+  }
+
+.menuItemTextCol {
+  white-space: nowrap;
+  width: 100%;
+}
+
+  .menuItemTextCol a:link {
+    color: black;
+  }
+
+  .menuItemTextCol a:visited {
+    color: black;
+  }
+
+  .menuItemTextCol a:hover {
+    color: black;
+  }
+
+  .menuItemTextCol a:active {
+    color: black;
+  }
+
+
+.menuItemShortCutCol {
+  text-align: right;
+  padding-left: 5px;
+}
+
+
+  .menuItemShortCutCol a:link {
+    color: black;
+  }
+
+  .menuItemShortCutCol a:visited {
+    color: black;
+  }
+
+  .menuItemShortCutCol a:hover {
+    color: black;
+  }
+
+  .menuItemShortCutCol a:active {
+    color: black;
+  }
+
+.menuItemSeparator {
+  background-color: #797979;
+  width: 90%;
+  height: 1px;
+}
+
+.menuItemOver {
+  cursor: hand;
+  cursor: pointer;
+  border: 0px none;
+  padding: 0px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: expression(cellSpacing=0);
+  border-spacing: 0px;
+}
+
+  .menuItemOver #tm_contentCell {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    cursor: hand;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+    .menuItemOver #tm_contentCell a {
+      text-decoration: none;
+    }
+
+  .menuItemOver #tm_submenuCell {
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 10px;
+    padding-right: 10px /* <!-- if background image needed --> 		background-image: url('submenu.gif'); 		background-repeat: no-repeat; 		background-position: -52px 5px; 		*/;
+  }
+
+.menuContainerDiv {
+  position: absolute;
+  top: 0px;
+  left: -2000px;
+  visibility: hidden;
+  z-index: 1180;
+}
+
+/* disabled style*/
+.CDisabled {
+  color: #7c8690 !important;
+  -webkit-text-fill-color: #7c8690 !important;
+  cursor: default !important;
+}
+
+/* To hide password (Dark) fields set the color and background-color to the same value as the main form and hide the border */
+.CPasswordCobolEdit {
+  /*
+  border: none !important;
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  */
+}
+
+/* Non display print option. Don't show the value but allow editing it */
+.CIbmCobolNonDisplayPrint {
+  color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  border: 0px solid !important;
+}
+
+/* An Ibm normal unprotected input field */
+.CIbmCobolNormalUnprotected {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+}
+
+/* An Ibm intensified unprotected input field */
+.CIbmCobolIntensifiedUnprotected {
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+  color: #FF0000 !important;
+  font-weight: bold !important;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+}
+
+/* An Ibm text field (editbox) which is made protected */
+.CIbmCobolTextBoxProtected {
+  background-color: inherit !important;
+  border: none !important; /* Remove the border around the input field showing it as a label */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default !important;
+  position: absolute;
+  padding: 0;
+  padding-left: 2px; /* When changing padding also update AmtTextBox.RenderControl */
+  padding-right: 2px;
+  margin: 0;
+  height: 17px;
+}
+
+/* An Ibm normal protected field. Can be a label or disabled-editbox */
+.CIbmCobolNormalProtected {
+}
+
+/* An Ibm intensified protected field. Can be a label or disabled-editbox */
+.CIbmCobolIntensifiedProtected {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* A-Series SDF output field */
+.CASeriesCobolOutput {
+  background-color: inherit !important;
+  border: none !important;
+  user-select: none;
+  cursor: default !important;
+}
+
+/* A-Series SDF output transmittable field */
+.CASeriesCobolOutputTransmittable {
+  background-color: #C0DCC0;
+  user-select: none;
+  cursor: default !important;
+}
+
+/* A-Series SDF input field */
+.CASeriesCobolInput {
+}
+
+/* A-Series SDF field highlighter */
+.CASeriesCobolHighlight {
+  font-weight: bold !important;
+}
+
+@media print {
+  #AmtBody * {
+    visibility: hidden;
+    overflow: visible;
+  }
+
+  #PageDiv * {
+    visibility: visible;
+  }
+
+  #AppTitleBar * {
+    visibility: hidden;
+  }
+
+  #AppStatusBarWrapper * {
+    visibility: hidden;
+  }
+
+  #AppStatusBar * {
+    visibility: hidden;
+  }
+
+  #theform * {
+    visibility: visible;
+  }
+
+  [id^="AppBodyContent"] * {
+    visibility: visible;
+  }
+  /* Editable print settings: */
+  [id^="AppBodyContent"] {
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+  }
+
+  .CListView {
+    overflow: hidden !important;
+  }
+
+  .CListViewInvisibleColumn {
+    display: none !important;
+  }
+
+  .NoPrint {
+    display: none !important;
+  }
+
+  .CList {
+    overflow: hidden !important;
+  }
+
+  .CPage {
+    overflow: hidden !important;
+  }
+
+  .CTabStripPlaceHolder {
+    overflow: hidden !important;
+  }
+
+  .CTabStripSub {
+    overflow: hidden !important;
+  }
+
+  .CTabSheetSub {
+    overflow: hidden !important;
+  }
+
+  .CPanel {
+    overflow: hidden !important;
+  }
+
+  .CGroup {
+    overflow: hidden !important;
+  }
+
+  .CScroll {
+    overflow: hidden !important;
+  }
+  /* disabled style - print as black */
+  .CDisabled {
+    background-color: #FFFFFF !important;
+    color: #C0C0C0 !important;
+    -webkit-text-fill-color: #C0C0C0 !important;
+  }
+  /* uncomment this for forcing a print in landscape
+    @page {
+    size: landscape
+  }
+  */
+}
+
+
+
+.menuContainerIframeUnderlay {
+  border: 0;
+  position: absolute;
+  visibility: hidden;
+  left: -2000px;
+  top: 0px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0);
+  filter: Alpha(Opacity= '0' );
+  opacity: 0;
+  -moz-opacity: 0;
+}
+
+.ToList {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.CComboBox_ComboContent_container {
+  z-index: 1010;
+  border: 1px solid gray;
+  border-top: none;
+  position: relative;
+  left: -1px;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+  .CComboBox_ComboContent_container:not(ul):not(li) {
+    background-color: inherit;
+  }
+
+.CComboBoxAdvanced {
+  position: relative;
+}
+
+
+.ToList li:hover, .amthovered {
+  background-color: rgb(10, 120, 255);
+  color: white;
+  border-left: none;
+  border-right: none;
+  white-space: pre;
+}
+
+.ToList li {
+  position: relative;
+  min-height: 13px;
+  padding: 0px;
+  border: none !important;
+  white-space: pre;
+}
+
+.CComboBox_Input {
+  -webkit-nbsp-mode: normal;
+}
+
+.disabled {
+  color: grey;
+}
+
+  .disabled input:hover, .disabled img:hover, .disabled CComboBox_ComboInput_container:hover, .disabled li:hover {
+    cursor: no-drop;
+  }
+
+    .disabled li:hover:not(.amthovered) {
+      background-color: white;
+      color: grey;
+      border: 0;
+    }
+
+.nochange li:hover:not(.amthovered) {
+  background-color: white;
+  color: black;
+  border: 0;
+}
+
+.disabled ul {
+  overflow: hidden !important;
+}
+
+/* Overwrite Bootstrap styling that breaks our features */
+*, ::after, ::before {
+  box-sizing: unset !important;
+  border-collapse: unset !important;
+}
+
+.AmtLegendEmpty {
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+}
+
+.AmtLegend {
+  font-size: inherit;
+  margin-bottom: -1em;
+  margin-top: -1em;
+  padding-inline-start: 2px;
+  padding-inline-end: 2px;
+}
+
+body {
+  line-height: unset !important;
+}
+
+legend {
+  width: unset !important;
+}
+
+/* Hidden div to set cursor state*/
+#AmtHidden {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  overflow: hidden;
+}

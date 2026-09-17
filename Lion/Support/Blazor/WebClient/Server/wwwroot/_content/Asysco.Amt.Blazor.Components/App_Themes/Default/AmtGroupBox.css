@@ -1,0 +1,39 @@
+﻿/* **********************************************************
+   * File      : AmtGroupBox.css                            *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+legend {
+  color: inherit;
+  margin-left: 4px;
+  width: unset !important;
+}
+
+.AmtLegendEmpty {
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+}
+
+.AmtLegend {
+  font-size: inherit;
+  padding-inline-start: 2px;
+  padding-inline-end: 2px;
+}
+
+/* Div within GroupBox for margin */
+.CGroupMargin {
+  transform: translateY(-1em);
+  background-color: inherit;
+}
+
+/*GroupBox */
+.CGroup {
+  position: absolute;
+  background-color: inherit;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  margin-top: -2px;
+}

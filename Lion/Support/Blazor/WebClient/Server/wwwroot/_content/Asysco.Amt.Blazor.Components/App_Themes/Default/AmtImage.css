@@ -1,0 +1,25 @@
+﻿/* **********************************************************
+   * File      : AmtImage.css                               *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Image */
+.CImage {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.ImageEvent {
+  cursor: pointer !important;
+}
+
+.ImageHyperLink {
+  cursor: pointer !important;
+}
+
+.disabled img:hover {
+  cursor: no-drop;
+}

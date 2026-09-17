@@ -1,0 +1,165 @@
+.justify-between {
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 0.33;
+}
+
+.server-time {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-menu {
+  width: 40px;
+  background-color: red;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.with-bg {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  max-height: 130px;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0px !important;
+  padding-left: 10px !important;
+}
+
+.header-box-shadow {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.bottom-to-top {
+  border: 0px;
+  border-right: 1px;
+  border-style: solid;
+  border-image: linear-gradient(to top, #c1c1c1, rgba(0, 0, 0, 0)) 1 100%;
+}
+
+.smallerFont {
+  font-size: 14px;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.progress-blue {
+  color: aqua;
+}
+
+.nav-list-item-icon {
+  padding-right: 5px;
+}
+
+.nav-menu-icon {
+  padding-right: 5px;
+  padding-left: 16px;
+}
+
+.nav-list {
+  padding-top: 0px;
+}
+
+#top-nav-list-item {
+  font-size: 15px;
+  height: 40px;
+}
+
+.menu-item-text {
+  padding-top: 3px;
+}
+
+.panel-header {
+  padding: 0;
+}
+
+#first-menu-item {
+  font-size: 15px;
+}
+
+.icon-button{
+  background: none;
+  padding-right: 5px;
+  padding-left: 14px;
+  border: 0;
+  cursor: pointer;
+}
+
+.icon-button .icon {
+  width: 28px;
+}
+
+.application {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.theme-alternate .mat-toolbar {
+  background-color: black;
+}
+
+.mat-toolbar {
+  width: 100%;
+  height: 40px;
+  color: white;
+}
+
+.home-info {
+  left: 24px;
+  margin-left: 10px;
+  width: 100%;
+}
+
+.theme-toggle {
+  white-space: preserve nowrap;
+}
+
+.user-info {
+  margin-left: 10px;
+}
+
+.content {
+  position: relative;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  height: 100vh;
+}
+
+.footer {
+  min-height: 20px;
+  bottom: 0;
+  height: auto;
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}

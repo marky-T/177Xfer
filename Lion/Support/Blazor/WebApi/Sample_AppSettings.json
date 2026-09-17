@@ -1,0 +1,37 @@
+﻿{
+  "Amt": {
+    "AmtCookieEncryptionKey": "eN5lwyldYKKCLzjwYGfY2rpRa791JMFSke5PDTRL0lA=", // Should be the same as AC CookieEncryptionKey!
+    "ApplicationName": "BlazorWebAPI",
+
+    "Authentication": {
+      "AuthenticationType": "JWT",
+      "JWT": {
+        "Authority": "",
+        "Audience": "",
+        "TokenValidationParameters": {
+          "NameClaimType": "preferred_username"
+        }
+      }
+    }
+  },
+  "BlazorAPI": {
+    "ConnectionType": "AppManager", // AppServer / AppManager / TransactionServer / VsWebApi
+    "ConnectionAddress": "<host> | GRPC:<address>:<port> | <address>/api/",
+    // [AppServer|AppManager] "<host>"                 Replace <host> with the address of the application manager/server. If not set, machine name will be used.
+    // [TransactionServer]    "GRPC:<address>:<port>"  Replace <address> and <port> with the Transaction Server settings as set in the Control Center.
+    // [VsWebApi]             "<address>/api/"         Replace <address> with the Business Logic web address of the application as set in the Control Center.
+    "ConnectionPort": 0, // Change this to the application manager/server port (required for AppServer|AppManager)
+    "EnableLogging": false, // When turned on, the API will log debug information / exceptions to the log (App_Data\Logs\<date>)
+    "SpareConnectionAddress": "<address>", //spare manager's connection address when the main appmanager is not available.
+    "SpareConnectionPort": 0 //spare manager's connection port when the main appmanager is not available.
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "System.Net.Http": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

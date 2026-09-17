@@ -1,0 +1,93 @@
+﻿/* **********************************************************
+   * File      : AmtError.css                         *
+   * Date      : 07-14-2022                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+.AmtNotSupportWarning {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.AmtNotSupportWarningButton {
+  background-color: coral;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: .75em;
+}
+
+.CTrace {
+  position: absolute;
+  top: 670px;
+  left: 0px;
+  background-color: White;
+  height: 70px;
+  overflow-y: auto;
+}
+
+.ExceptionPageMain {
+  height: 100%;
+  width: 82%;
+  position:absolute;
+}
+
+.ExceptionTraceTime {
+  border-right: 1px solid;
+  border-bottom: 2px solid black;
+}
+
+.ExceptionTraceText {
+  border-bottom: 2px solid black;
+}
+
+.ExceptionTraceTime span {
+  font-weight: bold;
+}
+
+.ExceptionPageTrace {
+  position: absolute;
+  height: 100%;
+  width: 18%;
+  margin-left: 82%;
+  background-color: wheat;
+  color: dodgerblue;
+  text-align: left;
+  font-size: 10px;
+}
+
+  .ExceptionPageTrace h4 {
+    color: black;
+    text-align: center;
+    font-size: 12px;
+  }
+
+.ExceptionTraceScrollDiv {
+  overflow-y: auto;
+  overflow-x: auto;
+  height: 93%;
+}
+
+.ExceptionTraceNoMessages {
+  color: darkgray;
+  font-weight: 400;
+  text-align: center;
+}
+
+.ExceptionTraceButtons {
+  display: flex;
+  margin-top: -10px;
+  border-bottom: 1px dashed red;
+  justify-content: right;
+}
+
+.ExceptionTraceButtons button{
+  font-size: 8px;
+  text-align: center;
+  margin-bottom: 2px;
+  margin-right: 4px;
+  height: 14px;
+}

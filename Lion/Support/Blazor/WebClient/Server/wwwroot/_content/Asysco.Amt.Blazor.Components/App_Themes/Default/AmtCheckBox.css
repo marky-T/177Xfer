@@ -1,0 +1,16 @@
+﻿/* **********************************************************
+   * File      : AmtCheckBox.css                            *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+input[type="checkbox"] {
+  -moz-appearance: checkbox;
+}
+
+/*CheckBox */
+.CCheck {
+  position: absolute;
+  border-color: white;
+}

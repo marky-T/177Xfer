@@ -1,0 +1,342 @@
+﻿/* 2020-01-17 Asysco */
+div, span
+{
+  margin:0;
+}
+
+.testClass {
+  color: #FF0000;
+}
+
+div span
+{
+  white-space: pre;
+  height:100%;
+  width:100%;
+}
+
+table
+{
+  font-size:inherit !important;
+}
+
+html
+{
+  overflow:hidden;
+  padding:0;
+  margin:0;
+  width:100%;
+  height:100%;
+}
+
+/* Body Style*/
+.AmtBody, body
+{
+  font-family: Courier New, Sans-Serif;
+  font-size: 11pt;
+  background-color: #C0C0C0;
+  color: #000000;
+  cursor: default;
+  padding:0;
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+.PageDiv
+{
+  margin: 0;
+  padding: 0;
+  height:100%;
+  overflow:hidden;
+}
+
+/* Cursor */
+.DCursor
+{
+  cursor: default;
+}
+.HCursor
+{
+  cursor: pointer;
+  cursor: hand;
+}
+
+/*Scrollbar display */
+.SCROLLBAR_BOTH
+{
+  overflow: scroll;
+}
+.SCROLLBAR_NONE
+{
+  overflow: hidden;
+}
+.SCROLLBAR_HORIZONTAL
+{
+  overflow-x: scroll;
+}
+.SCROLLBAR_VERTICAL
+{
+  overflow-y: scroll;
+}
+.CTabStripPlaceHolder
+{
+  position: absolute;
+  overflow:hidden;
+  top:0px;
+  left:0px;
+  border:none;
+  height:auto;
+  z-index:1010;
+}
+
+.ImageEvent
+{
+  cursor: pointer !important;
+}
+
+.ImageHyperLink
+{
+  cursor: pointer !important;
+}
+
+/*
+  'scroll' displays scrollbars allways. To display scrollbars automaticly, 'auto' can be used
+   instead of 'scroll'
+*/
+.SCROLLBAR_BOTH
+{
+  overflow: scroll;
+}
+.SCROLLBAR_NONE
+{
+  overflow: hidden;
+}
+.SCROLLBAR_HORIZONTAL
+{
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.SCROLLBAR_VERTICAL
+{
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.CSS_NONE
+{
+  border: none;
+}
+.CSS_SINGLE
+{
+  border: black 1px solid;
+}
+.CSS_MEDIUM
+{
+  border: black 2px solid;
+}
+.CSS_WIDE
+{
+  border: black 3px solid;
+}
+.CSS_DASHED
+{
+  border: black 1px dashed;
+}
+.CSS_DOTTED
+{
+  border: black 1px dotted;
+}
+.CSS_INSET
+{
+  border: black 2px inset;
+}
+.CSS_OUTSET
+{
+  border: white 2px outset;
+}
+.CSS_RIDGE
+{
+  border: black 2px ridged;
+}
+.CSS_GROOVE
+{
+  border: black 3px groove;
+}
+.CSS_3D
+{
+  border: black 2px groove;
+}
+
+.Lrdg
+{
+  position: absolute;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LrdgBut
+{
+  position: absolute;
+  top: 0px;
+}
+
+.LLabrdgGC
+{
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgIE
+{
+  position: absolute;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.LLabrdgNS
+{
+  position: absolute;
+  top: -2px;
+  left: 20px;
+  background-color: transparent;
+  cursor: default;
+}
+
+.Lbtngrp
+{
+  background-color: transparent;
+}
+
+/* disabled style*/
+.CDisabled
+{
+  color:#7c8690 !important;
+  -webkit-text-fill-color: #7c8690 !important;
+  cursor: default !important;
+}
+
+.CDisabledCobolEdit
+{
+  background-color: #C0C0C0 !important;
+  border: none !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.CEnabledCobolEdit
+{
+  background-color: #FFFFFF !important;
+  border: 1px solid !important;
+}
+
+@media print
+{
+  #AmtBody * { visibility: hidden; overflow:visible; }
+  #PageDiv * { visibility: visible; }
+  #AppTitleBar * { visibility: hidden; }
+  #AppStatusBarWrapper * { visibility: hidden; }
+  #AppStatusBar * { visibility: hidden; }
+  #theform * { visibility: visible; }
+  #AppBodyContent * { visibility: visible; }
+  /* Editable print settings: */
+  #AppBodyContent { margin-top: 0px !important; margin-left: 0px !important; }
+  .CListView { overflow: hidden !important; }
+  .CList { overflow: hidden !important; }
+  .CPage { overflow: hidden !important; }
+  .CTabStripPlaceHolder { overflow: hidden !important; }
+  .CTabStripSub { overflow: hidden !important; }
+  .CTabSheetSub { overflow: hidden !important; }
+  .CPanel { overflow: hidden !important; }
+  .CGroup { overflow: hidden !important; }
+  .CScroll { overflow: hidden !important; }
+  /* disabled style - print as black */
+  .CDisabled
+  {
+    background-color: #FFFFFF !important;
+    color: #C0C0C0 !important;
+    -webkit-text-fill-color:#C0C0C0 !important;
+  }
+}
+
+.menuContainerIframeUnderlay
+{
+  border: 0;
+  position: absolute;
+  visibility: hidden;
+  left: -2000px;
+  top: 0px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0);
+  filter: Alpha(Opacity= '0' );
+  opacity: 0;
+  -moz-opacity: 0;
+}
+
+
+.ToList
+{
+  background-color:white;
+  text-decoration:none;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.CComboBox_ComboContent_container
+{
+  z-index:1010;
+  border: 1px solid gray;
+  border-top: none;
+
+  position: relative;
+  left: -1px;
+}
+
+.CComboBoxAdvanced
+{
+  position: relative;
+}
+
+
+.ToList li:hover, .amthovered {
+  background-color: rgb(10, 120, 255);
+  color: white;
+  border-left: none;
+  border-right: none;
+}
+
+.ToList li
+{
+  position: relative;
+  word-wrap:break-word;
+}
+
+.CComboBox_Input
+{
+  -webkit-nbsp-mode: normal;
+}
+
+.disabled input:hover, .disabled img:hover, .disabled CComboBox_ComboInput_container:hover, .disabled li:hover
+{
+  cursor: no-drop;
+}
+
+.disabled li:hover:not(.amthovered), .nochange li:hover:not(.amthovered)
+{                                                                                             
+  background-color: white;
+  color: black;
+  border: 0;
+}
+
+.disabled ul
+{
+  overflow: hidden !important;
+}

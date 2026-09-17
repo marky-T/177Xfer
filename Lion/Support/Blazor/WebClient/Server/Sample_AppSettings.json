@@ -1,0 +1,71 @@
+﻿{
+  "Amt": {
+    "RuntimeBehaviour": "Lion", // Runtime behaviour. Can be set to Lion/Cobol/Natural
+    "HttpRequestTimeout": 7200, // HTTP Request timeout in seconds.
+    "NoDefaultTheme": false, // Ignore the default theme. If set to true, default theme will not be loaded, and only specified theme will be loaded
+    "MaxRequestLength": 10240, // Maximum request length and upload limit in kB. 32 bit integer which limits the setting to a maximum value of 2147483647
+    "Theme": "", // Name of the folder  in 'wwwroot\App_Themes' where custom theme will be used from
+    "IsVSApplication": false, // Is the application a static VS application?
+    "ObjectFields": "", // Object Fields, seperated with a semicolon, i.e "TESTFIELD1;TESTFIELD2"
+    "LoadAndRun": false, // Load and run active? (false/true)
+    "LoadAndRunJs": "loadandrun", // Custom loadandrun.js name in the root\scripts folder without extension.
+    "LoadCustomize": false, // Custom.js active? (false/true)
+    "CustomizeJs": "customize", // custom.js name in the root\scripts folder	without extensions
+    "AdditionalErrorDetails": false, // When set to true, the AmtExceptionPage provides additional error information.
+    "LoadAdditionalJavascripts": false, // Make the additional javascripts defined below active.
+    "UseNotifyBar": true, // Use the notifybar to get messages from the backend in parallel	
+    "NotifyBarTime": 120, // Time in seconds to show the notifybar
+    "AdditionalJavascripts": "", // Additional javascript files placed in the root\scripts folder, seperated with a semicolon (do not include the '.js' extension).
+
+    "BlazorWebApi": { // Connection settings for the Blazor Web Api
+      "Protocol": "Http", // Http or Https
+      "Domain": "localhost", // Domain name
+      "Port": 0 // Port used for running local. Set to 0 when hosted on IIS.
+    },
+
+    "Authentication": {
+      "AuthenticationType": "OIDC",
+      "AmtOIDC": {
+        "OIDC": {
+          "ClientId": "",
+          "Authority": "",
+          "Scope": [ "" ], // Scope of API to request access tokens for
+          "ClientSecret": "", // Needs to be set when client assertion is disabled!
+          "TokenValidationParameters": {
+           "NameClaimType": "preferred_username"
+          }
+        },
+        "CookieAuthenticationOptions": {
+          "Cookie": {
+            "Name": ".Amt.Blazor.{APPLICATION_NAME}.Auth", // Replace {APPLICATION_NAME} by name of the application to prevent collision of cookies!
+            "SameSite": "None", // Necessary when running Blazor Server in AC so that authentication cookie can be written while executed in IFrame!
+          }
+        },
+
+        // "RefreshThreshold": 60, // defaults to 60 seconds
+        // "EnableClientAssertion": false, // defaults to false
+        // "ClientAssertionAlgorithm": "RS256", // defaults to RS256
+    
+        //// Certificate config: configures the certificate to be used for signing the client assertion
+        // "CertificateConfig": {
+        //   //"AllowInvalid": true, // allow invalid certificates? defaults to false
+    
+        //   "Subject": "", // Subject of the certificate to be loaded from the cert store to be used to sign client assertions
+        //   "StoreName": "MY", // Defaults to MY
+        //   "StoreLocation": "CurrentUser", // CurrentUser || LocalMachine
+    
+        //   //"Path": "certificate.pfx", //Path to certificate file
+        //   //"Password": "", // Password for certificate, only necessary when loading from file
+        // }
+      }
+    }
+  },
+  "Logging": { // Do not alter this section
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}

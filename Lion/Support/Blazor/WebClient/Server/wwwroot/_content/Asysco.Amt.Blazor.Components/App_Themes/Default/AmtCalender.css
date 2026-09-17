@@ -1,0 +1,27 @@
+﻿/* **********************************************************
+   * File      : AmtCalender.css                            *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*Calendar */
+.CCalendar {
+  position: absolute;
+  width: auto !important;
+}
+
+.calendarWrap {
+  position: relative;
+  display: inline-block;
+}
+
+  .calendarWrap:after {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    left: 4px;
+    height: 1px;
+    width: 75%;
+    background: black;
+  }

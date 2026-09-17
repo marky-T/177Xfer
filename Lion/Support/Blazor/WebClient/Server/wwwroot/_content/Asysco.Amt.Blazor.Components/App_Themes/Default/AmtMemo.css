@@ -1,0 +1,25 @@
+﻿/* **********************************************************
+   * File      : AmtMemo.css                                *
+   * Date      : 04-01-2023                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/* is needed to hava a white background within memo */
+textarea {
+  background-color: #FFFFFF;
+}
+
+/*Memo */
+.CMemo {
+  position: absolute;
+  /* Small horizontal padding so the caret stays clear of the border (e.g. at the start
+     of a line after Home) instead of disappearing behind it. box-sizing: border-box keeps
+     the overall control size unchanged. */
+  padding: 0 2px;
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #000000;
+  resize: none;
+  box-sizing: border-box;
+}

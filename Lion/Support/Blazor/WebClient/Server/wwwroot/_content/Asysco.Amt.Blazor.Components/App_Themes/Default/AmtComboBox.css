@@ -1,0 +1,132 @@
+﻿/* **********************************************************
+   * File      : AmtComboBox.css                            *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*ComboBox */
+.CComboBox {
+  position: absolute !important;
+  letter-spacing: 0.2px;
+  box-sizing: border-box !important;
+}
+
+.CComboBox_ComboContent_container li, .CComboBox_ComboContent_container ul {
+  border-style: none !important;
+  border-width: 0px !important;
+}
+
+  .CComboBox_ComboContent_container li.selected {
+    border: 1px solid grey !important;
+  }
+
+.CComboBoxSimple {
+  position: absolute !important;
+  border-style: solid;
+  border-width: 1px;
+  letter-spacing: 0.2px;
+}
+
+
+/*created for dropdownlists*/
+.CComboBoxAdvanced {
+  position: absolute !important;
+  background-color: transparent;
+  border: none;
+  border-color: white;
+  border: 1px solid black;
+  letter-spacing: 0.2px;
+  box-sizing: border-box !important;
+}
+
+.CComboBox_Inputbox {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+  border: none;
+}
+
+.CComboBox_Input {
+  background: inherit;
+  border: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  height: 19px;
+  letter-spacing: 0.2px;
+}
+
+.CComboBox_Image {
+  float: right;
+  width: 18px;
+  height: 19px;
+}
+
+.CComboBox_Dropdown {
+  position: absolute;
+  background-color: transparent;
+  border: black 1px solid;
+  overflow: auto;
+  letter-spacing: 0.2px;
+}
+
+.CComboBox_DropdownDiv {
+  position: absolute;
+  z-index: 1100; /*when a popup is displayed the dropdownlist of the underlying form is showed*/
+  letter-spacing: 0.2px;
+}
+
+.CComboBox_Dropdown li, .CComboBox_Dropdown ul {
+  border-style: none !important;
+  border-width: 0px !important;
+}
+
+.CComboBox_Dropdown2 {
+  background-color: #CCa1FF;
+  position: relative;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  letter-spacing: 0.2px;
+}
+
+.CComboBox_ComboContent_container {
+  z-index: 1010;
+  border: 1px solid gray;
+  border-top: none;
+  position: relative;
+  left: -1px;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.CComboBoxAdvanced {
+  position: relative;
+}
+
+.CComboBox_Input {
+  -webkit-nbsp-mode: normal;
+}
+
+.disabled CComboBox_ComboInput_container:hover {
+  cursor: no-drop;
+}
+
+.CComboBoxOption:focus {
+  background-color: rgb(10, 120, 255);
+  color: white;
+}
+
+.CComboBox:focus-within {
+  background-color: rgb(10, 120, 255);
+  color: white;
+}
+
+.CSS_3D_COMBOBOX {
+  border: black 1px groove;
+  border-style: inset !important;
+  border-color: white !important;
+}

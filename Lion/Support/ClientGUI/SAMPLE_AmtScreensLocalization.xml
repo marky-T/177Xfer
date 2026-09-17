@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<messages>
+  <remarks>
+    This file contains texts for the GUI components within AMT Screens. At least one language should exist and at all times one language should be marked as default="true".
+  </remarks>
+  <language name="ENGLISH" default="true">
+    <msg id="0" value="Undo" />
+    <msg id="1" value="Copy" />
+    <msg id="2" value="Paste" />
+    <msg id="3" value="Select All" />
+    <msg id="4" value="Right to left reading order" />
+    <msg id="5" value="Delete" />
+    <msg id="6" value="Cut" />
+  </language>
+</messages>

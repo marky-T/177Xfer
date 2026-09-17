@@ -1,0 +1,116 @@
+﻿/* **********************************************************
+   * File      : AmtPageControl.css                         *
+   * Date      : 12-11-2021                                 *
+   * Copyright : Asysco Software BV (http://www.asysco.com) *
+   * Product   : Amt                                        *
+   **********************************************************/
+
+/*PageControl */
+.CPage {
+  position: absolute;
+  background-color: inherit;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.CTabStripPlaceHolder {
+  position: absolute;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  border: none;
+  height: auto;
+  z-index: 1010;
+}
+
+.CTabStrip,
+.CTabStripSelected {
+  position: relative;
+  float: left;
+  text-align: center;
+  display: block;
+}
+
+.CTabStripSelected {
+  border: none;
+  border-left: white 2px outset;
+  border-top: white 2px outset;
+  border-right: white 2px outset;
+  /*border-bottom: transparent;*/
+  top: 0px;
+  z-index: 1013;
+}
+
+.CTabStripHidden {
+  display: none;
+}
+
+.CTabStrip {
+  border: none;
+  border-left: white 2px inset;
+  border-top: white 2px inset;
+  border-right: white 2px inset;
+  border-bottom: transparent;
+  top: 0px;
+  z-index: 1012;
+}
+
+.CTabStripSub span {
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-align: center;
+}
+
+.CTabStripSub {
+  overflow: hidden;
+  line-height: auto;
+  cursor: hand;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.CTabSheet {
+  position: absolute;
+  border: none;
+  border-left: white 2px outset;
+  border-right: white 2px outset;
+  border-bottom: white 2px outset;
+  z-index: 1012;
+}
+
+.CTabSheetSub {
+  z-index: 1010;
+  overflow: hidden;
+}
+
+/*TabbedForm */
+.CTabForm {
+  position: absolute;
+}
+
+.CTabArrow {
+  position: absolute;
+  width: 17px;
+  z-index: 1013;
+  background-color: ButtonHighlight;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 13px;
+}
+
+.CTabArrow:hover {
+  background-color: #bee6fd;
+  cursor: pointer;
+}
+
+.CTabArrow:active {
+  background-color: inherit;
+  border: none;
+  font-size: 12px;
+}
