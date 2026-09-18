@@ -1,0 +1,10 @@
+{
+  "_source": "Reused from Trials/CHABAN_ASCII/sgs-values.json - CHAB100_ASCII shares the same *DEFINE macros (CALUN/CALDEU/CALTROI/CALMAX) and token scheme; NUMB=0/MOD=0/LIST=0 keep it the simplified ASCII variant.",
+  "ASCII": "1",
+  "OUTPUT,1,1,1": "ECL-OUTPUT",
+  "OUTPUT,1,1,2": "80",
+  "OUTPUT,1,1,3": "1",
+  "LIST": "0",
+  "MOD": "0",
+  "NUMB": "0"
+}

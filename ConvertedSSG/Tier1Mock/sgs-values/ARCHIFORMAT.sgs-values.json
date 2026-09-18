@@ -1,0 +1,15 @@
+{
+  "_source": "Trial3/manifest/programs.manifest.json - key ARCHIFORMAT (paramOverrides brackets stripped; conditionValues empty)",
+  "filein,1,1,1": "ECL-FICREPORT",
+  "filein,1,2,1": "ECL-FICDESCRIPT",
+  "filein,1,3,1": "ECL-FICUNLOAD",
+  "fileout,1,1,1": "ECL-FICFORMAT",
+  "key,1,1,1": "CLE-TABLE",
+  "key,1,1,2": "N",
+  "key,1,1,3": "10",
+  "rsz,1,1,1": "55",
+  "table,1,1,1": "SCHEMA1",
+  "table,1,1,2": "TABLE-ARCH",
+  "table,1,1,3": "ARCHIS",
+  "table,1,2,1": "2"
+}
