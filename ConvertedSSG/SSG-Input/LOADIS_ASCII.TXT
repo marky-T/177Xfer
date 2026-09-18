@@ -1,0 +1,127 @@
+*DEFINE  FILER  
+*SET  FILLCTR TO  [#1]-1
+*IF FILLCTR  IS  SET
+           02  FILLER  PIC  X([*FILLCTR]).  
+*END
+*END
+*IF [ASCII] > 0 
+#ACOB,IE  .LOADIS/ASCII,.LOADIS/ASCII   
+*ELSE   
+#ACOB,IET .LOADIS/ASCII,.LOADIS/ASCII   
+*END
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. LOADIS-ASCII.
+       AUTHOR BOURDEAUD HUY 17/12/79.   
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.  
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+*IF [VIDE] > 0  
+*ELSE   
+*INCREMENT  I  FROM  1  BY 1 TO [INPUT,1]   
+           SELECT  BDE[*I]  ASSIGN TO   
+*IF [INPUT,1,1] > 3 
+               UNISERVO [INPUT,1,1,1].  
+*ELSE   
+               DISC [INPUT,1,1,1].  
+*END
+*LOOP   
+*ENDIF  
+           SELECT DISQ ASSIGN TO DISC  [OUTPUT,1,1,1]   
+           ORGANIZATION IS INDEXED  
+           RESERVE 5 AREAS  
+           ACCESS  MODE IS SEQUENTIAL RECORD KEY IS CLEF
+           FILE STATUS IS IO-STAT.  
+       DATA DIVISION.   
+       FILE SECTION.
+*IF [VIDE] > 0  
+*ELSE   
+*INCREMENT I FROM 1 BY 1 TO  [INPUT,1]  
+       FD  BDE[*I]  
+           LABEL RECORD STANDARD
+             BLOCK CONTAINS [INPUT,1,1,3]   RECORDS 
+           RECORD CONTAINS [INPUT,1,1,2] CHARACTERS 
+           DATA RECORD IS  Z[*I].   
+       01  Z[*I]   PIC  X([INPUT,1,1,2]).   
+*LOOP   
+*ENDIF  
+       FD  DISQ   LABEL RECORD STANDARD 
+           BLOCK CONTAINS [OUTPUT,1,1,3] RECORDS
+           RECORD  CONTAINS [OUTPUT,1,1,2] CHARACTERS   
+             DATA RECORD IS ZDISQ CLEF. 
+       01  ZDISQ  PIC  X([OUTPUT,1,1,2]).   
+       01  CLEFA.   
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER PIC X([KEYIS,1,1,1]).  
+           02 CLEF PIC X([KEYIS,1,1,2]).
+           02 FILLER PIC X([KEYIS,1,1,3]).  
+*ELSE   
+           02 CLEF PIC X([KEYIS,1,1,2]).
+           02 FILLER PIC X([KEYIS,1,1,3]).  
+*END
+       WORKING-STORAGE SECTION. 
+       77  FF  PIC  9(10)  COMP  VALUE 1.   
+       77  CTRIN  PIC  9(10)  COMP  VALUE  0.   
+       01  WREC.
+           02 FILLER  PIC  X([OUTPUT,1,1,2]).   
+       01  WREC1     REDEFINES  WREC.   
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER   PIC  X([KEYIS,1,1,1]).   
+           02 KEYA PIC X([KEYIS,1,1,2]).
+           02 FILLER PIC X([KEYIS,1,1,3]).  
+*ELSE   
+           02 KEYA PIC X([KEYIS,1,1,2]).
+           02 FILLER PIC X([KEYIS,1,1,3]).  
+*END
+*IF [ASCII] > 0 
+       01  IO-STAT. 
+           02 IO-FS1     PIC X VALUE '9'.   
+           02 IO-FS2     PIC X VALUE '9'.   
+*ELSE   
+       01  IO-STAT DISP-1.  
+           02 IO-FS1     PIC X VALUE '9' DISP-1.
+           02 IO-FS2     PIC X VALUE '9' DISP-1.
+*END
+       PROCEDURE DIVISION.  
+       DEBUT.   
+*IF [VIDE] > 0  
+*ELSE   
+*INCREMENT  I  FROM  1  BY 1 TO [INPUT,1]   
+           OPEN INPUT  BDE[*I]. 
+*LOOP   
+*ENDIF  
+           OPEN  OUTPUT  DISQ.  
+*IF [VIDE] > 0  
+*ELSE   
+       LECT.
+           GO TO LECT1 FINB  DEPENDING  ON FF.  
+       LECT1.   
+*INCREMENT I FROM 1 BY 1 TO [INPUT,1]   
+           MOVE SPACES TO Z[*I].
+*LOOP   
+           READ  BDE1  INTO  WREC  AT END ADD 1 TO FF  GO TO LECT.  
+           GO TO CONT.  
+       CONT.
+           MOVE KEYA     TO  CLEF.  
+           ADD  1  TO  CTRIN.   
+           WRITE ZDISQ FROM WREC INVALID KEY GO TO  ERRDISQ.
+           MOVE SPACES TO WREC WREC1 ZDISQ. 
+           GO TO LECT.  
+       FINB.
+           DISPLAY 'NB.RECORDS ECRITS'  CTRIN  UPON PRINTER.
+*INCREMENT I FROM 1 BY 1 TO [INPUT,1]   
+           CLOSE  BDE[*I].  
+*LOOP   
+*ENDIF  
+           CLOSE  DISQ. 
+           STOP RUN.
+       ERRDISQ. 
+           DISPLAY 'IS.ERROR         : '  CLEF  UPON  PRINTER.  
+           DISPLAY 'STATUS           : ' IO-FS1 IO-FS2 UPON  PRINTER.   
+           DISPLAY 'RECORD EN ERREUR : ' CTRIN ' EME'  UPON PRINTER.
+           ENTER ASM 'ABORT'.   
+#MAP,S    ASSURFED*UTILITASCII.MAP,TPF$.LOADIS  
+#HDG,N  

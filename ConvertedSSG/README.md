@@ -10,18 +10,25 @@ mock harness before bundling.
 
 ## Programs
 
-| PowerShell file | SSG source | Lines |
+| PowerShell file | SSG source (see `SSG-Input/`) | Lines |
 |-----------------|-----------|------:|
 | `ARCHIFORMAT.ps1`    | ARCHIFORMAT.TXT     | 366 |
 | `ARCHISEPARE.ps1`    | ARCHISEPARE         | 223 |
 | `BABA_ASCII.ps1`     | BABA_ASCII.TXT      | 448 |
-| `CFH-COPY.ps1`       | CFH-COPY_ASCII.TXT  | 419 |
+| `CFH-COPY.ps1`       | CFH-COPY.TXT        | 419 |
 | `CHAB100_ASCII.ps1`  | CHAB100_ASCII.TXT   | 301 |
 | `CHABAN_ASCII.ps1`   | CHABAN_ASCII.TXT    | 300 |
 | `LOADIS_ASCII.ps1`   | LOADIS_ASCII.TXT    | 141 |
 | `LOADIS_MULTI.ps1`   | LOADIS_MULTI.TXT    | 274 |
 | `UNLOADIS_ASCII.ps1` | UNLOADIS_ASCII.TXT  | 113 |
 | `UNLOADIS_MULTI.ps1` | UNLOADIS_MULTI.txt  | 198 |
+
+## SSG-Input/ — original SSG source (unconverted)
+
+The exact 10 SSG source files given to `SsgConverter` as input to produce the `.ps1` files above
+(same content/name as used in `SsgConverter/Examples/Input` in the SsgTrial workspace). Included so
+any report/output can be traced back to the original SSG text — e.g. to compare against a
+hand-built COBOL candidate, or to re-run the converter.
 
 ## Running on AMT172
 
