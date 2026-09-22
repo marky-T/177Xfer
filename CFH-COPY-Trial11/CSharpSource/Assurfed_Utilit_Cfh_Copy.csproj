@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\AmtAppCodeAnalysisRuleSet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <ProjectReference Include="Y:\Amt.Net\Libraries\Libs\Asysco.Amt.Libs.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\Libraries\Asysco.Amt.AmtSharedDataModel\Asysco.Amt.AmtSharedDataModel.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\Libraries\Runtime\Asysco.Amt.Runtime.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\Libraries\serializerwrappers\Asysco.Amt.SerializerWrappers.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\AmtScreens\Common\Asysco.Amt.Screens.Common.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\ComScript\ComScript\AmtComScript.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\ComScript\AmtComScriptService\AmtComScriptService.csproj">
+    </ProjectReference>
+    <ProjectReference Include="Y:\Amt.Net\Libraries\FTP\Asysco.Amt.Ftp.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\AFBUS_2200COBOL.Application.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\Database\AFBUS_2200COBOL.Database.csproj">
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assurfed_Utilit_Cfh_Copy.Core.cs" />
+    <Compile Include="Assurfed_Utilit_Cfh_Copy.cs" />
+    <Compile Include="Assurfed_Utilit_Cfh_Copy.Files.cs" />
+    <Compile Include="Assurfed_Utilit_Cfh_Copy_Info.cs" />
+    <Compile Include="Fd_Recin.cs" />
+    <Compile Include="Fd_Recout.cs" />
+    <Compile Include="LocalDefinitions.cs" />
+    <Compile Include="PrintDefinitions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintDefinitions.Designer.cs">
+      <DependentUpon>PrintDefinitions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+</Project>
