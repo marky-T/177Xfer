@@ -1,0 +1,182 @@
+[
+  {
+    "Path": "AMT_177.dat",
+    "Bytes": 270405615,
+    "SHA256": "143AC42A2E463E437971555CA95FE4B5275C73B167EA7DD6F2FD62E7D2BB2DC5",
+    "Parts": 3
+  },
+  {
+    "Path": "Release_8.0.26230.0.7z",
+    "Bytes": 281045729,
+    "SHA256": "ADE17E611C01A44775DD798E00CE72128A705E6325C77A941C06795BBFE3FE0B",
+    "Parts": 3
+  },
+  {
+    "Path": "Setup.exe",
+    "Bytes": 57237694,
+    "SHA256": "B947D788EAC2526EA432F1E34571F5AD991CA06F01F58C3964CEDDFABBE1C602",
+    "Parts": 0
+  },
+  {
+    "Path": "YDrive_C#.7z",
+    "Bytes": 25913622,
+    "SHA256": "95C4D1CCA1512ACB140DC7CAAD268A25996367BC677AB994360E17B6478D9359",
+    "Parts": 0
+  },
+  {
+    "Path": "ExtraTools\\ActiveAmt.7z",
+    "Bytes": 1371536,
+    "SHA256": "300042C8F9515D3E11B73FCED2719A70902EEFDF102E7D7D0118F81E9899761A",
+    "Parts": 0
+  },
+  {
+    "Path": "ExtraTools\\AmtAid.7z",
+    "Bytes": 15513054,
+    "SHA256": "3452A7A1A6E285B8DCA9A5599938985F834BDC0A14A5E7DEE6E1EAFDDE4C897D",
+    "Parts": 0
+  },
+  {
+    "Path": "ExtraTools\\AmtOpconTest.7z",
+    "Bytes": 457830,
+    "SHA256": "A9B690DFA33769DA09FA9E7395E222132A66B4DA181ACB2CA5C1F649406B8AA5",
+    "Parts": 0
+  },
+  {
+    "Path": "ExtraTools\\LionDevRemote.7z",
+    "Bytes": 4089427,
+    "SHA256": "1FF75E6DD12654EA0718BA205AC8A93096A49FA813F0C328C9696AA4C52D25CF",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\AmtSourceAnalyser.7z",
+    "Bytes": 73177075,
+    "SHA256": "97A6DD1A1F4E87EE16E1B54E42690190BE3CE58D9E45F1BEA880C7120728BD24",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\CmdConverterGui.7z",
+    "Bytes": 8488344,
+    "SHA256": "56933FEBBB6C4F6D2D44185F7C6065756857ACFFEAE1F44C03F1684EBC8E7579",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\CobolToAmt.7z",
+    "Bytes": 61213455,
+    "SHA256": "E75A5056E92B7DAF6C95EDBCE3396B4ABB0C4E1C8DAF380EB830FE81750B09DF",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\DataPump.7z",
+    "Bytes": 6713839,
+    "SHA256": "5F038F139CA5CF6F0104BC2E944FCF33FD88F2A06CDABA81A1EF9DB65A0BFC1D",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\DataPumpConsole.7z",
+    "Bytes": 6250067,
+    "SHA256": "AC6BB9F8F70E09FDBC9D674DB744BC5AF9786A12A727F95A164762E2D98C9235",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\EasytrieveConverterCmd.7z",
+    "Bytes": 13455907,
+    "SHA256": "E3476ED5A010D18C0D90AFCCB32E8A4851FBC3A0456797BAE2ABC5D272FA5F13",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\EasytrieveConverterGui.7z",
+    "Bytes": 14044800,
+    "SHA256": "7DBAA2A060B5536096FFCB05B634503E16489CD7271131E7EFAE6FCB2A058A85",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\EclConverterConsole.7z",
+    "Bytes": 10816119,
+    "SHA256": "626493D5DBE916B8FE3FBA55644121F90E15CDB053FF46C1F24EC43AE390D468",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\EclConverterGui.7z",
+    "Bytes": 10222683,
+    "SHA256": "375C2C5BBF4D869D68E6FBBD1612CADF8DC46B7AD34A9140BCA56121AAA47143",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\FlatFileConverter.7z",
+    "Bytes": 8229620,
+    "SHA256": "62AF8452F2C82A270F211D56A08A98B73646DBD57EC3598FDF83A6981A20A10C",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\JclConverterConsole.7z",
+    "Bytes": 10851585,
+    "SHA256": "F50ADF837E696DF27FE1BC390E99402FD1F8DC0883188FC0BEB0FB40B8A863B4",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\JclConverterGui.7z",
+    "Bytes": 10857725,
+    "SHA256": "2AC97C904678A751A580CC0ED7142AE9840DA52178DAE686C02190103776FC20",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\LincToLionConsole.7z",
+    "Bytes": 60752006,
+    "SHA256": "DA10265209EAF464B49366A6BDCE317E049A2289266BDE2F29715FD49DBDF639",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\LincToLionGui.7z",
+    "Bytes": 61027034,
+    "SHA256": "BB810E2681F26EF5F3BA81F3D7173D494389A18CCA41E25EC6FC0A44D3596934",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\LionCommodule_X86.7z",
+    "Bytes": 5386513,
+    "SHA256": "BFDCFBC44FEFC1C301E9202CD21D92A76623DD2599A3860995C56F64BB49980F",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\MicroFocusFileConverterGui.7z",
+    "Bytes": 7976749,
+    "SHA256": "7DAC6EC992340D6B941D794E14ACAB685660DBFF6C5E5BE30A3CBAE5D7D78F85",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\NaturalConverterConsole.7z",
+    "Bytes": 13060376,
+    "SHA256": "1F8A22960DBF643170B8F142BC09AAC45F9A3A5F63A0C6C2FFD81FE0E215D172",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\NaturalConverterGui.7z",
+    "Bytes": 13278045,
+    "SHA256": "C2DE06B367F74E4196292AC7ED73ED874C1CBD69DD7EEC41451F47E652657355",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\RexxConverter.7z",
+    "Bytes": 5117401,
+    "SHA256": "49112A99C6F7DD2559C964C8E2227EDC0A5A7B6D3122320229D8C47A1CFF3913",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\UnixScriptConverter.7z",
+    "Bytes": 5129723,
+    "SHA256": "51B3067B861AAE76094D93AD35FA79B8BFAEC254993FF034504E18C2E80D4AAF",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\WflConverter.7z",
+    "Bytes": 9075473,
+    "SHA256": "3FA2839F3DBD6DB0C1A553A31BC4835AA9248781E38E21892B09E5C4D3F48FF6",
+    "Parts": 0
+  },
+  {
+    "Path": "MigrationTools\\XgenToAmt.7z",
+    "Bytes": 61301900,
+    "SHA256": "CC2981B3567CAEA0F6922825FA97FBAF7BA40DD79D0D1195F028009D431B2168",
+    "Parts": 0
+  }
+]
