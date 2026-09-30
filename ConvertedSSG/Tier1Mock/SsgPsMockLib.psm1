@@ -21,8 +21,14 @@ function Reset-SgsMock {
 
   # PowerShell hashtables are case-insensitive for string keys by default -
   # matches the generated scripts' inconsistent key casing (e.g. "Y2K" vs "y2k,$a,$B,2").
+  #
+  # IMPORTANT: use .PSBase.Keys, not .Keys. If $Values contains a key that matches (case-
+  # insensitively) a real Hashtable member name - e.g. an SSG condition flag literally called
+  # "KEYS" (seen in LECTIS_ASCII) - PowerShell's ETS silently resolves ".Keys" to that DICTIONARY
+  # ENTRY's value instead of the real Keys property, collapsing the whole enumeration to one
+  # phantom item. ".PSBase.Keys" bypasses the adapter and always returns the true key collection.
   $global:SgsValues        = @{}
-  foreach ($key in $Values.Keys) {
+  foreach ($key in $Values.PSBase.Keys) {
     $global:SgsValues[$key] = $Values[$key]
   }
 
@@ -48,7 +54,9 @@ function GetSgsValue {
     [Parameter(Mandatory=$true)][String]$Key
   )
 
-  if ($global:SgsValues.ContainsKey($Key)) {
+  # .PSBase.ContainsKey (not .ContainsKey) - same ETS-shadowing hazard as Reset-SgsMock's .Keys;
+  # a mocked key literally named "ContainsKey" would otherwise silently break this too.
+  if ($global:SgsValues.PSBase.ContainsKey($Key)) {
     $value = $global:SgsValues[$Key]
     if ($value -is [String]) {
       [Int64]$asInt = 0
@@ -242,6 +250,21 @@ function SetC {
 
   [void]$global:ExternalCalls.Add("SetC $($Rest -join ' ')")
 } # SetC
+
+
+function Log-Message {
+  <#
+    .SYNOPSIS
+      Mock stand-in for the real AMT logging primitive (Log-Message $Text $Severity). No log
+      sink in the Tier-1 harness, so recorded (for visibility) and otherwise a no-op.
+  #>
+
+  param (
+    [Parameter(ValueFromRemainingArguments = $true)] [Object[]]$Rest
+  )
+
+  [void]$global:ExternalCalls.Add("Log-Message $($Rest -join ' ')")
+} # Log-Message
 
 
 Export-ModuleMember -Function * -Variable *

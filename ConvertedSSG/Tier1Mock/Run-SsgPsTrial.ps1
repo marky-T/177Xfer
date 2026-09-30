@@ -52,7 +52,9 @@ if (Test-Path $errFile) { Remove-Item $errFile -Force -ErrorAction SilentlyConti
 
 Write-Host "=== Tier-1 trial: $Program ===" -ForegroundColor Cyan
 Write-Host "Script : $ScriptPath"
-Write-Host "Values : $ValuesFile ($($values.Count) mocked keys)"
+# .PSBase.Count (not .Count) - a mocked SGS key literally named "Count" would otherwise hit the
+# same Hashtable ETS-shadowing hazard fixed in SsgPsMockLib.psm1's Reset-SgsMock/GetSgsValue.
+Write-Host "Values : $ValuesFile ($($values.PSBase.Count) mocked keys)"
 
 $failed = $false
 $errorMessage = $null
