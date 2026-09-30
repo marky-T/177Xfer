@@ -1,0 +1,207 @@
+﻿{
+    "_readme":  "MT-010 handoff bundle manifest. 20 SSG-\u003ePowerShell programs, converted by SsgConverter from SSG-COBOL source. All Tier-1 mock-shell verified (0 parse errors); see per-program README.md for real-runtime status. Mirrors the Trial3/manifest/programs.manifest.json + fixtures/\u003ckey\u003e/ shape per AMT172\u0027s request.",
+    "bundleDate":  "2026-09-30",
+    "programCount":  20,
+    "programs":  [
+                     {
+                         "key":  "ARCHIFORMAT",
+                         "sourceFile":  "ARCHIFORMAT.TXT",
+                         "scriptFile":  "ARCHIFORMAT.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "confirmed-seeded-from-manifest",
+                         "goldenCopied":  true,
+                         "folder":  "Programs/ARCHIFORMAT"
+                     },
+                     {
+                         "key":  "ARCHISEPARE",
+                         "sourceFile":  "ARCHISEPARE",
+                         "scriptFile":  "ARCHISEPARE.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "confirmed-seeded-from-manifest",
+                         "goldenCopied":  true,
+                         "folder":  "Programs/ARCHISEPARE"
+                     },
+                     {
+                         "key":  "BABA_ASCII",
+                         "sourceFile":  "BABA_ASCII.TXT",
+                         "scriptFile":  "BABA_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/BABA_ASCII"
+                     },
+                     {
+                         "key":  "CFH-COPY",
+                         "sourceFile":  "CFH-COPY.TXT",
+                         "scriptFile":  "CFH-COPY.ps1",
+                         "executionStatus":  "tier1+stagea",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "confirmed-seeded-from-manifest",
+                         "goldenCopied":  true,
+                         "folder":  "Programs/CFH-COPY"
+                     },
+                     {
+                         "key":  "CFH-COPY_ASCII",
+                         "sourceFile":  "CFH-COPY_ASCII.TXT",
+                         "scriptFile":  "CFH-COPY_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "parameter-mismatch-related-source-variant",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/CFH-COPY_ASCII"
+                     },
+                     {
+                         "key":  "CHAB100_ASCII",
+                         "sourceFile":  "CHAB100_ASCII.TXT",
+                         "scriptFile":  "CHAB100_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/CHAB100_ASCII"
+                     },
+                     {
+                         "key":  "CHABAN_ASCII",
+                         "sourceFile":  "CHABAN_ASCII.TXT",
+                         "scriptFile":  "CHABAN_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/CHABAN_ASCII"
+                     },
+                     {
+                         "key":  "CONDIS2_ASCII",
+                         "sourceFile":  "CONDIS2_ASCII.TXT",
+                         "scriptFile":  "CONDIS2_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/CONDIS2_ASCII"
+                     },
+                     {
+                         "key":  "EXTEUR",
+                         "sourceFile":  "EXTEUR.TXT",
+                         "scriptFile":  "EXTEUR.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/EXTEUR"
+                     },
+                     {
+                         "key":  "FUSBA2_ASCII",
+                         "sourceFile":  "FUSBA2_ASCII.TXT",
+                         "scriptFile":  "FUSBA2_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/FUSBA2_ASCII"
+                     },
+                     {
+                         "key":  "FUSBA_ASCII",
+                         "sourceFile":  "FUSBA_ASCII.TXT",
+                         "scriptFile":  "FUSBA_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/FUSBA_ASCII"
+                     },
+                     {
+                         "key":  "LECTIS_ASCII",
+                         "sourceFile":  "LECTIS_ASCII.TXT",
+                         "scriptFile":  "LECTIS_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "confirmed-seeded-from-manifest",
+                         "goldenCopied":  true,
+                         "folder":  "Programs/LECTIS_ASCII"
+                     },
+                     {
+                         "key":  "LOADIS_ASCII",
+                         "sourceFile":  "LOADIS_ASCII.TXT",
+                         "scriptFile":  "LOADIS_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "cross-checked-partial-overlap",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/LOADIS_ASCII"
+                     },
+                     {
+                         "key":  "LOADIS_MULTI",
+                         "sourceFile":  "LOADIS_MULTI.TXT",
+                         "scriptFile":  "LOADIS_MULTI.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/LOADIS_MULTI"
+                     },
+                     {
+                         "key":  "RECAP",
+                         "sourceFile":  "RECAP.TXT",
+                         "scriptFile":  "RECAP.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/RECAP"
+                     },
+                     {
+                         "key":  "SCAN_ASCII",
+                         "sourceFile":  "SCAN_ASCII.TXT",
+                         "scriptFile":  "SCAN_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "parameter-mismatch",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/SCAN_ASCII"
+                     },
+                     {
+                         "key":  "TABAN_ASCII",
+                         "sourceFile":  "TABAN_ASCII.TXT",
+                         "scriptFile":  "TABAN_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/TABAN_ASCII"
+                     },
+                     {
+                         "key":  "TAPELD_ASCII",
+                         "sourceFile":  "TAPELD_ASCII.TXT",
+                         "scriptFile":  "TAPELD_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  false,
+                         "goldenStatus":  "confirmed-seeded-from-manifest",
+                         "goldenCopied":  true,
+                         "folder":  "Programs/TAPELD_ASCII"
+                     },
+                     {
+                         "key":  "UNLOADIS_ASCII",
+                         "sourceFile":  "UNLOADIS_ASCII.TXT",
+                         "scriptFile":  "UNLOADIS_ASCII.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "no-manifest-entry",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/UNLOADIS_ASCII"
+                     },
+                     {
+                         "key":  "UNLOADIS_MULTI",
+                         "sourceFile":  "UNLOADIS_MULTI.txt",
+                         "scriptFile":  "UNLOADIS_MULTI.ps1",
+                         "executionStatus":  "tier1-only",
+                         "overlapsWithT3ConvertedSSG10":  true,
+                         "goldenStatus":  "cross-checked-partial-overlap",
+                         "goldenCopied":  false,
+                         "folder":  "Programs/UNLOADIS_MULTI"
+                     }
+                 ]
+}

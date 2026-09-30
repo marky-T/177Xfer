@@ -1,0 +1,171 @@
+{
+  "_readme": "MT-010 Phase 2 output. Checks which of the 20 SSG->PowerShell programs have a Trial3/manifest/programs.manifest.json 'proof' entry (a refimpl-derived expected.dat under Trial3/fixtures/<dir>/), and whether OUR Tier-1 sgs-values.json seed actually matches that entry's paramOverrides/conditionValues (per each program's own sgs-values.json '_source' field, which already documents this). IMPORTANT CAVEAT (repo memory, confirmed 260917): Trial3's fixtures/expected.dat files are produced by a DIFFERENT execution engine - a 'refimpl' PowerShell reference implementation that simulates REAL file I/O (reads mock input.dat, computes actual output bytes) for the COBOL->C# pipeline. Our own Tier-1 harness (SsgPsMockLib.psm1) does NOT simulate file I/O at all - it only captures literal lines passed to DataLineOrNoStatement (SSG parameter-substituted COBOL/print text), with Call-ExternalProgram/file operations recorded but not executed. So even for the 'confirmed same parameters' programs below, a byte-diff between our Tier-1 .out.txt and Trial3's expected.dat is NOT meaningful pass/fail proof - they're answering different questions. What IS useful: these fixtures give AMT172 an independently-derived expected VALUE/BEHAVIOUR reference (record counts, byte layout, branch semantics) to check their REAL Connect-Application run against, once they do real file I/O.",
+  "programs": {
+    "ARCHIFORMAT": {
+      "manifestKey": "ARCHIFORMAT",
+      "paramMatchStatus": "confirmed-seeded-from-manifest",
+      "fixtureDir": "Trial3/fixtures/archiformat",
+      "expectedFile": "Trial3/fixtures/archiformat/expected.dat",
+      "expectedBytes": 689,
+      "expectedLines": 11,
+      "notes": "Trials/ARCHIFORMAT/sgs-values.json's own _source field states it was seeded directly from this manifest key (brackets stripped). Computed A=69/B=68/C=67/D=66/E=65 in the AMT172 trial run matches hand-calculation - consistent with this fixture's record-size assumptions."
+    },
+    "ARCHISEPARE": {
+      "manifestKey": "ARCHISEPARE",
+      "paramMatchStatus": "confirmed-seeded-from-manifest",
+      "fixtureDir": "Trial3/fixtures/archisepare",
+      "expectedFile": "Trial3/fixtures/archisepare/expected.dat",
+      "expectedBytes": 496,
+      "expectedLines": 10,
+      "notes": "Trials/ARCHISEPARE/sgs-values.json's own _source field confirms direct seed from this manifest key."
+    },
+    "BABA_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key for BABA_ASCII. Seed came from the .ps1's own GetSgsValue keys, loop counts at 0 (see MT-010 Phase 1 loop-count-zero gap)."
+    },
+    "CFH-COPY": {
+      "manifestKey": "CFH-COPY",
+      "paramMatchStatus": "confirmed-seeded-from-manifest",
+      "fixtureDir": "Trial3/fixtures/cfh-copy",
+      "expectedFile": "Trial3/fixtures/cfh-copy/expected.dat",
+      "expectedBytes": 246,
+      "expectedLines": 3,
+      "notes": "Trials/CFH-COPY/sgs-values.json's own _source field confirms direct seed from this manifest key. This is the program the AMT172 Stage A / live-CC trial already reported PASS on (structurally identical COBOL codegen to the trial-11-cfh-copy candidate, only diff = our own SSG-STUB comment annotations)."
+    },
+    "CFH-COPY_ASCII": {
+      "manifestKey": "CFH-COPY (related, not exact)",
+      "paramMatchStatus": "parameter-mismatch-related-source-variant",
+      "fixtureDir": "Trial3/fixtures/cfh-copy",
+      "expectedFile": "Trial3/fixtures/cfh-copy/expected.dat",
+      "expectedBytes": 246,
+      "expectedLines": 3,
+      "notes": "GAP: Trials/CFH-COPY_ASCII/sgs-values.json was reused/adapted from CFH-COPY's seed (same values), but CFH-COPY_ASCII.TXT is a DIFFERENT source file with different FILE-CONTROL (DISC/DISP-1 assign vs CFH-COPY's UNISERVO/MASS-STORAGE, per DiscDesignators.json). Same parameter VALUES, different source-variant semantics - do not hand this fixture to AMT172 as CFH-COPY_ASCII's confirmed golden; it's a close reference only."
+    },
+    "CHAB100_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. Seed reused from CHABAN_ASCII's own (independently derived, not manifest-sourced) seed."
+    },
+    "CHABAN_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. Seeded from the .ps1's own GetSgsValue keys, loop counts at 0."
+    },
+    "CONDIS2_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. PG=0 seed skips the whole record-layout generation loop."
+    },
+    "EXTEUR": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. COND=0 seed skips the whole record-layout/procedure generation loop."
+    },
+    "FUSBA_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. Adapted from FUSBA2_ASCII's own (also non-manifest) seed."
+    },
+    "FUSBA2_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. Minimal seed, loop counts at 0."
+    },
+    "LECTIS_ASCII": {
+      "manifestKey": "LECTIS",
+      "paramMatchStatus": "confirmed-seeded-from-manifest",
+      "fixtureDir": "Trial3/fixtures/lectis",
+      "expectedFile": "Trial3/fixtures/lectis/expected.dat",
+      "expectedBytes": null,
+      "expectedLines": null,
+      "notes": "Trials/LECTIS_ASCII/sgs-values.json's own _source field confirms direct seed from manifest key LECTIS. NOTE: manifest programId is 'LECTIS' (no _ASCII) though our source/script filename is LECTIS_ASCII - see the Area C naming rule (output name = input filename, not PROGRAM-ID). This program also has the KEYS-named condition flag that triggers the T3-007 ETS-shadowing hazard if a harness doesn't use .PSBase.*."
+    },
+    "LOADIS_ASCII": {
+      "manifestKey": "LOADIS_MULT-NODUP (cross-checked overlap only, not a full seed)",
+      "paramMatchStatus": "cross-checked-partial-overlap",
+      "fixtureDir": "Trial3/fixtures/LOADIS_MULT-NODUP",
+      "expectedFile": "Trial3/fixtures/LOADIS_MULT-NODUP/expected.dat",
+      "expectedBytes": 95,
+      "expectedLines": 4,
+      "notes": "Trials/LOADIS_ASCII/sgs-values.json's own _source field says 'derived from source directives; cross-checked against manifest key LOADIS_MULT-NODUP where the same tokens overlap' - NOT a full 1:1 paramOverrides seed like CFH-COPY/ARCHIFORMAT/ARCHISEPARE/LECTIS. Treat this fixture as a partial cross-check, not a confirmed golden."
+    },
+    "LOADIS_MULTI": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No manifest key named LOADIS_MULT or LOADIS_MULTI (only LOADIS_MULT-NODUP exists, which is what LOADIS_ASCII cross-checks against, not this program). Seed is a mirror of UNLOADIS_MULTI's table with input/output roles swapped."
+    },
+    "RECAP": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. Minimal seed derived from source, ASCII path selected."
+    },
+    "SCAN_ASCII": {
+      "manifestKey": "SCAN (fixture exists but parameters DIFFER from our seed)",
+      "paramMatchStatus": "parameter-mismatch",
+      "fixtureDir": "Trial3/fixtures/scan",
+      "expectedFile": "Trial3/fixtures/scan/expected.dat",
+      "expectedBytes": 732,
+      "expectedLines": 16,
+      "notes": "GAP - IMPORTANT: Trials/SCAN_ASCII/sgs-values.json's own _source field explicitly says 'No Trial3 manifest entry for SCAN_ASCII' and uses DIFFERENT values than the manifest's SCAN key (e.g. our INPUT,1,1,2=100 vs manifest's 80; our INPUT,1,1,3=10 vs manifest's 1). Do NOT hand fixtures/scan/expected.dat to AMT172 as SCAN_ASCII's golden - it was computed for a different parameterization."
+    },
+    "TABAN_ASCII": {
+      "manifestKey": null,
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "No Trial3 manifest key. SCHEMA=0 seed deliberately skips a schema-selection loop whose *EXIT would map to a script-terminating PowerShell Exit."
+    },
+    "TAPELD_ASCII": {
+      "manifestKey": "TAPELD_DISTRIB",
+      "paramMatchStatus": "confirmed-seeded-from-manifest",
+      "fixtureDir": "Trial3/fixtures/TAPELD_DISTRIB",
+      "expectedFile": "Trial3/fixtures/TAPELD_DISTRIB/expected.dat",
+      "expectedBytes": 246,
+      "expectedLines": 3,
+      "notes": "Trials/TAPELD_ASCII/sgs-values.json's own _source field confirms reuse from manifest key TAPELD_DISTRIB (same programId 'CFH-COPY' template, per the manifest's own programId field)."
+    },
+    "UNLOADIS_ASCII": {
+      "manifestKey": "UNLOADIS_MULT or UNLOADIS_MULT-NODUP (ambiguous - not disambiguated)",
+      "paramMatchStatus": "no-manifest-entry",
+      "fixtureDir": null,
+      "expectedFile": null,
+      "notes": "Trials/UNLOADIS_ASCII/sgs-values.json's own _source field explicitly says 'not in Trial3 manifest', seeded from the .ps1's own GetSgsValue keys. Manifest has two same-programId (UNLOAD-ASCII) candidates (UNLOADIS_MULT / UNLOADIS_MULT-NODUP) but neither was used as our seed - left unresolved rather than guessed."
+    },
+    "UNLOADIS_MULTI": {
+      "manifestKey": "UNLOADIS_MULT (cross-checked overlap only, not a full seed)",
+      "paramMatchStatus": "cross-checked-partial-overlap",
+      "fixtureDir": "Trial3/fixtures/UNLOADIS_MULT",
+      "expectedFile": "Trial3/fixtures/UNLOADIS_MULT/expected.dat",
+      "expectedBytes": 290,
+      "expectedLines": 5,
+      "notes": "Trials/UNLOADIS_MULTI/sgs-values.json's own _source field says 'cross-checked against manifest key UNLOADIS_MULT (same element name, same token scheme)' - not a full 1:1 seed. Treat as partial cross-check."
+    }
+  },
+  "caveat": "Do not represent any 'confirmed-seeded-from-manifest' entry above as a byte-diff PASS against our Tier-1 harness output - see _readme. It means our SGS parameter seed intentionally matches the manifest's paramOverrides/conditionValues, so the two pipelines were asked the same question; it does not mean the two outputs were ever diffed against each other (different execution engines: refimpl file-I/O simulation vs Tier-1 line-capture mock).",
+  "summary": {
+    "confirmed-seeded-from-manifest": ["ARCHIFORMAT", "ARCHISEPARE", "CFH-COPY", "LECTIS_ASCII", "TAPELD_ASCII"],
+    "cross-checked-partial-overlap": ["LOADIS_ASCII", "UNLOADIS_MULTI"],
+    "parameter-mismatch": ["SCAN_ASCII"],
+    "parameter-mismatch-related-source-variant": ["CFH-COPY_ASCII"],
+    "no-manifest-entry": ["BABA_ASCII", "CHAB100_ASCII", "CHABAN_ASCII", "CONDIS2_ASCII", "EXTEUR", "FUSBA_ASCII", "FUSBA2_ASCII", "LOADIS_MULTI", "RECAP", "TABAN_ASCII", "UNLOADIS_ASCII"]
+  }
+}

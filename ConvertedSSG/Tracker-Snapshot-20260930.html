@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMT177 SSG &rarr; PowerShell Trial — Progress Tracker</title>
+<style>
+  :root {
+    --nav-w:240px; --done:#1a7f4b; --prog:#b45309; --pend:#6b7280;
+    --bug:#b91c1c; --code-bg:#1e1e2e; --code-fg:#cdd6f4;
+    --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:var(--nav-w); min-width:var(--nav-w); background:#1e1b4b; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #312e81; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#f5f3ff; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#a78bfa; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#c4b5fd; text-decoration:none; transition:background .15s; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#312e81; color:#f5f3ff; border-left-color:#a78bfa; }
+  nav ul li a.active { background:#2e1065; color:#a78bfa; border-left-color:#7c3aed; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#6d5fb5; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  nav ul li.sub a { padding-left:28px; font-size:11.5px; color:#a78bfa; }
+  main { flex:1; padding:28px 36px; max-width:980px; }
+  .page-title h1 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:22px; }
+  .badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
+  .badge-done { background:#dcfce7; color:var(--done); }
+  .badge-prog { background:#fef3c7; color:var(--prog); }
+  .badge-pend { background:#f3f4f6; color:var(--pend); }
+  .badge-info { background:#dbeafe; color:#1d4ed8; }
+  .badge-plan { background:#fef3c7; color:#92400e; }
+  .badge-bug  { background:#fee2e2; color:var(--bug); }
+
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:26px; }
+  .section-card h2 { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border); }
+  .section-card h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .section-card p  { margin-bottom:10px; line-height:1.6; }
+  .section-card ul { margin:0 0 10px 20px; line-height:1.7; }
+  .section-card li { margin-bottom:3px; }
+
+  code { background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+  pre { background:var(--code-bg); color:var(--code-fg); padding:12px 14px; border-radius:6px; overflow-x:auto; font-size:12px; line-height:1.55; margin:10px 0; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+  pre code { background:none; color:inherit; padding:0; }
+
+  .warn        { background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .info-box    { background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .success-box { background:#f0fdf4; border-left:4px solid #22c55e; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+
+  table.ref { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+  table.ref th { background:#f0f4f8; padding:7px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; }
+  table.ref td { padding:6px 10px; border:1px solid #ddd; vertical-align:middle; line-height:1.55; }
+  table.ref tr:nth-child(even) td { background:#fafafa; }
+  table.ref code { font-size:11.5px; }
+
+  .dot-done::before { content:'\25CF'; color:var(--done); margin-right:5px; }
+  .dot-pend::before { content:'\25CB'; color:var(--pend); margin-right:5px; }
+  .dot-prog::before { content:'\25D1'; color:var(--prog); margin-right:5px; }
+
+  .trial-detail { font-size:10.5px; color:#6b7280; display:block; margin-top:3px; font-family:'Cascadia Code',Consolas,monospace; }
+  .legend { display:flex; gap:18px; flex-wrap:wrap; margin:8px 0 16px; font-size:12px; color:#374151; }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; text-decoration:none; font-size:13px; margin-bottom:18px; }
+  .back-link:hover { text-decoration:underline; }
+  .footer-bar { margin-top:36px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af; }
+  .footer-bar a { color:#1d4ed8; }
+  a { color:#1d4ed8; }
+</style>
+</head>
+<body>
+
+<nav id="sidenav">
+  <div class="logo">
+    <h1>AMT177 Trial</h1>
+    <p>SSG &rarr; PowerShell Progress</p>
+  </div>
+  <ul>
+    <li><a href="SSG-Trial-Progress.html">&#8596; SSG-COBOL &rarr; C# Progress</a></li>
+    <li><a href="SSG-ECL-PowerShell-Reference.html">&#8596; SSG-ECL / PowerShell</a></li>
+    <li><a href="SSG-COBOL-Reference.html">&#8596; SSG/COBOL Reference</a></li>
+    <li><a href="Asset-Register.md">&#8596; Asset Register</a></li>
+    <li style="border-bottom:1px solid #312e81;margin:2px 0 6px;"></li>
+    <li class="section">Progress</li>
+    <li><a href="#aim">Aim / Target</a></li>
+    <li><a href="#overview">1 &middot; Overview</a></li>
+    <li><a href="#areas">2 &middot; Work Areas</a></li>
+    <li><a href="#programs">3 &middot; Program Status</a></li>
+    <li><a href="#fix">4 &middot; Converter Fix</a></li>
+    <li><a href="#routine">5 &middot; Repeatable Routine</a></li>
+    <li class="section">Runbooks</li>
+    <li><a href="#runbooks">5b &middot; Runbooks</a></li>
+    <li class="sub"><a href="#run-cfh-copy">CFH-COPY (Tier-1)</a></li>
+    <li class="sub"><a href="#stagea-runbook">Stage A (real runtime)</a></li>
+    <li><a href="#amt-run-process">5c &middot; AMT Run Process</a></li>
+    <li class="sub"><a href="#run-cfh-copy-cc">CFH-COPY (Control Center)</a></li>
+    <li class="section">Reference</li>
+    <li><a href="#issues">6 &middot; Issues (bugs)</a></li>
+    <li><a href="#todo">7 &middot; ToDo</a></li>
+    <li><a href="#update">8 &middot; How to Update</a></li>
+  </ul>
+</nav>
+
+<main>
+  <a class="back-link" href="Asset-Register.md">&#8592; Asset Register</a>
+
+  <div class="page-title">
+    <h1>AMT177 SSG &rarr; PowerShell Trial &mdash; Progress Tracker</h1>
+    <p style="font-size:14px;color:#6b7280;margin-top:3px;font-weight:400;">Converting OS2200 SSG (Symbiont Stream Generator) source to PowerShell and proving it runs in a Tier-1 mock harness &mdash; on the AMT177 VM, kept separate from the live FEDERALE_APP. The end target: run Federale's mixed SSG-ECL-COBOL reports as PowerShell under the AMT Control Center framework, using mocked or supplied input files.</p>
+  </div>
+<p class="page-meta">Last updated: 2026-09-30 &nbsp;|&nbsp; AMT177 / FEDERALE_APP VM &nbsp;|&nbsp; Companion to <a href="Asset-Register.md">Asset Register</a> &amp; <a href="../SsgConverter/Fixes/SsgConverter-Fix-20260909.md">SsgConverter fix log</a></p>
+
+  <!-- ────────────────────────── AIM / TARGET -->
+  <div class="section-card" id="aim">
+    <h2>Aim / Target</h2>
+    <div class="info-box" style="border-left-color:#7c3aed;background:#f5f3ff;">
+      <strong>End target:</strong> run Federale's mixed-source <strong>SSG-ECL-COBOL reports</strong> as
+      <strong>PowerShell scripts inside the AMT Control Center (CC) framework</strong>, driven by
+      <strong>mocked or supplied input files</strong> &mdash; reproducing the report output on the
+      AMT177 VM without the OS2200 mainframe.
+    </div>
+    <p>The Tier-1 mock harness this page tracks is the <strong>first step</strong> toward that target:
+    prove each converted <code>.ps1</code> parses and runs standalone, then promote it to run under the
+    real AMT CC / ECL runtime.</p>
+    <table class="ref">
+      <thead><tr><th style="width:24%">Stage</th><th>What runs the PowerShell</th><th style="width:16%">Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier 1 &mdash; mock harness</strong></td>
+          <td>Converted <code>.ps1</code> run standalone against a mocked SGS table + input files (<code>Run-SsgPsTrial.ps1</code>) &mdash; no AMT stack. Proves parse + run.</td>
+          <td><span class="badge badge-prog">in progress</span></td>
+        </tr>
+        <tr>
+          <td><strong>Target &mdash; AMT Control Center</strong></td>
+          <td>The same converted PowerShell driven by the AMT ECL runtime under Control Center / BatchController, with mocked or supplied <code>Extracts</code> input files. <strong>Stage A</strong> (standalone vs the real <code>AmtPsEclLib</code>) reached <code>FIN</code>; <strong>Stage B</strong> (under BatchController) is the remaining target &mdash; see <a href="#MT-005">MT-005</a>.</td>
+          <td><span class="badge badge-prog">Stage A done</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 1: OVERVIEW -->
+  <div class="section-card" id="overview">
+    <h2>1 &middot; Overview</h2>
+    <p>This page tracks the <strong>SSG&nbsp;&rarr;&nbsp;PowerShell conversion trial</strong> on the new
+    AMT177 VM. The goal: take OS2200 <strong>SSG</strong> skeleton source (<code>*IF</code>/<code>*SET</code>/<code>*DEFINE</code>
+    directives), convert it to PowerShell with <strong>SsgConverter</strong>, and prove the output
+    both <em>parses</em> and <em>runs</em> in a lightweight Tier-1 mock harness &mdash; without the live
+    AMT stack.</p>
+
+    <div class="info-box">
+      <strong>Kept separate by design:</strong> the live AMT environment (<strong>AMT177 / FEDERALE_APP</strong>,
+      COBOL OS&nbsp;2200 track) is not wired into this trial. No changes are made to its config, the
+      <code>FA_AFBUS</code> DB, or the <code>ava</code> service account.
+    </div>
+
+    <div class="success-box">
+      <strong>Current state (2026-09-30):</strong> <strong>20 of 20</strong> example programs convert to
+      PowerShell that parses with <strong>0 errors</strong> (previously 103&ndash;248 each) <strong>and all
+      20 run clean</strong> end-to-end in the Tier-1 harness &mdash; <strong>the trial's example set is complete.</strong> Two converter fixes (<a href="#T3-001">T3-001</a>
+      data-line, <a href="#T3-003">T3-003</a> <code>Clear-Variable</code>) plus two added mock primitives
+      (<a href="#T3-002">T3-002</a> <code>Hdg</code>, <a href="#T3-004">T3-004</a> <code>SetC</code>) got the first 5 there;
+      <a href="#T3-006">T3-006</a> (<code>GetSgsValue</code> numeric coercion) was needed for the 6th,
+      <code>ARCHIFORMAT</code>. <code>LOADIS_ASCII</code> (7th), <code>UNLOADIS_MULTI</code> (8th),
+      <code>CHAB100_ASCII</code> (9th) and <code>LOADIS_MULTI</code> (10th) added 2026-09-17 from
+      <code>SSG-Source</code>, all ran clean first try (0 unmocked lookups) via the
+      <code>/ssg-reconvert</code> &rarr; <code>/ssg-run-trial</code> chain. <code>LECTIS_ASCII</code> (11th) and
+      <code>FUSBA2_ASCII</code> (12th) added 2026-09-24; seeding LECTIS_ASCII surfaced
+      <a href="#T3-007">T3-007</a> (a PowerShell Hashtable <code>.Keys</code>/<code>.ContainsKey</code>
+      member-shadowing bug in the Tier-1 mock, triggered by a seeded key literally named <code>KEYS</code>) &mdash;
+      fixed via <code>.PSBase.*</code>, then both ran clean (0 unmocked lookups). <code>CFH-COPY_ASCII</code>
+      (13th) and <code>FUSBA_ASCII</code> (14th) added the same day, sibling variants of <code>CFH-COPY</code>
+      and <code>FUSBA2_ASCII</code> respectively &mdash; both ran clean first try. <code>RECAP</code> (15th)
+      needed <a href="#T3-008">T3-008</a> (missing <code>Log-Message</code> mock primitive).
+      <code>TABAN_ASCII</code> (16th), <code>TAPELD_ASCII</code> (17th) and <code>CONDIS2_ASCII</code> (18th)
+      added 2026-09-30 &mdash; all ran clean first try (0 unmocked lookups), no new mock gaps.
+      <code>EXTEUR</code> (19th, added 2026-09-30) 0 parse errors, ran clean after topping up 3
+      <code>DATIME$</code> timestamp keys (0 unmocked lookups); independently reconfirmed the
+      <a href="#T3-009">T3-009</a> fix (identical <code>+I</code>/<code>+J</code> pattern). <code>SCAN_ASCII</code>
+      (20th and last, added 2026-09-30, highest complexity score 214.6) seeded with
+      <code>IF=0</code>/<code>NOCONT=0</code>/<code>INDIC=0</code>/<code>TITLE=0</code>/<code>Y2K=0</code> to take
+      the simplest "TOTAL SCAN" path (unconditional match, skipping the <code>*CREATE SGS</code>/<code>*EDIT ON &amp;</code>
+      card-generation machinery entirely) &mdash; ran clean first try, 0 unmocked lookups.
+    </div>
+
+    <table class="ref" style="margin-top:12px;">
+      <tr><th style="width:34%">Milestone</th><th>Status</th></tr>
+      <tr><td>Copilot regime (CI + 3 area instructions + 5 <code>/ssg-*</code> prompts)</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+      <tr><td>Tier-1 mock harness (<code>Run-SsgPsTrial.ps1</code> + <code>SsgPsMockLib.psm1</code>)</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+      <tr><td>Converter data-line parse fix (Area B) &mdash; built, verified, deployed</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+      <tr><td>20 of 20 example programs parse 0 and run in the Tier-1 harness</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+      <tr><td>All example programs converted &mdash; trial example set complete</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 2: WORK AREAS -->
+  <div class="section-card" id="areas">
+    <h2>2 &middot; The Work Areas</h2>
+    <p>Work is organised into four areas, each with its own on-demand instructions file and a
+    <code>/ssg-*</code> slash-command prompt.</p>
+    <table class="ref">
+      <thead><tr><th style="width:8%">Area</th><th style="width:28%">Scope</th><th>What it covers</th><th style="width:20%">Prompt</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A</strong></td>
+          <td>Run trials on converted PowerShell</td>
+          <td>Tier-1 mock harness: parse-check the converted <code>.ps1</code>, run it against a mocked SGS table, diff vs Trial3 goldens.</td>
+          <td><code>/ssg-run-trial</code></td>
+        </tr>
+        <tr>
+          <td><strong>B</strong></td>
+          <td>Change the SsgConverter (C#)</td>
+          <td>Fix converter defects (e.g. the data-line parse bug), rebuild the library, re-verify the examples.</td>
+          <td><code>/ssg-fix-converter</code></td>
+        </tr>
+        <tr>
+          <td><strong>C</strong></td>
+          <td>Reconvert SSG-COBOL &rarr; PowerShell</td>
+          <td>Re-run <code>SsgConverterConsole</code> from source, review the warning taxonomy, hand output to Area A.</td>
+          <td><code>/ssg-reconvert</code></td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Run under the real AMT runtime</td>
+          <td>Run the converted <code>.ps1</code> against the real (isolated-copy) <code>AmtPsEclLib</code> &mdash; <a href="#stagea-runbook">Stage A</a> (no COM/app) vs Stage B (under Control Center). End-to-end via <code>/ssg-e2e</code>.</td>
+          <td><code>/ssg-e2e</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:12.5px;color:#6b7280;">Process prompts: <code>/ssg-session-start</code> (orient &amp; confirm) and <code>/ssg-review</code> (review work against the standard process).</p>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 3: PROGRAM STATUS -->
+  <div class="section-card" id="programs">
+    <h2>3 &middot; Program Status &mdash; 20 Example Programs</h2>
+
+    <div class="legend">
+      <span class="legend-item"><span class="badge badge-done">&#10003; runs</span> parses 0 + executes in Tier-1 harness</span>
+      <span class="legend-item"><span class="badge badge-info">&#10003; parses</span> parses 0; harness run pending SGS seed</span>
+      <span class="legend-item"><span class="badge badge-pend">&mdash; pending</span> not yet started</span>
+    </div>
+
+    <table class="ref">
+      <thead>
+        <tr>
+          <th style="width:18%">Program</th>
+          <th style="width:12%">Kind</th>
+          <th style="width:16%">Parse errors<br><span style="font-weight:400;font-size:10px;">(before &rarr; after)</span></th>
+          <th style="width:18%">Tier-1 run</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ARCHISEPARE</code></td>
+          <td>Archive / separate</td>
+          <td><span class="badge badge-bug">219</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">143 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>1 <code>Call-ExternalProgram</code> (<code>ucob</code>). Seed: <code>Trials/ARCHISEPARE/sgs-values.json</code>.</td>
+        </tr>
+        <tr>
+          <td><code>CFH-COPY</code></td>
+          <td>File copy</td>
+          <td><span class="badge badge-bug">248</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">45 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>1 <code>Call-ExternalProgram</code> (<code>MAP</code>). Seed topped up (<code>MAXCOPY,1,1,1</code>, <code>FIXE,1,1,3</code>). Line count corrected 47&rarr;45 by <a href="#T3-006">T3-006</a>.</td>
+        </tr>
+        <tr>
+          <td><code>BABA_ASCII</code></td>
+          <td>Data build</td>
+          <td><span class="badge badge-bug">241</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">48 lines</span></td>
+          <td>Runs after <a href="#T3-003">T3-003</a> (<code>Clear-Variable</code>) + <a href="#T3-004">T3-004</a> (<code>SetC</code> mock). Reaches the ECL tail (<code>@MAP</code>/<code>SetC</code>/<code>Hdg</code>/<code>Fin</code>).</td>
+        </tr>
+        <tr>
+          <td><code>CHABAN_ASCII</code></td>
+          <td>Data build</td>
+          <td><span class="badge badge-bug">202</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">132 lines</span></td>
+          <td>Runs after <a href="#T3-003">T3-003</a> (<code>Clear-Variable</code> &rarr; <code>$A = 0</code>).</td>
+        </tr>
+        <tr>
+          <td><code>UNLOADIS_ASCII</code></td>
+          <td>Unload</td>
+          <td><span class="badge badge-bug">103</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">63 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Seeded; needed the <code>Hdg</code> (<code>#HDG</code>) primitive added to the mock harness (<a href="#T3-002">T3-002</a>).</td>
+        </tr>
+        <tr>
+          <td><code>ARCHIFORMAT</code></td>
+          <td>Archive formatter (mixed ECL+SSG+COBOL)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">0 lines (by design) &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260917 from <code>SSG-Source/ARCHIFORMAT.TXT</code> (not part of the original 5, so no pre-fix parse count). KI-3 pattern: only its 5 <code>*SET</code> lines convert (<code>$A</code>..<code>$E</code>); the rest is ECL/COBOL pass-through comments &mdash; expected, not a bug. Computed values verified against the documented golden (<code>rsz=55, key=10, ncols=2</code> &rarr; <code>$A=69</code>) only after <a href="#T3-006">T3-006</a>'s <code>GetSgsValue</code> numeric-coercion fix (previously miscomputed as <code>10554</code>).</td>
+        </tr>
+        <tr>
+          <td><code>LOADIS_ASCII</code></td>
+          <td>Load IS (indexed) file</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">69 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260917 from <code>SSG-Source/LOADIS_ASCII.TXT</code> (lightest remaining program by the <a href="../Trial3/SSG_QUICK_REFERENCE.md">complexity ranking</a>, score 37.1). SGS table cross-checked against the manifest's <code>LOADIS_MULT-NODUP</code> entry (same <code>PROGRAM-ID LOADIS-ASCII</code>). Ran clean first try &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>UNLOADIS_MULTI</code></td>
+          <td>Unload IS (indexed) file, multi-key</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">64 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260917 from <code>SSG-Source/UNLOADIS_MULTI.txt</code> (next-lightest, score 56.2). SGS table cross-checked against the manifest's <code>UNLOADIS_MULT</code> entry (same element name/token scheme: <code>KEYIS=2</code> with the alternate key's <code>WITH DUPLICATES</code> branch taken). Ran clean first try &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>CHAB100_ASCII</code></td>
+          <td>Data build (card &rarr; fixed-record)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">212 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260917 from <code>SSG-Source/CHAB100_ASCII.TXT</code> via <code>/ssg-reconvert</code> &rarr; <code>/ssg-run-trial</code> (score 69.1, sibling of <code>CHABAN_ASCII</code> &mdash; same <code>*DEFINE CALUN/CALDEU/CALTROI/CALMAX</code> macros and token scheme; <code>sgs-values.json</code> reused with <code>NUMB=0</code>/<code>MOD=0</code>/<code>LIST=0</code>). Ran clean first try &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>LOADIS_MULTI</code></td>
+          <td>Load IS (indexed) file, multi-key</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">96 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260917 from <code>SSG-Source/LOADIS_MULTI.TXT</code> via <code>/ssg-reconvert</code> &rarr; <code>/ssg-run-trial</code> (score 77). Mirror of <code>UNLOADIS_MULTI</code> with INPUT/OUTPUT roles swapped (reads <code>BDE</code>, writes indexed <code>DISQ</code>); no direct manifest entry (only the <code>-NODUP</code> variant exists), so the SGS table was derived from source and cross-checked against <code>UNLOADIS_MULTI</code>'s scheme. Ran clean first try, confirmed byte-identical on a second run &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>LECTIS_ASCII</code></td>
+          <td>Multi-key sequential reader</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">178 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260924 from <code>SSG-Source/LECTIS_ASCII.TXT</code> (next-lightest remaining program, score 78.6). Seed derived from the manifest's <code>LECTIS</code> entry (<code>paramOverrides</code> + <code>conditionValues</code>, incl. <code>KEYS=0</code>). First run showed 63 spuriously-unmocked lookups (incl. keys that <em>were</em> seeded, e.g. <code>ASCII</code>) &mdash; root cause was <a href="#T3-007">T3-007</a> (Hashtable <code>.Keys</code> shadowed by a seeded key literally named <code>KEYS</code>); fixed in the harness, then clean (0 unmocked) after topping up 2 filler-length keys. Confirmed byte-identical on a second run &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>).</td>
+        </tr>
+        <tr>
+          <td><code>FUSBA2_ASCII</code></td>
+          <td>File merge/fusion (dynamic <code>PROGRAM-ID</code>)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">69 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260924 from <code>SSG-Source/FUSBA2_ASCII.TXT</code> (score 131.4; no Trial3 manifest entry &mdash; minimal seed with loop-count/condition flags at 0, same convention as <code>BABA_ASCII</code>/<code>CHABAN_ASCII</code>). <code>PROGRAM-ID.  FUSION-[OUTPUT,1,1,1].</code> is <strong>dynamic</strong> (an SGS-bracket reference) &mdash; confirms output filenames are the <em>input file's base name</em>, not the COBOL <code>PROGRAM-ID</code> (documented in <code>ssg-reconvert.instructions.md</code>). Also hit &amp; fixed <a href="#T3-007">T3-007</a> during seeding. Confirmed byte-identical on a second run &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>MAP</code>, <code>SetC</code>, <code>Hdg</code>).</td>
+        </tr>
+        <tr>
+          <td><code>CFH-COPY_ASCII</code></td>
+          <td>File copy (sibling variant of <code>CFH-COPY</code>)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">47 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260924 from <code>SSG-Source/CFH-COPY_ASCII.TXT</code> (next-lightest remaining program, score 155.6). Same skeleton family as <code>CFH-COPY</code> (identical <code>FIXE</code>/<code>REPRISE</code>/<code>FIELDIN</code>/<code>FIELDOUT</code>/<code>MAXCOPY</code> token scheme); seed adapted from <code>Trials/CFH-COPY/sgs-values.json</code> plus 2 extra keys (<code>INPUT,1,1</code>/<code>OUTPUT,1,1</code>). Ran clean first try &mdash; 2 <code>Call-ExternalProgram</code> calls (<code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups. Confirmed byte-identical on a second run.</td>
+        </tr>
+        <tr>
+          <td><code>FUSBA_ASCII</code></td>
+          <td>File merge/fusion (sibling variant of <code>FUSBA2_ASCII</code>)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">39 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260924 from <code>SSG-Source/FUSBA_ASCII.TXT</code> (score 161.5; no Trial3 manifest entry). Same skeleton family as <code>FUSBA2_ASCII</code> (identical <code>TRACE</code>/<code>UPDATE</code>/<code>KEYS</code>/<code>SEQERROR</code> token scheme, plus <code>ANNUL</code>/<code>INSERT</code>); seed adapted from <code>Trials/FUSBA2_ASCII/sgs-values.json</code>. Ran clean first try &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>MAP</code>, <code>SetC</code>, <code>Hdg</code>), 0 unmocked lookups. Confirmed byte-identical on a second run.</td>
+        </tr>
+        <tr>
+          <td><code>RECAP</code></td>
+          <td>Recapitulative summary / totals</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">223 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260924 from <code>SSG-Source/RECAP.TXT</code> (score 164.1; no Trial3 manifest entry). Needed <a href="#T3-008">T3-008</a> (<code>Log-Message</code> mock, added to <code>SsgPsMockLib.psm1</code>). Seed selects the <code>ASCII</code> path (<code>CFH=0</code>, <code>ASCIIFD=0</code>, <code>ASCII=1</code>) with <code>SCHEMA</code>/<code>Y2K</code>/<code>NEURO</code>/<code>FIELDIN</code>/<code>FIELDOUT</code>/<code>TOTIN</code>/<code>TOTOUT</code>/<code>INDIC</code> loop counts at 0. 3 <code>Call-ExternalProgram</code> calls (<code>Log-Message</code>, <code>ACOB</code>, <code>MAP</code>), 0 unmocked lookups after topping up the <code>,1</code> sub-keys. Confirmed byte-identical on a second run.</td>
+        </tr>
+        <tr>
+          <td><code>TABAN_ASCII</code></td>
+          <td>Data build / table analysis</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">215 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260930 from <code>SSG-Source/TABAN_ASCII.TXT</code> (score 191.5; no Trial3 manifest entry). Ran clean &mdash; 4 <code>Call-ExternalProgram</code> calls (<code>Log-Message</code>, <code>ACOB [I]</code>, <code>MAP [S]</code>, <code>Hdg</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>TAPELD_ASCII</code></td>
+          <td>Tape load</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">49 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260930 from <code>SSG-Source/TAPELD_ASCII.TXT</code> (score 209.5; no Trial3 manifest entry). Ran clean &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>Log-Message</code>, <code>ACOB [I,P,E,C]</code>, <code>MAP</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>CONDIS2_ASCII</code></td>
+          <td>Condition/discrepancy check (largest example: 911 source lines)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">479 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260930 from <code>SSG-Source/CONDIS2_ASCII.TXT</code> (score 210.0, <strong>Critical</strong> tier; no Trial3 manifest entry). Ran clean &mdash; 2 <code>Call-ExternalProgram</code> calls (<code>ACOB [I,E]</code>, <code>MAP [N]</code>), 0 unmocked lookups.</td>
+        </tr>
+        <tr>
+          <td><code>EXTEUR</code></td>
+          <td>Batch DB extract/currency conversion (RDMS/SQL-heavy)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">692 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260930 from <code>SSG-Source/EXTEUR.TXT</code> (score 183.3, 961 source lines &mdash; largest example; no Trial3 manifest entry; previously deferred, no confirmed blocker found on reattempt). SGS seeded with <code>COND=0</code> to skip the CASE/MT/OTHERWISE record-layout loop, and <code>DEVISE,1,1=1</code>/<code>DEVISE,1,3,1="NONE"</code> to take the simpler branches of nested <code>*If</code>/<code>*Else</code> currency-handling blocks (avoids needing <code>DEVISE,1,1,3</code>). First run surfaced 3 unmocked <code>DATIME$,1,x,1</code> timestamp lookups (header comment substitutions); topped up, then 0 unmocked lookups. 0 <code>Call-ExternalProgram</code> calls. Confirmed byte-identical on a second run.</td>
+        </tr>
+        <tr>
+          <td><code>SCAN_ASCII</code></td>
+          <td>Conditional/total record scan (largest complexity score: 214.6)</td>
+          <td><span class="badge badge-done">n/a</span> &rarr; <span class="badge badge-done">0</span></td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; runs</span><span class="trial-detail">104 lines &nbsp;|&nbsp; 0 unmocked lookups</span></td>
+          <td>Added 260930 from <code>SSG-Source/SCAN_ASCII.TXT</code>, the 20th and last example program. SGS seeded with <code>IF=0</code>/<code>NOCONT=0</code>/<code>INDIC=0</code>/<code>TITLE=0</code>/<code>Y2K=0</code> to select the "TOTAL SCAN" path (heading text's own <code>*IF [IF]&gt;0 CONDITIONAL *ELSE TOTAL</code> branch) &mdash; every record read is unconditionally treated as found, bypassing the file's most complex machinery: per-field <code>*EDIT ON &amp;</code> macro-generated `IF` tests and the self-referential `*CREATE SGS`/`*REMOVE SGS` card-table codegen (both entirely skipped, not exercised). Ran clean first try &mdash; 3 <code>Call-ExternalProgram</code> calls (<code>ACOB</code>, <code>MAP</code>, <code>Hdg</code>), 0 unmocked lookups. Confirmed byte-identical on a second run.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px;font-size:12.5px;color:#6b7280;">Reconvert of <code>Examples/Input</code> = <strong>20 succeeded / 0 failed</strong>; only expected-taxonomy warnings (orphaned data line, missing <code>@FIN</code> auto-appended, <code>@MAP</code>/<code>@ACOB</code> unknown processor).</p>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 4: CONVERTER FIX -->
+  <div class="section-card" id="fix">
+    <h2>4 &middot; Converter Fix &mdash; Data-Line Parse Bug (<a href="#T3-001">T3-001</a>, Area B)</h2>
+    <p><strong>Root cause:</strong> COBOL data-division / output lines were emitted by running the whole
+    line through the SSG <em>expression</em> migrator, so ordinary COBOL punctuation was misread as
+    PowerShell operators &mdash; hyphens in names (<code>PROGRAM-ID</code>) as subtraction,
+    <code>PIC X(n)</code> parentheses as unbalanced brackets, and level-number digits adjacent to a name
+    (<code>06 FILLER</code>) as invalid tokens.</p>
+
+    <h3>Before &rarr; after (CFH-COPY line 16)</h3>
+    <pre><code># BEFORE (248 parse errors in the file)
+DataLineOrNoStatement ((06 FILLER PIC  X( + ($FILLCTR + ").")))
+
+# AFTER (0 parse errors)
+DataLineOrNoStatement ("                     06 FILLER PIC  X(" + ($FILLCTR) + ").  ")</code></pre>
+
+    <p><strong>Fix:</strong> a new emit path builds each output line as a concatenation of <em>verbatim
+    double-quoted string segments</em> (literal text) and <strong>only</strong> the <code>[bracketed]</code>
+    references converted with variable context &mdash; so <code>[FILLCTR]</code>&rarr;<code>$FILLCTR</code>
+    and <code>[INPUT,1,1,1]</code>&rarr;<code>GetSgsValue("INPUT,1,1,1")</code> resolve exactly as before.
+    No change to bracket semantics.</p>
+
+    <div class="info-box">
+      Changed: <code>SymstreamProcessor.cs</code> (new <code>OutputLineToPowerShellExpression</code> +
+      quoting helper; both <code>DataLineOrNoStatement</code> emit sites re-routed) and
+      <code>SymstreamExpressionMigrator.cs</code> (made <code>SplitBracketedReferencesAndLiteralParts</code>
+      public). Full write-up: <a href="../SsgConverter/Fixes/SsgConverter-Fix-20260909.md">SsgConverter-Fix-20260909.md</a>.
+    </div>
+
+    <div class="success-box">
+      <strong>Deployed 2026-09-10:</strong> library rebuilt; <code>Build\Console</code> and
+      <code>Build\Gui</code> <code>SsgConverter.dll</code> refreshed (51200 bytes); <code>Examples\Output</code>
+      goldens regenerated. All 5 parse 0; ARCHISEPARE (143) + CFH-COPY (47) run OK.
+    </div>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 5: ROUTINE -->
+  <div class="section-card" id="routine">
+    <h2>5 &middot; Repeatable Routine</h2>
+    <p>The whole fix&rarr;reconvert&rarr;verify loop is one script, so each new program follows the same
+    steps: <code>SsgConverter/Trials/Reconvert-And-Verify.ps1</code>.</p>
+    <pre><code># rebuild library + refresh Build\Console&amp;Gui DLL + regenerate goldens + verify
+.\Reconvert-And-Verify.ps1 -Rebuild -RefreshDll -UpdateGoldens
+
+# run one program through the Tier-1 harness
+.\Trials\Tier1Mock\Run-SsgPsTrial.ps1 -Program CFH-COPY -Diff</code></pre>
+
+    <div class="warn">
+      <strong>Run overwrites with VS Code closed.</strong> While VS Code is open, its extensions hold OS
+      read-locks on the loaded <code>.dll</code> (C# service) and analysed <code>.ps1</code>
+      (PowerShell/PSScriptAnalyzer). External processes cannot overwrite the <code>Build\Console</code>
+      DLL or the <code>Examples\Output</code> goldens until VS Code is closed. In-editor edits are
+      unaffected. Backups: <code>SsgConverter/_backup/Output-*</code> and <code>SsgConverter.dll.orig</code>.
+    </div>
+
+    <div class="warn">
+      <strong>"Access denied" can also be plain UAC, not the VS Code lock above (found 2026-09-30,
+      <a href="#T3-009">T3-009</a>).</strong> ACLs under <code>SsgConverter\Source\</code> and
+      <code>SsgConverter\Build\</code> grant write only to <code>BUILTIN\Administrators</code>/
+      <code>SYSTEM</code>; an unelevated session shows the account's <code>Administrators</code>
+      membership as <em>"Group used for deny only"</em> (<code>whoami /groups</code>) and gets only
+      <code>Users</code>-level (read/execute) rights &mdash; so both a VS Code save (<em>"Insufficient
+      permissions... Retry as Admin"</em>) and <code>-RefreshDll</code>'s <code>Copy-Item</code> fail with
+      "Access to the path ... is denied", closed VS Code or not. Fix: re-run the write step
+      (save, or <code>Reconvert-And-Verify.ps1 -RefreshDll</code>) from an <strong>elevated</strong>
+      pwsh/VS Code &mdash; the account already has the rights, it just isn't using them. Distinguish the
+      two causes with <code>Get-Acl</code> + <code>whoami /groups</code> before assuming a lock.
+    </div>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 5b: RUNBOOKS -->
+  <div class="section-card" id="runbooks">
+    <h2>5b &middot; Runbooks &mdash; Reproduce a Run</h2>
+    <p>Step-by-step, tester-reproducible recipes. Every step is idempotent and re-runnable to stable
+    output.</p>
+
+    <div class="info-box" id="runbook-env" style="border-left-color:#0369a1;background:#f0f9ff;">
+      <strong>Environment notes.</strong> Everything below runs on this <strong>isolated AMT177 VM</strong>,
+      against <strong>our own copy</strong> of AMT / Control Center at
+      <code>E:\Repos\Federale_InternalRelease</code> &mdash; this is <em>not</em> the Federale client site.
+      Nothing here affects other users; converted software is shared only once bundled to GitHub. Because
+      this AMT/CC is ours, <strong>Stage B</strong> (running under the real CC / BatchController) is
+      runnable here when we choose to (<a href="#MT-005">MT-005</a>).
+      <table class="ref" style="margin-top:12px;">
+        <tbody>
+          <tr><th style="width:34%">What</th><th>Location</th></tr>
+          <tr><td>Trials root</td><td><code>E:\Repos\SsgTrial\SsgConverter\Trials\</code></td></tr>
+          <tr><td>Tier-1 mock harness (Area A)</td><td><code>Trials\Tier1Mock\Run-SsgPsTrial.ps1</code> + mock runtime <code>Tier1Mock\SsgPsMockLib.psm1</code></td></tr>
+          <tr><td>Per-program SGS seed + output</td><td><code>Trials\&lt;Program&gt;\sgs-values.json</code>; run output under <code>Trials\&lt;Program&gt;\out\</code></td></tr>
+          <tr><td>Real-runtime Stage A (Area D)</td><td><code>Trials\RealRuntime\Run-StageA.ps1</code></td></tr>
+          <tr><td>Isolated runtime copies</td><td><code>Trials\RealRuntime\{AmtPsEclLib,AmtPsSortLib,EclOptions,AmtPsCustomerLib}.psm1</code> &mdash; read-only copies of the real libs</td></tr>
+          <tr><td>Script under test</td><td><code>SsgConverter\Examples\Output\&lt;Program&gt;.ps1</code></td></tr>
+          <tr><td>Stage&nbsp;B joblog target</td><td><code>E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\&lt;date&gt;\</code> (written only by a Stage B run)</td></tr>
+        </tbody>
+      </table>
+      <p style="margin:12px 0 0;"><strong>Why an isolated Stage A leaves no AMT joblog / Event Viewer
+      entry.</strong> Stage A imports only the copied <code>AmtPsEclLib.psm1</code> and deliberately does
+      <em>not</em> call <code>Initialize</code> / <code>Connect-Application</code>. The AMT joblog
+      (<code>AmtTools\Basepaths\Logs\&lt;date&gt;\</code>) and Windows Event Viewer records are written by
+      the job-context bring-up (<code>Create-InitialJobLog</code> / <code>Init-JobLog</code> + the
+      COM/file-controller connection), which Stage A skips &mdash; so the run's output goes only to the
+      console. Those artefacts appear under <strong>Stage B</strong>.</p>
+    </div>
+
+    <!-- Program runbook: CFH-COPY (Tier-1) -->
+    <h3 id="run-cfh-copy">Program runbook &mdash; <code>CFH-COPY</code> (Tier-1 mock harness, Area A)</h3>
+    <table class="ref">
+      <tbody>
+        <tr><th style="width:26%">Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>SSG-Source/CFH-COPY_ASCII.TXT</code> (read-only reference)</td></tr>
+        <tr><td>Program key</td><td><code>CFH-COPY</code> = base name of <code>SsgConverter/Examples/Output/CFH-COPY.ps1</code></td></tr>
+        <tr><td>SGS seed</td><td><code>SsgConverter/Trials/CFH-COPY/sgs-values.json</code> (topped up: <code>MAXCOPY,1,1,1</code>, <code>FIXE,1,1,3</code>)</td></tr>
+        <tr><td>Parse-check</td><td><code>[Parser]::ParseFile("Examples/Output/CFH-COPY.ps1", [ref]$null, [ref]$e)</code> &rarr; <span class="badge badge-done">0 errors</span> (was <span class="badge badge-bug">248</span>)</td></tr>
+        <tr><td>Run command</td><td><code>cd SsgConverter/Trials/Tier1Mock; .\Run-SsgPsTrial.ps1 -Program CFH-COPY -Diff</code></td></tr>
+        <tr><td>Result</td><td><span class="badge badge-done">&#10003; runs</span> 47 emitted lines &middot; 0 unmocked <code>GetSgsValue</code> &middot; 1 <code>Call-ExternalProgram</code> (<code>MAP</code>)</td></tr>
+        <tr><td>Output file</td><td><code>SsgConverter/Trials/CFH-COPY/out/CFH-COPY.out.txt</code> (byte-identical on re-run)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Stage A runbook -->
+    <h3 id="stagea-runbook">Stage A runbook &mdash; run against the real <code>AmtPsEclLib</code> (Area D)</h3>
+    <p>Proves the converted <code>.ps1</code> is API-compatible with the <strong>real</strong> AMT
+    runtime &mdash; using an <strong>isolated copy</strong> of the runtime libraries, with <strong>no
+    COM object and no app connection</strong>. One command:</p>
+    <pre><code>cd SsgConverter/Trials/RealRuntime
+pwsh -NoProfile -File .\Run-StageA.ps1 -Program CFH-COPY</code></pre>
+    <p>What the runner does, in order:</p>
+    <ol>
+      <li><strong>Import the isolated runtime.</strong> <code>Trials/RealRuntime/AmtPsEclLib.psm1</code>
+      (+ <code>AmtPsSortLib.psm1</code>) &mdash; read-only copies; never the <code>Federale_InternalRelease</code> original.</li>
+      <li><strong>Isolated init.</strong> Set <code>$global:WarningRcw2435 = $false</code> &mdash; the one
+      Initialize-scope flag <code>Fin</code> reads (<code>AmtPsEclLib</code> L6051) that is <em>not</em>
+      set at module load. The statement-context globals (<code>PreviousStatement</code>, <code>InSsg</code>,
+      &hellip;) are already set at import.</li>
+      <li><strong>Seed SGS.</strong> <code>$global:SgsLabels = New-Object Dictionary[String,Object]</code>
+      then <code>AddTo-SgsList</code> for <code>INPUT ECL-TAPEIN,80,1</code> / <code>OUTPUT ECL-TAPEOUT,80,1</code> / <code>ASCII 1</code>.</li>
+      <li><strong>Run</strong> <code>Examples/Output/CFH-COPY.ps1 -Parameters @('80')</code>.</li>
+    </ol>
+    <div class="success-box">
+      <strong>Result (2026-09-10):</strong> the full program body executes against the real runtime and
+      prints <code>FIN</code> &rarr; <code>End Job</code> &rarr; <code>Script Done</code> &mdash; exit 0.
+      The only remaining step is the end-of-job COM cleanup
+      <code>$global:Com.RemoveNonPrintedFiles()</code> (<code>AmtPsEclLib</code> L3157), an unguarded COM
+      call that needs the COM object created only by the Stage B bring-up. <code>Run-StageA.ps1</code>
+      recognises this exact boundary and reports <strong>PASS (Stage A)</strong>.
+    </div>
+    <div class="info-box">
+      <strong>Why Stage A stops here.</strong> <code>Initialize</code> (<code>AmtPsEclLib</code> L497) is
+      <em>not</em> isolated: it <code>Add-Type</code>s <code>ComScript.dll</code>, creates the COM object,
+      and calls <code>Connect-Application</code> against the live app. Running it &mdash; and letting the
+      COM cleanup complete for real &mdash; is <strong>Stage B</strong> (<a href="#MT-005">MT-005</a>).
+      Do <em>not</em> mock <code>$global:Com</code>: a stub only triggers further COM property accesses
+      (e.g. <code>.Station</code> in the logging path) &mdash; re-mocking the whole object <em>is</em> Stage B.
+    </div>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 5c: AMT RUN PROCESS -->
+  <div class="section-card" id="amt-run-process">
+    <h2>5c &middot; AMT Control Center Run Process (Stage B) &mdash; developer walkthrough</h2>
+    <p>How a converted report is run as a <strong>real AMT job</strong> under Control Center /
+    BatchController on this VM &mdash; written so a developer can follow it by hand. Two tiers share the
+    same run process; only the artefact + catalog type differ:</p>
+    <table class="ref">
+      <tbody>
+        <tr><th style="width:16%">Tier</th><th style="width:20%">Artefact</th><th>Runner</th><th style="width:16%">Status</th></tr>
+        <tr><td><strong>Tier 2</strong> (SSG&rarr;C#)</td><td>compiled <code>&lt;Program&gt;.dll</code> in <code>Binaries\Reports\</code></td><td>BatchController runs the DLL itself via <code>LoadAndRunReport</code></td><td><span class="badge badge-done">proven (AMT175)</span></td></tr>
+        <tr><td><strong>Tier 3</strong> (SSG&rarr;PS)</td><td>converted <code>&lt;Program&gt;.ps1</code> using <code>AmtPsEclLib</code></td><td>BatchController hands off to <code>AmtPowershellHost.exe</code> (<strong>net8 / PS&nbsp;7.4</strong>) which carries the DB/SqlClient deps closure</td><td><span class="badge badge-prog">our target</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn"><strong>Why not standalone pwsh.</strong> A converted <code>.ps1</code> run in a bare
+    <code>pwsh</code> reaches <code>Connect-Application</code> but fails the DB connect: the native MsSql
+    wrapper (<code>Asysco.Amt.AmtSqlServerWrapper.dll</code>, selected by <code>SERVER TYPE=MSSQL</code> in
+    <code>Sys.ini</code>) needs a <strong>.NET&nbsp;8</strong> closure (<code>Microsoft.Data.SqlClient
+    6.1.4</code> + native SNI <code>6.0.2</code>) that only exists via a <code>.deps.json</code>. Bare pwsh
+    has none &rarr; <em>&ldquo;not supported on this platform.&rdquo;</em> Run it under the shipped host
+    instead (below). See <a href="#MT-005">MT-005</a>.</div>
+
+    <h3>Environment (this VM)</h3>
+    <table class="ref">
+      <tbody>
+        <tr><th style="width:34%">Item</th><th>Value</th></tr>
+        <tr><td>Application</td><td><code>FEDERALE_APP</code> &middot; DB <code>FEDERALE_SYSTEM</code> @ <code>VMFEDPE08</code> (MSSQL)</td></tr>
+        <tr><td>System base path</td><td><code>E:\Repos\Federale_InternalRelease\AFBUS_AMT</code> (from <code>AmtTools\Sys.ini</code>)</td></tr>
+        <tr><td>Services (all Running)</td><td><code>FederaleBatchController</code>, <code>FederaleFileController</code>, <code>FederaleTransactionServer</code> (gRPC :8031), <code>FederalePrintController</code>, <code>FederaleControlCenter</code> (+ BL), <code>FederaleBlazorAPI</code>/<code>Client</code></td></tr>
+        <tr><td>Control Center web</td><td>Blazor UI at <code>http://localhost:5120</code> (API <code>:5130</code>, core <code>:5110</code>); auth OIDC/Keycloak <code>http://localhost:8080/realms/Federale</code></td></tr>
+        <tr><td>PS host + deps closure</td><td><code>AmtTools\AmtBatchController\AmtPowershellHost.exe</code> + <code>AmtPowershellHost.deps.json</code>; native SNI under <code>BatchControllerAgentCore\runtimes\win-x64\native\</code></td></tr>
+        <tr><td>Report DLL folder (Tier 2)</td><td><code>AFBUS_AMT\Binaries\Reports\</code></td></tr>
+        <tr><td>Joblog output</td><td><code>AmtTools\Basepaths\Logs\&lt;date&gt;\</code> + Windows Event Viewer</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Steps (follow in order)</h3>
+    <ol>
+      <li><strong>Confirm the stack is up.</strong> <code>Get-Service Federale* | ? Status -ne 'Running'</code>
+      returns nothing. (Full cold-start order: Keycloak &rarr; IIS/CC site &rarr; FileController &rarr;
+      BatchController &rarr; TransactionServer.)</li>
+      <li><strong>Deploy the artefact.</strong> Tier&nbsp;2: copy <code>&lt;Program&gt;.dll</code> to
+      <code>AFBUS_AMT\Binaries\Reports\</code>. Tier&nbsp;3 (PS): the report must be <strong>wrapped in the
+      CC job skeleton</strong> (SsgConverter emits body-only &mdash; <a href="#MT-008">MT-008</a>) and placed
+      2 levels deep at <code>Scripts\&lt;GROUP&gt;\RUN\&lt;name&gt;.ps1</code> so its
+      <code>Import-Module ..\..\Libraries\AmtPsEclLib.psm1</code> and
+      <code>$AmtSettingsFile="..\..\Settings\AmtSettings.xml"</code> resolve. A real
+      <code>Scripts\Settings\AmtSettings.xml</code> must exist (only <code>.sample</code> ships).</li>
+      <li><strong>Register in the catalog.</strong> Control Center &rarr; <em>System Configuration &rarr;
+      Batch &amp; Forms &rarr; AvailableJobs</em> &rarr; <em>Read all jobs from system</em> (a scan; there is no
+      manual &ldquo;Add&rdquo;). The row is App / JobName / Description / <strong>Type</strong> / Queue / File;
+      a PowerShell report is <strong>Type <code>Script</code></strong> (vs <code>AmtReport</code> for a DLL).
+      Confirm a <code>Script</code>-type row for your program appears (filter by Jobname).</li>
+      <li><strong>Make the BatchController see it.</strong> If needed, <code>Restart-Service
+      FederaleBatchController</code> (elevated) so it rescans. No live auto-sync.</li>
+      <li><strong>Activate the job.</strong> Control Center &rarr; <em>Security &rarr; Jobs</em> &rarr;
+      <em>Activate</em> (else it never appears under <em>Start Job</em>).</li>
+      <li><strong>Stage input files.</strong> Read the report&rsquo;s DISC designators (for a PS report,
+      the <code>INPUT</code>/<code>OUTPUT</code> SGS names it reads, e.g. <code>ECL-TAPEIN</code> /
+      <code>ECL-TAPEOUT</code>). Copy fixtures to <code>&lt;working base&gt;\Lion\Files\Extracts\&lt;designator&gt;.DAT</code>
+      <em>immediately before</em> Start Job (designators are shared across programs).</li>
+      <li><strong>Start the job.</strong> Control Center &rarr; <em>Jobs &rarr; Start Job</em> &rarr; app
+      &rarr; job &rarr; <em>Start</em>. This inserts a row in <code>AMTSYSBATCHREQUEST</code>. Typical
+      runtime params: <code>LOADINBATCHCONTROLLER /R:19 /USEWORKINGDIR</code>.</li>
+      <li><strong>Monitor.</strong> Control Center &rarr; <em>Job Management / Batch Control</em>: Queued
+      &rarr; Running &rarr; Completed (backed by <code>AMTSYSPROCESSJOB</code>). Watch the joblog appear
+      under <code>AmtTools\Basepaths\Logs\&lt;date&gt;\</code> and Event Viewer.</li>
+      <li><strong>Collect output.</strong> Read output from the same <code>Extracts</code> folder by the
+      output designator (e.g. <code>ECL-TAPEOUT</code>).</li>
+    </ol>
+
+    <div class="success-box"><strong>Tier&nbsp;3 verified live (2026-09-10).</strong> In this VM&rsquo;s
+    Control Center the job <code>TYPE</code> set is Unspecified / <strong>Script</strong> / Batch /
+    AmtReport / Executable / AmtCobolProgram &mdash; a PowerShell report is <strong>Script</strong>.
+    Registration is the <em>Read all jobs from system</em> scan (no manual Add). <code>CFH-COPY</code> is
+    not yet registered (0 of 5315 jobs; the rest are <code>AmtReport</code> DLLs). The <code>Scripts\</code>
+    tree already holds R&amp;D&rsquo;s 2759 converted <code>.ps1</code> + <code>Libraries\</code>. Still to
+    confirm at run time: the exact <code>Extracts</code> qualification and Start-Job runtime params for a Script job.</div>
+
+    <h3 id="run-cfh-copy-cc">CFH-COPY &mdash; Control Center (Stage B) runbook</h3>
+    <table class="ref"><tbody>
+      <tr><th style="width:28%">Item</th><th>Value</th></tr>
+      <tr><td>Report / source</td><td><code>CFH-COPY</code> from <code>SSG-Source/CFH-COPY_ASCII.TXT</code>; converter output <code>Examples/Output/CFH-COPY.ps1</code> (body-only, 422 lines, parses 0)</td></tr>
+      <tr><td>Registered?</td><td>Not yet &mdash; AvailableJobs filter <code>CFH-COPY</code> = <strong>0 of 5315</strong></td></tr>
+      <tr><td>Job Type</td><td><code>Script</code></td></tr>
+      <tr><td>Deploy path</td><td><code>Scripts\&lt;GROUP&gt;\RUN\CFH-COPY.ps1</code> (2 levels deep) &middot; siblings <code>Scripts\Libraries\AmtPsEclLib.psm1</code> (present) + <code>Scripts\Settings\AmtSettings.xml</code> (create from our <code>Trials\RealRuntime\AmtSettings.xml</code>)</td></tr>
+      <tr><td>SGS seed</td><td><code>INPUT ECL-TAPEIN,80,1</code> &middot; <code>OUTPUT ECL-TAPEOUT,80,1</code> &middot; <code>ASCII 1</code></td></tr>
+      <tr><td>Input to stage</td><td><code>ECL-TAPEIN</code> fixture under <code>&hellip;\AFBUS_AMT\Files\Extracts\</code> (PS path may be qualified via the script&rsquo;s <code>Asg</code>/<code>Qual</code>)</td></tr>
+      <tr><td>Register + run</td><td>CC &rarr; System Configuration &rarr; Batch &amp; Forms &rarr; AvailableJobs &rarr; <em>Read all jobs from system</em> &rarr; Security &rarr; Jobs &rarr; <em>Activate</em> &rarr; Jobs &rarr; <em>Start Job</em> &rarr; FEDERALE_APP &rarr; CFH-COPY</td></tr>
+      <tr><td>Verify</td><td>Job Management (Queued&rarr;Running&rarr;Completed) + joblog <code>AmtTools\Basepaths\Logs\&lt;date&gt;\</code> + Event Viewer; output by <code>ECL-TAPEOUT</code></td></tr>
+    </tbody></table>
+    <p>Wrap the converter body in the CC job skeleton (the body&rsquo;s trailing <code>Fin</code> becomes the skeleton&rsquo;s):</p>
+    <pre><code># CFH-COPY.ps1 wrapped for Control Center (Type: Script) - deploy to Scripts\&lt;GROUP&gt;\RUN\
+Import-Module -Name "..\..\Libraries\AmtPsEclLib.psm1"  -Force -DisableNameChecking -ErrorAction Stop
+Import-Module -Name "..\..\Libraries\AmtPsSortLib.psm1" -Force -DisableNameChecking -ErrorAction Stop
+$AmtSettingsFile = "..\..\Settings\AmtSettings.xml"
+
+Set-Jobname "CFH-COPY"
+Initialize $AmtSettingsFile
+Try {
+  # SGS seed (from the Trial3 manifest / Tier-1 sgs-values.json)
+  AddTo-SgsList "INPUT ECL-TAPEIN,80,1"
+  AddTo-SgsList "OUTPUT ECL-TAPEOUT,80,1"
+  AddTo-SgsList "ASCII 1"
+  # ... converted report body (Examples\Output\CFH-COPY.ps1, minus its trailing Fin) ...
+  Fin
+} Catch [Exception] {
+  HandleTrapAndAbort "Error trapped: " $_
+} Finally {
+  Cleanup $false
+}</code></pre>
+
+    <div class="warn"><strong>Gotchas.</strong> Missing <code>Binaries\Common\*</code> subfolders halt the
+    assembly watcher; a crashed job wedges the agent (fix: <code>Restart-Service FederaleBatchController</code>,
+    which also clears stuck <code>AMTSYSPROCESSJOB</code> rows); shared designators mean you must stage
+    input immediately before each run.</div>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 6: ISSUES -->
+  <div class="section-card" id="issues">
+    <h2>6 &middot; Issues (bugs)</h2>
+    <p>Bugs and issues found during the trial. IDs use <code>T3-nnn</code> (<code>T3</code> = Trial3) and
+    are referenced from the <a href="#programs">program status</a> table. New issues are appended;
+    fixed issues are kept for the record.</p>
+    <table class="ref">
+      <thead><tr><th style="width:9%">ID</th><th style="width:8%">Created</th><th style="width:7%">Area</th><th>Issue</th><th style="width:16%">Status</th></tr></thead>
+      <tbody>
+        <tr id="T3-001">
+          <td><strong>T3-001</strong></td><td>260908</td><td>B</td>
+          <td><strong>SSG data-line parse bug.</strong> COBOL data-division / output lines were migrated as SSG <em>expressions</em> &rarr; invalid PowerShell (219&ndash;248 parse errors per file). Fixed by emitting them as literal strings with only <code>[bracket]</code> references substituted. <a href="../SsgConverter/Fixes/SsgConverter-Fix-20260909.md">Fix log</a>.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; deployed 260910</span></td>
+        </tr>
+        <tr id="T3-002">
+          <td><strong>T3-002</strong></td><td>260910</td><td>A</td>
+          <td><strong>Missing <code>Hdg</code> (<code>#HDG</code>) primitive in the mock harness.</strong> Converted scripts call <code>Hdg</code> (page-heading directive); the Tier-1 mock lacked it &rarr; runtime throw. Added <code>Hdg</code> to <code>SsgPsMockLib.psm1</code> &mdash; unblocked <code>UNLOADIS_ASCII</code>.</td>
+          <td><span class="badge badge-done">&#10003; fixed</span></td>
+        </tr>
+        <tr id="T3-003">
+          <td><strong>T3-003</strong></td><td>260910</td><td>B</td>
+          <td><strong><code>Clear-Variable $var</code> emits the value, not the name.</strong> Converter emits e.g. <code>Clear-Variable $A</code> / <code>Clear-Variable $FILLCTR</code>, passing the variable's <em>value</em> as <code>-Name</code> &mdash; throws on null. Should emit the variable <em>name</em>, null-safe. Fixed: <code>*CLEAR</code> now emits <code>$name = 0</code> (SSG sets the var to 0). Unblocked <code>CHABAN_ASCII</code> + <code>BABA_ASCII</code>.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; deployed 260910</span></td>
+        </tr>
+        <tr id="T3-004">
+          <td><strong>T3-004</strong></td><td>260910</td><td>A</td>
+          <td><strong>Missing <code>SetC</code> (<code>@SETC</code>) primitive in the mock harness.</strong> The ECL runstream tail of <code>BABA_ASCII</code> calls <code>SetC</code>; the Tier-1 mock lacked it &rarr; runtime throw at the <code>@MAP</code>/<code>SetC</code>/<code>Hdg</code>/<code>Fin</code> tail. Added <code>SetC</code> to <code>SsgPsMockLib.psm1</code> &mdash; unblocked <code>BABA_ASCII</code>.</td>
+          <td><span class="badge badge-done">&#10003; fixed</span></td>
+        </tr>
+        <tr id="T3-005">
+          <td><strong>T3-005</strong></td><td>260910</td><td>A</td>
+          <td><strong>Tier-1 harness aborts when the previous run's <code>error.txt</code> is locked.</strong> <code>Run-SsgPsTrial.ps1</code> deletes <code>&lt;Program&gt;.error.txt</code> before a run; if an extension holds that file, <code>Remove-Item</code> throws and the whole run fails (hit on BABA). Fix: tolerate the delete (<code>-ErrorAction SilentlyContinue</code>) or write to a fresh/unique out dir.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; 260917</span></td>
+        </tr>
+        <tr id="T3-006">
+          <td><strong>T3-006</strong></td><td>260917</td><td>A</td>
+          <td><strong>Tier-1 mock's <code>GetSgsValue</code> returned raw strings, not typed values.</strong> PowerShell treats the string <code>"0"</code> as <strong>truthy</strong> (only <code>""</code> is falsy) but the int <code>0</code> as <strong>falsy</strong>. CFH-COPY's converted script guards its MAXCOPY block with a raw <code>If ((GetSgsValue ("MAXCOPY")))</code> (no <code>CompareTypeSafe</code>) &mdash; with <code>MAXCOPY=0</code> (disabled) the string mock wrongly entered the block, emitting 2 extra lines (a <code>COPY-LIMIT</code> declaration + a <code>GO TO FINW</code> check that would break the copy loop at runtime). The same untyped-string return also broke raw <code>*SET</code> arithmetic (string concatenation instead of addition, e.g. ARCHIFORMAT's <code>$A</code> computed as <code>10554</code> instead of the documented <code>69</code>). Fixed by coercing numeric-looking mock values to <code>[Int64]</code>/<code>[Double]</code> in <code>GetSgsValue</code> (<code>SsgPsMockLib.psm1</code>), matching the real typed SGS store. Confirmed via an A/B test shadowing the old vs new behaviour side by side. CFH-COPY's emitted line count corrected 47&rarr;45 in <a href="#programs">&sect;3</a>.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; 260917</span></td>
+        </tr>
+        <tr id="T3-007">
+          <td><strong>T3-007</strong></td><td>260924</td><td>A</td>
+          <td><strong>PowerShell Hashtable member-shadowing silently broke SGS seed loading.</strong> <code>Reset-SgsMock</code>/<code>GetSgsValue</code> used <code>.Keys</code>/<code>.ContainsKey()</code> (dot-notation) on the seeded Hashtable. When a seed file contains a key that matches (case-insensitively) a real <code>Hashtable</code> member name &mdash; e.g. LECTIS_ASCII's SSG condition flag literally named <code>KEYS</code> &mdash; PowerShell's ETS silently resolves <code>.Keys</code> to <em>that dictionary entry's value</em> instead of the real key collection, collapsing enumeration to one phantom item (<code>0</code>) and defaulting <strong>every other seeded key</strong> to <code>0</code> with a false "no mock value" warning (63 of 80 lookups on LECTIS_ASCII's first run, even for keys that <em>were</em> seeded, e.g. <code>ASCII</code>). Fixed by using <code>.PSBase.Keys</code> / <code>.PSBase.ContainsKey()</code> / <code>.PSBase.Count</code> throughout <code>SsgPsMockLib.psm1</code> and <code>Run-SsgPsTrial.ps1</code>, which bypass the ETS adapter. Any future program with an SSG condition/param literally named <code>Keys</code>, <code>Count</code>, <code>Values</code>, <code>Add</code>, etc. would hit the same hazard without this fix.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; 260924</span></td>
+        </tr>
+        <tr id="T3-008">
+          <td><strong>T3-008</strong></td><td>260924</td><td>A</td>
+          <td><strong>Missing <code>Log-Message</code> primitive in the mock harness.</strong> <code>RECAP</code>'s converted script calls <code>Log-Message $Text $Severity</code> (the real AMT logging primitive, e.g. <code>Log-Message ("schema = " + $schname) '([LogMessageType]::Information)'</code>); the Tier-1 mock lacked it &rarr; runtime throw (<code>The term 'Log-Message' is not recognized...</code>). Added <code>Log-Message</code> to <code>SsgPsMockLib.psm1</code> (records the call for visibility, otherwise a no-op &mdash; same pattern as <a href="#T3-002">T3-002</a> <code>Hdg</code> / <a href="#T3-004">T3-004</a> <code>SetC</code>) &mdash; unblocked <code>RECAP</code>.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; 260924</span></td>
+        </tr>
+        <tr id="T3-009">
+          <td><strong>T3-009</strong></td><td>260929</td><td>B</td>
+          <td><strong>Leading-<code>+</code> <code>*INCREMENT</code> variable name produced an invalid/mismatched <code>For</code> loop.</strong> <code>CONDIS2_ASCII</code> writes <code>*Increment +I FROM 1 BY 1 TO [PG]</code> &mdash; some SSG sources put the leading <code>+</code> on the loop variable name itself (not as an operator); every other reference to the same loop variable in the source (e.g. bracketed <code>[PG,I,1,1]</code>) omits the <code>+</code>. The converter captured the raw <code>+I</code> as the declare (<code>For ([Int32]$+I = 1; ...)</code> &mdash; invalid PowerShell) while a separate vendored AST-writer path sanitised condition/increment references (leading <code>+</code>&rarr;<code>_</code>) to <code>$_I</code>, producing a declare/condition mismatch even once the syntax was patched around. Fixed by stripping a leading <code>+</code> from <code>incrementVariable</code> right after regex capture in <code>SymstreamProcessor.cs</code> (<code>DirectiveId.Increment</code>). The analogous <code>*DO</code> variable capture has the same latent pattern but was left unfixed &mdash; no confirmed repro there. Rebuilt/redeployed 260930 with no regressions across the other 17 programs; unblocked <code>CONDIS2_ASCII</code> (18th program, 0 parse errors, runs clean). <strong>Independently reconfirmed 260930:</strong> <code>EXTEUR</code> (19th program) uses the identical <code>*Increment +I</code>/<code>+J</code> construct (nested, nested two levels deep) and also parsed 0 / ran clean with no further fix needed &mdash; a second, unrelated source file exercising the same code path.</td>
+          <td><span class="badge badge-done">&#10003; fixed &middot; deployed 260930</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 7: TODO -->
+  <div class="section-card" id="todo">
+    <h2>7 &middot; ToDo</h2>
+    <p>Forward list of required pipeline functions, features and gaps &mdash; added to as the pipeline
+    grows. IDs use <code>MT-nnn</code> where <code>MT</code> is the creator's initials, so other
+    developers can add items and be identified as the author.</p>
+    <table class="ref">
+      <thead><tr><th style="width:9%">ID</th><th style="width:8%">Created</th><th>Item</th><th style="width:16%">Status</th></tr></thead>
+      <tbody>
+        <tr id="MT-001"><td><strong>MT-001</strong></td><td>260908</td><td>Repo-scoped Copilot regime targeting this VM's layout (CI + area instructions + <code>/ssg-*</code> prompts).</td><td><span class="badge badge-done">&#10003; done</span></td></tr>
+        <tr id="MT-002"><td><strong>MT-002</strong></td><td>260908</td><td>Trial3 <code>pipeline.config.json</code> points at a missing <code>CobolConverterConsole.exe</code> and <code>globalCopyDir</code> &mdash; blocks the Trial3 pipeline beyond <code>-ListOnly</code>.</td><td><span class="badge badge-prog">open</span></td></tr>
+        <tr id="MT-003"><td><strong>MT-003</strong></td><td>260908</td><td>Only 5 of the original 36 converter input files are present locally (<code>Examples/Input</code>).</td><td><span class="badge badge-prog">open</span></td></tr>
+        <tr id="MT-004"><td><strong>MT-004</strong></td><td>260910</td><td><code>SsgConverterConsole.csproj</code> won't build standalone (undefined <code>$(SsgDeps)</code> + external <code>EclConverter</code> project refs). Library builds fine; the routine only needs the library DLL.</td><td><span class="badge badge-prog">open</span></td></tr>
+        <tr id="MT-005"><td><strong>MT-005</strong></td><td>260910</td><td>Promote converted PowerShell to run under the <strong>AMT Control Center</strong> / ECL runtime (the <a href="#aim">target</a>). <strong>Stage A done (260910):</strong> CFH-COPY runs against the real <code>AmtPsEclLib</code> in isolation via <a href="#stagea-runbook"><code>Run-StageA.ps1</code></a> &mdash; SGS values resolve, <code>@MAP</code> handled, full body reaches <code>FIN</code> / <code>End Job</code> / <code>Script Done</code> (exit 0) with only <code>$global:WarningRcw2435=$false</code> set. The only remaining step is the end-of-job COM cleanup (<code>RemoveNonPrintedFiles</code>, L3157); <code>Initialize</code> is not isolated (loads ComScript + <code>Connect-Application</code>) = <strong>Stage B</strong> under BatchController. Driven by <code>/ssg-e2e</code>. <strong>Stage B finding (260910):</strong> a <em>standalone pwsh</em> run of the report is <strong>not a supported host</strong> &mdash; <code>Connect-Application</code>&rsquo;s DB connect is owned by the native MsSql wrapper (<code>Asysco.Amt.AmtSqlServerWrapper.dll</code>, <code>SERVER TYPE=MSSQL</code>), which needs a <strong>.NET 8</strong> closure (<code>Microsoft.Data.SqlClient 6.1.4</code> + native SNI <code>6.0.2</code>) defined in a <code>.deps.json</code>. Bare pwsh has none &rarr; &ldquo;<em>not supported on this platform</em>.&rdquo; The supported host is <code>AmtPowershellHost.exe</code> (<strong>net8 / PS&nbsp;7.4</strong>) via BatchController/CC. Next: register + Start Job through Control Center (script/settings <code>Run-StageB.ps1</code>+<code>AmtSettings.xml</code> are fine; they were run in the wrong host).</td><td><span class="badge badge-prog">Stage A done &middot; Stage B scoped</span></td></tr>
+        <tr id="MT-006"><td><strong>MT-006</strong></td><td>260910</td><td><strong>Stage B provenance &amp; citations register.</strong> Sources behind the Stage B / Tier-3 PowerShell mechanism, kept for traceability:
+          <ul style="margin:6px 0 6px 18px;">
+            <li>AMT training doc <em>&ldquo;Overview Batch Jobs in AMT &mdash; from ECL to PowerShell&rdquo;</em> &sect;6.1&ndash;6.5 (script start paths: 6.4 online/batch&rarr;BatchController, 6.5 ControlCenter), script skeleton <code>Set-Jobname&rarr;Initialize&rarr;Trap&rarr;body&rarr;Fin</code>, and Exercise&nbsp;1 hello-world.</li>
+            <li><code>AmtPsEclLib.psm1</code> <strong>L585&ndash;618</strong> (AMT175 copy = matches our isolated copy): <code>Initialize</code> does <code>Add-Type ComScript</code> &rarr; <code>New Comscript</code> &rarr; <code>Connect-Application</code>; assigns <code>RequestId/JobNumber/BatchId</code> via <code>Get-*</code>.</li>
+            <li><code>SSG-ECL-PowerShell-Reference.html</code> &sect;2 &mdash; Tier-3 full PowerShell ECL orchestration marked <em>&ldquo;optional / not yet exercised&rdquo;</em>.</li>
+            <li>Live infra (this VM): app <code>FEDERALE_APP</code>, DB <code>FEDERALE_SYSTEM</code>@<code>VMFEDPE08</code>, TransactionServer <code>Grpc:localhost:8031</code>, job host <code>AmtTools\AmtBatchController\AmtPowershellHost.exe</code>; ComScript preflight OK under pwsh&nbsp;7.6.6 / .NET&nbsp;10.0.12.</li>
+          </ul>
+          <strong>SsgConverter DLL provenance</strong> (the build that produced the verified <code>Examples/Output</code> goldens): <code>Build\Console\SsgConverter.dll</code> and <code>Build\Gui\SsgConverter.dll</code>, both <strong>51200 bytes</strong>, <strong>SHA256 <code>EDC81B6633030D1D9DBB8E2B636B99661CF32A2CD5A37C1F7734326B39A8047A</code></strong> (identical). See plan <code>.github/Copilot_Plans/260910-mt005-stageb-real-amt-job.md</code>.</td><td><span class="badge badge-info">reference</span></td></tr>
+        <tr id="MT-007"><td><strong>MT-007</strong></td><td>260910</td><td><strong>Trial3 Control Center credentials.</strong> Running a report through Control Center (Stage B, <a href="#amt-run-process">&sect;5c</a>) requires a <strong>Keycloak login</strong> (realm <code>Federale</code>, client <code>federale-blazor-client</code>, at <code>http://localhost:8080</code>) &mdash; the CC UI at <code>http://localhost:5120</code> redirects to it. A documented Trial3 CC username/password is needed to register/activate/Start-Job. <em>Store securely (not in this repo); never paste secrets into chat.</em></td><td><span class="badge badge-pend">needed</span></td></tr>
+        <tr id="MT-008"><td><strong>MT-008</strong></td><td>260910</td><td><strong>Converter emits body-only PS; CC needs the full job skeleton.</strong> A CC-runnable PowerShell report (Type <code>Script</code>) has the shape: <code>Import-Module ..\..\Libraries\AmtPsEclLib.psm1</code> (+Sort) &rarr; <code>$AmtSettingsFile="..\..\Settings\AmtSettings.xml"</code> &rarr; <code>Set-Jobname</code> &rarr; <code>Initialize</code> &rarr; <code>Try{ &lt;body&gt; Fin } Catch{ HandleTrapAndAbort } Finally{ Cleanup $false }</code> (per R&amp;D <code>ASSURFED_F999RUN_2PPA01.ps1</code>). SsgConverter currently emits <em>body-only</em> (<code>param</code> + body + trailing <code>Fin</code>). To run under CC, either add a converter option to emit the skeleton or wrap the output at deploy time. Confirmed live: CC job <code>TYPE</code> options = Unspecified/<strong>Script</strong>/Batch/AmtReport/Executable/AmtCobolProgram; register via <em>Read all jobs from system</em> scan.</td><td><span class="badge badge-prog">open</span></td></tr>
+        <tr id="MT-009"><td><strong>MT-009</strong></td><td>260910</td><td><strong>Build a 2nd (COBOL / OS2200) application on AMT177 &mdash; Stage B prerequisite.</strong> The supplied VM has only <code>FEDERALE_APP</code>, which is the <strong>ABSuite/LINC</strong> application (its 5315 catalog jobs are all <code>AmtReport</code> DLLs; a PowerShell-script scan registers nothing). Our reports are <strong>OS2200 SSG/ECL/COBOL</strong> (<code>ApplicationKind=CobolOS2200</code>) and need their own <strong>COBOL application</strong> &mdash; the kind the previous trial built as <code>AMT175_AFBUS_COBOL</code> (COBOL host based on AFBUS). Deploying/registering <code>CFH-COPY</code> under the ABSuite app cannot work. <strong>Action:</strong> build/register a COBOL/OS2200 application on AMT177 (mirror the previous AFBUS COBOL host: <code>AMTSYSAPPLICATION</code> + base paths + controllers + binaries/scripts layout + DB), then register &amp; run <code>CFH-COPY</code> under it. Blocks <a href="#MT-005">MT-005</a> Stage B. Registering/installing an application is an admin-level operation on this VM &mdash; if it throws "Access denied"/"Insufficient permissions" rather than a lock error, see the UAC/ACL note in <a href="#routine">&sect;5 &middot; Repeatable Routine</a> (run elevated, not around a VS Code close).</td><td><span class="badge badge-prog">open</span></td></tr>
+        <tr id="MT-010"><td><strong>MT-010</strong></td><td>260930</td><td><strong>Bundle all 20 converted SSG&rarr;PowerShell programs + raw source + Tier-1 harness for handoff to an AMT172 Copilot session</strong>, which will attempt the first <strong>live</strong> <code>Connect-Application</code>/Control-Center run (ours has only reached Tier-1 mock-shell, plus one isolated Stage A run for <code>CFH-COPY</code> &mdash; see <a href="#MT-005">MT-005</a>). Supersedes the earlier 10-program push (<code>marky-T/177Xfer</code> branch <code>T3ConvertedSSG</code>); overlap and 10 new programs must be called out explicitly. Answers AMT172's prepared requirements doc (version/host compatibility, per-program DISC designators, execution-status honesty, <code>Set-Jobname</code>/naming, dependencies, delivery shape) &mdash; several are open gaps on our own side too (no live run ever completed, no <code>Set-Jobname</code>/job-skeleton per <a href="#MT-008">MT-008</a>, no proven live <code>AmtSettings.xml</code> per <a href="#MT-009">MT-009</a>) and must be flagged, not silently omitted. Plan: <code>.github/Copilot_Plans/260930-mt010-amt172-handoff-bundle.md</code>.</td><td><span class="badge badge-pend">planned</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:#6b7280;">Register &amp; conventions are documented in the supporting
+    Copilot instruction <code>.github/instructions/ssg-todo-issues.instructions.md</code> (referenced by
+    the main CI when a new feature / pipeline request is raised).</p>
+  </div>
+
+  <!-- ─────────────────────────── SECTION 8: HOW TO UPDATE -->
+  <div class="section-card" id="update">
+    <h2>8 &middot; How to Update This Page</h2>
+    <div class="info-box" style="border-left-color:#7c3aed;background:#f5f3ff;">
+      <strong>This page is maintained / updated via VS Code Copilot</strong>, driven by the repository&rsquo;s
+      <strong>Copilot instructions</strong> &mdash; not hand-edited ad hoc. The always-on contract is
+      <code>.github/copilot-instructions.md</code>; deeper, on-demand rules live in the area instruction files:
+      <code>.github/instructions/ssg-run-trials.instructions.md</code> (Area A),
+      <code>ssg-converter-dev.instructions.md</code> (Area B),
+      <code>ssg-reconvert.instructions.md</code> (Area C),
+      <code>ssg-amtcc-runbook.instructions.md</code> (Area D), and
+      <code>ssg-todo-issues.instructions.md</code> (the <a href="#issues">T3-nnn</a> / <a href="#todo">MT-nnn</a> registers).
+      Repeatable work is driven by the <code>/ssg-*</code> prompts in <code>.github/prompts/</code>
+      (<code>/ssg-run-trial</code>, <code>/ssg-fix-converter</code>, <code>/ssg-reconvert</code>,
+      <code>/ssg-e2e</code>, <code>/ssg-update-tracker</code>, <code>/ssg-session-start</code>, <code>/ssg-review</code>) and the reusable scripts
+      <code>Reconvert-And-Verify.ps1</code>, <code>Trials/Tier1Mock/Run-SsgPsTrial.ps1</code>,
+      <code>Trials/RealRuntime/{Run-StageA.ps1, Run-StageB.ps1, Deploy-CC-Job.ps1}</code>. Larger changes are
+      captured as plan files in <code>.github/Copilot_Plans/</code> and referenced/linked from the related
+      <a href="#todo">MT-nnn</a> ToDo entries (and <a href="#issues">T3-nnn</a> issues). Whenever any of these
+      change, the driving <strong>Copilot session &mdash; following the instruction files above &mdash; updates
+      the affected registers (&sect;3/&sect;6/&sect;7), the plan files, and this page in the same pass</strong> so
+      they don&rsquo;t drift. The explicit mechanism is the <code>/ssg-update-tracker</code> prompt, invoked as the
+      <em>closing action</em> of a reviewed run (see the area instruction files); it is a Copilot convention enforced
+      by those instructions, not an automated build step, so it depends on the agent honouring them each session.
+    </div>
+    <p>After bringing a program online (parse 0 + harness run), add or update its row in
+    <a href="#programs">&sect;3</a>: set the before&rarr;after parse counts, the run badge
+    (<span class="badge badge-done">&#10003; runs</span> once it executes), emitted line count, and notes
+    (link any relevant <a href="#issues">T3-nnn</a> issue). Refresh the <em>Last updated</em> date and
+    the <a href="#overview">&sect;1</a> current-state box.</p>
+    <p>When a new bug is found, append a <a href="#issues">T3-nnn</a> row (&sect;6); when a new
+    pipeline function / feature is needed, append an <a href="#todo">MT-nnn</a> row (&sect;7) with a
+    <code>yymmdd</code> created date. Conventions:
+    <code>.github/instructions/ssg-todo-issues.instructions.md</code>.</p>
+    <p style="font-size:12.5px;color:#6b7280;">Source of truth for the numbers:
+    <code>Reconvert-And-Verify.ps1</code> summary table and the Tier-1 harness output under
+    <code>SsgConverter/Trials/&lt;Program&gt;/out/</code>.</p>
+  </div>
+
+  <div class="footer-bar">
+    AMT177 SSG &rarr; PowerShell Trial &middot; progress tracker &middot; generated 2026-09-10 &middot;
+    companion to <a href="Asset-Register.md">Asset Register</a>,
+    <a href="../SsgConverter/Fixes/SsgConverter-Fix-20260909.md">fix log</a>, and the
+    <a href="SSG-Trial-Progress.html">SSG-COBOL &rarr; C# progress tracker</a>.
+  </div>
+</main>
+</body>
+</html>
