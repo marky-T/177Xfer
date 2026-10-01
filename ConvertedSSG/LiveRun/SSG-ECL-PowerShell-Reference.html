@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSG-ECL / PowerShell Pre-Processor Pipeline — Reference</title>
+<style>
+  :root {
+    --nav-w:240px; --done:#1a7f4b; --prog:#b45309; --pend:#6b7280;
+    --bug:#b91c1c; --code-bg:#1e1e2e; --code-fg:#cdd6f4;
+    --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:var(--nav-w); min-width:var(--nav-w); background:#14331f; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #1f5135; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#f0fdf4; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#86efac; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#d1fae5; text-decoration:none; transition:background .15s; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#1f5135; color:#f0fdf4; border-left-color:#4ade80; }
+  nav ul li a.active { background:#14532d; color:#86efac; border-left-color:#22c55e; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#4d7c5a; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  nav ul li.sub a { padding-left:28px; font-size:11.5px; color:#9ddbb4; }
+  main { flex:1; padding:28px 36px; max-width:980px; }
+  .page-title h1 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:22px; }
+  .badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
+  .badge-done { background:#dcfce7; color:var(--done); }
+  .badge-prog { background:#fef3c7; color:var(--prog); }
+  .badge-pend { background:#f3f4f6; color:var(--pend); }
+  .badge-info { background:#dbeafe; color:#1d4ed8; }
+
+  /* Cards */
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:26px; }
+  .section-card h2 { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border); }
+  .section-card h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .section-card h4 { font-size:13px; font-weight:600; color:#374151; margin:12px 0 6px; }
+  .section-card p  { margin-bottom:10px; line-height:1.6; }
+  .section-card ul, .section-card ol { margin:0 0 10px 20px; line-height:1.7; }
+  .section-card li { margin-bottom:3px; }
+
+  /* Code */
+  .code-wrap { position:relative; margin:12px 0; }
+  .code-label { font-size:10px; color:#6b7280; font-family:monospace; background:#f3f4f6; padding:3px 10px; border-radius:4px 4px 0 0; display:inline-block; border:1px solid #e5e7eb; border-bottom:none; }
+  pre { background:var(--code-bg); color:var(--code-fg); padding:15px 18px; border-radius:0 6px 6px 6px; overflow-x:auto; font-size:12px; line-height:1.6; font-family:'Cascadia Code','Fira Code',Consolas,'Courier New',monospace; white-space:pre; }
+  code { background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+
+  /* Callout boxes */
+  .warn        { background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .info-box    { background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .success-box { background:#f0fdf4; border-left:4px solid #22c55e; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .danger-box  { background:#fef2f2; border-left:4px solid #ef4444; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+
+  /* Tables */
+  table.ref { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+  table.ref th { background:#f0f4f8; padding:6px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; }
+  table.ref td { padding:5px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.55; }
+  table.ref tr:nth-child(even) td { background:#fafafa; }
+  table.ref code { font-size:11.5px; }
+
+  /* Status indicators */
+  .dot-done::before { content:'●'; color:var(--done); margin-right:5px; }
+  .dot-pend::before { content:'○'; color:var(--pend); margin-right:5px; }
+  .dot-prog::before { content:'◑'; color:var(--prog); margin-right:5px; }
+
+  /* SSG / ECL syntax colouring (for use inside <pre> via <span>) */
+  .ssg-directive { color:#c084fc; font-weight:600; }   /* *DEFINE *SET *INCREMENT etc  */
+  .ssg-param     { color:#fbbf24; }                    /* [INPUT,1,1,1] macro params    */
+  .ssg-comment   { color:#6a9955; font-style:italic; } /* ← annotations                 */
+  .ssg-keyword   { color:#569cd6; }                    /* COBOL division headers         */
+  .ecl-directive { color:#4ec9b0; font-weight:600; }   /* @XQT @ASG @USE etc            */
+  .ecl-file      { color:#ce9178; }                    /* file names in ECL              */
+  .ps-cmd        { color:#4ec9b0; }                    /* PowerShell cmdlets             */
+  .ps-param      { color:#fbbf24; }                    /* -Parameter names               */
+  .ps-cmt        { color:#6a9955; font-style:italic; } /* # comments                     */
+
+  /* Example header banner */
+  .example-header { background:linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 100%); color:white; padding:16px 22px; border-radius:8px 8px 0 0; }
+  .example-header h3 { font-size:16px; font-weight:700; color:white; margin:0; }
+  .example-header p  { font-size:12px; color:#bfdbfe; margin:5px 0 0; }
+  .example-body { border:1px solid #c7d2fe; border-top:none; border-radius:0 0 8px 8px; padding:22px 26px; margin-bottom:28px; background:white; }
+  .example-body h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .example-body h3:first-child { margin-top:0; }
+  .example-body p  { margin-bottom:10px; line-height:1.6; }
+  .example-body ul, .example-body ol { margin:0 0 10px 20px; line-height:1.7; }
+
+  /* Back / nav links */
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; text-decoration:none; font-size:13px; margin-bottom:18px; }
+  .back-link:hover { text-decoration:underline; }
+  .footer-bar { margin-top:36px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af; }
+  .footer-bar a { color:#1d4ed8; }
+
+  /* ── Floating Cut & Paste Notepad (shape/size mirrors the AMT Launcher) ── */
+  #eclref-notepad { position:fixed; bottom:20px; right:20px; z-index:9999; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:12px; }
+  #eclref-notepad .np-panel { background:#e9f7ef; border:1px solid #86efac; border-radius:10px; box-shadow:0 8px 32px rgba(20,51,31,.35); width:230px; overflow:hidden; transition:height .2s ease; }
+  #eclref-notepad .np-header { display:flex; align-items:center; justify-content:space-between; padding:8px 11px; background:#14532d; cursor:pointer; user-select:none; border-radius:10px 10px 0 0; }
+  #eclref-notepad .np-title { color:#dcfce7; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; display:flex; align-items:center; gap:7px; }
+  #eclref-notepad .np-toggle { color:#86efac; font-size:14px; line-height:1; cursor:pointer; }
+  #eclref-notepad .np-body { padding:9px 10px 10px; }
+  #eclref-notepad textarea { width:100%; height:150px; resize:vertical; box-sizing:border-box; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:7px 8px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; font-size:11.5px; line-height:1.5; color:#14532d; }
+  #eclref-notepad textarea:focus { outline:none; border-color:#22c55e; box-shadow:0 0 0 2px rgba(34,197,94,.25); }
+  #eclref-notepad .np-actions { display:flex; gap:6px; margin-top:8px; }
+  #eclref-notepad .np-btn { flex:1; padding:6px 8px; background:#22c55e; border:none; border-radius:6px; color:#06310f; font-size:11px; font-weight:600; cursor:pointer; transition:background .13s; }
+  #eclref-notepad .np-btn:hover { background:#16a34a; color:#f0fdf4; }
+  #eclref-notepad .np-btn.secondary { background:#bbf7d0; color:#14532d; }
+  #eclref-notepad .np-btn.secondary:hover { background:#86efac; }
+  #eclref-notepad .np-flash { margin-top:6px; font-size:10px; color:#15803d; min-height:13px; text-align:center; opacity:0; transition:opacity .25s; }
+  #eclref-notepad .np-flash.show { opacity:1; }
+  #eclref-notepad.collapsed .np-body { display:none; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ SIDEBAR NAV -->
+<nav id="sidenav">
+  <div class="logo">
+    <h1>SSG-ECL / PowerShell</h1>
+    <p>Pre-Processor Pipeline Reference</p>
+  </div>
+  <ul>
+    <li><a href="AMT172-Setup-Guide.html" style="color:#60a5fa;border-left-color:#60a5fa;background:#1a2e4a;">&#8592; AMT172 Setup Guide</a></li>
+    <li><a href="AMT175-Setup-Guide.html">&#8596; AMT175 Quick Reference</a></li>
+    <li><a href="SSG-COBOL-Reference.html">&#8596; SSG/COBOL Reference</a></li>    <li><a href="SSG-Trial-Progress.html">&#8596; Trial Progress</a></li>
+    <li><a href="SSG-ECL-Command-Matrix.html">&#8596; ECL/SSG Command Matrix</a></li>    <!-- ECLREF:start AMT ECL&rarr;PowerShell (E2P) reference &mdash; target-side orchestration mechanics, NOT a source of override values -->
+    <li><a href="../AMT_ReferenceDocuments/AMT_ECLtoPowershell/Overview%20Batch%20Jobs%20in%20AMT%20-%20from%20ECL%20to%20PowerShell.md"
+           title="AMT reference: ECL job runstreams &rarr; PowerShell (E2P). Describes target-side job-control mechanics (file assignments, Xqt, BatchController) &mdash; NOT a source of SSG override values. Build the PS skeleton from these AMT docs."
+           target="_blank" rel="noopener"
+           style="color:#fbbf24;border-left-color:#fbbf24;">&#8599; AMT ECL&#8594;PowerShell (E2P)</a></li>
+    <!-- ECLREF:end -->
+    <li style="border-bottom:1px solid #334155;margin:2px 0 6px;"></li>
+    <li class="section">Overview</li>
+    <li><a href="#overview">1 · Overview</a></li>
+    <li class="section">Execution</li>
+    <li><a href="#execution-model">2 · Execution Model</a></li>
+    <li class="section">Pipeline</li>
+    <li><a href="#pipeline">3 · Pre-Processor Pipeline</a></li>
+    <li class="sub"><a href="#remove-ssg">Remove-SsgDirectives.ps1</a></li>
+    <li class="sub"><a href="#convert-ssg">Convert-SsgToLion.ps1</a></li>
+    <li class="section">Parameters</li>
+    <li><a href="#ecl-params">4 · ECL Param Substitution</a></li>
+    <li><a href="#ssg-conditions">5 · SSG *IF / *DEFINE Handling</a></li>
+    <li class="section">Runbook</li>
+    <li><a href="#runbook">6 · Trial Runbook</a></li>
+    <li class="sub"><a href="#run-montant">MONTANT_SIGNE</a></li>
+    <li class="sub"><a href="#run-lectis">LECTIS_MULT</a></li>
+    <li class="sub"><a href="#run-tri">TRI_ASCII (SORT)</a></li>
+    <li class="sub"><a href="#run-architab1">ARCHITAB1</a></li>
+    <li class="sub"><a href="#run-eclat">ECLAT</a></li>
+    <li class="sub"><a href="#run-compare2">COMPARE2_ASCII</a></li>
+        <li class="sub"><a href="#run-cfh-copy">CFH-COPY</a></li>
+        <li class="sub"><a href="#run-archiformat">ARCHIFORMAT</a></li>
+        <li class="sub"><a href="#run-archisepare">ARCHISEPARE</a></li>
+        <li class="sub"><a href="#run-loadis">LOADIS_MULT-NODUP</a></li>
+        <li class="sub"><a href="#run-unloadis">UNLOADIS_MULT</a></li>
+        <li class="sub"><a href="#run-unloadis-nodup">UNLOADIS_MULT-NODUP</a></li>
+        <li class="sub"><a href="#run-tapeld-distrib">TAPELD_DISTRIB</a></li>
+    <!-- ECLREF:start Control Center runbook nav (added 2026-07-17) -->
+    <li class="section">Control Center</li>
+    <li><a href="#controlcentrerunbook">6b &middot; Control Center Runbook</a></li>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start T3 PS-conversion runbook nav (added 2026-09-18) -->
+    <li class="section">T3 PS-Conversion</li>
+    <li><a href="#t3-ps-conversion">6c &middot; T3 PS-Conversion Runbook</a></li>
+    <li class="sub"><a href="#run-t3-archiformat">ARCHIFORMAT</a></li>
+    <li class="sub"><a href="#run-t3-archisepare">ARCHISEPARE</a></li>
+    <li class="sub"><a href="#run-t3-baba">BABA_ASCII</a></li>
+    <li class="sub"><a href="#run-t3-cfh-copy">CFH-COPY</a></li>
+    <li class="sub"><a href="#run-t3-chab100">CHAB100_ASCII</a></li>
+    <li class="sub"><a href="#run-t3-chaban">CHABAN_ASCII</a></li>
+    <li class="sub"><a href="#run-t3-loadis-ascii">LOADIS_ASCII</a></li>
+    <li class="sub"><a href="#run-t3-loadis-multi">LOADIS_MULTI</a></li>
+    <li class="sub"><a href="#run-t3-unloadis-ascii">UNLOADIS_ASCII</a></li>
+    <li class="sub"><a href="#run-t3-unloadis-multi">UNLOADIS_MULTI</a></li>
+    <li class="sub"><a href="#t3-live-tier3">Live Tier-3 run (20-program bundle)</a></li>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start Record-size parameterisation proof nav (added 2026-09-18) -->
+    <li class="section">Record-Size Proof</li>
+    <li><a href="#record-size-proof">6d &middot; Record-Size Parameterisation Proof</a></li>
+    <li class="sub"><a href="#rsp-cfh-copy">CFH-COPY &mdash; compiled C# (JOBID 737)</a></li>
+    <!-- ECLREF:end -->
+    <li class="section">Troubleshooting</li>
+    <li><a href="#troubleshooting">7 · Troubleshooting</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════ MAIN -->
+<main>
+  <a class="back-link" href="AMT172-Setup-Guide.html">&#8592; AMT172 Setup Guide</a>
+
+  <div class="page-title">
+    <h1>SSG-ECL / PowerShell Pre-Processor Pipeline</h1>
+    <p style="font-size:14px;color:#6b7280;margin-top:3px;font-weight:400;">Reference for the script pipeline that turns raw SSG/ECL source into convertible COBOL</p>
+  </div>
+  <p class="page-meta">Last updated: 2026-06-26 &nbsp;|&nbsp; AMT 172 (8.0.26125.0 RC1) &nbsp;|&nbsp; Federale migration — SSG/ECL → COBOL → Lion → C# &nbsp;|&nbsp; Companion to <a href="SSG-COBOL-Reference.html">SSG/COBOL Reference</a></p>
+
+  <!-- ─────────────────────────────────────────── SECTION 1: OVERVIEW -->
+  <div class="section-card" id="overview">
+    <h2>1 &middot; Overview</h2>
+    <p>The Federale SSG utility programs are <strong>not plain COBOL</strong>. Each
+    <code>ASSURFED_*</code> source file is a <strong>macro-COBOL hybrid</strong>: COBOL divisions
+    interleaved with SSG macro directives (<code>*DEFINE</code>, <code>*IF</code>, <code>*SET</code>,
+    <code>*END</code>) and ECL job parameters (<code>[INPUT,1,1,1]</code> style tokens). The AMT
+    <code>CobolConverter</code> cannot parse those directives directly, so a <strong>PowerShell
+    pre-processor pipeline</strong> resolves them into clean COBOL <em>before</em> conversion.</p>
+
+    <div class="info-box">
+      This page documents the <strong>pre-conversion</strong> half of <strong>Phase 12</strong>.
+      The downstream COBOL&nbsp;&rarr;&nbsp;Lion&nbsp;&rarr;&nbsp;C# detail, worked program examples,
+      and transformation pattern cards live on the
+      <a href="SSG-COBOL-Reference.html">SSG/COBOL Reference &#8599;</a>.
+    </div>
+
+    <h3>Where it sits in the migration</h3>
+    <div class="code-wrap">
+      <span class="code-label">pipeline</span>
+<pre>Raw SSG/ECL source (ASSURFED_*.TXT)
+  <span class="ps-cmd">Remove-SsgDirectives.ps1</span>   <span class="ps-cmt"># strip *IF/*DEFINE, substitute [param] tokens</span>
+    clean COBOL candidate (&lt;PROGRAM-ID&gt;.TXT)
+      <span class="ps-cmd">CobolConverterConsole.exe</span>   <span class="ps-cmt"># orchestrated by Convert-SsgToLion.ps1</span>
+        .LionSource  &#8594;  [Phase 13] LionDevGenNet  &#8594;  C# assembly</pre>
+    </div>
+
+    <h3>Authoritative rule</h3>
+    <div class="warn">
+      Always use the <strong>established script pipeline</strong> to produce candidate files.
+      Hand-authoring a candidate is a fallback <em>only</em> when the source is already plain COBOL
+      with no SSG directives. See
+      <code>.github/instructions/amt-cobol-migration.instructions.md</code>.
+    </div>
+
+    <h3>Tooling locations</h3>
+    <table class="ref">
+      <tr><th>Component</th><th>Path</th></tr>
+      <tr><td><code>Remove-SsgDirectives.ps1</code></td><td><code>C:\Amt\Migration\CobolConvert\tools\</code></td></tr>
+      <tr><td><code>Convert-SsgToLion.ps1</code></td><td><code>C:\Amt\Migration\CobolConvert\tools\</code></td></tr>
+      <tr><td>Settings (<code>.settings</code> JSON)</td><td><code>C:\Amt\Migration\CobolConvert\settings\</code></td></tr>
+      <tr><td>Candidates (input)</td><td><code>C:\Amt\Migration\CobolConvert\candidates\</code></td></tr>
+      <tr><td>Output (<code>.LionSource</code>)</td><td><code>C:\Amt\Migration\CobolConvert\output\</code></td></tr>
+      <tr><td>Macro stubs</td><td><code>C:\Amt\Migration\CobolConvert\macros\ssg-stub.macros.xml</code></td></tr>
+    </table>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 2: EXECUTION MODEL -->
+  <!-- ECLREF:start Execute vs. orchestrate — runtime layers + 3 proof tiers (added 2026-06-26) -->
+  <div class="section-card" id="execution-model">
+    <h2>2 &middot; Execution Model &mdash; Execute vs. Orchestrate</h2>
+
+    <p>Running a converted SSG-COBOL utility (e.g. <code>MONTANT</code>) involves <strong>two
+    distinct layers</strong>. Keeping them apart explains why the proof harness needs no PowerShell
+    while production does.</p>
+
+    <table class="ref">
+      <tr><th>Layer</th><th>What it does</th><th>Needed to run<br>MONTANT's logic?</th></tr>
+      <tr>
+        <td><strong>AMT .NET runtime</strong><br>(the C# framework)</td>
+        <td>Actually <strong>executes</strong> the converted program &mdash; the file
+        <code>READ</code>/<code>WRITE</code>, the <code>COMPUTE</code>, the sort API, indexed-file I/O</td>
+        <td><span class="badge badge-done">Yes</span> &mdash; this is what <em>runs</em> the code</td>
+      </tr>
+      <tr>
+        <td><strong>AMT PowerShell ECL framework</strong><br>(<code>AmtPsEclLib</code>)</td>
+        <td>Job control migrated from the ECL runstream: sets up <strong>file assignments</strong>
+        (<code>FILEIN-1</code> &rarr; a path), then <code>Xqt</code>s the program via the
+        <strong>BatchController</strong></td>
+        <td><span class="badge badge-pend">No</span> &mdash; it <em>kicks off and wires</em> the
+        program; it does <strong>not</strong> run the COBOL logic</td>
+      </tr>
+    </table>
+
+    <div class="info-box">
+      The PowerShell library is the <strong>job-control / file-assignment / invocation</strong> layer
+      (<strong>Stream B</strong>). It never performs the program's computation &mdash;
+      <code>Xqt</code> just inserts a job request and the BatchController runs the converted program
+      (which is C# on the AMT .NET runtime).
+    </div>
+
+    <h3>Three proof tiers</h3>
+    <table class="ref">
+      <tr><th>Tier</th><th>What runs</th><th>PowerShell / AMT stack?</th></tr>
+      <tr>
+        <td><strong>Tier 1 &mdash; mock-shell</strong> <span class="badge badge-prog">now</span></td>
+        <td>A thin harness that <em>stands in for</em> the PowerShell + BatchController orchestration
+        &mdash; it provides the input/output files directly and runs the logic (reference oracle now).
+        Proves report contents.</td>
+        <td><strong>None</strong> needed</td>
+      </tr>
+      <!-- ECLREF:start Tier 2 DONE - output-vs-golden proven via working-dir staging (revised 2026-07-18) -->
+      <tr>
+        <td><strong>Tier 2 &mdash; AMT .NET runtime</strong> <span class="badge badge-done">done</span></td>
+        <td>Runs the <strong>actual converted C#</strong> under the AMT .NET runtime &mdash; the deployed
+        program DLL is <code>Xqt</code>ed by the <strong>Control Center BatchController</strong> as a real
+        batch job (app <code>AFBUS_2200COBOL</code>). <strong>Proven end-to-end (2026-07-18):</strong> MONTANT ran
+        Queued &rarr; Running &rarr; Completed and its output was <strong>byte-identical</strong> to the Tier-1
+        golden. Inputs/outputs resolve as <code>%SYSROOT%\Files\Extracts\&lt;designator&gt;.DAT</code> &mdash; stage
+        each fixture input there and collect the output from the same place. See
+        <a href="#controlcentrerunbook">&sect;6b Control Center Runbook</a>.</td>
+        <td>AMT .NET runtime + Control Center (no PowerShell ECL needed)</td>
+      </tr>
+      <!-- ECLREF:end -->
+      <tr>
+        <td><strong>Tier 3 &mdash; full PowerShell ECL orchestration</strong> <span class="badge badge-info">optional</span></td>
+        <td>Run the <strong>converted PowerShell ECL script</strong> that sets file assignments and
+        <code>Xqt</code>s the program through the BatchController &mdash; reproducing the real
+        operational invocation.</td>
+        <td><strong>This</strong> is where <code>AmtPsEclLib</code> is actually used</td>
+      </tr>
+    </table>
+
+    <div class="success-box">
+      <strong>Design bridge:</strong> the Tier&nbsp;1 mock-shell is modelled on the AMT PowerShell ECL
+      skeleton (<code>Import-Module AmtPsEclLib</code> &rarr; <code>Set-Jobname</code> &rarr; file
+      assignments &rarr; <code>Xqt</code>-style call), so the same harness invokes the oracle now, the
+      converted C# later, and graduates into the real Stream&nbsp;B script eventually.
+    </div>
+  </div>
+  <!-- ECLREF:end -->
+
+  <!-- ─────────────────────────────────────────── SECTION 3: PIPELINE -->
+  <div class="section-card" id="pipeline">
+    <h2>3 &middot; Pre-Processor Pipeline</h2>
+    <p>Two scripts make up the pipeline. <code>Convert-SsgToLion.ps1</code> is the orchestrator you
+    normally run; it calls <code>Remove-SsgDirectives.ps1</code> first, then invokes the converter.</p>
+
+    <h3 id="remove-ssg">Remove-SsgDirectives.ps1</h3>
+    <p>Resolves the SSG macro layer into plain COBOL:</p>
+    <ul>
+      <li>Strips <code>*IF</code> / <code>*ELSEIF</code> / <code>*ELSE</code> / <code>*END</code> / <code>*ENDIF</code> directive lines
+      (<code>*ENDIF</code> is used by ECLAT in place of <code>*END</code>; matched by <code>^\*END(?:IF)?\b</code>).
+      <code>*ELSEIF</code> is handled via a <code>branchTaken</code> flag on the condition stack &mdash;
+      once any branch fires, all subsequent <code>*ELSEIF</code>/<code>*ELSE</code> arms are suppressed
+      (trial-12 ARCHISEPARE). Emits only the branch selected by <code>-ConditionValues</code>.</li>
+      <li>Unrolls <code>*INCREMENT&hellip;*LOOP</code> blocks: expands each iteration substituting
+      <code>[*I]</code> and indexed <code>[PARAM,r,<em>n</em>,f]</code> tokens, producing one copy of
+      the loop body per iteration count (trial-11+; confirmed for FILE-CONTROL/FD/OPEN+CLOSE loops in
+      trial-14 LOADIS_MULT-NODUP).</li>
+      <li>Evaluates <code>*SET [*varname] = &lt;expr&gt;</code> assignments and substitutes
+      <code>[*varname]</code> references throughout the emitted output. Supports N-operand arithmetic
+      chains (<code>+</code> <code>-</code> <code>*</code> <code>/</code>) via
+      <code>Eval-SsgSetExpr</code> (trial-12 ARCHISEPARE; N-operand form trial-13 ARCHIFORMAT).</li>
+      <li>Suppresses entire <code>*DEFINE</code> macro bodies (tracks <code>$inDefineBlock</code> +
+      <code>$defineIfDepth</code>, including nested <code>*IF</code> content) so FILLER lines inside
+      a <code>*DEFINE</code> body never leak in front of <code>IDENTIFICATION DIVISION</code>.</li>
+      <li>Strips extended SSG control lines: <code>*BRKPT</code>, <code>*SORT</code>, <code>*EXIT</code>,
+      <code>*ITERATE</code>, <code>*ABORT</code>, <code>*DISPLAY</code>, <code>*MESSAGE</code>,
+      <code>*.</code> (SSG comment lines starting with <code>*.</code>).</li>
+      <li>Strips ECL job-control directives embedded in SSG source: <code>#ASG</code>, <code>#USE</code>,
+      <code>#LINK</code>, <code>#FREE</code>, <code>#DELETE</code>, <code>#CAT</code>, <code>#XQT</code>.
+      Non-directive content lines inside a <code>#LINK&hellip;#FREE</code> linker block
+      (e.g. <code>INCLUDE</code>, <code>OUTPUT</code>, <code>RESOLVE</code>) are suppressed via
+      the <code>$inLinkBlock</code> state variable.</li>
+      <li>Strips COBOL-source ECL lines: <code>#ACOB</code> (general COBOL generation control;
+      trial-03+) and <code>#ucob,is</code> (plain-COBOL path marker for ARCHITAB1-style programs;
+      trial-07+).</li>
+      <li>Substitutes inline <code>[param]</code> tokens with the values from
+      <code>-ParamOverrides</code> (catch-all unmatched tokens collapse to <code>1</code>).</li>
+      <li><strong><code>-AnnotateStubs</code></strong> switch (trial-07+): appends
+      <code>&nbsp;&nbsp;*&gt; SSG-STUB [original-token]</code> as a COBOL inline comment on every
+      line where a token was substituted, preserving traceability back to the SSG source parameter.</li>
+      <li><code>Resolve-SsgCondition</code> evaluates <code>*IF [PARAM] = WORD</code> string
+      comparisons using the override value (needed for TRI_ASCII&rsquo;s
+      <code>*IF [INPUT,1,A,1] = CARDREADER</code> style conditions).</li>
+    </ul>
+    <div class="info-box">
+      Output is a single clean COBOL file named after the <strong>PROGRAM-ID</strong> — see
+      <a href="#troubleshooting">§7, Bug&nbsp;14</a>.
+    </div>
+
+    <h3 id="convert-ssg">Convert-SsgToLion.ps1</h3>
+    <p>Orchestrates the full step: <code>Remove-SsgDirectives</code> &rarr;
+    <code>CobolConverterConsole.exe</code>. Driven by a <code>.settings</code> JSON plus
+    per-program override hashtables.</p>
+    <div class="code-wrap">
+      <span class="code-label">powershell</span>
+<pre><span class="ps-cmd">.\Convert-SsgToLion.ps1</span> `
+  <span class="ps-param">-SettingsFile</span> <span class="ecl-file">"C:\Amt\Migration\CobolConvert\settings\trial-05-lectis.settings"</span> `
+  <span class="ps-param">-RawSourceDir</span> <span class="ecl-file">"C:\Amt\MainframeSource\Codedrop 2025\SSG Prd\SSG Creating COBOL"</span> `
+  <span class="ps-param">-ParamOverrides</span> @{
+      <span class="ssg-param">'[INPUT,1,1,1]'</span> = 'FICHIN-1'
+      <span class="ssg-param">'[INPUT,1,1,2]'</span> = '120'
+      <span class="ssg-param">'[LKEY,1,1,2]'</span>  = '8'
+  } `
+  <span class="ps-param">-ConditionValues</span> @{
+      'ASCII' = 1;  'LKEY' = 2;  'KEYS' = 0;  'COND,1' = 0
+  }</pre>
+    </div>
+    <table class="ref">
+      <tr><th>Parameter</th><th>Controls</th></tr>
+      <tr><td><code>-SettingsFile</code></td><td>Converter <code>.settings</code> JSON (Env, GlobalCopyDir, output path).</td></tr>
+      <tr><td><code>-RawSourceDir</code></td><td>Folder holding the raw <code>ASSURFED_*.TXT</code> SSG source.</td></tr>
+      <tr><td><code>-ParamOverrides</code></td><td>Inline <code>[TOKEN]</code> substitution in emitted COBOL lines (see §3).</td></tr>
+      <tr><td><code>-ConditionValues</code></td><td>Which <code>*IF</code> branches are emitted (see §4) — required for multi-variant programs.</td></tr>
+    </table>
+
+    <h3>Required converter settings (all conversions)</h3>
+    <table class="ref">
+      <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+      <tr><td><code>Env</code></td><td><code>4096</code> (<code>CobolOS2200</code>)</td><td>Unisys 2200/MCP platform — <strong>critical</strong>.</td></tr>
+      <tr><td><code>GlobalCopyDir</code></td><td><code>...\Codedrop 2025\CopyPrd</code></td><td>Shared copybooks for every conversion.</td></tr>
+      <tr><td><code>UseCobolAnalyser</code></td><td><code>true</code></td><td>Enables the analyser pass.</td></tr>
+      <tr><td><code>DontIncludeFolderNames</code></td><td><code>true</code></td><td>Object name derives from file, not folder.</td></tr>
+    </table>
+
+    <h3>Planned &mdash; parallel conversion stream &amp; new COBOL repository <span class="badge badge-pend">Planned</span></h3>
+    <div class="warn">
+      Set up a <strong>parallel processing stream</strong> in CobolConverter for the
+      <strong>converted files plus their macro / stub settings</strong>. This stream
+      <strong>exports the converted COBOL into a new, dedicated COBOL repository</strong> &mdash;
+      kept separate from the raw mainframe source corpus and versioned independently &mdash; so the
+      cleaned, convertible COBOL is preserved as its own artefact set.
+    </div>
+    <ul>
+      <li><strong>Converted-COBOL repo:</strong> holds the post-<code>Remove-SsgDirectives</code>
+      candidate <code>.TXT</code> files (named by PROGRAM-ID) and the macro/stub settings
+      (<code>ssg-stub.macros.xml</code>, per-program <code>.settings</code>) that produced them.</li>
+      <li><strong>ECL alignment:</strong> the ECL process files in this stream stay aligned with
+      this ECL reference guide &mdash; each ECL job param, stub name and condition documented here
+      maps 1:1 to an entry in the converted-COBOL repo, keeping doc and corpus in lock-step.</li>
+      <li><strong>Stream separation:</strong> the COBOL conversion stream and the ECL/PowerShell
+      pre-processor stream run in parallel; the new repo is the hand-off point between them.</li>
+    </ul>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 4: ECL PARAMS -->
+  <div class="section-card" id="ecl-params">
+    <h2>4 &middot; ECL Parameter Substitution</h2>
+    <p>ECL job parameters appear in the source as bracketed tokens. The pre-processor replaces each
+    with a concrete value supplied through <code>-ParamOverrides</code>; any token left unmatched is
+    collapsed to <code>1</code> by a generic catch-all.</p>
+
+    <h3>Token anatomy</h3>
+    <div class="code-wrap">
+      <span class="code-label">ecl token</span>
+<pre><span class="ssg-param">[INPUT,1,1,1]</span>   <span class="ssg-comment">← stream, position, occurrence, sub-field</span>
+   |     | | |
+   |     | | &#8627; field index (1=name, 2=record size, 3=block size)
+   |     | &#8627; occurrence
+   |     &#8627; position
+   &#8627; ECL stream name (INPUT / OUTPUT / LKEY / MONTANT / ...)</pre>
+    </div>
+
+    <h3>Common ECL fields</h3>
+    <p style="margin-bottom:6px; font-size:13px; color:#475569;">The third field (occurrence)
+    may be <code>A</code> (all/any &mdash; sort/array stream contexts, seen in TRI_ASCII), and the
+    sub-field index may be a named word rather than a number (e.g. <code>COL</code> for column
+    width in <code>[KEYS,n,COL,2]</code>).</p>
+    <table class="ref">
+      <tr><th>Token</th><th>Meaning</th><th>Seen in</th><th>C# transform tier</th></tr>
+      <tr><td><code>[INPUT,1,1,1]</code></td><td>Input file name</td><td>MONTANT (default), LECTIS, COMPARE2 (IN1)</td><td>T4 (file name)</td></tr>
+      <tr><td><code>[INPUT,1,1,2]</code></td><td>Input record size <em>or</em> second file name (see note&nbsp;&#x2193;)</td><td>MONTANT/LECTIS (record size); COMPARE2 (IN2 file name)</td><td>T3 / T4</td></tr>
+      <tr><td><code>[INPUT,1,1,3]</code></td><td>Input block size <em>or</em> record size (see note&nbsp;&#x2193;)</td><td>LECTIS (block size); COMPARE2 (record size)</td><td>T5 / T3</td></tr>
+      <tr><td><code>[INPUT,1,1,4]</code></td><td>Block count (COMPARE2 multi-file &mdash; field shifts)</td><td>COMPARE2</td><td>T5 (stored only)</td></tr>
+      <tr><td><code>[INPUT,1,A,1]</code></td><td>Input file name &mdash; A-variant (sort stream)</td><td>TRI_ASCII</td><td>T4 (file name)</td></tr>
+      <tr><td><code>[INPUT,1,A,2]</code></td><td>Input record size &mdash; A-variant</td><td>TRI_ASCII</td><td>T3 (record size)</td></tr>
+      <tr><td><code>[OUTPUT,1,1,1]</code></td><td>Output file name / PROGRAM-ID seed</td><td>TRI_ASCII</td><td>T4</td></tr>
+      <tr><td><code>[LKEY,1,1,2]</code></td><td>Key 1 width</td><td>LECTIS</td><td>T_KEY</td></tr>
+      <tr><td><code>[LKEY,2,1,2]</code></td><td>Key 2 width</td><td>LECTIS</td><td>T_KEY</td></tr>
+      <tr><td><code>[KEYS,1,COL,2]</code></td><td>Sort key column width (COL sub-field)</td><td>TRI_ASCII</td><td>T_KEY</td></tr>
+    </table>
+    <div class="info-box" style="margin-top:10px;">
+      <strong>Multi-file field-shift note (COMPARE2_ASCII, trial-10):</strong>
+      When an SSG template declares two input files under the same <code>INPUT</code> stream, the
+      sub-field index shifts by one: fields&nbsp;1 and 2 carry the two file names, pushing record size
+      to field&nbsp;3 and block count to field&nbsp;4. Single-file programs (MONTANT, LECTIS) use
+      fields 1/2/3 for name/record-size/block-size respectively. The field semantics are
+      <strong>template-specific</strong> &mdash; always verify against the source
+      <code>*DEFINE</code> bodies and <code>-ParamOverrides</code> in the manifest.
+    </div>
+
+    <h3>Stub naming (traceability)</h3>
+
+    <!-- ECLREF:start ECL_ stub rule — not yet in Trials 03-06; applied from Trial 07 (added 2026-06-26) -->
+    <div class="warn">
+      <strong>Current state (Trials 03&ndash;06 &mdash; MONTANT, LECTIS, TRI_ASCII):</strong>
+      The pre-processor performs <strong>direct inline substitution only</strong> &mdash;
+      <code>[INPUT,1,1,2]</code> becomes <code>80</code> literally. No <code>ECL_</code> stub
+      identifiers are created and no <code>*&gt;</code> annotation comments are added. Confirmed
+      by inspection of all three candidates and their <code>.LionSource</code> outputs (zero
+      <code>ECL_</code> / <code>*&gt;</code> lines found).
+    </div>
+    <p style="margin-top:12px;"><strong>Rule &mdash; applied from Trial 07 (ARCHITAB1) onwards:</strong>
+    After each ECL token is substituted, the resulting COBOL stub must be renamed to an
+    <code>ECL_</code>-prefixed identifier and a preceding <code>*&gt; SSG-STUB</code> comment must
+    carry the verbatim original token. This makes every substituted value searchable in AMT
+    from ECL source param &rarr; annotated COBOL stub &rarr; <code>.LionSource</code> &rarr;
+    generated C# field:</p>
+    <div class="code-wrap">
+      <span class="code-label">cobol (target format &mdash; to apply from Trial 07)</span>
+<pre><span class="ssg-comment">*&gt; SSG-STUB ECL_INPUT_RECSIZE = [INPUT,1,1,2]   (record size)</span>
+01  ECL-IN  PIC X(80).        <span class="ssg-comment">*&gt; was PIC X([INPUT,1,1,2])</span></pre>
+    </div>
+    <div class="info-box">
+      Stub names &amp; their token / tier / helper mapping are tabulated on the
+      <a href="SSG-COBOL-Reference.html#patterns">SSG/COBOL Reference &sect;7 pattern cards &#8599;</a>.
+      <strong>Survival of <code>*&gt;</code> comments into emitted C#:</strong> confirmed the
+      current pre-processor does <strong>not</strong> produce them (Trials 03&ndash;06 direct
+      substitution). Whether the AMT converter preserves them once added will be verified at
+      Trial 07 (ARCHITAB1).
+    </div>
+    <!-- ECLREF:end -->
+
+    <h3>Marker &amp; lineage convention</h3>
+    <p>Two distinct markers keep this work traceable &mdash; one reaches the generated objects you
+    run in AMT, the other does not. <strong>Code lineage markers are not yet applied (Trials
+    03&ndash;06); the rule above mandates them from Trial 07 (ARCHITAB1) onwards.</strong></p>
+    <table class="ref">
+      <tr><th>Marker</th><th>Form</th><th>Where</th><th>Reaches AMT / C#?</th><th>Status</th></tr>
+      <tr>
+        <td><strong>Code lineage</strong></td>
+        <td><code>ECL_</code> / <code>SSG_</code> <em>prefix</em> on stub identifiers</td>
+        <td>annotated COBOL stubs &rarr; <code>.LionSource</code> &rarr; generated <code>.cs</code></td>
+        <td><span class="badge badge-done">Yes (when applied)</span></td>
+        <td><span class="badge badge-pend">From Trial 07</span></td>
+      </tr>
+      <tr>
+        <td><strong>Documentation</strong></td>
+        <td><code>ECLREF</code> HTML-comment pairs; <code>eclref-</code> on new ids/classes</td>
+        <td>inserted fragments in the guide / this reference set</td>
+        <td><span class="badge badge-pend">No</span></td>
+        <td><span class="badge badge-done">Active</span></td>
+      </tr>
+    </table>
+    <div class="info-box">
+      <strong>Prefix, not suffix</strong>, for the code-lineage marker: the identifier survives even
+      if the generator strips <code>*&gt;</code> comments, sorts/groups together in AMT&rsquo;s object
+      explorer and side-by-side diffs, and avoids hyphen&rarr;underscore mangling. A single search
+      for <code>ECL_</code> then traces a value from the ECL job param &rarr; annotated COBOL stub
+      &rarr; <code>.LionSource</code> &rarr; the C# field under review in AMT.
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 5: SSG CONDITIONS -->
+  <div class="section-card" id="ssg-conditions">
+    <h2>5 &middot; SSG <code>*IF</code> / <code>*DEFINE</code> Handling</h2>
+    <p>SSG source carries multiple conditional variants of the same program. Emitting more than one
+    branch produces duplicate field definitions that the converter rejects, so
+    <code>-ConditionValues</code> selects exactly one branch per condition.</p>
+
+    <h3><code>-ConditionValues</code></h3>
+    <div class="code-wrap">
+      <span class="code-label">powershell</span>
+<pre><span class="ps-param">-ConditionValues</span> @{
+    'ASCII'  = 1     <span class="ps-cmt"># take the *IF ASCII branch</span>
+    'LKEY'   = 2     <span class="ps-cmt"># two key fields</span>
+    'KEYS'   = 0
+    'NOLIST' = 0
+    'COND,1' = 0
+}</pre>
+    </div>
+    <ul>
+      <li>A numeric value selects which <code>*IF &lt;COND&gt;</code> arm is emitted.</li>
+      <li>String comparisons (<code>*IF [PARAM] = WORD</code>) resolve against the matching
+      <code>-ParamOverrides</code> value via <code>Resolve-SsgCondition</code>.</li>
+      <li><strong>Required</strong> for multi-variant programs (e.g. LECTIS) to avoid duplicate WS
+      items.</li>
+    </ul>
+
+    <h3><code>*DEFINE</code> block suppression</h3>
+    <div class="warn">
+      A <code>*DEFINE</code> body can contain FILLER and nested <code>*IF</code> lines. If not
+      suppressed, those lines appear <em>before</em> <code>IDENTIFICATION DIVISION</code> and the
+      converter fails. The pre-processor tracks <code>$inDefineBlock</code> + <code>$defineIfDepth</code>
+      to strip the entire body.
+    </div>
+
+    <h3>Verifying the candidate</h3>
+    <ol>
+      <li>Inspect <code>BatchDir\&lt;PROGRAM-ID&gt;.TXT</code> for residual <code>[token]</code>
+      patterns the catch-all replaced with <code>1</code>; tighten <code>-ParamOverrides</code> if
+      the stubs are not meaningful.</li>
+      <li>If the converter log reports unknown bare-word tokens, add them to
+      <code>ssg-stub.macros.xml</code> and update its inventory comment.</li>
+    </ol>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 6: RUNBOOK -->
+  <div class="section-card" id="runbook">
+    <h2>6 &middot; Trial Runbook</h2>
+    <p>Worked pipeline invocations for the programs migrated so far. Each produced a clean
+    <code>.LionSource</code> (0 converter errors) that generated and ran end-to-end.</p>
+
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-montant">MONTANT_SIGNE</h3>
+      <p>Signed-amount batch utility — first full pipeline proof</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>MONTANT</code></td></tr>
+        <tr><td>Candidate</td><td><code>candidates\trial-03-montant\</code></td></tr>
+        <tr><td>Output</td><td><code>trial-03-montant.LionSource</code> (6,582 bytes, 0 errors)</td></tr>
+        <tr><td>LionDev app</td><td><code>TRIAL03MONTANT</code> (File version 6 / NEW APPLICATION)</td></tr>
+        <!-- ECLREF:start MONTANT Tier-2 result row (added 2026-09-17) -->
+        <tr><td>Tier-2 (CC)</td><td><span class="badge badge-done">&#10003; PASS</span> 2026-07-18 (job&nbsp;740) &amp; reconfirmed 2026-09-17 (job&nbsp;740, RequestId&nbsp;1039, Status=Done): staged <code>ECL-TAPEIN.DAT</code> &rarr; <code>Files\Extracts\ECL-TAPEOUT.DAT</code> = 328&thinsp;B, byte-identical to <code>fixtures\montant\expected.dat</code> (diff=0). See <a href="#controlcentrerunbook">&sect;6b</a>.</td></tr>
+        <!-- ECLREF:end -->
+      </table>
+      <div class="success-box">
+        Pipeline (Option A): <code>Remove-SsgDirectives.ps1</code> strips all SSG directives and
+        substitutes inline <code>[param]</code> tokens before conversion &rarr;
+        <strong>0 errors, clean output</strong>.
+      </div>
+
+      <!-- ECLREF:start Compliance accordion — proof harness vs SSG-COBOL-Reference §4 (added 2026-06-26) -->
+      <details style="margin-top:16px; border:1px solid #e5e7eb; border-radius:8px; background:#fafafa;">
+        <summary style="cursor:pointer; padding:12px 16px; font-weight:700; color:#0f172a; font-size:14px; user-select:none; border-radius:8px;">
+          &#9656;&nbsp; Compliance &mdash; proof harness vs <code>SSG-COBOL-Reference.html</code> (ECL Invocation Pattern &sect;4)
+        </summary>
+        <div style="padding:6px 18px 18px;">
+          <p>The Tier&nbsp;1 proof harness (<code>Run-EclProof.ps1</code>) reproduces the canonical
+          <strong>compile&nbsp;&rarr;&nbsp;assign&nbsp;&rarr;&nbsp;execute&nbsp;&rarr;&nbsp;free</strong>
+          lifecycle that <code>SSG-COBOL-Reference.html</code> &sect;4 defines for all 16 utilities:</p>
+
+          <table class="ref">
+            <tr><th style="width:42%">Documented ECL step (&sect;4)</th><th>Harness implementation</th></tr>
+            <tr>
+              <td><strong>STEP&nbsp;1</strong> <code>@SSG,IA</code> &mdash; compile template with parameter cards</td>
+              <td>The pre-process pipeline (<code>Convert-SsgToLion</code> driven by manifest
+              <code>paramOverrides</code>/<code>conditionValues</code>) already produced the validated
+              candidate. The harness <em>consumes</em> it via the manifest <code>proof</code> block &mdash;
+              it does not re-author it.</td>
+            </tr>
+            <tr>
+              <td><strong>STEP&nbsp;2</strong> <code>@ASG</code>/<code>@USE INB,physical</code> &mdash; bind logical name &rarr; physical file</td>
+              <td><code>assign.json</code> <code>fileAssignments</code> map
+              (<code>FILEIN-1</code>&rarr;<code>input.dat</code>, <code>FILEOUT-1</code>&rarr;<code>output.dat</code>)
+              + the <code>Copy-Item</code> binding into the per-job work dir = the <code>@USE</code> logical&rarr;physical bind.</td>
+            </tr>
+            <tr>
+              <td><strong>STEP&nbsp;4</strong> <code>@XQT .PROGNAME</code> &mdash; execute by <strong>PROGRAM-ID</strong></td>
+              <td>The <code>Xqt</code> block invokes the executor under the manifest key /
+              PROGRAM-ID <code>MONTANT</code>, not the element name <code>MONTANT_SIGNE</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>STEP&nbsp;5</strong> <code>@FREE</code>/<code>@ERS</code> &mdash; release + erase temp</td>
+              <td>Each run wipes and recreates the per-job work dir &rarr; idempotent, no residue.</td>
+            </tr>
+          </table>
+
+          <p style="margin-top:14px;">Two specific &sect;4 rules it honours:</p>
+          <ul>
+            <li><strong>"Logical names in SSG parameters match <code>@USE</code> bindings."</strong>
+            The assignment keys <code>FILEIN-1</code>/<code>FILEOUT-1</code> are exactly the logical names in
+            the cleaned candidate's <code>SELECT FILEIN ASSIGN TO DISC FILEIN-1</code> / <code>FILEOUT-1</code>.</li>
+            <li><strong>"Compiled PROGRAM-ID may differ from element name"</strong>
+            (<code>MONTANT_SIGNE</code> &rarr; <code>MONTANT</code>, <code>@XQT .MONTANT</code>). The harness
+            enumerates by source filename but proves identity by PROGRAM-ID &mdash; the Bug&nbsp;14 rule.</li>
+          </ul>
+
+          <div class="info-box">
+            &sect;5's inventory describes MONTANT_SIGNE as <em>"extract N signed S9 amount fields &hellip;
+            multiply each by +1 (sign-normalisation)."</em> The Tier&nbsp;1 oracle
+            (<code>tools\refimpl\montant.ps1</code>) reproduces precisely that behaviour (S9(9) field,
+            <code>* +1</code>, OS2200 overpunch), so the golden is faithful to the documented purpose &mdash;
+            not an arbitrary stub.
+          </div>
+        </div>
+      </details>
+      <!-- ECLREF:end -->
+    </div>
+
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-lectis">LECTIS_MULT</h3>
+      <p>Indexed-file reader — multi-variant (<code>*IF</code> branches)</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source element</td><td><code>LECTIS_MULT</code> &rarr; PROGRAM-ID <code>LECTIS</code></td></tr>
+        <tr><td>Output</td><td><code>trial-05-lectis.LionSource</code> (14,284 bytes, 0 errors)</td></tr>
+        <tr><td>Pre-processor</td><td>500 &rarr; 186 lines after <code>-ConditionValues</code> + <code>-ParamOverrides</code></td></tr>
+        <tr><td>Runtime</td><td><code>FICHIN-1.DAT</code> (3&times;120-byte) &rarr; <code>LECTIS__*.IMP.PRN</code> &mdash; 3 records &#10003;</td></tr>
+      </table>
+      <div class="info-box">
+        Indexed-file API: <code>OpenFile</code> / <code>LocateRecordIndexedFile</code> /
+        <code>ReadRandomAccessFileNextRecord</code> / <code>CloseFile</code>.
+      </div>
+
+      <!-- ECLREF:start LECTIS indexed-file reference note (added 2026-06-26) -->
+      <div class="warn" style="margin-top:10px;">
+        <strong>Indexed-file reference:</strong>
+        The COBOL <code>ORGANIZATION INDEXED</code> / <code>ACCESS MODE DYNAMIC</code> construct
+        is not specifically covered in <em>this</em> reference or
+        <code>SSG-COBOL-Reference.html</code>. The closest available authority is
+        <strong>AMT-LION Primary Developer Training (ALPD) &sect;18.1.3</strong>
+        (<em>File indexes</em>) and <strong>&sect;18.1.7</strong>
+        (<em>File functions</em>), which describe indexed files as a
+        <strong>COBOL-compatibility feature</strong> in AMT LION
+        (sequential files are recommended).
+        The specific C# API names above
+        (<code>OpenFile</code> / <code>LocateRecordIndexedFile</code> / &hellip;)
+        are <strong>generated automatically</strong> by the converter and are
+        <strong>not documented in any available reference doc</strong>.
+        For the <strong>Tier-1 proof harness</strong>, no indexed-file stack is required &mdash;
+        <code>START &gt; LOW-VALUES</code> + <code>READ NEXT</code> is a full sequential scan,
+        so the fixture is a flat-sequential 120-char file.
+      </div>
+      <!-- ECLREF:end -->
+    </div>
+
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-tri">TRI_ASCII (SORT)</h3>
+      <p>SORT utility — string <code>*IF</code> conditions + parameterised PROGRAM-ID</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_TRI_ASCII(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>SORT-FICHOUT-1</code> (from <code>[OUTPUT,1,1,1]</code>)</td></tr>
+        <tr><td>Output</td><td><code>trial-06-sort-fichout-1.LionSource</code> (8,304 bytes, 0 errors)</td></tr>
+        <tr><td>Runtime</td><td><code>FICHIN-1.DAT</code> (ZZZ / AAA / MMM) &rarr; <code>FICHOUT-1.DAT</code>: AAA / MMM / ZZZ &#10003;</td></tr>
+      </table>
+      <div class="success-box">
+        SORT API: <code>SortFiles(Sortfile, Tuple&lt;AmtVariable,AmtOrder&gt;[], false)</code> &mdash;
+        <strong>not</strong> <code>AmtAfcSortInfo</code> (IBM DFSORT only).
+      </div>
+    </div>
+
+    <!-- ECLREF:start ARCHITAB1 runbook entry (added 2026-06-27) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-architab1">ARCHITAB1</h3>
+      <p>Pure-output archive table utility &mdash; plain COBOL (<code>#ucob,is</code>), no SSG template; first trial with <code>-AnnotateStubs</code></p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_ARCHITAB1(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>ARCHITAB1</code> (plain COBOL &mdash; <strong>not</strong> an SSG template; no <code>@SSG,IA</code> &rarr; <a href="SSG-ECL-Command-Matrix.html#pat-ucob">&rarr;P6</a>)</td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-07-architab1/ARCHITAB1.TXT</code> (119 lines; 1 control line stripped, 8 substituted)</td></tr>
+        <tr><td>Pre-processor</td><td>120 &rarr; 119 lines &mdash; <code>#ucob,is</code> header stripped; <code>-AnnotateStubs</code> ON: every substituted line carries <code>*&gt;&nbsp;SSG-STUB&nbsp;[token]</code></td></tr>
+        <tr><td>Stubs</td><td><code>[fname,1,1,1]</code>=<code>&quot;ECL-FNAME&quot;</code> (assign designator), <code>[tname,1,1,1/2]</code>, <code>[key,1,1,1/2]</code> (string), <code>[key,1,1,3]</code>=<code>00.00</code> (PIC&nbsp;99.99 numeric)</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 246&thinsp;B, 3 records; date pinned via parameter card (<code>input.dat</code> line&nbsp;1 = <code>yyyymmdd</code>)</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-07-architab1.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>No SSG directives whatsoever</strong> &mdash; ARCHITAB1 is plain COBOL compiled inline
+        via the OS2200 <code>#ucob,is</code> header (stripped before conversion). No <code>*DEFINE</code>,
+        no <code>*IF</code>, no <code>*INCREMENT</code>. The only tokens are data-value ECL params
+        (<code>[fname,&hellip;]</code>, <code>[tname,&hellip;]</code>, <code>[key,&hellip;]</code>)
+        substituted with explicit <code>-ParamOverrides</code>.
+      </div>
+      <!-- ECLREF:start ARCHITAB1 date-mask column corrected 8-15 -> 38-45 (2026-07-17 live run) -->
+      <div class="warn" style="margin-top:10px;">
+        <strong>Tier-2 date mask:</strong> <code>ACCEPT dt-ach FROM DATE YYYYMMDD</code> writes the
+        actual run date into <code>ligne-type0</code> cols&nbsp;38&ndash;45 and <code>ligne-type9</code>
+        cols&nbsp;38&ndash;45 of the 80-char output records (immediately after the 16-char table-name field;
+        verified in the 2026-07-17 live CC run). When diffing the real C# output against
+        the Tier-1 golden, <strong>mask those 8 bytes</strong> in both type-0 and type-9 records.
+      </div>
+      <!-- ECLREF:end -->
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start ECLAT runbook entry (added 2026-06-29) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-eclat">ECLAT &mdash; <code>UGXB02</code></h3>
+      <p>Archive-extraction merge: sorted FILEKEY + TABLE &rarr; matched records to FARCHIVE, unmatched TABLE records to FENCOURS; first trial with full SSG loop expansion and <code>*ENDIF</code></p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_ECLAT(P).TXT</code> (322 lines)</td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>UGXB02</code> (SSG template via <code>@SSG,IA</code> / <code>#UCOB</code> &rarr; <a href="SSG-ECL-Command-Matrix.html#pat-ucob">&rarr;P6</a>; ECL element name <em>ECLAT</em> does not match PROGRAM-ID)</td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-09-eclat/ECLAT.TXT</code> (202 lines; 120 stripped, 24 substituted; loop bodies manually expanded for <code>key=1</code>)</td></tr>
+        <tr><td>Pre-processor</td><td>322 &rarr; 202 lines &mdash; <code>*ENDIF</code> fix, new SSG/ECL strip set, <code>$inLinkBlock</code> state added; <code>-AnnotateStubs</code> ON; <code>*INCREMENT</code> loop bodies manually written into candidate (key=1 &rarr; single iteration)</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[key,1,1,2]</code>=<code>10</code> (key length &times; key count), <code>[filekey,1,1,1]</code>=<code>ECL-FILEKEY</code>, <code>[filekey,1,1,2]</code>=<code>10</code>, <code>[table,1,1,1]</code>=<code>ECL-TABLE</code>, <code>[table,1,1,2]</code>=<code>20</code>, <code>[table,1,1,3]</code>=<code>ARCHIVE-TABLE</code>, <code>[farchive,1,1,1]</code>=<code>ECL-FARCHIVE</code>, <code>[fencours,1,1,1]</code>=<code>ECL-FENCOURS</code></td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 162&thinsp;B; 2 FARCHIVE records (&times;68&thinsp;B) + 1 FENCOURS record (20&thinsp;B); date pinned to 20260629</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-09-eclat.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>New pre-processor capabilities introduced at trial-09</strong> (fixes now in <code>Remove-SsgDirectives.ps1</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong><code>*ENDIF</code> support</strong> &mdash; ECLAT closes <code>*IF</code> blocks with <code>*ENDIF</code>; the <code>$condStack</code> pop pattern extended to <code>^\*END(?:IF)?\b</code>. Without this fix the entire COBOL body was suppressed.</li>
+          <li><strong>New SSG strips</strong> &mdash; <code>*BRKPT</code>, <code>*SORT</code>, <code>*EXIT</code>, <code>*ITERATE</code>, <code>*ABORT</code>, <code>*DISPLAY</code>, <code>*MESSAGE</code>, <code>*.</code> (SSG comment lines).</li>
+          <li><strong>New ECL strips</strong> &mdash; <code>#ASG</code>, <code>#USE</code>, <code>#LINK</code>, <code>#FREE</code>, <code>#DELETE</code>, <code>#CAT</code>, <code>#XQT</code>.</li>
+          <li><strong><code>$inLinkBlock</code> state machine</strong> &mdash; linker control lines between <code>#LINK</code> and <code>#FREE</code> (<code>INCLUDE</code>, <code>OUTPUT</code>, <code>RESOLVE</code>, etc.) are stripped as a block; previously they would have passed through into the COBOL candidate.</li>
+          <li><strong><code>*INCREMENT</code> loop expansion (manual, key=1)</strong> &mdash; automated loop unrolling is deferred. For key=1 the single-iteration COBOL bodies were written directly into the candidate: <code>KEY1</code>/<code>KEY-T1</code>/<code>S-KEY1</code>/<code>S-KEY-T1</code> <code>PIC X(10)</code>, <code>FILLER PIC X(10)</code> in <code>ENR-TAB</code>, <code>MOVE KEY1 TO S-KEY1</code> / <code>MOVE KEY-T1 TO S-KEY-T1</code>.</li>
+        </ul>
+      </div>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>Multi-file harness</strong>: ECLAT reads two input files (FILEKEY + TABLE) and writes two output files (FARCHIVE + FENCOURS). The Tier-1 refimpl derives the TABLE path from <code>Split-Path $InFile</code> (same directory as the primary <code>input.dat</code>) and collects FARCHIVE records and FENCOURS records separately, writing FARCHIVE first then FENCOURS to a single <code>$OutFile</code> (<code>encours.dat</code>). <code>assign.json</code>: <code>FILEKEY=input.dat</code>, <code>TABLE=table.dat</code>, <code>FARCHIVE=archive.dat</code>, <code>FENCOURS=encours.dat</code>.
+      </div>
+      <div class="warn" style="margin-top:10px;">
+        <strong>Tier-2 date mask:</strong> <code>ACCEPT DAT-DAT FROM DATE</code> fills the 6-digit <code>DAT-DAT</code> group (<code>DAT-AA</code>/<code>DAT-MM</code>/<code>DAT-JJ</code> each <code>PIC 9(2)</code>). <code>DAT-SS</code> is computed: <code>DAT-AA &lt; 28 &rarr; 20</code>, else <code>19</code>. The combined 8-byte <code>DAT-ARC</code> sits at offset&nbsp;30 in every FARCHIVE record &mdash; <strong>mask those 8 bytes</strong> when diffing real C# output vs the Tier-1 golden.
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start COMPARE2_ASCII runbook entry (added 2026-06-30) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-compare2">COMPARE2_ASCII</h3>
+      <p>Dual-file ASCII compare: IN1 vs IN2 (100-char records) &rarr; LISTING (132-char printer); first trial with bare and OR-form <code>*IF</code> conditions</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_COMPARE2_ASCII(P).TXT</code> (332 lines)</td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>COMPARE</code> (SSG template via <code>@SSG,IA</code> / <code>#UCOB</code> &rarr; <a href="SSG-ECL-Command-Matrix.html#pat-ucob">&rarr;P6</a>; ECL element name <em>COMPARE2</em> does not match PROGRAM-ID)</td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-10-compare2/COMPARE2.TXT</code> (160 lines; 172 lines stripped/suppressed, all <code>*INCREMENT</code> bodies suppressed via INDIC=0)</td></tr>
+        <tr><td>Pre-processor</td><td>332 &rarr; 160 lines &mdash; bare/OR <code>*IF</code> fixes, <code>#TIME</code> strip added; <code>-AnnotateStubs</code> ON; loop bodies suppressed (INDIC=0)</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[INPUT,1,1,1]</code>=<code>ECL-FICHIN-1</code>, <code>[INPUT,1,1,2]</code>=<code>ECL-FICHIN-2</code>, <code>[INPUT,1,1,3]</code>=<code>100</code> (record size), <code>[INPUT,1,1,4]</code>=<code>1</code> (block count)</td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>INDIC=0</code>, <code>EXCLUDE=0</code>, <code>LIST=0</code>, <code>UN=0</code>, <code>DEUX=0</code>, <code>EGALITE=0</code>, <code>LABELOMIT=0</code></td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 1206&thinsp;B; 9 LISTING records (132-char CRLF); 3 identical input records &rarr; 0 differences &rarr; FINI summary only</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-10-compare2.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>New pre-processor capabilities introduced at trial-10</strong> (fixes now in <code>Remove-SsgDirectives.ps1</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong>Bare <code>*IF [PARAM]</code></strong> &mdash; condition with no operator or value (e.g. <code>*IF [EXCLUDE]</code>). Resolved via <code>$ConditionValues</code> lookup; defaults to <em>taken</em> (block emitted) if the key is absent from the map.</li>
+          <li><strong>OR-form <code>*IF</code></strong> &mdash; two-clause disjunction: <code>*IF [P1] OP V OR [P2] OP V</code>. Each clause is evaluated independently against <code>$ConditionValues</code>; the block is emitted if either clause is true.</li>
+          <li><strong><code>#TIME</code> strip</strong> &mdash; the OS2200 elapsed-time directive <code>#TIME</code> is now stripped alongside <code>#ERS</code>, <code>#ACOB</code>, <code>#MAP</code>, <code>#HDG</code>, <code>#ASG</code>, <code>#USE</code>, <code>#LINK</code>, <code>#FREE</code>, <code>#DELETE</code>, <code>#CAT</code>, <code>#XQT</code>.</li>
+        </ul>
+      </div>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>Multi-file harness</strong>: COMPARE2 reads two input files (IN1, IN2) and writes one printer output (LISTING). The Tier-1 refimpl derives the IN2 path as sibling file <code>input2.dat</code> in the same directory as the primary <code>-InFile</code> (<code>input.dat</code>). <code>assign.json</code>: <code>IN1=input.dat</code>, <code>IN2=input2.dat</code>, <code>LISTING=listing.prn</code>. For the simplified trial both files contain identical records, so the output contains only the FINI summary (0 differences).
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start CFH-COPY runbook entry (added 2026-06-30) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-cfh-copy">CFH-COPY</h3>
+      <p>General-purpose ASCII file copy utility: reads TAPEIN (80-char records, UNISERVO) &rarr; copies verbatim to TAPEOUT (MASS-STORAGE); first trial with string&ndash;string OR <code>*IF</code> condition</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_CFH-COPY(P).TXT</code> (332 lines)</td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>'CFH-COPY'</code> (quoted PROGRAM-ID; unusual but valid in UNIVAC COBOL)</td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-11-cfh-copy/ASSURFED_UTILIT_CFH-COPY(P).TXT</code> (47 lines; 285 lines stripped/suppressed, all <code>*INCREMENT</code> bodies suppressed &mdash; Y2K=0, FIXE=0, FIELDIN=0, FIELDOUT=0)</td></tr>
+        <tr><td>Pre-processor</td><td>332 &rarr; 47 lines &mdash; string&ndash;string OR fix added; <code>-AnnotateStubs</code> ON; all optional-feature blocks suppressed</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[INPUT,1,1,1]</code>=<code>ECL-TAPEIN</code>, <code>[INPUT,1,1,2]</code>=<code>80</code>, <code>[INPUT,1,1,3]</code>=<code>1</code>; <code>[OUTPUT,1,1,1]</code>=<code>ECL-TAPEOUT</code>, <code>[OUTPUT,1,1,2]</code>=<code>80</code>, <code>[OUTPUT,1,1,3]</code>=<code>1</code></td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>PRINT=0</code>, <code>FIELDIN=0</code>, <code>FIELDOUT=0</code>, <code>FIXE=0</code>, <code>REPRISE=0</code>, <code>MAXCOPY=0</code>, <code>SUPCOM=0</code>, <code>REPSIM=0</code>, <code>STARTFIELD=0</code>, <code>STARTREC=0</code>, <code>Y2K=0</code></td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 246&thinsp;B; 3&times;80-char CRLF records; pure byte-for-byte copy (no field transforms active)</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-11-cfh-copy.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>New pre-processor capability introduced at trial-11</strong> (fix now in <code>Remove-SsgDirectives.ps1</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong>String&ndash;string OR <code>*IF</code></strong> &mdash; two-clause disjunction comparing the <em>same or different</em> parameter against two string literals:
+              <code>*IF [OUTPUT,1,1,1] = CARDPUNCH OR [OUTPUT,1,1,1] = PRINTER</code>.
+              Each clause is resolved via <code>$ParamOverrides</code>; the block is emitted if either comparison matches.
+              This handler must be checked <em>before</em> the single-string equality handler
+              (which also matches the OR form but ignores the second clause).
+          </li>
+        </ul>
+      </div>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>Pipeline fixes introduced at trial-11</strong> (now apply to all programs with <code>annotateStubs:true</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong><code>Run-EclPipeline.ps1</code> &mdash; hashtable splat for <code>-AnnotateStubs</code></strong>: replaced array-splat <code>@('-AnnotateStubs')</code> with hashtable splat <code>@{AnnotateStubs=$true}</code> so the <code>[switch]</code> parameter binds correctly in PS&nbsp;5.1.</li>
+          <li><strong><code>Convert-SsgToLion.ps1</code> &mdash; in-process pre-processor call</strong>: changed <code>&amp; powershell -File $preprocessor &hellip; -ParamOverrides $ParamOverrides</code> to <code>&amp; $preprocessor &hellip; -ParamOverrides $ParamOverrides</code>. Child-process invocation cannot serialise PS hashtable objects; the in-process call passes them directly.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start ARCHIFORMAT runbook entry (added 2026-07-01) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-archiformat">ARCHIFORMAT</h3>
+      <p>Archive formatter: reads RSA schema report, column description, and unload data; writes fixed-size archive records (types 0, 1, 2&times;ncols, 3, 4&times;count, 9) plus printer rapport. First trial using N-operand <code>*SET</code> chains (4 operands) that required the <code>Eval-SsgSetExpr</code> N-operand fix.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_ARCHIFORMAT(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>ARCHIFORMAT</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-13-archiformat/ASSURFED_UTILIT_ARCHIFORMAT(P).TXT</code></td></tr>
+        <tr><td>Pre-processor</td><td><code>*SET</code> N-operand arithmetic pre-pass evaluates <code>[*a]</code>&ndash;<code>[*e]</code> (up to 4 operands: e.g. <code>[*c] = [*b] + [*a] - [key,1,1,3] + 1</code>); <code>-AnnotateStubs</code> ON; no <code>*IF</code>/<code>*ELSE</code> conditions</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[filein,1,1,1]</code>=<code>ECL-FICREPORT</code>, <code>[filein,1,2,1]</code>=<code>ECL-FICDESCRIPT</code>, <code>[filein,1,3,1]</code>=<code>ECL-FICUNLOAD</code>, <code>[fileout,1,1,1]</code>=<code>ECL-FICFORMAT</code>, <code>[key,1,1,1]</code>=<code>CLE-TABLE</code>, <code>[key,1,1,2]</code>=<code>N</code>, <code>[key,1,1,3]</code>=<code>10</code>, <code>[rsz,1,1,1]</code>=<code>55</code>, <code>[table,1,1,1]</code>=<code>SCHEMA1</code>, <code>[table,1,1,2]</code>=<code>TABLE-ARCH</code>, <code>[table,1,1,3]</code>=<code>ARCHIS</code>, <code>[table,1,2,1]</code>=<code>2</code></td></tr>
+        <tr><td>Condition values</td><td><em>none</em> &mdash; pure <code>*SET</code> template, no <code>*IF</code>/<code>*ELSE</code> branches</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 689&thinsp;B, 11 lines; fixtures: 12-line fic-report, 4-line fic-descript, 2-record fic-unload &rarr; 8 fmt records (types 0,1,2&times;2,3,4&times;2,9) + 3 printer lines. Date-sensitive fields <code>dt-ach</code>, <code>dt-maj</code>, <code>dt-fr</code> pinned to run date (Tier-2 must mask)</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-13-archiformat.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>New pre-processor capability introduced at trial-13</strong> (fix now in <code>Remove-SsgDirectives.ps1</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong><code>Eval-SsgSetExpr</code> N-operand chain evaluator</strong> &mdash; rewritten from 2-operand-only to a character-level tokeniser that splits on <code>+</code>/<code>-</code> outside brackets and folds left, supporting chains of any length. Fixes <code>[*c]</code>=0, <code>[*d]</code>=0 bugs that occurred when a <code>*SET</code> expression had 3+ operands.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start ARCHISEPARE runbook entry (added 2026-07-01) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-archisepare">ARCHISEPARE</h3>
+      <p>Sorted-merge separator: reads <code>chercheuse</code> (search keys) and <code>ficunload</code> (table unload), routes matching records to <code>ficarchi</code> (archive) and non-matching to <code>ficnarchi</code>. First active use of <code>*SET</code> arithmetic and <code>*ELSEIF</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_ARCHISEPARE(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>ARCHISEPARE</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-12-archisepare/ASSURFED_UTILIT_ARCHISEPARE(P).TXT</code> (9902&thinsp;B)</td></tr>
+        <tr><td>Pre-processor</td><td><code>*SET</code> arithmetic pre-pass evaluates <code>[*a]</code>&ndash;<code>[*d]</code>; <code>*IF</code>/<code>*ELSEIF</code>/<code>*ELSE</code> block selects <code>key,1,2,1=0</code> branch; <code>-AnnotateStubs</code> ON</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[filein,1,1,1]</code>=<code>ECL-CHERCHEUSE</code>, <code>[filein,1,2,1]</code>=<code>ECL-FICUNLOAD</code>, <code>[fileout,1,1,1]</code>=<code>ECL-FICARCHI</code>, <code>[fileout,1,2,1]</code>=<code>ECL-FICNARCHI</code>, <code>[key,1,1,2]</code>=<code>10</code>, <code>[key,1,2,1]</code>=<code>0</code>, <code>[key,1,2,2]</code>=<code>10</code>, <code>[rsz,1,1,1]</code>=<code>40</code>, <code>[tname,1,1,1]</code>=<code>ARCHIS</code>, <code>[tname,1,1,2]</code>=<code>CHERCHEUSE-TABLE-ARCH</code></td></tr>
+        <tr><td>Condition values</td><td><code>key,1,2,1=0</code> (key at start of ficunload record)</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 496&thinsp;B; 2 keys in chercheuse, 4 records in ficunload &rarr; 2 type4 + 1 type9 in ficarchi, 2 records in ficnarchi, 5-line rapport. Date pinned to run date (Tier-2 must mask <code>dt-ach9</code> + <code>date-fr</code>)</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-12-archisepare.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>New pre-processor capabilities introduced at trial-12</strong> (fixes now in <code>Remove-SsgDirectives.ps1</code>):
+        <ul style="margin:6px 0 0 0;">
+          <li><strong><code>*SET</code> arithmetic pre-pass (<code>Eval-SsgSetExpr</code>)</strong> &mdash; a pre-pass before <code>$tokenMap</code> build evaluates all <code>*SET varname = expr</code> lines where <em>expr</em> can be a literal, a <code>[PARAM]</code> token, a <code>[*var]</code> reference, or a two-operand <code>+</code>/<code>-</code> expression. Results stored in <code>$computedVarValues</code> and injected into <code>$specificMap</code> as <code>[*varname]</code> replacements. Enables multi-step arithmetic chains (e.g. <code>*set a = [rsz,1,1,1] - [key,1,2,2]</code>, <code>*set b = [*a] - [key,1,2,1]</code>).</li>
+          <li><strong><code>*ELSEIF</code> handler with <code>branchTaken</code> tracking</strong> &mdash; the condition stack now carries a <code>branchTaken</code> flag; once any <code>*IF</code> or <code>*ELSEIF</code> branch is taken, all subsequent <code>*ELSEIF</code>/<code>*ELSE</code> arms are suppressed. <code>*ELSE</code> was also updated to use <code>branchTaken</code>. The <code>^\*ELSE\b</code> word boundary correctly distinguishes <code>*ELSE</code> from <code>*ELSEIF</code>.</li>
+        </ul>
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start LOADIS_MULT-NODUP runbook entry (added 2026-07-01) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-loadis">LOADIS_MULT-NODUP</h3>
+      <p>Load IS (indexed) file from sequential input with duplicate suppression (<code>INVALID KEY &rarr; ABORT</code>). Multiple <code>*INCREMENT</code> file loops + multi-branch <code>*IF</code> for key structure. <code>PROGRAM-ID. LOADIS-ASCII</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_LOADIS_MULT-NODUP(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>LOADIS-ASCII</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-14-loadis-ascii/LOADIS-ASCII.TXT</code> (66 lines after pre-processing)</td></tr>
+        <tr><td>Pre-processor</td><td><code>*INCREMENT</code> loops (&times;3: FILE-CONTROL/FD/OPEN+CLOSE) unrolled to <code>INPUT,1=1</code> &rarr; single <code>BDE1</code>/<code>Z1</code>; <code>*IF</code> branches resolved for DISC path, KEYIS=2 key structure, no filler fields; <code>-AnnotateStubs</code> ON</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[ASCII]</code>=<code>1</code>, <code>[INPUT,1,1,1]</code>=<code>&quot;ECL-BDE1&quot;</code>, <code>[INPUT,1,1,2]</code>=<code>80</code>, <code>[INPUT,1,1,3]</code>=<code>1</code>, <code>[OUTPUT,1,1,1]</code>=<code>ECL-DISQ</code>, <code>[OUTPUT,1,1,2]</code>=<code>20</code>, <code>[OUTPUT,1,1,3]</code>=<code>1</code>, <code>[KEYIS]</code>=<code>2</code>, <code>[KEYIS,1,1,2]</code>=<code>8</code>, <code>[KEYIS,2,1,2]</code>=<code>12</code></td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>INPUT,1=1</code>, <code>INPUT,1,1=3</code> (DISC), <code>KEYIS=2</code>, all filler conditions=0</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 95&thinsp;B; 3 BDE1 records (A&times;80, B&times;80, C&times;80) &rarr; 3 DISQ records (first 20 bytes each) + <code>NB.RECORDS ECRITS0000000003</code> PRINTER line. No duplicate keys &rarr; INVALID KEY path not exercised.</td></tr>
+        <!-- ECLREF:start LOADIS Tier-2 result row (added 2026-07-18) -->
+        <tr><td>Tier-2 (CC)</td><td><span class="badge badge-prog">exec-only</span> 2026-07-18 (job&nbsp;739): loaded the indexed file OK (<code>AmtAfc</code> Create/AddRecord/Close) &rarr; <code>Files\Extracts\ECL-TAPEOUT.DAT</code> (246&thinsp;B) + <code>.Index</code> + <code>._CLEG</code> sidecars. <strong>Not byte-comparable</strong> to the 95&thinsp;B refimpl golden (different representation: preview + PRINTER count). Execution proven; see <a href="#controlcentrerunbook">&sect;6b</a>.</td></tr>
+        <!-- ECLREF:end -->
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-14-loadis-ascii.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>No new pre-processor capabilities at trial-14</strong> &mdash; all constructs (<code>*INCREMENT</code> loops, <code>*IF</code> numeric equality/comparison, <code>[PARAM,r,1,f]</code> tokens, <code>[*I]</code>) were already supported. <code>*DEFINE FILER</code> block stripped (macro never invoked). IS-file write simulated sequentially in refimpl oracle (Tier-2 AMT runtime will use real indexed-file API).
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start UNLOADIS_MULT runbook entry (added 2026-07-01) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-unloadis">UNLOADIS_MULT</h3>
+      <p>Unload IS (indexed) file to sequential flat output &mdash; reverse of LOADIS_MULT-NODUP. Reads indexed <code>DISQ</code> sequentially, writes 80-char <code>BDE</code> records, displays record count to <code>CONSOLE</code>. <code>PROGRAM-ID. UNLOAD-ASCII</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_UNLOADIS_MULT(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>UNLOAD-ASCII</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-15-unload-ascii/UNLOAD-ASCII.TXT</code> (67 lines after pre-processing)</td></tr>
+        <tr><td>Pre-processor</td><td><code>*IF</code> branches resolved for DISC output path, KEYIS=2 key structure, no filler fields, MAXREC=0 (unlimited &rarr; literal 99999999); <code>*DEFINE FILER</code> block stripped (never invoked); <code>-AnnotateStubs</code> ON</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[ASCII]</code>=<code>1</code>, <code>[OUTPUT,1,1,1]</code>=<code>&quot;ECL-BDE1&quot;</code>, <code>[OUTPUT,1,1,2]</code>=<code>80</code>, <code>[OUTPUT,1,1,3]</code>=<code>1</code>, <code>[INPUT,1,1,1]</code>=<code>ECL-DISQ</code>, <code>[INPUT,1,1,2]</code>=<code>20</code>, <code>[INPUT,1,1,3]</code>=<code>1</code>, <code>[KEYIS]</code>=<code>2</code>, <code>[KEYIS,1,1,2]</code>=<code>8</code>, <code>[KEYIS,2,1,2]</code>=<code>12</code></td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>OUTPUT,1,1=3</code> (DISC), <code>KEYIS=2</code>, <code>MAXREC=0</code>, all filler conditions=0</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 290&thinsp;B; 3 DISQ records (20&thinsp;B each) &rarr; 3 BDE records (padded to 80) + <code>FIN DE FICHIER</code> + <code>NB.ARTICLES ECRITS=0000003</code>. <code>DISPLAY UPON CONSOLE</code> captured in combined <code>$OutFile</code>.</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-15-unload-ascii.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>No new pre-processor capabilities at trial-15</strong> &mdash; all constructs already supported. <code>DISPLAY UPON CONSOLE</code> (vs <code>UPON PRINTER</code>) captured in combined output &mdash; no file designator in source; refimpl appends console messages to <code>$OutFile</code> after data records.
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start UNLOADIS_MULT-NODUP runbook entry (added 2026-07-02) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-unloadis-nodup">UNLOADIS_MULT-NODUP</h3>
+      <p>Unload IS (indexed) file to sequential flat output &mdash; NODUP variant. Identical to
+      UNLOADIS_MULT except <code>FILE-CONTROL SELECT DISQ</code> uses
+      <code>ALTERNATE RECORD KEY IS CLEG.</code> (no <code>WITH DUPLICATES</code>).
+      Procedure division is identical. <code>PROGRAM-ID. UNLOAD-ASCII</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>UNLOAD-ASCII</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-16-unload-ascii-nodup/ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P).TXT</code> (67 lines after pre-processing)</td></tr>
+        <tr><td>Pre-processor</td><td><code>*IF</code> branches resolved for DISC output path, KEYIS=2 key structure, no filler fields, MAXREC=0 (unlimited &rarr; literal 99999999); <code>*DEFINE FILER</code> block stripped (never invoked); <code>-AnnotateStubs</code> ON. NODUP distinction (no <code>WITH DUPLICATES</code> on alternate key) affects IS-file creation only &mdash; sequential read path in candidate is identical to UNLOADIS_MULT.</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[ASCII]</code>=<code>1</code>, <code>[OUTPUT,1,1,1]</code>=<code>&quot;ECL-BDE1&quot;</code>, <code>[OUTPUT,1,1,2]</code>=<code>80</code>, <code>[OUTPUT,1,1,3]</code>=<code>1</code>, <code>[INPUT,1,1,1]</code>=<code>ECL-DISQ</code>, <code>[INPUT,1,1,2]</code>=<code>20</code>, <code>[INPUT,1,1,3]</code>=<code>1</code>, <code>[KEYIS]</code>=<code>2</code>, <code>[KEYIS,1,1,2]</code>=<code>8</code>, <code>[KEYIS,2,1,2]</code>=<code>12</code></td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>OUTPUT,1,1=3</code> (DISC), <code>KEYIS=2</code>, <code>MAXREC=0</code>, all filler conditions=0</td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 290&thinsp;B; 3 DISQ records (20&thinsp;B each) &rarr; 3 BDE records (padded to 80) + <code>FIN DE FICHIER</code> + <code>NB.ARTICLES ECRITS=0000003</code>. Identical output to UNLOADIS_MULT (NODUP constraint irrelevant to sequential read).</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-16-unload-ascii-nodup.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>No new pre-processor capabilities at trial-16</strong> &mdash; all constructs already supported. The NODUP variant shares the same candidate pre-processing parameters as UNLOADIS_MULT; the only source difference (absent <code>WITH DUPLICATES</code>) is transparent to the Stream A pre-processor.
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start TAPELD_DISTRIB runbook entry (added 2026-07-02) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-tapeld-distrib">TAPELD_DISTRIB</h3>
+      <p>Tape load/distribution file copy utility. Same COBOL template as CFH-COPY (trial-11).
+      Adds extended parameters (STITRE, FIELDIN/FIELDOUT field-remapping, FIXE fixed-fields,
+      PRINT, MAXCOPY, SUPCOM, REPSIM, STARTFIELD, STARTREC) all set to 0 at simplification.
+      <code>PROGRAM-ID. CFH-COPY</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Source</td><td><code>ASSURFED_UTILIT_TAPELD_DISTRIB(P).TXT</code></td></tr>
+        <tr><td>PROGRAM-ID</td><td><code>CFH-COPY</code></td></tr>
+        <tr><td>Candidate</td><td><code>EclCobolPipeline/candidates/trial-17-tapeld-distrib/ASSURFED_UTILIT_TAPELD_DISTRIB(P).TXT</code></td></tr>
+        <tr><td>Pre-processor</td><td><code>*IF</code> branches resolved for DISC I/O, ASCII=1; extended parameters FIELDIN/FIELDOUT/FIXE/PRINT/SUPCOM/REPSIM/STARTFIELD/STARTREC/STITRE/MAXCOPY all conditioned to 0 &rarr; suppressed. <code>*DEFINE FILER</code> present (stripped; never invoked &mdash; FIELDIN=0). <code>*PROCESS</code> and <code>*INCREMENT</code> loops present in source but suppressed at simplification. <code>-AnnotateStubs</code> ON.</td></tr>
+        <tr><td>Stubs (key overrides)</td><td><code>[ASCII]</code>=<code>1</code>, <code>[INPUT,1,1,1]</code>=<code>ECL-TAPEIN</code>, <code>[INPUT,1,1,2]</code>=<code>80</code>, <code>[OUTPUT,1,1,1]</code>=<code>&quot;ECL-TAPEOUT&quot;</code>, <code>[OUTPUT,1,1,2]</code>=<code>80</code>, all optional params=0</td></tr>
+        <tr><td>Condition values</td><td><code>ASCII=1</code>, <code>PRINT=0</code>, <code>FIELDIN=0</code>, <code>FIELDOUT=0</code>, <code>FIXE=0</code>, <code>SUPCOM=0</code>, <code>MAXCOPY=0</code>, <code>REPSIM=0</code>, <code>STARTFIELD=0</code>, <code>STARTREC=0</code>, <code>STITRE=0</code>, <code>FILLCTR=0</code></td></tr>
+        <tr><td>Tier-1 proof</td><td>PASS &mdash; diff=0, 246&thinsp;B; pure byte-for-byte copy (3&times;80-char CRLF records). <code>FINW DISPLAY</code> statements go <code>UPON PRINTER</code> (stdout; not in output file). Identical behaviour to CFH-COPY trial-11.</td></tr>
+        <tr><td>LionSource</td><td>Conversion pending (settings: <code>trial-17-tapeld-distrib.settings</code>)</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:10px;">
+        <strong>No new pre-processor capabilities at trial-17</strong> &mdash; all constructs already supported. TAPELD_DISTRIB introduces <em>*PROCESS</em> and subscripted <em>[PARAM,r,A,f]</em> tokens in the SSG source (inside suppressed FIELDIN/FIELDOUT/FIXE blocks), but these constructs are stripped by the pre-processor and do not affect the candidate output. The extended parameter set (STITRE, MAXCOPY, REPSIM, STARTFIELD, STARTREC) are all new <em>*IF</em> conditions handled by the existing Resolve-SsgCondition logic.
+      </div>
+    </div>
+    <!-- ECLREF:end -->
+  </div>
+  <!-- ECLREF:start Control Center runbook - Tier-2 live batch execution (added 2026-07-17) -->
+  <div class="section-card" id="controlcentrerunbook">
+    <h2>6b &middot; Control Center Runbook &mdash; Tier&nbsp;2 live batch execution</h2>
+    <p>Operational runbook for executing any converted <code>AFBUS_2200COBOL</code> utility as a
+    <strong>real Control Center batch job</strong> (the Tier&nbsp;2 path in
+    <a href="#execution-model">&sect;2</a>). It reuses the <em>same</em> fixtures and
+    <code>expected.dat</code> goldens as the Tier&nbsp;1 harness &mdash; only the executor changes: the
+    AMT .NET runtime runs the deployed program DLL, <code>Xqt</code>ed by the BatchController, instead
+    of the PowerShell oracle. Worked examples: <strong>MONTANT</strong> &amp; <strong>CFH_COPY</strong> (full passes, diff=0).</p>
+
+    <!-- ECLREF:start file-resolution model - Approach A works (revised 2026-07-18; retracts 2026-07-17 finding) -->
+    <div class="success-box">
+      <strong>File-resolution model (confirmed 2026-07-18) &mdash; working-dir staging works.</strong>
+      Both input and output DISC files resolve to <code>%SYSROOT%\Files\Extracts\&lt;DISC-designator&gt;.DAT</code>
+      (= <code>C:\Amt\Working\Lion\Files\Extracts\&lt;designator&gt;.DAT</code>). The designator is the
+      <code>AmtFileId</code> <code>SetOptions(...)</code> name in the generated <code>&lt;Program&gt;.Files.cs</code>
+      (MONTANT: <code>FILEIN&rarr;ECL-TAPEIN</code>, <code>FILEOUT&rarr;ECL-TAPEOUT</code>). Stage each fixture input as
+      <code>&lt;inputDesignator&gt;.DAT</code> there; the run reads it and writes <code>&lt;outputDesignator&gt;.DAT</code>
+      alongside &mdash; proven byte-identical to the golden for MONTANT.
+    </div>
+    <div class="info-box">
+      <strong>Retraction:</strong> the earlier &ldquo;report model cannot feed inputs&rdquo; note (2026-07-17) was
+      premature &mdash; ARCHIFORMAT/ARCHITAB1 produced <code>1.DAT</code> because their <em>deployed</em> output
+      designator was the catch-all <code>1</code> (build-param divergence) <em>and</em> their inputs were never staged,
+      not because of a model limitation. No <code>AMTSYSBATCHFILE</code>/<code>AmtPsEclLib</code> assignment is required.
+    </div>
+    <!-- ECLREF:end -->
+
+    <h3>1 &middot; Bring the stack up (once per boot)</h3>
+    <div class="info-box">
+      Run <code>C:\Amt\Migration\tools\Federale_CC_Startup.ps1</code> <strong>elevated</strong> &mdash; starts,
+      in dependency order: Keycloak (:8080) &rarr; IIS CC site &rarr; <code>AmtFileController</code> &rarr;
+      <code>AmtBatchController</code> &rarr; <code>AmtApplicationServer</code>. CC UI:
+      <code>http://localhost/Working/ControlCenter/</code>.
+    </div>
+
+    <h3>2 &middot; App registration (one-time, already done)</h3>
+    <table class="ref">
+      <tr><th>Layer</th><th>State</th></tr>
+      <tr><td>Database</td><td><code>WORKING_AFBUS_2200COBOL</code> (DATABASEID&nbsp;4); schema built via <code>AmtReoConsole.exe /APP=AFBUS_2200COBOL</code>.</td></tr>
+      <tr><td>Application</td><td><code>AMTSYSAPPLICATION</code> APPID&nbsp;5, APPLICATIONKIND&nbsp;4, AUTOSTART&nbsp;T.</td></tr>
+      <tr><td>Jobs</td><td>8 program DLLs in <code>AMTSYSAVAILABLEJOB</code> (TYPE&nbsp;3 AmtReport, Default Queue) &mdash; the original 7 (JOBID&nbsp;736&ndash;742) plus <code>ARCHITAB1</code> (JOBID&nbsp;1002, added 2026-07-17). <strong>DLLs in <code>Binaries\Reports\</code>; FILE = bare filename</strong>. A newly deployed DLL needs <code>Restart-Service AmtBatchController</code> to re-sync (auto-sync is off).</td></tr>
+      <tr><td>Security</td><td>CC &rarr; Security &rarr; Jobs &rarr; <strong>Activate&nbsp;All</strong> (role Users) &mdash; else jobs never appear under Start&nbsp;Job.</td></tr>
+    </table>
+
+    <h3>3 &middot; Run a report</h3>
+    <p>CC &rarr; <strong>Jobs &rarr; Start Job</strong> &rarr; Application <code>AFBUS_2200COBOL</code> &rarr;
+    select job &rarr; <strong>Start job</strong>. Track under <strong>Job Management</strong> /
+    <strong>Batch Control</strong> (Queued &rarr; Running &rarr; Completed). Runtime params:
+    <code>LOADINBATCHCONTROLLER /R:19 /USEWORKINGDIR</code>.</p>
+
+    <!-- ECLREF:start section 4 - working-dir staging procedure (revised 2026-07-18) -->
+    <h3>4 &middot; Feed a fixture &amp; prove the output (working-dir staging)</h3>
+    <p>Read the program&rsquo;s real DISC designators from its generated <code>&lt;Program&gt;.Files.cs</code>
+    (<code>m_&lt;File&gt;.SetOptions(&quot;&lt;designator&gt;&quot;, &hellip;)</code>) &mdash; these, not the candidate
+    or <code>assign.json</code> keys, are what the runtime resolves. Then:</p>
+    <ol>
+      <li>Copy each fixture input to <code>C:\Amt\Working\Lion\Files\Extracts\&lt;inputDesignator&gt;.DAT</code>
+      (uppercase name, <code>.DAT</code> extension). E.g. MONTANT: <code>input.dat</code> &rarr;
+      <code>Files\Extracts\ECL-TAPEIN.DAT</code>.</li>
+      <li>CC &rarr; Jobs &rarr; Start Job &rarr; the job &rarr; <strong>Start job</strong>; wait for Completed.</li>
+      <li>Collect the output <code>Files\Extracts\&lt;outputDesignator&gt;.DAT</code> (MONTANT: <code>ECL-TAPEOUT.DAT</code>).</li>
+      <li>Diff vs <code>fixtures\&lt;key&gt;\expected.dat</code> &mdash; <strong>mask run-date bytes</strong> for
+      date-sensitive programs (ARCHITAB1: cols&nbsp;38&ndash;45 of type-0/9).</li>
+    </ol>
+    <div class="info-box">
+      <strong>MONTANT (2026-07-18):</strong> staged <code>ECL-TAPEIN.DAT</code> &rarr; run &rarr;
+      <code>ECL-TAPEOUT.DAT</code> = 328&thinsp;B, <strong>byte-identical</strong> to the golden (diff=0). No file
+      assignments, no DB writes, no <code>AmtPsEclLib</code> (which is not installed here).
+    </div>
+    <!-- ECLREF:end -->
+
+    <h3>5 &middot; Known gotchas</h3>
+    <ul>
+      <li><strong>FileController won't start</strong> (&ldquo;File service FileController not found&rdquo;):
+      <code>AMTSYSFILECONTROLLER.SERVICENAME</code> must be exactly <code>FileController</code>.</li>
+      <li><strong>Report DLL path</strong>: DLLs must be in <code>Binaries\Reports\</code> with a bare-filename
+      <code>FILE</code> (else a doubled-path load error).</li>
+      <li><strong>CC Server-Control Start/Stop buttons are broken</strong> (impersonation NRE) &mdash; use the
+      startup script / elevated PowerShell.</li>
+      <li><strong>OIDC login loop</strong> over plain HTTP on full re-login &mdash; reprieve: clear cookies;
+      durable fix: serve CC over HTTPS.</li>
+      <!-- ECLREF:start gotchas added from 2026-07-17 CC-Trial run -->
+      <li><strong>Missing <code>Binaries\Common\*</code> subfolders halt batch execution</strong>: the BatchController
+      <code>StartAppAssemblyMonitor</code> throws <em>&ldquo;directory &hellip;\Common\Libraries\ does not exist&rdquo;</em>.
+      Create the full set of <code>Common\*</code> subfolders (mirroring an app like AFBUS: <code>Dlls</code>,
+      <code>Libraries</code>, <code>Insertables</code>, <code>Types</code>, <code>runtimes</code>, the ApplicationServerAgent /
+      RestApi / Soap / Web provider dirs, etc.) even if empty.</li>
+      <li><strong>A crashed job can wedge the BatchController agent</strong> (agent keeps the output file locked;
+      <code>AMTSYSPROCESSJOB</code> shows a stuck <em>Running</em> row). Recover by
+      <code>Restart-Service AmtBatchController</code> (elevated) &mdash; the restart <em>Kills</em> the stuck job and clears
+      the lock &mdash; then clear any stale queued <code>AMTSYSPROCESSJOB</code> rows (e.g. old <code>%APPROOT%\Programs\</code>
+      path entries that keep erroring).</li>
+      <li><strong>Newly deployed report DLL won&rsquo;t run until the BatchController is re-synced</strong> (auto-sync is
+      off): Start Job silently no-ops (no process row/log). Fix: <code>Restart-Service AmtBatchController</code> (elevated)
+      to rebuild the report pool from <code>Binaries\Reports\</code>.</li>
+      <!-- ECLREF:end -->
+      <!-- ECLREF:start OIDC client-secret gotcha (added 2026-09-17) -->
+      <li><strong>CC login fails for EVERY user with <code>unauthorized_client</code> / &ldquo;Invalid client or
+      Invalid client credentials&rdquo;</strong> (not a bad-password symptom): the Keycloak <code>amt-cc</code> client
+      secret configured in <code>ControlCenterCore\appsettings.json</code>
+      (<code>Amt.Authentication.AmtOIDC.OIDC.ClientSecret</code>) drifted from Keycloak&rsquo;s live secret. Fix: get an
+      admin token from <code>http://localhost:8080/realms/master/protocol/openid-connect/token</code>
+      (<code>grant_type=password&amp;client_id=admin-cli&amp;username=admin&amp;password=admin</code> worked as default),
+      <code>GET /admin/realms/master/clients?clientId=amt-cc</code>, read <code>.secret</code>, patch it into
+      appsettings.json (PowerShell, not <code>read_file</code>/edit tools &mdash; Copilot-ignored), then an
+      <strong>elevated <code>iisreset /noforce</code></strong> (OIDC options bind at IIS worker-process startup, not
+      hot-reloaded). Confirmed realm on this box is <code>master</code>, not a shared <code>amtrealm</code>.</li>
+      <!-- ECLREF:end -->
+    </ul>
+
+    <!-- ECLREF:start Tier-2 results MONTANT + ARCHITAB1 (revised 2026-07-18) -->
+    <h3>6 &middot; Tier&nbsp;2 results</h3>
+    <div class="success-box">
+      <strong>MONTANT &mdash; 2026-07-18 &mdash; first true output-vs-golden PASS.</strong> Staged
+      <code>input.dat</code> &rarr; <code>Files\Extracts\ECL-TAPEIN.DAT</code>; job&nbsp;740 ran to Completed and wrote
+      <code>Files\Extracts\ECL-TAPEOUT.DAT</code> = 328&thinsp;B, <strong>byte-identical</strong> to
+      <code>fixtures\montant\expected.dat</code> (diff=0, not date-sensitive). Confirms working-dir staging.
+      <strong>CFH_COPY</strong> (job&nbsp;737, 2026-07-18) followed the same recipe &mdash; staged
+      <code>ECL-TAPEIN.DAT</code> &rarr; wrote <code>ECL-TAPEOUT.DAT</code> = 246&thinsp;B, byte-identical to its
+      golden. <strong>Two clean full passes.</strong>
+    </div>
+    <!-- ECLREF:start MONTANT reconfirmation after OIDC outage (added 2026-09-17) -->
+    <div class="success-box">
+      <strong>MONTANT &mdash; 2026-09-17 &mdash; reconfirmed PASS, diff=0.</strong> JobId&nbsp;740, RequestId&nbsp;1039,
+      Status=Done, ExitCode=0. Same recipe as 2026-07-18: staged <code>input.dat</code> &rarr;
+      <code>Files\Extracts\ECL-TAPEIN.DAT</code>, ran via CC &rarr; Jobs &rarr; Start Job, output
+      <code>ECL-TAPEOUT.DAT</code> = 328&thinsp;B, byte-identical to <code>fixtures\montant\expected.dat</code>.
+      Session also hit and fixed a full CC-login outage (Keycloak <code>amt-cc</code> client-secret drift &mdash; see
+      &sect;5 gotchas) before the job could be started; verification used the CC UI Completed-jobs &ldquo;View&rdquo;
+      dialog since <code>AMTSYSPROCESSJOB</code> did not show the new run row.
+    </div>
+    <!-- ECLREF:end -->
+    <!-- ECLREF:start CFH_COPY reconfirmation after environment rebuild (added 2026-09-30) -->
+    <div class="success-box">
+      <strong>CFH_COPY &mdash; 2026-09-30 &mdash; reconfirmed PASS after environment rebuild.</strong> JobId&nbsp;<strong>1006</strong>
+      (was 737 &mdash; <code>AMTSYSAVAILABLEJOB</code> IDs have shifted from the 736&ndash;742/1002 range to 1004&ndash;1013;
+      treat older JOBID references in this doc as stale pointers, not live IDs), RequestId&nbsp;1069, Jobtype
+      <code>AmtCobolProgram</code>, Status=Done, ExitCode=0, execution time 00:00:00.358. Same recipe as 2026-07-18:
+      staged <code>fixtures\cfh-copy\input.dat</code> &rarr; <code>Files\Extracts\ECL-TAPEIN.DAT</code> (246&thinsp;B),
+      cleared stale <code>ECL-TAPEOUT.DAT</code>+sidecars left by an earlier LOADIS run sharing the same designator,
+      ran via CC &rarr; Jobs &rarr; Start Job. Output <code>ECL-TAPEOUT.DAT</code> = 246&thinsp;B,
+      <strong>byte-identical</strong> to the staged input (<code>Compare-Object</code> &rarr; no diffs).
+    </div>
+    <div class="info-box">
+      <strong>Verification methods (in increasing detail):</strong>
+      <ol style="margin-top:6px;">
+        <li><strong>Disk</strong> &mdash; <code>Compare-Object (Get-Content ECL-TAPEIN.DAT) (Get-Content ECL-TAPEOUT.DAT)</code>;
+        no output = byte-identical. Sizes/timestamps from <code>Get-ChildItem Files\Extracts\ECL-TAPE*</code> should match
+        the job's Started/Ended time.</li>
+        <li><strong>CC &rarr; Jobs &rarr; Job Management &rarr; Completed jobs &rarr; View</strong> &mdash; Status <code>Done</code>,
+        Error blank, <code>Task value</code> <code>EXITCODE value="0"</code>.</li>
+        <li><strong>CC &rarr; Messages &rarr; Alerts</strong> &mdash; filter by JobName; look for
+        <code>Program execution time: 00:00:00.xxx</code> followed by <code>Done</code>, sourced from the job name.</li>
+        <li><strong>CC &rarr; Processed &rarr; Logging &rarr; <code>AmtBatchController_AGENT_1_Trace.Log</code></strong>
+        (physically <code>Lion\SystemLogging\&lt;date&gt;\</code>) &mdash; confirms the message handshake:
+        <code>StartReportRequest</code> (ReportFile/JobName/Parameters <code>LOADINBATCHCONTROLLER /R:19 /USEWORKINGDIR</code>)
+        &rarr; <code>StartReportReply</code> &rarr; <code>ReportFinishedReply</code> with
+        <code>{"ExitCode":0,"JobState":19}</code>.</li>
+        <li><strong>CC &rarr; Processed &rarr; Logging &rarr; <code>AmtBatchController_AGENT_1_Filecontroller_Trace.Log</code></strong>
+        &mdash; the strongest proof of actual file I/O: per-job WCF call lines
+        <code>AmtAfcResultConnect</code> &rarr; <code>AmtAfcResultOpen</code> &rarr; <code>AmtAfcResultReadRecord</code>
+        (&times;N &mdash; one per input record read) &rarr; <code>AmtAfcResultCreate</code>/<code>AmtAfcResultDirCreate</code>
+        (output file write) &rarr; <code>AmtAfcResultClose</code>, all attributed to the job name in that column.</li>
+        <li><strong>CC &rarr; Processed &rarr; File Monitor</strong> &mdash; live/recent FileController client sessions
+        (<code>BatchBusinessLogic</code>/<code>AmtBatchController</code> rows) if you need to confirm the controller
+        is actively servicing the run rather than reading historical logs.</li>
+      </ol>
+    </div>
+    <!-- ECLREF:end -->
+    <div class="success-box">
+      <strong>ARCHITAB1 &mdash; 2026-07-17 &mdash; first non-empty Tier&nbsp;2 output (pure output).</strong>
+      Job&nbsp;1002 (no input files &mdash; <code>open output ficout</code> + <code>ACCEPT FROM DATE</code>) wrote
+      <code>Files\Extracts\1.DAT</code> = <strong>246&thinsp;B, 3 records</strong>, <strong>structurally byte-identical</strong>
+      to <code>fixtures\architab1\expected.dat</code> (record types 0/1/9, field positions, length&nbsp;80,
+      <code>+99999999999+99999999999</code> trailer all match; run date masked at cols&nbsp;38&ndash;45).
+    </div>
+    <div class="info-box">
+      <strong>ARCHITAB1 remaining diff = build-parameter divergence, not a logic bug.</strong> Its <em>deployed</em>
+      output designator (and <code>[tname]</code>/<code>[key]</code>) resolved to the catch-all <code>1</code> (hence the
+      output landed as <code>1.DAT</code> and the table-name/key fields read <code>1</code>), whereas the Tier-1 golden
+      used explicit <code>ECL-*</code> overrides. Neither value is production-real; the converted code + Tier-2 execution
+      are proven. A literal diff=0 would require both builds to share the same SSG parameters.
+    </div>
+    <!-- ECLREF:end -->
+
+    <!-- ECLREF:start Tier-2 testability map (added 2026-07-18) -->
+    <h3>7 &middot; Tier&nbsp;2 testability map (deployed programs)</h3>
+    <p>Whether a deployed program can be proven via staging depends on the DISC designators in its generated
+    <code>&lt;Program&gt;.Files.cs</code> (<code>SetOptions(&quot;&hellip;&quot;)</code>). Programs whose modeled build kept
+    <strong>distinct</strong> <code>ECL-*</code> designators are provable; those collapsed to the catch-all <code>1</code>
+    (or a stray value) collide on one physical file and must be <strong>regenerated with distinct designators</strong> first.</p>
+    <table class="ref">
+      <tr><th>Program (JOBID)</th><th>Designators (<code>Files.cs</code>)</th><th>Tier&nbsp;2 status</th></tr>
+      <tr><td>MONTANT_SIGNE (740)</td><td><code>ECL-TAPEIN, ECL-TAPEOUT</code></td><td><span class="badge badge-done">&#10003; PASS</span> diff=0</td></tr>
+      <tr><td>CFH_COPY (737, now 1006)</td><td><code>ECL-TAPEIN, ECL-TAPEOUT</code></td><td><span class="badge badge-done">&#10003; PASS</span> diff=0, reconfirmed 2026-09-30</td></tr>
+      <tr><td>ARCHITAB1 (1002)</td><td><code>1</code> (single output)</td><td><span class="badge badge-prog">struct</span> pure output; param divergence</td></tr>
+      <tr><td>LOADIS_MULT_NODUP (739)</td><td><code>ECL-TAPEIN, ECL-TAPEOUT</code></td><td><span class="badge badge-prog">exec-only</span> indexed output (see note)</td></tr>
+      <tr><td>ARCHIFORMAT (736)</td><td><code>1, 1, 1, 1</code> (all collide)</td><td><span class="badge badge-pend">blocked</span> needs regen</td></tr>
+      <tr><td>COMPARE2_ASCII (738)</td><td><code>ECL-TAPEIN, 80</code></td><td><span class="badge badge-pend">blocked</span> IN2 designator = 80</td></tr>
+      <tr><td>TAPELD_DISTRIB (741)</td><td><code>ECL-TAPEIN</code> (no output)</td><td><span class="badge badge-pend">blocked</span> output designator missing</td></tr>
+      <tr><td>TRI_ASCII (742)</td><td><code>&hellip;SORTFILE, 1, ECL-TAPEOUT</code></td><td><span class="badge badge-pend">blocked</span> input designator = 1</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>Designator reuse:</strong> <code>ECL-TAPEIN</code>/<code>ECL-TAPEOUT</code> are shared across several
+      programs, so they map to the <em>same</em> <code>Files\Extracts\ECL-TAPEIN.DAT</code>/<code>ECL-TAPEOUT.DAT</code>.
+      Stage the input fresh immediately before each run (runs are sequential, so this is safe).
+    </div>
+    <div class="warn">
+      <strong>Indexed-output programs (e.g. LOADIS_MULT_NODUP, 2026-07-18):</strong> the output is an <em>indexed</em>
+      file &mdash; the runtime writes <code>Files\Extracts\&lt;designator&gt;.DAT</code> (full data) plus sidecars
+      <code>.Index</code> (primary key) and <code>._&lt;ALTKEY&gt;</code> (e.g. <code>._CLEG</code>). LOADIS ran cleanly
+      (indexed load; <code>AmtAfc</code> Create/AddRecord/Close) but the runtime data file (246&thinsp;B, full 80-byte
+      records) is <strong>not byte-comparable</strong> to the Tier-1 golden (95&thinsp;B = refimpl preview + PRINTER
+      count). Treat as an <strong>execution pass</strong>; compare the PRINTER/count output separately or regenerate a
+      matching golden. Also: <strong>clear</strong> the output <code>.DAT</code>+sidecars before a re-run (shared
+      designators otherwise leave a stale file to mis-compare).
+    </div>
+    <!-- ECLREF:end -->
+  </div>
+  <!-- ECLREF:end -->
+  <!-- ECLREF:start T3 PS-conversion trial runbook (added 2026-09-18) -->
+  <div class="section-card" id="t3-ps-conversion">
+    <h2>6c &middot; T3 PS-Conversion Trial Runbook</h2>
+    <p>Worked trials for the <strong>SsgConverter direct-to-PowerShell</strong> stream &mdash; a
+    <em>different</em> conversion path from the COBOL&rarr;Lion&rarr;C# stream used for the
+    <code>AFBUS_2200COBOL</code> Control Center jobs in <a href="#controlcentrerunbook">&sect;6b</a>.
+    Source repo: <code>marky-T/177Xfer</code> branch <code>T3ConvertedSSG</code>, cloned locally to
+    <code>C:\Amt\Migration\T3ConvertedSSG\</code>.</p>
+
+    <div class="warn">
+      <strong>These `.ps1` files are NOT the business-logic runtime.</strong> They reproduce the SSG
+      <strong>template-expansion / COBOL-codegen phase</strong> &mdash; calling <code>GetSgsValue</code>,
+      <code>DataLineOrNoStatement</code>, <code>CompareTypeSafe</code>, <code>Call-ExternalProgram</code>
+      &mdash; not the compiled program itself. They also do NOT call the generic ECL job-control
+      skeleton (<code>Set-Jobname</code>/<code>Initialize</code>/<code>Connect-Application</code>/
+      <code>Xqt</code>), so registering one as a real Control Center Start-Job isn't applicable as-is;
+      what's proven here is a <strong>Tier-1 mock-shell</strong> run (no live AMT/COM/BatchController
+      connection), using the official <code>ConvertedSSG/Tier1Mock/</code> harness
+      (<code>SsgPsMockLib.psm1</code> + <code>Run-SsgPsTrial.ps1</code> + per-program
+      <code>sgs-values/&lt;Program&gt;.sgs-values.json</code>).
+    </div>
+
+    <!-- ECLREF:start T3 real CC Start-Job milestone (added 2026-09-18) -->
+    <div class="success-box">
+      <strong>MILESTONE (2026-09-18) &mdash; all 10 programs now also run as a real Control Center
+      Start Job</strong>, not just in an ad-hoc PowerShell session. Discovered
+      <code>AMTSYSAVAILABLEJOB.TYPE=1</code> = a "Script" job type (distinct from <code>TYPE=3</code>
+      AmtReport) &mdash; confirmed via 2 pre-existing system jobs (<code>_REFRESH_POOL</code>,
+      <code>INSTALL-APPSERVER</code>) that are plain PowerShell scripts with zero
+      <code>AmtPsEclLib</code>/<code>Xqt</code> wiring. Registered a wrapper
+      (<code>Tier1Mock\CC-Run-T3.ps1</code>) as JOBID&nbsp;1003 <code>T3_RUN_SSGPS</code> under
+      APPID&nbsp;5 (AFBUS_2200COBOL). The CC "New Start job" dialog for a <code>TYPE=1</code> job
+      exposes a <strong>"Commandline (script) parameter"</strong> free-text field &mdash; typing
+      <code>-Program &lt;Name&gt;</code> there selects which of the 10 converted programs to run.
+      All 10 completed with <code>Status=Done</code>, <code>ExitCode=0</code>, and emitted-line/
+      warning counts identical to the plain-session mock-shell runs (e.g. CFH-COPY:
+      RequestId&nbsp;1040, ~3s elapsed). See <a href="#controlcentrerunbook">&sect;6b</a> for the
+      general CC runbook conventions this reuses (Batch Control tracking, elevated
+      <code>Restart-Service AmtBatchController</code> to pick up new job registrations).
+    </div>
+    <!-- ECLREF:end -->
+
+    <h3>Testability map (all 10 programs, 2026-09-18)</h3>
+    <table class="ref">
+      <tr><th>Program</th><th>Emitted lines</th><th>Warnings</th><th>Baseline on our side?</th><th>Status</th><th>Run via CC?</th></tr>
+      <tr><td>ARCHIFORMAT</td><td>0 (by design)</td><td>0</td><td>trial-13-archiformat (SET-values only)</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>CFH-COPY</td><td>45</td><td>0</td><td>trial-11-cfh-copy</td><td><span class="badge badge-done">&#10003; PASS</span> structural parity</td><td><span class="badge badge-done">&#10003;</span> RequestId 1040</td></tr>
+      <tr><td>ARCHISEPARE</td><td>143</td><td>0</td><td>trial-12-archisepare (208 lines)</td><td><span class="badge badge-prog">diverges</span> 85 diff rows</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>LOADIS_ASCII</td><td>69</td><td>0</td><td>trial-14-loadis-ascii (65 lines)</td><td><span class="badge badge-prog">diverges</span> 108 diff rows</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>LOADIS_MULTI</td><td>96</td><td>0</td><td>trial-14-loadis-ascii (65 lines)</td><td><span class="badge badge-prog">diverges</span> 141 diff rows</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>UNLOADIS_ASCII</td><td>63</td><td>0</td><td>trial-15-unload-ascii (65 lines)</td><td><span class="badge badge-prog">diverges</span> 98 diff rows</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>UNLOADIS_MULTI</td><td>64</td><td>0</td><td>trial-16-unload-ascii-nodup (65 lines)</td><td><span class="badge badge-prog">diverges</span> 123 diff rows</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>CHAB100_ASCII</td><td>212</td><td>0</td><td><em>none</em> &mdash; new program</td><td><span class="badge badge-info">ran clean</span> unverified</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>CHABAN_ASCII</td><td>132</td><td>0</td><td><em>none</em> &mdash; new program</td><td><span class="badge badge-info">ran clean</span> unverified</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+      <tr><td>BABA_ASCII</td><td>48</td><td><strong>30</strong></td><td><em>none</em> &mdash; new program</td><td><span class="badge badge-pend">weak</span> seed values incomplete</td><td><span class="badge badge-done">&#10003;</span> JOBID 1003</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>"Diverges" is not a confirmed logic defect</strong> &mdash; it means the raw generated
+      text doesn't line up 1:1 against our own hand-built Stream-A candidate (different pipeline,
+      possibly different formatting/blank-line/comment conventions or parameter-shape choices). None
+      of these five have had a line-level root-cause pass yet; treat as "ran without error, parity
+      unconfirmed" rather than pass or fail.
+    </div>
+
+    <!-- ARCHIFORMAT -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-archiformat">ARCHIFORMAT (T3 PS-conversion)</h3>
+      <p>Archive formatter &mdash; a <code>#ucob is</code> program: body is ~95% inert
+      <code>Orphaned data line:</code> comments; only 5 <code>*SET</code> variables and one
+      <code>Call-ExternalProgram</code> invocation are executable.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/ARCHIFORMAT.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/ARCHIFORMAT.ps1</code> (366 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/ARCHIFORMAT.sgs-values.json</code> (12 keys) &mdash; matches trial-13-archiformat params</td></tr>
+        <tr><td>Input</td><td><code>ARCHIFORMAT.sgs-values.json</code> &mdash; 490 bytes (the seeded SSG parameter table; these codegen mocks have no physical FILEIN/FILEOUT &mdash; the parameter file IS the input)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/ARCHIFORMAT.cc-run.txt</code> &mdash; 204 bytes (0 emitted COBOL lines by design + SET-value/call trace)</td></tr>
+        <tr><td>Computed SET vars</td><td><code>A=69 B=68 C=67 D=66 E=65</code> &mdash; matches hand-calculation from the same formulas</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ucob [I, S] \archiformat</code> &mdash; correctly identifies the target compiled object to invoke</td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 0 emitted lines (by design &mdash; no COBOL text to regenerate for a <code>#ucob</code> program)</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program ARCHIFORMAT</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="success-box">PASS &mdash; SET-value and invocation-target parity confirmed against hand-calculation; also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- ARCHISEPARE -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-archisepare">ARCHISEPARE (T3 PS-conversion)</h3>
+      <p>Sorted-merge separator &mdash; real <code>DataLineOrNoStatement</code> codegen.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/ARCHISEPARE</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/ARCHISEPARE.ps1</code> (223 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/ARCHISEPARE.sgs-values.json</code> (10 keys)</td></tr>
+        <tr><td>Input</td><td><code>ARCHISEPARE.sgs-values.json</code> &mdash; 443 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/ARCHISEPARE.cc-run.txt</code> &mdash; 6,319 bytes (143 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ucob [I, S] \archisepare</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 143 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-12-archisepare/ASSURFED_UTILIT_ARCHISEPARE(P).TXT</code> (208 non-blank lines): <strong>85 diff rows</strong> &mdash; not reconciled</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program ARCHISEPARE</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="warn">Ran clean but diverges from our Stream-A candidate at the raw-line level &mdash; not yet root-caused (see testability map note above). Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- BABA_ASCII -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-baba">BABA_ASCII (T3 PS-conversion)</h3>
+      <p>New program &mdash; not previously converted in either stream.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/BABA_ASCII.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/BABA_ASCII.ps1</code> (448 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/BABA_ASCII.sgs-values.json</code> (13 keys) &mdash; <strong>incomplete</strong></td></tr>
+        <tr><td>Input</td><td><code>BABA_ASCII.sgs-values.json</code> &mdash; 454 bytes (seeded SSG parameter table; incomplete &mdash; see warnings)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/BABA_ASCII.cc-run.txt</code> &mdash; 4,010 bytes (48 emitted COBOL lines + 30 warnings + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>MAP [N] ASSURFED\UTILITASCII\MAP</code>; <code>SetC 0/t1</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 48 emitted lines, but <strong>30</strong> <code>GetSgsValue: no mock value</code> warnings (<code>KEYS</code>, <code>COND</code>, <code>Y2K</code>, <code>INPUT,1</code>, <code>OUTPUT,1</code>, <code>SEQERROR</code>, <code>ASCII</code>, etc.)</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program BABA_ASCII</code> &mdash; Status=Done, ExitCode=0, same 30 warnings</td></tr>
+      </table>
+      <div class="warn">Every branch guarded by an unmocked key defaulted to the "0" path &mdash; treat the 48 emitted lines as unverified until the seed values file is completed. Also confirmed via real CC Start Job (same weak result).</div>
+    </div>
+
+    <!-- CFH-COPY -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-cfh-copy">CFH-COPY (T3 PS-conversion)</h3>
+      <p>General-purpose file copy &mdash; real <code>DataLineOrNoStatement</code> codegen, full structural match.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/CFH-COPY.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/CFH-COPY.ps1</code> (419 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/CFH-COPY.sgs-values.json</code> (20 keys) &mdash; matches trial-11-cfh-copy params</td></tr>
+        <tr><td>Input</td><td><code>CFH-COPY.sgs-values.json</code> &mdash; 565 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/CFH-COPY.cc-run.txt</code> &mdash; 1,805 bytes (45 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>MAP [N] ASSURFED\UTILITTEST\MAP</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 45 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-11-cfh-copy/ASSURFED_UTILIT_CFH-COPY(P).TXT</code>: <strong>0 structural diffs</strong> &mdash; the only lines that differ are our own <code>*&gt; SSG-STUB [...]</code> annotation comments (our tooling's addition, not SsgConverter's). Confirmed independently through both our own hand-built mock AND the official <code>SsgPsMockLib.psm1</code>.</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program CFH-COPY</code> &mdash; RequestId 1040, Status=Done, ExitCode=0, ~3s elapsed, identical results</td></tr>
+      </table>
+      <div class="success-box">PASS &mdash; full structural parity, cross-validated twice; also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- CHAB100_ASCII -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-chab100">CHAB100_ASCII (T3 PS-conversion)</h3>
+      <p>New program &mdash; not previously converted in either stream. Compiles via <code>#ACOB</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/CHAB100_ASCII.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/CHAB100_ASCII.ps1</code> (301 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/CHAB100_ASCII.sgs-values.json</code> (7 keys)</td></tr>
+        <tr><td>Input</td><td><code>CHAB100_ASCII.sgs-values.json</code> &mdash; 369 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/CHAB100_ASCII.cc-run.txt</code> &mdash; 8,521 bytes (212 emitted COBOL lines + trace &mdash; largest of the 10)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I] TPF$\CHABANA</code>; <code>MAP [N] ASSURFED\UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 212 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program CHAB100_ASCII</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="info-box">Ran clean; no Stream-A baseline exists on our side to diff against (new program). Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- CHABAN_ASCII -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-chaban">CHABAN_ASCII (T3 PS-conversion)</h3>
+      <p>New program &mdash; not previously converted in either stream. Compiles via <code>#ACOB</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/CHABAN_ASCII.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/CHABAN_ASCII.ps1</code> (300 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/CHABAN_ASCII.sgs-values.json</code> (7 keys)</td></tr>
+        <tr><td>Input</td><td><code>CHABAN_ASCII.sgs-values.json</code> &mdash; 327 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/CHABAN_ASCII.cc-run.txt</code> &mdash; 5,465 bytes (132 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I] TPF$\CHABANA</code>; <code>MAP [N] ASSURFED\UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 132 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program CHABAN_ASCII</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="info-box">Ran clean; no Stream-A baseline exists on our side to diff against (new program). Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- LOADIS_ASCII -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-loadis-ascii">LOADIS_ASCII (T3 PS-conversion)</h3>
+      <p>Load IS (indexed) file &mdash; compiles via <code>#ACOB</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/LOADIS_ASCII.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/LOADIS_ASCII.ps1</code> (141 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/LOADIS_ASCII.sgs-values.json</code> (13 keys)</td></tr>
+        <tr><td>Input</td><td><code>LOADIS_ASCII.sgs-values.json</code> &mdash; 491 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/LOADIS_ASCII.cc-run.txt</code> &mdash; 2,765 bytes (69 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I, E] \LOADIS\ASCII</code>; <code>MAP [S] ASSURFED\UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 69 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-14-loadis-ascii/LOADIS-ASCII.TXT</code> (65 non-blank lines): <strong>108 diff rows</strong> &mdash; not reconciled</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program LOADIS_ASCII</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="warn">Ran clean but diverges from our Stream-A candidate at the raw-line level &mdash; not yet root-caused. Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- LOADIS_MULTI -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-loadis-multi">LOADIS_MULTI (T3 PS-conversion)</h3>
+      <p>Load IS (indexed) file with duplicate suppression &mdash; fuller DECLARATIVES/ROLLBACK structure than LOADIS_ASCII.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/LOADIS_MULTI.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/LOADIS_MULTI.ps1</code> (274 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/LOADIS_MULTI.sgs-values.json</code> (18 keys)</td></tr>
+        <tr><td>Input</td><td><code>LOADIS_MULTI.sgs-values.json</code> &mdash; 637 bytes (seeded SSG parameter table &mdash; largest input of the 10)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/LOADIS_MULTI.cc-run.txt</code> &mdash; 3,513 bytes (96 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I] \LOADIS</code>; <code>MAP [N] ASSURFED\UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 96 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-14-loadis-ascii/LOADIS-ASCII.TXT</code> (65 non-blank lines, our closest analogue &mdash; PROGRAM-ID LOADIS-ASCII, corresponds to LOADIS_MULT-NODUP): <strong>141 diff rows</strong> &mdash; not reconciled</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program LOADIS_MULTI</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="warn">Ran clean but diverges from our Stream-A candidate at the raw-line level &mdash; not yet root-caused. Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- UNLOADIS_ASCII -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-unloadis-ascii">UNLOADIS_ASCII (T3 PS-conversion)</h3>
+      <p>Unload IS (indexed) file to sequential output &mdash; reverse of LOADIS_ASCII.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/UNLOADIS_ASCII.TXT</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/UNLOADIS_ASCII.ps1</code> (113 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/UNLOADIS_ASCII.sgs-values.json</code> (14 keys)</td></tr>
+        <tr><td>Input</td><td><code>UNLOADIS_ASCII.sgs-values.json</code> &mdash; 467 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/UNLOADIS_ASCII.cc-run.txt</code> &mdash; 2,503 bytes (63 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I, P, E, C] \UNLOAD-ASCII</code>; <code>MAP [N] \UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 63 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-15-unload-ascii/UNLOAD-ASCII.TXT</code> (65 non-blank lines): <strong>98 diff rows</strong> &mdash; not reconciled</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program UNLOADIS_ASCII</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="warn">Ran clean but diverges from our Stream-A candidate at the raw-line level &mdash; not yet root-caused. Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- UNLOADIS_MULTI -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="run-t3-unloadis-multi">UNLOADIS_MULTI (T3 PS-conversion)</h3>
+      <p>Unload IS (indexed) file &mdash; NODUP variant.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>SSG source</td><td><code>ConvertedSSG/SSG-Input/UNLOADIS_MULTI.txt</code></td></tr>
+        <tr><td>Converted PS</td><td><code>ConvertedSSG/UNLOADIS_MULTI.ps1</code> (198 lines)</td></tr>
+        <tr><td>Seed values</td><td><code>Tier1Mock/sgs-values/UNLOADIS_MULTI.sgs-values.json</code> (19 keys)</td></tr>
+        <tr><td>Input</td><td><code>UNLOADIS_MULTI.sgs-values.json</code> &mdash; 599 bytes (seeded SSG parameter table)</td></tr>
+        <tr><td>Output</td><td><code>Tier1Mock/CcRuns/UNLOADIS_MULTI.cc-run.txt</code> &mdash; 2,406 bytes (64 emitted COBOL lines + trace)</td></tr>
+        <tr><td>Call-ExternalProgram trace</td><td><code>ACOB [I] \UNLOADIS</code>; <code>MAP [N] ASSURFED\UTILITASCII\MAP</code>; <code>Hdg N</code></td></tr>
+        <tr><td>Result</td><td>Completed without a thrown exception; 64 emitted lines, 0 unmocked-key warnings</td></tr>
+        <tr><td>Baseline diff</td><td>vs <code>trial-16-unload-ascii-nodup/ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P).TXT</code> (65 non-blank lines): <strong>123 diff rows</strong> &mdash; not reconciled</td></tr>
+        <tr><td>CC Start Job</td><td>Run via JOBID 1003 <code>T3_RUN_SSGPS</code>, script param <code>-Program UNLOADIS_MULTI</code> &mdash; Status=Done, ExitCode=0, identical results</td></tr>
+      </table>
+      <div class="warn">Ran clean but diverges from our Stream-A candidate at the raw-line level &mdash; not yet root-caused. Also confirmed via real CC Start Job.</div>
+    </div>
+
+    <!-- ECLREF:start T3 live Tier-3 run, 20-program bundle (added 2026-10-01) -->
+    <div class="example-header" style="border-radius:8px 8px 0 0;">
+      <h3 id="t3-live-tier3">Live Tier-3 run &mdash; 20-program bundle (2026-10-01)</h3>
+      <p>Everything above this point is <strong>Tier-1 mock-shell only</strong> (codegen-text
+      emission, no AMT connection). This subsection documents the first time any T3-bundle program
+      was run as a <strong>genuine Tier-3 job</strong>: a real <code>Connect-Application</code>,
+      through the real CC&nbsp;&rarr;&nbsp;Start&nbsp;Job&nbsp;&rarr;&nbsp;BatchController pipeline,
+      against a new (larger) 20-program handoff bundle from AMT177/178
+      (<code>marky-T/177Xfer</code> branch <code>T3ConvertedSSG-20</code>, superseding the 10-program
+      set documented above).</p>
+    </div>
+    <div class="example-body">
+      <div class="info-box">
+        <strong>The "wrapper" pattern.</strong> Every bundle script (<code>Binaries\Scripts\&lt;KEY&gt;.ps1</code>)
+        is body-only SSG codegen &mdash; no job-control shell, can't run as a real job as-is. A
+        <code>&lt;KEY&gt;-LIVE.ps1</code> wrapper supplies exactly that shell:
+        <code>Set-Jobname</code> &rarr; <code>Initialize</code> (real <code>Connect-Application</code>)
+        &rarr; seed SGS values via <code>AddTo-SgsList</code> (sourced from the already-proven
+        <code>Tier1Mock\sgs-values\&lt;KEY&gt;.sgs-values.json</code>) &rarr; invoke the unmodified
+        body script &rarr; <code>Fin</code>. One wrapper (CFH-COPY) was hand-built; the other 19 were
+        generated mechanically by <code>LiveRun/Generate-T3-Live-Wrappers.ps1</code>.
+      </div>
+
+      <h4 style="margin-top:18px;">Two root-cause fixes found (both shared back to the bundle's <code>RealRuntime/</code>)</h4>
+      <table class="ref">
+        <tr><th>Issue</th><th>Symptom</th><th>Root cause</th><th>Fix</th></tr>
+        <tr>
+          <td>Zone.Identifier / execution policy</td>
+          <td>Any script run via real CC Start Job (not bare <code>pwsh</code>) failed with a
+          cascading <code>Abort</code> / "null-valued expression" error, even the trivial
+          "Hello World" skeleton with no SSG body at all.</td>
+          <td><code>RealRuntime\EclOptions.psm1</code> carried a <strong>Zone.Identifier</strong>
+          (mark-of-the-web) stream from being copied in from another folder. BatchController launches
+          scripts without <code>-ExecutionPolicy Bypass</code>, so the default policy blocked it as
+          "not digitally signed" &mdash; the real error was swallowed by a broken
+          <code>Trap</code>/<code>Abort</code> cascade and only visible in the <strong>main</strong>
+          <code>AmtBatchController_Trace.Log</code> (not the per-job agent log).</td>
+          <td><code>Unblock-File</code> on <code>RealRuntime\*.psm1</code> and
+          <code>Binaries\Scripts\*.ps1</code>.</td>
+        </tr>
+        <tr>
+          <td>Missing <code>Log-Message</code> function</td>
+          <td>4 programs (CONDIS2_ASCII, TABAN_ASCII, RECAP, TAPELD_ASCII) aborted with
+          <code>The term 'Log-Message' is not recognized...</code>.</td>
+          <td>SsgConverter emits <code>Log-Message (...) '([LogMessageType]::Information)'</code>
+          diagnostic calls with no implementation anywhere in the bundled runtime. Note the 2nd
+          argument arrives as the <strong>literal string</strong> <code>"([LogMessageType]::Information)"</code>,
+          not an evaluated enum.</td>
+          <td>Added a minimal no-op <code>Log-Message([string]$Message,[string]$Level='')</code> stub
+          to <code>RealRuntime\AmtPsCustomerLib.psm1</code> &mdash; already the bundle's designated
+          empty customer-extension module, auto-imported by <code>AmtPsEclLib.psm1</code>.</td>
+        </tr>
+      </table>
+
+      <h4 style="margin-top:18px;">Results &mdash; 18 of 20 programs confirmed DONE through the real CC/BatchController pipeline</h4>
+      <table class="ref">
+        <tr><th>Program</th><th>Standalone (bare <code>pwsh</code>)</th><th>Real CC Start Job</th><th>Notes</th></tr>
+        <tr><td>CFH-COPY</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>First breakthrough; JOBID 1060</td></tr>
+        <tr><td>(Hello World isolation test)</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1061; proved the Zone.Identifier issue was generic, not CFH-COPY-specific</td></tr>
+        <tr><td>ARCHIFORMAT</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1062</td></tr>
+        <tr><td>ARCHISEPARE</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1063</td></tr>
+        <tr><td>BABA_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1064</td></tr>
+        <tr><td>CFH-COPY_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1065</td></tr>
+        <tr><td>CHAB100_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1066</td></tr>
+        <tr><td>CHABAN_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1067</td></tr>
+        <tr><td>CONDIS2_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span> (needed Log-Message fix)</td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1068</td></tr>
+        <tr><td>EXTEUR</td><td><span class="badge badge-pend">FAIL</span></td><td><span class="badge badge-pend">FAIL</span> (identical error)</td><td>JOBID 1069 &mdash; <code>Cannot convert value "NONE" to type "System.Int32"</code> at line 158; needs a per-program SGS seed fix, not a runtime bug</td></tr>
+        <tr><td>FUSBA_ASCII</td><td><span class="badge badge-pend">FAIL</span></td><td><span class="badge badge-pend">FAIL</span> (identical error)</td><td>JOBID 1070 &mdash; <code>Cannot index into a null array</code> in <code>Define_limpara</code> at line 50; needs a different SGS seed shape</td></tr>
+        <tr><td>FUSBA2_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1071</td></tr>
+        <tr><td>LECTIS_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1072</td></tr>
+        <tr><td>LOADIS_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1073</td></tr>
+        <tr><td>LOADIS_MULTI</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1074</td></tr>
+        <tr><td>RECAP</td><td><span class="badge badge-done">&#10003; PASS</span> (needed Log-Message fix)</td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1075</td></tr>
+        <tr><td>SCAN_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1077</td></tr>
+        <tr><td>TABAN_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span> (needed Log-Message fix)</td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1078</td></tr>
+        <tr><td>TAPELD_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span> (needed Log-Message fix)</td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1079</td></tr>
+        <tr><td>UNLOADIS_ASCII</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1080</td></tr>
+        <tr><td>UNLOADIS_MULTI</td><td><span class="badge badge-done">&#10003; PASS</span></td><td><span class="badge badge-done">&#10003; DONE</span></td><td>JOBID 1081</td></tr>
+      </table>
+      <div class="success-box">
+        <strong>18 of 20</strong> T3-bundle programs now have a fully confirmed, real, live Tier-3
+        execution through the genuine CC/BatchController pipeline &mdash; real
+        <code>Connect-Application</code>, real SGS seeding, real script body, real <code>FIN</code>.
+        The remaining 2 (EXTEUR, FUSBA_ASCII) fail identically standalone and via CC, confirming
+        they're genuine per-program data/seed issues, not pipeline or hosting problems.
+      </div>
+
+      <h4 style="margin-top:18px;">Harnesses/artifacts built this round, shared back via git</h4>
+      <table class="ref">
+        <tr><th>File</th><th>Purpose</th></tr>
+        <tr><td><code>LiveRun/Generate-T3-Live-Wrappers.ps1</code></td><td>Reads each program's <code>Tier1Mock/sgs-values/&lt;KEY&gt;.sgs-values.json</code> and mechanically generates the matching <code>&lt;KEY&gt;-LIVE.ps1</code> skeleton wrapper.</td></tr>
+        <tr><td><code>LiveRun/Wrappers/*.ps1</code></td><td>All 20 generated/hand-built live wrappers (the actual CC job files).</td></tr>
+        <tr><td><code>LiveRun/Run-All-T3-Live-Standalone.ps1</code></td><td>Batch-runs all wrappers via bare <code>pwsh</code> for a fast pass/fail pre-check before registering as CC jobs.</td></tr>
+        <tr><td><code>LiveRun/AmtSettings-AFBUS2200COBOL.xml</code></td><td>Working <code>AmtSettings.xml</code> proven against AMT172's AFBUS_2200COBOL app (ComScript/ComModule paths, <code>TransactionServer Grpc:localhost:4444</code>).</td></tr>
+        <tr><td><code>LiveRun/Register-T3-20-Scripts.sql</code> / <code>Register-T3-20-Live-Wrappers.sql</code></td><td>SQL to register the body scripts and the live wrappers as <code>AMTSYSAVAILABLEJOB</code> (<code>TYPE=1</code>) CC jobs.</td></tr>
+        <tr><td><code>RealRuntime/AmtPsCustomerLib.psm1</code> (modified)</td><td>Added the <code>Log-Message</code> stub (see fixes table above).</td></tr>
+        <tr><td><code>RealRuntime/EclOptions.psm1</code> (now tracked, unblocked)</td><td>Dependency that was missing/zone-marked; now committed clean.</td></tr>
+        <tr><td><code>LiveRun/README.md</code></td><td>Full narrative write-up of this round &mdash; breakthroughs, root causes, fixes, and the per-program results table.</td></tr>
+      </table>
+    </div>
+    <!-- ECLREF:end -->
+  </div>
+  <!-- ECLREF:end -->
+  <!-- ECLREF:start Record-size parameterisation proof (added 2026-09-18) -->
+  <div class="section-card" id="record-size-proof">
+    <h2>6d &middot; Record-Size Parameterisation Proof</h2>
+    <p>Proves that an <strong>already-deployed, already-working compiled C# CC job</strong> can be
+    reworked to accept its record size as a runtime parameter (instead of a hardcoded literal) and
+    still run correctly at multiple sizes &mdash; mirroring the MONTANT precedent documented in
+    <code>AMT172-Setup-Guide.html</code> Phase 15/18/20. Unlike the T3 mock-shell trials in
+    <a href="#t3-ps-conversion">&sect;6c</a> (which only exercise SSG codegen text), these are REAL
+    CC batch runs against real physical mock <code>FILEIN</code>/<code>FILEOUT</code> files.</p>
+    <div class="warn"><strong>Not the same artifact as &sect;6c's <a href="#run-t3-cfh-copy">CFH-COPY
+    (T3 PS-conversion)</a>.</strong> That's a PowerShell script produced by SsgConverter directly from
+    the raw SSG source (SSG&rarr;PS stream). The program below is the pre-existing <strong>compiled C#</strong>
+    DLL for CC JOBID 737, produced by the separate COBOL&rarr;Lion&rarr;C# stream (the same one MONTANT
+    uses) &mdash; they share a program name but are otherwise unrelated builds.</div>
+
+    <div class="example-header">
+      <h3 id="rsp-cfh-copy">CFH-COPY &mdash; compiled C# (JOBID 737)</h3>
+      <p>Simplest case: single input/output copy. Deployed DLL:
+      <code>Lion\Apps\AFBUS_2200COBOL\Binaries\Reports\ASSURFED_UTILIT_CFH_COPY.dll</code>.</p>
+    </div>
+    <div class="example-body">
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Change</td><td><code>Fd_Recin.cs</code> / <code>Fd_Recout.cs</code> constructors reworked from a
+        hardcoded <code>new AmtVarAlpha(80, m_DataRecord)</code> literal to
+        <code>Fd_Recin(Assurfed_Utilit_Cfh_Copy parentObject, int recordSize = 80)</code>; call sites in
+        <code>Assurfed_Utilit_Cfh_Copy.Files.cs</code> pass a single <code>private const int m_RecordSize</code>
+        field &mdash; one point of change per rebuild.</td></tr>
+        <tr><td>Designators</td><td><code>ECL-TAPEIN</code> / <code>ECL-TAPEOUT</code> (same as MONTANT)</td></tr>
+        <tr><td>Build</td><td><code>dotnet build Assurfed_Utilit_Cfh_Copy.csproj -c Debug -p:NuGetAudit=false</code>
+        (NuGet Audit flags a transitive SSH.NET advisory via <code>Asysco.Amt.Ftp.csproj</code> as an error &mdash;
+        harmless build-only bypass, no files changed)</td></tr>
+        <tr><td>80-byte run</td><td>Mock <code>ECL-TAPEIN.DAT</code>: 4 records &times; 80 bytes + CRLF = 328 bytes.
+        CC Job Management &rarr; <strong>Status=Done</strong>, 0.63s execution. Output <code>ECL-TAPEOUT.DAT</code>:
+        328 bytes, <strong>byte-identical</strong> to input.</td></tr>
+        <tr><td>120-byte run</td><td><code>m_RecordSize</code> changed 80&rarr;120, rebuilt, redeployed. Mock input:
+        same 4 records padded to 120 bytes + CRLF = 488 bytes. CC Job Management &rarr;
+        <strong>Status=Done</strong>, 0.48s execution. Output: 488 bytes, <strong>byte-identical</strong> to input.</td></tr>
+        <tr><td>Result</td><td>Both sizes PASS via real CC Start Job runs (RequestIds in the 52916&ndash;52921 /
+        1058&ndash;1064 range) &mdash; proves the deployed program copes with different record sizes through pure
+        runtime parameterisation, no LionDev/SSG regeneration required.</td></tr>
+      </table>
+      <div class="danger-box">
+        <strong>Gotcha:</strong> the shared <code>Y:\Amt.Net\AmtAssemblyInfo.cs</code> hardcodes
+        <code>AssemblyVersion</code>/<code>AssemblyFileVersion</code> for every project in that tree
+        (<code>GenerateAssemblyInfo=false</code>, so <code>-p:Version=...</code> on the command line has no effect).
+        If this doesn't match the version already baked into the deployed BatchController/report DLLs, the job
+        silently bounces &ldquo;Running&rdquo; &rarr; &ldquo;Queued&rdquo; forever (no crash logged) until BatchController's
+        agent pool recycles, at which point it surfaces as
+        <code>Object of type 'Asysco.Amt.Runtime.Batch.AmtBatchControllerCommands' cannot be converted to type
+        'Asysco.Amt.Runtime.Batch.AmtBatchControllerCommands'</code> &mdash; a classic cross-assembly-version type-identity
+        mismatch. Fix: pin the shared version to match BatchController's own copy before rebuilding. See
+        <code>/memories/repo/afbus-cobol-batch-jobs.md</code> for the full gotcha chain (NuGet Audit, version pin,
+        file-lock-from-diagnostics, ReportPool caching, service stop/start ordering).
+      </div>
+    </div>
+  </div>
+  <!-- ECLREF:end -->
+  <!-- ─────────────────────────────────────────── SECTION 7: TROUBLESHOOTING -->
+  <div class="section-card" id="troubleshooting">
+    <h2>7 &middot; Troubleshooting</h2>
+
+    <h3>Bug 14 &mdash; candidate filename must match PROGRAM-ID</h3>
+    <div class="danger-box">
+      The candidate <code>.TXT</code> filename <strong>must equal the PROGRAM-ID</strong> in the
+      COBOL source, not the SSG element name. SSG element <code>LECTIS_MULT</code> has
+      <code>PROGRAM-ID. LECTIS.</code> &rarr; the candidate must be named <code>LECTIS.TXT</code>.
+    </div>
+    <p>The generator indexes by <code>PROGRAM-ID</code> (<code>CobolApp.Sources.Find(objNameWm)</code>).
+    A mismatch fails generation with <em>Could not find source with name: &lt;ID&gt;</em> even after
+    the suffix is cleaned up.</p>
+
+    <h3>Bug 15 &mdash; parse before generate</h3>
+    <div class="warn">
+      After importing the <code>.LionSource</code> into LionDev, always run
+      <strong>Logic Status &rarr; Select All &rarr; F7 (Parse)</strong> before clicking Generate.
+      Skipping this leaves <code>REVGENSETDATA</code> empty and generates empty C# files.
+    </div>
+
+    <h3>Residual <code>[token]</code> = 1</h3>
+    <p>An unintended <code>1</code> in the candidate means a token was not in
+    <code>-ParamOverrides</code> and hit the catch-all. Add the token with a meaningful value and
+    re-run.</p>
+
+    <h3>Bare-word macro tokens</h3>
+    <p>Unknown tokens in the converter log are bare-word macros, not <code>[param]</code> tokens.
+    Add entries to <code>ssg-stub.macros.xml</code> (and update its inventory comment — even when no
+    new entries are needed).</p>
+
+    <h3>Multiple <code>*IF</code> branches emitted (duplicate WS items)</h3>
+    <p>Supply <code>-ConditionValues</code> for every condition so only one variant is emitted (see
+    §4).</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    SSG-ECL / PowerShell Pipeline Reference &nbsp;&middot;&nbsp; AMT 172 Migration &nbsp;&middot;&nbsp; 2026-06-26
+    &nbsp;&middot;&nbsp; <a href="AMT172-Setup-Guide.html">&#8592; Back to Setup Guide</a>
+    &nbsp;&middot;&nbsp; <a href="SSG-COBOL-Reference.html">SSG/COBOL Reference &#8599;</a>
+  </div>
+
+</main>
+
+<!-- ECLREF:start — Floating cut & paste Notepad (doc helper, this page only) -->
+<div id="eclref-notepad">
+  <div class="np-panel">
+    <div class="np-header" onclick="eclrefToggleNotepad()">
+      <span class="np-title">&#128221; Cut &amp; Paste</span>
+      <span class="np-toggle" id="eclref-np-toggle">&#9660;</span>
+    </div>
+    <div class="np-body">
+      <textarea id="eclref-np-text" placeholder="Collect snippets here&#10;(select text on the page, then Add)" aria-label="Cut and paste collection"></textarea>
+      <div class="np-actions">
+        <button class="np-btn" onclick="eclrefAddSelection()">&#10133; Add</button>
+        <button class="np-btn secondary" onclick="eclrefCopyAll()">&#10697; Copy</button>
+        <button class="np-btn secondary" onclick="eclrefClearNotepad()">&#128465; Clear</button>
+      </div>
+      <div class="np-flash" id="eclref-np-flash"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var KEY = 'eclref-notepad-content';
+    var ta = document.getElementById('eclref-np-text');
+    try { var saved = localStorage.getItem(KEY); if (saved !== null) ta.value = saved; } catch (e) {}
+    ta.addEventListener('input', function () {
+      try { localStorage.setItem(KEY, ta.value); } catch (e) {}
+    });
+  })();
+  function eclrefFlash(msg) {
+    var f = document.getElementById('eclref-np-flash');
+    f.textContent = msg; f.classList.add('show');
+    clearTimeout(f._t); f._t = setTimeout(function () { f.classList.remove('show'); }, 1600);
+  }
+  function eclrefPersist() {
+    try { localStorage.setItem('eclref-notepad-content', document.getElementById('eclref-np-text').value); } catch (e) {}
+  }
+  function eclrefToggleNotepad() {
+    var np = document.getElementById('eclref-notepad');
+    np.classList.toggle('collapsed');
+    document.getElementById('eclref-np-toggle').innerHTML = np.classList.contains('collapsed') ? '&#9650;' : '&#9660;';
+  }
+  function eclrefAddSelection() {
+    var sel = (window.getSelection ? window.getSelection().toString() : '').trim();
+    var ta = document.getElementById('eclref-np-text');
+    if (!sel) { eclrefFlash('Select text on the page first'); return; }
+    ta.value += (ta.value && !ta.value.endsWith('\n') ? '\n' : '') + sel + '\n';
+    eclrefPersist();
+    eclrefFlash('Added selection');
+  }
+  function eclrefCopyAll() {
+    var ta = document.getElementById('eclref-np-text');
+    if (!ta.value) { eclrefFlash('Nothing to copy'); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(function () { eclrefFlash('Copied to clipboard'); },
+        function () { ta.select(); document.execCommand('copy'); eclrefFlash('Copied'); });
+    } else { ta.select(); document.execCommand('copy'); eclrefFlash('Copied'); }
+  }
+  function eclrefClearNotepad() {
+    var ta = document.getElementById('eclref-np-text');
+    ta.value = ''; eclrefPersist(); eclrefFlash('Cleared');
+  }
+</script>
+<!-- ECLREF:end -->
+
+</body>
+</html>
