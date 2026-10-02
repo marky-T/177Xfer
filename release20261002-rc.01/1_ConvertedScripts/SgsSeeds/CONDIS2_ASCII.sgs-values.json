@@ -1,0 +1,9 @@
+{
+  "_source": "No Trial3 manifest entry for CONDIS2_ASCII. PG=0 skips the entire *Increment PG loop (CASE/MOVE/CONST/OTHERWISE validation and record-layout generation), leaving only the fixed COBOL skeleton - same minimal-seed convention used for BABA_ASCII/CHABAN_ASCII/UNLOADIS_ASCII. FILEIN/FILEOUT record/block sizes are placeholders needed for the FD PIC X([FILEIN,1,1,1]) substitutions.",
+  "ASCII": "1",
+  "PG": "0",
+  "FILEIN,1,1,1": "80",
+  "FILEIN,1,1,2": "10",
+  "FILEOUT,1,1,1": "80",
+  "FILEOUT,1,1,2": "10"
+}

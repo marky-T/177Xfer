@@ -1,0 +1,14 @@
+{
+  "_source": "No Trial3 manifest entry for FUSBA2_ASCII. Minimal Tier-1 seed: top-level condition flags and loop counts set to 0 so loop bodies stay empty (same convention used for BABA_ASCII/CHABAN_ASCII/UNLOADIS_ASCII). Unmocked lookups default to 0 with a warning; add keys here if the harness throws rather than warns.",
+  "ASCII": "1",
+  "TRACE": "0",
+  "UPDATE": "0",
+  "KEYS": "0",
+  "SEQERROR": "0",
+  "FIELDIN": "0",
+  "FIELDOUT": "0",
+  "INPUT,1": "0",
+  "OUTPUT,1": "0",
+  "OUTPUT,1,1,1": "0",
+  "NOLIST": "0"
+}

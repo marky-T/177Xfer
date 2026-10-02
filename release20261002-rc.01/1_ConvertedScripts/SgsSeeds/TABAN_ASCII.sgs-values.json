@@ -1,0 +1,16 @@
+{
+  "_source": "Derived from SSG-Source/TABAN_ASCII.TXT directives. SCHEMA=0 deliberately skips the *increment/*exit schema-selection loop (its *EXIT maps to a raw PowerShell Exit statement, which would terminate the whole script, not just the loop - avoided rather than triggered).",
+  "ASCII": "1",
+  "SCHEMA": "0",
+  "INPUT,1,1,1": "ECL-TAPE1",
+  "INPUT,1,1": "3",
+  "INPUT,1,1,2": "80",
+  "INPUT,1,1,3": "1",
+  "KEYS,1": "0",
+  "INDIC": "0",
+  "CCARTE": "0",
+  "MAXREC": "0",
+  "UTYL2": "0",
+  "LISTE": "0",
+  "Y2K": "0"
+}

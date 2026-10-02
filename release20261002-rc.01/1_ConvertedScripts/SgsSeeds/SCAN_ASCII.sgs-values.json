@@ -1,0 +1,15 @@
+{
+  "_source": "No Trial3 manifest entry for SCAN_ASCII. IF=0/NOCONT=0/INDIC=0/TITLE=0/Y2K=0 skip the whole conditional-field-test / *CREATE SGS card-generation machinery, leaving the simplest 'TOTAL SCAN' path: every record read is unconditionally treated as found (falls straight through SUITE-RECHERCHE/FOUND-REC with no test), matching the '*IF [TITLE]>0 ... *ELSE *IF [IF]>0 CONDITIONAL *ELSE TOTAL' heading text. ASCII=1 selects the ACOB,IB / DISPLAY-1 branch. INPUT,1,1<=3 selects DISC (not UNISERVO) file assign.",
+  "ASCII": "1",
+  "OMITTED": "0",
+  "LIST": "0",
+  "IF": "0",
+  "NOCONT": "0",
+  "INDIC": "0",
+  "TITLE": "0",
+  "Y2K": "0",
+  "INPUT,1,1": "1",
+  "INPUT,1,1,1": "ECL-TAPEIN",
+  "INPUT,1,1,2": "100",
+  "INPUT,1,1,3": "10"
+}

@@ -1,0 +1,16 @@
+{
+  "_source": "Derived from SSG-Source/LOADIS_ASCII.TXT directives; cross-checked against Trial3 manifest key LOADIS_MULT-NODUP (programId LOADIS-ASCII) where the same tokens overlap.",
+  "ASCII": "1",
+  "VIDE": "0",
+  "INPUT,1": "1",
+  "INPUT,1,1": "3",
+  "INPUT,1,1,1": "ECL-BDE1",
+  "INPUT,1,1,2": "80",
+  "INPUT,1,1,3": "1",
+  "OUTPUT,1,1,1": "ECL-DISQ",
+  "OUTPUT,1,1,2": "20",
+  "OUTPUT,1,1,3": "1",
+  "KEYIS,1,1,1": "0",
+  "KEYIS,1,1,2": "8",
+  "KEYIS,1,1,3": "12"
+}

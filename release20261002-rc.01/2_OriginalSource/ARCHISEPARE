@@ -1,0 +1,238 @@
+*set a = [rsz,1,1,1] - [key,1,2,2]  
+*set b = [*a] - [key,1,2,1] 
+*set c = 32 + [rsz,1,1,1]   
+*set d = [rsz,1,1,1]
+#ucob,is .archisepare,.archisepare  
+      ***------------------------------------------------------------***
+      ***                  -- ARCHISEPARE --                         ***
+      ***            Separe les enregistrements a archiver           ***
+      ***                   et a ne pas archiver                     ***
+      ***                        == UCS ==                           ***
+      ***------------------------------------------------------------***
+      * Type     :                                                     *
+      * Analyste :                                 (INITIALES)         *
+      * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+      * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+      * Release  :                                 (99)                *
+      * Version  :                                 (999)               *
+      *----------------------------------------------------------------*
+      * Modifications :                                                *
+      * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+    
+      ***------------------------------------------------------------***
+      *                       DESCRIPTION                              *
+      *                       ===========                              *
+      *                                                                *
+      *    INPUT : chercheuse : numero de sinistres a archiver         *
+      *    INPUT : ficunload : unload de la table a archiver           *
+      *    OUTPUT: ficarchi : enregistrements a archiver               *
+      *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+      ***------------------------------------------------------------***
+
+    
+       Identification division. 
+      *========================*
+       program-id.  ARCHISEPARE.
+    
+       Environment division.
+      *====================*
+    
+       Configuration section.   
+      *----------------------*  
+       source-computer.  unisys-2200.   
+       object-computer.  unisys-2200 MEMORY 3 MODULES.  
+       special-names.   
+           printer       printer
+           decimal-point comma. 
+
+       Input-output section.
+      *---------------------*   
+       file-control.
+           select chercheuse assign to disc     [filein,1,1,1]. 
+           select ficunload assign to disc      [filein,1,2,1]. 
+           select ficarchi assign to disc       [fileout,1,1,1].
+           select ficnarchi assign to disc      [fileout,1,2,1].
+       i-o-control. 
+    
+       Data division.   
+      *==============*  
+
+       File section.
+      *-------------*   
+      * Fichier chercheuse  
+       FD  chercheuse.  
+        1  cle-chercheuse        pic 9([key,1,1,2]).
+    
+      *Unload de la table a archiver
+       FD  ficunload.   
+*if [key,1,2,1] = 0 
+        1  ligne-unload.
+           3 cle-unload          pic 9([key,1,2,2]).
+           3 filler              pic x([*a]).   
+*elseif [key,1,2,1] = [*a]  
+        1  ligne-unload.
+           3 filler              pic x([*a]).   
+           3 cle-unload          pic 9([key,1,2,2]).
+*else   
+        1  ligne-unload.
+           3 filler              pic x([key,1,2,1]).
+           3 cle-unload          pic 9([key,1,2,2]).
+           3 filler              pic x([*b]).   
+*endif  
+    
+      * Fichier enregistrements a archiver  
+       FD  ficarchi.
+        1  ligne-archi           pic x([*c]).   
+    
+      * Fichier enregistrement a ne pas archiver
+       FD  ficnarchi.   
+        1  ligne-narchi          pic x([*d]).   
+    
+       Working-storage section. 
+      *------------------------*
+         1 ligne-type4. 
+           3 cd-don                    pic x value "4". 
+           3 cd-ach                    pic x.   
+           3 tl-cle                    pic 9([key,1,2,2]).  
+           3 tl-don                    pic x([rsz,1,1,1]).  
+         1 ligne-type9. 
+           3 cd-don9                   pic x value "9". 
+           3 nm-bas9                   pic x(6).
+           3 nm-tab9                   pic x(30).   
+           3 dt-ach9                   pic x(8).
+           3 cptach1                   pic s9(11) sign leading separate.
+           3 cptach2                   pic s9(11) sign leading separate.
+         1 lecrchf                     pic 9 value 0.   
+           88 fin-lecrch               value 1. 
+         1 lecunloadf                  pic 9 value 0.   
+           88 fin-lecunload            value 1. 
+      *---------------- Pour le rapport ---------------------   
+        77 cptlu                       pic 9(7).
+        77 cptarchi                    pic 9(7).
+        77 cptnarchi                   pic 9(7).
+        77 cptluf                      pic z(6)9.   
+        77 cptarchif                   pic z(6)9.   
+        77 cptnarchif                  pic z(6)9.   
+      *------------------------------------------------------   
+      *------------------ POUR LA DATE ---------------------
+         1 date-i.  
+           3 annee-i                   pic 9(4).
+           3 mois-i                    pic 99.  
+           3 jour-i                    pic 99.  
+         1 date-fr. 
+           3 jour-fr                   pic 99.  
+           3     pic x value '/'.   
+           3 mois-fr                   pic 99.  
+           3     pic x value '/'.   
+           3 annee-fr                  pic 9(4).
+      *------------------------------------------------------   
+    
+    
+       PROCEDURE DIVISION.  
+      *-------------------  
+         000-main.  
+           open input chercheuse ficunload  
+                output ficarchi ficnarchi   
+           perform 100-lec-chercheuse thru 100-exit 
+           perform 101-lec-unload thru 101-exit 
+           perform 102-separe thru 102-exit 
+           perform 103-date thru 103-exit   
+           perform 104-rapport thru 104-exit
+           close chercheuse ficunload   
+                 ficarchi ficnarchi 
+           stop run 
+           .
+      *---------- LECTURE DU NUMERO DE CHERCHEUSE -------------------   
+        100-lec-chercheuse. 
+           read chercheuse  
+             at end 
+               move 1 to lecrchf
+           end-read 
+           .
+        100-exit.   
+           exit.
+      *------------ LECTURE D'UN ENREGISTREMENT UNLOAD -------- 
+        101-lec-unload. 
+           read ficunload   
+             at end 
+               move 1 to lecunloadf 
+             not at end 
+               add 1 to cptlu   
+           end-read 
+           .
+        101-exit.   
+           exit.
+      *----- SEPARATION ENREGISTREMENT ARCHI ET NARCHI ---------
+        102-separe. 
+           perform until fin-lecunload  
+             if lecrchf not = 1 
+               evaluate true
+      *L'enregistrement est a archiver  
+                 when cle-chercheuse = cle-unload   
+                   move "A" to cd-ach   
+                   move cle-unload to tl-cle
+                   move ligne-unload to tl-don  
+                   write ligne-archi from ligne-type4   
+                   add 1 to cptarchi
+                   perform 101-lec-unload thru 101-exit 
+                   if cle-unload not = cle-chercheuse   
+                     perform 100-lec-chercheuse thru 100-exit   
+                   end-if   
+      *L'enregistrement ne doit pas etre archive
+                 when cle-chercheuse > cle-unload   
+                   write ligne-narchi from ligne-unload 
+                   add 1 to cptnarchi   
+                   perform 101-lec-unload thru 101-exit 
+      *Decalage de cle  
+                 when cle-chercheuse < cle-unload   
+                   perform 100-lec-chercheuse   
+               end-evaluate 
+             else   
+      *Si la chercheuse est vide, il faut ecrire les enregistrements
+      *  qui restent dans le fichier d'unload   
+               write ligne-narchi from ligne-unload 
+               add 1 to cptnarchi   
+               perform 101-lec-unload thru 101-exit 
+             end-if 
+           end-perform  
+      *Pour l'enregistrement de type9   
+           move "[tname,1,1,1]" to nm-bas9  
+           move "[tname,1,1,2]" to nm-tab9  
+           accept date-i from date yyyymmdd 
+           move date-i to dt-ach9   
+           move cptarchi to cptach1 
+                            cptach2 
+           write ligne-archi from ligne-type9   
+           .
+        102-exit.   
+           exit.
+      *---------------- DATE AU FORMAT FRANCAIS -------------   
+        103-date.   
+           move annee-i to annee-fr 
+           move mois-i to mois-fr   
+           move jour-i to jour-fr   
+           .
+        103-exit.   
+           exit.
+      *----------- DISPLAY DU RAPPORT ------------- 
+        104-rapport.
+           move cptlu to cptluf 
+           move cptarchi to cptarchif   
+           move cptnarchi to cptnarchif 
+           display "Archisepare              Rapport             "  
+             date-fr upon printer   
+           display " " upon printer 
+           display "Enregistrement lu : " cptluf upon printer   
+           display "Enregistrement ecrit dans [fileout,1,1,1] : "   
+             cptarchif upon printer 
+           display "Enregistrement ecrit dans [fileout,1,2,1] : "   
+             cptnarchif upon printer
+           .
+        104-exit.   
+           exit.

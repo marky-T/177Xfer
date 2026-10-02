@@ -1,0 +1,16 @@
+{
+  "_source": "Adapted from Trials/FUSBA2_ASCII/sgs-values.json (FUSBA_ASCII is the sibling program, same skeleton family). No Trial3 manifest entry. Minimal Tier-1 seed: condition flags/loop counts at 0.",
+  "ASCII": "1",
+  "TRACE": "0",
+  "UPDATE": "0",
+  "KEYS": "0",
+  "SEQERROR": "0",
+  "FIELDIN": "0",
+  "FIELDOUT": "0",
+  "INPUT,1": "0",
+  "OUTPUT,1": "0",
+  "OUTPUT,1,1,1": "0",
+  "NOLIST": "0",
+  "ANNUL": "0",
+  "INSERT": "0"
+}
