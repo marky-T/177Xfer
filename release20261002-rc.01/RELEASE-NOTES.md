@@ -43,6 +43,8 @@ A mock install dry-run (`CFH-COPY` + `UNLOADIS_ASCII`) confirmed the package ins
 
 > These are the only install-mechanics actions required beyond the standard AMT prerequisites (runtime libraries, a CobolOS2200 application, Control Center login). Everything else is covered by the step-by-step in README §3.
 
+> **Confirmed live (2026-10-02):** this exact package was installed and run on a real AMT Control Center (`CFH-COPY`, AMT172). The wrapper's env-var resolution (`AMT_RT`/`AMT_SETTINGS`) and live Script-path resolution (`$global:AmtPath.ScriptPath` from `Initialize` reading the CC Basepath config) were both genuinely exercised — the body was located from live config, not a hardcoded path. Both "Required runtime setup" items above were necessary and sufficient, with the caveat that the Script-path value and the required env-var scope must be **confirmed in the live admin UI**, not assumed from a prior environment. See `VALIDATION-PROMPT.md` for a reusable, environment-agnostic validation procedure.
+
 ---
 
 ## 3. Testing performed to date
@@ -54,6 +56,18 @@ A mock install dry-run (`CFH-COPY` + `UNLOADIS_ASCII`) confirmed the package ins
 | **Stage B — live Control Center** | Real `Connect-Application` + CC **Start Job** via BatchController on a working CobolOS2200 application. | **18 / 20 pass** (parallel AMT env, 2026-10-01) |
 
 **Important scope note.** A Tier-1 pass proves the converted logic parses and executes with every lookup resolved; it is **necessary but not sufficient** — it does not prove numeric output parity against the legacy mainframe report. Output-level reconciliation against Federale's expected results is the **next** test phase and is **not** claimed by this release.
+
+### Live install validation of THIS package (CFH-COPY, AMT172, 2026-10-02)
+This exact release package was installed and run on a live AMT Control Center (AMT172) for `CFH-COPY`:
+installed per the README (body flat at the CC Script path — confirmed live as `Working`; wrapper in a
+`RUN` subfolder; `AMT_RT`/`AMT_SETTINGS` set at **Machine** scope via an elevated terminal; `Unblock-File`
+on both scripts), registered via **Batch & Forms → Available Jobs → "Read all jobs from system"** (JobId
+1085) then **Security → Jobs → Activate All**, and started from Control Center. Result: **`Script Started →
+FIN → Script Done`, exit code 0** in both the job log and the Completed Jobs detail. This genuinely
+exercised the wrapper's design — explicit `AMT_RT`/`AMT_SETTINGS` resolution and live
+`$global:AmtPath.ScriptPath` from `Initialize` reading the real CC Basepaths config. Note `CFH-COPY`'s
+converted body is **codegen-only** (no runtime file I/O), so no `ECL-TAPEIN` input needed staging. See
+`VALIDATION-PROMPT.md` for the reusable, environment-agnostic validation procedure distilled from this run.
 
 ---
 
