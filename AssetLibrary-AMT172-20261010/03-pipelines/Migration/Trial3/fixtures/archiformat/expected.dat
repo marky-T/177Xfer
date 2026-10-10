@@ -1,0 +1,11 @@
+0ARCHISTABLE-ARCH                    2026070120260115                
+1CLE-TABLE                     N10.00                                
+2COL-NAME-1                    CHARVAR0000000010NULL                 
+2COL-NAME-2                    INTEGER0000000004                     
+3PK_TABLE-ARCH                 CLE-TABLE                     Asc     
+4A1234567890DATA1                                                    
+4A0000000042DATA2                                                    
+9ARCHISTABLE-ARCH                    20260701+00000000002+00000000000
+ARCHIFORMAT          RAPPORT          01/07/2026
+Enregistrements lus:          2
+Enregistrements 4 ecrits:          2

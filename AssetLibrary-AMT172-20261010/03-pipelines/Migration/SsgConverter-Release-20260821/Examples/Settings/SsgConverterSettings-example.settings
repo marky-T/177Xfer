@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SsgConversionSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <InputFolder>C:\SsgConverter-Release-20260821\Examples\Input</InputFolder>
+  <OutputFolder>C:\SsgConverter-Release-20260821\Examples\Output</OutputFolder>
+  <ClearOutputFolder>false</ClearOutputFolder>
+  <ContinueOnException>true</ContinueOnException>
+  <VerboseLevel>2</VerboseLevel>
+  <LogFile>C:\SsgConverter-Release-20260821\Examples\Output\</LogFile>
+  <EnableLogFile>true</EnableLogFile>
+</SsgConversionSettings>

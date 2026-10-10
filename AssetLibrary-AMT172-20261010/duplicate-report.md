@@ -1,0 +1,581 @@
+# Duplicate report - AMT172 - 20261010
+
+Informational only. Nothing was deleted, merged or deduplicated.
+
+## (a) Exact duplicates (same SHA256)
+
+120 groups, 151 extra copies.
+
+- **expected.dat** (6 copies, `EE8E23AC3D87`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/expected.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/input.dat`
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/expected.dat`
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/input.dat`
+- **ssg-stub.macros.xml** (5 copies, `EE1202791F3B`)
+  - `03-pipelines/Migration/CobolConvert/macros/ssg-stub.macros.xml`
+  - `03-pipelines/Migration/CobolConvertMacros/ssg-stub2.macros.xml`
+  - `03-pipelines/Migration/EclCobolPipeline/macros/ssg-stub.macros.xml`
+  - `03-pipelines/Migration/Trial3/macros/ssg-stub.macros.xml`
+  - `03-pipelines/Amt/SharePipelineProcess/ssg-stub.macros.xml`
+- **assign.json** (4 copies, `7259FFD92CEE`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT/assign.json`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT-NODUP/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT-NODUP/assign.json`
+- **programs.manifest.20260702-015358.json** (4 copies, `DE1144EEA57C`)
+  - `03-pipelines/Migration/EclCobolPipeline/manifest/backups/programs.manifest.20260702-015358.json`
+  - `03-pipelines/Migration/EclCobolPipeline/manifest/backups/programs.manifest.20260702-022023.json`
+  - `03-pipelines/Migration/Trial3/manifest/backups/programs.manifest.20260702-015358.json`
+  - `03-pipelines/Migration/Trial3/manifest/backups/programs.manifest.20260702-022023.json`
+- **expected.dat** (4 copies, `99A691D177C7`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT/expected.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT-NODUP/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT-NODUP/expected.dat`
+- **input.dat** (4 copies, `072B1D626B15`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/input.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/scan/input.dat`
+- **disq.dat** (4 copies, `B98A31746C43`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT/disq.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT-NODUP/disq.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT/disq.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT-NODUP/disq.dat`
+- **input.dat** (4 copies, `B782BC4D753B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/input.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/input2.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/input2.dat`
+- **working-AMT172-old.code-workspace** (4 copies, `5EC58B0DD0D6`)
+  - `07-other/Amt/working-AMT172-old.code-workspace`
+  - `07-other/Amt/working-AMT172.code-workspace`
+  - `07-other/Amt/working-AMT172.code-workspace. - Copy.code-workspace`
+  - `07-other/Amt/working-AMT172.code-workspace..code-workspace`
+- **expected.dat** (4 copies, `52BF6185F0E2`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/expected.dat`
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/input.dat`
+- **trial-05-lectis.settings** (3 copies, `CF6A50FB8CC9`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-05-lectis.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-05-lectis.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-05-lectis.settings`
+- **trial-06-sort-fichout-1.settings** (3 copies, `AAADD3FAABEC`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-06-sort-fichout-1.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-06-sort-fichout-1.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-06-sort-fichout-1.settings`
+- **trial-02-ssg.settings** (3 copies, `6D0806E8963E`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-02-ssg.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-02-ssg.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-02-ssg.settings`
+- **trial-01.settings** (3 copies, `4B2B90A7D839`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-01.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-01.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-01.settings`
+- **trial-03-montant.settings** (3 copies, `B8D47A0F5B9C`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-03-montant.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-03-montant.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-03-montant.settings`
+- **Remove-SsgDirectives.ps1** (3 copies, `BD54F45BFFCC`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Remove-SsgDirectives.ps1`
+  - `03-pipelines/Migration/Templates/Remove-SsgDirectives.ps1`
+  - `03-pipelines/Migration/Trial3/tools/Remove-SsgDirectives.ps1`
+- **assign.json** (3 copies, `6D7AE6623230`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/assign.json`
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/assign.json`
+- **trial-04-montant-afbus.settings** (3 copies, `5743BE491F0D`)
+  - `03-pipelines/Migration/CobolConvert/settings/trial-04-montant-afbus.settings`
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-04-montant-afbus.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-04-montant-afbus.settings`
+- **BABA_ASCII.TXT** (2 copies, `B86E78B91FA4`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Input/BABA_ASCII.TXT`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Input/BABA_ASCII.TXT`
+- **expected.dat** (2 copies, `B89B1FB78D17`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/expected.dat`
+- **trial-14-loadis-ascii.settings** (2 copies, `B506FF898F8E`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-14-loadis-ascii.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-14-loadis-ascii.settings`
+- **CHABAN_ASCII.ps1** (2 copies, `B1336EBCDED7`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/CHABAN_ASCII.ps1`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/CHABAN_ASCII.ps1`
+- **assign.json** (2 copies, `ACC7A27DF0E0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/assign.json`
+- **.gitignore** (2 copies, `AFB90BB48670`)
+  - `07-other/Migration/EclCobolPipeline/.gitignore`
+  - `07-other/Migration/Trial3/.gitignore`
+- **montant.ps1** (2 copies, `BE2A2A485E3C`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/montant.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/montant.ps1`
+- **chercheuse.dat** (2 copies, `AC4343D36FBD`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/chercheuse.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/chercheuse.dat`
+- **tri_ascii.ps1** (2 copies, `A83AD41C13FE`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/tri_ascii.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/tri_ascii.ps1`
+- **CFH-COPY.TXT** (2 copies, `A2E981A82E22`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Input/CFH-COPY.TXT`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Input/CFH-COPY.TXT`
+- **_scan-show-params.ps1** (2 copies, `9F7126EA2EB6`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_scan-show-params.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_scan-show-params.ps1`
+- **Run-EclProof.ps1** (2 copies, `9F19CCA80418`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Run-EclProof.ps1`
+  - `03-pipelines/Migration/Trial3/tools/Run-EclProof.ps1`
+- **programs.manifest.json** (2 copies, `9E6F7060482F`)
+  - `03-pipelines/Migration/EclCobolPipeline/manifest/programs.manifest.json`
+  - `03-pipelines/Migration/Trial3/manifest/programs.manifest.json`
+- **_run-eclat-remove.ps1** (2 copies, `97E72F7F8FC0`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_run-eclat-remove.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_run-eclat-remove.ps1`
+- **assign.json** (2 copies, `B115F696157D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/montant/assign.json`
+- **expected.dat** (2 copies, `0451B3229299`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/expected.dat`
+- **UNLOADIS_ASCII.ps1** (2 copies, `BFFA52251B82`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/UNLOADIS_ASCII.ps1`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/UNLOADIS_ASCII.ps1`
+- **_build-scan-candidate.ps1** (2 copies, `9319FC258099`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_build-scan-candidate.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_build-scan-candidate.ps1`
+- **trial-16-unload-ascii-nodup.settings** (2 copies, `F380315F5A4E`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-16-unload-ascii-nodup.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-16-unload-ascii-nodup.settings`
+- **make-fixtures.ps1** (2 copies, `F2DA60B6FB8A`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/make-fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/make-fixtures.ps1`
+- **trial-10-compare2.settings** (2 copies, `F1E8C18BFC67`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-10-compare2.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-10-compare2.settings`
+- **Create-Fixtures.ps1** (2 copies, `F19D1D10A6ED`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/Create-Fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/Create-Fixtures.ps1`
+- **archiformat.ps1** (2 copies, `EF9224E0A40C`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/archiformat.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/archiformat.ps1`
+- **SSG-COBOL-Reference.html** (2 copies, `EF3A8FBD691D`)
+  - `01-docs-html/Migration/SSG-COBOL-Reference.html`
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-COBOL-Reference.html`
+- **input.dat** (2 copies, `EC696887DC05`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/input.dat`
+- **assign.json** (2 copies, `E9FF50E3385E`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/scan/assign.json`
+- **expected.dat** (2 copies, `E7A7EFBF82A6`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/expected.dat`
+- **table.dat** (2 copies, `E4B42D5B5D37`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/table.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/table.dat`
+- **trial-13-archiformat.settings** (2 copies, `E3FAB210E4DD`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-13-archiformat.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-13-archiformat.settings`
+- **input.dat** (2 copies, `E06428F71473`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/montant/input.dat`
+- **README.md** (2 copies, `DFF6C8220330`)
+  - `01-docs-html/Migration/SsgConverter-Release-20260821/README.md`
+  - `01-docs-html/Amt/SsgConverter-Release-20260821/README.md`
+- **expected.dat** (2 copies, `DEAA805772FC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/expected.dat`
+- **SsgConverter-Fix-20260820.md** (2 copies, `DC985BFBB07A`)
+  - `01-docs-html/Migration/SsgConverter-Release-20260821/Fixes/SsgConverter-Fix-20260820.md`
+  - `01-docs-html/Amt/SsgConverter-Release-20260821/Fixes/SsgConverter-Fix-20260820.md`
+- **_gen-fixtures.ps1** (2 copies, `DA1929631BB7`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/_gen-fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/_gen-fixtures.ps1`
+- **archisepare.ps1** (2 copies, `D91E2C7656D3`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/archisepare.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/archisepare.ps1`
+- **_scan-trigger-b.ps1** (2 copies, `D6EA3019C8BB`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_scan-trigger-b.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_scan-trigger-b.ps1`
+- **assign.json** (2 copies, `D0A3486B7CC4`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/assign.json`
+- **Convert-SsgToLion.ps1** (2 copies, `CFE0E1397446`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Convert-SsgToLion.ps1`
+  - `03-pipelines/Migration/Trial3/tools/Convert-SsgToLion.ps1`
+- **assign.json** (2 copies, `C8AAED229E47`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/assign.json`
+- **expected.dat** (2 copies, `C4BCA70F2F80`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/montant/expected.dat`
+- **fic-unload.dat** (2 copies, `C1FFE4BB79D9`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/fic-unload.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/fic-unload.dat`
+- **input.dat** (2 copies, `C1816D047F5A`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/input.dat`
+- **trial-17-tapeld-distrib.settings** (2 copies, `C035BB52A406`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-17-tapeld-distrib.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-17-tapeld-distrib.settings`
+- **_gen-fixtures.ps1** (2 copies, `BF8D463AC222`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/_gen-fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/_gen-fixtures.ps1`
+- **trial-07-architab1.settings** (2 copies, `8DB79DF0CE1D`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-07-architab1.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-07-architab1.settings`
+- **scan.ps1** (2 copies, `7CBD69C54C06`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/scan.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/scan.ps1`
+- **_check-json.ps1** (2 copies, `825B5285B24C`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_check-json.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_check-json.ps1`
+- **fic-descript.dat** (2 copies, `365A8C1FC46D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/fic-descript.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/fic-descript.dat`
+- **ficunload.dat** (2 copies, `34A3F3073163`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/ficunload.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/ficunload.dat`
+- **README.md** (2 copies, `346E1BF7778E`)
+  - `01-docs-html/Migration/EclCobolPipeline/README.md`
+  - `01-docs-html/Migration/Trial3/README.md`
+- **expected.dat** (2 copies, `33915D2BEF1B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/expected.dat`
+- **input.dat** (2 copies, `324AF5645F67`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/input.dat`
+- **test-refimpl.ps1** (2 copies, `319BC36B6A13`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/test-refimpl.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/test-refimpl.ps1`
+- **assign.json** (2 copies, `312406DDFFAD`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/assign.json`
+- **_debug-trig-b.ps1** (2 copies, `2D5A11485934`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_debug-trig-b.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_debug-trig-b.ps1`
+- **AMT172-Setup-Guide.md** (2 copies, `2BCB97155155`)
+  - `01-docs-html/Migration/AMT172-Setup-Guide.md`
+  - `01-docs-html/SsgTrial-Transfer/docs/AMT172-Setup-Guide.md`
+- **assign.json** (2 copies, `298370F1F70D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/assign.json`
+- **Run-EclPipeline.ps1** (2 copies, `294F2A298571`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Run-EclPipeline.ps1`
+  - `03-pipelines/Migration/Trial3/tools/Run-EclPipeline.ps1`
+- **eclat.ps1** (2 copies, `388850D35D64`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/eclat.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/eclat.ps1`
+- **Fix-Unload.ps1** (2 copies, `27638B41F145`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/Fix-Unload.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/Fix-Unload.ps1`
+- **Check-Fixtures.ps1** (2 copies, `210BF25904E0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/Check-Fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/Check-Fixtures.ps1`
+- **trial-09-eclat.settings** (2 copies, `1B8B0F6DCB56`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-09-eclat.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-09-eclat.settings`
+- **compare2.ps1** (2 copies, `17349DAD6358`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/compare2.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/compare2.ps1`
+- **Check-Expected.ps1** (2 copies, `1662B1B76D12`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/Check-Expected.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/Check-Expected.ps1`
+- **assign.json** (2 copies, `15C7B073101D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/assign.json`
+- **loadis_mult-nodup.ps1** (2 copies, `109A738473C4`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/loadis_mult-nodup.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/loadis_mult-nodup.ps1`
+- **expected.dat** (2 copies, `0F747FEAB67B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/expected.dat`
+- **Convert-SsgToLion.ps1** (2 copies, `08E6ECFBB44B`)
+  - `03-pipelines/Migration/CobolConvert/tools/Convert-SsgToLion.ps1`
+  - `03-pipelines/Amt/SharePipelineProcess/Convert-SsgToLion.ps1`
+- **Remove-SsgDirectives.ps1** (2 copies, `081D179CA4B4`)
+  - `03-pipelines/Migration/CobolConvert/tools/Remove-SsgDirectives.ps1`
+  - `03-pipelines/Amt/SharePipelineProcess/Remove-SsgDirectives.ps1`
+- **fic-report.dat** (2 copies, `070C802D6A57`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/fic-report.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/fic-report.dat`
+- **BABA_ASCII.ps1** (2 copies, `04F15C5C8318`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/BABA_ASCII.ps1`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/BABA_ASCII.ps1`
+- **trial-12-archisepare.settings** (2 copies, `2667831B6709`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-12-archisepare.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-12-archisepare.settings`
+- **trial-15-unload-ascii.settings** (2 copies, `3DD56640B5B2`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-15-unload-ascii.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-15-unload-ascii.settings`
+- **SSG-Trial-Progress.html** (2 copies, `3E404D248C0B`)
+  - `01-docs-html/Migration/SSG-Trial-Progress.html`
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-Trial-Progress.html`
+- **_gen-fixtures.ps1** (2 copies, `3E56816508AF`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/_gen-fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/fixtures/montant/_gen-fixtures.ps1`
+- **assign.json** (2 copies, `819704B8685D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/assign.json`
+- **SSG-ECL-Command-Matrix.html** (2 copies, `7ED5E0B48D38`)
+  - `01-docs-html/Migration/SSG-ECL-Command-Matrix.html`
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-ECL-Command-Matrix.html`
+- **cfh-copy.ps1** (2 copies, `F62E25DC2F82`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/cfh-copy.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/cfh-copy.ps1`
+- **_build-scan-fixtures.ps1** (2 copies, `7A34D05F9A05`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_build-scan-fixtures.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_build-scan-fixtures.ps1`
+- **programs.manifest.20260702-022735.json** (2 copies, `7903A031C574`)
+  - `03-pipelines/Migration/EclCobolPipeline/manifest/backups/programs.manifest.20260702-022735.json`
+  - `03-pipelines/Migration/Trial3/manifest/backups/programs.manifest.20260702-022735.json`
+- **expected.dat** (2 copies, `75E5D105D2DC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/expected.dat`
+- **expected.dat** (2 copies, `74D2E9162612`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/scan/expected.dat`
+- **unloadis_mult.ps1** (2 copies, `7242D31C44D0`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/unloadis_mult.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/unloadis_mult.ps1`
+- **AMT175-Setup-Guide.html** (2 copies, `66AC22AF6A04`)
+  - `01-docs-html/Migration/AMT175-Setup-Guide.html`
+  - `01-docs-html/SsgTrial-Transfer/docs/AMT175-Setup-Guide.html`
+- **trial-11-cfh-copy.settings** (2 copies, `6308F2777F0A`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-11-cfh-copy.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-11-cfh-copy.settings`
+- **Fill-AfmtColumn.ps1** (2 copies, `621E9F6078C2`)
+  - `01-docs-html/Migration/EclCobolPipeline/tools/Fill-AfmtColumn.ps1`
+  - `01-docs-html/Migration/Trial3/tools/Fill-AfmtColumn.ps1`
+- **trial-08-scan.settings** (2 copies, `61DAA08B7FFD`)
+  - `03-pipelines/Migration/EclCobolPipeline/settings/trial-08-scan.settings`
+  - `03-pipelines/Migration/Trial3/settings/trial-08-scan.settings`
+- **_scan-find-ecl.ps1** (2 copies, `5F25971979C7`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_scan-find-ecl.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_scan-find-ecl.ps1`
+- **UNLOADIS_ASCII.TXT** (2 copies, `553AF33F3DC9`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Input/UNLOADIS_ASCII.TXT`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Input/UNLOADIS_ASCII.TXT`
+- **input.dat** (2 copies, `54375AC097D7`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/input.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/input.dat`
+- **expected.dat** (2 copies, `53CC86694463`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/expected.dat`
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/expected.dat`
+- **CFH-COPY.ps1** (2 copies, `4FFD44ACFBBC`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/CFH-COPY.ps1`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/CFH-COPY.ps1`
+- **assign.json** (2 copies, `4FDF3110EDF0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/assign.json`
+- **fill-ULND-cells.ps1** (2 copies, `4EFD7A1B38F0`)
+  - `01-docs-html/Migration/EclCobolPipeline/tools/fill-ULND-cells.ps1`
+  - `01-docs-html/Migration/Trial3/tools/fill-ULND-cells.ps1`
+- **architab1.ps1** (2 copies, `4CF7CE1C90B4`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/architab1.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/architab1.ps1`
+- **unloadis_mult-nodup.ps1** (2 copies, `4BFA9E54357A`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/unloadis_mult-nodup.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/unloadis_mult-nodup.ps1`
+- **assign.json** (2 copies, `4B40FCC09957`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/assign.json`
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/assign.json`
+- **CHABAN_ASCII.TXT** (2 copies, `48CC27296316`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Input/CHABAN_ASCII.TXT`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Input/CHABAN_ASCII.TXT`
+- **_eclat-trigger-b.ps1** (2 copies, `489253132F7F`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/_eclat-trigger-b.ps1`
+  - `03-pipelines/Migration/Trial3/tools/_eclat-trigger-b.ps1`
+- **tapeld_distrib.ps1** (2 copies, `457151FF9545`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/tapeld_distrib.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/tapeld_distrib.ps1`
+- **lectis.ps1** (2 copies, `8DB3A1F1B3C9`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/lectis.ps1`
+  - `03-pipelines/Migration/Trial3/tools/refimpl/lectis.ps1`
+- **ARCHISEPARE.ps1** (2 copies, `F7BDFE7CEB89`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/ARCHISEPARE.ps1`
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/ARCHISEPARE.ps1`
+
+## (b) Same name, different hash (diverged copies)
+
+21 groups.
+
+- **_gen-fixtures.ps1**
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/_gen-fixtures.ps1` (2026-06-26, `BF8D463A`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/_gen-fixtures.ps1` (2026-06-26, `3E568165`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/_gen-fixtures.ps1` (2026-06-26, `DA192963`)
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/_gen-fixtures.ps1` (2026-06-26, `BF8D463A`)
+  - `03-pipelines/Migration/Trial3/fixtures/montant/_gen-fixtures.ps1` (2026-06-26, `3E568165`)
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/_gen-fixtures.ps1` (2026-06-26, `DA192963`)
+- **AMT172-Setup-Guide.extract.md**
+  - `02-todo-issues/Migration/AMT172-Setup-Guide.extract.md` (2026-09-10, `F1D6F70B`)
+  - `02-todo-issues/SsgTrial-Transfer/docs/AMT172-Setup-Guide.extract.md` (2026-09-01, `A1E68AA7`)
+  - `02-todo-issues/Amt/SharePipelineProcess/AMT172-Setup-Guide.extract.md` (2026-08-12, `BBD9E666`)
+- **AMT172-Setup-Guide.html**
+  - `01-docs-html/Migration/AMT172-Setup-Guide.html` (2026-09-10, `4D5DA478`)
+  - `01-docs-html/SsgTrial-Transfer/docs/AMT172-Setup-Guide.html` (2026-09-01, `20FE61B0`)
+  - `01-docs-html/Amt/SharePipelineProcess/AMT172-Setup-Guide.html` (2026-08-12, `BDD6ED59`)
+- **AmtSettings.xml**
+  - `03-pipelines/Migration/Trial3/run/RealRuntime/AmtSettings.xml` (2026-10-01, `F586BFCA`)
+  - `03-pipelines/Migration/Trial3/run/AmtSettings.xml` (2026-08-18, `6F11E55F`)
+- **archisepare.ps1**
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/ARCHISEPARE.ps1` (2026-08-21, `F7BDFE7C`)
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/ARCHISEPARE.ps1` (2026-08-21, `F7BDFE7C`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/archisepare.ps1` (2026-07-01, `D91E2C76`)
+  - `03-pipelines/Migration/Trial3/tools/refimpl/archisepare.ps1` (2026-07-01, `D91E2C76`)
+- **assign.json**
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT/assign.json` (2026-07-02, `7259FFD9`)
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/assign.json` (2026-07-02, `4B40FCC0`)
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT-NODUP/assign.json` (2026-07-02, `7259FFD9`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT-NODUP/assign.json` (2026-07-02, `7259FFD9`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT/assign.json` (2026-07-02, `7259FFD9`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/assign.json` (2026-07-02, `4B40FCC0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/assign.json` (2026-07-01, `298370F1`)
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/assign.json` (2026-07-01, `312406DD`)
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/assign.json` (2026-07-01, `D0A3486B`)
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/assign.json` (2026-07-01, `298370F1`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/assign.json` (2026-07-01, `D0A3486B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/assign.json` (2026-07-01, `312406DD`)
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/assign.json` (2026-06-30, `4FDF3110`)
+  - `03-pipelines/Migration/Trial3/fixtures/scan/assign.json` (2026-06-30, `E9FF50E3`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/assign.json` (2026-06-30, `6D7AE662`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/assign.json` (2026-06-30, `E9FF50E3`)
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/assign.json` (2026-06-30, `C8AAED22`)
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/assign.json` (2026-06-30, `6D7AE662`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/assign.json` (2026-06-30, `C8AAED22`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/assign.json` (2026-06-30, `4FDF3110`)
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/assign.json` (2026-06-30, `6D7AE662`)
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/assign.json` (2026-06-27, `ACC7A27D`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/assign.json` (2026-06-27, `ACC7A27D`)
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/assign.json` (2026-06-26, `15C7B073`)
+  - `03-pipelines/Migration/Trial3/fixtures/montant/assign.json` (2026-06-26, `B115F696`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/assign.json` (2026-06-26, `15C7B073`)
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/assign.json` (2026-06-26, `819704B8`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/assign.json` (2026-06-26, `819704B8`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/assign.json` (2026-06-26, `B115F696`)
+- **cfh-copy.ps1**
+  - `03-pipelines/Working/CFH-COPY.ps1` (2026-10-02, `6742BA77`)
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Output/CFH-COPY.ps1` (2026-08-21, `4FFD44AC`)
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Output/CFH-COPY.ps1` (2026-08-21, `4FFD44AC`)
+  - `03-pipelines/Migration/EclCobolPipeline/tools/refimpl/cfh-copy.ps1` (2026-06-30, `F62E25DC`)
+  - `03-pipelines/Migration/Trial3/tools/refimpl/cfh-copy.ps1` (2026-06-30, `F62E25DC`)
+- **Convert-SsgToLion.ps1**
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Convert-SsgToLion.ps1` (2026-07-03, `CFE0E139`)
+  - `03-pipelines/Migration/Trial3/tools/Convert-SsgToLion.ps1` (2026-07-03, `CFE0E139`)
+  - `03-pipelines/Migration/CobolConvert/tools/Convert-SsgToLion.ps1` (2026-06-25, `08E6ECFB`)
+  - `03-pipelines/Amt/SharePipelineProcess/Convert-SsgToLion.ps1` (2026-06-25, `08E6ECFB`)
+- **expected.dat**
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/expected.dat` (2026-07-02, `52BF6185`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/expected.dat` (2026-07-02, `52BF6185`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archiformat/expected.dat` (2026-07-01, `DEAA8057`)
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT/expected.dat` (2026-07-01, `99A691D1`)
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/expected.dat` (2026-07-01, `B89B1FB7`)
+  - `03-pipelines/Migration/Trial3/fixtures/archisepare/expected.dat` (2026-07-01, `75E5D105`)
+  - `03-pipelines/Migration/Trial3/fixtures/UNLOADIS_MULT-NODUP/expected.dat` (2026-07-01, `99A691D1`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT-NODUP/expected.dat` (2026-07-01, `99A691D1`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/UNLOADIS_MULT/expected.dat` (2026-07-01, `99A691D1`)
+  - `03-pipelines/Migration/Trial3/fixtures/archiformat/expected.dat` (2026-07-01, `DEAA8057`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/archisepare/expected.dat` (2026-07-01, `75E5D105`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/expected.dat` (2026-07-01, `B89B1FB7`)
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/expected.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/expected.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/expected.dat` (2026-06-30, `0451B322`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/expected.dat` (2026-06-30, `0451B322`)
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/expected.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/expected.dat` (2026-06-29, `E7A7EFBF`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/expected.dat` (2026-06-29, `E7A7EFBF`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/expected.dat` (2026-06-27, `74D2E916`)
+  - `03-pipelines/Migration/Trial3/fixtures/scan/expected.dat` (2026-06-27, `74D2E916`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/expected.dat` (2026-06-27, `53CC8669`)
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/expected.dat` (2026-06-27, `53CC8669`)
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/expected.dat` (2026-06-26, `0F747FEA`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/expected.dat` (2026-06-26, `0F747FEA`)
+  - `03-pipelines/Migration/Trial3/fixtures/montant/expected.dat` (2026-06-26, `C4BCA70F`)
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/expected.dat` (2026-06-26, `33915D2B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/expected.dat` (2026-06-26, `33915D2B`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/expected.dat` (2026-06-26, `C4BCA70F`)
+- **input.dat**
+  - `03-pipelines/Migration/Trial3/fixtures/TAPELD_DISTRIB/input.dat` (2026-07-02, `52BF6185`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/TAPELD_DISTRIB/input.dat` (2026-07-02, `52BF6185`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/LOADIS_MULT-NODUP/input.dat` (2026-07-01, `072B1D62`)
+  - `03-pipelines/Migration/Trial3/fixtures/LOADIS_MULT-NODUP/input.dat` (2026-07-01, `072B1D62`)
+  - `07-other/Amt/Transfer/CFH-COPY-Trial11/MockInputFiles/input.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/cfh-copy/input.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/compare2/input.dat` (2026-06-30, `B782BC4D`)
+  - `03-pipelines/Migration/Trial3/fixtures/compare2/input.dat` (2026-06-30, `B782BC4D`)
+  - `03-pipelines/Migration/Trial3/fixtures/cfh-copy/input.dat` (2026-06-30, `EE8E23AC`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/eclat/input.dat` (2026-06-29, `324AF564`)
+  - `03-pipelines/Migration/Trial3/fixtures/eclat/input.dat` (2026-06-29, `324AF564`)
+  - `03-pipelines/Migration/Trial3/fixtures/scan/input.dat` (2026-06-27, `072B1D62`)
+  - `03-pipelines/Migration/Trial3/fixtures/architab1/input.dat` (2026-06-27, `54375AC0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/scan/input.dat` (2026-06-27, `072B1D62`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/architab1/input.dat` (2026-06-27, `54375AC0`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/tri_ascii/input.dat` (2026-06-26, `C1816D04`)
+  - `03-pipelines/Migration/Trial3/fixtures/lectis/input.dat` (2026-06-26, `EC696887`)
+  - `03-pipelines/Migration/Trial3/fixtures/montant/input.dat` (2026-06-26, `E06428F7`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/montant/input.dat` (2026-06-26, `E06428F7`)
+  - `03-pipelines/Migration/EclCobolPipeline/fixtures/lectis/input.dat` (2026-06-26, `EC696887`)
+  - `03-pipelines/Migration/Trial3/fixtures/tri_ascii/input.dat` (2026-06-26, `C1816D04`)
+- **pipeline.config.json**
+  - `03-pipelines/Migration/Trial3/config/pipeline.config.json` (2026-08-18, `C30A8210`)
+  - `03-pipelines/Migration/EclCobolPipeline/config/pipeline.config.json` (2026-06-26, `A55AD34F`)
+- **README.md**
+  - `01-docs-html/Migration/Trial3/run/RealRuntime/README.md` (2026-10-01, `5F29A0C4`)
+  - `01-docs-html/SsgTrial-Transfer/README.md` (2026-09-08, `78E3303E`)
+  - `01-docs-html/SsgTrial-Transfer/Trial3/README.md` (2026-09-08, `2BBAC22B`)
+  - `01-docs-html/Migration/SsgConverter-Release-20260821/README.md` (2026-08-21, `DFF6C822`)
+  - `01-docs-html/Amt/SsgConverter-Release-20260821/README.md` (2026-08-21, `DFF6C822`)
+  - `01-docs-html/Migration/Templates/README.md` (2026-08-19, `7BC7911B`)
+  - `01-docs-html/ReferenceDocuments/Migration CobolToC/README.md` (2026-08-19, `C7FA6630`)
+  - `01-docs-html/Amt/SharePipelineProcess/README.md` (2026-08-12, `316CA8B9`)
+  - `01-docs-html/Migration/EclCobolPipeline/README.md` (2026-06-26, `346E1BF7`)
+  - `01-docs-html/Migration/Trial3/README.md` (2026-06-26, `346E1BF7`)
+- **Remove-SsgDirectives.ps1**
+  - `03-pipelines/Migration/EclCobolPipeline/tools/Remove-SsgDirectives.ps1` (2026-07-01, `BD54F45B`)
+  - `03-pipelines/Migration/Templates/Remove-SsgDirectives.ps1` (2026-07-01, `BD54F45B`)
+  - `03-pipelines/Migration/Trial3/tools/Remove-SsgDirectives.ps1` (2026-07-01, `BD54F45B`)
+  - `03-pipelines/Migration/CobolConvert/tools/Remove-SsgDirectives.ps1` (2026-06-25, `081D179C`)
+  - `03-pipelines/Amt/SharePipelineProcess/Remove-SsgDirectives.ps1` (2026-06-25, `081D179C`)
+- **SSG-COBOL-Reference.extract.md**
+  - `02-todo-issues/Migration/SSG-COBOL-Reference.extract.md` (2026-09-01, `D83A6014`)
+  - `02-todo-issues/SsgTrial-Transfer/docs/SSG-COBOL-Reference.extract.md` (2026-09-01, `01184BC7`)
+  - `02-todo-issues/Amt/SharePipelineProcess/SSG-COBOL-Reference.extract.md` (2026-06-26, `04E45C4F`)
+- **SSG-COBOL-Reference.html**
+  - `01-docs-html/Migration/SSG-COBOL-Reference.html` (2026-09-01, `EF3A8FBD`)
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-COBOL-Reference.html` (2026-09-01, `EF3A8FBD`)
+  - `01-docs-html/Amt/SharePipelineProcess/SSG-COBOL-Reference.html` (2026-06-26, `D1DDCF8A`)
+- **SSG-ECL-Command-Matrix.html**
+  - `01-docs-html/Migration/SSG-ECL-Command-Matrix.html` (2026-09-01, `7ED5E0B4`)
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-ECL-Command-Matrix.html` (2026-09-01, `7ED5E0B4`)
+  - `01-docs-html/Amt/SharePipelineProcess/SSG-ECL-Command-Matrix.html` (2026-07-02, `3AFC9B86`)
+- **SSG-ECL-PowerShell-Reference.extract.md**
+  - `02-todo-issues/Migration/SSG-ECL-PowerShell-Reference.extract.md` (2026-10-01, `7C8220CD`)
+  - `02-todo-issues/SsgTrial-Transfer/docs/SSG-ECL-PowerShell-Reference.extract.md` (2026-09-01, `DADD756E`)
+  - `02-todo-issues/Amt/SharePipelineProcess/SSG-ECL-PowerShell-Reference.extract.md` (2026-07-21, `62259C3E`)
+- **SSG-ECL-PowerShell-Reference.html**
+  - `01-docs-html/Migration/SSG-ECL-PowerShell-Reference.html` (2026-10-01, `F957F557`)
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-ECL-PowerShell-Reference.html` (2026-09-01, `7D82ED34`)
+  - `01-docs-html/Amt/SharePipelineProcess/SSG-ECL-PowerShell-Reference.html` (2026-07-21, `8282B6F4`)
+- **SSG-Trial-Progress.html**
+  - `01-docs-html/Migration/SSG-Trial-Progress.html` (2026-09-01, `3E404D24`)
+  - `01-docs-html/SsgTrial-Transfer/docs/SSG-Trial-Progress.html` (2026-09-01, `3E404D24`)
+  - `01-docs-html/Amt/SharePipelineProcess/SSG-Trial-Progress.html` (2026-07-21, `074C91FC`)
+- **SsgConverter-COPILOT.md**
+  - `01-docs-html/Migration/SsgConverter-Release-20260821/SsgConverter-COPILOT.md` (2026-08-21, `E48AFE21`)
+  - `01-docs-html/Amt/SsgConverter-Release-20260821/SsgConverter-COPILOT.md` (2026-08-21, `123A1C3A`)
+- **SsgConverterSettings-example.settings**
+  - `03-pipelines/Migration/SsgConverter-Release-20260821/Examples/Settings/SsgConverterSettings-example.settings` (2026-08-21, `B53E9778`)
+  - `03-pipelines/Amt/SsgConverter-Release-20260821/Examples/Settings/SsgConverterSettings-example.settings` (2026-08-21, `4FA9CC1F`)
+
+## (c) Script families (candidates for shared logic)
+
+Grouped by leading name token; 6 families with 3+ distinct scripts.
+
+- **Run-*.ps1** (14): Run-EclPipeline.ps1, Run-EclProof.ps1, Run-All-T3-Live-Standalone.ps1, Run-Archisepare.ps1, Run-Chaban.ps1, Run-LoadisAscii.ps1, Run-T3-CFH-COPY-Live.ps1, Run-T3-HelloWorld-Live.ps1, Run-UnloadAscii.ps1, Run-UnloadisMulti.ps1, Run-StageA.ps1, Run-Pilot-CHABAN.ps1, Run-Pilot-UNLOADIS.ps1, run-baseline.ps1
+- **-*.ps1** (10): _gen-fixtures.ps1, _build-scan-candidate.ps1, _build-scan-fixtures.ps1, _check-json.ps1, _debug-trig-b.ps1, _eclat-trigger-b.ps1, _run-eclat-remove.ps1, _scan-find-ecl.ps1, _scan-show-params.ps1, _scan-trigger-b.ps1
+- **Fill-*.ps1** (6): Fill-AfmtColumn.ps1, fill-ULND-cells.ps1, fill-asep-cells.ps1, fill-LMND-cells.ps1, fill-TAPE-cells.ps1, fill-UNL-cells.ps1
+- **cfh-*.ps1** (3): cfh-copy.ps1, CFH-COPY.ps1, CFH-COPY-LIVE.ps1
+- **check-*.ps1** (3): check_version.ps1, Check-Expected.ps1, Check-Fixtures.ps1
+- **unloadis-*.ps1** (3): unloadis_mult-nodup.ps1, unloadis_mult.ps1, UNLOADIS_ASCII.ps1

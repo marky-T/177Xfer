@@ -1,0 +1,10 @@
+{
+  "_description": "Repeatable ECL/COBOL/PowerShell conversion pipeline configuration. Paths are environment-specific; edit to match the local machine. Relative paths (settingsDir, candidatesDir, outputDir, macrosFile) are resolved against the repo root.",
+  "converterConsolePath": "C:\\Dev\\amt-go-net-net8\\Migration Tools\\CobolToAmt\\CobolConverterConsole\\bin\\Debug\\net8.0\\CobolConverterConsole.exe",
+  "globalCopyDir": "C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd",
+  "rawSourceDir": "C:\\Amt\\MainframeSource\\Codedrop 2025\\SSG Prd\\SSG Creating COBOL",
+  "settingsDir": "settings",
+  "macrosFile": "macros\\ssg-stub.macros.xml",
+  "candidatesDir": "candidates",
+  "outputDir": "output"
+}

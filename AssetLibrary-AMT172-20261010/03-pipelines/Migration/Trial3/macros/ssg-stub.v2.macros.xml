@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SSG Stub Macros v2 — Enhanced for Trial3 formatting corrections
+
+  Previous version (v1) handled bare-word tokens from *DEFINE constructs.
+  
+  This version adds:
+    - Level number normalization: LLEV1 → 01, LLEV3 → 03, LLEV5 → 05, LLEV7 → 07
+    - SSG marker cleanup: enddefine, endif, elseif aliases
+
+  Version: 2
+  Date: 2026-08-20
+  Programs: ARCHISEPARE, LOADIS_ASCII, UNLOADIS_MULTI
+
+  APPROACH: Use named tokens (LLEV1, LLEV3, etc.) instead of bare digits 1, 3
+  to avoid collisions with numeric literals in picture clauses or expressions.
+  This requires a pre-processor pass to replace bare level numbers with tokens.
+-->
+<PrecompilerSettings>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- LEVEL NUMBER MAPPING (v2 additions) -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  
+  <!-- Named token → COBOL level number mappings.
+       These are used if the SSG source or pre-processor marks level numbers
+       with token names (LLEV1, LLEV3, etc.) instead of bare digits. -->
+  <PrecompilerMacro Name="LLEV1"    ReplacementText="01" />
+  <PrecompilerMacro Name="LLEV3"    ReplacementText="03" />
+  <PrecompilerMacro Name="LLEV5"    ReplacementText="05" />
+  <PrecompilerMacro Name="LLEV7"    ReplacementText="07" />
+  <PrecompilerMacro Name="LLEV9"    ReplacementText="09" />
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- SSG MARKER CLEANUP (v2 additions) -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  
+  <!-- SSG control flow markers — map to harmless aliases if they survive pre-processing -->
+  <PrecompilerMacro Name="  enddefine" ReplacementText="continue" />
+  <PrecompilerMacro Name="endif"     ReplacementText=" continue " />
+  <PrecompilerMacro Name="  2elseif"    ReplacementText=" continue2 " />
+  <PrecompilerMacro Name="  3 "        ReplacementText=" 03 " />
+
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- LEGACY ENTRIES (v1 — retained for compatibility) -->
+  <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- MONTANT_SIGNE family — REDEFINES level-number aliases in WORKING-STORAGE -->
+  <PrecompilerMacro Name="FILLUN"   ReplacementText="01" />
+  <PrecompilerMacro Name="FILLDEU"  ReplacementText="01" />
+
+  <!-- COMPARE2 / CONDIS family — filler and step identifier aliases -->
+  <PrecompilerMacro Name="FIL1"     ReplacementText="01" />
+  <PrecompilerMacro Name="FIL2"     ReplacementText="01" />
+  <PrecompilerMacro Name="PAS"      ReplacementText="01" />
+
+</PrecompilerSettings>

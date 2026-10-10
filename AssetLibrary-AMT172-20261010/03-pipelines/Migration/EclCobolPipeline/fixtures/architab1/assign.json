@@ -1,0 +1,8 @@
+{
+  "_description": "Tier-1 file-assignment map for ARCHITAB1, modelled on the AMT PowerShell ECL skeleton (jobname -> file assignments -> Xqt). ARCHITAB1 has NO COBOL input file; input.dat is the ECL parameter card that pins the ACCEPT...FROM DATE value so the Tier-1 golden is deterministic. FICOUT (the ficout designator [fname,1,1,1]='ECL-FNAME') is materialised in the harness temp work dir.",
+  "jobname": "ARCHITAB1",
+  "fileAssignments": {
+    "DATECARD": "input.dat",
+    "FICOUT": "output.dat"
+  }
+}

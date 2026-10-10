@@ -1,0 +1,8 @@
+{
+  "_description": "Tier-1 file-assignment map for TRI_ASCII (PROGRAM-ID SORT-FICHOUT-1). Flat-sequential 80-char records in, sorted 80-char records out.",
+  "jobname": "SORT-FICHOUT-1",
+  "fileAssignments": {
+    "FICHIN-1": "input.dat",
+    "FICHOUT-1": "output.dat"
+  }
+}

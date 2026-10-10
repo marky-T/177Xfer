@@ -1,0 +1,8 @@
+{
+  "_description": "Tier-1 file-assignment map for MONTANT, modelled on the AMT PowerShell ECL skeleton (jobname -> file assignments -> Xqt). Paths are relative to this fixture folder; FILEOUT-1 is materialised in the harness temp work dir.",
+  "jobname": "MONTANT",
+  "fileAssignments": {
+    "FILEIN-1": "input.dat",
+    "FILEOUT-1": "output.dat"
+  }
+}
