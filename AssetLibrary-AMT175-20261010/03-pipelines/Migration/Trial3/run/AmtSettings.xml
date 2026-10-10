@@ -1,0 +1,45 @@
+<Amt>
+	<AmtSettings>
+		<AppName>AMT175_AFBUS_COBOL</AppName>
+		<FullAMT>True</FullAMT>
+		<IniFile>C:\Amt\Parallel\AMT175\Sys.ini</IniFile>
+		<ComScript>C:\Amt\Parallel\AMT175\AmtTools\ComScript\ComScript.dll</ComScript>
+		<ComModule>C:\Amt\Parallel\AMT175\AmtTools\ComModule\AmtCOMModule.dll</ComModule>
+		<TransactionServer>Grpc:localhost:4444</TransactionServer>
+		<MaxWaitTime>5</MaxWaitTime>
+		<ApplicationKind>CobolOS2200</ApplicationKind>
+		<UseJobLog>True</UseJobLog>
+		<LogTimes>True</LogTimes>
+		<LoggingSeverity>Info</LoggingSeverity>
+		<LogEventError>True</LogEventError>
+		<LogEventInfo>True</LogEventInfo>
+		<LogEventWarning>True</LogEventWarning>
+		<PrintToPhysicalPrinters>False</PrintToPhysicalPrinters>
+		<DefaultDontPrint>True</DefaultDontPrint>
+		<DefaultPrinter>Default</DefaultPrinter>
+		<UseUnicode>True</UseUnicode>
+		<DeleteEmptyFolders>False</DeleteEmptyFolders>
+		<DefaultBDFolder>BD</DefaultBDFolder>
+		<TransferRoot></TransferRoot>
+		<WarningRcw2435>False</WarningRcw2435>
+		<MailLogLevel>0</MailLogLevel>
+		<MailTestAddress></MailTestAddress>
+		<MailFrom></MailFrom>
+		<MailPort>25</MailPort>
+		<MailServer></MailServer>
+		<MailLogon></MailLogon>
+		<MailPassword></MailPassword>
+		<MailUseSSL>False</MailUseSSL>
+		<MailRecipient></MailRecipient>
+		<FTPCreateFolders>True</FTPCreateFolders>
+		<FTPTestSettings>False</FTPTestSettings>
+		<FTPTestDest></FTPTestDest>
+		<FTPTestHost></FTPTestHost>
+		<FTPTestUser></FTPTestUser>
+		<FTPTestPassword></FTPTestPassword>
+		<FTPPath></FTPPath>
+		<FTPDeleteFiles>True</FTPDeleteFiles>
+		<FileControllerName>FileController</FileControllerName>
+		<BatchControllerName>AMT175 BatchController</BatchControllerName>
+	</AmtSettings>
+</Amt>

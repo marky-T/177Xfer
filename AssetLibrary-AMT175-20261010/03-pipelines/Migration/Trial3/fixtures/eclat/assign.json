@@ -1,0 +1,9 @@
+{
+  "jobname": "ECLAT",
+  "fileAssignments": {
+    "FILEKEY":   "input.dat",
+    "TABLE":     "table.dat",
+    "FARCHIVE":  "archive.dat",
+    "FENCOURS":  "encours.dat"
+  }
+}

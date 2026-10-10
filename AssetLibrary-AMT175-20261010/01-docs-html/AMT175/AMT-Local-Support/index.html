@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMT Local Support</title>
+<!--
+  ============================================================================
+  AMT LOCAL SUPPORT  -  standalone offline help page
+  ============================================================================
+  - Single self-contained file. No server, no internet, no Keycloak required.
+  - Open it by double-clicking (file://) in any browser.
+
+  HOW TO ADD A NEW SECTION
+  ------------------------
+  1. Copy an existing block:  section class="topic" id="..."  ...  /section
+  2. Paste it just before the END TOPICS marker further down the file.
+  3. Give the section a unique id and a data-tags list (words used by search).
+  4. Edit the h2 title and the body, then save and refresh the browser.
+
+  The left-hand contents list, search, and scroll highlight update
+  automatically from whatever topic sections exist.
+  ============================================================================
+-->
+<style>
+  :root{
+    --nav-w:240px; --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+    --code-bg:#1e1e2e; --code-fg:#cdd6f4; --done:#1a7f4b;
+    /* vars consumed by the embedded architecture SVG */
+    --panel:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --accent-soft:#eaf1ff; --code:#f3f4f6; --warn-line:#f59e0b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh;}
+  a{color:var(--accent);}
+
+  nav#sidenav{width:var(--nav-w); min-width:var(--nav-w); background:#0f2832; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0;}
+  nav#sidenav .logo{padding:14px 16px 10px; border-bottom:1px solid #1a4a5a;}
+  nav#sidenav .logo h1{font-size:13px; font-weight:700; color:#e0f2fe; letter-spacing:.5px; text-transform:uppercase;}
+  nav#sidenav .logo p{font-size:11px; color:#7dd3fc; margin-top:3px;}
+  nav#sidenav .nav-search{padding:10px 12px 6px;}
+  nav#sidenav .nav-search input{width:100%; padding:7px 10px; border:1px solid #1a4a5a; border-radius:6px; background:#0c2029; color:#e0f2fe; font-size:12px;}
+  nav#sidenav .nav-search input::placeholder{color:#3a7a90;}
+  #tocList{padding:2px 0 20px;}
+  #tocList a{display:block; padding:7px 16px; font-size:12px; color:#bae6fd; text-decoration:none; border-left:3px solid transparent; transition:background .15s;}
+  #tocList a:hover{background:#1a4a5a; color:#e0f2fe; border-left-color:#38bdf8;}
+  #tocList a.active{background:#0c3344; color:#7dd3fc; border-left-color:#0ea5e9;}
+
+  main{flex:1; padding:28px 36px; max-width:1000px;}
+  .page-title h1{font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px;}
+  .page-meta{font-size:13px; color:#6b7280; margin-bottom:22px; line-height:1.6;}
+
+  section.topic{background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:22px;}
+  section.topic > h2{font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border);}
+  section.topic h3.sub{font-size:14px; font-weight:600; color:var(--accent); margin:18px 0 8px;}
+  section.topic p{margin-bottom:10px; line-height:1.65;}
+  section.topic ul, section.topic ol{margin:0 0 10px 20px; line-height:1.7;}
+  section.topic li{margin-bottom:3px;}
+  strong{font-weight:600;}
+
+  pre{background:var(--code-bg); color:var(--code-fg); padding:14px 18px; border-radius:6px; overflow-x:auto; font-size:12px; line-height:1.6; font-family:'Cascadia Code','Fira Code',Consolas,monospace; white-space:pre; margin:12px 0;}
+  pre code{background:none; color:inherit; padding:0; font-size:inherit;}
+  code{background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace;}
+  .path{font-family:Consolas,monospace; font-size:11.5px; color:#6b7280; word-break:break-all; background:none; padding:0;}
+
+  .callout{background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; color:#1e3a5f;}
+  .callout strong{color:#0f172a;}
+  /* reusable setup/warning message — stronger amber */
+  .callout.setup{background:#fde68a; border-left-color:#b45309; color:#5c2e0d; font-weight:600;}
+  .callout.setup strong{color:#5c2e0d;}
+
+  table{width:100%; border-collapse:collapse; font-size:13px; margin:10px 0;}
+  th{background:#f0f4f8; padding:6px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; color:#374151;}
+  td{padding:5px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.55;}
+  tr:nth-child(even) td{background:#fafafa;}
+
+  .badge{display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600;}
+  .badge-done{background:#dcfce7; color:var(--done);}
+  .badge-info{background:#dbeafe; color:#1d4ed8;}
+
+  .muted{color:#6b7280;}
+  .hidden{display:none !important;}
+  mark.hl{background:#fde047; color:inherit; padding:0 1px; border-radius:2px;}
+  .footer-bar{margin-top:20px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af;}
+  ::-webkit-scrollbar{width:8px; height:8px;}
+  ::-webkit-scrollbar-thumb{background:#94a3b8; border-radius:4px;}
+  @media (max-width:820px){ nav#sidenav{display:none} main{padding:20px 16px} }
+  @media print{ nav#sidenav{display:none} section.topic{break-inside:avoid} }
+</style>
+</head>
+<body>
+
+<nav id="sidenav" aria-label="Contents">
+  <div class="logo">
+    <h1>AMT Local Support</h1>
+    <p>Offline help &middot; SSG &amp; AMT</p>
+  </div>
+  <div class="nav-search">
+    <input id="search" type="search" placeholder="Search…" autocomplete="off" />
+  </div>
+  <div id="tocList"></div>
+</nav>
+
+<main id="topics">
+  <div class="page-title">
+    <h1>AMT Local Support</h1>
+    <p class="page-meta">Offline help for local AMT transformation tooling &mdash; runs from <code>file://</code>, no server or Keycloak. Edit this file to add sections.</p>
+  </div>
+
+    <!-- ==== START TOPICS ==== -->
+
+    <section class="topic" id="overview" data-tags="overview index home about amt local support">
+      <h2>Overview</h2>
+      <div class="body">
+        <p>This is an offline help page for local AMT transformation tooling. It runs from
+        the file system (<code>file://</code>) with no server, localhost, or Keycloak.</p>
+        <div class="callout">To add your own notes, open this file in an editor and follow the
+        <strong>HOW TO ADD A NEW TOPIC</strong> instructions in the comment at the top of the file.</div>
+        <p class="muted">Seeded: 2026-08-11 — SSG Converter + AMT PowerShell runtime library.</p>
+      </div>
+    </section>
+
+    <section class="topic" id="architecture" data-tags="architecture diagram flow pipeline runtime cobol ecl ssg powershell comscript control center wiring">
+      <h2>Architecture &amp; data-flow (SSG → PowerShell → AMT + Control Center)</h2>
+      <div class="body">
+        <p>Design/transform time (1→2→3): SSG source — standalone <code>.ssg</code>, embedded in a COBOL
+        program, or part of an ECL job — is converted by the C# tools into a <code>.ps1</code>.
+        Runtime (4→5→6): the host PowerShell runs the script, imports <code>AmtPsEclLib.psm1</code>, which
+        loads the ComScript COM engine, connects to the AMT application, and exposes the service objects the
+        cmdlets call.</p>
+        <div style="overflow:auto">
+        <svg viewBox="0 0 1120 900" width="100%" role="img" aria-label="SSG to PowerShell to AMT and Control Center data flow" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+          <defs>
+            <marker id="arw" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L7,3 L0,6 z" fill="#7a8699"></path>
+            </marker>
+            <style>
+              .band{fill:var(--accent-soft); stroke:var(--line);}
+              .bl{fill:var(--muted); font-size:12px; font-weight:700; letter-spacing:.5px;}
+              .box{fill:var(--panel); stroke:var(--line); stroke-width:1.5;}
+              .box.hi{stroke:var(--accent);}
+              .t{fill:var(--ink); font-size:13px;}
+              .ts{fill:var(--muted); font-size:11.5px;}
+              .edge{stroke:#7a8699; stroke-width:1.6; fill:none; marker-end:url(#arw);}
+              .elabel{fill:var(--ink); font-size:11px;}
+            </style>
+          </defs>
+
+          <!-- Band 1: SSG sources -->
+          <rect class="band" x="10" y="14" width="1100" height="120" rx="10"></rect>
+          <text class="bl" x="26" y="34">1 · SSG SOURCE — DESIGN TIME</text>
+          <rect class="box" x="40" y="48" width="300" height="70" rx="8"></rect>
+          <text class="t" x="60" y="78">Standalone .ssg file</text>
+          <text class="ts" x="60" y="98">Symstream skeleton</text>
+          <rect class="box" x="410" y="48" width="300" height="70" rx="8"></rect>
+          <text class="t" x="430" y="78">SSG embedded in COBOL</text>
+          <text class="ts" x="430" y="98">SGS bracket references [..]</text>
+          <rect class="box" x="780" y="48" width="300" height="70" rx="8"></rect>
+          <text class="t" x="800" y="78">SSG inside an ECL job</text>
+          <text class="ts" x="800" y="98">runstream / IPF</text>
+
+          <!-- Band 2: Conversion -->
+          <rect class="band" x="10" y="170" width="1100" height="120" rx="10"></rect>
+          <text class="bl" x="26" y="190">2 · CONVERSION — C# TOOLS (.NET 10)</text>
+          <rect class="box hi" x="40" y="206" width="470" height="70" rx="8"></rect>
+          <text class="t" x="60" y="234">SsgConverterGui.exe / SsgConverterConsole.exe</text>
+          <text class="ts" x="60" y="256">host: C# / .NET 10</text>
+          <rect class="box" x="560" y="206" width="520" height="70" rx="8"></rect>
+          <text class="t" x="580" y="230">SymstreamProcessor (SsgConverter.dll)</text>
+          <text class="ts" x="580" y="250">+ EclParserOs2200 / EclToAstOs2200 + IpfConverter</text>
+          <text class="ts" x="580" y="266">+ PowerShellWriter / PowerShellGenerator</text>
+
+          <!-- Band 3: Generated artifact -->
+          <rect class="band" x="10" y="326" width="1100" height="104" rx="10"></rect>
+          <text class="bl" x="26" y="346">3 · GENERATED ARTIFACT</text>
+          <rect class="box hi" x="360" y="360" width="400" height="58" rx="8"></rect>
+          <text class="t" x="380" y="384">PowerShell script (.ps1)</text>
+          <text class="ts" x="380" y="404">Msg · Xqt · GetSgsValue · DataLineOrNoStatement</text>
+
+          <!-- Band 4: Runtime host -->
+          <rect class="band" x="10" y="466" width="1100" height="104" rx="10"></rect>
+          <text class="bl" x="26" y="486">4 · RUNTIME HOST</text>
+          <rect class="box" x="180" y="500" width="360" height="56" rx="8"></rect>
+          <text class="t" x="200" y="524">Windows PowerShell / pwsh</text>
+          <text class="ts" x="200" y="544">executes the .ps1</text>
+          <rect class="box hi" x="580" y="500" width="360" height="56" rx="8"></rect>
+          <text class="t" x="600" y="524">Import-Module AmtPsEclLib.psm1</text>
+          <text class="ts" x="600" y="544">AMT PowerShell runtime library</text>
+
+          <!-- Band 5: Runtime library -->
+          <rect class="band" x="10" y="606" width="1100" height="150" rx="10"></rect>
+          <text class="bl" x="26" y="626">5 · AMT RUNTIME LIBRARY — WHERE THE CMDLETS LIVE</text>
+          <rect class="box" x="40" y="640" width="230" height="96" rx="8"></rect>
+          <text class="t" x="58" y="672">Initialize /</text>
+          <text class="t" x="58" y="690">Connect-Application</text>
+          <rect class="box" x="300" y="640" width="300" height="96" rx="8"></rect>
+          <text class="t" x="318" y="668">Add-Type ComScript DLL</text>
+          <text class="ts" x="318" y="688">New-Object</text>
+          <text class="ts" x="318" y="704">Asysco.Amt.Scripting.Comscript</text>
+          <text class="ts" x="318" y="722">reads Sys.ini / AmtSettings.xml → Com.Connect()</text>
+          <rect class="box hi" x="630" y="640" width="450" height="96" rx="8"></rect>
+          <text class="t" x="648" y="668">service objects</text>
+          <text class="ts" x="648" y="690">AmtMessage · AmtFile · AmtScript / AmtReport</text>
+          <text class="ts" x="648" y="710">AmtPrint · AmtDatabase</text>
+
+          <!-- Band 6: AMT engine + CC -->
+          <rect class="band" x="10" y="792" width="1100" height="96" rx="10"></rect>
+          <text class="bl" x="26" y="812">6 · AMT ENGINE + CONTROL CENTER</text>
+          <rect class="box" x="40" y="826" width="240" height="48" rx="8"></rect>
+          <text class="t" x="58" y="855">AMT application (ComScript)</text>
+          <rect class="box hi" x="300" y="826" width="240" height="48" rx="8"></rect>
+          <text class="t" x="318" y="855">Control Center (msg log)</text>
+          <rect class="box" x="560" y="826" width="200" height="48" rx="8"></rect>
+          <text class="t" x="578" y="855">File controller</text>
+          <rect class="box" x="780" y="826" width="300" height="48" rx="8"></rect>
+          <text class="t" x="798" y="855">Job / Print / RDMS-ESQL DB</text>
+
+          <!-- edges: sources -> tools -->
+          <path class="edge" d="M190,118 L230,206"></path>
+          <path class="edge" d="M560,118 L400,206"></path>
+          <path class="edge" d="M930,118 L470,206"></path>
+          <!-- tools -> artifact -->
+          <path class="edge" d="M560,276 L560,360"></path>
+          <!-- artifact -> host -->
+          <path class="edge" d="M480,418 L400,500"></path>
+          <!-- host ps -> import -->
+          <path class="edge" d="M540,528 L580,528"></path>
+          <!-- import -> initialize -->
+          <path class="edge" d="M700,556 L200,640"></path>
+          <!-- init chain -->
+          <path class="edge" d="M270,688 L300,688"></path>
+          <path class="edge" d="M600,688 L630,688"></path>
+          <!-- connect -> AMT app -->
+          <path class="edge" d="M360,736 L200,826"></path>
+          <!-- service objects -> CC / DB / file -->
+          <path class="edge" d="M820,736 L430,826"></path>
+          <text class="elabel" x="612" y="784">Msg → AddMsgInformation</text>
+          <path class="edge" d="M900,736 L930,826"></path>
+          <text class="elabel" x="905" y="784">Xqt / DataLine → DB</text>
+          <path class="edge" d="M760,736 L660,826"></path>
+          <text class="elabel" x="690" y="800">GetSgsValue / AmtFile</text>
+          <!-- AMT app -> CC -->
+          <path class="edge" d="M280,850 L300,850"></path>
+        </svg>
+        </div>
+        <div class="callout"><strong>Boundary</strong> — bands 1–3 happen at transform time; bands 4–6 only work at
+        runtime inside a configured AMT environment (Sys.ini/AmtSettings.xml, ComScript DLL, live AMT app +
+        Control Center). The same <code>.ps1</code> run in plain PowerShell has no AMT/CC to call.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="ssg-patterns-amtlib" data-tags="ssg patterns ecl amt lib runtime GetSgsValue Xqt CompareTypeSafe SearchConditional Use Asg Free define set process increment loop if else token ucob compile matrix P1 P2 P3 P4 P5 P6">
+      <h2>SSG patterns ↔ AMT library — can the runtime lib run them?</h2>
+      <div class="body">
+        <p>The <a href="file:///C:/Amt/Migration/SSG-ECL-Command-Matrix.html#patterns">SSG-ECL Command Matrix</a>
+        resolves patterns P2–P5 at pre-process / compile time (<code>Remove-SsgDirectives.ps1</code> strips or
+        expands them; the generated C# bakes in the chosen variant). The SSG → PowerShell converter takes the
+        opposite, <strong>runtime</strong> approach: it emits live <code>.ps1</code> that calls AMT-library
+        routines, so the SGS-driven behaviour runs dynamically.</p>
+
+        <p>Confirmed functions in <code>AmtPsEclLib.psm1</code>: <code>GetSgsValue</code>, <code>Add-Sgs</code>,
+        <code>Xqt</code>, <code>Use</code>, <code>Asg</code>, <code>Free</code>, <code>Qual</code>,
+        <code>Delete</code>, <code>Ers</code>, <code>Erase-File</code>, <code>CompareTypeSafe</code>,
+        <code>SearchConditional</code>, <code>Msg</code>, <code>DataLineOrNoStatement</code>,
+        <code>Skip-Statement</code>, <code>Fin</code>.</p>
+
+        <h3 class="sub">Pattern → AMT-lib runtime support</h3>
+        <table>
+          <tr><th>Matrix pattern</th><th>Runs via AMT lib?</th><th>Function(s)</th></tr>
+          <tr><td><strong>P5</strong> tokens <code>[PARAM,r,c,f]</code>, <code>[*var]</code></td><td>✅ Yes — the key one</td><td><code>GetSgsValue("FILE,$I,1,1,…")</code> resolves tokens live (vs. hard-substituted literals in C#)</td></tr>
+          <tr><td><strong>P3</strong> <code>*INCREMENT / *LOOP</code></td><td>✅ Yes</td><td>native <code>For (…; -le (GetSgsValue("FILE")); …)</code> — the loop is emitted, not expanded away</td></tr>
+          <tr><td><strong>P4</strong> <code>*IF / *ELSE / *ENDIF</code></td><td>✅ Yes</td><td><code>If</code> + <code>CompareTypeSafe</code> / <code>SearchConditional</code> (runtime branch, not compile-time variant)</td></tr>
+          <tr><td><strong>P1</strong> <code>@XQT / @USE / @ASG / @FREE</code></td><td>✅ Yes</td><td><code>Xqt</code>, <code>Use</code>, <code>Asg</code>, <code>Free</code> (+ <code>Qual</code>, <code>Delete</code>/<code>Ers</code>/<code>Erase-File</code>)</td></tr>
+          <tr><td><strong>P2</strong> <code>*DEFINE / *SET / *PROCESS</code></td><td>◑ Partly</td><td><code>*SET</code> arithmetic → inline PowerShell expression (converter's expression migrator); no dedicated macro call</td></tr>
+          <tr><td><strong>P6</strong> <code>#ucob,is / @UCOB,I</code></td><td>❌ No</td><td>inline COBOL compile directive — a build-time action; nothing in the PS runtime executes it</td></tr>
+        </table>
+
+        <div class="callout"><strong>Takeaway</strong> — the AMT PowerShell lib does run the token (P5), loop (P3),
+        conditional (P4) and job/file (P1) patterns dynamically; <code>GetSgsValue</code> is the linchpin (exactly
+        what the generated <code>.ps1</code> uses, e.g. <code>GetSgsValue("FILE,$I,2,1")</code>). Only inline-compile
+        directives (P6) have no runtime equivalent, and <code>*DEFINE</code> macros (P2) become inline expressions.</div>
+
+        <p class="muted">Shallow map from function names + the converter's emitted output; internals of each function not traced.</p>
+      </div>
+    </section>
+
+    <section class="topic" id="ssg-converter" data-tags="ssg symstream converter console gui exe input output powershell ps1">
+      <h2>SSG Converter — what it is &amp; how to run it</h2>
+      <div class="body">
+        <p><strong>SSG</strong> (Symbiont Stream Generator) source is transformed into PowerShell
+        (<code>.ps1</code>) scripts that run against the AMT PowerShell runtime library.</p>
+
+        <h3 class="sub">Executables</h3>
+        <table>
+          <tr><th>Tool</th><th>Use</th><th>Path (Debug build)</th></tr>
+          <tr>
+            <td>GUI (window app)</td>
+            <td>Interactive; this is "the converter" you open</td>
+            <td class="path">8.0.26188.0\MigrationTools\SsgConverter\SsgConverter\SsgConverterGui\bin\Debug\net10.0-windows\SsgConverterGui.exe</td>
+          </tr>
+          <tr>
+            <td>Console (CLI)</td>
+            <td>Scripted/batch; needs arguments</td>
+            <td class="path">8.0.26188.0\MigrationTools\SsgConverter\SsgConverter\SsgConverterConsole\bin\Debug\net10.0\SsgConverterConsole.exe</td>
+          </tr>
+        </table>
+        <div class="callout">The <code>SsgConverterConsole.exe</code> that also appears in the GUI's
+        <code>net10.0-windows</code> folder is just a copy pulled in as a project reference — the app to
+        open is <code>SsgConverterGui.exe</code>.</div>
+
+        <h3 class="sub">Console usage</h3>
+        <pre><code>&amp; "…\SsgConverterConsole\bin\Debug\net10.0\SsgConverterConsole.exe" `
+    /INPUT:"C:\Amt\Parallel\Source-SSG\Input-SSG" `
+    /OUTPUT:"C:\Amt\Parallel\Source-SSG\Output-SSG" `
+    /VERBOSE:2 `
+    /ENABLELOGFILE:TRUE /LOGFILE:"C:\Amt\Parallel\Source-SSG\Logs-SSG"</code></pre>
+        <p>Run it from an open PowerShell prompt (not double-click) so output and errors stay visible.</p>
+
+        <table>
+          <tr><th>Flag</th><th>Meaning</th></tr>
+          <tr><td><code>/INPUT:&lt;path&gt;</code></td><td>Folder containing SSG source files</td></tr>
+          <tr><td><code>/OUTPUT:&lt;path&gt;</code></td><td>Folder for generated <code>.ps1</code> (created if missing)</td></tr>
+          <tr><td><code>/SETTINGSFILE:&lt;path&gt;</code></td><td>Load settings from an XML file instead of flags</td></tr>
+          <tr><td><code>/CLEAROUTPUT:TRUE|FALSE</code></td><td>Delete existing <code>*.ps1</code> in output first</td></tr>
+          <tr><td><code>/CONTINUEONERROR:TRUE|FALSE</code></td><td>Keep going when a file fails</td></tr>
+          <tr><td><code>/VERBOSE:0-3</code></td><td>Console verbosity (0=minimal … 3=diagnostic)</td></tr>
+          <tr><td><code>/LOGFILE:&lt;path&gt;</code></td><td>Log file (or a folder → auto <code>SsgConversion_yyyymmdd_hhmmss.log</code>)</td></tr>
+          <tr><td><code>/ENABLELOGFILE:TRUE|FALSE</code></td><td>Turn the log file on (default: off)</td></tr>
+        </table>
+        <div class="callout"><strong>Logging</strong> — a log is written only when
+        <code>/ENABLELOGFILE:TRUE</code> and <code>/LOGFILE:</code> are both supplied.
+        The file log is fixed at Normal verbosity; <code>/VERBOSE</code> affects only console output.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="ssg-input-format" data-tags="ssg input format skeleton directive star hash encoding ascii text">
+      <h2>SSG input format</h2>
+      <div class="body">
+        <ul>
+          <li>Plain-text files, read line by line.</li>
+          <li>Any filename or extension — the input folder is scanned with <code>*.*</code> (convention is <code>.ssg</code>).</li>
+          <li>Top directory only — no subfolder recursion.</li>
+          <li>Must look like SSG — within the first 20 non-empty lines a line must start with <code>*</code> or <code>#</code>; otherwise it is logged <em>Skipped (not SSG)</em>.</li>
+        </ul>
+        <p>Output: one <code>.ps1</code> per input file, with a header and <code>param([string[]]$Parameters)</code>.</p>
+        <div class="callout">If sources are OS2200/EBCDIC or fixed-block binary, convert them to plain ASCII text first or the check will skip them.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="ssg-known-issues" data-tags="ssg error known issue limitation primitive unary sign bug">
+      <h2>SSG Converter — known issues</h2>
+      <div class="body">
+        <h3 class="sub">"SymstreamExpressionPrimitive expected."</h3>
+        <p>The conversion fails for a file with an error like:</p>
+        <pre><code>Error converting &lt;FILE&gt;: SymstreamExpressionPrimitive expected.</code></pre>
+        <p>Cause: a converter limitation. The parser accepts a leading unary <code>-</code>/<code>+</code>
+        in front of any sub-expression, but the migrator only emits a unary sign when the operand is a
+        primitive (a literal number/string or a plain identifier). A sign applied to a bracketed
+        <code>[…]</code> SGS reference, a parenthesised group, or a compound expression throws this error.</p>
+        <p>The message carries no line number — the failure is caught at file level, so only the file name is shown.</p>
+      </div>
+    </section>
+
+    <section class="topic" id="amt-runtime-lib" data-tags="amt library runtime psm1 AmtPsEclLib cmdlet Msg Xqt GetSgsValue DataLineOrNoStatement">
+      <h2>AMT PowerShell runtime library (AmtPsEclLib.psm1)</h2>
+      <div class="body">
+        <p>The generated <code>.ps1</code> scripts call helper cmdlets that live in the AMT runtime library
+        <code>AmtPsEclLib.psm1</code>. The library is what connects a running script to AMT and the Control Center.</p>
+        <table>
+          <tr><th>Cmdlet (in generated script)</th><th>Runtime target</th><th>Purpose</th></tr>
+          <tr><td><code>Msg</code></td><td><code>$global:AmtMessage.AddMsgInformation()</code></td><td>Writes a message to the AMT Control Center</td></tr>
+          <tr><td><code>Xqt</code></td><td><code>$global:AmtScript</code> / <code>CreateJob()</code></td><td>Submits/executes an AMT job/task</td></tr>
+          <tr><td><code>DataLineOrNoStatement</code></td><td><code>$global:AmtDatabase</code></td><td>Feeds RDMS/ESQL statements to the AMT DB layer</td></tr>
+          <tr><td><code>GetSgsValue</code></td><td>SGS data in the AMT runtime</td><td>Reads Symbiont Generation System values</td></tr>
+        </table>
+        <p class="muted">Source: <code>…\MigrationTools\EclConverter (1)\EclConverter\CmdLets\AmtPsEclLib.psm1</code></p>
+      </div>
+    </section>
+
+    <section class="topic" id="amt-cc-integration" data-tags="amt control center integration comscript connect application AmtMessage AmtFile sys.ini runtime">
+      <h2>How generated scripts integrate with AMT &amp; the Control Center</h2>
+      <div class="body">
+        <p>Integration happens at runtime, when the <code>.ps1</code> runs inside a configured AMT
+        environment. The library's <code>Initialize</code> / <code>Connect-Application</code> does three things:</p>
+        <ol>
+          <li>Loads the AMT COM engine — <code>Add-Type -Path $global:ComScriptDll</code>, then
+              <code>New-Object Asysco.Amt.Scripting.Comscript</code>.</li>
+          <li>Connects to the application — sets <code>SysIniFile</code>, <code>AppName</code>,
+              <code>Station="BATCH"</code>, <code>ApplicationKind</code> from <code>Sys.ini</code> / <code>AmtSettings.xml</code>,
+              then <code>Com.Connect()</code>.</li>
+          <li>Creates the service objects — <code>AmtMessage</code> (Control Center), <code>AmtFile</code>
+              (file controller), <code>AmtScript</code>/<code>AmtReport</code> (jobs), <code>AmtPrint</code>, <code>AmtDatabase</code>.</li>
+        </ol>
+        <div class="callout"><strong>Caveat</strong> — these cmdlets are not standalone. They need
+        <code>AmtPsEclLib.psm1</code> imported, a valid <code>Sys.ini</code>/<code>AmtSettings.xml</code>, the ComScript DLL,
+        and a live AMT app + Control Center. Run the <code>.ps1</code> in plain PowerShell and the calls fail.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="start-amt175-cc" data-tags="start run AMT175 control center CC keycloak kc.bat IIS app pool W3SVC login startup boot powershell">
+      <h2>Start the local AMT175 Control Center</h2>
+      <div class="body">
+        <p>The AMT175 Control Center is hosted in <strong>IIS</strong> and authenticates against a
+        local <strong>Keycloak</strong>. To bring it up on this PC you need three things running:
+        Keycloak (port 8080), IIS with the AMT175 app pools, then browse to the CC URL.</p>
+
+        <div class="callout"><strong>URL:</strong> <code>http://localhost/AMT175/ControlCenter</code>
+        &nbsp;·&nbsp; <strong>Keycloak:</strong> <code>http://localhost:8080</code> (realm <code>amt175</code>)</div>
+
+        <h3 class="sub">Step 1 — Start Keycloak (25.0.6) on port 8080</h3>
+        <p>Open a PowerShell window and leave it running (Keycloak stays in the foreground):</p>
+        <div class="callout setup">&#9888; <strong>ONE server only.</strong> Keycloak runs a <strong>single</strong> instance on <code>8080</code> — <strong>never</strong> start a second on <code>8081</code>.</div>
+        <pre><code>$env:KC_BOOTSTRAP_ADMIN_USERNAME='admin'
+$env:KC_BOOTSTRAP_ADMIN_PASSWORD='admin'
+cd 'C:\Tools\keycloak-25.0.6-fresh\keycloak-25.0.6'
+.\bin\kc.bat start-dev --http-port=8080 --hostname=localhost --hostname-strict=false --db=dev-file</code></pre>
+        <p>Ready when you see: <code>Listening on: http://0.0.0.0:8080</code>. Keep this window open;
+        open a <em>new</em> PowerShell window for the next steps.</p>
+        <div class="callout"><strong>Be patient — this can take a while.</strong> A cold start (first run
+        of the day, or after a reboot) can take <strong>25&ndash;30 seconds or longer</strong> before it
+        finishes booting, with the window looking idle in between. Do not close it &mdash; wait for the
+        <code>started in &hellip;s. Listening on: http://0.0.0.0:8080</code> line, which is your confirmation
+        that Keycloak is up.</div>
+        <p>Successful startup looks like this (the key line is the last <code>io.quarkus</code>
+        &ldquo;started &hellip; Listening on&rdquo; line):</p>
+        <pre><code>&hellip; ISPN000556: Starting user marshaller 'org.infinispan&hellip;JBossUserMarshaller'
+&hellip; Registering class org.keycloak.broker.provider.mappersync.ConfigSyncEventListener
+&hellip; Node name: node_277316, Site name: null
+&hellip; Keycloak 25.0.6 on JVM (powered by Quarkus 3.8.5) started in 26.491s. Listening on: http://0.0.0.0:8080. Management interface listening on http://0.0.0.0:9000.
+&hellip; Profile dev activated.
+&hellip; Running the server in development mode. DO NOT use this configuration in production.</code></pre>
+
+        <h3 class="sub">Step 2 — Make sure IIS + the AMT175 app pools are running</h3>
+        <div class="callout setup">&#9888; Window&nbsp;1 is busy running Keycloak &mdash; open a <strong>second, elevated</strong> PowerShell window (<em>Run as administrator</em>) for Steps&nbsp;2 and&nbsp;3. IIS usually auto-starts with Windows, so you only need Step&nbsp;2 after a stop/restart.</div>
+        <p>The CC UI and its business-logic API run under IIS as <code>/AMT175/ControlCenter</code> and
+        <code>/AMT175/ControlCenterBL</code>, in dedicated app pools:</p>
+        <pre><code>Import-Module WebAdministration
+Start-Service W3SVC                                   # IIS web service
+Start-WebAppPool -Name 'AMT175_ControlCenterPool'     # CC UI
+Start-WebAppPool -Name 'AMT175_ControlCenterBLPool'   # CC business-logic API</code></pre>
+
+        <h3 class="sub">Step 2b — Start the AMT175 Windows services (elevated PS)</h3>
+        <p>After the IIS pools are up, start the AMT175 runtime services. Run the following in the
+        <strong>same elevated PowerShell window</strong>:</p>
+        <pre><code>'AMT175_ApplicationManager','AMT175_ApplicationServer','AMT175_FileController','AMT175_BatchController' | ForEach-Object { Start-Service $_ }</code></pre>
+        <div class="callout setup">&#9888; <strong>CC Server Control icons stay yellow</strong> even when KC and IIS are running &mdash; this is because the AMT Windows services are stopped. Start the four services above first; the icons turn green only after they connect. <code>AMT175_PrintController</code> and <code>AMT175_Reorganise</code> may time out (error&nbsp;1053) and can be left stopped &mdash; they are not required to run COBOL programs in CC.</div>
+        <p>Verify all four are running:</p>
+        <pre><code>Get-Service AMT175_ApplicationManager,AMT175_ApplicationServer,AMT175_FileController,AMT175_BatchController | Select-Object Name,Status</code></pre>
+
+        <h3 class="sub">Step 3 — Verify, then open the Control Center</h3>
+        <pre><code># Keycloak realm reachable? (expect 200)
+Invoke-WebRequest 'http://localhost:8080/realms/amt175/.well-known/openid-configuration' -UseBasicParsing | Select-Object StatusCode
+
+# CC responds? (expect 302 -> .../realms/amt175/...auth = redirect to login)
+curl.exe -s -i 'http://localhost/AMT175/ControlCenter' | Select-String '^HTTP/|^location:'</code></pre>
+        <p>Verified output &mdash; Keycloak returns <code>200</code> and the CC returns a
+        <code>302</code> redirect to the <code>amt175</code> login:</p>
+        <pre><code>PS C:\&gt; # Keycloak realm reachable? (expect 200)
+PS C:\&gt; Invoke-WebRequest 'http://localhost:8080/realms/amt175/.well-known/openid-configuration' -UseBasicParsing | Select-Object StatusCode
+
+StatusCode
+----------
+       200
+
+
+PS C:\&gt; # CC responds? (expect 302 -> .../realms/amt175/...auth = redirect to login)
+PS C:\&gt; curl.exe -s -i 'http://localhost/AMT175/ControlCenter' | Select-String '^HTTP/|^location:'
+
+HTTP/1.1 302 Found
+Location: http://localhost:8080/realms/amt175/protocol/openid-connect/auth?client_id=amt-cc&amp;request_uri=urn%3Aietf%3Aparams%3Aoauth%3Arequest_uri%3A25da2b03-1f56-4acb-b63d-6a0f7ce95204&amp;x-client-SKU=ID_NET10_0&amp;x-client-ver=8.19.1.0</code></pre>
+        <p>Then browse to <code>http://localhost/AMT175/ControlCenter</code> (a fresh/incognito window
+        avoids cached sessions). You are redirected to the Keycloak <code>amt175</code> login.</p>
+
+        <h3 class="sub">Login</h3>
+        <table>
+          <tr><th>User</th><th>Password</th><th>Role</th></tr>
+          <tr><td><code>amt175admin</code></td><td><code>Asysco12345!</code></td><td>ADMIN (restore-admin identity)</td></tr>
+          <tr><td><code>marky-t</code></td><td><code>Asysco12345!</code></td><td>Administrator (granted via CC UI)</td></tr>
+          <tr><td><code>amt175user</code></td><td><code>Asysco12345!</code></td><td>User</td></tr>
+        </table>
+
+        <div class="callout"><strong>If login lands on <code>notauthorized.html</code></strong> — the
+        Keycloak identity is not yet mapped to an AMT admin. See <code>REPRODUCTION_STEPS.md</code>
+        (RESOLUTION): the <code>AMTSYSIDENTITYTRANSLATION</code> row is set up as an interim measure and the
+        admin role granted via <strong>Control Center → Security → Users</strong>, pending confirmation
+        from AMT support on the correct configuration for this build.</div>
+
+        <h3 class="sub">Stopping / restarting</h3>
+        <p>Close the Keycloak window (Ctrl+C) to stop auth. To recycle the CC after a config change,
+        touch its <code>web.config</code> (no restart needed):</p>
+        <pre><code>(Get-Item 'C:\Amt\Parallel\AMT175\AmtTools\ControlCenterCore\web.config').LastWriteTime = Get-Date</code></pre>
+      </div>
+    </section>
+
+    <section class="topic" id="run-cobol-in-cc" data-tags="run cobol program CC batch CHABAN UNLOADIS harness pwsh AmtPsEclLib Xqt AMT175_AFBUS_COBOL Trial3">
+      <h2>Run a generated COBOL program in CC (Trial 3)</h2>
+      <div class="content">
+        <p>Runs the generated C# COBOL program via the AMT PowerShell runtime harness. The harness
+        connects directly to the Application Server (port 4444) and submits a batch job — no CC
+        Server Control required.</p>
+
+        <div class="callout setup">&#9888; <strong>Prerequisites:</strong> Keycloak running, IIS app pools started,
+        and all 4 AMT Windows services running (see <a href="#start-amt175-cc">Start the local AMT175 Control Center</a>).
+        <strong>Must use <code>pwsh.exe</code> (7.6.3) — NOT <code>powershell.exe</code> (5.1).</strong>
+        The AMT assemblies target .NET 10 and will not load under PS 5.1.</div>
+
+        <h3 class="sub">COBOL &amp; SSG Conversion Tools</h3>
+        <p><strong>SsgConverterGui.exe</strong> (SSG → PowerShell conversion):</p>
+        <p class="path">c:\Amt\Parallel\AMT175\8.0.26188.0\MigrationTools\SsgConverter\SsgConverter\SsgConverterGui\bin\Debug\net10.0-windows\SsgConverterGui.exe</p>
+        <p><strong>CobolConverterGui.exe</strong> (COBOL → LionSource conversion, with Precompiler Macros):</p>
+        <p class="path">C:\Amt\Parallel\AMT175\8.0.26188.0\MigrationTools\AMT177 Tools\CobolToAmt\CobolToAmt\CobolConverterGui.exe</p>
+
+        <h3 class="sub">Step 1 — Open a fresh pwsh 7 window</h3>
+        <p>Use the inline <code>pwsh -Command</code> form from any shell — this guarantees a fresh process
+        with no stale assembly state:</p>
+        <pre><code>pwsh -Command "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; &amp; 'C:\Amt\Migration\Trial3\run\Run-Chaban.ps1'"</code></pre>
+        <p>For UNLOAD-ASCII:</p>
+        <pre><code>pwsh -Command "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; &amp; 'C:\Amt\Migration\Trial3\run\Run-UnloadAscii.ps1'"</code></pre>
+
+        <h3 class="sub">Step 2 — Verify in CC</h3>
+        <p>In CC &rarr; <strong>Jobs &rarr; Batch Control</strong>: the job appears in <em>Completed batches</em>
+        with messages <code>Script Started</code> &rarr; <code>Script Done</code>. Typical run time: ~6 seconds.</p>
+        <table>
+          <tr><th>Program</th><th>Harness</th><th>Application</th><th>Log size (success)</th></tr>
+          <tr><td>CHABAN</td><td><code>Run-Chaban.ps1</code></td><td>AMT175_AFBUS_COBOL</td><td>729 B</td></tr>
+          <tr><td>UNLOAD-ASCII</td><td><code>Run-UnloadAscii.ps1</code></td><td>AMT175_AFBUS_COBOL</td><td>TBC</td></tr>
+        </table>
+
+        <div class="callout"><strong>Information — CobolToAmt Converter Settings</strong><br>
+        The converter stores its settings in the Windows Registry at
+        <code>HKEY_CURRENT_USER\Software\Asysco\CobolToAmt</code>. The <code>MostRecentSettings</code>
+        value holds the path to the last-used project settings file and is loaded automatically on startup —
+        regardless of which version of the exe you launch. This means opening a freshly downloaded
+        AMT177 build will pre-populate with the previous AMT172/175 working paths.<br><br>
+        <strong>To start fresh:</strong> open <code>regedit</code>, navigate to
+        <code>HKCU\Software\Asysco\CobolToAmt</code> and delete (or edit) the <code>MostRecentSettings</code>
+        value — or simply use <strong>Load Settings / Save Settings</strong> in the UI to point to a new
+        settings file, which will update the registry for future launches.
+        </div>
+
+        <h3 class="sub">Known issues / gotchas</h3>
+        <table>
+          <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+          <tr>
+            <td><code>Unable to find type [Asysco.Amt.Libs.Support.AmtEventLog]</code></td>
+            <td>Running in PS 5.1, or reusing a pwsh session that had a previous failed load</td>
+            <td>Use <code>pwsh -Command "..."</code> (fresh process)</td>
+          </tr>
+          <tr>
+            <td>Xqt hangs — log file locked, no <code>Script Done</code></td>
+            <td>Program waiting for card-reader input (e.g. CHABAN CAR file not assigned, or prior hung agent)</td>
+            <td>From elevated PS: <code>Get-Process ApplicationServerAgent | Stop-Process -Force</code>,
+            then <code>Restart-Service AMT175_ApplicationServer</code>, then rerun in fresh pwsh</td>
+          </tr>
+          <tr>
+            <td><code>AMT175_ApplicationServer</code> won't start — bug report says <em>Lion Server AmtApplicationServer not found in database AMT175_SYSTEM</em></td>
+            <td>CC <strong>(De)Install</strong> button has a null-reference bug that deletes the Lion server DB record</td>
+            <td>CC &rarr; System Configuration &rarr; Services &rarr; Lion services &rarr; <strong>Add</strong>:
+            Application=AMT175 AFBUS, Server Type=Application Server, Service name=<code>AmtApplicationServer</code>,
+            Address=localhost, Port=4444, Account login=(default). Save. <strong>Do NOT click (De)Install again.</strong></td>
+          </tr>
+          <tr>
+            <td>CC Server Control shows all services yellow</td>
+            <td>Systemic CC Server Control bug on build 8.0.26188.0 — does not affect harness execution</td>
+            <td>Ignore — use the PowerShell harness directly. Check <code>AMT175_ApplicationServer</code> Windows service status instead.</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==== END TOPICS ==== -->
+
+    <div class="footer-bar">AMT Local Support &middot; offline single-file help &middot; edit this file to add sections.</div>
+
+  </main>
+
+<script>
+(function () {
+  "use strict";
+  var cards = Array.prototype.slice.call(document.querySelectorAll("section.topic"));
+  var tocList = document.getElementById("tocList");
+  var search = document.getElementById("search");
+  var links = [];
+
+  // Build sidebar links from the section cards.
+  cards.forEach(function (sec) {
+    var h = sec.querySelector("h2");
+    var a = document.createElement("a");
+    a.href = "#" + sec.id;
+    a.textContent = h ? h.textContent.replace(/\s+/g, " ").trim() : sec.id;
+    tocList.appendChild(a);
+    links.push(a);
+  });
+
+  // Escape regex metacharacters in a search word.
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+  // Remove previous <mark> highlights from a card.
+  function clearMarks(root) {
+    var marks = root.querySelectorAll("mark.hl");
+    for (var i = 0; i < marks.length; i++) {
+      var m = marks[i];
+      m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+    }
+    // SVG diagram: remove highlight rects and restore original text fills.
+    var rects = root.querySelectorAll("rect.hl-svg");
+    for (var r = 0; r < rects.length; r++) { rects[r].parentNode.removeChild(rects[r]); }
+    var svgt = root.querySelectorAll("svg text[data-hlfill]");
+    for (var t = 0; t < svgt.length; t++) {
+      var orig = svgt[t].getAttribute("data-hlfill");
+      if (orig) { svgt[t].setAttribute("fill", orig); } else { svgt[t].removeAttribute("fill"); }
+      svgt[t].removeAttribute("data-hlfill");
+    }
+    root.normalize();
+  }
+
+  // Wrap each matching word in a yellow <mark> (skips the diagram SVG, script, style).
+  function applyMarks(root, words) {
+    if (!words.length) return;
+    var test = new RegExp(words.map(esc).join("|"), "i");
+    var rx = new RegExp("(" + words.map(esc).join("|") + ")", "gi");
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        var p = node.parentNode, tag = p ? p.nodeName.toLowerCase() : "";
+        if (tag === "script" || tag === "style" || tag === "mark") return NodeFilter.FILTER_REJECT;
+        if (p.closest && p.closest("svg")) return NodeFilter.FILTER_REJECT;
+        return test.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    var targets = [], n;
+    while ((n = walker.nextNode())) targets.push(n);
+    targets.forEach(function (node) {
+      var s = node.nodeValue, frag = document.createDocumentFragment(), last = 0, m;
+      rx.lastIndex = 0;
+      while ((m = rx.exec(s))) {
+        if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+        var mk = document.createElement("mark");
+        mk.className = "hl";
+        mk.textContent = m[0];
+        frag.appendChild(mk);
+        last = m.index + m[0].length;
+      }
+      if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+    // SVG diagram: no <mark> allowed, so put a yellow rect behind each matching <text>.
+    var SVGNS = "http://www.w3.org/2000/svg";
+    var svgTexts = root.querySelectorAll("svg text");
+    for (var j = 0; j < svgTexts.length; j++) {
+      var te = svgTexts[j];
+      if (!test.test(te.textContent)) continue;
+      var bb;
+      try { bb = te.getBBox(); } catch (e) { continue; }
+      var pad = 1.5;
+      var rect = document.createElementNS(SVGNS, "rect");
+      rect.setAttribute("x", bb.x - pad);
+      rect.setAttribute("y", bb.y - pad);
+      rect.setAttribute("width", bb.width + pad * 2);
+      rect.setAttribute("height", bb.height + pad * 2);
+      rect.setAttribute("rx", "2");
+      rect.setAttribute("fill", "#fde047");
+      rect.setAttribute("class", "hl-svg");
+      te.parentNode.insertBefore(rect, te);
+      if (!te.hasAttribute("data-hlfill")) { te.setAttribute("data-hlfill", te.getAttribute("fill") || ""); }
+      te.setAttribute("fill", "#111827");
+    }
+  }
+
+  // Live search: filter cards + nav links, and highlight matches in yellow.
+  if (search) {
+    search.addEventListener("input", function () {
+      var words = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+      cards.forEach(function (sec, i) {
+        var hay = (sec.textContent + " " + (sec.getAttribute("data-tags") || "")).toLowerCase();
+        var match = words.every(function (w) { return hay.indexOf(w) !== -1; });
+        sec.classList.toggle("hidden", !match);
+        links[i].classList.toggle("hidden", !match);
+        clearMarks(sec);
+        if (match) applyMarks(sec, words);
+      });
+    });
+  }
+
+  // Scrollspy: highlight the nav link of the card nearest the top.
+  function onScroll() {
+    var best = -1, bestTop = -Infinity;
+    cards.forEach(function (sec, i) {
+      var t = sec.getBoundingClientRect().top;
+      if (t <= 120 && t > bestTop) { bestTop = t; best = i; }
+    });
+    links.forEach(function (a, i) { a.classList.toggle("active", i === best); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

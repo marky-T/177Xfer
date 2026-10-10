@@ -1,0 +1,12 @@
+   DD-PROCESS-TIME-STAMP                                                                                                            
+      26 01 15                                                                                                                      
+Columns                                                                                                                             
+ Col  Name                   Type     Length   Null                                                                                 
+                                       Allowed                                                                                      
+                                         YES                                                                                        
+                                         NO                                                                                         
+                                                                                                                                    
+Primary Key : PK_TABLE-ARCH                                                                                                         
+  Column     Direction                                                                                                              
+    CLE-TABLE , Asc                                                                                                                 
+                                                                                                                                    
