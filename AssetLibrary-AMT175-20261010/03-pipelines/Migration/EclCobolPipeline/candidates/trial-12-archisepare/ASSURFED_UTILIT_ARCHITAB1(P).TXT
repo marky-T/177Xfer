@@ -1,0 +1,119 @@
+﻿      ***------------------------------------------------------------***
+      ***                  -- architab1 --                         ***  
+      ***            Pour creerle fichier pour architab2             ***
+      ***                        == UCS ==                           ***
+      ***------------------------------------------------------------***
+      * Type     :                                                     *
+      * Analyste :                                 (INITIALES)         *
+      * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+      * Ecrit le : 18 avril 2001                   (dd/mm/ccyy)        *
+      * Release  :                                 (99)                *
+      * Version  :                                 (999)               *
+      *----------------------------------------------------------------*
+      * Modifications :                                                *
+      * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+    
+      ***------------------------------------------------------------***
+      *                       DESCRIPTION                              *
+      *                       ===========                              *
+      *                                                                *
+      *    OUTPUT: ficout : renseignements pour architab2              *
+      ***------------------------------------------------------------***
+
+    
+       Identification division. 
+      *========================*
+       program-id.  architab1.  
+    
+       Environment division.
+      *====================*
+    
+       Configuration section.   
+      *----------------------*  
+       source-computer.  unisys-2200.   
+       object-computer.  unisys-2200 MEMORY 3 MODULES.  
+       special-names.   
+           printer       printer.   
+
+       Input-output section.
+      *---------------------*   
+       file-control.
+           select ficout assign to disc      1.  *> SSG-STUB [fname,1,1,1]
+       i-o-control. 
+    
+       Data division.   
+      *==============*  
+
+       File section.
+      *-------------*   
+      * Fichier pour architab2  
+       FD  ficout.  
+        1  ligneout              pic x(80). 
+
+       Working-storage section. 
+      *------------------------*
+         1 ligne-type0. 
+           3 cd-don0                   pic x value "0". 
+           3 nm-bas0                   pic x(6).
+           3 nm-tab0                   pic x(30).   
+           3 dt-ach0                   pic x(8).
+           3 dt-tab                    pic x(8) value space.
+         1 ligne-type1. 
+           3 cd-don1                   pic x value "1". 
+           3 nm-cle                    pic x(30).   
+           3 ds-cle.
+            5 type-cle                 pic x.   
+            5 longueur                 pic 99.99.   
+         1 ligne-type9. 
+           3 cd-don9                   pic x value "9". 
+           3 nm-bas9                   pic x(6).
+           3 nm-tab9                   pic x(30).   
+           3 dt-ach9                   pic x(8).
+           3 nombre                    pic s9(11) sign leading  
+             separate value 99999999999.
+           3 nombre2                   pic s9(11) sign leading  
+             separate value 99999999999.
+    
+       PROCEDURE DIVISION.  
+      *-------------------  
+         000-main.  
+           open output ficout   
+           perform 100-type0 thru 100-exit  
+           perform 101-type1 thru 101-exit  
+           perform 102-type9 thru 102-exit  
+           close ficout 
+           stop run 
+           .
+      *------------ ENREGISTREMENT DE TYPE 0 ----------------   
+        100-type0.  
+           move "ARCHIS" to nm-bas0  *> SSG-STUB [tname,1,1,1]
+           move "CHERCHEUSE-TABLE-ARCH" to nm-tab0  *> SSG-STUB [tname,1,1,2]
+           accept dt-ach0 from date yyyymmdd
+           write ligneout from ligne-type0  
+           .
+        100-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 1 -----------------  
+        101-type1.  
+           move "1" to nm-cle  *> SSG-STUB [key,1,1,1]
+           move "10" to type-cle  *> SSG-STUB [key,1,1,2]
+           move 1 to longueur  *> SSG-STUB [key,1,1,3]
+           write ligneout from ligne-type1  
+           .
+        101-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 9 -----------------  
+        102-type9.  
+           move "ARCHIS" to nm-bas9  *> SSG-STUB [tname,1,1,1]
+           move "CHERCHEUSE-TABLE-ARCH" to nm-tab9  *> SSG-STUB [tname,1,1,2]
+           accept dt-ach9 from date yyyymmdd
+           write ligneout from ligne-type9  
+           .
+        102-exit.   
+           exit.

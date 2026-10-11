@@ -1,0 +1,10 @@
+﻿2026-08-11 10:29:33 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:29:33 [0] Phase     : SSG to PowerShell Converter
+2026-08-11 10:29:33 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:29:33 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-11 10:29:33 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-11 10:29:33 [0] Log       : SSG source files found: 10
+2026-08-11 10:29:35 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-08-11 10:29:36 [0] Error     :   Error converting ASSURFED_UTILIT_CONDIS_ASCII(P): Target VARIABLE for *REMOVE directive is not supported (line 32).
+2026-08-11 10:29:36 [0] Log       : 
+2026-08-11 10:29:36 [0] Log       : Conversion complete: 0 succeeded, 1 failed

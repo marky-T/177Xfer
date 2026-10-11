@@ -1,0 +1,144 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID.    COMPARE.  
+       AUTHOR.        HANSE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. SPERRY-1100.
+       OBJECT-COMPUTER. SPERRY-1100.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT IN1 ASSIGN TO DISC FICHIN-1.  *> SSG-STUB
+           SELECT IN2 ASSIGN TO DISC 120.  *> SSG-STUB
+           SELECT LISTING ASSIGN TO PRINTER.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  IN1  
+           LABEL  RECORD IS STANDARD
+           BLOCK  CONTAINS 80 RECORDS *> SSG-STUB
+           RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB
+           DATA RECORD IS ENR-IN1.  
+       01  ENR-IN1   PIC X(1).   *> SSG-STUB
+       FD  IN2  
+           LABEL  RECORD IS STANDARD
+           BLOCK  CONTAINS 80 RECORDS *> SSG-STUB
+           RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB
+           DATA RECORD IS ENR-IN2.  
+       01  ENR-IN2   PIC X(1).   *> SSG-STUB
+       FD  LISTING  
+           LABEL RECORD IS OMITTED  
+           BLOCK CONTAINS 1 RECORDS 
+           RECORD CONTAINS 132 CHARACTERS   
+           DATA RECORD IS LIGNE.
+       01  LIGNE PIC X(132).
+       WORKING-STORAGE SECTION. 
+    
+       01  L-NOLIGNE.   
+           05 FILLER PIC X(50) VALUE
+           '----+----1----+----2----+----3----+----4----+----5'.
+           05 FILLER PIC X(50) VALUE
+           '----+----6----+----7----+----8----+----9----+----1'.
+
+       01  WS-IN1.  
+           02 TAB-IN1 OCCURS 1 INDEXED BY XT1 PIC X(100). *> SSG-STUB
+       01  WS-EXCL1-1 REDEFINES WS-IN1.   *> SSG-STUB
+           02 EXCL1-1              PIC X(1).    *> SSG-STUB
+       01  WS-IN2.  
+           02 TAB-IN2 OCCURS 1 INDEXED BY XT2 PIC X(100). *> SSG-STUB
+       01  WS-EXCL2-1 REDEFINES WS-IN2.   *> SSG-STUB
+           02 EXCL2-1              PIC X(1).    *> SSG-STUB
+       01  WS-INDIC1.   
+           02 FILLER          PIC X(4). 
+       01  WS-INDIC2.   
+           02 FILLER          PIC X(4). 
+       01  LIGNE-NO-REC.
+         03  FILLER   PIC X(20) VALUE 'ENREGISTREMENT NO   '.   
+         03  ZCT1     PIC 9(10) VALUE ZEROES.   
+         03  FILLER   PIC X(4) VALUE ' (FICHIN-1) '.  *> SSG-STUB
+         03  FILLER   PIC X(3) VALUE ' / '. 
+         03  ZCT2     PIC 9(10) VALUE ZEROES.   
+         03  FILLER   PIC X(4) VALUE ' (120) '.  *> SSG-STUB
+         03  FILLER   PIC X(9) VALUE 'NO DIFF: '.   
+         03  ZCT3     PIC 9(6) VALUE ZEROES.
+       01  CT1     PIC 9(10) COMP VALUE ZEROES. 
+       01  CT2     PIC 9(10) COMP VALUE ZEROES. 
+       01  SW-ANO  PIC 9          VALUE 0.  
+       01  DIFFERENCE         PIC 9            VALUE 0. 
+       01  NB-TOT-DIFFERENCE  PIC 9(6)         VALUE 0. 
+       01  WS-COMPTEUR-PRNT   PIC 9(6)         VALUE 0. 
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT IN1 IN2   
+                OUTPUT LISTING. 
+           MOVE SPACES TO LIGNE.
+           WRITE LIGNE AFTER PAGE.  
+       LECTURE. 
+           PERFORM LECTURE-IN1 THRU LECTURE-EX. 
+           PERFORM LECTURE-IN2 THRU LECTURE-EX. 
+       TEST.
+           IF WS-INDIC1 = WS-INDIC2  GO TO EGALITE. 
+           IF WS-INDIC1 > WS-INDIC2  GO TO IN2-SEUL.
+           IF WS-INDIC1 < WS-INDIC2  GO TO IN1-SEUL.
+       EGALITE. 
+           IF WS-INDIC1 = HIGH-VALUES GO TO FINI.   
+           GO TO LECTURE
+       IN1-SEUL.
+           DISPLAY '< ENREG. NO : ' CT1 UPON PRINTER.   
+           PERFORM LECTURE-IN1 THRU LECTURE-EX. 
+           GO TO TEST.  
+       IN2-SEUL.
+           DISPLAY '> ENREG. NO :            - ' CT2 UPON PRINTER.  
+           PERFORM LECTURE-IN2 THRU LECTURE-EX. 
+           GO TO TEST.  
+       LECTURE-IN1. 
+           ADD DIFFERENCE TO NB-TOT-DIFFERENCE. 
+           MOVE NB-TOT-DIFFERENCE TO ZCT3.  
+           ADD 1 TO ZCT3.   
+           MOVE 0 TO DIFFERENCE.
+           READ IN1 INTO WS-IN1 AT END  
+                                MOVE HIGH-VALUES TO WS-INDIC1   
+                                GO TO LECTURE-EX.   
+           PERFORM EXCLUDE1 THRU EXCLUDE1-EXIT. 
+           ADD 1 TO CT1.
+           GO TO LECTURE-EX.
+       LECTURE-IN2. 
+           MOVE 0 TO DIFFERENCE.
+           READ IN2 INTO WS-IN2 AT END  
+                                MOVE HIGH-VALUES TO WS-INDIC2   
+                                GO TO LECTURE-EX.   
+           PERFORM EXCLUDE2 THRU EXCLUDE2-EXIT. 
+           ADD 1 TO CT2.
+       LECTURE-EX.  
+           EXIT.
+       EXCLUDE1.
+           MOVE ALL '*' TO EXCL1-1.   *> SSG-STUB
+       EXCLUDE1-EXIT.   
+           EXIT.
+    
+       EXCLUDE2.
+           MOVE ALL '*' TO EXCL2-1.   *> SSG-STUB
+       EXCLUDE2-EXIT.   
+           EXIT.
+    
+    
+       FINI.
+           DISPLAY '******************************' 
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 1 = ' CT1  
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 2 = ' CT2  
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS DIFFERENTS = '   
+                    NB-TOT-DIFFERENCE              UPON PRINTER.
+           DISPLAY '******************************' UPON PRINTER.   
+           DISPLAY '**********************************************' 
+                    UPON PRINTER.   
+           IF NB-TOT-DIFFERENCE > 0   *> SSG-STUB
+                 DISPLAY '* TOUTES LES DIFFERENCES NE SONT PAS LISTEES *'   
+                 UPON PRINTER   
+           ELSE 
+                 DISPLAY '*    TOUTES LES DIFFERENCES SONT LISTEES     *'   
+                 UPON PRINTER.  
+           DISPLAY '**********************************************' 
+                    UPON PRINTER.   
+           CLOSE IN1 IN2 LISTING.   
+           STOP RUN.

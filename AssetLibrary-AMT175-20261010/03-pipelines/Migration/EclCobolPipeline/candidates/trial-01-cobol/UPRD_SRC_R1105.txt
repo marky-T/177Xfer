@@ -1,0 +1,22 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID.            R1105.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER.       UNIVAC-1100-10.   
+       OBJECT-COMPUTER.       UNIVAC-1100-10.   
+       DATA DIVISION.   
+       LINKAGE SECTION. 
+       01  RIN-ERREUR         PIC X(08).                                PV040398
+       01  RIN-BR.  
+           03  AF-BR          PIC 999.  
+           88  AF-BR-1        VALUE  010 060 030 THRU 033 037 630 637   
+                                     638 639 731 732  733 737 738 739   
+                                   800 801 802 803 806  810 THRU 817
+                                     820 THRU 827     850 860 870 880   
+                                     832 THRU 837.  
+       PROCEDURE DIVISION USING RIN-BR  RIN-ERREUR. 
+       DEBUT.   
+           IF  AF-BR-1  
+               MOVE SPACES  TO RIN-ERREUR.                              PV040398
+       FIN-ROUT1105.
+           EXIT  PROGRAM.   

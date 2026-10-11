@@ -1,0 +1,9 @@
+﻿2026-08-12 14:15:14 [0] Phase     : ------------------------------------------------------------
+2026-08-12 14:15:14 [0] Phase     : SSG to PowerShell Converter
+2026-08-12 14:15:14 [0] Phase     : ------------------------------------------------------------
+2026-08-12 14:15:14 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-12 14:15:14 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-12 14:15:14 [0] Log       : SSG source files found: 2
+2026-08-12 14:15:14 [0] Error     :   Error converting AAAAASSURFED_UTILIT_COMPARE2_ASCII_reformatedSSG: The expression text may not be null or empty.
+2026-08-12 14:15:14 [0] Log       : 
+2026-08-12 14:15:14 [0] Log       : Conversion complete: 0 succeeded, 1 failed

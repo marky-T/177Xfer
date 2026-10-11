@@ -1,0 +1,322 @@
+*set case$ to 1 
+*brkpt     tpf$.arch
+      *******************************************************************   
+      ***                     -- UGXB02 --                            ***   
+      ***     PROGRAMME D'EXTRACTION DES ENREGISTREMENTS A ARCHIVER   ***   
+      ***                     ------------                            ***   
+      ***                                                             ***   
+      *******************************************************************   
+
+      *******************************************************************   
+      * Type     : BATCH RDMS                      (BATCH, TRANSACTION) *   
+      * Analyste : VG                              (INITIALES)          *   
+      * Auteur   : GIUSEPPI VALERIE                (NOM, PRENOM)        *   
+      * Release  : 01                              (2 CHIFFRES)         *   
+      * Version  : 001                             (3 CHIFFRES)         *   
+      *******************************************************************   
+      *  Modification                                                   *   
+      *  Qui ?    Quand ?     Quoi ?                             Projet *   
+      * .PP     .29/03/1996.  CREATION                          .ARCHIV 
+      * .       .__/__/____.                                    .       *   
+      * .       .__/__/____.                                    .       *   
+      * .       .__/__/____.                                    .       *   
+      * .       .__/__/____.                                    .       *   
+      * .       .__/__/___ .                                    .       *   
+      * .       .__/__/___ .                                    .       *   
+      * .       .__/__/___ .                                    .       *   
+      * .       .__/__/___ .                                    .       *   
+      *******************************************************************   
+
+*SORT,x   SGS  KEY  
+*.  
+*.  
+*.Premier test de validation des parametres:  chevauchement des cles dans   
+*.******************************************  la chercheuse 
+*.  
+*set pos to 0   
+*increment a from 1 to [key] by 1   
+*set pos to [key,a,1,1] + [key,a,1,2]   
+*if [*a] = [key]
+*exit   
+*endif  
+*set b to [*a] + 1  
+*if [*pos] > [key,b,1,1]
+*display 'ERREUR: LES CLES [*a] ET [*b] DE LA CHERCHEUSE SE CHEVAUCHENT.'   
+*message,x 'ERREUR: LES CLES [*a] ET [*b] DE LA CHERCHEUSE SE CHEVAUCHENT'  
+*abort  
+*endif  
+*loop   
+*.  
+*.  
+*.Deuxi}me test de validation des parametres:  chevauchement des cles dans  
+*.*******************************************  la table 
+*.  
+*SORT,x   SGS  KEY,1,1,3
+*increment a from 1 to [key] by 1   
+*set pos to [key,a,1,2] + [key,a,1,3]   
+*set c to [*a] + 1  
+*increment b from c to [key] by 1   
+*if [*b] = [*a] 
+*iterate a  
+*endif  
+*if  [key,b,1,3] < [*pos]   
+*display  'ERREUR: LES CLES [*a] ET [*b] DE LA TABLE SE CHEVAUCHENT.'   
+*message,x  'ERREUR: LES CLES [*a] ET [*b] DE LA TABLE SE CHEVAUCHENT.' 
+*abort  
+*exit a 
+*endif  
+*loop   
+*loop   
+*.  
+*.  
+*.Troisi}me test de validation des parametres:  sur les longueurs des cles  
+*.********************************************  (< 256) 
+*.  
+*set lg to 0
+*increment a from 1 to [key] by 1   
+*set lg to [*lg] + [key,a,1,2]  
+*loop   
+*if [*lg] > 256 
+*display 'ERREUR: LA LONGUEUR DES CLES DEPASSE 256.'
+*display '        ELLE EST DE [*lg].'   
+*message,x 'ERREUR: LA LONGUEUR DES CLES DEPASSE 256.'  
+*message,x '        ELLE EST DE [*lg].' 
+*abort  
+*endif  
+*SORT,x   SGS  KEY  
+*.  
+*.***********************************************************************   
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. UGXB02.  
+
+       DATE-WRITTEN. 29/03/96.  
+       DATE-COMPILED.   
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNISYS-2200.
+       OBJECT-COMPUTER. UNISYS-2200 MEMORY 3 MODULES.   
+       SPECIAL-NAMES.   
+           PRINTER IS PRINER
+           DECIMAL-POINT IS COMMA   
+           PRINTER IS PRINTER   
+           CARD-READER    CARD-READER   
+           CARD-PUNCH     CARD-PUNCH
+           CONSOLE         CONSOLE  
+           CURRENCY    "F". 
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT [FILEKEY,1,1,1] ASSIGN TO DISC [FILEKEY,1,1,1].   
+      * 
+           SELECT [TABLE,1,1,1] ASSIGN TO DISC [TABLE,1,1,1].   
+      * 
+           SELECT FARCHIVE ASSIGN TO DISC [FARCHIVE,1,1,1]. 
+      * 
+           SELECT FENCOURS ASSIGN TO DISC [FENCOURS,1,1,1]. 
+      * 
+      * 
+      * 
+       DATA DIVISION.   
+      **********************
+       FILE SECTION.
+       FD  [FILEKEY,1,1,1]  
+      * 
+      *    DECLARATION DE LA CHERCHEUSE GENERE PAR SSG  
+      * 
+            LABEL RECORDS ARE STANDARD. 
+       01  ENR-CHER.
+*set pos to 1   
+*increment a from 1 to [key] by 1   
+*set fil to [key,a,1,1] - [*pos]
+*if [*fil]  > 0 
+           02  FILLER PIC X([*fil]).
+*endif  
+           02  KEY[*a]   PIC X([key,a,1,2]).
+*set pos to [*pos] + [key,a,1,2]  + [*fil]  
+*loop   
+*set fil to [filekey,1,1,2] - [*pos] + 1
+*if [*fil]  > 0 
+           02  FILLER PIC X([*FIL]).
+*endif  
+       FD  [table,1,1,1]
+      *   DECLARATION DU FICHIER SEQUENTIEL CONTENANT LA TABLE UNLOADEE 
+      * 
+            LABEL RECORDS ARE STANDARD. 
+       01  ENR-TAB. 
+*set pos to 1   
+*increment b from 1 to [key] by 1   
+*set fil to [key,b,1,3] - [*pos]
+*if [*fil]  > 0 
+           02  FILLER PIC X([*fil]).
+*endif  
+           02  KEY-T[*B]   PIC X([key,b,1,2]).  
+*set pos to [*pos] + [key,b,1,2]  + [*fil]  
+*loop   
+*set fil to [table,1,1,2] - [*pos] + 1  
+*if [*fil]  > 0 
+           02  FILLER PIC X([*fil]).
+*endif  
+       FD  FARCHIVE 
+           LABEL RECORDS ARE STANDARD.  
+       01  ENR-ARC. 
+           02 NOM-TAB         PIC X(30).
+           02 DAT-ARC.  
+                03 DAT-SS     PIC 9(2). 
+                03 DAT-DAT. 
+                    04 DAT-AA PIC 9(2). 
+                    04 DAT-MM PIC 9(2). 
+                    04 DAT-JJ PIC 9(2). 
+           02 CLES-TAB        PIC X([filekey,1,1,2]).   
+           02 ENR             PIC X([table,1,1,2]). 
+       FD  FENCOURS 
+           LABEL RECORDS ARE STANDARD.  
+       01  ENR-ENC            PIC X([table,1,1,2]). 
+       WORKING-STORAGE SECTION. 
+       01  SEQ-KEY. 
+*increment a from 1 to [key] by 1.  
+           02 S-KEY[*a]   PIC X([key,a,1,2]).   
+*loop   
+       01  SEQ-KEY-T.   
+*increment a from 1 to [key] by 1.  
+           02 S-KEY-T[*a]   PIC X([key,a,1,2]). 
+*loop   
+       77  EOF-FILE            PIC X VALUE "0". 
+       77  EOF-CHER            PIC X VALUE "0". 
+       77  CPT-CHER            PIC 9(10) COMP VALUE 0.  
+       77  CPT-FILE            PIC 9(10) COMP VALUE 0.  
+       77  CPT-ENC             PIC 9(10) COMP VALUE 0.  
+       77  CPT-ARC             PIC 9(10) COMP VALUE 0.  
+       01  CPT-CHER-ED         PIC Z(10).   
+       01  CPT-FILE-ED         PIC Z(10).   
+       01  CPT-ENC-ED          PIC Z(10).   
+       01  CPT-ARC-ED          PIC Z(10).   
+      * 
+       PROCEDURE DIVISION.  
+      **********************
+       000-MAIN.
+      **********************
+           PERFORM 010-OUVERTURE
+           PERFORM 020-TRT-PRINC UNTIL (EOF-CHER = "1" AND  
+                                       EOF-FILE = "1")  
+           IF EOF-FILE = "0"
+              PERFORM LEC-FILE  
+      *       PERFORM 030-TRT-SEC UNTIL (EOF-FILE = "1")
+           END-IF   
+           PERFORM 090-CLOTURE  
+           STOP RUN.
+      * 
+      ******FONCTIONS*******
+      **********************
+       LEC-CHER.
+           READ [filekey,1,1,1] AT END MOVE "1" TO EOF-CHER 
+           END-READ 
+           IF EOF-CHER = "0"
+              ADD 1 TO CPT-CHER 
+*increment a from 1 to [key] by 1.  
+              MOVE KEY[*a] to S-KEY[*a] 
+*loop   
+           ELSE 
+              MOVE HIGH-VALUE TO SEQ-KEY
+           END-IF   
+           .
+       LEC-FILE.
+           READ [table,1,1,1] AT END MOVE "1" TO EOF-FILE   
+           END-READ 
+           IF EOF-FILE = "0"
+              ADD 1 TO CPT-FILE 
+*increment a from 1 to [key] by 1.  
+              MOVE KEY-T[*a] to S-KEY-T[*a] 
+*loop   
+           ELSE 
+              MOVE HIGH-VALUE TO SEQ-KEY-T  
+           END-IF   
+           .
+      * 
+       010-OUVERTURE.   
+      **********************
+           OPEN INPUT [filekey,1,1,1] [table,1,1,1] 
+                OUTPUT FARCHIVE FENCOURS
+           ACCEPT DAT-DAT FROM DATE 
+           PERFORM LEC-CHER 
+           PERFORM LEC-FILE.
+      * 
+       020-TRT-PRINC.   
+      **********************
+           IF SEQ-KEY = SEQ-KEY-T   
+                MOVE "[table,1,1,3]" TO NOM-TAB 
+                IF DAT-AA < 28  
+                   MOVE 20 TO DAT-SS
+                ELSE
+                   MOVE 19 TO DAT-SS
+                END-IF  
+                MOVE SEQ-KEY TO CLES-TAB
+                MOVE ENR-TAB TO ENR 
+                WRITE ENR-ARC   
+                ADD 1 TO CPT-ARC
+                PERFORM LEC-CHER
+                PERFORM LEC-FILE
+           ELSE 
+             IF SEQ-KEY > SEQ-KEY-T 
+                MOVE ENR-TAB TO ENR-ENC 
+                WRITE ENR-ENC   
+                ADD 1 TO CPT-ENC
+                PERFORM LEC-FILE
+             ELSE   
+      *         ERREUR  
+                PERFORM LEC-CHER
+             END-IF 
+           END-IF.  
+      * 
+       030-TRT-SEC. 
+      **********************
+           MOVE ENR-TAB TO ENR-ENC  
+           WRITE ENR-ENC
+           ADD 1 TO CPT-ENC 
+           PERFORM LEC-FILE.
+      * 
+       090-CLOTURE. 
+      **********************
+           CLOSE [filekey,1,1,1] [table,1,1,1] FARCHIVE FENCOURS
+           MOVE CPT-ENC TO CPT-ENC-ED   
+           MOVE CPT-ARC TO CPT-ARC-ED   
+           MOVE CPT-CHER TO CPT-CHER-ED 
+           MOVE CPT-FILE TO CPT-FILE-ED 
+           DISPLAY   '  LES TOTAUX DE CONTROLE:' UPON PRINER
+           DISPLAY   '  ***********************' UPON PRINER
+           DISPLAY             ' Nombre de records lus dans le fichier' 
+           ' [filekey,1,1,1] : ' CPT-CHER-ED UPON PRINER
+           DISPLAY             ' Nombre de records lus dans le fichier' 
+           ' [table,1,1,1] : ' CPT-FILE-ED UPON PRINER  
+           DISPLAY           ' Nombre de records {crit dans le fichier' 
+           ' [farchive,1,1,1] : ' CPT-ARC-ED UPON PRINER
+           DISPLAY           ' Nombre de records {crit dans le fichier' 
+           ' [fencours,1,1,1] : ' CPT-ENC-ED UPON PRINER.   
+*brkpt  
+#UCOB TPF$.arch,Tpf$.arch,,,MAIN-PROGRAM,COMPAT/FULLHV377,; 
+      CACHE/0,EXTENDED/0,NO-SHIFT,NO-DEBUG,OPTIM,SOURCE;
+      NO-UREP-XREF  
+
+#ASG,A        SYS$LIB$*APP$3.   
+#USE          LINK$PF,SYS$LIB$*APP$3.   
+#LINK        ,Tpf$.arch 
+     INCLUDE       Tpf$.arch
+     OUTPUT ZOOM
+     RESOLVE ALL REFERENCES USING LOCAL_DEFS,SYS$LIB$*EMOMRTS., 
+                 LIBCODENAME
+    SET SIZE=SIZE + 32734 FOR URTS$TABLES   
+    SET ALS_INIT_SIZE = 0117000 
+    DELETE ALL DEFINITION EXCEPT START$ 
+    PROCESS FOR EXTENDED
+#FREE SYS$LIB$*APP$3.   
+#ASG,A [filekey,1,1,1]. 
+#ASG,A [table,1,1,1].   
+#DELETE,C [farchive,1,1,1]. 
+#CAT,P [farchive,1,1,1],F//POS/4095 
+#ASG,AX [farchive,1,1,1].   
+#DELETE,C [fencours,1,1,1]. 
+#CAT,P [fencours,1,1,1],F//POS/4095 
+#ASG,AX [fencours,1,1,1].   
+#XQT  TPF$.ARCH 
+#FREE [filekey,1,1,1].  
+#FREE [table,1,1,1].
+#FREE [fencours,1,1,1]. 
+#FREE [farchive,1,1,1]. 

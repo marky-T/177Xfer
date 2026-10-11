@@ -1,0 +1,7 @@
+﻿2026-08-12 12:55:32 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:55:32 [0] Phase     : SSG to PowerShell Converter
+2026-08-12 12:55:32 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:55:32 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-12 12:55:32 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-12 12:55:32 [0] Log       : SSG source files found: 0
+2026-08-12 12:55:32 [0] Warning   : No SSG files found in the input folder.

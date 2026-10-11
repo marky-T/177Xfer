@@ -1,0 +1,50 @@
+*EDIT ON &  
+*EDIT OFF   
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. MICHEL REVISED BY BOURDEAUD HUY. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN  TO  UNISERVO FICHIN-1.   *> SSG-STUB
+           SELECT  TAPEOUT  ASSIGN  TO  MASS-STORAGE FILEOUT-1. *> SSG-STUB
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS 1  RECORDS *> SSG-STUB
+           DATA RECORD RECIN.   
+       01  RECIN   PIC  X(120).    *> SSG-STUB
+       FD  TAPEOUT  
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS 1  RECORDS   *> SSG-STUB
+           DATA RECORD RECOUT.  
+       01  RECOUT   PIC   X(80). *> SSG-STUB
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC   9(10)  COMP  VALUE 0. 
+       01  COPY-LIMIT         PIC 9(10) VALUE 1.   *> SSG-STUB
+       01   SWITCHES.   
+           03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT TAPEIN.   
+           OPEN  OUTPUT  TAPEOUT.   
+       LECT.
+           MOVE SPACES TO RECOUT.   
+           READ  TAPEIN  AT  END  GO TO  FINW.  
+           MOVE RECIN TO RECOUT.
+           ADD 1  TO NB-LUS.
+           WRITE RECOUT.
+           IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.   
+           GO TO LECT.  
+       FINW.
+           DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.   
+           DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.   
+           CLOSE  TAPEIN.   
+           CLOSE  TAPEOUT.  
+           DISPLAY  REC-SKIPPED  UPON  PRINTER. 
+           STOP RUN.

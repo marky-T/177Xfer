@@ -1,0 +1,181 @@
+*DEFINE  FILER  
+*SET  FILLCTR TO   [#1]-1   
+*IF FILLCTR  IS  SET
+           02  FILLER  PIC  X([*FILLCTR]).  
+*END
+*END
+*IF [ASCII] > 0 
+#ACOB,I     .UNLOADIS,.UNLOADIS 
+*ELSE   
+#ACOB,IT    .UNLOADIS,.UNLOADIS 
+*END
+
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. UNLOADIS.
+       AUTHOR.     H A N S E .  
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNISYS-1100.
+       OBJECT-COMPUTER. UNISYS-1100.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT BDE  ASSIGN TO
+*IF [OUTPUT,1,1] > 3
+               INTERCHANGE [OUTPUT,1,1,1].  
+*ELSE   
+               DISC [OUTPUT,1,1,1]. 
+*END
+*IF [SFS] > 0   
+           SELECT DISQ ASSIGN TO A-SHARED-FILE [INPUT,1,1,1]
+*ELSE   
+           SELECT DISQ ASSIGN TO DISC  [INPUT,1,1,1]
+*END
+           RESERVE 20 AREAS 
+           ORGANIZATION IS INDEXED  
+           ACCESS  MODE IS SEQUENTIAL   
+           RECORD KEY IS CLEF   
+*IF [KEYIS] > 1 
+           ALTERNATE RECORD KEY IS CLEG 
+*IF [KEYIS,2,1] > 3 
+                     WITH DUPLICATES
+*END
+*END
+*IF [KEYIS] > 2 
+           ALTERNATE RECORD KEY IS CLEH 
+*IF [KEYIS,3,1] > 3 
+                     WITH DUPLICATES
+*END
+*END
+*IF [KEYIS] > 3 
+           ALTERNATE RECORD KEY IS CLEI 
+*IF [KEYIS,4,1] > 3 
+                     WITH DUPLICATES
+*END
+*END
+           .
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  BDE  
+*IF [OMITTED] > 0   
+           LABEL RECORD OMITTED 
+*ELSE   
+           LABEL RECORD STANDARD
+*END
+             BLOCK CONTAINS [OUTPUT,1,1,3]   RECORDS
+           RECORD CONTAINS [OUTPUT,1,1,2] CHARACTERS
+           DATA RECORD IS  ZBDE.
+       01  ZBDE    PIC  X([OUTPUT,1,1,2]).  
+       FD  DISQ 
+*IF [SFS] > 0   
+           LABEL RECORD OMITTED 
+*ELSE   
+           LABEL RECORD STANDARD
+*END
+           BLOCK CONTAINS [INPUT,1,1,3] RECORDS 
+           RECORD  CONTAINS [INPUT,1,1,2] CHARACTERS
+           DATA RECORD IS ZDISQ CLEFA CLEFB CLEFC CLEFD.
+       01  ZDISQ   PIC  X([INPUT,1,1,2]).   
+       01  CLEFA.   
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER PIC X([KEYIS,1,1,1]).  
+*END
+           02 CLEF   PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).  
+*END
+       01  CLEFB.   
+*IF [KEYIS] > 1 
+*IF [KEYIS,2,1,1] > 0   
+           02 FILLER PIC X([KEYIS,2,1,1]).  
+*END
+           02 CLEG   PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).  
+*END
+*ELSE   
+           02 FILLER PIC X([INPUT,1,1,2]).  
+*END
+       01  CLEFC.   
+*IF [KEYIS] > 2 
+*IF [KEYIS,3,1,1] > 0   
+           02 FILLER PIC X([KEYIS,3,1,1]).  
+*END
+           02 CLEH   PIC X([KEYIS,3,1,2]).  
+*IF [KEYIS,3,1,3] > 0   
+           02 FILLER PIC X([KEYIS,3,1,3]).  
+*END
+*ELSE   
+           02 FILLER PIC X([INPUT,1,1,2]).  
+*END
+       01  CLEFD.   
+*IF [KEYIS] > 3 
+*IF [KEYIS,4,1,1] > 0   
+           02 FILLER PIC X([KEYIS,4,1,1]).  
+*END
+           02 CLEI   PIC X([KEYIS,4,1,2]).  
+*IF [KEYIS,4,1,3] > 0   
+           02 FILLER PIC X([KEYIS,4,1,3]).  
+*END
+*ELSE   
+           02 FILLER PIC X([INPUT,1,1,2]).  
+*END
+       WORKING-STORAGE SECTION. 
+       77  CTR                PIC 9(10) COMP VALUE 0.   
+*IF [MAXREC] > 0
+       77  MAXBDE             PIC 9(10) COMP VALUE [MAXREC,1,1,1].  
+*ELSE   
+       77  MAXBDE             PIC 9(10) COMP VALUE 99999999.
+*END
+*IF [SFS] > 0   
+       01  RDMS-STATUS        PIC 9(4). 
+       01  INFO-COLUMN        PIC S1(36).   
+*END
+       01  WREC.
+           02 FILLER          PIC X([INPUT,1,1,2]). 
+       PROCEDURE DIVISION.  
+       DEBUT.   
+*IF [SFS] > 0   
+           ENTER MASM 'ACOB$RDMR' USING 
+                 'BEGIN THREAD FOR UDSSRC READ UDSMSG; '
+                 RDMS-STATUS, INFO-COLUMN.  
+*END
+           OPEN  OUTPUT BDE.
+           OPEN  INPUT  DISQ.   
+           MOVE LOW-VALUES TO CLEF. 
+       LECT.
+           READ  DISQ  INTO  WREC  AT END GO TO FINB.   
+           ADD  1  TO  CTR. 
+           WRITE ZBDE FROM WREC.
+           MOVE SPACES TO WREC. 
+           IF CTR = MAXBDE   GO TO FINB.
+           GO TO LECT.  
+       FINB.
+           DISPLAY 'NB.RECORDS ECRITS : '  CTR  UPON PRINTER.   
+           CLOSE  DISQ. 
+           CLOSE  BDE.  
+*IF [SFS] > 0   
+           ENTER MASM 'ACOB$RDMR' USING 
+                 'END THREAD ; '
+                 RDMS-STATUS, INFO-COLUMN.  
+*END
+           STOP RUN.
+*IF [SFS] > 0   
+#MAP,N     ,TPF$.UNLOADIS   
+IBANK,UX  C$DML 
+IBANK,MRC I1,025000 
+IN  TPF$.   
+IN  SYS$LIB$*RSA.RDMR-ACOBDAT   
+IN  SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+IN  SYS$LIB$*SFSLIB.CBEP$$SFS   
+DBANK,MU  D1,0164000
+IN  TPF$.   
+IN  SYS$LIB$*RSA.RDMR-ACOBDAT   
+IN  SYS$LIB$*RSA.CBEP$$RSA  
+IN  SYS$LIB$*SFSLIB.CBEP$$SFS   
+LIB SYS$LIB$*ACOB.  
+LIB SYS$LIB$*SORT.  
+END 
+*ELSE   
+#MAP,N    ASSURFED*UTILITASCII.MAP,TPF$.UNLOADIS
+*END
+#HDG,N  

@@ -1,0 +1,383 @@
+# . Pour date table, null et clé
+#delete,c     [filein,1,1,1].   
+#asg,up       [filein,1,1,1].,f/0/pos/4000  
+#brkpt        print$,[filein,1,1,1].
+#dd,e    ,,udssrc   
+report table [table,1,1,2] for schema [table,1,1,1].
+process table [table,1,1,2] for schema [table,1,1,1] report.
+exit
+#brkpt        print$
+#sym          print$,,nega/u
+#free         [filein,1,1,1].   
+# . Pour description des champs 
+#delete,c     [filein,1,2,1].   
+#asg,up       [filein,1,2,1].,f/0/pos/4000  
+# . 
+#xqt,e        sys$lib$*rsa.rsac-coivp   
+begin thread for udssrc read;   
+use default qualifier [table,1,1,1];
+unload to file "[filein,1,2,1]" 
+  select *  
+  from [table,1,1,2]
+  format internal   
+  with description only;
+end thread; 
+exit;   
+#free         [filein,1,2,1].   
+# . 
+#asg,a        [filein,1,1,1].   
+#asg,a        [filein,1,2,1].   
+*set a = 2 + [key,1,1,3] + [rsz,1,1,1] + [table,1,2,1]  
+*set b = [key,1,1,3] + [rsz,1,1,1] + 1 + [table,1,2,1]  
+*set c =  2 + [key,1,1,3] + [rsz,1,1,1] 
+*set d =  1 + [key,1,1,3] + [rsz,1,1,1] 
+*set e =  [key,1,1,3] + [rsz,1,1,1] 
+#ucob,is .archiformat,.archiformat  
+      ***------------------------------------------------------------***
+      ***                    -- archiformat --                       ***
+      ***            Foramt données pour archivage                   ***
+      ***                        == UCS ==                           ***
+      ***------------------------------------------------------------***
+      * Type     :                                                     *
+      * Analyste :                                 (INITIALES)         *
+      * Auteur   : Néga  NEGA SERGE                (INITIALES  NM PN)  *
+      * Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+      * Release  :                                 (99)                *
+      * Version  :                                 (999)               *
+      *----------------------------------------------------------------*
+      * Modifications :                                                *
+      * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+    
+      ***------------------------------------------------------------***
+      *                       DESCRIPTION                              *
+      *                       ===========                              *
+      *                                                                *
+      *    INPUT : [filein,1,1,1] : report de la table                 *
+      *    INPUT : [filein,1,2,1] : description de la table            *
+      *    INPUT : [filein,1,3,1] : données unloadées archivées        *
+      *    OUTPUT: [fileout,1,1,1] : données au  format  archive       *
+      ***------------------------------------------------------------***
+    
+    
+       Identification division. 
+      *========================*
+       program-id.  archiformat.
+    
+       Environment division.
+      *====================*
+    
+       Configuration section.   
+      *----------------------*  
+       source-computer.  unisys-2200.   
+       object-computer.  unisys-2200 MEMORY 3 MODULES.  
+       special-names.   
+           printer       printer.   
+    
+       Input-output section.
+      *---------------------*   
+       file-control.
+           select fic-report assign to disc      [filein,1,1,1].
+           select fic-descript assign to disc    [filein,1,2,1].
+           select fic-unload assign to disc      [filein,1,3,1].
+           select fic-format assign to disc      [fileout,1,1,1].   
+       i-o-control. 
+    
+       Data division.   
+      *==============*  
+    
+       File section.
+      *-------------*   
+      * Fichier du report   
+       FD  fic-report.  
+        1  lgn-rep               pic x(132).
+
+      * Fichier de description  
+       FD  fic-descript.
+        1  lgn-des               pic x(132).
+    
+      * Fichier d'unload des données archivées  
+       FD  fic-unload.  
+        1  lgn-unl               pic x([*b]).   
+
+      * Fichier formaté pour l'archivage
+       FD  fic-format.  
+        1  lgn-for               pic x([*a]).   
+
+       Working-storage section. 
+      *------------------------*
+      *enregistrement type 0
+         1 ws-don-0.
+           3 ws-0-typ           pic x value "0".
+           3 ws-0-nm-base       pic x(6) value "[table,1,1,3]". 
+           3 ws-0-nm-table      pic x(30) value "[table,1,1,2]".
+           3 ws-0-dt-ach        pic 9(8).   
+           3 ws-0-dt-maj.   
+            5 ws-0-dt-maj-ss    pic 99. 
+            5 ws-0-dt-maj-aa    pic 99. 
+            5 ws-0-dt-maj-mm    pic 99. 
+            5 ws-0-dt-maj-jj    pic 99. 
+      *enregistrement type 1
+         1 ws-don-1.
+           3 ws-1-typ           pic x value "1".
+           3 ws-1-nm-cle        pic x(30) value "[key,1,1,1]".  
+           3 ws-1-cle.  
+            5 ws-1-typ-cle      pic x value "[key,1,1,2]".  
+            5 ws-1-lg-cle       pic 99.99.  
+      *enregistrement type 2
+         1 ws-don-2.
+           3 ws-2-typ           pic x value "2".
+           3 ws-2-nm-chp        pic x(30).  
+           3 ws-2-typ-chp       pic x(7).   
+           3 ws-2-lg-chp        pic x(10).  
+           3 ws-2-null          pic x(8).   
+      *enregistrement type 3
+         1 ws-don-3.
+           3 ws-3-typ           pic x value "3".
+           3 ws-3-nm-idx        pic x(30).  
+           3 ws-3-nm-chp        pic x(30).  
+           3 ws-3-tri           pic x(8).   
+      *enregistrement type 4
+         1 ws-don-4.
+           3 ws-4-typ           pic xx value "4A".  
+           3 ws-4-don           pic x([*b]).
+      *    3 ws-4-cle           pic x([key,1,1,3]). 
+      *enregistrement type 9
+         1 ws-don-9.
+           3 ws-9-typ           pic x value "9".
+           3 ws-9-nm-base       pic x(6) value "[table,1,1,3]". 
+           3 ws-9-nm-table      pic x(30) value "[table,1,1,2]".
+           3 ws-9-dt-ach        pic 9(8).   
+           3 ws-9-cpt-ach       pic s9(11) sign leading separate.   
+           3 ws-9-cpt-5         pic x(12) value "+00000000000". 
+         1 unloadf              pic 9 value 0.  
+           88 fin-unload        value 1.
+         1 table-null.  
+           3 tnull              pic x occurs 70 times.  
+        77 i                    pic 99. 
+        77 i-buf                pic 99. 
+        77 i-tot                pic 99. 
+    
+      *------------------ flag ---------------------------  
+        77 fl-null              pic 9.  
+      *---------------------------------------------------  
+    
+      *---------------- compteur -------------------------  
+        77 cpt-char             pic 999.
+        77 cpt-ach              pic 9(11).  
+        77 cpt-lu               pic 9(11).  
+        77 cpt-achf             pic z(10)9. 
+        77 cpt-luf              pic z(10)9. 
+      *---------------------------------------------------- 
+    
+      *------------------ POUR LA DATE ---------------------
+         1 dt-i.
+           3 aa-i               pic 9(4).   
+           3 mm-i               pic 99. 
+           3 jj-i               pic 99. 
+         1 dt-fr.   
+           3 jj-fr              pic 99. 
+           3   pic x value '/'. 
+           3 mm-fr              pic 99. 
+           3   pic x value '/'. 
+           3 aa-fr              pic 9(4).   
+      *------------------------------------------------------   
+    
+       PROCEDURE DIVISION.  
+      *-------------------  
+         000-main.  
+           open input fic-report fic-descript fic-unload
+                output fic-format   
+           perform 100-type0 thru 100-exit  
+           perform 101-type1 thru 101-exit  
+           perform 102-type2 thru 102-exit  
+           perform 103-type3 thru 103-exit  
+           perform 104-type4 thru 104-exit  
+           perform 105-type9 thru 105-exit  
+           perform 106-tot thru 106-exit
+           close fic-report fic-descript fic-unload fic-format  
+           stop run 
+           .
+      *------------ ENREGISTREMENT DE TYPE 0 ----------------   
+        100-type0.  
+           accept ws-0-dt-ach from date yyyymmdd
+      *recherche de la date de création de la table 
+           perform 200-lec-report thru 200-exit until lgn-rep(4:21) 
+             = 'DD-PROCESS-TIME-STAMP'  
+           perform 200-lec-report thru 200-exit 
+           move lgn-rep(7:2) to ws-0-dt-maj-aa  
+           if ws-0-dt-maj-aa > 90   
+             move 19 to ws-0-dt-maj-ss  
+           else 
+             move 20 to ws-0-dt-maj-ss  
+           end-if   
+           move lgn-rep(10:2) to ws-0-dt-maj-mm 
+           move lgn-rep(13:2) to ws-0-dt-maj-jj 
+           write lgn-for from ws-don-0  
+           .
+        100-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 1 -----------------  
+        101-type1.  
+           move [key,1,1,3] to ws-1-lg-cle  
+           write lgn-for from ws-don-1  
+           .
+        101-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 2 -----------------  
+        102-type2.  
+           perform until lgn-rep(1:7) = 'Columns'   
+             perform 200-lec-report thru 200-exit   
+           end-perform  
+           perform 200-lec-report thru 200-exit 2 times 
+      *localisation de l'emplacement de yes/no pour NULL
+           move 0 to cpt-char   
+           inspect lgn-rep tallying cpt-char
+                           for characters   
+                           before initial 'Allowed' 
+           move cpt-char to i-buf   
+           perform 200-lec-report thru 200-exit 
+           perform 201-lec-descript thru 201-exit 2 times   
+      *localisation du nom du champ 
+           move 0 to cpt-char   
+           inspect lgn-des tallying cpt-char
+                           for characters   
+                           before initial 'TION.'   
+           add 6 to cpt-char
+           perform [table,1,2,1] times  
+      *chargement du nom et de la description des champs
+             move lgn-des(cpt-char:30) to ws-2-nm-chp   
+             move lgn-des(6:7) to ws-2-typ-chp  
+             move lgn-des(13:10) to ws-2-lg-chp 
+             move lgn-rep to table-null 
+             add 3 to i-buf giving i
+             move 0 to fl-null  
+             add 2 to i giving i-tot
+      *recherche [Y] et ensuite [E] pour NULL   
+             perform until i >= i-tot   
+               if tnull(i) = 'Y'
+                 add 1 to i 
+                 if tnull(i) = 'E'  
+                   move 1 to fl-null
+                 end-if 
+               end-if   
+               add 1 to i   
+             end-perform
+             if fl-null = 1 
+               move 'NULL' to ws-2-null 
+             else   
+               move space to ws-2-null  
+             end-if 
+             write lgn-for from ws-don-2
+             perform 200-lec-report thru 200-exit   
+             perform 201-lec-descript thru 201-exit 
+           end-perform  
+           .
+        102-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 3 -----------------  
+        103-type3.  
+           perform until lgn-rep(1:13) = 'Primary Key :'
+             perform 200-lec-report thru 200-exit   
+           end-perform  
+      *localisation de la clé   
+           move 0 to cpt-char   
+           inspect lgn-rep tallying cpt-char
+                           for characters   
+                           before initial 'PK_' 
+           add 1 to cpt-char
+           move lgn-rep(cpt-char:30) to ws-3-nm-idx 
+           perform 200-lec-report thru 200-exit 2 times 
+           perform until lgn-rep(1:10) = space  
+             move 0 to cpt-char 
+             inspect lgn-rep tallying cpt-char  
+                             for characters 
+                             before initial ',' 
+             subtract 4 from cpt-char   
+      *chargement du nom de la clé  
+             move lgn-rep(5:cpt-char) to ws-3-nm-chp
+             add 7 to cpt-char  
+      *chargement de l'ordre de tri 
+             move lgn-rep(cpt-char:3) to ws-3-tri   
+             write lgn-for from ws-don-3
+             perform 200-lec-report thru 200-exit   
+           end-perform  
+           .
+        103-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 4 -----------------  
+        104-type4.  
+           perform until fin-unload 
+             perform 202-lec-unload thru 202-exit   
+             if not fin-unload  
+      *chargement de la clé d'archivage 
+      *déjà répété via la jointure!!!!! 
+      *        move lgn-unl ([key,1,1,4]:[key,1,1,3]) to ws-4-cle   
+               write lgn-for from ws-don-4  
+               add 1 to cpt-ach 
+             end-if 
+           end-perform  
+           .
+        104-exit.   
+           exit.
+      *------------ ENREGISTREMENT DE TYPE 9 -----------------  
+        105-type9.  
+           accept ws-9-dt-ach from date yyyymmdd
+      *comteur du nombre d'enregistrement de type 4 
+           move cpt-ach to ws-9-cpt-ach 
+           write lgn-for from ws-don-9  
+           .
+        105-exit.   
+           exit.
+      *----------------- RAPPORT  ----------------- 
+        106-tot.
+           move cpt-ach to cpt-achf 
+           move cpt-lu to cpt-luf   
+           move ws-0-dt-ach to dt-i 
+           move aa-i to aa-fr   
+           move mm-i to mm-fr   
+           move jj-i to jj-fr   
+           display "ARCHIFORMAT          RAPPORT          " 
+             dt-fr upon printer 
+           display "Enregistrements lus:" cpt-luf upon printer  
+           display "Enregistrements 4 écrits:" cpt-achf upon printer
+           .
+        106-exit.   
+           exit.
+      *--------------- LECTURE DU REPORT -------------- 
+        200-lec-report. 
+           read fic-report  
+             at end 
+               display "fin du report" upon printer 
+           end-read 
+           .
+        200-exit.   
+           exit.
+      *--------------- LECTURE DU DESCRIPT ------------ 
+        201-lec-descript.   
+           read fic-descript
+             at end 
+               display "fin de la description" upon printer 
+           end-read 
+           .
+        201-exit.   
+           exit.
+      *--------------- LECTURE DE L'UNLOAD --------------   
+        202-lec-unload. 
+           read fic-unload  
+             at end 
+               move 1 to unloadf
+             not at end 
+               move lgn-unl(1:[*e]) to ws-4-don(1:[*e]) 
+               move lgn-unl([*c]:[table,1,2,1]) 
+                 to ws-4-don([*d]:[table,1,2,1])
+               add 1 to cpt-lu  
+           end-read 
+           .
+        202-exit.   
+           exit.
