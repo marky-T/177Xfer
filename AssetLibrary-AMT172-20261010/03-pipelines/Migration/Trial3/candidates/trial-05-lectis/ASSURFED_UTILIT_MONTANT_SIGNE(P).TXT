@@ -1,0 +1,48 @@
+@UCOB,I   TPF$.NAME$,TPF$.MONTANT   
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. MONTANT. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  FILEIN  ASSIGN TO DISC FICHIN-1. *> SSG-STUB
+           SELECT  FILEOUT ASSIGN TO DISC FILEOUT-1.    *> SSG-STUB
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  FILEIN   
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS *> SSG-STUB
+           RECORD CONTAINS 120  CHARACTERS *> SSG-STUB
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X(120).  *> SSG-STUB
+       FD  FILEOUT  
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS    *> SSG-STUB
+           RECORD CONTAINS 80  CHARACTERS    *> SSG-STUB
+           DATA RECORD IS REC-OUT.  
+       01  REC-OUT            PIC X(80). *> SSG-STUB
+       WORKING-STORAGE SECTION. 
+       01  WS-IN  PIC X(120).  *> SSG-STUB
+       01  WS-IN1 REDEFINES WS-IN.    *> SSG-STUB
+               03 FILLER    PIC X(1).    *> SSG-STUB
+               03 MONTANT1  PIC S9(9).  *> SSG-STUB
+               03 FILLER    PIC X(1).   *> SSG-STUB
+       01  WS-OUT  PIC X(80).    *> SSG-STUB
+       01  WS-OUT1 REDEFINES WS-OUT.  *> SSG-STUB
+               03 FILLER    PIC X(1).    *> SSG-STUB
+               03 MONTANT1  PIC S9(9).  *> SSG-STUB
+               03 FILLER    PIC X(1).   *> SSG-STUB
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT FILEIN
+                OUTPUT FILEOUT. 
+       LECTURE. 
+           READ FILEIN INTO WS-IN AT END GO TO FIN. 
+           MOVE WS-IN TO WS-OUT.
+           COMPUTE MONTANT1 OF WS-OUT1 = MONTANT1 OF WS-IN1 * +1 *> SSG-STUB
+
+           WRITE REC-OUT FROM WS-OUT.   
+           GO TO LECTURE.   
+       FIN. 
+           CLOSE FILEIN FILEOUT.
+           STOP RUN.
