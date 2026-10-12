@@ -1,0 +1,157 @@
+@RUN,M/T  COMA16,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@SYM       PRINT$,1,PRSP
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES MOUVEMENTS COMMISSIONS               **
+@MSG       **      MODULE COMA16/U3                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE ANO_ERL_CMM               **
+@MSG       *===========================================================*
+@ . 
+@ .        P04062 : VANKE : 17/01/2005 : CREATION   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA16/U3
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA16U3.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE          - RESTART 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE ANO_ERL_CMM         - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,C      IUNLMVTAEC.  
+@CAT,P         IUNLMVTAEC.,F/18/POS/262143  
+@ASG,A         IUNLMVTAEC.  
+@USE       UNL,IUNLMVTAEC.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE ANO_ERL_CMM IN EXCLUSIVE RETRIEVAL MODE; 
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   ANO_ERL_CMM
+  ORDER  BY 
+     NO_DRT_CMM         ASCENDING   
+   , CD_ETA_ANO_ERL_CMM ASCENDING   
+   , DT_CRE_ANO_ERL_CMM ASCENDING   
+   , NO_ANO_ERL_CMM     ASCENDING   
+  FORMAT EXTERNAL;  
+UNLOCK ANO_ERL_CMM; 
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTAEC.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB017:   MSG 017. TRI FICHIER DE SELECTION                      - TRI 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ERS       TPF$.
+@ASG,A         RCOMA15AEC.  
+@USE       INA,RCOMA15AEC.  
+@DELETE,C      ICOMA15AEC.  
+@ASG,UP        ICOMA15AEC.,F/0/POS/4000 
+@USE       OUT,ICOMA15AEC.  
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=01,10,CH,A,1        .NO-DRT-CMM 
+KEY=11,02,CH,A,2        .CD-ETA-ANO-ERL-CMM 
+KEY=13,08,CH,A,3        .DT-CRE-ANO-ERL-CMM 
+KEY=21,10,CH,A,4        .NO-ANO-ERL-CMM 
+RSZ=108 
+RECORD=10   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB020:   MSG 020. SELECT.DES MOUVEMENTS ANO_ERL_CMM A RECHARGER - SSG 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTAEC.  
+@USE       UNL,IUNLMVTAEC.  
+@ASG,AX        ICOMA15AEC.  
+@USE       CLE,ICOMA15AEC.  
+@ . 
+@DELETE,C      ILODMVTAEC.  
+@CAT,P         ILODMVTAEC.,F//POS/5000  
+@ASG,A         ILODMVTAEC.  
+@USE       LOA,ILODMVTAEC.  
+@DELETE,C      ISUPMVTAEC.  
+@CAT,P         ISUPMVTAEC.,F//POS/5000  
+@ASG,A         ISUPMVTAEC.  
+@USE       SUP,ISUPMVTAEC.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,108,10   UNL,166,10  
+OUTPUT         LOA,166,10   SUP,166,10  
+KEYS           02,10 13,02 17,08 27,10  
+UPDATE         01,10 11,02 13,08 21,10  
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT TPF$.FUSBA 
+@ . 
+@FREE          ICOMA15AEC.  
+@FREE          IUNLMVTAEC.  
+@FREE          ILODMVTAEC.  
+@FREE          ISUPMVTAEC.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB025:   MSG 025. TRI FICHIER LOAD ANO_ERL_CMM                  - TRI 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ERS       TPF$.
+@ASG,A         ILODMVTAEC.  
+@USE       INA,ILODMVTAEC.  
+@DELETE,C      ILOAMVTAEC.  
+@ASG,UP        ILOAMVTAEC.,F/0/POS/4000 
+@USE       OUT,ILOAMVTAEC.  
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=02,10,CH,A,1        .NO-DRT-CMM 
+KEY=13,02,CH,A,2        .CD-ETA-ANO-ERL-CMM 
+KEY=17,08,CH,D,3        .DT-CRE-ANO-ERL-CMM (descending !)  
+KEY=27,10,CH,A,4        .NO-ANO-ERL-CMM 
+RSZ=166 
+RECORD=10   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE              - REPRISE 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA16/U3 S'EST BIEN TERMINE ****
+@FREE      COMA16U3 
+@QUAL,R 
+@FIN

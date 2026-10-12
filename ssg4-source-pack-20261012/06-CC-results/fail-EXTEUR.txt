@@ -1,0 +1,16 @@
+Successfully connected to application "AFBUS_2200COBOL"
+2026-10-01 00:26:37 
+2026-10-01 00:26:37 Amt Sort PS library version: 60.31, date: 2026-04-13
+[Sort-Init] Initializing Sort 
+2026-10-01 00:26:37 [Sort-Init] Initializing Sort 
+Info: Script Started: T3_20_EXTEUR_LIVE
+=== Initialize OK - live Connect-Application succeeded ===
+=== Running EXTEUR.ps1 body ===
+Error: Error trapped:  Cannot convert value "NONE" to type "System.Int32". Error: "The input string 'NONE' was not in a correct format."
+Error: at <ScriptBlock>, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\EXTEUR.ps1: line 158
+at <ScriptBlock>, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\EXTEUR-LIVE.ps1: line 31
+Error: AFBUS_2200COBOL  - T3_20_EXTEUR_LIVE : Script aborted.
+2026-10-01 00:26:38 
+2026-10-01 00:26:38 End Job. Start: 2026-10-01 00:26:37
+2026-10-01 00:26:38          End:   2026-10-01 00:26:38
+Abort was called (Exit 1).

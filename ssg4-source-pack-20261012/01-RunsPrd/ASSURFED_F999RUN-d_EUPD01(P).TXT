@@ -1,0 +1,33 @@
+@RUN,M/T  EUPD01,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@MSG *************************************************************  
+@MSG * Creation d'un fichier pour L'EURO avec la phase et le TAUX*  
+@MSG **FICHIER FEUR001PRD (ASCII/FD)                             *  
+@MSG *************************************************************  
+@. +                                                             +  
+@. +-------------------------------------------------------------+  
+@SYM          PRINT$,,PRSP  
+@. +-------------------------------------------------------------+  
+@. + Cr{ation le 19/01/1999   PAR GERON JEAN-MARC                +  
+@. +-------------------------------------------------------------+  
+@ERS TPF$.  
+@SSG,IA *UTILIT.CHAB100/ASCII   
+SGS 
+OUTPUT   FILEIN,100,1   
+NUMB 1,1
+MOD 0   
+FLDSEL 0
+@EOF
+@DELETE,C   FEUR001PRD. 
+@CAT,P      FEUR001PRD,F///100  
+@ASG,AX     FEUR001PRD. 
+@USE        FileIn,FEUR001PRD.  
+@XQT     .CHABAN
+PRD300403399
+@ERS TPF$.  
+@FREE       FEUR001PRD. 
+@. +---------------------------------------------------------------+
+@MSG  *** LE RUN EUPD01 S'EST BIEN TERMINE ***  
+@QUAL,R 
+@FIN

@@ -1,0 +1,15 @@
+T3_20_EXTEUR_LIVE started 2026-10-01 00:23:35
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.6
+
+2026-10-01 00:23:35 
+2026-10-01 00:23:35 Amt Sort PS library version: 60.31, date: 2026-04-13
+2026-10-01 00:23:35 [Sort-Init] Initializing Sort 
+2026-10-01 00:23:35 Info:  Script Started: T3_20_EXTEUR_LIVE
+2026-10-01 00:23:36 Error:  Error trapped:  Cannot convert value "NONE" to type "System.Int32". Error: "The input string 'NONE' was not in a correct format."
+2026-10-01 00:23:36 Error:  at <ScriptBlock>, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\EXTEUR.ps1: line 158
+at <ScriptBlock>, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\EXTEUR-LIVE.ps1: line 31
+2026-10-01 00:23:36 Error:  AFBUS_2200COBOL  - T3_20_EXTEUR_LIVE : Script aborted.
+2026-10-01 00:23:36 
+2026-10-01 00:23:36 End Job. Start: 2026-10-01 00:23:34
+2026-10-01 00:23:36          End:   2026-10-01 00:23:36

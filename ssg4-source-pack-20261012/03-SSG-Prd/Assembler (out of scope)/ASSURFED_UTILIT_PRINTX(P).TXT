@@ -1,0 +1,25 @@
+$(1)       AXR$   
+PRINTX*   DS        A0,A0SAVE           . 
+PRINTC*    LA,U     A0,040000           .  TEST USER PROGRAM
+           TG,H2    A0,0,X11            .  AND IF ASC11  PROCESS  
+           J        ASC11               .  ACCORDINGLY
+TOAD       LA,H2    A0,0,X11            .  GET IMAGE ADDRESS
+          LA,S1     A1,*0,X11           . GET PRTCN$ CONTROL CHARACTER  
+          TNE,U     A1,'H'              . 
+          LXI,U     A0,16               . IF 'H' SET 96     
+          TNE,U     A1,'S'              . 
+          LXI,U     A0,8              . IF'S'=  SET 48
+          TNE,U     A1,'M'              . 
+          LXI,U     A0,2               . IF 'M' SET 12
+          TNE,U     A1,'L'              . 
+          LXI,U     A0,2               . IF 'L' SET 12
+          TNE,U     A1,'W'    
+          LXI,U     A0,2               . IF 'W' SET 12
+           ER       PRTCN$    
+          DL        A0,A0SAVE           . 
+EXIT   J            1,X11               .  FINISH SUBROUTINE
+ASC11      A,U      X11,1     
+           J        TOAD
+$(0)  
+A0SAVE     RES      2   
+ END  

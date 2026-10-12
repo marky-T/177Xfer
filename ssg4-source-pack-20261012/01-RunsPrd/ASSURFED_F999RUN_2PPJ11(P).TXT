@@ -1,0 +1,350 @@
+@RUN,M/T   2PPJ11,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM,u     PRINT$,,PRSP 
+@MSG       **********************************************   
+@MSG       ** SIGEDIS  -  Envoi des sélections  -       *   
+@MSG       ** Fin de compte (Décès, Pension, Paie.Part) *   
+@MSG       **********************************************   
+@ . 
+@ . LE 29/01/2018 : CREATION DU RUN (P10073/61) 
+@ . 
+@ . MSG       IMPRESSION DU JCL.
+@ . PRT,SC    F999RUN.2PPJ11
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     2PPJ11.,F///11543
+@COPY,A    VPRD*BABS.VIB116,2PPJ11.VIB116   
+@ . 
+@TIME   
+@ . 
+@LAB000:   MSG 000.      PROCEDURE DE RESTART AUTOMATIQUE   
+@ . 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@TIME   
+@ . 
+@LAB010:   MSG 010. Sélection des contrats  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ .  Output 
+@USE       OENVSAS-054,2PPJ11*I001MSG054            .Msg054 Deces   
+@DELETE,CN 2PPJ11*I001MSG054.   
+@ASG,UP    2PPJ11*I001MSG054.,F/1/POS/4000  
+@USE       OENVSAS-055,2PPJ11*I001MSG055            .Msg055 Pension 
+@DELETE,CN 2PPJ11*I001MSG055.   
+@ASG,UP    2PPJ11*I001MSG055.,F/1/POS/4000  
+@USE       OENVSAS-056,2PPJ11*I001MSG056            .Msg055 Paie.Part   
+@DELETE,CN 2PPJ11*I001MSG056.   
+@ASG,UP    2PPJ11*I001MSG056.,F/1/POS/4000  
+@DELETE,C  2PPJ11*P-VIB116-ANO. 
+@ASG,UP    2PPJ11*P-VIB116-ANO.,F///50000   
+@USE       ANOMALIE,2PPJ11*P-VIB116-ANO.
+@ . 
+@XQT       2PPJ11.VIB116
+@ . 
+@FREE      2PPJ11*I001MSG054.   
+@FREE      2PPJ11*I001MSG055.   
+@FREE      2PPJ11*I001MSG056.   
+@FREE      2PPJ11*P-VIB116-ANO. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB110: MSG 110. TEST EXISTENCE DU FICHIER I001MSG054  
+@ . ---------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ADD      ESYS$AF*COM.SYB003
+FILE      2PPJ11*I001MSG054.
+LABEL     LAB210
+@EOF
+@ . 
+@FREE      2PPJ11*I001MSG054
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB115: MSG 115. BABA D'UN FICHIER 
+@ . ---------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB115  
+@MSG BABA D'UN FICHIER FIELDATA 
+@ERS  TPF$. 
+@SSG,IA         *UTILIT.BABA/ASCII  
+SGS 
+ASCII   
+INPUT I001MSG054,366,10 
+OUTPUT I006MSG054,366,10
+KEYS   E         1,8,CONTROLE   
+@EOF
+@ASG,A          2PPJ11*I001MSG054.  
+@ . 
+@DELETE,C 2PPJ11*I006MSG054.
+@CAT,P    2PPJ11*I006MSG054.,F/0/POS/4000   
+@ASG,A    2PPJ11*I006MSG054.
+@XQT TPF$.BABA  
+@ERS  TPF$. 
+@FREE            2PPJ11*I001MSG054. 
+@FREE            2PPJ11*I006MSG054. 
+@TIME   
+@ . 
+@LAB120:   MSG 120. Formatage pour EXCEL MSG054 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ASG,A    2PPJ11*I006MSG054.
+@USE      FILEIN,2PPJ11*I006MSG054. 
+@ . 
+@DELETE,C 2PPJ11*I005MSG054.
+@CAT,P    2PPJ11*I005MSG054.,F/0/POS/4000   
+@ASG,A    2PPJ11*I005MSG054.
+@USE      FILEOUT,2PPJ11*I005MSG054.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  366   
+COL 1,3,,''Type de Déclaration''
+COL 4,4,,''Version de Déclaration'' 
+COL 8,14,,''Date de Création''  
+COL 22,13,,''Générateur''   
+COL 35,8,,''Identifiant Fédérale''  
+COL 55,2,,''Type Identifiant Fédérale'' 
+COL 57,100,,''Commentaire'' 
+COL 157,10,,''Initiale Gestionnaire Contrat''   
+COL 167,8,,''Référence du Régime PCLI'' 
+COL 175,8,,''N° Assuré''
+COL 183,8,AAAAMMJJ,''EvaluationDate''   
+COL 191,8,AAAAMMJJ,''CalculationDate''  
+COL 199,12,MNT,''VestedReserves''   
+COL 211,12,MNT,''VestedBenefits''   
+COL 223,8,AAAAMMJJ,''VestedBenefitsDate''   
+COL 231,12,MNT,''LegalGuarantee''   
+COL 243,56,,''Espace Libre ''   
+COL 299,12,MNT,''DeathBenefits''
+COL 311,1,,''AdditionalDeathCoverage''  
+COL 312,1,,''OrphanAnnuity''
+COL 313,7,,''FundingLevel'' 
+COL 320,1,,''Flag Correction''  
+COL 321,46,,''Espace Libre''
+TABUL '';'' 
+@EOF
+@FREE   2PPJ11*I005MSG054.  
+@FREE   2PPJ11*I006MSG054.  
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB210: MSG 210. TEST EXISTENCE DU FICHIER I001MSG055  
+@ . ---------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB210  
+@ADD      ESYS$AF*COM.SYB003
+FILE      2PPJ11*I001MSG055.
+LABEL     LAB310
+@EOF
+@ . 
+@FREE      2PPJ11*I001MSG055.   
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB215: MSG 215. BABA D'UN FICHIER 
+@ . ---------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB215  
+@MSG BABA D'UN FICHIER FIELDATA 
+@ERS  TPF$. 
+@SSG,IA         *UTILIT.BABA/ASCII  
+SGS 
+ASCII   
+INPUT I001MSG055,366,10 
+OUTPUT I006MSG055,366,10
+KEYS   E         1,8,CONTROLE   
+@EOF
+@ASG,A          2PPJ11*I001MSG055.  
+@ . 
+@DELETE,C 2PPJ11*I006MSG055.
+@CAT,P    2PPJ11*I006MSG055.,F/0/POS/4000   
+@ASG,A    2PPJ11*I006MSG055.
+@XQT TPF$.BABA  
+@ERS  TPF$. 
+@FREE            2PPJ11*I001MSG055. 
+@FREE            2PPJ11*I006MSG055. 
+@TIME   
+@ . 
+@LAB220:   MSG 220. Formatage pour EXCEL MSG055 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,A    2PPJ11*I006MSG055.
+@USE      FILEIN,2PPJ11*I006MSG055. 
+@ . 
+@DELETE,C 2PPJ11*I005MSG055.
+@CAT,P    2PPJ11*I005MSG055.,F/0/POS/4000   
+@ASG,A    2PPJ11*I005MSG055.
+@USE      FILEOUT,2PPJ11*I005MSG055.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  366   
+COL 1,3,,''Type de Déclaration''
+COL 4,4,,''Version de Déclaration'' 
+COL 8,14,,''Date de Création''  
+COL 22,13,,''Générateur''   
+COL 35,8,,''Identifiant Fédérale''  
+COL 55,2,,''Type Identifiant Fédérale'' 
+COL 57,100,,''Commentaire'' 
+COL 157,10,,''Initiale Gestionnaire Contrat''   
+COL 167,8,,''Référence du Régime PCLI'' 
+COL 175,8,,''N° Assuré''
+COL 183,8,AAAAMMJJ,''EvaluationDate''   
+COL 191,8,AAAAMMJJ,''CalculationDate''  
+COL 199,12,MNT,''VestedReserves''   
+COL 211,12,MNT,''VestedBenefits''   
+COL 223,8,AAAAMMJJ,''VestedBenefitsDate''   
+COL 231,12,MNT,''LegalGuarantee''   
+COL 243,56,,''Espace Libre ''   
+COL 299,12,MNT,''DeathBenefits''
+COL 311,1,,''AdditionalDeathCoverage''  
+COL 312,1,,''OrphanAnnuity''
+COL 313,7,,''FundingLevel'' 
+COL 320,1,,''Flag Correction''  
+COL 321,46,,''Espace Libre''
+TABUL '';'' 
+@EOF
+@FREE   2PPJ11*I005MSG055.  
+@FREE   2PPJ11*I006MSG055.  
+@TIME   
+@ . 
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB310: MSG 310. TEST EXISTENCE DU FICHIER I001MSG056  
+@ . ---------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB310  
+@ADD      ESYS$AF*COM.SYB003
+FILE      2PPJ11*I001MSG056.
+LABEL     LAB600
+@EOF
+@ . 
+@FREE      2PPJ11*I001MSG056.   
+@TIME   
+@ . 
+@ . ---------------------------------------------------------   
+@LAB315: MSG 315. BABA D'UN FICHIER 
+@ . ---------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB315  
+@MSG BABA D'UN FICHIER FIELDATA 
+@ERS  TPF$. 
+@SSG,IA         *UTILIT.BABA/ASCII  
+SGS 
+ASCII   
+INPUT I001MSG056,366,10 
+OUTPUT I006MSG056,366,10
+KEYS   E         1,8,CONTROLE   
+@EOF
+@ASG,A          2PPJ11*I001MSG056.  
+@ . 
+@DELETE,C 2PPJ11*I006MSG056.
+@CAT,P    2PPJ11*I006MSG056.,F/0/POS/4000   
+@ASG,A    2PPJ11*I006MSG056.
+@XQT TPF$.BABA  
+@ERS  TPF$. 
+@FREE            2PPJ11*I001MSG056. 
+@FREE            2PPJ11*I006MSG056. 
+@TIME   
+@ . 
+@LAB320:   MSG 320. Formatage pour EXCEL MSG056 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ASG,A    2PPJ11*I006MSG056.
+@USE      FILEIN,2PPJ11*I006MSG056. 
+@ . 
+@DELETE,C 2PPJ11*I005MSG056.
+@CAT,P    2PPJ11*I005MSG056.,F/0/POS/4000   
+@ASG,A    2PPJ11*I005MSG056.
+@USE      FILEOUT,2PPJ11*I005MSG056.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  366   
+COL 1,3,,''Type de Déclaration''
+COL 4,4,,''Version de Déclaration'' 
+COL 8,14,,''Date de Création''  
+COL 22,13,,''Générateur''   
+COL 35,8,,''Identifiant Fédérale''  
+COL 55,2,,''Type Identifiant Fédérale'' 
+COL 57,100,,''Commentaire'' 
+COL 157,10,,''Initiale Gestionnaire Contrat''   
+COL 167,8,,''Référence du Régime PCLI'' 
+COL 175,8,,''N° Assuré''
+COL 183,8,AAAAMMJJ,''EvaluationDate''   
+COL 191,8,AAAAMMJJ,''CalculationDate''  
+COL 199,12,MNT,''VestedReserves''   
+COL 211,12,MNT,''VestedBenefits''   
+COL 223,8,AAAAMMJJ,''VestedBenefitsDate''   
+COL 231,12,MNT,''LegalGuarantee''   
+COL 243,56,,''Espace Libre ''   
+COL 299,12,MNT,''DeathBenefits''
+COL 311,1,,''AdditionalDeathCoverage''  
+COL 312,1,,''OrphanAnnuity''
+COL 313,7,,''FundingLevel'' 
+COL 320,1,,''Flag Correction''  
+COL 321,46,,''Espace Libre''
+TABUL '';'' 
+@EOF
+@FREE   2PPJ11*I005MSG056.  
+@FREE   2PPJ11*I006MSG056.  
+@TIME   
+@ . 
+@LAB600: MSG 600. ENVOI DES RESULTATS INTRANET  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB600  
+@ . 
+@ADD F999TRANSF.2PPJ11/2200PC   
+@TIME   
+@ . 
+@TIME   
+@ . 
+@LAB660: MSG 660. IMPRESSION DES FICHIER VIA F999SYM
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB660  
+@ . ADD   F999SYM.2PPJ11
+@TIME   
+@ . 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.FASDIR 
+@TIME   
+@ . 
+@LAB750: MSG 750. DELETE DES FICHIERS.  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB750  
+@DELETE,C  2PPJ11*I001MSG054.   
+@DELETE,C  2PPJ11*I001MSG055.   
+@DELETE,C  2PPJ11*I001MSG056.   
+@DELETE,C  2PPJ11*I005MSG054.   
+@DELETE,C  2PPJ11*I005MSG055.   
+@DELETE,C  2PPJ11*I005MSG056.   
+@DELETE,C  2PPJ11*I006MSG054.   
+@DELETE,C  2PPJ11*I006MSG055.   
+@DELETE,C  2PPJ11*I006MSG056.   
+@DELETE,C  2PPJ11*P-VIB116-ANO. 
+@TIME   
+@ . 
+@LAB770:   MSG 770.  DELETE DU FICHIER DE REPRISE   
+@ . 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@TIME   
+@ . 
+@MSG       ****** LE RUN 2PPJ11 S'EST BIEN TERMINE ******   
+@ . 
+@QUAL,R 
+@FIN

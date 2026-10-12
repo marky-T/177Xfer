@@ -1,0 +1,592 @@
+@RUN,M/T   PBDA07,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       **********************************************************   
+@MSG       **                                                      **   
+@MSG       **        MAJ ANNUELLE DES PB  - DEBUT ANNEE            **   
+@MSG       **                 VIE GROUPE                           **   
+@MSG       **                                                      **   
+@MSG       **********************************************************   
+@ . LE 15/01/02: CREATION DU RUN
+@ . LE 15/01/02: AJOUTE DES FICHIERS D'IMPRESSIONS  
+@ . LE 24/09/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . LE 03/02/03: ADAPTATION SAUVETAGE INCENDIE POUR CLOTURE 
+@ . LE 26/11/03: REMPL FASDIR PAR COPIE SUR PC POUR GRAVURE 
+@ . LE 01/12/04: ADAPTATION A N-COUCHES 
+@ . LE 21/10/10: F10127/01 (JLH) - MAJ EXCEPTIONS CONTRATS  
+@ . LE 25/01/13: F13027/01 (JLH) - Ajout liste erreur PBB308
+@ . LE 11/10/24: AJOUT LAB F999TRANSF   
+@ . 
+@MSG       EDITION DES PARAMETRAGES 
+@TIME   
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@TIME   
+@MSG       EDITION DU JCL.  
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     PBDA07.,F///10000
+@ . *************************************************** 
+@COPY,A    VPRD*BABS.PBB308,PBDA07.PBB308   
+@COPY,A    VPRD*BABS.PBB026,PBDA07.PBB026   
+@COPY,A    VPRD*BABS.PBB038,PBDA07.PBB038   
+@COPY,A    VPRD*BABS.PBB313,PBDA07.PBB313   
+@COPY,A    AFLINC*REP$ABS.SWB003,PBDA07.SWB003  
+@COPY,A    AFLINC*REP$ABS.SWB004,PBDA07.SWB004  
+@.  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . ******************************************************************* 
+@LAB010: MSG 010. GENERATION DES PARAMETRES POUR LE RUN. (SWB003)   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@XQT       PBDA07.SWB003
+PBDA07  
+@TIME   
+@ . ******************************************************************* 
+@LAB020: MSG  20. TRI        INVENT GRP 3112AAAA
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ASG,A     FVGRT01RES.  
+@USE       INA,FVGRT01RES.  
+@DELETE,C  IPBA07INV99. 
+@CAT,P     IPBA07INV99,F/1/POS/4000 
+@ASG,AX    IPBA07INV99. 
+@USE       OUTA,IPBA07INV99.
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=16,7,CH,A,1 
+KEY=7,1,CH,A,2  
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB030: MSG  30. SCAN INVENT GRP 3112AAAA  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ASG,AX    IPBA07INV99. 
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+ASCII   
+INPUT      IPBA07INV99,500,10   
+IF R < 10   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      IPBA07INV99. 
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB040: MSG  40. TRI        COU HIS GRP 3112AAAA   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ASG,A     FVGR002RES.  
+@USE       INA,FVGR002RES.  
+@DELETE,C  IPBA07CO99.  
+@CAT,P     IPBA07CO99,F/1/POS/4000  
+@ASG,AX    IPBA07CO99.  
+@USE       OUTA,IPBA07CO99. 
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=16,7,CH,A,1 
+KEY=7,1,CH,A,2  
+KEY=321,5,CH,A,3
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB050: MSG  50. SCAN COU HIS GRP 3112AAAA 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@MSG       SCAN FICHIER ASCII.  
+@ASG,AX    IPBA07CO99.  
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+ASCII   
+INPUT      IPBA07CO99,500,10
+IF R < 10   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      IPBA07CO99.  
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB060: MSG 060. SELECTION CONTRATS COU HIS GRP 3112AAAA   
+@ . ******************************************************************* 
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB060  
+@ASG,A     IPBA07CO99.  
+@DELETE,C  IPBA07CO99SS.
+@ASG,UP    IPBA07CO99SS.,F/1/POS/4000   
+@DELETE,C  IPBA07CO99AA.
+@ASG,UP    IPBA07CO99AA.,F/1/POS/4000   
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      IPBA07CO99,500,10
+OUTPUT     IPBA07CO99SS,500,10  IPBA07CO99AA,500,10 
+KEYS       R   16,7  7,1  321,5 
+SEQERROR   MULTI
+ASCII   
+@EOF
+@XQT,WR    TPF$.BABA
+@FREE      IPBA07CO99.  
+@FREE      IPBA07CO99SS.
+@FREE      IPBA07CO99AA.
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB070: MSG 070. SCAN COU HIS GRP 3112AAAA MULTIPLES   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ASG,AX    IPBA07CO99AA.
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+INPUT      IPBA07CO99AA,500,10  
+ASCII   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      IPBA07CO99AA.
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB100: MSG 100. CREATION COU HIS GRP 3112AAAA POUR I/O
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ASG,A     IPBA07CO99SS.
+@DELETE,C  IPBA07CO99N. 
+@ASG,UP    IPBA07CO99N.,F/1/POS/4000
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      IPBA07CO99SS,500,10  
+OUTPUT     IPBA07CO99N,500,10   
+FIELDIN    1,22 7,1  321,5 29,471   
+FIELDOUT   1,22 23,1 24,5  29,471   
+@EOF
+@XQT,WR    .CFH-COPY
+@FREE      IPBA07CO99SS.
+@FREE      IPBA07CO99N. 
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB110: MSG 110. SCAN COU HIS GRP 3112AAAA I/O 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ASG,A     IPBA07CO99N. 
+@USE       INA,IPBA07CO99N  
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+INPUT      INA,500,10   
+IF R < 10   
+ASCII   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      INA. 
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB120: MSG 120. CREATION COU HIS GRP 3112AAAA EN I/O  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@DELETE,C  FPBA07CO99.  
+@CAT,P     FPBA07CO99,F/0/POS/4000  
+@ASG,A     FPBA07CO99.  
+@ASG,A     IPBA07CO99N. 
+@USE       INA,IPBA07CO99N. 
+@USE       OUT,FPBA07CO99.  
+@SORT,E 
+FILEIN=INA,F  MODE=SDF     BLOCK=10 
+FILEOUT=OUT,F MODE=MSAM    BLOCK=10 
+KEY=16,13,CH,A  
+MSKEY=16,13 
+DATA=ASCII  
+RSZ=500 
+COPY
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB140: MSG 140. sort fichier pb au 3112   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@DELETE,C  IPB9511RES.  
+@CAT,P     IPB9511RES,F/0/POS/4000  
+@ASG,A     IPB9511RES.  
+@ASG,A     FPB9511RES.  
+@USE       INA,FPB9511RES.  
+@USE       OUT,IPB9511RES.  
+@SORT,E 
+FILEIN=INA,F  MODE=SDF     BLOCK=10 
+FILEOUT=OUT,F MODE=SDF     BLOCK=10 
+KEY=17,7,CH,A   
+DATA=ASCII  
+RSZ=500 
+COPY
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB150: MSG 150.     MISE A JOUR ANNUELLE DE LA DB PB  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ASG,A     IPBA07INV99. 
+@USE       IENC3112,IPBA07INV99.
+@ASG,A     FPBA07CO99.  
+@USE       IHIS3112,FPBA07CO99. 
+@ASG,A     IPB9511RES.  
+@USE       PBENC3112,IPB9511RES.
+@DELETE,C  IPBA07DT.
+@CAT,P     IPBA07DT.,F/0/POS/4000   
+@ASG,A     IPBA07DT.
+@USE       LISDATEFF,IPBA07DT.  
+@DELETE,C  IPBA07C2.
+@CAT,P     IPBA07C2.,F/0/POS/4000   
+@ASG,A     IPBA07C2.
+@USE       LISTCOMB2,IPBA07C2.  
+@DELETE,C  IPBA07PL.
+@CAT,P     IPBA07PL.,F/1/POS/4000   
+@ASG,A     IPBA07PL.
+@USE       PETITLIST,IPBA07PL.  
+@DELETE,C  IPBA07GL.
+@CAT,P     IPBA07GL.,F/1/POS/4000   
+@ASG,A     IPBA07GL.
+@USE       GRANDLIST,IPBA07GL.  
+@DELETE,C  PBDA07*IMP-PBB308D.  
+@CAT,P     PBDA07*IMP-PBB308D.,F///10000
+@ASG,A     PBDA07*IMP-PBB308D.  
+@USE       LISTCTRL,PBDA07*IMP-PBB308D. 
+@DELETE,C  PBDA07*IMP-PBB308F.  
+@CAT,P     PBDA07*IMP-PBB308F.,F///10000
+@ASG,A     PBDA07*IMP-PBB308F.  
+@USE       LISTERR,PBDA07*IMP-PBB308F.  
+@DELETE,C  PBDA07*IMP-PBB308A.  
+@CAT,P     PBDA07*IMP-PBB308A.,F///10000
+@ASG,A     PBDA07*IMP-PBB308A.  
+@USE       LISTANO,PBDA07*IMP-PBB308A.  
+@XQT       PBDA07.PBB308
+@FREE      PBDA07*IMP-PBB308D.  
+@FREE      PBDA07*IMP-PBB308F.  
+@FREE      PBDA07*IMP-PBB308A.  
+@FREE      IPBA07INV99. 
+@FREE      FPBA07CO99.  
+@FREE      IPB9511RES.  
+@FREE      IPBA07GL.
+@FREE      IPBA07PL.
+@FREE      IPBA07C2.
+@FREE      IPBA07DT.
+@EOF
+@TIME   
+@ . ******************************************************************* 
+@LAB160: MSG 160. repercution d'une suppression d'une couche inv vg 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB160  
+@ASG,A     FPBA07CO99.  
+@USE       IHIS3112,FPBA07CO99. 
+@DELETE,C  PBDA07*IMP-PBB038C.  
+@CAT,P     PBDA07*IMP-PBB038C.,F///10000
+@ASG,A     PBDA07*IMP-PBB038C.  
+@USE       LSTCTRL,PBDA07*IMP-PBB038C.  
+@DELETE,C  PBDA07*IMP-PBB038V.  
+@CAT,P     PBDA07*IMP-PBB038V.,F///10000
+@ASG,A     PBDA07*IMP-PBB038V.  
+@USE       LSTVERIF,PBDA07*IMP-PBB038V. 
+@XQT       PBDA07.PBB038
+@FREE      PBDA07*IMP-PBB038C.  
+@FREE      PBDA07*IMP-PBB038V.  
+@FREE      FPBA07CO99.  
+@EOF
+@TIME   
+@ . ******************************************************************* 
+@LAB170: MSG 170.     TRI FICHIER IMPRESSION PETITE LISTE   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ASG,A     IPBA07PL.
+@DELETE,C  IPBA07PLB.   
+@ASG,UP    IPBA07PLB,F/1/POS/4000   
+@SORT,E 
+FILEIN=IPBA07PL.,F      MODE=SDF
+FILEOUT=IPBA07PLB,F     MODE=SDF
+DATA=ASCII  
+RSZ=50  
+KEY=1,17,S,A
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB200: MSG 200. IMPRESSION PETITE  LISTE  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,AX    IPBA07PLB.   
+@USE       IPB-ETCO,IPBA07PLB.  
+@DELETE,C  PBDA07*IMP-PBB026A.  
+@CAT,P     PBDA07*IMP-PBB026A.,F/1/POS/4000 
+@ASG,AX    PBDA07*IMP-PBB026A.  
+@USE       LISTE,PBDA07*IMP-PBB026A.
+@XQT,WR    PBDA07.PBB026
+@FREE      PBDA07*IMP-PBB026A.  
+@FREE      IPBA07PLB.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB210: MSG 210.     TRI FICHIER IMPRESSION GRANDE LISTE   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ASG,A     IPBA07GL.
+@DELETE,C  IPBA07GLB.   
+@ASG,UP    IPBA07GLB,F/1/POS/4000   
+@SORT,E 
+FILEIN=IPBA07GL.,F      MODE=SDF
+FILEOUT=IPBA07GLB,F     MODE=SDF
+DATA=ASCII  
+RSZ=50  
+KEY=1,17,S,A
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB220: MSG 220. IMPRESSION GRANDE  LISTE  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,AX    IPBA07GLB.   
+@USE       IPB-ETCO,IPBA07GLB.  
+@DELETE,C  PBDA07*IMP-PBB026B.  
+@CAT,P     PBDA07*IMP-PBB026B.,F/1/POS/4000 
+@ASG,AX    PBDA07*IMP-PBB026B.  
+@USE       LISTE,PBDA07*IMP-PBB026B.
+@XQT,WR    PBDA07.PBB026
+@FREE      PBDA07*IMP-PBB026B.  
+@FREE      IPBA07GLB.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB230: MSG 230.     TRI FICHIER CHANGEMENT ANNEE REFERENCE
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ASG,A     IPBA07DT.
+@DELETE,C  IPBA07DTB.   
+@ASG,UP    IPBA07DTB,F/0/POS/4000   
+@SORT,E 
+FILEIN=IPBA07DT.,F      MODE=SDF
+FILEOUT=IPBA07DTB,F     MODE=SDF
+DATA=ASCII  
+RSZ=80  
+KEY=16,4,CH,A,1 
+KEY=12,4,CH,A,2 
+KEY=1,7,CH,A,3  
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB240: MSG 240. IMPRESSION CHANGEMENT ANNEE REFERENCE PB  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ASG,A     IPBA07DTB.   
+@DELETE,C  PBDA07*IMP-LAB240.   
+@CAT,P     PBDA07*IMP-LAB240.,F/0/POS/4000  
+@ASG,AX    PBDA07*IMP-LAB240.   
+@USE       INP,PBDA07*IMP-LAB240.   
+@SSG,IA    *UTILIT.TAPELD/ASCII 
+SGS 
+INPUT      IPBA07DTB,80,10  
+ASCII   
+OUTPUT  PRINTER,132,1   
+FIELDIN  16,4 12,4 1,6 7,1 8,2  
+FIELDOUT 1,4 7,4 13,6 20,1 23,2 
+FIXE  1,25,'AN-DB NV-AN  POLICE  COMB' ;
+      31,34,'CHANGEMENT ANNEE REFERENCE PB GRP' 
+STITRE  YES 
+@EOF
+@HDG,P CHANGEMENT ANNEE REFERENCE PB GROUPE 
+@XQT,WR    TPF$.
+@FREE      PBDA07*IMP-LAB240.   
+@FREE      IPBA07DTB.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB250: MSG 250.     TRI FICHIER CHANGEMENT COMBINAISON
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB250  
+@ASG,A     IPBA07C2.
+@DELETE,C  IPBA07C2B.   
+@ASG,UP    IPBA07C2B,F/0/POS/4000   
+@SORT,E 
+FILEIN=IPBA07C2.,F      MODE=SDF
+FILEOUT=IPBA07C2B,F     MODE=SDF
+DATA=ASCII  
+RSZ=80  
+KEY=1,7,CH,A,1  
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB260: MSG 260. IMPRESSION CHANGEMENT COMBINAISON 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB260  
+@ASG,A     IPBA07C2B.   
+@DELETE,C  PBDA07*IMP-LAB260.   
+@CAT,P     PBDA07*IMP-LAB260.,F/0/POS/4000  
+@ASG,AX    PBDA07*IMP-LAB260.   
+@USE       INP,PBDA07*IMP-LAB260.   
+@SSG,IA    *UTILIT.TAPELD/ASCII 
+SGS 
+INPUT      IPBA07C2B,80,10  
+ASCII   
+OUTPUT     PRINTER,132,1
+FIELDIN  8,2 10,2 1,6 7,1 12,8  
+FIELDOUT 3,2 10,2 16,6 23,1 25,8
+FIXE  1,22,'CMB-DB CMB-INV  POLICE' ;   
+      26,6,'GROUPE' 
+STITRE  YES 
+@EOF
+@EOF
+@HDG,P CHANGEMENT COMBINAISON   
+@XQT,WR    TPF$.
+@FREE      PBDA07*IMP-LAB260.   
+@FREE      IPBA07C2B.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB300: MSG 300.     MISE A JOUR EXCEPTIONS CONTRATS  - PBB313 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@XQT       PBDA07.PBB313
+@EOF
+@TIME   
+@ . 
+@ . =====================================================   
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@LAB720: MSG 720. TRANSFERT FICHIER - F999TRANSF
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ . 
+@ADD       F999TRANSF.PBDA07/2200PC 
+@ . 
+@TIME   
+@ . 
+@LAB730: MSG 730. NETTOYAGE DES SYMBIONTS D'IMPRESSION. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB730  
+@ED,UQ     PBDA07*IMP-LAB240.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     PBDA07*IMP-LAB260.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@LAB740: MSG 740. IMPRESSION SUR IMPRIMENTE LASER   
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB740  
+@TIME   
+@ADD       F999SYM.PBDA07   
+@ . 
+@LAB750: MSG 750. CLOTURE DES PARAMETRES AU NIVEAU DU RUN.(SWB004)  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB750  
+@ . 
+@XQT       PBDA07.SWB004
+PBDA07  
+@ . 
+@TIME   
+@ . 
+@ . =====================================================   
+@ . 
+@LAB760: MSG 760. EXECUTION DELETE DES FICHIERS DE TRAVAIL  
+@ADD       SYS$*RUNS.REPRISE
+LAB760  
+@ . 
+@DELETE,C  IPBA07CO99.  
+@DELETE,C  IPBA07CO99SS.
+@DELETE,C  IPBA07CO99AA.
+@DELETE,C  IPBA07CO99N. 
+@DELETE,C  IPBA07INV99. 
+@DELETE,C  FPBA07CO99.  
+@DELETE,C  IPB9511RES.  
+@DELETE,C  IPBA07GL.
+@DELETE,C  IPBA07PL.
+@DELETE,C  IPBA07C2.
+@DELETE,C  IPBA07DT.
+@DELETE,C  IPBA07GLB.   
+@DELETE,C  IPBA07PLB.   
+@DELETE,C  IPBA07C2B.   
+@DELETE,C  IPBA07DTB.   
+@TIME   
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@MSG       *** LE RUN PBDA07 S'EST BIEN TERMINE *** 
+@ . 
+@QUAL,R 
+@FIN

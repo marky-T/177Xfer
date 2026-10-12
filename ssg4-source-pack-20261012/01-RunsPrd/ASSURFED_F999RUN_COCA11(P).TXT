@@ -1,0 +1,59 @@
+@RUN,M/T   COCA11,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE  TPF$ 
+@ASG,T  TPF$
+@SYM       PRINT$,,PRSP 
+@ .     *============================================================*  
+@MSG    *  COCA11 - MISE A ZERO  DE FCORCFPAIING                     *  
+@ .     *============================================================*  
+@ . *      ---------------------------------------------------  
+@LAB010:   MSG 010. PROCEDURE DE RESTART AUTOMATIQUE
+@ . *      ---------------------------------------------------  
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@.  *    --------------------------------------------------------   
+@LAB023: MSG MISE A ZERO  DE FCORCFPAIING   
+@.  *    ------------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB023  
+@ERS      TPF$  
+@ASG,CPV  FCORCFPAIING(+1).,F/0/POS/4000
+@USE  OUTA,FCORCFPAIING(+1) 
+@SSG,IA    *UTILIT.CHABAN/ASCII 
+SGS 
+ASCII   
+OUTPUT     OUTA,58,10   
+LIST       YES  
+NUMB       4,1  
+MOD        0
+FLDSEL     0
+@EOF
+@XQT       .CHABAN  
+@FREE  FCORCFPAIING(+1).
+@ERS  TPF$  
+@TIME   
+@ .      -----------------------------------------------------  
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.COPIE/PC   
+@ . 
+@TIME   
+@ .        -------------------------------------------  
+@LAB720:   MSG 720. SUPPRESSION DES VIEUX CYCLES
+@ . *      ---------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB720  
+@CYCLE,C   FCORCFPAIING.,2  
+@CYCLE,C   FCORCFPAIING.,32 
+@LAB777:   MSG 777. SUPPRESSION DU FICHIER DE REPRISE   
+@ . *      ------------------------------------------   
+@ADD       SYS$*RUNS.REPDEL 
+@MSG            ******************************************  
+@MSG            ***  LE RUN COCA11 S'EST BIEN TERMINE  ***  
+@MSG            ******************************************  
+@QUAL,R 
+@FIN

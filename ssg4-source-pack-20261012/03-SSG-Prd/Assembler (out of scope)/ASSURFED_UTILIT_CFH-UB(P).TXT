@@ -1,0 +1,3178 @@
+/ .   
+USEP*     PROC                         .  USE PROCEDURE PROC
+          L         A0,USEL            .  
+          S         A0,6,X10           .  
+          L,U       A0,LABEL           .  
+          S         A0,USELOC          .  
+          LMJ       A0,LABELR            .
+          L         A2,USEP(1,1)        . 
+          L         A2,USEP(1,2)        . 
+          L         A2,USEP(1,3)        . 
+          L         A0,6,X10           .  
+          S         A0,USEL   
+          END                          .  
+LABROUT*  PROC      1              .  THIS PROC CALLS THE LABEL ROUTINES
+          LMJ       A0,LABELR      . CALL TEST ROUTINE
+L        DO    LABROUT(1) ,   L  A2,LABROUT(1,L)  .   
+          END     
+ .    
+ .    
+FLPTST*   PROC      0      .  
+          TNZ       FLP                . ANY FILE LIMITS PROCEDURE
+          J         OUT 
+          S         X10,LSAVE          . SAVE X10     
+          L,U       A2,$+4             . SET UP RETURN FROM FLP   
+          S,H2      A2,L$BACK 
+          L         A2,FLP    
+          J         0,A2
+          L         X10,LSAVE          .  
+          L,U       R3,1
+          DL        A1,DCOM$$+3        . GET LIMITS   
+          TZ        SEQ                . SEQUENTIAL FILE  ? 
+          L,U       A1,1               . YES SET LOWER LIMIT=1    
+          TG        A2,A1               . LOWER > UPPER?    
+          J         $+3                 . NO    
+          LMJ       X11,LERR$17        . YES    
+          DL        A1,(0D)             . ZERO FILE LIMITS  
+          DS        A1,FLL    
+OUT    .    
+          END     .     
+ .    
+ .    
+CLRIOP*   PROC      0                  .  
+          SZ        02,X10             . CLEAR I/O PKT AREA USED BY     
+          SZ        03,X10             .  FACIL$ CALL 
+          SZ        04,X10             .  
+          SZ        05,X10             .  
+          END                          .  
+ .    
+LWEF*     PROC                     . THIS PROC WRITES AN EOF MARK ON TAPE     
+          LA,U      A1,WEF$        .
+          SA        A1,FUNC        .
+          ER        IOW$           .
+          END                      .
+ .    
+ .    
+/ . FILE CONTROL TABLE EQUFS  
+          AXR$                     .
+$(1)     .  
+FCT       EQUF      0,X10               . FILE CONTROL TABLE
+AKLOC     EQUF      032,X10,H1          . ACTUAL KEY LOCATOR
+ALT       EQUF      013,X10,S1     . ALT FILE INDICATOR     
+ALTNAM    EQUF      021,X10        . AREA USED TO HOLD ALT. FILENAME    
+AERRI     EQUF      043,X10,H2     . AFTER ERROR ON INPUT PROCEDURE     
+AERRIO    EQUF      045,X10,H2     . AFTER ERROR ON INPUT-OUTPUT  
+AERRO     EQUF      044,X10,H2     . AFTER ERROR ON OUTPUT  
+ASBFI     EQUF      046,X10,H2     . AFTER STD. BEGIN. FILE INPUT ADD.  
+ASBFIO    EQUF      050,X10,H2     . AFTER STD NEGN FILE I/O PROC. ADD. 
+ASBFO     EQUF      047,X10,H2     . AFTER STD BEGN FILE OUTPUT PROC ADD
+ASBRI     EQUF      054,X10,H2     . AFTER STD BEGN REEL INPUT    
+ASBRO     EQUF      055,X10,H2     . AFTER STD BEGN REEL OUTPUT   
+ASEFI     EQUF      051,X10,H2     . AFTER STANDARD END FILE INPUT
+ASEFIO    EQUF      053,X10,H2     . AFTER STD END FILE INPUT-OUTPUT    
+ASEFO     EQUF      052,X10,H2     . AFTER STANDARD END FILE OUTPUT     
+ASERI     EQUF      056,X10,H2     . AFTER STD END  REEL INPUT    
+ASERO     EQUF      057,X10,H2     . AFTER STD END   REEL OUTPUT  
+ASG       EQUF      015,X10,S2     . FILE ASSIGNED FLAG     
+BLKADD    EQUF      04,X10,H2           . BLOCK ADDRESS     
+BLKCT     EQUF      021,X10        . BLOCK COUNT
+BLKRD     EQUF      03,X10,H2           . WORDS ACTUALLY READ     
+BLKSEC    EQUF      040,X10,H1     . SECTORS PER BLOCK
+BLKSIZ    EQUF      04,X10,H1           . BLOCK SIZE  
+BRC       EQUF      025,X10,H1          . BLOCK RECORD COUNT
+BRKIMG    EQUF      04,X10         . BRKPT IMAGE 4 WRDS     
+BRP       EQUF      025,X10,H2          . BLOCK RECORDS PROCESSED 
+BSBFI     EQUF      046,X10,H1     . BEFORE STD BEGN. FILE INPUT ADD.   
+BSBFIO    EQUF      050,X10,H1     . BEFORE STD BEGN FILE I/O ADD"
+BSBFO     EQUF      047,X10,H1     . BEFORE STD BEGN FILE OUTPUT PROC ADD     
+BSBRI     EQUF      054,X10,H1     . BEFORE STD BEGN REEL INPUT   
+BSBRO     EQUF      055,X10,H1     . BEFORE STD BEGN REEL OUTPUT  
+BSEFI     EQUF      051,X10,H1     . BEFORE STANDARD END FILE INPUT     
+BSEFIO    EQUF      053,X10,H1     . BEFORE STANDARD END FILE INPUT OUTPUT    
+BSEFO     EQUF      052,X10,H1     . BEFORE STANDARD END FILE OUTPUT    
+BSERI     EQUF      056,10,H1      . BEFORE STD END  REEL INPUT   
+BSERO     EQUF      057,X10,H1     . BEFORE STD END   REEL OUTPUT 
+BUFF      EQUF      020,X10          .    
+BUFF1     EQUF      020,X10,H2
+BUFF2     EQUF      020,X10,H1       .    
+CARD      EQUF      012,X10,S4     . CARD  ILE FLAG   
+CHKFCT    EQUF      033,X10,H2     . POINTER TO PKT FOR CHECKPOINT
+CHKREC    EQUF      033,X10,H1     . RECORD COUNT FOR CHECKPOINT  
+DATA      EQUF      014,X10,S5          . DATA FLAG   
+EOFEX     EQUF      031,X10,H1     . EOF EXIT   
+EOF       EQUF      014,X10,S6     . END OF FILE FLAG 
+EOT       EQUF      014,X10,S2     . END OF TAPE FLAG 
+EOW       EQUF      017,X10,S3       . END OF WRITE FLAG    
+EQPTYP    EQUF      016,X10,S4     . EQUIPMENT TYPE CODE    
+EQUIP     EQUF      06,X10,S1      . EQUIPMENT TYPE ASSIGNED TO FILE    
+EXFLNM    EQUF      02,X10         . EXTERNAL FILE NAME PROVIDED BY FACIL$    
+EXTERN    EQUF      012,X10,H2     . EXTERNAL FILE FLAGS    
+FADD      EQUF      05,X10         . FASTRAND ADDRESS 
+FAST      EQUF      011,X10,S3     . FASTRAND FILE    
+FBC       EQUF      035,X10          .    
+FDLSP     EQUF      013,X10,S2     . LINE SPACING SPECIFIED IN FD 
+FEND      EQUF      010,X10             . FASTRAND FILE LIMIT     
+FEOF      EQUF      042,X10            . FASTRAND END OF FILE     
+FLAG1     EQUF      011,X10        . TS,TAPE,FAST,IN,OUT,INOUT    
+FLAG2     EQUF      014,X10        . REW,EOT,REV,LAB,DATA,EOF     
+FLAG3     EQUF      015,X10,H2          . FLAGS TO BE CLEARED     
+FLAG4     EQUF      017,X10             . 
+FLL       EQUF      0116,X10      . FILE LIMIT LOWER  
+FLP       EQUF      045,X10,H1       . FILE LIMIT PROCEDURE 
+FLU       EQUF      0117,X10      . FILE LIMIT UPPER  
+FRC       EQUF       034,X10         . FILE RECORD COUNT    
+FTP       EQUF      032,X10,H2     . FILE TAPE POSITION     
+FUNC      EQUF      03,X10,S2      . FUNCTION CODE FOR TAPE HANDLING    
+GRAN      EQUF      06,X10,S3      . GRANULARITY TYPE INDICZTOR   
+IBM       EQUF      016,X10,S3         . COMPATABLE FORMATS 
+IN        EQUF      011,X10,S4     . INPUT FILE OPEN FLAG   
+INOUT     EQUF      011,X10,S6     . INPUT-OUTPUT FLAG
+INFLNM    EQUF      0,X10          . INTERNAL FILE NAME     
+INTP      EQUF      017,X10,S6    . RECORD COUNT DISPLAYED ON INPUT     
+LAB       EQUF      014,X10,S4     . LABEL BLOCK
+LAB       EQUF      014,X10,S4     . LABEL READ 
+LABEL     EQUF      062,X10       . AREA OF FCT FOR LABELS  
+LABELF    EQUF      013,X10        . ANY LABEL FLAG   
+LABOT     EQUF      037,X10,H2 . LINES AT BOTTOM
+LABTP     EQUF      037,X10    . LABOT OR LATOP 
+LATOP     EQUF      037,X10,H1 . LINES AT TOP   
+LBFADD    EQUF      070,X10       . LABEL - FASTRAND EOF SECTOR   
+LOCK      EQUF      015,X10,S3        . FILE LOCK FLAG
+LPP       EQUF      036,X10,H1 . LINES PER PAGE 
+LSP       EQUF      036,X10,H2 . LINE-SPACING SPECIFIED IN FD PARAGRPH  
+MAXBLK    EQUF      023,X10,H1     . MAXIMUM BLOCKSIZE
+MINBLK    EQUF      024,X10,H1     . MINIMUM BLOCKSIZE
+MAXREC    EQUF      023,X10,H2     . MAXIMUM RECORD LENGTH  
+MINREC    EQUF      024,X10,H2     . MINIMUM RECORD LENGTH  
+MGC       EQUF      010,X10        . MAXIMUM GRANULE COUNT,SECTOR COUNT 
+OLAB      EQUF      013,X10,S5     . OMMITTED LABLEL FLAG   
+OPEN      EQUF      011,X10,H2     . OPEN FLAGS 
+OPT       EQUF      012,X10,S1 . OPTIONAL FILE OR OPEN FLAG 
+OUT       EQUF      011,X10,S5     . OUTPUT FILE FLAG 
+OUTM      EQUF      015,X10,S4        . OUT MODE FLAG 
+OUTP      EQUF      017,X10,S5    . RECORD COUNT DISPLAYED ON OUTPUT    
+P         EQUF      030,X10        . PARAMETER FOR LWS$,INCLUDES RETURN 
+PAD       EQUF      015,X10,S1     . COMPATIBLE FORMAT PAD FLAG   
+PCH       EQUF      012,X10,S6 . PUNCH FLAG     
+PEXIT     EQUF      030,X10,H1          . EOF OR INVALID KEY EXIT 
+PF        EQUF      015,X10,S5        . PREVIOUS FUNCTION FLAG    
+PRP112    EQUF      016,X10,S5
+PRT       EQUF      012,X10,S5     . PRINT FILE 
+PRTCRL    EQUF      02,X10     . UNUSED LOCATION USED FOR PACKET  
+PRTPCH    EQUF      012,X10,H2 . PRINTER OR PUNCH  (PCH,PRT)
+PRTPKT    EQUF      020,X10        . USED AS PRINT PKT, PUNCH PKT 
+RAN       EQUF      012,X10,S3     .  RANDOM FLAG     
+RECCT     EQUF      022,X10        . RECORD COUNT     
+RECL      EQUF      027,X10             . RECORD SIZE AND LOCATION
+RECLOC    EQUF      027,X10,H2     . POINTER TO NEXT RECORD 
+RECSIZ    EQUF      027,X10,H1          . RECORD SIZE 
+REEL      EQUF      040,X10,H2     . REEL NUMBER
+REM       EQUF      017,X10,S4         .  # OF CHARS IN LAST WORD 
+RETURN    EQUF      030,X10,H2 . RETURN LINK TO CALLING PROGRAM   
+REV       EQUF      014,X10,S3     . REVERSE READ SPECIFIED 
+REW       EQUF      014,X10,S1     . REWIND FLAG
+RIO       EQUF      017,X10,S1        . READ FLAG     
+RPB       EQUF      041,X10,H2        . RECORDS PER BLOCK   
+RRC       EQUF      0122,X10      . REEL RECORD COUNT 
+RRERON    EQUF      060,X10       . RERUN 'ON' FILE-NAME    
+RRN       EQUF      016,X10,S2         . RERUN FLAG   
+RW        EQUF      015,X10,S6        . RECORD WRITTEN FLAG 
+SAR       EQUF      016,X10,S1        . SAME AREA FLAG
+SAVE      EQUF      040,X10,H1        .   
+SEQ       EQUF      012,X10,S2          . SEQUENTIAL FLAG   
+SF        EQUF      013,X10,S2          . SPECIAL FORMS REQUEST FLAG    
+SIP       EQUF      043,X10,H1     . STANDARD INPUT PROCEDURE ADDRESS   
+SLAB      EQUF      013,X10,S4     . STANDARD LABEL FLAG    
+SOP       EQUF      044,X10,H1     . STANDARD OUTPUT PROCEDURE ADDRESS  
+SREV      EQUF      041,X10,H1        . REVERSE BLOCK LOCATOR     
+STAT      EQUF      03,X10,S1           . IO STATUS   
+STATUS    EQUF      03,X10         . I/O COMPLETION CODE WORD     
+TAPE      EQUF      011,X10,S2     . TAPE FILE  
+TDATE     EQUF      066,X10       . TIME AND DATA LOCZTION  
+TS        EQUF      011,X10,S1          . TEST AND SET FLAG 
+ULAB      EQUF      013,X10,S6     . USER LABEL FLAG  
+USEL      EQUF      026,X10             . USER SIZE AND LOCATION  
+USELOC    EQUF      026,X10,H2     . STARTING LOCATION
+USESIZ    EQUF      026,X10,H1     . ALLOWED LABEL SIZE     
+VAR       EQUF      013,X10,S3        . VARIABLE RECORD FLAG
+VARF      EQUF      0116,X10      . PARAMETERS FOR MOVE FROM
+VART      EQUF      0120,X10      . PARAMETERS FOR MOVE TO  
+WIO       EQUF      017,X10,S2        . WRITE FLAG    
+/ . FOLLOWING IS A NUMERICALLY ORDERED LIST OF THE FCT EQUFS
+. FCT     EQUF      0,X10               . FILE CONTROL TABLE
+. INFLNM  EQUF      0,X10          . INTERNAL FILE NAME     
+. EXFLNM  EQUF      02,X10         . EXTERNAL FILE NAME PROVIDED BY FACIL$    
+. PRTCRL  EQUF      02,X10     . UNUSED LOCATION USED FOR PACKET  
+. STATUS  EQUF      03,X10         . I/O COMPLETION CODE WORD     
+. STAT    EQUF      03,X10,S1           . IO STATUS   
+. FUNC    EQUF      03,X10,S2      . FUNCTION CODE FOR TAPE HANDLING    
+. BLKRD   EQUF      03,X10,H2           . WORDS ACTUALLY READ     
+. BRKIMG  EQUF      04,X10         . BRKPT IMAGE 4 WRDS     
+. BLKSIZ  EQUF      04,X10,H1           . BLOCK SIZE  
+. BLKADD  EQUF      04,X10,H2           . BLOCK ADDRESS     
+. FADD    EQUF      05,X10         . FASTRAND ADDRESS 
+. EQUIP   EQUF      06,X10,S1      . EQUIPMENT TYPE ASSIGNED TO FILE    
+. GRAN    EQUF      06,X10,S3      . GRANULARITY TYPE INDICZTOR   
+. FEND    EQUF      010,X10             . FASTRAND FILE LIMIT     
+. MGC     EQUF      010,X10        . MAXIMUM GRANULE COUNT,SECTOR COUNT 
+. FLAG1   EQUF      011,X10        . TS,TAPE,FAST,IN,OUT,INOUT    
+. TS      EQUF      011,X10,S1          . TEST AND SET FLAG 
+. TAPE    EQUF      011,X10,S2     . TAPE FILE  
+. FAST    EQUF      011,X10,S3     . FASTRAND FILE    
+. OPEN    EQUF      011,X10,H2     . OPEN FLAGS 
+. IN      EQUF      011,X10,S4     . INPUT FILE OPEN FLAG   
+. OUT     EQUF      011,X10,S5     . OUTPUT FILE FLAG 
+. INOUT   EQUF      011,X10,S6     . INPUT-OUTPUT FLAG
+. OPT     EQUF      012,X10,S1 . OPTIONAL FILE OR OPEN FLAG 
+. SEQ     EQUF      012,X10,S2          . SEQUENTIAL FLAG   
+. RAN     EQUF      012,X10,S3     .  RANDOM FLAG     
+. EXTERN  EQUF      012,X10,H2     . EXTERNAL FILE FLAGS    
+. PRTPCH  EQUF      012,X10,H2 . PRINTER OR PUNCH  (PCH,PRT)
+. CARD    EQUF      012,X10,S4     . CARD  ILE FLAG   
+. PRT     EQUF      012,X10,S5     . PRINT FILE 
+. PCH     EQUF      012,X10,S6 . PUNCH FLAG     
+. LABELF  EQUF      013,X10        . ANY LABEL FLAG   
+. ALT     EQUF      013,X10,S1     . ALT FILE INDICATOR     
+. FDLSP   EQUF      013,X10,S2     . LINE SPACING SPECIFIED IN FD 
+. SF      EQUF      013,X10,S2          . SPECIAL FORMS REQUEST FLAG    
+. VAR     EQUF      013,X10,S3        . VARIABLE RECORD FLAG
+. SLAB    EQUF      013,X10,S4     . STANDARD LABEL FLAG    
+. OLAB    EQUF      013,X10,S5     . OMMITTED LABLEL FLAG   
+. ULAB    EQUF      013,X10,S6     . USER LABEL FLAG  
+. FLAG2   EQUF      014,X10        . REW,EOT,REV,LAB,DATA,EOF     
+. REW     EQUF      014,X10,S1     . REWIND FLAG
+. EOT     EQUF      014,X10,S2     . END OF TAPE FLAG 
+. REV     EQUF      014,X10,S3     . REVERSE READ SPECIFIED 
+. LAB     EQUF      014,X10,S4     . LABEL BLOCK
+. LAB     EQUF      014,X10,S4     . LABEL READ 
+. DATA    EQUF      014,X10,S5          . DATA FLAG   
+. EOF     EQUF      014,X10,S6     . END OF FILE FLAG 
+. PAD     EQUF      015,X10,S1     . COMPATIBLE FORMAT PAD FLAG   
+. ASG     EQUF      015,X10,S2     . FILE ASSIGNED FLAG     
+. LOCK    EQUF      015,X10,S3        . FILE LOCK FLAG
+. FLAG3   EQUF      015,X10,H2          . FLAGS TO BE CLEARED     
+. OUTM    EQUF      015,X10,S4        . OUT MODE FLAG 
+. PF      EQUF      015,X10,S5        . PREVIOUS FUNCTION FLAG    
+. RW      EQUF      015,X10,S6        . RECORD WRITTEN FLAG 
+. SAR     EQUF      016,X10,S1        . SAME AREA FLAG
+. RRN     EQUF      016,X10,S2         . RERUN FLAG   
+. IBM     EQUF      016,X10,S3         . COMPATABLE FORMATS 
+. EQPTYP  EQUF      016,X10,S4     . EQUIPMENT TYPE CODE    
+. PRP112  EQUF      016,X10,S5
+. FLAG4   EQUF      017,X10             . 
+. RIO     EQUF      017,X10,S1        . READ FLAG     
+. WIO     EQUF      017,X10,S2        . WRITE FLAG    
+. EOW     EQUF      017,X10,S3       . END OF WRITE FLAG    
+. REM     EQUF      017,X10,S4         .  # OF CHARS IN LAST WORD 
+. OUTP    EQUF      017,X10,S5    . RECORD COUNT DISPLAYED ON OUTPUT    
+. INTP    EQUF      017,X10,S6    . RECORD COUNT DISPLAYED ON INPUT     
+. BUFF    EQUF      020,X10          .    
+. PRTPKT  EQUF      020,X10        . USED AS PRINT PKT, PUNCH PKT 
+. BUFF2   EQUF      020,X10,H1       .    
+. BUFF1   EQUF      020,X10,H2
+. ALTNAM  EQUF      021,X10        . AREA USED TO HOLD ALT. FILENAME    
+. BLKCT   EQUF      021,X10        . BLOCK COUNT
+. RECCT   EQUF      022,X10        . RECORD COUNT     
+. MAXBLK  EQUF      023,X10,H1     . MAXIMUM BLOCKSIZE
+. MAXREC  EQUF      023,X10,H2     . MAXIMUM RECORD LENGTH  
+. MINBLK  EQUF      024,X10,H1     . MINIMUM BLOCKSIZE
+. MINREC  EQUF      024,X10,H2     . MINIMUM RECORD LENGTH  
+. BRC     EQUF      025,X10,H1          . BLOCK RECORD COUNT
+. BRP     EQUF      025,X10,H2          . BLOCK RECORDS PROCESSED 
+. USEL    EQUF      026,X10             . USER SIZE AND LOCATION  
+. USESIZ  EQUF      026,X10,H1     . ALLOWED LABEL SIZE     
+. USELOC  EQUF      026,X10,H2     . STARTING LOCATION
+. RECL    EQUF      027,X10             . RECORD SIZE AND LOCATION
+. RECSIZ  EQUF      027,X10,H1          . RECORD SIZE 
+. RECLOC  EQUF      027,X10,H2     . POINTER TO NEXT RECORD 
+. P       EQUF      030,X10        . PARAMETER FOR LWS$,INCLUDES RETURN 
+. PEXIT   EQUF      030,X10,H1          . EOF OR INVALID KEY EXIT 
+. RETURN  EQUF      030,X10,H2 . RETURN LINK TO CALLING PROGRAM   
+. EOFEX   EQUF      031,X10,H1     . EOF EXIT   
+. AKLOC   EQUF      032,X10,H1         . ACTUAL KEY LOCATOR 
+. FTP     EQUF      032,X10,H2     . FILE TAPE POSITION     
+. CHKREC  EQUF      033,X10,H1     . RECORD COUNT FOR CHECKPOINT  
+. CHKFCT  EQUF      033,X10,H2     . POINTER TO PKT FOR CHECKPOINT
+. FRC     EQUF       034,X10         . FILE RECORD COUNT    
+. FBC     EQUF      035,X10          .    
+. LPP     EQUF      036,X10,H1 . LINES PER PAGE 
+. LSP     EQUF      036,X10,H2 . LINE-SPACING SPECIFIED IN FD PARAGRPH  
+. LABTP   EQUF      037,X10    . LABOT OR LATOP 
+. LATOP   EQUF      037,X10,H1 . LINES AT TOP   
+. LABOT   EQUF      037,X10,H2 . LINES AT BOTTOM
+. BLKSEC  EQUF      040,X10,H1     . SECTORS PER BLOCK
+. SAVE    EQUF      040,X10,H1        .   
+. REEL    EQUF      040,X10,H2     . REEL NUMBER
+. SREV    EQUF      041,X10,H1        . REVERSE BLOCK LOCATOR     
+. RPB     EQUF      041,X10,H2        . RECORDS PER BLOCK   
+. FEOF    EQUF      042,X10            . FASTRAND END OF FILE     
+. SIP     EQUF      043,X10,H1     . STANDARD INPUT PROCEDURE ADDRESS   
+. AERRI   EQUF      043,X10,H2     . AFTER ERROR ON INPUT PROCEDURE     
+. SOP     EQUF      044,X10,H1     . STANDARD OUTPUT PROCEDURE ADDRESS  
+. AERRO   EQUF      044,X10,H2     . AFTER ERROR ON OUTPUT  
+. FLP     EQUF      045,X10,H1       . FILE LIMIT PROCEDURE 
+. AERRIO  EQUF      045,X10,H2     . AFTER ERROR ON INPUT-OUTPUT  
+. BSBFI   EQUF      046,X10,H1     . BEFORE STD BEGN. FILE INPUT ADD.   
+. ASBFI   EQUF      046,X10,H2     . AFTER STD. BEGIN. FILE INPUT ADD.  
+. BSBFO   EQUF      047,X10,H1     . BEFORE STD BEGN FILE OUTPUT PROC ADD     
+. ASBFO   EQUF      047,X10,H2     . AFTER STD BEGN FILE OUTPUT PROC ADD
+. BSBFIO  EQUF      050,X10,H1     . BEFORE STD BEGN FILE I/O ADD"
+. ASBFIO  EQUF      050,X10,H2     . AFTER STD NEGN FILE I/O PROC. ADD. 
+. BSEFI   EQUF      051,X10,H1     . BEFORE STANDARD END FILE INPUT     
+. ASEFI   EQUF      051,X10,H2     . AFTER STANDARD END FILE INPUT
+. BSEFO   EQUF      052,X10,H1     . BEFORE STANDARD END FILE OUTPUT    
+. ASEFO   EQUF      052,X10,H2     . AFTER STANDARD END FILE OUTPUT     
+. BSEFIO  EQUF      053,X10,H1     . BEFORE STANDARD END FILE INPUT OUTPUT    
+. ASEFIO  EQUF      053,X10,H2     . AFTER STD END FILE INPUT-OUTPUT    
+. BSBRI   EQUF      054,X10,H1     . BEFORE STD BEGN REEL INPUT   
+. ASBRI   EQUF      054,X10,H2     . AFTER STD BEGN REEL INPUT    
+. BSBRO   EQUF      055,X10,H1     . BEFORE STD BEGN REEL OUTPUT  
+. ASBRO   EQUF      055,X10,H2     . AFTER STD BEGN REEL OUTPUT   
+. BSERI   EQUF      056,10,H1      . BEFORE STD END  REEL INPUT   
+. ASERI   EQUF      056,X10,H2     . AFTER STD END  REEL INPUT    
+. BSERO   EQUF      057,X10,H1     . BEFORE STD END   REEL OUTPUT 
+. ASERO   EQUF      057,X10,H2     . AFTER STD END   REEL OUTPUT  
+. RRERON  EQUF      060,X10       . RERUN 'ON' FILE-NAME    
+. LABEL   EQUF      062,X10       . AREA OF FCT FOR LABELS  
+. TDATE   EQUF      066,X10       . TIME AND DATA LOCZTION  
+. LBFADD  EQUF      070,X10       . LABEL - FASTRAND EOF SECTOR   
+. FLL     EQUF      0116,X10      . FILE LIMIT LOWER  
+. VARF    EQUF      0116,X10      . PARAMETERS FOR MOVE FROM
+. FLU     EQUF      0117,X10      . FILE LIMIT UPPER  
+. VART    EQUF      0120,X10      . PARAMETERS FOR MOVE TO  
+. RRC     EQUF      0122,X10      . REEL RECORD COUNT 
+/ .   
+ . ERRITE  DIAGNOSTICADDRESS,RETURN OR RECOVERYADDRESS,CODE 
+ .  CODE = 0  ER  ADDRESS     
+ .   CODE=1  J  RETURN/ 
+ .   CODE=2  J  ADDRESS 
+ERRITE*   PROC      1   
+P         FORM      6,30
+      DO  ERRITE(1,3)=1 ,     L         X11,RETURN    
+    DO    ERRITE(1,2)>0  ,     S      ERRITE(1,2),06,X10    
+          LMJ       X11,LERRIT     . CALL DIAGNOSTIC WRITING ROUTINE    
+          P         ERRITE(1,2),ERRITE(1,1)     
+          END       .   
+ .    
+LERR$1    ERRITE    E1                  . INVALID EQUIPMENT 
+LERR$2    ERRITE    E2                  . NO EQUIPMENT
+LERR$3    ERRITE    E3,X11,1            . ALREADY OPEN
+LERR$4    ERRITE    E4                  . INPUT-OUTPUT TAPE FILE  
+LERR$5    ERRITE    E5                  . RANDOM TAPE FILE  
+LERR$6    ERRITE    E6                  . ILLEGAL READ REVERSE TAPE     
+LERR$7    ERRITE    E7                  . NO READ REVERSE ON FAST 
+LERR$9    ERRITE    E9,X11,1            . ALREADY CLOSED, NOT OPEN
+LERR$10   ERRITE    E10                 . WRONG BLOCKTYPE   
+LERR$11   ERRITE    E11                 . BLOCKSIZE TOO LARGE     
+LERR$12   ERRITE    E12                 . RECORDSIZE TOO LARGE    
+LERR$13   ERRITE    E13                 . CLOSE REEL ON NONTAPE   
+LERR$14   ERRITE    E14                 . FILE TAPE POSITION ERROR
+LERR$15   ERRITE    E15                 . LOCKED FILE 
+LERR$16   ERRITE    E16,A3              . NO RERUN FILE ASSIGNED  
+LERR$17   ERRITE    E17,X11             . FILE LIMITS ERROR 
+LERR$18   ERRITE    E18                 . READ REVERSE POSITION ERROR   
+WRE1      ERRITE    EWR1                . NOT FASTRAND ERROR
+WRE2      ERRITE    EWR2                . SEQ FILE ERROR    
+WRE3      ERRITE    EWR3                . OPEN ERROR  
+WRE4    SLJ     CONVRT  
+        S,T3    A0,EWR4+5              FASTRAND ERROR 
+          ERRITE    EWR4                . 
+RRE1      ERRITE    ERR1                . NOT FASTRAND ERROR
+RRE2      ERRITE    ERR2                . SEQ FILE ERROR    
+RRE3      ERRITE    ERR3                . OPEN ERROR  
+RRE4    SLJ     CONVRT  
+        S,T3    A0,ERR4+5              FASTRAND ERROR 
+          ERRITE    ERR4                . 
+WSE1      ERRITE    EWS1                . OPEN ERROR  
+WSE2    SLJ     CONVRT  
+        S,T3    A0,EWS2+6              FASTRAND ERROR 
+          ERRITE    EWS2                . 
+WSE3    SLJ     CONVRT  
+        S,T3    A0,EWS3+5              TAPE ERROR     
+          ERRITE    EWS3                . 
+WSE4      ERRITE    EWS4                . SEQ WRITE INVALID KEY   
+RSE1      ERRITE    ERS1                . OPEN ERROR  
+RSE2    SLJ     CONVRT  
+        S,T3    A0,ERS2+6              FASTRAND ERROR 
+          ERRITE    ERS2                . 
+RSE3    SLJ     CONVRT  
+        S,T3    A0,ERS3+5              TAPE ERROR     
+          ERRITE    ERS3                . 
+RSE4    SLJ     CONVRT  
+        S,T3    A0,ERS4+7              TAPE ERROR REVERSE   
+          ERRITE    ERS4                . 
+RSE5      ERRITE    ERS5                . EOF OR EOR ERROR  
+RSE6      ERRITE    ERS6                . EOF ERROR   
+IBME1     ERRITE    IB1                . TAPE POSITIONING   
+IBME2     ERRITE    IB2                . REVERSE
+IBME3     ERRITE    IB3                . FASTRAND     
+IBME4     ERRITE    IB4                . BAD FORMAT   
+IBME5     ERRITE    IB5                . BAD DATA BLOCK     
+IBME6     ERRITE    IB6                .  
+IOERR   SLJ     CONVRT  
+        S,T3    A0,IOE+2               I/O ERROR
+        ERRITE  IOE     
+CONVRT  +       0 
+        L       A3,(1,0)
+        DSL     A0,36   
+        DI,016  A0,8    
+        DSL     A1,6    
+        TLEM,016 A3,1   
+        J       CONVRT+2
+        OR      A2,(0606060606060)  
+        L       A0,A3   
+        SSL     A0,24   
+        J       *CONVRT 
+ .    
+LERRIT    S         X11,07,X10         . SAVE RETURN  
+          LA        A0,(0205,LERDBF)    . SKELETON PRINT PKT
+          LA        A1,*0,X11           . GET WORD COUNT OF DIAGNOSTIC  
+          LR        R1,A1               . SAVE FOR TRANSFER COUNT 
+          LSSL      A1,18               . SHIFT TO CORRECT PLACE FOR    
+          AA        A0,A1               .  ADDITION TO PRINT PKT  
+          TS        ('@@TS@@')          . THE REST IS NON REENTRANT     
+          DL        A1,0,X10            . GET FILENAME
+          DS        A1,LERDBF+3         . PUT IN DIAGNOSTIC 
+          LX        X11,0,X11           . GET ADDRESS OF DIAGNOSTIC MESG
+          LXI,U     X11,1               . INSERT INCREMENT  
+          LA        A3,(1,LERDBF+4)     . GET PRINTLINE DESTINATION     
+          BT        A3,1,*X11           . TRANSFER MESSAGE  
+          ER        PRINT$         . PRINT
+          S         X10,LSAVE          . RECOVER X10  
+          TNZ       IN             .
+          J         LEROUT         .
+          LA        A1,AERRI       . ERROR ON INPUT   
+          JZ        A1,$+2         .
+          SLJ       0,A1               . CALL ROUTINE 
+LEROUT    TNZ       OUT            .
+          J         LERIO          .
+          LA        A1,AERRO       . ERROR ON OUTPUT  
+          JZ        A1,$+2         .
+          SLJ       0,A1               . CALL ROUTINE 
+LERIO     TNZ       INOUT          .
+          J         LERNO          .
+          LA        A1,AERRIO      . ERROR ON INPUT-OUTPUT  
+          JZ        A1,$+2         .
+          SLJ       0,A1               . CALL ROUTINE 
+LERNO     L         X10,LSAVE          . RECOVER X10  
+          L         X11,07,X10         .  
+          L,U       R3,1
+          SZ        ('@@TS@@')          . CLEAR TEST AND SET
+          TNZ,S1    0,X11     
+          ER        ERR$                . GO TO ERR$ EXIT   
+          L         X11,06,X10
+          J         0,X11               . RETURN TO CALL    
+$(0)  
+LERDBF    'CFH - ERR ON FILE' 
+          RES       19                  . 
+E1        +         5              .
+         'INVALID EQUIPMENT ASSIGNMENT.'  
+E2        +         4              .
+         'NO EQUIPMENT ASSIGNED.'   
+E3        +         6              .
+         'FILE ALREADY OPEN. NO ACTION TAKEN.'  
+E4        +         6              .
+         'TAPE FILES CANNOT BE INPUT-OUTPUT.'   
+E5        +         5              .
+         'TAPE FILES CANNOT BE RANDOM.'   
+E6        +         8              .
+         'READ REVERSE ILLEGAL ON ASSIGNED TAPE UNIT.'
+E7        +         6              .
+         'READ REVERSE ILLEGAL ON FASTRAND.'    
+E9        +         6              .
+         'FILE NOT OPEN. NO ACTION TAKEN.'
+E10       +         3              .
+         'WRONG BLOCK TYPE.'  
+E11       +         4   
+         'BLOCKSIZE TOO LARGE  '    
+E12       +         4   
+         'RECORDSIZE TOO LARGE'     
+E13       +         6   
+         'CLOSE REEL ATTEMPTED ON ILLEGAL UNIT' 
+E14       +         9   
+         'END OF TAPE FOUND BEFORE FILE TAPE POSITION SPECIFIED'  
+E15       +         5   
+          'ATTEMPT TO USE LOCKED FILE'.   
+E16       +         4   
+         'NO RERUN FILE ASSIGNED.'  .     
+E17       +         5   
+         'FILE LIMITS- LOWER  > UPPER.'   
+E18       +         6   
+         'INCORRECT POSITION FOR READ REVERSE.' 
+EWR1      +5
+          'RANDOM WRITE FILE NOT FASTRAND'
+EWR2      +6
+          'RANDOM WRITE ON SEQUENTIAL FILE'     
+EWR3      +5
+          'RANDOM WRITE FILE NOT OPEN'    
+EWR4      +5
+          'RANDOM WRITE FASTRAND ERROR   '
+ERR1      +5
+          'RANDOM READ FILE NOT FASTRAND' 
+ERR2      +5
+          'RANDOM READ ON SEQUENTIAL FILE'
+ERR3      +5
+          'RANDOM READ FILE NOT OPEN'     
+ERR4      +5
+          'RANDOM READ FASTRAND ERROR    '
+EWS1      +5
+          'SEQUENTIAL WRITE FILE NOT OPEN'
+EWS2      +6
+          'SEQUENTIAL WRITE FASTRAND ERROR   '  
+EWS3      +5
+          'SEQUENTIAL WRITE TAPE ERROR   '
+EWS4      +7
+          'SEQUENTIAL WRITE AFTER INVALID KEY EXIT'   
+ERS1      +5
+          'SEQUENTIAL READ FILE NOT OPEN' 
+ERS2      +6
+          'SEQUENTIAL READ FASTRAND ERROR   '   
+ERS3      +5
+          'SEQUENTIAL READ TAPE ERROR   ' 
+ERS4      +7
+          'SEQUENTIAL READ REVERSE TAPE ERROR   '     
+ERS5      +6                         .    
+          'SEQUENTIAL READ NO TAPE EOF OR EOR'  
+ERS6      +6                         .    
+          'SEQUENTIAL READ AFTER AT END EXIT'   
+IB1       +9
+          'COMPATIBLE FORMAT TAPE MUST BE POSITIONED EXTERNALLY'  
+IB2       +8
+          'COMPATIBLE FORMAT TAPE CANNOT BE OPENED REVERSE' 
+IB3       +8
+          'COMPATIBLE FORMAT FILE MUST BE ASSIGNED TO TAPE' 
+IB4       +7
+          'COMPATIBLE FORMAT ERROR - FILE STRUCTURE'  
+IB5       +8
+          'COMPATIBLE FORMAT ERROR - DATA BLOCK STRUCTURE'  
+IB6       +7
+          'COMPATIBLE FORMAT ERROR - RECORD SIZE'     
+IOE     +       2 
+        'I/O ERROR   '  
+/ .   
+$(1)  
+ .    
+ . THIS ROUTINE CHECKS FACILITY TYPE. USES A0 AND X11 ONLY  
+FAC$      S,H1      X11,P          . SAVE RETURN LINK 
+          LA        A0,X10         . GET FCT ADDRESS  
+          ER        FACIL$         . GET FACILITY INFORMATION     
+          TNZ       EXFLNM         . HAS FILE NEEB ASG'D    
+          J         FACNOASG       . HAS NOT BEEN ASG'D     
+          TNZ       EQUIP          . HAS EQUIPMENT BEEN ASSIGNED  
+          J         FACNOASG       . NO   
+          SR        R3,ASG         . SET ASSIGNED FLAG
+          LA        A0,EQUIP       . DETERMINE EQUIPMENT TYPE     
+         S       A0,EQPTYP    
+          TLE,U     A0,020         .
+          J         FACTAPE        . TAPE 
+        TLE,U   A0,040  
+          TNG,U     A0,030         .
+          LMJ       X11,LERR$1     . INVALID EQUIPMENT ASSIGNMENT 
+          SA        A0,FAST             . PUT TYPE CODE IN FLAG   
+          TZ        IBM                . IBM TAPE     
+          J         IBME3              . YES    
+          LA,H2     A0,MGC         . NUMBER OF GRANULES     
+          MSI,U     A0,64          . NUMBER OF SECTORS IF TRK GRANULARITY     
+          TZ        GRAN           . TRK OR POSITON G*RANULARITY  
+          MSI,U     A0,64          . NUM OF SECTORS IF POS GRANULARITY  
+          SA        A0,MGC         . SAVE NUMBER OF SECTORS MAX   
+          J         $+2            . RETURN     
+FACTAPE   SA        A0,TAPE             . PUT TYPE CODE IN FLAG   
+          LX,H1     X11,P          .
+          J         0,X11          .
+FACNOASG  TNZ       OPT            . IS FILE OPTIONAL 
+          LMJ       X11,LERR$2     . NO EQUIPMENT ASSIGNED  
+          SZ        ASG            . CLEAR ASG FLAG   
+          L         X11,RETURN          . OPTIONAL FILE ,NOT ASGD 
+          J         0,X11          . RETURN     
+ .    
+ .    
+ . THIS ROUTINE TESTS FOR AND EXECUTES REWINDS  
+LREW*     TNE,U     A1,023             . TEST REWIND CODES  
+          J         LCR2TP         .
+          TE,U      A1,021             . REWIND WITH INTERLOCK TEST     
+          J         $+3            . CHECK OTHER CODES
+          LA,U      A2,REWI$       . YES  
+          J         LCRREW         .
+          LA,U      A2,REW$        . YES  
+LCRREW    SA        A2,FUNC   
+          ER        IOW$           . PERFORM REWIND   
+        LA      A0,STAT 
+        JNZ     A0,IOERR
+LCR2TP    J         0,X11          . RETURN     
+ .    
+ .    
+ . THIS ROUTINE CONVERTS OCTAL NUMBERS TO 3 DIGIT DECIMAL NUMBERS.
+ . RESULT IS LEFT IN H1 OF A2 WITH 6 BITS PER DECIMAL DIGIT.
+LCONV     L,U       R1,2           . 3 DIGIT NUMBER   
+          SZ        A2             . ZERO A2    
+LCONV1    DSL       A0,36          . INITIALIZE FOR DIVISION
+          DI,U      A0,10          . DIVIDE BY 10     
+          DSL       A1,6           . SAVE REMAINDER   
+          JGD       R1,LCONV1      . LOOP 
+          J         0,X11          . RETURN     
+ .    
+ . THIS ROUTINE CALLS LABEL ROUTINES IF ANY     
+LABELR    S         A0,LSAVE           .     SAVE REGISTERS 
+          S         R2,LSAVE+1
+          S         X10,LSAVE+2     
+          EX        0,A0
+          TZ        A2                 . IS THERE A PROCEDURE     
+          SLJ       0,A2               . EXECUTE IT   
+          L,U       A2,LABXXX          . PREPARE RETURN FROM SIP, SOP   
+          S,H2      A2,L$BACK 
+          L         A0,LSAVE  
+        L       X10,LSAVE+2   
+          SZ        DCOM$$+2           . ZERO FAIL TEST LOCATION  
+          EX        1,A0
+          JNZ       A2,0,A2            . JUMP IF THERE IS   
+LABXXX   L         A0,LSAVE   
+        L       X10,LSAVE+2   
+          EX        1,A0               . GET 2ND PROCEDURE ADD    
+          TNE       A2,SIP    
+          TNZ       DCOM$$+2           .  TEST FOR PROCEDURE TEST FAIL  
+          J         LABELA             . NO FAIL
+LABXX1   C$OM      LRFAIL     
+          L         A0,LRREC           .    CONSOLE AND GET ANSWER
+          TE        A0,('GO    ')   
+         J         LABXX2     
+LABELA    L         A0,LSAVE  
+        L       X10,LSAVE+2   
+          EX        2,A0
+          TZ        A2                 . IS THERE A PROCEDURE     
+          SLJ       0,A2               . EXECUTE IT   
+          L         A0,LSAVE  
+          L         R2,LSAVE+1         . RESTORE REGISTERS  
+          L         X10,LSAVE+2     
+          L,U       R3,1
+          J         3,A0               . RETURN 
+LABXX2   TNE       A0,('NO    ')    
+          J         LABXX3    
+          TNE       A0,('ER    ')   
+          ER        ERR$
+          J         LABXX1    
+LABXX3    L         A0,EQPTYP 
+          TG,016    A0,020    
+          ER        ERR$
+          L         A0,LSAVE  
+          L         X10,LSAVE+2     
+          L         A0,0,A0   
+          TE        A0,( L   A2,BSEFI)    
+          TNE       A0,( L   A2,BSERI)    
+          J         LABELA    
+          S         A1,R2     
+          L,016     A1,021    
+          L         A0,X10    
+          LMJ       X11,LREW  
+          L         A1,R2     
+          L         R2,LSAVE+2
+          L         A0,LSAVE  
+          L         A0,0,A0   
+          TE        A0,( L  A2,BSBFI)     
+          J         LABXX4    
+          L         A0,X10    
+          J         LOICFREW+2
+LABXX4    L         A0,LSAVE  
+          TNZ       IBM 
+          J         LCRNL1    
+          J         LCRI4     
+L$BACK*   J         0   
+$(0),LSAVE   RES    3   
+$(1)  
+/ .   
+ . LRERUN CHECKS TO SEE IF RERUN IS SPECIFIED.  CHKFCT IS ASSUMED TO    
+ . POINT TO A PACKET OF TWO WORDS AS FOLLOWS    
+ .    
+ .        ---------------------------------------------     
+ .        :  INTERNAL FILE NAME ASSIGNED TO FILE      :     
+ .        ---------------------------------------------     
+ .        :  WHERE CHECKPOINT INFO IS TO BE SAVED     :     
+ .        ---------------------------------------------     
+ .    
+L$NOND*.    
+LRERUN    TZ        EOT                . CALL FROM LCR$?    
+          J         LRN 
+          L         A0,RRC        GET REEL RECORD COUNT     
+          A,016     A0,1          INCREMENT     
+          S         A0,RRC    
+          L         A0,FRC             . GET FILE RECORD COUNT    
+          AA,U      A0,1           . INCREMENT  
+          SA        A0,FRC              . SAVE IN FCT 
+LRN       TNZ       RRN           IS RERUN REQUESTED? 
+          J         LREXIT         . NO RERUN   
+          TZ        CHKREC         . EVERY REEL OR RECORD   
+          J         LREREC         . CHECK RECORD COUNT     
+          TNZ       EOT            . CHECK END OF REEL
+          J         LREXIT         . NO RERUN   
+          J         LCHKPT         . RERUN
+LREREC    DSA       A0,36              . SHIFT FOR DIVISION 
+          DI        A0,CHKREC          . DIVIDE BY RERUN RECORD CNT     
+          JNZ       A1,LREXIT          . IF ZERO TIME TO DO A RERUN     
+LCHKPT    DL        A0,RRERON 
+          DS        A0,RRCSF1 
+          L         A0,RRPKT  
+          ER        CSF$             . CHECKPOINT     
+LREXIT    TNZ       EOT                . WAS THIS A CALL FROM LCR$
+          L         X11,RETURN         . NO     
+          J         0,X11          .
+RRPKT     +         4,RRCSF   
+RRCSF     '@CKPT       '
+RRCSF1    '            '
+ . ON OPEN CHECK TO SEE IF RERUN FILE HAS BEEN ASSIGNED     
+RRNTST    TNZ       RRN                . IS RERUN REQUESTED 
+          J         0,A3               . RETURN 
+          L         R1,A3     
+          DL        A2,0,X10           . SAVE FILENAME
+        L       A0,CHKFCT     
+        DL      A0,0,A0 
+          DS        A0,RRERON 
+          DS        A0,0,X10           . RUT RERUN FILENAME IN FCT
+          L         A0,X10             . ADDRESS FOR FACIL$ 
+          ER        FACIL$    
+          DS        A2,0,X10           . RESTORE FILENAME   
+          L         A3,R1     
+          TZ        EXFLNM    
+          J         0,A3               . RETURN 
+          SZ        RRN                . ZERO RERUN FLAG SINCE NO FILE  
+          LMJ       X11,LERR$16        . NO RERUN FILE ASSIGNED   
+          J         0,A3               . RETURN 
+CONV    L       A0,(1,0)
+         DSL       A4,36
+         DI,U      A4,10
+         DSL       A5,6 
+        TLEM,U  A0,5    
+         J         CONV+1     
+         OR        A6,(0606060606060)     
+         J         0,A1 
+/ .   
+. THIS ROUTINE POSITIONS THE FILE TO THE NEXT VALID DATA BLOCK    
+. AFTER THE CHECKPOINT BLOCKS  ROUTINE SAVES AND RESTORES   
+. REGISTER A0 IF NECESSARY    
+.     
+.     
+CHECPT   +         0    
+         L         A8,(0747574757475)     
+         S         A1,SAVEA1          . SAVE A1 
+         L         A1,BLKADD          . BUFFER ADDRESS
+         TE        A8,0,A1            . CHECKPOINT SENTINEL BLOCK 
+         J         CHEC2              . NO RETURN     
+         S         A0,SAVEA0          . SAVE A0 
+CHEC1    L         A0,X10             . READ CHECKPOINT DATA
+         ER        IOW$ 
+CHEC5    TE        A8,0,A1            . MAYBE SECOND SENTINEL     
+         J         CHEC1              . NO A DATA BLOCK     
+         L,S1      A0,1,A1    
+         TE,U      A0,020     
+         J         CHEC4              . SECOND SENTINEL     
+        LMJ     A0,CHEC3               TAPE SWAP
+         J       CHEC5                . CONTINUE CHECKING FOR 2ND SENTINEL    
+CHEC4    L         A0,X10             . SECOND SENTINEL     
+         ER        IOW$ 
+         L         A0,STAT    
+         TE,016    A0,1               . EOF MARK MAY FOLLOW CKPT SENTINEL     
+         J         CHEC6              . IT DID NOT    
+         L         A0,X10     
+         ER        IOW$               . BYPASS EOF MARK     
+CHEC6     TE        A8,0,A1           . TEST FOR BACK TO BACK CHECKPOINT
+        J       CHEC2X  
+         L,S1      A0,1,A1    
+         TE,U      A0,020     
+         J         CHEC1              . REPEAT CKPT ROUTINE 
+        LMJ     A0,CHEC3               HIT CKPT EOR BLOCK   
+         J         CHEC6              . CONTINUE CHECKING FOR NEXT CKPT 
+CHEC3   S,1     A0,CHEC3X     
+        L       A0,X10  
+        LXI,016 A0,0    
+         ER        TSWAP$     
+         ER        IOW$               . BYPASS FIRST BLOCK  
+CHEC3X  J       $-$     
+CHEC2X  L       A0,SAVEA0     
+CHEC2    L         A1,SAVEA1  
+         J         *CHECPT            . RETURN  
+SAVEA0   +         0                  . SAVE A0 WHEN ENTERING CKPT ROUTINE    
+SAVEA1   +         0                  . SAVE A1 WHEN ENTERING CKPT ROUTINE    
+/ .   
+ . THIS ROUTINE WRITES LABELS 
+ . HEADER LABEL   
+ .             -------------------------------------- 
+ .          0  : 'H' : 'D' : 'R' :TYPE:             : 
+ .             -------------------------------------- 
+ .          1  :   BLOCK  SIZE   :   RECORD SIZE    : 
+ .             -------------------------------------- 
+ .          2  :      BLOCK COUNT                   : 
+ .             -------------------------------------- 
+ .             :      RECORD COUNT                  : 
+ .             -------------------------------------- 
+ .          4  :  CREATION DATE                     : 
+ .             -------------------------------------- 
+ .             :      REEL NUMBER                   : 
+ .             -------------------------------------- 
+ .             :  FASTRAND EOF ADDRESS              : 
+ .             -------------------------------------- 
+ .        7-13 :                                    : 
+ .             :         UNUSED                     : 
+ .             -------------------------------------- 
+ .             :                                    : 
+ .             :        LABEL AREA                  : 
+ .             -------------------------------------- 
+ .    
+ .    
+LWRITLABEL                         .
+          SX,H1     X11,P          . SAVE RETURN LINK 
+          LR        R1,A2          . GET LABEL PROCEDURE ADDRESS  
+          LXM,U     A2,'S@@'       . STANDARD LABEL   
+          TZ        OLAB           .
+          LXM,U     A2,'O@@'       . OMITTED LABEL    
+          TZ        ULAB           .
+          LXM,U     A2,'U@@'       . USERLABEL  
+          LA,U      A3,LABEL            . FCT ADDRESS FOR LABEL   
+          S         A2,0,A3        .
+          TZ        RAN 
+          S,S5      R3,0,A3             . SET RANDOM FLAG IN LABEL
+          LA        A1,MAXBLK      . GET MAXIMUM BLOCKSIZE  
+          SA,H1     A1,1,A3        . INSERT AS BLOCKSIZE IN TAPE LABEL  
+          LA        A1,MAXREC      .
+          SA,H2     A1,1,A3        . INSERT IN HEADER AS RECORDSIZE     
+          LA        A1,BLKCT       . GET BLOCKCOUNT FROM FCT
+          SA        A1,2,A3        . INSERT IN TAPE LABEL   
+          LA        A1,RECCT       . GET RECORD COUNT FROM FCT    
+          SA        A1,3,A3        . INSERT IN TAPE LABEL   
+        L       A1,A2   
+          SSL      A1,18
+        TE,U     A1,0122413   
+         J     LWREEL   
+        TNZ     OUTP    
+        J       LWREEL  
+        DL      A0,0,X10
+        DS      A0,WMSG 
+        L       A4,FRC  
+        LMJ     A1,CONV 
+        S       A7,WMSG+5     
+        C$OM    RITREC  
+LWREEL  LA      A1,REEL 
+          SA        A1,5,A3        . INSERT IN TAPE LABEL   
+          TZ        OLAB           .
+          J         LWOMIT    
+          L         A0,USEL            . SAVE USEL    
+          S         A0,6,X10  
+          L,U       A0,14          . USER STANDARD LABEL    
+          SA        A0,USESIZ      . INSERT ALLOWED SIZE IN FCT   
+          AA        A0,A3          . INCREMENT TO USER OR STAND. LABEL AREA   
+          SA        A0,USELOC      . SAVE IN FCT
+          LXM       A0,R1          . GET PROCEDURE ADDRESS  
+          J         0,A0           . JUMP TO PROCEDURE
+LWRBOF    LABROUT   BSBFO,SOP,ASBFO  . CALL OUTPUT LABEL ROUTINE  
+          J         LWRITNO        .
+LWRBOR    LABROUT   BSBRO,SOP,ASBRO  . CALL BEGN REEL OUT ROUTINE 
+          J         LWRITNO        .
+LWREOR    LABROUT   BSERO,SOP,ASERO . CALL OUTPUT LABEL ROUTINES  
+          J         LWRITNO   
+LWREOF    LABROUT   BSEFO,SOP,ASEFO . CALL ENDING OUTPUT ROUTINE  
+          J         LWRITNO            .  
+LWREIO    LABROUT   BSEFIO,SOP,ASEFIO  . CALL INPUT-OUTPUT ROUTINES     
+LWRITNO   L         A0,6,X10           . RESTORE USEL 
+          S         A0,USEL            .       SAME AREA    
+LWOMIT    L,U       A0,W$     
+          SA        A0,FUNC        . PUT IN I/O PKT   
+          LA,U      A0,28           .     
+          SA        A0,BLKSIZ          . NUMBER WORDS TO I/O PKT  
+          L,U       A3,LABEL  
+          SA        A3,BLKADD          . RECEIVING AREA ADDRESS TO PKT  
+          LA        A0,X10         . GET I/O PKT ADDRESS    
+          ER        IOW$           .
+          TZ        FAST           . NO EOF ON FASTRAND     
+          J         LWREND         .
+          LA,U      A3,WEF$        . CODE TO WRITE EOF MARK 
+          SA        A3,FUNC        . INSERT IN FUNCTION LOC IF I/O PRT  
+          ER        IOW$
+          LA,S1     A1,STATUS      . IO STATUS CODE   
+          TNZ       EOT            . HAS CLOSE REEL ALREADY BEEN CALLED 
+          TE,U      A1,02          . TEST FOR END OF TAPE CODE    
+          J         LWREND         .
+          L,U       A1,MB$    
+          S         A1,FUNC   
+          ER        IOW$
+          ER        IOW$
+          ER        IOW$
+          LR        R2,P           . SAVE RETURN LINK 
+          LA,U      A0,0           . REWIND     
+          LMJ       X11,LCR$       . CLOSE REEL 
+          SR        R2,P           . RESTORE RETURN LINK    
+          J         LCFWEF    
+LWREND    LX,H1     X11,P          .
+          J         0,X11          . RETURN     
+/ .   
+ . THIS ROUTINE READS LABEL BLOCKS  
+LREADLABEL*                        .
+          SX,H1     X11,P          . SAVE RETURN LINK 
+          LA        A0,X10         . GET I/O PKT ADDRESS    
+          LA,U      A3,LABEL            . LABEL AREA  
+          TNZ       REV            . REVERSE READ CODE
+          J         LREFOR         . READ FORWARD     
+          LA,U      A1,RB$         . READ BACKWARD CODE     
+          AA,U      A3,27          . START AT END OF BUFFER 
+          LR,U      R1,0400034     . READ 28 WORDS BACKWARD 
+          J         LREBLK         .
+LREFOR    LA,U      A1,R$          . READ FORWARD CODE
+          LR,U      R1,28          . READ 28 WORDS FORWARD  
+LREBLK    SA        A1,FUNC        . INSERT FUNCTION CODE IN I/O PKT    
+          SA        A3,BLKADD          . RECEIVING AREA ADDRESS TO PKT  
+          SR        R1,BLKSIZ          . NUMBER WORDS TO I/O PKT  
+          ER        IOW$           . READ BLOCK 
+        L       A0,STAT 
+          TE,016    A0,4
+        JNZ     A0,IOERR
+         SLJ       CHECPT     
+        LA      A0,STAT 
+        JNZ     A0,IOERR
+          LXM       A0,A2          . GET LABEL ROUTINE NAME 
+          SSL       A2,18          . SHIFT TO GET LABEL     
+          LA,U      A3,LABEL            . LABEL AREA  
+          TNE,H1    A2,0,A3        . TEST BLOCKTYPE   
+          J         LREIT          . CORRECT BLOCKTYPE
+          TE,U      A2,'EOF'       . ATTEMPTED CLOSE FILE TEST    
+          LMJ       X11,LERR$10    . BLOCKTYPE ERROR  
+          LA,H1     A1,0,A3        . GET BLOCKTYPE    
+          TE,U      A1,'EOR'       . END OF REEL BLOCK TEST 
+          LMJ       X11,LERR$10    . BLOCKTYPE ERROR  
+          J         LREEXIT        . ACCEPTABLE BLOCK BUT NO LABEL RPOC 
+LREIT     TNE,U     A2,'HDR'       . DETERMINE BLOCKTYPE FOR PROCESSING 
+          J         $+3            . HDR LABEL,MUST GET INFO
+          TNZ       FAST           . FASTRAND EOF MUST CHECK INFO 
+          J         LRECONT        . NO CHECKING NECESSARY  
+          LA        A1,5,A3        . GET REEL NUMBER  
+          SA        A1,REEL        . SAVE 
+          LA,H1     A1,1,A3        . GET BLOCKSIZE    
+          SA        A1,MINBLK      . SAVE 
+          AN,U      A1,1           .
+          TG        A1,MAXBLK      . IS BLKSIZE TOO LARGE   
+          LMJ       X11,LERR$11    . ERROR
+          LA,H2     A1,1,A3        . GET RECORD SIZE  
+          SA        A1,MINREC      . SAVE 
+          AN,U      A1,1           .
+          TG        A1,MAXREC      . IS RECORD SIZE TOO LARGE     
+          LMJ       X11,LERR$12    . ERROR
+          TZ        INOUT              .  
+          TE,U      A2,'HDR'           . SKIP IF INOUT HEADR BLOCK
+          J         $+2 
+          J         LRECONT            . YES DO NOT ERASE  BLKCT,RECCT,FEOF   
+          LA        A1,2,A3        . GET BLOCKCOUNT   
+          SA        A1,BLKCT       . INSERT IN FCT    
+          LA        A1,3,A3        . GET RECORD COUNT 
+          SA        A1,RECCT       . INSERT IN FCT    
+          L         A1,6,A3            . FASTRAND END OF FILE     
+          S         A1,FEOF            .  
+LRECONT   TZ        OLAB           . OMITTED LABEL TEST     
+          J         LROMIT    
+          L         A1,USEL          . SAVE USEL
+          S         A1,6,X10         .    
+          L,U       A1,14          . STANDARD LABEL SIZE    
+          SA        A1,USESIZ      .
+          AA        A1,A3          . ADD BEGN BUFFER ADDRESS
+          SA        A1,USELOC      .
+          J         0,A0           . JUMP TO APPROPRIATE LABEL PROCEDURE
+LREEOF    LABROUT   BSEFI,SIP,ASEFI . CALL ENDING FILE LABEL ROUTINES   
+          J         LRENO          .
+LREBOR    LABROUT   BSBRI,SIP,ASBRI . CALL BEGN REEL ROUTINES     
+          J         LRENO          .
+LREEOR    LABROUT   BSERI,SIP,ASERI . ENDING-REEL  ROUT     
+          J         LRENO          .
+LREBOF    LABROUT   BSBFI,SIP,ASBFI . BEGN  FILE ROUT 
+          J         LRENO          .
+LREEIO    LABROUT   BSEFIO,SIP,ASEFIO . END FILE INPUT-OUTPUT     
+          J         LRENO          .
+LREBIO    LABROUT   BSBFIO,SIP,ASBFIO   .  BEGN FILE INPUT-OUTPUT 
+LRENO     L         A0,6,X10  
+          S         A0,USEL            .  
+LROMIT    TZ        REV 
+          TE,U      A2,'HDR'       . MOVE OVER EOF MARK ON REV AFTER EOF
+          TZ        FAST           . NO EOFMARK ON FASTRAND 
+          J         LREEXIT        .
+          LA,U      A1,MF$         . MOVE FORWARD COD(
+          TZ        REV            .
+          LA,U      A1,MB$         . MOVE BACKWARDS   
+          SA        A1,FUNC        .
+          LA        A0,X10    
+          ER        IOW$           .
+LREEXIT   LX,H1     X11,P          .
+          LA        A0,X10         . RELOAD I/O PKT ADDRESS 
+          J         0,X11          .
+LRFAIL    C$OMPK    48,LRMSG,2,LRREC
+LRMSG   'STANDARD INPUT PROCEDURE FAILED TYPE GO NO OR ER'  
+RCFAL    C$OMPK 31,RRMSG,0,0  
+RCFAL1   C$OMPK 38,RRMSG1,2,LRREC   
+RRMSG    '             RECORD COUNT ERROR'
+RRMSG1   '  R =         W =        TYPE NO OR GO'     
+LRREC     '      '
+RITREC  C$OMPK 36,WMSG,0,0    
+REDREC  C$OMPK 36,RMSG,0,0    
+WMSG    '              RECORD OUTPUT =         '
+RMSG    '              RECORD INPUT =          '
+/ .   
+ . THIS ROUTINE OPENS AN OUTPUT FILE
+ .    
+LOO$*     SX        X11,RETURN     . SAVE RETURN LINK 
+          S         A0,REW             . SAVE REWIND CODE   
+          LR,U      R3,1           . R3 USED TO SET FLAGS   
+          TZ        OPEN           . HAS FILE ALREADY BEEN OPENED 
+          LMJ       X11,LERR$3     . FILE ALREADY OPEN
+          TZ        LOCK               . IS FILE LOCKED     
+          J         LERR$15   
+          SR        R3,OUT         . SET OUTPUT FILE FLAG   
+          LMJ       A3,RRNTST          . CHECK FOR RERUN FILE     
+          TZ        PRTPCH         . TEST FOR FILE TYPE     
+          J         LOOEXT         . EXTERNAL   
+          SZ        BRP            . ZERO RECORDS PER BLOCK 
+          L         A1,REW             . GET REWIND CODE    
+          TP        STATUS    
+          ER        WAIT$          . WAIT FOR I/O COMPLETION
+        ER      OPT$    
+        TEP,U   A0,1*/('Z'-'W')     
+        S       R3,OUTP 
+          TEP,U     A0,1*/('Z'-'U')   . UNPAD OPTION  
+          S         R3,PAD    
+          ER        TDATE$         . GET CREATION DATE
+          S         A0,TDATE       . INSERT IN LABEL AREA OF FCT  
+          LMJ       X11,FAC$       . DETERMINE FACILITY     
+          CLRIOP                   . CLEAR I/O PKT    
+          TNZ       FAST
+          J         LOOTRW    
+          FLPTST                       . TEST FILE LIMITS   
+          J         LOOTAPE            . NO REWIND ON FASTRAND    
+LOOTRW    S         R3,REEL            . INITIALIZE REEL COUNT    
+          LA        A0,X10    
+        LXI,016 A0,0    
+        TE,U    A1,023  
+        ER      TINTL$  
+          TZ        IBM                . IBM COMPATABLE FORMAT    
+          J         LOOIBM             . YES    
+LOOTAPE   LA        A2,('HDR',LWRBOF) . HEADER BLOCK  
+          SZ        FADD           . FASTRAND HDR SECTOR 0  
+          LMJ       X11,LWRITLABEL .
+          LA,U      A3,2           . SET FOR ADDRESS OF NEXT DATA 
+        TZ      PRP112  
+        LA,U    A3,4    
+          SA        A3,FADD        .   BLOCK    
+          L         A2,MAXREC          . RECORD SIZE IN CHARACTERS
+          S         A2,RECSIZ          .  
+          L         A1,BUFF1           .  
+          TZ        RAN 
+          J         LOORAN             . RANDOM FILE  
+          A,U       A1,1
+          S         A1,RECLOC 
+          A,U       A1,1
+          TNZ       SAR                . INITIALIZE USELOC TO BUFFER+2  
+          S         A1,USELOC          . IF NOT SAME AREA   
+          J         LOOOUT    
+LOORAN    TNZ       SAR                 . TEST SAME AREA    
+          S         A1,USELOC          . BUFF1 TO USELOC    
+          J         LOOOUT    
+LOOEXT    TZ        SF                  . TEST FOR SPECIAL FORMS REQUEST
+          J         LOOSF               . INSERT REQUEST IN PRINT FILE  
+          TNZ       PCH                 . NO SPECIAL FORMS  
+          J         LOONSF              . PRINT 
+          J         LOOPCH              . PUNCH 
+LOOSF     DL        A0,('S,SPECIAL FO') . FIRST HALF OF MESSAGE   
+          DS        A0,2,X10            .   TO FILE   
+        DL      A0,('RMS REQUEST ')    MIDDLE THIRD OF MESSAGE    
+          DS        A0,4,X10            . 
+        L       A0,DCOM$$+7            FROM USER
+        L       A1,('.     ') 
+        DS      A0,6,X10               LAST THIRD OF MESSAGE
+          LA,U      A0,2,X10            . GET ADDRESS OF MESSAGE  
+        AA      A0,(6,0)               ADD WORD COUNT OF PACKET   
+          TNZ       PCH                 . TEST PRINT OR PUNCH     
+          J         LOOALT              . PRINT-GO TO PRINT CONTROL ERS 
+          TNZ       ALT                 . PUNCH 
+          J         $+4                 . PRIMARY PUNCH FILE
+          AH        A0,(2,-2)      . INCLUDE ALTERNATE FILE NAME  
+          ER        PCHCA$             . CALL PUNCH ALTERNATE CONTROL   
+          J         $+2                 . 
+          ER        PCHCN$              . CALL PUNCH PRIMARY CONTROL    
+          J         LOOPCH              . LEAVE 
+LOONSF    LA        A0,LABTP            . CHECKTO SEE IF BOT,TOP MARGIN 
+          JNZ       A0,LOOADJ      .  OR LINES PER PAGE IS SPECIFIED    
+          TZ        LPP            .
+          J         LOOADJ         . USE FD SPECIFIED FORMAT
+          LXI,U     A3,6               . USE STANDARD PRINT FORMAT -    
+          LXM,U     A3,3               . 6 TOP 3 BOTTOM 66 PER PAGE     
+          L,U       A2,0702        . 66 LINES PER PAGE
+          J         LOOLD          . FORM PRINT CONTROL IMAGE     
+LOOADJ    SSL       A0,18          . RIGHT JUSTIFY FOR CONVERSION 
+          LMJ       X11,LCONV      . CONVERT TO DECIMAL     
+          LX        A3,A2          . SAVE IN A3 
+          LA        A0,LABOT       . GET LINES AT BOTTOM    
+          LMJ       X11,LCONV      . CONVERT TO DECIMAL     
+          SSL       A2,18           . RIGHT JUSTIFY   
+          LXM       A3,A2              . LOAD IN RIGHT HALF OF A3 
+          L         A0,LPP         . GET LINES-PER PAGE     
+          A         A0,LABOT           . ADD SINCE LPP IS PRINTABLE     
+          A         A0,LATOP           . LINES PER PAGE, NOT TOTAL
+          LMJ       X11,LCONV      . CONVERT TO DECIMAL     
+          SSL       A2,18          . RIGHT JUSTIFY    
+LOOLD     DL        A0,('M,000,00,00.')  . PRINT CONTROL SKELETON 
+          DSC       A0,6           . CIRCULAR SHIFT TO ALIGN WITH DATA  
+          DA        A0,A2          . ADD IN CONTROL VALUES  
+          LDSC      A0,6           . RETURN TO ORIGINAL ALIGNMENT 
+          DS        A0,PRTCRL      . STORE IN UNUSED SPACE IN FCT 
+          LA,U      A0,PRTCRL      . LOAD ADDRESS OF PRINT CONTROL PKT  
+          AA        A0,(2,0)       . ADD TO GIVE NO. OF WRDS
+LOOALT    TNZ       ALT                 . TEST FOR ALTERNATE FILE 
+          J         $+4            . PRIMARY PRINT FILE     
+          AH        A0,(2,-2)      . INCLUDE ALTERNATE FILE NAME  
+          ER        PRTCA$    
+          J         $+2            . JUMP AROUND PRINARY    
+          ER        PRTCN$         . CALL PRINARY PRINT CONTROL   
+          L         A0,SF     
+        JNB     A0,LOPCH1     
+          L,U       A0,2
+          S         A0,SF              . SET SF TO FALL THROUGH NEXT    
+          J         LOONSF              . GO SET PRINT MARGINS    
+LOPCH2  L       A0,(0101,('      '))
+        TNZ     ALT     
+        J       LWSL0   
+        S       A0,3,X10
+        DL      A1,INFLNM     
+        DS      A1,4,X10
+        LA,U    A0,3,X10
+        ER      PRNTA$  
+        J       0,X11   
+LWSL0   ER      PRINT$  
+        J       0,X11   
+LOPCH1  LMJ     X11,LOPCH2    
+LOOPCH    L         A1,BUFF1  
+          S         A1,RECLOC 
+          TNZ       SAR                . SAME AREA?   
+          S         A1,USELOC 
+          L,U       A1,22              . PRINT? 
+          TNZ       PRT 
+          L,U       A1,14              . PUNCH  
+          S         A1,RECSIZ 
+LOOOUT    S         R3,LAB             . LABEL HAS BEEN WRITTEN   
+          TZ        SF                 . WAS THIS A SPECIAL FORMS 
+          S         R3,SF              . YES SET TO 1 
+          LX        X11,RETURN     . RETURN TO CALLING PROGRAM    
+          J         0,X11          .
+/ .   
+ . THIS ROUTINE OPENS INPUT FILES OR INPUT-OUTPUT FILES DEPENDING ON THE
+ . ENTRY POINT    
+LOI$*     LR,U      R3,1           . R3 USED TO SET FLAGS   
+          L,U       A1,010000      . INPUT FLAG 
+          J         $+3            . SKIP I/O ENTRANCE
+LOIO$*    LR,U      R3,1           . R3 USED TO SET FLAGS   
+          L,U       A1,000001      . INOUT FLAG 
+          SX        X11,RETURN     . SAVE RETURN
+          S         A0,REW             . SAVE REWIND CODE   
+          TZ        OPEN           . HAS FILE ALREADY BEEN OPENED 
+          LMJ       X11,LERR$3     . FILE ALREADY OPEN
+          TZ        LOCK               . IS FILE LOCKED     
+          J         LERR$15   
+          SA        A1,OPEN        . SET APPROPRIATE FLAG   
+          LMJ       A3,RRNTST 
+        TZ      SAR     
+        J       $+3     
+        L       A1,BUFF1
+        S       A1,USELOC     
+          TZ        CARD           . TEST TO SEE IF EXTERNAL
+          J         LOICARD            . CARD FILE    
+          L         A1,REW             . GET REWIND CODE    
+          TP        STATUS    
+          ER        WAIT$          . WAIT FOR I/O COMPLETION
+        ER      OPT$    
+        TEP,U   A0,1*/('Z'-'R')     
+        S       R3,INTP 
+          LMJ       X11,FAC$       . SET FACILITY FLAGS     
+          CLRIOP                       . CLEAR I/O PKT
+          TNZ       TAPE           .
+          J         LOICFAST  
+          S         R3,REEL            . INITIALIZE REEL COUNT    
+          TZ        INOUT          .
+          LMJ       X11,LERR$4     . TAPE FILES CANNOT BE INPUT OUTPUT  
+          TZ        RAN            . IS HTE RANDOM FLAG ON  
+          LMJ       X11,LERR$5     . TAPE FILES CANNOT BE RANDOM  
+          JZ        A1,LOICFREW    . REWIND     
+          TNE,U     A1,020         .
+          J         LOIREV         .REVERSE     
+LOICFTAPE TZ        IBM                .  
+          J         LOIIBM             .  
+          LA        A2,('HDR',LREBOF)  . READ HEADER LABEL  
+          LMJ       X11,LREADLABEL .  READ  HDR LABEL 
+          LA        A2,MINREC      . GET RECORD SIZE READ IN
+          SA        A2,RECSIZ      . SAVE IN RECSIZ   
+LOICRD    LX        X11,RETURN     .
+          SR        R3,LAB         . SET LABEL FLAG   
+          J         0,X11          .
+LOICFREW  LA        A0,X10         . GET I/O PKT ADDRESS    
+        LXI,016 A0,0    
+        ER      TINTL$  
+          TNZ       FTP            . IS MOVE TO BEGN OF FILE REQUESTED  
+          J         LOICFTAPE      . OPEN TAPE FILE   
+        TZ      IBM     
+        J       IBME1   
+          LA,U      A1,1           . YES  
+LOISKIP   TNE       A1,FTP         . IS THIS HTE CORRECT FILE     
+          J         LOICFTAPE      .
+          LA        A0,X10         . GET I/O PKT ADDRESS    
+LOINXTBLK LA,U      A2,MF$         . MOVE FORWARD CODE
+          SA        A2,FUNC        .
+          ER        IOW$           . MOVE OVER LABEL BLOCK  
+          TZ,S1     STATUS         . TEST FOR EOFMARK CODE  
+          LMJ       X11,LERR$14    . END OFTAPE(OR BAD TAPE)
+          ER        IOW$           . MOVE OVER EOFMARK
+LOIRDA    ER        IOW$           . READ DATA BLOCK  
+          TNZ,S1    STATUS         . EOFMARK TEST     
+          J         LOIRDA    
+          ER        IOW$           . MOVE OVER EOF BLOCK    
+          TZ,S1     STATUS         . TEST FOR EOFMARK CODE  
+          LMJ       X11,LERR$14    . END OF TAPE(OR BAD TAPE)     
+          ER        IOW$           . MOVE OVER EOFMARK
+          AA,U      A1,1           . ONE FILE MOVE COMPLETE 
+          J         LOISKIP        . CHECK FTP  
+LOIREV    SR        R3,REV         .
+          TZ        IBM                . IBM TAPE     
+          J         IBME2              . YES    
+          LA        A3,EQUIP       . GET EQUIPMENT TYPE     
+          TNE,U     A3,07          . 4C TAPE DRIVE READ REVERSE ILLEGAL 
+          LMJ       X11,LERR$6     .
+LOIRTLR   LA        A0,X10         . GET I/O PKT ADDRESS    
+          LA,U      A1,MB$         . MOVE BACKWARD CODE     
+          SA        A1,FUNC        .
+          ER        IOW$           . MOVE OVER EOF    
+          TNZ,S1    STATUS             . WAS THIS AN EOF    
+          J         LERR$18            . NO ERROR     
+          L         A2,('EOF',LREEOF)     
+          LMJ       X11,LREADLABEL .  READ  EOF LABEL 
+          J         LOICRD         .
+LOICFAST  TNE,U     A1,020         . IS READ REVERSE SPECIFIED    
+          LMJ       X11,LERR$7     . READ REVERSE ILLEGAL ON FASTRAND   
+          FLPTST     .   TEST FOR FILE LIMITS PROCEDURE     
+          SR        R3,FADD        . READ EOF BLOCK   
+          LA        A2,('EOF',LRENO )  . READ EOF LABEL,EX NO  PROCED   
+          LMJ       X11,LREADLABEL .  WREAD EOF LABEL 
+          SZ        FADD           . ADDRESS OF FASTRAND HEADERP  
+          TNZ       INOUT          . INPUT OUTPUT FILE TYPE 
+          J         LOICFTAPE      . GO READ HEADER   
+LOIOINOUT LA        A2,('HDR',LREBIO)  . READ HEADER  BEGIN I/O PROC    
+          LMJ       X11,LREADLABEL .
+          LA,U      A1,W$          . WRITE CODE 
+          SA        A1,FUNC        .
+          LA,U      A1,28          . ONE BLOCK (SECTOR)     
+          SA        A1,BLKSIZ          . NUMBER WORDS TO I/O PKT  
+          L,U       A0,LABEL         . LABEL LOCATION 
+          SA        A0,BLKADD          . RECEIVING AREA ADDRESS TO PKT  
+          LA        A0,X10         . I/O PKT ADDRESS TO A0  
+          ER        IOW$           . WRITES LABEL BLOCK     
+          TZ        RAN                .  
+          J         LOIRAN             . DONT READ FOR RANDOM     
+          LA,U      A1,2           .
+        TZ      PRP112  
+        LA,U    A1,4    
+          SA        A1,FADD        . FIRST DATA BLOCK ADDRESS     
+          TNZ       BUFF2            . DOUBLE BUFFERING     
+          J         LOIDBF         . NO   
+          LA        A0,MINBLK          . BLOCKSIZE    
+          LMJ       X11,RFW            . READ FIRST DATA BLOCK    
+          J         RSE2             . ERROR    
+          J         $+1              . IGNORE 05 FOR NOW    
+LOIDB     L         A1,BUFF1         . GET BUFFER LOCATION  
+          A,U       A1,1             .    
+          S         A1,RECLOC        . SET RECORD CONTROL WORD LOCATION 
+          A,U       A1,1             .    
+          TNZ       SAR              . SAME AREA
+          S         A1,USELOC        . NO SET USER RECORD LOCATION
+          J         LOICRD             . OK     
+LOIDBF    LMJ       X11,RSFW           . READ FIRST DATA BLOCK    
+          J         LOIDB            . ERROR IGNORE FOR NOW 
+          J         LOIDB            . EOF IGNORE FOR NOW   
+          J         LOIDB            .    
+LOIRAN    TZ        SAR                .  
+          J         LOICRD             .  SAME AREA   
+          L         A1,BUFF1           . BUFF1 TO USELOC    
+          S         A1,USELOC          .  
+          J        LOICRD              .  
+LOICARD TNZ     ALT                     ALTERNATE FILE?     
+        J       LOICR1                  NO
+        TP      STATUS  
+        ER      WAIT$   
+        LMJ     X11,FAC$
+        CLRIOP    
+LOICR1  L       A1,BUFF1
+          S         A1,RECLOC          . RECLOC = BUFF1     
+          TNZ       SAR                . SAME AREA?   
+          S         A1,USELOC          . USELOC=BUFF1 
+          L,U       A1,14              . RECSIZ=14    
+          S         A1,RECSIZ          .  
+          J         LOICRD             . EXIT   
+/ .   
+. THIS ROUTINE PERFORMS A CARD READ 
+.     
+.     
+LRSCRD    L         A0,BUFF1         . BLANK BUFFER AREA    
+          LXI,U     A0,1             .    
+          L,U       A1,('      ')    .    
+          L         R1,MAXREC        .    
+          BT        A0,0,*A1         .    
+          LXI       A0,PEXIT         . AT END EXIT    
+          LXM       A0,BUFF1       .
+          TNZ       ALT            . TEST FOR ALTERNATE FILE
+          J         LRSPRM         . PRIMARY FILE     
+        TNZ     OPT                     OPTIONAL?     
+        J       LRSCR1                  NO
+        TZ      ASG                     YES - ASSIGNED?     
+        J       LRSCR1                  YES     
+        S       R3,EOF                  NO - EOF
+        L       X11,PEXIT     
+        J       0,X11   
+LRSCR1  DL      A1,INFLNM     
+          DS        A1,ALTNAM      . STORE AFTER PACKET     
+          SA        A0,PRTPKT      .  STORE  READ PACKET    
+          L,U       A0,PRTPKT     . LOAD ADDRESS OF READ PACKET   
+          ER        READA$         . CALL ALTERNATE READ    
+          J         $+2 
+LRSPRM    ER        READ$          . CALL PRIMARY READ
+        L       R1,MAXREC     
+        S       R1,USESIZ     
+          TNZ       SAR                . SAME AREA?   
+          J         LRSFIN             . NO     
+          L         A2,USELOC          . TO   LOCATION
+          LXI,U     A2,1
+          L         A1,BUFF1           . FROM LOCATION
+          LXI,U     A1,1
+          BT        A2,0,*A1  
+LRSFIN    J         LRERUN         . CHECK FOR RERUN  
+/ .   
+. THIS ROUTINE PERFORMS A PRINT OR PUNCH  
+.     
+.     
+LWSPT     TZ        SAR                . SAME AREA?   
+          LMJ       X11,LWSMV          . YES  MOVE    
+          LMJ       X11,BLANKW         .  
+          L         R2,BUFF1           . SAVE BUFFER ADDRESS
+          L,U       A2,0               . CALCULATE PRINT SPACING  
+          LA,S3     A3,P           . LOAD CODE FOR TESTING  
+          TE,U      A3,0           . TEST CODE FOR 0  
+          J         LWSNDS         . CODE NEQ 0, ADVANCING USED   
+          TNZ       LSP                . TEST IF LINE SPACING IN FD     
+          J         LWSSTD         . NO   
+          L         A2,LSP         . YES, GET VALUE FROM FCT
+          J         LWSPRT         . GO TO FORM PKT   
+LWSSTD    L,U       A2,1           . STANDARD SPACING 
+          J         LWSPRT         . GO TO FORM PKT   
+LWSNDS    TE,U      A3,2           . TEST = 2   
+          J         LWSPRT+1       . CODE = 1   
+          L         A2,DCOM$$+8        . CODE=2  AFTER ADVANCING  
+        TLE,016 A2,511                 . TEST FOR TOP-OF-PAGE     
+        J       LWSPRT                 . NO - NORMAL SPACING
+        S       A0,6,X10               . SAVE A0
+        L       A0,('L,0.  ') 
+        S       A0,PRTCRL     
+        L,016   A0,PRTCRL     
+        A       A0,(1,0)
+        TNZ     ALT                    . TEST FOR ALT FILE  
+        J       $+4                    . PRIMARY FILE 
+        AH      A0,(2,-2)     
+        ER      PRTCA$  
+        J       $+2     
+        ER      PRTCN$  
+        L       A0,6,X10
+        L,016   A2,1    
+LWSPRT    LSSL      A2,6           . SHIFT FOR SPACE  
+          A         A2,A0          . ADD WRD COUNT OF OUTPUT
+          SA,H1     A2,PRTPKT      . STORE IN PRINT PACKET  
+          TNZ       ALT            . TEST FOR ALTERNATE FILE
+          J         LWSPRM         . PRIMARY FILE     
+          DL        A1,INFLNM      . GET INTERNAL FILE NAME FOR ALTERNATE     
+          DS        A1,ALTNAM      . STORE AFTER PKT  
+          LA,U      A0,PRTPKT      . LOAD ADDRESS OF PKT    
+          ER        PRNTA$         . PRINT
+          J         LWSCLR         . JUMP TO CLEAR BUFFER   
+LWSPRM    LA        A0,PRTPKT      . LOAD PKT FOR PRIMARY   
+          ER        PRINT$         . PRINT
+          J         LWSCLR         . JUMP TO BUFFER CLEAR   
+LWSPCH    TZ        SAR                . SAME AREA?   
+          LMJ       X11,LWSMV          . YES MOVE DATA
+          LMJ       X11,BLANKW         .  
+          S,H1      A0,PRTPKT          . PUT WORD COUNT IN PKT    
+          TNZ       ALT            . TEST FOR ALTERNATE     
+          J         LWSPCM         . PRIMARY FILE     
+          DL        A1,INFLNM      . GET INTERNAL FILENAME FOR ALTERNATE
+          DS        A1,ALTNAM      . STORE AFTER PKT  
+          LA,U      A0,PRTPKT      . LOAD PKT ADDRESS 
+          ER        PNCHA$         . PUNCH ALT  
+          J         LRERUN    
+LWSPCM    LA        A0,PRTPKT      . LOAD PKT   
+          ER        PUNCH$         . PUNCH PRIMARY    
+          J         LRERUN             . TEST FOR RERUN     
+LWSCLR    S         R2,BUFF1           . RESTORE BUFFER ADDRESS   
+          TE,U      A3,1         . TEST FOR CODE 1 BEFORE ADVANCING     
+          J         LRERUN             . CHECK FOR RERUN    
+          L,U       A3,0           . ZERO CODE TO PREVENT REPEAT  
+          L,U       A2,('      ')      . PRINT BLANK WORD   
+          S,H2      A2,PRTPKT 
+          L,U       A0,1               . ONE WORD     
+          J         LWSNDS+2           .  
+LWSMV     L         R1,USESIZ 
+          L         A2,USELOC          . FROM LOCATION
+          LXI,U     A2,1
+          L         A1,RECLOC          . TO LOCATION  
+          LXI,U     A1,1
+          BT        A1,0,*A2  
+          J         0,X11     
+BLANKW    L,U       A3,05            . SPACE CHARACTER TO A3
+          L         A0,USESIZ          . GET WORDSIZE 
+          ANU,U     A0,1               . PICK UP LAST WORD ADDRESS
+          A         A1,BUFF1           .  
+          L         A2,REM           . GET REMAINDER  
+          JZ        A2,0,X11         .    
+          AN,U      A2,1             .    
+          J         BWRIT,A2           . BLANK OUT UNUSED CHARACTERS    
+BWRIT     S,S2      A3,,A1    
+          S,S3      A3,,A1    
+          S,S4      A3,,A1    
+          S,S5      A3,,A1    
+          S,S6      A3,,A1    
+          J         0,X11     
+/ .   
+ . THIS ROUTINE CLOSES FILES  
+ .    
+LCF$*     SX        X11,RETURN     . SAVE RETURN LINK 
+          LR,U      R3,1           . USED TO SET FLAGS
+          TNZ       OPT                . OPTIONAL FILE?     
+          J         $+3                . NO     
+          TNZ       ASG                . ASSIGNED?    
+          J         LCFEXIT            . NO EXIT
+          TNZ       OPEN           . TEST TO SEE IF OPEN    
+          LMJ       X11,LERR$9     . FILE NOT OPEN    
+          TNE,U     A0,021             . WAS LOCK REQUESTED 
+          SR        R3,LOCK            . YES    
+          TZ        EXTERN         . TEST IF EXTERNAL 
+          J         LCFEXT         . EXTERNAL FILE    
+          SA        A0,REW             . SAVE REWIND CODE   
+          TP        STATUS         . ANY  
+          ER        WAIT$          . WAIT FOR I/O COMPLETION
+          TZ        IBM                . IBM COMPATABLE FORMAT    
+          J         LCFIBM             . YES    
+          LA        A0,X10         . I/O PKT ADDRESS  
+          TNZ       IN                 .  
+          J         LCFOUT             . OUTPUT OR I-O FILE 
+          TNZ       TAPE           .
+          J         LCFOFA         . FASTRAND   
+          TZ        EOF             . EOF TEST  
+          J         LCFRED         . ALREADY PAST EOFMARK   
+          LA,U      A1,MF$         . MOVE OVER UNREAD DATA  
+          TZ        REV            .
+          LA,U      A1,MB$         . MOVE BACKWARDS IF READ REVERSE     
+          SA        A1,FUNC        .
+          ER        IOW$           . PERFORM MOVE     
+          LA,S1     A1,STATUS      . GET STATUS 
+          TE,U      A1,01          . TEST FOR END OF FILE   
+          J         LCFEXIT        . NOT POSITION AT END,NO LABEL ROCESS
+LCFRED    TZ        REV            .
+          J         LCFREV         . READ REVERSE     
+LCFOFA    SR        R3,FADD        . ADDRESS OF FASTRAND EOF BLOCK
+          LA        A2,('EOF',LREEOF) . EOF BEGN FILE PROC  
+LCFHDR    LMJ       X11,LREADLABEL . READ HEADER OR EOF LABEL     
+        TNZ     REV     
+         TNZ     EOF    
+         J       LCFEOF 
+        L,U     A3,LABEL
+          L         A4,RRC        GET REEL RECORD COUNT     
+        TNE        A4,3,A3    
+        J       LCFOF1  
+         DL        A0,0,X10   
+         DS        A0,RRMSG   
+         LMJ       A1,CONV    
+         S         A7,RRMSG1+1
+           L       A4,3,A3    
+         LMJ       A1,CONV    
+         S         A7,RRMSG1+3
+         LMJ     X11,RECERR   
+        L       A0,X10  
+LCFEOF   TNZ     TAPE   
+          J         LCFEXIT        .  NOT TAPE  
+          LA        A1,REW    
+          LMJ       X11,LREW       . EXECUTE REWINDS  
+LCFEXIT   SZ        FLAG1          . CLEAR DEVICE,MODE FLAGS
+          SZ        FLAG2          . CLEAR REW,REV,EOT,BLOCKTYPE FLAGS  
+          SZ        FLAG3          . CLEAR PAD,ASG    
+          SZ        FLAG4               . CLEAR RIO,WIO     
+          SZ        BLKCT              . ZERO BLOCK COUNT   
+          SZ        RECCT              . ZERO RECORD COUNT  
+          SZ        FRC                . CLEAR FILE RECORD COUNT  
+          SZ        RRC           CLEAR REEL RECORD COUNT   
+        L,016   A0,0200 
+        TNZ     SAR     
+        S       A0,USELOC     
+          LX        X11,RETURN     .
+          J         0,X11          . RETURN     
+LCFOF1  TNZ     INTP    
+        J       LCFEOF  
+        DL      A0,0,X10
+        DS      A0,RMSG 
+        L       A4,FRC  
+        LMJ     A1,CONV 
+        S       A7,RMSG+5     
+        C$OM    REDREC  
+        L       A0,X10  
+        J       LCFEOF  
+RECERR   C$OM      RCFAL
+         C$OM      RCFAL1     
+         L       A1,LRREC     
+         TNE     A1,('GO    ')
+         J       0,X11  
+         TNE     A1,('NO    ')
+         ER      ERR$   
+        J       RECERR+2
+LCFREV    L         A2,('HDR',LREBOF)     
+          J         LCFHDR         . GO READ HEADER   
+LCFINOUT  S         R3,FADD            .  
+          LA        A2,('EOF',LREEIO)     
+          LMJ       X11,LREADLABEL  .  READ EOF , ENDING I-O PROCEDURES 
+LCFWIO    LA,U      A1,W$          . WRITE CODE 
+          SA        A1,FUNC        .
+          LA        A0,X10         . I-O PKT ADDRESS  
+          ER        IOW$           . WRITE EOF BLOCK BACK   
+          J         LCFEXIT        . LEAVE
+LCFOUT    TZ        RAN              . RANDOM FILE    
+          J         LCFFEOF           . YES     
+          TNZ       INOUT            . OPEN INPUT-OUTPUT    
+          J         LCFWFB           . NO 
+          TZ        OUTM             . FILE EXTENDED  
+          J         LCFWFB           . YES
+          TNZ       RW               . WAS A RECORD WRITTEN IN BLOCK    
+          J         LCFINOUT         . NO 
+          LMJ       X11,WRSW         . REWRITE BLOCK  
+          J         LCFINOUT         .    
+LCFWFB    TNZ       FAST             . FASTRAND 
+          J         LCFBRP           . NO 
+          TNZ       BUFF2            . DOUBLE BUFFERING     
+          J         LCFBRP           . NO 
+          TNZ       WIO              . IO OUTSTANDING 
+          J         LCFBRP           . NO 
+          L         A0,BLKSIZ        . UPDATE FASTRAND ADDRESS    
+          A,U       A0,27            .    
+          DSL       A0,36            .    
+          DI,U      A0,28            .    
+          A         A0,FADD          .    
+          S         A0,FADD          .    
+LCFBRP    TNZ       BRP              . ANY BLOCK TO BE WRITTEN    
+          J         LCFWEF         . GO WRITE EOF MARK
+          L         A1,BLKCT           . INCREMENT BLOCK COUNT    
+          A,U       A1,1               .  
+          S         A1,BLKCT           .  
+          L         A1,BUFF1         . GET BUFFER LOCATION  
+          L         A2,BRP           .    
+          S,H1      A2,0,A1          . RECORDS PER BLOCK    
+          L         A2,RECLOC        .    
+          ANA       A2,A1            .    
+          S,H2      A2,0,A1          . BLOCK SIZE     
+          TZ        FAST                . 
+          J         $+5                 . 
+          LMJ       X11,WSTW         . WRITE TAPE     
+          J         WSE3                . ERROR 
+          J         LCFEOT              . END OF TAPE 
+          J         LCFWEF              . NORMAL RETURN     
+          LMJ       X11,WSFW         . WRITE FASTRAND 
+          J         WSE2             . ERROR    
+          J         WSE2                . ERROR 
+          J         LCFFEOF             . NORMAL RETURN     
+LCFEOT    LR        R2,RETURN           . 
+          LA,U      A0,0           . REWIND     
+          LMJ       X11,LCR$       . CLOSE REEL 
+          SR        R2,RETURN      .
+LCFWEF    TNZ       TAPE           . NO EOF ON FASTRAND     
+          J         LCFFEOF        .
+          LA,U      A1,WEF$        . WRITE EOF MARK CODE    
+          SA        A1,FUNC        .
+          LA        A0,X10         .
+          ER        IOW$           .
+LCFFEOF   L         A1,FADD            . GET FASTRAND ADDRESS     
+          S         A1,LBFADD     FASTRAND EOF TO LABEL AREA
+          SR        R3,FADD            . SECTOR 1     
+          LA        A2,('EOF',LWREOF) .   
+          TZ        INOUT              .  
+          L         A2,('EOF',LWREIO)  . CALL I-O ROUTINES  
+          LMJ       X11,LWRITLABEL .
+          TNZ       TAPE           .
+          J         LCFAST              . NOT TAPE    
+          L,U       A1,WEF$        . WRITE SECOND END OF FILE     
+          SA        A1,FUNC        .
+          ER        IOW$           .
+          L,S1      A1,STATUS 
+          TE,U      A1,2
+          J         LC2EOF    
+          L,U       A1,MB$    
+          S         A1,FUNC   
+          ER        IOW$
+          ER        IOW$
+          ER        IOW$
+          L,U       A0,0
+          LMJ       X11,LCR$  
+          J         LCFWEF    
+LC2EOF    L,U       A1,MB$    
+          SA        A1,FUNC        .
+          ER        IOW$           .
+          LA        A1,REW    
+          LMJ       X11,LREW       . EXECUTE REWINDS  
+          J         LCFEXIT        . GO TO EXIT 
+LCFAST    TZ        RAN              . RANDOM FILE    
+          J         LCFEXIT          . YES
+          LA        A1,('EOF@@@')    . EOF MARKER     
+          L         A2,BUFF1  
+          S         A1,0,A2   
+          L         A1,LBFADD     FASTRAND EOF SECTOR 
+          SA        A1,FADD          .    
+          L         A1,MAXBLK         . DATA BLOCK SIZE     
+          S         A1,BLKSIZ 
+          L         A1,BUFF   
+          SA        A1,BLKADD           . 
+          LA,U      A1,W$               . WRITE CODE  
+          SA        A1,FUNC             . 
+          LA        A0,X10              . 
+          ER        IOW$                . WRITE ONE SECTOR EOF    
+          J         LCFEXIT        . LEAVE
+LCFEXT    TNZ       ALT 
+          TNZ       PRT            . NO... PRINTER?   
+          J         LCFTST         . ALTERNATE FILE OR NONPRINT FILE    
+LCFSTD    DL        A0,('M,72,6,3.   ')  . LOAD STANDARD PRINT CONTROL  
+          DS        A0,PRTCRL      . STORE IN PRINT CONTROL LOC   
+          L,U       A0,PRTCRL      . LOAD ADDRESS OF PKT    
+          LXI,U     A0,2           . NO. OF WORDS     
+          ER        PRTCN$         . CALL PRIMARY PRINT CONTROL   
+        LMJ     X11,LOPCH2    
+          J         LCFEXIT            . GO TO EXIT   
+LCFTST    TNZ       ALT            . ALTERNATE FILE?  
+          J         LCFEXIT        . NO ... ALL DONE  
+LCFALT     .
+          DL        A0,('@BRKPT      ')   . LOAD BRKPT IMAGE
+          DS        A0,BRKIMG      . STORE IN SCRATCH LOC   
+          DL        A0,INFLNM      . GET INTERNAL FILENAME  
+          DS        A0,BRKIMG+2    . STORE IN SCRATCH LOC   
+          LA,U      A0,BRKIMG      . GET PACKET ADDRESS FOR CSF$  
+          AA        A0,(4,0)       .  ADD IN PKT LENGTH     
+          ER        CSF$           . EXECUTE BREAKPOINT     
+          J         LCFEXIT        . LEAVE
+/ .   
+ . THIS ROUTINE EXECUTES A CLOSE REEL     
+ .    
+ .    
+LCR$*     SX        X11,RETURN     . SAVE RETURN LINK 
+          LR,U      R3,1           . USED TO SET FLAGS
+          A,U       A0,1               . MAKE IT NONZERO    
+          S         A0,EOT             . SET EOT FLAG WITH REWIND CODE  
+          TNZ       OPEN           .
+          LMJ       X11,LERR$9     . FILE NOT OPEN ERROR    
+          TNZ       TAPE           .
+          LMJ       X11,LERR$13    . NOT A TAPE FILE-ERROR  
+          LA        A0,X10         .
+          TP        STATUS           . WAIT FOR ANY   
+          ER        WAIT$            . OUTSTANDING IO 
+          TZ        IBM                . IBM COMPATABLE FORMAT    
+          J         LCRIBM             . YES    
+          TZ        OUT            . OUTPUT FILE TEST 
+          J         LCROUT         . OUTPUT     
+          TZ        EOF            . TEST TO SEE IF EOFMARK READ  
+          J         LCRIN          . YES  
+          LA,U      A1,MF$         . MOVE OVER EOFMARK
+          SA        A1,FUNC        .
+          ER        IOW$           .
+          TNZ,S1    STATUS             .  
+          J         LCRNL              . NOT AN EOF-NOT END OR TAPE     
+LCRIN     LA        A2,('EOR',LREEOR) . EOR, END OF REEL PROCEDURES     
+          LMJ       X11,LREADLABEL . GO READ ENND OF REEL LABEL   
+         TNZ     EOF    
+         J       LCRNL  
+        L,U     A3,LABEL
+          L         A4,RRC        GET REEL RECORD COUNT     
+        TNE        A4,3,A3    
+         J       LCRNL  
+         DL        A0,0,X10   
+         DS        A0,RRMSG   
+         LMJ       A1,CONV    
+         S         A7,RRMSG1+1
+           L       A4,3,A3    
+         LMJ       A1,CONV    
+         S         A7,RRMSG1+3
+         LMJ     X11,RECERR   
+        L       A0,X10  
+LCRNL     SZ        RRC           CLEAR REEL RECORD COUNT   
+         L       A1,EOT 
+          AN,U      A1,1               . CONVERT BACK 
+        LXI,016 A0,0    
+          ER        TSWAP$         .  SWAP REELS
+          LMJ       X11,LRERUN         . CHECK FOR RERUN    
+          LA        A1,REEL        . INCREMENT REEL COUNT   
+          AA,U      A1,1           . INCREMENT REEL COUNT   
+          SA        A1,REEL        . INCREMENT REEL COUNT   
+LCRNL1    L         A2,('HDR',LREBOR)     
+          LMJ       X11,LREADLABEL . READ HEADER LABEL
+          SZ        DATA
+          J         LCREXIT        .
+LCROUT    LWEF                         . WRITE EOF    
+          L         A2,RECCT  
+          TNZ       BUFF2     
+          J         $+4 
+          AN        A2,BRP    
+          S         A2,RECCT  
+          J         $+5 
+          L         A2,BLKCT  
+          A,U       A2,1
+          S         A2,BLKCT  
+          SZ        BRP 
+          LA        A2,('EOR',LWREOR) .   
+          LMJ       X11,LWRITLABEL . WRITE END OF REEL LABEL
+          LWEF                     . WRITE EOF MARK   
+          LA        A1,EOT             . GET REWIND CODE    
+          AN,U      A1,1               . CONVERT BACK 
+        LXI,016 A0,0    
+          ER        TSWAP$         .  SWAP REELS
+          LMJ       X11,LRERUN         . CHECK FOR RERUN    
+          LA        A1,REEL        .
+          AA,U      A1,1           . INCREMENT REEL COUNT   
+          SA        A1,REEL        .
+          LA        A2,('HDR',LWRBOR) . HEADER BLOCK  
+          LMJ       X11,LWRITLABEL . WRITE HEADER LABEL     
+         L       A0,BRP 
+        S       A0,RECCT
+          L         A0,BLKCT  
+          AN,U      A0,1
+          TNZ       BUFF2     
+          S         A0,BLKCT  
+LCREXIT   SZ        EOF            . CLEAR EOF FLAG   
+          SZ        EOT                . CLEAR EOT    
+          LX        X11,RETURN     .
+          J         0,X11          . RETURN     
+/ .   
+.     
+.         LW$ AND LR$ SPECIAL ENTERIES FOR COBOL
+.     
+LW$*      TZ        RAN              . RANDOM WRITE   
+          J         LWR$             . YES
+          J         LWS$             . NO 
+LR$*      TZ        RAN              . RANDOM READ    
+          J         LRR$             . YES
+          J         LRS$             . NO 
+/ .   
+.     
+.         LWR$ - WRITE RANDOM 
+.     
+LWR$*     L,U       R3,1                . 
+          L         A0,0,X11            . GET P FROM CALL   
+          S         A0,P                . SAVE P
+          TNZ       RAN                 . SEQUENTIAL FILE   
+          J         WRE2                . YES   
+          TZ        OUT                 . FILE OPEN FOR OUTPUT    
+          J         $+3                 . YES   
+          TNZ       INOUT               . FILE OPEN FOR INPUT-OUTPUT    
+          J         WRE3                . NO    
+          TNZ       FAST                . FILE ASG'D TO FASTRAND  
+          J         WRE1                . NO    
+          L         A0,AKLOC            . GET KEY LOCATION  
+          L         A0,*0,A0         . GET ACTUAL KEY 
+          TLE,U     A0,1                . IS KEY LESS THAN ONE    
+          J         WRIK                . YES - INVALID KEY EXIT  
+          TNZ       FLP              . FILE LIMIT PROCEDURE 
+          J         $+5              . NO 
+          DL        A1,FLL           . GET FILE LIMITS
+          AN,U      A1,1             .    
+          TW        A1,A0            . TEST WITHIN RANGE    
+          J         WRIK             . INVALID KEY    
+          L         A1,MINREC           . GET RECORD SIZE   
+          TZ        OUT                 . OPEN FOR OUTPUT ONLY    
+          L         A1,MAXREC           . YES GET RECORD SIZE     
+          A,U       A1,27            .    
+          DSL       A1,36               . COMPUTE THE SECTOR
+          DI,U      A1,28               . COUNT FOR ONE RECORD    
+          ANA,U     A0,1                . ACTUAL-KEY MINUS ONE    
+          L         A2,A1               . 
+          ANA,U     A2,1                . RECORD SECTOR COUNT MINUS ONE 
+          MSI       A1,A0               . SECTOR COUNT TIMES KEY LESS ONE     
+          AA,U      A1,2                . ALLOWANCE FOR SECTORS 0 AND 1 
+        TZ      PRP112  
+        AA,U    A1,2    
+          AU        A1,A2               . LAST SECTOR TO BE READ  
+          TG        A2,FEND             . WILL WRITE GO BEYOND ASG'D AREA     
+          J         WWRRIK           . YES
+          TZ        SAR               . IS RECORD TO BE MOVED     
+          LMJ       X11,WRM          . YES  MOVE RECORD     
+          L         A0,MINREC           . WORDS TO WRITE    
+          TZ        OUT                 . OPEN FOR OUTPUT ONLY    
+          L         A0,MAXREC           . WORDS TO WRITE    
+          LMJ       X11,WFW             . WRITE FASTRAND    
+          J         WRE4                . WRITE ERROR 
+          L         A0,RECCT          . COUNT RECORD  
+          A,U       A0,1              .   
+          S         A0,RECCT          .   
+          L         A0,BLKCT          . COUNT BLOCK   
+          A,U       A0,1              .   
+          S         A0,BLKCT          .   
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+WRM       L         A0,BUFF1         . TO LOCATION    
+          LXI,U     A0,1             .    
+          L         A2,USELOC        . FROM LOCATION  
+          LXI,U     A2,1             .    
+          L         R1,MAXREC        . TRANSFER COUNT 
+          BT        A0,0,*A2          . TRANSFER RECORD     
+          J         0,X11            . RETURN   
+WWRRIK    L         A0,AKLOC         . GET ACTUAL KEY ADDRESS     
+          L         A0,*0,A0         . LOAD ACTUAL KEY
+          L         A4,A0     
+          LMJ       A1,CONV          . CONVERT KEY TO FIELDATA    
+          S         A7,WWRRL+3       . STORE KEY IN MESSAGE 
+          DL        A0,0,X10  
+          DS        A0,WWRRK  
+          C$OM      WWRR6     
+          C$OM      WWRR7     
+RRIK. 
+WRIK. 
+          L         X11,PEXIT           . 
+          J         0,X11               . INVALID KEY RETURN
+WWRR6     C$OMPK 42,WWRRK,0,0 
+WWRR7     C$OMPK 24,WWRRL,0,0 
+WWRRK    '             MASS-STORAGE SPACE EXHAUSTED ' 
+WWRRL    'USER ACTUAL KEY         ' 
+.     
+.         LSK$ - SEEK   
+.     
+LSK$*     J         0,X11            . DO NOTHING     
+/ .   
+.     
+.         LRR$ - READ RANDOM  
+.     
+LRR$*     L,U       R3,1                . 
+          L         A0,0,X11            . GET P FROM CALL   
+          S         A0,P                . SAVE P
+          TNZ       RAN                 . SEQUENTIAL FILE   
+          J         RRE2                . YES   
+          TZ        IN                  . FILE OPEN FOR INPUT     
+          J         $+3                 . YES   
+          TNZ       INOUT               . FILE OPEN FOR INPUT-OUTPUT    
+          J         RRE3                . NO    
+          TNZ       FAST                . FILE ASG'D TO FASTRAND  
+          J         RRE1                . NO    
+          L         A0,AKLOC            . GET KEY LOCATION  
+          L         A0,*0,A0         . GET ACTUAL KEY 
+          TLE,U     A0,1                . IS KEY LESS THAN ONE    
+          J         RRIK                . YES - INVALID KEY EXIT  
+          TNZ       FLP              . FILE LIMIT PROCEDURE 
+          J         $+5              . NO 
+          DL        A1,FLL           . GET FILE LIMITS
+          AN,U      A1,1             .    
+          TW        A1,A0            . TEST WITHIN RANGE    
+          J         RRIK             . INVALID KEY    
+          L         A1,MINREC           . GET RECORD SIZE   
+          A,U       A1,27            .    
+          DSL       A1,36               . COMPUTE THE SECTOR
+          DI,U      A1,28               . COUNT FOR ONE RECORD    
+          ANA,U     A0,1                . ACTUAL-KEY MINUS ONE    
+          L         A2,A1               . 
+          ANA,U     A2,1                . RECORD SECTOR-COUNT MINUS ONE 
+          MSI       A1,A0               . SECTOR-COUNT TIMES KEY LESS ONE     
+          AA,U      A1,2                . ALLOWANCE FOR SECTORS 0 AND 1 
+        TZ      PRP112  
+        AA,U    A1,2    
+          AU        A1,A2               . LAST SECTOR TO BE READ  
+          TG        A2,FEND             . WILL READ GO BEYOND ASG'D AREA
+          J         WWRRIK           . YES
+          L         A0,MINREC           . WORDS TO BE READ  
+          LMJ       X11,RFW             . READ FASTRAND     
+          J         RRE4                . READ ERROR  
+          NOP                         .   
+          TZ        SAR               . IS RECORD TO BE MOVED     
+          J         RRM               . YES     
+          L         A0,BUFF1          . SET RECORD LOCATION FOR USER    
+          S         A0,USELOC         .   
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+RRM       L         A0,BUFF1         . FROM LOCATION  
+          LXI,U     A0,1             .    
+          L         A2,USELOC        . TO LOCATION    
+          LXI,U     A2,1             .    
+          L         R1,MAXREC        . TRANSFER COUNT 
+          BT        A2,0,*A0          . TRANSFER RECORD     
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+/ .   
+.     
+.         LWS$ - WRITE SEQUENTIAL   
+.     
+LWS$*     L,U       R3,1              .   
+          TZ        IBM                . IBM COMPATABLE FORMAT    
+          J         LWSIBM             . YES    
+          DSL       A0,36            . CONVERT RECORD 
+          DI,U      A0,6             . CHARACTER COUNT
+          JZ        A1,$+2           . TO WORDS 
+          A,U       A0,1             .    
+          S         A1,REM           . SAVE REMAINDER 
+          S         A0,USESIZ         . SAVE RECORD WORD COUNT    
+          L         A1,0,X11          . GET P FROM CALL     
+          S         A1,P              . SAVE P  
+          TZ        EOW              . INVALID KEY RETURN PREVIOUS
+          J         WSE4             . YES
+          TZ        TAPE             . TAPE FILE
+          J         $+8              . YES
+          TNZ       FLP              . FILE LIMITS SPECIFIED
+          J         $+6              . NO 
+          DL        A0,FLL           . GET FILE LIMITS
+          TLE       A1,A0            . UPPER LIMIT REACHED  
+          J         WSIK             . YES
+          A,U       A0,1             . INCREMENT LOWER LIMIT
+          S         A0,FLL           .    
+          TNZ       OUT               . FILE OPEN FOR OUTPUT
+          J         WSIO              . NO
+          TZ        PRT               . PRINT FILE    
+          J         LWSPT             . YES     
+          TZ        PCH               . PUNCH FILE    
+          J         LWSPCH           . YES
+          TNZ       DATA              . DATA FLAG SET 
+          J         WSD               . NO
+WSO       TZ        SAR               . DOES RECORD HAVE TO BE MOVED    
+          LMJ       X11,WSM           . YES     
+          L         A0,RECLOC         .   
+          L         A1,USESIZ         .   
+          S,H2      A1,0,A0           . SET ORIGINAL RECORD SIZE  
+          S,H1      A1,0,A0           . SET ACTUAL RECORD SIZE    
+          A         A0,A1             .   
+          A,U       A0,1              .   
+          S         A0,RECLOC         . UPDATE RECORD LOCATOR     
+          L         A1,RECCT          . COUNT RECORD  
+          A,U       A1,1              .   
+          S         A1,RECCT          .   
+          L         A1,BRP            . GET BLOCK RECORDS PROCESSED     
+          A,U       A1,1              .   
+        S       A1,BRP  
+        TZ      RPB                    BLOCK CONTAINS CHARACTERS? 
+        J       WSOOA                  NO - BLOCK CONTAINS N RECORDS    
+        L       A0,BUFF1               YES - BLOCK CONTAINS N CHARACTERS
+        A       A0,MAXBLK              BUFFER ADDRESS + MAX BLOCK SIZE  
+        AN      A0,MAXREC              MINUS MAX RECORD SIZE
+        AN,U    A0,1                   MINUS BLOCK CONTROL WORD   
+        TLE     A0,RECLOC    IS THERE ROOM FOR A MAX SIZE RECORD? 
+        J       WSO2                   NO - BLOCK IS FULL   
+        J       WSO1                   YES - BLOCK NOT FULL YET   
+WSOOA   TNE     A1,RPB                 IS BLOCK FULL YET?   
+          J         WSO2              . YES     
+WSO1      S         A1,BRP            . SAVE BRP
+          TZ        SAR               . WILL RECORD BE MOVED BY USER    
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+          L         A1,RECLOC         . SET LOCATION FOR NEXT RECORD    
+          A,U       A1,1              .   
+          S         A1,USELOC         .   
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+WSO2      L         A0,BUFF1          . GET BUFFER LOCATION 
+          S,H1      A1,0,A0           . SET BLOCK RECORD COUNT    
+          L         A1,RECLOC         .   
+          ANA       A1,A0             .   
+          S,H2      A1,0,A0           . SET BLOCK SIZE
+          TNZ       TAPE              . FILE ON TAPE  
+          J         $+5               . NO
+WSO4      LMJ       X11,WST          . WRITE TAPE     
+          J         WSE3              . ERR RETURN    
+          J         WSEOT             . EOT RETURN    
+          J         WSO3              .   
+          LMJ       X11,WSF           . WRITE FASTRAND
+          J         WSE2              . ERR RETURN    
+          J         WSE2              .   
+WSO3      L         A0,BUFF1          . GET NEW BUFFER LOCATION   
+          A,U       A0,1              .   
+          S         A0,RECLOC         .   
+          SZ        A1                . CLEAR BRP     
+          L         A0,BLKCT          . COUNT BLOCK   
+          A,U       A0,1              .   
+          S         A0,BLKCT          .   
+          J         WSO1              .   
+WSD       SZ        LAB               . CLEAR LAB FLAG
+          S         R3,DATA           . SET DATA FLAG 
+          SZ        BRP              . CLEAR BLOCK RECORDS PROCESSED    
+          J         WSO              .    
+WSM       L         A1,RECLOC         . TO LOCATION   
+          A,U       A1,1              .   
+          LXI,U     A1,1              .   
+          L         A2,USELOC         . FROM LOCATION 
+          LXI,U     A2,1              .   
+          L         R1,USESIZ         . WORD COUNT    
+          BT        A1,0,*A2          . TRANFER RECORD
+          J         0,X11             . RETURN  
+WSEOT     L         A0,P             . SAVE P   
+          S         A0,FBC           .    
+          SZ        A0  
+          LMJ       X11,LCR$         . CLOSE REEL     
+          L         A0,FBC           . RESTORE P
+          S         A0,P             .    
+          TZ        BUFF2            . DOUBLE BUFFERING     
+          J         WSO4             . YES
+          J         WSO3.     
+WSIK      S         R3,EOW           . SET END OF WRITE FLAG
+          L         X11,PEXIT        .    
+          J         0,X11            . INVALID KEY RETURN   
+/ .   
+.     
+.         WRITE SEQUENTIAL INPUT-OUTPUT MODE    
+.     
+WSIO      TNZ       INOUT             . FILE OPEN FOR INPUT-OUTPUT
+          J         WSE1              . NO - ERROR    
+          TZ        OUTM             . FILE BEING EXTENDED  
+          J         WSO               .   
+          TNZ       DATA              . DATA FLAG SET 
+          J         WSIOD            . NO 
+WSIO5     L         A0,RECLOC        . GET RECORD LOCATION  
+          L,H2      A1,0,A0          . GET ORIGINAL RECORD SIZE   
+          TLE       A1,USESIZ         . IS USER SIZE GREATER
+          S         A1,USESIZ         . YES     
+WSIO1     TZ        SAR               . DOES RECORD HAVE TO BEMOVED     
+          LMJ       X11,WSM           . YES     
+WSIO2     L         A0,RECLOC         . GET RECORD LOCATION 
+          L         A1,USESIZ         .   
+          S,H1      A1,0,A0           . SET ACTUAL RECORD SIZE    
+          A,H2      A0,0,A0           .   
+          A,U       A0,1              .   
+          S         A0,RECLOC         . UPDATE RECORD LOCATOR     
+          S         R3,RW             . SET RECORD WRITTEN FLAG   
+          S         R3,PF             . SET PREVIOUS FUNCTION FLAG
+          L         A1,BRP            . UPDATE BLOCK RECORDS PROCESSED  
+          A,U       A1,1              .   
+          TE        A1,BRC            . BLOCK FULL    
+          J         WSO1              . NO
+WSIO3     TNZ       RW                . HAS RECORD BEEN WRITTEN   
+          J         WSIO4             . NO
+          LMJ       X11,WRSW          . WRITE BLOCK   
+WSIO4     LMJ       X11,RSF           . READ FASTRAND 
+          J         WSE2             .    
+          J         WSEOF             .   
+          SZ        RW                . CLEAR RECORD WRITE FLAG   
+          L         A0,BUFF1          . GET BLOCK LOCATION  
+          L,H1      A1,0,A0           . GET BLOCK RECORD COUNT    
+          S         A1,BRC            . SET IN BRC    
+          A,U       A0,1             .    
+          S         A0,RECLOC         .   
+          SZ        A1               . CLEAR BRP
+          J         WSO1             .    
+WSEOF     S         R3,OUTM          . SET OUTPUT MODE FLAG 
+          SZ        STAT             . CLEAR IO STATUS
+          L         A0,BUFF1         . GET NEW BUFFER LOCATION    
+          A,U        A0,1            .    
+          S         A0,RECLOC        .    
+           SZ       A1               . CLEAR BRP
+          J          WSO1            .    
+WRSW      S         X11,SAVE          .   
+          TP        FCT+3             . PREVIOUS IO COMPLETE
+          ER        WAIT$             .   
+          DL        A1,FCT+3          . SAVE PACKET   
+          DS        A1,FBC+1          .   
+          L         A1,FBC            .   
+          L         A2,FCT+5          .   
+          S         A1,FCT+5          .   
+          S         A2,FBC            .   
+          LMJ       X11,WSFW          . WRITE FASTRAND
+          J         WSE2              .   
+          J         WSE2              .   
+          DL        A1,FBC+1          . RESTORE PACKET
+          DS        A1,FCT+3         .    
+          L         A1,FBC            .   
+          S         A1,FCT+5          .   
+          L         X11,SAVE          .   
+          J         0,X11             . RETURN  
+WRSD      S         X11,SAVE  
+          SZ        LAB               . CLEAR LABEL FLAG    
+          S         R3,DATA           .   
+          L         A0,BUFF          . GET BUFFER CONTROL WORD    
+          L         A1,0,A0          .    
+          TNE       A1,('EOF@@@')    . END OF FILE    
+          J         1,X11            . YES
+          SSL       A1,18            .    
+          S         A1,BRC           . SET BLOCK RECORD COUNT     
+          SZ        BRP              . CLEAR BLOCK RECORDS PROCESSED    
+          TNZ       BUFF2            . DOUBLE BUFFERING     
+          J         0,X11            . NO 
+          SSC       A0,18            . ROTATE BUFFERS 
+          S         A0,BUFF          . GET BUFFER CONTROL WORD    
+          LMJ       X11,RSF           . READ FASTRAND 
+          J         RSE2              . ERROR   
+          J         RSEOF             . EOF     
+          L         X11,SAVE          .   
+          J         0,X11             . RETURN  
+WSIOD     LMJ       X11,WRSD         .    
+          J         WSIO5            .    
+          J         WSEOF            .    
+/ .   
+.     
+.         LRS$ - READ SEQUENTIAL    
+.     
+LRS$*     L,U       R3,1              .   
+          L         A1,0,X11          . GET P FROM CALL     
+          S         A1,P              . SAVE P  
+          TZ        EOF               . EOF RETURN GIVE PREVIOUSLY
+          J         RSE6              . YES     
+          TNZ       IN                . FILE OPEN FOR INPUT 
+          J         RSIO              . NO
+          TZ        CARD              . CARD FILE     
+          J         LRSCRD            . YES     
+          TZ        IBM                . IBM COMPATABLE FORMAT    
+          J         LRSIBM             . YES    
+          TZ        TAPE             . TAPE FILE
+          J         $+8              . YES
+          TNZ       FLP              . FILE LIMITS SPECIFIED
+          J         $+6              . NO 
+          DL        A0,FLL           . GET FILE LIMITS
+          TLE       A1,A0            . UPPER LIMIT REACHED  
+          J         RSEOF            . YES
+          A,U       A0,1             . INCREMENT LOWER LIMIT
+          S         A0,FLL           .    
+          TNZ       DATA              . DATA FLAG SET 
+          J         RSD               . NO
+RSI       L         A1,BRP            . GET BLOCK RECORDS PROCESSED     
+          TNE       A1,BRC            . BLOCK PROCESSED     
+          J         RSI4              . YES - GET ANOTHER BLOCK   
+RSI1      TZ        REV               . REVERSE FLAG SET    
+          J         RSI7              . YES - LOCATE RECORD 
+RSI2      L         A0,RECLOC         . GET RECORD LOCATOR  
+          L         A1,MAXREC        .    
+          TG,H1     A1,0,A0          . RECORD TO LARGE
+          L,H1      A1,0,A0           . GET ACTUAL RECORD SIZE    
+          S         A1,USESIZ         . SAVE RECORD SIZE    
+          TZ        SAR               . IS RECORD TO BE MOVED     
+          J         RSI8              . YES - MOVE RECORD   
+          A,U       A0,1              .   
+          S         A0,USELOC         . SET USER RECORD LOCATOR   
+RSI3      L         A0,BRP            . UPDATE BLOCK RECORD PROCESSED   
+          A,U       A0,1              .   
+          S         A0,BRP            .   
+          L         A0,RECLOC         . UPDATE RECORD LOCATOR     
+          A,H2      A0,0,A0           .   
+          A,U       A0,1              .   
+          S         A0,RECLOC         .   
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+RSI4      TNZ       TAPE              . FILE ON TAPE  
+          J         RSI6              . NO
+          TZ        REV               . REVERSE FLAG  
+          J         RSREV             . YES - READ REVERSE  
+          LMJ       X11,RST           . READ TAPE     
+          J         RSE3              . TAPE ERROR    
+          J         RSEOT             . EOT OR EOF    
+RSI5      L         A0,BUFF1          . GET BUFFER LOCATION 
+          L,H1      A1,0,A0           . GET BLOCK RECORD COUNT    
+          S         A1,BRC            .   
+          SZ        BRP               . CLEAR BLOCK RECORDS PROCESSED   
+          A,U       A0,1              .   
+          S         A0,RECLOC         . SET RECORD LOCATOR  
+          J         RSI1              .   
+RSI6      LMJ       X11,RSF           . READ FASTRAND 
+          J         RSE2              . FASTRAND ERROR
+          J         RSEOF             . EOF ON FASTRAND     
+          J         RSI5              .   
+RSI7      L         A0,SREV           . GET BLOCK ADDRESS   
+          L,H1      A3,0,A0           . GET BLOCK RECORD COUNT    
+          AN,U      A3,1              . DECREMENT     
+          S,H1      A3,0,A0           .   
+          A,U       A0,1              .   
+          JGD       A3,$+3            . LAST RECORD OF BLOCK LOCATED    
+          S         A0,RECLOC         . YES SAVE RECORD LOCATION  
+          J         RSI2              .   
+          A,H2      A0,0,A0           . UPDATE RECORD LOCATION    
+          A,U       A0,1              .   
+          J         $-5               .   
+RSI8      LMJ       X11,RSM           . MOVE RECORD   
+          J         RSI3
+RSD       SZ        LAB               . CLEAR LABEL FLAG    
+          S         R3,DATA           . SET DATA FLAG 
+          L,U       A0,2             .    
+        TZ      PRP112  
+        L,U     A0,4    
+          S         A0,FADD          .    
+          TNZ       OPT               . FILE OPTIONAL 
+          J         RSD1             .    
+          TNZ       ASG               . FILE ASSIGNED 
+          J         RSEOF             . NO
+RSD1      TNZ       BUFF2            . DOUBLE BUFFERING     
+          J         RSI4             . NO 
+          TZ        REV              . READ REVERSE   
+          J         RSI4             . YES
+          L         A0,MINBLK        .    
+          L,U       A1,2             . FASTRAND READ ADDRESS
+        TZ      PRP112  
+        L,U     A1,4    
+          LMJ       X11,RFW          . READ TAPE OR FASTRAND
+          J         $+2              . ERROR - IGNORE FOR NOW     
+          J         $+1              .    
+         SLJ       CHECPT     
+          L         A0,BUFF          . GET BUFFER LOCATOR   
+          SSC       A0,18            . ROTATE BUFFERS 
+          S         A0,BUFF          .    
+          J         RSI4             .    
+RSM       L         A1,RECLOC         . FROM LOCATION 
+          A,U       A1,1              .   
+          LXI,U     A1,1              .   
+          L         A2,USELOC         . TO LOCATION   
+          LXI,U     A2,1              .   
+          L         R1,USESIZ        . WORD COUNT     
+          BT        A2,0,*A1          . TRANSFER RECORD     
+          J         0,X11     
+RSEOT     LMJ       X11,RSTW          . READ BLOCK    
+          J         RSE3              . ERROR   
+          J         RSE3              . EOF - ERROR   
+          L         A0,BUFF1          .   
+          L,H1      A2,0,A0           . GET  EOR DR EOF     
+          L,U       A0,051            . BACKSPACE FUNCTION  
+          S         A0,FUNC           .   
+          L         A0,X10           .    
+          ER        IOW$              . BACKSPACE     
+          L         A0,STAT           . GET IO STATUS 
+          JNZ       A0,RSE3           . ERROR   
+          TNE,U     A2,'EOF'         . END-OF-FILE    
+          J         RSEOF             . YES     
+          TE,U      A2,'EOR'         . END-OF-REEL    
+          J         RSE5             . NO - ERROR     
+          L         A0,P             . SAVE P   
+          S         A0,FBC           .    
+          S         R3,EOF             . EOF MARK READ
+          SZ        A0  
+          LMJ       X11,LCR$         . CLOSE REEL     
+          L         A0,FBC           . RESTORE P
+          S         A0,P             .    
+          SZ        LAB              . CLEAR LAB FLAG 
+          S         R3,DATA          . SET DATA FLAG  
+          TNZ       BUFF2            . DOUBLE BUFFERING     
+          J         RSI4             . NO 
+          J         RSD1             . YES
+RSEOF     S         R3,EOF            . SET EOF FLAG  
+          L         X11,PEXIT         .   
+          J         0,X11             . EOF RETURN    
+RSREV     LMJ       X11,RTBW          . READ TAPE BACKWARD  
+          J         RSE4              . ERROR   
+          J         RSEOF             . END OF FILE   
+          J         RSI5+1           .    
+/ .   
+.     
+.         READ SEQUENTIAL INPUT-OUTPUT MODE     
+.     
+RSIO      TNZ       INOUT             . FILE OPEN FOR INPUT-OUTPUT
+          J         RSE1              . NO
+          TZ        OUTM              . FILE BEING EXTENDED 
+          J         REOF             . END OF FILE    
+          TNZ       DATA              . DATA FLAG SET 
+          J         RSIOD     
+          TZ        PF                . PREVIOUS FUNCTION A WRITE 
+          J         RSIO1             .   
+          TNZ       FLP              . FILE LIMITS SPECIFIED
+          J         $+6              . NO 
+          DL        A0,FLL           . GET FILE LIMITS
+          TLE       A1,A0            . UPPER LIMIT REACHED  
+          J         RSEOF            . YES
+          A,U       A0,1             . INCREMENT LOWER LIMIT
+          S         A0,FLL           .    
+          L         A0,RECLOC         . UPDATE RECORD LOCATION    
+          A,H2      A0,0,A0           .   
+          A,U       A0,1             .    
+          S         A0,RECLOC         .   
+          A,U       A0,1             .    
+          TNZ       SAR              . SAME AREA
+          S         A0,USELOC        . NO 
+          L         A1,BRP            . UPDATE BLOCK RECORD PROCESSED   
+          A,U       A1,1              .   
+          S         A1,BRP            .   
+          TNE       A1,BRC            . BLOCK PROCESSED     
+          J         RSIO2             .   
+RSIO1     L         A0,RECLOC         . GET RECORD LOCATOR  
+          L         A1,MAXREC        .    
+          TG,H1     A1,0,A0          . RECORD TO LARGE
+          L,H1      A1,0,A0           . GET ACTUAL RECORD SIZE    
+          S         A1,USESIZ         . SAVE RECORD SIZE    
+          TZ        SAR               . IS RECORD TO BE MOVED     
+          LMJ       X11,RSM          . YES
+          SZ        PF  
+          J         LRERUN           . CHECK FOR RERUN AND EXIT   
+RSIO2     TNZ       RW                . HAS RECORD BEEN WRITTEN   
+          J         RSIO3             . NO
+          LMJ       X11,WRSW          . WRITE FASTRAND
+RSIO3     LMJ       X11,RSF           . READ FASTRAND 
+          J         RSE2              . ERROR   
+          J         REOF              . EOF     
+          L         A0,BUFF1          . GET BUFFER LOCATION 
+          L,H1      A1,0,A0           . GET BLOCK RECORD COUNT    
+          S         A1,BRC            .   
+          SZ        BRP               . CLEAR BLOCK RECORDS PROCESSED   
+          SZ        RW               .    
+          A,U       A0,1              .   
+          S         A0,RECLOC         . SET RECORD LOCATOR  
+          A,U       A0,1             .    
+          TNZ       SAR              . SAME AREA
+          S         A0,USELOC         . UPDATE USER LOCATOR 
+          J         RSIO1             .   
+REOF      S         R3,EOF            . SET EOF FLAG  
+          S         R3,OUTM           . SET OUTPUT MODE FLAG
+          SZ        STAT             . CLEAR IO STATUS
+          SZ        BRP               .   
+          L         A0,BUFF1         . GET BUFFER LOCATION  
+          A,U        A0,1            .    
+          S         A0,RECLOC        .    
+          TZ        SAR              . USER RECORD AREA     
+          J         $+3              .    
+          A,U       A0,1             .    
+          S         A0,USELOC        .    
+          L         X11,PEXIT         .   
+          J         0,X11             . EOF RETURN    
+RSIOD     LMJ       X11,WRSD          .   
+          J         RSIO1             .   
+          J         REOF             . END OF FILE    
+/ .   
+.     
+.         WSF - WRITE FASTRAND
+.     
+WSF.  
+          TNZ       BUFF2             . DOUBLE BUFFERING    
+          J         WSFW              . NO - GO TO WRITE AND WAIT 
+          TP        FCT+3             . PREVIOUS IO DONE    
+          ER        WAIT$             .   
+          L         A0,STAT           . GET IO STATUS 
+          JNZ       A0,0,X11          . ERR RETURN    
+          TNZ       WIO               . IO OUTSTANDING
+          J         WSF1              . NO
+          L         A0,BLKSIZ         . GET PREVIOUS BLOCK SIZE   
+          A,U       A0,27             . COMPUTE LENGTH IN SECTORS 
+          DSL       A0,36             .   
+          DI,U      A0,28             .   
+          A         A0,FADD           . UPDATE FASTRAND SECTOR ADDRESS  
+          S         A0,FADD           .   
+          J         WST1              . GO INITIATE NEXT WRITE    
+WSF1      S         R3,WIO            . SET IO OUTSTANDING FLAG   
+          J         WST1              . GO INITIATE NEXT WRITE    
+.     
+.         WSFW  WRITE FASTRAND AND WAIT   
+.     
+WSFW. 
+          L         A0,BUFF1          . GET BUFFER LOCATION 
+          L,H2      A1,0,A0           . GET BLOCK LENGTH    
+          S         A1,BLKSIZ         . SET IN IO PACKET    
+          S         A0,BLKADD         . SET IN IO PACKET    
+          L,U       A0,010            .   
+          S         A0,FUNC           . SET WRITE FUNCTION IN PACKET    
+          L         A0,X10            .   
+          ER        IOW$              . WRITE BLOCK   
+          L         A0,STAT           . GET IO STATUS 
+          JNZ       A0,0,X11         . ERR RETURN     
+          L         A0,BLKSIZ         . GET BLOCK SIZE
+          A,U       A0,27             . COMPUTE LENGTH IN SECTORS 
+          DSL       A0,36             .   
+          DI,U      A0,28             .   
+          A         A0,FADD           . UPDATE FASTRAND SECTOR ADDRESS  
+          S         A0,FADD           .   
+          J         2,X11             . NORMAL RETURN 
+.     
+.         WST - WRITE TAPE    
+.     
+WST.  
+          TNZ       BUFF2             . DOUBLE BUFFERING    
+          J         WSTW              . NO - GO WRITE AND WAIT    
+          TP        FCT+3             . PREVIOUS IO DONE    
+          ER        WAIT$             . NO
+          L         A0,STAT           . GET IO STATUS 
+          JZ        A0,WST1           . JUMP IF IO STATUS NOT ZERO
+          TNE,U     A0,2              . END OF TAPE   
+          J         1,X11             . EOT RETURN    
+          J         0,X11             . ERR RETURN    
+WST1      L         A0,BUFF           . GET BUFFER LOCATOR  
+          L,H2      A1,0,A0          . GET BLOCK LENGTH     
+         TNZ    TAPE    
+         J       $+3    
+         JNB      A1,$+2
+         A,U     A1,1   
+          S         A1,BLKSIZ        . SET IN IO PACKET     
+          S         A0,BLKADD         . SET IN IO PACKET    
+          SSC       A0,18             . ROTATE BUFFERS
+          S         A0,BUFF           . SAVE BUFFER LOCATOR 
+          L,U       A0,010            .   
+          S         A0,FUNC           . SET WRITE FUNCTION IN PACKET    
+          L         A0,X10            .   
+          ER        IO$               . WRITE BLOCK   
+          J         2,X11             . NORMAL RETURN 
+.     
+.         WSTW - WRITE TAPE AND WAIT
+.     
+WSTW. 
+          L         A0,BUFF1          . GET BUFFER LOCATOR  
+          L,H2      A1,0,A0           . GET BLOCK LENGTH    
+         JNB     A1,$+2 
+         A,U     A1,1   
+          S         A1,BLKSIZ         . SET IN IO PACKET    
+          S         A0,BLKADD         . SET IN IO PACKET    
+          L,U       A0,010            .   
+          S         A0,FUNC           . SET WRITE FUNCTION IN PACKET    
+          L         A0,X10            .   
+          ER        IOW$              . WRITE BLOCK   
+          L         A0,STAT           . GET IO STATUS 
+          JZ        A0,2,X11          . NORMAL RETURN 
+          TNE,U     A0,2              . END OF TAPE   
+          J         1,X11             . EOT RETURN    
+          J         0,X11             . ERR RETURN    
+.     
+.         RSF       READ FASTRAND   
+.     
+RSF.  
+          TNZ       BUFF2             . DOUBLE BUFFERING    
+          J         RSFW              . NO - GO TO READ AND WAIT  
+          TP        FCT+3             . PREVIOUS IO DONE    
+          ER        WAIT$             .   
+          L         A0,BUFF2         .    
+          L         A0,0,A0          . GET FIRST WORD OF BLOCK    
+          TNE       A0,('EOF@@@')    . END OF FILE    
+          J         1,X11            . YES
+          L         A0,FADD          .    
+          S         A0,FBC           . SAVE FASTRAND ADDRESS
+          L         A0,STAT          . GET IO STATUS  
+          JZ        A0,RSF1          . ZERO STATUS    
+          TE,U      A0,05            . 05 STATUS
+          J         0,X11            . NO - ERROR     
+          L         A1,BUFF2         . GET BUFFER LOCATION  
+          L         A2,BLKRD         . ACTUAL WORDS READ    
+          JZ        A2,0,X11         . ERROR IF NO WORDS READ     
+          TLE,H2    A2,0,A1          . COMPLETE BLOCK READ  
+          J         0,X11            . NO - ERROR     
+RSF1      L         A0,BUFF2         . GET BUFFER LOCATION  
+          L,H2      A0,0,A0           . GET BLOCK LENGTH    
+          A,U       A0,27             . COMPUTE LENGTH IN SECTORS 
+          DSL       A0,36             .   
+          DI,U      A0,28             .   
+          A         A0,FADD           . UPDATE FASTRAND SECTOR ADDRESS  
+          S         A0,FADD           .   
+        J       RST2    
+.     
+.         RSFW - READ FASTRAND AND WAIT   
+.     
+RSFW. 
+          L         A0,BUFF1          . GET BUFFER LOCATOR  
+          S         A0,BLKADD         . SET IN IO PACKET    
+          L         A0,MINBLK         . GET BLOCK LENGTH    
+          S         A0,BLKSIZ         . SET IN IO PACKET    
+          L,U       A0,020            .   
+          S         A0,FUNC           . SET READ FUNCTION IN PACKET     
+          L         A0,X10            .   
+          ER        IOW$              . READ BLOCK    
+          L         A0,BUFF1         .    
+          L         A0,0,A0          . GET FIRST WORD OF BLOCK    
+          TNE       A0,('EOF@@@')    . END OF FILE    
+          J         1,X11            . YES
+          L         A0,FADD          .    
+          S         A0,FBC           . SAVE ADDRESS   
+          L         A0,STAT           . GET IO STATUS 
+          JZ        A0,RSFW1         . ZERO STATUS    
+          TE,U      A0,05            . 05 STATUS
+          J         0,X11            . NO - ERROR     
+          L         A1,BUFF1         . GET BUFFER LOCATION  
+          L         A2,BLKRD         . ACTUAL WORDS READ    
+          JZ        A2,0,X11         . ERROR IF NO WORDS READ     
+          TLE,H2    A2,0,A1          . COMPLETE BLOCK READ  
+          J         0,X11            . NO - ERROR     
+RSFW1     L         A0,BUFF1         . GET BUFFER LOCATION  
+          L,H2      A0,0,A0           . GET BLOCK LENGTH    
+          A,U       A0,27             . COMPUTE LENGTH IN SECTORS 
+          DSL       A0,36             .   
+          DI,U      A0,28             .   
+          A         A0,FADD           . UPDATE FASTRAND SECTOR ADDRESS  
+          S         A0,FADD           .   
+          J         2,X11             .   
+.     
+.         RST - READ TAPE     
+.     
+RST.  
+          TNZ       BUFF2             . DOUBLE BUFFERING    
+          J         RSTW              . NO - GO READ AND WAIT     
+          TP        FCT+3            . PREVIOUS I/ DONE     
+          ER        WAIT$             . NO
+          L         A0,STAT           . GET IO STATUS 
+          JZ        A0,RST1           .   
+          TNE,U     A0,1              . END OF FILE   
+          J         1,X11             . EOF RETURN    
+          TE,U      A0,04            . FRAME COUNT ERR
+          J         0,X11            . NO - ERR RETURN
+          L         A1,BUFF2         . GET BUFFER LOCATION  
+          L         A2,BLKRD         . ACTUAL WORDS READ    
+          JZ        A2,0,X11         . ERROR IF NO WORDS READ     
+RST1     L         A0,BUFF2   
+         S         A0,BLKADD  
+         SLJ       CHECPT     
+         L          A0,STAT   
+         JZ         A0,RST2   
+         TNE,U      A0,1
+         J          1,X11     
+         TE,U       A0,4
+         J          0,X11     
+         L          A1,BUFF2  
+         L          A2,BLKRD  
+         JZ         A2,0,X11  
+         TLE,H2     A2,0,A1   
+         J          0,X11     
+RST2     L          A0,BUFF   
+          S         A0,BLKADD         . SET IN IO PACKET    
+          SSC       A0,18             . ROTATE BUFFERS
+          S         A0,BUFF           . SAVE BUFFER LOCATOR 
+          L         A1,MINBLK         . GET BLOCK SIZE
+          S         A1,BLKSIZ         . SET IN IO PACKET    
+          L,U       A0,020            .   
+          S         A0,FUNC           . SET READ FUNCTION IN PACKET     
+          L         A0,X10            .   
+          ER        IO$               . READ BLOCK    
+          J         2,X11             . NORMAL RETURN 
+.     
+.         RSTW - READ TAPE AND WAIT 
+.     
+RSTW. 
+          L         A0,BUFF1          . GET BUFFER LOCATOR  
+          S         A0,BLKADD         . SET IN IO PACKET    
+          L         A0,MINBLK         . GET BLOCK LENGTH    
+          S         A0,BLKSIZ         . SGT IN IO PACKET    
+          L,U       A0,020            .   
+          S         A0,FUNC           . SET READ FUNCTION IN PACKET     
+          L         A0,X10            .   
+          ER        IOW$              . READ BLOCK    
+          L         A0,STAT           . GET IO STAT   
+          TE,016    A0,4
+         JNZ        A0,RSTW1  
+         SLJ       CHECPT     
+         L          A0,STAT   
+         JZ         A0,2,X11  
+RSTW1   TNE,U   A0,1                   . END OF FILE  
+          J         1,X11             . EOF RETURN    
+          TE,U      A0,04            . FRAME COUNT ERR
+          J         0,X11            . NO - ERR RETURN
+          L         A1,BUFF1         . GET BUFFER LOCATION  
+          L         A2,BLKRD         . ACTUAL WORDS READ    
+          JZ        A2,0,X11         . ERROR IF NO WORDS READ     
+          TLE,H2    A2,0,A1          . COMPLETE BLOCK READ  
+          J         0,X11            . NO - ERR RETURN
+          J         2,X11            . NORMAL RETURN  
+.     
+.         WFW  - WRITE FASTRAND AND WAIT  
+.     
+WFW       S         A0,BLKSIZ           . SET ACCES WORD COUNT    
+          S         A1,FADD             . SET FASTRAND ADDRESS    
+          L,U       A0,010              . 
+          S         A0,FUNC             . 
+          L         A0,BUFF1            . 
+          S         A0,BLKADD           . SET BUFFER LOCATION     
+          L         A0,X10              . 
+          ER        IOW$                . WRITE FASTRAND    
+          L         A0,STAT             . GET STATUS CODE   
+          JZ        A0,1,X11            . NORMAL RETURN     
+          J         0,X11               . ERROR RETURN
+.     
+.         RFW  - READ FASTRAND AND WAIT   
+.     
+RFW       S         A0,BLKSIZ           . SET ACCESS WORD COUNT   
+          S         A1,FADD             . SET FASTRAND ADDRESS    
+          S         A1,FBC           . SAVE FASTRAND ADDRESS
+          L,U       A0,020              . 
+          S         A0,FUNC             . 
+          L         A0,BUFF1            . 
+          S         A0,BLKADD           . SET BUFFER LOCATION     
+          L         A0,X10              . 
+          ER        IOW$                . READ FASTRAND     
+          L         A0,STAT             . GET STATUS CODE   
+          JZ        A0,2,X11          . NORMAL RETURN 
+          TNE,U     A0,05             . AN 05 STATUS  
+          J         1,X11             . YES     
+          J         0,X11               . ERROR RETURN
+.     
+.         RTBW  - READ TAPE BACKWARD AND WAIT   
+.     
+RTBW      L         A0,MAXBLK         . SET UP ACCESS WORD  
+         JNB     A0,$+2 
+         A,U     A0,1   
+          LXI       A0,A0             .   
+          A,U       A0,0,*0             . ADD DECREMENT INDICATOR 
+          SSC       A0,18               . 
+          A         A0,BUFF1            . 
+          ANA,U     A0,1              .   
+          S         A0,FCT+4            . SET ACCESS WORD   
+          L,U       A0,021              . 
+          S         A0,FUNC             . SET FUNCTION CODE 
+          L         A0,X10              . 
+          ER        IOW$                . READ TAPE BACKWARD
+          L         A0,STAT             . GET STATUS CODE   
+          JNZ       A0,RTB1           . ZERO STATUS   
+          L         A0,BLKADD         . YES     
+          ANA       A0,BLKRD          . LOCATE BLOCK IN BUFFER    
+          A,U       A0,1              .   
+          S         A0,SREV           .   
+          J         2,X11     
+RTB1      TNE,U     A0,01             . END OF FILE   
+          J         1,X11               . EOF RETURN  
+          J         0,X11               . ERROR RETURN
+.     
+.         WTM  - WRITE TAPE END-OF-FILE MARK    
+.     
+WTM       L,U       A0,011              . 
+          S         A0,FUNC             . SET FUNCTION CODE 
+          L         A0,X10              . 
+          ER        IOW$                . WRITE EOF MARK    
+          L         A0,STAT             . GET STATUS CODE   
+          JZ        A0,2,X11            . NORMAL RETURN     
+          TE,U      A0,2
+          J         0,X11               . ERROR RETURN
+          SZ        STAT
+          J         1,X11        . EOT RETURN   
+/.    
+.     
+.         COMPATABLE FORMATS FORM01 FORM02 FORMM03    
+.     
+.     
+.         OPEN OUTPUT   
+.     
+LOOIBM    L         A4,IBM             . GET FORMAT INDICATOR     
+          TZ        VAR                . VARIABLE RECORDS   
+          LMJ       A3,BCDZ            . YES    
+          SZ        BRC                .  
+LO1       TNE,U     A4,1               . FORM01 
+          J         LO2                . YES    
+          L         A3,('1HDR  ')      .  
+          LMJ       X11,IBMLAB         . SET UP LABEL 
+          USEP      BSBFO,SOP,ASBFO    .  BEGIN FILE OUTPUT PROC  
+LO3       L         A4,IBM             .  
+          LMJ       A3,WTLAB           . WRITE LABEL  
+          TE,U      A4,2               . FORM02 
+          J         LO2                . NO     
+          LMJ       X11,WTM            . WRITE TAPE MARK    
+          J         WSE3              . TAPE ERROR    
+          J         $+1                . IGNORE EOT   
+LO2       L         X11,RETURN         .  
+          J         0,X11              . RETURN 
+WTLAB     L,U       A1,LABEL           .  
+          L,U       A2,14              .  
+          LMJ       X11,WTTAP+1       . WRITE LABEL   
+          J         WSE3              . TAPE ERROR    
+          J         0,A3               . IGNORE EOT   
+          J         0,A3               . RETURN 
+IBMLAB    L,U       A0,LABEL           . SET UP STANDARD LABEL    
+          LXI,U     A0,1              .   
+          L,U       A1,('      ')      .  
+          L,U       R1,14             .   
+          BT        A0,0,*A1           .  
+          AN,U      A0,1              .   
+          S         A3,LABEL  
+          L         A1,('&&&&&&')      .  
+          S,S3      A1,0,A0            .  
+          S,H2      A1,0,A0            .  
+          J         0,X11     
+/.    
+.     
+.         OPEN INPUT    
+.     
+LOIIBM    L         A4,IBM             . GET FORMAT INDICATOR     
+          TZ        FTP                . MOVE REQUEST 
+          J         IBME1              . YES ERROR OFF
+          L         A1,USEL            . SET UP PARAMETERS  
+          L,U       A0,0               . TO MOVE FROM BUFFER
+          LXI,U     A0,1               .  
+          LXI,U     A1,1               .  
+          DS        A0,VART            . TO SAR 
+          LXM       A1,BUFF1           .  
+          DS        A0,VARF            .  
+LI1       TNE,U     A4,1               . FORM01 
+          J         LI3                . YES    
+          LMJ       A3,RLIBM           . READ LABEL   
+          TNZ       SLAB               . STANDARD LABEL     
+          J         LI2                . NO     
+          L         A1,LABEL           .  
+          SSL       A1,12              .  
+          TE        A1,('@@1HDR')      .  
+          J         IBME4              . NO RIGHT LABEL     
+LI2       USEP      BSBFI,SIP,ASBFI    .  BEGIN FILE INPUT PROC   
+LI4       L         A4,IBM    
+          TE,U      A4,2               . FORM02 
+          J         LI3                . NO     
+          L,U       A2,14             .   
+          LMJ        X11,RDTAP        . MOVE OVER TAPE MARK 
+          J         RSE3               . TAPE ERROR   
+          J         $+2               .   
+          J         IBME4             . FORMAT ERROR  
+LI3       L         X11,RETURN
+          J         0,X11     
+RLIBM     L,U       A1,LABEL           .  
+          L,U       A2,14              .  
+          LMJ       X11,RDTAP+1        . READ LABEL   
+          J         RSE3              . TAPE ERROR    
+          J         IBME4             . FORMAT ERROR  
+          J         0,A3               .  
+/.    
+.     
+.         CLOSE FILE    
+.     
+LCFIBM .    
+          TNZ       OUT                . OPENED FOR OUTPUT  
+          J         LCFI               . NO     
+LCFO      TNZ       BRC                . ANY RECORDS WRITTEN
+          J         LCF1               . NO     
+          TNZ       PAD 
+          J         PAD2
+          L         A1,BRC    
+          DSL       A1,36     
+          DI,U      A1,6              . CONVERT CHAR TO WORDS     
+          JZ        A2,PAD1           . DON,T   UNPAD 
+          L         A4,A1     
+          A         A1,BUFF1  
+          L,U       A3,046    
+          AN,U      A2,1
+          LMJ       X11,BWRIT,A2    
+          L         A1,A4     
+          A,U       A1,1
+PAD1      L         A2,A1     
+          LMJ       X11,WTTAP 
+          J         WSE3              . ERROR RETURN  
+          J         $+2               . END OF TAPE   
+          J         LCF1              . NORMAL  
+          LMJ       A1,IBMCLR 
+          J         LCF1
+PAD2      L         A1,MINREC         . CONSTRUCT ALL 9,S RECORD  
+          DSL       A1,36              .  
+          DI,U      A1,6               .  
+          L         R1,MAXREC         . REPEAT COUNT  
+          L         A1,USEL            .  
+          LXI,U     A1,1               .  
+          L,U       A3,('999999')      .  
+          BT        A1,0,*A3           .  
+          TNZ       VAR                . VARIABLE RECORD    
+          J         LCFOW     
+          L,U       A3,077             .  
+          AN,U      A1,1               .  
+          EX        SREM,A2            . SET STOP CODE
+LCFOW     L         A0,MINREC         .   
+          L         A1,P              .   
+          S         A1,FBC            .   
+          LMJ       X11,LWS$           . WRITE RECORD 
+          +         0,$+1              .  
+          L         A1,FBC            .   
+          S         A1,P              .   
+          L         A0,BRC             .  
+          TE        A0,MINREC          . BLOCK WRITTEN
+          J         LCFOW             .   
+          TP         FCT+3            .   
+          ER        WAIT$             .   
+LCF1      L         A4,IBM            . GET FORMAT CODE     
+          TNE,U     A4,1              . FORM01  
+          J         LCF2               . YES    
+          LMJ       X11,WTM            . WRITE TAPE MARK    
+          J         WSE3              . TAPE ERROR    
+          J         $+1 
+          L         A3,('1EOF  ')      .  
+          LMJ       X11,IBMLAB         . SET UP LABEL 
+          USEP      BSEFO,SOP,ASEFO    .  END  FILE OUTPUT PROC   
+          LMJ       A3,WTLAB  
+LCF2      LMJ       X11,WTM            . WRITE TAPE MARK    
+          J         WSE3              . TAPE ERROR    
+          J         $+1                .  
+          LMJ       X11,WTM   
+          J         WSE3              . TAPE ERROR    
+          J         $+1 
+          L,U       A0,051             .  
+          S         A0,FUNC           .   
+          L         A0,X10               .
+          ER        IOW$              . BACKSPACE     
+          L         A0,X10             .  
+          L         A1,REW             .  
+          LMJ       X11,LREW           . CHECK FOR REWIND   
+          J         LCFEXIT            .  
+LCFI      TNZ       EOF               . AUTOMATIC EOF 
+          J          LCFI4            .   
+LCFI1     L         A4,IBM            .   
+          TNE,U     A4,1              . FORM01  
+          J         LCFI4             . YES     
+          TNZ       SLAB               . STANDARD LABEL     
+          J         LCFI3              . NO     
+          L         A1,LABEL  
+          SSL       A1,12              .  
+          TE        A1,('@@1EOF')      .  
+          J         IBME4              . NOT RIGHT LABEL    
+LCFI3     USEP      BSEFI,SIP,ASEFI   . EOF INPUT PROCEDURES
+LCFI2     L,U       A2,14              .  
+          LMJ       X11,RDTAP         . MOVE OVER TAPE MARK 
+          J         RSE3              . TAPE ERROR    
+          J         $+2                . EOF - EXPECTED     
+          J         IBME4             . FORMAT ERROR  
+LCFI4      L        A1,REW             .  
+          L         A0,X10             .  
+          LMJ       X11,LREW           . CHECK FOR REWIND   
+          J         LCFEXIT            .  
+SREM      S,S6      A3,0,A1           .   
+          S,S1      A3,0,A1           .   
+          S,S2      A3,0,A1           .   
+          S,S3      A3,0,A1           .   
+          S,S4      A3,0,A1           .   
+          S,S5      A3,0,A1           .   
+/.    
+.     
+.         CLOSE REEL    
+.     
+LCRIBM    L         A4,IBM             .  
+          L         A0,REEL            . INCREMENT REEL COUNT     
+          A,U       A0,1               .  
+          S         A0,REEL            .  
+          TNZ       OUT                . OPENED FOR OUTPUT  
+          J         LCRI               . NO     
+LCRO      TNE,U     A4,1               . FORM01 
+          J         LCRO1              . YES    
+          LMJ       X11,WTM            . WRITE TAPE MARK    
+          J         WSE3              . TAPE ERROR    
+          J         $+1                .  
+          L         A3,('1EOR  ')      .  
+          LMJ       X11,IBMLAB         . SET UP LABEL 
+          USEP      BSERO,SOP,ASERO    .  END REEL OUTPUT PROC    
+          LMJ       A3,WTLAB           . WRITE LABEL  
+LCRO1     LMJ       X11,WTM           . WRITE TAPE MARK     
+          J         WSE3              . TAPE ERROR    
+          J         $+1 
+          LMJ       X11,WTM            . WRITE TAPE MARK    
+          J         WSE3              . TAPE ERROR    
+          J         $+1                .  
+          L         A1,EOT             .  
+          AN,U      A1,1               .  
+          L         A0,X10             .  
+        LXI,016 A0,0    
+          ER        TSWAP$             . SWAP TAPE    
+          LMJ       X11,LRERUN         . CHECK FOR RERUN    
+          SZ        EOT               . CLEAR EOT FLAG
+          L         A4,IBM             .  
+          TNE,U     A4,1               . FORM01 
+          J         LO2                . YES    
+          L         A3,('1HDR  ')      .  
+          LMJ       X11,IBMLAB         . SET UP LABEL 
+          USEP      BSBRO,SOP,ASBRO    .  BEGIN REEL OUTPUT PROC  
+          J         LO3                .  
+LCRI      TNZ       EOF               .   
+          J         LCRI1             .   
+          SZ        EOF               .   
+          L         A4,IBM            .   
+          TNE,U     A4,1              . FORM01  
+          J         LCRI1             . YES     
+          TNZ       SLAB              . STANDARD LABELS     
+          J         LCRI2             . NO
+          L         A1,LABEL          .   
+          SSL       A1,12             .   
+          TE        A1,('@@1EOR')     . ]END OF REEL  
+          J         IBME4             . NOT RIGHT LABEL     
+LCRI2     USEP      BSERI,SIP,ASERI   . EOR INPUT PROCEDURES
+LCRI1     L         A1,EOT            .   
+          AN,U      A1,1               .  
+          L         A0,X10             .  
+        LXI,016 A0,0    
+          ER        TSWAP$             . SWAP TAPE    
+          LMJ       X11,LRERUN         . CHECK FOR RERUN    
+        SZ      DATA    
+          SZ        EOT               . CLEAR EOT FLAG
+          L         A4,IBM             .  
+          TNE,U     A4,1               . FORM01 
+          J         LI3                . YES    
+LCRI4     LMJ       A3,RLIBM  
+          TNZ       SLAB               . STANDARD LABEL     
+          J         LCRI3              . NO     
+          L         A1,LABEL           .  
+          SSL       A1,12              .  
+          TE        A1,('@@1HDR')      .  
+          J         IBME4              . NOT RIGHT LABEL    
+LCRI3     USEP      BSBRI,SIP,ASBRI    .  BEGIN REEL INPUT PROC   
+          J         LI4 
+/.    
+.     
+.         WRITE RECORD  
+.     
+LWSIBM.     
+          TNZ       OUT 
+          J         WSE1               . ERROR FILE NOT OPEN
+          L         A1,0,X11  
+          S         A1,P
+          S         A0,USESIZ          . SAVE RECORD SIZE   
+WIBM      TZ        VAR                . VARIABLE SIZE RECORDS    
+          J         WIBMV              . YES    
+          TE        A0,MINREC          .  
+          J         IBME6              . RECORD SIZE  
+          S         A0,FIXMV+3        . SET CHARACTER COUNT 
+WIBMF     L         A2,BRC             . GET CHAR COUNT     
+          AU        A2,MINREC          . ADD RECORD CHAR SIZE     
+          L         A1,MINBLK          . GETBLOCK CHAR SIZE 
+          TLE       A1,A3              . BLOCK FULL   
+          J         WRITF              . YES    
+WIBMF1    S         A3,BRC             .  
+          DSL       A2,36              . COMPUTE BLOCK
+          DI,U      A2,6              .   
+          A         A2,BUFF1           .  
+          S,H2      A2,FIXMV+2         .  
+          S,S1      A3,FIXMV+2         .  
+          L         A0,USEL           .   
+        SZ,S1   FIXMV+1 
+          S,H2      A0,FIXMV+1        . SET MOVE FROM LOCATION    
+          J         FIXME             .   
+WRITF     DSL       A1,36              .  
+          DI,U      A1,6               .  
+          JZ        A2,$+5            .   
+          A         A1,BUFF1           . NO     
+          L,U       A3,046             .  
+          AN,U      A2,1               .  
+          LMJ       X11,BWRIT,A2       . ZERO FILL LAST WORD
+WRITF1  L       A2,MAXBLK     
+          LMJ       X11,WTTP          . WRITE TAPE    
+          J         WSE3              . TAPE ERROR    
+        J       WFKCLR  
+EOTFK   SZ      BRC     
+          J         WIBMF              .  
+WIBMV     S,H2      A0,FIXMV+3        . RECORD CHAR COUNT   
+          L         A1,MINREC         .   
+          TLE       A1,USESIZ          . RECORD VALID SIZE  
+          J         IBME6              . NO     
+          L         A2,BRC             . GET CHAR COUNT     
+          AU        A2,USESIZ          . ADD RECORD SIZE    
+          L         A1,MINBLK          . GET BLOCK SIZE     
+          TLE       A1,A3              . RECORD FIT IN BLOCK
+          J         WRITV              . NO     
+          J         WIBMF1             .  
+WRITV     L         A2,MAXBLK          .  
+          LMJ       X11,WTTP           . WRITE TAPE   
+          J         WSE3              . TAPE ERROR    
+        J       WVKCLR  
+EOTVK   LMJ     A3,BCDZ 
+          SZ        BRC                .  
+          J         WIBMV+1           .   
+WFKCLR  LMJ     A1,IBMCLR              FIXED LENGTH RECORDS 
+        TNZ     BUFF2                  DOUBLE BUFFERING?    
+        J       EOTFK                  NO 
+        J       WRITF1                 YES
+WVKCLR  LMJ     A1,IBMCLR              VARIABLE LENGTH RECORDS    
+        TNZ     BUFF2                  DOUBLE BUFFERING?    
+        J       EOTVK                  NO 
+        J       WRITV                  YES
+/.    
+.     
+.         READ RECORD   
+.     
+LRSIBM.     
+          TZ        DATA               . DATA FLAG SET
+          J         RIBM               .  
+          SZ        LAB                . CLEAR LAB FLAG     
+          S         R3,DATA            . SET DATA FLAG
+          TNZ       OPT                . FILE OPTIONAL
+          J         $+3                . NO     
+          TNZ       ASG                . IS FILE ASG'D
+          J         IBMEOF             . NO  EOF
+          TZ        VAR               .   
+          LMJ       A3,BCDZ            . CLEAR END OD BUFFER
+          TNZ       BUFF2              . DOUBLE BUFFERING   
+          J         READT              . NO     
+          L         A2,MAXBLK          .  
+          LMJ       X11,RDTAP          . READ BLOCK   
+          J         RSE3               .  
+          J         IBMEFR             . EOF OR EOR   
+          L         A0,BUFF           .   
+          SSC       A0,18             .   
+          S         A0,BUFF           .   
+          TZ        VAR               .   
+          LMJ       A3,BCDZ            . CLEAR END OD BUFFER
+          J         READT              . READ BLOCK   
+RIBM      TZ        VAR                . VARIABLE SIZE RECORDS    
+          J         RIBMV              . YES    
+RIBMF     L         A0,BRC             . GET CHAR COUNT     
+          AU        A0,MINREC          . ADD RECORD CHAR SIZE     
+          L         A2,MINBLK          . GET BLOCK CHAR SIZE
+          TLE       A2,A1              . BLOCK EMPTY  
+          J         READT              . YES    
+          S         A1,BRC    
+          DSL       A0,36              . COMPUTE LOCATION OF RECORD     
+          DI,U      A0,6               .  
+          A         A0,BUFF1           .  
+          S,H2      A0,FIXMV+1         . SET FROM LOCATION  
+          S,S1      A1,FIXMV+1         . FOR THE MOVE 
+          L         A0,MINREC         .   
+          S         A0,FIXMV+3        . SET CHARACTER COUNT 
+        A,016   A0,5    
+        DSA     A0,36   
+        DI,016  A0,6    
+        S       A0,USESIZ     
+          L         A0,USEL           .   
+        SZ,H1   FIXMV+2 
+          S,H2      A0,FIXMV+2        . SET MOVE TO LOCATION
+FIXME     L,U       A0,L$PLMV         .   
+          S,H2      A0,FIXMV          . SET ENTRY     
+FIXMV     LMJ       X11,L$PLMV         . MOVE RECORD FROM   
+          +         077,0,0   
+          +         0,0                .  
+          +         0                  .  
+          J         LRERUN             .  
+READT     L         A2,MAXBLK          . GET BLOCK SIZE     
+          LMJ       X11,RDTP           . READ BLOCK   
+          J         RSE3               . TAPE ERROR   
+          J         IBMEFR             . EOF OR EOR   
+          L         A0,BUFF1           .  
+          S,H2      A0,VARF+1          .  
+          SZ,H2     A0,VARF           .   
+          SZ        BRC                . CLEAR BLOCK CHAR COUNT   
+          J         RIBM               .  
+RIBMV     L         A4,MINBLK          . MAX BLOCKSIZE IN CHAR    
+          DL        A0,VARF            . BLOCK PARAMETERS FOR MOVE FROM 
+          AN        A4,BRC             . CHARACTERS ALREADY PROCESSED   
+          ANU       A4,MINREC          . MAX RECORD IN CHARACTERS 
+          DL        A2,VART            . BLOCK PARAMETERS FOR MOVE TO   
+          JN        A5,$+3             . DO NOT SET MAX RECORD FLAG     
+          S,H2      A4,READV           . SET MAX RECORD FLAG
+          L         A4,MINREC          . PROCESS MAX RECORD SIZE  
+          AN,U      A4,1
+          S         A5,A6     
+          EX        VARL,*A0           . GET CHARACTER
+VARMV1    EX        VARS,*A2           . STORE CHARACTER    
+          TE,016    A5,077             .  END OF RECORD     
+          JGD       A4,VARMV1-1        . NO GET NEXT CHARACTER    
+          JN        A4,READV           . MAYBE NO SENTINEL CHECK FOR ERROR    
+          AN        A4,MINREC          . COMPUTE NEG ACTUAL LENGTH
+          TP        A6  
+          AN        A4,A6     
+          ANU       A4,BRC             . ADD NEG NUMBER OF CHARACTERS   
+          SM        A5,BRC             . ADD CURRENT RECORD TO CHAR PROCESSED 
+          DSA       A4,36     
+          SZ,H2     READV              . CLEAR MAX RECORD FLAG    
+          DI,U      A4,6
+          DS        A0,VARF            . BLOCK PARAMETERS NEXTRECORD TO READ  
+          SM        A4,USESIZ          . STORE USERS REC LENGTH AND ADDRESS   
+          J         LRERUN             . EXIT   
+READV     TZ,U      $                  . MAX RECORD READ    
+          J         IBME5              . YES ERROR    
+          LMJ       A3,BCDZ            . CLEAR END OF BLOCK 
+          J         READT              . READ NEXT BLOCK    
+VARL      L,S1      A5,0,A1            . REMOTE LOAD  
+          L,S2      A5,0,A1   
+          L,S3      A5,0,A1   
+          L,S4      A5,0,A1   
+          L,S5      A5,0,A1   
+          J         $+1 
+          LXM,U     A0,0               . RESET TO S1  
+          L,S6      A5,0,*A1  
+          J         VARMV1    
+VARS      S,S1      A5,0,A3            . REMOTE STORE 
+          S,S2      A5,0,A3   
+          S,S3      A5,0,A3   
+          S,S4      A5,0,A3   
+          S,S5      A5,0,A3   
+          J         $+1 
+          LXM,U     A2,0               . RESET TO S1  
+          S,S6      A5,0,*A3  
+          J         VARMV1+1  
+IBMEFR    L         A4,IBM            .   
+          TNE,U      A4,1             . FORM01  
+        J       IBMCOM  
+          LMJ       A3,RLIBM           . READ LABEL   
+          TNZ       SLAB               . STANDARD LABELS    
+          J         IBMCOM             .  
+          L         A1,LABEL           .  
+          SSL       A1,12              .  
+          TNE       A1,('@@1EOR')      . END OF REEL  
+        J       IBMENR  
+          TE        A1,('@@1EOF')      . END OF FILE  
+          J         IBME4             .   
+IBMEOF    L,U       R3,1               .  
+          S         R3,EOF            . SET EOF FLAG  
+          L         X11,PEXIT          .  
+          J         0,X11              . EOF RETURN   
+IBMEOR  TE,U    A0,027  
+        J       IBMCOM  
+IBMENR  L,U     R3,1    
+          S         R3,EOF            . SET EOF FLAG  
+          LMJ       A1,IBMCLR         . CLOSE REEL    
+          SZ        DATA                . CLEAR DATA FLAG   
+          J         LRSIBM            .   
+IBMCOM    DL        A0,0,X10  
+          DS        A0,IBMCM  
+          C$OM      IBMC               . ASK OPERATOR 
+          L,S1      A0,IBMCA           . IF EOF OR EOR
+          TE,U      A0,013             .  
+          J         IBMEOR            . EOR     
+        J       IBMEOF                 EOF
+IBMC      C$OMPK    48,IBMCM,1,IBMCA
+IBMCM     '              CLOSE FILE OR REEL (TYPE F OR R)  '
+IBMCA     '      '
+IBMCLR    L         A0,P               . SAVE P 
+          DS        A0,FBC             .  
+          L,U       A0,0               .  
+          LMJ       X11,LCR$           . CLOSE REEL   
+          DL        A0,FBC             .  
+          S         A0,P               .  
+          J         0,A1               . RETURN 
+/.    
+.     
+.         SUBROUTINES   
+.     
+RDTP      TNZ       BUFF2              . DOUBLE BUFFERING   
+          J         RDTAP              . NO     
+          TP        FCT+3              . PREVIOUS IO DONE   
+          ER        WAIT$              . NO     
+          L         A0,STAT            .  
+          TE,U      A0,4              . CHAR COUNT    
+          JNZ       A0,RDTP1           . STATUS ZERO  
+         L         A0,BUFF2   
+         S         A0,BLKADD  
+         SLJ       CHECPT     
+         L          A0,STAT   
+         TE,U       A0,4
+         JNZ        A0,RDTP1  
+          L         A1,BUFF            . YES    
+          S         A1,BLKADD          .  
+          SSC       A1,18              . SWITCH BUFFERS     
+          S         A1,BUFF            .  
+          S         A2,BLKSIZ          .  
+          L         A0,BLKRD  
+          MSI,U     A0,6
+          S         A0,MINBLK 
+          L,U       A0,020             .  
+          S         A0,FUNC            .  
+          L         A0,X10             .  
+          ER        IO$                . READ BLOCK   
+          J         2,X11              . RETURN 
+RDTAP     L         A1,BUFF1           . READ BLOCK FROM TAPE     
+          S         A1,BLKADD          .  
+          S         A2,BLKSIZ         .   
+          L,U       A0,020             .  
+          S         A0,FUNC            .  
+          L         A0,X10             .  
+          ER        IOW$               .  
+          L         A0,BLKRD  
+          MSI,U     A0,6
+          S         A0,MINBLK 
+          L         A0,STAT            .  
+          TE,016    A0,4
+         JNZ        A0,RDTP1  
+         SLJ       CHECPT     
+         L          A0,STAT   
+        JZ      A0,2,X11
+RDTP1     TNE,U     A0,1               . EOF STATUS   
+          J         1,X11              . EOF RETURN   
+          TNE,U     A0,4              . CHAR COUNT    
+          J         2,X11             . ACCEPT BLOCK  
+          J         0,X11              . ERROR RETURN 
+WTTP      TNZ       BUFF2              . DOUBLE BUFFERING   
+          J         WTTAP              . NO     
+          TP        FCT+3              . PREVIOUS IO DONE   
+          ER        WAIT$             . NO
+          L         A0,STAT            .  
+          JNZ       A0,WTTP1           . STATUS ZERO  
+          L         A1,BUFF            . YES    
+          S         A1,BLKADD          .  
+          SSC       A1,18              . SWITCH BUFFERS     
+          S         A1,BUFF            .  
+          S         A2,BLKSIZ          .  
+          L,U       A0,010             .  
+          S         A0,FUNC            .  
+          L         A0,X10             .  
+          ER        IO$                . WRITE BLOCK  
+          J         2,X11              . RETURN 
+WTTAP     L         A1,BUFF1           . WRITE BLOCK TO TAPE
+          S         A1,BLKADD          .  
+          S         A2,BLKSIZ          .  
+          L,U       A0,010             .  
+          S         A0,FUNC            .  
+          L         A0,X10             .  
+          ER        IOW$               .  
+          L         A0,STAT            .  
+          JZ        A0,2,X11           . NORMAL RETURN
+WTTP1     TNE,U     A0,2               . EOT STATUS   
+          J         1,X11              . EOT RETURN   
+          J         0,X11              . ERROR RETURN 
+BCDZ      L         A0,BUFF1           .  
+          A         A0,MAXBLK          . ADD BLOCK LENGTH   
+          AN        A0,MAXREC          .  
+          LXI,U     A0,1               .  
+          L,U       A1,('&&&&&&')      .  
+          L         R1,MAXREC          .  
+          BT        A0,0,*A1           . BCD ZERO FILL END OF BUFFER    
+          J         0,A3               .  
+          END .   

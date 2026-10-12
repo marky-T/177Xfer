@@ -1,0 +1,301 @@
+@RUN,M/T   LRPA01,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@ . 
+@MSG       *********************************************************
+@MSG       **                                                     **
+@MSG       **                 E/G PRIMES VARIABLES                **
+@MSG       **                                                     **
+@MSG       **  Envoi premiers Rappels Primes Variables via Email  **
+@MSG       **  -------------------------------------------------  **
+@MSG       **                                                     **
+@MSG       **                    -  LRPA01  -                     **
+@MSG       **                                                     **
+@MSG       **     1. TEST FICHIER EMAIL RESEAU VIDE               **
+@MSG       **     2. CREATION FICHIER EMAIL MAINFRAME SUR BASE    **
+@MSG       **         FICHIER EMAIL RESEAU                        **
+@MSG       **     3. LONGUEUR FICHIER 1000 VERS 158 CARACTERES    **
+@MSG       **     4. TRI FICHIER SUR NO INTERVENANT               **
+@MSG       **     5. MISE A 2 DES PARAMETRES POUR LE RUN          **
+@MSG       **     6. GENERATION PARAMETRES POUR LE RUN            **
+@MSG       **     7. CREATION FICHIER RAPPELS POUR ENVOI VIA EMAIL**
+@MSG       **     8. CLOTURE DES PARAMETRES DU RUN                **
+@MSG       **     9. TEST FICHIER RAPPELS VIDE                    **
+@MSG       **    10. TRANSFERT FICHIER RAPPELS CSV VERS BIZTALK   **
+@MSG       **    11. SAUVEGARDE DES FICHIERS                      **
+@MSG       **                                                     **
+@MSG       *********************************************************
+@ . 
+@ . LE 09/03/2022 : CREATION DU RUN 
+@ . 
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.LRPA01  
+@TIME   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.LRPA01   
+@TIME   
+@ . 
+@MSG       TRANSFERT PROGRAMMES 
+@ . 
+@ASG,T     LRPA01.,F/0/POS/4000 
+@COPY,A    APRD*BABS.UGB030,LRPA01.UGB030   
+@COPY,A    AFLINC*REP$ABS.SWB003,LRPA01.SWB003  
+@COPY,A    AFLINC*REP$ABS.SWB004,LRPA01.SWB004  
+@COPY,A    AFLINC*REP$ABS.SWB018,LRPA01.SWB018  
+@COPY,A    AFLINC*REP$ABS.LRB071,LRPA01.LRB071  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ . ================================================================
+@LAB010: MSG 010. TEST FICHIER EMAIL RESEAU VIDE
+@ . ============================================================== SYB003   
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE LRPA01*FPV-EMAIL   
+LABEL LAB777
+@EOF
+@ERS TPF$.  
+@ . 
+@ . ==============================================================  
+@LAB020: MSG 020. CREAT FICH EMAIL MAINFRAME SUR BASE FICH RESEAU   
+@ . ============================================================== UGB030   
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ASG,A    LRPA01*FPV-EMAIL. 
+@USE      IRESEAU,LRPA01*FPV-EMAIL. 
+@ .   Longeur record : 158 caractères   
+@ . 
+@DELETE,C LRPA01*IPV-EMAIL. 
+@CAT,P    LRPA01*IPV-EMAIL.,F/0/POS/4000
+@ASG,A    LRPA01*IPV-EMAIL. 
+@USE      OFICH,LRPA01*IPV-EMAIL.   
+@ .   Longueur record : 1000 caractères (Description fichier contrôle   
+@ .               F999CONTROLE.LRPA01(158 caractères) + blancs) 
+@ . 
+@XQT      LRPA01.UGB030 
+@ADD      F999CONTROLE.LRPA01   
+@ . 
+@FREE     LRPA01*FPV-EMAIL. 
+@FREE     LRPA01*IPV-EMAIL. 
+@ERS  TPF$. 
+@TIME   
+@ . 
+@ . =============================================================   
+@LAB025: MSG 025. LONGUEUR FICHIER 1000 vers 158 CARACTERES 
+@ . ========================================================= CFH-COPY  
+@ADD SYS$*RUNS.REPRISE  
+LAB025  
+@ . 
+@ASG,A     LRPA01*IPV-EMAIL.
+@USE       INA,LRPA01*IPV-EMAIL.
+@ . 
+@DELETE,C  LRPA01*IPVMAIL.  
+@CAT,P     LRPA01*IPVMAIL.,F/0/POS/4000 
+@ASG,A     LRPA01*IPVMAIL.  
+@USE       OUTA,LRPA01*IPVMAIL. 
+@ . 
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      INA,1000,10  
+OUTPUT     OUTA,158,10  
+FIELDIN    1,158
+FIELDOUT   1,158
+@EOF
+@XQT       TPF$.CFH-COPY
+@ERS       TPF$.
+@FREE      LRPA01*IPV-EMAIL.
+@FREE      LRPA01*IPVMAIL.  
+@ERS TPF$.  
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB026: MSG 026. TRI FICHIER PAR NO INTERVENANT
+@ . ============================================================== SORT 
+@ADD SYS$*RUNS.REPRISE  
+LAB026  
+@ . 
+@ASG,A     LRPA01*IPVMAIL.  
+@USE       INP,LRPA01*IPVMAIL.  
+@ . 
+@DELETE,C  LRPA01*IPVEMAIL. 
+@CAT,P     LRPA01*IPVEMAIL.,F/0/POS/4000
+@ASG,A     LRPA01*IPVEMAIL. 
+@USE       OUT,LRPA01*IPVEMAIL. 
+@ . 
+@SORT,ES
+FILEIN=INP  BLOCK=10
+FILEOUT=OUT BLOCK=10
+RSZ=158 
+KEY=1,8,CH,A,1  . No Intervenant
+@EOF
+@ . 
+@ERS TPF$.  
+@ . 
+@FREE      LRPA01*IPVMAIL.  
+@FREE      LRPA01*IPVEMAIL. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB030: MSG 030. MISE A 2 DES PARAMETRES POUR LE RUN   
+@ . ============================================================== SWB018   
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@XQT,R     LRPA01.SWB018
+LRPA01  
+@ . 
+@DELETE,C  LRPA01*IMP-SWB018-1. 
+@CAT,P     LRPA01*IMP-SWB018-1.,F///1000
+@ASG,A     LRPA01*IMP-SWB018-1. 
+@COPY,C    PRINT,LRPA01*IMP-SWB018-1.   
+@DELETE,C  PRINT
+@ . 
+@FREE      LRPA01*IMP-SWB018-1. 
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB035: MSG 035. GENERATION DES PARAMETRES POUR LE RUN 
+@ . ============================================================== SWB003   
+@ADD SYS$*RUNS.REPRISE  
+LAB035  
+@ . 
+@XQT,R     LRPA01.SWB003
+LRPA01  
+@ . 
+@DELETE,C  LRPA01*IMP-SWB003-1. 
+@CAT,P     LRPA01*IMP-SWB003-1.,F///1000
+@ASG,A     LRPA01*IMP-SWB003-1. 
+@COPY,C    PRINT,LRPA01*IMP-SWB003-1.   
+@DELETE,C  PRINT
+@ . 
+@FREE      LRPA01*IMP-SWB003-1. 
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB040: MSG 040. CREATION FICHIER RAPPELS POUR ENVOI VIA EMAIL 
+@ . ============================================================== LRB071   
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ . 
+@ASG,T     R$CORE.,F///50   
+@ASG,T     XA.,F///100  
+@ASG,T     XB.,F///9999 
+@ASG,T     XC.,F///9999 
+@ASG,T     XD.,F///9999 
+@ . 
+@ . FICHIER EMAIL INPUT 
+@ASG,A     LRPA01*IPVEMAIL. 
+@USE       IPVEMAIL,LRPA01*IPVEMAIL.
+@ .   Longueur record : 158 caractères  
+@ . 
+@ . Fichier OUTPUT RAPPELS A ENVOYER A BIZTALK  
+@ . Fichier créé en .csv
+@DELETE,C  LRPA01*ILRB071RAP.   
+@CAT,P     LRPA01*ILRB071RAP.,F/0/POS/4000  
+@ASG,A     LRPA01*ILRB071RAP.   
+@USE       ILRB071RAP,LRPA01*ILRB071RAP.
+@ .   Longueur record : 1453 caractères maximum 
+@ . 
+@DELETE,C  LRPA01*IMP-LRB071-1. 
+@CAT,P     LRPA01*IMP-LRB071-1.,F///1000
+@ASG,A     LRPA01*IMP-LRB071-1. 
+@ . 
+@XQT,R     LRPA01.LRB071
+@PRT,LI 
+@ . 
+@COPY,C    PRINT,LRPA01*IMP-LRB071-1.   
+@DELETE,C  PRINT
+@ . 
+@FREE      LRPA01*IPVEMAIL. 
+@FREE      LRPA01*ILRB071RAP.   
+@FREE      R$CORE.  
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB050: MSG 050, CLOTURE DES PARAMETRES AU NIVEAU DU RUN   
+@ . ============================================================== SWB004   
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@XQT,R     LRPA01.SWB004
+LRPA01  
+@ . 
+@TIME   
+@ . 
+@ . ================================================================
+@LAB060: MSG 060  TEST FICHIER RAPPELS VIDE 
+@ . ============================================================== SYB003   
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE LRPA01*ILRB071RAP  
+LABEL LAB320
+@EOF
+@TIME   
+@ . 
+@ . ==========================================================  
+@LAB300: MSG 300. TRANSFERT FICH CSV VERS BIZTALK, ENVOI FICHIER
+@ .               SUR INTRANET ET ENVOI MAIL
+@ . ========================================================== F999TRANSF   
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ . 
+@ADD       F999TRANSF.LRPA01/2200PC 
+@ . 
+@TIME   
+@ . 
+@ . ============================================================
+@LAB320: MSG 320. SAUVETAGE DES FICHIERS.   
+@ . ========================================================== COPIE/PC 
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ . 
+@ADD       SYS$*RUNS.COPIE/PC   
+@ . 
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB400: MSG 400. DELETE DES FICHIERS   
+@ . ============================================================== DELETE   
+@ADD SYS$*RUNS.REPRISE  
+LAB400  
+@ . 
+@FREE      LRPA01.  
+@ . 
+@DELETE,C  LRPA01*FPV-EMAIL.
+@DELETE,C  LRPA01*IPV-EMAIL.
+@DELETE,C  LRPA01*IPVMAIL.  
+@DELETE,C  LRPA01*IPVEMAIL. 
+@DELETE,C  LRPA01*ILRB071RAP.   
+@DELETE,C  LRPA01*IMP-LRB071-1. 
+@DELETE,C  LRPA01.  
+@TIME   
+@ . 
+@ . ==============================================================  
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . ============================================================== DELETE   
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       *** LE RUN LRPA01 S'EST BIEN TERMINE *** 
+@ . 
+@QUAL,R 
+@FIN

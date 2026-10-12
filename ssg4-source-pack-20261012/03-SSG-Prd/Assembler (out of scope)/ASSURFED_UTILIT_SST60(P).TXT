@@ -1,0 +1,200 @@
+           . SST  IS A SUBROUTINE TO SIMULATE  H200  SST  060  INSTRUCTION    
+ . CALL   ENTER SST SUBROUTINE REFERENCING ARG1  ARG2 
+ .     WHERE  ARG1  IS THE FIELD FROM WHICH  SIGN IS  TAKEN 
+.             ARG2  IS THE FIELD TO WHICH  THE  SIGN IS  TO BE  STORE   
+ . EFFECT.MOVE SIGN  OF ARG1  TO  ARG2    
+ . RESTRICTIONS   ARG1 AND  ARG2  MUST NOT BE  DESCRIBE UNDER OCCURS STATET.  
+.         LENGTH  OF ARG1  AND ARG2  MUST BE  LESS  THAN 32 
+           AXR$   
+PF        FORM      12,6,18   
+$(0)  
+ITEM1      +0     
+LOADC  LA,S1    A2,0,A0 
+           LA,S2    A2,0,A0   
+           LA,S3    A2,0,A0   
+           LA,S4    A2,0,A0   
+           LA,S5    A2,0,A0   
+           LMJ      X11,$+1   
+           LA,S6    A2,0,*A0  
+           LA       A1,(+1,+0)
+           J        0,X11     
+LOADP      LA,S1    A2,0,A0   
+           LA,S2    A2,0,A0   
+           LA,S3    A2,0,A0   
+           LA,S4    A2,0,A0   
+           LA,S5    A2,0,A0   
+           LA,S6    A2,0,A0   
+STORC     SA,S1     A2,0,A0   
+          SA,S2     A2,0,A0   
+          SA,S3     A2,0,A0   
+          SA,S4     A2,0,A0   
+          SA,S5     A2,0,A0   
+          SA,S6     A2,0,A0   
+TABLE.    S4=NEG-VALUE  S4=POSIT-VALUE  S6= 0 IF POSIT  1 IF NEGAT  077 ABNORM
+          0,0,0,055,060,0    .   0      BINARY ZERO   
+          0,0,0,077,077,077  .   1  
+          0,0,0,077,077,077  .   2  
+          0,0,0,077,077,077  .   3  
+          0,0,0,077,077,077  .   4  
+          0,0,0,055,060,0    .   5      SPACE   
+          0,0,0,017,061,0    .   6      A 
+          0,0,0,020,062,0    .   7      B 
+          0,0,0,021,063,0    .  10      C 
+          0,0,0,022,064,0    .  11      D 
+          0,0,0,023,065,0    .  12      E 
+          0,0,0,024,066,0    .  13      F 
+          0,0,0,025,067,0    .  14      G 
+          0,0,0,026,070,0    .  15      H 
+          0,0,0,027,071,0    .  16      I 
+          0,0,0,017,061,1    .  17      J 
+          0,0,0,020,062,1    .  20      K 
+          0,0,0,021,063,1    .  21      L 
+          0,0,0,022,064,1    .  22      M 
+          0,0,0,023,065,1    .  23      N 
+          0,0,0,024,066,1    .  24      O 
+          0,0,0,025,067,1    .  25      P 
+          0,0,0,026,070,1    .  26      Q 
+          0,0,0,027,071,1    .  27      R 
+          0,0,0,020,062,0    .  30      S 
+          0,0,0,021,063,0    .  31      T 
+          0,0,0,022,064,0    .  32      U 
+          0,0,0,023,065,0    .  33      V 
+          0,0,0,024,066,0    .  34      W 
+          0,0,0,025,067,0    .  35      X 
+          0,0,0,026,070,0    .  36      Y 
+          0,0,0,027,071,0    .  37      Z 
+          0,0,0,077,077,077  .  40  
+          0,0,0,041,060,1    .  41      - 
+          0,0,0,055,060,0    .  42      + 
+          0,0,0,077,077,077  .  43  
+          0,0,0,077,077,077  .  44  
+          0,0,0,077,077,077  .  45  
+          0,0,0,055,060,0    .  46      & 
+          0,0,0,077,077,077  .  47  
+          0,0,0,077,077,077  .  50  
+          0,0,0,077,077,077  .  51  
+          0,0,0,077,077,077  .  52  
+          0,0,0,077,077,077  .  53  
+          0,0,0,055,060,0    .  54      ? 
+          0,0,0,055,060,1    .  55      ! 
+          0,0,0,077,077,077  .  56  
+          0,0,0,077,077,077  .  57  
+          0,0,0,055,060,0    .  60      0 
+          0,0,0,017,061,0    .  61      1 
+          0,0,0,020,062,0    .  62      2 
+          0,0,0,021,063,0    .  63      3 
+          0,0,0,022,064,0    .  64      4 
+          0,0,0,023,065,0    .  65      5 
+          0,0,0,024,066,0    .  66      6 
+          0,0,0,025,067,0    .  67      7 
+          0,0,0,026,070,0    .  70      8 
+          0,0,0,027,071,0    .  71      9 
+          0,0,0,077,077,077  .  72  
+          0,0,0,077,077,077  .  73  
+          0,0,0,077,077,077  .  74  
+          0,0,0,077,077,077  .  75  
+          0,0,0,077,077,077  .  76  
+          0,0,0,077,077,077  .  77  
+MESE1     'ERROR SST SUBROUTINE ARG TOO LONG OR UNDER OCCURS     '
+RX11      +0
+ARG       +0
+COMPKT   C$OMPK 42,MESE2
+MESE2     'ERROR SST60 BAD CHAR. AT ADDR '
+MESE21    +0
+MESE22    +0
+RX11A     +0
+ARGA      +0
+$(1)  
+SST60*.     
+          SX        X11,RX11  
+          LA        A0,0,X11  
+          LMJ       X11,DECOD     .  RETURN  A0= WORD-ADDR  A1= CH-ADDR 
+          LXI,U     A0,+1         .         A2= LENGTH
+          LXI,U     A1,+1     
+          ANA,U     A2,+1     
+          LR        R3,A2         .  LENGTH-1   
+          EX        LOADC,*A1 
+          JGD       R3,$-1        .  READ  INTO  A2  RIGHT CHARACTER    
+          LA,S6     A5,TABLE,A2   .  0=POSIT   1=NEG  77 INVALID  
+          TNE,U     A5,+077       . TEST  INVALID     
+          J         ERROR2    
+          SA        A5,ITEM1  
+          LX        X11,RX11  
+          LA        A0,1,X11  
+          LMJ       X11,DECOD     .  RETURN  A0= WORD-ADDR  A1= CH-ADDR 
+          LXI,U     A0,+1                    A2= LENGTH     
+          LXI,U     A1,+1     
+          TNE,U     A2,+1         .  TEST  LENGTH = 1 
+          J         LENG1     
+          ANA,U     A2,+2         .  LENGTH-2   
+          LR        R3,A2     
+          EX        LOADC,*A1 
+          JGD       R3,$-1        .  READ INTO A2  POSITION  BEFORE RIGHT     
+LENG1.
+          EX        LOADP,A1      . READ INTO A2  RIGHT-CH. AND KEEP POSITION 
+          LA        A5,ITEM1      . TYPE  OF  ARGUMENT 1    
+          JZ        A5,POSIT      . JUMP  IF  ARG1 POSITIVE 
+NEGAT.
+          LA,S4     A2,TABLE,A2   . TAXE THE NEGATIVE VALUE INTO A2     
+          J         STOR
+POSIT.
+          LA,S5     A2,TABLE,A2   . TAKE THE POSITIVE  VALUE INTO A2    
+STOR. 
+          TNE,U     A2,+077       . TEST  INVALID     
+          J         ERROR2    
+          EX        STORC,A1      . STORE NEW VALUE INTO RIGHT CH.
+          LX        X11,RX11  
+          J         2,X11         . RETURN
+DECOD.     ENTRY  A0  COBOL  ARG  ADDR    
+          JN        A0,ERR1       .  ARG UNDER OCCURS  ERROR
+          AND       A0,(0177717177777)  .  0 TO  A B  E  G  (COBOL)     
+          SA        A1,ARG    
+          LA,S3     A0,ARG              .  LOAD  F  (INDEX) 
+          JZ        A0,NOIDX       . NO INDEX SPECIFIED     
+          SA,H2     A0,LADDR            .  STORE  INDEX REG. ADDR 
+LADDR.
+          LA        A0,X1               .  X1 BE MODIFIED  BY  INDEX REG ADDR 
+          AND       A0,(+0777777)       .  KEEP  RIGHT  HALF
+          AA,H2     A1,ARG              .  ADD   BASE   ADDR
+GOIDX.
+          LA        A0,A1               .  A0   WORD  ADDR  RETURN
+          LA,S1     A1,ARG              .  A1   CHAR  ADDR  RETURN
+          LA,S2     A2,ARG              .  A2   LENGTH      RETURN
+          JZ        A2,ERR1             .  ARG  TOO  LONG   
+          SA,H2     A0,ARG    
+          SA,H1     A1,ARG    
+          J         0,X11               .  RETURN     
+NOIDX.  NO INDEX WAS SPECIFIED
+          LA,H2     A1,ARG     .  LOAD  BASE ADDR     
+          J         GOIDX     
+ERR1. 
+          P$RINT   (PF  1,11,MESE1) 
+          ER       ERR$ 
+ERROR2.     
+          LR,U      R3,+5     
+          LA,U      A1,+0     
+          LA,H2     A0,ARG    
+          DSL       A0,3
+          SSL       A1,3
+          JGD       R3,$-2    
+          OR        A1,(0606060606060)    
+          SA        A2,MESE21 
+          SA        A2,CSF1   
+          LR,U      R3,+5     
+          LA,H1     A0,ARG    
+          DSL       A0,3
+          SSL       A1,3
+          JGD       R3,$-2    
+          OR        A1,(0606060606060)    
+          SA        A2,MESE22 
+          SA        A2,CSF2   
+          C$OM      COMPKT    
+          LA        A0,(7,CSFLOG)   
+          ER        CSF$
+          LX        X11,RX11  
+          J         2,X11     
+CSFLOG    '@LOG ERROR SST60 ADDR   '
+CSF1      +0
+CSF2      +0
+          '   .  '
+          END     

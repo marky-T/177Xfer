@@ -1,0 +1,333 @@
+﻿Warning              CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+Phase                
+Phase                ********************************************************************************
+Phase                * C O B O L   C O N V E R S I O N   L O G G I N G ******************************
+Phase                ********************************************************************************
+Phase                
+Log                      Application:   TRIAL03MONTANT
+Log                      Version:       
+Phase                
+Phase                ********************************************************************************
+Phase                * L O A D I N G   C U S T O M E R   S E T T I N G S ****************************
+Phase                ********************************************************************************
+Phase                
+Phase                
+Phase                ********************************************************************************
+Phase                * L O A D I N G   P R E C O M P I L E R   M A C R O S **************************
+Phase                ********************************************************************************
+Phase                
+Warning              XML element [<#comment>] not understood, expected [<precompilermacro>]
+Warning              XML element [<#comment>] not understood, expected [<precompilermacro>]
+Phase                
+Phase                ********************************************************************************
+Phase                * R E A D I N G   O S 2 2 0 0   P R O C L I B S ********************************
+Phase                ********************************************************************************
+Phase                
+Warning              Duplicate Copy Proc TA070-SEL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\DMSTST_RDMSLIB_TAB070-SEL.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1005-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\DPS_DPS2R2PROCS_SCREEN-1005_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-563 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\DPS_DPS2R2PROCS_SCREEN-563_COBP.txt
+Warning              Duplicate Copy Proc SDF-PROC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\DPS_DPS2R2PROCS_SDF-PROC_COBP.txt
+Warning              Duplicate Copy Proc FP-ACQ-ELT-INFO found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\SYS$LIB_PROC$FP$ACQELTINF_COB.TXT
+Warning              Duplicate Copy Proc CALL-FP-ACQ-ELT-INFO-SHORT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\SYS$LIB_PROC$FP$ACQELTINF_COB.TXT
+Warning              Duplicate Copy Proc CALL-FP-ACQ-ELT-INFO-LONG found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\SYS$LIB_PROC$FP$ACQELTINF_COB.TXT
+Warning              Duplicate Copy Proc DPS-ATTR-TABLE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_ATTR-TABLE_COBP.txt
+Warning              Duplicate Copy Proc AU001-WS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_AU001-WS.txt
+Warning              Duplicate Copy Proc CCR023 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_CCR023_PRM.txt
+Warning              Duplicate Copy Proc CCR024 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_CCR024_PRM.txt
+Warning              Duplicate Copy Proc CCR030 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_CCR030_PRM.txt
+Warning              Duplicate Copy Proc DPS-CONFIG-BUFFER found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_CONFIG-BUFF_COBP.txt
+Warning              Duplicate Copy Proc DEF-ATTRS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DEF-ATTRS_COBP.txt
+Warning              Duplicate Copy Proc DPS-DEF-STATUS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DEF-STATUS_COBP.txt
+Warning              Duplicate Copy Proc DPS-DEVICE-PACKET found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DEVICE-PACK_COBP.txt
+Warning              Duplicate Copy Proc DPS-DEVICE-PARAMETER-VALUES found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DEVICE-VALS_COBP.txt
+Warning              Duplicate Copy Proc DISPLAYERR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DISPLAYERR_COBP.txt
+Warning              Duplicate Copy Proc DPS-OPTIONS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DPS-OPTIONS_STD.txt
+Warning              Duplicate Copy Proc DPSSTATUSCOB found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DPS-STATUS_COBP.txt
+Warning              Duplicate Copy Proc DYNAMIC-CONTROL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_DYNAMIC_COBP.txt
+Warning              Duplicate Copy Proc EG002-WS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_EG002-WS.txt
+Warning              Duplicate Copy Proc EG011-WS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_EG011-WS.txt
+Warning              Duplicate Copy Proc EGU017 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_EGU017_PRM.txt
+Warning              Duplicate Copy Proc 999-ESQL-ERR-TIP found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_ESQL-ERR_UCS.txt
+Warning              Duplicate Copy Proc GENERATE-WS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_GENERATE-WS_COBP.txt
+Warning              Duplicate Copy Proc GETFIELD found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_GET-FIELD_COBP.txt
+Warning              Duplicate Copy Proc GETLINE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_GET-LINE_COBP.txt
+Warning              Duplicate Copy Proc GETSCREEN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_GET-SCREEN_COBP.txt
+Warning              Duplicate Copy Proc DPS-GET-WS-BUFF found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_GET-WS-BUFF_COBP.txt
+Warning              Duplicate Copy Proc IN005-SEL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_IN005-SEL.txt
+Warning              Duplicate Copy Proc INFO-BUFFER found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_INFO-BUFFER_COBP.txt
+Warning              Duplicate Copy Proc LG-SINIS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_LG-SINIS.txt
+Warning              Duplicate Copy Proc LIBKEYS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_LIBKEYS_STD.txt
+Warning              Duplicate Copy Proc MDL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_MDL_COBP.txt
+Warning              Duplicate Copy Proc MSGERR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_MSGERR_PRM.txt
+Warning              Duplicate Copy Proc DPS-NAME-TABLE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_NAME-TABLE_COBP.txt
+Warning              Duplicate Copy Proc DPS-NAMES found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_NAMES_COBP.txt
+Warning              Duplicate Copy Proc DPS-OPTIONS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_OPTIONS_COBP.txt
+Warning              Duplicate Copy Proc PAGE-STATUS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PAGE-STATUS_COBP.txt
+Warning              Duplicate Copy Proc PBW047 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PBW047_PRM.txt
+Warning              Duplicate Copy Proc PID-STAT-INFO found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PIDSTAT-INFO_COBP.txt
+Warning              Duplicate Copy Proc PROCP-R found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PROCP-R_STD.txt
+Warning              Duplicate Copy Proc PROCPW-R found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PROCPW-R_STD.txt
+Warning              Duplicate Copy Proc PROCPW found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PROCPW_STD.txt
+Warning              Duplicate Copy Proc PROCP found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PROCP_STD.txt
+Warning              Duplicate Copy Proc PSCRAT-INFO found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PSCRAT-INFO_COBP.txt
+Warning              Duplicate Copy Proc PUTSCREEN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_PUT-SCREEN_COBP.txt
+Warning              Duplicate Copy Proc RCB-OPTIONS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RCBOPTIONS_COBP.txt
+Warning              Duplicate Copy Proc RECOVERY-CONTROL-BLOCK found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RCB_COBP.txt
+Warning              Duplicate Copy Proc RCHIN2 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RCHIN2_PRM.txt
+Warning              Duplicate Copy Proc RDMS-BEGIN-Q found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RDMS-BEGIN-Q_STD.txt
+Warning              Duplicate Copy Proc RDMS-BEGIN-U found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RDMS-BEGIN-U_STD.txt
+Warning              Duplicate Copy Proc RDMS-BEGIN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RDMS-BEGIN_STD.txt
+Warning              Duplicate Copy Proc RDMS-WS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RDMS-WS_STD.txt
+Warning              Duplicate Copy Proc RETURNERR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_RETURNERR_COBP.txt
+Warning              Duplicate Copy Proc REXMIT-BUFF found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_REXMIT-BUFF_COBP.txt
+Warning              Duplicate Copy Proc SCR-CCS9J found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCR-CCS9J_PRM.txt
+Warning              Duplicate Copy Proc SCRATCH-AREA found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCRATCH-AREA_STD.txt
+Warning              Duplicate Copy Proc SCRATCH-CORB found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCRATCH-LIB_STD.txt
+Warning              Duplicate Copy Proc SCREEN-TEMP-0 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCREEN-0_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-S14-14 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCREEN-14_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-BUFFER found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCREEN-DEFS_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-DEFINITIONS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCREEN-DEFS_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PRINT-BUFFER found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SCREEN-DEFS_COBP.txt
+Warning              Duplicate Copy Proc SDF-PROC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SDF-PROC_STD.txt
+Warning              Duplicate Copy Proc SENDERROR-COORDINATES found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SENDERROR-C_COBP.txt
+Warning              Duplicate Copy Proc SENDERROR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_SENDERROR_COBP.txt
+Warning              Duplicate Copy Proc FITRASTA found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STA.txt
+Warning              Duplicate Copy Proc COTRECTAUX found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STA.txt
+Warning              Duplicate Copy Proc DEPRECRSQ found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STA.txt
+Warning              Duplicate Copy Proc COTDEPRSQ found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STA.txt
+Warning              Duplicate Copy Proc RECAPCHAR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STA.txt
+Warning              Duplicate Copy Proc STAEXTGAR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STAEXTGAR.txt
+Warning              Duplicate Copy Proc STAIMPFIRME found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STAIMPFIRME.txt
+Warning              Duplicate Copy Proc STANOUVRCE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STANOUVRCE.txt
+Warning              Duplicate Copy Proc STAPREVCOT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STAPREVCOT.txt
+Warning              Duplicate Copy Proc STAPREVDEP found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STAPREVDEP.txt
+Warning              Duplicate Copy Proc STAREBRA found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STAREBRA.txt
+Warning              Duplicate Copy Proc STATOT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STATOT.txt
+Warning              Duplicate Copy Proc STATRAV found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STATRAV.txt
+Warning              Duplicate Copy Proc STATUS-WORD found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_STATUS-WORD_COBP.txt
+Warning              Duplicate Copy Proc TA010-SEL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_TA010-SEL.txt
+Warning              Duplicate Copy Proc TA073-LAST-1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_TA073-LAST-1.txt
+Warning              Duplicate Copy Proc TEMPLAT1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_TEMPLAT1-BUF_COBP.txt
+Warning              Duplicate Copy Proc TEMPLATE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_TEMPLATE-BUF_COBP.txt
+Warning              Duplicate Copy Proc TRACE-BUFFER found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_TRACE-BUFFER_COBP.txt
+Warning              Duplicate Copy Proc VALDAT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_VALDAT_PRM.txt
+Warning              Duplicate Copy Proc VGU023 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_VGU023_PRM.txt
+Warning              Duplicate Copy Proc WS-ESQL-VAR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_WS-ESQL_UCS.txt
+Warning              Duplicate Copy Proc WS-RDMS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COMMONS_WS-RDMS_STD.txt
+Warning              Duplicate Copy Proc CAT-ECR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_CAT-ECR_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc DB-AID found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_DB-AID_RDMSTST.txt
+Warning              Duplicate Copy Proc DB-MSG-ERR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_DB-MSG-ERR_RDMSTST.txt
+Warning              Duplicate Copy Proc DRN-IDE-ITF-CPT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_DRN-IDE-ITF_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc ITF-CPT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_ITF-CPT_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc JRN-CPT-GEN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_JRN-CPT-GEN_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc LGN-ECR-CPT-GEN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_LGN-ECR-CPT_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc LIB-CAT-ECR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_LIB-CAT-ECR_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc LIB-TYP-CAT-ECR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_LIB-TYP-CAT_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc LIB-TYP-CTE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_LIB-TYP-CTE_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc PCN-CAT-NVE-CTE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_PCN-CAT-NVE_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc PCN-CAT-OLD-CTE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_PCN-CAT-OLD_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc PER-ECR-CPT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_PER-ECR-CPT_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc RCV-DOC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_RCV-DOC_CPTCO.txt
+Warning              Duplicate Copy Proc RCV-MVT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_RCV-MVT_CPTCO.txt
+Warning              Duplicate Copy Proc SIN-ACT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_SIN-ACT_SINCC.txt
+Warning              Duplicate Copy Proc SOC-CPT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_SOC-CPT_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc TAB-CAT-PFL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CAT-PFL_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-CAS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-CAS_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-CHA found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-CHA_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-GNR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-GNR_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-HIS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-HIS_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-OCC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-OCC_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CDE-TRJ found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CDE-TRJ_SINCC.txt
+Warning              Duplicate Copy Proc TAB-CMP-CAT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-CMP-CAT_SINCC.txt
+Warning              Duplicate Copy Proc TAB-DUR-CON found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-DUR-CON_SINCC.txt
+Warning              Duplicate Copy Proc TAB-ETA-DOS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-ETA-DOS_SINCC.txt
+Warning              Duplicate Copy Proc TAB-JOU-CHO found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-JOU-CHO_SINCC.txt
+Warning              Duplicate Copy Proc TAB-MES-PVI found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-MES-PVI_SINCC.txt
+Warning              Duplicate Copy Proc TAB-MES-PVM found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-MES-PVM_SINCC.txt
+Warning              Duplicate Copy Proc TAB-NAT-ACC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-NAT-ACC_SINCC.txt
+Warning              Duplicate Copy Proc TAB-SIE-AFV found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-SIE-AFV_SINCC.txt
+Warning              Duplicate Copy Proc TAB-SIT-CON found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-SIT-CON_SINCC.txt
+Warning              Duplicate Copy Proc TAB-SUF-RSQ found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-SUF-RSQ_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-APS found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-APS_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-AYD found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-AYD_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-CON found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-CON_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-DCI found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-DCI_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-EMR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-EMR_SINCC.txt
+Warning              Duplicate Copy Proc TAB-TYP-RSP found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TAB-TYP-RSP_SINCC.txt
+Warning              Duplicate Copy Proc TRC-CAT-ECR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TRC-CAT-ECR_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc TYP-CAT-ECR found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TYP-CAT-ECR_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc TYP-CTE found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPBK_TYP-CTE_COMPTA-GEN.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_LOCK_MAJIN1.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN2 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_LOCK_MAJIN2.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN3 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_LOCK_MAJIN3.txt
+Warning              Duplicate Copy Proc ADDSCC-RES-SIN found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_SELSCC_BAS-FRS-MDL.txt
+Warning              Duplicate Copy Proc EG011-SEL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_SELSCC_EG011.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_UNLK_MAJIN1.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN2 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_UNLK_MAJIN2.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN3 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_COPSQL_UNLK_MAJIN3.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1000 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1000_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1002 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1002_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1002-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1002_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1003-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1002_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1004 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1004_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1004-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1004_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1005-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1004_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1006 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1006_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1006-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1006_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1040 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1040_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1040-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1040_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1041-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1040_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-110 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-110_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-111 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-111_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-112 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-112_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-113 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-113_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-114 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-114_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-115 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-115_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1170 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1170_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-118 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-118_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-119 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-119_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1400 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1400_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1460 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1460_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-193 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-193_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1943-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1943_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-1944-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-1944_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-199 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-199_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2001-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2001_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2007-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2007_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2013-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2013_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2017-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2017_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2019-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2019_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2021-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2021_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2023-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2023_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2024 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2024_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2489-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2489_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2490 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2490_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2494 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2494_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2494-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2494_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-2495-INIT found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-2494_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-255 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-255_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-259 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-259_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-266 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-266_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-300 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-300_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-323 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-323_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-324 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-324_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-327 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-327_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-328 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-328_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-329 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-329_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-330 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-330_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-350 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-350_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-351 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-351_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-352 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-352_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-353 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-353_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-354 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-354_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-40 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-40_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-41 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-41_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-42 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-42_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-43 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-43_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-47 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-47_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-490 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-490_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-492 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-492_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-52 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-52_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-54 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-54_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-564 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-564_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-565 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-565_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-566 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-566_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-569 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-569_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-615 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-615_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-617 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-617_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-618 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-618_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-620 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-620_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-621 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-621_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-622 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-622_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-624 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-624_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-625 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-625_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-626 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-626_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-627 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-627_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-629 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-629_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-630 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-630_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-631 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-631_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-632 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-632_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-694 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-694_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-695 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-695_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-696 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-696_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-699 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-699_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-707 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-707_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-708 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-708_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-709 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-709_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-710 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-710_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-711 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-711_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-712 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-712_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-714 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-714_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-729 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-729_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-733 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-733_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-734 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-734_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-735 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-735_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-742 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-742_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-744 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-744_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-747 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-747_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-748 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-748_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-749 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-749_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-750 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-750_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-777 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-777_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-778 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-778_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-779 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-779_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-780 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-780_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-781 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-781_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-782 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-782_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-86 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-86_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-87 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-87_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-900 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-900_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-94 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-94_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-95 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-95_COBP.txt
+Warning              Duplicate Copy Proc SCREEN-PROJET-9 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\TST_SCREENS_SCREEN-9_COBP.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN1-TRC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN1 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN2 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN2-TRC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN2 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN3 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc LOCK-MAJIN3-TRC found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc UNLOCK-MAJIN3 found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_LOCK-UNLOCK_MAJINT.txt
+Warning              Duplicate Copy Proc TA010-SEL found in C:\\Amt\\MainframeSource\\Codedrop 2025\\CopyPrd\UTST_ESQL_TA010-SEL.txt
+Warning              Cobol prefab file DefaultPrefab.txt not found
+Warning              Cobol prefab file OS2200Prefab.txt not found
+Phase                
+Phase                ********************************************************************************
+Phase                * R E A D I N G   B A T C H   S O U R C E S ************************************
+Phase                ********************************************************************************
+Phase                
+Log                  Reading source: ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT
+Log                  1 source(s) read
+Log                  
+Log                  Analyzing source: ASSURFED_UTILIT_MONTANT_SIGNE(P)
+Warning              
+Warning              Analyzing source: ASSURFED_UTILIT_MONTANT_SIGNE(P)
+Warning              WAR 000025 REDEFINES SIZE MISMATCH. Size [11] REDEFINES size [80].
+Warning              WAR 000030 REDEFINES SIZE MISMATCH. Size [11] REDEFINES size [80].
+Phase                
+Phase                ********************************************************************************
+Phase                * A N A L Y S I N G   S O U R C E S ********************************************
+Phase                ********************************************************************************
+Phase                
+Phase                
+Phase                ********************************************************************************
+Phase                * W R I T I N G   L I O N   O U T P U T   F I L E ******************************
+Phase                ********************************************************************************
+Phase                
+Log                  1 source(s) processed
+Phase                
+Phase                ********************************************************************************
+Phase                * TRIAL03MONTANT CONVERSION STATISTICS *****************************************
+Phase                ********************************************************************************
+Phase                
+Log                  Source code counts:
+Log                                 Sources   Lines     Average
+Log                  Batch          1         47        47      
+Log                  
+Phase                
+Phase                ********************************************************************************
+Phase                * D O N E **********************************************************************
+Phase                ********************************************************************************
+Phase                
+Log                  Elapsed time:  00:00:03:381

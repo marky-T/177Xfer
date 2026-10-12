@@ -1,0 +1,127 @@
+          AXR$    
+$(0)  
+LPBCA     +0606060606060
+          +0525252525252
+ZERO      +0606060606060
+$(1)  
+L$PBCA*.    
+          LA        A3,ZERO   
+          LA,U      A2,015    
+INIT      LA,U      A0,+3     
+BCLE. 
+          TNE       A3,DCOM$$,A2    
+          J         FHW15     
+         TZ         DCOM$$,A2 
+          J         $+3 
+          SA        A3,DCOM$$,A2    
+          J         FHW15     
+          LA,H1     A1,DCOM$$,A2    
+          TE,U      A1,+050505
+          J         $+3 
+          SA,H1     A3,DCOM$$,A2    
+          J         FHW15G    
+          LA,S1     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S1     A3,DCOM$$,A2    
+          LA,S2     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S2     A3,DCOM$$,A2    
+          LA,S3     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S3     A3,DCOM$$,A2    
+FHW15G.     
+          LA,H2     A1,DCOM$$,A2    
+          TE,U      A1,+050505
+          J         $+3 
+          SA,H2     A3,DCOM$$,A2    
+          J         FHW15D    
+          LA,S4     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S4     A3,DCOM$$,A2    
+          LA,S5     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S5     A3,DCOM$$,A2    
+          LA,S6     A1,DCOM$$,A2    
+          TNE,U     A1,+05    
+          SA,S6     A3,DCOM$$,A2    
+FHW15D.     
+FHW15.
+          AA,U      A2,+1     
+          JGD       A0,BCLE   
+          TNE,U     A2,026    
+          J         $+3 
+          LA,U      A2,+022   
+          J         INIT
+          LA,S6     A3,DCOM$$+021   
+          LX,XU     A1,+1     
+          TE,S6     A3,DCOM$$+014   
+          LX,XU     A1,-1     
+          LX        A2,A1     
+          SZ        R2  
+L1042.
+          LX,XU     A0,03     
+L1043.
+          LR        R5,LPBCA  
+          LA        A4,DCOM$$+022,A0
+          JNZ       A2,L1051  
+          LA        A4,R2     
+          JZ        A4,0,X11  
+          LA        A4,R5     
+L1051.
+          AA        A4,R2     
+          SZ        R2  
+          TNE       A4,R5     
+          JP        A2,L1073  
+          EX        L1114,A1  
+          EX        L1115,A1  
+          JZ        A4,L1065  
+          JNC       L1066     
+          LR,XU     R2,+1     
+          ANA       A4,A1     
+          JNZ       A4,L1066  
+          TP        A1  
+L1065.
+          LNA       A4,A4     
+L1066.
+          AND       A4,R5     
+          SSC       A5,03     
+          ANA       A4,A5     
+          OR        A4,R5     
+          SA        A5,DCOM$$+015,A0
+L1073.
+          JGD       A0,L1043  
+          AA        A2,R2     
+          JNZ       A2,L1117  
+          SA        A3,DCOM$$+014   
+          LA        A4,LPBCA+1
+          ANU       A4,DCOM$$+020   
+          SA        A5,DCOM$$+020   
+          ANU       A4,DCOM$$+017   
+          SA        A5,DCOM$$+017   
+          ANU       A4,DCOM$$+016   
+          SA        A5,DCOM$$+016   
+          ANU       A4,DCOM$$+015   
+          SA        A5,DCOM$$+015   
+          LR,XU     R2,+1     
+          LX,U      A1,+1     
+          J         L1042     
+          ANA       A4,DCOM$$+015,A0
+L1114.
+          LNA       A4,A4     
+L1115.
+          ANA       A4,LPBCA+1
+          AA        A4,DCOM$$+015,A0
+L1117.
+          TNE,S6    A3,DCOM$$+014   
+          J         0,X11     
+          JB        A3,0,X11  
+          LA        A4,R5     
+          TNE       A4,DCOM$$+020   
+          TE        A4,DCOM$$+017   
+          J         0,X11     
+          TNE       A4,DCOM$$+016   
+          TE        A4,DCOM$$+015   
+          J         0,X11     
+          SA        A3,DCOM$$+014   
+          J         0,X11     
+          END     

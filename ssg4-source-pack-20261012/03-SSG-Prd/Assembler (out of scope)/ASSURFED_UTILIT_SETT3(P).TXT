@@ -1,0 +1,11 @@
+       AXR$ .     
+$(0) .
+IMAG    '@LOG  VALUE INSERTED INTO T3 =             .    ' .
+$(1) .
+SETT3*  LA  A0,*0,X11 . 
+        ER  SETC$ .     
+        SA,T3  A0,IMAG+6 .    
+        LA  A0,(010,IMAG) .   
+        ER  CSF$ .
+        J   1,X11 .     
+        END .     

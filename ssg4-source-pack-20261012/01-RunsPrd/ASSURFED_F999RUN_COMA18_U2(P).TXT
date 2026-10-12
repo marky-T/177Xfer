@@ -1,0 +1,153 @@
+@RUN,M/T  COMA18,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@SYM       PRINT$,1,PRSP
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES DROITS A COMMISSIONS                 **
+@MSG       **      MODULE COMA18/U2                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE CO002                     **
+@MSG       *===========================================================*
+@ . 
+@ .        P04062/02 : VANKE : 16/02/2005 : CREATION
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA18/U2
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA18U2.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE          - RESTART 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE CO002               - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@DELETE,C      IUNLMVTCO2.  
+@CAT,P         IUNLMVTCO2.,F/2/POS/262143   
+@ASG,A         IUNLMVTCO2.  
+@USE       UNL,IUNLMVTCO2.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE CO002 IN EXCLUSIVE RETRIEVAL MODE;   
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   CO002  
+  ORDER  BY 
+         N_MAT  
+        ,BRANCHEAL  
+        ,N_POLICEC  
+        ,N_POLICES  
+        ,N_AVENANT  
+        ,D_EFFET
+  FORMAT INTERNAL;  
+UNLOCK CO002;   
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTCO2.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB017:   MSG 017. TRI FICHIER DE SELECTION                      - TRI 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ERS       TPF$.
+@ASG,A         RCOMA17CO2.  
+@USE       INA,RCOMA17CO2.  
+@DELETE,C      ICOMA17CO2.  
+@ASG,UP        ICOMA17CO2.,F/0/POS/4000 
+@USE       OUT,ICOMA17CO2.  
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=01,07,CH,A,1        .N-MAT  
+KEY=08,03,CH,A,2        .BRANCHEAL  
+KEY=11,07,CH,A,3        .N-POLICEC  
+KEY=18,02,CH,A,4        .N-POLICES  
+KEY=20,03,CH,A,5        .N-AVENANT  
+KEY=23,08,CH,A,6        .D-EFFET
+RSZ=30                  .RECORDSIZE 
+RECORD=10   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB020:   MSG 020. SELECT.DES MOUVEMENTS CO002 A RECHARGER - SSG   
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTCO2.  
+@USE       UNL,IUNLMVTCO2.  
+@ASG,AX        ICOMA17CO2.  
+@USE       CLE,ICOMA17CO2.  
+@ . 
+@DELETE,C      ILOAMVTCO2.  
+@CAT,P         ILOAMVTCO2.,F//POS/5000  
+@ASG,A         ILOAMVTCO2.  
+@USE       LOA,ILOAMVTCO2.  
+@DELETE,C      ISUPMVTCO2.  
+@CAT,P         ISUPMVTCO2.,F//POS/5000  
+@ASG,A         ISUPMVTCO2.  
+@USE       SUP,ISUPMVTCO2.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,030,10   UNL,076,10  
+OUTPUT         LOA,076,10   SUP,076,10  
+KEYS           2,7 9,3 13,7 21,2 23,3 27,8  
+UPDATE         1,7 8,3 11,7 18,2 20,3 23,8  
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT TPF$.FUSBA 
+@ . 
+@FREE          ICOMA17CO2.  
+@FREE          IUNLMVTCO2.  
+@FREE          ILOAMVTCO2.  
+@FREE          ISUPMVTCO2.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB030:   MSG 030. UTILITAIRE FICHIER INTERNAL                   - BSF 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@COPY,A    ABSUITE*UTIL$.BSF,   
+@ASG,A         ILOAMVTCO2.  
+@ . 
+@TPF$.BSF   
+INTERNAL RDMS ASSURFED*ILOAMVTCO2   
+@ . 
+@ERS           TPF$.
+@FREE          ILOAMVTCO2.  
+@TIME   
+@ . 
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE              - REPRISE 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA18/U2 S'EST BIEN TERMINE ****
+@FREE      COMA18U2 
+@QUAL,R 
+@FIN

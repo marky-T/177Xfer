@@ -1,0 +1,285 @@
+@RUN,M/T   LRSM14,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@MSG       **********************************************************   
+@MSG       **  PRIMES VARIABLES(LR) : Listes de controle           **   
+@MSG       **********************************************************   
+@ . LE 08/03/2005 : CREATION DU RUN 
+@ . 
+@MSG       EDITION DU JCL.  
+@ . 
+@PRT,SC    F999RUN.LRSM14   
+@.  
+@TIME   
+@.  
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     LRSM14,F//POS/4000   
+@ . 
+@TIME   
+@ . 
+@LAB001: MSG 001. PROCEDURE DE RESTART AUTOMATIQUE. 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@ . 
+@TIME   
+@ . 
+@LAB010: MSG 010. UNLOAD DES DONNEES DE LA LR401
+@ADD       SYS$*RUNS.REPRISE
+LAB010  
+@.  
+@delete,c LRSM14*IDRLR401.  
+@cat,p LRSM14*IDRLR401.,f///100000  
+@asg,ax LRSM14*IDRLR401.
+@use fl.,LRSM14*IDRLR401.   
+@XQT,E    SYS$LIB$*RSA.RSAC-COIVP   
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC       ;
+ unload to file fl  
+ select n_mat,n_dcl,c_branche,policec,c_num_avn,
+  n_rsq_mat from lr401 a , pr_lr4012 c where
+      (a.d_fin = 0 or a.d_fin > 20050100) and c.c_gnr_dcl = 'D' and 
+  exists (select * from lr401 b 
+          where a.n_mat = b.n_mat and c.c_gnr_dcl = 'D' and 
+   a.n_rsq_mat = b.n_rsq_mat and a.n_dcl = b.n_dcl and  
+   not a.c_branche = b.c_branche and (b.d_fin = 0 or b.d_fin > 20050100) )  
+  and c.c_branche in ('100','107','109') and c.n_mat = a.n_mat and  
+  a.n_rsq_mat = c.n_rsq_mat and a.c_branche = c.c_branche and   
+  a.policec = c.policec and a.c_typ_avn = c.c_typ_avn and   
+  a.c_num_avn = c.c_num_avn and a.d_effet = c.d_effet and   
+  a.c_gnr_dcl = c.c_gnr_dcl and a.c_cat_emr = c.c_cat_emr and   
+  a.n_cmm_pta = c.n_cmm_pta and a.n_dcl = c.n_dcl   
+  order by n_mat,c_branche,policec,c_num_avn
+  format external;  
+END THREAD; 
+EXIT;   
+@FREE LRSM14*IDRLR401.  
+@ . 
+@LAB020: MSG 020. Transformation de fichier en fichier excel
+@ADD       SYS$*RUNS.REPRISE
+LAB020  
+@ASG,AX    LRSM14*IDRLR401. 
+@USE       FILEIN,LRSM14*IDRLR401.  
+@DELETE,C  LRSM14*FICHEXCEL.
+@ASG,UP    LRSM14*FICHEXCEL.,F/1/POS/4000   
+@USE       FILEOUT,LRSM14*FICHEXCEL.
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 35 
+COL 1,8,,MATRICULE 10,3,,DCL 14,3,,BCH 18,8,,POLICE 
+COL 27,3,,AVN 31,4,,RSQ 
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@TIME   
+@.  
+@LAB030: MSG 030. UNLOAD DES DONNEES DE LA LR407
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@.  
+@delete,c LRSM14*IDRLR407.  
+@cat,p LRSM14*IDRLR407.,f///100000  
+@asg,ax LRSM14*IDRLR407.
+@use fl.,LRSM14*IDRLR407.   
+@XQT,E    SYS$LIB$*RSA.RSAC-COIVP   
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC       ;
+ unload to file fl  
+   SELECT  T1.N_MAT,T2.N_EXE,T2.N_EXE_PER,T2.N_DCP,T1.C_ILE_RED,T1.IDTXT
+        FROM
+            LR407      T1,  
+            LR405      T2   
+        WHERE   
+            EXISTS (SELECT T3.N_MAT FROM PR_LR4052 T3 WHERE 
+                      T3.C_STA_TRT = 'ATR' AND T3.N_MAT = T1.N_MAT) AND 
+                      T1.N_TRT_AUM = '60' AND T1.N_MAT=T2.N_MAT 
+
+        format external;
+END THREAD; 
+EXIT;   
+@FREE LRSM14*IDRLR407.  
+@ . 
+@LAB040: MSG 040. Transformation de fichier en fichier excel
+@ADD       SYS$*RUNS.REPRISE
+LAB040  
+@ASG,AX    LRSM14*IDRLR407. 
+@USE       FILEIN,LRSM14*IDRLR407.  
+@DELETE,C  LRSM14*FICHEXCE1.
+@ASG,UP    LRSM14*FICHEXCE1.,F/1/POS/4000   
+@USE       FILEOUT,LRSM14*FICHEXCE1.
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 57 
+COL 1,8,,MATRICULE 11,2,,EXE 15,1,,PER 18,2,,DCP 21,5,,INIT 27,30,,CMM  
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@TIME   
+@.  
+@LAB050: MSG 050. UNLOAD DES DONNEES DE LA LR429
+@ADD       SYS$*RUNS.REPRISE
+LAB050  
+@.  
+@DELETE,C LRSM14*IDRLR4291. 
+@CAT,P    LRSM14*IDRLR4291.,f///100000  
+@ASG,AX   LRSM14*IDRLR4291. 
+@USE FL1.,LRSM14*IDRLR4291. 
+@.  
+@DELETE,C LRSM14*IDRLR4292. 
+@CAT,P    LRSM14*IDRLR4292.,f///100000  
+@ASG,AX   LRSM14*IDRLR4292. 
+@USE FL2.,LRSM14*IDRLR4292. 
+@.  
+@XQT,E    SYS$LIB$*RSA.RSAC-COIVP   
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC       ;
+ UNLOAD TO FILE FL1 
+   SELECT  A.N_MAT,A.C_STA_TRT,A.D_PER_DEB,A.D_PER_FIN  
+        FROM
+            LR429 A 
+        WHERE   
+            A.C_STA_TRT = 'ATP' AND 
+            EXISTS (SELECT B.MATRICC FROM AL027 B   
+                    WHERE A.N_MAT = B.MATRICC AND B.C_SUSPEND <> '32')  
+        FORMAT EXTERNAL;
+END THREAD; 
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+ UNLOAD TO FILE FL2 
+   SELECT   A.N_MAT,A.C_STA_TRT,A.D_PER_DEB,A.D_PER_FIN,
+            C.N_TRT_AUM,C.IDTXT,C.C_ILE_RED,C.D_DEB,C.N_PRG 
+        FROM
+            LR429 A 
+            LEFT JOIN LR407 C   
+            ON A.N_MAT = C.N_MAT
+        WHERE   
+            A.C_STA_TRT = 'ATP' 
+            AND 
+            EXISTS (SELECT * FROM AL027 B   
+                    WHERE A.N_MAT = B.MATRICC AND B.C_SUSPEND <> '32')  
+            AND 
+            C.N_TRT_AUM = 90
+        FORMAT EXTERNAL;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE LRSM14*IDRLR4291. 
+@FREE LRSM14*IDRLR4292. 
+@ . 
+@TIME   
+@.  
+@LAB060: MSG 060. FUSION DES 2 FICHIERS DE LR429
+@ADD       SYS$*RUNS.REPRISE
+LAB060  
+@.  
+@ASG,A     LRSM14*IDRLR4291.
+@USE       I1,LRSM14*IDRLR4291. 
+@.  
+@ASG,A     LRSM14*IDRLR4292.
+@USE       I2,LRSM14*IDRLR4292. 
+@.  
+@DELETE,C  LRSM14*IDRLR4293.
+@CAT,P     LRSM14*IDRLR4293.,F///100000 
+@ASG,A     LRSM14*IDRLR4293.
+@USE       OSORT,LRSM14*IDRLR4293.  
+@.  
+@SORT,ES
+FILESIN=I1,I2 BLOCK=10  
+FILEOUT=OSORT BLOCK=10  
+RSZ=91  
+KEY=2,7,CH,A,1:15,8,CH,A,2:36,2,CH,D,3  
+MERGE   
+@EOF
+@FREE      I1.  
+@FREE      I2.  
+@FREE      OSORT.   
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB070: MSG 070. Suppression des doublons dans le fichier fusion   
+@ADD       SYS$*RUNS.REPRISE
+LAB070  
+@ . 
+@ASG,A   LRSM14*IDRLR4293.  
+@USE     INP,LRSM14*IDRLR4293.  
+@ . 
+@DELETE,C LRSM14*IDRLR429.  
+@CAT,P    LRSM14*IDRLR429.,F///100000   
+@ASG,A    LRSM14*IDRLR429.  
+@USE      OUT1,LRSM14*IDRLR429. 
+@ . 
+@DELETE,C LRSM14*IDRLR4294. 
+@CAT,P    LRSM14*IDRLR4294.,F///100000  
+@ASG,A    LRSM14*IDRLR4294. 
+@USE      OUT2,LRSM14*IDRLR4294.
+@ . 
+@SSG,IA *UTILIT.BABA/ASCII  
+SGS 
+ASCII   
+INPUT  INP,91,10
+OUTPUT OUT1,91,10 OUT2,91,10
+KEYS ALL 1,32   
+SEQERROR MULTI  
+@EOF
+@XQT .BABA  
+@ . 
+@FREE INP.  
+@FREE OUT1. 
+@FREE OUT2. 
+@ . 
+@ERS TPF$.  
+@TIME   
+@ . 
+@LAB100: MSG 100. Transformation du fichier fusion en fichier excel 
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@ . 
+@ASG,AX    LRSM14*IDRLR429. 
+@USE       FILEIN,LRSM14*IDRLR429.  
+@DELETE,C  LRSM14*FICHEXCE2.
+@ASG,UP    LRSM14*FICHEXCE2.,F/1/POS/4000   
+@USE       FILEOUT,LRSM14*FICHEXCE2.
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 91 
+COL 2,7,,MATRICULE 10,3,,STA 15,8,,DT-DEB 25,8,,DT-FIN  
+COL 36,2,,STA 39,30,,TEXTE 70,5,,REDAC 77,8,,DT-LR407 86,5,,PROGR   
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@TIME   
+@.  
+@LAB110: MSG 110. Transfert des fichiers
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ . 
+@ADD       F999TRANSF.LRSM14/2200PC 
+@ . 
+@TIME   
+@ . 
+@LAB120: MSG 120. Delete des fichiers intermédiaires
+@ADD       SYS$*RUNS.REPRISE
+LAB120  
+@ . 
+@DELETE,C LRSM14*FICHEXCEL. 
+@DELETE,C LRSM14*IDRLR401.  
+@DELETE,C LRSM14*FICHEXCE1. 
+@DELETE,C LRSM14*IDRLR407.  
+@DELETE,C LRSM14*FICHEXCE2. 
+@DELETE,C LRSM14*IDRLR429.  
+@DELETE,C LRSM14*IDRLR4291. 
+@DELETE,C LRSM14*IDRLR4292. 
+@DELETE,C LRSM14*IDRLR4293. 
+@DELETE,C LRSM14*IDRLR4294. 
+@ . 
+@TIME   
+@ . 
+@LAB777: MSG 777. Delete du fichier de reprise  
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@TIME   
+@ . 
+@MSG       ***** LE RUN LRSM14 S'EST TERMINE CORRECTEMENT ***** 
+@QUAL,R 
+@FIN

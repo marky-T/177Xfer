@@ -1,0 +1,65 @@
+$(1)   AXR$ 
+ . CALL 'XPRT' USING CHAR/LINE LINE/PAGE. 
+XPRT* 
+       LA          A0,(1,HEAD)  .   
+       ER          PRTCN$  .  
+       SZ           A3 .
+       SZ          A0   
+       L,H2        A1,0,X11   
+       TNG,U       A1,4000    
+       A,U         X11,1
+       L           A1,*0,X11  
+       SLJ          CON 
+       DI,U        A0,6 
+       JZ          A1,DP8              . WHOLE NO OF WORDS  
+       MSI,U       A1,6 .     
+       LA          A3,SP .    
+       LA          A2,XS .    
+       LDSL        A2,A1 .    
+       S           A0,A3               . SAVE FOR INDEX LATER     
+       S           A2,XXX,A3 .
+       A,U         A0,1 
+DP8    S,S3        A0,PRT     
+       SZ          A0   
+       L           A1,*1,X11  
+       SLJ          CON 
+       AN,U        A1,1 
+       L,U         R3,4 
+       S           A1,R2
+       L           A0,(007701,SP)   
+       ER          PRINT$     
+       L           A0,PRT     
+       ER          PRINT$     
+       JGD         R2,$-2     
+       JGD         R3,$-6     
+       L           A0,XS .    
+       S           A0,XXX,A3 .
+       L           A0,(007701,SP)   
+       ER          PRINT$     
+       J           2,X11
+CON    +            0   
+       L,U          R3,5
+       LDSL         A0,6
+       TNZ          A0  
+       JGD          R3,$-2    
+       AN,U         A0,060    
+       A            A0,NUM    
+       JGD          R3,$+2    
+       J            $+5 
+       MSI,U        A0,10     
+       S            A0,NUM    
+       SZ           A0  
+       J            $-10
+       S            A0,A1     
+       SZ           A0  
+       S            A0,NUM    
+       J            *CON
+$(0) .
+XS     'XXXXXX' . 
+NUM    +0   
+PRT    0100,XXX   
+XXX    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'.  
+       'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'.  
+SP     '      '   
+HEAD   'L,1 . ' . 
+       END  

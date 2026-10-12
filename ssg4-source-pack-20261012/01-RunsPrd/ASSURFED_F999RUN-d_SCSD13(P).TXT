@@ -1,0 +1,158 @@
+@RUN,M/T   SCSD13,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ******************************************************** 
+@MSG       **                                                    ** 
+@MSG       **  TRAITEMENT DU BORDEREAU CAISSE DE COMPENSATION    ** 
+@MSG       **                  DDR ACTIF 00124                   ** 
+@MSG       **                  ---------                         ** 
+@MSG       ******************************************************** 
+@ . LE 20/04/2016 : CREATION DU RUN 
+@ . LE __/__/____ : MODIFICATION DU RUN 
+@ . 
+@MSG       EDITION DU JCL.  
+@ . 
+@PRT,SC    F999RUN.SCSD13   
+@TIME   
+@ . 
+@MSG       TRANSFERT DES PROGRAMMES 
+@ . 
+@ASG,T     SCSD13.,F//POS/4000  
+@COPY,A    SCPRD*BABS.SCB293,SCSD13.SCB293  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE. 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@TIME   
+@ . 
+@ . ====================================================================
+@ . BABA - SELECTION DU RECORD AYANT LE CODE C85
+@ . ====================================================================
+@ . 
+@LAB010: MSG 010. SELECTION ET FILTRAGE 
+@ADD       SYS$*RUNS.REPRISE
+LAB010  
+@ . 
+@ASG,AX    FBORDCC124.  
+@USE       INA,FBORDCC124.  
+@ . 
+@DELETE,C  RBRDC85-124. 
+@ASG,UP    RBRDC85-124.,F//POS/4000 
+@USE       OUTA,RBRDC85-124.
+@ . 
+@DELETE,C  IBRDC80-124. 
+@ASG,UP    IBRDC80-124.,F//POS/4000 
+@USE       OUTB,IBRDC80-124.
+@ . 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INA,300,10   
+OUTPUT     OUTA,300,10   OUTB,358,10
+KEYS       R  1,3,C85   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      RBRDC85-124. 
+@FREE      IBRDC80-124. 
+@FREE      FBORDCC124.  
+@ . 
+@ . =================================================================== 
+@ . BABA - SEPARATION DDR ACTIF ET DDR PASSIF   
+@ . =================================================================== 
+@ . 
+@LAB015: MSG 015. SELECTION ET FILTRAGE 
+@ADD       SYS$*RUNS.REPRISE
+LAB015  
+@ . 
+@ASG,AX    IBRDC80-124. 
+@USE       INA,IBRDC80-124. 
+@ . 
+@DELETE,C  IBRDC80A-124.
+@ASG,UP    IBRDC80A-124.,F//POS/4000
+@USE       OUTA,IBRDC80A-124.   
+@ . 
+@DELETE,C  RBRDC80P-124.
+@ASG,UP    RBRDC80P-124.,F//POS/4000
+@USE       OUTB,RBRDC80P-124.   
+@ . 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INA,358,10   
+OUTPUT     OUTA,300,10   OUTB,358,10
+KEYS       R  4,5,00124 
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      IBRDC80A-124.
+@FREE      RBRDC80P-124.
+@ . 
+@ . ====================================================================
+@LAB020: MSG 020. SELECTION ET TRI POUR SCB293. 
+@ . ====================================================================
+@ADD       SYS$*RUNS.REPRISE
+LAB020  
+@ . 
+@ASG,A     IBRDC80A-124.
+@DELETE,C  IBRDACF-124T.
+@CAT,P     IBRDACF-124T.,F//POS/4000
+@ASG,A     IBRDACF-124T.
+@SORT,ES
+FILEIN=IBRDC80A-124,F   BLOCK=10
+FILEOUT=IBRDACF-124T,F BLOCK=10 
+ACCEPT=1,3,CAS,E,C81,OR 
+ACCEPT=1,3,CAS,E,C82
+KEY=18,2,CH,A,1    . Zone 03 : Numéro de suite = TP-DEM (1,2,3) 
+RECORD=100  
+RSZ=300 
+@EOF
+@TIME   
+@ . 
+@ . ====================================================================
+@ . CREATION DDR SCB293 ACTIF   
+@ . ====================================================================
+@ . 
+@LAB030: MSG 030. CREATION DDR ACTIF
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@ASG,AX    RBRDC85-124. 
+@USE       IN-DATA-C85,RBRDC85-124. 
+@ . 
+@ASG,AX    IBRDACF-124T.
+@USE       IN-DATA-C80,IBRDACF-124T.
+@ . 
+@XQT       SCSD13.SCB293
+@FREE      RBRDC85-124. 
+@FREE      IBRDACF-124T.
+@TIME   
+@ . 
+@ . ====================================================================
+@ . 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS.   
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.copie/pc   
+@TIME   
+@ . 
+@LAB770: MSG 770. EXECUTION DELETE FICHIERS TRAVAUX.
+@ADD       SYS$*RUNS.REPRISE
+LAB770  
+@ . 
+@DELETE,C  IBRDC80-124  
+@DELETE,C  IBRDC80A-124 
+@DELETE,C  IBRDACF-124T 
+@FREE      RBRDC85-124  
+@TIME   
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@MSG       *** LE RUN SCSD13 S'EST BIEN TERMINE *** 
+@ . 
+@QUAL,R 
+@FIN

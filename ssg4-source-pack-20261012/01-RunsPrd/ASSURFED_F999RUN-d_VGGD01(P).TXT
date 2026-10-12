@@ -1,0 +1,636 @@
+@RUN,M/T  VGGD01,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@ . 
+@MSG       **********************************************************   
+@MSG       *   RESERVES COUCHE VIE GROUPE POUR TAUX VARIABLE        *   
+@MSG       **********************************************************   
+@ . LE 13/04/03: CREATION DU RUN
+@.  Le 14/02/2005 Adapatation aux n couches --> P02083/23   
+@.                --> Haegeman Jean-Luc.
+@.  
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.VGGD01  
+@TIME   
+@MSG       ENREGISTREMENT DES PARAMETRES + EDITION  
+@ADD       F999PARA.VGGD01  
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.VGGD01   
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VGGD01.,F//POS/10000 
+@COPY,A    ASSURFED*ABSVIG.VIG747,VGGD01.VIG747 
+@COPY,A    ASSURFED*ABSVIG.VIG851,VGGD01.VIG851 
+@COPY,A    ASSURFED*ABSVIG.VIG860,VGGD01.VIG860 
+@COPY,A    VGRPRD*BABS.VGB080,VGGD01.VGB080 
+@COPY,A    VGRPRD*BABS.VGB081,VGGD01.VGB081 
+@COPY,A    VPRD*BABS.VGB111,VGGD01.VGB111   
+@COPY,A    VPRD*BABS.VGB151,VGGD01.VGB151   
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@LAB010: MSG 010. Isoler les années tarif à traiter.
+@ . 
+@ADD       CPVGGD01.TXCLIG  
+@ . 
+@ .        Fichier trié des années tarifs présentes dans le fichier input   
+@DELETE,C  IVGDTABSDF.  
+@CAT,P     IVGDTABSDF.,F///10000
+@ASG,A     IVGDTABSDF.  
+@USE       FOCH1,IVGDTABSDF.
+@SORT,EA
+FILEIN=IINDEX,F  MODE=MSAM,D . Le fichier input est indexé  
+FILEOUT=FOCH1,F MODE=SDF     . Le fichier output est séquentiel 
+KEY=5,5,CH,A                 . Tri suivant l'année tarif croissante 
+SELECT=5,5                   . Sélection de l'année tarif   
+ACCEPT=1,4,ASC,E,V110,AND    . Ne traiter que les tables V110   
+ACCEPT=5,1,OCT,NE,040        . Ne pas traiter les libellés  
+DELDUPS                      . Supprimer les doublons   
+RSZ=132 
+@EOF
+@TIME   
+@ . 
+@LAB020: MSG 020. TRI COUCHE ANNEE TARIF VIE GROUPE ASCENDING.  
+@ . 
+@ASG,A     FVGR002CLO.  
+@USE       INA,FVGR002CLO.  
+@ . 
+@DELETE,C  IVGD002CCHT. 
+@ASG,UP    IVGD002CCHT,F/0/POS/4000 
+@USE       OUT,IVGD002CCHT. 
+@ . 
+@SORT,ES
+FILEIN=INA,F     BLOCK=10   
+FILEOUT=OUT,F    BLOCK=10   
+KEY=321,5,CH,A                   . Code année tarif 
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@LAB030: MSG 030. SELECTION DES COUCHES DE LA VIE GROUPE TRAITEES   
+@ . 
+@ERS       TPF$.
+@ . 
+@DELETE,C  IVGD002BON.  
+@ASG,UP    IVGD002BON.,F///10000
+@USE       COUBON,IVGD002BON.   
+@ . 
+@DELETE,C  IVGD002SUP.  
+@ASG,UP    IVGD002SUP.,F///10000
+@USE       COUSUP,IVGD002SUP.   
+@ . 
+@ASG,A     IVGDTABSDF.  
+@USE       CLE,IVGDTABSDF.  
+@ . 
+@ASG,A     IVGD002CCHT. 
+@USE       COUCHE,IVGD002CCHT.  
+@ . 
+@SSG,IA    *UTILIT.FUSBA/ASCII  
+SGS 
+ASCII   
+INPUT      CLE,5,10       COUCHE,500,10 
+OUTPUT     COUSUP,500,10  COUBON,500,10 
+KEYS       321,5
+UPDATE     1,5  
+ANNUL COPY  
+NOLIST  
+@EOF
+@XQT       TPF$.FUSBA   
+@FREE      IVGD002BON.  
+@FREE      IVGD002SUP.  
+@FREE      IVGDTABSDF.  
+@FREE      IVGD002CCHT. 
+@TIME   
+@ . 
+@LAB040: MSG 040. Tri inventaires couches intéressées au 31/12. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ASG,A     IVGD002BON.  
+@USE       INA,IVGD002BON.  
+@DELETE,C  IVGDt02Cch.  
+@ASG,UP    IVGDt02Cch.,F///10000
+@USE       OUTA,IVGDt02Cch. 
+@SORT,ES
+FILEIN=INA,F              BLOCK=10  
+FILEOUT=OUTA,F            BLOCK=10  
+KEY=16,7,CH,A,1         . NUMERO DE CONTRAT 
+KEY=7,1,CH,A,2          . CODE TARIF
+KEY=321,5,CH,A,3        . ANNEE TARIF   
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB050: MSG 050. Tri inventaires contrats au 31/12.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ASG,A     FVGR001CLO.  
+@USE       INA,FVGR001CLO.  
+@DELETE,C  IVGDt01CON.  
+@ASG,UP    IVGDt01CON.,F///10000
+@USE       OUTA,IVGDt01CON. 
+@SORT,ES
+FILEIN=INA,F              BLOCK=10  
+FILEOUT=OUTA,F            BLOCK=10  
+KEY=16,7,CH,A,1         . NUMERO DE CONTRAT 
+KEY=7,1,CH,A,2          . CODE TARIF
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB060: MSG 060. ASSORTIMENT CON-CCH - VGB111. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@DELETE,C  IVGD002INV.  
+@ASG,UP    IVGD002INV,F/1/POS/4000  
+@USE       CCH-OUT,IVGD002INV.  
+@ASG,AX    IVGDt01CON.  
+@USE       CON-INP,IVGDt01CON.  
+@ASG,AX    IVGDt02CCH.  
+@USE       CCH-INP,IVGDt02CCH.  
+@DELETE,C  VGGD01*P-VGB111-CTL. 
+@CAT,P     VGGD01*P-VGB111-CTL.,F///10000   
+@ASG,AX    VGGD01*P-VGB111-CTL. 
+@USE       LISTE,VGGD01*P-VGB111-CTL.   
+@XQT       VGGD01.VGB111
+@FREE      IVGDt01CON.  
+@FREE      IVGDt02CCH.  
+@FREE      IVGD002INV.  
+@FREE      VGGD01*P-VGB111-CTL. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB070: MSG 070. CALCUL RES.MATH COMB 71 - VIG747. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ASG,A     IVGD002INV.          . FICHIER COUCHES   
+@ADD       CPVGGD01.TXCLIG  
+@DELETE,C  IVGD747COU.  
+@ASG,UP    IVGD747COU,F/0/POS/4000  
+@USE       FIPOLINV,IVGD002INV. 
+@USE       FRESMAT,IVGD747COU.  
+@DELETE,C  VGGD01*IMP-VIG747.   
+@ASG,UP    VGGD01*IMP-VIG747.,F///10000 
+@USE       LISTE,VGGD01*IMP-VIG747. 
+@SETC      0/S4 
+@XQT       VGGD01.VIG747
+@ADD       F999CONTROLE.VGGD01  
+@FREE      VGGD01*IMP-VIG747.   
+@FREE      IVGD002INV.  
+@FREE      IINDEX.  
+@FREE      IVGD747COU.  
+@TIME   
+@ERS       TPF$.
+@ . 
+@LAB100: MSG 100. Sélection AD combinaisons autres 71 - VIG860. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@SETC      0/S3 
+@ASG,A     IVGD002INV.          . FICHIER COUCHES   
+@DELETE,C  IVGD860COU.  
+@ASG,UP    IVGD860COU,F/0/POS/4000  
+@USE       IINVENT,IVGD002INV.  
+@USE       ORESERVE,IVGD860COU. 
+@DELETE,C  VGGD01*IMP-VIG860.   
+@ASG,UP    VGGD01*IMP-VIG860.,F///10000 
+@USE       LISTE,VGGD01*IMP-VIG860. 
+@XQT       VGGD01.VIG860
+@ADD       F999CONTROLE.VGGD01  
+@FREE      VGGD01*IMP-VIG860.   
+@FREE      IVGD002INV.  
+@FREE      IVGD860COU.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB110: MSG 110. Calcul AD combinaisons autres que 71 - VIG851.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ASG,A     IVGD860COU.  
+@ADD       CPVGGD01.TXCLIG  
+@DELETE,C  IVGD851COU.  
+@ASG,UP    IVGD851COU,F/0/POS/4000  
+@USE       IRESERVE,IVGD860COU. 
+@USE       ORESERVE,IVGD851COU. 
+@DELETE,C  VGGD01*IMP-VIG851.   
+@ASG,UP    VGGD01*IMP-VIG851.,F///10000 
+@USE       LISTE,VGGD01*IMP-VIG851. 
+@SETC      0/S4 
+@XQT       VGGD01.VIG851
+@ADD       F999CONTROLE.VGGD01  
+@FREE      VGGD01*IMP-VIG851.   
+@FREE      IINDEX.  
+@FREE      IVGD860COU.  
+@FREE      IVGD851COU.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB120: MSG 120. FUSION AD OUTPUTS VIG747 + VIG851.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ASG,A     IVGD747COU.                  . RSM-9509-00 comb 71   
+@ASG,A     IVGD851COU.                  . RSM-9509-00 comb70-60-61-6
+@DELETE,C  IVGD002COU.  
+@ASG,UP    IVGD002COU.,F/0/POS/4000 
+@SORT,ES
+FILEIN=IVGD747COU,F   BLOCK=10  
+FILEIN=IVGD851COU,F   BLOCK=10  
+FILEOUT=IVGD002COU,F  BLOCK=10  
+KEY=8,1,CH,A,1      . CODE BANDE
+KEY=17,7,CH,A,2     . POLICE
+KEY=301,5,CH,D,3    . ANNEE TARIF   
+RSZ=400 
+RECORD=50   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB130: MSG 130. Création totaux réserves AD - VGB080. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB130  
+@ASG,A     IVGD002COU.  
+@USE       IRESCCH,IVGD002COU.  
+@DELETE,C  VGGD01*IMP-VGB80CAD. 
+@ASG,UP    VGGD01*IMP-VGB80CAD.,F///10000   
+@USE       LISTCONTR,VGGD01*IMP-VGB80CAD.   
+@DELETE,C  IVGD080MAT.  
+@ASG,UP    IVGD080MAT.,F/0/POS/4000 
+@USE       ORESTOT,IVGD080MAT.  
+@XQT       VGGD01.VGB080
+@FREE      VGGD01*IMP-VGB80CAD. 
+@FREE      IVGD002COU.  
+@FREE      IVGD080MAT.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB140: MSG 140. FORMATAGES EXCEL (TRANSEXCEL) AD. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@ASG,A     IVGD080MAT.  
+@USE       FILEIN,IVGD080MAT.   
+@ . 
+@DELETE,C  RVGD080ADPC. 
+@CAT,P     RVGD080ADPC.,F/0/POS/4000
+@ASG,A     RVGD080ADPC. 
+@USE       FILEOUT,RVGD080ADPC. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 700
+COL 097,04,,''Année réserve AD''
+COL 318,02,,''Domaine'' 
+COL 009,08,,''N° de groupe''
+COL 001,01,VIDEALPHA,''Matricule''  
+COL 017,06,,''Radical police''  
+COL 023,01,,''Suffixe police''  
+COL 007,01,,''Code tarif''  
+COL 001,01,VIDEALPHA,''Branche''
+COL 051,02,,''Code coassurance''
+COL 063,04,,''Rapport coassurance'' 
+COL 037,02,,''Combinaison'' 
+COL 043,06,,''N° assuré A'' 
+COL 067,01,,''Sexe A''  
+COL 025,06,AAAAMM,''Date naissance A''  
+COL 001,01,VIDEALPHA,''N° assuré B''
+COL 001,01,VIDEALPHA,''Sexe B'' 
+COL 001,01,VIDEALPHA,''Date naissance B''   
+COL 320,04,JJMM,''Echéance réserve''
+COL 001,01,VIDEALPHA,''Décroissance''   
+COL 001,01,VIDEALPHA,''Constante taux'' 
+COL 039,02,,''Age terme''   
+COL 001,01,VIDEALPHA,''Date terme'' 
+COL 095,02,,''Age terme primes''
+COL 082,08,AAAAMMJJ,''Date terme primes''   
+COL 041,02,,''Périodicité'' 
+COL 301,05,,''Année tarif'' 
+COL 332,08,V5,''Taux inventaire décès'' 
+COL 324,08,V5,''Taux encaissement'' 
+COL 101,12,MNT,''CD''   
+COL 113,12,MNT,''CV''   
+COL 001,01,VIDEALPHA,''Bonus''  
+COL 125,12,MNT,''PAC''  
+COL 137,12,MNT,''PAI''  
+COL 149,12,MNT,''PUC''  
+COL 161,12,MNT,''PUI''  
+COL 289,12,MNT,''DPAmax''   
+COL 340,12,MNT,''DPAmin''   
+COL 001,01,VIDEALPHA,''Zillmer''
+COL 001,01,VIDEALPHA,''Age''
+COL 001,01,VIDEALPHA,''Durée garantie'' 
+COL 001,01,VIDEALPHA,''Durée primes''   
+COL 001,01,VIDEALPHA,''äxm (axm)''  
+COL 001,01,VIDEALPHA,''äxn (axn)''  
+COL 001,01,VIDEALPHA,''äx'' 
+COL 001,01,VIDEALPHA,''äxnm''   
+COL 001,01,VIDEALPHA,''nEx''
+COL 001,01,VIDEALPHA,''A1x''
+COL 001,01,VIDEALPHA,''A1xn''   
+COL 001,01,VIDEALPHA,''lA1xm''  
+COL 001,01,VIDEALPHA,''läxm''   
+COL 001,01,VIDEALPHA,''mEx''
+COL 001,01,VIDEALPHA,''A1xnm''  
+COL 001,01,VIDEALPHA,''v1n''
+COL 001,01,VIDEALPHA,''Tarif SRD''  
+COL 001,01,VIDEALPHA,''Coefficient 1''  
+COL 001,01,VIDEALPHA,''Réserve 1''  
+COL 053,05,,''Age'' 
+COL 058,05,,''Durée garantie restante'' 
+COL 090,05,,''Durée primes restantes''  
+COL 001,01,VIDEALPHA,''CD2''
+COL 201,18,V9,''äxm (axm)'' 
+COL 001,01,VIDEALPHA,''äxn (axn)''  
+COL 001,01,VIDEALPHA,''äx (ax)''
+COL 001,01,VIDEALPHA,''äxnm (axnm)''
+COL 219,18,V9,''nEx''   
+COL 001,01,VIDEALPHA,''A1x''
+COL 237,18,V9,''A1'xn'' 
+COL 255,18,V9,''lA1'xm''
+COL 370,18,V9,''mEx''   
+COL 068,14,V5,''1Ex''   
+COL 273,14,V5,''A1'xm'' 
+COL 352,18,V9,''A1'xnm''
+COL 001,01,VIDEALPHA,''läxm''   
+COL 001,01,VIDEALPHA,''v1n''
+COL 001,01,VIDEALPHA,''Tarif SRD''  
+COL 001,01,VIDEALPHA,''Coefficient 2''  
+COL 001,01,VIDEALPHA,''Réserve 2''  
+COL 173,12,MNT,''Prorata''  
+COL 185,12,MNT,''Réserve 31/12''
+COL 388,1,,''Code anomalie''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE      IVGD080MAT.  
+@FREE      RVGD080ADPC. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB150: MSG 150. TRI COUCHE ANNEE TARIF VIE GROUPE ASCENDING.  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ASG,A     FPB9511CCH.            . Inventaire PB CCH.  
+@USE       INA,FPB9511CCH.  
+@ . 
+@DELETE,C  IVGDPB2CCHT. 
+@ASG,UP    IVGDPB2CCHT,F/0/POS/4000 
+@USE       OUT,IVGDPB2CCHT. 
+@ . 
+@SORT,ES
+FILEIN=INA,F     BLOCK=10   
+FILEOUT=OUT,F    BLOCK=10   
+KEY=69,5,CH,A                   . Code année tarif  
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@LAB160: MSG 160. SELECTION DES COUCHES DE LA VIE GROUPE TRAITEES   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB160  
+@ERS       TPF$.
+@ . 
+@DELETE,C  IVGDPB2BON.  
+@ASG,UP    IVGDPB2BON.,F///10000
+@USE       COUBON,IVGDPB2BON.   
+@ . 
+@DELETE,C  IVGDPB2SUP.  
+@ASG,UP    IVGDPB2SUP.,F///10000
+@USE       COUSUP,IVGDPB2SUP.   
+@ . 
+@ASG,A     IVGDTABSDF.  
+@USE       CLE,IVGDTABSDF.  
+@ . 
+@ASG,A     IVGDPB2CCHT. 
+@USE       COUCHE,IVGDPB2CCHT.  
+@ . 
+@SSG,IA    *UTILIT.FUSBA/ASCII  
+SGS 
+ASCII   
+INPUT      CLE,5,10       COUCHE,500,10 
+OUTPUT     COUSUP,500,10  COUBON,500,10 
+KEYS       69,5 
+UPDATE     1,5  
+ANNUL COPY  
+NOLIST  
+@EOF
+@XQT       TPF$.FUSBA   
+@FREE      IVGDPB2BON.  
+@FREE      IVGDPB2SUP.  
+@FREE      IVGDTABSDF.  
+@FREE      IVGDPB2CCHT. 
+@TIME   
+@ . 
+@LAB170: MSG 170. Tri invent couches PB intéressées au 31/12.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ASG,A     IVGDPB2BON.                . Inventaire PB CCH int.  
+@USE       INA,IVGDPB2BON.  
+@DELETE,C  IVGDPB2INV.  
+@ASG,UP    IVGDPB2INV.,F///10000
+@USE       OUTA,IVGDPB2INV. 
+@SORT,ES
+FILEIN=INA,F              BLOCK=10  
+FILEOUT=OUTA,F            BLOCK=10  
+KEY=17,7,CH,A,1         . NUMERO DE CONTRAT 
+KEY=24,1,CH,A,2         . CODE TARIF
+KEY=69,5,CH,A,3         . ANNEE TARIF   
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@LAB200: MSG 200. Calcul réserves PB - VGB151.  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,A     IVGDPB2INV.  
+@ASG,A     FVIR001SDF.  
+@USE       IPBGRP,IVGDPB2INV.           . FPB9511CCH trié   
+@USE       IINDEX,FVIR001SDF.   
+@ASG,A     IVGDt01CON.                  . FVGR001CLO trié   
+@USE       IINVENT,IVGDt01CON.  
+@DELETE,C  IVGD151COU.  
+@ASG,UP    IVGD151COU,F/0/POS/4000  
+@USE       OPB,IVGD151COU.  
+@SETC      0/S3 
+@SETC      0/S4 
+@DELETE,C  VGGD01*IMP-VGB151.   
+@ASG,UP    VGGD01*IMP-VGB151.,F///10000 
+@USE       LISTE,VGGD01*IMP-VGB151. 
+@XQT       VGGD01.VGB151
+@ADD       F999CONTROLE.VGGD01  
+@FREE      VGGD01*IMP-VGB151.   
+@FREE      FVIR001SDF.  
+@FREE      IVGDt01CON.  
+@FREE      IVGDPB2INV.  
+@FREE      IVGD151COU.  
+@TIME   
+@ . 
+@LAB210: MSG 210. Création totaux réserves PB - VGB081. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ASG,A     IVGD151COU.  
+@USE       IRESCCH,IVGD151COU.  
+@DELETE,C  VGGD01*IMP-VGB081.   
+@ASG,UP    VGGD01*IMP-VGB081.,F///10000 
+@USE       LISTCONTR,VGGD01*IMP-VGB081. 
+@DELETE,C  IVGD081RMPB. 
+@ASG,UP    IVGD081RMPB.,F/0/POS/4000
+@USE       ORESTOT,IVGD081RMPB. 
+@XQT       VGGD01.VGB081
+@FREE      VGGD01*IMP-VGB081.   
+@FREE      IVGD151COU.  
+@FREE      IVGD081RMPB. 
+@TIME   
+@ . 
+@LAB220: MSG 220. FORMATAGES EXCEL (TRANSEXCEL) PB. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,A     IVGD081RMPB. 
+@USE       FILEIN,IVGD081RMPB.  
+@ . 
+@DELETE,C  RVGD081PBPC. 
+@CAT,P     RVGD081PBPC.,F/0/POS/4000
+@ASG,A     RVGD081PBPC. 
+@USE       FILEOUT,RVGD081PBPC. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 700
+COL 185,04,,''Année réserve PB''
+COL 293,02,,''Domaine'' 
+COL 009,08,,''N° de groupe''
+COL 001,01,VIDEALPHA,''Matricule''  
+COL 017,06,,''Radical police''  
+COL 023,01,,''Suffixe police''  
+COL 024,01,,''Code tarif''  
+COL 001,01,VIDEALPHA,''Branche''
+COL 035,02,,''Code coassurance''
+COL 037,04,,''Rapport coassurance'' 
+COL 031,02,,''Combinaison AP''  
+COL 074,02,,''Combinaison PB''  
+COL 295,06,,''N° assuré''   
+COL 370,01,,''Sexe''
+COL 025,06,AAAAMM,''Date naissance''
+COL 366,04,MMJJ,''Echéance réserve''
+COL 033,02,,''Age terme''   
+COL 001,01,VIDEALPHA,''Date terme'' 
+COL 076,03,,''Type PB'' 
+COL 069,05,,''Année tarif'' 
+COL 332,08,VIDEALPHA,''Taux inventaire décès''  
+COL 101,12,VIDEALPHA,''CDPB''   
+COL 213,12,MNT,''CVPB'' 
+COL 001,01,VIDEALPHA,''Age''
+COL 001,01,VIDEALPHA,''Durée garantie'' 
+COL 001,01,VIDEALPHA,''Qx'' 
+COL 001,01,VIDEALPHA,''äxn''
+COL 001,01,VIDEALPHA,''äx'' 
+COL 001,01,VIDEALPHA,''nEx''
+COL 001,01,VIDEALPHA,''A1x''
+COL 001,01,VIDEALPHA,''A1xn''   
+COL 001,01,VIDEALPHA,''vn'' 
+COL 001,01,VIDEALPHA,''Coefficient 1''  
+COL 001,01,VIDEALPHA,''Réserve 1''  
+COL 041,05,,''Age'' 
+COL 046,05,,''Durée garantie''  
+COL 001,01,VIDEALPHA,''Qx'' 
+COL 001,01,VIDEALPHA,''äxn''
+COL 001,01,VIDEALPHA,''äx'' 
+COL 051,18,V9,''nEx''   
+COL 001,01,VIDEALPHA,''A1x''
+COL 001,01,VIDEALPHA,''A1xn''   
+COL 001,01,VIDEALPHA,''vn'' 
+COL 001,01,VIDEALPHA,''Coefficient 2''  
+COL 001,01,VIDEALPHA,''Réserve 2''  
+COL 173,12,MNT,''Réserve 31/12''
+COL 500,1,,''Code anomalie''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE      IVGD081RMPB. 
+@FREE      RVGD081PBPC. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB230: MSG 230. Envoi INTRANET réserves PB.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ . 
+@ .  Transfert RVGD080ADPC  
+@ .            RVGD081PBPC. 
+@ . 
+@ADD       F999TRANSF.VGGD01/2200PC 
+@ . 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@LAB740: MSG 740. IMPRESSION SUR IMPRIMANTE LASER.  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ADD       F999SYM.VGGD01   
+@TIME   
+@LAB770: MSG 770. SUPPRESSION DES FICHIERS INTERMEDIAIRES   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@ . 
+@DELETE,C IVGDTABSDF.   
+@DELETE,C IVGD002CCHT.  
+@DELETE,C IVGDt02Cch.   
+@DELETE,C IVGDPB2SUP.   
+@DELETE,C IVGDPB2BON.   
+@DELETE,C IVGDPB2CCHT.  
+@DELETE,C IVGD002SUP.   
+@DELETE,C IVGD002BON.   
+@DELETE,C IVGDt01CON.   
+@DELETE,C IVGD002INV.   
+@DELETE,C IVGD747COU.   
+@DELETE,C IVGD860COU.   
+@DELETE,C IVGD851COU.   
+@DELETE,C IVGD002COU.   
+@DELETE,C IVGD080MAT.   
+@DELETE,C RVGD080ADPC.  
+@DELETE,C IVGDPB2INV.   
+@DELETE,C IVGD151COU.   
+@DELETE,C IVGD081RMPB.  
+@DELETE,C RVGD081PBPC.  
+@DELETE,C VGGD01.   
+@DELETE,C CPVGGD01. 
+@ . 
+@TIME   
+@ . 
+@ . --------------------------------------------------------------------
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ . --------------------------------------------------------------------
+@ . 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@MSG       **** LE RUN VGGD01 S'EST BIEN TERMINE ****   
+@QUAL,R 
+@FIN

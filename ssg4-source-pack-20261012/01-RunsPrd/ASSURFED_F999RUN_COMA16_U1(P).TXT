@@ -1,0 +1,141 @@
+@RUN,M/T  COMA16,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@SYM       PRINT$,1,PRSP
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES MOUVEMENTS COMMISSIONS               **
+@MSG       **      MODULE COMA16/U1                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE ERL_MVT_CMM               **
+@MSG       *===========================================================*
+@ . 
+@ .        P04062 : VANKE : 17/01/2005 : CREATION   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA16/U1
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA16U1.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE          - RESTART 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE ERL_MVT_CMM         - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,C      IUNLMVTEMC.  
+@CAT,P         IUNLMVTEMC.,F/1107/POS/262143
+@ASG,A         IUNLMVTEMC.  
+@USE       UNL,IUNLMVTEMC.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE ERL_MVT_CMM IN EXCLUSIVE RETRIEVAL MODE; 
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   ERL_MVT_CMM
+  ORDER  BY 
+         NO_MVT_CMM 
+  FORMAT EXTERNAL   
+         1:11                                    ,  
+         13:13                                   ,  
+         15:17                                   ,  
+         19:26                                   ,  
+         28:30                                   ,  
+         32:39                                   ,  
+         41:43                                   ,  
+         45:53                                   ,  
+         55:57                                   ,  
+         59:61                                   ,  
+         63:68                                   ,  
+         70:73            null is '~'            ,  
+         75:78            null is '~'            ,  
+         80:92                                   ,  
+         94:102                                  ,  
+         104:104                                 ,  
+         106:114                                 ,  
+         116:175                                 ,  
+         177:178                                 ,  
+         180:188                                 ,  
+         190:198                                 ,  
+         200:212                                 ,  
+         214:220                                 ,  
+         222:230                                 ,  
+         232:240                                 ,  
+         242:242                                 ,  
+         244:244                                 ,  
+         246:254                                 ,  
+         256:264                                 ,  
+         266:271                                 ,  
+         273:281                                 ,  
+         283:289                                 ,  
+         291:296                                 ;  
+UNLOCK ERL_MVT_CMM; 
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTEMC.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB020:   MSG 020. SELECT.DES MOUVEMENTS ERL_MVT_CMM A RECHARGER - SSG 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTEMC.  
+@USE       UNL,IUNLMVTEMC.  
+@ASG,AX        RCOMA15EMC.  
+@USE       CLE,RCOMA15EMC.  
+@ . 
+@DELETE,C      ILOAMVTEMC.  
+@CAT,P         ILOAMVTEMC.,F//POS/5000  
+@ASG,A         ILOAMVTEMC.  
+@USE       LOA,ILOAMVTEMC.  
+@DELETE,C      ISUPMVTEMC.  
+@CAT,P         ISUPMVTEMC.,F//POS/5000  
+@ASG,A         ISUPMVTEMC.  
+@USE       SUP,ISUPMVTEMC.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,029,10   UNL,296,10  
+OUTPUT         LOA,296,10   SUP,296,10  
+KEYS           2,10 
+UPDATE         1,10 
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT TPF$.FUSBA 
+@ . 
+@FREE          RCOMA15EMC.  
+@FREE          IUNLMVTEMC.  
+@FREE          ILOAMVTEMC.  
+@FREE          ISUPMVTEMC.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE              - REPRISE 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA16/U1 S'EST BIEN TERMINE ****
+@FREE      COMA16U1 
+@QUAL,R 
+@FIN

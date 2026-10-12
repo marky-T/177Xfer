@@ -1,0 +1,479 @@
+@RUN,M/T   RISH02,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@ . 
+@ . *===================================================================*   
+@ . * RISH02 - Payer (automatiquement) les ristournes   
+@ . *===================================================================*   
+@ . 
+@MSG  RISH02 - * Payer (automatiquement) les ristournes 
+@ . 
+@ . LE 26/08/2008 : CREATION DU RUN                             P06039/02   
+@ . LE 05/05/2009 : MODIFICATION DE FREQUENCE (DEVIENT HEBDO)   P06039/06   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@ . * COPY   - TRANSFERT DES PROGRAMMES                                 *   
+@ . *===================================================================*   
+@ . 
+@MSG  COPY   - Transfert des programmes 
+@ . 
+@asg,t     RISH02.,F/0/POS/4000 
+@ . 
+@COPY,A    CPRD*BABS.RIB010,RISH02.RIB010   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB000: MSG 000. procedure de restart automatique. 
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.RESTART
+?JOB-ID?
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB010: MSG 010. DELETE + cataloguer fichiers output   
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,c  RISH02*IRIB010GST1.  
+@cat,p     RISH02*IRIB010GST1.,F/0/POS/4000 
+@ . 
+@DELETE,c  RISH02*IRIB010GST2.  
+@cat,p     RISH02*IRIB010GST2.,F/0/POS/4000 
+@ . 
+@DELETE,c  RISH02*IRIB010CCRIS. 
+@cat,p     RISH02*IRIB010CCRIS.,F/0/POS/4000
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB020: MSG 020. PAYER (AUTOMATIQUEMENT) LES RISTOURNES        - RIB010
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@asg,ax    RISH02*IRIB010GST1.  
+@use       outfile1,RISH02*IRIB010GST1. 
+@ . 
+@asg,ax    RISH02*IRIB010GST2.  
+@use       outfile2,RISH02*IRIB010GST2. 
+@ . 
+@xqt       RISH02.RIB010
+@ . 
+@free      RISH02*IRIB010GST1.  
+@free      RISH02*IRIB010GST2.  
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB050: MSG 050. Déchargement output de RIB010                 - unload
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@setc      0/S2 
+@ . 
+@asg,a     RISH02*IRIB010CCRIS. 
+@use       f-unload1,RISH02*IRIB010CCRIS
+@ . 
+@xqt,e     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ UDSMSG;
+USE DEFAULT QUALIFIER AFLINC;   
+    
+unload to file "F-UNLOAD1"  
+    select  
+        substr(tl_ocr,1,917)
+    from
+        tmp_seq_rdm 
+    where   
+            mr_run_maj = 'RISH02'   
+        and mr_prg_maj = 'RIB010'   
+        and nm_fch_log = 'RIST-CPTCO'   
+    format internal;
+exit;   
+@ . 
+@free      RISH02*IRIB010CCRIS. 
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD RIST-CPTCO **  
+@ABORT  
+@OK:   MSG ** UNLOAD RIST-CPTCO OK **   
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB060: MSG 060. Déchargement matricules bordereaux emis       - unload
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@setc      0/S2 
+@ . 
+@DELETE,c  RISH02*IRIB010MAT.   
+@cat,p     RISH02*IRIB010MAT.,F/0/POS/4000  
+@asg,a     RISH02*IRIB010MAT.   
+@use       f-unload1,RISH02*IRIB010MAT. 
+@ . 
+@xqt,e     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ UDSMSG;
+USE DEFAULT QUALIFIER AFLINC;   
+    
+unload to file "F-UNLOAD1"  
+    select  
+     substr(tl_ocr,2,7),
+     substr(tl_ocr,917,1),  
+     substr(tl_ocr,219,1)   
+    
+    from tmp_seq_rdm
+    where   
+            mr_run_maj = 'RISH02'   
+        and mr_prg_maj = 'RIB010'   
+        and nm_fch_log = 'RIST-CPTCO'   
+        and substr(tl_ocr,1,1) = '1'
+    format external;
+exit;   
+@ . 
+@free      RISH02*IRIB010MAT.   
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD MAT-EMIS **
+@ABORT  
+@OK:   MSG ** UNLOAD MAT-EMIS OK ** 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB100: MSG 100. Déchargement Mail No_Lot de type 'RI2'        - unload
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB100  
+@ . 
+@setc      0/S2 
+@ . 
+@DELETE,c  RISH02*IUNLOADRI2.   
+@cat,p     RISH02*IUNLOADRI2.,f/0/POS/4000  
+@asg,a     RISH02*IUNLOADRI2.   
+@use       f-unload1,RISH02*IUNLOADRI2  
+@ . 
+@xqt,e     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ UDSMSG;
+USE DEFAULT QUALIFIER AFLINC;   
+    
+unload to file "F-UNLOAD1"  
+    select  
+        substring(tl_ocr,1,50)  
+    from
+        tmp_seq_rdm 
+    where   
+            mr_run_maj = 'RISH02'   
+        and mr_prg_maj = 'RIB010'   
+        and nm_fch_log = 'RI2'  
+        and no_seq     = 1  
+    format external;
+    ;   
+exit;   
+@ . 
+@free      RISH02*IUNLOADRI2.   
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC1
+@JUMP      OK1  
+@ERRC1: MSG ** PROBLEME DANS L'UNLOAD Mail No_Lot de type 'RI2' **  
+@ABORT  
+@OK1:   MSG ** UNLOAD Mail No_Lot de type 'RI2' **  
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB110: MSG 110. Déchargement Mail No_Lot de type 'RIV'        - unload
+@ . *===================================================================*   
+@ . 
+@add SYS$*RUNS.REPRISE  
+LAB110  
+@ . 
+@setc      0/S2 
+@DELETE,c  RISH02*IUNLOADRIV.   
+@cat,p     RISH02*IUNLOADRIV.,f/0/POS/4000  
+@asg,a     RISH02*IUNLOADRIV.   
+@use       f-unload1,RISH02*IUNLOADRIV  
+@ . 
+@xqt,e     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ UDSMSG;
+USE DEFAULT QUALIFIER AFLINC;   
+    
+unload to file "F-UNLOAD1"  
+   select   
+         Substring (Rtrim (Ltrim (Rmb.LB_CMT_001)),1,10),   
+         Rmb.MT_RMB,
+         Rtrim (Ltrim (Rmb.LB_CMT_002)),
+         Rtrim (Ltrim (Rmb.LB_CMT_003)),
+         Rtrim(ltrim(Don_Ecp_Trs.TL_ECP_001)),  
+         Rtrim(ltrim(Don_Ecp_Trs.TL_ECP_002)),  
+         Rtrim(ltrim(Don_Ecp_Trs.TL_ECP_003)),  
+         Rtrim(ltrim(Don_Ecp_Trs.TL_ECP_004)),  
+         Rmb.LB_CMT_001 
+    
+    From Tmp_Seq_Rdm, Rmb, Don_Ecp_Trs  
+    
+      Where 
+          Don_Ecp_Trs.CD_TYP_TRS     = 'A'  
+      AND REPLACE(STR(Don_Ecp_Trs.NO_TRS,10),' ','0') = 
+          Substring (Rtrim (Ltrim (Rmb.LB_CMT_001)),1,10)   
+      AND Don_Ecp_Trs.CD_TYP_CTE_TRS = 'I'  
+      AND Don_Ecp_Trs.CD_OBJ_RCV     IN (' ', 'RI') 
+      AND Don_Ecp_Trs.NO_BCH         = ' '  
+      AND Don_Ecp_Trs.NO_POL         = 0
+      AND Don_Ecp_Trs.CD_TYP_ECP     = 830  
+      AND Rmb.MR_DAT_MAJ Between
+                Don_Ecp_Trs.DT_DEB And Don_Ecp_Trs.DT_FIN   
+      AND Tmp_seq_rdm.no_seq     = Rmb.no_Lot   
+      AND Tmp_seq_rdm.mr_run_maj = 'RISH02' 
+      AND Tmp_seq_rdm.mr_prg_maj = 'RIB010' 
+      AND Tmp_seq_rdm.nm_fch_log = 'VRI'
+    
+    Order By Rmb.LB_CMT_001 
+    
+    format internal;
+    ;   
+exit;   
+@ . 
+@free      RISH02*IUNLOADRIV.   
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC2
+@JUMP      OK2  
+@ERRC2: MSG ** PROBLEME DANS L'UNLOAD Mail No_Lot de type 'RIV' **  
+@ABORT  
+@OK2:   MSG ** UNLOAD Mail No_Lot de type 'RIV'  OK **  
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB115: MSG 115. Globalisation par matricule                Recap  
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.REPRISE
+LAB115  
+@ . 
+@ASG,A     RISH02*IUNLOADRIV.   
+@USE       ENTREE,RISH02*IUNLOADRIV.
+@ . 
+@DELETE,C  RISH02*IUNLOADREC.   
+@ASG,UP    RISH02*IUNLOADREC.,F/0/POS/4000  
+@USE       SORTIE,RISH02*IUNLOADREC.
+@ . 
+@SSG,IA   *UTILIT.RECAP 
+SGS 
+INPUT      ENTREE,307,10
+OUTPUT     SORTIE,295,10
+FIELDIN    1,10 12,10 22,41 63,53 116,45 161,45 206,45 251,45   
+FIELDOUT   1,10 12,10 22,41 63,53 116,45 161,45 206,45 251,45   
+TOTIN      12,10
+TOTOUT     12,10
+INDIC      1,10 
+NEURO      1
+ASCII   
+@EOF
+@XQT       TPF$.RECAP   
+@ERS       TPF$.
+@FREE      RISH02*IUNLOADRIV.   
+@FREE      RISH02*IUNLOADREC.   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB120: MSG 120. Transformation TXT du RIV                  TransExcel 
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.REPRISE
+LAB120  
+@ . 
+@ASG,A     RISH02*IUNLOADREC.   
+@USE       FILEIN,RISH02*IUNLOADREC.
+@ . 
+@DELETE,C  RISH02*TXT-RIV.  
+@CAT,P     RISH02*TXT-RIV.,F/0/POS/4000 
+@ASG,A     RISH02*TXT-RIV.  
+@USE       FILEOUT,RISH02*TXT-RIV.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 295
+COL 001,10,,''MATRICULE''   
+COL 012,10,MNT,''MONTANT''  
+COL 022,41,,''DESTINATION'' 
+COL 063,53,,''CONTRAT SI UNIQUE''   
+COL 116,45,,''EXCEPTION COMMENTAIRE 1'' 
+COL 161,45,,''EXCEPTION COMMENTAIRE 2'' 
+COL 206,45,,''EXCEPTION COMMENTAIRE 3'' 
+COL 251,45,,''EXCEPTION COMMENTAIRE 4'' 
+TABUL '';'' 
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB125: MSG 125. Transformation TXT du Bordereaux emis      TransExcel 
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.REPRISE
+LAB125  
+@ . 
+@ASG,A     RISH02*IRIB010MAT.   
+@USE       FILEIN,RISH02*IRIB010MAT.
+@ . 
+@DELETE,C  RISH02*TXT-BRD.  
+@CAT,P     RISH02*TXT-BRD.,F/0/POS/4000 
+@ASG,A     RISH02*TXT-BRD.  
+@USE       FILEOUT,RISH02*TXT-BRD.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 12 
+COL 001,07,,''MATRICULE''   
+COL 009,01,,''PHASE AVIS EMISE ?''  
+COL 011,01,,''EXCEPTION ?'' 
+TABUL '';'' 
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB130: MSG 130. Confection fichier ancienne application   - Recap 
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.REPRISE
+LAB130  
+@ . 
+@ASG,A     RISH02*TXT-RIV.  
+@USE       FILEIN,RISH02*TXT-RIV.   
+@ . 
+@DELETE,C  RISH02*DAT-RIV.  
+@CAT,P     RISH02*DAT-RIV.,F/0/POS/4000 
+@ASG,A     RISH02*DAT-RIV.  
+@USE       FILEOUT,RISH02*DAT-RIV.  
+@ . 
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      FILEIN,304,10
+OUTPUT     FILEOUT,20,10
+FIELDIN    5,8 12,9 22,3
+FIELDOUT   1,8 9,9 18,3 
+STARTREC   2
+@EOF
+@XQT,WR    .CFH-COPY
+@ERS       TPF$.
+@ . 
+@FREE RISH02*TXT-RIV.   
+@FREE RISH02*DAT-RIV.   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB600: MSG 600. Suppression outputs DB du run RISH02          - DELETE
+@ . *===================================================================*   
+@ . 
+@add       SYS$*RUNS.REPRISE
+LAB600  
+@ . 
+@xqt,e     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC UPDATE(QUICKLOOKS) UDSMSG;  
+USE DEFAULT QUALIFIER AFLINC;   
+    
+LOCK TABLE TMP_SEQ_RDM IN EXCLUSIVE UPDATE MODE;
+    
+DELETE FROM 
+    TMP_SEQ_RDM 
+WHERE   
+    MR_RUN_MAJ = 'RISH02';  
+
+UNLOCK TMP_SEQ_RDM; 
+EXIT;   
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB700: MSG 700. ENVOI liste(s) VIA INTRANET   
+@ . *===================================================================*   
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@ . 
+@ADD       F999TRANSF.RISH02/2200PC 
+@ . 
+@TIME   
+@ . 
+@ . 
+@ . *===================================================================*   
+@LAB710: MSG 710. SAUVETAGE DES FICHIERS PAR FAS
+@ . *===================================================================*   
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB710  
+@ . 
+@ADD       SYS$*RUNS.FASDIR 
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB770: MSG 770. DELETE DES FICHIERS TEMPORAIRES.    - DELETE  
+@ . *===================================================================*   
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB770  
+@ . 
+@DELETE,c  RISH02*IRIB010GST1.  
+@DELETE,c  RISH02*IRIB010GST2.  
+@DELETE,c  RISH02*IRIB010CCRIS. 
+@DELETE,c  RISH02*IRIB010MAT.   
+@DELETE,c  RISH02*IUNLOADRI2.   
+@DELETE,c  RISH02*IUNLOADRIV.   
+@DELETE,c  RISH02*IUNLOADREC.   
+@DELETE,C  RISH02*TXT-RIV.  
+@DELETE,C  RISH02*TXT-BRD.  
+@DELETE,C  RISH02*DAT-RIV.  
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB771: MSG 771. DELETE DU FICHIER DE REPRISE  
+@ . *===================================================================*   
+@ . 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@TIME   
+@ . 
+@ . *===================================================================*   
+@LAB777: MSG 777. FIN DU RUN
+@ . *===================================================================*   
+@ . 
+@MSG     ****LE RUN RISH02 S'EST BIEN TERMINE ****  
+@ . 
+@TIME   
+@ . 
+@QUAL,R 
+@FIN

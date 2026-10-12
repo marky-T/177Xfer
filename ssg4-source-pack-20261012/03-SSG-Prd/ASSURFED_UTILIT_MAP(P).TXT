@@ -1,0 +1,11 @@
+       LIB     SYS$*COBLIB$.  
+       LIB     SYS*LIB1.
+       IN      TPF$.    
+       IN      ASSURFED*UTILIT.CFH-UB     
+       IN      ASSURFED*UTILIT.LBPCA-UB   
+       IN      ASSURFED*UTILIT.LPCOS-UB   
+       NOT     ASSURFED*UTILIT.ABORT-TRACE
+       IN      ASSURFED*UTILIT.ABORT
+       IN      ASSURFED*UTILIT.WSSINIT    
+       LIB     ASSURFED*UTILIT.     
+       LIB     SYS$*COBLIB$.  

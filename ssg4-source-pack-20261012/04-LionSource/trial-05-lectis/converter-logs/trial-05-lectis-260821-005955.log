@@ -1,0 +1,98 @@
+﻿2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:55 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-08-21 00:59:55 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:58 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:58 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-08-21 00:59:58 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Error     : ERR 000070 End of statement expected but 03CLE-UNLOAD found
+2026-08-21 00:59:59 [0] Error     : ERR 000071 End of statement expected but 03FILLER found
+2026-08-21 00:59:59 [0] Error     : ERR 000072 End of statement expected but 01 found
+2026-08-21 00:59:59 [0] Error     : ERR 000073 End of statement expected but 03FILLER found
+2026-08-21 00:59:59 [0] Error     : ERR 000074 End of statement expected but 03CLE-UNLOAD found
+2026-08-21 00:59:59 [0] Error     : ERR 000075 End of statement expected but 01 found
+2026-08-21 00:59:59 [0] Error     : ERR 000076 End of statement expected but 03FILLER found
+2026-08-21 00:59:59 [0] Error     : ERR 000077 End of statement expected but 03CLE-UNLOAD found
+2026-08-21 00:59:59 [0] Error     : ERR 000078 End of statement expected but 03FILLER found
+2026-08-21 00:59:59 [0] Error     : ERR 000086 Picture has illegal characters [X(0)]
+2026-08-21 00:59:59 [0] Error     : ERR 000090 Field LIGNE-TYPE4 is expected to have sub items but none found.
+2026-08-21 00:59:59 [0] Error     : ERR 000091 End of statement expected but 03CD-DON found
+2026-08-21 00:59:59 [0] Error     : ERR 000092 End of statement expected but 03CD-ACH found
+2026-08-21 00:59:59 [0] Error     : ERR 000093 End of statement expected but 03TL-CLE found
+2026-08-21 00:59:59 [0] Error     : ERR 000094 End of statement expected but 03TL-DON found
+2026-08-21 00:59:59 [0] Error     : ERR 000095 Field LIGNE-TYPE9 is expected to have sub items but none found.
+2026-08-21 00:59:59 [0] Error     : ERR 000096 End of statement expected but 03CD-DON9 found
+2026-08-21 00:59:59 [0] Error     : ERR 000097 End of statement expected but 03NM-BAS9 found
+2026-08-21 00:59:59 [0] Error     : ERR 000098 End of statement expected but 03NM-TAB9 found
+2026-08-21 00:59:59 [0] Error     : ERR 000099 End of statement expected but 03DT-ACH9 found
+2026-08-21 00:59:59 [0] Error     : ERR 000100 End of statement expected but 03CPTACH1 found
+2026-08-21 00:59:59 [0] Error     : ERR 000101 End of statement expected but 03CPTACH2 found
+2026-08-21 00:59:59 [0] Error     : ERR 000115 Field DATE-I is expected to have sub items but none found.
+2026-08-21 00:59:59 [0] Error     : ERR 000116 End of statement expected but 03ANNEE-I found
+2026-08-21 00:59:59 [0] Error     : ERR 000117 End of statement expected but 03MOIS-I found
+2026-08-21 00:59:59 [0] Error     : ERR 000118 End of statement expected but 03JOUR-I found
+2026-08-21 00:59:59 [0] Error     : ERR 000119 Field DATE-FR is expected to have sub items but none found.
+2026-08-21 00:59:59 [0] Error     : ERR 000120 End of statement expected but 03JOUR-FR found
+2026-08-21 00:59:59 [0] Error     : ERR 000122 End of statement expected but 03MOIS-FR found
+2026-08-21 00:59:59 [0] Error     : ERR 000124 End of statement expected but 03ANNEE-FR found
+2026-08-21 00:59:59 [0] Error     : ERR 000146 Operand END-READ is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000147 Operand END-READ must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000157 Operand END-READ is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000158 Operand END-READ must be a numeric variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000168 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000169 Operand CD-ACH is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000169 Operand CD-ACH must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000170 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000170 Invalid expression [CLE-UNLOAD] encountered.
+2026-08-21 00:59:59 [0] Error     : ERR 000170 Operand TL-CLE is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000170 Operand TL-CLE must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000171 Operand TL-DON is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000171 Operand TL-DON must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000175 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000177 Unexpected token END-IF, expected: 
+2026-08-21 00:59:59 [0] Error     : ERR 000179 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000184 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000186 Unexpected token END-EVALUATE, expected: 
+2026-08-21 00:59:59 [0] Error     : ERR 000193 Unexpected token END-IF, expected: 
+2026-08-21 00:59:59 [0] Error     : ERR 000196 Operand NM-BAS9 is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000196 Operand NM-BAS9 must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000197 Operand NM-TAB9 is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000197 Operand NM-TAB9 must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000199 Operand DT-ACH9 is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000199 Operand DT-ACH9 must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000200 Operand CPTACH1 is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000200 Operand CPTACH1 must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000200 Operand CPTACH2 is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000201 Operand CPTACH2 must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000208 Operand ANNEE-I is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000208 Invalid expression [ANNEE-I] encountered.
+2026-08-21 00:59:59 [0] Error     : ERR 000208 Operand ANNEE-FR is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000208 Operand ANNEE-FR must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000209 Operand MOIS-I is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000209 Invalid expression [MOIS-I] encountered.
+2026-08-21 00:59:59 [0] Error     : ERR 000209 Operand MOIS-FR is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000209 Operand MOIS-FR must be a variable.
+2026-08-21 00:59:59 [0] Error     : ERR 000210 Operand JOUR-I is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000210 Invalid expression [JOUR-I] encountered.
+2026-08-21 00:59:59 [0] Error     : ERR 000210 Operand JOUR-FR is not declared.
+2026-08-21 00:59:59 [0] Error     : ERR 000210 Operand JOUR-FR must be a variable.
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:59:59 [0] Phase     : D O N E
+2026-08-21 00:59:59 [0] Phase     : ------------------------------------------------------------

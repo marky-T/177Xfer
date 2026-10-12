@@ -1,0 +1,553 @@
+@RUN,M/T   CCSA09,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ***********************************************************  
+@MSG       ** COMPLETER BCLO005DEP                 avec d{penses DB **  
+@MSG       ** ET ALIMENTER CLOTURE DEPENSES KS                      **  
+@MSG       ** +  ALIMENTER LA TABLE CLO_DEP_CCO                     **  
+@MSG       ***********************************************************  
+@ . LE 31/01/96: CREATION DU RUN
+@ . LE 21/01/98: ADAPTATION ALIMENTATION CLOTURE K.S. par PLC   
+@ . LE 01/10/00: NOUVELLE VERSION DU CCSA09 (REVISION CLOTURE)  
+@ . LE 11/09/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . LE 17/10/02: SECURISER UNLOAD : P02064  
+@ . LE 15/01/03: ADAPTATION SAUVETAGE INCENDIE POUR CLOTURE 
+@ . LE 05/12/03: REMPL FASDIR PAR COPIE SUR PC POUR GRAVURE 
+@ . LE 25/11/05: REMPLACER CMP_CON PAR CCD036_SIN_CON   
+@ . LE 25/10/07: NE PLUS COMPLETER FICHIER DEPENSES CC (CYCLE VIEUX)
+@TIME   
+@MSG       EDITION DU FICHIER PARA. 
+@ADD       F999PARA.CCSA09  
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.CCSA09   
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     CCSA09.,F///500  
+@COPY,A    SCCPRD*BABS.CCB152,CCSA09.CCB152 
+@COPY,A    SCCPRD*BABS.CCB153,CCSA09.CCB153 
+@COPY,A    SCCPRD*BABS.CCB148,CCSA09.CCB148 
+@COPY,A    SCCPRD*BABS.CCB176,CCSA09.CCB176 
+@COPY,A    SCCPRD*BABS.CCB175,CCSA09.CCB175 
+@TIME   
+@LAB001: MSG 01. PROCEDURE DE RESTART AUTOMATIQUE   
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@.  
+@ . ========================================================
+@LAB010: MSG 010. SAUVEGARDER ENVIRONNEMENT           - SAVE
+@ . ========================================================
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@TIME   
+@ .      -------------------------------------------------- 
+@LAB020: MSG 20. SELECTION EVENEMENTS CLOT HORS 32/12 - SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ASG,A     FCCS61EVE.   
+@USE       FILIN,FCCS61EVE. 
+@DELETE,C  ICCS61CLO.   
+@CAT,P     ICCS61CLO,F/0/POS/4000   
+@ASG,AX    ICCS61CLO.   
+@SORT,ES
+FILEIN=FILIN,F       BLOCK=10   
+FILEOUT=ICCS61CLO,F  BLOCK=10   
+RSZ=160 
+RECORD=300  
+@ADD,P     CPCCSA09.ACCEPT  
+COPY
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB030: MSG 30. CONVERSION EVENEMENT POUR EVODEP     - CCB152  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@ASG,A     ICCS61CLO.   
+@DELETE,C  ICCS9GDEPCLO.
+@CAT,P     ICCS9GDEPCLO,F/0/POS/4000
+@ASG,A     ICCS9GDEPCLO.
+@DELETE,C  CCSA09*P-CCB152-TOT. 
+@CAT,P     CCSA09*P-CCB152-TOT.,F/0/POS/4000
+@ASG,A     CCSA09*P-CCB152-TOT. 
+@USE       RELEVE,ICCS61CLO 
+@USE       RELEVEO,ICCS9GDEPCLO 
+@USE       TOTAUX,CCSA09*P-CCB152-TOT.  
+@XQT       CCSA09.CCB152
+@FREE      ICCS61CLO.   
+@FREE      ICCS9GDEPCLO.
+@FREE      CCSA09*P-CCB152-TOT. 
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB040: MSG 40. DECHARGEMENT ccd036_sin_con ( branche 010) 
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ . 
+@SETC      0/S2 
+@DELETE,C  ICCS9GTRV.   
+@CAT,P     ICCS9GTRV.,F/0/POS/4000  
+@ASG,A     ICCS9GTRV.   
+@TIME   
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ     ;  
+USE DEFAULT QUALIFIER AFLINC;   
+ UNLOAD TO FILE "ICCS9GTRV."
+
+        SELECT no_int_emr , ' ',
+
+               NO_SIN_ACT , ' ',
+
+               no_con   
+
+          FROM ccd036_sin_con   
+          where cd_bch = '010'  
+          FORMAT EXTERNAL;  
+END THREAD; 
+EXIT;   
+@FREE      ICCS9GTRV.   
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK:   MSG ** UNLOAD OK **  
+@ .      ---------------------------------------------------
+@LAB050: MSG 50. Tri matricule (asc.) sinistre (desc.)- SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@DELETE,C  ICCS9GTR1.   
+@CAT,P     ICCS9GTR1.,F/0/POS/4000  
+@ASG,A     ICCS9GTR1.   
+@ASG,A     ICCS9GTRV.   
+@SORT,ES
+FILEIN=ICCS9GTRV,F  MODE=SDF
+FILEOUT=ICCS9GTR1,F MODE=SDF
+RSZ=34  
+BLOCK=10,RECORDS
+KEY=02,09,CH,A,1
+KEY=14,10,CH,D,2
+DATA=ASCII  
+SELECT=2,9,1:27,8,10
+@EOF
+@ . 
+@ .      ---------------------------------------------------
+@LAB060: MSG 60. ELIMINATION MULTIPLES BABA           - BABA
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@DELETE,C  ICCS9GTR2.   
+@CAT,P     ICCS9GTR2.,F/0/POS/4000  
+@ASG,A     ICCS9GTR2.   
+@ASG,A     ICCS9GTR1.   
+@ASG,A     *UTILIT. 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      ICCS9GTR1,34,10  
+OUTPUT     ICCS9GTR2,17,10  
+KEYS       E 1,8
+SEQERROR   MULTI
+@EOF
+@XQT       .BABA
+@ERS       TPF$.
+@FREE      ICCS9GTR2.   
+@FREE      ICCS9GTR1.   
+@ . 
+@ .      ---------------------------------------------------
+@LAB070: MSG 70. MISE EN INDEXE-SEQUENTIEL            - SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ . 
+@DELETE,C  ICCS9GCL5.   
+@CAT,P     ICCS9GCL5.,F/0/POS/4000  
+@ASG,A     ICCS9GCL5.   
+@ASG,A     ICCS9GTR2.   
+@SORT,ES
+COPY
+FILEIN=ICCS9GTR2,F  MODE=SDF
+FILEOUT=ICCS9GCL5,F MODE=MSAM   
+MSKEY=1,8   
+RSZ=17  
+BLOCK=10,RECORDS
+DATA=ASCII  
+@EOF
+@ . 
+@ .      -----------------------------------------------------  
+@LAB100: MSG 100. DECHARGEMENT AGENDA MEDICAL.  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ . 
+@SETC      0/S2 
+@DELETE,C  ICCS9GTRVA.  
+@CAT,P     ICCS9GTRVA.,F/0/POS/4000 
+@ASG,A     ICCS9GTRVA.  
+@TIME   
+@XQT,E    SYS$LIB$*RSA.RSAC-COIVP   
+BEGIN THREAD FOR UDSSRC READ     ;  
+USE DEFAULT QUALIFIER AFLINC;   
+ UNLOAD TO FILE "ICCS9GTRVA."   
+        SELECT NO_DEP_CCO,  
+               CD_MED   
+          FROM LGN_AGD_MED  
+          FORMAT EXTERNAL;  
+END THREAD; 
+EXIT;   
+@FREE      ICCS9GTRVA.  
+@TEST      TE/0/S2  
+@JUMP      ERRD 
+@JUMP      OKD  
+@ERRD: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OKD:  MSG ** UNLOAD OK **  
+@ . 
+@ .      ---------------------------------------------------
+@LAB110: MSG 110. CHARGEMENT EN INDEXE-SEQUENTIEL.    - SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ . 
+@DELETE,C  ICCS9GCL6.   
+@CAT,P     ICCS9GCL6.,F/0/POS/4000  
+@ASG,A     ICCS9GCL6.   
+@ASG,A     ICCS9GTRVA.  
+@SORT,ES
+FILEIN=ICCS9GTRVA,F  MODE=SDF   
+FILEOUT=ICCS9GCL6,F  MODE=MSAM  
+MSKEY=1,10  
+RSZ=14  
+BLOCK=10,RECORDS
+KEY=1,10,CH,A,1 
+ACCEPT=1,10,ASC,G,0000000000
+DATA=ASCII  
+@EOF
+@ . 
+@ .      -----------------------------------------------
+@LAB120: MSG 120. TRI EVENEM. PR CONVERS. EN FDEP001-2-3
+@ .      -----------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ . 
+@ .        TRI CODE-TYPE-REF-CPT, SINISTRE, NUM-DEPENSE.
+@ .        DU FICHIER EVOLUTION DEPENSES.   
+@ . 
+@ASG,A     ICCS9GDEPCLO.
+@DELETE,C  ICCS9GCL1.   
+@CAT,P     ICCS9GCL1.,F/0/POS/4000  
+@ASG,A     ICCS9GCL1.   
+@SORT,ES
+FILEIN=ICCS9GDEPCLO,F  MODE=SDF 
+FILEOUT=ICCS9GCL1,F    MODE=SDF 
+RSZ=160 
+BLOCK=10,RECORDS
+DATA=ASCII  
+KEY=160,01,CH,A,1   
+KEY=001,10,CH,A,2   
+KEY=028,10,CH,A,3   
+VOLUME=LARGE
+@EOF
+@ .      -----------------------------------------------------  
+@LAB130: MSG 130. CONVERS. DEP.EN FORMAT FDEP001-2-3  - CCB153  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB130  
+@ . 
+@ASG,A     ICCS9GCL1.   
+@ASG,A     ICCS9GCL5.   
+@ASG,A     ICCS9GCL6.   
+@DELETE,C  ICCS9GCL2.   
+@CAT,P     ICCS9GCL2.,F/0/POS/4000  
+@ASG,A     ICCS9GCL2.   
+@DELETE,C  ICCS9GCL3.   
+@CAT,P     ICCS9GCL3.,F/0/POS/4000  
+@ASG,A     ICCS9GCL3.   
+@DELETE,C  ICCS9GCL4.   
+@CAT,P     ICCS9GCL4.,F/0/POS/4000  
+@ASG,A     ICCS9GCL4.   
+@USE       FCCS83CL1,ICCS9GCL1  
+@USE       FCCS83CL2,ICCS9GCL2  
+@USE       FCCS83CL3,ICCS9GCL3  
+@USE       FCCS83CL4,ICCS9GCL4  
+@USE       FCCS83CL5,ICCS9GCL5  
+@USE       FCCS83CL6,ICCS9GCL6  
+@XQT       CCSA09.CCB153
+@FREE      ICCS9GCL1.   
+@FREE      ICCS9GCL5.   
+@FREE      ICCS9GCL6.   
+@FREE      ICCS9GCL2.   
+@FREE      ICCS9GCL3.   
+@FREE      ICCS9GCL4.   
+@ . 
+@ .      ---------------------------------------------------
+@LAB135: MSG 135. TRI EVENEMENTS POUR REGROUPAGE      - SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB135  
+@ . 
+@ASG,A     ICCS9GCL4.   
+@DELETE,C  ICCS9GCL4T.  
+@CAT,P     ICCS9GCL4T.,F/0/POS/4000 
+@ASG,A     ICCS9GCL4T.  
+@SORT,ES
+FILEIN=ICCS9GCL4,F      MODE=SDF
+FILEOUT=ICCS9GCL4T,F    MODE=SDF
+RSZ=49  
+BLOCK=10,RECORDS
+DATA=ASCII  
+KEY=1,4,CH,A,1    . YY-CLOTURE  
+KEY=5,10,CH,A,2   . NO-DOSSIER  
+KEY=15,6,CH,A,3   . NO-CTE-CPT  
+KEY=21,2,CH,A,4   . CD-TYP-DCC  
+VOLUME=LARGE
+@EOF
+@TIME   
+@ . 
+@ .      --------------------------------------------------------   
+@LAB140: MSG 140. REMPLISSAGE DE LA TABLE CLO_DEP_CCO    - CCB148   
+@ .      --------------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@ . 
+@ASG,A     ICCS9GCL4T.  
+@DELETE,C  CCSA09*P-CCB148-ERR. 
+@CAT,P     CCSA09*P-CCB148-ERR.,F/0/POS/4000
+@ASG,A     CCSA09*P-CCB148-ERR. 
+@USE       FCCB148CL1,ICCS9GCL4T
+@USE       OUTFILE,CCSA09*P-CCB148-ERR. 
+@XQT       CCSA09.CCB148
+@FREE      ICCS9GCL4T.  
+@FREE      CCSA09*P-CCB148-ERR. 
+@TIME   
+@ .      ----------------------------------------------------   
+@LAB150: MSG 150. TABULATION MONTANT ICCS9GCL2.       - TABAN   
+@ .      ----------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ . 
+@ASG,A     ICCS9GCL2.   
+@SSG,IA    *UTILIT.TABAN/ASCII  
+SGS 
+INPUT      ICCS9GCL2,300,10 
+ASCII   
+KEYS       113,9
+INDIC      2,1  
+@EOF
+@XQT       TPF$.TABAN   
+@ERS       TPF$.
+@FREE      ICCS9GCL2.   
+@TIME   
+@ . 
+@ .      -------------------------------------------------- 
+@LAB160: MSG 160. INIT. I76CC1AW POUR CCB176.         - SSG 
+@ .      -------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB160  
+@ . 
+@DELETE,C  I76CC1AW 
+@CAT,P     I76CC1AW.,F/0/POS/4000   
+@ASG,A     I76CC1AW.
+@USE       OUT,I76CC1AW.
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+INPUT      CARDREADER,80,1  
+OUTPUT     OUT,30,10
+ASCII   
+@XQT,WR    .CFH-COPY
+@ERS       TPF$.
+@FREE      I76CC1AW.
+@ . 
+@ .      ---------------------------------------------------
+@LAB170: MSG 170. TRIER ICCS9GCL2.  POUR EVODEP.      - SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ . 
+@ASG,A     ICCS9GCL2.   
+@DELETE,C  I212DEPMCCN. 
+@CAT,P     I212DEPMCCN.,F/0/POS/4000
+@ASG,A     I212DEPMCCN. 
+@SORT,ES
+FILEIN=ICCS9GCL2,F     BLOCK=10 
+FILEOUT=I212DEPMCCN,F  BLOCK=10 
+KEY=2,9,CH,A,1  
+KEY=15,21,CH,A,2
+DATA=ASCII  
+RSZ=300 
+RECORD=200  
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB200: MSG 200. CREA. EVOL. DEP. SUR BASE DB SINCC. - CCB176  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ . 
+@ASG,A     I76CC1AW.
+@ASG,A     I212DEPMCCN. 
+@DELETE,C  I76CC1A. 
+@CAT,P     I76CC1A.,F/0/POS/4000
+@ASG,AX    I76CC1A. 
+@DELETE,C  I76DEPCC1.   
+@CAT,P     I76DEPCC1,F/0/POS/4000   
+@ASG,AX    I76DEPCC1.   
+@USE       E138,I76CC1AW
+@USE       E137,I212DEPMCCN 
+@USE       E140,I76CC1A 
+@USE       E141,I76DEPCC1   
+@SETC      1/S3 
+@XQT       CCSA09.CCB176
+@FREE      I76CC1AW.
+@FREE      I76DEPCC1.   
+@FREE      I212DEPMCCN  
+@FREE      I76CC1A. 
+@SETC      0/S3 
+@ . 
+@ .      ---------------------------------------------------
+@LAB210: MSG 210. TRI EVOL. DEP. DB SINCC POUR CCB175.- SORT
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ . 
+@ASG,AX    I76DEPCC1.   
+@DELETE,C  I76DEPCC2.   
+@CAT,P     I76DEPCC2,F/0/POS/4000   
+@ASG,AX    I76DEPCC2.   
+@SORT,ES
+FILEIN=I76DEPCC1,F   BLOCK=10   
+FILEOUT=I76DEPCC2,F  BLOCK=10   
+KEY=29,8,CH,A,1 
+KEY=299,2,CH,A,2
+KEY=7,8,CH,A,3  
+KEY=21,8,CH,A,4 
+KEY=41,36,CH,A,5
+DATA=ASCII  
+RSZ=300 
+VOLUME=LARGE
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB220: MSG 220. RECAP ET FUSION EVOLUTION DB        - CCB175  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ . 
+@ASG,AX    I76DEPCC2.   
+@USE       FILEIN,I76DEPCC2 
+@DELETE,C  R76CCSA09
+@ASG,UP    R76CCSA09.,F/0/POS/4000  
+@USE       FILEOUT,R76CCSA09        . ANCIEN BCLO005DEP 
+@DELETE,C  CCSA09*P-CCB175-TOT. 
+@CAT,P     CCSA09*P-CCB175-TOT.,F/0/POS/100 
+@ASG,A     CCSA09*P-CCB175-TOT. 
+@USE       TOTCONT,CCSA09*P-CCB175-TOT. 
+@XQT       CCSA09.CCB175
+@FREE      I76DEPCC2.   
+@FREE      R76CCSA09.   
+@FREE      CCSA09*P-CCB175-TOT. 
+@ . 
+@ .      ----------------------------------------------------   
+@LAB230: MSG 230. TABULATION BCLO005DEP  COMPLET.     - TABAN   
+@ .      ----------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ . 
+@ASG,A     R76CCSA09
+@DELETE,C  CCSA09*IMP-TABAN.
+@ASG,UP    CCSA09*IMP-TABAN.,F///10000  
+@USE       INP,CCSA09*IMP-TABAN.
+@BRKPT     PRINT$/INP   
+@USE       FILIN,R76CCSA09  
+@SSG,IA    *UTILIT.TABAN/ASCII  
+SGS 
+INPUT      FILIN,300,10 
+KEYS       201,12   
+ASCII   
+@EOF
+@EOF
+@XQT,WR    TPF$.TABAN   
+@ERS       TPF$.
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      CCSA09*IMP-TABAN.
+@FREE      R76CCSA09
+@TIME   
+@ .      ----------------------------------------   
+@LAB700: MSG 700.  SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE   
+@ .      ----------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@ .      -------------------------------------------------- 
+@LAB720: MSG 720. ENVOI INTRANET
+@ .      -------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ . 
+@ADD       F999TRANSF.CCSA09/2200PC 
+@TIME   
+@ . 
+@ .      ------------------------------------------ 
+@LAB740: MSG 740. SYM DES OUTPUT PAPIER VIA F999SYM 
+@ .      ------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ . 
+@ADD      F999SYM.CCSA09
+@TIME   
+@ .      -----------------------------------------------------  
+@LAB750: MSG 750. DELETE DES FICHIERS.                - DELETE  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB750  
+@ . 
+@FREE      CCSA09.  
+@DELETE,C  ICCS9GCL1.   
+@DELETE,C  ICCS9GCL2.   
+@DELETE,C  ICCS9GCL3.   
+@DELETE,C  ICCS9GCL4.   
+@DELETE,C  ICCS9GCL4T.  
+@DELETE,C  ICCS9GCL5.   
+@DELETE,C  ICCS9GCL6.   
+@DELETE,C  ICCS61CLO.   
+@DELETE,C  ICCS9GDEPCLO.
+@DELETE,C  ICCS9GTRV.   
+@DELETE,C  ICCS9GTRVA.  
+@DELETE,C  ICCS9GTR1.   
+@DELETE,C  ICCS9GTR2.   
+@DELETE,C  I76DEPCC1.   
+@DELETE,C  I76DEPCC2.   
+@DELETE,C  I76CC1AW.
+@DELETE,C  I212DEPMCCN. 
+@DELETE,C  I76CC1A  
+@DELETE,C  CPCCSA09.
+@DELETE,C  CCSA09.  
+@TIME   
+@ .      -----------------------------------------------------  
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE         - DELETE 
+@ .      -----------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@MSG     ****LE RUN CCSA09 S'EST BIEN TERMINE ****  
+@ .      -----------------------------------------------------  
+@QUAL,R 
+@FIN

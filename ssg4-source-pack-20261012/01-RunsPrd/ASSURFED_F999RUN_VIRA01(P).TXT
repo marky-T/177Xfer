@@ -1,0 +1,766 @@
+@RUN,M/T   VIRA01,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG       ***********************************************  
+@MSG       **  STATISTIQUES ANNUELLES VIE INDIVIDUELLE  **  
+@MSG       ***********************************************  
+@ . 
+@ . LE 25/01/95: NOUVELLE ADAPATION DU RUN  
+@ . Le 06/07/02: projet P01115 supp exec VIR642 
+@ .               suppression LAB 070   
+@ . Le 30/09/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . Le 18/12/02: projet P02051/07 suppression du fichier de réassurance 
+@ . Le 22/09/2004 : Passage à n couches du run (BARON X. --> P02083)
+@ . Le 11/08/2023 : Liste en plus pour MAB par VIR641 Projet:1001470
+@ . Le 22/08/2023 : Liste en plus pour MAB par VIR552 Projet:1001470
+@ . 
+@ . AVRIL 2008 PASSAGE ASC ---> UCS + FICHIERS INTERMEDIARE PAR RINCK MC
+@ .   PROJET A06010 
+@ . DECEMBRE 2014 SUPPRESSION DE D.J.D.E PROJET : E12032/01 PAR KALALA  
+@MSG       EDITION DU FICHIER DES PARAMETRES
+@ADD       F999PARA.VIRA01  
+@TIME   
+@ . 
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.VIRA01  
+@TIME   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.VIRA01   
+@TIME   
+@ . 
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VIRA01,F///4000  
+@COPY,A    ASSURFED*ABSVIE.VIR241,VIRA01.VIR241 
+@COPY,A    VPRD*BABS.VIR242,VIRA01.VIR242   
+@COPY,A    VPRD*BABS.VIR245,VIRA01.VIR245   
+@COPY,A    ASSURFED*ABSVIE.VIR255,VIRA01.VIR255 
+@COPY,A    VPRD*BABS.VIR257,VIRA01.VIR257   
+@COPY,A    ASSURFED*ABSVIE.VIR261,VIRA01.VIR261 
+@COPY,A    VPRD*BABS.VIR262,VIRA01.VIR262   
+@COPY,A    VPRD*BABS.VIR263,VIRA01.VIR263   
+@COPY,A    ASSURFED*ABSVIE.VIR550,VIRA01.VIR550 
+@COPY,A    VPRD*BABS.VIR552,VIRA01.VIR552   
+@COPY,A    VPRD*BABS.VIR640,VIRA01.VIR640   
+@COPY,A    VPRD*BABS.VIR641,VIRA01.VIR641   
+@COPY,A    VPRD*BABS.VIR643,VIRA01.VIR643   
+@COPY,A    VIPRD*BABS.VIB071,VIRA01.VIB071  
+@COPY,A    VIPRD*BABS.VIB085,VIRA01.VIB085  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ .               ----------------------------------------- 
+@LAB010: MSG 010. TRI COUCHE CLOTURE ANNEE TARIF DESCENDING 
+@ .               ----------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@ASG,A     FVIR002CLO.  
+@USE       INA,FVIR002CLO.  
+@ . 
+@DELETE,C  VIRA01*IVIR002CLOT.  
+@ASG,UP    VIRA01*IVIR002CLOT,F/0/POS/4000  
+@USE       OUTA,VIRA01*IVIR002CLOT. 
+@ . 
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=6,7,CH,A,1                   .RADICAL, SUFFIXE  
+KEY=845,5,CH,D,2                 .ANNEE TARIF   
+RSZ=900 
+RECORD=20   
+@EOF
+@FREE      FVIR002CLO.  
+@FREE      VIRA01*IVIR002CLOT.  
+@TIME   
+@ . 
+@ .      -----------------------------------------------
+@LAB020: MSG 020. TOTALISATION CONTRAT - COUCHES CLOTURE
+@ .      -----------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ASG,A     FVIR001CLO.  
+@USE       ICON,FVIR001CLO. 
+@ . 
+@ASG,A     VIRA01*IVIR002CLOT.  
+@USE       ICCH,VIRA01*IVIR002CLOT. 
+@ . 
+@DELETE,C  VIRA01*IVIRT01CLO.   
+@ASG,UP    VIRA01*IVIRT01CLO.,F/0/POS/4000  
+@USE       OCON,VIRA01*IVIRT01CLO            .CONTRAT AVEC TOT  
+@ . 
+@DELETE,C  VIRA01*IVIRT02CLO.   
+@ASG,UP    VIRA01*IVIRT02CLO.,F/0/POS/4000  
+@USE       OCCH,VIRA01*IVIRT02CLO.           .COUCHE NUMEROTEES 
+@ . 
+@XQT       VIRA01.VIB071
+@ . 
+@FREE      FVIR001CLO.  
+@FREE      VIRA01*IVIR002CLOT.  
+@FREE      VIRA01*IVIRT01CLO.   
+@FREE      VIRA01*IVIRT02CLO.   
+@TIME   
+@ . 
+@ .      -------------------------------------- 
+@LAB030: MSG 030. EXECUTION SORT ALPHA VIE IND. 
+@ .      -------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@ASG,A     B006VIRA03C. 
+@DELETE,C  VIRA01*I006ALP3112.  
+@ASG,UP    VIRA01*I006ALP3112,F/0/POS/4000  
+@USE       OUTVIRA01,VIRA01*I006ALP3112.
+@SORT,ES
+COPY
+FILEIN=B006VIRA03C,F   BLOCK=10 
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@ .      ------------------------------------------------   
+@LAB040: MSG 040. CREER FICHIER STAT AN TERME NUM. VIR241   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ASG,A     VIRA01*IVIRT01CLO.   
+@USE       INUMVIE,VIRA01*IVIRT01CLO.   
+@ASG,A     VIRA01*I006ALP3112.  
+@USE       IALFVIE,VIRA01*I006ALP3112.  
+@DELETE,C  VIRA01*I006STANTER.  
+@ASG,UP    VIRA01*I006STANTER,F/0/POS/4000  
+@USE       OSTATTRM,VIRA01*I006STANTER. 
+@DELETE,C  VIRA01*IMP-VIR241.   
+@ASG,UP    VIRA01*IMP-VIR241.,F///10000 
+@USE       INP,VIRA01*IMP-VIR241.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR241
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR241.   
+@FREE      VIRA01*IVIRT01CLO.   
+@FREE      VIRA01*I006ALP3112.  
+@FREE      VIRA01*I006STANTER.  
+@TIME   
+@ . 
+@ .      ---------------------------------------
+@LAB050: MSG 050. TRI STAT AN TERME POUR VIR242.
+@ .      ---------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ASG,A     VIRA01*I006STANTER.  
+@USE       INAVIRA01,VIRA01*I006STANTER.
+@DELETE,C  VIRA01*I006STANTERT. 
+@ASG,UP    VIRA01*I006STANTERT,F/0/POS/4000 
+@USE       OUTVIRA01,VIRA01*I006STANTERT.   
+@SORT,ES
+FILEIN=INAVIRA01,F    BLOCK=10  
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=400 
+RECORD=80   
+KEY=25,4,CH,A,1 
+KEY=23,2,CH,A,2 
+KEY=21,2,CH,A,3 
+KEY=1,7,CH,A,4  
+KEY=9,2,CH,A,5  
+KEY=15,6,CH,A,6 
+@EOF
+@TIME   
+@ . 
+@ .      ---------------------------------- 
+@LAB060: MSG 060. LISTE TERME DES CONTRATS. 
+@ .      ---------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ASG,A     VIRA01*I006STANTERT. 
+@USE       ISTATTRM,VIRA01*I006STANTERT.
+@DELETE,C  VIRA01*IMP-VIR242.   
+@ASG,UP    VIRA01*IMP-VIR242.,F///10000 
+@USE       INP,VIRA01*IMP-VIR242.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR242
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR242.   
+@FREE      VIRA01*I006STANTERT. 
+@TIME   
+@ . 
+@ .      ---------------------------------------
+@LAB070: MSG 070. TRI STAT AN TERME POUR VIR245.
+@ .      ---------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ASG,A     VIRA01*I006STANTER.  
+@USE       INAVIRA01,VIRA01*I006STANTER.
+@DELETE,C  VIRA01*I006STANTETT. 
+@ASG,UP    VIRA01*I006STANTETT,F/0/POS/4000 
+@USE       OUTVIRA01,VIRA01*I006STANTETT.   
+@SORT,ES
+FILEIN=INAVIRA01,F    BLOCK=10  
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=400 
+RECORD=80   
+KEY=33,4,CH,A,1 
+KEY=31,2,CH,A,2 
+KEY=29,2,CH,A,3 
+KEY=1,7,CH,A,4  
+KEY=9,2,CH,A,5  
+KEY=15,6,CH,A,6 
+@EOF
+@TIME   
+@ . 
+@ .      ---------------------------------------
+@LAB100: MSG 100. LISTE TERME DES PRIMES. VIR245
+@ .      ---------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ASG,A     VIRA01*I006STANTETT. 
+@USE       ISTATRM,VIRA01*I006STANTETT. 
+@DELETE,C  VIRA01*IMP-VIR245.   
+@ASG,UP    VIRA01*IMP-VIR245.,F///10000 
+@USE       INP,VIRA01*IMP-VIR245.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR245
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR245.   
+@FREE      VIRA01*I006STANTETT. 
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB110: MSG 110. CREER FICHIER STAT AN COMB COMPL NUM. VIR255  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ASG,A     VIRA01*IVIRT01CLO.   
+@USE       INUMVIE,VIRA01*IVIRT01CLO.   
+@DELETE,C  VIRA01*I006STAN255.  
+@ASG,UP    VIRA01*I006STAN255,F/0/POS/4000  
+@USE       OSTATANN,VIRA01*I006STAN255. 
+@DELETE,C  VIRA01*IMP-VIR255.   
+@ASG,UP    VIRA01*IMP-VIR255.,F///10000 
+@USE       INP,VIRA01*IMP-VIR255.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR255
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR255.   
+@FREE      VIRA01*IVIRT01CLO.   
+@FREE      VIRA01*I006STAN255.  
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB120: MSG 120. TRI FICH.STAT AN COMB COMPL NUM POUR VIR257.  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ . 
+@ASG,A     VIRA01*I006STAN255.  
+@USE       INAVIRA01,VIRA01*I006STAN255.
+@DELETE,C  VIRA01*I006STAN255T. 
+@ASG,UP    VIRA01*I006STAN255T,F/0/POS/4000 
+@USE       OUTVIRA01,VIRA01*I006STAN255T.   
+@SORT,ES
+FILEIN=INAVIRA01,F    BLOCK=10  
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=100 
+RECORD=80   
+KEY=21,2,CH,A,1 
+KEY=51,2,CH,A,2 
+KEY=2,9,CH,A,3  
+KEY=15,6,CH,A,4 
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB130: MSG 130. LISTE AF DIR COMB COMPL NUMER VIR257 - 0/S3.  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB130  
+@ASG,A     VIRA01*I006STAN255T. 
+@USE       ISTATANN,VIRA01*I006STAN255T 
+@SETC      0/S3 
+@DELETE,C  VIRA01*IMP-VIR257.   
+@ASG,UP    VIRA01*IMP-VIR257.,F///10000 
+@USE       INP,VIRA01*IMP-VIR257.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR257
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR257.   
+@FREE      VIRA01*I006STAN255T. 
+@TIME   
+@ . 
+@ .      ------------------------------------------------   
+@LAB140: MSG 140. EXECUTION SORT NUM. MOUVMENTES VIE IND.   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@ . 
+@ASG,A     B006VIRA03E. 
+@DELETE,C  VIRA01*I006MOU3112.  
+@ASG,UP    VIRA01*I006MOU3112,F/0/POS/4000  
+@USE       OUTVIRA01,VIRA01*I006MOU3112.
+@SORT,ES
+COPY
+FILEIN=B006VIRA03E,F   BLOCK=10 
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@ .      -------------------------- 
+@LAB150: MSG 150. BABA I006MOU3112. 
+@ .      -------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ASG,A     VIRA01*I006MOU3112.  
+@USE       INAVIRA01,VIRA01*I006MOU3112.
+@DELETE,C  VIRA01*I006VIR261.   
+@ASG,UP    VIRA01*I006VIR261,F/0/POS/4000   
+@USE       OUTVIRA01,VIRA01*I006VIR261  
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      INAVIRA01,500,10 
+OUTPUT     OUTVIRA01,500,10 
+@ADD       CPVIRA01.BABA1   
+ASCII   
+@EOF
+@XQT,WR    TPF$.BABA
+@ERS       TPF$.
+@FREE      VIRA01*I006MOU3112   
+@FREE      VIRA01*I006VIR261
+@TIME   
+@ . 
+@ .      ------------------------------------------------------ 
+@LAB160: MSG 160. TRI FICH. MOUVEMENT NUMERIQUE AN POUR VIR261. 
+@ .      ------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB160  
+@ASG,A     VIRA01*I006VIR261.   
+@USE       INAVIRA01,VIRA01*I006VIR261. 
+@DELETE,C  VIRA01*I006MOUVANT.  
+@ASG,UP    VIRA01*I006MOUVANT,F/0/POS/4000  
+@USE       OUTVIRA01,VIRA01*I006MOUVANT.
+@SORT,ES
+FILEIN=INAVIRA01,F      BLOCK=10
+FILEOUT=OUTVIRA01,F    BLOCK=10 
+RSZ=500 
+RECORD=400  
+KEY=106,7,CH,A,1
+KEY=122,1,CH,A,2
+KEY=391,2,CH,A,3
+KEY=120,1,CH,A,4
+KEY=6,7,CH,A,5  
+KEY=397,4,CH,A,6
+KEY=395,2,CH,A,7
+KEY=393,2,CH,A,8
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB170: MSG 170. LISTE PROCURATION ANNUEL PAR DELEGUE. VIR261  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ASG,A     VIRA01*I006MOUVANT.  
+@USE       MOUVNUM-I,VIRA01*I006MOUVANT.
+@DELETE,C  VIRA01*I006MOUV261.  
+@ASG,UP    VIRA01*I006MOUV261,F/0/POS/4000  
+@USE       MOUVTRAV-O,VIRA01*I006MOUV261.   
+@DELETE,C  VIRA01*IMP-VIR261.   
+@ASG,UP    VIRA01*IMP-VIR261.,F///10000 
+@USE       INP,VIRA01*IMP-VIR261.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR261
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR261.   
+@FREE      VIRA01*I006MOUVANT.  
+@FREE      VIRA01*I006MOUV261.  
+@TIME   
+@ . 
+@ .      ---------------------------------- 
+@LAB200: MSG 200. EXECUTION PROGRAM VIR640. 
+@ .      ---------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,A     VIRA01*I006VIR261.   
+@USE       IMOUV,VIRA01*I006VIR261. 
+@DELETE,C  VIRA01*IMP-VIR640.   
+@ASG,UP    VIRA01*IMP-VIR640.,F///10000 
+@USE       INP,VIRA01*IMP-VIR640.   
+@BRKPT     PRINT$/INP   
+@SETC      0/S3 
+@XQT       VIRA01.VIR640
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR640.   
+@FREE      VIRA01*I006VIR261.   
+@TIME   
+@ . 
+@ .      -------------------------------------------
+@LAB210: MSG 210. EXECUTION PROGRAM VIR641 POUR MAB.
+@ .      -------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ASG,A     VIRA01*I006VIR261.   
+@USE       IMOUV,VIRA01*I006VIR261. 
+@SETC      1/S4 
+@DELETE,C  VIRA01*IVIR641EXMAB.               . fichier extream 
+@ASG,UP    VIRA01*IVIR641EXMAB.,F/0/POS/4000
+@USE       OUT-STAT,VIRA01*IVIR641EXMAB.
+@ . 
+@XQT       VIRA01.VIR641
+@ADD       F999CONTROLE.VIRA01  
+@ . 
+@FREE      VIRA01*I006VIR261.   
+@FREE      VIRA01*IVIR641EXMAB. 
+@SETC      0/S4 
+@TIME   
+@ . 
+@ .      ------------------------------------------ 
+@LAB211: MSG 211. EXECUTION PROGRAM VIR641 POUR FA. 
+@ .      ------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB211  
+@ASG,A     VIRA01*I006VIR261.   
+@USE       IMOUV,VIRA01*I006VIR261. 
+@SETC      0/S4 
+@DELETE,C  VIRA01*I007VIR641EX.               . fichier extream 
+@ASG,UP    VIRA01*I007VIR641EX.,F/0/POS/4000
+@USE       OUT-STAT,VIRA01*I007VIR641EX.
+@ . 
+@XQT       VIRA01.VIR641
+@ADD       F999CONTROLE.VIRA01  
+@ . 
+@FREE      VIRA01*I006VIR261.   
+@FREE      VIRA01*I007VIR641EX. 
+@TIME   
+@ . 
+@ .      ---------------------------------- 
+@LAB220: MSG 220. EXECUTION PROGRAM VIB085. 
+@ .      ---------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,A     VIRA01*I006VIR261.   
+@USE       FILIN,VIRA01*I006VIR261. 
+@DELETE,C  VIRA01*IVIR261001.   
+@CAT,P     VIRA01*IVIR261001.,F/0/POS/4000  
+@ASG,A     VIRA01*IVIR261001.   
+@USE       FILOUT,VIRA01*IVIR261001.
+@DELETE,C  VIRA01*P-VIB085-TOT. 
+@ASG,UP    VIRA01*P-VIB085-TOT.,F///100 
+@USE       TOTCONT,VIRA01*P-VIB085-TOT. 
+@XQT       VIRA01.VIB085
+@FREE      VIRA01*P-VIB085-TOT. 
+@FREE      VIRA01*I006VIR261.   
+@FREE      VIRA01*IVIR261001.   
+@TIME   
+@ . 
+@ .      -------------------------------------  
+@LAB230: MSG 230. SORT IVIR261001 POUR VIR643.  
+@ .      -------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ASG,A     VIRA01*IVIR261001.   
+@USE       INAVIRA01,VIRA01*IVIR261001. 
+@DELETE,C  VIRA01*I006VIR261T.  
+@ASG,UP    VIRA01*I006VIR261T,F/0/POS/4000  
+@USE       OUTVIRA01,VIRA01*I006VIR261T.
+@SORT,ES
+FILEIN=INAVIRA01,F    BLOCK=10  
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+KEY=391,2,CH,A,1
+KEY=137,4,CH,A,2
+KEY=6,7,CH,A,3  
+KEY=13,2,CH,A,4 
+KEY=19,6,CH,A,5 
+RSZ=500 
+RECORD=200  
+@EOF
+@TIME   
+@ . 
+@ .      ---------------------------------- 
+@LAB240: MSG 240. EXECUTION PROGRAM VIR643. 
+@ .      ---------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ASG,AX    VIRA01*I006VIR261T.  
+@USE       IMOUV,VIRA01*I006VIR261T.
+@DELETE,C  VIRA01*IMP-VIR643.   
+@ASG,UP    VIRA01*IMP-VIR643.,F///10000 
+@USE       INP,VIRA01*IMP-VIR643.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR643
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR643.   
+@FREE      VIRA01*I006VIR261T.  
+@TIME   
+@ . 
+@ .      -------------------------------------------------- 
+@LAB250: MSG 250. CREATION FICHIER STAT ANNULATIONS. VIR262 
+@ .      -------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB250  
+@ASG,A     VIRA01*I006VIR261
+@USE       MOUVNUM-I,VIRA01*I006VIR261  
+@ASG,A     VIRA01*I006ALP3112.  
+@USE       ALFVIE-I,VIRA01*I006ALP3112. 
+@DELETE,C  VIRA01*I006MOUV262.  
+@ASG,UP    VIRA01*I006MOUV262,F/0/POS/4000  
+@USE       MOUVTRAV-O,VIRA01*I006MOUV262.   
+@DELETE,C  VIRA01*IMP-VIR262.   
+@ASG,UP    VIRA01*IMP-VIR262.,F///10000 
+@USE       INP,VIRA01*IMP-VIR262.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR262
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR262.   
+@FREE      VIRA01*I006ALP3112.  
+@FREE      VIRA01*I006VIR261
+@FREE      VIRA01*I006MOUV262.  
+@TIME   
+@ . 
+@ .      ------------------------------------------ 
+@LAB260: MSG 260. TRI STAT ANNULATIONS POUR VIR263. 
+@ .      ------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB260  
+@ASG,A     VIRA01*I006MOUV262.  
+@USE       INAVIRA01,VIRA01*I006MOUV262.
+@DELETE,C  VIRA01*I006MOUV262T. 
+@ASG,UP    VIRA01*I006MOUV262T,F/0/POS/4000 
+@USE       OUTVIRA01,VIRA01*I006MOUV262T.   
+@SORT,ES
+FILEIN=INAVIRA01,F    BLOCK=10  
+FILEOUT=OUTVIRA01,F  BLOCK=10   
+RSZ=200 
+RECORD=80   
+KEY=4,1,CH,A,1  
+KEY=6,7,CH,A,2  
+KEY=197,4,CH,A,3
+KEY=195,2,CH,A,4
+KEY=193,2,CH,A,5
+@EOF
+@TIME   
+@ . 
+@ .      -----------------------------------------------------  
+@LAB270: MSG 270. IMPRESSION STAT ANNUELLE ANNULATIONS. VIR263  
+@ .      -----------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB270  
+@ASG,A     VIRA01*I006MOUV262T. 
+@USE       TRAVVIEMVT,VIRA01*I006MOUV262T.  
+@DELETE,C  VIRA01*IMP-VIR263.   
+@ASG,UP    VIRA01*IMP-VIR263.,F///10000 
+@USE       INP,VIRA01*IMP-VIR263.   
+@BRKPT     PRINT$/INP   
+@XQT       VIRA01.VIR263
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR263.   
+@FREE      VIRA01*I006MOUV262T. 
+@TIME   
+@ . 
+@ .      ------------------------------------------------------ 
+@LAB300: MSG 300. CREA.FICH.VIE IND.STAT TAUX MORTALITE. VIR550 
+@ .      ------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ASG,A     VIRA01*I006ALP3112.  
+@ASG,A     VIRA01*IVIRT01CLO.   
+@USE       IALFVIE,VIRA01*I006ALP3112.  
+@USE       INUMVIE,VIRA01*IVIRT01CLO
+@DELETE,C  VIRA01*I006VIR550.   
+@ASG,UP    VIRA01*I006VIR550,F/0/POS/4000   
+@USE       OSTAT,VIRA01*I006VIR550  
+@DELETE,C  VIRA01*IMP-VIR550.   
+@ASG,UP    VIRA01*IMP-VIR550.,F///10000 
+@USE       INP,VIRA01*IMP-VIR550.   
+@BRKPT     PRINT$/INP   
+@XQT,WR    VIRA01.VIR550
+@ADD       F999CONTROLE.VIRA01  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA01*IMP-VIR550.   
+@FREE      VIRA01*I006ALP3112.  
+@FREE      VIRA01*IVIRT01CLO.   
+@FREE      VIRA01*I006VIR550.   
+@TIME   
+@ . 
+@ .      ---------------------------------------------- 
+@LAB310: MSG 310. EXECUTION TRI I006VIR550 POUR VIR552. 
+@ .      ---------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB310  
+@ASG,A     VIRA01*I006VIR550.   
+@USE       INAVIRA01,VIRA01*I006VIR550. 
+@DELETE,C  VIRA01*I006VIR550T.  
+@ASG,UP    VIRA01*I006VIR550T,F/0/POS/4000  
+@USE       OUTVIRA01,VIRA01*I006VIR550T.
+@SORT,ES
+FILEIN=INAVIRA01,F   BLOCK=10   
+FILEOUT=OUTVIRA01,F BLOCK=10
+KEY=949,1,CH,A,1
+KEY=999,2,CH,A,2
+KEY=945,4,CH,D,3
+KEY=903,6,CH,D,4
+RSZ=1000
+RECORD=100  
+@EOF
+@TIME   
+@ . 
+@ .      ------------------------------------------------------------   
+@LAB320: MSG 320. IMP.STA.MORT.VIEIND DECES-MIXTE/AN.TAR. VIR552 MAB
+@ .      ------------------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ASG,A     VIRA01*I006VIR550T.  
+@USE       ISTAT,VIRA01*I006VIR550T.
+@SETC      1/S4 
+@DELETE,C  VIRA01*IVIR552EXMAB.                . fichier hp-exstream
+@ASG,UP    VIRA01*IVIR552EXMAB.,F/0/POS/4000
+@USE       OUT-VERIF,VIRA01*IVIR552EXMAB.   
+@ . 
+@XQT       VIRA01.VIR552
+@ADD       F999CONTROLE.VIRA01  
+@ . 
+@FREE      VIRA01*IMP-VIR552.   
+@FREE      VIRA01*I006VIR550T   
+@FREE      VIRA01*IVIR552EXMAB. 
+@SETC      0/S4 
+@TIME   
+@ .      ---------------------------------------------------------- 
+@LAB321: MSG 321. IMP.STA.MORT.VIEIND DECES-MIXTE/AN.TAR. VIR552 FA 
+@ .      ---------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB321  
+@ASG,A     VIRA01*I006VIR550T.  
+@USE       ISTAT,VIRA01*I006VIR550T.
+@SETC      0/S4 
+@DELETE,C  VIRA01*I008VIR552EX.                . fichier hp-exstream
+@ASG,UP    VIRA01*I008VIR552EX.,F/0/POS/4000
+@USE       OUT-VERIF,VIRA01*I008VIR552EX.   
+@ . 
+@XQT       VIRA01.VIR552
+@ADD       F999CONTROLE.VIRA01  
+@ . 
+@FREE      VIRA01*IMP-VIR552.   
+@FREE      VIRA01*I006VIR550T   
+@FREE      VIRA01*I008VIR552EX. 
+@TIME   
+@ . 
+@ .      ---------------------------------------------------
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ .      ---------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@LAB730: MSG 730. NETTOYAGE DES SYMBIONTS D'IMPRESSION. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB730  
+@ED,UQ     VIRA01*IMP-VIR242.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA01*IMP-VIR245.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA01*IMP-VIR257.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA01*IMP-VIR640.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA01*IMP-VIR643.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA01*IMP-VIR263.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ .      -----------------------------------------------
+@LAB720: MSG 720. TRANSFERT DES FICHIERS VERS LE SERVEUR
+@ .      -----------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ADD       F999TRANSF.VIRA01/2200PC 
+@TIME   
+@ .      ---------------------------------------------------------  
+@LAB740: MSG 740. IMPRESSION DES FICHIERS D'IMPRESSION VIA F999SYM  
+@ .      ---------------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ADD       F999SYM.VIRA01   
+@TIME   
+@ . 
+@ .      ----------------------------   
+@LAB750: MSG 750. DELETE DES FICHIERS   
+@ .      ----------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB750  
+@ . 
+@ADD       SYS$*RUNS.PURGE/RUNID
+@FREE      VIRA01.  
+@FREE      CPVIRA01.
+@DELETE,C  VIRA01.  
+@DELETE,C  CPVIRA01.
+@ . 
+@ . 
+@TIME   
+@ .      -------------------------------------  
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ .      -------------------------------------  
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN VIRA01 S'EST BIEN TERMINE ****   
+@QUAL,R 
+@FIN

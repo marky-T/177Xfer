@@ -1,0 +1,911 @@
+@RUN,M/T   VIPM03,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$ 
+@ASG,T     TPF$ 
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG       *******************************************************  
+@MSG       ** RUN VIPM03                                        **  
+@MSG       ** VIE INDIVIDUELLE - TERMES - DOCUMENT LIQUIDATION  **  
+@MSG       *******************************************************  
+@ . 
+@ . 
+@ . LE 26/10/2006 : CREATION DU RUN 
+@ . LE 05/12/2008 : P08100/01   
+@ . LE 29/07/2010 : P10068/02 par JLH + Kalala  
+@ . LE 01/06/2012 : P11002/01 par JLH (suppression doc. GGI).   
+@ . LE 21/01/2014 : P13086/01 par KALAL (cotisation de solidarité). 
+@ . LE 12/06/2017 : P16038/01 par KALAL (FATCA - CRS)   
+@ . 
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.VIPM03   
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VIPM03,///12521  
+@ . 
+@COPY,A    VIPRD*BABS.VIB243,VIPM03.VIB243  
+@COPY,A    VIPRD*BABS.VIB144,VIPM03.VIB144  
+@COPY,A    VIPRD*BABS.VIB151,VIPM03.VIB151  
+@COPY,A    VPRD*BABS.VIB805,VIPM03.VIB805   
+@COPY,A    AFLINC*REP$ABS.VIB016,VIPM03.VIB016  
+@ . 
+@ .        =======================================================  
+@LAB001:   MSG 001. PROCEDURE DE RESTART AUTOMATIQUE
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB010:   MSG 010. SELECTION DONNEES DOC.DE LIQUIDATION  - VIB151  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB010  
+@ . 
+@DELETE,C  IVIB151LQD.  
+@ASG,UP    IVIB151LQD.,F/0/POS/4000 
+@USE       O-FCH-LIQ,IVIB151LQD.
+@ASG,A     *F006NSOLV.  
+@USE       I-NON-SOL,*F006NSOLV.
+@ASG,A     *F006ALPHV.  
+@USE       I-ALF-VIE,*F006ALPHV.
+@ASG,A     *F006INTV.   
+@USE       I-INT-VIE,*F006INTV. 
+@ . 
+@XQT       VIPM03.VIB151
+SELECTION PREPARATION LIQUID
+@ . 
+@FREE      IVIB151LQD.  
+@FREE      F006NSOLV.   
+@FREE      F006ALPHV.   
+@FREE      F006INTV.
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB020:   MSG 020. TRI FICHIER A ENVOYER                   - SORT  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB020  
+@ . 
+@ASG,A     IVIB151LQD.  
+@USE       INA,IVIB151LQD.  
+@DELETE,C  RVIR005LQD.  
+@ASG,UP    RVIR005LQD.,F/0/POS/4000 
+@USE       OUT,RVIR005LQD.  
+@ . 
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=3,6,CH,A,1          . Numéro de radical 
+KEY=9,1,CH,A,2          . suffixe   
+RSZ=3896                . old rsz=3680  
+RECORD=10   
+@EOF
+@ . 
+@FREE      IVIB151LQD.  
+@FREE      RVIR005LQD.  
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB030:   MSG 030. SPLIT ENREG GGI - AUTRES                - BABA  
+@ .        =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@ASG,A     RVIR005LQD.  
+@USE       INA,RVIR005LQD.  
+@DELETE,C  RVIR005GGI.  
+@ASG,UP    RVIR005GGI.  
+@USE       OUTA,RVIR005GGI. 
+@DELETE,C  RVIR005OTR.  
+@ASG,UP    RVIR005OTR.,F/1/POS/4000 
+@USE       OUTB,RVIR005OTR. 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INA,3896,10  
+OUTPUT     OUTA,3896,10   OUTB,3896,10  
+KEYS       R  42,2,50   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      RVIR005GGI.  
+@FREE      RVIR005OTR.  
+@ . 
+@ .        =======================================================  
+@LAB100:   MSG 100. FORMATTAGE FICHIER A ENVOYER        TRANSEXCEL  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@ . 
+@ASG       TPF$.
+@ASG,A     RVIR005OTR.  
+@USE       FILEIN,RVIR005OTR.   
+@DELETE,C  OLQD-OTR.
+@ASG,UP    OLQD-OTR.,F//POS/4095
+@USE       FILEOUT,OLQD-OTR.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 3896   
+COL 3289,0008,ALPHAG,''Police'' 
+COL 0010,0002,ALPHAG,''Branche''
+COL 0012,0006,NUM,''Matricule'' 
+COL 0018,0008,AAAAMMJJ,''Date terme gar''   
+COL 0026,0008,AAAAMMJJ,''Date terme prm''   
+COL 0034,0008,AAAAMMJJ,''Date effet''   
+COL 0042,0002,ALPHAG,''Combinaison''
+COL 0044,0001,ALPHAG,''Exonération fiscale''
+COL 0045,0002,ALPHAG,''Nature garantie''
+COL 0047,0001,ALPHAG,''ELT Passée'' 
+COL 0048,0001,ALPHAG,''Périodicité''
+COL 0049,0012,MNT,''Prêt sur police''   
+COL 0061,0012,MNT,''Solde du compte courant''   
+COL 0073,0002,ALPHAG,''Dégressivité''   
+COL 0075,0004,NUM,''Dernière année PB attribuée''   
+COL 0079,0003,NUM,''Hypothèse définitive''  
+COL 0082,0004,NUM,''Année PB choisie''  
+COL 0086,0003,NUM,''Hypothèse définitive choisie''  
+COL 0089,0012,MNT,''Mt à déduire''  
+COL 0101,0012,MNT,''Mt cap. décès 1993''
+COL 0113,0012,MNT,''Mt cap. vie 1993''  
+COL 0125,0012,MNT,''Mt PB décès minimum''   
+COL 0137,0012,MNT,''Mt fond de PB'' 
+COL 0149,0032,ALPHAG,''Qualité civile'' 
+COL 0181,0032,ALPHAG,''Nom du bénéficiaire''
+COL 0213,0032,ALPHAG,''Nom du bénéficiaire (suite)''
+COL 0245,0032,ALPHAG,''Adresse du bénéficiaire''
+COL 0277,0032,ALPHAG,''Adresse du bénéficiaire(suite)'' 
+COL 0309,0008,ALPHAG,''Code postal du bénéficiaire''
+COL 0317,0032,ALPHAG,''Localité du bénéficiaire''   
+COL 0349,0010,ALPHAG,''Téléphone du bénéficiaire''  
+COL 0359,0001,ALPHAG,''Cd sexe du bénéficiaire''
+COL 0360,0001,ALPHAG,''Rég. linguistique du bénéficiaire''  
+COL 0362,0032,ALPHAG,''Libellé bénéficiaire de l'alpha''
+COL 0394,0002,ALPHAG,''Type d'interm.'' 
+COL 0396,0005,ALPHAG,''Numéro d'interm.''   
+COL 0401,0001,ALPHAG,''Cd sexe de l'interm.''   
+COL 0402,0032,ALPHAG,''Nom de l'interm.''   
+COL 0434,0032,ALPHAG,''Nom de l'interm.(suite)''
+COL 0466,0032,ALPHAG,''Adresse de l'interm.''   
+COL 0498,0032,ALPHAG,''Adresse de l'interm.(suite)''
+COL 0530,0008,ALPHAG,''Cd postal de l'interm.'' 
+COL 0538,0032,ALPHAG,''Localité de l'interm.''  
+COL 0570,0010,ALPHAG,''Numéro de tél. de l'interm.''
+COL 0580,0002,ALPHAG,''Type d'interm. MP''  
+COL 0582,0005,ALPHAG,''Numéro d'interm. MP''
+COL 0587,0032,ALPHAG,''Nom de l'interm. MP''
+COL 0619,0032,ALPHAG,''Prénom de l'interm. MP'' 
+COL 0651,0032,ALPHAG,''Nom de l'assuré''
+COL 0683,0006,ALPHAG,''Numéro de l'assuré'' 
+COL 0689,0008,AAAAMMJJ,''Dt naiss. de l'assuré''
+COL 0697,0001,ALPHAG,''Cd sexe de l'assuré''
+COL 0698,0012,MNT,''Mt Client'' 
+COL 3297,0002,ALPHAG,''AP Code taxation 1'' 
+COL 3299,0002,ALPHAG,''AP Code taxation 2'' 
+COL 3307,0001,ALPHAG,''Erreur'' 
+COL 0710,0100,ALPHAG,''Libellé msg information 001''
+COL 0810,0100,ALPHAG,''Libellé msg information 002''
+COL 0910,0100,ALPHAG,''Libellé msg information 003''
+COL 1010,0100,ALPHAG,''Libellé msg information 004''
+COL 1110,0100,ALPHAG,''Libellé msg information 005''
+COL 3308,0012,MNT,''Total CD''  
+COL 3320,0012,MNT,''Total CV''  
+COL 3333,0010,MNT,''Total PB''  
+COL 3343,0010,MNT,''Total base tax 1''  
+COL 3353,0010,MNT,''Total base tax 2''  
+COL 3363,0010,MNT,''Total base tax''
+COL 3373,0010,MNT,''Total tax 1''   
+COL 3383,0010,MNT,''Total tax 2''   
+COL 3393,0010,MNT,''Total tax'' 
+COL 3403,0010,MNT,''Vie - Taxe''
+COL 3332,0001,,''Tx taxes'' 
+COL 3428,0010,MNT,''Base calcul Inami'' 
+COL 3423,0005,V2,''Tx Inami''   
+COL 3413,0010,MNT,''Total Inami''   
+COL 1210,0005,ALPHAG,''Code année tarifaire(1)''
+COL 1215,0012,MNT,''Mt capital décès''  
+COL 1227,0012,MNT,''Mt capital vie''
+COL 1239,0012,MNT,''Mt Bonus trm''  
+COL 1251,0012,MNT,''Mt réserve 3112''   
+COL 1263,0012,MNT,''Mt PB sur réserve CD''  
+COL 1275,0012,MNT,''Mt PB sur réserve CV''  
+COL 1287,0012,MNT,''Mt PB libre CD''
+COL 1299,0012,MNT,''Mt PB libre CV''
+COL 1311,0012,MNT,''Mt PB garantie CD'' 
+COL 1323,0012,MNT,''Mt PB garantie CV'' 
+COL 1335,0012,MNT,''Mt Inami PCLI'' 
+COL 1347,0002,ALPHAG,''Code taxation 1''
+COL 1349,0002,ALPHAG,''Code taxation 2''
+COL 1351,0006,V2,''Taux taxation 1''
+COL 1357,0006,V2,''Taux taxation 2''
+COL 1363,0012,MNT,''Mt base taxable 1'' 
+COL 1375,0012,MNT,''Mt base taxable 2'' 
+COL 1387,0012,MNT,''Mt taxe 1'' 
+COL 1399,0012,MNT,''Mt taxe 2'' 
+COL 1411,0006,V2,''Coefficient de conversion''  
+COL 1417,0005,ALPHAG,''Code année tarifaire(2)''
+COL 1422,0012,MNT,''Mt capital décès''  
+COL 1434,0012,MNT,''Mt capital vie''
+COL 1446,0012,MNT,''Mt Bonus trm''  
+COL 1458,0012,MNT,''Mt réserve 3112''   
+COL 1470,0012,MNT,''Mt PB sur réserve CD''  
+COL 1482,0012,MNT,''Mt PB sur réserve CV''  
+COL 1494,0012,MNT,''Mt PB libre CD''
+COL 1506,0012,MNT,''Mt PB libre CV''
+COL 1518,0012,MNT,''Mt PB garantie CD'' 
+COL 1530,0012,MNT,''Mt PB garantie CV'' 
+COL 1542,0012,MNT,''Mt Inami PCLI'' 
+COL 1554,0002,ALPHAG,''Code taxation 1''
+COL 1556,0002,ALPHAG,''Code taxation 2''
+COL 1558,0006,V2,''Taux taxation 1''
+COL 1564,0006,V2,''Taux taxation 2''
+COL 1570,0012,MNT,''Mt base taxable 1'' 
+COL 1582,0012,MNT,''Mt base taxable 2'' 
+COL 1594,0012,MNT,''Mt taxe 1'' 
+COL 1606,0012,MNT,''Mt taxe 2'' 
+COL 1618,0006,V2,''Coefficient de conversion''  
+COL 1624,0005,ALPHAG,''Code année tarifaire(3)''
+COL 1629,0012,MNT,''Mt capital décès''  
+COL 1641,0012,MNT,''Mt capital vie''
+COL 1653,0012,MNT,''Mt Bonus trm''  
+COL 1665,0012,MNT,''Mt réserve 3112''   
+COL 1677,0012,MNT,''Mt PB sur réserve CD''  
+COL 1689,0012,MNT,''Mt PB sur réserve CV''  
+COL 1701,0012,MNT,''Mt PB libre CD''
+COL 1713,0012,MNT,''Mt PB libre CV''
+COL 1725,0012,MNT,''Mt PB garantie CD'' 
+COL 1737,0012,MNT,''Mt PB garantie CV'' 
+COL 1749,0012,MNT,''Mt Inami PCLI'' 
+COL 1761,0002,ALPHAG,''Code taxation 1''
+COL 1763,0002,ALPHAG,''Code taxation 2''
+COL 1765,0006,V2,''Taux taxation 1''
+COL 1771,0006,V2,''Taux taxation 2''
+COL 1777,0012,MNT,''Mt base taxable 1'' 
+COL 1789,0012,MNT,''Mt base taxable 2'' 
+COL 1801,0012,MNT,''Mt taxe 1'' 
+COL 1813,0012,MNT,''Mt taxe 2'' 
+COL 1825,0006,V2,''Coefficient de conversion''  
+COL 1831,0005,ALPHAG,''Code année tarifaire(4)''
+COL 1836,0012,MNT,''Mt capital décès''  
+COL 1848,0012,MNT,''Mt capital vie''
+COL 1860,0012,MNT,''Mt Bonus trm''  
+COL 1872,0012,MNT,''Mt réserve 3112''   
+COL 1884,0012,MNT,''Mt PB sur réserve CD''  
+COL 1896,0012,MNT,''Mt PB sur réserve CV''  
+COL 1908,0012,MNT,''Mt PB libre CD''
+COL 1920,0012,MNT,''Mt PB libre CV''
+COL 1932,0012,MNT,''Mt PB garantie CD'' 
+COL 1944,0012,MNT,''Mt PB garantie CV'' 
+COL 1956,0012,MNT,''Mt Inami PCLI'' 
+COL 1968,0002,ALPHAG,''Code taxation 1''
+COL 1970,0002,ALPHAG,''Code taxation 2''
+COL 1972,0006,V2,''Taux taxation 1''
+COL 1978,0006,V2,''Taux taxation 2''
+COL 1984,0012,MNT,''Mt base taxable 1'' 
+COL 1996,0012,MNT,''Mt base taxable 2'' 
+COL 2008,0012,MNT,''Mt taxe 1'' 
+COL 2020,0012,MNT,''Mt taxe 2'' 
+COL 2032,0006,V2,''Coefficient de conversion''  
+COL 2038,0005,ALPHAG,''Code année tarifaire(5)''
+COL 2043,0012,MNT,''Mt capital décès''  
+COL 2055,0012,MNT,''Mt capital vie''
+COL 2067,0012,MNT,''Mt Bonus trm''  
+COL 2079,0012,MNT,''Mt réserve 3112''   
+COL 2091,0012,MNT,''Mt PB sur réserve CD''  
+COL 2103,0012,MNT,''Mt PB sur réserve CV''  
+COL 2115,0012,MNT,''Mt PB libre CD''
+COL 2127,0012,MNT,''Mt PB libre CV''
+COL 2139,0012,MNT,''Mt PB garantie CD'' 
+COL 2151,0012,MNT,''Mt PB garantie CV'' 
+COL 2163,0012,MNT,''Mt Inami PCLI'' 
+COL 2175,0002,ALPHAG,''Code taxation 1''
+COL 2177,0002,ALPHAG,''Code taxation 2''
+COL 2179,0006,V2,''Taux taxation 1''
+COL 2185,0006,V2,''Taux taxation 2''
+COL 2191,0012,MNT,''Mt base taxable 1'' 
+COL 2203,0012,MNT,''Mt base taxable 2'' 
+COL 2215,0012,MNT,''Mt taxe 1'' 
+COL 2227,0012,MNT,''Mt taxe 2'' 
+COL 2239,0006,V2,''Coefficient de conversion''  
+COL 2245,0005,ALPHAG,''Code année tarifaire(6)''
+COL 2250,0012,MNT,''Mt capital décès''  
+COL 2262,0012,MNT,''Mt capital vie''
+COL 2274,0012,MNT,''Mt Bonus trm''  
+COL 2286,0012,MNT,''Mt réserve 3112''   
+COL 2298,0012,MNT,''Mt PB sur réserve CD''  
+COL 2310,0012,MNT,''Mt PB sur réserve CV''  
+COL 2322,0012,MNT,''Mt PB libre CD''
+COL 2334,0012,MNT,''Mt PB libre CV''
+COL 2346,0012,MNT,''Mt PB garantie CD'' 
+COL 2358,0012,MNT,''Mt PB garantie CV'' 
+COL 2370,0012,MNT,''Mt Inami PCLI'' 
+COL 2382,0002,ALPHAG,''Code taxation 1''
+COL 2384,0002,ALPHAG,''Code taxation 2''
+COL 2386,0006,V2,''Taux taxation 1''
+COL 2392,0006,V2,''Taux taxation 2''
+COL 2398,0012,MNT,''Mt base taxable 1'' 
+COL 2410,0012,MNT,''Mt base taxable 2'' 
+COL 2422,0012,MNT,''Mt taxe 1'' 
+COL 2434,0012,MNT,''Mt taxe 2'' 
+COL 2446,0006,V2,''Coefficient de conversion''  
+COL 2452,0005,ALPHAG,''Code année tarifaire(7)''
+COL 2457,0012,MNT,''Mt capital décès''  
+COL 2469,0012,MNT,''Mt capital vie''
+COL 2481,0012,MNT,''Mt Bonus trm''  
+COL 2493,0012,MNT,''Mt réserve 3112''   
+COL 2505,0012,MNT,''Mt PB sur réserve CD''  
+COL 2517,0012,MNT,''Mt PB sur réserve CV''  
+COL 2529,0012,MNT,''Mt PB libre CD''
+COL 2541,0012,MNT,''Mt PB libre CV''
+COL 2553,0012,MNT,''Mt PB garantie CD'' 
+COL 2565,0012,MNT,''Mt PB garantie CV'' 
+COL 2577,0012,MNT,''Mt Inami PCLI'' 
+COL 2589,0002,ALPHAG,''Code taxation 1''
+COL 2591,0002,ALPHAG,''Code taxation 2''
+COL 2593,0006,V2,''Taux taxation 1''
+COL 2599,0006,V2,''Taux taxation 2''
+COL 2605,0012,MNT,''Mt base taxable 1'' 
+COL 2617,0012,MNT,''Mt base taxable 2'' 
+COL 2629,0012,MNT,''Mt taxe 1'' 
+COL 2641,0012,MNT,''Mt taxe 2'' 
+COL 2653,0006,V2,''Coefficient de conversion''  
+COL 2659,0005,ALPHAG,''Code année tarifaire(8)''
+COL 2664,0012,MNT,''Mt capital décès''  
+COL 2676,0012,MNT,''Mt capital vie''
+COL 2688,0012,MNT,''Mt Bonus trm''  
+COL 2700,0012,MNT,''Mt réserve 3112''   
+COL 2712,0012,MNT,''Mt PB sur réserve CD''  
+COL 2724,0012,MNT,''Mt PB sur réserve CV''  
+COL 2736,0012,MNT,''Mt PB libre CD''
+COL 2748,0012,MNT,''Mt PB libre CV''
+COL 2760,0012,MNT,''Mt PB garantie CD'' 
+COL 2772,0012,MNT,''Mt PB garantie CV'' 
+COL 2784,0012,MNT,''Mt Inami PCLI'' 
+COL 2796,0002,ALPHAG,''Code taxation 1''
+COL 2798,0002,ALPHAG,''Code taxation 2''
+COL 2800,0006,V2,''Taux taxation 1''
+COL 2806,0006,V2,''Taux taxation 2''
+COL 2812,0012,MNT,''Mt base taxable 1'' 
+COL 2824,0012,MNT,''Mt base taxable 2'' 
+COL 2836,0012,MNT,''Mt taxe 1'' 
+COL 2848,0012,MNT,''Mt taxe 2'' 
+COL 2860,0006,V2,''Coefficient de conversion''  
+COL 2866,0005,ALPHAG,''Code année tarifaire(9)''
+COL 2871,0012,MNT,''Mt capital décès''  
+COL 2883,0012,MNT,''Mt capital vie''
+COL 2895,0012,MNT,''Mt Bonus trm''  
+COL 2907,0012,MNT,''Mt réserve 3112''   
+COL 2919,0012,MNT,''Mt PB sur réserve CD''  
+COL 2931,0012,MNT,''Mt PB sur réserve CV''  
+COL 2943,0012,MNT,''Mt PB libre CD''
+COL 2955,0012,MNT,''Mt PB libre CV''
+COL 2967,0012,MNT,''Mt PB garantie CD'' 
+COL 2979,0012,MNT,''Mt PB garantie CV'' 
+COL 2991,0012,MNT,''Mt Inami PCLI'' 
+COL 3003,0002,ALPHAG,''Code taxation 1''
+COL 3005,0002,ALPHAG,''Code taxation 2''
+COL 3007,0006,V2,''Taux taxation 1''
+COL 3013,0006,V2,''Taux taxation 2''
+COL 3019,0012,MNT,''Mt base taxable 1'' 
+COL 3031,0012,MNT,''Mt base taxable 2'' 
+COL 3043,0012,MNT,''Mt taxe 1'' 
+COL 3055,0012,MNT,''Mt taxe 2'' 
+COL 3067,0006,V2,''Coefficient de conversion''  
+COL 3280,0008,NUM,''No terme lqd''  
+COL 3438,0010,MNT,''Mt Cotisation de solidarité''   
+COL 3448,0007,V4,''% Cotisation de solidarité'' 
+NBREC   
+@EOF
+@ . 
+@FREE      RVIR005OTR.  
+@FREE      OLQD-OTR.
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB110:   MSG 110. FORMATTAGE FICHIER A ENVOYER        TRANSEXCEL  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ . 
+@ASG       TPF$.
+@ASG,A     RVIR005GGI.  
+@USE       FILEIN,RVIR005GGI.   
+@DELETE,C  OLQD-GGI.
+@ASG,UP    OLQD-GGI.,F//POS/4095
+@USE       FILEOUT,OLQD-GGI.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 3896   
+COL 3289,0008,ALPHAG,''Police'' 
+COL 0010,0002,ALPHAG,''Branche''
+COL 0012,0006,NUM,''Matricule'' 
+COL 0018,0008,AAAAMMJJ,''Date terme gar''   
+COL 0026,0008,AAAAMMJJ,''Date terme prm''   
+COL 0034,0008,AAAAMMJJ,''Date effet''   
+COL 0042,0002,ALPHAG,''Combinaison''
+COL 0044,0001,ALPHAG,''Exonération fiscale''
+COL 0045,0002,ALPHAG,''Nature garantie''
+COL 0047,0001,ALPHAG,''ELT Passée'' 
+COL 0048,0001,ALPHAG,''Périodicité''
+COL 0049,0012,MNT,''Prêt sur police''   
+COL 0061,0012,MNT,''Solde du compte courant''   
+COL 0073,0002,ALPHAG,''Dégressivité''   
+COL 0075,0004,NUM,''Dernière année PB attribuée''   
+COL 0079,0003,NUM,''Hypothèse définitive''  
+COL 0082,0004,NUM,''Année PB choisie''  
+COL 0086,0003,NUM,''Hypothèse définitive choisie''  
+COL 0089,0012,MNT,''Mt à déduire''  
+COL 0101,0012,MNT,''Mt cap. décès 1993''
+COL 0113,0012,MNT,''Mt cap. vie 1993''  
+COL 0125,0012,MNT,''Mt PB décès minimum''   
+COL 0137,0012,MNT,''Mt fond de PB'' 
+COL 0149,0032,ALPHAG,''Qualité civile'' 
+COL 0181,0032,ALPHAG,''Nom du bénéficiaire''
+COL 0213,0032,ALPHAG,''Nom du bénéficiaire (suite)''
+COL 0245,0032,ALPHAG,''Adresse du bénéficiaire''
+COL 0277,0032,ALPHAG,''Adresse du bénéficiaire(suite)'' 
+COL 0309,0008,ALPHAG,''Code postal du bénéficiaire''
+COL 0317,0032,ALPHAG,''Localité du bénéficiaire''   
+COL 0349,0010,ALPHAG,''Téléphone du bénéficiaire''  
+COL 0359,0001,ALPHAG,''Cd sexe du bénéficiaire''
+COL 0360,0001,ALPHAG,''Rég. linguistique du bénéficiaire''  
+COL 0362,0032,ALPHAG,''Libellé bénéficiaire de l'alpha''
+COL 0394,0002,ALPHAG,''Type d'interm.'' 
+COL 0396,0005,ALPHAG,''Numéro d'interm.''   
+COL 0401,0001,ALPHAG,''Cd sexe de l'interm.''   
+COL 0402,0032,ALPHAG,''Nom de l'interm.''   
+COL 0434,0032,ALPHAG,''Nom de l'interm.(suite)''
+COL 0466,0032,ALPHAG,''Adresse de l'interm.''   
+COL 0498,0032,ALPHAG,''Adresse de l'interm.(suite)''
+COL 0530,0008,ALPHAG,''Cd postal de l'interm.'' 
+COL 0538,0032,ALPHAG,''Localité de l'interm.''  
+COL 0570,0010,ALPHAG,''Numéro de tél. de l'interm.''
+COL 0580,0002,ALPHAG,''Type d'interm. MP''  
+COL 0582,0005,ALPHAG,''Numéro d'interm. MP''
+COL 0587,0032,ALPHAG,''Nom de l'interm. MP''
+COL 0619,0032,ALPHAG,''Prénom de l'interm. MP'' 
+COL 0651,0032,ALPHAG,''Nom de l'assuré''
+COL 0683,0006,ALPHAG,''Numéro de l'assuré'' 
+COL 0689,0008,AAAAMMJJ,''Dt naiss. de l'assuré''
+COL 0697,0001,ALPHAG,''Cd sexe de l'assuré''
+COL 0698,0012,MNT,''Mt Client'' 
+COL 3297,0002,ALPHAG,''AP Code taxation 1'' 
+COL 3299,0002,ALPHAG,''AP Code taxation 2'' 
+COL 3307,0001,ALPHAG,''Erreur'' 
+COL 0710,0100,ALPHAG,''Libellé msg information 001''
+COL 0810,0100,ALPHAG,''Libellé msg information 002''
+COL 0910,0100,ALPHAG,''Libellé msg information 003''
+COL 1010,0100,ALPHAG,''Libellé msg information 004''
+COL 1110,0100,ALPHAG,''Libellé msg information 005''
+COL 3308,0012,MNT,''Total CD''  
+COL 3320,0012,MNT,''Total CV''  
+COL 3333,0010,MNT,''Total PB''  
+COL 3343,0010,MNT,''Total base tax 1''  
+COL 3353,0010,MNT,''Total base tax 2''  
+COL 3363,0010,MNT,''Total base tax''
+COL 3373,0010,MNT,''Total tax 1''   
+COL 3383,0010,MNT,''Total tax 2''   
+COL 3393,0010,MNT,''Total tax'' 
+COL 3403,0010,MNT,''Vie - Taxe''
+COL 3332,0001,,''Tx taxes'' 
+COL 3428,0010,MNT,''Base calcul Inami'' 
+COL 3423,0005,V2,''Tx Inami''   
+COL 3413,0010,MNT,''Total Inami''   
+COL 1210,0005,ALPHAG,''Code année tarifaire(1)''
+COL 1215,0012,MNT,''Mt capital décès''  
+COL 1227,0012,MNT,''Mt capital vie''
+COL 1239,0012,MNT,''Mt Bonus trm''  
+COL 1251,0012,MNT,''Mt réserve 3112''   
+COL 1263,0012,MNT,''Mt PB sur réserve CD''  
+COL 1275,0012,MNT,''Mt PB sur réserve CV''  
+COL 1287,0012,MNT,''Mt PB libre CD''
+COL 1299,0012,MNT,''Mt PB libre CV''
+COL 1311,0012,MNT,''Mt PB garantie CD'' 
+COL 1323,0012,MNT,''Mt PB garantie CV'' 
+COL 1335,0012,MNT,''Mt Inami PCLI'' 
+COL 1347,0002,ALPHAG,''Code taxation 1''
+COL 1349,0002,ALPHAG,''Code taxation 2''
+COL 1351,0006,V2,''Taux taxation 1''
+COL 1357,0006,V2,''Taux taxation 2''
+COL 1363,0012,MNT,''Mt base taxable 1'' 
+COL 1375,0012,MNT,''Mt base taxable 2'' 
+COL 1387,0012,MNT,''Mt taxe 1'' 
+COL 1399,0012,MNT,''Mt taxe 2'' 
+COL 1411,0006,V2,''Coefficient de conversion''  
+COL 1417,0005,ALPHAG,''Code année tarifaire(2)''
+COL 1422,0012,MNT,''Mt capital décès''  
+COL 1434,0012,MNT,''Mt capital vie''
+COL 1446,0012,MNT,''Mt Bonus trm''  
+COL 1458,0012,MNT,''Mt réserve 3112''   
+COL 1470,0012,MNT,''Mt PB sur réserve CD''  
+COL 1482,0012,MNT,''Mt PB sur réserve CV''  
+COL 1494,0012,MNT,''Mt PB libre CD''
+COL 1506,0012,MNT,''Mt PB libre CV''
+COL 1518,0012,MNT,''Mt PB garantie CD'' 
+COL 1530,0012,MNT,''Mt PB garantie CV'' 
+COL 1542,0012,MNT,''Mt Inami PCLI'' 
+COL 1554,0002,ALPHAG,''Code taxation 1''
+COL 1556,0002,ALPHAG,''Code taxation 2''
+COL 1558,0006,V2,''Taux taxation 1''
+COL 1564,0006,V2,''Taux taxation 2''
+COL 1570,0012,MNT,''Mt base taxable 1'' 
+COL 1582,0012,MNT,''Mt base taxable 2'' 
+COL 1594,0012,MNT,''Mt taxe 1'' 
+COL 1606,0012,MNT,''Mt taxe 2'' 
+COL 1618,0006,V2,''Coefficient de conversion''  
+COL 1624,0005,ALPHAG,''Code année tarifaire(3)''
+COL 1629,0012,MNT,''Mt capital décès''  
+COL 1641,0012,MNT,''Mt capital vie''
+COL 1653,0012,MNT,''Mt Bonus trm''  
+COL 1665,0012,MNT,''Mt réserve 3112''   
+COL 1677,0012,MNT,''Mt PB sur réserve CD''  
+COL 1689,0012,MNT,''Mt PB sur réserve CV''  
+COL 1701,0012,MNT,''Mt PB libre CD''
+COL 1713,0012,MNT,''Mt PB libre CV''
+COL 1725,0012,MNT,''Mt PB garantie CD'' 
+COL 1737,0012,MNT,''Mt PB garantie CV'' 
+COL 1749,0012,MNT,''Mt Inami PCLI'' 
+COL 1761,0002,ALPHAG,''Code taxation 1''
+COL 1763,0002,ALPHAG,''Code taxation 2''
+COL 1765,0006,V2,''Taux taxation 1''
+COL 1771,0006,V2,''Taux taxation 2''
+COL 1777,0012,MNT,''Mt base taxable 1'' 
+COL 1789,0012,MNT,''Mt base taxable 2'' 
+COL 1801,0012,MNT,''Mt taxe 1'' 
+COL 1813,0012,MNT,''Mt taxe 2'' 
+COL 1825,0006,V2,''Coefficient de conversion''  
+COL 1831,0005,ALPHAG,''Code année tarifaire(4)''
+COL 1836,0012,MNT,''Mt capital décès''  
+COL 1848,0012,MNT,''Mt capital vie''
+COL 1860,0012,MNT,''Mt Bonus trm''  
+COL 1872,0012,MNT,''Mt réserve 3112''   
+COL 1884,0012,MNT,''Mt PB sur réserve CD''  
+COL 1896,0012,MNT,''Mt PB sur réserve CV''  
+COL 1908,0012,MNT,''Mt PB libre CD''
+COL 1920,0012,MNT,''Mt PB libre CV''
+COL 1932,0012,MNT,''Mt PB garantie CD'' 
+COL 1944,0012,MNT,''Mt PB garantie CV'' 
+COL 1956,0012,MNT,''Mt Inami PCLI'' 
+COL 1968,0002,ALPHAG,''Code taxation 1''
+COL 1970,0002,ALPHAG,''Code taxation 2''
+COL 1972,0006,V2,''Taux taxation 1''
+COL 1978,0006,V2,''Taux taxation 2''
+COL 1984,0012,MNT,''Mt base taxable 1'' 
+COL 1996,0012,MNT,''Mt base taxable 2'' 
+COL 2008,0012,MNT,''Mt taxe 1'' 
+COL 2020,0012,MNT,''Mt taxe 2'' 
+COL 2032,0006,V2,''Coefficient de conversion''  
+COL 2038,0005,ALPHAG,''Code année tarifaire(5)''
+COL 2043,0012,MNT,''Mt capital décès''  
+COL 2055,0012,MNT,''Mt capital vie''
+COL 2067,0012,MNT,''Mt Bonus trm''  
+COL 2079,0012,MNT,''Mt réserve 3112''   
+COL 2091,0012,MNT,''Mt PB sur réserve CD''  
+COL 2103,0012,MNT,''Mt PB sur réserve CV''  
+COL 2115,0012,MNT,''Mt PB libre CD''
+COL 2127,0012,MNT,''Mt PB libre CV''
+COL 2139,0012,MNT,''Mt PB garantie CD'' 
+COL 2151,0012,MNT,''Mt PB garantie CV'' 
+COL 2163,0012,MNT,''Mt Inami PCLI'' 
+COL 2175,0002,ALPHAG,''Code taxation 1''
+COL 2177,0002,ALPHAG,''Code taxation 2''
+COL 2179,0006,V2,''Taux taxation 1''
+COL 2185,0006,V2,''Taux taxation 2''
+COL 2191,0012,MNT,''Mt base taxable 1'' 
+COL 2203,0012,MNT,''Mt base taxable 2'' 
+COL 2215,0012,MNT,''Mt taxe 1'' 
+COL 2227,0012,MNT,''Mt taxe 2'' 
+COL 2239,0006,V2,''Coefficient de conversion''  
+COL 2245,0005,ALPHAG,''Code année tarifaire(6)''
+COL 2250,0012,MNT,''Mt capital décès''  
+COL 2262,0012,MNT,''Mt capital vie''
+COL 2274,0012,MNT,''Mt Bonus trm''  
+COL 2286,0012,MNT,''Mt réserve 3112''   
+COL 2298,0012,MNT,''Mt PB sur réserve CD''  
+COL 2310,0012,MNT,''Mt PB sur réserve CV''  
+COL 2322,0012,MNT,''Mt PB libre CD''
+COL 2334,0012,MNT,''Mt PB libre CV''
+COL 2346,0012,MNT,''Mt PB garantie CD'' 
+COL 2358,0012,MNT,''Mt PB garantie CV'' 
+COL 2370,0012,MNT,''Mt Inami PCLI'' 
+COL 2382,0002,ALPHAG,''Code taxation 1''
+COL 2384,0002,ALPHAG,''Code taxation 2''
+COL 2386,0006,V2,''Taux taxation 1''
+COL 2392,0006,V2,''Taux taxation 2''
+COL 2398,0012,MNT,''Mt base taxable 1'' 
+COL 2410,0012,MNT,''Mt base taxable 2'' 
+COL 2422,0012,MNT,''Mt taxe 1'' 
+COL 2434,0012,MNT,''Mt taxe 2'' 
+COL 2446,0006,V2,''Coefficient de conversion''  
+COL 2452,0005,ALPHAG,''Code année tarifaire(7)''
+COL 2457,0012,MNT,''Mt capital décès''  
+COL 2469,0012,MNT,''Mt capital vie''
+COL 2481,0012,MNT,''Mt Bonus trm''  
+COL 2493,0012,MNT,''Mt réserve 3112''   
+COL 2505,0012,MNT,''Mt PB sur réserve CD''  
+COL 2517,0012,MNT,''Mt PB sur réserve CV''  
+COL 2529,0012,MNT,''Mt PB libre CD''
+COL 2541,0012,MNT,''Mt PB libre CV''
+COL 2553,0012,MNT,''Mt PB garantie CD'' 
+COL 2565,0012,MNT,''Mt PB garantie CV'' 
+COL 2577,0012,MNT,''Mt Inami PCLI'' 
+COL 2589,0002,ALPHAG,''Code taxation 1''
+COL 2591,0002,ALPHAG,''Code taxation 2''
+COL 2593,0006,V2,''Taux taxation 1''
+COL 2599,0006,V2,''Taux taxation 2''
+COL 2605,0012,MNT,''Mt base taxable 1'' 
+COL 2617,0012,MNT,''Mt base taxable 2'' 
+COL 2629,0012,MNT,''Mt taxe 1'' 
+COL 2641,0012,MNT,''Mt taxe 2'' 
+COL 2653,0006,V2,''Coefficient de conversion''  
+COL 2659,0005,ALPHAG,''Code année tarifaire(8)''
+COL 2664,0012,MNT,''Mt capital décès''  
+COL 2676,0012,MNT,''Mt capital vie''
+COL 2688,0012,MNT,''Mt Bonus trm''  
+COL 2700,0012,MNT,''Mt réserve 3112''   
+COL 2712,0012,MNT,''Mt PB sur réserve CD''  
+COL 2724,0012,MNT,''Mt PB sur réserve CV''  
+COL 2736,0012,MNT,''Mt PB libre CD''
+COL 2748,0012,MNT,''Mt PB libre CV''
+COL 2760,0012,MNT,''Mt PB garantie CD'' 
+COL 2772,0012,MNT,''Mt PB garantie CV'' 
+COL 2784,0012,MNT,''Mt Inami PCLI'' 
+COL 2796,0002,ALPHAG,''Code taxation 1''
+COL 2798,0002,ALPHAG,''Code taxation 2''
+COL 2800,0006,V2,''Taux taxation 1''
+COL 2806,0006,V2,''Taux taxation 2''
+COL 2812,0012,MNT,''Mt base taxable 1'' 
+COL 2824,0012,MNT,''Mt base taxable 2'' 
+COL 2836,0012,MNT,''Mt taxe 1'' 
+COL 2848,0012,MNT,''Mt taxe 2'' 
+COL 2860,0006,V2,''Coefficient de conversion''  
+COL 2866,0005,ALPHAG,''Code année tarifaire(9)''
+COL 2871,0012,MNT,''Mt capital décès''  
+COL 2883,0012,MNT,''Mt capital vie''
+COL 2895,0012,MNT,''Mt Bonus trm''  
+COL 2907,0012,MNT,''Mt réserve 3112''   
+COL 2919,0012,MNT,''Mt PB sur réserve CD''  
+COL 2931,0012,MNT,''Mt PB sur réserve CV''  
+COL 2943,0012,MNT,''Mt PB libre CD''
+COL 2955,0012,MNT,''Mt PB libre CV''
+COL 2967,0012,MNT,''Mt PB garantie CD'' 
+COL 2979,0012,MNT,''Mt PB garantie CV'' 
+COL 2991,0012,MNT,''Mt Inami PCLI'' 
+COL 3003,0002,ALPHAG,''Code taxation 1''
+COL 3005,0002,ALPHAG,''Code taxation 2''
+COL 3007,0006,V2,''Taux taxation 1''
+COL 3013,0006,V2,''Taux taxation 2''
+COL 3019,0012,MNT,''Mt base taxable 1'' 
+COL 3031,0012,MNT,''Mt base taxable 2'' 
+COL 3043,0012,MNT,''Mt taxe 1'' 
+COL 3055,0012,MNT,''Mt taxe 2'' 
+COL 3067,0006,V2,''Coefficient de conversion''  
+COL 3280,0008,NUM,''No terme lqd''  
+COL 3438,0010,MNT,''Mt Cotisation de solidarité''   
+COL 3448,0007,V4,''% Cotisation de solidarité'' 
+NBREC   
+@EOF
+@ . 
+@FREE      RVIR005GGI.  
+@FREE      OLQD-GGI.
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB130:   MSG 130. FILTRE POUR VIB243     (GDD)   -          SORT  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB130  
+@ASG,A     RVIR005OTR.  
+@USE       IN1,RVIR005OTR.  
+@DELETE,C  IVIR005OTR.  
+@ASG,UP    IVIR005OTR.,F/0/POS/4000 
+@USE       OUT1,IVIR005OTR  
+@ . 
+@SORT,ES
+FILEIN=IN1,F   BLOCK=10 
+FILEOUT=OUT1,F BLOCK=10 
+RSZ=3896                                   . old rsz=3680   
+ACCEPT=3288,01,CAS,NE,D,AND                . CD-ETA-GST-TRM 
+ACCEPT=3307,01,CAS,NE,Y,AND                . FL-ERR 
+ACCEPT=0698,12,ASC,NE,00000000000{,AND     . MT-CLT 
+ACCEPT=0698,12,ASC,NE,00000000000}  
+COPY
+@EOF
+@FREE      RVIR005LQD.  
+@FREE      IVIR005OTR.  
+@ . 
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB215:   MSG 215. IMPRIMER LES DOCUMENTS (EXSTREAM)   - VIB243/VIU142 
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB215  
+@ . 
+@ASG,A     IVIR005OTR.  
+@USE       I-FCH-TRM,IVIR005OTR.
+@DELETE,C  VIPM03*P-VIB243-CT2. 
+@ASG,UP    VIPM03*P-VIB243-CT2.,F///1000
+@USE       O-IME-CTL,VIPM03*P-VIB243-CT2.   
+@ . 
+@DELETE,C  VIPM03*IVIB243EX0.   
+@CAT,P     VIPM03*IVIB243EX0.,F/1/POS/4000  
+@ASG,A     VIPM03*IVIB243EX0.   
+@USE      DOC-OUT,VIPM03*IVIB243EX0.
+@ . 
+@XQT       VIPM03.VIB243
+@ . 
+@FREE      I-FCH-TRM.   
+@FREE      VIPM03*P-VIB243-CT2. 
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB230:   MSG 230. MAJ VID019-GST_TRM                     - VIB144 
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB230  
+@ . 
+@ASG,A     RVIR005LQD.  
+@USE       I-FCH-INP,RVIR005LQD.
+@DELETE,C  VIPM03*P-VIB144-CTL. 
+@ASG,UP    VIPM03*P-VIB144-CTL.,F///1000
+@USE       O-IME-CTL,VIPM03*P-VIB144-CTL.   
+@ . 
+@XQT       VIPM03.VIB144
+@ . 
+@FREE      I-FCH-INP.   
+@FREE      VIPM03*P-VIB144-CTL. 
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB400:   MSG 400. PREPARATION FICHIER POUR VIB016           BABA  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB400  
+@.  
+@ERS       TPF$.
+@ASG,A     RVIR005LQD.  
+@DELETE,C  IVIB151BAB.  
+@ASG,UP    IVIB151BAB.,F///4000 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      RVIR005LQD,3896,10   
+OUTPUT     IVIB151BAB,3896,10   
+KEYS       E 3288,1,D                      . CD-ETA-GST-TRM 
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      RVIR005LQD.  
+@FREE      IVIB151BAB.  
+@TIME   
+@ .        =======================================================  
+@LAB500:   MSG 500. PREPARATION FICHIER POUR VIB016       CFH-COPY  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB500  
+@.  
+@.     Légende : 3,23 (NO-RAD-POL,NO-SUF-POL,CD-BCH,NO-MAT,DT-TRM-GAR)  
+@.             698,12 (MT-CLT)  
+@.              49,12 (MT-PSP)  
+@.     ---------------------------------------------------------------  
+@ERS       TPF$.
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+INPUT      IVIB151BAB,3896,10   
+OUTPUT     IVIB151CFH,3300,10   
+FIELDIN    3,23 698,12 49,12
+FIELDOUT   1,23  24,12 36,12
+ASCII   
+@EOF
+@ASG,A     IVIB151BAB.  
+@DELETE,C  IVIB151CFH.  
+@ASG,UP    IVIB151CFH.,F/0/POS/4000 
+@XQT       .CFH-COPY
+@ERS       TPF$.
+@FREE      IVIB151BAB.  
+@FREE      IVIB151CFH.  
+@ . 
+@ .        =========================================================
+@LAB510: MSG 510. CREATION CODIFICATIONS VI050              VIB016  
+@ .        =========================================================
+@ . VI050 CREE un seul record dans la table VI050 avec code mvt = 35
+@ . ce code permet, lors de la maj de l'inventaire de supprimer le  
+@ . contrat arrivé à terme. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB510  
+@XQT,R     VIPM03.VIB016
+@PRT,I  
+@TIME   
+@ .        =========================================================
+@LAB600: MSG 600. ENRICHISSEMENT TABLE VID024/VID025        VIB805  
+@ .        =========================================================
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB600  
+@ASG,A     RVIR005OTR.  
+@USE       INA,RVIR005OTR.  
+@ . 
+@DELETE,C  VIPM03*IANOMALIE.
+@ASG,UP    VIPM03*IANOMALIE.,F/0/POS/4000   
+@USE       OUTA,VIPM03*IANOMALIE.   
+@ . 
+@XQT       VIPM03.VIB805
+@ERS       TPF$.
+@FREE      RVIR005OTR.  
+@FREE      VIPM03*IANOMALIE.
+@TIME   
+@ .        =======================================================  
+@LAB700:   MSG 700. ENVOI  FICHIERS 
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@ . 
+@ADD       F999TRANSF.VIPM03/2200PC 
+@ . 
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB740:   MSG 740. IMPRESSION DES FICHIERS VIA F999SYM      - SYM  
+@ .        =======================================================  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB740  
+@ . 
+@ADD       F999SYM.VIPM03   
+@ . 
+@TIME   
+@ . 
+@ .        =======================================================  
+@LAB750:   MSG 750. SAUVETAGE DES FICHIERS                   - FAS  
+@ .        =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB750  
+@ . 
+@ADD       SYS$*RUNS.FASDIR 
+@ . 
+@TIME   
+@ . 
+@ .        =========================================================
+@LAB770:   MSG 770. SUPPRESSION DES FICHIERS INTERMEDIAIRES - DELETE
+@ .        =========================================================
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@ . 
+@DELETE,C  IVIB151LQD.  
+@DELETE,C  RVIR005LQD.  
+@DELETE,C  RVIR005GGI.  
+@DELETE,C  RVIR005OTR.  
+@DELETE,C  IVIR005OTR.  
+@DELETE,C  IVIB151BAB.  
+@DELETE,C  IVIB151CFH.  
+@DELETE,C  OLQD-GGI.
+@DELETE,C  OLQD-OTR.
+@DELETE,C  VIPM03*IANOMALIE.
+@DELETE,C  VIPM03*IVIB243EX0.   
+@TIME   
+@ . 
+@ .        =========================================================
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE            - REPDEL
+@ .        =========================================================
+@ . 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@MSG       **** LE RUN VIPM03 S'EST BIEN TERMINE ****   
+@QUAL,R 
+@FIN

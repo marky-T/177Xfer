@@ -1,0 +1,218 @@
+@RUN,M/T  CCSA14,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.,F///9999   
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG       *********************************************************
+@MSG       **  CLOTURE SCC : GEL DEFINITIF DES RESERVES           **
+@MSG       **       (ANCIENNEMENT : CCSA06 + CCSA14)              **
+@MSG       *********************************************************
+@ . 
+@ . LE 29/08/2000 : NOUVEAU RUN REPRENANT LE CCSA06 ET LE CCSA14 (PLUSQ)
+@ . LE 11/09/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . LE 15/01/03: ADAPTATION POUR SAUVETAGE INCENDIE CLOTURE 
+@ . LE 13/10/04: AJOUT DU COPIE/PC POUR GRAVURE 
+@ . LE 21/12/04: INTEGRATION DES IMPRESSIONS DE L'EX CCSD10 
+@ . 
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.CCSA14   
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ .        ************************************ 
+@ASG,T     CCSA14.  
+@COPY,A    SCCPRD*BABS.CCB151,CCSA14.CCB151 
+@COPY,A    SCCPRD*BABS.CCB171,CCSA14.CCB171 
+@COPY,A    SCCPRD*BABS.CCSB4R,CCSA14.CCSB4R 
+@COPY,A    SCCPRD*BABS.CCSB4U,CCSA14.CCSB4U 
+@COPY,A    SCCPRD*BABS.CCSB4V,CCSA14.CCSB4V 
+@ .        ************************************ 
+@ . 
+@ .      -----------------------------------------  
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@.       -----------------------------------------  
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ .      ------------------------------------------------   
+@LAB010: MSG 010. GEL DEFINITIF RESERVES         - CCB151   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,C  CCSA14*P-CCB151-TOT. 
+@ASG,UP    CCSA14*P-CCB151-TOT.,F///100 
+@USE       TOTCONT,CCSA14*P-CCB151-TOT. 
+@DELETE,C  CCSA14*P-CCB151-ANO. 
+@ASG,UP    CCSA14*P-CCB151-ANO.,F///10000   
+@USE       ANOMAL,CCSA14*P-CCB151-ANO.  
+@DELETE,C  CCSA14*P-CCB151-RGC. 
+@ASG,UP    CCSA14*P-CCB151-RGC.,F///10000   
+@USE       RGCONT,CCSA14*P-CCB151-RGC.  
+@DELETE,C  R171CCSA14   
+@ASG,UP    R171CCSA14.,F/0/POS/4000 
+@USE       FOUTPUT,R171CCSA14   
+@ . 
+@XQT,WR    CCSA14.CCB151
+@ . 
+@FREE      CCSA14*P-CCB151-TOT. 
+@FREE      CCSA14*P-CCB151-ANO. 
+@FREE      CCSA14*P-CCB151-RGC. 
+@FREE      R171CCSA14   
+@TIME   
+@ . 
+@ .      ---------------------------------------------- 
+@LAB020: MSG 020. SCAN DE LA BANDE RESCLO.       - SCAN 
+@ .      ---------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ASG,A     R171CCSA14   
+@USE       INA,R171CCSA14   
+@TIME   
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+ASCII   
+INPUT      INA,300,10   
+IF         R   <  100   
+@EOF
+@XQT       TPF$.SCAN
+@ERS       TPF$.
+@FREE      R171CCSA14   
+@TIME   
+@ . 
+@ .      -----------------------------------------------
+@LAB030: MSG 030. TABAN DE LA BANDE RESCLO.      - TABAN
+@ .      -----------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ASG,A     R171CCSA14   
+@SSG,IA    *UTILIT.TABAN/ASCII  
+SGS 
+ASCII   
+INPUT      R171CCSA14,300,10
+KEYS       201,12  213,12   
+SEQERROR   NON  
+@EOF
+@XQT,WR    TPF$.TABAN   
+@ERS       TPF$.
+@FREE      R171CCSA14.  
+@TIME   
+@ . 
+@ .      ------------------------------------------------   
+@LAB040: MSG 040. GEL DEFINITIF DES RESERVES ARP - CCB171   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ . 
+@DELETE,C  CCSA14*P-CCB171-TOT. 
+@ASG,UP    CCSA14*P-CCB171-TOT.,F///500 
+@USE       TOTCONT,CCSA14*P-CCB171-TOT. 
+@ . 
+@XQT,WR    CCSA14.CCB171
+@ . 
+@FREE      CCSA14*P-CCB171-TOT. 
+@TIME   
+@ . 
+@ .      ------------------------------------------------   
+@LAB050: MSG 050. RESERVES DETAIL PAR SINISTRE   - CCSB4R   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@DELETE,C  CCSA14*ICCS4RLSTG.   
+@CAT,P     CCSA14*ICCS4RLSTG.,F///10000 
+@ASG,AX    CCSA14*ICCS4RLSTG.   
+@USE       PRT4R-G,CCSA14*ICCS4RLSTG.   
+@DELETE,C  CCSA14*ICCS4RLSTP.   
+@CAT,P     CCSA14*ICCS4RLSTP.,F///10000 
+@ASG,AX    CCSA14*ICCS4RLSTP.   
+@USE       PRT4R-P,CCSA14*ICCS4RLSTP.   
+@ . 
+@XQT,WR    CCSA14.CCSB4R
+@ . 
+@FREE      CCSA14*ICCS4RLSTG.   
+@FREE      CCSA14*ICCS4RLSTP.   
+@ERS       TPF$.
+@ . 
+@ .      ------------------------------------------------   
+@LAB060: MSG 060. RESERVES PAR CATEGORIE - ANNEE - CCSB4U   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@DELETE,C  CCSA14*ICCS4ULSTG.   
+@CAT,P     CCSA14*ICCS4ULSTG.,F///10000 
+@ASG,AX    CCSA14*ICCS4ULSTG.   
+@USE       PRT4U-G,CCSA14*ICCS4ULSTG.   
+@DELETE,C  CCSA14*ICCS4ULSTP.   
+@CAT,P     CCSA14*ICCS4ULSTP.,F///10000 
+@ASG,AX    CCSA14*ICCS4ULSTP.   
+@USE       PRT4U-P,CCSA14*ICCS4ULSTP.   
+@ . 
+@XQT,WR    CCSA14.CCSB4U
+@ . 
+@FREE      CCSA14*ICCS4ULSTG.   
+@FREE      CCSA14*ICCS4ULSTP.   
+@ERS       TPF$.
+@ . 
+@ .      ------------------------------------------------   
+@LAB070: MSG 070. RESERVES PAR ANNEE             - CCSB4V   
+@ .      ------------------------------------------------   
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ . 
+@DELETE,C  CCSA14*ICCS4VLSTG.   
+@CAT,P     CCSA14*ICCS4VLSTG.,F///10000 
+@ASG,AX    CCSA14*ICCS4VLSTG.   
+@USE       PRT4V-G,CCSA14*ICCS4VLSTG.   
+@DELETE,C  CCSA14*ICCS4VLSTP.   
+@CAT,P     CCSA14*ICCS4VLSTP.,F///10000 
+@ASG,AX    CCSA14*ICCS4VLSTP.   
+@USE       PRT4V-P,CCSA14*ICCS4VLSTP.   
+@ . 
+@XQT       CCSA14.CCSB4V
+@ . 
+@FREE      CCSA14*ICCS4VLSTG.   
+@FREE      CCSA14*ICCS4VLSTP.   
+@ERS       TPF$.
+@ .      -------------------------------------------------- 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ .      -------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@ .      -------------------------------------------------- 
+@LAB720: MSG 720. ENVOI INTRANET
+@ .      -------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ . 
+@ADD       F999TRANSF.CCSA14/2200PC 
+@TIME   
+@ . 
+@ .      -------------------------------------------------- 
+@LAB740: MSG 740. IMPRESSION DES LISTES CCSA14 VIA F999SYM  
+@ .      -------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ . 
+@ADD       F999SYM.CCSA14   
+@TIME   
+@ . 
+@ .      -------------------------------------- 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ .      -------------------------------------- 
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       ****MSG LE RUN CCSA14 S'EST BIEN TERMINE ****
+@QUAL,R 
+@FIN

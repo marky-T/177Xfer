@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = C:\\Amt\\Migration\\Trial3\\output\\trial3-chaban.LionSource
+APPNAME = AFBUS_COBOL
+GENSET = Default from new application
+SYSOPT = FALSE

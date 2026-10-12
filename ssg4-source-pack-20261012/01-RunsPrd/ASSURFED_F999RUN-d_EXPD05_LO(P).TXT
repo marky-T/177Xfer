@@ -1,0 +1,42 @@
+@RUN,M/T  EXPD05,EXPLOITATION,ASSURFED,S8000
+@SYM       PRINT$,,PRSP 
+@MSG       ************************************************ 
+@MSG       ** MODULE LO                                 *** 
+@MSG       ************************************************ 
+@MSG       DECHARGEMENT DU F006GPOL 
+@ASG,A     FSGR001VIC.  
+@DELETE,C  ISGR001VIC   
+@ASG,UP    ISGR001VIC.,F/0/POS/4000 
+@USE       OUT,ISGR001VIC   
+@SSG,IA    *UTILIT.UNLOADIS/ASCII   
+SGS 
+ASCII   
+INPUT      FSGR001VIC,114,10
+OUTPUT     OUT,114,20   
+KEYIS      6,8,100  
+@EOF
+@XQT,WR    TPF$.UNLOADIS
+@ERS       TPF$.
+@FREE      FSGR001VIC.  
+@FREE      ISGR001VIC.  
+@TIME   
+@ASG,A     FSCR001ATO.  
+@DELETE,C  ISCR001ATO.  
+@CAT,P     ISCR001ATO,F/0/POS/4000  
+@ASG,AX    ISCR001ATO   
+@SSG,IA    *UTILIT.UNLOADIS/ASCII   
+SGS 
+ASCII   
+INPUT      FSCR001ATO,204,10
+OUTPUT     ISCR001ATO,204,10
+KEYIS      6,8,190  
+@EOF
+@XQT,WR    TPF$.UNLOADIS
+@ERS       TPF$.
+@FREE      ISCR001ATO.  
+@FREE      FSCR001ATO.  
+@TIME   
+@PRT,F     FSCR001ATO   
+@TIME   
+@ . 
+@FIN

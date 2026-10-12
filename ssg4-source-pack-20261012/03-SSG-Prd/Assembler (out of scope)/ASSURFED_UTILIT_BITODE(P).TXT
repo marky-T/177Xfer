@@ -1,0 +1,46 @@
+       AXR$ .     
+$(0) .
+SAVR   RES 4 .    
+LONG   + 0 .
+DIX    +         012 .  
+CINQ   +   005 .  
+SIX    +         006 .  
+$(1) .
+LOBUF  SA,S1     A5,0,A1 .    
+       SA,S2     A5,0,A1 .    
+       SA,S3     A5,0,A1 .    
+       SA,S4     A5,0,A1 .    
+       SA,S5     A5,0,A1 .    
+       SA,S6     A5,0,A1 .    
+BITODE* DS       A2,SAVR .     SAUVE A2,A3
+       DS        A4,SAVR+2 .           A4,A5    
+       DSL       A1,36 .       A1 DANS A2 
+       DSL       A2,18 .       A2 = DEPLAC
+       SSL       A3,18 .       A3 = LONGUEUR    
+       ANA,U     A3,+1 .       MOINS 1 DANS LONG
+       SZ        A1 .   
+       AA        A2,A3 .       DEP + (LONG - 1) 
+       DI        A1,SIX .     
+       SA        A1,LONG .    
+       DSL       A0,18 .       A0 = ADRESSE DU MOT A CONVERTIR    
+       SSL       A1,18 .       A1 = ADRESSE DU BUFFER 
+       AA        A1,LONG .    
+DEBUT  LA        A5,0,A0 .     VALEUR DANS A5   
+BOUC1  SZ        A4 .          RAZ A4     
+       TZ        A5 .          VAL = 0 ?  
+       DI        A4,DIX .      NON  DIVISE LE QUOTIENT PAR DIX    
+       AA,U      A5,+060 .     CONVERTIT EN FIELDATA  
+       EX        LOBUF,A2 .    STORE LA VALEUR DEC DANS LE S VOULU
+       LA        A5,A4 .       REMET LE QUOTIENT DANS A5    
+       ANA,U     A2,+1 .       S PRECEDENT
+       TP        A2 .          MOT PRECEDENT ?  
+       J         RA6A2 .       OUI  
+TST    JGD       A3,BOUC1 .    FIN DU MOT ?     
+       DL        A2,SAVR .     OUI  
+       DL        A4,SAVR+2 .   RECHARGE LES REG A2,A3,A4,A5 
+       DSL       A0,72 .       RAZ A0,A1  
+       J         0,X11 .       RETOUR     
+RA6A2  LA  A2,CINQ .    
+       ANA,U  A1,+1 .   
+       J         TST .  
+       END  

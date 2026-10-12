@@ -1,0 +1,123 @@
+@RUN,M/T  COMA18,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@SYM       PRINT$,1,PRSP
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES DROITS A COMMISSIONS                 **
+@MSG       **      MODULE COMA18/U1                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE CO001                     **
+@MSG       *===========================================================*
+@ . 
+@ .        P04062/02 : VANKE : 11/02/2005 : CREATION
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA18/U1
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA18U1.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE          - RESTART 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE CO001               - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@DELETE,C      IUNLMVTCO1.  
+@CAT,P         IUNLMVTCO1.,F/1175/POS/262143
+@ASG,A         IUNLMVTCO1.  
+@USE       UNL,IUNLMVTCO1.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE CO001 IN EXCLUSIVE RETRIEVAL MODE;   
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   CO001  
+  ORDER  BY 
+         N_DAC  
+  FORMAT INTERNAL;  
+UNLOCK CO001;   
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTCO1.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB020:   MSG 020. SELECT.DES MOUVEMENTS CO001 A RECHARGER - SSG   
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTCO1.  
+@USE       UNL,IUNLMVTCO1.  
+@ASG,AX        RCOMA17CO1.  
+@USE       CLE,RCOMA17CO1.  
+@ . 
+@DELETE,C      ILOAMVTCO1.  
+@CAT,P         ILOAMVTCO1.,F//POS/5000  
+@ASG,A         ILOAMVTCO1.  
+@USE       LOA,ILOAMVTCO1.  
+@DELETE,C      ISUPMVTCO1.  
+@CAT,P         ISUPMVTCO1.,F//POS/5000  
+@ASG,A         ISUPMVTCO1.  
+@USE       SUP,ISUPMVTCO1.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,087,10   UNL,198,10  
+OUTPUT         LOA,198,10   SUP,198,10  
+KEYS           2,10 
+UPDATE         1,10 
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT           TPF$.FUSBA   
+@ . 
+@FREE          RCOMA17CO1.  
+@FREE          IUNLMVTCO1.  
+@FREE          ILOAMVTCO1.  
+@FREE          ISUPMVTCO1.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB030:   MSG 030. UTILITAIRE FICHIER INTERNAL                   - BSF 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@COPY,A    ABSUITE*UTIL$.BSF,   
+@ASG,A         ILOAMVTCO1.  
+@ . 
+@TPF$.BSF   
+INTERNAL RDMS ASSURFED*ILOAMVTCO1   
+@ . 
+@ERS           TPF$.
+@FREE          ILOAMVTCO1.  
+@TIME   
+@ . 
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE              - REPRISE 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA18/U1 S'EST BIEN TERMINE ****
+@FREE      COMA18U1 
+@QUAL,R 
+@FIN

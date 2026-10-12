@@ -1,0 +1,190 @@
+@RUN,M/T   VIRA12,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@MSG       **************************************************** 
+@MSG       **  M.A.J VIE INDIVIDUELLE 13E ENROLEMENT         ** 
+@MSG       **  MODULE VIRA12/CG NOM DANS SCHEDULER VIRA12CG  ** 
+@MSG       **************************************************** 
+@ . LE 02/11/92: CREATION DU RUN
+@ . LE 14/12/93: MODIFICATION POUR KTP ET AJOUTE DU NX CANEVAS  
+@ . LE 01/03/2002: Sauvetage I006VIR305 pour VIRD37 (F02036).   
+@ . LE 04/01/2013: Suppression création RVIRD37CPT (P12090/01-JLH). 
+@ . LE 12/07/2017: Preparation nouveau logiciel UNIT4 (P15080/01-FJ)
+@ . LE 22/10/2018: Création d'un nouveau flux ISIE (1000422)
+@ . 
+@MSG       ENREGISTREMENT DES PARAMETRES + EDITION  
+@ADD       F999PARA.VIRA12  
+@TIME   
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.VIRA12  
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.VIRA12/CG
+@TIME   
+@ . *************************************************** 
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VIRA12CG.,F///1000   
+@COPY,A    CPTPRD*BABS.CGB022,VIRA12CG.CGB022   
+@ASG,A     CPVIRA12 
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB501: MSG 501. SELECTION ENROL PRIMES SUR DT ENROLEMENT. BABA.   
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB501  
+@ASG,A     I006VRA12ATX.
+@USE       INA,I006VRA12ATX.
+@ERS       TPF$.
+@DELETE,C  I006TERMVIE. 
+@ASG,UP    I006TERMVIE.,F/0/POS/4000
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      INA,500,10   
+OUTPUT     I006TERMVIE,500,10   
+@ADD       CPVIRA12.BABA1   
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      INA  
+@FREE      I006TERMVIE. 
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB503: MSG 503. SELECTION ENROL PRIMES SUR DT ENROLEMENT. BABA.   
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB503  
+@ASG,A     I006VRA12ATX.
+@USE       INA,I006VRA12ATX.
+@ERS       TPF$.
+@DELETE,C  I006TERMVIEA.
+@ASG,UP    I006TERMVIEA.,F/0/POS/4000   
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      INA,500,10   
+OUTPUT     I006TERMVIEA,500,10  
+@ADD       CPVIRA12.BABA2   
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      INA  
+@FREE      I006TERMVIEA.
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB510: MSG 510. FUSION DES FICHIERS TERME POUR CGB022. SORT.  
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB510  
+@ASG,AX    I006TERMVIE. 
+@ASG,AX    I006TERMVIEA.
+@DELETE,C  VIRA12*I006TERM022T. 
+@ASG,UP    VIRA12*I006TERM022T.,F/0/POS/4000
+@USE       FOUT,VIRA12*I006TERM022T.
+@SORT,ES
+COPY
+FILEIN=I006TERMVIE,F      BLOCK=10  
+FILEIN=I006TERMVIEA,F     BLOCK=10  
+FILEOUT=FOUT,F            BLOCK=10  
+RSZ=500 
+@EOF
+@FREE      VIRA12*I006TERM022T. 
+@TIME   
+@ . ------------------------------------------------------------------- 
+@LAB512: MSG 512. MOUVEMENTS COMPTABLES A DESTINATION DE ISIE.  
+@ . ------------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB512  
+@ . 
+@ASG,AX    VIRA12*I006TERM022T. 
+@USE       IN-PRM-VIE,VIRA12*I006TERM022T.  
+@ . 
+@DELETE,C  VIRA12*IISIE.
+@CAT,P     VIRA12*IISIE.,F/0/POS/4000   
+@ASG,AX    VIRA12*IISIE.
+@USE       OUT-MVT-CPT,VIRA12*IISIE.
+@ . 
+@DELETE,C  VIRA12*ICGB022ANO.   
+@CAT,P     VIRA12*ICGB022ANO.,F/0/POS/4000  
+@ASG,AX    VIRA12*ICGB022ANO.   
+@USE       OUT-LST-ANO,VIRA12*ICGB022ANO.   
+@ . 
+@XQT       VIRA12CG.CGB022  
+@ADD       F999CONTROLE.VIRA12  
+@ . 
+@FREE      VIRA12*I006TERM022T. 
+@FREE      VIRA12*IISIE.
+@FREE      VIRA12*ICGB022ANO.   
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------- 
+@LAB515: MSG 515. TEST PRESENCE FICHIER ANOMALIES.  
+@ . ------------------------------------------------------------------- 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB515  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE VIRA12*ICGB022ANO. 
+LABEL LAB777
+@EOF
+@ . 
+@ . ------------------------------------------------------------------- 
+@LAB520: MSG 520. CREATION FICHIER EXCEL LISTE ANOMALIES. TRANSEXCEL.   
+@ . ------------------------------------------------------------------- 
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB520  
+@ . 
+@ASG,A     VIRA12*ICGB022ANO.   
+@USE       FILEIN,VIRA12*ICGB022ANO.
+@ . 
+@DELETE,C  VIRA12*IXLSCPTELI.   
+@CAT,P     VIRA12*IXLSCPTELI.,F/0/POS/4000  
+@ASG,AX    VIRA12*IXLSCPTELI.   
+@USE       FILEOUT,VIRA12*IXLSCPTELI.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 98 
+COL 1,6,,''Matric'' 
+COL 7,2,,''Br'' 
+COL 9,6,,''Police'' 
+COL 15,1,,''Suf''   
+COL 16,8,,''Dt ech''
+COL 24,6,,''Dt compt''  
+COL 30,8,,''Dt enrol''  
+COL 38,6,,''Cpt debit'' 
+COL 44,6,,''Cpt credit''
+COL 50,8,,''No piece''  
+COL 58,12,MNT,''Prime totale''  
+COL 70,12,MNT,''Taxe totale''   
+COL 82,8,V5,''Taux princ''  
+COL 90,8,V5,''Taux compl''  
+TABUL '';'' 
+@EOF
+@ERS       TPF$.
+@FREE      VIRA12*ICGB022ANO.   
+@FREE      VIRA12*IXLSCPTELI.   
+@ . 
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------- 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ . ------------------------------------------------------------------- 
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       *** LE RUN VIRA12/CG S'EST BIEN TERMINE ***  
+@QUAL,R 
+@FIN

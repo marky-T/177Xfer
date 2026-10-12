@@ -1,0 +1,34 @@
+$(1)  AXR$  
+ABORTU*.    
+         LA  A0,0,X11   . LOAD ADDRESS OF TRACE-TABLE 
+         SA  A0,TADDR   . STORE IT INTO LMJ PARAM     
+         J   2,X11      . RETURN TO TRACED-PROGRAM    
+ABORT*     .
+AVORT*     .
+ABORTQ*   SA        A0,A0SAVE           . 
+          L         A0,MES              . 
+PRNT  ER            PRINT$              . 
+      LA  A0,TADDR  . LOAD TRACE-TAB ADDR 
+      JZ  A0,NOTRAC . NO TRACE TO DO ?    
+          LA        A0,A0SAVE           . 
+ .       LMJ  X11,ABORTV       . LMJ TO TRACE DUMP    
+TADDR       +0               .  TRACE-TAB  ADDRESS    
+        125,3                . DUMMY WORD 
+EABT      ER        EABT$               . 
+NOTRAC      LA   A0,A0SAVE    
+            ER   EABT$  
+KILL* 
+TUE*  
+          SA        A0,A0SAVE .     
+          LA        A0,MES2   .     
+          ER        PRINT$    .     
+          LA        A0,A0SAVE .     
+ABRT      ER        ABORT$              . 
+$(0). 
+A0SAVE              +0                  . 
+PF        FORM      12,6,18             . 
+MES       PF        10,4,MESS           . 
+MESS                'RUN TERMINATED VIA EABT$'    .   
+MES2      PF        10,8,MESS2
+MESS2               'RUN TERMINATED VIA ABORT$ - NO @PMD ALLOWED '
+ END  

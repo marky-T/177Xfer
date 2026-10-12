@@ -1,0 +1,133 @@
+﻿20260704 02:58 Starting
+20260704 02:58 Loading file: C:\Amt\Migration\EclCobolPipeline\output\trial-11-cfh-copy.LionSource
+20260704 02:58 File version: 6
+20260704 02:58 Exported with program version: 
+20260704 02:58 Loading application CFH_COPY_COBOL under AFBUS_2200COBOL
+20260704 02:58 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.1
+20260704 02:58 Loading DMS Schema:  1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIFORMAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIINSERT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHISEPARE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHITAB1(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CFH-COPY(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_COMPARE2_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CONDIS_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ECLAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_MONTANT_SIGNE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_SCAN-VAR_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TAPELD_DISTRIB(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TRI_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: AMT_999-ESQL-ERR 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-INVOKE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE-DYN 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: WS-ESQL-VAR 1.0 as 1.0
+20260704 02:58 Loading file: C:\Amt\Migration\EclCobolPipeline\output\trial-12-archisepare.LionSource
+20260704 02:58 File version: 6
+20260704 02:58 Exported with program version: 
+20260704 02:58 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.1 Application option may only be in the 1e file
+20260704 02:58 Loading DMS Schema:  1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIFORMAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIINSERT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHISEPARE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHITAB1(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CFH-COPY(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_COMPARE2_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CONDIS_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ECLAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_MONTANT_SIGNE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_SCAN-VAR_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TAPELD_DISTRIB(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TRI_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: AMT_999-ESQL-ERR 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-INVOKE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE-DYN 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: WS-ESQL-VAR 1.0 as 1.0
+20260704 02:58 Loading file: C:\Amt\Migration\EclCobolPipeline\output\trial-13-archiformat.LionSource
+20260704 02:58 File version: 6
+20260704 02:58 Exported with program version: 
+20260704 02:58 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.1 Application option may only be in the 1e file
+20260704 02:58 Loading DMS Schema:  1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIFORMAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIINSERT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHISEPARE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHITAB1(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CFH-COPY(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_COMPARE2_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CONDIS_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ECLAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_MONTANT_SIGNE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_SCAN-VAR_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TAPELD_DISTRIB(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TRI_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: AMT_999-ESQL-ERR 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-INVOKE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE-DYN 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: WS-ESQL-VAR 1.0 as 1.0
+20260704 02:58 Loading file: C:\Amt\Migration\EclCobolPipeline\output\trial-16-unload-ascii-nodup.LionSource
+20260704 02:58 File version: 6
+20260704 02:58 Exported with program version: 
+20260704 02:58 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 2.1 Application option may only be in the 1e file
+20260704 02:58 Loading DMS Schema:  1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIFORMAT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIINSERT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHISEPARE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHITAB1(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CFH-COPY(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_COMPARE2_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CONDIS_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ECLAT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LOADIS_MULT-NODUP(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_MONTANT_SIGNE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_SCAN-VAR_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TAPELD_DISTRIB(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TRI_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Copy: AMT_999-ESQL-ERR 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-INVOKE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE-DYN 1.0 as 2.1
+20260704 02:58 Loading Cobol Copy: WS-ESQL-VAR 1.0 as 1.0
+20260704 02:58 Loading file: C:\Amt\Migration\EclCobolPipeline\output\trial-17-tapeld-distrib.LionSource
+20260704 02:58 File version: 6
+20260704 02:58 Exported with program version: 
+20260704 02:58 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 2.1 Application option may only be in the 1e file
+20260704 02:58 Loading DMS Schema:  1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIFORMAT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHIINSERT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHISEPARE(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ARCHITAB1(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CFH-COPY(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_COMPARE2_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_CONDIS_ASCII(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_ECLAT(P) 1.0 as 1.0
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_LOADIS_MULT-NODUP(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_MONTANT_SIGNE(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_SCAN-VAR_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TAPELD_DISTRIB(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_TRI_ASCII(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Program: ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P) 1.0 as 2.1
+20260704 02:58 Loading Cobol Copy: AMT_999-ESQL-ERR 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-INVOKE 1.0 as 2.1
+20260704 02:58 Loading Cobol Copy: ESQL-USE 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: ESQL-USE-DYN 1.0 as 1.0
+20260704 02:58 Loading Cobol Copy: WS-ESQL-VAR 1.0 as 2.1
+20260704 02:58 Done in 00:00:02
