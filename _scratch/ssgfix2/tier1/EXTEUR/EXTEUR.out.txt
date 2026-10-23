@@ -1,0 +1,617 @@
+@ASG,T  TEMPUCS,F///5000
+@UCOB,I  ,TEMPUCS.EXTEUR,,,MAIN-PROGRAM,COMPAT/FULLHV377,;  
+           CACHE/0,EXTENDED/0,NO-SHIFT,NO-DEBUG,OPTIM,NO-SOURCE,;   
+           NO-UREP-XREF 
+      * 
+      * PROGRAMME GENERE LE 30/09/2026 A 12:00   
+      * 
+      ***------------------------------------------------------------***
+      ***               REPRISE FICHIER EXTERIEUR                    ***
+      ***                     == U C S ==                            ***
+      ***------------------------------------------------------------***
+      * Type     : BATCH                                               *
+      * Analyste : SABLON ERIC                     (INITIALES, NM, PN) *
+      * Auteur   : DESGARDIN PASCAL                (INITIALES, NM, PN) *
+      * Ecrit le : 30/09/2026                 (dd/mm/ccyy)        *
+      * Release  : 01                              (99)                *
+      * Version  : 001                             (999)               *
+      *----------------------------------------------------------------*
+      * Modifications :                                                *
+      * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+      ***------------------------------------------------------------***
+      *                       DESCRIPTION                              *
+      *                       ===========                              *
+      * SQUELETTE BATCH SIMPLIFIE                                      *
+      *                                                                *
+      *                                                                *
+      *                                                                *
+      *                                                                *
+      *                                                                *
+      *                                                                *
+      ***------------------------------------------------------------***
+    
+       IDENTIFICATION DIVISION. 
+      ************************* 
+       PROGRAM-ID. EXTEUR . 
+       AUTHOR. DESGARDIN PASCAL 
+       DATE-WRITTEN. 27/12/2000.
+       DATE-COMPILED.   
+       ENVIRONMENT DIVISION.
+      **********************
+    
+       CONFIGURATION SECTION.   
+      *----------------------*  
+       SOURCE-COMPUTER. UNISYS-2200.
+       OBJECT-COMPUTER. UNISYS-2200 MEMORY 3 MODULES.   
+       SPECIAL-NAMES.   
+           CARD-READER    CARD-READER   
+           CARD-PUNCH     CARD-PUNCH
+           PRINTER        PRINTER   
+           CONSOLE        CONSOLE   
+           DECIMAL-POINT  COMMA 
+           CURRENCY       "F".  
+    
+       INPUT-OUTPUT SECTION.
+      *---------------------*   
+       FILE-CONTROL.
+    
+      *FICHIER INPUT
+           SELECT INA         ASSIGN TO DISC INA.   
+    
+      *FICHIER OUTPUT : DESSIN DE FICHIER   
+           SELECT OUTA        ASSIGN TO DISC OUTA.  
+           SELECT ANOA        ASSIGN TO DISC ANOA.  
+           SELECT LISTE       ASSIGN TO PRINTER.
+    
+    
+       DATA DIVISION.   
+      ***************   
+    
+       FILE SECTION.
+    
+       FD  INA  
+           LABEL RECORD IS STANDARD 
+           RECORD CONTAINS 80 CHARACTERS  
+           BLOCK CONTAINS 10 RECORDS 
+           DATA RECORD IS REC-FILE-INA. 
+       01  REC-FILE-INA.
+              05  FILLER                PIC X(80).
+       01  ENR-INPUT100.
+              05  ENRIN-1       PIC X(80).
+       01 ENRGT-DEVISE-INA. 
+       05 DEVISE-INA           PIC X(2).   
+       05 FILLER                   PIC X(83).
+    
+    
+       FD  OUTA 
+           LABEL RECORD IS STANDARD 
+           RECORD CONTAINS 80 CHARACTERS  
+           BLOCK CONTAINS 10 RECORDS 
+           DATA RECORD IS REC-FILE-OUTA.
+       01  REC-FILE-OUTA.   
+              05  FILLER                PIC X(80).
+       01  ENR-INPUT100.
+              05  ENRIN-1       PIC X(80).
+       01 ENRGT-DEVISE-OUTA.
+       05 DEVISE-OUTA           PIC X(2).  
+       05 FILLER                   PIC X(83).
+    
+       FD  ANOA 
+           LABEL RECORD IS STANDARD 
+           RECORD CONTAINS 80 CHARACTERS  
+           BLOCK CONTAINS 10 RECORDS 
+           DATA RECORD IS REC-ANOA. 
+    
+       01  REC-ANOA.
+           03  REC-ANOA-DATA            PIC X(80).
+       FD  LISTE
+           LABEL RECORD IS OMITTED  
+           LINAGE 63 TOP 6 BOTTOM 3 
+           DATA RECORD IS LIGNE.
+       01  LIGNE                        PIC X(132). 
+    
+      / 
+       WORKING-STORAGE SECTION. 
+      *------------------------*
+    
+      *-----------------------------------------------------------------*   
+      * .FL. VARIABLES DE CONTROLE                                      *   
+      *-----------------------------------------------------------------*   
+       77  WS-PARAM-COMMIT-N            PIC 9(08).  
+       77  WS-PARAM-INSERT              PIC X(01).  
+       77  WS-COMMIT-NB                 PIC 9(12) VALUE 0.  
+       77  WS-TOTAL-NB                  PIC 9(12) VALUE 0.  
+       77  WS-ERREUR-NB                 PIC 9(12) VALUE 0.  
+       77  SW-END                       PIC 9(01).  
+       77  SW-ERREUR                    PIC 9(01).  
+    
+      *-----------------------------------------------------------------*   
+      * .CS. CONSTANTES                                                 *   
+      *-----------------------------------------------------------------*   
+       01  CS-NM-PRG                    PIC X(06)   
+                                        VALUE "EXTPLA". 
+    
+      *-----------------------------------------------------------------*   
+      * .WK. VARIABLES DE TRAVAIL                                       *   
+      *-----------------------------------------------------------------*   
+       01  WK-CURRENT-DATE. 
+           03  WK-D8-TODAY              PIC  9(08). 
+           03  WK-D8-TODAY-S1           REDEFINES WK-D8-TODAY.  
+               05  WK-CC-TODAY          PIC  9(02). 
+               05  WK-YY-TODAY          PIC  9(02). 
+               05  WK-MM-TODAY          PIC  9(02). 
+               05  WK-DD-TODAY          PIC  9(02). 
+           03  WK-D8-TODAY-S2           REDEFINES WK-D8-TODAY.  
+               05  WK-Y4-TODAY          PIC  9(04). 
+               05  FILLER               PIC  9(04). 
+    
+           03  WK-T8-NOW                PIC  9(08). 
+           03  WK-T8-NOW-S1             REDEFINES WK-T8-NOW.
+               05  WK-HH-NOW            PIC  9(02). 
+               05  WK-MI-NOW            PIC  9(02). 
+               05  WK-SC-NOW            PIC  9(02). 
+               05  WK-CS-NOW            PIC  9(02). 
+           03  WK-T8-NOW-S2             REDEFINES WK-T8-NOW.
+               05  WK-T6-NOW-HHMISC     PIC  9(06). 
+               05  FILLER               PIC  9(02). 
+    
+           03  FILLER                   PIC  X(05). 
+    
+    
+       01  WK-DT-INTER                  PIC 9(8).   
+    
+       01  WK-DT-INTER-S1               REDEFINES  WK-DT-INTER. 
+           03  WK-Y4-INTER              PIC 9999.   
+           03  WK-MM-INTER              PIC 99. 
+           03  WK-DD-INTER              PIC 99. 
+    
+       01  WS-NB-REC-LUS              PIC 9(10).
+       01  WS-NB-REC-ECR              PIC 9(08).
+       01  WS-NB-REC-ERR              PIC 9(08).
+       01  WS-NB-REC-MAJ              PIC 9(10).
+       01  WS-MAJ                     PIC 9(01).
+       01  WS-PARAM-BIDON                       PIC X(12).  
+    
+       01 SQLSTATE           PIC X(05) USAGE DISPLAY .  
+    
+       01  WS-SIGNE                 PIC X.  
+           88 VAL-NEGA    VALUE IS 'J' THRU 'R'.
+           88 VAL-POS    VALUE IS 'A' THRU 'I'. 
+           88 VAL-ZERO    VALUE IS '{', '}', '!', '?'.  
+           88 VAL-NS      VALUE IS '0' THRU '9'.
+           88 VAL-SP      VALUE IS '+' THRU '-'.
+       01  WS-DEVISE-2200      PIC X(03).   
+       01  WS-PAS-CONVERTION   PIC 9(01) VALUE 0.   
+      *----------------------------------------------------------------*
+      * .PM. STRUCTURES DE PARAMETRES POUR PROCEDURES EXTERNES         *
+      *----------------------------------------------------------------*
+    
+       01  MSGERR.  
+           03 MSGERR-MSG-ENE.   
+              05 MSGERR-NO                       PIC 9(05). 
+              05 MSGERR-CD-RLG                   PIC X(01). 
+              05 MSGERR-VAR-001                  PIC X(40). 
+              05 MSGERR-VAR-002                  PIC X(16). 
+           03 MSGERR-MSG-SRT.   
+              05 MSGERR-CD-STA                   PIC 9(01). 
+                 88 MSGERR-STATUS-NORMAL                VALUE 0.
+                 88 MSGERR-STATUS-NONTROUVE             VALUE 1.
+                 88 MSGERR-STATUS-AUTRE-ERR-RDMS        VALUE 2.
+                 88 MSGERR-STATUS-PARAM1-NONTROUVE      VALUE 3.
+                 88 MSGERR-STATUS-PARAM2-NONTROUVE      VALUE 4.
+                 88 MSGERR-STATUS-AUCUN-PARAM           VALUE 5.
+                 88 MSGERR-STATUS-MASQUE1-NONTROUV      VALUE 6.
+                 88 MSGERR-STATUS-MASQUE2-NONTROUV      VALUE 7.
+                 88 MSGERR-STATUS-AUCUN-MASQUE          VALUE 8.
+              05 MSGERR-LB                       PIC X(71). 
+              05 MSGERR-CD-TYP                   PIC X(01). 
+                 88 MSGERR-TYPE-ERREUR                  VALUE 'E'.  
+                 88 MSGERR-TYPE-INFORMATION             VALUE 'I'.  
+      / 
+       01  DB-EU001.
+                REPLACE ==01== BY ==03==.   
+                INVOKE TABLE EU001 OF AFLINC FROM REPOSITORY.   
+                REPLACE OFF.
+      / 
+      *-----------------------------------------------------------------*   
+      * .DB. VARIABLES RDMS                                             *   
+      *-----------------------------------------------------------------*   
+           EXEC SQL BEGIN DECLARE SECTION END-EXEC. 
+    
+       01  RDMCA.   
+           05  ERROR-STATUS              PIC 9999.  
+           05  AUX-INFO                  PIC S9(9)  BINARY. 
+           EXEC SQL END   DECLARE SECTION END-EXEC. 
+       01  SQLCODE                       PIC S9(9)  BINARY. 
+       01  WS-ESQL-VAR. 
+            05  WS-ESQL-FL               PIC X. 
+            05  WS-ESQL-FL-THREAD        PIC X. 
+            05  WS-ESQL-FL-ROLLBACK      PIC X. 
+            05  WS-ESQL-FL-END-THREAD    PIC X. 
+            05  WS-ESQL-FL-ABORT         PIC X. 
+            05  WS-ESQL-SQLCODE          PIC S9(9) BINARY.  
+            05  WS-ESQL-RDMCA.  
+                10  WS-ESQL-ERROR-STATUS PIC 9999.  
+                10  WS-ESQL-AUX-INFO     PIC S9(9) BINARY.  
+            05  WS-ESQL-DS-CMD. 
+                10  WS-ESQL-CML          PIC X(40) OCCURS 200   
+                                         INDEXED BY WS-ESQL-IX-CML. 
+            05  WS-ESQL-DS-ERR. 
+                10  WS-ESQL-LB-ERR       PIC X(132) OCCURS 5
+                                         INDEXED BY WS-ESQL-IX-ERR. 
+       01  WS-ESQL-WORK-AREA-SIZE       PIC S1(36) BINARY-1.
+       01  WS-ESQL-TRACE                PIC X(40).  
+       01  WS-ESQL-CT-DEADLOCK          PIC S9(2)  COMP.
+       01  WS-ESQL-FL-DEADLOCK          PIC S9(2)  COMP.
+       01  CS-ESQL-NO-MSG-DEADLOCK      PIC 9(05)  VALUE 1993.  
+       01  WS-ESQL-MSG-VAR-001          PIC X(40).  
+    
+       01  WS-RDMS. 
+           03  RDMS-QUALIFIER                        PIC X(12). 
+           03  RDMS-IND                              PIC 9(3).  
+           03  RDMS-STATUS                           PIC 9999.  
+           03  RDMS-SAV-STATUS                       PIC 9999.  
+           03  RDMS-ROLLB                            PIC 9. 
+           03  RDMS-COLUMN                           PIC S1(36).
+           03  RDMS-SAV-COLUMN                       PIC S1(36).
+           03  RDMS-FLAG                             PIC 9. 
+           03  RDMS-FLAG-THREAD                      PIC 9. 
+           03  RDMS-RESULT. 
+                 05 RDMS-ERROR-LINE OCCURS 4         PIC X(80). 
+           03  RDMS-COM.
+                 05 RLIN            OCCURS 200       PIC X(40). 
+      / 
+    
+      * 
+      / 
+       PROCEDURE DIVISION.  
+      ********************  
+      *=================================================================*   
+      * .000. TRAITEMENT GENERAL (MAIN)                                 *   
+      *=================================================================*   
+    
+       000-MAIN.
+      *---------*   
+           PERFORM 010-INIT-FICHIER        THRU 010-EXIT.   
+           PERFORM 020-INIT-VARIABLES      THRU 020-EXIT.   
+           PERFORM 030-INIT-DB             THRU 030-EXIT.   
+           PERFORM 035-RECHERCHE-PHASE THRU 035-EXIT.   
+           PERFORM UNTIL SW-END = 1 
+              PERFORM 040-TRAITEMENT          THRU 040-EXIT 
+           END-PERFORM. 
+           PERFORM 090-CLOTURE             THRU 090-EXIT.   
+           IF WS-NB-REC-ERR > 0 
+              DISPLAY '*---------------------------------*' 
+              DISPLAY '*     GRAVE ERREUR (OVERFLOW)     *' 
+              DISPLAY '*        ABORT DU PROGRAMME       *' 
+              DISPLAY '*        CONTACTER J-Y NAUW       *' 
+              DISPLAY '*       APPELER LES POMPIERS      *' 
+              DISPLAY '*---------------------------------*' 
+              CALL "EREABT$"
+           END-IF   
+           STOP RUN.
+       000-EXIT.  EXIT. 
+      *---------*   
+    
+    
+      *=================================================================*   
+      * .010. OUVERTURE DES FICHIERS                                    *   
+      *=================================================================*   
+    
+       010-INIT-FICHIER.
+      *-----------------*   
+           OPEN OUTPUT LISTE ANOA OUTA  
+           OPEN INPUT  INA  
+           .
+       010-EXIT.  EXIT. 
+      *---------*   
+    
+      *=================================================================*   
+      * .020. INITIALISATION VARIABLES                                  *   
+      *=================================================================*   
+       020-INIT-VARIABLES.  
+    
+           INITIALIZE WS-NB-REC-LUS 
+                      WS-NB-REC-ECR 
+                      WS-NB-REC-ERR.
+       020-INIT-DATE.   
+           MOVE FUNCTION CURRENT-DATE TO WK-CURRENT-DATE.   
+      *---------*   
+       020-EXIT.  EXIT. 
+      *---------*   
+    
+      *=================================================================*   
+      * .030. INITIALISATION DB                                         *   
+      *=================================================================*   
+       030-INIT-DB. 
+      *------------*
+           MOVE "0" TO WS-ESQL-FL-THREAD
+           EXEC SQL BEGIN THREAD READ END-EXEC  
+    
+           IF  SQLCODE NOT = 0  
+                MOVE "100- BEGIN THREAD" TO WS-ESQL-TRACE   
+                PERFORM 999-ESQL-ERR
+                PERFORM 090-CLOTURE THRU 090-EXIT   
+                CALL "EREABT$"  
+           END-IF   
+           MOVE "1" TO WS-ESQL-FL-THREAD
+           EXEC SQL  USE DEFAULT QUALIFIER AFLINC END-EXEC  
+           EXEC SQL  USE DEFAULT VERSION PRODUCTION  END-EXEC   
+           IF  SQLCODE NOT = 0  
+                PERFORM 999-ESQL-ERR
+                PERFORM 090-CLOTURE THRU 090-EXIT   
+                CALL "EREABT$"  
+           END-IF   
+           .
+       030-EXIT.  EXIT. 
+      *---------*   
+    
+       035-RECHERCHE-PHASE. 
+      *-------------------* 
+           MOVE 0 TO C-PHA-EUR. 
+           EXEC SQL 
+                 SELECT 
+                       C_PHA_EUR
+                    INTO :C-PHA-EUR 
+                    FROM
+                       EU001
+           END-EXEC 
+    
+           IF C-PHA-EUR = '100' OR = '200'  
+              MOVE 'BEF' TO WS-DEVISE-2200  
+           END-IF   
+           IF C-PHA-EUR = '300' OR = '350' OR = '400'   
+              MOVE 'EUR' TO WS-DEVISE-2200  
+           END-IF   
+    
+           DISPLAY 'PHASE ACTUELLE : ' C-PHA-EUR '/' WS-DEVISE-2200 
+           .
+       035-EXIT.  EXIT. 
+      *---------*   
+    
+    
+      *=================================================================*   
+      * .040. TRAITEMENT PROPRE AU PROGRAMME BATCH                      *   
+      *=================================================================*   
+    
+       040-TRAITEMENT.  
+      *---------------* 
+    
+      *----------------------------------------------------------------*
+      * TRAITEMENT DIVERS                                              *
+      *----------------------------------------------------------------*
+    
+           MOVE 0 TO SW-ERREUR. 
+    
+      *-----------------------------------------------------------------*   
+    
+           PERFORM  500-LECTURE-INA 
+               THRU 500-LECTURE-INA-EXIT.   
+           IF SW-END = 1
+              PERFORM 510-MAJ-PARAM-DB  
+              GO TO 040-EXIT.   
+      *-----------------------------------------------------------------*   
+           ADD 1 TO WS-NB-REC-ECR.  
+      *-----------------------------------------------------------------*   
+      * CAS OVERFLOW
+           IF SW-ERREUR = 1 
+              ADD 1 TO WS-NB-REC-ERR
+              MOVE REC-FILE-INA OF INA TO REC-ANOA-DATA 
+              WRITE REC-ANOA
+           END-IF.  
+      *-----------------------------------------------------------------*   
+    
+    
+       040-EXIT.  EXIT. 
+      *---------*   
+      *================================================================*
+      * .090. CLOTURE GENERALE                                         *
+      *================================================================*
+    
+       090-CLOTURE. 
+      *------------*
+           DISPLAY 'NB RECORDS LUS     : ' WS-NB-REC-LUS
+           DISPLAY 'NB RECORDS MAJ     : ' WS-NB-REC-MAJ
+           DISPLAY 'NB RECORDS ERREUR  : ' WS-NB-REC-ERR
+    
+           IF  WS-ESQL-FL-THREAD = "1"  
+                EXEC SQL END THREAD END-EXEC
+                MOVE "0" TO WS-ESQL-FL-THREAD   
+           END-IF.  
+           CLOSE LISTE ANOA INA OUTA
+           .
+       090-EXIT.  EXIT. 
+      *---------*   
+    
+      *================================================================*
+      * .500. LECTURES DB                                              *
+      *================================================================*
+      *=================================================================*   
+      *  DECLARATION CURSEUR                                            *   
+      *=================================================================*   
+      * 
+      *-----------------*   
+       500-LECTURE-INA. 
+            READ INA AT END MOVE 1 TO SW-END.   
+    
+            IF SW-END = 1   
+               GO TO 500-LECTURE-INA-EXIT.  
+    
+            MOVE 0 TO WS-MAJ.   
+    
+            ADD 1 TO WS-NB-REC-LUS  
+    
+            MOVE REC-FILE-INA TO
+                 REC-FILE-OUTA  
+    
+            MOVE 0 TO WS-PAS-CONVERTION 
+    
+            IF WS-DEVISE-2200 = 'BEF'   
+               IF DEVISE-INA NOT = '1' AND NOT =   
+                                   '2' 
+                  DISPLAY '*---------------------------------*' 
+                  DISPLAY '*     GRAVE ERREUR DE DEVISE      *' 
+                  DISPLAY '*        ABORT DU PROGRAMME       *' 
+                  DISPLAY '*        CONTACTER J-Y NAUW       *' 
+                  DISPLAY '*       APPELER LES POMPIERS      *' 
+                  DISPLAY '*---------------------------------*' 
+                  CALL "EREABT$"
+               END-IF   
+               IF DEVISE-INA = '1' 
+                  MOVE 1 TO WS-PAS-CONVERTION   
+               END-IF   
+            END-IF  
+    
+            IF WS-DEVISE-2200 = 'EUR'   
+               IF DEVISE-INA NOT = '1' AND NOT =   
+                                   '2' 
+                  DISPLAY '*---------------------------------*' 
+                  DISPLAY '*     GRAVE ERREUR DE DEVISE      *' 
+                  DISPLAY '*        ABORT DU PROGRAMME       *' 
+                  DISPLAY '*        CONTACTER J-Y NAUW       *' 
+                  DISPLAY '*       APPELER LES POMPIERS      *' 
+                  DISPLAY '*---------------------------------*' 
+                  CALL "EREABT$"
+               END-IF   
+               IF DEVISE-INA = '2' 
+                  MOVE 1 TO WS-PAS-CONVERTION   
+               END-IF   
+            END-IF  
+    
+            IF WS-PAS-CONVERTION = 1
+               GO TO SUITE. 
+    
+       SUITE.   
+            COMPUTE WS-NB-REC-MAJ = WS-NB-REC-MAJ + WS-MAJ  
+               MOVE WS-DEVISE-2200 TO DEVISE-OUTA   
+            WRITE REC-FILE-OUTA 
+            .   
+       500-LECTURE-INA-EXIT. EXIT.  
+       500-VERIF-PARAM-DB.  
+      * 
+       510-MAJ-PARAM-DB.
+            PERFORM 020-INIT-DATE.  
+    
+    
+      *================================================================*
+      * .600. TRAITEMENT DES CASES ET CALCULS                          *
+      *================================================================*
+       600-CASE-1.  
+    
+    
+      *================================================================*
+      * .900. TRAITEMENT DES ANOMALIES                                 *
+      *================================================================*
+       999-ESQL-ERR.
+      *-----------------------------------------------------------------*   
+      * ESQL ERROR                                                      *   
+      *-----------------------------------------------------------------*   
+           IF  SQLCODE = -6010  
+                MOVE CS-ESQL-NO-MSG-DEADLOCK TO MSGERR-NO   
+                MOVE '1'                     TO MSGERR-CD-RLG   
+                MOVE WS-ESQL-TRACE           TO MSGERR-VAR-001  
+                CALL 'MSGERR' USING MSGERR  
+                DISPLAY MSGERR-LB (1:60) UPON CONSOLE   
+                CALL 'BLOACE' USING WS-ESQL-TRACE   
+                ADD  1 TO WS-ESQL-CT-DEADLOCK   
+                MOVE 1 TO WS-ESQL-FL-DEADLOCK   
+                IF  WS-ESQL-CT-DEADLOCK < 6 
+                     PERFORM 090-CLOTURE THRU 090-EXIT  
+    
+                     GO TO 000-MAIN 
+                END-IF  
+           END-IF   
+           .
+           PERFORM 999-ESQL-GET-ERR 
+           IF WS-ESQL-FL-THREAD = '1'   
+                EXEC SQL ROLLBACK WORK END-EXEC 
+      *         EXEC SQL END THREAD    END-EXEC 
+      *         MOVE '0' TO WS-ESQL-FL-THREAD   
+           END-IF   
+           .
+       999-ESQL-ERR-NO-DISP.
+      *-----------------------------------------------------------------*   
+      * ESQL ERROR                                                      *   
+      *-----------------------------------------------------------------*   
+           IF WS-ESQL-FL-THREAD = '1'   
+                EXEC SQL ROLLBACK WORK END-EXEC 
+    
+      *         EXEC SQL END THREAD    END-EXEC 
+      *         MOVE '0' TO WS-ESQL-FL-THREAD   
+           END-IF   
+           .
+    
+       999-ESQL-GET-ERR.
+      *-----------------------------------------------------------------*   
+      * DISPLAY DE L'ERREUR ESQL                                        *   
+      *-----------------------------------------------------------------*   
+           MOVE SQLCODE      TO WS-ESQL-SQLCODE 
+           MOVE ERROR-STATUS OF RDMCA   
+                             TO WS-ESQL-ERROR-STATUS
+           MOVE AUX-INFO     OF RDMCA   
+                              TO WS-ESQL-AUX-INFO   
+           DISPLAY "*** ESQL ERROR ***"          UPON PRINTER   
+           DISPLAY "TRACE       = " WS-ESQL-TRACE  UPON PRINTER 
+           DISPLAY "SQLCODE     = " SQLCODE      UPON PRINTER   
+           DISPLAY "ERROR-SATUS = " ERROR-STATUS OF RDMCA   
+                                                 UPON PRINTER   
+           DISPLAY "AUX-INFO    = " AUX-INFO     OF RDMCA   
+                                                 UPON PRINTER   
+           MOVE "0" TO WS-ESQL-FL   
+    
+           PERFORM UNTIL WS-ESQL-FL = "1"   
+                EXEC SQL GETERROR INTO  
+                  :WS-ESQL-LB-ERR (1), :WS-ESQL-LB-ERR (2), 
+                  :WS-ESQL-LB-ERR (3), :WS-ESQL-LB-ERR (4), 
+                  :WS-ESQL-LB-ERR (5)   
+                END-EXEC
+                DISPLAY WS-ESQL-LB-ERR (1) UPON PRINTER 
+                DISPLAY WS-ESQL-LB-ERR (2) UPON PRINTER 
+                DISPLAY WS-ESQL-LB-ERR (3) UPON PRINTER 
+                DISPLAY WS-ESQL-LB-ERR (4) UPON PRINTER 
+                DISPLAY WS-ESQL-LB-ERR (5) UPON PRINTER 
+                IF  WS-ESQL-LB-ERR (1) = SPACES 
+                AND WS-ESQL-LB-ERR (2) = SPACES 
+                AND WS-ESQL-LB-ERR (3) = SPACES 
+                AND WS-ESQL-LB-ERR (4) = SPACES 
+                AND WS-ESQL-LB-ERR (5) = SPACES 
+                     MOVE "1" TO WS-ESQL-FL 
+                END-IF  
+           END-PERFORM  
+    
+    
+           PERFORM VARYING WS-ESQL-IX-CML FROM 1 BY 1   
+                     UNTIL WS-ESQL-IX-CML > 200 
+                DISPLAY WS-ESQL-CML (WS-ESQL-IX-CML) UPON PRINTER   
+           END-PERFORM  
+    
+    
+           MOVE WS-ESQL-SQLCODE      TO SQLCODE 
+           MOVE WS-ESQL-ERROR-STATUS TO ERROR-STATUS OF RDMCA   
+           MOVE WS-ESQL-AUX-INFO     TO AUX-INFO     OF RDMCA   
+           .
+    
+@EOF
+@ASG,A   SYS$LIB$*APP$3.
+@USE    LINK$PF,SYS$LIB$*APP$3. 
+@ASG,T  TEMPABS,F///5000
+@LINK,S ,TPF$.EXTEUR
+         INCLUDE    TEMPUCS.EXTEUR  
+         OUTPUT ZOOM
+         RESOLVE ALL REFERENCES USING LOCAL_DEFS,SYS$LIB$*EMOMRTS., 
+                     LIBCODENAME,UTST*OBJ   
+         SET SIZE=SIZE + 32734 FOR URTS$TABLES  
+         SET ALS_INIT_SIZE = 0117000
+         DELETE ALL DEFINITION EXCEPT START$
+         PROCESS FOR EXTENDED   
+@FREE SYS$LIB$*APP$3.   

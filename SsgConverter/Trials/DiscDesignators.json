@@ -1,0 +1,184 @@
+{
+  "_readme": "MT-010 Phase 1 output. Extended from the assign.json schema found in 177Xfer main:CFH-COPY-Trial11/MockInputFiles/assign.json ({ jobname, fileAssignments: {LOGICAL: physicalFile} }). Values here are objects, not plain filenames, because record length/format/BLOCK CONTAINS also had to be captured; a physical filename still needs binding per AMT172 environment. 'Resolved' values came from this program's Trials/<Program>/sgs-values.json (case-insensitive bracket-key match); 'null' + a note means the bracket reference has no matching seeded key (honest gap, not fabricated).",
+  "programs": {
+    "ARCHIFORMAT": {
+      "sourceFile": "ARCHIFORMAT.TXT",
+      "scriptFile": "ARCHIFORMAT.ps1",
+      "files": [
+        { "logicalName": "fic-report",   "direction": "input",  "assignRaw": "DISC [filein,1,1,1]",  "assignResolved": "DISC ECL-FICREPORT",   "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 132, "notes": null },
+        { "logicalName": "fic-descript", "direction": "input",  "assignRaw": "DISC [filein,1,2,1]",  "assignResolved": "DISC ECL-FICDESCRIPT", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 132, "notes": null },
+        { "logicalName": "fic-unload",   "direction": "input",  "assignRaw": "DISC [filein,1,3,1]",  "assignResolved": "DISC ECL-FICUNLOAD",   "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "computed (10+55+1+2)", "recordLengthResolved": 68, "notes": "Record length is a *SET-computed sum of SGS values, not a literal FD PIC." },
+        { "logicalName": "fic-format",   "direction": "output", "assignRaw": "DISC [fileout,1,1,1]", "assignResolved": "DISC ECL-FICFORMAT",   "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "computed (2+10+55+2)", "recordLengthResolved": 69, "notes": "Matches the documented golden A=69 in repo memory." }
+      ]
+    },
+    "ARCHISEPARE": {
+      "sourceFile": "ARCHISEPARE",
+      "scriptFile": "ARCHISEPARE.ps1",
+      "files": [
+        { "logicalName": "chercheuse", "direction": "input",  "assignRaw": "DISC [filein,1,1,1]",  "assignResolved": "DISC ECL-CHERCHEUSE", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "9([key,1,1,2])", "recordLengthResolved": 10, "notes": null },
+        { "logicalName": "ficunload",  "direction": "input",  "assignRaw": "DISC [filein,1,2,1]",  "assignResolved": "DISC ECL-FICUNLOAD",  "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": null, "notes": "dynamic: 9(10) + X(30) sub-fields, not a single literal." },
+        { "logicalName": "ficarchi",   "direction": "output", "assignRaw": "DISC [fileout,1,1,1]", "assignResolved": "DISC ECL-FICARCHI",   "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "computed (32+40)", "recordLengthResolved": 72, "notes": null },
+        { "logicalName": "ficnarchi",  "direction": "output", "assignRaw": "DISC [fileout,1,2,1]", "assignResolved": "DISC ECL-FICNARCHI",  "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 40, "notes": null }
+      ]
+    },
+    "BABA_ASCII": {
+      "sourceFile": "BABA_ASCII.TXT",
+      "scriptFile": "BABA_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN[*INPUTCT]",  "direction": "input",  "assignRaw": "UNISERVO/DISC/CARD-READER [INPUT,1,INPUTCT,1]",  "assignResolved": null, "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[INPUT,1,IMP,3]", "recordLengthRaw": "[INPUT,1,IMP,2]", "recordLengthResolved": null, "notes": "GAP: this program's FILE-CONTROL/FD is *LOOP-generated over [INPUTCT]/[IMP]; our sgs-values.json seed has the loop counts at 0, so no concrete file entries resolve. Needs a non-zero-count seed to know the real designators." },
+        { "logicalName": "TAPEOUT[*OUTPUTCT]", "direction": "output", "assignRaw": "UNISERVO/DISC [OUTPUT,1,OUTPUTCT,1]", "assignResolved": null, "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[OUTPUT,1,OUTPCT,3]", "recordLengthRaw": "[OUTPUT,1,OUTPCT,2]", "recordLengthResolved": null, "notes": "Same loop-count gap as TAPEIN above." }
+      ]
+    },
+    "CFH-COPY": {
+      "sourceFile": "CFH-COPY.TXT",
+      "scriptFile": "CFH-COPY.ps1",
+      "files": [
+        { "logicalName": "TAPEIN",   "direction": "input",              "assignRaw": "UNISERVO [INPUT,1,1,1]",   "assignResolved": "UNISERVO ECL-TAPEIN",  "labelRecord": "STANDARD", "blockContains": 1, "recordLengthRaw": "[INPUT,1,1,2]",  "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "TAPEOUT",  "direction": "output",             "assignRaw": "MASS-STORAGE [OUTPUT,1,1,1]", "assignResolved": "MASS-STORAGE ECL-TAPEOUT", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "PRINTOUT", "direction": "output-print",       "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 132, "notes": "Conditional on [PRINT]>0 and OUTPUT device not already PRINTER." }
+      ]
+    },
+    "CFH-COPY_ASCII": {
+      "sourceFile": "CFH-COPY_ASCII.TXT",
+      "scriptFile": "CFH-COPY_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN",   "direction": "input",        "assignRaw": "DISC [INPUT,1,1,1]",  "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[INPUT,1,1,3]", "recordLengthRaw": "[INPUT,1,1,2]",  "recordLengthResolved": null, "notes": "GAP: SsgConverter/Trials/CFH-COPY_ASCII/sgs-values.json not checked/present for this key set - resolve before final bundle." },
+        { "logicalName": "TAPEOUT",  "direction": "output",       "assignRaw": "DISC [OUTPUT,1,1,1]", "assignResolved": null, "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": null, "notes": "Same gap as TAPEIN. DISP-1 (ASCII) variant of CFH-COPY." },
+        { "logicalName": "PRINTOUT", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 132, "notes": "Conditional, same as CFH-COPY." }
+      ]
+    },
+    "CHAB100_ASCII": {
+      "sourceFile": "CHAB100_ASCII.TXT",
+      "scriptFile": "CHAB100_ASCII.ps1",
+      "files": [
+        { "logicalName": "FIC", "direction": "output",       "assignRaw": "DISC [OUTPUT,1,1,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,1,3]", "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": null, "notes": "GAP: no sgs-values.json key resolved for OUTPUT,1,1,*." },
+        { "logicalName": "CAR", "direction": "input",        "assignRaw": "CARD-READER", "assignResolved": "CARD-READER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "PRI", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 100, "notes": "Conditional." }
+      ]
+    },
+    "CHABAN_ASCII": {
+      "sourceFile": "CHABAN_ASCII.TXT",
+      "scriptFile": "CHABAN_ASCII.ps1",
+      "files": [
+        { "logicalName": "FIC", "direction": "output",       "assignRaw": "DISC [OUTPUT,1,1,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,1,3]", "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": null, "notes": "GAP: same as CHAB100_ASCII - no matching sgs-values.json key resolved." },
+        { "logicalName": "CAR", "direction": "input",        "assignRaw": "CARD-READER", "assignResolved": "CARD-READER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "PRI", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 100, "notes": "Conditional." }
+      ]
+    },
+    "CONDIS2_ASCII": {
+      "sourceFile": "CONDIS2_ASCII.TXT",
+      "scriptFile": "CONDIS2_ASCII.ps1",
+      "files": [
+        { "logicalName": "FILEIN",  "direction": "input",  "assignRaw": "DISC FILEIN (literal, not a bracket)",  "assignResolved": "DISC FILEIN", "labelRecord": "STANDARD", "blockContains": "[FILEIN,1,1,2]", "recordLengthRaw": "[FILEIN,1,1,1]", "recordLengthResolved": null, "notes": "GAP: BLOCK/length brackets unresolved against current sgs-values.json." },
+        { "logicalName": "FILEOUT", "direction": "output", "assignRaw": "DISC FILEOUT (literal, not a bracket)", "assignResolved": "DISC FILEOUT", "labelRecord": "STANDARD", "blockContains": "[FILEOUT,1,1,2]", "recordLengthRaw": "[FILEOUT,1,1,1]", "recordLengthResolved": null, "notes": "Same gap as FILEIN." }
+      ]
+    },
+    "EXTEUR": {
+      "sourceFile": "EXTEUR.TXT",
+      "scriptFile": "EXTEUR.ps1",
+      "files": [
+        { "logicalName": "INA",   "direction": "input",        "assignRaw": "DISC INA (literal)",  "assignResolved": "DISC INA",  "labelRecord": "STANDARD", "blockContains": "[BLOCK,1,1,1]", "recordLengthRaw": "[LONG,1,1,1]", "recordLengthResolved": null, "notes": "GAP: BLOCK/LONG brackets unresolved." },
+        { "logicalName": "OUTA",  "direction": "output",       "assignRaw": "DISC OUTA (literal)", "assignResolved": "DISC OUTA", "labelRecord": "STANDARD", "blockContains": "[BLOCK,1,1,1]", "recordLengthRaw": "[LONG,1,1,1]", "recordLengthResolved": null, "notes": "Same gap as INA." },
+        { "logicalName": "ANOA",  "direction": "output",       "assignRaw": "DISC ANOA (literal)", "assignResolved": "DISC ANOA", "labelRecord": null, "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": null, "notes": "FD details not distinctly captured - needs closer read." },
+        { "logicalName": "LISTE", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": null, "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": null, "notes": null }
+      ]
+    },
+    "FUSBA_ASCII": {
+      "sourceFile": "FUSBA_ASCII.TXT",
+      "scriptFile": "FUSBA_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN[*INPUTCT]",  "direction": "input",  "assignRaw": "UNISERVO/DISC/CARD-READER [INPUT,1,INPUTCT,1]",  "assignResolved": null, "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[INPUT,1,IMP,3]", "recordLengthRaw": "[INPUT,1,IMP,2]", "recordLengthResolved": null, "notes": "GAP: same *LOOP-count-is-0 issue as BABA_ASCII - no concrete files resolve at current seed." },
+        { "logicalName": "TAPEOUT[*OUTPUTCT]", "direction": "output", "assignRaw": "UNISERVO/DISC [OUTPUT,1,OUTPUTCT,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,OUTPCT,3]", "recordLengthRaw": "[OUTPUT,1,OUTPCT,2]", "recordLengthResolved": null, "notes": "Same loop-count gap." }
+      ]
+    },
+    "FUSBA2_ASCII": {
+      "sourceFile": "FUSBA2_ASCII.TXT",
+      "scriptFile": "FUSBA2_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN[*INPUTCT]",  "direction": "input",  "assignRaw": "UNISERVO/DISC/CARD-READER [INPUT,1,INPUTCT,1]",  "assignResolved": null, "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[INPUT,1,IMP,3]", "recordLengthRaw": "[INPUT,1,IMP,2]", "recordLengthResolved": null, "notes": "GAP: same *LOOP-count-is-0 issue as FUSBA_ASCII/BABA_ASCII. Also recall FUSBA2_ASCII's PROGRAM-ID is dynamic ('FUSION-[OUTPUT,1,1,1]') per the Area C naming note." },
+        { "logicalName": "TAPEOUT[*OUTPUTCT]", "direction": "output", "assignRaw": "UNISERVO/DISC [OUTPUT,1,OUTPUTCT,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,OUTPCT,3]", "recordLengthRaw": "[OUTPUT,1,OUTPCT,2]", "recordLengthResolved": null, "notes": "Same loop-count gap." }
+      ]
+    },
+    "LECTIS_ASCII": {
+      "sourceFile": "LECTIS_ASCII.TXT",
+      "scriptFile": "LECTIS_ASCII.ps1",
+      "files": [
+        { "logicalName": "[INPUT,1,1,1] (indexed)", "direction": "input",       "assignRaw": "DISC [INPUT,1,1,1]", "assignResolved": "DISC FICHIN-1", "labelRecord": "STANDARD", "blockContains": "[INPUT,1,1,3]", "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 120, "notes": "PROGRAM-ID is 'LECTIS' (no _ASCII) but script filename is LECTIS_ASCII.ps1 - see naming note." },
+        { "logicalName": "IMP",   "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": "LINAGE 63 AT TOP 6 AT BOTTOM 3", "recordLengthRaw": null, "recordLengthResolved": 100, "notes": "USAGE DISPLAY-1 (ASCII)." },
+        { "logicalName": "CARTE", "direction": "input",        "assignRaw": "CARD-READER", "assignResolved": "CARD-READER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": null, "notes": "dynamic: key-dependent size, conditional file. NOTE: this program has a mocked SGS condition literally named 'KEYS' - the exact case the T3-007 .PSBase.Keys fix guards against; make sure AMT172's own harness (if any) has the equivalent fix." }
+      ]
+    },
+    "LOADIS_ASCII": {
+      "sourceFile": "LOADIS_ASCII.TXT",
+      "scriptFile": "LOADIS_ASCII.ps1",
+      "files": [
+        { "logicalName": "BDE[*I]", "direction": "input (multiple)", "assignRaw": "UNISERVO/DISC [INPUT,1,1,1]", "assignResolved": "UNISERVO/DISC ECL-BDE1", "labelRecord": "STANDARD", "blockContains": 1, "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "DISQ",    "direction": "output (indexed)", "assignRaw": "DISC [OUTPUT,1,1,1]", "assignResolved": "DISC ECL-DISQ", "labelRecord": "STANDARD", "blockContains": 1, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": 20, "notes": null }
+      ]
+    },
+    "LOADIS_MULTI": {
+      "sourceFile": "LOADIS_MULTI.TXT",
+      "scriptFile": "LOADIS_MULTI.ps1",
+      "files": [
+        { "logicalName": "BDE",  "direction": "input",           "assignRaw": "UNISERVO/DISC [INPUT,1,1,1]", "assignResolved": "UNISERVO/DISC ECL-BDE1", "labelRecord": "STANDARD", "blockContains": 1, "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "DISQ", "direction": "output (indexed)", "assignRaw": "A-SHARED-FILE or DISC [OUTPUT,1,1,1]", "assignResolved": "DISC ECL-DISQ", "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[OUTPUT,1,1,3] to [OUTPUT,1,1,4] (1 to 0 = effectively 1)", "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": 20, "notes": null }
+      ]
+    },
+    "RECAP": {
+      "sourceFile": "RECAP.TXT",
+      "scriptFile": "RECAP.ps1",
+      "files": [
+        { "logicalName": "TAPEIN",  "direction": "input",  "assignRaw": "DISC [INPUT,1,1,1]",  "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[INPUT,1,1,3]",  "recordLengthRaw": "[INPUT,1,1,2]",  "recordLengthResolved": null, "notes": "GAP: brackets unresolved against current sgs-values.json." },
+        { "logicalName": "TAPEOUT", "direction": "output", "assignRaw": "DISC [OUTPUT,1,1,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,1,3]", "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": null, "notes": "Same gap as TAPEIN." }
+      ]
+    },
+    "SCAN_ASCII": {
+      "sourceFile": "SCAN_ASCII.TXT",
+      "scriptFile": "SCAN_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN[*INPUTCT]",  "direction": "input",  "assignRaw": "DISC/UNISERVO [INPUT,1,INPUTCT,1]",  "assignResolved": null, "labelRecord": "OMITTED or STANDARD (conditional)", "blockContains": "[INPUT,1,IMP,3]",  "recordLengthRaw": "[INPUT,1,IMP,2]",  "recordLengthResolved": null, "notes": "GAP: same *LOOP-count pattern as BABA_ASCII/FUSBA*_ASCII - unresolved at current seed." },
+        { "logicalName": "TAPEOUT[*OUTPUTCT]", "direction": "output", "assignRaw": "DISC/UNISERVO [OUTPUT,1,OUTPUTCT,1]", "assignResolved": null, "labelRecord": "STANDARD", "blockContains": "[OUTPUT,1,OUTPCT,3]", "recordLengthRaw": "[OUTPUT,1,OUTPCT,2]", "recordLengthResolved": null, "notes": "Same loop-count gap." },
+        { "logicalName": "PRT", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": null, "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": null, "notes": null }
+      ]
+    },
+    "TABAN_ASCII": {
+      "sourceFile": "TABAN_ASCII.TXT",
+      "scriptFile": "TABAN_ASCII.ps1",
+      "files": [
+        { "logicalName": "IMP",   "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": "LINAGE 63 AT TOP 6 AT BOTTOM 3", "recordLengthRaw": null, "recordLengthResolved": 132, "notes": "DISP-1 (ASCII)." },
+        { "logicalName": "TAPE1", "direction": "input",        "assignRaw": "UNISERVO/DISC [INPUT,1,1,1] or CARD-READER", "assignResolved": "UNISERVO/DISC ECL-TAPE1", "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": "[INPUT,1,1,3]", "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 80, "notes": "DISP-1 (ASCII)." }
+      ]
+    },
+    "TAPELD_ASCII": {
+      "sourceFile": "TAPELD_ASCII.TXT",
+      "scriptFile": "TAPELD_ASCII.ps1",
+      "files": [
+        { "logicalName": "TAPEIN",   "direction": "input",        "assignRaw": "DISC [INPUT,1,1,1] or CARD-READER", "assignResolved": null, "labelRecord": "OMITTED or STANDARD (conditional)", "blockContains": "[INPUT,1,1,3]", "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": null, "notes": "GAP: brackets unresolved against current sgs-values.json." },
+        { "logicalName": "TAPEOUT",  "direction": "output",       "assignRaw": "DISC or CARD-PUNCH [OUTPUT,1,1,1]", "assignResolved": null, "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": null, "notes": "Same gap as TAPEIN." },
+        { "logicalName": "PRINTOUT", "direction": "output-print", "assignRaw": "PRINTER", "assignResolved": "PRINTER", "labelRecord": "OMITTED", "blockContains": null, "recordLengthRaw": null, "recordLengthResolved": 132, "notes": "Conditional." }
+      ]
+    },
+    "UNLOADIS_ASCII": {
+      "sourceFile": "UNLOADIS_ASCII.TXT",
+      "scriptFile": "UNLOADIS_ASCII.ps1",
+      "files": [
+        { "logicalName": "BDE",  "direction": "output",          "assignRaw": "INTERCHANGE or DISC [OUTPUT,1,1,1]", "assignResolved": "DISC ECL-OUTPUT", "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": 1, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "DISQ", "direction": "input (indexed)", "assignRaw": "DISC [INPUT,1,1,1]", "assignResolved": "DISC ECL-INPUT", "labelRecord": "STANDARD", "blockContains": 1, "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 80, "notes": null }
+      ]
+    },
+    "UNLOADIS_MULTI": {
+      "sourceFile": "UNLOADIS_MULTI.txt",
+      "scriptFile": "UNLOADIS_MULTI.ps1",
+      "files": [
+        { "logicalName": "BDE",  "direction": "output",          "assignRaw": "INTERCHANGE or DISC [OUTPUT,1,1,1]", "assignResolved": "DISC ECL-BDE1", "labelRecord": "STANDARD or OMITTED (conditional)", "blockContains": 1, "recordLengthRaw": "[OUTPUT,1,1,2]", "recordLengthResolved": 80, "notes": null },
+        { "logicalName": "DISQ", "direction": "input (indexed)", "assignRaw": "A-SHARED-FILE or DISC [INPUT,1,1,1]", "assignResolved": "DISC ECL-DISQ", "labelRecord": "OMITTED or STANDARD (conditional)", "blockContains": 1, "recordLengthRaw": "[INPUT,1,1,2]", "recordLengthResolved": 20, "notes": null }
+      ]
+    }
+  },
+  "gapsSummary": {
+    "loopCountZeroGap": ["BABA_ASCII", "FUSBA_ASCII", "FUSBA2_ASCII", "SCAN_ASCII"],
+    "loopCountZeroExplanation": "These 4 programs generate their FILE-CONTROL/FD via *INCREMENT loops over an SGS-seeded count (e.g. [INPUTCT], [IMP]); our sgs-values.json for each currently seeds that count as 0, so no concrete per-file designator resolves. Not a bug - just means our Tier-1 seed values were only enough to reach 0 parse errors and a Tier-1 run, not to exercise the file-binding path. AMT172 will need real counts/values before these 4 can be registered with concrete DISC bindings.",
+    "unresolvedBracketGap": ["CFH-COPY_ASCII", "CHAB100_ASCII", "CHABAN_ASCII", "CONDIS2_ASCII", "EXTEUR", "RECAP", "TAPELD_ASCII"],
+    "unresolvedBracketExplanation": "These programs' sgs-values.json seeds don't cover every INPUT/OUTPUT/FILEIN/FILEOUT bracket key referenced in FILE-CONTROL/FD - the raw bracket is preserved and the field is null rather than guessed."
+  }
+}

@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\LOADIS_ASCII__VIRM01_IS_L313.LionSource
+APPNAME = LOADISASCIIVIRM01ISL313
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,6 @@
+robocopy exit=1
+dll present: True
+Asysco.Amt.AmtSharedDataModel.dll
+Asysco.Amt.AmtSqlServerWrapper.deps.json
+Asysco.Amt.AmtSqlServerWrapper.dll
+Asysco.Amt.Libs.dll

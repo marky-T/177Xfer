@@ -1,0 +1,12 @@
+BABA_ASCII       121 calls  Xqt: "" (".BABA") x12; "" ("TPF`$.BABA") x80; "R, W" (".BABA") x13; "R, W" ("TPF`$.BABA") x16
+CFH-COPY_ASCII    46 calls  Xqt: "" (".CFH-COPY") x4; "" ("TPF`$.CFH-COPY") x15; "R, W" (".CFH-COPY") x25; "R, W" ("TPF`$.CFH-COPY") x2
+CHABAN_ASCII      29 calls  Xqt: "" (".CHABAN") x15; "" ("TPF`$.CHABAN") x11; "R, W" (".CHABAN") x1; "R, W" ("TPF`$.CHABAN") x2
+CONDIS2_ASCII     18 calls  Xqt: "" ("TPF`$.CONDIS2") x17; "R, W" ("TPF`$.CONDIS2") x1
+FUSBA_ASCII       32 calls  Xqt: "" ("TPF`$.FUSBA") x32
+FUSBA2_ASCII       4 calls  Xqt: "" ("TPF`$.FUSBA") x4
+LECTIS_ASCII       1 calls  Xqt: "" ("TPF`$.LECTIS") x1
+LOADIS_ASCII       9 calls  Xqt: "" ("TPF`$.LOADIS") x7; "R, W" ("TPF`$.LOADIS") x2
+LOADIS_MULTI       1 calls  Xqt: "R, W" ("TPF`$.LOADIS") x1
+TABAN_ASCII       27 calls  Xqt: "" ("TPF`$.TABAN") x19; "R, W" (".TABAN") x2; "R, W" ("TPF`$.TABAN") x6
+UNLOADIS_ASCII     4 calls  Xqt: "R, W" ("TPF`$.UNLOADIS") x4
+UNLOADIS_MULTI     1 calls  Xqt: "R, W" ("TPF`$.UNLOADIS") x1

@@ -1,0 +1,9 @@
+Stage Package, environment CC-Trial, started 2026-10-22 00:01:09
+PASS Package        regression current             all jobs in utilities.json "regress" passed after the last delivery
+PASS Package        deployed set == utilities.json 8 utilities, 13 skeleton entries checked, problems: 0
+PASS Package        built == imported              both LionSources equal what LionDev generated the delivered programs from
+PASS Package        7 program DLLs                 copied from the application, equal to the 177a rebuild
+PASS Package        13 skeletons, 9 includes       copied from the deployed (proven) set
+PASS Package        manifest                       37 files, 1246 KB, SHA256 re-checked
+PASS Package        staged (local only)            E:\AMT_Work\Delivery\GN-20261022-0001
+=== Package : all passed

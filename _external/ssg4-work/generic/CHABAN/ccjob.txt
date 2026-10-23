@@ -1,0 +1,4 @@
+--- BatchController: 20261021 22:33:49.822 12 Information SSG4_CHABAN_CASES Done Id: 856 Queue: JOB_QUEUE1 (Execution time: 00:00:22:378)
+--- CHABTEST_8562026102122333060.log
+--- 8 of 8 outputs byte-identical
+=== SSG4_CHABAN_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\CHABAN\cc-runs\check.txt)

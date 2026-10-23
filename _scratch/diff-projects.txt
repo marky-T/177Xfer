@@ -1,0 +1,213 @@
+
+######## SsgConverterConsole\Os2200ContentConverter.cs
+@@ -53,3 +53,9 @@ namespace SsgConverterConsole {
+       EclParserOs2200 parser = new EclParserOs2200(m_LogObject);
+-      EclObjectOs2200 eclObject = parser.Parse(eclLines, EclObjectType.Runstream);
++      EclObjectOs2200 eclObject;
++      try {
++        eclObject = parser.Parse(eclLines, EclObjectType.Runstream);
++      } catch (Exception ex) {
++        m_LogObject.Warning(0, String.Format("ECL parse failed for content block in '{0}': {1} ΓÇö content skipped.", containingFile, ex.Message));
++        return null;
++      }
+ 
+@@ -62,3 +68,8 @@ namespace SsgConverterConsole {
+       EclMigrateOs2200 migrator = new EclMigrateOs2200(m_Vocabulary, psClass, m_LogObject, m_Options, summary, eclObject);
+-      migrator.MigrateStatements();
++      try {
++        migrator.MigrateStatements();
++      } catch (Exception ex) {
++        m_LogObject.Warning(0, String.Format("ECL migration failed for content block in '{0}': {1} ΓÇö content skipped.", containingFile, ex.Message));
++        return null;
++      }
+ 
+
+######## SsgConverterConsole\Program.cs
+@@ -3,2 +3,3 @@ using System.Collections.Generic;
+ using System.IO;
++using System.Linq;
+ using System.Text;
+@@ -67,2 +68,6 @@ namespace SsgConverterConsole {
+           logPath = Path.Combine(logPath, $"SsgConversion_{DateTime.Now:yyyyMMdd_HHmmss}.log");
++        } else {
++          // always unique per run so repeated Convert clicks never hit a locked file
++          String dir = Path.GetDirectoryName(logPath) ?? String.Empty;
++          logPath = Path.Combine(dir, $"{Path.GetFileNameWithoutExtension(logPath)}_{DateTime.Now:HHmmss}{Path.GetExtension(logPath)}");
+         }
+@@ -77,6 +82,5 @@ namespace SsgConverterConsole {
+ 
+-      if (ownLogger) {
+-        logger.Start(1);
+-        logger.ThreadStarted(0);
+-      }
++      // Always start after all appenders are added so every appender receives the Start signal
++      logger.Start(1);
++      logger.ThreadStarted(0);
+ 
+@@ -126,2 +130,14 @@ namespace SsgConverterConsole {
+ 
++            // Warn when a file has no SSG directives ΓÇö it is probably plain COBOL with an ECL header
++            String[] ssgKeywords = { "*IF", "*SET", "*DEFINE", "*LOOP", "*INCREMENT", "*DO",
++                                     "*ENDDEFINE", "*ENDIF", "*ENDDO", "*SORT", "*REMOVE",
++                                     "*CLEAR", "*DISPLAY", "*ABORT", "*EXIT", "*RETURN" };
++            Int32 ssgDirectiveCount = lines.Where(l => {
++              String t = l.TrimStart().ToUpperInvariant();
++              return ssgKeywords.Any(k => t.StartsWith(k + " ") || t.StartsWith(k + ",") || t == k);
++            }).Count();
++            if (ssgDirectiveCount == 0) {
++              logger.Warning(0, $"  No SSG directives recognised in '{fileName}' ΓÇö file may be plain COBOL rather than SSG. Output will be comments only.");
++            }
++
+             // Convert SSG to PowerShell AST
+@@ -160,5 +176,6 @@ namespace SsgConverterConsole {
+ 
+-        return errorCount == 0;
++        Boolean result = errorCount == 0;
++        return result;
+       } catch (Exception ex) {
+-        logger.Error(0, ex.Message);
++        try { logger.Error(0, ex.Message); } catch { }
+         return false;
+
+######## SsgConverterGui\App.xaml.cs
+@@ -1 +1,2 @@
++using System;
+ using System.Windows;
+@@ -8,4 +9,11 @@ namespace Ssg.ConverterGui {
+   public partial class App : Application {
+-  }
+ 
++    protected override void OnStartup (StartupEventArgs e) {
++      base.OnStartup(e);
++      DispatcherUnhandledException += (s, ex) => {
++        MessageBox.Show(ex.Exception.ToString(), "Unhandled Error", MessageBoxButton.OK, MessageBoxImage.Error);
++        ex.Handled = true;
++      };
++    }
++  }
+ }
+
+######## SsgConverterGui\MainWindow.xaml.cs
+@@ -29,2 +29,20 @@ namespace Ssg.ConverterGui {
+       InitializeControls();
++      // load settings from command-line arg after controls are ready
++      String[] args = Environment.GetCommandLineArgs();
++      if (args.Length > 1) {
++        LoadSettingsFromFile(args[1]);
++      }
++    }
++
++    /// <summary>
++    /// Load a settings file by path ΓÇö called from App.xaml.cs for command-line args.
++    /// </summary>
++    internal void LoadSettingsFromFile (String path) {
++      SsgConversionSettings settings = SsgSettingsSupport.LoadSettings(path, out String error);
++      if (settings != null) {
++        ApplySettingsToUi(settings);
++        StatusText.Text = $"Loaded: {System.IO.Path.GetFileName(path)}";
++      } else {
++        MessageBox.Show(error ?? $"Could not load: {path}", "Load Error", MessageBoxButton.OK, MessageBoxImage.Error);
++      }
+     }
+@@ -72,6 +90,11 @@ namespace Ssg.ConverterGui {
+ 
+-      Boolean success = await Task.Run(() => RunConversion(settings));
+-
+-      SetConverting(false);
+-      StatusText.Text = success ? "Conversion completed successfully." : "Conversion completed with errors.";
++      try {
++        Boolean success = await Task.Run(() => RunConversion(settings));
++        SetConverting(false);
++        StatusText.Text = success ? "Conversion completed successfully." : "Conversion completed with errors.";
++      } catch (Exception ex) {
++        SetConverting(false);
++        StatusText.Text = "Conversion failed with an exception.";
++        MessageBox.Show(ex.ToString(), "Conversion Error", MessageBoxButton.OK, MessageBoxImage.Error);
++      }
+     }
+@@ -81,3 +104,3 @@ namespace Ssg.ConverterGui {
+ 
+-      // Add UI log appender
++      // Add UI log appender ΓÇö Start is called by Program.RunConversion after all appenders are added
+       UiLogAppender uiAppender = new UiLogAppender(this);
+@@ -86,6 +109,2 @@ namespace Ssg.ConverterGui {
+ 
+-      // Initialize logger
+-      logger.Start(1);
+-      logger.ThreadStarted(0);
+-
+       // Delegate to the shared conversion logic in SsgConverterConsole
+
+######## SsgConverterConsole\SsgConverterConsole.csproj
+@@ -16,5 +16,3 @@
+     <AssemblyName>SsgConverterConsole</AssemblyName>
+-    <SignAssembly>true</SignAssembly>
+-    <AssemblyOriginatorKeyFile>..\..\..\amt.net\security\signingkeys\sourceproprietary.snk</AssemblyOriginatorKeyFile>
+-    <DelaySign>false</DelaySign>
++    <SignAssembly>false</SignAssembly>
+   </PropertyGroup>
+@@ -27,12 +25,9 @@
+ 
+-  <ItemGroup>
+-    <Compile Include="..\..\..\Amt.Net\AmtAssemblyInfo.cs" Link="Properties\AmtAssemblyInfo.cs" />
+-  </ItemGroup>
+-
+   <ItemGroup>
+     <ProjectReference Include="..\SsgConverter\SsgConverter.csproj" />
+-    <ProjectReference Include="..\..\EclConverter\EclToAstOs2200\EclToAstOs2200.csproj" />
+-    <ProjectReference Include="..\..\EclConverter\EclParserOs2200\EclParserOs2200.csproj" />
+-    <ProjectReference Include="..\..\ConverterSupport\ConverterSupport.csproj" />
+-    <ProjectReference Include="..\..\PowerShellWriter\PowerShellWriter.csproj" />
++    <ProjectReference Include="..\..\..\EclConverter (1)\EclConverter\EclToAstOs2200\EclToAstOs2200.csproj" />
++    <ProjectReference Include="..\..\..\EclConverter (1)\EclConverter\EclParserOs2200\EclParserOs2200.csproj" />
++    <Reference Include="ConverterSupport"><HintPath>$(SsgDeps)ConverterSupport.dll</HintPath></Reference>
++    <Reference Include="PowerShellGenerator"><HintPath>$(SsgDeps)PowerShellGenerator.dll</HintPath></Reference>
++    <Reference Include="PowerShellWriter"><HintPath>$(SsgDeps)PowerShellWriter.dll</HintPath></Reference>
+   </ItemGroup>
+
+######## SsgConverterGui\SsgConverterGui.csproj
+@@ -17,5 +17,3 @@
+     <AssemblyName>SsgConverterGui</AssemblyName>
+-    <SignAssembly>true</SignAssembly>
+-    <AssemblyOriginatorKeyFile>..\..\..\amt.net\security\signingkeys\sourceproprietary.snk</AssemblyOriginatorKeyFile>
+-    <DelaySign>false</DelaySign>
++    <SignAssembly>false</SignAssembly>
+   </PropertyGroup>
+@@ -28,6 +26,2 @@
+ 
+-  <ItemGroup>
+-    <Compile Include="..\..\..\Amt.Net\AmtAssemblyInfo.cs" Link="Properties\AmtAssemblyInfo.cs" />
+-  </ItemGroup>
+-
+   <ItemGroup>
+@@ -35,3 +29,3 @@
+     <ProjectReference Include="..\SsgConverterConsole\SsgConverterConsole.csproj" />
+-    <ProjectReference Include="..\..\ConverterSupport\ConverterSupport.csproj" />
++    <Reference Include="ConverterSupport"><HintPath>$(SsgDeps)ConverterSupport.dll</HintPath></Reference>
+   </ItemGroup>
+
+######## SsgConverter\SsgConverter.csproj
+@@ -16,5 +16,3 @@
+     <AssemblyName>SsgConverter</AssemblyName>
+-    <SignAssembly>true</SignAssembly>
+-    <AssemblyOriginatorKeyFile>..\..\..\amt.net\security\signingkeys\sourceproprietary.snk</AssemblyOriginatorKeyFile>
+-    <DelaySign>false</DelaySign>
++    <SignAssembly>false</SignAssembly>
+   </PropertyGroup>
+@@ -27,9 +25,10 @@
+ 
++  <!-- ProjectReferences swapped for shipped binaries in _deps (source projects not available) -->
+   <ItemGroup>
+-    <Compile Include="..\..\..\Amt.Net\AmtAssemblyInfo.cs" Link="Properties\AmtAssemblyInfo.cs" />
+-  </ItemGroup>
+-
+-  <ItemGroup>
+-    <ProjectReference Include="..\..\PowerShellGenerator\PowerShellGenerator.csproj" />
+-    <ProjectReference Include="..\..\ConverterSupport\ConverterSupport.csproj" />
++    <Reference Include="PowerShellGenerator">
++      <HintPath>..\_deps\PowerShellGenerator.dll</HintPath>
++    </Reference>
++    <Reference Include="ConverterSupport">
++      <HintPath>..\_deps\ConverterSupport.dll</HintPath>
++    </Reference>
+   </ItemGroup>

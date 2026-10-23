@@ -1,0 +1,83 @@
+=== Asysco.Amt.Runtime.dll copies (excluding dev bin/obj) ===
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Application\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Common\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Common\Copies\DataDivision\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Common\Copies\ProcedureDivision\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Common\RestApiProvider\AmtRestApiProvider\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Common\Subprograms\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Programs\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Application\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Common\Copies\DataDivision\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Common\Copies\ProcedureDivision\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Common\Dlls\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Common\Insertables\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Common\Libraries\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Programs\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\ReoWorking\FEDERALE_APP\ReoPool.3\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Reports\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Working\ServerWorking\Amt_VMFEDPE08_8031_1\WorkerPool.1\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Working\ServerWorking\Amt_VMFEDPE08_8031_2\WorkerPool.1\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Working\ServerWorking\Amt_VMFEDPE_8031_1\WorkerPool.1\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/2/2026 9:13:21 AM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Working\ServerWorking\Amt_VMFEDPE_8031_2\WorkerPool.1\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/2/2026 9:13:21 AM
+E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Working\ServerWorking\TransactionServer\Application.1\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/7/2026 6:49:13 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:04:30 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:04:30 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:29:00 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtPrintService\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:28:43 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:28:43 PM
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\TransactionAgentCore\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:28:43 PM
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:30:00 PM
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterWebApi\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:29:31 PM
+E:\Repos\Federale_InternalRelease\AmtTools\Opconservice\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.50 | ProductVersion=AMT 177a - 260818 | LastWriteTime=9/8/2026 12:30:00 PM
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=8/28/2026 10:40:08 AM
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\ReorganizeAgent\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=8/28/2026 10:40:08 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\AmtLionVsWebApi\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\AmtSoapHost\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:54 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\Common\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:57 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\Common\ApplicationServerAgentCore\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:55 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\Common\DebuggerHostCore\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:57 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\LionscreensProvider\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:57 AM
+E:\Repos\Federale_InternalRelease\Lion\Support\RestApiProvided\Asysco.Amt.Runtime.dll | FileVersion=8.0.26230.0 | ProductVersion=AMT 177 - 260818 | LastWriteTime=9/17/2026 12:11:58 AM
+
+=== AmtBatchControllerAgent / PowerShellHost folder contents relevant to Cobol runtime ===
+--- E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore ---
+Asysco.Amt.AmtSharedDataModel.dll  FileVersion=8.0.26230.50
+Asysco.Amt.AmtSharedDataModel.pdb  FileVersion=
+Asysco.Amt.Charts.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Charts.pdb  FileVersion=
+Asysco.Amt.DataCom.dll  FileVersion=8.0.26230.50
+Asysco.Amt.DataCom.pdb  FileVersion=
+Asysco.Amt.Libs.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Libs.pdb  FileVersion=
+Asysco.Amt.Pdf.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Pdf.pdb  FileVersion=
+Asysco.Amt.Runtime.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Runtime.pdb  FileVersion=
+Asysco.Amt.Screens.Common.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Screens.Common.pdb  FileVersion=
+Asysco.Amt.SerializerWrappers.dll  FileVersion=8.0.26230.50
+Asysco.Amt.SerializerWrappers.pdb  FileVersion=
+Asysco.Amt.Unmanaged.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Unmanaged.pdb  FileVersion=
+Asysco.Amt.Windows.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Windows.pdb  FileVersion=
+Asysco.Amt.WindowsServices.dll  FileVersion=8.0.26230.50
+Asysco.Amt.WindowsServices.pdb  FileVersion=
+--- E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController ---
+Asysco.Amt.AmtSharedDataModel.dll  FileVersion=8.0.26230.50
+Asysco.Amt.AmtSharedDataModel.pdb  FileVersion=
+Asysco.Amt.Libs.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Libs.pdb  FileVersion=
+Asysco.Amt.Runtime.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Runtime.pdb  FileVersion=
+Asysco.Amt.Screens.Common.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Screens.Common.pdb  FileVersion=
+Asysco.Amt.SerializerWrappers.dll  FileVersion=8.0.26230.50
+Asysco.Amt.SerializerWrappers.pdb  FileVersion=
+Asysco.Amt.Unmanaged.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Unmanaged.pdb  FileVersion=
+Asysco.Amt.Windows.dll  FileVersion=8.0.26230.50
+Asysco.Amt.Windows.pdb  FileVersion=
+Asysco.Amt.WindowsServices.dll  FileVersion=8.0.26230.50
+Asysco.Amt.WindowsServices.pdb  FileVersion=

@@ -1,0 +1,35 @@
+--- BatchController: 20261021 23:53:47.419 12 Information SSG4_CHABAN_CASES Done Id: 1020 Queue: JOB_QUEUE1 (Execution time: 00:00:22:236)
+--- CHABTEST_102020261021235327621.log
+  2026-10-21 23:53:28 Info: CHABAN case E0 (VIRA12_UL_L83)
+  2026-10-21 23:53:28 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBE0\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=I006VI027; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:31 RECORDS WRITTEN 0
+  2026-10-21 23:53:31 Info: CHABAN case EN (MAPA01_L350)
+  2026-10-21 23:53:32 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBEN\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=I996RIST; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:33 RECORDS WRITTEN 0
+  2026-10-21 23:53:33 Info: CHABAN case B1 (BSEH02_L110)
+  2026-10-21 23:53:33 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBB1\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=OUT; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:35 RECORDS WRITTEN 1
+  2026-10-21 23:53:35 Info: CHABAN case R4 (SINM05_L190)
+  2026-10-21 23:53:35 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBR4\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=I009PAI120R; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:37 RECORDS WRITTEN 1
+  2026-10-21 23:53:37 Info: CHABAN case R22 (-d_TABD53_L31)
+  2026-10-21 23:53:37 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBR22\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=OUT; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:39 RECORDS WRITTEN 1
+  2026-10-21 23:53:39 Info: CHABAN case R5 (-d_VIRD50_EN_L484)
+  2026-10-21 23:53:39 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBR5\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=ID50AVISVIDE; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:41 RECORDS WRITTEN 1
+  2026-10-21 23:53:41 Info: CHABAN case R58 (COCA11_L23)
+  2026-10-21 23:53:41 Info: SSG-4 hand-off (CHABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBR58\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=OUTA; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:43 RECORDS WRITTEN 1
+  2026-10-21 23:53:43 Info: CHABAN case C100 (-d_EUPD01_L15)
+  2026-10-21 23:53:43 Info: SSG-4 hand-off (CHAB100): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CHBC100\CHAPARM (3 lines); CHAIN=*ACCEPT* CHAOUT=FILEIN; Xqt CHABAN -> ASSURFED_UTILIT_CHABAN_GN
+  23:53:45 RECORDS WRITTEN 1
+E0     I006VI027.DAT         0 B vs expected         0 B: PASS byte-identical
+EN     I996RIST.DAT         0 B vs expected         0 B: PASS byte-identical
+B1     OUT.DAT             82 B vs expected        82 B: PASS byte-identical
+R4     I009PAI120R.DAT       302 B vs expected       302 B: PASS byte-identical
+R22    OUT.DAT            134 B vs expected       134 B: PASS byte-identical
+R5     ID50AVISVIDE.DAT       402 B vs expected       402 B: PASS byte-identical
+R58    OUTA.DAT            60 B vs expected        60 B: PASS byte-identical
+C100   FILEIN.DAT         102 B vs expected       102 B: PASS byte-identical
+--- 8 of 8 outputs byte-identical

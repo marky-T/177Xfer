@@ -1,0 +1,42 @@
+licence C:\Temp\Lion.lic : True
+AmtLion present         : True
+
+=== AmtLion top level ===
+[F] Amt-Lion Services.sln
+[F] Amt-Lion-Client.sln
+[F] Amt-Lion.sln
+[D] AmtProdInstall
+[D] ApplicationManager
+[D] ApplicationServer
+[D] Asysco.Amt.Lion.Grpc
+[D] CommunicationManager
+[D] CommunicationServer
+[D] Documentation
+[D] Lion
+[D] Lion60Installer
+[F] Lion60Installer.sln
+[D] LionClient
+[D] LionDebugger
+[D] LionDebuggerHost
+[D] LionDebuggerLib
+[D] LionProtocol
+[D] LionWebDeploymentProjects
+[D] RestartService
+[D] Test
+[D] WebDeployment
+
+=== LionDev/Gen/Reo exe under AmtLion (depth2) ===
+E:\Repos\Federale_InternalRelease\AmtLion\Lion60Installer\IncludeFiles\LionDev.exe
+
+=== existing Lion.ini candidates ===
+E:\Repos\Federale_InternalRelease\AmtLion\Lion.ini : False
+E:\Repos\Federale_InternalRelease\AmtLion\Lion\Lion.ini : False
+E:\Repos\Federale_InternalRelease\Lion.ini : False
+
+=== runtime config candidates ===
+E:\Repos\Federale_InternalRelease\Sys.ini : False
+E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini : True
+E:\Repos\Federale_InternalRelease\Scripts\Settings\AmtSettings.xml : True
+E:\Repos\Federale_InternalRelease\AmtLocalisation.xml : False
+E:\Repos\Federale_InternalRelease\amtruntime.lic : False
+E:\Repos\Federale_InternalRelease\AmtRuntime.lic : False

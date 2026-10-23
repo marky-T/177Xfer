@@ -1,0 +1,3 @@
+--- Sys.ini ComScript setting ---
+--- AmtSettings.xml (deployed) ComScript-related ---
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Settings\AmtSettings.xml:6:		<ComScript>E:\Repos\Federale_InternalRelease\AmtTools\ComScript\ComScript.dll</ComScript>

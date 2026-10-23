@@ -1,0 +1,29 @@
+ROOT: E:\Repos\release_candidates\release20261002-rc.01
+  README.md
+  RELEASE-NOTES.md
+  1_ConvertedScripts\
+    Bodies\  (20 files)
+    SgsSeeds\  (20 files)
+    Wrappers\  (20 files)
+    Generate-Release-Wrappers.ps1
+  2_OriginalSource\
+    ARCHIFORMAT.TXT
+    ARCHISEPARE
+    BABA_ASCII.TXT
+    CFH-COPY_ASCII.TXT
+    CFH-COPY.TXT
+    CHAB100_ASCII.TXT
+    CHABAN_ASCII.TXT
+    CONDIS2_ASCII.TXT
+    EXTEUR.TXT
+    FUSBA_ASCII.TXT
+    FUSBA2_ASCII.TXT
+    LECTIS_ASCII.TXT
+    LOADIS_ASCII.TXT
+    LOADIS_MULTI.TXT
+    RECAP.TXT
+    SCAN_ASCII.TXT
+    TABAN_ASCII.TXT
+    TAPELD_ASCII.TXT
+    UNLOADIS_ASCII.TXT
+    UNLOADIS_MULTI.txt

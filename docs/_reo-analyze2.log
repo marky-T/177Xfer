@@ -1,0 +1,116 @@
+﻿20260922 22:23:45  Database FEDERALE_AFBUS_2200COBOL : Database FEDERALE_AFBUS_2200COBOL
+20260922 22:23:45  Check database object lengths.
+20260922 22:23:45  Check database object lengths done.
+20260922 22:23:45  Check database filegroups.
+20260922 22:23:45  Check database object lengths done.
+20260922 22:23:45  Analyze database tables.
+20260922 22:23:45  Create table AMTSYSSCHEMAINFO : New table.
+20260922 22:23:45  Table AMTSYSSCHEMAINFO New column SCHEMAVERSION : New column.
+20260922 22:23:45  Create table AMTSYSCRITICALREPORT : New table.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT New column ID : New column.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT New column APPID : New column.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT New column COUNT : New column.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT New column VALUE1 : New column.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT New column VALUE2 : New column.
+20260922 22:23:45  Create table AMTSYSDMS2200DBSKEY : New table.
+20260922 22:23:45  Table AMTSYSDMS2200DBSKEY New column AREANAME : New column.
+20260922 22:23:45  Table AMTSYSDMS2200DBSKEY New column MAXDBSKEY : New column.
+20260922 22:23:45  Create table AMTSYSINDEXLOGIC : New table.
+20260922 22:23:45  Table AMTSYSINDEXLOGIC New column INDEXNAME : New column.
+20260922 22:23:45  Table AMTSYSINDEXLOGIC New column INDEXLOGIC : New column.
+20260922 22:23:45  Create table AMTSYSREOARRAYITEM : New table.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column TABLENAME : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column FIELD : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column LENGTH : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column DECIMAL : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column ITEMTYPE : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column SIGNED : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS1 : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS2 : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS3 : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS4 : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS5 : New column.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM New column OCCURS6 : New column.
+20260922 22:23:45  Create table AMTSYSREODATA : New table.
+20260922 22:23:45  Table AMTSYSREODATA New column KEY1 : New column.
+20260922 22:23:45  Table AMTSYSREODATA New column KEY2 : New column.
+20260922 22:23:45  Table AMTSYSREODATA New column SUBKEY : New column.
+20260922 22:23:45  Table AMTSYSREODATA New column VALUE1 : New column.
+20260922 22:23:45  Table AMTSYSREODATA New column VALUE2 : New column.
+20260922 22:23:45  Create table AMTSYSSESSIONDATA : New table.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column STATION : New column.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column APPID : New column.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column TRANSNO : New column.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column SESSIONNO : New column.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column DATA : New column.
+20260922 22:23:45  Table AMTSYSSESSIONDATA New column PREVFORM : New column.
+20260922 22:23:45  Create table AMTSYSSESSIONFORMDATA : New table.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column STATION : New column.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column FORM : New column.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column SESSIONNO : New column.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column APPID : New column.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column SUBKEY : New column.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA New column DATA : New column.
+20260922 22:23:45  Create table AMTSYSTABLEVERSION : New table.
+20260922 22:23:45  Table AMTSYSTABLEVERSION New column TABLENAME : New column.
+20260922 22:23:45  Table AMTSYSTABLEVERSION New column VERSION : New column.
+20260922 22:23:45  Table AMTSYSTABLEVERSION New column REODATETIME : New column.
+20260922 22:23:45  Table AMTSYSTABLEVERSION New column VERSIONDLL : New column.
+20260922 22:23:45  Table AMTSYSTABLEVERSION New column CHECKDATETIME : New column.
+20260922 22:23:45  Analyze database tables done.
+20260922 22:23:45  Analyze database indexes.
+20260922 22:23:45  Table AMTSYSCRITICALREPORT Create index PKAMTSYSCRITICALREPORT : New index, due to new table.
+20260922 22:23:45  Table AMTSYSINDEXLOGIC Create index PKAMTSYSINDEXLOGIC : New index, due to new table.
+20260922 22:23:45  Table AMTSYSREOARRAYITEM Create index PKAMTSYSREOARRAYITEM : New index, due to new table.
+20260922 22:23:45  Table AMTSYSREODATA Create index PKAMTSYSREODATA : New index, due to new table.
+20260922 22:23:45  Table AMTSYSSCHEMAINFO Create index PKAMTSYSSCHEMAINFO : New index, due to new table.
+20260922 22:23:45  Table AMTSYSSESSIONDATA Create index PKAMTSYSSESSIONDATA : New index, due to new table.
+20260922 22:23:45  Table AMTSYSSESSIONFORMDATA Create index PKAMTSYSSESSIONFORMDATA : New index, due to new table.
+20260922 22:23:45  Table AMTSYSTABLEVERSION Create index PKAMTSYSTABLEVERSION : New index, due to new table.
+20260922 22:23:45  Analyze database indexes done.
+20260922 22:23:45  Analyze database foreignkeys.
+20260922 22:23:45  Analyze database foreignkeys done.
+20260922 22:23:45  Analyze database triggers.
+20260922 22:23:45  Analyze database triggers done.
+20260922 22:23:45  Analyze database views.
+20260922 22:23:45  Analyze database views done.
+20260922 22:23:45  Analyze database synonyms.
+20260922 22:23:45  Analyze database synonyms done.
+20260922 22:23:45  Analyze database sequences.
+20260922 22:23:45  Create sequence seq_amtsysuniquenumber : New sequence.
+20260922 22:23:45  Analyze database sequences done.
+20260922 22:23:45  Analyze database stored procedures.
+20260922 22:23:45  Create Stored Procedure asy_reverse : New stored procedure.
+20260922 22:23:45  Create Stored Procedure asy_getdstdate : New stored procedure.
+20260922 22:23:45  Create Stored Procedure asy_getlocaltime : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_DELETEREODATA : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_DELETESYSINDEXLOGIC : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_DELETE_AMTSYSREOARRAYITEM : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_SETREODATA : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_INSERT_AMTSYSREOARRAYITEM : New stored procedure.
+20260922 22:23:45  Create Stored Procedure AMT_INSERTSYSINDEXLOGIC : New stored procedure.
+20260922 22:23:45  Analyze database stored procedures done.
+20260922 22:23:45  Analyze database functions.
+20260922 22:23:45  Create Function asy_reverse_5 : New function.
+20260922 22:23:45  Create Function asy_reverse_10 : New function.
+20260922 22:23:45  Create Function asy_reverse_50 : New function.
+20260922 22:23:45  Create Function asy_reverse_100 : New function.
+20260922 22:23:45  Create Function asy_reverse_500 : New function.
+20260922 22:23:45  Create Function ASY_DT_CURRENTDATE : New function.
+20260922 22:23:45  Create Function ASY_DT_CURRENTTIME : New function.
+20260922 22:23:45  Create Function ASY_DT_CURRENTTIMESTAMP : New function.
+20260922 22:23:45  Create Function ASY_DT_CURRENTTIMESTAMPOFFSET : New function.
+20260922 22:23:45  Create Function ASY_DT_TIMESTAMP : New function.
+20260922 22:23:45  Create Function ASY_DT_TIMESTAMP_ISO : New function.
+20260922 22:23:45  Create Function ASY_DATEADD : New function.
+20260922 22:23:45  Create Function ASY_DATEDIFF : New function.
+20260922 22:23:45  Create Function ASY_DATEPART : New function.
+20260922 22:23:45  Create Function ASY_CURRENTDATE : New function.
+20260922 22:23:45  Create Function ASY_CURRENTTIME : New function.
+20260922 22:23:45  Create Function ASY_CURRENTTIMESTAMP : New function.
+20260922 22:23:45  Create Function ASY_TIMESTAMP : New function.
+20260922 22:23:45  Create Function AMT_DECRYPT : New function.
+20260922 22:23:45  Create Function AMT_ENCRYPT : New function.
+20260922 22:23:45  Analyze database functions done.
+20260922 22:23:45  Analyze done FEDERALE_AFBUS_2200COBOL : Analyze is done, 92 actions found.
+20260922 22:23:45  Finished reorganize analysis for application: AFBUS_2200COBOL.

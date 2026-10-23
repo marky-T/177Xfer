@@ -1,0 +1,13 @@
+base(...) calls rewritten in 6 file(s)
+
+Program                        Built FirstError
+-------                        ----- ----------
+ASSURFED_UTILIT_CFH_COPY_ASCII  True 
+ASSURFED_UTILIT_FUSBA2_ASCII    True 
+ASSURFED_UTILIT_LECTIS_ASCII    True 
+ASSURFED_UTILIT_LOADIS_ASCII    True 
+ASSURFED_UTILIT_RECAP           True 
+ASSURFED_UTILIT_UNLOADIS_ASCII  True 
+
+
+Output: E:\AMT_Work\Rebuild177a\AFBUS_2200COBOL\Binaries\Programs

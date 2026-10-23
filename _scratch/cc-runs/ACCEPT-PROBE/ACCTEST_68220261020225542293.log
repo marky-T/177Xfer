@@ -1,0 +1,23 @@
+ACCTEST started 2026-10-20 22:55:42
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.6
+
+2026-10-20 22:55:42 
+2026-10-20 22:55:42 Amt Sort PS library version: 60.31, date: 2026-04-13
+2026-10-20 22:55:42 [Sort-Init] Initializing Sort 
+2026-10-20 22:55:42 Info:  Script Started: ACCTEST
+2026-10-20 22:55:42 QUAL: ACCTEST
+2026-10-20 22:55:42 QUAL Options: 
+2026-10-20 22:55:43 DELETE: OUT
+2026-10-20 22:55:43 DELETE Options: C
+2026-10-20 22:55:43 ASG: OUT
+2026-10-20 22:55:43 ASG Options: P, U
+2026-10-20 22:55:43 Ignored option P.
+2026-10-20 22:55:43 Error:  Error trapped:   Exception calling "WriteAllLines" with "3" argument(s): "Could not find a part of the path 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\ACCTEST\CFHPARM'."
+2026-10-20 22:55:43 Error:  at Invoke-GnHandoff, <No file>: line 40
+at <ScriptBlock>, \SCRIPTS\SSG4\ASSURFED_F999\RUN\SSG4_ACCEPT_PROBE.PS1: line 15
+at <ScriptBlock>, <No file>: line 1
+2026-10-20 22:55:43 Error:  AFBUS_2200COBOL_AMT  - ACCTEST : Script aborted.
+2026-10-20 22:55:43 
+2026-10-20 22:55:43 End Job. Start: 2026-10-20 22:55:42
+2026-10-20 22:55:43          End:   2026-10-20 22:55:43

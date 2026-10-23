@@ -1,0 +1,42 @@
+jul27 top: SsgConverter
+release top: Build, Examples, Fixes, Source, README.md, SsgConverter-COPILOT.md, SsgConverterGui.exe - Shortcut.lnk
+jul27(AMT178)  E:\Repos\SsgTrial\_scratch\rd-jul27\SsgConverter\SsgConverter
+release-0821   E:\Repos\SsgTrial\_scratch\rel-20260821\Source\SsgConverter
+ourBase(0908)  E:\Repos\SsgTrial\_scratch\ssgbase
+RnD develop    E:\Repos\amt-go-net-ref\Migration Tools\SsgConverter\SsgConverter
+ours now       E:\Repos\SsgTrial\SsgConverter\Source\SsgConverter
+
+== SymstreamProcessor.cs   (identical after line-ending normalisation?)
+jul27(AMT178)    -   | diff | diff | diff | diff
+release-0821   diff |   -   | SAME | diff | diff
+ourBase(0908)  diff | SAME |   -   | diff | diff
+RnD develop    diff | diff | diff |   -   | diff
+ours now       diff | diff | diff | diff |   -  
+
+== SymstreamExpressionMigrator.cs   (identical after line-ending normalisation?)
+jul27(AMT178)    -   | diff | diff | SAME | diff
+release-0821   diff |   -   | SAME | diff | diff
+ourBase(0908)  diff | SAME |   -   | diff | diff
+RnD develop    SAME | diff | diff |   -   | diff
+ours now       diff | diff | diff | diff |   -  
+
+== SymstreamExpressionParser.cs   (identical after line-ending normalisation?)
+jul27(AMT178)    -   | diff | diff | SAME | diff
+release-0821   diff |   -   | SAME | diff | SAME
+ourBase(0908)  diff | SAME |   -   | diff | SAME
+RnD develop    SAME | diff | diff |   -   | diff
+ours now       diff | SAME | SAME | diff |   -  
+
+line changes vs jul27 (added/removed, ignoring EOL):
+SymstreamProcessor.cs            jul27 -> release-0821   +/- 65/17
+SymstreamProcessor.cs            jul27 -> ourBase(0908)  +/- 65/17
+SymstreamProcessor.cs            jul27 -> RnD develop    +/- 15/12
+SymstreamProcessor.cs            jul27 -> ours now       +/- 166/22
+SymstreamExpressionMigrator.cs   jul27 -> release-0821   +/- 14/14
+SymstreamExpressionMigrator.cs   jul27 -> ourBase(0908)  +/- 14/14
+SymstreamExpressionMigrator.cs   jul27 -> RnD develop    +/- no difference
+SymstreamExpressionMigrator.cs   jul27 -> ours now       +/- 43/16
+SymstreamExpressionParser.cs     jul27 -> release-0821   +/- 63/33
+SymstreamExpressionParser.cs     jul27 -> ourBase(0908)  +/- 63/33
+SymstreamExpressionParser.cs     jul27 -> RnD develop    +/- no difference
+SymstreamExpressionParser.cs     jul27 -> ours now       +/- 63/33

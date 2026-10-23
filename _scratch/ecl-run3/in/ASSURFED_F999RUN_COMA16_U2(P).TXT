@@ -1,0 +1,110 @@
+@RUN,M/T  COMA16,EXPLOITATION,ASSURFED,S8000
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@SYM       PRINT$,1,PRSP
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES MOUVEMENTS COMMISSIONS               **
+@MSG       **      MODULE COMA16/U2                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE BAS_MVT_CMM               **
+@MSG       *===========================================================*
+@ . 
+@ .        P04062 : VANKE : 17/01/2005 : CREATION   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA16/U2
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA16U2.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE          - RESTART 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE BAS_MVT_CMM         - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,C      IUNLMVTBMC.  
+@CAT,P         IUNLMVTBMC.,F/538/POS/262143 
+@ASG,A         IUNLMVTBMC.  
+@USE       UNL,IUNLMVTBMC.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE BAS_MVT_CMM IN EXCLUSIVE RETRIEVAL MODE; 
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   BAS_MVT_CMM
+  ORDER  BY 
+         NO_MVT_CMM 
+      ,  NO_BAS_CMM 
+  FORMAT EXTERNAL;  
+UNLOCK BAS_MVT_CMM; 
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTBMC.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ERS TPF$.  
+@ . *      ------------------------------------------------------------ 
+@LAB020:   MSG 020. SELECT.DES MOUVEMENTS BAS_MVT_CMM A RECHARGER - SSG 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTBMC.  
+@USE       UNL,IUNLMVTBMC.  
+@ASG,AX        RCOMA15BMC.  
+@USE       CLE,RCOMA15BMC.  
+@ . 
+@DELETE,C      ILOAMVTBMC.  
+@CAT,P         ILOAMVTBMC.,F//POS/5000  
+@ASG,A         ILOAMVTBMC.  
+@USE       LOA,ILOAMVTBMC.  
+@DELETE,C      ISUPMVTBMC.  
+@CAT,P         ISUPMVTBMC.,F//POS/5000  
+@ASG,A         ISUPMVTBMC.  
+@USE       SUP,ISUPMVTBMC.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,030,10   UNL,129,10  
+OUTPUT         LOA,129,10   SUP,129,10  
+KEYS           2,10  14,10  
+UPDATE         1,10  11,10  
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT TPF$.FUSBA 
+@ . 
+@FREE          RCOMA15BMC.  
+@FREE          IUNLMVTBMC.  
+@FREE          ILOAMVTBMC.  
+@FREE          ISUPMVTBMC.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE              - REPRISE 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA16/U2 S'EST BIEN TERMINE ****
+@FREE      COMA16U2 
+@QUAL,R 
+@FIN

@@ -1,0 +1,76 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\SsgTrial\_scratch\cobol-run2\CHAB100_ASCII.settings
+Applications to convert:
+  - CHAB100ASCII
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   CHAB100ASCII
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: CHABAN.TXT
+1 source(s) read
+
+Analyzing source: CHABAN
+WARNING: WAR 000032 REDEFINES SIZE MISMATCH. Size [80] REDEFINES size [100].
+WARNING: WAR 000115 REDEFINES SIZE MISMATCH. Size [80] REDEFINES size [8000].
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+1 source(s) processed
+
+*** PHASE: CHAB100ASCII CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          1         212       212     
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:00:339
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 0
+Warnings: 6
+Todos: 0
+Logs: 12
+
+
+=== Conversion Completed ===
+
+Conversion completed with warnings.

@@ -1,0 +1,38 @@
+EXIT=0
+HEAD=0f816b58ce5e5a767d53431ad5c8498a6553aa4e
+--- top-level ---
+[D] .git
+[D] 8.0.26230.0
+[D] Lion
+[F] .gitattributes
+--- git ls-tree matches for 8.0.26230.0/Setup/dat/7z ---
+8.0.26230.0/AMT_177.dat
+8.0.26230.0/ExtraTools/ActiveAmt.7z
+8.0.26230.0/ExtraTools/AmtAid.7z
+8.0.26230.0/ExtraTools/AmtOpconTest.7z
+8.0.26230.0/ExtraTools/LionDevRemote.7z
+8.0.26230.0/MigrationTools/AmtSourceAnalyser.7z
+8.0.26230.0/MigrationTools/CmdConverterGui.7z
+8.0.26230.0/MigrationTools/CobolToAmt.7z
+8.0.26230.0/MigrationTools/DataPump.7z
+8.0.26230.0/MigrationTools/DataPumpConsole.7z
+8.0.26230.0/MigrationTools/EasytrieveConverterCmd.7z
+8.0.26230.0/MigrationTools/EasytrieveConverterGui.7z
+8.0.26230.0/MigrationTools/EclConverterConsole.7z
+8.0.26230.0/MigrationTools/EclConverterGui.7z
+8.0.26230.0/MigrationTools/FlatFileConverter.7z
+8.0.26230.0/MigrationTools/JclConverterConsole.7z
+8.0.26230.0/MigrationTools/JclConverterGui.7z
+8.0.26230.0/MigrationTools/LincToLionConsole.7z
+8.0.26230.0/MigrationTools/LincToLionGui.7z
+8.0.26230.0/MigrationTools/LionCommodule_X86.7z
+8.0.26230.0/MigrationTools/MicroFocusFileConverterGui.7z
+8.0.26230.0/MigrationTools/NaturalConverterConsole.7z
+8.0.26230.0/MigrationTools/NaturalConverterGui.7z
+8.0.26230.0/MigrationTools/RexxConverter.7z
+8.0.26230.0/MigrationTools/UnixScriptConverter.7z
+8.0.26230.0/MigrationTools/WflConverter.7z
+8.0.26230.0/MigrationTools/XgenToAmt.7z
+8.0.26230.0/Release_8.0.26230.0.7z
+8.0.26230.0/Setup.exe
+8.0.26230.0/YDrive_C#.7z

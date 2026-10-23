@@ -1,0 +1,332 @@
+*DEFINE PAS 
+    *CLEAR A
+    *CLEAR B
+    *CLEAR C
+    *DIVIDE [#1] BY +100 GIVING A,B 
+    *IF B IS SET
+        *SET A TO A+1   
+    *ENDIF
+    *MULTIPLY A BY +100 GIVING C
+*ENDDEFINE
+*DEFINE FILUN   
+    *SET FIL1 TO [#1]-1 
+    *IF FIL1 IS SET 
+           02 FILLER          PIC X([*FIL1]).   
+    *ENDIF
+*ENDDEFINE
+*DEFINE FILDEUX 
+    *SET FIL2 TO [#1]-[#2]-[#3]+1   
+    *IF FIL2 IS SET 
+           02 FILLER          PIC X([*FIL2]).   
+    *ENDIF
+*ENDDEFINE
+*#ERS
+*IF [ASCII] > 0 
+*#ACOB,IX     TPF$.NAME$,.   
+*ELSEIF   
+*#ACOB,ITX    TPF$.NAME$,.   
+*ENDIF
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID.    COMPARE.  
+       AUTHOR.        HANSE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. SPERRY-1100.
+       OBJECT-COMPUTER. SPERRY-1100.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT IN1 ASSIGN TO DISC [INPUT,1,1,1]. 
+           SELECT IN2 ASSIGN TO DISC [INPUT,1,1,2]. 
+           SELECT LISTING ASSIGN TO PRINTER.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  IN1  
+*IF [LABELOMIT] > 0 
+           LABEL  RECORD IS OMITTED 
+*ELSEIF   
+           LABEL  RECORD IS STANDARD
+*ENDIF
+           BLOCK  CONTAINS [INPUT,1,1,4] RECORDS
+           RECORD CONTAINS [INPUT,1,1,3] CHARACTERS 
+           DATA RECORD IS ENR-IN1.  
+       01  ENR-IN1   PIC X([INPUT,1,1,3]).  
+       FD  IN2  
+*IF [LABELOMIT] > 0 
+           LABEL  RECORD IS OMITTED 
+*ELSEIF   
+           LABEL  RECORD IS STANDARD
+*ENDIF
+           BLOCK  CONTAINS [INPUT,1,1,4] RECORDS
+           RECORD CONTAINS [INPUT,1,1,3] CHARACTERS 
+           DATA RECORD IS ENR-IN2.  
+       01  ENR-IN2   PIC X([INPUT,1,1,3]).  
+       FD  LISTING  
+           LABEL RECORD IS OMITTED  
+           BLOCK CONTAINS 1 RECORDS 
+           RECORD CONTAINS 132 CHARACTERS   
+           DATA RECORD IS LIGNE.
+       01  LIGNE PIC X(132).
+       WORKING-STORAGE SECTION. 
+*PROCESS PAS [INPUT,1,1,3]  
+    
+       01  L-NOLIGNE.   
+           05 FILLER PIC X(50) VALUE
+           '----+----1----+----2----+----3----+----4----+----5'.
+           05 FILLER PIC X(50) VALUE
+           '----+----6----+----7----+----8----+----9----+----1'.
+
+       01  WS-IN1.  
+           02 TAB-IN1 OCCURS [*A] INDEXED BY XT1 PIC X(100).
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+       01  WS-IN1[*I] REDEFINES WS-IN1. 
+*PROCESS FILUN [INDIC,1,I,1]
+           02 INDIC1[*I]      PIC X([INDIC,1,I,2]). 
+*PROCESS FILDEUX [*C] [INDIC,1,I,1] [INDIC,1,I,2]   
+*LOOP   
+*ENDIF
+*IF [EXCLUDE]   
+*INCREMENT I FROM 1 BY 1 TO [EXCLUDE,1] 
+       01  WS-EXCL1-[*I] REDEFINES WS-IN1.  
+*SET L1 = [EXCLUDE,1,I,1] - 1   
+*IF [*L1] > 0   
+           02 FILLER                PIC X([*L1]).   
+*ENDIF  
+           02 EXCL1-[*I]              PIC X([EXCLUDE,1,I,2]).   
+*SET L2 = [INPUT,1,1,3] - [EXCLUDE,1,I,1] - [EXCLUDE,1,I,2] + 1 
+*IF [*L2] > 0   
+           02 FILLER                PIC X([*L2]).   
+*ENDIF  
+*LOOP   
+*ENDIF  
+       01  WS-IN2.  
+           02 TAB-IN2 OCCURS [*A] INDEXED BY XT2 PIC X(100).
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+       01  WS-IN2[*I] REDEFINES WS-IN2. 
+*PROCESS FILUN [INDIC,1,I,1]
+           02 INDIC2[*I]      PIC X([INDIC,1,I,2]). 
+*PROCESS FILDEUX [*C] [INDIC,1,I,1] [INDIC,1,I,2]   
+*LOOP   
+*ENDIF
+*IF [EXCLUDE]   
+*INCREMENT I FROM 1 BY 1 TO [EXCLUDE,1] 
+       01  WS-EXCL2-[*I] REDEFINES WS-IN2.  
+*SET L1 = [EXCLUDE,1,I,1] - 1   
+*IF [*L1] > 0   
+           02 FILLER                PIC X([*L1]).   
+*ENDIF  
+           02 EXCL2-[*I]              PIC X([EXCLUDE,1,I,2]).   
+*SET L2 = [INPUT,1,1,3] - [EXCLUDE,1,I,1] - [EXCLUDE,1,I,2] + 1 
+*IF [*L2] > 0   
+           02 FILLER                PIC X([*L2]).   
+*ENDIF  
+*LOOP   
+*ENDIF
+       01  WS-INDIC1.   
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           02 IND1[*I]        PIC X([INDIC,1,I,2]). 
+*LOOP   
+*ELSEIF   
+           02 FILLER          PIC X(4). 
+*ENDIF
+       01  WS-INDIC2.   
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           02 IND2[*I]        PIC X([INDIC,1,I,2]). 
+*LOOP   
+*ELSE   
+           02 FILLER          PIC X(4). 
+*END
+       01  LIGNE-NO-REC.
+         03  FILLER   PIC X(20) VALUE 'ENREGISTREMENT NO   '.   
+         03  ZCT1     PIC 9(10) VALUE ZEROES.   
+*SET LONGUEUR = [INPUT,1,1,1,LEN$] + 4  
+*DISPLAY [*LONGUEUR]
+         03  FILLER   PIC X([*LONGUEUR]) VALUE ' ([INPUT,1,1,1]) '. 
+         03  FILLER   PIC X(3) VALUE ' / '. 
+         03  ZCT2     PIC 9(10) VALUE ZEROES.   
+*SET LONGUEUR = [INPUT,1,1,2,LEN$] + 4  
+         03  FILLER   PIC X([*LONGUEUR]) VALUE ' ([INPUT,1,1,2]) '. 
+         03  FILLER   PIC X(9) VALUE 'NO DIFF: '.   
+         03  ZCT3     PIC 9(6) VALUE ZEROES.
+       01  CT1     PIC 9(10) COMP VALUE ZEROES. 
+       01  CT2     PIC 9(10) COMP VALUE ZEROES. 
+       01  SW-ANO  PIC 9          VALUE 0.  
+       01  DIFFERENCE         PIC 9            VALUE 0. 
+       01  NB-TOT-DIFFERENCE  PIC 9(6)         VALUE 0. 
+       01  WS-COMPTEUR-PRNT   PIC 9(6)         VALUE 0. 
+       PROCEDURE DIVISION.  
+*IF [LIST]  
+*IF [LIST,1,1,1,LEN$]=0 
+*SET AIMPRIMER = 10000  
+*ELSE   
+*SET AIMPRIMER = [LIST,1,1,1]   
+*ENDIF  
+*ELSE   
+*SET AIMPRIMER = 0  
+*ENDIF  
+       DEBUT.   
+           OPEN INPUT IN1 IN2   
+                OUTPUT LISTING. 
+           MOVE SPACES TO LIGNE.
+           WRITE LIGNE AFTER PAGE.  
+       LECTURE. 
+           PERFORM LECTURE-IN1 THRU LECTURE-EX. 
+           PERFORM LECTURE-IN2 THRU LECTURE-EX. 
+       TEST.
+           IF WS-INDIC1 = WS-INDIC2  GO TO EGALITE. 
+           IF WS-INDIC1 > WS-INDIC2  GO TO IN2-SEUL.
+           IF WS-INDIC1 < WS-INDIC2  GO TO IN1-SEUL.
+       EGALITE. 
+           IF WS-INDIC1 = HIGH-VALUES GO TO FINI.   
+*IF [UN] > 0 OR [DEUX] > 0  
+           GO TO LECTURE
+*ELSE   
+           MOVE 0 TO SW-ANO.
+           SET XT1 XT2 TO 1.
+       BCL1.
+           IF XT1 > [*A]  GO TO IMP-EGAL.   
+           IF XT2 > [*A]  GO TO IMP-EGAL.   
+           IF TAB-IN1 (XT1) = TAB-IN2 (XT2)  GO TO RBCL1.   
+           MOVE 1 TO DIFFERENCE.
+           MOVE 1 TO SW-ANO.
+       RBCL1.   
+           SET XT1 XT2 UP BY 1. 
+           GO TO BCL1.  
+       IMP-EGAL.
+           IF SW-ANO = 0   GO TO LECTURE.   
+           ADD  1 TO WS-COMPTEUR-PRNT.  
+           IF NOT WS-COMPTEUR-PRNT > [*AIMPRIMER]   
+              GO TO IMPRESSION. 
+           GO TO LECTURE.   
+       IMPRESSION.  
+           MOVE CT1 TO ZCT1.
+           MOVE CT2 TO ZCT2.
+           DISPLAY ' ' UPON PRINTER 
+           DISPLAY LIGNE-NO-REC                   UPON PRINTER  
+           DISPLAY L-NOLIGNE                      UPON PRINTER. 
+           SET XT1 TO 1.
+           SET XT2 TO 1.
+       BCL-IMP. 
+           IF XT2 > [*A]   GO TO LECTURE.   
+           DISPLAY TAB-IN1 (XT1) UPON PRINTER.  
+           DISPLAY TAB-IN2 (XT2) UPON PRINTER.  
+           SET XT1 UP BY 1  
+           SET XT2 UP BY 1. 
+           GO TO BCL-IMP.   
+*END
+       IN1-SEUL.
+*IF [EGALITE] > 0  OR [DEUX] > 0
+           PERFORM LECTURE-IN1 THRU LECTURE-EX. 
+           GO TO TEST.  
+*ELSE   
+           DISPLAY '< ENREG. NO : ' CT1 UPON PRINTER.   
+*IF [LIST] > 0  
+           SET XT1 TO 1.
+       BCL-IMP-IN1. 
+           IF XT1 > [*A]   PERFORM LECTURE-IN1 THRU LECTURE-EX  
+                           GO TO TEST.  
+           DISPLAY TAB-IN1 (XT1) UPON PRINTER.  
+           SET XT1 UP BY 1. 
+           GO TO BCL-IMP-IN1.   
+*ELSE   
+           PERFORM LECTURE-IN1 THRU LECTURE-EX. 
+           GO TO TEST.  
+*END
+*END
+       IN2-SEUL.
+*IF [EGALITE] > 0 OR [UN] > 0   
+           PERFORM LECTURE-IN2 THRU LECTURE-EX. 
+           GO TO TEST.  
+*ELSE   
+           DISPLAY '> ENREG. NO :            - ' CT2 UPON PRINTER.  
+*IF [LIST] > 0  
+           SET XT2 TO 1.
+       BCL-IMP-IN2. 
+           IF XT2 > [*A]   PERFORM LECTURE-IN2 THRU LECTURE-EX  
+                           GO TO TEST.  
+           DISPLAY TAB-IN2 (XT2) UPON PRINTER.  
+           SET XT2 UP BY 1. 
+           GO TO BCL-IMP-IN2.   
+*ELSE   
+           PERFORM LECTURE-IN2 THRU LECTURE-EX. 
+           GO TO TEST.  
+*END
+*END
+       LECTURE-IN1. 
+           ADD DIFFERENCE TO NB-TOT-DIFFERENCE. 
+           MOVE NB-TOT-DIFFERENCE TO ZCT3.  
+           ADD 1 TO ZCT3.   
+           MOVE 0 TO DIFFERENCE.
+           READ IN1 INTO WS-IN1 AT END  
+                                MOVE HIGH-VALUES TO WS-INDIC1   
+                                GO TO LECTURE-EX.   
+*IF [EXCLUDE]   
+           PERFORM EXCLUDE1 THRU EXCLUDE1-EXIT. 
+*END
+           ADD 1 TO CT1.
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           MOVE INDIC1[*I] TO IND1[*I]. 
+*LOOP   
+*END
+           GO TO LECTURE-EX.
+       LECTURE-IN2. 
+           MOVE 0 TO DIFFERENCE.
+           READ IN2 INTO WS-IN2 AT END  
+                                MOVE HIGH-VALUES TO WS-INDIC2   
+                                GO TO LECTURE-EX.   
+*IF [EXCLUDE]   
+           PERFORM EXCLUDE2 THRU EXCLUDE2-EXIT. 
+*END
+           ADD 1 TO CT2.
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           MOVE INDIC2[*I] TO IND2[*I]. 
+*LOOP   
+*END
+       LECTURE-EX.  
+           EXIT.
+*IF [EXCLUDE]   
+       EXCLUDE1.
+*INCREMENT I FROM 1 BY 1 TO [EXCLUDE,1] 
+           MOVE ALL '*' TO EXCL1-[*I].  
+*LOOP   
+       EXCLUDE1-EXIT.   
+           EXIT.
+    
+       EXCLUDE2.
+*INCREMENT I FROM 1 BY 1 TO [EXCLUDE,1] 
+           MOVE ALL '*' TO EXCL2-[*I].  
+*LOOP   
+       EXCLUDE2-EXIT.   
+           EXIT.
+*ENDIF  
+    
+    
+       FINI.
+           DISPLAY '******************************' 
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 1 = ' CT1  
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 2 = ' CT2  
+                    UPON PRINTER.   
+           DISPLAY 'NOMBRE ENREGISTREMENTS DIFFERENTS = '   
+                    NB-TOT-DIFFERENCE              UPON PRINTER.
+           DISPLAY '******************************' UPON PRINTER.   
+           DISPLAY '**********************************************' 
+                    UPON PRINTER.   
+           IF NB-TOT-DIFFERENCE > [*AIMPRIMER]  
+                 DISPLAY '* TOUTES LES DIFFERENCES NE SONT PAS LISTEES *'   
+                 UPON PRINTER   
+           ELSE 
+                 DISPLAY '*    TOUTES LES DIFFERENCES SONT LISTEES     *'   
+                 UPON PRINTER.  
+           DISPLAY '**********************************************' 
+                    UPON PRINTER.   
+           CLOSE IN1 IN2 LISTING.   
+           STOP RUN.
+#MAP,NX  ASSURFED*UTILITASCII.MAP,TPF$.COMPARE  
+#TIME   

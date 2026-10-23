@@ -1,0 +1,116 @@
+﻿2026-08-11 10:16:43 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:16:43 [0] Phase     : SSG to PowerShell Converter
+2026-08-11 10:16:43 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:16:43 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-11 10:16:43 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-11 10:16:43 [0] Log       : SSG source files found: 13
+2026-08-11 10:16:43 [0] Warning   : @UCOB: unknown processor — emitted as CallExternalProgram
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                  -- architab1 --                         ***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***            Pour creerle fichier pour architab2             ***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Ecrit le : 18 avril 2001                   (dd/mm/ccyy)        *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                                                                *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficout : renseignements pour architab2              *
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Identification division.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *========================*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): program-id.  architab1.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Environment division.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *====================*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Configuration section.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): special-names.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): printer       printer.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Input-output section.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *---------------------*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): file-control.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): select ficout assign to disc      [fname,1,1,1].
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): i-o-control.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Data division.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *==============*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): File section.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *-------------*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier pour architab2
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  ficout.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  ligneout              pic x(80).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): Working-storage section.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------------------*
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ligne-type0.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 cd-don0                   pic x value "0".
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nm-bas0                   pic x(6).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nm-tab0                   pic x(30).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 dt-ach0                   pic x(8).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 dt-tab                    pic x(8) value space.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ligne-type1.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 cd-don1                   pic x value "1".
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nm-cle                    pic x(30).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ds-cle.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 type-cle                 pic x.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 longueur                 pic 99.99.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ligne-type9.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 cd-don9                   pic x value "9".
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nm-bas9                   pic x(6).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nm-tab9                   pic x(30).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 dt-ach9                   pic x(8).
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nombre                    pic s9(11) sign leading
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): separate value 99999999999.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 nombre2                   pic s9(11) sign leading
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): separate value 99999999999.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): PROCEDURE DIVISION.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *-------------------
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 000-main.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): open output ficout
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 100-type0 thru 100-exit
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 101-type1 thru 101-exit
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 102-type9 thru 102-exit
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): close ficout
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): stop run
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 0 ----------------
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 100-type0.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[tname,1,1,1]" to nm-bas0
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[tname,1,1,2]" to nm-tab0
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): accept dt-ach0 from date yyyymmdd
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): write ligneout from ligne-type0
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 100-exit.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 1 -----------------
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 101-type1.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[key,1,1,1]" to nm-cle
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[key,1,1,2]" to type-cle
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move [key,1,1,3] to longueur
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): write ligneout from ligne-type1
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 101-exit.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 9 -----------------
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 102-type9.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[tname,1,1,1]" to nm-bas9
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): move "[tname,1,1,2]" to nm-tab9
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): accept dt-ach9 from date yyyymmdd
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): write ligneout from ligne-type9
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): 102-exit.
+2026-08-11 10:16:43 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-08-11 10:16:43 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-08-11 10:16:43 [0] Error     :   Error converting ASSURFED_UTILIT_CFH-COPY(P): This is unexpected. DirectiveId: End  Line: 5
+2026-08-11 10:16:43 [0] Log       : 
+2026-08-11 10:16:43 [0] Log       : Conversion complete: 1 succeeded, 1 failed

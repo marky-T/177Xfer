@@ -1,0 +1,45 @@
+batch log last write: 10/20/2026 12:00:08   now: 12:00:10
+20261020 11:42:41.424 8 Information FederaleBatchController (1) StartPending
+20261020 11:42:41.523 8 Information FederaleBatchController (1) Running
+20261020 11:42:42.327 19 Information Starting scan of new/updated/remove forms, report and scripts.
+20261020 11:42:42.357 11 Information Start recover.
+20261020 11:42:42.372 11 Information Recover done.
+20261020 11:42:42.372 11 Information FederaleBatchController up and running
+20261020 11:42:42.373 21 Information Start statistics calculation thread.
+20261020 11:42:45.342 19 Information This batchcontroller is marked for synchronizing forms, reports and scripts.
+20261020 11:42:45.342 19 Information Reading information from database.
+20261020 11:42:45.348 19 Information No auto synchronization configured. Synchronizing stopped.
+20261020 11:47:42.804 21 Information Calculating weekly statistics.
+20261020 11:58:29.977 11 Information ASSURFED_UTILIT_CFH_COPY_ASCII Running Id: 120 Queue: JOB_QUEUE1 Agent: 1
+20261020 11:58:29.981 11 Information ASSURFED_UTILIT_CFH_COPY_ASCII Queued Id: 120 Queue: JOB_QUEUE1
+20261020 11:58:34.202 11 Information ASSURFED_UTILIT_CFH_COPY_ASCII Done Id: 120 Queue: JOB_QUEUE1 (Execution time: 00:00:00:886)
+20261020 11:59:43.870 11 Information ASSURFED_UTILIT_LOADIS_ASCII Running Id: 121 Queue: JOB_QUEUE1 Agent: 1
+20261020 11:59:43.870 11 Information ASSURFED_UTILIT_LOADIS_ASCII Queued Id: 121 Queue: JOB_QUEUE1
+20261020 11:59:45.828 11 Information ASSURFED_UTILIT_LOADIS_ASCII Done Id: 121 Queue: JOB_QUEUE1 (Execution time: 00:00:00:262)
+20261020 12:00:06.523 11 Information ASSURFED_UTILIT_UNLOADIS_ASCII Running Id: 122 Queue: JOB_QUEUE1 Agent: 1
+20261020 12:00:06.524 11 Information ASSURFED_UTILIT_UNLOADIS_ASCII Queued Id: 122 Queue: JOB_QUEUE1
+20261020 12:00:08.496 11 Information ASSURFED_UTILIT_UNLOADIS_ASCII Done Id: 122 Queue: JOB_QUEUE1 (Execution time: 00:00:00:212)
+--- new log files in the last 15 minutes under E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020
+11:58:31       181 FederaleBatchController_AGENT_1.Log
+11:58:31       284 Batch.Log
+11:58:32     6,832 ASSURFED_UTILIT_CFH_COPY_ASCII_BugReport.Log
+11:59:44     7,160 ASSURFED_UTILIT_LOADIS_ASCII_BugReport.Log
+12:00:06     7,165 ASSURFED_UTILIT_UNLOADIS_ASCII_BugReport.Log
+12:00:08    16,685 FederaleBatchController.Log
+--- Extracts
+11:59:44     8,240 B010SINAUTCL.DAT
+16:48:05        24 ECL-CHERCHEUSE
+16:48:05       536 ECL-FICDESCRIPT
+16:48:05     1,608 ECL-FICREPORT
+16:48:05       140 ECL-FICUNLOAD
+16:48:05        66 ECL-INPUT
+16:48:05       246 ECL-TAPEIN
+16:48:05       366 FICHIN-1
+11:59:44     8,240 FSCR001ATO.DAT
+11:59:44       935 FSCR001ATO.DAT.Index
+11:58:31     2,050 INASC.DAT
+12:00:06     8,240 OUT.DAT
+14:44:44         0 OUTA.DAT
+11:58:31       600 OUTASC.DAT
+11:59:44     8,240 OUTCLOA49.DAT
+11:59:44       935 OUTCLOA49.DAT.Index

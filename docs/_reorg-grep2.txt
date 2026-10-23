@@ -1,0 +1,4 @@
+--- AmtReorganize/AmtReoConsole ---
+--- lines ending in .dat or .7z ---
+--- Setup.exe ---
+--- lines containing "Reorg" (any case) ---

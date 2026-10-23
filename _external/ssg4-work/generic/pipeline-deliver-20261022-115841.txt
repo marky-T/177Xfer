@@ -1,0 +1,11 @@
+Stage Deliver, environment CC-Federale, started 2026-10-22 11:58:41
+PASS GNFED          generated after                2026-10-22 10:49:02 (the build LionSource)
+PASS GNFED          imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               10/22/2026 11:57:04 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_BABA_GN pre-build checks               10/22/2026 11:57:04 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_FUSBA_GN pre-build checks               10/22/2026 11:57:04 AM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CHABAN_GN pre-build checks               10/22/2026 11:57:04 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CONDIS2_GN pre-build checks               10/22/2026 11:57:04 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_SCAN_GN pre-build checks               10/22/2026 11:57:05 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_TAPELD_GN pre-build checks               10/22/2026 11:57:05 AM ok (1 varying input(s) at 4001)
+=== Deliver : all passed

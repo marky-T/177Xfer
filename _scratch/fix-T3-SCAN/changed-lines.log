@@ -1,0 +1,118 @@
+---- ARCHIFORMAT
+-$A = (2 + ((GetSgsValue ("key,1,1,3")) + ((GetSgsValue ("rsz,1,1,1")) + (GetSgsValue ("table,1,2,1")))))
+-$B = ((GetSgsValue ("key,1,1,3")) + ((GetSgsValue ("rsz,1,1,1")) + (1 + (GetSgsValue ("table,1,2,1")))))
+-$C = (2 + ((GetSgsValue ("key,1,1,3")) + (GetSgsValue ("rsz,1,1,1"))))
+-$D = (1 + ((GetSgsValue ("key,1,1,3")) + (GetSgsValue ("rsz,1,1,1"))))
++$A = (((2 + (GetSgsValue ("key,1,1,3"))) + (GetSgsValue ("rsz,1,1,1"))) + (GetSgsValue ("table,1,2,1")))
++$B = ((((GetSgsValue ("key,1,1,3")) + (GetSgsValue ("rsz,1,1,1"))) + 1) + (GetSgsValue ("table,1,2,1")))
++$C = ((2 + (GetSgsValue ("key,1,1,3"))) + (GetSgsValue ("rsz,1,1,1")))
++$D = ((1 + (GetSgsValue ("key,1,1,3"))) + (GetSgsValue ("rsz,1,1,1")))
+---- BABA_ASCII
+-        $YLG1 = ((GetSgsValue ("keys,$C,$YCH,3,len$")) - ($yls + 1))
++        $YLG1 = (((GetSgsValue ("keys,$C,$YCH,3,len$")) - $yls) + 1)
+---- CFH-COPY_ASCII
+-        $YLG1 = ((GetSgsValue ("FIXE,$C,$YCH,3,len$")) - ($yls + 1))
++        $YLG1 = (((GetSgsValue ("FIXE,$C,$YCH,3,len$")) - $yls) + 1)
+-    If ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES ;")) {
+-      DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  SPACE   ")
++    If (((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES") -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACE"))) {
+-      If ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROES ;")) {
+-        DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  ZERO ;  ")
+-        DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  ZEROS   ")
++      If (((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROES") -or ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZERO") -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROS")))) {
+---- CFH-COPY
+-        $YLG1 = ((GetSgsValue ("FIXE,$C,$YCH,3,len$")) - ($yls + 1))
++        $YLG1 = (((GetSgsValue ("FIXE,$C,$YCH,3,len$")) - $yls) + 1)
+-    If ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES ;")) {
+-      DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  SPACE   ")
++    If (((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES") -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACE"))) {
+-      If ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROES ;")) {
+-        DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  ZERO ;  ")
+-        DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  ZEROS   ")
++      If (((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROES") -or ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZERO") -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "ZEROS")))) {
+---- CHAB100_ASCII
+-  Set-Variable -Name "FILDEU" -Value (([Int64]$Parameters[0] - ([Int64]$Parameters[1] - ([Int64]$Parameters[2] + 1)))) -Scope 1
++  Set-Variable -Name "FILDEU" -Value (((([Int64]$Parameters[0] - [Int64]$Parameters[1]) - [Int64]$Parameters[2]) + 1)) -Scope 1
+---- CHABAN_ASCII
+-  Set-Variable -Name "FILDEU" -Value (([Int64]$Parameters[0] - ([Int64]$Parameters[1] - ([Int64]$Parameters[2] + 1)))) -Scope 1
++  Set-Variable -Name "FILDEU" -Value (((([Int64]$Parameters[0] - [Int64]$Parameters[1]) - [Int64]$Parameters[2]) + 1)) -Scope 1
+---- CONDIS2_ASCII
+-      $L2 = ((GetSgsValue ("FILEIN,1,1,1")) - ((GetSgsValue ("PG,$I,$J,1")) - ((GetSgsValue ("PG,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("FILEIN,1,1,1")) - (GetSgsValue ("PG,$I,$J,1"))) - (GetSgsValue ("PG,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("FILEIN,1,1,1")) - ((GetSgsValue ("PG,$I,$J,1")) - ((GetSgsValue ("PG,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("FILEIN,1,1,1")) - (GetSgsValue ("PG,$I,$J,1"))) - (GetSgsValue ("PG,$I,$J,2"))) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (2 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 2) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (4 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 4) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (2 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 2) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (2 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 2) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (6 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 6) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (6 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 6) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (6 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 6) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - (8 + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - 8) + 1)
+-        $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,3")) - ((GetSgsValue ("PG,$I,$J,2")) + 1)))
++        $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,3"))) - (GetSgsValue ("PG,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("FILEOUT,1,1,1")) - ((GetSgsValue ("PG,$I,$J,1")) - ((GetSgsValue ("PG,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("FILEOUT,1,1,1")) - (GetSgsValue ("PG,$I,$J,1"))) - (GetSgsValue ("PG,$I,$J,2"))) + 1)
+---- EXTEUR
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-$L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("DEVISE,1,1,1")) - ((GetSgsValue ("DEVISE,1,1,2")) + 1)))
++$L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("DEVISE,1,1,1"))) - (GetSgsValue ("DEVISE,1,1,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-      $L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("COND,$I,$J,1")) - ((GetSgsValue ("COND,$I,$J,2")) + 1)))
++      $L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("COND,$I,$J,1"))) - (GetSgsValue ("COND,$I,$J,2"))) + 1)
+-$L2 = ((GetSgsValue ("LONG,1,1,1")) - ((GetSgsValue ("DEVISE,1,1,1")) - ((GetSgsValue ("DEVISE,1,1,2")) + 1)))
++$L2 = ((((GetSgsValue ("LONG,1,1,1")) - (GetSgsValue ("DEVISE,1,1,1"))) - (GetSgsValue ("DEVISE,1,1,2"))) + 1)
+---- LECTIS_ASCII
+-    $Z5 = ($Z1 - ($Z3 + $Z4))
++    $Z5 = (($Z1 - $Z3) + $Z4)
+-      $D = ($D - ($W3 + 2))
++      $D = (($D - $W3) + 2)
+-      $W1 = ((GetSgsValue ("Y2K,1,$W1,1")) - ($W3 - 4))
++      $W1 = (((GetSgsValue ("Y2K,1,$W1,1")) - $W3) - 4)
+---- SCAN_ASCII
+-  Set-Variable -Name "FIL5" -Value (([Int64]$Parameters[0] - ([Int64]$Parameters[1] - ([Int64]$Parameters[2] + 1)))) -Scope 1
++  Set-Variable -Name "FIL5" -Value (((([Int64]$Parameters[0] - [Int64]$Parameters[1]) - [Int64]$Parameters[2]) + 1)) -Scope 1
+-  Set-Variable -Name "FILCT2" -Value (([Int64]$Parameters[0] - ([Int64]$Parameters[1] - ([Int64]$Parameters[2] + 1)))) -Scope 1
++  Set-Variable -Name "FILCT2" -Value (((([Int64]$Parameters[0] - [Int64]$Parameters[1]) - [Int64]$Parameters[2]) + 1)) -Scope 1
+-  Set-Variable -Name "FILLCTR" -Value ((([Int64]$Parameters[0] + 99) - ([Int64]$Parameters[1] - [Int64]$Parameters[2]))) -Scope 1
++  Set-Variable -Name "FILLCTR" -Value (((([Int64]$Parameters[0] + 99) - [Int64]$Parameters[1]) - [Int64]$Parameters[2])) -Scope 1
+-          $YLG1 = ((GetSgsValue ("IF,$Z1,$BCL,1,LEN$")) - ($YLS + 1))
++          $YLG1 = (((GetSgsValue ("IF,$Z1,$BCL,1,LEN$")) - $YLS) + 1)
+-            $YLG1 = ((GetSgsValue ("NOCONT,1,$BCL,3,LEN$")) - ($YLS + 1))
++            $YLG1 = (((GetSgsValue ("NOCONT,1,$BCL,3,LEN$")) - $YLS) + 1)
+-            $YLG1 = ((GetSgsValue ("INDIC,$I,$BCL,3,LEN$")) - ($YLS + 1))
++            $YLG1 = (((GetSgsValue ("INDIC,$I,$BCL,3,LEN$")) - $YLS) + 1)
+-    If ((-not (CompareTypeSafe (GetSgsValue ("IF,$RD,$IFPTR,1")) "EqualTo" "R ;"))) {
+-      DataLineOrNoStatement (" AND  NOT  " + ((GetSgsValue ("IF,$RD,$IFPTR,1"))) + "  = RECORD")
++    If (((-not (CompareTypeSafe (GetSgsValue ("IF,$RD,$IFPTR,1")) "EqualTo" "R")) -and (-not (CompareTypeSafe (GetSgsValue ("IF,$RD,$IFPTR,1")) "EqualTo" "RECORD")))) {
+---- TABAN_ASCII
+-  Set-Variable -Name "FILLCTR" -Value ((([Int64]$Parameters[0] + 1) - ([Int64]$Parameters[1] - [Int64]$Parameters[2]))) -Scope 1
++  Set-Variable -Name "FILLCTR" -Value (((([Int64]$Parameters[0] + 1) - [Int64]$Parameters[1]) - [Int64]$Parameters[2])) -Scope 1
+---- TAPELD_ASCII
+-  Set-Variable -Name "FILLCTR" -Value (([Int64]$Parameters[0] - (1 + "CADR"))) -Scope 1
++  Set-Variable -Name "FILLCTR" -Value ((([Int64]$Parameters[0] - 1) + $CADR)) -Scope 1
+-  Set-Variable -Name "FILLCTR" -Value ((([Int64]$Parameters[0] + 1) - ([Int64]$Parameters[1] - [Int64]$Parameters[2]))) -Scope 1
++  Set-Variable -Name "FILLCTR" -Value (((([Int64]$Parameters[0] + 1) - [Int64]$Parameters[1]) - [Int64]$Parameters[2])) -Scope 1
+-    If (((-not (CompareTypeSafe (GetSgsValue ("FIXE,1,$I")) "GreaterThan" 0)) -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES ;"))) {
+-      DataLineOrNoStatement ("               OR  " + ((GetSgsValue ("FIXE,1,$I,3"))) + "  =  SPACE   ")
++    If (((-not (CompareTypeSafe (GetSgsValue ("FIXE,1,$I")) "GreaterThan" 0)) -or ((CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES") -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACE")))) {

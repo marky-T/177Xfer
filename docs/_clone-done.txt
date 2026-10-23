@@ -1,0 +1,3 @@
+EXIT=0
+LionDev=False
+sizeMB=982.6

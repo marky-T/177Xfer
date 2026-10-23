@@ -1,0 +1,60 @@
+disk 94218 bytes, good 94887 bytes
+disk  sha256 4652FCB799BD787557BDD4EF7AF0D9E9C2C2ADD21C3CE9E958BFFE404EE4814D
+good  sha256 E0E43A97C641B803D50C3E22581EE6F965AF877D24D45395E0DCC21BCE68AE60
+@@ -307,4 +307,4 @@ namespace Ecl.SsgConverter {
+ 
+-        // separate any comment from the line being evaluated (directive and ECL images only, manual 4.3: other images are output text)
+-        Int32 commentStart = (CarriesComment(line, directivePrefix) || mergedLine.Length > 0) ? line.IndexOf(" . ") : -1;
++        // separate any comment from the line being evaluated
++        Int32 commentStart = line.IndexOf(" . ");
+         if (commentStart > -1) {
+@@ -394,6 +394,3 @@ namespace Ecl.SsgConverter {
+       foreach (String line in lines) {
+-        if (!CarriesComment(line, directivePrefix)) {
+-          // an image that is neither a directive nor an ECL image is output text and stays unchanged (manual 4.3)
+-          processedLines.Add(line);
+-        } else if (!line.StartsWith(prefixDotSpace) && !line.StartsWith(prefixSpaceDot) && line.Contains(" . ")) {
++        if (!line.StartsWith(prefixDotSpace) && !line.StartsWith(prefixSpaceDot) && line.Contains(" . ")) {
+           commentPos = line.IndexOf(" . ");
+@@ -884,24 +881,20 @@ namespace Ecl.SsgConverter {
+               String[] splitVariables = variables.Split(',');
+-              for (Int32 v = 0; v < splitVariables.Length; v++) {
+-                splitVariables[v] = splitVariables[v].Trim();
+-              }
+-
+-              // First variable = quotient, second (if any) = remainder; both integers. The numbers go into temporaries first,
+-              // so a target may also occur in the numbers, and the second target may repeat the first (then only the remainder is kept).
+-              PsAstExprPrimitive dividend = new PsAstExprPrimitive("SsgDividend", PsAstPrimitiveType.LocalObject);
+-              PsAstExprPrimitive divisor = new PsAstExprPrimitive("SsgDivisor", PsAstPrimitiveType.LocalObject);
+-              powerSkel.AddAssignment(dividend, SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables));
+-              powerSkel.AddAssignment(divisor, SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables));
+-
+-              // (dividend - remainder) is an exact multiple of the divisor, so the division needs no floor.
+-              PsAstExprBinaryOperator remainder = new PsAstExprBinaryOperator(dividend, PSAstOperatorType.Modulo, divisor);
+-              PsAstExprBinaryOperator quotient = new PsAstExprBinaryOperator(
+-                new PsAstExprParenthesized(new PsAstExprBinaryOperator(dividend, PSAstOperatorType.Substract, new PsAstExprParenthesized(remainder))),
+-                PSAstOperatorType.Divide,
+-                divisor);
+-
+-              AssignSsgVariable(powerSkel, splitVariables[0], quotient);
+-              globalVariables.Add(splitVariables[0].ToUpperInvariant());
++
++              if (splitVariables.Length > 0) {
++                // $VariableName1 = [math]::floor([int] $Number1 / [int] $Number2)
++                PsAstExprPrimitive target = new PsAstExprPrimitive(splitVariables[0], PsAstPrimitiveType.LocalObject);
++                PsAstExprBlock num1 = SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables);
++                PsAstExprBlock num2 = SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables);
++                PsAstExprBinaryOperator div = new PsAstExprBinaryOperator(num1, PSAstOperatorType.Divide, num2);
++                // TODO: It may still need the [math]::floor() part
++                powerSkel.AddAssignment(target, div);
++                globalVariables.Add(splitVariables[0].ToUpperInvariant());
++              }
++
+               if (splitVariables.Length > 1) {
+-                AssignSsgVariable(powerSkel, splitVariables[1], remainder);
++                PsAstExprPrimitive target = new PsAstExprPrimitive(splitVariables[0], PsAstPrimitiveType.LocalObject);
++                PsAstExprBlock num1 = SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables);
++                PsAstExprBlock num2 = SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables);
++                PsAstExprBinaryOperator mod = new PsAstExprBinaryOperator(num1, PSAstOperatorType.Modulo, num2);
++                powerSkel.AddAssignment(target, mod);
+                 globalVariables.Add(splitVariables[1].ToUpperInvariant());

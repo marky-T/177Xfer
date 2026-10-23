@@ -1,0 +1,14 @@
+           AXR$   
+              $(0)
+RX11          +0  
+              $(1)
+IABORT*.    
+           SX      X11,RX11   
+           LA      A0,(020000,IIROUT)     
+          ER     IALL$  
+           LX      X11,RX11   
+           J       1,X11
+IIROUT.     
+          RES    2
+           LMJ     X11,ABORT  
+           END    

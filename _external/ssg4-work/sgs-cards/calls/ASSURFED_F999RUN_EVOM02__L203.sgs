@@ -1,0 +1,6 @@
+ASCII
+OUTPUT     OUTEVOM02,300,10
+LIST       YES
+NUMB       8,1
+FLDSEL     0
+MOD        0

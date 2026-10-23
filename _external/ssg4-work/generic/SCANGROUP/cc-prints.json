@@ -1,0 +1,42 @@
+[
+  {
+    "Case": "S1",
+    "Ref": true,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\S1\\model.txt"
+  },
+  {
+    "Case": "S2",
+    "Ref": true,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\S2\\model.txt"
+  },
+  {
+    "Case": "S3",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\S3\\model.txt"
+  },
+  {
+    "Case": "S4",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\S4\\model.txt"
+  },
+  {
+    "Case": "T1",
+    "Ref": true,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\T1\\model.txt"
+  },
+  {
+    "Case": "T2",
+    "Ref": true,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\T2\\model.txt"
+  },
+  {
+    "Case": "T3",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\T3\\model.txt"
+  },
+  {
+    "Case": "T4",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\cases\\T4\\model.txt"
+  }
+]

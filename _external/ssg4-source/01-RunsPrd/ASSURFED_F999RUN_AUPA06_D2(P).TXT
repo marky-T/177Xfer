@@ -1,0 +1,2631 @@
+@RUN,M/T   AUPA06,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@MSG       ************************************************ 
+@MSG       **  ARCHIVAGE E/G Auto : S{paration par table ** 
+@MSG       ************************************************ 
+@ . LE 06/06/2002 : CREATION DU RUN.
+@ . 
+@MSG       EDITION DU JCL.  
+@ . 
+@PRT,SC    F999RUN.AUPA06/D2
+@.  
+@TIME   
+@.  
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     AUPA06,F///300   
+@.  
+@TIME   
+@.  
+@LAB001: MSG 001. PROCEDURE DE RESTART AUTOMATIQUE. 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@.  
+@TIME   
+@.  
+@LAB100: MSG 100. Extraction AU000                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU00D.
+@ASG,UP    IAUB082AU00D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU00D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU000,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU00D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB110: MSG 110. Extraction AU001                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU01D.
+@ASG,UP    IAUB082AU01D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU01D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU001,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU01D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB120: MSG 120. Extraction AU002                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB120  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU02D.
+@ASG,UP    IAUB082AU02D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU02D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU002,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU02D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB130: MSG 130. Extraction AU003                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB130  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU03D.
+@ASG,UP    IAUB082AU03D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU03D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU003,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU03D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB140: MSG 140. Extraction AU004                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB140  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU04D.
+@ASG,UP    IAUB082AU04D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU04D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU004,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU04D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB150: MSG 150. Extraction AU005                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB150  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU05D.
+@ASG,UP    IAUB082AU05D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU05D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU005,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU05D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB160: MSG 160. Extraction AU006                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB160  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU06D.
+@ASG,UP    IAUB082AU06D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU06D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU006,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU06D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB170: MSG 170. Extraction AU007                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB170  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU07D.
+@ASG,UP    IAUB082AU07D.,F/1/TRK/260000 
+@USE       FB,IAUB082AU07D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU007,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU07D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB200: MSG 200. Extraction EG001                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB200  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG01D.
+@ASG,UP    IAUB082EG01D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG01D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG001,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG01D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB210: MSG 210. Extraction EG002                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB210  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG02D.
+@ASG,UP    IAUB082EG02D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG02D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG002,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG02D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB220: MSG 220. Extraction EG003                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB220  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG03D.
+@ASG,UP    IAUB082EG03D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG03D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG003,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG03D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB230: MSG 230. Extraction EG004                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB230  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG04D.
+@ASG,UP    IAUB082EG04D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG04D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG004,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG04D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB240: MSG 240. Extraction EG011                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB240  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG11D.
+@ASG,UP    IAUB082EG11D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG11D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG011,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG11D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB250: MSG 250. Extraction EG013                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB250  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG13D.
+@ASG,UP    IAUB082EG13D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG13D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG013,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG13D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB260: MSG 260. Extraction EG014                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB260  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG14P.
+@ASG,UP    IAUB082EG14P.,F/1/TRK/260000 
+@USE       FB,IAUB082EG14P. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG014,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG14P.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB264: MSG 264. SELECTION DES RECORDS EG014   
+@ADD       SYS$*RUNS.REPRISE
+LAB264  
+@.  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE IAUB082EG14P   
+LABEL LAB270
+@EOF
+@ASG,A     IAUB082EG14P.
+@USE       FA,IAUB082EG14P. 
+@DELETE,C  IAUB082EG14X.
+@ASG,UP    IAUB082EG14X.,F/1/TRK/260000 
+@USE       FB,IAUB082EG14X. 
+@ASG,A     FA.  
+@ASG,A     FB.  
+@SORT,ES
+FILEIN=FA MODE=SDF     BLOCK=10 
+FILEOUT=FB MODE=SDF    BLOCK=10 
+DATA=ASCII  
+RSZ=536,CHARACTERS  
+KEY=6,3,CH,A
+KEY=9,8,CH,A
+KEY=17,1,CH,A   
+KEY=18,3,CH,A   
+KEY=21,5,CH,A   
+KEY=26,3,CH,A   
+KEY=29,8,CH,A   
+KEY=37,1,CH,A   
+KEY=38,3,CH,A   
+SORT
+@EOF
+@FREE      FA.  
+@FREE      IAUB082EG14P.
+@FREE      IAUB082EG14X.
+@TIME   
+@.  
+@LAB265: MSG 265. ELIMINATION DES DOUBLONS EG014
+@ADD       SYS$*RUNS.REPRISE
+LAB265  
+@.  
+@ASG,A     IAUB082EG14X.
+@DELETE,C  IAUB082EG14D.
+@CAT,P     IAUB082EG14D.,F/1/TRK/260000 
+@ASG,A     IAUB082EG14D.
+@USE       FB,IAUB082EG14D. 
+@USE       FA,IAUB082EG14X. 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      FA,536,10
+OUTPUT     FB,536,10
+KEYS       ALL 6,15 
+SEQERROR   MULTI
+@EOF
+@XQT       TPF$.BABA
+@FREE      IAUB082EG14X.
+@FREE      IAUB082EG14D.
+@TIME   
+@ . 
+@LAB270: MSG 270  Extraction EG015                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB270  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG15D.
+@ASG,UP    IAUB082EG15D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG15D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG015,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG15D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB300: MSG 300. Extraction EG016                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB300  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG16D.
+@ASG,UP    IAUB082EG16D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG16D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG016,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG16D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB310: MSG 310. Extraction EG017                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB310  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG17D.
+@ASG,UP    IAUB082EG17D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG17D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG017,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG17D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB320: MSG 320. Extraction EG018                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB320  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG18D.
+@ASG,UP    IAUB082EG18D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG18D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG018,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG18D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB330: MSG 330. Extraction EG020                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB330  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG20D.
+@ASG,UP    IAUB082EG20D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG20D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG020,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG20D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB340: MSG 340. Extraction EG021                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB340  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG21D.
+@ASG,UP    IAUB082EG21D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG21D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG021,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG21D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB350: MSG 350. Extraction EG022                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB350  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG22D.
+@ASG,UP    IAUB082EG22D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG22D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG022,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG22D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB360: MSG 360. Extraction EG024                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB360  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG24D.
+@ASG,UP    IAUB082EG24D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG24D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG024,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG24D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB370: MSG 370. Extraction EG025                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB370  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG25D.
+@ASG,UP    IAUB082EG25D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG25D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG025,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG25D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB371: MSG 371. ENLEVER LES MULTIPLES DU FICHIER EG025.   
+@ADD       SYS$*RUNS.REPRISE
+LAB371  
+@.  
+@ASG,A     IAUB082EG25D.
+@USE       FA,IAUB082EG25D. 
+@DELETE,C  IAUB082EGTP. 
+@ASG,UP    IAUB082EGTP.,F/1/TRK/260000  
+@USE       FB,IAUB082EGTP.  
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+RSZ=536 
+KEY=7,8,CH,A,1  
+SORT
+@EOF
+@COPY      IAUB082EGTP.,IAUB082EG25D.   
+@FREE      IAUB082EG25D.
+@FREE      IAUB082EGTP. 
+@DELETE,C  IAUB082EGTP. 
+@ERS       TPF$.
+@LAB372: MSG 372. ENLEVER LES MULTIPLES DU FICHIER EG025.BABA   
+@ADD       SYS$*RUNS.REPRISE
+LAB372  
+@ASG,A     IAUB082EG25D.
+@DELETE,C  ITMPEG025.   
+@CAT,P     ITMPEG025,F/1/TRK/260000 
+@ASG,A     ITMPEG025.   
+@USE       FA,IAUB082EG25D. 
+@USE       FB,ITMPEG025.
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      FA,536,10
+OUTPUT     FB,536,10
+KEYS       ALL 7,8  
+SEQERROR   MULTI
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      IAUB082EG25D.
+@FREE      ITMPEG025.   
+@DELETE,C  IAUB082EG25D.
+@ASG,UP    IAUB082EG25D.,F/1/TRK/260000 
+@ASG,A     ITMPEG025.   
+@COPY      ITMPEG025.,IAUB082EG25D. 
+@DELETE,C  ITMPEG025.   
+@FREE      IAUB082EG25D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@LAB400: MSG 400. Extraction EG026                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB400  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG26D.
+@ASG,UP    IAUB082EG26D.,F/1/TRK/260000 
+@USE       FB,IAUB082EG26D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG026,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG26D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB410: MSG 410. Extraction RE007                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB410  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE07D.
+@ASG,UP    IAUB082RE07D.,F/1/TRK/260000 
+@USE       FB,IAUB082RE07D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE007,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE07D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB420: MSG 420. Extraction RE008                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB420  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE08D.
+@ASG,UP    IAUB082RE08D.,F/1/TRK/260000 
+@USE       FB,IAUB082RE08D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE008,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE08D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB430: MSG 430. Extraction RE009                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB430  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE09D.
+@ASG,UP    IAUB082RE09D.,F/1/TRK/260000 
+@USE       FB,IAUB082RE09D. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE009,AND  
+ACCEPT=7,1,CAS,E,1  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE09D.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB440: MSG 440. Extraction AU000                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB440  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU00C.
+@ASG,UP    IAUB082AU00C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU00C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU000,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU00C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB450: MSG 450. Extraction AU001                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB450  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU01C.
+@ASG,UP    IAUB082AU01C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU01C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU001,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU01C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB460: MSG 460. Extraction AU002                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB460  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU02C.
+@ASG,UP    IAUB082AU02C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU02C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU002,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU02C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB470: MSG 470. Extraction AU003                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB470  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU03C.
+@ASG,UP    IAUB082AU03C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU03C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU003,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU03C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB500: MSG 500  Extraction AU004                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB500  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU04C.
+@ASG,UP    IAUB082AU04C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU04C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU004,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU04C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB510: MSG 510. Extraction AU005                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB510  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU05C.
+@ASG,UP    IAUB082AU05C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU05C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU005,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU05C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB520: MSG 520. Extraction AU006                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB520  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU06C.
+@ASG,UP    IAUB082AU06C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU06C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU006,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU06C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB530: MSG 530. Extraction AU007                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB530  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082AU07C.
+@ASG,UP    IAUB082AU07C.,F/1/TRK/260000 
+@USE       FB,IAUB082AU07C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,AU007,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082AU07C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB550: MSG 550. Extraction EG001                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB550  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG01C.
+@ASG,UP    IAUB082EG01C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG01C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG001,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG01C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB560: MSG 560. Extraction EG002                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB570  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG02C.
+@ASG,UP    IAUB082EG02C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG02C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG002,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG02C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB570: MSG 570. Extraction EG003                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB570  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG03C.
+@ASG,UP    IAUB082EG03C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG03C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG003,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG03C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB600: MSG 600. Extraction EG004                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB600  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG04C.
+@ASG,UP    IAUB082EG04C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG04C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG004,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG04. 
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB610: MSG 610. Extraction EG011                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB610  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG11C.
+@ASG,UP    IAUB082EG11C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG11C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG011,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG11C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB620: MSG 620. Extraction EG013                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB620  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG13C.
+@ASG,UP    IAUB082EG13C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG13C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG013,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG13C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB630: MSG 630. Extraction EG014                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB630  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG14C.
+@ASG,UP    IAUB082EG14C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG14C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG014,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG14C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB640: MSG 640. Extraction EG015                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB640  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG15C.
+@ASG,UP    IAUB082EG15C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG15C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG015,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG15C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB650: MSG 650. Extraction EG016                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB650  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG16C.
+@ASG,UP    IAUB082EG16C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG16C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG016,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG16. 
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB660: MSG 660. Extraction EG017                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB660  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG17C.
+@ASG,UP    IAUB082EG17C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG17C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG017,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG17C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB670: MSG 670. Extraction EG018                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB670  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG18C.
+@ASG,UP    IAUB082EG18C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG18C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG018,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG18C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB700: MSG 700. Extraction EG020                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG20C.
+@ASG,UP    IAUB082EG20C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG20C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG020,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG20C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB710: MSG 710. Extraction EG021                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB710  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG21C.
+@ASG,UP    IAUB082EG21C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG21C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG021,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG21C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB720: MSG 720. Extraction EG022                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB720  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG22C.
+@ASG,UP    IAUB082EG22C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG22C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG022,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG22C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB730: MSG 730. Extraction EG024                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB730  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG24C.
+@ASG,UP    IAUB082EG24C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG24C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG024,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG24C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB740: MSG 740. Extraction EG025                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB740  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG25C.
+@ASG,UP    IAUB082EG25C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG25C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG025,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG25C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB750: MSG 750. Extraction EG026                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB750  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082EG26C.
+@ASG,UP    IAUB082EG26C.,F/1/TRK/260000 
+@USE       FB,IAUB082EG26C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,EG026,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082EG26C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB760: MSG 760. Extraction RE007                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB761  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE07C.
+@ASG,UP    IAUB082RE07C.,F/1/TRK/260000 
+@USE       FB,IAUB082RE07C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE007,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE07C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB761: MSG 761. Extraction RE008                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB761  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE08C.
+@ASG,UP    IAUB082RE08C.,F/1/TRK/260000 
+@USE       FB,IAUB082RE08C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE008,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE08C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB762: MSG 762. Extraction RE009                             SORT 
+@ADD       SYS$*RUNS.REPRISE
+LAB762  
+@.  
+@ASG,A     RAUAUB082AR. 
+@USE       FA,RAUAUB082AR.  
+@ . 
+@DELETE,C  IAUB082RE09C.
+@ASG,UP    IAUB082RE09C.,F/1/TRK/260000 
+@USE       FB,IAUB082RE09C. 
+@ . 
+@FREE      XA.  
+@FREE      XB.  
+@FREE      XC.  
+@FREE      XD.  
+@FREE      XE.  
+@FREE      XF.  
+@FREE      XG.  
+@FREE      XH.  
+@ . 
+@ASG,T     R$CORE.,///50
+@ASG,T     XA.,F/1/TRK/260000   
+@ASG,T     XB.,F/1/TRK/260000   
+@ASG,T     XC.,F/1/TRK/260000   
+@ASG,T     XD.,F/1/TRK/260000   
+@ASG,T     XE.,F/1/TRK/260000   
+@ASG,T     XF.,F/1/TRK/260000   
+@ASG,T     XG.,F/1/TRK/260000   
+@ASG,T     XH.,F/1/TRK/260000   
+@ . 
+@SORT,ES
+COPY
+FILEIN=FA,F        mode=sdf 
+FILEOUT=FB,F       mode=sdf 
+ACCEPT=1,5,CAS,E,RE009,AND  
+ACCEPT=7,1,CAS,E,2  
+SELECT=23,536,1 
+@EOF
+@FREE      IAUB082RE09C.
+@FREE      RAUAUB082AR. 
+@ERS       TPF$.
+@ . 
+@TIME   
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@DELETE,C  IAUB082EG14X.
+@DELETE,C  IAUB082EG14P.
+@TIME   
+@ . 
+@MSG       ***** LE RUN AUPA06/D2 S'EST TERMINE CORRECTEMENT *****  
+@QUAL,R 
+@FIN

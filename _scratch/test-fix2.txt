@@ -1,0 +1,24 @@
+dll: E:\Repos\SsgTrial\_scratch\ssgfix2\src\SsgConverter\bin\Debug\net10.0\SsgConverter.dll 52224 bytes
+Conversion complete: 20 succeeded, 0 failed
+
+== parse + diff against current goldens
+ARCHIFORMAT            parse=0 lines 367->378 differing=343
+ARCHISEPARE            parse=0 lines 229->235 differing=172
+BABA_ASCII             parse=0 lines 460->460 differing=0
+CFH-COPY_ASCII         parse=0 lines 448->447 differing=269
+CFH-COPY               parse=0 lines 423->422 differing=261
+CHAB100_ASCII          parse=0 lines 310->312 differing=510
+CHABAN_ASCII           parse=0 lines 309->311 differing=508
+CONDIS2_ASCII          parse=0 lines 876->876 differing=0
+EXTEUR                 parse=0 lines 913->924 differing=1695
+FUSBA_ASCII            parse=0 lines 564->564 differing=0
+FUSBA2_ASCII           parse=0 lines 476->476 differing=0
+LECTIS_ASCII           parse=0 lines 366->366 differing=0
+LOADIS_ASCII           parse=0 lines 145->145 differing=0
+LOADIS_MULTI           parse=0 lines 277->277 differing=84
+RECAP                  parse=0 lines 560->560 differing=0
+SCAN_ASCII             parse=0 lines 614->614 differing=0
+TABAN_ASCII            parse=0 lines 697->697 differing=0
+TAPELD_ASCII           parse=0 lines 709->708 differing=653
+UNLOADIS_ASCII         parse=0 lines 118->118 differing=0
+UNLOADIS_MULTI         parse=0 lines 201->201 differing=82

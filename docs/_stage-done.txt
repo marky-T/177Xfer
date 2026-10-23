@@ -1,0 +1,6 @@
+robocopy_exit=1 (0-7=success)
+LionDev.exe=True
+LionDevGenNet.exe=True
+Lion.Lic=True
+Default_Lion.Lic=True
+staged_sizeMB=851.8

@@ -1,0 +1,22 @@
+== LionGeneratorBusinessLogic.dll [Unicode] #177
+   167: Mail your Lion.lic file to AMT.Support@avanade.com, so they can supply you with a new license.
+   168: Lion.lic
+   169: ORACLE
+   170: MSSQL
+   171: Your .ini file does not contain a valid database type.
+   172: Your license file does not contain a valid database type.
+   173:  in the .ini file does not correspond to your licensed databasetype 
+   174: Please contact Avanade at (AMT.Support@avanade.com) to order a new license.
+   175: Mail your Lion.lic file to AMT.Support@avanade.com, so they can supply you with a new license.
+   176: Generate_ 
+   177: LIONGENERATES.NOW
+   178: LOCK
+   179: development
+   180: .idea
+   181: idea_backup
+   182: WebProvider
+   183: LionscreensProvider.dll
+   184: Lionscreens.wsdl
+   185: LionScreens.ini
+   186: ADDRESS=
+   187: PORT=

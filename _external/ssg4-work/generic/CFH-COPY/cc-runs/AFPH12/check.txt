@@ -1,0 +1,7 @@
+--- BatchController: 20261021 22:26:11.863 12 Information SSG4_AFPH12_CFH_COPY Done Id: 838 Queue: JOB_QUEUE1 (Execution time: 00:00:14:837)
+--- AFPH12_83820261021222601911.log
+  2026-10-21 22:26:03 Info: SSG-4 hand-off (CFH-COPY): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\ASSURFED\CFHPARM (3 lines); CFHIN=INASC CFHOUT=OUTASC; Xqt CFH_COPY -> ASSURFED_UTILIT_CFH_COPY_GN
+  2026-10-21 22:26:04 Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_GN
+  22:26:09 *NB-ENREG-LUS =00000000025
+AFPH12 IAFB012FAI.DAT       600 B vs expected       600 B: PASS byte-identical
+--- 1 of 1 outputs byte-identical

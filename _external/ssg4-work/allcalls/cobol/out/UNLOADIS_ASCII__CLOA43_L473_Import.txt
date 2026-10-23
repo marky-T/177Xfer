@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\UNLOADIS_ASCII__CLOA43_L473.LionSource
+APPNAME = UNLOADISASCIICLOA43L473
+GENSET = Default from new application
+SYSOPT = FALSE

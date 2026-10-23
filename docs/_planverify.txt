@@ -1,0 +1,11 @@
+OK    E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Generate-Release-Wrappers.ps1
+OK    E:\Repos\SsgTrial\docs\_build-release.ps1
+OK    E:\Repos\SsgTrial\docs\_mock-install-test.ps1
+OK    E:\Repos\_mock_amt_install\Scripts\Libraries\AmtPsEclLib.psm1
+OK    E:\Repos\_mock_amt_install\Scripts\Libraries\AmtPsSortLib.psm1
+OK    E:\Repos\release_candidates\release20261002-rc.01\README.md
+OK    E:\Repos\release_candidates\release20261002-rc.01\RELEASE-NOTES.md
+OK    E:\Repos\release_candidates\release20261002-rc.01\VALIDATION-PROMPT.md
+
+Tier-1 result records (out/*.out.txt) count: 21
+Any machine-readable Tier1 status file? DiscDesignators.json, GoldenReconciliation.json

@@ -1,0 +1,7 @@
+Stage Package, environment CC-Trial, started 2026-10-22 00:18:14
+PASS Package        regression (information)       all 1 jobs passed since the last delivery
+PASS Package        1 program DLLs                 copied from the application, equal to the 177a rebuild
+PASS Package        1 skeletons, 2 includes        copied from the deployed (proven) set
+PASS Package        manifest                       12 files, 793 KB, SHA256 re-checked
+PASS Package        staged (local only)            E:\AMT_Work\Delivery\GN-20261022-0018-BABA
+=== Package : all passed

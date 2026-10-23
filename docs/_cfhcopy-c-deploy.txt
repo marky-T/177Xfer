@@ -1,0 +1,4 @@
+--- Programs folder now ---
+Assurfed_Utilit_Cfh_Copy.deps.json
+Assurfed_Utilit_Cfh_Copy.dll
+Assurfed_Utilit_Cfh_Copy.pdb

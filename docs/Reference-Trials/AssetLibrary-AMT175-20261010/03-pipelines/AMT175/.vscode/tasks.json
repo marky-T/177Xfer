@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build AMT175",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder:AMT175}/AMT175.sln", "-c", "Debug"],
+      "presentation": { "group": "amt", "reveal": "always", "panel": "shared" },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build AMT172",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder:AMT172}/AmtAll.sln", "-c", "Debug"],
+      "presentation": { "group": "amt", "reveal": "always", "panel": "shared" },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "run AMT175",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["run", "--project", "${workspaceFolder:AMT175}/src/ControlCenterCore", "--launch-profile", "AMT175"],
+      "presentation": { "group": "amt", "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "run AMT172",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["run", "--project", "${workspaceFolder:AMT172}/src/ControlCenterCore", "--launch-profile", "AMT172"],
+      "presentation": { "group": "amt", "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "run both AMT versions",
+      "dependsOn": ["run AMT172", "run AMT175"],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "preflight AMT175",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder:AMT175}/scripts/preflight.ps1"],
+      "presentation": { "reveal": "always" }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+=== Skeleton DLL copies under Federale_InternalRelease (excluding bin/obj dev output) ===
+
+=== Report deps.json reference to the skeleton assembly ===
+--- E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.1\Assurfed_Utilit_Cfh_Copy.deps.json ---
+No direct "Asysco.Amt.Runtime.Skeleton" version key found - searching nearby text:
+--- E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\Programs\Assurfed_Utilit_Cfh_Copy.deps.json ---
+No direct "Asysco.Amt.Runtime.Skeleton" version key found - searching nearby text:
+
+=== Programs folder contents (where AmtCobolProgram job loads the dll from) ===
+AFBUS_2200COBOL.Application.deps.json  (09/22/2026 18:12:57)
+AFBUS_2200COBOL.Application.dll  (09/22/2026 18:12:57)
+AFBUS_2200COBOL.Application.pdb  (09/22/2026 18:12:57)
+AFBUS_2200COBOL.Database.deps.json  (09/22/2026 18:12:57)
+AFBUS_2200COBOL.Database.dll  (09/22/2026 18:12:57)
+AFBUS_2200COBOL.Database.pdb  (09/22/2026 18:12:57)
+Assurfed_Utilit_Cfh_Copy.deps.json  (09/22/2026 17:26:12)
+Assurfed_Utilit_Cfh_Copy.dll  (09/22/2026 17:26:12)
+Assurfed_Utilit_Cfh_Copy.pdb  (09/22/2026 17:26:12)

@@ -1,0 +1,23 @@
+{
+  "_source": "Trial3/manifest/programs.manifest.json - key CFH-COPY (paramOverrides brackets stripped + conditionValues merged)",
+  "INPUT,1,1,1": "ECL-TAPEIN",
+  "INPUT,1,1,2": "80",
+  "INPUT,1,1,3": "1",
+  "OUTPUT,1,1,1": "ECL-TAPEOUT",
+  "OUTPUT,1,1,2": "80",
+  "OUTPUT,1,1,3": "1",
+  "ASCII": "1",
+  "PRINT": "0",
+  "FIELDIN": "0",
+  "FIELDOUT": "0",
+  "FIXE": "0",
+  "REPRISE": "0",
+  "MAXCOPY": "0",
+  "SUPCOM": "0",
+  "REPSIM": "0",
+  "STARTFIELD": "0",
+  "STARTREC": "0",
+  "Y2K": "0",
+  "MAXCOPY,1,1,1": "0",
+  "FIXE,1,1,3": "0"
+}

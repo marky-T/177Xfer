@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, started 2026-10-21 22:52:30
+PASS utilities.json files and hand-off defaults    8 utilities, 13 skeleton entries checked, problems: 0
+FAIL CHABAN         cross-check vs baseline        MATCH 31 (baseline 30)
+=== Check : 1 failure(s)

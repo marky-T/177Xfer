@@ -1,0 +1,65 @@
+          AXR$    
+$(0)  
+RX11       +0     
+LOADC      LA,S1    A0,0,A1   
+           LA,S2    A0,0,A1   
+           LA,S3    A0,0,A1   
+           LA,S4    A0,0,A1   
+           LA,S5    A0,0,A1   
+           LA,S6    A0,0,A1   
+STORC      SA,S1    A0,0,A1   
+           SA,S2    A0,0,A1   
+           SA,S3    A0,0,A1   
+           SA,S4    A0,0,A1   
+           SA,S5    A0,0,A1   
+           LMJ      X11,$+1   
+           SA,S6    A0,0,*A1  
+           LA       A2,(+1,+0)
+           J        0,X11     
+LOADQ      LA,Q1    A0,0,A1   
+           LA,Q2    A0,0,A1   
+           LA,Q3    A0,0,A1   
+           LA,Q4    A0,0,A1   
+STORQ      SA,Q1    A0,0,A1   
+           SA,Q2    A0,0,A1   
+           SA,Q3    A0,0,A1   
+           LMJ      X11,$+1   
+           SA,Q4    A0,0,*A1  
+           LA       A2,(+1,+0)
+           J        0,X11     
+$(1)  
+BLANKWSS*.  
+           SX      X11,RX11   
+           LA       A0,0,X11  
+           TE,U     A0,+2         .   TEST   IF ASCII 
+           J        WSSFD     
+WSSASC.                           ASCII  ENTRY  
+           LA       A3,2,X11    .  ADR2   
+           ANA      A3,1,X11    .  ADR2-ADR1    
+          MSI,U     A3,+4     
+           LA       A1,1,X11    .  ADR1   
+          LXI,U     A1,+1     
+          LA        A2,(+1,+0)
+LOOPQ     EX        LOADQ,A2  
+           TNE,U   A0,+0
+           LA,U     A0,+060   
+           EX       STORQ,*A2 
+          JGD       A3,LOOPQ  
+          LX        X11,RX11  
+           J        3,X11     
+WSSFD.
+          LA,H2    A3,1,X11   
+          LA,H2    A1,0,X11   
+          ANA    A3,A1  
+          MSI,U     A3,+6     
+           LA    A1,0,X11    .  ADR1
+           LXI,U    A1,+1     
+           LA    A2,(+1,+0)   
+LOOP       EX       LOADC,A2  
+           TNE,U    A0,+0     
+           LA,U     A0,+05      . 05 BLANK FOR BLANKWSS    060 FOR INIWSS.    
+           EX       STORC,*A2 
+           JGD      A3,LOOP   
+           LX      X11,RX11   
+           J        2,X11     
+           END    

@@ -1,0 +1,31 @@
+== our Source top level
+_deps
+SsgConverter
+SsgConverterConsole
+SsgConverterGui
+SsgConverter.slnx
+== R&D develop SsgConverter top level
+SsgConverter
+SsgConverterConsole
+SsgConverterGui
+SsgConverter.slnx
+== SsgConverterConsole : jul27 vs ours vs R&D develop
+ConsoleLogAppender.cs                    ours:=        rd:=
+Os2200ContentConverter.cs                ours:DIFF     rd:=
+Program.cs                               ours:DIFF     rd:=
+SsgConversionSettings.cs                 ours:=        rd:=
+SsgConverterConsole.csproj               ours:DIFF     rd:=
+SsgSettingsSupport.cs                    ours:=        rd:=
+Properties\AssemblyInfo.cs               ours:=        rd:=
+== SsgConverterGui : jul27 vs ours vs R&D develop
+App.xaml                                 ours:=        rd:=
+App.xaml.cs                              ours:DIFF     rd:=
+LogItem.cs                               ours:=        rd:=
+MainWindow.xaml                          ours:=        rd:=
+MainWindow.xaml.cs                       ours:DIFF     rd:=
+SsgConverterGui.csproj                   ours:DIFF     rd:=
+UiLogAppender.cs                         ours:=        rd:=
+Properties\AssemblyInfo.cs               ours:=        rd:=
+== EOL of R&D develop and jul27 library files
+E:\Repos\amt-go-net-ref\Migration Tools\SsgConverter\SsgConverter\SymstreamProcessor.cs: CRLF=1929 bareLF=0 BOM=False
+E:\Repos\SsgTrial\_scratch\rd-jul27\SsgConverter\SsgConverter\SymstreamProcessor.cs: CRLF=0 bareLF=1926 BOM=False

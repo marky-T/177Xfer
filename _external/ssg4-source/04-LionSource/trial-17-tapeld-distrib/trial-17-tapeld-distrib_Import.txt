@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = C:\\Amt\\Migration\\EclCobolPipeline\\output\\trial-17-tapeld-distrib.LionSource
+APPNAME = TAPELD_DISTRIB_COBOL
+GENSET = Default from new application
+SYSOPT = FALSE

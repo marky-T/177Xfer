@@ -1,0 +1,38 @@
+
+Next release candidate : release20261005-rc.01
+Destination            : E:\Repos\release_candidates\release20261005-rc.01
+Converted programs     : 20 (20 ready to release)
+
+
+Program        Seed Original Ready
+-------        ---- -------- -----
+ARCHIFORMAT    True     True  True
+ARCHISEPARE    True     True  True
+BABA_ASCII     True     True  True
+CFH-COPY_ASCII True     True  True
+CFH-COPY       True     True  True
+CHAB100_ASCII  True     True  True
+CHABAN_ASCII   True     True  True
+CONDIS2_ASCII  True     True  True
+EXTEUR         True     True  True
+FUSBA_ASCII    True     True  True
+FUSBA2_ASCII   True     True  True
+LECTIS_ASCII   True     True  True
+LOADIS_ASCII   True     True  True
+LOADIS_MULTI   True     True  True
+RECAP          True     True  True
+SCAN_ASCII     True     True  True
+TABAN_ASCII    True     True  True
+TAPELD_ASCII   True     True  True
+UNLOADIS_ASCII True     True  True
+UNLOADIS_MULTI True     True  True
+
+'Ready' = body + seed + original all present. Tier-1 is re-proven at build time, not here.
+
+
+NextReleaseLabel : release20261005-rc.01
+Destination      : E:\Repos\release_candidates\release20261005-rc.01
+TotalConverted   : 20
+ReadyCount       : 20
+Programs         : {@{Program=ARCHIFORMAT; Seed=True; Original=True; Ready=True}, @{Program=ARCHISEPARE; Seed=True; Original=True; Ready=True}, @{Program=BABA_ASCII; Seed=True; Original=True; Ready=True}, @{Program=CFH-COPY_ASCII; Seed=True; Original=True; Ready=True}…}
+

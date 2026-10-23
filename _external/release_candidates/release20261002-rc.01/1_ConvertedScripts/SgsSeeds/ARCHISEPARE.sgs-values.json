@@ -1,0 +1,13 @@
+{
+  "_source": "Trial3/manifest/programs.manifest.json - key ARCHISEPARE (paramOverrides brackets stripped + conditionValues merged)",
+  "filein,1,1,1": "ECL-CHERCHEUSE",
+  "filein,1,2,1": "ECL-FICUNLOAD",
+  "fileout,1,1,1": "ECL-FICARCHI",
+  "fileout,1,2,1": "ECL-FICNARCHI",
+  "key,1,1,2": "10",
+  "key,1,2,1": "0",
+  "key,1,2,2": "10",
+  "rsz,1,1,1": "40",
+  "tname,1,1,1": "ARCHIS",
+  "tname,1,1,2": "CHERCHEUSE-TABLE-ARCH"
+}

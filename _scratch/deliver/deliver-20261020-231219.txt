@@ -1,0 +1,8 @@
+
+Program                     Generated              Check
+-------                     ---------              -----
+ASSURFED_UTILIT_CHABAN_GN   10/20/2026 11:11:35 PM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_BABA_GN     10/20/2026 11:11:34 PM FAIL T3-040: varying input record not 4001 (Fi1=4000)
+ASSURFED_UTILIT_CFH_COPY_GN 10/20/2026 11:11:35 PM FAIL T3-040: varying input record not 4001 (Fi1=4000)
+
+

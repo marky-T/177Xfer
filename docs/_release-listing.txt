@@ -1,0 +1,23 @@
+
+7-Zip 26.02 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-06-25
+
+Scanning the drive for archives:
+1 file, 281045729 bytes (269 MiB)
+
+Listing archive: E:\Repos\177Xfer_Verify\8.0.26230.0\Release_8.0.26230.0.7z
+
+--
+Path = E:\Repos\177Xfer_Verify\8.0.26230.0\Release_8.0.26230.0.7z
+Type = 7z
+Physical Size = 281045729
+Headers Size = 206
+Method = LZMA2:25 BCJ
+Solid = -
+Blocks = 2
+
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+2026-08-28 11:40:36 ....A    270405615    264836877  AMT_177.dat
+2026-08-28 11:19:34 ....A     57237694     16208646  Setup.exe
+------------------- ----- ------------ ------------  ------------------------
+2026-08-28 11:40:36          327643309    281045523  2 files

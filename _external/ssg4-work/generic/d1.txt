@@ -1,0 +1,12 @@
+Stage Deliver, environment CC-Trial, started 2026-10-21 23:06:17
+PASS Deliver        generated after                2026-10-21 22:59:21 (-Since)
+FAIL ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               10/20/2026 11:34:25 PM FAIL generated 23:34 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_BABA_GN pre-build checks               10/20/2026 11:34:25 PM FAIL generated 23:34 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_FUSBA_GN pre-build checks               10/21/2026 1:13:00 AM FAIL generated 01:13 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_CHABAN_GN pre-build checks               10/21/2026 1:12:59 AM FAIL generated 01:12 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_CONDIS2_GN pre-build checks               10/21/2026 1:12:59 AM FAIL generated 01:12 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_SCAN_GN pre-build checks               10/21/2026 1:13:01 AM FAIL generated 01:13 before -Since (not regenerated?)
+FAIL ASSURFED_UTILIT_TAPELD_GN pre-build checks               10/21/2026 1:13:01 AM FAIL generated 01:13 before -Since (not regenerated?)
+FAIL Deliver-GnPrograms run                            Nothing delivered: a pre-build check failed.
+=== Deliver : 8 failure(s)
+report: E:\Repos\ssg4-work\generic\pipeline-deliver-20261021-230617.txt

@@ -105,7 +105,7 @@ If ((CompareTypeSafe (GetSgsValue ("key,1,2,1")) "EqualTo" 0)) { ... }   # *IF
 |---------|---------|--------|
 | `No SSG directives recognised in 'FILENAME'` | File is plain COBOL with an ECL header, no SSG content to convert | Remove from input folder |
 | `Orphaned data line` | COBOL source after `#ucob` — converter is working correctly | No action |
-| `Missing @FIN statement — auto-appended` | ECL content block has no job terminator — converter recovers | No action |
+| `Missing @FIN statement - auto-appended` | ECL content block has no job terminator - converter recovers | No action. **Note (2026-10-12):** the auto-append is R&D's own `EclMigrateOs2200` behaviour, not one of our changes. It applies when the converted file runs as its own job (standalone console), so standalone output ends with `Fin`. Inside R&D's ECL converter an SSG skeleton called from a runstream is treated as a partial runstream and the `Fin` is left out, which is the only difference between the two outputs for all 17 skeletons (comments ignored). Raised with R&D as item 2 of MT-033. |
 | `ECL parse failed for content block` | ECL runstream in file caused a pipeline crash — block skipped | Review output; may need ECL converter |
 
 ### Error (RED in GUI)
@@ -162,3 +162,8 @@ Full details of all 11 fixes applied to build 8.0.26188.0:
 `Fixes\SsgConverter-Fix-20260820.md`
 
 Full test result: **36 succeeded, 0 failed** (2026-08-21, build 8.0.26188.0).
+
+**2026-09-09 — data-line parse fix:** COBOL data-division / output lines were migrated as SSG
+*expressions*, producing PowerShell that would not parse (219–248 errors per example output). They are
+now emitted as literal strings with only `[bracket]` references substituted → all 5 example outputs
+parse (0 errors) and run in the Tier-1 harness. Details: `Fixes\SsgConverter-Fix-20260909.md`.

@@ -1,0 +1,19 @@
+
+[32;1mProgram        : [0mSCAN_ASCII
+[32;1mCardFile       : [0mE:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_CCSA14__L7
+                 6.sgs
+[32;1mLabels         : [0mASCII INPUT IF
+[32;1mLines          : [0m31
+[32;1mAmtMessages    : [0m0
+[32;1mCardsRewritten : [0m0
+[32;1mFailed         : [0mTrue
+[32;1mError          : [0mCannot convert value "R" to type "System.Int64". Error: "The 
+                 input string 'R' was not in a correct format." At E:\Repos\Ssg
+                 Trial\SsgConverter\Examples\Output\SCAN_ASCII.ps1:42 char:3
+                 +   Set-Variable -Name "FILLCTR" -Value 
+                 (([Int64]$Parameters[0] - 1)) - .
+                 +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                 ~~~~~~~~~
+[32;1mOutFile        : [0mE:\Repos\SsgTrial\_scratch\preflight-next5\expanded\SCAN_ASCII
+                 .cob
+

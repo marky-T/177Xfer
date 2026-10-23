@@ -1,0 +1,22 @@
+*DEFINE PAS 
+*CLEAR A
+*CLEAR B
+*CLEAR C
+*END
+*MULTIPLY A BY +100 GIVING C
+*DEFINE FILUN   
+*SET FIL1 TO [#1]-1 
+*IF FIL1 IS SET 
+           02 FILLER          PIC X([*FIL1]).   
+*END
+*DEFINE FILDEUX 
+*SET FIL2 TO [#1]-[#2]-[#3]+1   
+*IF FIL2 IS SET 
+           02 FILLER          PIC X([*FIL2]).   
+*END
+#ERS
+*IF [ASCII] > 0 
+*#ACOB,IX     TPF$.NAME$,.   
+*ELSE   
+*#ACOB,ITX    TPF$.NAME$,.   
+*END

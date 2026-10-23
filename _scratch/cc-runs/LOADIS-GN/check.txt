@@ -1,0 +1,2 @@
+--- BatchController: 20261021 20:14:58.519 12 Information SSG4_LOADIS_CASES Done Id: 807 Queue: JOB_QUEUE1 (Execution time: 00:00:16:222)
+--- LOADTEST_80720261021201444962.log

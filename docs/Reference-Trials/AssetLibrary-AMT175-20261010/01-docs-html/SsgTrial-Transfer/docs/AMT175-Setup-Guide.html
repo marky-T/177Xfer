@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMT 175 — Quick Reference &amp; Startup Guide</title>
+<style>
+  :root { --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:220px; min-width:220px; background:#1e293b; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #334155; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#f1f5f9; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#94a3b8; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#cbd5e1; text-decoration:none; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#334155; color:#f1f5f9; border-left-color:#60a5fa; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#64748b; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  main { flex:1; padding:28px 36px; max-width:920px; }
+  h1.title { font-size:20px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:18px; }
+  .phase { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px 18px; margin-bottom:16px; }
+  .phase h2 { font-size:16px; color:#0f172a; margin-bottom:10px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td,th { text-align:left; padding:5px 8px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:#374151; font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
+  code { background:#f1f5f9; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .env-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .env-card h3 { font-size:12px; color:#475569; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+  .warn { background:#fef3c7; border:1px solid #fde68a; color:#92400e; padding:8px 10px; border-radius:6px; font-size:12.5px; }
+  .code-wrap { background:#1e1e2e; color:#cdd6f4; border-radius:6px; padding:10px 12px; font-family:Consolas,monospace; font-size:12.5px; overflow-x:auto; margin-top:8px; }
+  .code-wrap pre { white-space:pre-wrap; }
+  a.ext { color:var(--accent); }
+</style>
+</head>
+<body>
+<nav id="sidenav">
+  <div class="logo"><h1>AMT 175</h1><p>Quick Reference</p></div>
+  <ul>
+    <li><a href="AMT172-Setup-Guide.html">&#8596; AMT172 Setup Guide</a></li>
+    <li><a href="SSG-COBOL-Reference.html">&#8596; SSG/COBOL Reference</a></li>
+    <li><a href="SSG-ECL-PowerShell-Reference.html">&#8596; SSG-ECL / PowerShell</a></li>
+    <li><a href="SSG-ECL-Command-Matrix.html">&#8596; ECL/SSG Command Matrix</a></li>
+    <li><a href="SSG-Trial-Progress.html">&#8596; Trial Progress</a></li>
+    <li style="border-bottom:1px solid #334155;margin:2px 0 6px;"></li>
+    <li><a href="../Parallel/AMT175/AMT-Local-Support/index.html" target="_blank" rel="noopener">&#8599; AMT Local Support</a></li>
+    <li style="border-bottom:1px solid #334155;margin:2px 0 6px;"></li>
+    <li class="section">Contents</li>
+    <li><a href="#env">1 &middot; Environment</a></li>
+    <li><a href="#startup">2 &middot; Startup After Reboot</a></li>
+    <li><a href="#creds">3 &middot; Credentials</a></li>
+  </ul>
+</nav>
+<main>
+  <h1 class="title">AMT 175 &#8212; Quick Reference &amp; Startup Guide</h1>
+  <p class="page-meta">Parallel lane alongside AMT172 &nbsp;|&nbsp; short-form reference &nbsp;|&nbsp; full authority: <code>AMT175 VS Code Installation Guide v3.md</code></p>
+
+  <!-- ENVIRONMENT -->
+  <div class="phase" id="env">
+    <h2>1 &middot; Environment Overview</h2>
+    <div class="env-grid">
+      <div class="env-card">
+        <h3>Paths</h3>
+        <table>
+          <tr><td>AMT install root</td><td><code>C:\Amt\Parallel\AMT175\</code></td></tr>
+          <tr><td>AMT Tools</td><td><code>C:\Amt\Parallel\AMT175\AmtTools\</code></td></tr>
+          <tr><td>Lion root</td><td><code>C:\Amt\Parallel\AMT175\Lion\</code></td></tr>
+          <tr><td>sys.ini</td><td><code>C:\Amt\Parallel\AMT175\sys.ini</code></td></tr>
+          <tr><td>Migration data (shared)</td><td><code>C:\Amt\Migration\</code></td></tr>
+        </table>
+      </div>
+      <div class="env-card">
+        <h3>Services</h3>
+        <table>
+          <tr><td>App HTTP / HTTPS</td><td><code>:5175</code> / <code>:7175</code></td></tr>
+          <tr><td>IIS virtual folder</td><td><code>/AMT175</code></td></tr>
+          <tr><td>Control Center</td><td><code>http://localhost/AMT175/ControlCenter</code></td></tr>
+          <tr><td>Keycloak (shared)</td><td><code>http://localhost:8080</code> &#8212; realm <code>amt175</code></td></tr>
+          <tr><td>dotnet SDK</td><td><code>10.0.203</code> (enforced by <code>global.json</code>)</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="env-card" style="margin-top:12px">
+      <h3>Key Databases</h3>
+      <table>
+        <tr><th>Database</th><th>Purpose</th></tr>
+        <tr><td><code>AMT175_REPOS</code></td><td>Lion main repository (REV* tables)</td></tr>
+        <tr><td><code>AMT175_SYSTEM</code></td><td>AMT system &#8212; users, roles, components</td></tr>
+        <tr><td><code>AMT175_LINC</code></td><td>LincToLion temporary repository</td></tr>
+        <tr><td><code>AMT175_APP</code></td><td>Application runtime database</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;font-size:12.5px;color:#6b7280">AMTSYSTEM (Machine env var): <code>C:\Amt\Parallel\AMT172;C:\Amt\Parallel\AMT175</code> &#8212; no spaces. LIONDEVNETSERVICENAME: <code>Amt175_Generator</code>.</p>
+  </div>
+
+  <!-- STARTUP -->
+  <div class="phase" id="startup">
+    <h2>2 &middot; Startup After Reboot</h2>
+    <p style="margin-bottom:6px">Use when SQL Server, IIS, and AMT175 are already installed &#8212; Keycloak just needs to be brought back up.</p>
+    <div class="code-wrap"><pre>$env:JAVA_HOME = "C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot"
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+Set-Location "C:\Keycloak\keycloak-26.2.5\bin"
+Start-Process "cmd.exe" -ArgumentList "/c kc.bat start-dev --http-port 8080 &gt; C:\Keycloak\keycloak.log 2&gt;&amp;1" -WindowStyle Minimized
+Write-Host "Waiting for Keycloak on port 8080..."
+for ($i = 1; $i -le 24; $i++) {
+    Start-Sleep -Seconds 5
+    $up = (Test-NetConnection localhost -Port 8080 -WarningAction SilentlyContinue).TcpTestSucceeded
+    if ($up) { Write-Host "Keycloak UP at $($i*5)s"; break }
+    Write-Host "  $($i*5)s..."
+}</pre></div>
+    <p style="margin-top:10px">Then open <a class="ext" href="http://localhost/AMT175/ControlCenter/" target="_blank" rel="noopener">AMT175 Control Center</a> and sign in with your Keycloak credentials (realm <code>amt175</code>).</p>
+    <p style="margin-top:6px;font-size:12.5px;color:#6b7280">Optional preflight check: <code>.\scripts\preflight.ps1</code> (verifies ports, AMTSYSTEM, SDK version, Keycloak reachability).</p>
+
+    <h3 style="margin-top:18px;font-size:13px;color:#475569">2a &middot; Ensure IIS is up (Control Center is IIS-hosted, not a standalone process)</h3>
+    <p style="font-size:12.5px;margin:4px 0 6px">Run in an <strong>elevated</strong> PowerShell after reboot &#8212; Control Center runs under IIS via the ASP.NET Core Module, so IIS/W3SVC must be running and the AMT175 app pool started before the CC URL will respond.</p>
+    <div class="code-wrap"><pre># Ensure IIS services are running
+Start-Service W3SVC, WAS -ErrorAction SilentlyContinue
+Get-Service W3SVC, WAS | Select-Object Name, Status
+
+# Check AMT175 app pool / site state
+&amp; "$env:windir\System32\inetsrv\appcmd.exe" list apppool
+&amp; "$env:windir\System32\inetsrv\appcmd.exe" list site
+
+# Start AMT175's app pool if stopped (replace &lt;PoolName&gt; with actual name from list above)
+&amp; "$env:windir\System32\inetsrv\appcmd.exe" start apppool /apppool.name:"&lt;PoolName&gt;"</pre></div>
+    <p style="margin-top:8px;font-size:12.5px;color:#6b7280">Symptom if skipped: CC URL returns <code>HTTP 500 &#8212; This page isn't working</code> (nothing listening on 5175/7175).</p>
+
+    <p style="margin-top:12px;font-size:12px;font-weight:600;color:#475569">Expected response (all pools already Started &#8212; nothing further to do):</p>
+    <div class="code-wrap"><pre>APPPOOL "DefaultAppPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_AppPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_ApplicationCenterPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_ApplicationCenterBLPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_ControlCenterPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_ControlCenterBLPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT-LION_ControlCenter_TransactionRendererPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL ".NET v4.5 Classic" (MgdVersion:v4.0,MgdMode:Classic,state:Started)
+APPPOOL ".NET v4.5" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_AppPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ApplicationCenterPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ApplicationCenterBLPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ControlCenterPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ControlCenterBLPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ControlCenter_TransactionRendererPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "Working_ControlCenter_TransactionRendererBlazorPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT175_ControlCenterPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT175_ControlCenterBLPool" (MgdVersion:v4.0,MgdMode:Integrated,state:Started)
+APPPOOL "AMT175_AFBUS_WebPool" (MgdVersion:,MgdMode:Integrated,state:Started)
+SITE "Default Web Site" (id:1,bindings:http/*:80:,state:Started)
+ERROR ( message:Cannot find APPPOOL object with identifier "&lt;PoolName&gt;". )
+
+Name  Status
+----  ------
+W3SVC Running
+WAS   Running</pre></div>
+    <p style="margin-top:6px;font-size:12.5px;color:#6b7280">The <code>ERROR ... &lt;PoolName&gt;</code> line is expected &#8212; it's the literal placeholder from the last command, only relevant if a pool actually needs starting (replace with the real name from the list, e.g. <code>AMT175_ControlCenterPool</code>).</p>
+
+    <h3 style="margin-top:18px;font-size:13px;color:#475569">2b &middot; If IIS Manager (inetmgr) opens as a blank window</h3>
+    <p style="font-size:12.5px;margin:4px 0 6px">The GUI console can break independently of the actual IIS service &#8212; use the <code>appcmd</code> commands above instead of the GUI. To repair the console itself, try in order:</p>
+    <ol style="font-size:12.5px;margin-left:18px;line-height:1.6">
+      <li>Close inetmgr, delete <code>%LOCALAPPDATA%\Microsoft\Inetmgr\config</code>, reopen</li>
+      <li>Control Panel &#8594; Programs &#8594; Turn Windows features on/off &#8594; uncheck <strong>IIS Management Console</strong> &#8594; Apply &#8594; re-check &#8594; Apply</li>
+      <li>Validate <code>applicationHost.config</code> is not corrupted:
+        <div class="code-wrap" style="margin-top:6px"><pre>[xml](Get-Content "$env:windir\System32\inetsrv\config\applicationHost.config") | Out-Null</pre></div>
+        If this throws, the config file is broken &#8212; check Event Viewer &#8594; Application log for <code>InetMgr</code>/<code>IIS</code> errors.</li>
+    </ol>
+  </div>
+
+  <!-- CREDS -->
+  <div class="phase" id="creds">
+    <h2>3 &middot; Credentials Summary</h2>
+    <div class="warn">&#9888; Local development only &#8212; do not commit to source control.</div>
+    <table style="margin-top:10px">
+      <tr><th>Service</th><th>User</th><th>Password / Secret</th></tr>
+      <tr><td>SQL Server</td><td><code>amt175_system_user</code></td><td><code>Asysco12345!</code></td></tr>
+      <tr><td>Keycloak admin</td><td><code>marky-t</code></td><td>(local only)</td></tr>
+      <tr><td>Keycloak realm</td><td><code>amt175</code></td><td>&#8212;</td></tr>
+      <tr><td>AMT app user</td><td><code>ADMIN</code></td><td>&#8212;</td></tr>
+    </table>
+    <p style="margin-top:8px;font-size:12px;color:#6b7280">Full plaintext reference: <code>C:\Amt\Parallel\AMT175\sys.ini.credentials.txt</code></p>
+  </div>
+</main>
+</body>
+</html>

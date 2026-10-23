@@ -1,0 +1,44 @@
+== Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational
+12:10:57   148 Channel Microsoft::Windows::RDS::Geometry::v08.01 has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel TextInput_ClientToServerDVC has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Geometry::v08.01 has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Geometry::v08.01 has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel Microsoft::Windows::RDS::Geometry::v08.01 has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel TextInput_ServerToClientDVC has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Geometry::v08.01 has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel Microsoft::Windows::RDS::Location has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Location has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::DisplayControl has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel Microsoft::Windows::RDS::Geometry::v08.01 has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Geometry::v08.01 has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel Microsoft::Windows::RDS::Input has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Input has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel cliprdr has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel AUDIO_PLAYBACK_LOSSY_DVC has been connected between the server and the client using transport tunnel: 1.
+12:10:57   132 A channel Microsoft::Windows::RDS::Notify has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel Microsoft::Windows::RDS::Notify has been closed between the server and the client on transport tunnel: 1.
+12:10:57   132 A channel AUDIO_PLAYBACK_DVC has been connected between the server and the client using transport tunnel: 1.
+12:10:57    72 Interface method called: LogonNotify(SessionId=2)
+12:10:57   132 A channel rdpdr has been connected between the server and the client using transport tunnel: 1.
+12:10:57   148 Channel AUDIO_PLAYBACK_LOSSY_DVC has been closed between the server and the client on transport tunnel: 1.
+12:10:57   148 Channel AUDIO_PLAYBACK_DVC has been closed between the server and the client on transport tunnel: 1.
+12:10:57   148 Channel rdpdr has been closed between the server and the client on transport tunnel: 1.
+12:10:57    72 Interface method called: GetServerAutoReconnectInfo
+== Microsoft-Windows-TerminalServices-LocalSessionManager/Operational
+12:10:57    25 Remote Desktop Services: Session reconnection succeeded: User: VMFEDPE08\MTRUMAN Session ID: 2 Source Network Address: 10.2.0.14
+12:10:57    40 Session 2 has been disconnected, reason code 5
+12:10:57    40 Session 3 has been disconnected, reason code 0
+12:09:25    24 Remote Desktop Services: Session has been disconnected: User: VMFEDPE08\MTRUMAN Session ID: 2 Source Network Address: 10.2.0.14
+12:09:24    40 Session 2 has been disconnected, reason code 0
+11:59:00    21 Remote Desktop Services: Session logon succeeded: User: VMFEDPE08\MTRUMAN Session ID: 2 Source Network Address: 10.2.0.14
+11:57:24    24 Remote Desktop Services: Session has been disconnected: User: VMFEDPE08\MTRUMAN Session ID: 10 Source Network Address: 10.2.0.14
+11:57:24    40 Session 10 has been disconnected, reason code 26
+11:51:54    21 Remote Desktop Services: Session logon succeeded: User: VMFEDPE08\MTRUMAN Session ID: 10 Source Network Address: 10.2.0.14
+11:49:47    24 Remote Desktop Services: Session has been disconnected: User: VMFEDPE08\MTRUMAN Session ID: 8 Source Network Address: 10.2.0.14
+11:49:47    40 Session 8 has been disconnected, reason code 12
+11:47:44    25 Remote Desktop Services: Session reconnection succeeded: User: VMFEDPE08\MTRUMAN Session ID: 8 Source Network Address: 10.2.0.14
+11:47:43    40 Session 8 has been disconnected, reason code 5
+11:47:43    40 Session 9 has been disconnected, reason code 0
+11:40:41    24 Remote Desktop Services: Session has been disconnected: User: VMFEDPE08\MTRUMAN Session ID: 8 Source Network Address: 10.2.0.14
+11:40:40    40 Session 8 has been disconnected, reason code 0
+11:38:26    21 Remote Desktop Services: Session logon succeeded: User: VMFEDPE08\MTRUMAN Session ID: 8 Source Network Address: 10.2.0.14

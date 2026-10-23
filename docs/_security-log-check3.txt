@@ -1,0 +1,21 @@
+=== Security log retained time span (oldest vs newest record actually present) ===
+Oldest record TimeCreated: 09/28/2026 09:14:22
+Newest record TimeCreated: 09/28/2026 10:43:36
+
+=== Log file size / max size / retention mode ===
+MaximumSizeInBytes: 20971520
+FileSize: 20975616
+LogMode: Circular
+name: Security
+enabled: true
+type: Admin
+owningPublisher: 
+isolation: Custom
+channelAccess: O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)
+logging:
+  logFileName: %SystemRoot%\System32\Winevt\Logs\Security.evtx
+  retention: false
+  autoBackup: false
+  maxSize: 20971520
+publishing:
+  fileMax: 1

@@ -1,0 +1,1082 @@
+﻿2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:42:24 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-07-02 12:42:24 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:21 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:21 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-07-02 12:43:21 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:21 [0] Error     : ERR 000093 End of statement expected but 1 found
+2026-07-02 12:43:21 [0] Error     : ERR 000097 End of statement expected but 1 found
+2026-07-02 12:43:21 [0] Error     : ERR 000101 End of statement expected but 1 found
+2026-07-02 12:43:21 [0] Error     : ERR 000105 End of statement expected but 1 found
+2026-07-02 12:43:21 [0] Error     : ERR 000143 Picture has illegal characters [X([*B])]
+2026-07-02 12:43:21 [0] Error     : ERR 000186 File FIC-REPORT must have at least 1 layout.
+2026-07-02 12:43:21 [0] Error     : ERR 000186 File FIC-DESCRIPT must have at least 1 layout.
+2026-07-02 12:43:21 [0] Error     : ERR 000186 File FIC-UNLOAD must have at least 1 layout.
+2026-07-02 12:43:21 [0] Error     : ERR 000186 File FIC-FORMAT must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000205 Operand LGN-REP(4:21) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000208 Operand LGN-REP(7:2) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000208 Invalid expression [LGN-REP(7:2)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000212 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000213 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000214 Operand LGN-REP(10:2) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000214 Invalid expression [LGN-REP(10:2)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000215 Operand LGN-REP(13:2) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000215 Invalid expression [LGN-REP(13:2)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000216 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000216 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000216 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000222 Operand [KEY is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000222 Invalid expression [[KEY] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000222 Target variable missing in MOVE instruction
+2026-07-02 12:43:22 [0] Error     : ERR 000223 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000223 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000223 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000229 Operand LGN-REP(1:7) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000231 Unexpected token END-PERFORM, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000235 Operand LGN-REP is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000235 Operand LGN-REP must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000243 Operand LGN-DES is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000243 Operand LGN-DES must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000247 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000249 Operand LGN-DES(CPT-CHAR:30) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000249 Invalid expression [LGN-DES(CPT-CHAR:30)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000250 Operand LGN-DES(6:7) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000250 Invalid expression [LGN-DES(6:7)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000251 Operand LGN-DES(13:10) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000251 Invalid expression [LGN-DES(13:10)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000252 Operand LGN-REP is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000252 Invalid expression [LGN-REP] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000261 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000262 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000261 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000263 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000264 Operand END-PERFORM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000265 Operand END-PERFORM must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000269 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000270 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000271 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000274 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000280 Operand LGN-REP(1:13) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000282 Unexpected token END-PERFORM, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Operand LGN-REP is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Operand LGN-REP must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000289 Operand LGN-REP(CPT-CHAR:30) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000289 Invalid expression [LGN-REP(CPT-CHAR:30)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000291 Operand LGN-REP(1:10) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000293 Operand LGN-REP is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000293 Operand LGN-REP must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand LGN-REP(5:CPT-CHAR) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Invalid expression [LGN-REP(5:CPT-CHAR)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000301 Operand LGN-REP(CPT-CHAR:3) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000301 Invalid expression [LGN-REP(CPT-CHAR:3)] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000302 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000302 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000302 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000304 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000316 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000316 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000316 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000317 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Operand END-IF must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000317 Operand END-PERFORM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000319 Operand END-PERFORM must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand LGN-FOR is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand LGN-FOR must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 LGN-FOR must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000352 End of statement expected but END-READ found
+2026-07-02 12:43:22 [0] Error     : ERR 000352 Paragraph END-READ must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000361 End of statement expected but END-READ found
+2026-07-02 12:43:22 [0] Error     : ERR 000361 Paragraph END-READ must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000371 Operand LGN-UNL(1:[ *E]) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000371 Invalid expression [LGN-UNL(1:[ *E])] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000371 Operand [ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000372 Operand LGN-UNL([ *C]:[TABLE,1,2,1]) is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000372 Invalid expression [LGN-UNL([ *C]:[TABLE,1,2,1])] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000372 Operand [ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000372 Operand [TABLE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000372 Invalid expression [1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000374 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000375 Operand END-READ must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000055 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000104  in copy: ESQL-INVOKE|NM-TAB|CHK_PNT_RST End of statement expected but INVOKE found
+2026-07-02 12:43:22 [0] Error     : ERR 000107  in copy: ESQL-INVOKE|NM-TAB|[TABLE,1,1,1] End of statement expected but INVOKE found
+2026-07-02 12:43:22 [0] Error     : ERR 000109 File CHERCHEUSE must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000131 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000134 Unexpected token 'USE DEFAULT QUALIFIER AFTST', expected: ','
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000168 Unexpected token END-READ, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000188 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000189 Operand END-READ must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000188 Operand END-PERFORM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000190 Operand END-PERFORM must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000188 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand END-IF must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000195 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000196 Operand END-READ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000195 Operand END-PERFORM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000197 Operand END-PERFORM must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000200 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000219 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000220 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000245 Paragraph END-EVALUATE must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Exception : System.IndexOutOfRangeException Exception on line 000254
+2026-07-02 12:43:22 [0] Error     : ERR 000261 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000266 Operand NO-RCH is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000266 Invalid expression [NO-RCH] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000270 Paragraph END-EVALUATE must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000284 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000296 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000307 Unexpected token =, expected: ')'
+2026-07-02 12:43:22 [0] Error     : ERR 000322 Unexpected token END-EVALUATE, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000325 Unexpected token (, expected: Set
+2026-07-02 12:43:22 [0] Error     : ERR 000333 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000341  in copy: 999-ESQL-ERR Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000341  in copy: 999-ESQL-ERR Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000343 Paragraph 999-ESQL-ABORT must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000066 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000070 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000071 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000072 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000073 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000074 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000075 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000076 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000077 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000078 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000079 End of statement expected but 3 found
+2026-07-02 12:43:22 [0] Error     : ERR 000083 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000087 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000094 Picture has illegal characters [9([KEY.1.2.2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000095 Picture has illegal characters [X([RSZ,1,1,1])]
+2026-07-02 12:43:22 [0] Error     : ERR 000129 File CHERCHEUSE must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 File FICUNLOAD must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 File FICARCHI must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 File FICNARCHI must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000147 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Operand END-READ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000158 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000159 Operand END-READ must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000169 Operand CLE-CHERCHEUSE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000169 Operand CLE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000171 Operand CLE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000171 Invalid expression [CLE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000172 Operand LIGNE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000172 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000173 Operand LIGNE-ARCHI is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000173 Operand LIGNE-ARCHI must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000173 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000176 Operand CLE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000176 Operand CLE-CHERCHEUSE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000178 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000180 Operand CLE-CHERCHEUSE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000180 Operand CLE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Operand LIGNE-NARCHI is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Operand LIGNE-NARCHI must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Operand LIGNE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Operand LIGNE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000181 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000185 Operand CLE-CHERCHEUSE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000185 Operand CLE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000187 Unexpected token END-EVALUATE, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand LIGNE-NARCHI is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand LIGNE-NARCHI must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand LIGNE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand LIGNE-UNLOAD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000194 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000203 Operand LIGNE-ARCHI is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000203 Operand LIGNE-ARCHI must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000203 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000058 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000084 File FICOUT must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000099 Operand LIGNEOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000099 Operand LIGNEOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000099 LIGNEOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000107 Operand [KEY is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000107 Invalid expression [[KEY] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000107 Target variable missing in MOVE instruction
+2026-07-02 12:43:22 [0] Error     : ERR 000108 Operand LIGNEOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000108 Operand LIGNEOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000108 LIGNEOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000117 Operand LIGNEOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000117 Operand LIGNEOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000117 LIGNEOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000035 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000036 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000037 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000038 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000039 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000040 End of statement expected but LABEL found
+2026-07-02 12:43:22 [0] Error     : ERR 000041 End of statement expected but BLOCK found
+2026-07-02 12:43:22 [0] Error     : ERR 000042 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000043 End of statement expected but REC11 found
+2026-07-02 12:43:22 [0] Error     : ERR 000045 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000046 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000047 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000048 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000053 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000056 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000057 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000058 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000059 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000060 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000061 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000062 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000063 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000064 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000065 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000066 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000067 End of statement expected but LABEL found
+2026-07-02 12:43:22 [0] Error     : ERR 000068 End of statement expected but BLOCK found
+2026-07-02 12:43:22 [0] Error     : ERR 000069 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000070 End of statement expected but REC21 found
+2026-07-02 12:43:22 [0] Error     : ERR 000072 End of statement expected but REPRISE-A1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000074 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000075 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000076 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000077 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000078 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000079 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000080 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000081 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000082 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000083 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000087 Field TITLE-LINE is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000109 Field TAB11 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000110 End of statement expected but OR found
+2026-07-02 12:43:22 [0] Error     : ERR 000112 End of statement expected but OR found
+2026-07-02 12:43:22 [0] Error     : ERR 000113 End of statement expected but OR found
+2026-07-02 12:43:22 [0] Error     : ERR 000122 File TAPEIN must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000122 File TAPEOUT must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000128 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000128 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000130 Operand RECIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000130 Invalid expression [RECIN] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000133 Operand RECIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000133 Invalid expression [RECIN] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000133 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000133 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000134 Operand ZONE1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000134 Invalid expression [ZONE1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000134 Operand ZONO1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000134 Operand ZONO1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand FIXED is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand FIXED must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand [ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand [ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand * is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand * must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand ] is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand ] must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000137 Operand SUBROUTINE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000137 Invalid expression [SUBROUTINE] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000137 Unexpected token REFERENCING, expected: .
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand FIXED1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand FIXDATA1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand FIXDATA1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000139 Operand FIXDATA1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000139 Operand FIXDATA1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Invalid expression [RECOUT] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Invalid expression [RECOUT] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000142 Operand ZONE2 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Operand REPRISE-AA11 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Operand REPRISE-AA21 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Operand REPRISE-AA21 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Operand REPRISE-AA11 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Operand REPRISE-AA1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Operand REPRISE-AA1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000150 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000150 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000150 RECOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000212 Unexpected token X, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000073 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000074 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000075 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000075 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000077 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000078 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000080 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000085 End of statement expected but COPYING found
+2026-07-02 12:43:22 [0] Error     : ERR 000086 End of statement expected but COPYING found
+2026-07-02 12:43:22 [0] Error     : ERR 000091 File description [FILEIN] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000098 File description [FILEOUT] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000105 File description [LIST-OUT] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Unexpected token C, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Field <> is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000141 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000141 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000142 Unexpected token NOZONECOND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000143 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000144 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000145 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000146 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000141 Field SET is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Unexpected token ADD, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000150 Unexpected token WS-ADD-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000152 Redefined item WS-ADD-1-1 not found
+2026-07-02 12:43:22 [0] Error     : ERR 000157 Unexpected token RESU, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000158 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000157 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000158 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000159 Unexpected token WS-RESU-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000162 Unexpected token COND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000163 End of statement expected but 'C' found
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Unexpected token 'C', expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000165 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000162 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000169 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000171 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Unexpected token C, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Field <> is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000175 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000175 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000176 Unexpected token NOZONECOND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000177 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000178 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000179 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000180 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000175 Field SET is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Unexpected token COND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000183 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000183 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000184 Unexpected token ENR-COND-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000183 Field 01 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000185 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000186 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000188 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000190 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000191 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000193 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000195 Unexpected token COND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000196 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000196 End of statement expected but 'C' found
+2026-07-02 12:43:22 [0] Error     : ERR 000196 Unexpected token 'C', expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000196 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000198 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000195 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000202 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000204 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000207 Unexpected token C, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000207 Field <> is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000208 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000207 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000208 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000209 Unexpected token NOZONECOND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000210 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000211 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000212 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000213 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000208 Field SET is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000215 Unexpected token RESU, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000216 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000215 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000216 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000217 Unexpected token ENR-RESU-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000216 Field 01 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000218 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000219 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000221 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000223 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000224 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Unexpected token ADDL, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000229 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000229 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000230 Unexpected token ENR-ADDL-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000229 Field 01 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000231 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000232 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000234 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000236 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000237 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000239 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000241 Unexpected token ADD, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000242 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000241 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000242 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000243 Unexpected token ENR-ADD-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000242 Field 01 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000244 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000245 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000247 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000253 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000254 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000256 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000258 Unexpected token ADDZ, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000259 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000258 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000259 Field + is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000260 Unexpected token ENR-ADDZ-1-1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000259 Field 01 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000261 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000262 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000264 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000266 End of statement expected but SET found
+2026-07-02 12:43:22 [0] Error     : ERR 000267 End of statement expected but IF found
+2026-07-02 12:43:22 [0] Error     : ERR 000269 End of statement expected but ENDIF found
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Unexpected token COND, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000272 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000272 End of statement expected but 'C' found
+2026-07-02 12:43:22 [0] Error     : ERR 000272 Unexpected token 'C', expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000272 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000274 Unexpected token SET, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000279 Unexpected token PROCEDURE, expected: .
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Field = is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000280 End of statement expected but OPEN found
+2026-07-02 12:43:22 [0] Error     : ERR 000284 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Area expected, but [AREA found.
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Area expected, but 1 found.
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Area expected, but ] found.
+2026-07-02 12:43:22 [0] Error     : ERR 000285 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000287 Area expected, but [AREA found.
+2026-07-02 12:43:22 [0] Error     : ERR 000287 Area expected, but 1 found.
+2026-07-02 12:43:22 [0] Error     : ERR 000287 Area expected, but ] found.
+2026-07-02 12:43:22 [0] Error     : ERR 000308 Record expected, but [RECORD found.
+2026-07-02 12:43:22 [0] Error     : ERR 000308 Line {0} not understood {1}
+2026-07-02 12:43:22 [0] Error     : ERR 000310 Record expected, but [RECORD found.
+2026-07-02 12:43:22 [0] Error     : ERR 000310 Line {0} not understood {1}
+2026-07-02 12:43:22 [0] Error     : ERR 000312 Operand [RECORD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000312 Invalid expression [[RECORD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000312 Target variable missing in MOVE instruction
+2026-07-02 12:43:22 [0] Error     : ERR 000317 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Operand NOCOND is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Operand NOCOND must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000318 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000319 Operand NOZONECOND is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000319 Operand NOZONECOND must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000319 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000319 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000320 Operand NOZONEADD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000320 Operand NOZONEADD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000320 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000320 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000321 Operand NOZONEADDL is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000321 Operand NOZONEADDL must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000321 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000321 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000322 Operand NOZONEADDZ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000322 Operand NOZONEADDZ must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000322 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000322 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000323 Operand NOZONERESU is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000323 Operand NOZONERESU must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000323 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000323 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000327 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand NOZONECOND is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand NOZONECOND must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000328 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000329 Operand # is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000330 Invalid expression [ELSEIF] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000333 Invalid expression [ELSEIF] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000337 Invalid expression [ENDIF] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000340 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000341 Operand NOZONEADD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000341 Operand NOZONEADD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000341 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000341 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000341 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000345 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000346 Operand NOZONERESU is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000346 Operand NOZONERESU must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000346 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000346 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000346 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000349 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000350 Operand NOZONEADDL is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000350 Operand NOZONEADDL must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000350 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000350 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000350 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000353 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000354 Operand NOZONEADDZ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000354 Operand NOZONEADDZ must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000354 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000354 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000354 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000358 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000359 Operand PARAMOLD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000359 Operand PARAMOLD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000359 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000359 End of statement expected but 'C' found
+2026-07-02 12:43:22 [0] Error     : ERR 000359 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000361 Operand PARAMOLD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000361 Operand PARAMOLD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000361 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000361 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000401 Operand P-INPUT-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000401 Operand P-INPUT-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000402 Operand P-OUTPUT-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000402 Operand P-OUTPUT-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000407 Invalid expression [1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand [RECORD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand [RECORD must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand ] is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000409 Operand ] must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Operand [RECORD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Invalid expression [[RECORD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Operand ] is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Invalid expression []] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Operand RECORD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000410 Invalid expression [RECORD] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000414 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000413 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000413 Operand UPDATE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000414 Operand UPDATE must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000416 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000493 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000494 Operand NOCOND is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000494 Operand NOCOND must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000494 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000494 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000494 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000495 Operand NOZONECOND is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000495 Operand NOZONECOND must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000495 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000495 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000496 Operand NOZONEADD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000496 Operand NOZONEADD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000496 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000496 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000497 Operand NOZONEADDL is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000497 Operand NOZONEADDL must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000497 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000497 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000498 Operand NOZONEADDZ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000498 Operand NOZONEADDZ must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000498 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000498 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000499 Operand NOZONERESU is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000499 Operand NOZONERESU must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000499 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000501 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000502 Operand BORNES is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000501 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000502 Operand [PARAM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000502 Binary operator expression expected I.
+2026-07-02 12:43:22 [0] Error     : ERR 000502 Invalid expression [I] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000503 Operand DATE_MIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000503 Operand DATE_MIN must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000503 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000503 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000505 Operand DATE_MIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000505 Operand DATE_MIN must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000505 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000507 Operand ENDIF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000506 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000507 Operand [PARAM is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000507 Binary operator expression expected I.
+2026-07-02 12:43:22 [0] Error     : ERR 000507 Invalid expression [I] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000508 Operand DATE_MAX is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000508 Operand DATE_MAX must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000508 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000508 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000510 Operand DATE_MAX is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000510 Operand DATE_MAX must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000510 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000513 Operand ENDIF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000513 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Operand RESU is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000513 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Operand NOZONERESU is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Operand NOZONERESU must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000514 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000515 Paragraph TRT-RESU-1-1 must not be nested within another statement. Please code a preceding period.
+2026-07-02 12:43:22 [0] Error     : ERR 000517 Operand WS-RESU-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000517 Invalid expression [WS-RESU-1-1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000520 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000521 Operand NOZONEADDL is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000521 Operand NOZONEADDL must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000521 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000521 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000521 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000532 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000532 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000533 Operand NOZONEADD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000533 Operand NOZONEADD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000533 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000533 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000533 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000560 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000561 Operand WS-ADD-1-1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000563 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000563 Operand WS-ADD-1-1 must be a numeric variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000564 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000568 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000568 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000568 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000571 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000571 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000571 Operand WS-ADD-1-1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000582 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000583 Operand NOZONEADDZ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000583 Operand NOZONEADDZ must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000583 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000583 Operand + is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000583 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000608 Unexpected token 1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000609 Operand PARAMOLD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000609 Operand PARAMOLD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000609 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000609 End of statement expected but 'C' found
+2026-07-02 12:43:22 [0] Error     : ERR 000609 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000611 Operand PARAMOLD is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000611 Operand PARAMOLD must be an integer variable, a condition name or a switch mnemonic
+2026-07-02 12:43:22 [0] Error     : ERR 000611 Operand = is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000611 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000621 Operand IO-ERROR-STATUS is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000621 Invalid expression [IO-ERROR-STATUS] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000640 Operand IO-ERROR-STATUS is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000640 Invalid expression [IO-ERROR-STATUS] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000643 Unexpected end of statement
+2026-07-02 12:43:22 [0] Error     : ERR 000645 Unexpected token XPQRCES, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000646 Unexpected token CONDIS, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000647 Unexpected token F, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000648 Unexpected token UX, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000654 Unexpected token S, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000660 Unexpected token DMSTST, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000660 End of statement expected but . found
+2026-07-02 12:43:22 [0] Error     : ERR 000066 Picture has illegal characters [X([*FIL])]
+2026-07-02 12:43:22 [0] Error     : ERR 000067 Unexpected token [, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000067 Picture has illegal characters [X([KEY,A,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000069 File description [[TABLE,1,1,1]] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000072 End of statement expected but LABEL found
+2026-07-02 12:43:22 [0] Error     : ERR 000073 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000074 End of statement expected but 02 found
+2026-07-02 12:43:22 [0] Error     : ERR 000075 End of statement expected but 02 found
+2026-07-02 12:43:22 [0] Error     : ERR 000076 End of statement expected but 02 found
+2026-07-02 12:43:22 [0] Error     : ERR 000087 Picture has illegal characters [X([FILEKEY,1,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000088 Picture has illegal characters [X([TABLE,1,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000091 Picture has illegal characters [X([TABLE,1,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000094 Unexpected token [, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000094 Picture has illegal characters [X([KEY,A,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000096 Unexpected token [, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000096 Picture has illegal characters [X([KEY,A,1,2])]
+2026-07-02 12:43:22 [0] Error     : ERR 000108 File [TABLE,1,1,1 must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000118 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000125 Unresolved file definition (FD) [FILEKEY,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000125 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand END-READ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Unexpected token [, expected: TO
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Target variable missing in MOVE instruction
+2026-07-02 12:43:22 [0] Error     : ERR 000130 Unexpected token ELSE, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000131 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000132 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000135 Unresolved file definition (FD) [TABLE,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000135 Operand END-READ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Operand END-READ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000139 Operand KEY-T is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000139 Invalid expression [KEY-T] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000139 Target variable missing in MOVE instruction
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Unexpected token ELSE, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000141 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000142 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000147 Unresolved file definition (FD) [FILEKEY,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000147 Unresolved file definition (FD) ]
+2026-07-02 12:43:22 [0] Error     : ERR 000147 Unresolved file definition (FD) [TABLE,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000147 Unresolved file definition (FD) ]
+2026-07-02 12:43:22 [0] Error     : ERR 000160 Operand END-IF is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000161 Operand END-IF must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Operand ENR-TAB is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Invalid expression [ENR-TAB] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000170 Operand ENR-TAB is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000170 Invalid expression [ENR-TAB] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000177 Unexpected token END-IF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Operand ENR-TAB is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Invalid expression [ENR-TAB] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000189 Unresolved file definition (FD) [FILEKEY,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000189 Unresolved file definition (FD) ]
+2026-07-02 12:43:22 [0] Error     : ERR 000189 Unresolved file definition (FD) [TABLE,1,1,1
+2026-07-02 12:43:22 [0] Error     : ERR 000189 Unresolved file definition (FD) ]
+2026-07-02 12:43:22 [0] Error     : ERR 000204 Unexpected token TPF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000209 Unexpected token LINK, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000210 Unexpected token TPF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000211 Unexpected token ARCH, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000214 Unexpected token LIBCODENAME, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000219 Unexpected token SYS, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000220 Unexpected token [FILEKEY,1,1,1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000221 Unexpected token [TABLE,1,1,1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000222 Unexpected token E, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000223 Unexpected token [FARCHIVE,1,1,1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000225 Unexpected token E, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000226 Unexpected token [FENCOURS,1,1,1, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Unexpected token TPF, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Unexpected token ARCH, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000226 End of statement expected but ARCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000138 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000140 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000141 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000144 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000145 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000148 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000149 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000162 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000163 Operand ZPR is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000170 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000170 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000172 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000172 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000176 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000176 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000178 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000178 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000180 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000184 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000184 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000186 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand SYMK is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000191 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000192 Operand ZPR is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000197 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000197 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000198 Operand ZPR is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000203 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000203 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000204 Operand ZPR is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000211 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000220 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000220 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000220 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000224 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000224 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000224 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000228 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000228 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000232 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000232 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000232 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000236 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000236 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000236 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000240 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000240 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000240 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000244 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000244 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000244 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000248 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000248 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000248 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000251 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000251 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000251 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000255 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000255 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000255 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000259 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000259 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000259 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000263 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000263 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000263 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000267 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000267 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000267 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000271 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000271 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000275 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000275 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000275 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000279 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000279 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000279 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000283 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000283 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000283 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000287 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000287 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000287 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000291 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000291 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000291 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000295 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000295 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000295 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000297 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000298 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000299 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000299 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000299 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000299 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000302 ZPRINT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000355 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000015 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000016 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000017 End of statement expected but RESERVE found
+2026-07-02 12:43:22 [0] Error     : ERR 000018 End of statement expected but ORGANIZATION found
+2026-07-02 12:43:22 [0] Error     : ERR 000019 End of statement expected but ACCESS found
+2026-07-02 12:43:22 [0] Error     : ERR 000020 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000021 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000022 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000031 File description [DISQ] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000098 Operand KEYA is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000098 Operand CLEF is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000099 Operand KEYB is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000099 Operand CLEG is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000100 Operand KEYA is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000100 Operand CLEF is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000101 Operand KEYB is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000101 Operand CLEG is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000102 Operand KEYC is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000102 Operand CLEH is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000113 Operand CLEF is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000115 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000018 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000019 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000025 End of statement expected but 1 found
+2026-07-02 12:43:22 [0] Error     : ERR 000026 End of statement expected but F found
+2026-07-02 12:43:22 [0] Error     : ERR 000027 End of statement expected but BLOCK found
+2026-07-02 12:43:22 [0] Error     : ERR 000027 End of statement expected but LSE found
+2026-07-02 12:43:22 [0] Error     : ERR 000029 End of statement expected but ND found
+2026-07-02 12:43:22 [0] Error     : ERR 000032 End of statement expected but RECORD found
+2026-07-02 12:43:22 [0] Error     : ERR 000033 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000034 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000035 File description [PRT] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000051 End of statement expected but NOT found
+2026-07-02 12:43:22 [0] Error     : ERR 000063 End of statement expected but VALUE found
+2026-07-02 12:43:22 [0] Error     : ERR 000072 Field H-LINE is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000086 Field CT-LINE is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000092 Field F-LINE is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000111 Field M-LINE is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000121 File TAPEIN must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand ZIN1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand ZIN1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000127 Operand ZIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000127 Operand ZIN must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000131 Operand ZIN1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000131 Invalid expression [ZIN1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000136 Unexpected token ON, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand & is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Invalid expression [1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000155 Operand ZONE-LECTURE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000166 PRT-LINE must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000166 Operand F-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000166 Operand F-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000168 PRT-LINE must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000168 Operand CT-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000168 Operand CT-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000171 PRT-LINE must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000171 Operand PRINT-LINE-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000171 Operand PRINT-LINE-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000174 PRT-LINE must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Operand PRINT-LINE-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000174 Operand PRINT-LINE-1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 PRT-LINE must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Operand M-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000182 Operand M-LINE is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000185 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000186 End of statement expected but & found
+2026-07-02 12:43:22 [0] Error     : ERR 000192 Unexpected token &, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000032 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000033 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000034 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000035 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000036 End of statement expected but LABEL found
+2026-07-02 12:43:22 [0] Error     : ERR 000037 End of statement expected but BLOCK found
+2026-07-02 12:43:22 [0] Error     : ERR 000038 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000039 End of statement expected but REC11 found
+2026-07-02 12:43:22 [0] Error     : ERR 000041 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000042 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000043 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000044 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000045 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000052 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000053 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000054 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000055 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000056 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000057 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000058 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000059 End of statement expected but LABEL found
+2026-07-02 12:43:22 [0] Error     : ERR 000060 End of statement expected but BLOCK found
+2026-07-02 12:43:22 [0] Error     : ERR 000061 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000062 End of statement expected but REC21 found
+2026-07-02 12:43:22 [0] Error     : ERR 000064 End of statement expected but RECOUT found
+2026-07-02 12:43:22 [0] Error     : ERR 000065 End of statement expected but DATA found
+2026-07-02 12:43:22 [0] Error     : ERR 000066 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000067 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000068 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000069 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000070 End of statement expected but 01 found
+2026-07-02 12:43:22 [0] Error     : ERR 000071 End of statement expected but 06 found
+2026-07-02 12:43:22 [0] Error     : ERR 000097 Field TAB11 is expected to have sub items but none found.
+2026-07-02 12:43:22 [0] Error     : ERR 000098 End of statement expected but OR found
+2026-07-02 12:43:22 [0] Error     : ERR 000106 File TAPEIN must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000106 File TAPEOUT must have at least 1 layout.
+2026-07-02 12:43:22 [0] Error     : ERR 000112 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000112 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000114 Operand FIXED1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000114 Operand FIXDATA1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000114 Operand FIXDATA1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000115 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000115 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000115 RECOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000116 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000116 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000117 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000117 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000117 RECOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000120 Operand RECIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000120 Invalid expression [RECIN] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000123 Operand RECIN is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000123 Invalid expression [RECIN] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000123 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000123 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000124 Operand ZONE1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000124 Invalid expression [ZONE1] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000124 Operand ZONO1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000124 Operand ZONO1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand FIXED is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand FIXED must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand [ is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand [ must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand * is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand * must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand 1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand ] is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000126 Operand ] must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000127 Operand SUBROUTINE is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000127 Invalid expression [SUBROUTINE] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000127 Unexpected token REFERENCING, expected: .
+2026-07-02 12:43:22 [0] Error     : ERR 000128 Operand FIXED1 is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000128 Operand FIXDATA1 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000128 Operand FIXDATA1 must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Invalid expression [RECOUT] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000129 Invalid expression [RECOUT] encountered.
+2026-07-02 12:43:22 [0] Error     : ERR 000132 Operand ZONE2 is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand RECOUT is not declared.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 Operand RECOUT must be a variable.
+2026-07-02 12:43:22 [0] Error     : ERR 000138 RECOUT must be a file record defined in an FD entry
+2026-07-02 12:43:22 [0] Error     : ERR 000143 Unexpected token ELSE, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000153 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000012 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000013 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000014 End of statement expected but CARD-PUNCH found
+2026-07-02 12:43:22 [0] Error     : ERR 000015 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000016 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000025 File description [TAPEOUT] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000026 End of statement expected but FD found
+2026-07-02 12:43:22 [0] Error     : ERR 000030 File description [SORTFILE] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000082 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000016 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000017 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000018 End of statement expected but RESERVE found
+2026-07-02 12:43:22 [0] Error     : ERR 000019 End of statement expected but ORGANIZATION found
+2026-07-02 12:43:22 [0] Error     : ERR 000020 End of statement expected but ACCESS found
+2026-07-02 12:43:22 [0] Error     : ERR 000021 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000022 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000023 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000032 File description [DISQ] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000097 Operand CLEF is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000114 Unexpected token *, expected: 
+2026-07-02 12:43:22 [0] Error     : ERR 000016 End of statement expected but DISC found
+2026-07-02 12:43:22 [0] Error     : ERR 000017 End of statement expected but SELECT found
+2026-07-02 12:43:22 [0] Error     : ERR 000018 End of statement expected but RESERVE found
+2026-07-02 12:43:22 [0] Error     : ERR 000019 End of statement expected but ORGANIZATION found
+2026-07-02 12:43:22 [0] Error     : ERR 000020 End of statement expected but ACCESS found
+2026-07-02 12:43:22 [0] Error     : ERR 000021 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000022 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000023 End of statement expected but ALTERNATE found
+2026-07-02 12:43:22 [0] Error     : ERR 000032 File description [DISQ] encountered without corresponding SELECT in FILE-CONTROL.
+2026-07-02 12:43:22 [0] Error     : ERR 000097 Operand CLEF is defined duplicately, please specify containing structure.
+2026-07-02 12:43:22 [0] Error     : ERR 000114 Unexpected token ASSURFED, expected: 
+2026-07-02 12:43:23 [0] Error     : ERR 000227 SQL Table/View chk_pnt_rst not found
+2026-07-02 12:43:23 [0] Error     : ERR 000277 SQL Table/View Chk_Pnt_Rst not found
+2026-07-02 12:43:23 [0] Error     : ERR 000307 SQL Table/View chk_pnt_rst not found
+2026-07-02 12:43:23 [0] Error     : ERR 000325 SQL Table/View chk_pnt_rst not found
+2026-07-02 12:43:23 [0] Error     : ERR 000502 Expression [1] must be Boolean.
+2026-07-02 12:43:23 [0] Error     : ERR 000507 Expression [1] must be Boolean.
+2026-07-02 12:43:23 [0] Error     : ERR 000156 Expression [1] must be Boolean.
+2026-07-02 12:43:23 [0] Error     : ERR 000138 Expression [&] must be Boolean.
+2026-07-02 12:43:23 [0] Exception : System.InvalidCastException Unable to cast object of type 'Asysco.Migration.CobolToAmt.Parser.Instructions.MigInstrText' to type 'Asysco.Migration.CobolToAmt.Parser.Instructions.MigInstrCode'. On analysing source's data items and instructions: ASSURFED_UTILIT_TRI_ASCII(P)
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------
+2026-07-02 12:43:23 [0] Phase     : D O N E
+2026-07-02 12:43:23 [0] Phase     : ------------------------------------------------------------

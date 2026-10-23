@@ -1,0 +1,7 @@
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.74
+Conversion complete: 20 succeeded, 0 failed
+identical to variant A: 20   different: 0   parse errors in 0 files
+ps1 files produced: 20

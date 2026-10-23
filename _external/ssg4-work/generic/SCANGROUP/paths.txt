@@ -1,0 +1,52 @@
+Prepare-CondisCc.ps1:6: $spike = 'E:\Repos\SsgTrial\_scratch\spike-condis'
+Prepare-CondisCc.ps1:7: $gn = 'E:\Repos\SsgTrial\Conversion\Pipeline\Generic'
+Prepare-CondisCc.ps1:8: $scripts = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4'
+Prepare-CondisCc.ps1:9: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Prepare-CondisCc.ps1:10: $root = 'E:\AMT_Work\MockTest\CONDIS_GN'
+Prepare-CondisCc.ps1:11: $cardsDir = 'E:\Repos\ssg4-work\sgs-cards'
+Prepare-CondisCc.ps1:13: . "$spike\check\CondisModel.ps1"
+Prepare-CondisCc.ps1:14: . "$spike\CondisCases.ps1"
+Prepare-CondisCc.ps1:15: $calls = @(Import-Csv E:\Repos\ssg4-work\allcalls\expanded-fix\CONDIS2_ASCII-expansion.csv)
+Prepare-CondisCc.ps1:18: $d = & "$gn\Deploy-GnSkeleton.ps1" -Skeleton 'UTILIT_CONDIS2_ASCII' -ParmScript "$spike\gen\CondisParm.ps1" -Call 'Invoke-CondisHandoff'
+Prepare-CondisCc.ps1:26: $p = Read-CondisParm (Get-Content "$spike\check\parm\$($c.Call).parm" -Encoding Latin1)
+Prepare-CondisCc.ps1:73: $cc | ConvertTo-Json | Set-Content "$spike\cc-cases.json"
+Prepare-CondisCc.ps1:74: $r | Out-File "$spike\prepare-cc.txt"
+Test-CondisParm.ps1:8: [String]$Cards = 'E:\Repos\ssg4-work\sgs-cards',
+Test-CondisParm.ps1:9: [String]$Expanded = 'E:\Repos\ssg4-work\allcalls\expanded-fix',
+Test-CondisParm.ps1:10: [String]$Out = 'E:\Repos\SsgTrial\_scratch\spike-condis\check'
+Test-CondisParm.ps1:13: $repo = 'E:\Repos\SsgTrial'
+Test-CondisReference.ps1:5: param([String]$Binaries = 'E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Binaries\Programs')
+Test-CondisReference.ps1:7: $mt = 'E:\Repos\SsgTrial\Conversion\Pipeline\MockTest'
+Test-CondisReference.ps1:8: $root = 'E:\AMT_Work\MockTest\CONDIS_GN'
+Test-GnSgsImages.ps1:3: . 'E:\Repos\SsgTrial\Conversion\Pipeline\Generic\GnHandoff.ps1'
+New-CondisGn.ps1:3: param([String]$Skeleton = 'E:\Repos\SsgTrial\SsgConverter\Examples\Input\CONDIS2_ASCII.TXT',
+New-CondisGn.ps1:27: * the skeleton hand-off; see _scratch\spike-condis\spec.md.
+Test-ScanParm.ps1:9: [String]$Cards = 'E:\Repos\ssg4-work\sgs-cards',
+Test-ScanParm.ps1:10: [String]$Expanded = 'E:\Repos\ssg4-work\allcalls\expanded-fix',
+Test-ScanParm.ps1:11: [String]$Out = 'E:\Repos\SsgTrial\_scratch\spike-scan\check'
+Test-ScanParm.ps1:14: $repo = 'E:\Repos\SsgTrial'
+Probe-L339Cards.ps1:2: $repo = 'E:\Repos\SsgTrial'
+Probe-L339Cards.ps1:13: foreach ($raw in [IO.File]::ReadAllLines('E:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_PBDA04__L339.sgs')) {
+Test-TapeldParm.ps1:10: [String]$Cards = 'E:\Repos\ssg4-work\sgs-cards',
+Test-TapeldParm.ps1:11: [String]$Out = 'E:\Repos\SsgTrial\_scratch\spike-tapeld\check'
+Test-TapeldParm.ps1:14: $repo = 'E:\Repos\SsgTrial'
+Prepare-ScanGroupCc.ps1:7: $s = 'E:\Repos\SsgTrial\_scratch'
+Prepare-ScanGroupCc.ps1:8: $g = "$s\spike-scangroup"
+Prepare-ScanGroupCc.ps1:9: $gn = 'E:\Repos\SsgTrial\Conversion\Pipeline\Generic'
+Prepare-ScanGroupCc.ps1:10: $scripts = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4'
+Prepare-ScanGroupCc.ps1:11: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Prepare-ScanGroupCc.ps1:12: $root = 'E:\AMT_Work\MockTest\SCANGRP_GN'
+Prepare-ScanGroupCc.ps1:13: $prints = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Prints'
+Prepare-ScanGroupCc.ps1:15: $cards = 'E:\Repos\ssg4-work\sgs-cards'
+Prepare-ScanGroupCc.ps1:20: $d = & "$gn\Deploy-GnSkeleton.ps1" -Skeleton 'UTILIT_SCAN_ASCII' -ParmScript "$s\spike-scan\gen\ScanParm.ps1" -Call 'Invoke-ScanHandoff'
+Prepare-ScanGroupCc.ps1:22: $d = & "$gn\Deploy-GnSkeleton.ps1" -Skeleton 'UTILIT_TAPELD_ASCII' -ParmScript "$s\spike-tapeld\gen\TapeldParm.ps1" -Call 'Invoke-TapeldHandoff'
+Prepare-ScanGroupCc.ps1:46: $parmFile = if ($c.Sk -eq 'SCAN') { "$s\spike-scan\check\parm\$($c.Call).parm" } else { "$s\spike-tapeld\check\parm\$($c.Call).parm" }
+Build-ScanGroup.ps1:8: $s = 'E:\Repos\SsgTrial\_scratch'
+Build-ScanGroup.ps1:9: $x = 'E:\Repos\ssg4-work\allcalls\expanded-fix'
+Build-ScanGroup.ps1:10: $g = "$s\spike-scangroup"
+Build-ScanGroup.ps1:33: $refs['TAPELD-RA'] = New-Ref "$s\spike-tapeld\check\expanded\PBDA04_L805.cob" "PROGRAM-ID\.\s+'CFH-COPY'\." 'TAPELD-RA' $tilde
+Build-ScanGroup.ps1:34: $refs['TAPELD-RB'] = New-Ref "$s\spike-tapeld\check\expanded\VIRA12_PI_L590.cob" "PROGRAM-ID\.\s+'CFH-COPY'\." 'TAPELD-RB' $tilde
+Build-ScanGroup.ps1:37: 'CONDIS2-GN' = "$s\spike-condis\gen\ASSURFED-UTILIT-CONDIS2-GN.cob"
+Build-ScanGroup.ps1:38: 'SCAN-GN'    = "$s\spike-scan\gen\ASSURFED-UTILIT-SCAN-GN.cob"
+Build-ScanGroup.ps1:39: 'TAPELD-GN'  = "$s\spike-tapeld\gen\ASSURFED-UTILIT-TAPELD-GN.cob"
+Build-ScanGroup.ps1:47: & E:\Repos\SsgTrial\Conversion\Pipeline\Invoke-CobolConversion.ps1 -CobolFile $files -ProgramId $ids -Name SCANGRP1 -AppName AFBUS_2200COBOL -WorkDir "$g\work1" *> "$g\convert1.log"

@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\generic\\SCANGROUP\\work1\\out\\SCANGRP1.LionSource
+APPNAME = AFBUS_2200COBOL
+GENSET = Default from new application
+SYSOPT = FALSE

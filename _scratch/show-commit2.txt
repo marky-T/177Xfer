@@ -1,0 +1,5 @@
+== clone HEAD
+50d47170 2026-10-09 Merged PR 13331: Update packages, addressed in sprint 2637
+== shallow?
+true
+== is 5fc53fd one of the commits we have (no fetch)

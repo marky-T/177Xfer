@@ -1,0 +1,47 @@
+diff --git "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SymstreamExpressionMigrator.cs" "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamExpressionMigrator.cs"
+index 58f6091..0a9d372 100644
+--- "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SymstreamExpressionMigrator.cs"	
++++ "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamExpressionMigrator.cs"
+@@ -82,21 +82,21 @@ namespace Ecl.SsgConverter {
+           case UnaryOperator.Negative:
+           case UnaryOperator.Positive:
+-            // operand shoud be a primitive
+             SymstreamExpressionPrimitive primitiveOperand = operand as SymstreamExpressionPrimitive;
+-            if (primitiveOperand == null) {
+-              throw new SymstreamException("SymstreamExpressionPrimitive expected.");
+-            }
+-
+-            String sign = String.Empty;
+-            if (ue.UnaryOperator == UnaryOperator.Negative) {
+-              sign = "-";
+-            }
+-
+-            if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
+-              powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
++            if (primitiveOperand != null) {
++              String sign = String.Empty;
++              if (ue.UnaryOperator == UnaryOperator.Negative) {
++                sign = "-";
++              }
++              if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
++                powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
++              } else {
++                powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
++              }
+             } else {
+-              powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
++              // non-primitive operand: emit (0 - expr) or (0 + expr)
++              PsAstExprBlock migratedOperand = Migrate(operand);
++              PSAstOperatorType op = ue.UnaryOperator == UnaryOperator.Negative ? PSAstOperatorType.Substract : PSAstOperatorType.Add;
++              powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(new PsAstExprBinaryOperator(new PsAstExprPrimitive("0"), op, migratedOperand)));
+             }
+-
+             break;
+           case UnaryOperator.Not:
+@@ -294,5 +294,5 @@ namespace Ecl.SsgConverter {
+     /// <param name="s">The string to be split.</param>
+     /// <returns>A list of separated parts.</returns>
+-    private List<String> SplitBracketedReferencesAndLiteralParts (String s) {
++    public List<String> SplitBracketedReferencesAndLiteralParts (String s) {
+ 
+       List<String> parts = new List<String>();

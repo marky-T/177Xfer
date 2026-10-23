@@ -1,0 +1,24 @@
+--- BatchController: 20261021 16:31:07.221 12 Information SSG4_FUSBA_CASES Done Id: 782 Queue: JOB_QUEUE1 (Execution time: 00:00:33:456)
+--- FUSBATEST_78220261021163038922.log
+  2026-10-21 16:30:41 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBC1\FUSPARM (7 lines); FUSIN1=CLE FUSIN2=UNL FUSOUT1=LOA FUSOUT2=SUP; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:49 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBC2\FUSPARM (17 lines); FUSIN1=CLE FUSIN2=UNL FUSOUT1=LOA FUSOUT2=SUP; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:51 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBC3\FUSPARM (11 lines); FUSIN1=CLECON FUSIN2=COUCHE FUSOUT1=COUSUP FUSOUT2=COUBON; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:53 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBD1\FUSPARM (14 lines); FUSIN1=CLE FUSIN2=COMPLET FUSOUT1=ANO; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:55 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBD2\FUSPARM (6 lines); FUSIN1=CLE FUSIN2=COMPLET FUSOUT1=GRP; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:57 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBU1\FUSPARM (11 lines); FUSIN1=MAJ FUSIN2=INP FUSOUT1=OUT; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:30:59 Info: SSG-4 hand-off (FUSBA): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBU2\FUSPARM (11 lines); FUSIN1=UNL FUSIN2=CLE FUSOUT1=SUP; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:31:01 Info: SSG-4 hand-off (FUSBA2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBM1\FUSPARM (9 lines); FUSIN1=MAJ FUSIN2=INP FUSOUT1=OUT; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+  2026-10-21 16:31:03 Info: SSG-4 hand-off (FUSBA2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\FUSBM2\FUSPARM (9 lines); FUSIN1=MAJ FUSIN2=INP FUSOUT1=OUT; Xqt FUSBA -> ASSURFED_UTILIT_FUSBA_GN
+C1     LOA.DAT          6,854 B vs expected     6,854 B: PASS byte-identical
+C1     SUP.DAT         14,006 B vs expected    14,006 B: PASS byte-identical
+C2     LOA.DAT          2,652 B vs expected     2,652 B: PASS byte-identical
+C2     SUP.DAT          2,340 B vs expected     2,340 B: PASS byte-identical
+C3     COUSUP.DAT      17,570 B vs expected    17,570 B: PASS byte-identical
+C3     COUBON.DAT      15,060 B vs expected    15,060 B: PASS byte-identical
+D1     ANO.DAT          3,312 B vs expected     3,312 B: PASS byte-identical
+D2     GRP.DAT          2,622 B vs expected     2,622 B: PASS byte-identical
+U1     OUT.DAT          4,104 B vs expected     4,104 B: PASS byte-identical
+U2     SUP.DAT          6,834 B vs expected     6,834 B: PASS byte-identical
+M1     OUT.DAT         14,632 B vs expected    14,632 B: PASS byte-identical
+M2     OUT.DAT         13,000 B vs expected    13,000 B: PASS byte-identical
+--- 12 of 12 outputs byte-identical

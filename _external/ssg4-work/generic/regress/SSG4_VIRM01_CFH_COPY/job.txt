@@ -1,0 +1,4 @@
+--- BatchController: 20261021 23:51:54.213 12 Information SSG4_VIRM01_CFH_COPY Done Id: 1004 Queue: JOB_QUEUE1 (Execution time: 00:00:08:065)
+--- VIRM01_100420261021235148575.log
+--- 1 of 1 outputs byte-identical
+=== SSG4_VIRM01_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_VIRM01_CFH_COPY\check.txt)

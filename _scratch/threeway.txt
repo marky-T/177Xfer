@@ -1,0 +1,36 @@
+--- R&D history of the converter folder
+50d47170 2026-10-09 Lalu, Louise Rafael (A) | Merged PR 13331: Update packages, addressed in sprint 2637
+SymstreamProcessor.cs: base->R&D 103 lines differ; base->ours 106 lines differ; base==R&D? False
+SymstreamExpressionMigrator.cs: base->R&D 28 lines differ; base->ours 31 lines differ; base==R&D? False
+SymstreamExpressionParser.cs: base->R&D 96 lines differ; base->ours 0 lines differ; base==R&D? False
+--- R&D-only changes vs base (SymstreamProcessor.cs), first 30
+=> // parse the expression
+=> SymstreamExpression ssExpression = m_ExpressionParser.Parse(expression, globalVariables, localVariables, identifierOverS
+=> // migrate the expression to a PsAstExprBlock
+=> return m_ExpressionMigrator.Migrate(ssExpression);
+=> if (!String.IsNullOrEmpty(s)) {
+=> for (; (i < lines.Count) && !lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparis
+=> if ((IsDirective(lines[i], m_DirectivePrefix, out loopId)) && (loopId == DirectiveId.EndDo)) {
+=> Boolean hasExplicitFrom = false;
+=> Boolean hasExplicitTo = false;
+=> hasExplicitFrom = true;
+=> hasExplicitTo = true;
+=> if (i == lines.Count && !(hasExplicitFrom && hasExplicitTo)) {
+=> // no more lines and no *LOOP encountered, and the *INCREMENT is not self-bounded
+=> // A self-bounded *INCREMENT (explicit FROM/TO) needs no closing *LOOP: the
+=> // FROM/TO bounds define the iteration count and the consumed lines form the body.
+=> throw new SymstreamException(String.Format("*ITERATE variable is not the inner most loop variable, this is not supported
+=> throw new SymstreamException(String.Format("*SORT name field too complex: {0}", name));
+=> if (subnames.Length > 1) {
+=> }
+=> // not used in STA sources
+=> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+=> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+=> } else if (!String.IsNullOrEmpty(lines[i])) {
+=> // Output data line (not a directive, not ECL). This includes lines that begin with a bracketed
+=> // reference. In Symstream, any non-directive line is an output statement written verbatim to the
+=> // generated stream, with only [...] references substituted, => emit as literal text (not parsed
+=> // as an expression).
+=> String expanded = m_ExpressionMigrator.WrapSgsReferencesInFunctionCalls(lines[i], true, true);
+=> powerSkel.AddMethodInvoke("DataLineOrNoStatement", new PsAstExprPrimitive(expanded, false));
+<= try {

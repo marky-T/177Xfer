@@ -1,0 +1,78 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\ssg4-work\cobol\UNLOADIS_MULTI__VIGA50_L45.settings
+Applications to convert:
+  - UNLOADISMULTIVIGA50L45
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   UNLOADISMULTIVIGA50L45
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: UNLOADIS.TXT
+WARNING: WAR 000013 RESERVE is obsolete.
+ERROR: ERR 000017 End of statement expected but DATA found
+ERROR: ERR 000018 FILE SECTION must be coded within DATA DIVISION.
+ERROR: ERR 000019 DATA DIVISION expected, but FileSection found.
+1 source(s) read
+
+Analyzing source: UNLOADIS
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+1 source(s) processed
+
+*** PHASE: UNLOADISMULTIVIGA50L45 CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          1         62        62      
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:00:331
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 3
+Warnings: 5
+Todos: 0
+Logs: 12
+
+
+=== Conversion Completed ===
+
+Conversion completed with errors.

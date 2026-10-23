@@ -1,0 +1,8 @@
+parse + old-reference scan: 3 scripts
+--- check\Test-TapeldParm.ps1
+  Cross-check parm vs expansion: MATCH 14
+compare parm: 14/14 identical
+compare expanded: 14/14 identical
+compare cards: 14/14 identical
+compare crosscheck.csv: 1/1 identical
+problems: 0

@@ -1,0 +1,7 @@
+REF_FUSBA2_L766        PASS   MAJ 14, INP 39, OUT 39 records (13 with a MAJ update). OUT.DAT matches the expected file (9672 bytes)
+REF_LOADIS_ASCII       PASS   40 records, ascending keys at offset 6 length 8, into OUTCLOA49. ran to exit 0 (no expected file given)
+REF_UNLOADIS_ASCII     PASS   reads what LOADIS_ASCII wrote; expected = the records unchanged, in key order. OUT.DAT matches the expected file (8240 bytes)
+REF_LOADIS_MULTI       PASS   40 records, ascending keys at offset 164 length 26, into F006GRS. ran to exit 0 (no expected file given)
+REF_UNLOADIS_MULTI     PASS   reads what LOADIS_MULTI wrote; expected = the records unchanged, in key order. OUTVIGA50.DAT matches the expected file (8080 bytes)
+OBS_LOADIS_UNSORTED    NOTE   keys in random order: exit 0, 5 of 40 records written. COBOL would raise INVALID KEY on the first out-of-order key (error message, then abort); this runtime accepts the call and silently skips them.
+REF_CHAB100_ASCII      FAIL   data card 'PRD300403399' from the run stream; expected one 100-byte record. actual 0 bytes, expected 102; first difference at byte 0

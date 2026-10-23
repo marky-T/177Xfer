@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\preflight-next5\\cobol\\EXTEUR\\out\\EXTEUR.LionSource
+APPNAME = EXTEUR
+GENSET = Default from new application
+SYSOPT = FALSE

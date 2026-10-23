@@ -1,0 +1,23 @@
+Build succeeded.
+    0 Error(s)
+Conversion complete: 1 succeeded, 0 failed
+Add | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Add | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Add | SymstreamExpressionPrimitive | LiteralNumber:1
+Add | SymstreamExpressionPrimitive | LiteralNumber:1
+Substract | SymstreamExpressionPrimitive | LiteralNumber:0
+Substract | SymstreamExpressionPrimitive | LiteralNumber:0
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | LiteralNumber:1
+Substract | SymstreamExpressionPrimitive | LiteralNumber:1
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Substract | SymstreamExpressionPrimitive | LiteralNumber:1
+Substract | SymstreamExpressionPrimitive | LiteralNumber:1
+Add | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Add | SymstreamExpressionPrimitive | BracketedReference:[#1]
+Add | SymstreamExpressionPrimitive | LiteralNumber:1
+Add | SymstreamExpressionPrimitive | LiteralNumber:1

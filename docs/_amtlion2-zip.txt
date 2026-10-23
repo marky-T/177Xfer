@@ -1,0 +1,4 @@
+zip: E:\Repos\AmtLion2.zip
+sizeMB=11.7
+entry_count=3766
+top-level entries: AmtLion

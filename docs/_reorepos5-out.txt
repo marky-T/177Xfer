@@ -1,0 +1,4 @@
+2026/09/22 : 13:59:39 : Scanning installation to determine which version has been installed.
+2026/09/22 : 13:59:40 : Current version: AMT 177
+2026/09/22 : 13:59:40 : Lion version ready.
+2026/09/22 : 13:59:40 : Start reo repository.

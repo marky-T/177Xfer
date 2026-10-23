@@ -1,0 +1,58 @@
+== FederaleBatchController.Log 41449
+20261020	16:45:53.168	 11	Information	FederaleBatchController stop request
+20261020	16:45:55.169	 11	Information	Killing all running processes by BatchController Shutdown: FederaleBatchController
+20261020	16:46:12.678	 10	Information	FederaleBatchController (1) Stopped
+**  AmtService started at : 2026-10-20 16:46:37                                                                       **
+20261020	16:46:38.307	 8	Information	FederaleBatchController (1) StartPending
+20261020	16:46:38.422	 8	Information	FederaleBatchController (1) Running
+20261020	16:46:39.202	 18	Information	Starting scan of new/updated/remove forms, report and scripts.
+20261020	16:46:39.227	 11	Information	Start recover.
+20261020	16:46:39.242	 11	Warning	Unhandled job found, ProcessJobId: 373 Name: SSG4_AFPH12_CFH_COPY Status: Running
+20261020	16:46:39.272	 11	Information	SSG4_AFPH12_CFH_COPY Queued Id: 373 Queue: JOB_QUEUE1
+20261020	16:46:39.272	 11	Warning	Unhandled job found, ProcessJobId: 382 Name: SSG4_AFPH12_CFH_COPY Status: Running
+20261020	16:46:39.274	 11	Information	SSG4_AFPH12_CFH_COPY Queued Id: 382 Queue: JOB_QUEUE1
+20261020	16:46:39.279	 11	Information	Recover done.
+20261020	16:46:39.279	 11	Information	FederaleBatchController up and running
+20261020	16:46:39.280	 20	Information	Start statistics calculation thread.
+20261020	16:46:41.566	 11	Information	SSG4_AFPH12_CFH_COPY Error Id: 373 Queue: JOB_QUEUE1 (Execution time: 01:44:32:962)
+20261020	16:46:41.571	 11	Information	SSG4_AFPH12_CFH_COPY Error Id: 382 Queue: JOB_QUEUE1 (Execution time: 01:43:58:888)
+20261020	16:46:41.927	 11	Information	SSG4_AFPH12_CFH_COPY Running Id: 424 Queue: JOB_QUEUE1 Agent: ?
+20261020	16:46:41.961	 11	Information	SSG4_AFPH12_CFH_COPY Queued Id: 424 Queue: JOB_QUEUE1
+20261020	16:46:42.205	 18	Information	This batchcontroller is  marked for synchronizing forms, reports and scripts.
+20261020	16:46:42.205	 18	Information	Reading information from database.
+20261020	16:46:42.215	 18	Information	No auto synchronization configured. Synchronizing stopped.
+20261020	16:46:52.442	 11	Information	CFH_COPY Running Id: 425 Queue: JOB_QUEUE1 Agent: 1
+20261020	16:46:52.444	 11	Information	CFH_COPY Queued Id: 425 Queue: JOB_QUEUE1 Started by: AFPH12
+20261020	16:47:16.710	 11	Information	CFH_COPY Done Id: 425 Queue: JOB_QUEUE1 (Execution time: 00:00:01:017)
+20261020	16:50:20.356	 11	Information	SSG4_VIRM01_CFH_COPY Running Id: 426 Queue: JOB_QUEUE1 Agent: ?
+20261020	16:50:20.378	 11	Information	SSG4_VIRM01_CFH_COPY Queued Id: 426 Queue: JOB_QUEUE1
+20261020	16:50:26.428	 11	Information	CFH_COPY Running Id: 427 Queue: JOB_QUEUE1 Agent: 1
+20261020	16:50:26.428	 11	Information	CFH_COPY Queued Id: 427 Queue: JOB_QUEUE1 Started by: VIRM01
+20261020	16:50:48.474	 11	Information	CFH_COPY Done Id: 427 Queue: JOB_QUEUE1 (Execution time: 00:00:00:099)
+20261020	16:50:50.789	 11	Information	FederaleBatchController stop request
+20261020	16:50:52.790	 11	Information	Killing all running processes by BatchController Shutdown: FederaleBatchController
+20261020	16:51:10.273	 7	Information	FederaleBatchController (1) Stopped
+**  AmtService started at : 2026-10-20 16:51:17                                                                       **
+20261020	16:51:18.042	 8	Information	FederaleBatchController (1) StartPending
+20261020	16:51:18.053	 8	Information	FederaleBatchController (1) Running
+20261020	16:51:18.452	 18	Information	Starting scan of new/updated/remove forms, report and scripts.
+20261020	16:51:18.516	 11	Information	Start recover.
+20261020	16:51:18.537	 11	Warning	Unhandled job found, ProcessJobId: 424 Name: SSG4_AFPH12_CFH_COPY Status: Running
+20261020	16:51:18.600	 11	Information	SSG4_AFPH12_CFH_COPY Queued Id: 424 Queue: JOB_QUEUE1
+20261020	16:51:18.600	 11	Warning	Unhandled job found, ProcessJobId: 426 Name: SSG4_VIRM01_CFH_COPY Status: Running
+20261020	16:51:18.665	 11	Information	SSG4_VIRM01_CFH_COPY Queued Id: 426 Queue: JOB_QUEUE1
+20261020	16:51:18.680	 11	Information	Recover done.
+20261020	16:51:18.680	 11	Information	FederaleBatchController up and running
+20261020	16:51:18.682	 20	Information	Start statistics calculation thread.
+20261020	16:51:21.138	 11	Information	SSG4_AFPH12_CFH_COPY Error Id: 424 Queue: JOB_QUEUE1 (Execution time: 00:04:39:192)
+20261020	16:51:21.164	 11	Information	SSG4_VIRM01_CFH_COPY Error Id: 426 Queue: JOB_QUEUE1 (Execution time: 00:01:00:782)
+20261020	16:51:21.458	 18	Information	This batchcontroller is  marked for synchronizing forms, reports and scripts.
+20261020	16:51:21.458	 18	Information	Reading information from database.
+20261020	16:51:21.489	 18	Information	No auto synchronization configured. Synchronizing stopped.
+20261020	16:56:18.952	 20	Information	Calculating weekly statistics.
+== FederaleBatchController_AGENT_1.Log 2684
+20261020	16:46:52.018	 2	Information	FederaleBatchController_AGENT started
+20261020	16:46:53.462	 13	Information	CFH_COPY Running Id: 425 ThreadId: 11676
+20261020	16:50:26.430	 23	Information	CFH_COPY Running Id: 427 ThreadId: 11676
+20261020	16:51:40.305	 2	Information	Sending stop gracefully.
+20261020	16:51:40.305	 2	Information	BatchController Agent 1 stopped.

@@ -1,0 +1,31 @@
+--- Setup-related processes ---
+
+   Id ProcessName                                   StartTime            MainWin
+                                                                         dowTitl
+                                                                         e
+   -- -----------                                   ---------            -------
+14572 AmtBatchController                                                 
+ 3892 AmtFileController                                                  
+ 4036 AmtPrintService                                                    
+ 6544 AmtTransactionAgent                                                
+ 7860 AmtTransactionAgent                                                
+ 3900 AmtTransactionServer                                               
+ 4012 Asysco.Amt.ControlCenter.BusinessLogic.WebApi                      
+ 5408 Asysco.Amt.ControlCenter.Html5Web.Core                             
+16080 Setup                                         9/22/2026 1:30:41 PM AMT Se…
+
+
+--- recently modified files under Federale_InternalRelease (last 15 min) ---
+
+--- any new top-level folders under E:\Repos ---
+
+Name                     LastWriteTime
+----                     -------------
+177Xfer                  9/17/2026 5:02:12 PM
+177Xfer_FullAMT          9/22/2026 12:55:09 PM
+177Xfer_T3ConvertedSSG   9/22/2026 1:02:22 PM
+177Xfer_Verify           9/22/2026 1:10:40 PM
+AMT                      9/17/2026 3:09:38 PM
+Federale_InternalRelease 9/22/2026 7:22:17 AM
+SsgTrial                 9/8/2026 4:48:05 PM
+

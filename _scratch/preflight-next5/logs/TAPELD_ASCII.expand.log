@@ -1,0 +1,21 @@
+
+[32;1mProgram        : [0mTAPELD_ASCII
+[32;1mCardFile       : [0mE:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_PBDA04__L1
+                 99.sgs
+[32;1mLabels         : [0mINPUT OUTPUT FIELDIN FIELDOUT FIXE STITRE ASCII SCHEMA INFO$
+[32;1mLines          : [0m25
+[32;1mAmtMessages    : [0m1
+[32;1mCardsRewritten : [0m0
+[32;1mFailed         : [0mTrue
+[32;1mError          : [0mCannot convert value "CADR" to type "System.Int32". Error: 
+                 "The input string 'CADR' was not in a correct format." At E:\R
+                 epos\SsgTrial\SsgConverter\Examples\Output\TAPELD_ASCII.ps1:14
+                  char:3
+                 +   Set-Variable -Name "FILLCTR" -Value 
+                 (([Int64]$Parameters[0] - (1 +  .
+                 +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                 ~~~~~~~~~
+[32;1mOutFile        : [0mE:\Repos\SsgTrial\_scratch\preflight-next5\expanded\TAPELD_ASC
+                 II.cob
+
+[33;1mWARNING: SGS-QUOTED-SPECIAL - Quoted subfield contains a space or comma. NOT FIXABLE in the card: AMT's parser splits it into several fields or subfields. Card: FIXE       2,6,'POLICE' 10,7,'BRANCHE' 20,9,'MATRICULE' 32,27,'MULTIPLES COUCHE HIST 31/12'[0m

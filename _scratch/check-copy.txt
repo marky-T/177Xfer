@@ -1,0 +1,71 @@
+== *COPY / *ADD / *PROCESS SKEL$ / @ADD / @SSG in the 20 inputs (file: count)
+^\*\s*COPY\b   total    0   
+^\*\s*ADD\b    total    0   
+^\*\s*PROCESS\b total  100   BABA_ASCII.TXT:2, CFH-COPY_ASCII.TXT:8, CFH-COPY.TXT:8, CHAB100_ASCII.TXT:5, CHABAN_ASCII.TXT:5, FUSBA_ASCII.TXT:11, FUSBA2_ASCII.TXT:8, RECAP.TXT:5, SCAN_ASCII.TXT:6, TABAN_ASCII.TXT:18, TAPELD_ASCII.TXT:24
+^@ADD          total    0   
+^@SSG          total    0   
+^\*\s*DEFINE\b total   58   BABA_ASCII.TXT:5, CFH-COPY_ASCII.TXT:1, CFH-COPY.TXT:1, CHAB100_ASCII.TXT:4, CHABAN_ASCII.TXT:4, FUSBA_ASCII.TXT:7, FUSBA2_ASCII.TXT:7, LOADIS_ASCII.TXT:1, LOADIS_MULTI.TXT:1, RECAP.TXT:2, SCAN_ASCII.TXT:5, TABAN_ASCII.TXT:9, TAPELD_ASCII.TXT:9, UNLOADIS_ASCII.TXT:1, UNLOADIS_MULTI.txt:1
+== what the processor does with *COPY and *ADD
+--- Copy at line 693
+    case DirectiveId.Copy: {
+    //
+    // The *COPY directive adds skeleton images from other files or elements into the SSG skeleton.
+    //
+    // Format:
+    //   *COPY(,options) (file.)(element)
+    //
+    // TODO: Implement (occurs in 2 files only: system\install and system\patch, perhaps we can ignore it).
+    throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+    }
+    
+    // CORRECT
+    case DirectiveId.Correct: {
+    // not used in STA sources
+    throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+--- Add at line 625
+    case DirectiveId.Add: {
+    //
+    // The *ADD directive performs dynamic expansion of the SGS chain.
+    //
+    // Format:
+    //   *ADD(,opts) SGS(,options) specification
+    //
+    Int32 indexOfSgs = lines[i].IndexOf("SGS", StringComparison.OrdinalIgnoreCase);
+    if (indexOfSgs == -1) {
+    throw new SymstreamException(String.Format("SGS keyword expected in *ADD directive (line {0}).", i));
+    }
+    
+    Int32 firstSpaceAfterSgs = lines[i].IndexOf(' ', indexOfSgs);
+    String fileReference = lines[i].Substring(firstSpaceAfterSgs + 1);
+    
+== the 20 *PROCESS calls: names
+BABA_ASCII.TXT: FILLSUB
+BABA_ASCII.TXT: FILLADD
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY_ASCII.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CFH-COPY.TXT: FILER
+CHAB100_ASCII.TXT: CALUN
+CHAB100_ASCII.TXT: CALDEU
+CHAB100_ASCII.TXT: CALMAX
+CHAB100_ASCII.TXT: CALTROI
+CHAB100_ASCII.TXT: CALTROI
+CHABAN_ASCII.TXT: CALUN
+CHABAN_ASCII.TXT: CALDEU
+CHABAN_ASCII.TXT: CALMAX
+CHABAN_ASCII.TXT: CALTROI
+CHABAN_ASCII.TXT: CALTROI
+FUSBA_ASCII.TXT: ADD
+FUSBA_ASCII.TXT: FILLSUB

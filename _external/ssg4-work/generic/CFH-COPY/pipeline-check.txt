@@ -1,0 +1,4 @@
+Cross-check parm vs expansion: DIFF 1, EXPANSION-INCOMPLETE 5, MATCH 41
+  -d_AFID01_L145: DIFF: fixe exp[1,1, ] parm[1,1,+] 
+Model AFPH12_L427: 600 B vs reference 600 B -> PASS
+Model VIRM01_CO_L484: 3425 B vs reference 3425 B -> PASS

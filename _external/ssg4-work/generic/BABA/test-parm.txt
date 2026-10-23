@@ -1,0 +1,5 @@
+Cross-check parm vs expansion: DIFF 3, MATCH 118, NO-PARM 1
+  DEPM01_L139: NO-PARM parm: no INPUT card
+  SOCM02_D1_L83: DIFF: sets exp[ ] parm[W] 
+  SOCM03_D1_L89: DIFF: sets exp[ ] parm[W] 
+  SOCM10_D1_L86: DIFF: sets exp[ ] parm[W] 

@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <!-- Folder with the runtime DLLs (Asysco.Amt.*, ComScript, ...) of your application; change it here or build with -p:AmtRuntimeDir=... -->
+    <AmtRuntimeDir Condition="'$(AmtRuntimeDir)' == ''">E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Programs</AmtRuntimeDir>
+    <!-- Folder with your application's own AFBUS.Application/Database DLLs -->
+    <AmtApplicationDir Condition="'$(AmtApplicationDir)' == ''">E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Application</AmtApplicationDir>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,10 @@
+===== 177  (generation-tree Runtime) =====
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Programs\Asysco.Amt.Runtime.dll | 8.0.26230.0 | AMT 177 - 260818
+  [public] .ctor(System.String, System.String, System.String, System.String, System.Int32, System.Int32, Asysco.Amt.Runtime.Support.AmtCobolTransactionType)
+
+===== 177a (deployed Runtime) =====
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\Asysco.Amt.Runtime.dll | 8.0.26230.50 | AMT 177a - 260818
+  [public] .ctor(System.String, System.String, System.String, System.String, Asysco.Amt.Runtime.Support.AmtCobolTransactionType)
+
+===== REPORT: Assurfed_Utilit_Cfh_Copy =====
+  Report references Asysco.Amt.Runtime version: 8.0.26230.0

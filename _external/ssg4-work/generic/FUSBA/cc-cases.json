@@ -1,0 +1,62 @@
+[
+  {
+    "Case": "C1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC1\\LOA",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C1\\expected\\LOA"
+  },
+  {
+    "Case": "C1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC1\\SUP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C1\\expected\\SUP"
+  },
+  {
+    "Case": "C2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC2\\LOA",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C2\\expected\\LOA"
+  },
+  {
+    "Case": "C2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC2\\SUP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C2\\expected\\SUP"
+  },
+  {
+    "Case": "C3",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC3\\COUSUP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C3\\expected\\COUSUP"
+  },
+  {
+    "Case": "C3",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBC3\\COUBON",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\C3\\expected\\COUBON"
+  },
+  {
+    "Case": "D1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBD1\\ANO",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\D1\\expected\\ANO"
+  },
+  {
+    "Case": "D2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBD2\\GRP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\D2\\expected\\GRP"
+  },
+  {
+    "Case": "U1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBU1\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\U1\\expected\\OUT"
+  },
+  {
+    "Case": "U2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBU2\\SUP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\U2\\expected\\SUP"
+  },
+  {
+    "Case": "M1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBM1\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\M1\\expected\\OUT"
+  },
+  {
+    "Case": "M2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\FUSBM2\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\FUSBA\\cases\\M2\\expected\\OUT"
+  }
+]

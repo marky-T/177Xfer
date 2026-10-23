@@ -1,0 +1,9 @@
+
+Program       CallsAvailable ExpandOk Lines AmtMsgs ConvExit Errors Warnings
+-------       -------------- -------- ----- ------- -------- ------ --------
+CONDIS2_ASCII             18     True 566   0              0      0       22
+EXTEUR                     1     True 715   0              1     99        7
+SCAN_ASCII                19    False 31    0              -      -        -
+TABAN_ASCII               27     True 301   0              0      0        7
+TAPELD_ASCII              14    False 25    1              -      -        -
+

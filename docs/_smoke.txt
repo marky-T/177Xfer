@@ -1,0 +1,25 @@
+=== Build-Release: 2 program(s) requested ===
+Destination: E:\Repos\release_candidates\_smoketest
+
+  included CFH-COPY         tier1=pass lines=45 unmocked=0
+  included UNLOADIS_ASCII   tier1=pass lines=63 unmocked=0
+
+Generating wrappers...
+Generated E:\Repos\release_candidates\_smoketest\1_ConvertedScripts\Wrappers\CFH-COPY-LIVE.ps1 (job: T3_20_CFH_COPY_LIVE)
+Generated E:\Repos\release_candidates\_smoketest\1_ConvertedScripts\Wrappers\UNLOADIS_ASCII-LIVE.ps1 (job: T3_20_UNLOADIS_ASCII_LIVE)
+
+Done - 2 wrapper(s) written to E:\Repos\release_candidates\_smoketest\1_ConvertedScripts\Wrappers
+
+=== Build complete ===
+Included : 2
+Excluded : 0
+Wrappers : 2 (all parse 0)
+Manifest : E:\Repos\release_candidates\_smoketest\build-manifest.json
+
+Next: populate README.md / RELEASE-NOTES.md from the templates, then run Mock-Install-Dryrun.ps1.
+
+Dest                                   Included
+----                                   --------                                 
+E:\Repos\release_candidates\_smoketest {@{Program=CFH-COPY; Original=CFH-COPY.T…
+
+EXIT=0

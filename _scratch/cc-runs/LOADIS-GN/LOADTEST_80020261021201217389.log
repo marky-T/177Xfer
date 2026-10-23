@@ -1,0 +1,259 @@
+LOADTEST started 2026-10-21 20:12:17
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.6
+
+2026-10-21 20:12:17 
+2026-10-21 20:12:17 Amt Sort PS library version: 60.31, date: 2026-04-13
+2026-10-21 20:12:17 [Sort-Init] Initializing Sort 
+2026-10-21 20:12:18 Info:  Script Started: LOADTEST
+2026-10-21 20:12:18 QUAL: LOADTEST
+2026-10-21 20:12:18 QUAL Options: 
+2026-10-21 20:12:18 Msg: LOADIS case SA: static ASSURFED-UTILIT-LOADIS-ASCII
+2026-10-21 20:12:18 Msg Options: 
+2026-10-21 20:12:18 Info:  LOADIS case SA: static ASSURFED-UTILIT-LOADIS-ASCII
+2026-10-21 20:12:18 QUAL: LDSA0
+2026-10-21 20:12:18 QUAL Options: D
+2026-10-21 20:12:18 ASG: B010SINAUTCL
+2026-10-21 20:12:18 ASG Options: A
+2026-10-21 20:12:18 DELETE: OUTCLOA49
+2026-10-21 20:12:18 DELETE Options: C
+2026-10-21 20:12:18 ASG: OUTCLOA49
+2026-10-21 20:12:18 ASG Options: P, U
+2026-10-21 20:12:18 Ignored option P.
+2026-10-21 20:12:18 XQT: ASSURFED-UTILIT-LOADIS-ASCII
+2026-10-21 20:12:18 XQT Options: 
+2026-10-21 20:12:18 
+2026-10-21 20:12:18 End-Xqt
+2026-10-21 20:12:18 Starting Cobol program: ASSURFED_UTILIT_LOADIS_ASCII
+20:12:18 NB.RECORDS ECRITS00000000040
+2026-10-21 20:12:19 End Report. Time 00:00:00
+2026-10-21 20:12:19 FREE: B010SINAUTCL
+2026-10-21 20:12:19 FREE Options: 
+2026-10-21 20:12:19 FREE: OUTCLOA49
+2026-10-21 20:12:19 FREE Options: 
+2026-10-21 20:12:19 Msg: LOADIS case LA: LOADIS call via CFH-COPY-GN + index
+2026-10-21 20:12:19 Msg Options: 
+2026-10-21 20:12:19 Info:  LOADIS case LA: LOADIS call via CFH-COPY-GN + index
+2026-10-21 20:12:19 QUAL: LDSA1
+2026-10-21 20:12:19 QUAL Options: D
+2026-10-21 20:12:19 ASG: B010SINAUTCL
+2026-10-21 20:12:19 ASG Options: A
+2026-10-21 20:12:19 DELETE: OUTCLOA49
+2026-10-21 20:12:19 DELETE Options: C
+2026-10-21 20:12:19 ASG: OUTCLOA49
+2026-10-21 20:12:19 ASG Options: P, U
+2026-10-21 20:12:19 Ignored option P.
+2026-10-21 20:12:19 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_LOADIS_ASCII (Options=IA, SgsFile=P$SGS\LDLA)
+2026-10-21 20:12:19 Msg: NB.RECORDS ECRITS 40; index \EXTRACTS\TPF$8002026102120121805\LDSA1\OUTCLOA49.DAT.Index (key 6,8, written: True) from \EXTRACTS\LDSA1\B010SINAUTCL
+2026-10-21 20:12:19 Msg Options: 
+2026-10-21 20:12:19 Info:  NB.RECORDS ECRITS 40; index \EXTRACTS\TPF$8002026102120121805\LDSA1\OUTCLOA49.DAT.Index (key 6,8, written: True) from \EXTRACTS\LDSA1\B010SINAUTCL
+2026-10-21 20:12:19 FREE: SGSPARM
+2026-10-21 20:12:19 FREE Options: 
+2026-10-21 20:12:19 File not assigned or USEed: Ignored
+2026-10-21 20:12:19 FREE: CFHPARM
+2026-10-21 20:12:19 FREE Options: 
+2026-10-21 20:12:19 File not assigned or USEed: Ignored
+2026-10-21 20:12:19 ASG: CFHPARM
+2026-10-21 20:12:19 ASG Options: A
+2026-10-21 20:12:19 USE: SGSPARM,CFHPARM
+2026-10-21 20:12:19 Msg: SSG-4 hand-off (LOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSA1\CFHPARM (2 lines); CFHIN=B010SINAUTCL CFHOUT=OUTCLOA49; Xqt LOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:19 Msg Options: 
+2026-10-21 20:12:19 Info:  SSG-4 hand-off (LOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSA1\CFHPARM (2 lines); CFHIN=B010SINAUTCL CFHOUT=OUTCLOA49; Xqt LOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:19 XQT: TPF$.LOADIS
+2026-10-21 20:12:19 XQT Options: 
+2026-10-21 20:12:19 
+2026-10-21 20:12:19 End-Xqt
+2026-10-21 20:12:19 Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_GN
+20:12:20 *CFH-COPY  FIN*
+20:12:20 *NB-ENREG-LUS =00000000040
+20:12:20 000000
+2026-10-21 20:12:20 End Report. Time 00:00:01
+2026-10-21 20:12:21 Msg: LOADIS case LA: program done
+2026-10-21 20:12:21 Msg Options: 
+2026-10-21 20:12:21 Info:  LOADIS case LA: program done
+2026-10-21 20:12:21 Msg: index after the program: True
+2026-10-21 20:12:21 Msg Options: 
+2026-10-21 20:12:21 Info:  index after the program: True
+2026-10-21 20:12:21 FREE: B010SINAUTCL
+2026-10-21 20:12:21 FREE Options: 
+2026-10-21 20:12:21 Msg: LOADIS case UA: UNLOADIS call via CFH-COPY-GN
+2026-10-21 20:12:21 Msg Options: 
+2026-10-21 20:12:21 Info:  LOADIS case UA: UNLOADIS call via CFH-COPY-GN
+2026-10-21 20:12:21 USE: FSCR001ATO,OUTCLOA49
+2026-10-21 20:12:21 DELETE: OUT
+2026-10-21 20:12:21 DELETE Options: C
+2026-10-21 20:12:21 ASG: OUT
+2026-10-21 20:12:21 ASG Options: P, U
+2026-10-21 20:12:21 Ignored option P.
+2026-10-21 20:12:21 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_UNLOADIS_ASCII (Options=IA, SgsFile=P$SGS\LDUA)
+2026-10-21 20:12:21 FREE: SGSPARM
+2026-10-21 20:12:21 FREE Options: 
+2026-10-21 20:12:21 FREE: CFHPARM
+2026-10-21 20:12:21 FREE Options: 
+2026-10-21 20:12:21 File not assigned or USEed: Ignored
+2026-10-21 20:12:21 ASG: CFHPARM
+2026-10-21 20:12:21 ASG Options: A
+2026-10-21 20:12:21 USE: SGSPARM,CFHPARM
+2026-10-21 20:12:21 Msg: SSG-4 hand-off (UNLOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSA1\CFHPARM (2 lines); CFHIN=FSCR001ATO CFHOUT=OUT; Xqt UNLOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:21 Msg Options: 
+2026-10-21 20:12:21 Info:  SSG-4 hand-off (UNLOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSA1\CFHPARM (2 lines); CFHIN=FSCR001ATO CFHOUT=OUT; Xqt UNLOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:21 XQT: TPF$.UNLOADIS
+2026-10-21 20:12:21 XQT Options: 
+2026-10-21 20:12:21 
+2026-10-21 20:12:21 End-Xqt
+2026-10-21 20:12:21 Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_GN
+20:12:22 *CFH-COPY  FIN*
+20:12:22 *NB-ENREG-LUS =00000000040
+20:12:22 000000
+2026-10-21 20:12:22 End Report. Time 00:00:01
+2026-10-21 20:12:22 FREE: OUT
+2026-10-21 20:12:22 FREE Options: 
+2026-10-21 20:12:23 FREE: OUTCLOA49
+2026-10-21 20:12:23 FREE Options: 
+2026-10-21 20:12:23 Msg: LOADIS case SM: static ASSURFED-UTILIT-LOADIS-MULTI
+2026-10-21 20:12:23 Msg Options: 
+2026-10-21 20:12:23 Info:  LOADIS case SM: static ASSURFED-UTILIT-LOADIS-MULTI
+2026-10-21 20:12:23 QUAL: LDSM0
+2026-10-21 20:12:23 QUAL Options: D
+2026-10-21 20:12:23 ASG: INVIGA50
+2026-10-21 20:12:23 ASG Options: A
+2026-10-21 20:12:23 DELETE: F006GRS
+2026-10-21 20:12:23 DELETE Options: C
+2026-10-21 20:12:23 ASG: F006GRS
+2026-10-21 20:12:23 ASG Options: P, U
+2026-10-21 20:12:23 Ignored option P.
+2026-10-21 20:12:23 XQT: ASSURFED-UTILIT-LOADIS-MULTI
+2026-10-21 20:12:23 XQT Options: 
+2026-10-21 20:12:23 
+2026-10-21 20:12:23 End-Xqt
+2026-10-21 20:12:23 Starting Cobol program: ASSURFED_UTILIT_LOADIS_MULTI
+20:12:25 NB.RECORDS ECRITS00000000040
+2026-10-21 20:12:25 End Report. Time 00:00:02
+2026-10-21 20:12:25 FREE: INVIGA50
+2026-10-21 20:12:25 FREE Options: 
+2026-10-21 20:12:25 FREE: F006GRS
+2026-10-21 20:12:25 FREE Options: 
+2026-10-21 20:12:25 Msg: LOADIS case LM: LOADIS call via CFH-COPY-GN + index
+2026-10-21 20:12:25 Msg Options: 
+2026-10-21 20:12:25 Info:  LOADIS case LM: LOADIS call via CFH-COPY-GN + index
+2026-10-21 20:12:25 QUAL: LDSM1
+2026-10-21 20:12:25 QUAL Options: D
+2026-10-21 20:12:25 ASG: INVIGA50
+2026-10-21 20:12:25 ASG Options: A
+2026-10-21 20:12:25 DELETE: F006GRS
+2026-10-21 20:12:25 DELETE Options: C
+2026-10-21 20:12:25 ASG: F006GRS
+2026-10-21 20:12:25 ASG Options: P, U
+2026-10-21 20:12:25 Ignored option P.
+2026-10-21 20:12:25 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_LOADIS_MULTI (Options=IA, SgsFile=P$SGS\LDLM)
+2026-10-21 20:12:25 Msg: NB.RECORDS ECRITS 40; index \EXTRACTS\TPF$8002026102120121805\LDSM1\F006GRS.DAT.Index (key 164,26, written: True) from \EXTRACTS\LDSM1\INVIGA50
+2026-10-21 20:12:25 Msg Options: 
+2026-10-21 20:12:25 Info:  NB.RECORDS ECRITS 40; index \EXTRACTS\TPF$8002026102120121805\LDSM1\F006GRS.DAT.Index (key 164,26, written: True) from \EXTRACTS\LDSM1\INVIGA50
+2026-10-21 20:12:25 FREE: SGSPARM
+2026-10-21 20:12:25 FREE Options: 
+2026-10-21 20:12:25 FREE: CFHPARM
+2026-10-21 20:12:25 FREE Options: 
+2026-10-21 20:12:25 File not assigned or USEed: Ignored
+2026-10-21 20:12:25 ASG: CFHPARM
+2026-10-21 20:12:25 ASG Options: A
+2026-10-21 20:12:25 USE: SGSPARM,CFHPARM
+2026-10-21 20:12:25 Msg: SSG-4 hand-off (LOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSM1\CFHPARM (2 lines); CFHIN=INVIGA50 CFHOUT=F006GRS; Xqt LOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:25 Msg Options: 
+2026-10-21 20:12:25 Info:  SSG-4 hand-off (LOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSM1\CFHPARM (2 lines); CFHIN=INVIGA50 CFHOUT=F006GRS; Xqt LOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:25 XQT: TPF$.LOADIS
+2026-10-21 20:12:25 XQT Options: 
+2026-10-21 20:12:25 
+2026-10-21 20:12:25 End-Xqt
+2026-10-21 20:12:25 Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_GN
+20:12:27 *CFH-COPY  FIN*
+20:12:27 *NB-ENREG-LUS =00000000040
+20:12:27 000000
+2026-10-21 20:12:27 End Report. Time 00:00:01
+2026-10-21 20:12:27 Msg: LOADIS case LM: program done
+2026-10-21 20:12:27 Msg Options: 
+2026-10-21 20:12:27 Info:  LOADIS case LM: program done
+2026-10-21 20:12:27 Msg: index after the program: True
+2026-10-21 20:12:27 Msg Options: 
+2026-10-21 20:12:27 Info:  index after the program: True
+2026-10-21 20:12:27 FREE: INVIGA50
+2026-10-21 20:12:27 FREE Options: 
+2026-10-21 20:12:27 Msg: LOADIS case UM: UNLOADIS call via CFH-COPY-GN
+2026-10-21 20:12:27 Msg Options: 
+2026-10-21 20:12:27 Info:  LOADIS case UM: UNLOADIS call via CFH-COPY-GN
+2026-10-21 20:12:27 DELETE: OUTVIGA50
+2026-10-21 20:12:27 DELETE Options: C
+2026-10-21 20:12:27 ASG: OUTVIGA50
+2026-10-21 20:12:27 ASG Options: P, U
+2026-10-21 20:12:27 Ignored option P.
+2026-10-21 20:12:27 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_UNLOADIS_MULTI (Options=IA, SgsFile=P$SGS\LDUM)
+2026-10-21 20:12:27 FREE: SGSPARM
+2026-10-21 20:12:27 FREE Options: 
+2026-10-21 20:12:27 FREE: CFHPARM
+2026-10-21 20:12:27 FREE Options: 
+2026-10-21 20:12:27 File not assigned or USEed: Ignored
+2026-10-21 20:12:27 ASG: CFHPARM
+2026-10-21 20:12:27 ASG Options: A
+2026-10-21 20:12:27 USE: SGSPARM,CFHPARM
+2026-10-21 20:12:27 Msg: SSG-4 hand-off (UNLOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSM1\CFHPARM (2 lines); CFHIN=F006GRS CFHOUT=OUTVIGA50; Xqt UNLOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:27 Msg Options: 
+2026-10-21 20:12:27 Info:  SSG-4 hand-off (UNLOADIS): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\LDSM1\CFHPARM (2 lines); CFHIN=F006GRS CFHOUT=OUTVIGA50; Xqt UNLOADIS -> ASSURFED_UTILIT_CFH_COPY_GN
+2026-10-21 20:12:27 XQT: TPF$.UNLOADIS
+2026-10-21 20:12:27 XQT Options: 
+2026-10-21 20:12:27 
+2026-10-21 20:12:27 End-Xqt
+2026-10-21 20:12:27 Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_GN
+20:12:29 *CFH-COPY  FIN*
+20:12:29 *NB-ENREG-LUS =00000000040
+20:12:29 000000
+2026-10-21 20:12:29 End Report. Time 00:00:01
+2026-10-21 20:12:29 FREE: OUTVIGA50
+2026-10-21 20:12:29 FREE Options: 
+2026-10-21 20:12:29 FREE: F006GRS
+2026-10-21 20:12:29 FREE Options: 
+2026-10-21 20:12:29 Msg: LOADIS case PA: probe of the file controller's AddIndexKey API
+2026-10-21 20:12:29 Msg Options: 
+2026-10-21 20:12:29 Info:  LOADIS case PA: probe of the file controller's AddIndexKey API
+2026-10-21 20:12:29 QUAL: LDSA2
+2026-10-21 20:12:29 QUAL Options: D
+2026-10-21 20:12:29 ASG: B010SINAUTCL
+2026-10-21 20:12:29 ASG Options: A
+2026-10-21 20:12:50 Msg: LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSA2\PROBE6.DAT' because it is being used by another process.
+2026-10-21 20:12:50 Msg Options: 
+2026-10-21 20:12:50 Info:  LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSA2\PROBE6.DAT' because it is being used by another process.
+2026-10-21 20:12:50 Msg: LOADIS probe: 0 records via AddIndexKey(6,8)/CreateRecordFile into \EXTRACTS\LDSA2\PROBE6.DAT; key info: KEY,0,8; index exists: False
+2026-10-21 20:12:50 Msg Options: 
+2026-10-21 20:12:50 Info:  LOADIS probe: 0 records via AddIndexKey(6,8)/CreateRecordFile into \EXTRACTS\LDSA2\PROBE6.DAT; key info: KEY,0,8; index exists: False
+2026-10-21 20:13:11 Msg: LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSA2\PROBE7.DAT' because it is being used by another process.
+2026-10-21 20:13:11 Msg Options: 
+2026-10-21 20:13:11 Info:  LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSA2\PROBE7.DAT' because it is being used by another process.
+2026-10-21 20:13:11 Msg: LOADIS probe: 0 records via AddIndexKey(7,8)/CreateRecordFile into \EXTRACTS\LDSA2\PROBE7.DAT; key info: KEY,0,8; index exists: False
+2026-10-21 20:13:11 Msg Options: 
+2026-10-21 20:13:11 Info:  LOADIS probe: 0 records via AddIndexKey(7,8)/CreateRecordFile into \EXTRACTS\LDSA2\PROBE7.DAT; key info: KEY,0,8; index exists: False
+2026-10-21 20:13:11 FREE: B010SINAUTCL
+2026-10-21 20:13:11 FREE Options: 
+2026-10-21 20:13:11 Msg: LOADIS case PM: probe of the file controller's AddIndexKey API
+2026-10-21 20:13:11 Msg Options: 
+2026-10-21 20:13:11 Info:  LOADIS case PM: probe of the file controller's AddIndexKey API
+2026-10-21 20:13:11 QUAL: LDSM2
+2026-10-21 20:13:11 QUAL Options: D
+2026-10-21 20:13:11 ASG: INVIGA50
+2026-10-21 20:13:11 ASG Options: A
+2026-10-21 20:13:32 Msg: LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSM2\PROBE164.DAT' because it is being used by another process.
+2026-10-21 20:13:32 Msg Options: 
+2026-10-21 20:13:32 Info:  LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSM2\PROBE164.DAT' because it is being used by another process.
+2026-10-21 20:13:32 Msg: LOADIS probe: 0 records via AddIndexKey(164,26)/CreateRecordFile into \EXTRACTS\LDSM2\PROBE164.DAT; key info: KEY,0,26; index exists: False
+2026-10-21 20:13:32 Msg Options: 
+2026-10-21 20:13:32 Info:  LOADIS probe: 0 records via AddIndexKey(164,26)/CreateRecordFile into \EXTRACTS\LDSM2\PROBE164.DAT; key info: KEY,0,26; index exists: False
+2026-10-21 20:13:53 Msg: LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSM2\PROBE165.DAT' because it is being used by another process.
+2026-10-21 20:13:53 Msg Options: 
+2026-10-21 20:13:53 Info:  LOADIS probe: AddRecord 1 failed: AddRecord: FileController error: Exception The process cannot access the file 'E:\EXTRACTS\LDSM2\PROBE165.DAT' because it is being used by another process.
+2026-10-21 20:13:53 Msg: LOADIS probe: 0 records via AddIndexKey(165,26)/CreateRecordFile into \EXTRACTS\LDSM2\PROBE165.DAT; key info: KEY,0,26; index exists: False
+2026-10-21 20:13:53 Msg Options: 
+2026-10-21 20:13:53 Info:  LOADIS probe: 0 records via AddIndexKey(165,26)/CreateRecordFile into \EXTRACTS\LDSM2\PROBE165.DAT; key info: KEY,0,26; index exists: False
+2026-10-21 20:13:53 FREE: INVIGA50
+2026-10-21 20:13:53 FREE Options: 
+2026-10-21 20:13:53 FIN
+2026-10-21 20:13:53 
+2026-10-21 20:13:53 End Job. Start: 2026-10-21 20:12:17
+2026-10-21 20:13:53          End:   2026-10-21 20:13:53
+2026-10-21 20:13:53 Info:  Script Done: LOADTEST

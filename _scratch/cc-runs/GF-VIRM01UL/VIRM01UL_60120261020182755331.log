@@ -1,0 +1,33 @@
+VIRM01UL started 2026-10-20 18:27:55
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.6
+
+2026-10-20 18:27:55 
+2026-10-20 18:27:55 Amt Sort PS library version: 60.31, date: 2026-04-13
+2026-10-20 18:27:55 [Sort-Init] Initializing Sort 
+2026-10-20 18:27:55 Info:  Script Started: VIRM01UL
+2026-10-20 18:27:55 QUAL: ASSURFED
+2026-10-20 18:27:55 QUAL Options: 
+2026-10-20 18:27:55 LABEL: LAB110
+2026-10-20 18:27:55 Msg: 110. CFH-COPY SUR SORTIE FICHIER BABA
+2026-10-20 18:27:55 Msg Options: 
+2026-10-20 18:27:56 Info:  110. CFH-COPY SUR SORTIE FICHIER BABA
+2026-10-20 18:27:56 ASG: I006KTMAJ1
+2026-10-20 18:27:56 ASG Options: A
+2026-10-20 18:27:56 DELETE: F006KTMAJ3
+2026-10-20 18:27:56 DELETE Options: C
+2026-10-20 18:27:56 ASG: F006KTMAJ3
+2026-10-20 18:27:56 ASG Options: P, U
+2026-10-20 18:27:56 Ignored option P.
+2026-10-20 18:27:56 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII (Options=IA, SgsFile=P$SGS\VIRM01UL)
+2026-10-20 18:27:56 Error:  Error trapped:   The property 'Count' cannot be found on this object. Verify that the property exists.
+2026-10-20 18:27:56 Error:  at Get-CfhCopyParmLines, <No file>: line 25
+at Invoke-CfhCopyHandoff, <No file>: line 82
+at <ScriptBlock>, \SCRIPTS\SSG4\ASSURFED_UTILIT\UTILIT_CFH-COPY_ASCII.ps1: line 7
+at Invoke-Ssg, \SCRIPTS\Libraries\AmtPsEclLib.psm1: line 10841
+at <ScriptBlock>, \SCRIPTS\SSG4\ASSURFED_F999\RUN\SSG4_VIRM01UL_CFH_COPY.PS1: line 16
+at <ScriptBlock>, <No file>: line 1
+2026-10-20 18:27:56 Error:  AFBUS_2200COBOL_AMT  - VIRM01UL : Script aborted.
+2026-10-20 18:27:56 
+2026-10-20 18:27:56 End Job. Start: 2026-10-20 18:27:55
+2026-10-20 18:27:56          End:   2026-10-20 18:27:56

@@ -1,0 +1,27 @@
+Server  : VMFEDPE08   Database: AMT_MOCKSYS   User: LionDev
+Running Company.AFBUS_2200COBOL.BusinessLogic.Assurfed_Utilit_Chab100_Ascii.Assurfed_Utilit_Chab100_Ascii in application AFBUS_2200COBOL
+15:27:12  Started revision: 1.0 AMT version: 1.0.0.0 Parameters: /I:E:\AMT_Work\MockSystem\Run_TRY_CHAB100_NAMES\Sys.ini /APP:AFBUS_2200COBOL /TESTRUN
+15:27:14  Program execution time: 00:00:01:718
+15:27:14  Done
+Program exit code: 0
+--- extract after
+
+Name       Length LastWriteTime
+----       ------ -------------
+CAR            82 10/19/2026 3:22:24 PM
+CAR.DAT        82 10/19/2026 3:22:24 PM
+CAR.TXT        82 10/19/2026 3:22:24 PM
+FILEIN.DAT      0 10/19/2026 3:27:14 PM
+
+
+--- newest files anywhere under MockSystem\Run_TRY and MockTest
+
+FullName                                 Length
+--------                                 ------
+E:\AMT_Work\MockTest\Extracts\FILEIN.DAT      0
+
+
+--- Sys.ini paths
+
+SYSTEMBASE[7mPATH[0m=E:\AMT_Work\MockSystem\
+

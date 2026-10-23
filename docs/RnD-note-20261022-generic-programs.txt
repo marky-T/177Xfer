@@ -1,0 +1,44 @@
+To: R&D (AMT)            From: SSG-4 trial            Date: 2026-10-22
+Subject: Generic utility programs for the converted runstreams - what we built and six questions before hand-over
+
+WHAT WE BUILT
+Your converted runstreams call a utility skeleton and then start it by name, e.g.
+  Invoke-Ssg -Skeleton "../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII" -SgsFile "P$SGS\VIRM01"   ...   Xqt "R, W" (".CFH-COPY")
+Instead of one program per call (over 200 distinct card sets in the six utilities we surveyed, e.g. BABA 98 sets for 122 calls), we built 7 generic C# programs: BABA, FUSBA, CHABAN, CONDIS2, SCAN, TAPELD and CFH-COPY
+(CFH-COPY also serves LOADIS and UNLOADIS; the hand-off writes the .Index). A hand-off inserted right after param() in each converted skeleton, followed by
+return, writes the call's cards to a parameter file; the program reads that file at run time. The cards of a call are therefore data, not code.
+
+PROVEN
+On a copy of the client set-up (Control Center, Keycloak, our own trial application), 14 jobs ran one at a time and were byte-compared: 5 CFH-COPY calls, BABA 11/11,
+CHABAN 8/8, FUSBA 12/12, CONDIS2 6/6, SCAN/TAPELD 8 prints, LOADIS/UNLOADIS all 15 real calls (data and index), and both INVALID KEY abort cases.
+Offline, the parameter file of every real call is compared with the independent expansion of that call (e.g. BABA 118 of 122 match exactly).
+
+WHAT WE WOULD HAND OVER (one folder, SHA256 manifest, nothing installed by us)
+  Binaries\Programs        7 DLLs (built for the 177a runtime)       Binaries\Application   application DLLs
+  Scripts\...\ASSURFED_UTILIT   13 skeletons with the hand-off, 9 .inc includes
+  CloneReports.xml         the Xqt name -> program entries           Sources\CSharp   7 projects + GenericPrograms.sln (Visual Studio)
+  INSTALL.txt, RELEASE-NOTES.txt, MAINTENANCE.txt
+
+QUESTIONS
+1. Xqt name -> program. We map the name a script passes to Xqt (after Check-ReportName) to the generic program with CloneReports in AmtSettings.xml:
+     <CloneReports><OrginalReport Name="ASSURFED_UTILIT_BABA_GN" Clone="BABA"/> ...</CloneReports>
+   Is this the intended mechanism, and will it stay? Is the spelling "OrginalReport" stable?
+2. One name, several skeletons. LOADIS, UNLOADIS and CFH_COPY all map to one program; BABA, FUSBA, ... map one name to one program. Do you see any problem
+   with several names pointing to the same program? End-Xqt keeps AlternativeReportName for recovery points: is that what you intend for a cloned name?
+3. Where do the files go for FEDERALE_APP? (a) Which AmtSettings.xml do the converted runstreams read; our test set uses its own copy under Scripts\SSG4\Settings
+   with AppName set. (b) Our skeleton is your converted skeleton with the hand-off inserted, so it replaces your file of the same name: is
+   Scripts\ASSURFED_UTILIT the right place, or should it live beside yours? (The CC job scan does not register .inc, so the includes use that extension.)
+4. UseUnicode. We run with UseUnicode = False: with True, Asy-Cat pre-creates UTF-16 files (T3-039). Is False acceptable for the client set-up?
+5. Application and namespace. Our programs are Company.AFBUS_2200COBOL.BusinessLogic.<Program> with their own AFBUS_2200COBOL.Application/Database DLLs, registered as
+   AFBUS_2200COBOL_AMT. Yours are Federale.AFBUS.BusinessLogic.<Program> in AFBUS_AMT\Development\Programs\<Program>\<Program>.csproj with AFBUS.Application/Database.
+   For FEDERALE_APP, which namespace and application DLL set should the generic programs use, and may they sit as projects beside yours?
+   We can regenerate with the namespace you choose, or the Federale developers can rename it in Visual Studio.
+6. Runtime and tooling. LionDev 177 generates a base(...) call with generation date and time; the 177a runtime (8.0.26230.50) has the constructor without them.
+   The package C# already has the two arguments removed (marked REBUILT-FOR-177A). Is a matching generator planned, or should the Federale developers
+   keep the C# as delivered? They will maintain the PowerShell and C# in Visual Studio and will not convert again.
+
+TECHNICAL POINT FOR YOUR TOOLS
+Every variable-length input file of a generic program must be declared VARYING 1 TO 4001 (T3-040), otherwise cards longer than the declared maximum are cut.
+
+OPEN ON OUR SIDE
+Whether to include the Control Center regression kit (14 jobs, data, expected outputs) in the hand-over. RECAP is not part of this work (database access not converted, T3-027).

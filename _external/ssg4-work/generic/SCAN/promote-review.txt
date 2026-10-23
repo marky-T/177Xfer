@@ -1,0 +1,8 @@
+parse + old-reference scan: 2 scripts
+--- check\Test-ScanParm.ps1
+  Cross-check parm vs expansion + IF card: MATCH 19
+  By length / limit: 100/0 x1, 132/0 x1, 300/0 x2, 300/100 x1, 304/0 x1, 500/0 x1, 500/10 x5, 80/0 x1, 900/10 x6
+  Expansions without the IF statement (T3-045): 0
+compare parm: 19/19 identical
+compare crosscheck.csv: 1/1 identical
+problems: 0

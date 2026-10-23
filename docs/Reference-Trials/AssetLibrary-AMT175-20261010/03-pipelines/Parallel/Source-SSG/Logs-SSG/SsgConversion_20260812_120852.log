@@ -1,0 +1,9 @@
+﻿2026-08-12 12:08:52 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:08:52 [0] Phase     : SSG to PowerShell Converter
+2026-08-12 12:08:52 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:08:52 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-12 12:08:52 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-12 12:08:52 [0] Log       : SSG source files found: 4
+2026-08-12 12:08:52 [0] Error     :   Error converting ASSURFED_UTILIT_COMPARE2_ASCIIExpigated6: This is unexpected. DirectiveId: End  Line: 5
+2026-08-12 12:08:52 [0] Log       : 
+2026-08-12 12:08:52 [0] Log       : Conversion complete: 0 succeeded, 1 failed

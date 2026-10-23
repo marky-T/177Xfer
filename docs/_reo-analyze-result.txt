@@ -1,0 +1,2 @@
+HasExited: False
+Still running after 15s - will check again shortly, not killing yet.

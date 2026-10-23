@@ -1,0 +1,15 @@
+E:/Repos/SsgTrial/SsgConverter/Release-RnD-20261014/SsgConverter-vs-develop.patch:712: trailing whitespace.
+using System;
+warning: 1 line adds whitespace errors.
+Patch verified: applying it to develop reproduces all 7 shipped files.
+Package: E:\Repos\SsgTrial\SsgConverter\Release-RnD-20261014
+    15272  CHANGELIST.md
+     2540  readme.txt
+    44440  SsgConverter-vs-develop.patch
+    28356  Migration Tools\SsgConverter\SsgConverter\SymstreamExpressionMigrator.cs
+    24053  Migration Tools\SsgConverter\SsgConverter\SymstreamExpressionParser.cs
+    93295  Migration Tools\SsgConverter\SsgConverter\SymstreamProcessor.cs
+     2926  Migration Tools\SsgConverter\SsgConverterConsole\Os2200ContentConverter.cs
+     9254  Migration Tools\SsgConverter\SsgConverterConsole\Program.cs
+      491  Migration Tools\SsgConverter\SsgConverterGui\App.xaml.cs
+    11566  Migration Tools\SsgConverter\SsgConverterGui\MainWindow.xaml.cs

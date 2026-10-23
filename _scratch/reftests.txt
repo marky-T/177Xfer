@@ -1,0 +1,4 @@
+REF_FUSBA2_L766      PASS   MAJ 14, INP 39, OUT 39 records (13 with a MAJ update). OUT.DAT matches the expected file (9672 bytes)
+REF_LOADIS_L141      PASS   40 records with ascending keys at offset 6 length 8. ran to exit 0 (no expected file given)
+REF_UNLOADIS_L473    PASS   reads the indexed file LOADIS wrote; expected = the input records unchanged, in key order. OUT.DAT matches the expected file (8240 bytes)
+OBS_LOADIS_UNSORTED  NOTE   keys in random order: exit 0, 3 of 40 records written. COBOL would raise INVALID KEY on the first out-of-order key (error message, then abort); this runtime accepts the call and silently skips them.

@@ -1,0 +1,26 @@
+Check-LoadisAbort.ps1:4: $work = 'E:\Repos\ssg4-work\generic\LOADIS'
+Check-LoadisAbort.ps1:6: $logs = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs'
+Check-LoadisAbort.ps1:20: 'no index left'         = -not (Test-Path "E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\$($c.Qual)\OUTCLOA49.DAT.Index")
+Check-LoadisAll.ps1:3: param([String]$Work = 'E:\Repos\ssg4-work\generic\LOADIS', [String]$Evidence = "$Work\cc-runs\ALL")
+Check-LoadisAll.ps1:4: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Check-LoadisCc.ps1:3: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Check-LoadisCc.ps1:4: $ref = 'E:\AMT_Work\MockTest\Ref'
+Check-LoadisCc.ps1:5: $ev = 'E:\Repos\ssg4-work\generic\LOADIS\cc-runs\CASES'
+Prepare-LoadisAbort.ps1:4: $work = 'E:\Repos\ssg4-work\generic\LOADIS'
+Prepare-LoadisAbort.ps1:5: $scripts = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4'
+Prepare-LoadisAbort.ps1:6: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Prepare-LoadisAbort.ps1:8: $recs = [Collections.Generic.List[String]]::new([String[]][IO.File]::ReadAllLines('E:\AMT_Work\MockTest\Ref\LOADIS_ASCII-UNLOADIS_ASCII\B010SINAUTCL.bin', $enc))
+Prepare-LoadisAbort.ps1:20: Copy-Item 'E:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_CLOA49__L141.sgs' "$x\P`$SGS\LDXC" -Force
+Prepare-LoadisAll.ps1:5: $work = 'E:\Repos\ssg4-work\generic\LOADIS'
+Prepare-LoadisAll.ps1:6: $scripts = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4'
+Prepare-LoadisAll.ps1:7: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Prepare-LoadisAll.ps1:8: $cardRoot = 'E:\Repos\ssg4-work\sgs-cards'
+Prepare-LoadisAll.ps1:9: $root = 'E:\AMT_Work\MockTest\LOADIS_ALL'
+Prepare-LoadisCc.ps1:8: $work = 'E:\Repos\ssg4-work\generic\LOADIS'
+Prepare-LoadisCc.ps1:9: $scripts = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4'
+Prepare-LoadisCc.ps1:10: $x = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'
+Prepare-LoadisCc.ps1:11: $cards = 'E:\Repos\ssg4-work\sgs-cards\calls'
+Prepare-LoadisCc.ps1:12: $ref = 'E:\AMT_Work\MockTest\Ref'
+Test-IndexWriter.ps1:5: $cc = 'E:\Repos\ssg4-work\generic\LOADIS\ref'
+Test-IndexWriter.ps1:6: $work = 'E:\AMT_Work\MockTest\LOADIS_W'
+Test-IndexWriter.ps1:8: $ext = 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts'

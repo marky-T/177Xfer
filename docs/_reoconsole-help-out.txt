@@ -1,0 +1,67 @@
+===== AMT .NET REO started =====
+License valid.
+
+Reo commandline options are: 
+  /?                          This help screen.
+  /REMOVEINDEXES              All indexes will be removed from the database.
+  /REMOVETRIGGERS             All triggers will be removed from the database.
+  /FILLIDENTITYFIELDS         A value will be automatically assigned to an 
+                              identity field in an Oracle database.
+                              This option should only be used with the utmost
+                              care.
+  /FORCEFIRSTUSER             Ensures the Reorganization will start even when
+                              there are database connections.
+                              This option should only be used with the utmost
+                              care.
+  /SKIPUPDATEFLAGS            Flag fields belonging to conditional logic will NOT
+                              be updated when a change in the conditional logic is
+                              found.
+                              This option should only be used with the utmost care
+                              since it leaves the index in an unknown state.
+  /SKIPNULLTEST               When in the reorganize an NOT NULL constraint is
+                              added to an existing field all existing records will
+                              be scanned and filled with a not null value.
+                              When this option is used the Reorganize might fail
+                              when the NOT NULL constraint is added and records
+                              containing null values exist.
+  /KEEPALLTABLES              Any tables no longer in the schema will be retained
+                              after the Reorganize.
+  /KEEPALLSEQUENCES           Any sequences no longer in the schema will be retained
+                              after the Reorganize.
+  /KEEPALLSTOREDPROCEDURES    Any stored procedures no longer in the schema will
+                              be retained after the Reorganize.
+                              It is advised to set this option in the database
+                              definition in the Control Center instead of using
+                              this command line option.
+  /KEEPALLVIEWS               Any view no longer in the schema will be retained
+                              after the Reorganize.
+  /WHOLETABLEUPDATE           When used the whole table will be updated at once
+                              instead of in blocks.
+                              (In some cases this will produce a vast time
+  /REOSERVICEADDRESS=<Server>:<port>
+                              Connect to an Amt Reorganize Service. Using this option
+                              will automatically set the Reorganizer to batch mode.
+  /APP=name                   Name can have the following values:
+                                - ALL: All databases will be Reorganized
+                                - SYSTEM: The system database will be Reorganized
+                                - application name: The database belonging to this
+                                  application will be Reorganized
+                                - database name: The specified database will be
+                                  reorganized
+  /ANALYZEONLY                Analyze only the application, reports the differences
+                              and won't change the database (only available in batch mode)
+  /THREADS=#threads           The Reorganize will be executed using the specified
+                              Number of threads. Allowed values are from 1 to 4.
+  /USEFILECONTROLLER          Use the Amt Filecontroller for writing the log files
+  /LOG=logfile                Logs the messages to the given logfile.
+  /SKIPWARNINGS=T/F           Skip the warning messages.
+  /JAVA                       Use the Reo for the Java version of Amt.
+
+Exit codes
+0 - Success, no errors
+1 - Error no applications
+2 - Error parameters were invalid
+3 - A reo error has occurred, check log for error description
+4 - Error opening log file
+5 - Unknown application
+Reo done.

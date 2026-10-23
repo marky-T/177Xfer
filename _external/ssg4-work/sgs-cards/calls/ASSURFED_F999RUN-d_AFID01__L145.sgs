@@ -1,0 +1,6 @@
+ASCII
+INPUT      INA,8,10
+OUTPUT     OUTA,8,10
+FIXE       1,1,'+'
+FIELDIN    2,7
+FIELDOUT   2,7

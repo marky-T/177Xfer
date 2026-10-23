@@ -1,0 +1,3 @@
+path_exists=True
+--- top-level entries ---
+--- recursive (depth 4) ---

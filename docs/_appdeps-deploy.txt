@@ -1,0 +1,10 @@
+--- Programs folder now ---
+AFBUS_2200COBOL.Application.deps.json
+AFBUS_2200COBOL.Application.dll
+AFBUS_2200COBOL.Application.pdb
+AFBUS_2200COBOL.Database.deps.json
+AFBUS_2200COBOL.Database.dll
+AFBUS_2200COBOL.Database.pdb
+Assurfed_Utilit_Cfh_Copy.deps.json
+Assurfed_Utilit_Cfh_Copy.dll
+Assurfed_Utilit_Cfh_Copy.pdb

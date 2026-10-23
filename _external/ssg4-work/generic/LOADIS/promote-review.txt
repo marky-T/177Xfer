@@ -1,0 +1,22 @@
+parse + old-reference scan: 8 scripts
+--- check\Test-IndexWriter.ps1
+  ASCII: 40 keys | DAT same | Index same
+  MULTI: 40 keys | DAT same | Index same
+  reversed: 1 keys accepted, INVALID KEY at record 2 (R9751885)
+--- cc\Prepare-LoadisCc.ps1
+  UTILIT_UNLOADIS_ASCII.ps1 hand-off deployed, parse errors: 0
+  UTILIT_UNLOADIS_MULTI.ps1 hand-off deployed, parse errors: 0
+  SSG4_LOADIS_CASES.ps1 written, parse errors: 0
+--- cc\Prepare-LoadisAll.ps1
+  LD14 UNLOADIS EXPD05 L27   FSCR001ATO    -> ISCR001ATO    len 204 key 6,8 records 34
+  LD15 UNLOADIS VIGA50 L45   F006GRS       -> OUTVIGA50     len 200 key 164,26 records 35
+  SSG4_LOADIS_ALL.ps1 written, 15 cases, parse errors: 0
+--- cc\Prepare-LoadisAbort.ps1
+  UNSORTED  LDXU: expect INVALID KEY at record 4, key R0768246
+  DUPLICATE LDXD: expect INVALID KEY at record 6, key R1293291
+  SSG4_LOADIS_ABORT.ps1 written, parse errors: 0
+job SSG4_LOADIS_CASES.ps1 unchanged: True
+job SSG4_LOADIS_ALL.ps1 unchanged: True
+job SSG4_LOADIS_ABORT.ps1 unchanged: True
+deployed LoadisParm.inc == Generic\LOADIS source: True
+problems: 0

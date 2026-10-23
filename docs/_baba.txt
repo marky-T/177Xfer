@@ -1,0 +1,28 @@
+=== Tier-1 trial: BABA_ASCII ===
+Script : E:\Repos\SsgTrial\SsgConverter\Examples\Output\BABA_ASCII.ps1
+Values : E:\Repos\SsgTrial\SsgConverter\Trials\BABA_ASCII\sgs-values.json (13 mocked keys)
+Emitted lines   : 103
+Unmocked GetSgsValue lookups: 11
+  - GetSgsValue: no mock value for 'INPUT,1,1' - defaulted to 0
+  - GetSgsValue: no mock value for 'OUTPUT,1,1' - defaulted to 0
+  - GetSgsValue: no mock value for 'INPUT,1,1,3' - defaulted to 0
+  - GetSgsValue: no mock value for 'INPUT,1,1,2' - defaulted to 0
+  - GetSgsValue: no mock value for 'INPUT,1,1,2' - defaulted to 0
+  - GetSgsValue: no mock value for 'OUTPUT,1,1,3' - defaulted to 0
+  - GetSgsValue: no mock value for 'OUTPUT,1,1,2' - defaulted to 0
+  - GetSgsValue: no mock value for 'OUTPUT,1,1,2' - defaulted to 0
+  - GetSgsValue: no mock value for 'SEQERROR,1,1,1' - defaulted to 0
+  - GetSgsValue: no mock value for 'SEQERROR,1,1,1' - defaulted to 0
+  - GetSgsValue: no mock value for 'OUTPUT,1,1' - defaulted to 0
+Call-ExternalProgram calls  : 3
+  - MAP [N] ASSURFED\UTILITASCII\MAP
+  - SetC  0/t1
+  - Hdg N
+RESULT: completed without a thrown exception
+
+Program   : BABA_ASCII
+Failed    : False
+Error     : 
+OutFile   : E:\Repos\SsgTrial\SsgConverter\Trials\BABA_ASCII\out\BABA_ASCII.out.txt
+LineCount : 103
+

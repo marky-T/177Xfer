@@ -1,0 +1,12 @@
+
+[32;1mProgram        : [0mSCAN_ASCII
+[32;1mCardFile       : [0mE:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_CCSA14__L7
+                 6.sgs
+[32;1mLabels         : [0mASCII INPUT IF
+[32;1mLines          : [0m116
+[32;1mAmtMessages    : [0m0
+[32;1mCardsRewritten : [0m0
+[32;1mFailed         : [0mFalse
+[32;1mError          : [0m
+[32;1mOutFile        : [0mE:\Repos\SsgTrial\_scratch\fix-T3-045\expanded\SCAN_ASCII.cob
+

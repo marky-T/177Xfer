@@ -1,0 +1,39 @@
+﻿20260704 02:01 Starting
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-03-montant.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Loading application TRIAL03MONTANT under AFBUS_COBOL
+20260704 02:01 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: MONTANT 1.0 as 1.1
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-04-afbus-cobol.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5 Application option may only be in the 1e file
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: MONTANT 1.0 as 1.1
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-04-montant.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5 Application option may only be in the 1e file
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: MONTANT 1.0 as 1.1
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-04-montant-afbus.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5 Application option may only be in the 1e file
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: MONTANT 1.0 as 1.1
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-05-lectis.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5 Application option may only be in the 1e file
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: ASSURFED_UTILIT_LECTIS_MULT(P) 1.0 as 1.0
+20260704 02:01 Loading file: C:\Amt\Migration\CobolConvert\output\trial-06-sort-fichout-1.LionSource
+20260704 02:01 File version: 6
+20260704 02:01 Exported with program version: 
+20260704 02:01 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.5 Application option may only be in the 1e file
+20260704 02:01 Loading DMS Schema:  1.0 as 1.4
+20260704 02:01 Loading Cobol Program: SORT-FICHOUT-1 1.0 as 1.1
+20260704 02:01 Done in 00:00:00

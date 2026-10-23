@@ -1,0 +1,15 @@
+--- BatchController: 20261021 01:22:09.628 11 Information SSG4_CONDIS_CASES Done Id: 714 Queue: JOB_QUEUE1 (Execution time: 00:00:20:361)
+--- CONDTEST_71420261021012154311.log
+  2026-10-21 01:21:56 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\COND42\CONPARM (12 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+  2026-10-21 01:21:58 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CONDT\CONPARM (13 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+  2026-10-21 01:21:59 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CONBD\CONPARM (16 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+  2026-10-21 01:22:01 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CONUL\CONPARM (52 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+  2026-10-21 01:22:04 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CONUE\CONPARM (312 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+  2026-10-21 01:22:05 Info: SSG-4 hand-off (CONDIS2): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CONVG\CONPARM (9 lines); FILEIN=FILEIN FILEOUT=FILEOUT; Xqt CONDIS2 -> ASSURFED_UTILIT_CONDIS2_GN
+D42    OUTP.DAT         8,442 B vs expected     8,442 B: PASS byte-identical
+DT     OUTP.DAT         4,320 B vs expected     4,320 B: PASS byte-identical
+BD     OUTP.DAT         2,424 B vs expected     2,424 B: PASS byte-identical
+UL     OUTP.DAT         3,030 B vs expected     3,030 B: PASS byte-identical
+UE     OUTP.DAT         5,092 B vs expected     5,092 B: PASS byte-identical
+VG     OUTP.DAT         2,330 B vs expected     2,330 B: PASS byte-identical
+--- 6 of 6 outputs byte-identical

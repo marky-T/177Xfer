@@ -1,0 +1,191 @@
+==== 655
+  655:           }
+  656:           m_VariableSessionDataPool = AmtGlobalDataPool.ActivateNewSessionDataPool(true);
+  657:           m_ProgramException = false;
+  658:           m_SysDbs = AmtDbsSupport.CreateOpenDb(true, m_RequestInfo.ObjectName /*Program name*/, m_DatabaseList, m_RequestInfo.Configuration, true);
+  659:           m_RequestInfo.SysDbs = m_SysDbs;
+  660:           m_Dbs = AmtDbsSupport.CreateOpenDb(false, m_RequestInfo.ObjectName /*Program name*/, m_DatabaseList, m_RequestInfo.Configuration, true, true);
+  661:           base.Init(m_RequestInfo, m_Dbs);
+  662:           if (m_ReportNo == -1) {
+  663:             if (m_TestRun) {
+  664:               m_ReportNo = AmtRepSupport.CreateReport(m_SysDbs, m_ObjectName, m_ManuallyGlobalParam, m_ManuallyProgramParam, AmtOS.DoGetStn(), AmtIdentityTranslation.User, m_RequestInfo.AppOptions.DefaultLanguage, AmtJobState.Run_Debug, m_RequestInfo);
+  665:               if (!String.IsNullOrEmpty(m_ManuallyPrinter)) {
+  666:                 using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs))
+  667:                 using (AmtSysPrintSetting sysPrintSetting = new AmtSysPrintSetting(m_SysDbs)) {
+  668:                   if (sysProcessJobs.Select(m_ReportNo)) {
+  669:                     sysProcessJobs.RequestId = m_ReportNo;
+  670:                     sysProcessJobs.Change();
+  671:                   }
+  672:                   sysPrintSetting.Printer = m_ManuallyPrinter;
+  673:                   sysPrintSetting.PrintIdName = "DEFAULT";
+  674:                   sysPrintSetting.RequestId = m_ReportNo;
+  675:                   sysPrintSetting.CreateDateTime = AmtDateSupport.Now;
+  676:                   sysPrintSetting.Add();
+  677:                 }
+  678:               }
+  679:             } else {
+  680:               m_ReportNo = 0;
+  681:               // Throw expection so also cleanup occures. (cannot be started manually anymore)
+  682:               throw new AmtException("Aborted: Program may not be started manually [user=" + AmtIdentityTranslation.User + "]");
+  683:             }
+  684:           }
+  685:           String repParam = String.Empty;
+  686:           using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs)) {
+  687:             if (!sysProcessJobs.Select(m_ReportNo)) {
+  688:               throw new AmtException("Process [" + m_ReportNo.ToString() + "] not found");
+  689:             } else {
+  690:               sysProcessJobs.ProcessId = AmtOS.GetCurrentProcessId();
+  691:               sysProcessJobs.Change();
+  692:             }
+  693:             m_RequestInfo.RequestID = sysProcessJobs.RequestId;
+  694:             m_RequestInfo.ProcessJobId = sysProcessJobs.ProcessJobId;
+  695:             m_RequestInfo.CreateCobolSubprogramList(m_RequestInfo.Configuration.ApplicationName);
+  696:             m_RequestInfo.CobolProgramOptions = new AmtCobolProgramOptions();
+  697:             FillCobolProgramOptions(m_RequestInfo.CobolProgramOptions);
+  698: 
+  699:             m_SysItems.Init(m_Dbs.DbName);
+  700:             m_SysItems.InitStatus();
+  701:             FillSystemSettings(sysProcessJobs);
+  702: 
+  703:             m_CommAreaLength = m_RequestInfo.CobolProgramOptions.CommAreaLength;
+  704:             m_GlbDef = new AmtCobolGlobalDefinitions(this, m_CommAreaVar, m_CommAreaLength);
+  705:             m_GlbDefinitions = m_GlbDef;
+==== 1535
+ 1535:         result = false;
+ 1536:       }
+ 1537:       if (!result) {
+ 1538:         ExitAll();
+ 1539:       }
+ 1540:       return (result);
+ 1541:     } // Commit
+ 1542: 
+ 1543:     /// <summary>
+ 1544:     /// Flag the sysProcessJob table that this is a restartable cobol Program.
+ 1545:     /// </summary>
+ 1546:     private void MarkSysJobAsRestartableCobolProgram () {
+ 1547:       using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs)) {
+ 1548:         if (sysProcessJobs.Select(m_ReportNo)) {
+ 1549:           if (!sysProcessJobs.CriticalReport) {
+ 1550:             sysProcessJobs.CriticalReport = true;
+ 1551:             sysProcessJobs.Change();
+ 1552:           }
+ 1553:         }
+ 1554:       }
+ 1555: 
+ 1556:     } // MarkSysJobAsRestartableCobolProgram
+ 1557: 
+ 1558:     /// <summary>
+ 1559:     /// AMT-VS Syntax description
+ 1560:     /// <para></para>
+ 1561:     /// 	<para></para>
+ 1562:     /// 	<code lang="VB"><![CDATA[SaveRecovery(<waitTime>, <saveRecoveryNumber>, <noFreeOutput>, <recoveryValue>)]]></code>
+ 1563:     /// 	<para></para>
+ 1564:     /// 	<para></para>
+ 1565:     /// 	<para></para>
+ 1566:     /// 	<code lang="C#"><![CDATA[SaveRecovery(<waitTime>, <saveRecoveryNumber>, <noFreeOutput>, <recoveryValue>);]]></code>
+ 1567:     /// 	<para></para>
+ 1568:     /// 	<para></para>
+ 1569:     /// 	<para><b>Returned value type</b></para>
+ 1570:     /// 	<para></para>
+==== 1895
+ 1895:             request.JobName = m_RequestInfo.JobName;
+ 1896:             request.Kind = AmtRequestKind.Request;
+ 1897:             request.Origin = m_SysItems.Repname;
+ 1898:             request.ProcId = AmtOS.ReturnProcessId();
+ 1899:             if (msgs.Length > 4000) {
+ 1900:               request.Request = "..." + msgs.ToString().Substring(msgs.Length - 3997);
+ 1901:             } else {
+ 1902:               request.Request = msgs.ToString();
+ 1903:             }
+ 1904:             request.ProcessJobId = m_RequestInfo.ProcessJobId;
+ 1905:             request.Confirmation = String.Empty;
+ 1906:             request.Station = m_RequestInfo.Station;
+ 1907:             request.User = m_RequestInfo.UserCode;
+ 1908:             request.Add();
+ 1909:             // Adjust status of the program to waiting for input
+ 1910:             if (RequestInfo.ObjectType == m_ObjectType) {
+ 1911:               using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs)) {
+ 1912:                 sysProcessJobs.Status = AmtJobState.WaitForInputRequest;
+ 1913:                 sysProcessJobs.WaitForJob = "Waiting input request";
+ 1914:                 sysProcessJobs.ChangeByProcessJobId(RequestInfo.SysItems.RepUnique.ToInt32());
+ 1915:               }
+ 1916:             }
+ 1917:             m_SysDbs.Commit(); // Commit even if we where in transaction so that the control center CAN update the record.
+ 1918:             requestId = request.RequestId;
+ 1919:             // Now wait for a reply.
+ 1920:             if (m_InputFirstTime) {
+ 1921:               m_InputFirstTime = false;
+ 1922:               SmeAndJobSummary("INPUT", ">> Waiting for user input...");
+ 1923:             } else if (m_RequestInfo.SysItems.Debug) {
+ 1924:               System.Diagnostics.Trace.Write("LIONDEBUG:MESSAGE:INPUT: >> Waiting for user input...");
+ 1925:             }
+ 1926:           }
+ 1927:           break;
+ 1928:         } catch (Exception ex) {
+ 1929:           if (retryPolicy.ShouldRetry(ex)) {
+ 1930:             m_SysDbs.ConnectionLost();
+ 1931:           } else {
+ 1932:             throw;
+ 1933:           }
+ 1934:         }
+ 1935:       }
+ 1936:       using (AmtSysRequest request = new AmtSysRequest(m_SysDbs)) {
+ 1937:         Int64 startWaitAt = AmtCodeTimer.GetTimeInMs();
+ 1938:         AmtRetryPolicy retryPolicy = m_SysDbs.GetSingleRetryPolicy();
+ 1939:         for (Int32 tries = 1; ; tries++) {
+ 1940:           try {
+ 1941:             m_SysDbs.CheckOpenConnection();
+ 1942: 
+ 1943:             if (request.Select(requestId)) {
+ 1944:               if ((request.Kind == AmtRequestKind.Confirmation) ||
+ 1945:                   (request.Kind == AmtRequestKind.Cancelled)) {
+ 1946:                 // Adjust status of the report back to running.
+ 1947:                 if (RequestInfo.ObjectType == m_ObjectType) {
+ 1948:                   using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs)) {
+ 1949:                     sysProcessJobs.Status = AmtJobState.Running;
+ 1950:                     sysProcessJobs.WaitForJob = String.Empty;
+ 1951:                     sysProcessJobs.ChangeByProcessJobId(RequestInfo.SysItems.RepUnique.ToInt32());
+ 1952:                   }
+ 1953:                 }
+ 1954:                 if (request.Kind == AmtRequestKind.Confirmation) {
+ 1955:                   SmeAndJobSummary("Input(" + request.User + "," + request.Station + ")>>", request.Confirmation);
+ 1956:                   return request.Confirmation;
+ 1957:                 } else {
+ 1958:                   SmeAndJobSummary("Input(" + request.User + "," + request.Station + ") request cancelled", request.Confirmation);
+ 1959:                   m_RequestInfo.SysItems.ResOk.Assign(false);
+ 1960:                   return String.Empty;
+ 1961:                 }
+ 1962:               }
+ 1963:             }
+ 1964:             if (maxWaitInSeconds > 0) {
+ 1965:               if (AmtCodeTimer.TimeDiffNowInMs(startWaitAt) > (maxWaitInSeconds * 1000)) {
+ 1966:                 // Adjust status of the program back to running.
+ 1967:                 if (RequestInfo.ObjectType == m_ObjectType) {
+ 1968:                   using (AmtSysProcessJob sysProcessJobs = new AmtSysProcessJob(m_SysDbs)) {
+ 1969:                     sysProcessJobs.Status = AmtJobState.Running;
+ 1970:                     sysProcessJobs.WaitForJob = String.Empty;
+ 1971:                     sysProcessJobs.ChangeByProcessJobId(RequestInfo.SysItems.RepUnique.ToInt32());
+ 1972:                   }
+ 1973:                 }
+ 1974:                 request.Kind = AmtRequestKind.Cancelled;
+ 1975:                 request.Confirmation = AmtLocalise.Message(AmtLocalise.InputRequestTimeoutContinue);
+ 1976:                 request.Change();
+ 1977:                 Sme(AmtLocalise.Message(AmtLocalise.InputRequestTimeout), String.Empty, RequestInfo.Station);
+ 1978:                 m_RequestInfo.SysItems.ResOk.Assign(false);
+ 1979:                 return String.Empty;
+ 1980:               }
+ 1981:             }
+ 1982:             Int32 waitTime = 10000; // 10 seconds
+ 1983:             if (tries < 60) {
+ 1984:               waitTime = 500; // First 30 seconds try at .5 seconds interfall
+ 1985:             } else if (tries < 120) {
+ 1986:               waitTime = 2500; // For the first 30 to 60 seconds try at 2.5 seconds interfall
+ 1987:             }
+ 1988:             if (maxWaitInSeconds > 0) {
+ 1989:               Int64 timeLeft = (maxWaitInSeconds * 1000) - AmtCodeTimer.TimeDiffNowInMs(startWaitAt);
+ 1990:               if (timeLeft < 500) {
+ 1991:                 waitTime = 500;
+ 1992:               } else if (waitTime > timeLeft) {
+ 1993:                 waitTime = (Int32)timeLeft;
+ 1994:               }
+ 1995:             }

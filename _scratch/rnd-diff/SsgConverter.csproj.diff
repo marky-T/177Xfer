@@ -1,0 +1,32 @@
+diff --git "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SsgConverter.csproj" "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SsgConverter.csproj"
+index fd48a77..03f6699 100644
+--- "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SsgConverter.csproj"	
++++ "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SsgConverter.csproj"
+@@ -15,7 +15,5 @@
+     <RootNamespace>Ecl.SsgConverter</RootNamespace>
+     <AssemblyName>SsgConverter</AssemblyName>
+-    <SignAssembly>true</SignAssembly>
+-    <AssemblyOriginatorKeyFile>..\..\..\amt.net\security\signingkeys\sourceproprietary.snk</AssemblyOriginatorKeyFile>
+-    <DelaySign>false</DelaySign>
++    <SignAssembly>false</SignAssembly>
+   </PropertyGroup>
+ 
+@@ -26,11 +24,12 @@
+   </PropertyGroup>
+ 
++  <!-- ProjectReferences swapped for shipped binaries in _deps (source projects not available) -->
+   <ItemGroup>
+-    <Compile Include="..\..\..\Amt.Net\AmtAssemblyInfo.cs" Link="Properties\AmtAssemblyInfo.cs" />
+-  </ItemGroup>
+-
+-  <ItemGroup>
+-    <ProjectReference Include="..\..\PowerShellGenerator\PowerShellGenerator.csproj" />
+-    <ProjectReference Include="..\..\ConverterSupport\ConverterSupport.csproj" />
++    <Reference Include="PowerShellGenerator">
++      <HintPath>..\_deps\PowerShellGenerator.dll</HintPath>
++    </Reference>
++    <Reference Include="ConverterSupport">
++      <HintPath>..\_deps\ConverterSupport.dll</HintPath>
++    </Reference>
+   </ItemGroup>
+ 

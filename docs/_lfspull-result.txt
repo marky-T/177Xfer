@@ -1,0 +1,9 @@
+--- git lfs version ---
+git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)
+
+--- pulling AMT_177.dat, Release_8.0.26230.0.7z, Setup.exe ---
+lfs pull exit=0
+--- file sizes after pull ---
+AMT_177.dat = 134 bytes
+Release_8.0.26230.0.7z = 134 bytes
+Setup.exe = 57,237,694 bytes

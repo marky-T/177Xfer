@@ -1,0 +1,15 @@
+﻿20261021 23:15 Starting
+20261021 23:15 Loading file: E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource
+20261021 23:15 File version: 6
+20261021 23:15 Exported with program version: 
+20261021 23:15 Loading application AFBUS_2200COBOL under AFBUS_2200COBOL
+20261021 23:15 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.20
+20261021 23:15 Loading DMS Schema:  1.0 as 1.20
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-BABA-GN 1.0 as 1.5
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-CFH-COPY-GN 1.0 as 1.4
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-CHABAN-GN 1.0 as 1.1
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-CONDIS2-GN 1.0 as 1.2
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-FUSBA-GN 1.0 as 1.2
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-SCAN-GN 1.0 as 1.2
+20261021 23:15 Loading Cobol Program: ASSURFED-UTILIT-TAPELD-GN 1.0 as 1.2
+20261021 23:15 Done in 00:00:00

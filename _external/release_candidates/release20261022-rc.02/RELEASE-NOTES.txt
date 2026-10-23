@@ -1,0 +1,37 @@
+Generic utility programs (SSG-4, MT-043) for FEDERALE_APP, packaged 20261022-1634 from CC-Federale (FEDERALE_APP).
+Nothing in this folder has been copied into FEDERALE_APP; see INSTALL.txt.
+
+Programs (revision in LionDev 177, built from the imported LionSources, rebuilt for the 177a runtime):
+  ASSURFED_UTILIT_CFH_COPY_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_BABA_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_FUSBA_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_CHABAN_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_CONDIS2_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_SCAN_GN  rev 1.0.0.0
+  ASSURFED_UTILIT_TAPELD_GN  rev 1.0.0.0
+
+LionSource imported into LionDev 177 (what the programs were generated from, LionDev application AFBUS):
+  GNFED  SHA256 8D43EC5C6C6FB620749B8130E0A8E2BF62805F12E580BEA7F00DD5CA4AAB28A3
+
+Control Center proof of this build in FEDERALE_APP:
+  SSG4F_AFPH12_CFH_COPY job 1084 Done 2026-10-22 14:58:51; started CFH_COPY job 1085 = ASSURFED_UTILIT_CFH_COPY_GN (this build), Done; IAFB012FAI.DAT 600 B byte-identical to the AFPH12_L427 reference
+  The other 6 programs are the same COBOL (GNFED == GNBUILD apart from the application name), generated for AFBUS and not run under FEDERALE_APP; their CC proof is the CC-Trial regression below
+  Skeletons and includes: byte-identical to the set used in the CC-Trial regression
+
+Control Center regression of the same COBOL (earlier AFBUS_2200COBOL build in CC-Trial, not this build), result of the last run of each job:
+  2026-10-21 23:51:34  PASS, before the last delivery  SSG4_AFPH12_CFH_COPY
+  2026-10-21 23:52:13  PASS, before the last delivery  SSG4_VIRM01_CFH_COPY
+  2026-10-21 23:52:16  PASS, before the last delivery  SSG4_NEWNAME_CFH_COPY
+  2026-10-21 23:52:33  PASS, before the last delivery  SSG4_VIRM01UL_CFH_COPY
+  2026-10-21 23:52:49  PASS, before the last delivery  SSG4_VIRJ01PP_CFH_COPY
+  2026-10-21 23:53:18  PASS, before the last delivery  SSG4_BABA_CASES
+  2026-10-21 23:53:50  PASS, before the last delivery  SSG4_CHABAN_CASES
+  2026-10-21 23:54:21  PASS, before the last delivery  SSG4_FUSBA_CASES
+  2026-10-21 23:54:47  PASS, before the last delivery  SSG4_CONDIS_CASES
+  2026-10-21 23:55:25  PASS, before the last delivery  SSG4_SCANGRP_PRINTS
+  2026-10-21 23:55:50  PASS, before the last delivery  SSG4_LOADIS_CASES
+  2026-10-21 23:56:32  PASS, before the last delivery  SSG4_LOADIS_ALL
+  2026-10-21 23:56:47  PASS, before the last delivery  SSG4_LOADIS_ABORT [UNSORTED]
+  2026-10-21 23:57:17  PASS, before the last delivery  SSG4_LOADIS_ABORT [DUPLICATE]
+
+Not included: the test jobs (ASSURFED_F999\RUN\SSG4_*), their data, and the reference programs (*_RA, *_RB, *_RD, *_RV).

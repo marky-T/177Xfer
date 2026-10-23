@@ -1,0 +1,36 @@
+total lines: 12285
+--- line 867 ---
+            A      Format 3 only. Create a TOC SGS for the absolute element specified. An error
+                   occurs if the absolute element specified is not in the file. Requires the E option.
+            B      Format 4 only. Do not create an SGS for blank images. Requires the L option.
+            C      Formats 2 and 3 only. Create the short form of the TOC SGSs. The short form is
+                   shown in 3.1.1.
+            E      Format 3 only. Create a TOC SGS for each non-deleted element specified.
+--- line 1148 ---
+
+        t
+               is the number of blank lines at the top of page. Can be supplied by a numeric
+               string of 1, 2, or 3 characters.
+
+        b
+--- line 1152 ---
+
+        b
+               is the number of blank lines at the bottom of the page. Can be supplied by a
+               numeric string of 1, 2, or 3 characters.
+
+        lpi
+--- line 1580 ---
+                                     marks; otherwise, 0.
+                                     A subfield consisting of four single
+                                     quotation marks is a zero-length, double-
+                                     quoted subfield. Such a subfield is
+                                     undetectable unless it is the last subfield
+                                     in a field. Such an observation is
+--- line 10031 ---
+        0033 00     *. that contains the element entry: E1/V1 into TCFU2, E3/V3 into
+        0034 00     *. TCFU4, E5/V5 into TCFU3.    Since element entries are removed as
+        0035 00     *. they are processed, the "Yes" line next to TCFU1 is a blank line
+        0036 00     *. after this process is complete. Next, all element entries in
+        0037 00     *. TCFU2 are "bubbled" into "later" TCFU[i] sets, just as TCFU1 was
+        0038 00     *. handled. If at any time no TCFUi can be found that contains the

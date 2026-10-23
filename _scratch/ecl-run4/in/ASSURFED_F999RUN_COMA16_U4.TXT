@@ -1,0 +1,151 @@
+@RUN,M/T   COMA16,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@ . 
+@SYM       PRINT$,1,PRSP
+@ . 
+@MSG       *===========================================================*
+@MSG       **      ARCHIVAGE DES MOUVEMENTS COMMISSIONS               **
+@MSG       **      MODULE COMA16/U4                                   **
+@MSG       **      DECHARGEMENT DE LA TABLE HIS_MVT_CMM               **
+@MSG       *===========================================================*
+@ . 
+@ .        P04047 : VANKE : 23/11/2006 : NOUVELLE TABLE HIS_MVT_CMM 
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.COMA16/U4
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     COMA16U4.,F///5000   
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE - RESTART  
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB010: MSG 010. DECHARGEMENT DE LA TABLE HIS_MVT_CMM - UNLOAD 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@DELETE,C      IUNLMVTHMC.  
+@CAT,P         IUNLMVTHMC.,F/191/POS/262143 
+@ . !!!!!!!!!!!!
+@ .                        EXTERNAL 108947 AFLINC 23/11/2006  202   
+@ . !!!!!!!!!!!!
+@ASG,A         IUNLMVTHMC.  
+@USE       UNL,IUNLMVTHMC.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE HIS_MVT_CMM IN EXCLUSIVE RETRIEVAL MODE; 
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   HIS_MVT_CMM
+  ORDER  BY 
+     NO_HIS_MVT_CMM     ASCENDING   
+  FORMAT EXTERNAL;  
+UNLOCK HIS_MVT_CMM; 
+END THREAD; 
+EXIT;   
+@FREE          IUNLMVTHMC.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB017:   MSG 017. TRI FICHIER DE SELECTION             - TRI  
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ERS       TPF$.
+@ASG,A         RCOMA15HMC.  
+@USE       INA,RCOMA15HMC.  
+@DELETE,C      ICOMA15HMC.  
+@ASG,UP        ICOMA15HMC.,F/0/POS/4000 
+@USE       OUT,ICOMA15HMC.  
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=11,10,CH,A,1        .NO-HIS-MVT-CMM 
+RSZ=57  
+RECORD=10   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB020:  MSG 020. SELECT.  MVTS HIS_MVT_CMM A RECHARGER - SSG  
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS           TPF$.
+@ASG,AX        IUNLMVTHMC.  
+@USE       UNL,IUNLMVTHMC.  
+@ASG,AX        ICOMA15HMC.  
+@USE       CLE,ICOMA15HMC.  
+@ . 
+@DELETE,C      ILODMVTHMC.  
+@CAT,P         ILODMVTHMC.,F//POS/5000  
+@ASG,A         ILODMVTHMC.  
+@USE       LOA,ILODMVTHMC.  
+@DELETE,C      ISUPMVTHMC.  
+@CAT,P         ISUPMVTHMC.,F//POS/5000  
+@ASG,A         ISUPMVTHMC.  
+@USE       SUP,ISUPMVTHMC.  
+@ .            UNL(KEYS) sans CLE(UPDATE) = LOA ; SUP = UNL(KEYS)=CLE(UPD)  
+@SSG,IA *UTILIT.FUSBA/ASCII 
+SGS 
+ASCII   
+INPUT          CLE,057,10   UNL,202,10  
+OUTPUT         LOA,202,10   SUP,202,10  
+KEYS           02,10
+UPDATE         11,10
+ANNUL COPY  
+NOLIST  
+@EOF
+@ . 
+@XQT TPF$.FUSBA 
+@ . 
+@FREE          ICOMA15HMC.  
+@FREE          IUNLMVTHMC.  
+@FREE          ILODMVTHMC.  
+@FREE          ISUPMVTHMC.  
+@ERS           TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB025:   MSG 025. TRI FICHIER LOAD HIS_MVT_CMM                  - TRI 
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ERS       TPF$.
+@ASG,A         ILODMVTHMC.  
+@USE       INA,ILODMVTHMC.  
+@DELETE,C      ILOAMVTHMC.  
+@ASG,UP        ILOAMVTHMC.,F/0/POS/4000 
+@USE       OUT,ILOAMVTHMC.  
+@SORT,ES
+FILEIN=INA,F            BLOCK=10
+FILEOUT=OUT,F           BLOCK=10
+KEY=02,10,CH,A,1        .NO-HIS-MVT-CMM 
+RSZ=202 
+RECORD=10   
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . *      ------------------------------------------------------------ 
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE     - REPRISE  
+@ . *      ------------------------------------------------------------ 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       **** LE RUN COMA16/U4 S'EST BIEN TERMINE ****
+@FREE      COMA16U4 
+@QUAL,R 
+@FIN

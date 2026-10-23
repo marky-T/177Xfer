@@ -1,0 +1,11 @@
+<CloneReports>
+  <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="CFH_COPY" />
+  <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="LOADIS" />
+  <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="UNLOADIS" />
+  <OrginalReport Name="ASSURFED_UTILIT_BABA_GN" Clone="BABA" />
+  <OrginalReport Name="ASSURFED_UTILIT_FUSBA_GN" Clone="FUSBA" />
+  <OrginalReport Name="ASSURFED_UTILIT_CHABAN_GN" Clone="CHABAN" />
+  <OrginalReport Name="ASSURFED_UTILIT_CONDIS2_GN" Clone="CONDIS2" />
+  <OrginalReport Name="ASSURFED_UTILIT_SCAN_GN" Clone="SCAN" />
+  <OrginalReport Name="ASSURFED_UTILIT_TAPELD_GN" Clone="TPF$" />
+</CloneReports>

@@ -1,0 +1,7 @@
+{
+  "jobname": "CFH-COPY",
+  "fileAssignments": {
+    "TAPEIN":  "input.dat",
+    "TAPEOUT": "output.dat"
+  }
+}

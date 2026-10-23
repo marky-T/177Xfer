@@ -1,0 +1,2 @@
+CONDIS2_ASCII: 18 calls, 17 with a procedure division, 1 errors
+  PAIJ01_UL_L85: Cannot convert value "''" to type "System.Int32". Error: "The input string '''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCA

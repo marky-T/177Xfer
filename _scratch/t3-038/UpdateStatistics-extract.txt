@@ -1,0 +1,246 @@
+ 120:           m_SysDbs.Rollback();
+ 121:         } catch {
+ 122:           // do nothing we are already in error state
+ 123:         }
+ 124:       }
+ 125:     } // LogException
+ 126: 
+ 127:     /// <summary>
+ 128:     /// Creates a new connection to the system database
+ 129:     /// </summary>
+ 130:     private void CreateSysDbsConnection () {
+ 131:       m_SysDbs = AmtDbsSupport.CreateOpenDb(true, Program.BatchService.ServiceName + "_Stats", null, Program.BatchService.Configuration, false);
+ 132:       m_SysDbs.Isolation = IsolationLevel.ReadCommitted;
+ 133:       m_SysDbs.LockTimeout = 5 * 60; // 5 minutes
+ 134:     } // CreateSysDbsConnection
+ 135: 
+ 136:     /// <summary>
+ 137:     /// Get the last HOURLY record so we know from where to start
+ 138:     /// </summary>
+ 139:     private void GetStartHourly () {
+ 140:       m_HourlyFromDate = 0;
+ 141:       m_HourlyFromHour = 0;
+ 142:       using (AmtSysStatisticHourly sysStatisticHourly = new AmtSysStatisticHourly(m_SysDbs)) {
+ 143:         DateTime newestDatetime;
+ 144:         if (sysStatisticHourly.GetNewestDate(out newestDatetime)) {
+ 145:           m_HourlyFromDate = AmtDateSupport.GetDateAsInt(newestDatetime);
+ 146:           m_HourlyFromHour = AmtDateSupport.GetTimeAsInt(newestDatetime);
+ 147:         }
+ 148:       }
+ 149:     } // GetStartHourly
+ 150: 
+ 151:     /// <summary>
+ 152:     /// Get the last WEEKLY record so we know from where to start
+ 153:     /// </summary>
+ 154:     private void GetStartWeekly () {
+ 155:       m_WeeklyFromYearWeek = 0;
+ 156:       using (AmtSysStatisticWeekly sysStatisticWeekly = new AmtSysStatisticWeekly(m_SysDbs)) {
+ 157:         if (!sysStatisticWeekly.GetNewestYearWeek(out m_WeeklyFromYearWeek)) {
+ 158:           m_WeeklyFromYearWeek = 0;
+ 159:         }
+ 160:       }
+ 161:     } // GetStartWeekly
+ 162: 
+ 163:     /// <summary>
+ 164:     /// Update the hourly table for the next hour
+ 165:     /// </summary>
+ 166:     /// <param name="now">Datetime now</param>
+ 167:     /// <returns>False in case of an error on the lock of the first BC</returns>
+ 168:     private Boolean UpdateHourly (DateTime now) {
+ 169:       // Get the current hour for example 10:15 and take just the hour so 10:00
+ 170:       Int32 currentDate = AmtDateSupport.GetDateAsInt(now);
+ 171:       Int32 currentHour = AmtDateSupport.GetTimeAsInt(now) / 10000000;
+ 172:       Int32 currentMinutes = (AmtDateSupport.GetTimeAsInt(now) / 100000) % 100;
+ 173:       if (currentMinutes < 6) { // Wait until atleast 5 minutes past the hour. This for some slow flushing of clients
+ 174:         // with their stats
+ 175:         if (currentHour >= 1) {
+ 176:           currentHour--;
+ 177:         } else {
+ 178:           currentHour = 23;
+ 179:           currentDate = AmtDateSupport.AddDays(currentDate, -1);
+ 180:         }
+ 181:       }
+ 182:       // Get the previous our. so 09:00 (we fill the date to up 9 a clock which meens 09:00 till 09:59)
+ 183:       Int32 hourlyUntilDate = currentDate;
+ 184:       Int32 hourlyUntilTime = currentHour - 1;
+ 185:       if (hourlyUntilTime < 0) {
+ 186:         hourlyUntilTime = 23;
+ 187:         hourlyUntilDate = AmtDateSupport.AddDays(hourlyUntilDate, -1);
+ 188:       }
+ 189:       hourlyUntilTime = hourlyUntilTime * 10000000;
+ 190:       if ((m_HourlyFromDate != hourlyUntilDate) ||
+ 191:           (m_HourlyFromHour != hourlyUntilTime)) {
+ 192:         if (!CheckLockFirstBatchController()) {
+ 193:           m_StopEvent.WaitOne((60 * 1000), false); // Wait one minute for the other controller to finish
+ 194:           GetStartHourly();
+ 195:           GetStartWeekly();
+ 196:           return false; // start the calc again
+ 197:         }
+ 198:         // We have some data to collect and insert
+ 199:         using (AmtSysStatisticHourly sysStatisticHourly = new AmtSysStatisticHourly(m_SysDbs)) {
+ 200:           Int64 fromDateTime = AmtDateSupport.CombineDateTimeAsInt64(m_HourlyFromDate, m_HourlyFromHour);
+ 201:           Int64 untilDateTime = AmtDateSupport.CombineDateTimeAsInt64(hourlyUntilDate, hourlyUntilTime);
+ 202:           sysStatisticHourly.CreateRecordsFromUntil(fromDateTime, untilDateTime);
+ 203:         }
+ 204:         m_HourlyFromDate = hourlyUntilDate;
+ 205:         m_HourlyFromHour = hourlyUntilTime;
+ 206:       }
+ 207:       return true;
+ 208:     } // UpdateHourly
+ 209: 
+ 210:     /// <summary>
+ 211:     /// Update the weekly table for the next week
+ 212:     /// </summary>
+ 213:     /// <param name="now">Datetime now</param>
+ 214:     /// <returns>False in case of an error on the lock of the first BC</returns>
+ 215:     private Boolean UpdateWeekly (DateTime now) {
+ 216:       // Get the current year week for example 2010-05-18 and take just the year week so 201020
+ 217:       Int32 currentYearWeek = AmtDateSupport.ToYearWeek(AmtDateSupport.GetDateAsInt(now));
+ 218: 
+ 219:       Int32 currentHoursMinutes = (AmtDateSupport.GetTimeAsInt(now) / 100000);
+ 220:       if (currentHoursMinutes < 6) { // Wait until at least 5 minutes past mitnight. This for some slow flushing of clients
+ 221:         // with their stats
+ 222:         if ((currentYearWeek % 100) >= 1) {
+ 223:           currentYearWeek--;
+ 224:         } else {
+ 225:           currentYearWeek = currentYearWeek / 100;
+ 226:           currentYearWeek--;
+ 227:           currentYearWeek = (currentYearWeek * 100) + 52;
+ 228:         }
+ 229:       }
+ 230:       // Get the previous week so. 201019. (We fill that week so 2010-05-10 till 2010-05-17)
+ 231:       Int32 weeklyUntilYearWeek = currentYearWeek - 1;
+ 232:       if ((weeklyUntilYearWeek % 100) == 0) {
+ 233:         weeklyUntilYearWeek = weeklyUntilYearWeek / 100;
+ 234:         weeklyUntilYearWeek--;
+ 235:         weeklyUntilYearWeek = (weeklyUntilYearWeek * 100) + 52;
+ 236:       }
+ 237:       if (m_WeeklyFromYearWeek != weeklyUntilYearWeek) {
+ 238:         if (!CheckLockFirstBatchController()) {
+ 239:           m_StopEvent.WaitOne((60 * 1000), false); // Wait one minute for the other controller to finish
+ 240:           GetStartHourly();
+ 241:           GetStartWeekly();
+ 242:           return false;
+ 243:         }
+ 244:         // We have some data to collect and insert
+ 245:         AmtLog.Log(AmtLogSeverity.Information, AmtLocalise.CalculatingWeeklyStatistics);
+ 246:         using (AmtSysStatisticWeekly sysStatisticWeekly = new AmtSysStatisticWeekly(m_SysDbs)) {
+ 247:           sysStatisticWeekly.CreateRecordsFromUntil(m_WeeklyFromYearWeek, weeklyUntilYearWeek);
+ 248:         }
+ 249:         m_WeeklyFromYearWeek = weeklyUntilYearWeek;
+ 250:       }
+ 251:       return true;
+ 252:     } // UpdateWeekly
+ 253: 
+ 254:     /// <summary>
+ 255:     /// Sends a stop message from another thread to this one
+ 256:     /// </summary>
+ 257:     public void AsyncStop () {
+ 258:       if (m_StopEvent != null) {
+ 259:         m_StopEvent.Set();
+ 260:       }
+ 261:     } // AsyncStop
+ 262: 
+ 263:     /// <summary>
+ 264:     /// Check if we are the first batch controller or the second one running. Only the first has a lock
+ 265:     /// </summary>
+ 266:     /// <returns>True is this is the first BC that does an update to statistics</returns>
+ 267:     private Boolean CheckLockFirstBatchController () {
+ 268:       if (m_FirstControllerLock) {
+ 269:         return true;
+ 270:       }
+ 271:       try {
+ 272:         if (m_SysLockDbs == null) {
+ 273:           m_SysLockDbs = AmtDbsSupport.CreateOpenDb(true, Program.BatchService.ServiceName + "_Lock", null, Program.BatchService.Configuration, false);
+ 274:         }
+ 275:         using (AmtSysLock sysLock = new AmtSysLock(m_SysLockDbs)) {
+ 276:           m_SysLockDbs.StartTransaction();
+ 277:           if (sysLock.SetLock(AmtLockKind.CleanLoggingBatchController, String.Empty)) { // Was "AmtLockKind.Statistics".
+ 278:             // When cleaning at 00:05am and creating weekly statistics at 00:05am (in another thread!!) they are changing the statistics tables at the
+ 279:             // same time which might cause a a lock timeout because the creation adds so much records it has a table(page) lock.
+ 280:             m_FirstControllerLock = true;
+ 281:             return true;
+ 282:           } else {
+ 283:             m_SysLockDbs.Dispose();
+ 284:             m_SysLockDbs = null;
+ 285:           }
+ 286:         }
+ 287:       } catch {
+ 288:         if (m_SysLockDbs != null) {
+ 289:           m_SysLockDbs.Dispose();
+ 290:           m_SysLockDbs = null;
+ 291:         }
+ 292:       }
+ 293:       return false;
+ 294:     } // CheckLockFirstBatchController
+ 295: 
+ 296:     /// <summary>
+ 297:     /// Clears the lock of beeing the first batch controller
+ 298:     /// </summary>
+ 299:     private void ClearLockFirstBatchController () {
+ 300:       if (m_FirstControllerLock) {
+ 301:         try {
+ 302:           using (AmtSysLock sysLock = new AmtSysLock(m_SysLockDbs)) {
+ 303:             sysLock.ClearLock(AmtLockKind.CleanLoggingBatchController, String.Empty);
+ 304:             m_SysLockDbs.Commit();
+ 305:           }
+ 306:         } catch {
+ 307:           // Ignore any message
+ 308:         } finally {
+ 309:           m_SysLockDbs.Dispose();
+ 310:           m_SysLockDbs = null;
+ 311:         }
+ 312:         m_FirstControllerLock = false;
+ 313:       }
+ 314:     } // ClearLockFirstBatchController
+ 315: 
+ 316:     #region IDisposable members
+ 317: 
+ 318:     private Boolean m_Disposed;
+ 319: 
+ 320:     /// <summary>
+ 321:     /// destructor
+ 322:     /// </summary>
+ 323:     ~UpdateStatistics () {
+ 324:       Dispose(false);
+ 325:     } // ~UpdateStatistics
+ 326: 
+ 327:     /// <summary>
+ 328:     /// Dispose, free IDisposable resources
+ 329:     /// </summary>
+ 330:     public void Dispose () {
+ 331:       GC.SuppressFinalize(this);
+ 332:       Dispose(true);
+ 333:     } // Dispose
+ 334: 
+ 335:     /// <summary>
+ 336:     /// Dipose, free systemtable object, it is IDisposable
+ 337:     /// </summary>
+ 338:     /// <param name="disposing">Already disposing or not</param>
+ 339:     private void Dispose (Boolean disposing) {
+ 340:       if (m_Disposed) {
+ 341:         AmtExceptionSupport.DisposeCalledTwice(this);
+ 342:       }
+ 343:       m_Disposed = true;
+ 344:       // Free unmanaged resources
+ 345:       if (disposing) {
+ 346:         DisposeSysDbs();
+ 347:         // Free managed resources
+ 348:         if (m_StopEvent != null) {
+ 349:           m_StopEvent.Dispose();
+ 350:           m_StopEvent = null;
+ 351:         }
+ 352:         if (m_SysLockDbs != null) {
+ 353:           m_SysLockDbs.Dispose();
+ 354:           m_SysLockDbs = null;
+ 355:         }
+ 356:       } else {
+ 357:         AmtExceptionSupport.NoDisposeCalled(this);
+ 358:       }
+ 359:     } // Dispose
+ 360: 
+ 361:     #endregion
+ 362: 
+ 363:   } // Class UpdateStatistics
+ 364: 
+ 365: } // Namespace Asysco.Amt.AmtBatchController

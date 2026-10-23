@@ -1,0 +1,557 @@
+=== SSG to PowerShell Converter ===
+Input folder : E:\Repos\SsgTrial\SsgConverter\Examples\Input
+Output folder: E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\out
+SSG source files found: 20
+--Warning: ECL parse failed for content block in 'ARCHIFORMAT': Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index') - content skipped.
+--Warning: @UCOB: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                    -- archiformat --                       ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***            Foramt donn?es pour archivage                   ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+--Warning: Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+--Warning: Orphaned data line (not consumed by preceding statement): * Auteur   : N?ga  NEGA SERGE                (INITIALES  NM PN)  *
+--Warning: Orphaned data line (not consumed by preceding statement): * Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+--Warning: Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,1,1] : report de la table                 *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,2,1] : description de la table            *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,3,1] : donn?es unload?es archiv?es        *
+--Warning: Orphaned data line (not consumed by preceding statement): *    OUTPUT: [fileout,1,1,1] : donn?es au  format  archive       *
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): Identification division.
+--Warning: Orphaned data line (not consumed by preceding statement): *========================*
+--Warning: Orphaned data line (not consumed by preceding statement): program-id.  archiformat.
+--Warning: Orphaned data line (not consumed by preceding statement): Environment division.
+--Warning: Orphaned data line (not consumed by preceding statement): *====================*
+--Warning: Orphaned data line (not consumed by preceding statement): Configuration section.
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+--Warning: Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+--Warning: Orphaned data line (not consumed by preceding statement): special-names.
+--Warning: Orphaned data line (not consumed by preceding statement): printer       printer.
+--Warning: Orphaned data line (not consumed by preceding statement): Input-output section.
+--Warning: Orphaned data line (not consumed by preceding statement): *---------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): file-control.
+--Warning: Orphaned data line (not consumed by preceding statement): select fic-report assign to disc      [filein,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select fic-descript assign to disc    [filein,1,2,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select fic-unload assign to disc      [filein,1,3,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select fic-format assign to disc      [fileout,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): i-o-control.
+--Warning: Orphaned data line (not consumed by preceding statement): Data division.
+--Warning: Orphaned data line (not consumed by preceding statement): *==============*
+--Warning: Orphaned data line (not consumed by preceding statement): File section.
+--Warning: Orphaned data line (not consumed by preceding statement): *-------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier du report
+--Warning: Orphaned data line (not consumed by preceding statement): FD  fic-report.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  lgn-rep               pic x(132).
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier de description
+--Warning: Orphaned data line (not consumed by preceding statement): FD  fic-descript.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  lgn-des               pic x(132).
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier d'unload des donn?es archiv?es
+--Warning: Orphaned data line (not consumed by preceding statement): FD  fic-unload.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  lgn-unl               pic x([*b]).
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier format? pour l'archivage
+--Warning: Orphaned data line (not consumed by preceding statement): FD  fic-format.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  lgn-for               pic x([*a]).
+--Warning: Orphaned data line (not consumed by preceding statement): Working-storage section.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 0
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-0.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-0-typ           pic x value "0".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-0-nm-base       pic x(6) value "[table,1,1,3]".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-0-nm-table      pic x(30) value "[table,1,1,2]".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-0-dt-ach        pic 9(8).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-0-dt-maj.
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-ss    pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-aa    pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-mm    pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-jj    pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 1
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-1.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-1-typ           pic x value "1".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-1-nm-cle        pic x(30) value "[key,1,1,1]".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-1-cle.
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-1-typ-cle      pic x value "[key,1,1,2]".
+--Warning: Orphaned data line (not consumed by preceding statement): 5 ws-1-lg-cle       pic 99.99.
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 2
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-2.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-2-typ           pic x value "2".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-2-nm-chp        pic x(30).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-2-typ-chp       pic x(7).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-2-lg-chp        pic x(10).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-2-null          pic x(8).
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 3
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-3.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-3-typ           pic x value "3".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-3-nm-idx        pic x(30).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-3-nm-chp        pic x(30).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-3-tri           pic x(8).
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 4
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-4.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-4-typ           pic xx value "4A".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-4-don           pic x([*b]).
+--Warning: Orphaned data line (not consumed by preceding statement): *    3 ws-4-cle           pic x([key,1,1,3]).
+--Warning: Orphaned data line (not consumed by preceding statement): *enregistrement type 9
+--Warning: Orphaned data line (not consumed by preceding statement): 1 ws-don-9.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-typ           pic x value "9".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-nm-base       pic x(6) value "[table,1,1,3]".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-nm-table      pic x(30) value "[table,1,1,2]".
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-dt-ach        pic 9(8).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-cpt-ach       pic s9(11) sign leading separate.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 ws-9-cpt-5         pic x(12) value "+00000000000".
+--Warning: Orphaned data line (not consumed by preceding statement): 1 unloadf              pic 9 value 0.
+--Warning: Orphaned data line (not consumed by preceding statement): 88 fin-unload        value 1.
+--Warning: Orphaned data line (not consumed by preceding statement): 1 table-null.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 tnull              pic x occurs 70 times.
+--Warning: Orphaned data line (not consumed by preceding statement): 77 i                    pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 77 i-buf                pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 77 i-tot                pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------------ flag ---------------------------
+--Warning: Orphaned data line (not consumed by preceding statement): 77 fl-null              pic 9.
+--Warning: Orphaned data line (not consumed by preceding statement): *---------------------------------------------------
+--Warning: Orphaned data line (not consumed by preceding statement): *---------------- compteur -------------------------
+--Warning: Orphaned data line (not consumed by preceding statement): 77 cpt-char             pic 999.
+--Warning: Orphaned data line (not consumed by preceding statement): 77 cpt-ach              pic 9(11).
+--Warning: Orphaned data line (not consumed by preceding statement): 77 cpt-lu               pic 9(11).
+--Warning: Orphaned data line (not consumed by preceding statement): 77 cpt-achf             pic z(10)9.
+--Warning: Orphaned data line (not consumed by preceding statement): 77 cpt-luf              pic z(10)9.
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------------------------------------
+--Warning: Orphaned data line (not consumed by preceding statement): *------------------ POUR LA DATE ---------------------
+--Warning: Orphaned data line (not consumed by preceding statement): 1 dt-i.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 aa-i               pic 9(4).
+--Warning: Orphaned data line (not consumed by preceding statement): 3 mm-i               pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 jj-i               pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 1 dt-fr.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 jj-fr              pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 3   pic x value '/'.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 mm-fr              pic 99.
+--Warning: Orphaned data line (not consumed by preceding statement): 3   pic x value '/'.
+--Warning: Orphaned data line (not consumed by preceding statement): 3 aa-fr              pic 9(4).
+--Warning: Orphaned data line (not consumed by preceding statement): *------------------------------------------------------
+--Warning: Orphaned data line (not consumed by preceding statement): PROCEDURE DIVISION.
+--Warning: Orphaned data line (not consumed by preceding statement): *-------------------
+--Warning: Orphaned data line (not consumed by preceding statement): 000-main.
+--Warning: Orphaned data line (not consumed by preceding statement): open input fic-report fic-descript fic-unload
+--Warning: Orphaned data line (not consumed by preceding statement): output fic-format
+--Warning: Orphaned data line (not consumed by preceding statement): perform 100-type0 thru 100-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 101-type1 thru 101-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 102-type2 thru 102-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 103-type3 thru 103-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 104-type4 thru 104-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 105-type9 thru 105-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 106-tot thru 106-exit
+--Warning: Orphaned data line (not consumed by preceding statement): close fic-report fic-descript fic-unload fic-format
+--Warning: Orphaned data line (not consumed by preceding statement): stop run
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 0 ----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 100-type0.
+--Warning: Orphaned data line (not consumed by preceding statement): accept ws-0-dt-ach from date yyyymmdd
+--Warning: Orphaned data line (not consumed by preceding statement): *recherche de la date de cr?ation de la table
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit until lgn-rep(4:21)
+--Warning: Orphaned data line (not consumed by preceding statement): = 'DD-PROCESS-TIME-STAMP'
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(7:2) to ws-0-dt-maj-aa
+--Warning: Orphaned data line (not consumed by preceding statement): if ws-0-dt-maj-aa > 90
+--Warning: Orphaned data line (not consumed by preceding statement): move 19 to ws-0-dt-maj-ss
+--Warning: Orphaned data line (not consumed by preceding statement): else
+--Warning: Orphaned data line (not consumed by preceding statement): move 20 to ws-0-dt-maj-ss
+--Warning: Orphaned data line (not consumed by preceding statement): end-if
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(10:2) to ws-0-dt-maj-mm
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(13:2) to ws-0-dt-maj-jj
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-0
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 100-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 1 -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 101-type1.
+--Warning: Orphaned data line (not consumed by preceding statement): move [key,1,1,3] to ws-1-lg-cle
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-1
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 101-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 2 -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 102-type2.
+--Warning: Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:7) = 'Columns'
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit 2 times
+--Warning: Orphaned data line (not consumed by preceding statement): *localisation de l'emplacement de yes/no pour NULL
+--Warning: Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): for characters
+--Warning: Orphaned data line (not consumed by preceding statement): before initial 'Allowed'
+--Warning: Orphaned data line (not consumed by preceding statement): move cpt-char to i-buf
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 201-lec-descript thru 201-exit 2 times
+--Warning: Orphaned data line (not consumed by preceding statement): *localisation du nom du champ
+--Warning: Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): inspect lgn-des tallying cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): for characters
+--Warning: Orphaned data line (not consumed by preceding statement): before initial 'TION.'
+--Warning: Orphaned data line (not consumed by preceding statement): add 6 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): perform [table,1,2,1] times
+--Warning: Orphaned data line (not consumed by preceding statement): *chargement du nom et de la description des champs
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-des(cpt-char:30) to ws-2-nm-chp
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-des(6:7) to ws-2-typ-chp
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-des(13:10) to ws-2-lg-chp
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep to table-null
+--Warning: Orphaned data line (not consumed by preceding statement): add 3 to i-buf giving i
+--Warning: Orphaned data line (not consumed by preceding statement): move 0 to fl-null
+--Warning: Orphaned data line (not consumed by preceding statement): add 2 to i giving i-tot
+--Warning: Orphaned data line (not consumed by preceding statement): *recherche [Y] et ensuite [E] pour NULL
+--Warning: Orphaned data line (not consumed by preceding statement): perform until i >= i-tot
+--Warning: Orphaned data line (not consumed by preceding statement): if tnull(i) = 'Y'
+--Warning: Orphaned data line (not consumed by preceding statement): add 1 to i
+--Warning: Orphaned data line (not consumed by preceding statement): if tnull(i) = 'E'
+--Warning: Orphaned data line (not consumed by preceding statement): move 1 to fl-null
+--Warning: Orphaned data line (not consumed by preceding statement): end-if
+--Warning: Orphaned data line (not consumed by preceding statement): end-if
+--Warning: Orphaned data line (not consumed by preceding statement): add 1 to i
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): if fl-null = 1
+--Warning: Orphaned data line (not consumed by preceding statement): move 'NULL' to ws-2-null
+--Warning: Orphaned data line (not consumed by preceding statement): else
+--Warning: Orphaned data line (not consumed by preceding statement): move space to ws-2-null
+--Warning: Orphaned data line (not consumed by preceding statement): end-if
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-2
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): perform 201-lec-descript thru 201-exit
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 102-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 3 -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 103-type3.
+--Warning: Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:13) = 'Primary Key :'
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): *localisation de la cl?
+--Warning: Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): for characters
+--Warning: Orphaned data line (not consumed by preceding statement): before initial 'PK_'
+--Warning: Orphaned data line (not consumed by preceding statement): add 1 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(cpt-char:30) to ws-3-nm-idx
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit 2 times
+--Warning: Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:10) = space
+--Warning: Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): for characters
+--Warning: Orphaned data line (not consumed by preceding statement): before initial ','
+--Warning: Orphaned data line (not consumed by preceding statement): subtract 4 from cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): *chargement du nom de la cl?
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(5:cpt-char) to ws-3-nm-chp
+--Warning: Orphaned data line (not consumed by preceding statement): add 7 to cpt-char
+--Warning: Orphaned data line (not consumed by preceding statement): *chargement de l'ordre de tri
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-rep(cpt-char:3) to ws-3-tri
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-3
+--Warning: Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 103-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 4 -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 104-type4.
+--Warning: Orphaned data line (not consumed by preceding statement): perform until fin-unload
+--Warning: Orphaned data line (not consumed by preceding statement): perform 202-lec-unload thru 202-exit
+--Warning: Orphaned data line (not consumed by preceding statement): if not fin-unload
+--Warning: Orphaned data line (not consumed by preceding statement): *chargement de la cl? d'archivage
+--Warning: Orphaned data line (not consumed by preceding statement): *d?j? r?p?t? via la jointure!!!!!
+--Warning: Orphaned data line (not consumed by preceding statement): *        move lgn-unl ([key,1,1,4]:[key,1,1,3]) to ws-4-cle
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-4
+--Warning: Orphaned data line (not consumed by preceding statement): add 1 to cpt-ach
+--Warning: Orphaned data line (not consumed by preceding statement): end-if
+--Warning: Orphaned data line (not consumed by preceding statement): end-perform
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 104-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 9 -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 105-type9.
+--Warning: Orphaned data line (not consumed by preceding statement): accept ws-9-dt-ach from date yyyymmdd
+--Warning: Orphaned data line (not consumed by preceding statement): *comteur du nombre d'enregistrement de type 4
+--Warning: Orphaned data line (not consumed by preceding statement): move cpt-ach to ws-9-cpt-ach
+--Warning: Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-9
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 105-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------- RAPPORT  -----------------
+--Warning: Orphaned data line (not consumed by preceding statement): 106-tot.
+--Warning: Orphaned data line (not consumed by preceding statement): move cpt-ach to cpt-achf
+--Warning: Orphaned data line (not consumed by preceding statement): move cpt-lu to cpt-luf
+--Warning: Orphaned data line (not consumed by preceding statement): move ws-0-dt-ach to dt-i
+--Warning: Orphaned data line (not consumed by preceding statement): move aa-i to aa-fr
+--Warning: Orphaned data line (not consumed by preceding statement): move mm-i to mm-fr
+--Warning: Orphaned data line (not consumed by preceding statement): move jj-i to jj-fr
+--Warning: Orphaned data line (not consumed by preceding statement): display "ARCHIFORMAT          RAPPORT          "
+--Warning: Orphaned data line (not consumed by preceding statement): dt-fr upon printer
+--Warning: Orphaned data line (not consumed by preceding statement): display "Enregistrements lus:" cpt-luf upon printer
+--Warning: Orphaned data line (not consumed by preceding statement): display "Enregistrements 4 ?crits:" cpt-achf upon printer
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 106-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DU REPORT --------------
+--Warning: Orphaned data line (not consumed by preceding statement): 200-lec-report.
+--Warning: Orphaned data line (not consumed by preceding statement): read fic-report
+--Warning: Orphaned data line (not consumed by preceding statement): at end
+--Warning: Orphaned data line (not consumed by preceding statement): display "fin du report" upon printer
+--Warning: Orphaned data line (not consumed by preceding statement): end-read
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 200-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DU DESCRIPT ------------
+--Warning: Orphaned data line (not consumed by preceding statement): 201-lec-descript.
+--Warning: Orphaned data line (not consumed by preceding statement): read fic-descript
+--Warning: Orphaned data line (not consumed by preceding statement): at end
+--Warning: Orphaned data line (not consumed by preceding statement): display "fin de la description" upon printer
+--Warning: Orphaned data line (not consumed by preceding statement): end-read
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 201-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DE L'UNLOAD --------------
+--Warning: Orphaned data line (not consumed by preceding statement): 202-lec-unload.
+--Warning: Orphaned data line (not consumed by preceding statement): read fic-unload
+--Warning: Orphaned data line (not consumed by preceding statement): at end
+--Warning: Orphaned data line (not consumed by preceding statement): move 1 to unloadf
+--Warning: Orphaned data line (not consumed by preceding statement): not at end
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-unl(1:[*e]) to ws-4-don(1:[*e])
+--Warning: Orphaned data line (not consumed by preceding statement): move lgn-unl([*c]:[table,1,2,1])
+--Warning: Orphaned data line (not consumed by preceding statement): to ws-4-don([*d]:[table,1,2,1])
+--Warning: Orphaned data line (not consumed by preceding statement): add 1 to cpt-lu
+--Warning: Orphaned data line (not consumed by preceding statement): end-read
+--Warning: Orphaned data line (not consumed by preceding statement): .
+--Warning: Orphaned data line (not consumed by preceding statement): 202-exit.
+--Warning: Orphaned data line (not consumed by preceding statement): exit.
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @UCOB: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                  -- ARCHISEPARE --                         ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***            Separe les enregistrements a archiver           ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                   et a ne pas archiver                     ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+--Warning: Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+--Warning: Orphaned data line (not consumed by preceding statement): * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+--Warning: Orphaned data line (not consumed by preceding statement): * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+--Warning: Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : chercheuse : numero de sinistres a archiver         *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : ficunload : unload de la table a archiver           *
+--Warning: Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficarchi : enregistrements a archiver               *
+--Warning: Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): Identification division.
+--Warning: Orphaned data line (not consumed by preceding statement): *========================*
+--Warning: Orphaned data line (not consumed by preceding statement): program-id.  ARCHISEPARE.
+--Warning: Orphaned data line (not consumed by preceding statement): Environment division.
+--Warning: Orphaned data line (not consumed by preceding statement): *====================*
+--Warning: Orphaned data line (not consumed by preceding statement): Configuration section.
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+--Warning: Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+--Warning: Orphaned data line (not consumed by preceding statement): special-names.
+--Warning: Orphaned data line (not consumed by preceding statement): printer       printer
+--Warning: Orphaned data line (not consumed by preceding statement): decimal-point comma.
+--Warning: Orphaned data line (not consumed by preceding statement): Input-output section.
+--Warning: Orphaned data line (not consumed by preceding statement): *---------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): file-control.
+--Warning: Orphaned data line (not consumed by preceding statement): select chercheuse assign to disc     [filein,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficunload assign to disc      [filein,1,2,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficarchi assign to disc       [fileout,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficnarchi assign to disc      [fileout,1,2,1].
+--Warning: Orphaned data line (not consumed by preceding statement): i-o-control.
+--Warning: Orphaned data line (not consumed by preceding statement): Data division.
+--Warning: Orphaned data line (not consumed by preceding statement): *==============*
+--Warning: Orphaned data line (not consumed by preceding statement): File section.
+--Warning: Orphaned data line (not consumed by preceding statement): *-------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier chercheuse
+--Warning: Orphaned data line (not consumed by preceding statement): FD  chercheuse.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  cle-chercheuse        pic 9([key,1,1,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *Unload de la table a archiver
+--Warning: Orphaned data line (not consumed by preceding statement): FD  ficunload.
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,UX  C$DML
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,MRC I1,025000
+--Warning: Orphaned data line (not consumed by preceding statement): IN  TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+--Warning: Orphaned data line (not consumed by preceding statement): DBANK,MU  D1,0164000
+--Warning: Orphaned data line (not consumed by preceding statement): IN  TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.CBEP$$RSA
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+--Warning: Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*ACOB.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*SORT.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB PRD*REL.
+--Warning: Orphaned data line (not consumed by preceding statement): END
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @COB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+--Warning: Orphaned data line (not consumed by preceding statement): IN       TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+--Warning: Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+--Warning: Orphaned data line (not consumed by preceding statement): FORM         I$1
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+--Warning: Orphaned data line (not consumed by preceding statement): IN       TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+--Warning: Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+--Warning: Orphaned data line (not consumed by preceding statement): FORM         I$1
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+--Warning: Orphaned data line (not consumed by preceding statement): IN       TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+--Warning: Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+--Warning: Orphaned data line (not consumed by preceding statement): FORM         I$1
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @ACOB: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,UX  C$DML
+--Warning: Orphaned data line (not consumed by preceding statement): IBANK,MRC I1,025000
+--Warning: Orphaned data line (not consumed by preceding statement): IN  TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+--Warning: Orphaned data line (not consumed by preceding statement): DBANK,MU  D1,0164000
+--Warning: Orphaned data line (not consumed by preceding statement): IN  TPF$.
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.CBEP$$RSA
+--Warning: Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+--Warning: Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*ACOB.
+--Warning: Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*SORT.
+--Warning: Orphaned data line (not consumed by preceding statement): END
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: @MAP: unknown processor - emitted as CallExternalProgram
+--Warning: Missing @FIN statement - auto-appended in 
+--Warning: Missing @FIN statement - auto-appended in 
+
+Conversion complete: 20 succeeded, 0 failed

@@ -1,0 +1,32 @@
+[
+  {
+    "Case": "D42",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\COND42\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\D42\\expected\\OUTP"
+  },
+  {
+    "Case": "DT",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CONDT\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\DT\\expected\\OUTP"
+  },
+  {
+    "Case": "BD",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CONBD\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\BD\\expected\\OUTP"
+  },
+  {
+    "Case": "UL",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CONUL\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\UL\\expected\\OUTP"
+  },
+  {
+    "Case": "UE",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CONUE\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\UE\\expected\\OUTP"
+  },
+  {
+    "Case": "VG",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CONVG\\OUTP",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CONDIS2\\cases\\VG\\expected\\OUTP"
+  }
+]

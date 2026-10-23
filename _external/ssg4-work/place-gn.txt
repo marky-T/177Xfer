@@ -1,0 +1,17 @@
+Assurfed_Utilit_Cfh_Copy_Gn    placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CFH-COPY-GN.cob
+Assurfed_Utilit_Baba_Gn        placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-BABA-GN.cob
+Assurfed_Utilit_Fusba_Gn       placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-FUSBA-GN.cob
+Assurfed_Utilit_Chaban_Gn      placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CHABAN-GN.cob
+Assurfed_Utilit_Condis2_Gn     placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CONDIS2-GN.cob
+Assurfed_Utilit_Scan_Gn        placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-SCAN-GN.cob
+Assurfed_Utilit_Tapeld_Gn      placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-TAPELD-GN.cob
+Scripts\ASSURFED_UTILIT: 13 skeletons + 9 includes (22 replaced, 0 new)
+Scripts\Settings\AmtSettings.xml: CloneReports 9 entries inserted before </Amt> (AppName and UseUnicode left as they are)
+_All_.sln: solution folder Utilities + 7 project(s) inserted (fixed GUIDs from the names)
+build Assurfed_Utilit_Baba_Gn: exit 0, errors 0
+build Assurfed_Utilit_Cfh_Copy_Gn: exit 0, errors 0
+build Assurfed_Utilit_Chaban_Gn: exit 0, errors 0
+build Assurfed_Utilit_Condis2_Gn: exit 0, errors 0
+build Assurfed_Utilit_Fusba_Gn: exit 0, errors 0
+build Assurfed_Utilit_Scan_Gn: exit 0, errors 0
+build Assurfed_Utilit_Tapeld_Gn: exit 0, errors 0

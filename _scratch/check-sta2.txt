@@ -1,0 +1,26 @@
+== each "not used in STA sources" branch: the directive case it sits in
+  674: // note: Only example type 1 is used in STA sources (only in P$JOBC\UBOOT._SYM)   <- case DirectiveId.Clear: {
+  706: // not used in STA sources   <- case DirectiveId.Correct: {
+ 1044: // not used in STA sources   <- case DirectiveId.Dump: {
+ 1130: // not used in STA sources   <- case DirectiveId.Eject: {
+ 1225: // not used in STA sources   <- case DirectiveId.EndCorrect: {
+ 1531: // not used in STA sources   <- case DirectiveId.List: {
+ 1544: // not used in STA sources   <- case DirectiveId.Merge: {
+ 1727: // not used in STA sources   <- case DirectiveId.Restore: {
+ 1754: // not used in STA sources   <- case DirectiveId.Save: {
+ 1930: // not used in STA sources   <- case DirectiveId.Unlist: {
+== other source files mentioning STA
+SymstreamExpressionParser.cs:35: //       occur in STA sources so we can skip them for now.
+SymstreamProcessor.cs:674: // note: Only example type 1 is used in STA sources (only in P$JOBC\UBOOT._SYM)
+SymstreamProcessor.cs:706: // not used in STA sources
+SymstreamProcessor.cs:1044: // not used in STA sources
+SymstreamProcessor.cs:1130: // not used in STA sources
+SymstreamProcessor.cs:1225: // not used in STA sources
+SymstreamProcessor.cs:1531: // not used in STA sources
+SymstreamProcessor.cs:1544: // not used in STA sources
+SymstreamProcessor.cs:1727: // not used in STA sources
+SymstreamProcessor.cs:1754: // not used in STA sources
+SymstreamProcessor.cs:1930: // not used in STA sources
+== our docs and examples mentioning UBOOT or P$JOBC
+== manual: comment images (section 4.5)
+4017: ?   It is not a comment (*.).

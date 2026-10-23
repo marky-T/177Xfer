@@ -1,0 +1,194 @@
+=== SYS.INI ===
+--- E:\Repos\Federale_InternalRelease\AmtFramework\Amt.Net\PrintService\AmtPrintService\Sys.ini ---
+[COMMON SETTINGS]
+CONFIGURATION=A
+DEVELOPMENT=TRUE
+LIONDEV
+
+[APPLICATION SERVERS]
+APPSERVER=TCP ASYRD 40000
+USEAPPMANAGER=FALSE
+USESPAREMANAGER=FALSE
+APPMANAGER=TCP  
+SAMPLES=15
+DIFFLOAD=20
+BALANCE=0
+SAMPLESPEED=1
+NRWORKERTHREADS=12
+USEWORKERTHREADS=TRUE
+USEWINEVENTLOG=FALSE
+SPAREMANAGER=TCP  
+ACTIVEAPPSERVERS=1
+
+[DATABASE SERVER]
+SERVER NAME NET=ASYRD\MSSQL2005
+SERVER NAME=ODBC_MSSQL_ASYRD
+DATABASE NAME=TEST_EF_SYSTEM
+SERVER TYPE=MSSQL
+SHOWLOGIN=242076056070
+DBUSER=105094076
+DBPSSW=337079097103097081093
+KEEPALLTABLES=FALSE
+KEEPALLSTOREDPROCS=TRUE
+
+[LIONSCREENS]
+SUPPRESSPAGE2=FALSE
+AUTOTABNUMERIC=TRUE
+HIDESCREENDESCR=FALSE
+SUPPRESSBEEP=FALSE
+LABELBLANKWHENZERO=FALSE
+--- E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini ---
+#
+# This a sample Sys.ini
+#
+# The sys.ini needs to be placed within the systembase path of the lion enviroment
+# not in the lion directory of the lion enviroment. The sys.ini is used by the
+# different lion programs to get access to the correct system database.
+#
+
+# <Lion enviroment name> : Name of lion enviroment, for example BANKINGDEV or BANKINGTEST
+# <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+# <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+# <database name>        : System databasename for example LION_SYSTEMDEV
+# <database user>        : Database user for example lionsystemuser, this will encrypted after first access
+# <database password>    : Database password, this will encrypted after first access
+
+#
+# MsSql System database configuration
+#
+[DATABASE SERVER]
+ENVIRONMENT=FEDERALE
+SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+SERVER TYPE=MSSQL
+SERVER NAME NET=VMFEDPE08
+DATABASE NAME=FEDERALE_SYSTEM
+DBUSER=285085106085
+DBPSSW=683091112091
+SCHEMA=
+FILEGROUP=
+DATASCHEME=
+TABLENAME-PREFIX=FALSE
+--- E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\Sys.ini ---
+#
+# This a sample Sys.ini
+#
+# The sys.ini needs to be placed within the systembase path of the lion enviroment
+# not in the lion directory of the lion enviroment. The sys.ini is used by the
+# different lion programs to get access to the correct system database.
+#
+
+# <Lion enviroment name> : Name of lion enviroment, for example BANKINGDEV or BANKINGTEST
+# <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+# <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+# <database name>        : System databasename for example LION_SYSTEMDEV
+# <database user>        : Database user for example lionsystemuser, this will encrypted after first access
+# <database password>    : Database password, this will encrypted after first access
+
+#
+# MsSql System database configuration
+#
+[DATABASE SERVER]
+ENVIRONMENT=FEDERALE
+SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+SERVER TYPE=MSSQL
+SERVER NAME NET=VMFEDPE08
+DATABASE NAME=FEDERALE_SYSTEM
+DBUSER=006074095074
+DBPSSW=722087108087
+SCHEMA=
+FILEGROUP=
+DATASCHEME=
+TABLENAME-PREFIX=FALSE
+=== AMTSETTINGS.XML ===
+--- E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Settings\AmtSettings.xml ---
+<Amt>
+	<AmtSettings>
+		<AppName>AFBUS_2200COBOL</AppName>
+		<FullAMT>True</FullAMT>
+		<IniFile>E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini</IniFile>
+		<ComScript>E:\Repos\Federale_InternalRelease\AmtTools\ComScript\ComScript.dll</ComScript>
+		<ComModule>E:\Repos\Federale_InternalRelease\AmtTools\ComModule\AmtCOMModule.dll</ComModule>
+		<TransactionServer>Grpc:localhost:8032</TransactionServer>
+		<MaxWaitTime>5</MaxWaitTime>
+		<ApplicationKind>CobolOS2200</ApplicationKind>
+		<UseJobLog>True</UseJobLog>
+		<LogTimes>True</LogTimes>
+		<LoggingSeverity>Info</LoggingSeverity>
+		<LogEventError>True</LogEventError>
+		<LogEventInfo>True</LogEventInfo>
+		<LogEventWarning>True</LogEventWarning>
+		<PrintToPhysicalPrinters>False</PrintToPhysicalPrinters>
+		<DefaultDontPrint>True</DefaultDontPrint>
+		<DefaultPrinter>Default</DefaultPrinter>
+		<UseUnicode>True</UseUnicode>
+		<DeleteEmptyFolders>False</DeleteEmptyFolders>
+		<DefaultBDFolder>BD</DefaultBDFolder>
+		<TransferRoot></TransferRoot>
+		<WarningRcw2435>False</WarningRcw2435>
+		<MailLogLevel>0</MailLogLevel>
+		<MailTestAddress></MailTestAddress>
+		<MailFrom></MailFrom>
+		<MailPort>25</MailPort>
+		<MailServer></MailServer>
+		<MailLogon></MailLogon>
+		<MailPassword></MailPassword>
+		<MailUseSSL>False</MailUseSSL>
+		<MailRecipient></MailRecipient>
+		<FTPCreateFolders>True</FTPCreateFolders>
+		<FTPTestSettings>False</FTPTestSettings>
+		<FTPTestDest></FTPTestDest>
+		<FTPTestHost></FTPTestHost>
+		<FTPTestUser></FTPTestUser>
+		<FTPTestPassword></FTPTestPassword>
+		<FTPPath></FTPPath>
+		<FTPDeleteFiles>True</FTPDeleteFiles>
+		<FileControllerName>FederaleFileController</FileControllerName>
+		<BatchControllerName>FederaleBatchController</BatchControllerName>
+	</AmtSettings>
+</Amt>
+--- E:\Repos\Federale_InternalRelease\Scripts\Settings\AmtSettings.xml ---
+<Amt>
+	<AmtSettings>
+		<AppName>AFBUS_2200COBOL</AppName>
+		<FullAMT>True</FullAMT>
+		<IniFile>E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini</IniFile>
+		<ComScript>E:\Repos\Federale_InternalRelease\AmtTools\ComScript\ComScript.dll</ComScript>
+		<ComModule>E:\Repos\Federale_InternalRelease\AmtTools\ComModule\AmtCOMModule.dll</ComModule>
+		<TransactionServer>Grpc:localhost:8032</TransactionServer>
+		<MaxWaitTime>5</MaxWaitTime>
+		<ApplicationKind>CobolOS2200</ApplicationKind>
+		<UseJobLog>True</UseJobLog>
+		<LogTimes>True</LogTimes>
+		<LoggingSeverity>Info</LoggingSeverity>
+		<LogEventError>True</LogEventError>
+		<LogEventInfo>True</LogEventInfo>
+		<LogEventWarning>True</LogEventWarning>
+		<PrintToPhysicalPrinters>False</PrintToPhysicalPrinters>
+		<DefaultDontPrint>True</DefaultDontPrint>
+		<DefaultPrinter>Default</DefaultPrinter>
+		<UseUnicode>True</UseUnicode>
+		<DeleteEmptyFolders>False</DeleteEmptyFolders>
+		<DefaultBDFolder>BD</DefaultBDFolder>
+		<TransferRoot></TransferRoot>
+		<WarningRcw2435>False</WarningRcw2435>
+		<MailLogLevel>0</MailLogLevel>
+		<MailTestAddress></MailTestAddress>
+		<MailFrom></MailFrom>
+		<MailPort>25</MailPort>
+		<MailServer></MailServer>
+		<MailLogon></MailLogon>
+		<MailPassword></MailPassword>
+		<MailUseSSL>False</MailUseSSL>
+		<MailRecipient></MailRecipient>
+		<FTPCreateFolders>True</FTPCreateFolders>
+		<FTPTestSettings>False</FTPTestSettings>
+		<FTPTestDest></FTPTestDest>
+		<FTPTestHost></FTPTestHost>
+		<FTPTestUser></FTPTestUser>
+		<FTPTestPassword></FTPTestPassword>
+		<FTPPath></FTPPath>
+		<FTPDeleteFiles>True</FTPDeleteFiles>
+		<FileControllerName>FederaleFileController</FileControllerName>
+		<BatchControllerName>FederaleBatchController</BatchControllerName>
+	</AmtSettings>
+</Amt>

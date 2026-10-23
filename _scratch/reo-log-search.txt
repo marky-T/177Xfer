@@ -1,0 +1,14 @@
+11:42:54    10,181 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\Amt_VMFEDPE08_8031_1.Log
+11:42:54    10,181 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\Amt_VMFEDPE08_8031_2.Log
+11:18:14     5,167 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\ApplicationCenter_BL.Log
+11:58:32     6,832 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\ASSURFED_UTILIT_CFH_COPY_ASCII_BugReport.Log
+11:59:44     7,160 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\ASSURFED_UTILIT_LOADIS_ASCII_BugReport.Log
+12:00:06     7,165 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\ASSURFED_UTILIT_UNLOADIS_ASCII_BugReport.Log
+12:00:06     1,024 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\Batch.Log
+12:00:06       383 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleBatchController_AGENT_1.Log
+12:00:08    16,685 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleBatchController.Log
+11:42:26    11,582 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleFileController.Log
+11:42:35    12,267 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederalePrintController.Log
+11:42:58    12,322 E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleTransactionServer.Log
+10:58:32         0 C:\Users\MTRUMAN\AppData\Local\Temp\5\dd_BackgroundDownload_20261020105831_result_Success.log
+10:58:32     3,119 C:\Users\MTRUMAN\AppData\Local\Temp\5\dd_BackgroundDownload_20261020105831.log

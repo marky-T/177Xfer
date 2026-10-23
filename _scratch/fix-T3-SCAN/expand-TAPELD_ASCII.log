@@ -1,0 +1,11 @@
+TAPELD_ASCII: 14 calls, 0 with a procedure division, 14 errors
+  PBDA04_L199: Cannot convert value "COUCHE" to type "System.Int64". Error: "The input string 'COUCHE' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fi
+  PBDA04_L339: Cannot convert value "TRF'" to type "System.Int64". Error: "The input string 'TRF'' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3
+  PBDA04_L753: Cannot convert value "NV-AN" to type "System.Int64". Error: "The input string 'NV-AN' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-
+  PBDA04_L805: Cannot convert value "CMB-DB" to type "System.Int64". Error: "The input string 'CMB-DB' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fi
+  PBDA07_L436: Cannot convert value "NV-AN" to type "System.Int64". Error: "The input string 'NV-AN' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-
+  PBDA07_L483: Cannot convert value "CMB-INV" to type "System.Int64". Error: "The input string 'CMB-INV' was not in a correct format." At E:\Repos\SsgTrial\_scratch\
+  PBDA08_L330: Cannot convert value "NV-AN" to type "System.Int64". Error: "The input string 'NV-AN' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-
+  PBDA08_L382: Cannot convert value "CMB-INV" to type "System.Int64". Error: "The input string 'CMB-INV' was not in a correct format." At E:\Repos\SsgTrial\_scratch\
+  PBDA09_L579: Cannot convert value "NV-AN" to type "System.Int64". Error: "The input string 'NV-AN' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-
+  PBDA09_L631: Cannot convert value "CMB-DB" to type "System.Int64". Error: "The input string 'CMB-DB' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fi

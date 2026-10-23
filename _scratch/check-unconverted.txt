@@ -1,0 +1,26 @@
+== the 10 "not used in STA sources" branches: what each does
+  706 case DirectiveId.Correct: {        -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1044 case DirectiveId.Dump: {           -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1130 case DirectiveId.Eject: {          -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1225 case DirectiveId.EndCorrect: {     -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1531 case DirectiveId.List: {           -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1544 case DirectiveId.Merge: {          -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1727 case DirectiveId.Restore: {        -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1754 case DirectiveId.Save: {           -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+ 1930 case DirectiveId.Unlist: {         -> throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+== directives in the DirectiveId enum with no case in the switch (fall to default = warning + comment)
+enum names : None, Abort, Accept, Add, Brkpt, Clear, Copy, Correct, Create, Csf, Define, Display, Divide, Dloc, Do, Dump, Edit, Eject, Else, ElseIf, Elsf, End, EndCorrect, EndDefine, EndDo, EndIf, Exit, If, Increment, Iterate, List, Loop, Merge, Message, Multiply, Pcontrol, Process, Remove, Restore, Return, Save, Set, Sort, Unlist, Wait
+cases      : Abort, Accept, Add, Brkpt, Clear, Copy, Correct, Create, Csf, Define, Display, Divide, Dloc, Do, Dump, Edit, Eject, Else, ElseIf, Elsf, End, EndCorrect, EndDefine, EndDo, EndIf, Exit, If, Increment, Iterate, List, Loop, Merge, Message, Multiply, Pcontrol, Process, Remove, Restore, Return, Save, Set, Sort, Unlist, Wait
+no case    : None
+== the end of Convert: what happens to an image that starts with * but is not a known directive
+ 1961: } else {
+ 1972: } else if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"]) && m_SystemVariables["NSIGN$"].Equals("0")) {
+ 1975: while (i < lines.Count && ((!lines[i].StartsWith(m_DirectivePrefix) && !lines[i].StartsWith("[")) || IsComment(lines[i], m_DirectivePrefix, out commen
+ 1993: } else if (IsComment(lines[i], m_DirectivePrefix, out commentTextStart)) {
+ 1997: } else {
+ 2006: } else {
+ 2015: } else if (lines[i].StartsWith("[")) {
+ 2021: } else if (IsComment(lines[i], m_DirectivePrefix, out commentTextStart)) {
+ 2023: } else if (lines[i].StartsWith(m_DirectivePrefix)) {
+ 2037: } else {
+ 2056: } else if (!String.IsNullOrEmpty(lines[i])) {

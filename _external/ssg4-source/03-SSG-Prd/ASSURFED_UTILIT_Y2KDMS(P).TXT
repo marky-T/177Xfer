@@ -1,0 +1,253 @@
+*ADD SGS SYS$*RUNS.PARAMDB  
+*IF [SAVE]  
+*DISPLAY 'Generating restore run in tpf$.restor'
+*BRKPT restor   
+#IRU
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+DOWN FILE [file,a,2,1]#[file,a,2,2] ;   
+*else   
+DOWN FILE uds$$src*[FILE,A,2,2] ;   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+ACT ;   
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+#xqt,imuxz tip$*tiprun$.treg
+tpfree [file,a,1,1].
+#copy sv*[file,a,2,2].,[file,a,1,1].
+#xqt,imuxz tip$*tiprun$.treg
+tpasg [file,a,1,1]. 
+*else   
+#copy sv*[file,a,2,2].,uds$$src*[file,a,2,2].   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+#IRU
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+UP FILE [file,a,2,1]#[file,a,2,2] ; 
+*else   
+UP FILE uds$$src*[FILE,A,2,2] ; 
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+ACT ;   
+*BRKPT ssg  
+#IRU
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+DOWN FILE [file,a,2,1]#[file,a,2,2] ;   
+*else   
+DOWN FILE uds$$src*[FILE,A,2,2] ;   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+ACT ;   
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+#delete,c sv*[file,a,2,2].  
+#cat,p sv*[file,a,2,2].,f///20000   
+#xqt,imuxz tip$*tiprun$.treg
+tpfree [file,a,1,1].
+#copy [file,a,1,1].,sv*[file,a,2,2].
+#xqt,imuxz tip$*tiprun$.treg
+tpasg [file,a,1,1]. 
+*else   
+#delete,c sv*[file,a,2,2].  
+#cat,p sv*[file,a,2,2].,f///20000   
+#copy uds$$src*[file,a,2,2].,sv*[file,a,2,2].   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+#IRU
+*INCREMENT B FROM 1 TO [SAVE]   
+*INCREMENT A FROM 1 TO [FILE]   
+*IF [FILE,A,2,2] = [SAVE,B,1,1] 
+*if not [file,a,3,1]
+*if [file,a,1,1,SUBSTR$,1,4] = DMST 
+*if [ENV,1,1,1] = TST   
+UP FILE [file,a,2,1]#[file,a,2,2] ; 
+*else   
+UP FILE uds$$src*[FILE,A,2,2] ; 
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*LOOP   
+ACT ;   
+*ELSE   
+*BRKPT SSG  
+*ENDIF  
+#iqu,idu
+def n nrec1                      . compteurs records clepfix
+def a an 2                       . annee 2 digits   
+def a e1 '12345678901234567890123456789012345678901234567890'   
+def a e2 '_________1_________2_________3_________4_________5'   
+def n cpt                        . variable de travail  
+.   
+*if [ENV,1,1,1] = TST   
+invoke tsschema of tschema file dmstst*t-schabs 
+   display '...using TSCHEMA ...'   
+*else   
+invoke dsschema of dschema file dmstst*d-schabs 
+   display '...using DSCHEMA ...'   
+*endif  
+.   
+.   
+   z = 0
+   impart   
+   open [area,1,1,1] update 
+.   
+   set rda (1,1000) = $lovals   
+   f4 f [record,1,1,1] [area,1,1,1] area
+   do while error-num = 0   
+      nrec1 = nrec1 + 1 
+      z = z + 1 
+*IF [LISTM] 
+      if nrec1 <= [LISTM,1,1,1] 
+       do visu  
+      endif 
+*ENDIF  
+      do adapt  
+      modify [record,1,1,1] 
+*IF [LISTM] 
+      if nrec1 <= [LISTM,1,1,1] 
+       do visu  
+      endif 
+*ENDIF  
+      if z = 50 
+       free 
+       set z = 0
+      endif 
+      set rda (1,1000) = $lovals
+      f4 n [record,1,1,1] [area,1,1,1] area 
+      do ii 
+   enddo
+clospar 
+   close [area,1,1,1]   
+   depart   
+   d '[record,1,1,1] : ' +  
+   d nrec1  
+   go endit 
+.   
+adapt procedure 
+*INCREMENT n FROM 1 TO [ADD]
+      s$ = [add,n,1,1]  
+      an = rda (0,2)
+      if rda (0,1) <> ';'   
+       if rda (0,1) <> '_'  
+        if an <> $num   
+         if an <> $spaces   
+          d 'erreur annee (' +  
+          edit s$ '999' +   
+          d ') /' + 
+          d an +
+          d ' record : ' +  
+          d rda (1,50)  
+          go clospar
+         endif  
+        endif   
+       endif
+      endif 
+      if rda (0,1) <> ';'   
+         if rda (0,1) <> '_'
+            x = rda (0,2)   
+         else   
+            s$ = s$ + 1 
+            x = rda (0,1)   
+            s$ = s$ - 1 
+            x = x + 110 
+         endif  
+      else  
+         s$ = s$ + 1
+         x = rda (0,1)  
+         s$ = s$ - 1
+         x = x + 100
+      endif 
+      x = x + [add,n,1,2]   
+      rda (0,2) = x 
+      if rda (0,1) = '0'
+         rda (0,1) = ';'
+      endif 
+      if rda (0,1) = '1'
+         rda (0,1) = '_'
+      endif 
+      if an = '  '  
+         rda (0,2) = '  '   
+      endif 
+      if an = '00'  
+         rda (0,2) = '00'   
+      endif 
+*loop   
+finiproc
+   endproc  
+.   
+ii procedure
+      IF IICODE NOT = ' '   
+          IICODE = ' '  
+          PCONTROL CONSOLE  
+          TRIMDISP 'CURRENT PAGE : ' +  
+          TRIMDISP C-PAGE   
+          PCONTROL LOCAL
+      ENDIF 
+      endproc   
+.   
+visu procedure  
+      d ''  
+      d '__________________________________________________'
+      d e1  
+      d e2  
+      cpt = 1   
+lp-visu 
+      s$ = cpt  
+      d rda (0,50)  
+      if rda (0,50) = $lovals   
+        go nx-visu  
+      endif 
+      cpt = cpt + 50
+      go lp-visu
+nx-visu 
+      d '__________________________________________________'
+      endproc   
+.   
+endit   
+   stop exit
+run 

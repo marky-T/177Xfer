@@ -1,0 +1,4 @@
+INPUT       INA,541,10
+OUTPUT      INB,541,10
+ASCII
+KEYS        R 2,1,'W'

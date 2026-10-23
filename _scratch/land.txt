@@ -1,0 +1,11 @@
+== Rebuild library ==
+    0 Error(s)
+
+Time Elapsed 00:00:05.12
+Copy-Item: E:\Repos\SsgTrial\SsgConverter\Trials\Reconvert-And-Verify.ps1:57:7
+Line |
+  57 |        Copy-Item $builtDll $target -Force
+     |        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Access to the path
+     | 'E:\Repos\SsgTrial\SsgConverter\Build\Console\SsgConverter.dll' is
+     | denied.

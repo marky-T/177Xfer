@@ -1,0 +1,35 @@
+=== E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Application
+   AFBUS_2200COBOL.Application.dll  9728 B  2026-10-19 17:39
+      ref Asysco.Amt.Runtime 8.0.26230.50
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.50
+      ref Asysco.Amt.Libs 8.0.26230.50
+   AFBUS_2200COBOL.Database.dll  5632 B  2026-10-19 17:39
+      ref Asysco.Amt.Runtime 8.0.26230.50
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.50
+      ref Asysco.Amt.Libs 8.0.26230.50
+=== E:\AMT_Work\Apps177\Binaries\Application
+   AFBUS_2200COBOL.Application.dll  16384 B  2026-10-19 17:33
+      ref Asysco.Amt.Runtime 8.0.26230.0
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.0
+      ref Asysco.Amt.Libs 8.0.26230.0
+   AFBUS_2200COBOL.Database.dll  8192 B  2026-10-19 17:33
+      ref Asysco.Amt.Runtime 8.0.26230.0
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.0
+      ref Asysco.Amt.Libs 8.0.26230.0
+=== E:\AMT_Work\Rebuild177a\AFBUS_2200COBOL\Binaries\Application
+   AFBUS_2200COBOL.Application.dll  9728 B  2026-10-19 17:39
+      ref Asysco.Amt.Runtime 8.0.26230.50
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.50
+      ref Asysco.Amt.Libs 8.0.26230.50
+   AFBUS_2200COBOL.Database.dll  5632 B  2026-10-19 17:39
+      ref Asysco.Amt.Runtime 8.0.26230.50
+      ref Asysco.Amt.AmtSharedDataModel 8.0.26230.50
+      ref Asysco.Amt.Libs 8.0.26230.50
+=== Reorganize tool folder: E:\Amt\AMTTools\Reorganize
+   Asysco.Amt.Runtime.dll present, file version 8.0.26230.0
+   Asysco.Amt.Libs.dll present, file version 8.0.26230.0
+   AmtReorganize.dll present, file version 8.0.26230.0
+=== runtime DLL versions elsewhere
+   E:\Amt\AMTTools\Asysco.Amt.Runtime.dll : (none)
+   E:\Repos\Federale_InternalRelease\AmtTools\Asysco.Amt.Runtime.dll : (none)
+   E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Programs\Asysco.Amt.Runtime.dll : 8.0.26230.50

@@ -1,0 +1,61 @@
+-All: discovered 20 converted program(s) in Examples/Output
+=== Build-Release: 20 program(s) requested ===
+Destination: E:\Repos\release_candidates\_smokeall
+
+  included ARCHIFORMAT      tier1=pass lines=0 unmocked=0
+  included ARCHISEPARE      tier1=pass lines=143 unmocked=0
+  included BABA_ASCII       tier1=pass lines=103 unmocked=11
+  included CFH-COPY         tier1=pass lines=45 unmocked=0
+  included CFH-COPY_ASCII   tier1=pass lines=47 unmocked=0
+  included CHAB100_ASCII    tier1=pass lines=212 unmocked=0
+  included CHABAN_ASCII     tier1=pass lines=132 unmocked=0
+  included CONDIS2_ASCII    tier1=pass lines=479 unmocked=0
+  included EXTEUR           tier1=pass lines=692 unmocked=0
+  included FUSBA_ASCII      tier1=pass lines=39 unmocked=0
+  included FUSBA2_ASCII     tier1=pass lines=69 unmocked=0
+  included LECTIS_ASCII     tier1=pass lines=178 unmocked=0
+  included LOADIS_ASCII     tier1=pass lines=69 unmocked=0
+  included LOADIS_MULTI     tier1=pass lines=96 unmocked=0
+  included RECAP            tier1=pass lines=223 unmocked=0
+  included SCAN_ASCII       tier1=pass lines=104 unmocked=0
+  included TABAN_ASCII      tier1=pass lines=215 unmocked=0
+  included TAPELD_ASCII     tier1=pass lines=49 unmocked=0
+  included UNLOADIS_ASCII   tier1=pass lines=63 unmocked=0
+  included UNLOADIS_MULTI   tier1=pass lines=64 unmocked=0
+
+Generating wrappers...
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\ARCHIFORMAT-LIVE.ps1 (job: T3_20_ARCHIFORMAT_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\ARCHISEPARE-LIVE.ps1 (job: T3_20_ARCHISEPARE_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\BABA_ASCII-LIVE.ps1 (job: T3_20_BABA_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\CFH-COPY_ASCII-LIVE.ps1 (job: T3_20_CFH_COPY_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\CFH-COPY-LIVE.ps1 (job: T3_20_CFH_COPY_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\CHAB100_ASCII-LIVE.ps1 (job: T3_20_CHAB100_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\CHABAN_ASCII-LIVE.ps1 (job: T3_20_CHABAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\CONDIS2_ASCII-LIVE.ps1 (job: T3_20_CONDIS2_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\EXTEUR-LIVE.ps1 (job: T3_20_EXTEUR_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\FUSBA_ASCII-LIVE.ps1 (job: T3_20_FUSBA_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\FUSBA2_ASCII-LIVE.ps1 (job: T3_20_FUSBA2_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\LECTIS_ASCII-LIVE.ps1 (job: T3_20_LECTIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\LOADIS_ASCII-LIVE.ps1 (job: T3_20_LOADIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\LOADIS_MULTI-LIVE.ps1 (job: T3_20_LOADIS_MULTI_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\RECAP-LIVE.ps1 (job: T3_20_RECAP_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\SCAN_ASCII-LIVE.ps1 (job: T3_20_SCAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\TABAN_ASCII-LIVE.ps1 (job: T3_20_TABAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\TAPELD_ASCII-LIVE.ps1 (job: T3_20_TAPELD_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\UNLOADIS_ASCII-LIVE.ps1 (job: T3_20_UNLOADIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers\UNLOADIS_MULTI-LIVE.ps1 (job: T3_20_UNLOADIS_MULTI_LIVE)
+
+Done - 20 wrapper(s) written to E:\Repos\release_candidates\_smokeall\1_ConvertedScripts\Wrappers
+
+=== Build complete ===
+Included : 20
+Excluded : 0
+Wrappers : 20 (all parse 0)
+Manifest : E:\Repos\release_candidates\_smokeall\build-manifest.json
+
+Next: populate README.md / RELEASE-NOTES.md from the templates, then run Mock-Install-Dryrun.ps1.
+
+Dest                                  Included
+----                                  --------                                  
+E:\Repos\release_candidates\_smokeall {@{Program=ARCHIFORMAT; Original=ARCHIFOR…
+

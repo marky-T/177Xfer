@@ -1,0 +1,98 @@
+
+=== 1. Generated output is newer than the LionSource
+ASSURFED_UTILIT_CFH_COPY_ASCII.dll            2026-10-14 22:25:17 ok
+ASSURFED_UTILIT_FUSBA2_ASCII.dll              2026-10-14 22:25:17 ok
+ASSURFED_UTILIT_LECTIS_ASCII.dll              2026-10-14 22:25:17 ok
+ASSURFED_UTILIT_LOADIS_ASCII.dll              2026-10-14 22:25:17 ok
+ASSURFED_UTILIT_RECAP.dll                     2026-10-14 22:25:18 ok
+ASSURFED_UTILIT_UNLOADIS_ASCII.dll            2026-10-14 22:25:17 ok
+
+=== 2. Rebuild against Federale 177a (flagged)
+base(...) calls rewritten in 6 file(s)
+
+Program                        Built FirstError
+-------                        ----- ----------
+ASSURFED_UTILIT_CFH_COPY_ASCII  True 
+ASSURFED_UTILIT_FUSBA2_ASCII    True 
+ASSURFED_UTILIT_LECTIS_ASCII    True 
+ASSURFED_UTILIT_LOADIS_ASCII    True 
+ASSURFED_UTILIT_RECAP           True 
+ASSURFED_UTILIT_UNLOADIS_ASCII  True 
+
+
+Output: E:\AMT_Work\Rebuild177a\AFBUS_2200COBOL\Binaries\Programs
+
+=== 3. Mock tests
+== 1. CFH-COPY_ASCII against the reference (AFPH12 line 427)
+Application AFBUS_2200COBOL already exists (id 5).
+  22:26:59  Done
+  Program exit code: 0
+AFPH12_L427 : PASS  OUTASC matches the independent reference (25 records, 22 bytes + CRLF)
+
+== 2. Smoke runs (no reference output: loads, opens files, ends)
+
+[32;1mCase       : [0mVIRD03_L766
+[32;1mInputs     : [0mMAJ/70 INP/184
+[32;1mExit       : [0m0
+[32;1mProgram    : [0mProgram exit code: 0
+[32;1mNewFiles   : [0mOUT.DAT (1240 bytes)
+[32;1mFirstError : [0m
+
+
+[32;1mCase       : [0mCCTA09_L479
+[32;1mInputs     : [0mI008TSTA696/80
+[32;1mExit       : [0m0
+[32;1mProgram    : [0mProgram exit code: 0
+[32;1mNewFiles   : [0m
+[32;1mFirstError : [0m
+
+
+[32;1mCase       : [0mCLOA49_L141
+[32;1mInputs     : [0mB010SINAUTCL/204
+[32;1mExit       : [0m0
+[32;1mProgram    : [0mProgram exit code: 0
+[32;1mNewFiles   : [0mOUTCLOA49.DAT (1030 bytes); OUTCLOA49.DAT.Index (375 bytes)
+[32;1mFirstError : [0m
+
+
+[32;1mCase       : [0mCCTA08_L287
+[32;1mInputs     : [0mINACCTA08/120
+[32;1mExit       : [0m1
+[32;1mProgram    : [0mProgram exit code: 1
+[32;1mNewFiles   : [0mOUTCCTA08.DAT (0 bytes)
+[32;1mFirstError : [0m22:27:42  ERROR Invalid function call RSA$INIT. Should be 
+             AssemblyName.ClassName.MethodName
+
+
+[32;1mCase       : [0mCLOA43_L473
+[32;1mInputs     : [0mFSCR001ATO/204
+[32;1mExit       : [0m0
+[32;1mProgram    : [0mProgram exit code: 0
+[32;1mNewFiles   : [0mOUT.DAT (1030 bytes)
+[32;1mFirstError : [0m
+
+
+== 3. Reference tests (expected output worked out independently of the C#)
+REF_FUSBA2_L766      PASS   MAJ 14, INP 39, OUT 39 records (13 with a MAJ update). OUT.DAT matches the expected file (9672 bytes)
+REF_LOADIS_L141      PASS   40 records with ascending keys at offset 6 length 8. ran to exit 0 (no expected file given)
+REF_UNLOADIS_L473    PASS   reads the indexed file LOADIS wrote; expected = the input records unchanged, in key order. OUT.DAT matches the expected file (8240 bytes)
+OBS_LOADIS_UNSORTED  NOTE   keys in random order: exit 0, 3 of 40 records written. COBOL would raise INVALID KEY on the first out-of-order key (error message, then abort); this runtime accepts the call and silently skips them.
+[33;1mWARNING: One or more mock tests did not pass (see above). Known and deferred: RECAP (T3-027). The package is still staged without the excluded programs.[0m
+
+=== 4. Stage the delivery package (local only)
+Staged: E:\AMT_Work\Delivery\AFBUS_2200COBOL_AMT-20261014-2228
+
+Path                                                  Bytes
+----                                                  -----
+Binaries\Application\AFBUS_2200COBOL.Application.dll   9728
+Binaries\Application\AFBUS_2200COBOL.Database.dll      5632
+Binaries\Application\Newtonsoft.Json.dll             723368
+Binaries\Programs\AFBUS_2200COBOL.Application.dll      9728
+Binaries\Programs\AFBUS_2200COBOL.Database.dll         5632
+Binaries\Programs\ASSURFED_UTILIT_CFH_COPY_ASCII.dll  13312
+Binaries\Programs\ASSURFED_UTILIT_FUSBA2_ASCII.dll    18944
+Binaries\Programs\ASSURFED_UTILIT_LECTIS_ASCII.dll    19968
+Binaries\Programs\ASSURFED_UTILIT_LOADIS_ASCII.dll    14336
+Binaries\Programs\ASSURFED_UTILIT_UNLOADIS_ASCII.dll  13312
+
+

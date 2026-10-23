@@ -1,0 +1,47 @@
+﻿       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. MONTANT. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  FILEIN  ASSIGN TO DISC FILEIN-1.  *> SSG-STUB [INPUT,1,1,1]
+           SELECT  FILEOUT ASSIGN TO DISC FILEOUT-1.  *> SSG-STUB [OUTPUT,1,1,1]
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  FILEIN   
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+           RECORD CONTAINS 80  CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X(80).  *> SSG-STUB [INPUT,1,1,2]
+       FD  FILEOUT  
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+           RECORD CONTAINS 80  CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+           DATA RECORD IS REC-OUT.  
+       01  REC-OUT            PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       WORKING-STORAGE SECTION. 
+       01  WS-IN  PIC X(80).  *> SSG-STUB [INPUT,1,1,2]
+       01  WS-IN1 REDEFINES WS-IN.  *> SSG-STUB [*I]
+               03 FILLER    PIC X(1).  *> SSG-STUB [*FILLUN]
+               03 MONTANT1  PIC S9(9).  *> SSG-STUB [*I], [MONTANT,I,1,2]
+               03 FILLER    PIC X(1).  *> SSG-STUB [*FILLDEU]
+       01  WS-OUT  PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  WS-OUT1 REDEFINES WS-OUT.  *> SSG-STUB [*I]
+               03 FILLER    PIC X(1).  *> SSG-STUB [*FILLUN]
+               03 MONTANT1  PIC S9(9).  *> SSG-STUB [*I], [MONTANT,I,1,2]
+               03 FILLER    PIC X(1).  *> SSG-STUB [*FILLDEU]
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT FILEIN
+                OUTPUT FILEOUT. 
+       LECTURE. 
+           READ FILEIN INTO WS-IN AT END GO TO FIN. 
+           MOVE WS-IN TO WS-OUT.
+           COMPUTE MONTANT1 OF WS-OUT1 = MONTANT1 OF WS-IN1 * +1  *> SSG-STUB [*I], [*I], [*I], [*I]
+
+           WRITE REC-OUT FROM WS-OUT.   
+           GO TO LECTURE.   
+       FIN. 
+           CLOSE FILEIN FILEOUT.
+           STOP RUN.

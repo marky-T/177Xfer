@@ -1,0 +1,20 @@
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\AmtReorganize.exe : False
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\AmtReoConsole.exe : False
+E:\Repos\Federale_InternalRelease\AmtTools\AmtReorganize.exe : False
+E:\Repos\Federale_InternalRelease\Lion\AmtReorganize.exe : False
+E:\Repos\Federale_InternalRelease\Lion\Reorganize\AmtReorganize.exe : False
+C:\Amt\Working\Lion\Lion\AmtReorganize.exe : False
+
+--- AmtTools top-level dirs ---
+AmtBatchController
+AmtFileController
+AmtPrintService
+AmtTransactionServer
+Basepaths
+BlazorWebApi
+BlazorWebClient
+ComModule
+ComScript
+ControlCenterCore
+ControlCenterWebApi
+Opconservice

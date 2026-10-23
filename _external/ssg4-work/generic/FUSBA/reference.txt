@@ -1,0 +1,6 @@
+M  model vs independent FUSBA2 reference: PASS (read 14/39, written 39)
+C  model: read 15/58, written LOA/SUP 39/19
+C  static DLL vs model, LOA: PASS LOA.DAT matches the expected file (11622 bytes)
+C  static DLL vs model, SUP: PASS
+D1 static ASSURFED_UTILIT_FUSBA_RD.dll vs model: PASS ANO.DAT matches the expected file (3312 bytes)
+U1 static ASSURFED_UTILIT_FUSBA_RU.dll vs model: PASS OUT.DAT matches the expected file (4104 bytes)

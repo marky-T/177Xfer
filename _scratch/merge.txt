@@ -1,0 +1,534 @@
+SymstreamProcessor.cs: conflicts=22 markers=22
+SymstreamExpressionMigrator.cs: conflicts=5 markers=5
+SymstreamExpressionParser.cs: conflicts=11 markers=11
+--- conflict hunks
+== SymstreamProcessor.cs lines 21-37
+   <<<<<<< ours
+   
+       /// <summary>
+       /// Arguments for: Set-Variable -Name "NAME" -Value (value) -Scope 1, i.e. assign in the scope that called the define function.
+       /// </summary>
+       private static List<PsAstExprBase> SetVariableInCallerScope (String variableName, PsAstExprBase value) {
+         return new List<PsAstExprBase> {
+           new PsAstExprPrimitive("-Name", false),
+           new PsAstExprPrimitive(variableName, true),
+           new PsAstExprPrimitive("-Value", false),
+           new PsAstExprParenthesized(value),
+           new PsAstExprPrimitive("-Scope", false),
+           new PsAstExprPrimitive("1", false)
+         };
+       }
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 50-53
+   <<<<<<< ours
+       private Int32 m_DefineDepth = 0;
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 162-236
+   <<<<<<< ours
+         try {
+           SymstreamExpression ssExpression = m_ExpressionParser.Parse(expression, globalVariables, localVariables, identifierOverString);
+           return m_ExpressionMigrator.Migrate(ssExpression);
+         } catch (Exception ex) {
+           // rethrow with the expression text and file context so failures are diagnosable
+           throw new SymstreamException(
+             String.Format("Expression parse/migrate failed in '{0}'.\r\n  Expression: [{1}]\r\n  Cause: {2}",
+               m_FileBeingMigrated, expression, ex.Message));
+         }
+       } // SymstreamExpressionToPowerShellExpression
+   
+       /// <summary>
+       /// Converts a Symstream output/data line to a PowerShell expression that yields the line's text.
+       /// Literal text is emitted verbatim as double-quoted string segments (never parsed as arithmetic
+       /// operators), while only [bracketed] references are converted - with variable context - so a data
+       /// line such as "06 FILLER PIC X([FILLCTR])." becomes ("06 FILLER PIC X(" + ($FILLCTR) + ".")
+       /// rather than a broken operator expression.
+       /// </summary>
+       /// <param name="line">The Symstream output/data line.</param>
+       /// <param name="globalVariables">The current set of global variables if there is one.</param>
+       /// <param name="localVariables">The current set of local variables if there is one.</param>
+       /// <returns>A PowerShell expression object that yields the output line's text.</returns>
+       private PsAstExprBase OutputLineToPowerShellExpression (String line, List<String> globalVariables, List<String> localVariables) {
+   
+         List<String> parts = m_ExpressionMigrator.SplitBracketedReferencesAndLiteralParts(line);
+         PsAstExprBase result = null;
+   
+         foreach (String part in parts) {
+           PsAstExprBase segment;
+           if (part.Length > 0 && part[0] == '[') {
+             // a [bracketed] reference: convert with variable context ($var, GetSgsValue(...), $Parameters[n], ...)
+             segment = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(part, globalVariables, localVariables));
+           } else {
+             // literal text: emit verbatim as a double-quoted PowerShell string
+             segment = new PsAstExprPrimitive(QuoteForPowerShellDoubleQuotedString(part), false);
+           }
+   
+           result = (result == null) ? segment : new PsAstExprBinaryOperator(result, PSAstOperatorType.Add, segment);
+         }
+   
+         // an empty line still needs to be a valid PowerShell expression
+         if (result == null) {
+           result = new PsAstExprPrimitive("\"\"", false);
+         }
+   
+         return new PsAstExprParenthesized(result);
+       } // OutputLineToPowerShellExpression
+   
+       /// <summary>
+       /// Wraps literal text as a PowerShell double-quoted string, escaping the characters that are
+       /// special inside such a string (backtick, double quote, dollar).
+       /// </summary>
+       /// <param name="s">The literal text.</param>
+       /// <returns>A PowerShell double-quoted string literal.</returns>
+       private static String QuoteForPowerShellDoubleQuotedString (String s) {
+         StringBuilder sb = new StringBuilder();
+         sb.Append('"');
+         foreach (Char c in s) {
+           if (c == '`' || c == '"' || c == '$') {
+             sb.Append('`');
+           }
+           sb.Append(c);
+         }
+         sb.Append('"');
+         return sb.ToString();
+       } // QuoteForPowerShellDoubleQuotedString
+   =======
+         // parse the expression
+         SymstreamExpression ssExpression = m_ExpressionParser.Parse(expression, globalVariables, localVariables, identifierOverString);
+   
+         // migrate the expression to a PsAstExprBlock
+         return m_ExpressionMigrator.Migrate(ssExpression);
+       } // SymstreamExpressionToPowerShellExpression
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 281-293
+   <<<<<<< ours
+       /// Emits a warning log entry and a PS comment for a directive that is recognised but not yet implemented.
+       /// Use instead of throwing so the file conversion continues rather than failing.
+       /// </summary>
+       private void EmitNotImplemented (PsAstInstrBlock block, String sourceLine) {
+         String trimmed = sourceLine.Trim();
+         m_LogObject.Warning(0, String.Format("  Not implemented - emitted as comment: {0}", trimmed));
+         block.AddComment(String.Format(" NOT IMPLEMENTED: {0}", trimmed));
+       } // EmitNotImplemented
+   
+       /// <summary>
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 469-473
+   <<<<<<< ours
+           if (!String.IsNullOrWhiteSpace(s)) {
+   =======
+           if (!String.IsNullOrEmpty(s)) {
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 700-714
+   <<<<<<< ours
+                 // *CLEAR sets the (local or global) variable to 0, creating it if it does not exist.
+                 // Emit a null-safe assignment rather than `Clear-Variable $name` (which passed the
+                 // variable's value as -Name and threw when the variable was unset - issue T3-003).
+                 if (m_DefineDepth > 0) {
+                   powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(variableName, new PsAstExprPrimitive("0", false, PsAstPrimitiveType
+                 } else {
+                   powerSkel.AddAssignment(
+                     new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject),
+                     new PsAstExprPrimitive("0", false, PsAstPrimitiveType.Normal));
+                 }
+   =======
+                 PsAstExprPrimitive parameter = new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject);
+                 powerSkel.AddMethodInvoke("Clear-Variable", parameter);
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 822-836
+   <<<<<<< ours
+                 DirectiveId endDefId;
+                 m_DefineDepth++;
+                 for (; i < lines.Count; i++) {
+                   if (lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparison.OrdinalIgnoreCase)) break;
+                   // accept deprecated *End as *ENDDEFINE terminator
+                   if (IsDirective(lines[i], m_DirectivePrefix, out endDefId) && endDefId == DirectiveId.End) break;
+                   define.Body.AddInstrBlock(Convert(lines, ref i, globalVariables));
+                 }
+                 m_DefineDepth--;
+   =======
+                 for (; (i < lines.Count) && !lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparison.OrdinalIgnore
+                   define.Body.AddInstrBlock(Convert(lines, ref i, globalVariables));
+                 }
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1051-1056
+   <<<<<<< ours
+                   // accept deprecated *End as *ENDDO terminator
+                   if ((IsDirective(lines[i], m_DirectivePrefix, out loopId)) && (loopId == DirectiveId.EndDo || loopId == DirectiveId.End)) {
+   =======
+                   if ((IsDirective(lines[i], m_DirectivePrefix, out loopId)) && (loopId == DirectiveId.EndDo)) {
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1391-1395
+   <<<<<<< ours
+   =======
+                 Boolean hasExplicitFrom = false;
+                 Boolean hasExplicitTo = false;
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1405-1415
+   <<<<<<< ours
+                   if (incrementVariable.StartsWith("+")) {
+                     // some SSG sources write "*INCREMENT +I ..." with a leading '+' on the variable
+                     // name itself (not an operator); every other reference to the same loop variable
+                     // in the source (e.g. bracketed [PG,I,1,1]) omits the '+', so strip it here too -
+                     // otherwise the declare ($+I, invalid PowerShell) and the condition/increment
+                     // (sanitised to $_I by the AST writer) end up as two different, mismatched names.
+                     incrementVariable = incrementVariable.Substring(1);
+                   }
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1425-1428
+   <<<<<<< ours
+   =======
+                   hasExplicitFrom = true;
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1437-1440
+   <<<<<<< ours
+   =======
+                   hasExplicitTo = true;
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1526-1532
+   <<<<<<< ours
+                 if (i == lines.Count) {
+                   // no more lines and no *LOOP encountered
+   =======
+                 if (i == lines.Count && !(hasExplicitFrom && hasExplicitTo)) {
+                   // no more lines and no *LOOP encountered, and the *INCREMENT is not self-bounded
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1541-1546
+   <<<<<<< ours
+   =======
+                 // A self-bounded *INCREMENT (explicit FROM/TO) needs no closing *LOOP: the
+                 // FROM/TO bounds define the iteration count and the consumed lines form the body.
+   
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1571-1584
+   <<<<<<< ours
+                   // *ITERATE on an outer loop variable has no direct PowerShell equivalent (no labelled continue)
+                   // Emitted as a comment - see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
+                   m_LogObject.Error(0, String.Format(
+                     "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop - PowerShell has no labelled continue. " +
+                     "The iterate directive is emitted as a comment; the loop body will NOT skip remaining statements. " +
+                     "See SsgConverter-Fix-20260820.md Fix 11 for the proper R&D fix.", variableName));
+                   powerSkel.AddComment(String.Format(
+                     " IMPORTANT-WORKAROUND: *ITERATE {0} skips to the next iteration of an outer loop." +
+                     " PowerShell 'continue' only affects the innermost loop, so this is a no-op here." +
+                     " R&D fix required - see SsgConverter-Fix-20260820.md Fix 11.", variableName));
+   =======
+                   throw new SymstreamException(String.Format("*ITERATE variable is not the inner most loop variable, this is not supported. Line: {0}", 
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1634-1658
+   <<<<<<< ours
+                 // Format:
+                 //   *MULTIPLY number1 BY number2 GIVING variable-name
+                 String mulLine = lines[i].ToUpperInvariant();
+                 Int32 mulBy = mulLine.IndexOf(" BY ");
+                 Int32 mulGiving = mulLine.IndexOf(" GIVING ");
+                 if (mulBy > -1 && mulGiving > -1 && mulGiving > mulBy) {
+                   String mulNum1 = lines[i].Substring(10, mulBy - 10).Trim();
+                   String mulNum2 = lines[i].Substring(mulBy + 4, mulGiving - mulBy - 4).Trim();
+                   String mulVar  = lines[i].Substring(mulGiving + 8).Trim();
+                   PsAstExprPrimitive mulTarget = new PsAstExprPrimitive(mulVar, PsAstPrimitiveType.LocalObject);
+                   PsAstExprBinaryOperator mulOp = new PsAstExprBinaryOperator(
+                     SymstreamExpressionToPowerShellExpression(mulNum1, globalVariables, localVariables),
+                     PSAstOperatorType.Multiply,
+                     SymstreamExpressionToPowerShellExpression(mulNum2, globalVariables, localVariables));
+                   powerSkel.AddAssignment(mulTarget, mulOp);
+                   globalVariables.Add(mulVar.ToUpperInvariant());
+                 } else {
+                   EmitNotImplemented(powerSkel, lines[i]);
+                 }
+                 break;
+   =======
+                 // not used in STA sources
+                 throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1779-1786
+   <<<<<<< ours
+                 } else if (target.Equals("VARIABLE")) {
+                   // remove the named variable from scope; subsequent references treat it as an unquoted string
+                   String varName = lines[i].Substring(charBehindWord).Trim().ToUpperInvariant();
+                   globalVariables.Remove(varName);
+                   powerSkel.AddComment(" Removed variable: " + varName);
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1891-1900
+   <<<<<<< ours
+                 if (m_DefineDepth > 0 && IsVariableName(target)) {
+                   // SSG variables are global; a plain assignment inside a PowerShell function would only change a local copy.
+                   powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(target.ToUpperInvariant(), sourceExpr));
+                 } else {
+                   powerSkel.AddAssignment(targetExpr, sourceExpr);
+                 }
+   =======
+                 powerSkel.AddAssignment(targetExpr, sourceExpr);
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 1947-1953
+   <<<<<<< ours
+   =======
+                       if (subnames.Length > 1) {
+                         throw new SymstreamException(String.Format("*SORT name field too complex: {0}", name));
+                       }
+   
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 2027-2032
+   <<<<<<< ours
+                 EmitNotImplemented(powerSkel, lines[i]);
+                 break;
+   =======
+                 throw new SymstreamException(String.Format(Unexpected, directiveId, i));
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 2099-2107
+   <<<<<<< ours
+         } else if (lines[i].StartsWith("[")) {
+           powerSkel.AddComment(" This was a stand-alone bracketed reference line.");
+           PsAstExprBase psDataLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
+   
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", psDataLine);
+   
+   =======
+   >>>>>>> rd
+== SymstreamProcessor.cs lines 2143-2159
+   <<<<<<< ours
+         } else if (!String.IsNullOrWhiteSpace(lines[i])) {
+           // Plain text output line (not a directive, not ECL, not a standalone bracket reference).
+           // In Symstream, any non-directive line is an output statement written to the generated stream.
+           // Emit it as literal text with only [bracketed] references substituted - never parse the
+           // COBOL/text as an arithmetic expression (that produced invalid PowerShell).
+           PsAstExprBase psOutputLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+   =======
+         } else if (!String.IsNullOrEmpty(lines[i])) {
+           // Output data line (not a directive, not ECL). This includes lines that begin with a bracketed
+           // reference. In Symstream, any non-directive line is an output statement written verbatim to the
+           // generated stream, with only [...] references substituted, => emit as literal text (not parsed
+           // as an expression).
+           String expanded = m_ExpressionMigrator.WrapSgsReferencesInFunctionCalls(lines[i], true, true);
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", new PsAstExprPrimitive(expanded, false));
+   >>>>>>> rd
+== SymstreamExpressionMigrator.cs lines 61-71
+   <<<<<<< ours
+   
+           // note: "VALUE OF [x]" asks for the numeric value of x. The parser sees the words as a text operand joined to the
+           //       reference with +, which made the comparison string-vs-number and never true. Keep only the reference.
+           SymstreamExpressionPrimitive valueOfWord = left as SymstreamExpressionPrimitive;
+           if (binaryOperator == PSAstOperatorType.Add && valueOfWord != null && valueOfWord.PrimitiveType == PrimitiveType.LiteralString
+               && String.Equals(valueOfWord.Image.Trim(), "VALUE OF", StringComparison.OrdinalIgnoreCase)) {
+             return Migrate(right);
+           }
+   =======
+   >>>>>>> rd
+== SymstreamExpressionMigrator.cs lines 80-84
+   <<<<<<< ours
+             PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(MigrateOperand(left, right, binaryOperator), binaryOperator, MigrateOperand(right, 
+   =======
+             PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(Migrate(left), binaryOperator, Migrate(right));
+   >>>>>>> rd
+== SymstreamExpressionMigrator.cs lines 99-135
+   <<<<<<< ours
+               SymstreamExpressionPrimitive primitiveOperand = operand as SymstreamExpressionPrimitive;
+               if (primitiveOperand != null) {
+                 String sign = String.Empty;
+                 if (ue.UnaryOperator == UnaryOperator.Negative) {
+                   sign = "-";
+                 }
+                 if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
+                   powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
+                 } else {
+                   powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
+                 }
+               } else {
+                 // non-primitive operand: emit (0 - expr) or (0 + expr)
+                 PsAstExprBlock migratedOperand = Migrate(operand);
+                 PSAstOperatorType op = ue.UnaryOperator == UnaryOperator.Negative ? PSAstOperatorType.Substract : PSAstOperatorType.Add;
+                 powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(new PsAstExprBinaryOperator(new PsAstExprPrimitive("0"), op, migrated
+               }
+   =======
+               // operand shoud be a primitive
+               SymstreamExpressionPrimitive primitiveOperand = operand as SymstreamExpressionPrimitive;
+               if (primitiveOperand == null) {
+                 throw new SymstreamException("SymstreamExpressionPrimitive expected.");
+               }
+   
+               String sign = String.Empty;
+               if (ue.UnaryOperator == UnaryOperator.Negative) {
+                 sign = "-";
+               }
+   
+               if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
+                 powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
+               } else {
+                 powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
+               }
+   
+   >>>>>>> rd
+== SymstreamExpressionMigrator.cs lines 197-218
+   <<<<<<< ours
+       /// Migrates one operand of a binary operator. A define parameter ([#1]) arrives as a string in PowerShell, and
+       /// "6" + 1 is "61" there, so an arithmetic operand that is a define parameter is converted to a number first.
+       /// </summary>
+       private PsAstExprBase MigrateOperand (SymstreamExpression operand, SymstreamExpression otherOperand, PSAstOperatorType binaryOperator) {
+         Boolean arithmetic = binaryOperator == PSAstOperatorType.Add || binaryOperator == PSAstOperatorType.Substract
+           || binaryOperator == PSAstOperatorType.Multiply || binaryOperator == PSAstOperatorType.Divide || binaryOperator == PSAstOperatorType.Modulo;
+         SymstreamExpressionPrimitive primitive = operand as SymstreamExpressionPrimitive;
+         SymstreamExpressionPrimitive otherPrimitive = otherOperand as SymstreamExpressionPrimitive;
+         Boolean otherIsText = otherPrimitive != null && otherPrimitive.PrimitiveType == PrimitiveType.LiteralString;
+         if (arithmetic && !otherIsText && primitive != null && primitive.PrimitiveType == PrimitiveType.BracketedReference) {
+           Match parameterReference = Regex.Match(primitive.Image, @"^\[#(\d+)\]$");
+           if (parameterReference.Success && Int32.Parse(parameterReference.Groups[1].Value) > 0) {
+             return new PsAstExprPrimitive("[Int64]$Parameters[" + (Int32.Parse(parameterReference.Groups[1].Value) - 1) + "]", false);
+           }
+         }
+   
+         return Migrate(operand);
+       } // MigrateOperand
+       /// <summary>
+   =======
+   >>>>>>> rd
+== SymstreamExpressionMigrator.cs lines 353-357
+   <<<<<<< ours
+       public List<String> SplitBracketedReferencesAndLiteralParts (String s) {
+   =======
+       private List<String> SplitBracketedReferencesAndLiteralParts (String s) {
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 29-36
+   <<<<<<< ours
+         // guard: whitespace-only input trims to empty
+         if (String.IsNullOrEmpty(text)) {
+           throw new ArgumentException("The expression text may not be null or empty.");
+         }
+   
+   =======
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 115-127
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 138-150
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 161-173
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 184-196
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 207-219
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 230-242
+   <<<<<<< ours
+             if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
+               SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+               SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+             SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 332-335
+   <<<<<<< ours
+             if (String.IsNullOrEmpty(right)) { return exprLeft; }
+   =======
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 365-376
+   <<<<<<< ours
+             // guard: operand empty after unary strip (e.g. standalone '-' or '---') - treat as literal
+             if (!String.IsNullOrWhiteSpace(operand)) {
+               SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 386-397
+   <<<<<<< ours
+             // guard: operand empty after unary strip - treat as literal
+             if (!String.IsNullOrWhiteSpace(operand)) {
+               SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+               SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
+               return expression;
+             }
+   =======
+             SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+             SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
+             return expression;
+   >>>>>>> rd
+== SymstreamExpressionParser.cs lines 516-530
+   <<<<<<< ours
+         // require both the object keyword AND the SEARCH keyword to avoid false positives
+         // on COBOL identifiers that happen to start with ROW/COLUMN/KEYWORD after a binary split
+         if (text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
+             text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
+             text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase)) {
+           return text.IndexOf(" SEARCH ", StringComparison.OrdinalIgnoreCase) > -1 ||
+                  text.IndexOf("\tSEARCH ", StringComparison.OrdinalIgnoreCase) > -1;
+         }
+         return false;
+   =======
+         return text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
+           text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
+           text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase);
+   >>>>>>> rd

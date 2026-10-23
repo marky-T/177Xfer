@@ -1,0 +1,29 @@
+Conversion complete: 20 succeeded, 0 failed
+ARCHISEPARE: DIFFERENT  System.Object[]
+BABA_ASCII: DIFFERENT  System.Object[]
+CFH-COPY: DIFFERENT  System.Object[]
+EXTEUR: DIFFERENT  System.Object[]
+LECTIS_ASCII: DIFFERENT  System.Object[]
+LOADIS_ASCII: DIFFERENT  System.Object[]
+RECAP: DIFFERENT  System.Object[]
+TAPELD_ASCII: DIFFERENT  System.Object[]
+UNLOADIS_ASCII: DIFFERENT  System.Object[]
+programs with differing output (IsNullOrEmpty vs IsNullOrWhiteSpace): 9
+--- sample of one difference
+@@ -84,2 +84,3 @@ If ((CompareTypeSafe (GetSgsValue ("key,1,2,1")) "EqualTo" 0)) {
+ }
++DataLineOrNoStatement ("    ")
+ DataLineOrNoStatement ("      * Fichier enregistrements a archiver  ")
+@@ -87,2 +88,3 @@ DataLineOrNoStatement ("       FD  ficarchi.")
+ DataLineOrNoStatement ("        1  ligne-archi           pic x(" + ($c) + ").   ")
++DataLineOrNoStatement ("    ")
+ DataLineOrNoStatement ("      * Fichier enregistrement a ne pas archiver")
+@@ -90,2 +92,3 @@ DataLineOrNoStatement ("       FD  ficnarchi.   ")
+ DataLineOrNoStatement ("        1  ligne-narchi          pic x(" + ($d) + ").   ")
++DataLineOrNoStatement ("    ")
+ DataLineOrNoStatement ("       Working-storage section. ")
+@@ -128,2 +131,4 @@ DataLineOrNoStatement ("           3 annee-fr                  pic 9(4).")
+ DataLineOrNoStatement ("      *------------------------------------------------------   ")
++DataLineOrNoStatement ("    ")
++DataLineOrNoStatement ("    ")
+ DataLineOrNoStatement ("       PROCEDURE DIVISION.  ")

@@ -1,0 +1,8 @@
+{
+  "jobname": "LOADIS-ASCII",
+  "fileAssignments": {
+    "BDE1":    "input.dat",
+    "DISQ":    "disq.dat",
+    "PRINTER": "output.dat"
+  }
+}

@@ -1,0 +1,50 @@
+==== BABA_ASCII  ASSURFED_F999RUN_2PPJ11(P).TXT line 74  cards calls\ASSURFED_F999RUN_2PPJ11__L74.sgs
+ASCII
+INPUT I001MSG054,366,10
+OUTPUT I006MSG054,366,10
+KEYS   E         1,8,CONTROLE
+---- expansion output
+exit 1
+
+[32;1mProgram        : [0mBABA_ASCII
+[32;1mCardFile       : [0mE:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_2PPJ11__L7
+                 4.sgs
+[32;1mLabels         : [0mSystem.Collections.Generic.List`1[System.Object]
+[32;1mLines          : [0m37
+[32;1mAmtMessages    : [0m0
+[32;1mCardsRewritten : [0m0
+[32;1mFailed         : [0mTrue
+[32;1mError          : [0mException calling "ToInt32" with "1" argument(s): "The input 
+                 string 'REQ' was not in a correct format." At line:45 char:5
+                 +     [Int32]$F = [Convert]::ToInt32($Part) - 1
+                 +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[32;1mOutFile        : [0mE:\Repos\SsgTrial\_scratch\exp-BABA_ASCII.cob
+
+==== FUSBA_ASCII  ASSURFED_F999RUN_COMA16_U1(P).TXT line 113  cards calls\ASSURFED_F999RUN_COMA16_U1__L113.sgs
+ASCII
+INPUT          CLE,029,10   UNL,296,10
+OUTPUT         LOA,296,10   SUP,296,10
+KEYS           2,10
+UPDATE         1,10
+ANNUL COPY
+NOLIST
+---- expansion output
+exit 1
+
+[32;1mProgram        : [0mFUSBA_ASCII
+[32;1mCardFile       : [0mE:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_COMA16_U1_
+                 _L113.sgs
+[32;1mLabels         : [0mSystem.Collections.Generic.List`1[System.Object]
+[32;1mLines          : [0m89
+[32;1mAmtMessages    : [0m0
+[32;1mCardsRewritten : [0m0
+[32;1mFailed         : [0mTrue
+[32;1mError          : [0mA parameter cannot be found that matches parameter name 
+                 'not'. At E:\Repos\SsgTrial\SsgConverter\Examples\Output\FUSBA
+                 _ASCII.ps1:370 char:89
+                 + . Value ("UPDATE")) "GreaterThan" 0) -and (CompareTypeSafe 
+                 -not (GetSgs .
+                 +                                                            
+                 ~~~~
+[32;1mOutFile        : [0mE:\Repos\SsgTrial\_scratch\exp-FUSBA_ASCII.cob
+

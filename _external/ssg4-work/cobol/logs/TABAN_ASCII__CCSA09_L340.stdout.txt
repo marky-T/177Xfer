@@ -1,0 +1,85 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\ssg4-work\cobol\TABAN_ASCII__CCSA09_L340.settings
+Applications to convert:
+  - TABANASCIICCSA09L340
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   TABANASCIICCSA09L340
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: TABAN.TXT
+WARNING: WAR 000193 Compare between Alpha and Numeric item [REC1.LMONT1 (Numeric)] and [SPACE (Alpha)].
+ERROR: ERR 000238 Operand LIGNES-SUB.MONT1 is not declared.
+ERROR: ERR 000238 Operand LIGNES-SUB.MONT1 must be a variable.
+ERROR: ERR 000248 Operand LIGNES-SUB.MONT1 is not declared.
+ERROR: ERR 000248 Operand LIGNES-SUB.MONT1 must be a variable.
+WARNING: WAR 000259 Compare between Alpha and Numeric item [TMONT1(KMONT1) (Numeric)] and [SPACE (Alpha)].
+1 source(s) read
+
+Analyzing source: TABAN
+WARNING: File layout with only 1 not-alpha field found. Check MOVE results CCART Numeric 1
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+1 source(s) processed
+
+*** PHASE: TABANASCIICCSA09L340 CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          1         290       290     
+
+List of unresolved calls:
+Source                 No of calls
+EUU003                        2
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:00:396
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 4
+Warnings: 7
+Todos: 0
+Logs: 16
+
+
+=== Conversion Completed ===
+
+Conversion completed with errors.

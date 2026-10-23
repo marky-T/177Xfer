@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\AmtAppCodeAnalysisRuleSet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Asysco.Amt.Libs"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.Libs.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Asysco.Amt.AmtSharedDataModel"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.AmtSharedDataModel.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Asysco.Amt.Runtime"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Asysco.Amt.SerializerWrappers"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.SerializerWrappers.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Asysco.Amt.Screens.Common"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.Screens.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="ComScript"><HintPath>$(AmtRuntimeDir)\ComScript.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="AmtComScriptService"><HintPath>$(AmtRuntimeDir)\AmtComScriptService.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Asysco.Amt.Ftp"><HintPath>$(AmtRuntimeDir)\Asysco.Amt.Ftp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="AFBUS.Application"><HintPath>$(AmtApplicationDir)\AFBUS.Application.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="AFBUS.Database"><HintPath>$(AmtApplicationDir)\AFBUS.Database.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assurfed_Utilit_Scan_Gn.Core.cs" />
+    <Compile Include="Assurfed_Utilit_Scan_Gn.cs" />
+    <Compile Include="Assurfed_Utilit_Scan_Gn.Files.cs" />
+    <Compile Include="Assurfed_Utilit_Scan_Gn_Info.cs" />
+    <Compile Include="Fd_Parm_Len_Rec.cs" />
+    <Compile Include="Fd_Parm_Max_Rec.cs" />
+    <Compile Include="Fd_Parm_Name_Rec.cs" />
+    <Compile Include="Fd_Parm_Rec.cs" />
+    <Compile Include="Fd_Prt_Line.cs" />
+    <Compile Include="Fd_Rec_In.cs" />
+    <Compile Include="LocalDefinitions.cs" />
+    <Compile Include="PrintDefinitions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintDefinitions.Designer.cs">
+      <DependentUpon>PrintDefinitions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+</Project>
+

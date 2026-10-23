@@ -1,0 +1,6 @@
+exists_Lion=False
+git_dir=False
+LionDev.exe=False
+LionDevGenNet.exe=False
+Lion.Lic=False
+Default_Lion.Lic=False

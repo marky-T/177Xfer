@@ -1,0 +1,25 @@
+20261020	16:45:01.778	 10	Information	Disconnecting client. Client no longer processing. BatchController|VMFEDPE08$|VMFEDPE08|51a20987-3299-431d-afad-6ec27e249191|Logging|0
+20261020	16:46:12.966	 58	Information	FederaleFileController (1) 
+20261020	16:46:12.974	 58	Information	Stopping GRPC host
+20261020	16:46:12.984	 58	Information	GRPC stopped.
+20261020	16:46:12.984	 58	Information	FederaleFileController stop request.
+20261020	16:46:14.985	 58	Information	Stopping names pipes connections
+20261020	16:46:14.985	 58	Information	Named pipes connections stopped
+20261020	16:46:14.988	 58	Information	FederaleFileController (1) Stopped
+**  AmtService started at : 2026-10-20 16:46:16                                                                       **
+20261020	16:46:17.486	 7	Information	FederaleFileController (1) StartPending
+20261020	16:46:17.643	 10	Information	Threadpool Minimum worker threads: 100 Completion port threads 1
+20261020	16:46:18.860	 10	Information	FederaleFileController up and running.
+20261020	16:46:18.865	 10	Information	FederaleFileController (1) Running
+20261020	16:51:10.550	 34	Information	FederaleFileController (1) 
+20261020	16:51:10.559	 34	Information	Stopping GRPC host
+20261020	16:51:10.570	 34	Information	GRPC stopped.
+20261020	16:51:10.570	 34	Information	FederaleFileController stop request.
+20261020	16:51:12.571	 34	Information	Stopping names pipes connections
+20261020	16:51:12.571	 34	Information	Named pipes connections stopped
+20261020	16:51:12.574	 34	Information	FederaleFileController (1) Stopped
+**  AmtService started at : 2026-10-20 16:51:12                                                                       **
+20261020	16:51:13.512	 7	Information	FederaleFileController (1) StartPending
+20261020	16:51:13.654	 10	Information	Threadpool Minimum worker threads: 100 Completion port threads 1
+20261020	16:51:14.172	 10	Information	FederaleFileController up and running.
+20261020	16:51:14.176	 10	Information	FederaleFileController (1) Running

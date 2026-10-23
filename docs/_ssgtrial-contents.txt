@@ -1,0 +1,12 @@
+--- Libraries ---
+AmtPsCustomerLib.psm1
+AmtPsEclLib.psm1
+AmtPsSortLib.psm1
+EclOptions.psm1
+--- Settings ---
+AmtSettings.xml
+AmtSettings.xml.bak-20260922-preAFBUS2200COBOL
+AmtSettings.xml.sample
+--- SSGTRIAL (recursive) ---
+E:\Repos\Federale_InternalRelease\Scripts\SSGTRIAL\RUN
+E:\Repos\Federale_InternalRelease\Scripts\SSGTRIAL\RUN\CFH-COPY.ps1

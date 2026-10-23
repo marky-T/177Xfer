@@ -1,0 +1,6 @@
+ParentContainsErrorRecordException: E:\Repos\SsgTrial\_scratch\Check-GenQueue.ps1:5:1
+Line |
+   5 |  $conn.Open()
+     |  ~~~~~~~~~~~~
+     | Exception calling "Open" with "0" argument(s): "Login failed for user
+     | 'VMFEDPE08\MTRUMAN'."

@@ -1,0 +1,141 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\ssg4-work\release\cobol\AFBUS_2200COBOL.settings
+Applications to convert:
+  - AFBUS_2200COBOL
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   AFBUS_2200COBOL
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: ASSURFED-UTILIT-BABA-ASCII.TXT
+Reading source: ASSURFED-UTILIT-CFH-COPY-ASCII.TXT
+Reading source: ASSURFED-UTILIT-CHAB100-ASCII.TXT
+Reading source: ASSURFED-UTILIT-CHABAN-ASCII.TXT
+Reading source: ASSURFED-UTILIT-CONDIS2-ASCII.TXT
+Reading source: ASSURFED-UTILIT-FUSBA-ASCII.TXT
+Reading source: ASSURFED-UTILIT-FUSBA2-ASCII.TXT
+Reading source: ASSURFED-UTILIT-LECTIS-ASCII.TXT
+Reading source: ASSURFED-UTILIT-LOADIS-ASCII.TXT
+WARNING: WAR 000015 RESERVE is obsolete.
+Reading source: ASSURFED-UTILIT-LOADIS-MULTI.TXT
+WARNING: WAR 000013 RESERVE is obsolete.
+WARNING: WAR 000065 USE for ERROR not supported
+Reading source: ASSURFED-UTILIT-RECAP.TXT
+Reading source: ASSURFED-UTILIT-TABAN-ASCII.TXT
+WARNING: WAR 000201 Compare between Alpha and Numeric item [REC1.LMONT1 (Numeric)] and [SPACE (Alpha)].
+WARNING: WAR 000270 Compare between Alpha and Numeric item [TMONT1(KMONT1) (Numeric)] and [SPACE (Alpha)].
+Reading source: ASSURFED-UTILIT-UNLOADIS-ASCII.TXT
+WARNING: WAR 000016 RESERVE is obsolete.
+Reading source: ASSURFED-UTILIT-UNLOADIS-MULTI.TXT
+WARNING: WAR 000013 RESERVE is obsolete.
+14 source(s) read
+
+Analyzing source: ASSURFED-UTILIT-BABA-ASCII
+WARNING: WAR 000073 Go To statement: 'go to REQUIREMENTS-TEST' jumps outside section E-F-I001MSG054. This might lead to unpredictable behavior.
+WARNING: WAR 000085 Go To statement: 'go to WRITE-1-FROM-FILE-1' jumps outside section SEPARATION. This might lead to unpredictable behavior.
+WARNING: WAR 000088 Go To statement: 'go to READ-FILE-1' jumps outside section SEPARATION. This might lead to unpredictable behavior.
+Analyzing source: ASSURFED-UTILIT-CFH-COPY-ASCII
+Analyzing source: ASSURFED-UTILIT-CHAB100-ASCII
+Analyzing source: ASSURFED-UTILIT-CHABAN-ASCII
+Analyzing source: ASSURFED-UTILIT-CONDIS2-ASCII
+WARNING: WAR 000120 REDEFINES SIZE MISMATCH. Size [716] REDEFINES size [408].
+WARNING: WAR 000123 REDEFINES SIZE MISMATCH. Size [452] REDEFINES size [408].
+WARNING: WAR 000127 REDEFINES SIZE MISMATCH. Size [2872] REDEFINES size [408].
+WARNING: WAR 000131 REDEFINES SIZE MISMATCH. Size [452] REDEFINES size [408].
+WARNING: WAR 000135 REDEFINES SIZE MISMATCH. Size [782] REDEFINES size [408].
+WARNING: WAR 000139 REDEFINES SIZE MISMATCH. Size [452] REDEFINES size [408].
+WARNING: WAR 000143 REDEFINES SIZE MISMATCH. Size [529] REDEFINES size [408].
+WARNING: WAR 000147 REDEFINES SIZE MISMATCH. Size [452] REDEFINES size [408].
+WARNING: WAR 000151 REDEFINES SIZE MISMATCH. Size [1453] REDEFINES size [408].
+WARNING: WAR 000157 REDEFINES SIZE MISMATCH. Size [708] REDEFINES size [400].
+WARNING: WAR 000160 REDEFINES SIZE MISMATCH. Size [404] REDEFINES size [400].
+WARNING: WAR 000164 REDEFINES SIZE MISMATCH. Size [2864] REDEFINES size [400].
+WARNING: WAR 000168 REDEFINES SIZE MISMATCH. Size [404] REDEFINES size [400].
+WARNING: WAR 000172 REDEFINES SIZE MISMATCH. Size [774] REDEFINES size [400].
+WARNING: WAR 000176 REDEFINES SIZE MISMATCH. Size [404] REDEFINES size [400].
+WARNING: WAR 000180 REDEFINES SIZE MISMATCH. Size [521] REDEFINES size [400].
+WARNING: WAR 000184 REDEFINES SIZE MISMATCH. Size [404] REDEFINES size [400].
+WARNING: WAR 000188 REDEFINES SIZE MISMATCH. Size [1445] REDEFINES size [400].
+Analyzing source: ASSURFED-UTILIT-FUSBA-ASCII
+WARNING: WAR 000091 Go To statement: 'go to TEST-FILES-1-AND-2' jumps outside section MERGE-2-FILES. This might lead to unpredictable behavior.
+WARNING: WAR 000119 Go To statement: 'go to TEST-FILES-1-AND-2' jumps outside section MERGE-2-FILES. This might lead to unpredictable behavior.
+WARNING: WAR 000145 Go To statement: 'go to WRITE-FROM-FILE-1' jumps outside section FUSION. This might lead to unpredictable behavior.
+WARNING: WAR 000148 Go To statement: 'go to WRITE-FROM-FILE-2' jumps outside section FUSION. This might lead to unpredictable behavior.
+WARNING: WAR 000154 Go To statement: 'go to WRITE-FROM-FILE-1' jumps outside section FUSION. This might lead to unpredictable behavior.
+Analyzing source: ASSURFED-UTILIT-FUSBA2-ASCII
+Analyzing source: ASSURFED-UTILIT-LECTIS-ASCII
+WARNING: WAR 000088 MOVE WREC TO ZPR size discrepancy due to display-1 vars
+Analyzing source: ASSURFED-UTILIT-LOADIS-ASCII
+Analyzing source: ASSURFED-UTILIT-LOADIS-MULTI
+WARNING: WAR 000069 Go To statement: 'go to ERRDISQ' jumps outside section ROLLBACK1. This might lead to unpredictable behavior.
+Analyzing source: ASSURFED-UTILIT-RECAP
+Analyzing source: ASSURFED-UTILIT-TABAN-ASCII
+WARNING: File layout with only 1 not-alpha field found. Check MOVE results CCART Numeric 1
+Analyzing source: ASSURFED-UTILIT-UNLOADIS-ASCII
+Analyzing source: ASSURFED-UTILIT-UNLOADIS-MULTI
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+14 source(s) processed
+
+*** PHASE: AFBUS_2200COBOL CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          14        2657      189     
+
+List of unresolved calls:
+Source                 No of calls
+ABORT                         3
+EUU003                       12
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:01:077
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 0
+Warnings: 40
+Todos: 0
+Logs: 43
+
+
+=== Conversion Completed ===
+
+Conversion completed with warnings.

@@ -1,0 +1,6 @@
+
+Program                  Generated              Built                  Check                           Delivered
+-------                  ---------              -----                  -----                           ---------
+ASSURFED_UTILIT_FUSBA_GN 10/20/2026 10:21:26 PM 10/20/2026 10:42:12 PM ok (2 varying input(s) at 4001) yes, hash ok
+
+

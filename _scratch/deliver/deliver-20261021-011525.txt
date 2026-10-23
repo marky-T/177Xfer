@@ -1,0 +1,14 @@
+
+Program                    Generated             Built                 Check                           Delivered
+-------                    ---------             -----                 -----                           ---------
+ASSURFED_UTILIT_CONDIS2_GN 10/21/2026 1:12:59 AM 10/21/2026 1:15:43 AM ok (1 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_SCAN_GN    10/21/2026 1:13:01 AM 10/21/2026 1:15:52 AM ok (1 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_TAPELD_GN  10/21/2026 1:13:01 AM 10/21/2026 1:15:59 AM ok (1 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_CONDIS2_RV 10/21/2026 1:13:00 AM 10/21/2026 1:15:49 AM ok (0 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_CONDIS2_RD 10/21/2026 1:12:59 AM 10/21/2026 1:15:46 AM ok (0 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_SCAN_RA    10/21/2026 1:13:01 AM 10/21/2026 1:15:54 AM ok (0 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_SCAN_RB    10/21/2026 1:13:01 AM 10/21/2026 1:15:57 AM ok (0 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_TAPELD_RA  10/21/2026 1:13:01 AM 10/21/2026 1:16:01 AM ok (0 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_TAPELD_RB  10/21/2026 1:13:01 AM 10/21/2026 1:16:04 AM ok (0 varying input(s) at 4001) yes, hash ok
+
+

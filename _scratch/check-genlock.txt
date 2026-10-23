@@ -1,0 +1,49 @@
+== file
+
+[32;1mFullName      : [0mE:\AMT_Work\Apps177\Development\Database\QueryObjects\QueryObje
+                cts.cs
+[32;1mLength        : [0m391
+[32;1mLastWriteTime : [0m10/14/2026 10:25:09 PM
+[32;1mIsReadOnly    : [0mFalse
+[32;1mAttributes    : [0mArchive
+
+== acl
+BUILTIN\Administrators Allow  FullControl
+NT AUTHORITY\SYSTEM Allow  FullControl
+BUILTIN\Users Allow  ReadAndExecute, Synchronize
+== folder owner
+BUILTIN\Administrators
+== processes that may hold files
+
+   Id ProcessName   StartTime             Path
+   -- -----------   ---------             ----
+ 1952 Code          10/15/2026 1:25:15 PM C:\Program Files\Microsoft VS Code\Code.exe
+19240 Code          10/15/2026 1:25:17 PM C:\Program Files\Microsoft VS Code\Code.exe
+18444 Code          10/15/2026 1:25:15 PM C:\Program Files\Microsoft VS Code\Code.exe
+18080 Code          10/15/2026 1:25:19 PM C:\Program Files\Microsoft VS Code\Code.exe
+17984 Code          10/15/2026 1:25:16 PM C:\Program Files\Microsoft VS Code\Code.exe
+17196 Code          10/15/2026 1:25:16 PM C:\Program Files\Microsoft VS Code\Code.exe
+17208 Code          10/15/2026 1:25:15 PM C:\Program Files\Microsoft VS Code\Code.exe
+10956 Code          10/15/2026 1:25:14 PM C:\Program Files\Microsoft VS Code\Code.exe
+ 9032 Code          10/15/2026 1:25:27 PM C:\Program Files\Microsoft VS Code\Code.exe
+ 8908 Code          10/15/2026 1:25:15 PM C:\Program Files\Microsoft VS Code\Code.exe
+ 8092 Code          10/15/2026 1:25:28 PM C:\Program Files\Microsoft VS Code\Code.exe
+ 5612 Code          10/15/2026 1:25:16 PM C:\Program Files\Microsoft VS Code\Code.exe
+16632 Code          10/15/2026 1:25:15 PM C:\Program Files\Microsoft VS Code\Code.exe
+ 2088 devenv        10/15/2026 1:21:25 PM C:\Program Files\Microsoft Visual Studio\18\Professional\Common7\IDE\devenv.exe
+10628 explorer      10/15/2026 1:11:02 PM C:\Windows\Explorer.EXE
+16464 LionDev       10/15/2026 5:42:20 PM E:\Amt\Lion\LionDev.exe
+16364 LionDevGenNet 10/15/2026 5:44:46 PM E:\Amt\Lion\LionDevGenNet.exe
+ 3960 MsMpEng                             
+
+
+== whoami
+vmfedpe08\mtruman
+
+NT AUTHORITY\Local account and member of [7mAdministrators [0m[7m[0mgroup [0m[7m[0mWell-known [0m[7m[0mgroup [0m
+[7m[0mS-1-5-114 [0m[7m [0m[7m [0m[7m [0m[7m[0mGroup [0m[7m[0mused [0m[7m[0mfor [0m[7m[0mdeny [0m[7m[0monly [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m
+BUILTIN\[7mAdministrators [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mAlias [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m
+[7m[0mS-1-5-32-544 [0m[7m[0mGroup [0m[7m[0mused [0m[7m[0mfor [0m[7m[0mdeny [0m[7m[0monly [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m
+[7mMandatory [0m[7mLabel[0m\Medium [0m[7m[0mMandatory [0m[7m[0mLevel [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m[0mLabel [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m
+[7m[0mS-1-16-8192 [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m[7m [0m
+

@@ -1,0 +1,9 @@
+Setup commandline options are: 
+  ALLOWDOWNGRADE         Allow a downgrade of the environment
+  BATCHINSTALL           Will do a commandline install update/install.
+  BATCHIISMAPPING        Will do a commandline IIS Mapping action.
+  BATCHREOREPOS          Will run the reo on the repository.
+  CLEANINSTALL           You can reinstall the latest fix again.
+  QUIET                  Batchmode to prevent showing dialogs
+  /C:<current directory> Will set the current directory for the setup directory
+

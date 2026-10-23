@@ -1,0 +1,12 @@
+clone exists: True
+remote: origin	https://github.com/marky-T/177Xfer.git (fetch)
+current branch: T3ConvertedSSG-20
+status:
+# branch.oid 2bcf8f15aff19eac45cf9f3edf3e8f83b90601b6
+# branch.head T3ConvertedSSG-20
+# branch.upstream origin/T3ConvertedSSG-20
+# branch.ab +0 -0
+local branches:
++ T3-LiveRun-Results-20261001
+  T3ConvertedSSG
+* T3ConvertedSSG-20

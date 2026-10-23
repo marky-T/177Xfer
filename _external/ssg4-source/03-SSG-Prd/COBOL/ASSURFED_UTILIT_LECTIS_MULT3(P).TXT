@@ -1,0 +1,132 @@
+
+       IDENTIFICATION DIVISION.     
+       PROGRAM-ID. LECTIS-MULT3.    
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA   
+               PAGE IS SAUT.  
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+           SELECT FICHIN ASSIGN TO DISC INV-LRSG
+               ACCESS MODE IS DYNAMIC     
+                    RECORD KEY IS SYMK    
+               ALTERNATE RECORD KEY IS SYMK1 WITH DUPLICATES
+               ALTERNATE RECORD KEY IS SYMK2 WITH DUPLICATES
+                    ORGANIZATION INDEXED. 
+           SELECT IMP ASSIGN TO PRINTER.  
+           SELECT CARTE ASSIGN TO CARD-READER.  
+       DATA DIVISION.   
+       FILE SECTION.    
+       FD  FICHIN 
+           LABEL RECORD STANDARD    
+           BLOCK CONTAINS 10 RECORDS
+           RECORD CONTAINS 600 CHARACTERS 
+           DATA RECORD IS ZFIC ZFICH1.    
+       01  ZFIC               PIC X(600). 
+       01  ZFICH1.
+           02 SYMK   PIC X(54).     
+           02 FILLER PIC X(522).    
+           02 SYMK1 PIC X(8). 
+           02 SYMK2 PIC X(16).
+       FD  IMP    
+           LABEL RECORD OMITTED     
+           LINAGE IS 63 
+           AT TOP 6     
+           AT BOTTOM 3  
+           DATA RECORD ZPRINT.
+       01  ZPRINT             PIC X(100). 
+       FD  CARTE  
+           LABEL RECORD OMITTED     
+           DATA RECORD IS ZL1.
+       01  ZL1.   
+           02 ZL11 PIC X(16). 
+           02 ZL12 PIC X(64). 
+       WORKING-STORAGE SECTION.     
+       01  WREC.  
+           02 FILLER  PIC X(600).   
+       01  TIT.   
+           03  FILLER      PIC X(5) VALUE '***  '.    
+           03  FILLER        PIC X(14) VALUE 'RECORD NUMERO '.    
+           03  FILCO     PIC Z.ZZZ.ZZZ.   
+           03  FILLER      PIC X(5) VALUE '  ***'.    
+       01  ZPR  VALUE ALL SPACES.   
+           03  ZP1            PIC X(100). 
+           03  ZP2            PIC X(100). 
+           03  ZP3            PIC X(100). 
+           03  ZP4            PIC X(100). 
+           03  ZP5            PIC X(100). 
+           03  ZP6            PIC X(100). 
+           03  ZP7            PIC X(100). 
+           03  ZP8            PIC X(100). 
+       01  CTRLI PIC 9(4) VALUE ZEROES.   
+       01  CTR                PIC S9(7) VALUE 0.
+       01  SWI                PIC S9 VALUE 0.   
+       01  ASYMK2 PIC X(16).  
+       PROCEDURE DIVISION.    
+       OUVERT.    
+           OPEN OUTPUT IMP.   
+           WRITE ZPRINT FROM ZP1 BEFORE PAGE.   
+           OPEN INPUT FICHIN. 
+           OPEN INPUT CARTE.  
+       LOOP.
+           READ CARTE AT END GO TO FIN.   
+           MOVE ZL11 TO SYMK2.
+           READ FICHIN INTO WREC KEY IS SYMK2 INVALID KEY ADD 1 TO CTR  
+           GO TO LOOP.  
+           MOVE WREC TO ZPR PERFORM IMPRES THRU FIIMPRES.   
+       SECONDE-FOIS.    
+           MOVE SYMK2 TO ASYMK2.    
+           READ FICHIN NEXT RECORD INTO WREC AT END GO TO LOOP.   
+           IF ASYMK2 = SYMK2 GO TO SUITE. 
+           GO TO LOOP.  
+       SUITE.     
+           MOVE WREC TO ZPR PERFORM IMPRES THRU FIIMPRES.   
+           GO TO SECONDE-FOIS.
+       FIN. 
+           MOVE SPACES TO ZPRINT.   
+           WRITE ZPRINT BEFORE SAUT.
+           DISPLAY '** FIN DU TRAVAIL **' UPON PRINTER.     
+           DISPLAY 'NOMBRE D INVALID KEY **' CTR UPON PRINTER.    
+           CLOSE FICHIN IMP.  
+           CLOSE CARTE. 
+           STOP RUN.    
+       IMPRES.    
+           WRITE ZPRINT FROM ZP1 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP2 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP3 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP4 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP5 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP6 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP7 BEFORE 1.
+           ADD 100 TO CTRLI.  
+           IF 600 = CTRLI GO TO RAZ.
+           IF 600 < CTRLI GO TO RAZ.
+           WRITE ZPRINT FROM ZP8 BEFORE 1.
+       RAZ. 
+           MOVE  SPACES TO ZP1 ZP2 ZP3 ZP4 ZP5 ZP6 ZP7 ZP8. 
+             MOVE ZEROES TO CTRLI.  
+           MOVE ALL '*' TO ZPRINT.  
+           WRITE ZPRINT BEFORE 1.   
+       FIIMPRES.  
+           EXIT.  

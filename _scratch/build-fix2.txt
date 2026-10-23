@@ -1,0 +1,7 @@
+patched E:\Repos\SsgTrial\_scratch\ssgfix2\src\SsgConverter\SymstreamProcessor.cs  bom=False  bytes=94887
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.62

@@ -1,0 +1,99 @@
+﻿2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:18 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-08-20 09:02:18 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:22 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:22 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-08-20 09:02:22 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:22 [0] Error     : ERR 000033 Picture has illegal characters [X(0)]
+2026-08-20 09:02:23 [0] Error     : ERR 000041 Picture has illegal characters [X(0)]
+2026-08-20 09:02:23 [0] Error     : ERR 000025 End of statement expected but [ found
+2026-08-20 09:02:23 [0] Error     : ERR 000029 End of statement expected but DISC found
+2026-08-20 09:02:23 [0] Error     : ERR 000033 End of statement expected but SELECT found
+2026-08-20 09:02:23 [0] Error     : ERR 000034 End of statement expected but ORGANIZATION found
+2026-08-20 09:02:23 [0] Error     : ERR 000035 End of statement expected but RESERVE found
+2026-08-20 09:02:23 [0] Error     : ERR 000036 End of statement expected but ACCESS found
+2026-08-20 09:02:23 [0] Error     : ERR 000037 End of statement expected but FILE found
+2026-08-20 09:02:23 [0] Error     : ERR 000043 File description [BDE[*I]] encountered without corresponding SELECT in FILE-CONTROL.
+2026-08-20 09:02:23 [0] Error     : ERR 000044 End of statement expected but LABEL found
+2026-08-20 09:02:23 [0] Error     : ERR 000045 End of statement expected but BLOCK found
+2026-08-20 09:02:23 [0] Error     : ERR 000046 End of statement expected but RECORD found
+2026-08-20 09:02:23 [0] Error     : ERR 000047 End of statement expected but DATA found
+2026-08-20 09:02:23 [0] Error     : ERR 000048 End of statement expected but 01 found
+2026-08-20 09:02:23 [0] Error     : ERR 000051 File description [DISQ] encountered without corresponding SELECT in FILE-CONTROL.
+2026-08-20 09:02:23 [0] Error     : ERR 000052 End of statement expected but 1 found
+2026-08-20 09:02:23 [0] Error     : ERR 000053 End of statement expected but RECORD found
+2026-08-20 09:02:23 [0] Error     : ERR 000054 End of statement expected but DATA found
+2026-08-20 09:02:23 [0] Error     : ERR 000055 End of statement expected but 01 found
+2026-08-20 09:02:23 [0] Error     : ERR 000056 End of statement expected but 01 found
+2026-08-20 09:02:23 [0] Error     : ERR 000058 End of statement expected but 02 found
+2026-08-20 09:02:23 [0] Error     : ERR 000059 End of statement expected but 02 found
+2026-08-20 09:02:23 [0] Error     : ERR 000060 End of statement expected but 02 found
+2026-08-20 09:02:23 [0] Error     : ERR 000062 End of statement expected but 02 found
+2026-08-20 09:02:23 [0] Error     : ERR 000063 End of statement expected but 02 found
+2026-08-20 09:02:23 [0] Error     : ERR 000069 Picture has illegal characters [X([OUTPUT,1,1,2])]
+2026-08-20 09:02:23 [0] Error     : ERR 000072 Picture has illegal characters [X([KEYIS,1,1,1])]
+2026-08-20 09:02:23 [0] Error     : ERR 000073 Picture has illegal characters [X([KEYIS,1,1,2])]
+2026-08-20 09:02:23 [0] Error     : ERR 000074 Picture has illegal characters [X([KEYIS,1,1,3])]
+2026-08-20 09:02:23 [0] Error     : ERR 000076 Picture has illegal characters [X([KEYIS,1,1,2])]
+2026-08-20 09:02:23 [0] Error     : ERR 000077 Picture has illegal characters [X([KEYIS,1,1,3])]
+2026-08-20 09:02:23 [0] Error     : ERR 000088 File BDE must have at least 1 layout.
+2026-08-20 09:02:23 [0] Error     : ERR 000088 File BDE must have at least 1 layout.
+2026-08-20 09:02:23 [0] Error     : ERR 000088 File DISQ must have at least 1 layout.
+2026-08-20 09:02:23 [0] Error     : ERR 000093 Unresolved file definition (FD) [
+2026-08-20 09:02:23 [0] Error     : ERR 000093 Unresolved file definition (FD) *
+2026-08-20 09:02:23 [0] Error     : ERR 000093 Unresolved file definition (FD) I
+2026-08-20 09:02:23 [0] Error     : ERR 000093 Unresolved file definition (FD) ]
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand Z is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand Z must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand [ is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand [ must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand * is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand * must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand I is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand I must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand ] is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000103 Operand ] must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000105 Unresolved file definition (FD) BDE1
+2026-08-20 09:02:23 [0] Error     : ERR 000108 Operand KEYA is defined duplicately, please specify containing structure.
+2026-08-20 09:02:23 [0] Error     : ERR 000108 Operand CLEF is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000108 Operand CLEF must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000110 Operand ZDISQ is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000110 Operand ZDISQ must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000110 ZDISQ must be a file record defined in an FD entry
+2026-08-20 09:02:23 [0] Error     : ERR 000111 Operand ZDISQ is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000111 Operand ZDISQ must be a variable.
+2026-08-20 09:02:23 [0] Error     : ERR 000116 Unresolved file definition (FD) [
+2026-08-20 09:02:23 [0] Error     : ERR 000116 Unresolved file definition (FD) *
+2026-08-20 09:02:23 [0] Error     : ERR 000116 Unresolved file definition (FD) I
+2026-08-20 09:02:23 [0] Error     : ERR 000116 Unresolved file definition (FD) ]
+2026-08-20 09:02:23 [0] Error     : ERR 000122 Operand CLEF is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000122 Invalid expression [CLEF] encountered.
+2026-08-20 09:02:23 [0] Error     : ERR 000123 Operand IO-FS1 is defined duplicately, please specify containing structure.
+2026-08-20 09:02:23 [0] Error     : ERR 000123 Operand IO-FS2 is defined duplicately, please specify containing structure.
+2026-08-20 09:02:23 [0] Error     : ERR 000123 DISPLAY output device [PRINT] unknown
+2026-08-20 09:02:23 [0] Error     : ERR 000123 Operand PRINT is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000124 DISPLAY output device [PRINTE] unknown
+2026-08-20 09:02:23 [0] Error     : ERR 000124 Operand PRINTE is not declared.
+2026-08-20 09:02:23 [0] Error     : ERR 000125 Unexpected end of statement
+2026-08-20 09:02:23 [0] Error     : ERR 000125 Unexpected end of statement
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------
+2026-08-20 09:02:23 [0] Phase     : D O N E
+2026-08-20 09:02:23 [0] Phase     : ------------------------------------------------------------

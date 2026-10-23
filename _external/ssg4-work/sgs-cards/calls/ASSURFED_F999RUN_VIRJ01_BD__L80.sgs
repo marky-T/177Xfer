@@ -1,0 +1,6 @@
+OUTPUT     R006SOINSA,200,10
+LIST       YES
+NUMB       3,1
+FLDSEL     0
+MOD        0
+ASCII

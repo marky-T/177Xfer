@@ -1,0 +1,10 @@
+PRN files since 01:32:28: 12, expected 12
+S1: == reference (17086 bytes); model: 128 lines match
+S2: == reference (17172 bytes); model: 91 lines match
+S3: model: 9 lines match
+S4: model: 21 lines match
+T1: == reference (5352 bytes); model: 70 line(s) differ; first line 54: model [R0053DJ  0M      9S] print [R0053DJ  0M      9SPOLICE  CMB-DB  CMB-INV  CHANGEMENT COMBINAISON IND]
+T2: == reference (8366 bytes); model: 2 line(s) differ; first line 54: model [R00537   G       J1N2JZCQ/SO41H..,G   96X5C81IOABY    Y8PFHXSC    NM5R76P4] print [R00537   G       J1N2JZCQ/SO41H..,G   96X5C81IOABY    Y8PFHXSC    NM5R76P4POLICE  SUF.    AN. TRF       CD             CV     Dern. paiem  Date calcul]
+T3: model: 11 lines match
+T4: model: 6 lines match
+=== prints: 2 problem(s)

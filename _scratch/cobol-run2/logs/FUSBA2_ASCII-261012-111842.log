@@ -1,0 +1,60 @@
+﻿2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Error     : ERR 000025 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000025 Operand COMPARE-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000029 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000029 Operand COMPARE-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000030 Operand REC-IN-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000030 Invalid expression [REC-IN-2] encountered.
+2026-10-12 11:18:42 [0] Error     : ERR 000030 Operand REC-OUT-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000030 Operand REC-OUT-1 must be a variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000034 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000034 Operand COMPARE-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000034 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000034 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000037 Operand REC-IN-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000037 Invalid expression [REC-IN-2] encountered.
+2026-10-12 11:18:42 [0] Error     : ERR 000037 Operand REC-OUT-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000037 Operand REC-OUT-1 must be a variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000038 Operand ZONE1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000038 Invalid expression [ZONE1] encountered.
+2026-10-12 11:18:42 [0] Error     : ERR 000038 Operand ZONO1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000038 Operand ZONO1 must be a variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000040 Operand TAPE-1-MAJ-CT is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000040 Operand TAPE-1-MAJ-CT must be a numeric variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000042 Operand COMPARE-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000042 Operand PREC-COMPARE-2 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000046 Operand REC-OUT-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000046 Operand REC-OUT-1 must be a variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000046 REC-OUT-1 must be a file record defined in an FD entry
+2026-10-12 11:18:42 [0] Error     : ERR 000047 Operand TAPE-1-OUT-CT is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000047 Operand TAPE-1-OUT-CT must be a numeric variable.
+2026-10-12 11:18:42 [0] Error     : ERR 000050 Operand COMPARE-1 is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000050 Invalid expression [COMPARE-1] encountered.
+2026-10-12 11:18:42 [0] Error     : ERR 000063 Operand TAPE-1-MAJ-CT is not declared.
+2026-10-12 11:18:42 [0] Error     : ERR 000063 Invalid expression [TAPE-1-MAJ-CT] encountered.
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : FUSBA2ASCII CONVERSION STATISTICS
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------
+2026-10-12 11:18:42 [0] Phase     : D O N E
+2026-10-12 11:18:42 [0] Phase     : ------------------------------------------------------------

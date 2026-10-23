@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\CFH-COPY_ASCII__PBDA08_L126.LionSource
+APPNAME = CFHCOPYASCIIPBDA08L126
+GENSET = Default from new application
+SYSOPT = FALSE

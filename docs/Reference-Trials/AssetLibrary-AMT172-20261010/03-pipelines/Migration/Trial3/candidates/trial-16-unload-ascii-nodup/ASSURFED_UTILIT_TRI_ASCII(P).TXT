@@ -1,0 +1,76 @@
+﻿       IDENTIFICATION DIVISION.     
+       PROGRAM-ID.  SORT-"ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,1]
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+           SELECT  TAPE-1  ASSIGN  *> SSG-STUB [*A]
+                                        DISC 1.  *> SSG-STUB [INPUT,1,A,1]
+           SELECT  TAPEOUT  ASSIGN  
+                              DISC "ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,1]
+           SELECT SORTFILE ASSIGN TO MASS-STORAGE XA. 
+       DATA DIVISION.   
+       FILE SECTION.    
+       FD  TAPE-1  *> SSG-STUB [*A]
+           LABEL RECORD STANDARD    
+                   BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [INPUT,1,A,3]
+                   DATA RECORD IS REC-IN-1.  *> SSG-STUB [*A]
+       01  REC-IN-1            PIC X(1).  *> SSG-STUB [INPUT,1,A,2], [*A]
+       FD  TAPEOUT  LABEL RECORD IS STANDARD    
+                    RECORD CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+                    DATA RECORD IS REC-OUT.     
+       01  REC-OUT           PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       SD  SORTFILE     
+                    DATA RECORD IS SORT-REC.    
+       01  SORT-REC   PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  SORT-R1.  *> SSG-STUB [*COL]
+           03  SORT-KEY-1     PIC X(1).  *> SSG-STUB [KEYS,1,COL,2], [*COL]
+       WORKING-STORAGE SECTION.     
+       01  INPUT-CT-MESS-1.  *> SSG-STUB [*A]
+           03  FILLER         PIC X(24)   
+                    VALUE  'INPUT RECORD COUNT FROM '.
+           03  FILLER         PIC X(12)   
+                    VALUE  '1'.  *> SSG-STUB [INPUT,1,A,1]
+           03  INPUT-CT-1  PIC Z(11)9.  *> SSG-STUB [*A]
+       01  IN-CT-1         PIC  9(10)  COMP    VALUE ZERO.  *> SSG-STUB [*A]
+       01  OUTPUT-CT-MESS.    
+           03  FILLER         PIC X(24)   
+                    VALUE  'OUTPUT RECORD COUNT TO  '.
+           03  FILLER         PIC X(12)   
+                    VALUE  '"ECL-BDE1" '.  *> SSG-STUB [OUTPUT,1,1,1]
+           03  OUTPUT-CT      PIC  Z(11)9.
+       01  OUT-CT             PIC  9(10)   COMP   VALUE ZERO.     
+       PROCEDURE DIVISION.    
+       SORT-START SECTION.    
+       SORTING.   
+           OPEN INPUT  TAPE-1.  *> SSG-STUB [*A]
+           OPEN OUTPUT TAPEOUT.     
+           SORT SORTFILE ON ASCENDING KEY 
+                          SORT-KEY-1  *> SSG-STUB [*SK]
+                              INPUT PROCEDURE  IS INP 
+                              OUTPUT PROCEDURE IS OUTP.     
+           GO  TO  CLOSE-FILES.     
+       INP SECTION.     
+       INPUT-PROC-1.  *> SSG-STUB [*B]
+           READ   TAPE-1   INTO  SORT-REC  *> SSG-STUB [*B]
+                    AT END GO TO  CLOSE-1.  *> SSG-STUB [*B]
+           ADD  1   TO  IN-CT-1.  *> SSG-STUB [*B]
+           RELEASE  SORT-REC.                GO TO INPUT-PROC-1.  *> SSG-STUB [*B]
+       CLOSE-1.   CLOSE  TAPE-1.  *> SSG-STUB [*B], [*B]
+       INP-EXIT.    EXIT.     
+       OUTP SECTION.    
+       OUTPUT-PROC.     
+           RETURN SORTFILE              AT END GO TO OUTP-EXIT.   
+           ADD  1  TO  OUT-CT.
+           WRITE  REC-OUT  FROM SORT-REC.         GO TO OUTPUT-PROC.    
+       OUTP-EXIT.   EXIT.     
+       CLOSE-FILES  SECTION.  
+       ENDING-RUN.
+           MOVE  IN-CT-1   TO  INPUT-CT-1.  *> SSG-STUB [*A], [*A]
+           DISPLAY  INPUT-CT-MESS-1  UPON PRINTER.  *> SSG-STUB [*A]
+           MOVE  OUT-CT  TO  OUTPUT-CT.   
+           DISPLAY  OUTPUT-CT-MESS  UPON  PRINTER.    
+           CLOSE TAPEOUT.     
+           STOP RUN.    

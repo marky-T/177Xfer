@@ -1,0 +1,12 @@
+Stage Deliver, environment CC-Federale, started 2026-10-22 15:32:02
+PASS GNFED          generated after                2026-10-22 10:49:02 (the build LionSource)
+PASS GNFED          imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CFH_COPY_GN rebuilt and delivered          10/22/2026 2:33:26 PM 10/22/2026 3:32:18 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_BABA_GN rebuilt and delivered          10/22/2026 2:33:26 PM 10/22/2026 3:32:15 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_FUSBA_GN rebuilt and delivered          10/22/2026 2:33:27 PM 10/22/2026 3:32:26 PM ok (2 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_CHABAN_GN rebuilt and delivered          10/22/2026 2:33:26 PM 10/22/2026 3:32:21 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_CONDIS2_GN rebuilt and delivered          10/22/2026 2:33:26 PM 10/22/2026 3:32:24 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_SCAN_GN rebuilt and delivered          10/22/2026 2:33:27 PM 10/22/2026 3:32:29 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS ASSURFED_UTILIT_TAPELD_GN rebuilt and delivered          10/22/2026 2:33:27 PM 10/22/2026 3:32:32 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNFED recorded as imported     E:\Repos\ssg4-work\generic\build\GNFED\imported.LionSource (the next Build compares against it)
+=== Deliver : all passed

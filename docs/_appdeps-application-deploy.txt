@@ -1,0 +1,7 @@
+--- Application folder now ---
+AFBUS_2200COBOL.Application.deps.json
+AFBUS_2200COBOL.Application.dll
+AFBUS_2200COBOL.Application.pdb
+AFBUS_2200COBOL.Database.deps.json
+AFBUS_2200COBOL.Database.dll
+AFBUS_2200COBOL.Database.pdb

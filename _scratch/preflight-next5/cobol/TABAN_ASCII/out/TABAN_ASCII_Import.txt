@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\preflight-next5\\cobol\\TABAN_ASCII\\out\\TABAN_ASCII.LionSource
+APPNAME = TABANASCII
+GENSET = Default from new application
+SYSOPT = FALSE

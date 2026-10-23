@@ -1,0 +1,741 @@
+@RUN,M/T   COCM03,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE TPF$. 
+@ASG,T TPF$.
+@SYM       PRINT$,,PRSP 
+@MSG       *****************************************************
+@MSG       **                                                 **
+@MSG       **  IMPRESSION DES RECAPITULATIFS MENSUELS         **
+@MSG       **                                                 **
+@MSG       *****************************************************
+@ . 
+@ .  13/07/2000  P99026/01  CREATION
+@ .  05/11/2003  P01083/02  MODIFICATION - SELECTION DANS ERL_MVT_CMM   
+@ .                             AU LIEU DE CUM_PAI_CMM  
+@ .  27/04/2004  P01083/03  AJOUT DE LISTES 
+@ .  06/01/2007  P04047/03  REVISION DES LISTES JUSTIFICATIVES  
+@ .  07/08/2008  P08052/01  AMELIORATIONS COCM03
+@ . 
+@TIME   
+@ASG,T     COCM03,F///100000
+@COPY,A    CPRD*BABS.COB055,COCM03.COB055  . selection CC COURTIERS 
+@COPY,A    CPRD*BABS.COB088,COCM03.COB088  . selection COCH03   
+@.  
+@COPY,A    CPRD*BABS.COB059,COCM03.COB059  . recap par date dt enrôl
+@COPY,A    CPRD*BABS.COB066,COCM03.COB066  . liste just.    dt enrôl/per
+@COPY,A    CPRD*BABS.COB071,COCM03.COB071  . recap par bch  dt enrôl
+@.  
+@COPY,A    CPRD*BABS.COB060,COCM03.COB060  . recap par date dt paiem
+@COPY,A    CPRD*BABS.COB068,COCM03.COB068  . liste just.    dt paiem/per
+@COPY,A    CPRD*BABS.COB072,COCM03.COB072  . recap par bch  dt paiem
+@.  
+@COPY,A    AFLINC*REP$ABS.SWB003,COCM03.SWB003  
+@COPY,A    AFLINC*REP$ABS.SWB004,COCM03.SWB004  
+@.         =======================================================  
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@.         =======================================================  
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB010: MSG 010.  GENERATION DES PARAMETRES
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@XQT,XS      COCM03.SWB003  
+COCM03  
+@ . 
+@.         =======================================================  
+@LAB020: MSG 020.  SELECTION DES MVTS DE COMMISSIONS CC COURTIER
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@DELETE,C           COCM03*IMP-COB055.  
+@CAT,P              COCM03*IMP-COB055,F/0/POS/100   
+@ASG,A              COCM03*IMP-COB055.  
+@USE         TOTAUX,COCM03*IMP-COB055.  
+@DELETE,C           ICOMMISS.   
+@CAT,P              ICOMMISS,F/0/POS/4000   
+@ASG,A              ICOMMISS.   
+@USE         F-COMMISS,ICOMMISS 
+@ . 
+@XQT         COCM03.COB055  
+@ . 
+@FREE               COCM03*IMP-COB055.  
+@FREE               ICOMMISS.   
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB021: MSG 021.  SELECTION DES MVTS DE COMMISSIONS COCH03 
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB021  
+@ . 
+@DELETE,C              COCM03*IMP-COB088.   
+@CAT,P                 COCM03*IMP-COB088,F/0/POS/100
+@ASG,A                 COCM03*IMP-COB088.   
+@USE            TOTAUX,COCM03*IMP-COB088.   
+@DELETE,C              ICOCH03. 
+@CAT,P                 ICOCH03,F/0/POS/4000 
+@ASG,A                 ICOCH03. 
+@USE         F-COMMISS,ICOCH03  
+@ . 
+@XQT         COCM03.COB088  
+@ . 
+@FREE        COCM03*IMP-COB088. 
+@FREE        ICOCH03.   
+@ . 
+@TIME   
+@.         =======================================================  
+@LAB022:   MSG 022. INTEGRATION DES FICHIERS
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB022  
+@ . 
+@ASG,A          ICOMMISS.   
+@ASG,A          ICOCH03.
+@DELETE,C       ICOMMIS.
+@CAT,P          ICOMMIS,F/0/POS/4000
+@ASG,A          ICOMMIS.
+@USE       OUTA,ICOMMIS.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISS,F     BLOCK=10  
+FILEIN=ICOCH03,F      BLOCK=10  
+FILEOUT=OUTA,F        BLOCK=10  
+KEY=1,1,CH,A,1  
+RSZ=200 
+RECORD=50   
+@EOF
+@ . 
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB030: MSG 030. CFH-COPY - ENROLEMENT 
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@ASG,A      ICOMMIS.
+@USE        FIN,ICOMMIS 
+@DELETE,C   ICOMMISENR. 
+@CAT,P      ICOMMISENR,F///3500 
+@ASG,A      ICOMMISENR. 
+@USE        FOUT,ICOMMISENR.
+@ . 
+@SSG,IA  *UTILIT.CFH-COPY/ASCII 
+SGS 
+ASCII   
+INPUT       FIN,200,10  
+OUTPUT      FOUT,200,10 
+FIELDIN  1,91   57,6   98,23   121,80   
+FIELDOUT 1,91   92,6   98,23   121,80   
+@EOF
+@XQT,WR  .CFH-COPY  
+@ . 
+@FREE       ICOMMIS.
+@FREE       ICOMMISENR. 
+@TIME   
+@.         =======================================================  
+@LAB060: MSG 060.  TRI POUR COB059  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@ASG,A     ICOMMISENR.  
+@DELETE,C  ICOMMISENRT2.
+@CAT,P     ICOMMISENRT2,F/0/POS/4000
+@ASG,A     ICOMMISENRT2.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISENR     BLOCK=10  
+FILEOUT=ICOMMISENRT2  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . CODE SOCIETE  
+KEY=57,8,CH,A,2     . DATE COMPTABLE DE PRISE EN CHARGE 
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=65,8,CH,A,4     . DATE FISCALE DE PAIEMENT  
+@EOF
+@ . 
+@FREE      ICOMMISENR.  
+@FREE      ICOMMISENRT2.
+@TIME   
+@.         =======================================================  
+@LAB070: MSG 070. TOTAUX RECAP DES ENROLEMENTS - PAR DATE   
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB070  
+@ . 
+@ASG,A     ICOMMISENRT2.
+@USE       ICOMM,ICOMMISENRT2   
+@DELETE,C  ICMMENRMOI.  
+@ASG,UP    ICMMENRMOI.,F/0/POS/4000 
+@USE       ICMM-MOI,ICMMENRMOI. 
+@DELETE,C  COCM03*IMP-COB059.   
+@CAT,P     COCM03*IMP-COB059.,F///5000  
+@ASG,A     COCM03*IMP-COB059
+@USE       LISTE,COCM03*IMP-COB059. 
+@DELETE,C  COCM03*CTL-COB059.   
+@CAT,P     COCM03*CTL-COB059.,F///5000  
+@ASG,A     COCM03*CTL-COB059.   
+@USE       OUT-CTL,COCM03*CTL-COB059.   
+@ . 
+@XQT       COCM03.COB059
+@ . 
+@FREE      ICOMMISENRT2.
+@FREE      ICMMENRMOI.  
+@FREE      COCM03*IMP-COB059.   
+@FREE      COCM03*CTL-COB059.   
+@ . 
+@.         =======================================================  
+@LAB100: MSG 100.  TRI POUR COB066  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ . 
+@ASG,A     ICOMMISENR.  
+@DELETE,C  ICOMMISENRT3.
+@CAT,P     ICOMMISENRT3,F/0/POS/4000
+@ASG,A     ICOMMISENRT3.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISENR     BLOCK=10  
+FILEOUT=ICOMMISENRT3  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . SOCIETE   
+KEY=92,6,CH,A,2     . PERIODE COMPTABLE 
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=1,2,CH,A,4      . TYPE IMD  
+KEY=3,5,CH,A,5      . NO IMD
+KEY=57,8,CH,A,6     . DATE COMPTABLE DE PRISE EN CHARGE 
+KEY=33,3,CH,A,7     . NO BCH
+KEY=26,7,CH,A,8     . NO MAT
+KEY=36,7,CH,A,9     . NO POL
+KEY=45,3,CH,A,10    . AVENANT   
+@EOF
+@ . 
+@FREE      ICOMMISENR.  
+@FREE      ICOMMISENRT3.
+@TIME   
+@.         =======================================================  
+@LAB110: MSG 110. LISTE JUSTIFICATIVE - ENROLEMENT  
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ . 
+@ASG,A     ICOMMISENRT3.
+@USE       ICOMM,ICOMMISENRT3   
+@DELETE,C  COCM03*IMP-COB066.   
+@CAT,P     COCM03*IMP-COB066.,F///5000  
+@ASG,A     COCM03*IMP-COB066.   
+@USE       LISTE,COCM03*IMP-COB066. 
+@DELETE,C  COCM03*CTL-COB066.   
+@CAT,P     COCM03*CTL-COB066.,F///5000  
+@ASG,A     COCM03*CTL-COB066.   
+@USE       OUT-CTL,COCM03*CTL-COB066.   
+@ . 
+@XQT       COCM03.COB066
+@ . 
+@FREE      ICOMMISENRT3.
+@FREE      COCM03*IMP-COB066.   
+@FREE      COCM03*CTL-COB066.   
+@TIME   
+@.         =======================================================  
+@LAB121: MSG 121.  TRI POUR COB071  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB121  
+@ . 
+@ASG,A     ICOMMISENR.  
+@DELETE,C  ICOMMISENRT4.
+@CAT,P     ICOMMISENRT4,F/0/POS/4000
+@ASG,A     ICOMMISENRT4.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISENR     BLOCK=10  
+FILEOUT=ICOMMISENRT4  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . SOCIETE   
+KEY=92,6,CH,A,2     . PERIODE COMPTABLE 
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=33,3,CH,A,4     . NO BCH
+KEY=1,2,CH,A,5      . TYPE IMD  
+@EOF
+@ . 
+@FREE      ICOMMISENR.  
+@FREE      ICOMMISENRT4.
+@TIME   
+@.         =======================================================  
+@LAB130: MSG 130. TOTAUX RECAP DES ENROLEMENTS - PAR BRANCHE
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB130  
+@ . 
+@ASG,A     ICOMMISENRT4.
+@USE       ICOMM,ICOMMISENRT4   
+@DELETE,C  COCM03*IMP-COB071.   
+@CAT,P     COCM03*IMP-COB071.,F///5000  
+@ASG,A     COCM03*IMP-COB071
+@USE       LISTE,COCM03*IMP-COB071. 
+@DELETE,C  COCM03*CTL-COB071.   
+@CAT,P     COCM03*CTL-COB071.,F///5000  
+@ASG,A     COCM03*CTL-COB071.   
+@USE       OUT-CTL,COCM03*CTL-COB071.   
+@ . 
+@XQT       COCM03.COB071
+@ . 
+@FREE      ICOMMISENRT4.
+@FREE      COCM03*IMP-COB071.   
+@FREE      COCM03*CTL-COB071.   
+@TIME   
+@.         =======================================================  
+@LAB230: MSG 230. CFH-COPY - PAIEMENT   
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB230  
+@ . 
+@ASG,A      ICOMMIS.
+@USE        FIN,ICOMMIS.
+@DELETE,C   ICOMMISPAI. 
+@CAT,P      ICOMMISPAI,F///3500 
+@ASG,A      ICOMMISPAI. 
+@USE        FOUT,ICOMMISPAI.
+@ . 
+@SSG,IA  *UTILIT.CFH-COPY/ASCII 
+SGS 
+ASCII   
+INPUT       FIN,200,10  
+OUTPUT      FOUT,200,10 
+FIELDIN  1,91   65,6   98,23    121,80  
+FIELDOUT 1,91   92,6   98,23    121,80  
+@EOF
+@XQT,WR  .CFH-COPY  
+@ . 
+@FREE       ICOMMIS.
+@FREE       ICOMMISPAI. 
+@TIME   
+@.         =======================================================  
+@LAB260: MSG 260.  TRI POUR COB060  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB260  
+@ . 
+@ASG,A     ICOMMISPAI.  
+@DELETE,C  ICOMMISPAIT2.
+@CAT,P     ICOMMISPAIT2,F/0/POS/4000
+@ASG,A     ICOMMISPAIT2.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISPAI     BLOCK=10  
+FILEOUT=ICOMMISPAIT2  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . SOCIETE   
+KEY=65,8,CH,A,2     . DATE FISCALE DE PAIEMENT  
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=57,8,CH,A,4     . DATE COMPTABLE DE PRISE EN CHARGE 
+@EOF
+@ . 
+@FREE      ICOMMISPAI.  
+@FREE      ICOMMISPAIT2.
+@TIME   
+@.         =======================================================  
+@LAB270: MSG 270. TOTAUX RECAP DES PAIEMENTS  - PAR DATE
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB270  
+@ . 
+@ASG,A     ICOMMISPAIT2.
+@USE       ICOMM,ICOMMISPAIT2   
+@DELETE,C  ICMMPAIMOI.  
+@ASG,UP    ICMMPAIMOI.,F/0/POS/4000 
+@USE       ICMM-MOI,ICMMPAIMOI. 
+@DELETE,C  COCM03*IMP-COB060.   
+@CAT,P     COCM03*IMP-COB060.,F///5000  
+@ASG,A     COCM03*IMP-COB060
+@USE       LISTE,COCM03*IMP-COB060. 
+@DELETE,C  COCM03*CTL-COB060.   
+@CAT,P     COCM03*CTL-COB060.,F///5000  
+@ASG,A     COCM03*CTL-COB060.   
+@USE       OUT-CTL,COCM03*CTL-COB060.   
+@ . 
+@XQT       COCM03.COB060
+@ . 
+@FREE      ICOMMISPAIT2.
+@FREE      ICMMPAIMOI.  
+@FREE      COCM03*IMP-COB060.   
+@FREE      COCM03*CTL-COB060.   
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB300: MSG 300.  TRI POUR COB068  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ . 
+@ASG,A     ICOMMISPAI.  
+@DELETE,C  ICOMMISPAIT3.
+@CAT,P     ICOMMISPAIT3,F/0/POS/4000
+@ASG,A     ICOMMISPAIT3.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISPAI     BLOCK=10  
+FILEOUT=ICOMMISPAIT3  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . SOCIETE   
+KEY=92,6,CH,A,2     . PERIODE COMPTABLE 
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=1,2,CH,A,4      . TYPE IMD  
+KEY=3,5,CH,A,5      . NO IMD
+KEY=65,8,CH,A,6     . DATE FISCALE DE PAIEMENT  
+KEY=33,3,CH,A,7     . NO BCH
+KEY=26,7,CH,A,8     . NO MAT
+KEY=36,7,CH,A,9     . NO POL
+KEY=45,3,CH,A,10    . AVENANT   
+@EOF
+@ . 
+@FREE      ICOMMISPAI.  
+@FREE      ICOMMISPAIT3.
+@TIME   
+@.         =======================================================  
+@LAB310: MSG 310. LISTE JUSTIFICATIVE DES PAIEMENTS 
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB310  
+@ . 
+@ASG,A     ICOMMISPAIT3.
+@USE       ICOMM,ICOMMISPAIT3   
+@DELETE,C  COCM03*IMP-COB068.   
+@CAT,P     COCM03*IMP-COB068.,F///5000  
+@ASG,A     COCM03*IMP-COB068
+@USE       LISTE,COCM03*IMP-COB068. 
+@DELETE,C  COCM03*CTL-COB068.   
+@CAT,P     COCM03*CTL-COB068.,F///5000  
+@ASG,A     COCM03*CTL-COB068.   
+@USE       OUT-CTL,COCM03*CTL-COB068.   
+@ . 
+@XQT       COCM03.COB068
+@ . 
+@FREE      ICOMMISPAIT3.
+@FREE      COCM03*IMP-COB068.   
+@FREE      COCM03*CTL-COB068.   
+@TIME   
+@.         =======================================================  
+@LAB320: MSG 320.  TRI POUR COB072  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ . 
+@ASG,A     ICOMMISPAI.  
+@DELETE,C  ICOMMISPAIT4.
+@CAT,P     ICOMMISPAIT4,F/0/POS/4000
+@ASG,A     ICOMMISPAIT4.
+@ . 
+@SORT,ES
+FILEIN=ICOMMISPAI     BLOCK=10  
+FILEOUT=ICOMMISPAIT4  BLOCK=10  
+RSZ=200 
+RECORD=10   
+KEY=56,1,CH,A,1     . SOCIETE   
+KEY=92,6,CH,A,2     . PERIODE COMPTABLE 
+KEY=83,1,CH,A,3     . TYPE PAI  
+KEY=33,3,CH,A,4     . NO BCH
+KEY=1,2,CH,A,5      . TYPE IMD  
+@EOF
+@ . 
+@FREE      ICOMMISPAI.  
+@FREE      ICOMMISPAIT4.
+@TIME   
+@.         =======================================================  
+@LAB330: MSG 330. TOTAUX RECAP DES PAIEMENTS  - PAR BRANCHE 
+@.         =======================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB330  
+@ . 
+@ASG,A     ICOMMISPAIT4.
+@USE       ICOMM,ICOMMISPAIT4   
+@DELETE,C  COCM03*IMP-COB072.   
+@CAT,P     COCM03*IMP-COB072.,F///5000  
+@ASG,A     COCM03*IMP-COB072
+@USE       LISTE,COCM03*IMP-COB072. 
+@DELETE,C  COCM03*CTL-COB072.   
+@CAT,P     COCM03*CTL-COB072.,F///5000  
+@ASG,A     COCM03*CTL-COB072.   
+@USE       OUT-CTL,COCM03*CTL-COB072.   
+@ . 
+@XQT       COCM03.COB072
+@ . 
+@FREE      ICOMMISPAIT4.
+@FREE      COCM03*IMP-COB072.   
+@FREE      COCM03*CTL-COB072.   
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB340:   MSG 340. SORT  POUR I-XLS-ENR                      SORT  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB340  
+@ . 
+@ASG,A          ICMMENRMOI. 
+@USE        INA,ICMMENRMOI. 
+@DELETE,C       IRECAPSORT. 
+@CAT,P          IRECAPSORT.,F/0/POS/4000
+@ASG,A          IRECAPSORT. 
+@USE       OUTA,IRECAPSORT. 
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=56,1,CH,A,1  . Société  
+KEY=83,1,CH,A,2  . Code type paiement   
+KEY=01,2,CH,A,3  . Code type intermédiaire  
+KEY=03,5,CH,A,4  . Numéro d'intermédiaire   
+KEY=57,8,CH,A,5  . Date prise en charge     = Date comptable AAAAMMJJ   
+KEY=33,3,CH,A,6  . Branche  
+KEY=26,7,CH,A,7  . Matricule
+KEY=36,7,CH,A,8  . Police   
+KEY=45,3,CH,A,9  . Avenant  
+KEY=84,8,CH,A,10 . Date d'échéance  
+KEY=98,10,CH,A,11 . Numéro de piéce 
+RSZ=200 
+RECORD=50   
+@EOF
+@ . 
+@TIME   
+@.         =======================================================  
+@LAB350:   MSG 350. RECAP POUR I-XLS-ENR
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB350  
+@ERS TPF$.  
+@ASG,A             IRECAPSORT.  
+@USE           INA,IRECAPSORT.  
+@DELETE,C          IRECAPENR.   
+@ASG,UP            IRECAPENR.,F/0/POS/4000  
+@USE          OUTA,IRECAPENR.   
+@SSG,IA   *UTILIT.RECAP 
+SGS 
+ASCII   
+INPUT    INA,200,10 
+OUTPUT   OUTA,200,10
+FIELDIN  56,1 83,1  1,2  3,5 57,8 33,3 26,7 36,7 45,3 84,8 98,10 18,8 ; 
+           121,10    131,6     137,6    73,1    144,1   
+FIELDOUT  1,1  2,1  3,2  5,5 10,8 18,3 21,7 28,7 35,3 38,8 46,10 56,8 ; 
+            64,10     74,6      80,6    86,1    87,1
+TOTIN                                                    18,8  121,10   
+TOTOUT                                                   56,8   64,10   
+INDIC    56,1 83,1 01,2 03,5 57,8 33,3 26,7 36,7 45,3 84,8 98,10
+@EOF
+@XQT       TPF$.RECAP   
+@ERS       TPF$.
+@FREE              IRECAPSORT.  
+@FREE              IRECAPENR.   
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB360:   MSG 360. SORT  POUR I-XLS-PAI SORT   
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB360  
+@ . 
+@ASG,A          ICMMPAIMOI. 
+@USE        INA,ICMMPAIMOI. 
+@DELETE,C       IRECAPSOR2. 
+@CAT,P          IRECAPSOR2.,F/0/POS/4000
+@ASG,A          IRECAPSOR2. 
+@USE       OUTA,IRECAPSOR2. 
+@ . 
+@SORT,ES
+FILEIN=INA,F     BLOCK=10   
+FILEOUT=OUTA,F   BLOCK=10   
+KEY=56,1,CH,A,1  . Société  
+KEY=83,1,CH,A,2  . Code type paiement   
+KEY=01,2,CH,A,3  . Code type intermédiaire  
+KEY=03,5,CH,A,4  . Numéro d'intermédiaire   
+KEY=65,8,CH,A,5  . Date de paiement         = Date comptable AAAAMMJJ   
+KEY=57,8,CH,A,6  . Date de pri cha  
+KEY=33,3,CH,A,7  . Branche  
+KEY=26,7,CH,A,8  . Matricule
+KEY=36,7,CH,A,9  . Police   
+KEY=45,3,CH,A,10 . Avenant  
+KEY=84,8,CH,A,11 . Date d'échéance  
+RSZ=200 
+RECORD=50   
+@EOF
+@ . 
+@TIME   
+@.         =======================================================  
+@LAB370:   MSG 370. RECAP POUR I-XLS-PAI
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB370  
+@ERS TPF$.  
+@ASG,A             IRECAPSOR2.  
+@USE           INA,IRECAPSOR2.  
+@DELETE,C          IRECAPPAI.   
+@ASG,UP            IRECAPPAI.,F/0/POS/4000  
+@USE          OUTA,IRECAPPAI.   
+@SSG,IA   *UTILIT.RECAP 
+SGS 
+ASCII   
+INPUT    INA,200,10 
+OUTPUT   OUTA,200,10
+FIELDIN  56,1 83,1  1,2  3,5 65,8 57,8 33,3 26,7 36,7 45,3 84,8 18,8  ; 
+                       121,10    131,6     137,6    73,1  144,1 
+FIELDOUT  1,1  2,1  3,2  5,5 10,8 18,8 26,3 29,7 36,7 43,3 46,8 54,8  ; 
+                        62,10     72,6      78,6    84,1  85,1  
+TOTIN                                                 18,8 121,10   
+TOTOUT                                                54,8  62,10   
+INDIC    56,1 83,1  1,2  3,5 65,8 57,8 33,3 26,7 36,7 45,3 84,8 
+@EOF
+@XQT       TPF$.RECAP   
+@ERS       TPF$.
+@FREE              IRECAPSOR2.  
+@FREE              IRECAPPAI.   
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB400:   MSG 400. PREPA FICHIER XLS ENROLEMENT
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB400  
+@ASG,A             IRECAPENR.   
+@USE        FILEIN,IRECAPENR.   
+@DELETE,C          I-XLS-ENR.   
+@ASG,UP            I-XLS-ENR.,F/0/POS/4000  
+@USE       FILEOUT,I-XLS-ENR.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 200
+COL 1,1,ALPHAG,''Société''  
+COL 2,1,ALPHAG,''Type paiement''
+COL 3,2,ALPHAG,''Type intermédiaire''   
+COL 5,5,ALPHAG,''Numéro intermédiaire'' 
+COL 10,8,AAAAMMJJ,''Date prise en charge''  
+COL 18,3,ALPHAG,''Branche'' 
+COL 21,7,ALPHAG,''Matricule''   
+COL 28,7,ALPHAG,''Police''  
+COL 35,3,ALPHAG,''Avenant'' 
+COL 38,8,AAAAMMJJ,''Date échéance'' 
+COL 46,10,ALPHAG,''Numéro de pièce''
+COL 56,8,MNT,''Montant commission'' 
+COL 87,1,,''Code état DAC'' 
+COL 74,6,MNT,''% de base de commission''
+COL 80,6,MNT,''Taux''   
+COL 64,10,MNT,''Montant de la prime nette'' 
+COL 86,1,,''Code état mvt cmm'' 
+@EOF
+@ . 
+@FREE      IRECAPENR.   
+@FREE      I-XLS-ENR.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB410:   MSG 410. PREPA FICHIER XLS PAIEMENT  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB410  
+@ASG,A             IRECAPPAI.   
+@USE        FILEIN,IRECAPPAI.   
+@DELETE,C          I-XLS-PAI.   
+@ASG,UP            I-XLS-PAI.,F/0/POS/4000  
+@USE       FILEOUT,I-XLS-PAI.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 200
+COL 1,1,ALPHAG,''Société''  
+COL 2,1,ALPHAG,''Type paiement''
+COL 3,2,ALPHAG,''Type intermédiaire''   
+COL 5,5,ALPHAG,''Numéro intermédiaire'' 
+COL 10,8,AAAAMMJJ,''Date paiement'' 
+COL 18,8,AAAAMMJJ,''Date prise en charge''  
+COL 26,3,ALPHAG,''Branche'' 
+COL 29,7,ALPHAG,''Matricule''   
+COL 36,7,ALPHAG,''Police''  
+COL 43,3,ALPHAG,''Avenant'' 
+COL 46,8,AAAAMMJJ,''Date d'échéance''   
+COL 54,8,MNT,''Montant de commission''  
+COL 85,1,,''Code état DAC'' 
+COL 72,6,MNT,''% de base de commission''
+COL 78,6,MNT,''Taux''   
+COL 62,10,MNT,''Montant de la prime nette'' 
+COL 84,1,,''Code état mvt cmm'' 
+@EOF
+@ . 
+@FREE      IRECAPPAI.   
+@FREE      I-XLS-PAI.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@.         =======================================================  
+@LAB420:   MSG 420. ENVOIE DES FICHIERS SUR INTRANET
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB420  
+@ . 
+@ADD       F999TRANSF.COCM03/2200PC 
+@ . 
+@.         =======================================================  
+@LAB700: MSG 700. CLOTURE PARAMETRES DE CONTROLE
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@XQT,XS      COCM03.SWB004  
+COCM03  
+@.         =======================================================  
+@LAB710: MSG 710. IMPRESSION DES LISTES VIA F999SYM 
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB710  
+@ADD       F999SYM.COCM03   
+@.         =======================================================  
+@LAB720: MSG 720. SAUVEGARDE DES FICHIERS.  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ADD    SYS$*RUNS.FASDIR
+@TIME   
+@.         =======================================================  
+@LAB770: MSG 770. DELETE DES FICHIERS.  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@DELETE,C  ICOCH03. 
+@DELETE,C  ICOMMIS. 
+@DELETE,C  ICOMMISS.
+@DELETE,C  IRECAPSORT.  
+@DELETE,C  IRECAPSOR2.  
+@DELETE,C  IRECAPENR.   
+@DELETE,C  IRECAPPAI
+@DELETE,C  I-XLS-ENR.   
+@DELETE,C  I-XLS-PAI.   
+@DELETE,C  ICOMMISENR.  
+@DELETE,C  ICOMMISENRT2.
+@DELETE,C  ICOMMISENRT3.
+@DELETE,C  ICOMMISENRT4.
+@DELETE,C  ICOMMISPAI.  
+@DELETE,C  ICOMMISPAIT2.
+@DELETE,C  ICOMMISPAIT3.
+@DELETE,C  ICOMMISPAIT4.
+@DELETE,C  ICMMENRMOI.  
+@DELETE,C  ICMMPAIMOI.  
+@TIME   
+@.         =======================================================  
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@.         =======================================================  
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG         *****  LE RUN COCM03 S'EST BIEN TERMINE  ***** 
+@FREE        COCM03 
+@QUAL,R 
+@FIN

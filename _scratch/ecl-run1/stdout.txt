@@ -1,0 +1,91 @@
+EclConverter Console running with arguments: /INPUTFILE:E:\Repos\ssg4-source\01-RunsPrd\ASSURFED_F999RUN_VIRM01_CO(P).TXT /OUTPUT:E:\Repos\SsgTrial\_scratch\ecl-run1\out
+Input file   : E:\Repos\ssg4-source\01-RunsPrd\ASSURFED_F999RUN_VIRM01_CO(P).TXT
+Output folder: E:\Repos\SsgTrial\_scratch\ecl-run1\out
+--Warning: @PRT: unrecognized option(s) 'C' ignored
+--Warning: @PRT: unrecognized option(s) 'C' ignored
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.RESTART'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999STAR.B006COMARCH'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999STAR.B006COMIMP'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999STAR.B006COMACQ'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999STAR.B006TERMNUM'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999CONTROLE.VIRM01'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'F999STAR.B006NUMARCH'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve '*UTILIT.TRANSEXCEL'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve '*UTILIT.TRANSEXCEL'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPRISE'
+--Error: @ADD: RunstreamIndex not available - cannot resolve 'SYS$*RUNS.REPDEL'
+=== Phase 5: Converting SSG skeletons... ===
+  SSG inline conversion: 0 succeeded, 0 failed
+  SSG external conversion: 0 succeeded, 1 stubs (source not found), 0 errors
+  Obsolete codes reference: E:\Repos\SsgTrial\_scratch\ecl-run1\out\obsolete-codes.md (1 codes found)
+=== DONE ===
+
+Total input lines: 0
+Total runstreams : 0
+Total includes   : 0
+  Full runstreams      : 0
+  Partial runstreams   : 0
+  Data-only (skipped)  : 0
+--- ECL Parse Statistics ---
+  Total files     : 0
+  Total statements: 553
+  @Run         : 1
+  @Qual        : 3
+  @Sym         : 3
+  @Msg         : 41
+  @Comment     : 60
+  @Prt         : 2
+  @Time        : 34
+  @Asg         : 77
+  @Copy        : 14
+  @Label       : 30
+  @Add         : 43
+  @Data        : 57
+  @Use         : 61
+  @Delete      : 27
+  @Sort        : 11
+  @Cat         : 5
+  @Xqt         : 15
+  @Free        : 52
+  @Brkpt       : 4
+  @Setc        : 1
+  @Eof         : 4
+  @Ssg         : 1
+  @Ers         : 6
+  @Fin         : 1
+--- ECL Migration Summary ---
+  Programs executed: 15
+  Files assigned   : 49
+  Missing items    : 1

@@ -1,0 +1,16 @@
+{
+  "_source": "No Trial3 manifest entry for EXTEUR. COND=0 skips the entire *Increment COND loop (CASE/MT/OTHERWISE record-layout + procedure generation), leaving only the fixed batch/DB skeleton. DEVISE,1,1=1 (not 3) and DEVISE,1,3,1='NONE' (not 'KEEP') take the simpler branches of the nested *If/*Else blocks around DEVISE handling, avoiding the need for DEVISE,1,1,3. DEVOUTPUT=0 takes the C-PHA-EUR-derived currency branch instead of a literal override.",
+  "COND": "0",
+  "DEVOUTPUT": "0",
+  "LONG,1,1,1": "80",
+  "BLOCK,1,1,1": "10",
+  "DEVISE,1,1": "1",
+  "DEVISE,1,1,1": "0",
+  "DEVISE,1,1,2": "2",
+  "DEVISE,1,2,1": "01",
+  "DEVISE,1,2,2": "02",
+  "DEVISE,1,3,1": "NONE",
+  "DATIME$,1,7,1": "30/09/2026",
+  "DATIME$,1,2,1": "12:00",
+  "DATIME$,1,3,1": "30/09/2026"
+}

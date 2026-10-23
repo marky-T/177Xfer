@@ -1,0 +1,14 @@
+
+[32;1mCase             [0m[32;1m Result[0m[32;1m Exit[0m[32;1m Detail[0m
+[32;1m----             [0m [32;1m------[0m [32;1m----[0m [32;1m------[0m
+TRY_CHAB100_STDIN FAIL      0 actual 0 bytes, expected 102; first difference a.
+                              
+Sys.ini : E:\AMT_Work\MockSystem\Run_TRY_CHAB100_STDIN\Sys.ini
+Server  : VMFEDPE08   Database: AMT_MOCKSYS   User: LionDev
+Running Company.AFBUS_2200COBOL.BusinessLogic.Assurfed_Utilit_Chab100_Ascii.Assurfed_Utilit_Chab100_Ascii in application AFBUS_2200COBOL
+15:24:52  Started revision: 1.0 AMT version: 1.0.0.0 Parameters: /I:E:\AMT_Work\MockSystem\Run_TRY_CHAB100_STDIN\Sys.ini /APP:AFBUS_2200COBOL /TESTRUN
+15:24:54  Program execution time: 00:00:01:756
+15:24:54  Done
+Program exit code: 0
+
+

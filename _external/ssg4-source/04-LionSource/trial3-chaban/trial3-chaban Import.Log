@@ -1,0 +1,15 @@
+﻿20260820 08:37 Starting
+20260820 08:37 Loading file: C:\Amt\Migration\Trial3\output\trial3-chaban.LionSource
+20260820 08:37 File version: 6
+20260820 08:37 Exported with program version: 
+20260820 08:37 Loading application AFBUS_COBOL under AFBUS_COBOL
+20260820 08:37 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.9
+20260820 08:37 Loading DMS Schema:  1.0 as 1.9
+20260820 08:37 Loading Cobol Program: CHABAN 1.0 as 1.5
+20260820 08:37 Loading file: C:\Amt\Migration\Trial3\output\trial3-unloadis-multi.LionSource
+20260820 08:37 File version: 6
+20260820 08:37 Exported with program version: 
+20260820 08:37 Skip loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.9 Application option may only be in the 1e file
+20260820 08:37 Loading DMS Schema:  1.0 as 1.9
+20260820 08:37 Loading Cobol Program: UNLOADIS 1.0 as 1.5
+20260820 08:37 Done in 00:00:00

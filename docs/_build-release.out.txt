@@ -1,0 +1,23 @@
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\ARCHIFORMAT-LIVE.ps1 (job: T3_20_ARCHIFORMAT_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\ARCHISEPARE-LIVE.ps1 (job: T3_20_ARCHISEPARE_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\BABA_ASCII-LIVE.ps1 (job: T3_20_BABA_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\CFH-COPY_ASCII-LIVE.ps1 (job: T3_20_CFH_COPY_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\CFH-COPY-LIVE.ps1 (job: T3_20_CFH_COPY_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\CHAB100_ASCII-LIVE.ps1 (job: T3_20_CHAB100_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\CHABAN_ASCII-LIVE.ps1 (job: T3_20_CHABAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\CONDIS2_ASCII-LIVE.ps1 (job: T3_20_CONDIS2_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\EXTEUR-LIVE.ps1 (job: T3_20_EXTEUR_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\FUSBA_ASCII-LIVE.ps1 (job: T3_20_FUSBA_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\FUSBA2_ASCII-LIVE.ps1 (job: T3_20_FUSBA2_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\LECTIS_ASCII-LIVE.ps1 (job: T3_20_LECTIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\LOADIS_ASCII-LIVE.ps1 (job: T3_20_LOADIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\LOADIS_MULTI-LIVE.ps1 (job: T3_20_LOADIS_MULTI_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\RECAP-LIVE.ps1 (job: T3_20_RECAP_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\SCAN_ASCII-LIVE.ps1 (job: T3_20_SCAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\TABAN_ASCII-LIVE.ps1 (job: T3_20_TABAN_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\TAPELD_ASCII-LIVE.ps1 (job: T3_20_TAPELD_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\UNLOADIS_ASCII-LIVE.ps1 (job: T3_20_UNLOADIS_ASCII_LIVE)
+Generated E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers\UNLOADIS_MULTI-LIVE.ps1 (job: T3_20_UNLOADIS_MULTI_LIVE)
+
+Done - 20 wrapper(s) written to E:\Repos\release_candidates\release20261002-rc.01\1_ConvertedScripts\Wrappers
+Bodies=20 Seeds=20 Wrappers=20 Originals=20

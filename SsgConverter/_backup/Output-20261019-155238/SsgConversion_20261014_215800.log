@@ -1,0 +1,548 @@
+﻿2026-10-14 21:58:01 [0] Phase     : ------------------------------------------------------------
+2026-10-14 21:58:01 [0] Phase     : SSG to PowerShell Converter
+2026-10-14 21:58:01 [0] Phase     : ------------------------------------------------------------
+2026-10-14 21:58:01 [0] Log       : Input folder : E:\Repos\SsgTrial\SsgConverter\Examples\Input
+2026-10-14 21:58:01 [0] Log       : Output folder: E:\Repos\SsgTrial\SsgConverter\Examples\Output
+2026-10-14 21:58:01 [0] Log       : SSG source files found: 20
+2026-10-14 21:58:01 [0] Warning   : ECL parse failed for content block in 'ARCHIFORMAT': Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index') — content skipped.
+2026-10-14 21:58:01 [0] Warning   : @UCOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                    -- archiformat --                       ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***            Foramt donn�es pour archivage                   ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Auteur   : N�ga  NEGA SERGE                (INITIALES  NM PN)  *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                                                                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,1,1] : report de la table                 *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,2,1] : description de la table            *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    INPUT : [filein,1,3,1] : donn�es unload�es archiv�es        *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    OUTPUT: [fileout,1,1,1] : donn�es au  format  archive       *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Identification division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *========================*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): program-id.  archiformat.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Environment division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *====================*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Configuration section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): special-names.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): printer       printer.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Input-output section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *---------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): file-control.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select fic-report assign to disc      [filein,1,1,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select fic-descript assign to disc    [filein,1,2,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select fic-unload assign to disc      [filein,1,3,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select fic-format assign to disc      [fileout,1,1,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): i-o-control.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Data division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *==============*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): File section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *-------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier du report
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  fic-report.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  lgn-rep               pic x(132).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier de description
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  fic-descript.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  lgn-des               pic x(132).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier d'unload des donn�es archiv�es
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  fic-unload.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  lgn-unl               pic x([*b]).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier format� pour l'archivage
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  fic-format.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  lgn-for               pic x([*a]).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Working-storage section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 0
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-0.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-0-typ           pic x value "0".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-0-nm-base       pic x(6) value "[table,1,1,3]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-0-nm-table      pic x(30) value "[table,1,1,2]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-0-dt-ach        pic 9(8).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-0-dt-maj.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-ss    pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-aa    pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-mm    pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-0-dt-maj-jj    pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 1
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-1.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-1-typ           pic x value "1".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-1-nm-cle        pic x(30) value "[key,1,1,1]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-1-cle.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-1-typ-cle      pic x value "[key,1,1,2]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 5 ws-1-lg-cle       pic 99.99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 2
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-2.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-2-typ           pic x value "2".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-2-nm-chp        pic x(30).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-2-typ-chp       pic x(7).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-2-lg-chp        pic x(10).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-2-null          pic x(8).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 3
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-3.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-3-typ           pic x value "3".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-3-nm-idx        pic x(30).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-3-nm-chp        pic x(30).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-3-tri           pic x(8).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 4
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-4.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-4-typ           pic xx value "4A".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-4-don           pic x([*b]).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    3 ws-4-cle           pic x([key,1,1,3]).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *enregistrement type 9
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 ws-don-9.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-typ           pic x value "9".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-nm-base       pic x(6) value "[table,1,1,3]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-nm-table      pic x(30) value "[table,1,1,2]".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-dt-ach        pic 9(8).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-cpt-ach       pic s9(11) sign leading separate.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 ws-9-cpt-5         pic x(12) value "+00000000000".
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 unloadf              pic 9 value 0.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 88 fin-unload        value 1.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 table-null.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 tnull              pic x occurs 70 times.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 i                    pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 i-buf                pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 i-tot                pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------------ flag ---------------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 fl-null              pic 9.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *---------------------------------------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *---------------- compteur -------------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 cpt-char             pic 999.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 cpt-ach              pic 9(11).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 cpt-lu               pic 9(11).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 cpt-achf             pic z(10)9.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 77 cpt-luf              pic z(10)9.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------------------------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------------ POUR LA DATE ---------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 dt-i.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 aa-i               pic 9(4).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 mm-i               pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 jj-i               pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1 dt-fr.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 jj-fr              pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3   pic x value '/'.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 mm-fr              pic 99.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3   pic x value '/'.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 3 aa-fr              pic 9(4).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------------------------------------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): PROCEDURE DIVISION.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *-------------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 000-main.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): open input fic-report fic-descript fic-unload
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): output fic-format
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 100-type0 thru 100-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 101-type1 thru 101-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 102-type2 thru 102-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 103-type3 thru 103-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 104-type4 thru 104-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 105-type9 thru 105-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 106-tot thru 106-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): close fic-report fic-descript fic-unload fic-format
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): stop run
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 0 ----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 100-type0.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): accept ws-0-dt-ach from date yyyymmdd
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *recherche de la date de cr�ation de la table
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit until lgn-rep(4:21)
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): = 'DD-PROCESS-TIME-STAMP'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(7:2) to ws-0-dt-maj-aa
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): if ws-0-dt-maj-aa > 90
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 19 to ws-0-dt-maj-ss
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): else
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 20 to ws-0-dt-maj-ss
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-if
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(10:2) to ws-0-dt-maj-mm
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(13:2) to ws-0-dt-maj-jj
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-0
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 100-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 1 -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 101-type1.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move [key,1,1,3] to ws-1-lg-cle
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-1
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 101-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 2 -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 102-type2.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:7) = 'Columns'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit 2 times
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *localisation de l'emplacement de yes/no pour NULL
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): for characters
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): before initial 'Allowed'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move cpt-char to i-buf
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 201-lec-descript thru 201-exit 2 times
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *localisation du nom du champ
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): inspect lgn-des tallying cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): for characters
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): before initial 'TION.'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 6 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform [table,1,2,1] times
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *chargement du nom et de la description des champs
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-des(cpt-char:30) to ws-2-nm-chp
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-des(6:7) to ws-2-typ-chp
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-des(13:10) to ws-2-lg-chp
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep to table-null
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 3 to i-buf giving i
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 0 to fl-null
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 2 to i giving i-tot
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *recherche [Y] et ensuite [E] pour NULL
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform until i >= i-tot
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): if tnull(i) = 'Y'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 1 to i
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): if tnull(i) = 'E'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 1 to fl-null
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-if
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-if
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 1 to i
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): if fl-null = 1
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 'NULL' to ws-2-null
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): else
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move space to ws-2-null
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-if
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-2
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 201-lec-descript thru 201-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 102-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 3 -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 103-type3.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:13) = 'Primary Key :'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *localisation de la cl�
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): for characters
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): before initial 'PK_'
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 1 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(cpt-char:30) to ws-3-nm-idx
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit 2 times
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform until lgn-rep(1:10) = space
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 0 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): inspect lgn-rep tallying cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): for characters
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): before initial ','
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): subtract 4 from cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *chargement du nom de la cl�
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(5:cpt-char) to ws-3-nm-chp
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 7 to cpt-char
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *chargement de l'ordre de tri
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-rep(cpt-char:3) to ws-3-tri
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-3
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 200-lec-report thru 200-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 103-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 4 -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 104-type4.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform until fin-unload
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): perform 202-lec-unload thru 202-exit
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): if not fin-unload
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *chargement de la cl� d'archivage
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *d�j� r�p�t� via la jointure!!!!!
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *        move lgn-unl ([key,1,1,4]:[key,1,1,3]) to ws-4-cle
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-4
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 1 to cpt-ach
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-if
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-perform
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 104-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *------------ ENREGISTREMENT DE TYPE 9 -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 105-type9.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): accept ws-9-dt-ach from date yyyymmdd
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *comteur du nombre d'enregistrement de type 4
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move cpt-ach to ws-9-cpt-ach
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): write lgn-for from ws-don-9
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 105-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------- RAPPORT  -----------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 106-tot.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move cpt-ach to cpt-achf
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move cpt-lu to cpt-luf
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move ws-0-dt-ach to dt-i
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move aa-i to aa-fr
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move mm-i to mm-fr
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move jj-i to jj-fr
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): display "ARCHIFORMAT          RAPPORT          "
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): dt-fr upon printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): display "Enregistrements lus:" cpt-luf upon printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): display "Enregistrements 4 �crits:" cpt-achf upon printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 106-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DU REPORT --------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 200-lec-report.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): read fic-report
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): at end
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): display "fin du report" upon printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-read
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 200-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DU DESCRIPT ------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 201-lec-descript.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): read fic-descript
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): at end
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): display "fin de la description" upon printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-read
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 201-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *--------------- LECTURE DE L'UNLOAD --------------
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 202-lec-unload.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): read fic-unload
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): at end
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move 1 to unloadf
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): not at end
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-unl(1:[*e]) to ws-4-don(1:[*e])
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): move lgn-unl([*c]:[table,1,2,1])
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): to ws-4-don([*d]:[table,1,2,1])
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): add 1 to cpt-lu
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): end-read
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 202-exit.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): exit.
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @UCOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                  -- ARCHISEPARE --                         ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***            Separe les enregistrements a archiver           ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                   et a ne pas archiver                     ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *                                                                *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    INPUT : chercheuse : numero de sinistres a archiver         *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    INPUT : ficunload : unload de la table a archiver           *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficarchi : enregistrements a archiver               *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Identification division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *========================*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): program-id.  ARCHISEPARE.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Environment division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *====================*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Configuration section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *----------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): special-names.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): printer       printer
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): decimal-point comma.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Input-output section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *---------------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): file-control.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select chercheuse assign to disc     [filein,1,1,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select ficunload assign to disc      [filein,1,2,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select ficarchi assign to disc       [fileout,1,1,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): select ficnarchi assign to disc      [fileout,1,2,1].
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): i-o-control.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): Data division.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *==============*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): File section.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *-------------*
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): * Fichier chercheuse
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  chercheuse.
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): 1  cle-chercheuse        pic 9([key,1,1,2]).
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): *Unload de la table a archiver
+2026-10-14 21:58:01 [0] Warning   : Orphaned data line (not consumed by preceding statement): FD  ficunload.
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:01 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:01 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,UX  C$DML
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,MRC I1,025000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): DBANK,MU  D1,0164000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.CBEP$$RSA
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*ACOB.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*SORT.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB PRD*REL.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): END
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @COB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN       TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): FORM         I$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN       TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): FORM         I$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,XU C$DML
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,M  I$1,022000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN       TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN SYS$LIB$*RSA.CBEP$$RSA
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): DBANK,MUC    D$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): FORM         I$1
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          PRD*REL.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB          SYS*REL.
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @ACOB: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,UX  C$DML
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IBANK,MRC I1,025000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): DBANK,MU  D1,0164000
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  TPF$.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.RDMR-ACOBDAT
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*RSA.CBEP$$RSA
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): IN  SYS$LIB$*SFSLIB.CBEP$$SFS
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*ACOB.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): LIB SYS$LIB$*SORT.
+2026-10-14 21:58:02 [0] Warning   : Orphaned data line (not consumed by preceding statement): END
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : @MAP: unknown processor — emitted as CallExternalProgram
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Warning   : Missing @FIN statement — auto-appended in 
+2026-10-14 21:58:02 [0] Log       : 
+2026-10-14 21:58:02 [0] Log       : Conversion complete: 20 succeeded, 0 failed

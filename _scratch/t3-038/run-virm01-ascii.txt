@@ -1,0 +1,9 @@
+17:51:38
+20261020	17:50:56.832	 11	Information	SSG4_VIRM01_CFH_COPY Running Id: 593 Queue: JOB_QUEUE1 Agent: ?
+20261020	17:50:56.853	 11	Information	SSG4_VIRM01_CFH_COPY Queued Id: 593 Queue: JOB_QUEUE1
+20261020	17:51:00.890	 11	Information	CFH_COPY Running Id: 594 Queue: JOB_QUEUE1 Agent: 1
+20261020	17:51:00.890	 11	Information	CFH_COPY Queued Id: 594 Queue: JOB_QUEUE1 Started by: VIRM01
+20261020	17:51:02.912	 11	Information	SSG4_VIRM01_CFH_COPY Done Id: 593 Queue: JOB_QUEUE1 (Execution time: 00:00:06:073)
+20261020	17:51:02.915	 11	Information	CFH_COPY Done Id: 594 Queue: JOB_QUEUE1 (Execution time: 00:00:00:059)
+--- bug reports after 17:30: 
+output 3425 B (expected 3425 B), first bytes 54 41, identical: True

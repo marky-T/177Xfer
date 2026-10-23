@@ -1,0 +1,74 @@
+--- BatchController
+20261020 15:02:08.640 11 Information SSG4_AFPH12_CFH_COPY Queued Id: 373 Queue: JOB_QUEUE1
+20261020 15:02:18.458 11 Information CFH_COPY Running Id: 379 Queue: JOB_QUEUE1 Agent: 1
+20261020 15:02:18.460 11 Information CFH_COPY Queued Id: 379 Queue: JOB_QUEUE1 Started by: AFPH12
+20261020 15:02:20.612 11 Information CFH_COPY Done Id: 379 Queue: JOB_QUEUE1 (Execution time: 00:00:00:823)
+20261020 15:02:42.678 11 Information SSG4_AFPH12_CFH_COPY Running Id: 382 Queue: JOB_QUEUE1 Agent: ?
+20261020 15:02:42.683 11 Information SSG4_AFPH12_CFH_COPY Queued Id: 382 Queue: JOB_QUEUE1
+20261020 15:02:46.823 11 Information CFH_COPY Running Id: 383 Queue: JOB_QUEUE1 Agent: 1
+20261020 15:02:46.823 11 Information CFH_COPY Queued Id: 383 Queue: JOB_QUEUE1 Started by: AFPH12
+--- new/changed log files in the last 15 min
+14:53:06    1,166 AFPH12_13720261020145304697.log
+15:01:50   15,561 FederalePrintController.Log
+15:01:52   21,842 FederaleFileController.Log
+15:02:14   20,533 FederaleTransactionServer.Log
+15:02:14   16,969 Amt_VMFEDPE08_8031_1.Log
+15:02:15   16,968 Amt_VMFEDPE08_8031_2.Log
+15:02:20    1,829 AFPH12_37320261020150212149.log
+15:02:42   10,773 FederaleBatchController_BugReport.Log
+15:02:46   31,217 FederaleBatchController.Log
+15:02:47    1,883 AFPH12_38220261020150244915.log
+=== AFPH12_13720261020145304697.log (errors/warnings/key lines)
+2026-10-20 14:53:06 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII (Options=IA, SgsFile=P$SGS\AFPH12)
+2026-10-20 14:53:06 Invoke-Ssg: SGS file not found: \EXTRACTS\P$SGS\AFPH12 (continuing without)
+2026-10-20 14:53:06 ASG: IAFB011FAI
+2026-10-20 14:53:06 ASG Options: A
+2026-10-20 14:53:06 Error: AFBUS_2200COBOL_AMT - AFPH12 : File [\EXTRACTS\ASSURFED\IAFB011FAI] does not exist.
+=== AFPH12_37320261020150212149.log (errors/warnings/key lines)
+2026-10-20 15:02:13 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII (Options=IA, SgsFile=P$SGS\AFPH12)
+2026-10-20 15:02:13 ASG: IAFB011FAI
+2026-10-20 15:02:13 ASG Options: A
+2026-10-20 15:02:13 USE: INASC,IAFB011FAI
+2026-10-20 15:02:14 ASG: IAFB012FAI
+2026-10-20 15:02:14 ASG Options: P, U
+2026-10-20 15:02:14 USE: OUTASC,IAFB012FAI
+2026-10-20 15:02:14 XQT: .CFH-COPY
+2026-10-20 15:02:14 XQT Options:
+2026-10-20 15:02:14 End-Xqt
+2026-10-20 15:02:20 End Report. Time 00:00:06
+=== FederaleBatchController_BugReport.Log (errors/warnings/key lines)
+Bugreport:
+user name : WORKGROUP
+Error number : 0
+exception message : DB: Lock request time out period exceeded.
+SELECT [APPID], [QUEUEID], [JOBID], [JOBNAME], [JOBTYPE], [FILE], [BATCHID], [STARTEDBYJOB], [STATUS], [STARTDATETIME], [ERROR], [STATION], [USER], [TASKVALUE], [CRITICALREPORT], [SCRIPTPARAMETER], [REPGLOBALPARAM], [REPPARAM], [LANGUAGE], [INITIALRESULT], [BATCHCONTROLLERID], [SCHEDULEID], [PARENTREQUESTID], [RUNAS], [RESTARTAT], [REQUESTID], [PROCESSID], [PROCESSJOBID], [WAITFORJOB], [PRINTGROUP], [COMBENDDATETIME], [TRACEFILEMESSAGES], [DEADLOCKPRIORITY], [MAXIMUMNUMBEROFRESTARTS] FROM dbo.[AMTSYSPROCESSJOB]
+innerexception origin : Void OnError(Microsoft.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+innerexception message : Lock request time out period exceeded.
+innerexception stack trace : at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+at Microsoft.Data.SqlClient.Connection.SqlConnectionInternal.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+Bugreport:
+user name : WORKGROUP
+Error number : 0
+exception message : DB: Lock request time out period exceeded.
+SELECT [APPID], [QUEUEID], [JOBID], [JOBNAME], [JOBTYPE], [FILE], [BATCHID], [STARTEDBYJOB], [STATUS], [STARTDATETIME], [ERROR], [STATION], [USER], [TASKVALUE], [CRITICALREPORT], [SCRIPTPARAMETER], [REPGLOBALPARAM], [REPPARAM], [LANGUAGE], [INITIALRESULT], [BATCHCONTROLLERID], [SCHEDULEID], [PARENTREQUESTID], [RUNAS], [RESTARTAT], [REQUESTID], [PROCESSID], [PROCESSJOBID], [WAITFORJOB], [PRINTGROUP], [COMBENDDATETIME], [TRACEFILEMESSAGES], [DEADLOCKPRIORITY], [MAXIMUMNUMBEROFRESTARTS] FROM dbo.[AMTSYSPROCESSJOB]
+innerexception origin : Void OnError(Microsoft.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
+innerexception message : Lock request time out period exceeded.
+innerexception stack trace : at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+at Microsoft.Data.SqlClient.Connection.SqlConnectionInternal.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+=== AFPH12_38220261020150244915.log (errors/warnings/key lines)
+2026-10-20 15:02:45 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII (Options=IA, SgsFile=P$SGS\AFPH12)
+2026-10-20 15:02:46 ASG: IAFB011FAI
+2026-10-20 15:02:46 ASG Options: A
+2026-10-20 15:02:46 USE: INASC,IAFB011FAI
+2026-10-20 15:02:46 ASG: IAFB012FAI
+2026-10-20 15:02:46 ASG Options: P, U
+2026-10-20 15:02:46 USE: OUTASC,IAFB012FAI
+2026-10-20 15:02:46 XQT: .CFH-COPY
+2026-10-20 15:02:46 XQT Options:
+2026-10-20 15:02:46 End-Xqt
+2026-10-20 15:02:47 End Report. Time 00:00:00
+--- Extracts files touched in the last 15 min
+15:02:19    2,050 ASSURFED\IAFB011FAI
+15:02:47      600 ASSURFED\IAFB012FAI.DAT

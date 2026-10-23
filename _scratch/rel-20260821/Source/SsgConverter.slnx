@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Ecl/">
+    <Project Path="../../EclConverter (1)/EclConverter/EclParser/EclParser.csproj" />
+    <Project Path="../../EclConverter (1)/EclConverter/EclParserOs2200/EclParserOs2200.csproj" />
+    <Project Path="../../EclConverter (1)/EclConverter/EclToAst/EclToAst.csproj" />
+    <Project Path="../../EclConverter (1)/EclConverter/EclToAstOs2200/EclToAstOs2200.csproj" />
+    <Project Path="../../IpfConverter/IpfConverter/IpfConverter/IpfConverter.csproj" />
+    <Project Path="SsgConverter/SsgConverter.csproj" />
+  </Folder>
+  <Project Path="SsgConverterConsole/SsgConverterConsole.csproj" />
+  <Project Path="SsgConverterGui/SsgConverterGui.csproj" />
+</Solution>

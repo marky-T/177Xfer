@@ -1,0 +1,7 @@
+{
+  "jobname": "UNLOAD-ASCII",
+  "fileAssignments": {
+    "DISQ":   "disq.dat",
+    "BDE":    "output.dat"
+  }
+}

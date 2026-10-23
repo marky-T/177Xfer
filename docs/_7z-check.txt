@@ -1,0 +1,3 @@
+C:\Program Files\7-Zip\7z.exe : True
+C:\Program Files (x86)\7-Zip\7z.exe : False
+Get-Command 7z.exe: False

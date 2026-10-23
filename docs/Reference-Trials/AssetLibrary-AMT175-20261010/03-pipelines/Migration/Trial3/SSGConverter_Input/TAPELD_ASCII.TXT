@@ -1,0 +1,635 @@
+*DEFINE FILER   
+*SET  FILLCTR TO  [#1]-1+CADR   
+*IF   FILLCTR  IS SET   
+           06 FILLER PIC  X([*FILLCTR]).
+*END
+*END
+*DEFINE  FIL1   
+*SET  FILLCTR TO   [#1]+1-[#2]-[#3] 
+*IF FILLCTR  IS  SET
+               08 FIS[*I] PIC  X([*FILLCTR]).   
+*END
+*END
+*DEFINE  FIL2   
+*SET  FILLCTR TO   [#1]-1   
+*IF FILLCTR  IS  SET
+               08 FIA[*I] PIC  X([*FILLCTR]).   
+*END
+*END
+*DEFINE  FIL3   
+*SET  FILLCTR TO   [#1]+2   
+*END
+*DEFINE  SEJP3  
+*SET  J  TO   [#1]+3
+*END
+*DEFINE  SW 
+*SET  SW TO   [#1]  
+*END
+*DEFINE  INTER1 
+*SET  I1 TO   [#1]  
+*END
+*DEFINE  CADR   
+*SET  CADR TO   CADR+2  
+*END
+*DEFINE  INTERM 
+*SET  INTER TO   [#1]   
+*END
+*set case$ to 1 
+*create sgs schema DEV DBREP
+*create sgs schema TST AFLINC   
+*create sgs schema TEMPBEF EU1  
+*create sgs schema TEMPEUR EU2  
+*set schname to 'aflinc'
+*increment asch from 1 to [schema]  
+*display '[info$,1,3,1] = [schema,asch,1,1]'
+*if [info$,1,3,1] = [schema,asch,1,1]   
+*set schname to '[schema,asch,2,1]' 
+*exit   
+*endif  
+*loop   
+*display 'schema = [*schname]'  
+*CLEAR CADR 
+*IF   [ASCII]  >  0 
+#ACOB,IPEC    .CFH-COPY,.CFH-COPY   
+*ELSE   
+#ACOB,IPEC    .CFH-COPY,.CFH-COPY   
+*END
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. MICHEL.  
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+*IF   [INPUT,1,1,1]  =  CARDREADER  
+           SELECT  TAPEIN  ASSIGN  TO  CARD-READER. 
+*ELSE   
+           SELECT  TAPEIN  ASSIGN  TO  DISC [INPUT,1,1,1].  
+*END
+*IF  [OUTPUT,1,1,1] = CARDPUNCH   OR  [OUTPUT,1,1,1] = PRINTER  
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+           SELECT   TAPEOUT  ASSIGN  TO  PRINTER.   
+*ELSE   
+           SELECT  TAPEOUT  ASSIGN  TO  CARD-PUNCH. 
+*END
+*ELSE   
+           SELECT  TAPEOUT  ASSIGN  TO  DISC [OUTPUT,1,1,1].
+*END
+*IF     [PRINT]  > 0
+*IF   [OUTPUT,1,1,1] = PRINTER  
+*ELSE   
+           SELECT PRINTOUT ASSIGN TO PRINTER.   
+*END
+*END
+       DATA DIVISION.   
+       FILE SECTION.
+*IF   [PRINT]  > 0  
+*IF    [OUTPUT,1,1,1]  = PRINTER
+*ELSE   
+       FD  PRINTOUT 
+           LABEL RECORD OMITTED 
+           DATA RECORD IS LISTE.
+       01  LISTE PIC X(132).
+*END
+*END
+       FD  TAPEIN   
+*IF   [INPUT,1,1,1]  =  CARDREADER  
+           LABEL RECORD OMITTED 
+*IF [FIELDIN] > 0   
+           DATA RECORD IS   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+           REC1[*I] 
+*LOOP   
+           RECIN.   
+*ELSE   
+           DATA RECORD RECIN.   
+*END
+       01  RECIN  PIC  X([INPUT,1,1,2]).
+*IF [FIELDIN] > 0   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+       01  REC1[*I].
+*PROCESS   FILER   [FIELDIN,1,I,1]  
+           06 ZONE[*I] PIC X([FIELDIN,1,I,2]).  
+*LOOP   
+*END
+*ELSE   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS [INPUT,1,1,3]  RECORDS
+*IF [FIELDIN] > 0   
+           DATA RECORD IS   
+*INCREMENT I FROM 1 BY 1 TO [FIELDIN,1] 
+           REC1[*I] 
+*LOOP   
+           RECIN.   
+*ELSE   
+           DATA RECORD RECIN.   
+*END
+*IF [FIELDIN] > 0   
+*INCREMENT    I  FROM  1  BY  1  TO [FIELDIN,1] 
+*IF [ASCII] = 0 
+       01     REC1[*I]   DISP-1.
+*ELSE   
+       01     REC1[*I]. 
+*END
+*PROCESS          FILER [FIELDIN,1,I,1] 
+*IF  [FIELDIN,1,I]  >  2
+           06  ZONE[*I]  PIC  9([FIELDIN,1,I,2])V9([FIELDIN,1,I,3]).
+*ELSE   
+*CLEAR SW   
+*IF [Y2K] > 0   
+*INCREMENT A FROM 2 BY 1 TO [Y2K,1] 
+*PROCESS INTER1 [Y2K,1,A,2] 
+*IF [*I] = I1   
+           06  ZONE[*I].
+*PROCESS FIL2  [Y2K,1,A,1]  
+               08 ZTI-[*I]             PIC X([Y2K,1,A,3]).  
+*PROCESS FIL1 [FIELDIN,1,I1,2] [Y2K,1,A,3] [Y2K,1,A,1]  
+*PROCESS SW    [Y2K,1,A,1]  
+*END
+*LOOP   
+*END
+*IF [EURO] > 0  
+*INCREMENT B FROM 2 BY 1 TO [EURO,1]
+*PROCESS INTER1 [EURO,1,B,1]
+*IF [*I] = I1   
+           06  ZONE[*I]  PIC S9([FIELDIN,1,I,2]).   
+*PROCESS SW [EURO,1,B,1]
+*END
+*LOOP   
+*END
+*IF SW IS SET   
+*ELSE   
+           06  ZONE[*I]  PIC  X([FIELDIN,1,I,2]).   
+*END
+*END
+*LOOP   
+*END
+*IF [ASCII] = 0 
+       01  RECIN   PIC  X([INPUT,1,1,2])  DISP-1.   
+*ELSE   
+       01  RECIN   PIC  X([INPUT,1,1,2]).   
+*END
+*END
+       FD  TAPEOUT  
+*IF  [OUTPUT,1,1,1] = CARDPUNCH   OR  [OUTPUT,1,1,1] = PRINTER  
+           LABEL  RECORD OMITTED
+*IF [FIELDOUT] > 0  
+           DATA RECORD IS   
+*INCREMENT I  FROM 1  BY 1  TO [FIELDOUT,1] 
+           REC2[*I] 
+*LOOP   
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1 TO  [FIXE,1]   
+           REC3[*I] 
+*LOOP   
+*END
+           RECOUT.  
+*ELSE   
+           DATA RECORD RECOUT.  
+*END
+       01  RECOUT  PIC  X([OUTPUT,1,1,2]).  
+*IF [FIELDOUT] > 0  
+*INCREMENT I  FROM 1 BY 1  TO  [FIELDOUT,1] 
+       01  REC2[*I].
+*PROCESS   FILER   [FIELDOUT,1,I,1] 
+*IF [FIELDOUT,1,I] > 2  
+           06 ZONO[*I] PIC 9([FIELDOUT,1,I,2]),9([FIELDOUT,1,I,3]). 
+*ELSE   
+*CLEAR SW   
+*IF [Y2K] > 0   
+*INCREMENT A FROM 2 BY 1 TO [Y2K,1] 
+*PROCESS INTER1 [Y2K,1,A,2] 
+*IF [*I] = I1   
+           06  ZONO[*I].
+*PROCESS FIL2  [Y2K,1,A,1]  
+*PROCESS FIL3  [Y2K,1,A,3]  
+               08 ZTI-[*I]             PIC X([*FILLCTR]).   
+*PROCESS FIL1 [FIELDIN,1,I1,2] [Y2K,1,A,3] [Y2K,1,A,1]  
+*PROCESS SW    [Y2K,1,A,1]  
+*END
+*LOOP   
+*END
+*IF [EURO] > 0  
+*INCREMENT B FROM 2 BY 1 TO [EURO,1]
+*PROCESS INTER1 [EURO,1,B,1]
+*IF [*I] = I1   
+*PROCESS CADR   
+*PROCESS INTERM [EURO,1,B,1]
+*PROCESS FIL3 [FIELDIN,1,INTER,2]   
+           06  ZONO[*I] PIC X([*FILLCTR]).  
+*PROCESS SW [EURO,1,B,1]
+*END
+*LOOP   
+*END
+*IF SW IS SET   
+*ELSE   
+           06 ZONO[*I] PIC X([FIELDOUT,1,I,2]). 
+*END
+*END
+*LOOP   
+*END
+*CLEAR CADR 
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  REC3[*I].
+*PROCESS   FILER  [FIXE,1,I,1]  
+           06 FIXDATA[*I] PIC X([FIXE,1,I,2]).  
+*LOOP   
+*END
+*ELSE   
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS [OUTPUT,1,1,3]  RECORDS  
+*IF [FIELDOUT] > 0  
+           DATA RECORD IS   
+*INCREMENT I  FROM 1  BY 1  TO [FIELDOUT,1] 
+           REC2[*I] 
+*LOOP   
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1 TO  [FIXE,1]   
+           REC3[*I] 
+*LOOP   
+*END
+           RECOUT.  
+*ELSE   
+           DATA RECORD RECOUT.  
+*END
+       01  RECOUT   PIC   X([OUTPUT,1,1,2]).
+*IF [FIELDOUT] > 0  
+*INCREMENT I  FROM 1 BY 1  TO  [FIELDOUT,1] 
+       01  REC2[*I].
+*PROCESS   FILER   [FIELDOUT,1,I,1] 
+*IF  [FIELDOUT,1,I]   =  3  
+           06  ZONO[*I]  PIC 9([FIELDOUT,1,I,2]),9([FIELDOUT,1,I,3]).   
+*ELSE   
+           06 ZONO[*I] PIC X([FIELDOUT,1,I,2]). 
+*END
+*LOOP   
+*END
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  REC3[*I].
+*PROCESS   FILER  [FIXE,1,I,1]  
+           06 FIXDATA[*I] PIC X([FIXE,1,I,2]).  
+*LOOP   
+*END
+*END
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC  S9(10)  COMP  VALUE 0. 
+       77  LNCTR  PIC  S9(2)  VALUE 58. 
+*IF   [MAXCOPY] 
+       01  COPY-LIMIT         PIC 9(10) VALUE [MAXCOPY,1,1,1].  
+*END
+*IF   [OUTPUT,1,1,1] = PRINTER  
+       01  TITLE-LINE         USAGE DISP-1. 
+           03  FILLER         PIC X(4) VALUE 'H,,,'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE SPACES.   
+           03  FILLER         PIC X(12) VALUE '[INPUT,1,1,1]'.  
+           03  FILLER         PIC X(13) VALUE ' TO PRINTER '.   
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE '12 . '.  
+*END
+*IF [SUPCOM] = 0
+*ELSE   
+       01  RECW.
+           02 RECW1   PIC X([INPUT,1,1,2]). 
+           02 RECW2  REDEFINES RECW1.   
+               03  RECW3  OCCURS [INPUT,1,1,2]. 
+                    04  RECW4  PICTURE X.   
+*END
+*IF [FIXE] > 0  
+*INCREMENT I FROM 1 BY 1  TO [FIXE,1]   
+       01  TAB1[*I].
+*IF  NOT  [FIXE,1,I]  >  0  OR  [FIXE,1,I,3] = SPACES ; 
+               OR  [FIXE,1,I,3]  =  SPACE   
+           06  FIXED[*I]  PIC  X([FIXE,1,I,2])  VALUE SPACES.   
+*ELSE   
+           06 FIXED[*I]  PIC X([FIXE,1,I,2]) VALUE [FIXE,1,I,3].
+*END
+*LOOP   
+*END
+*IF [FIXE,1,1,3] =  NUM 
+       01  COUNT.   
+           03 COUNTING PIC S9([FIXE,1,1,2])  VALUE 0.   
+           03 COUNTER PIC S9([FIXE,1,1,2]) VALUE [FIXE,1,1,4].  
+*END
+       01   SWITCHES.   
+           03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+*IF [Y2K] > 0   
+       01  CDTOAF.  
+           03  CDTOAF-PRM-ENE.  
+               05  CDTOAF-DT-ENE.   
+                   07  CDTOAF-AA-ENE.   
+                       09  CDTOAF-A1-ENE       PIC X(01).   
+                       09  CDTOAF-A2-ENE       PIC X(01).   
+                   07  CDTOAF-MM-ENE           PIC X(02).   
+                   07  CDTOAF-JJ-ENE           PIC X(02).   
+           03  CDTOAF-PRM-SRT.  
+               05  CDTOAF-DT-SRT-9             PIC 9(08).   
+               05  CDTOAF-DT-SRT REDEFINES CDTOAF-DT-SRT-9. 
+                   07  CDTOAF-SSAA-SRT         PIC X(04).   
+                   07  CDTOAF-SSAA-SRT-RDF REDEFINES CDTOAF-SSAA-SRT.   
+                      09  CDTOAF-SS-SRT        PIC X(02).   
+                      09  CDTOAF-AA-SRT.
+                          11  CDTOAF-A1-SRT    PIC X(01).   
+                          11  CDTOAF-A2-SRT    PIC X(01).   
+                   07  CDTOAF-MM-SRT           PIC X(02).   
+                   07  CDTOAF-JJ-SRT           PIC X(02).   
+               05  CDTOAF-DTE-SRT REDEFINES CDTOAF-DT-SRT-9.
+                   07  CDTOAF-SSS-SRT          PIC X(02).   
+                   07  CDTOAF-DT6-SRT          PIC X(06).   
+               05  CDTOAF-DTE2-SRT REDEFINES CDTOAF-DT-SRT-9.   
+                   07  CDTOAF-SS2-SRT          PIC X(02).   
+                   07  CDTOAF-AAMM-SRT         PIC X(04).   
+                   07  CDTOAF-JJ2-SRT          PIC X(02).   
+*END
+*IF [EURO] > 0  
+       01  EUW002.  
+           03  WS-PTR-ENE.  
+               05  WS-PTR-ENE-MON-ENE.  
+                   07  MT-ENE              PIC S9(17).  
+                   07  MT-ENE-SGN          PIC X(01).   
+                   07  MT-ENE-CHI          PIC 9(02).   
+               05  WS-PTR-ENE-MON-SRT.  
+                   07  LG-MAX-MON-SRT      PIC 9(03).   
+                   07  CD-FMT-MON-SRT      PIC X(01).   
+                   07  WS-PTR-FAC-MON-SRT.  
+                       09  FL-IMP-APO      PIC X(01).   
+                       09  FL-IMP-EUR      PIC X(01).   
+                       09  FL-IMP-BEF      PIC X(01).   
+                       09  FL-PLT-SGN      PIC X(01).   
+                       09  FL-TRD-SGN      PIC X(01).   
+                       09  FL-SGN-FIX      PIC X(01).   
+                       09  FL-SGN-VUE      PIC X(01).   
+                       09  FL-CAD-PRC      PIC X(01).   
+                       09  FL-CAD-CNV      PIC X(01).   
+                       09  FL-IMP-PNT      PIC X(01).   
+                       09  FL-000          PIC X(01).   
+                       09  CD-DET-MON      PIC X(01).   
+                       09  FILLER          PIC X(19).   
+           03  WS-PTR-SRT.  
+               05  WS-MON-SRT-001.  
+                   07  MT-SRT              PIC X(100).  
+               05  WS-MON-SRT-002.  
+                   07  MT-SRT-PRC          PIC X(50).   
+                   07  MT-SRT-CNV          PIC X(50).   
+                   07  TL-PTH-GCH          PIC X(01).   
+                   07  TL-PTH-DRT          PIC X(01).   
+               05  LG-MON-SRT              PIC 9(02).   
+               05  LB-DVI-PRC              PIC X(03).   
+               05  LB-DVI-CNV              PIC X(03).   
+           03  WS-PTR-ENE-SRT.  
+               05  FILLER                  PIC X(10).   
+           03  WS-IFN-EUR.  
+               05  FILLER                  PIC X(10).   
+       01  WS-CMT-PGM.  
+           03  NM-PGM-APL               PIC X(08).  
+           03  NM-NOM-ENV               PIC X(08).  
+           03  NM-NOM-COP               PIC X(08).  
+           03  NM-NOM-DEM               PIC X(08).  
+           03  VL-CDE-RET               PIC S9(04). 
+           03  VL-MOT-CDE               PIC S9(04). 
+           03  LB-MSG-RET               PIC X(30).  
+           03  CD-DBG-PRG               PIC X(1).   
+           03  FILLER                   PIC X(7).   
+           03  VL-CHP-TSF               PIC X(3922).
+       01  RDMS-QUALIFIER                        PIC X(12). 
+       01  RDMS-IND                              PIC 9(2).  
+       01  RDMS-STATUS                           PIC 9999  VALUE 0. 
+       01  RDMS-SAV-STATUS                       PIC 9999  VALUE 0. 
+       01  RDMS-ROLLB                            PIC 9     VALUE 0. 
+       01  RDMS-COLUMN                           PIC S1(36).
+       01  RDMS-SAV-COLUMN                       PIC S1(36).
+       01  RDMS-FLAG                             PIC 9     VALUE 0. 
+       01  RDMS-FLAG-THREAD                      PIC 9     VALUE 0. 
+       01  RDMS-RESULT. 
+             05 RDMS-ERROR-LINE OCCURS 4         PIC X(80). 
+       01  RDMS-COM.
+             05 RLIN            OCCURS 36        PIC X(40). 
+*END
+       PROCEDURE DIVISION.  
+       DEBUT.   
+*IF  [PRINT]  > 0   
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+*ELSE   
+           OPEN OUTPUT  PRINTOUT.   
+*END
+*END
+           OPEN INPUT TAPEIN.   
+           OPEN  OUTPUT  TAPEOUT.   
+*IF [EURO] > 0  
+           CALL 'RSA$INIT'. 
+           ENTER MASM 'ACOB$RDMR' USING 
+             'BEGIN THREAD FOR APPLICATION UDSSRC READ;',   
+             RDMS-STATUS, RDMS-COLUMN.  
+
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 1 TO RDMS-FLAG-THREAD.  
+    
+           ENTER MASM 'ACOB$RDMR' USING 
+             'USE DEFAULT QUALIFIER [*schname];',   
+             RDMS-STATUS, RDMS-COLUMN.  
+
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+
+           ENTER MASM 'ACOB$RDMR' USING 
+             'USE DEFAULT VERSION PRODUCTION ;',
+             RDMS-STATUS, RDMS-COLUMN.  
+
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 0 TO RDMS-FLAG. 
+
+           MOVE 'TAPELD'    TO NM-PGM-APL   OF WS-CMT-PGM.  
+           MOVE 'BATCH'     TO NM-NOM-ENV   OF WS-CMT-PGM.  
+           MOVE 'Y'         TO CD-DBG-PRG   OF WS-CMT-PGM.  
+           MOVE 'EUW002'    TO NM-NOM-COP   OF WS-CMT-PGM.  
+           MOVE 'SERVICE1'  TO NM-NOM-DEM   OF WS-CMT-PGM.  
+           MOVE SPACES      TO WS-PTR-ENE   OF EUW002.  
+           MOVE 'L'         TO FL-PLT-SGN   OF EUW002.  
+           MOVE 'Y'         TO MT-ENE-SGN   OF EUW002.  
+           MOVE '1'         TO CD-FMT-MON-SRT  OF EUW002.   
+           MOVE 'Y'         TO FL-IMP-APO      OF EUW002.   
+           MOVE 'N'         TO FL-000          OF EUW002.   
+*END
+       LECT.
+           MOVE SPACES TO RECOUT.   
+*IF   [FIXE] > 0  AND  [STITRE]  >  0   
+           IF  LNCTR  > 57  
+*INCREMENT  I FROM 1 BY 1  TO  [FIXE,1] 
+           MOVE  FIXED[*I]   TO FIXDATA[*I] 
+*LOOP   
+           WRITE  RECOUT  AFTER  PAGE   
+           MOVE SPACES TO  RECOUT   
+           MOVE 5 TO LNCTR. 
+*END
+           READ  TAPEIN  AT  END  GO TO  FINW.  
+*IF [SUPCOM]  = 0   
+*ELSE   
+           MOVE  RECIN  TO RECW.
+           IF  RECW4 (7) = '*' GO TO LECT.  
+*END
+*IF  [REPSIM]  > 0  
+       REPSIM.  
+*END
+*IF  [FIELDIN]  >  0
+*ELSE   
+           MOVE RECIN TO RECOUT.
+*END
+*IF [FIELDIN] > 0   
+*INCREMENT  I  FROM 1  BY 1 TO [FIELDIN,1]  
+*CLEAR SW   
+           MOVE                ZONE[*I] TO ZONO[*I].
+*IF [Y2K] > 0   
+*INCREMENT A FROM 2 BY 1 TO [Y2K,1] 
+*PROCESS INTER1 [Y2K,1,A,2] 
+*IF [*I] = I1   
+           MOVE CORRESPONDING ZONE[*I] TO ZONO[*I]. 
+           MOVE SPACES               TO CDTOAF. 
+           MOVE ZTI-[*I] OF ZONE[*I] TO CDTOAF-AA-ENE.  
+           MOVE 01                   TO CDTOAF-MM-ENE   
+                                        CDTOAF-JJ-ENE.  
+           CALL 'CDTOAF'    USING CDTOAF.   
+           MOVE CDTOAF-SSAA-SRT  TO ZTI-[*I] OF ZONO[*I].   
+*END
+*LOOP   
+*END
+*IF [EURO] > 0  
+*INCREMENT A FROM 2 BY 1 TO [EURO,1]
+*PROCESS INTER1 [EURO,1,A,1]
+*IF [*I] = I1   
+           MOVE [FIELDIN,1,I,2] TO MT-ENE-CHI OF EUW002.
+           MOVE [FIELDOUT,1,I,2] TO LG-MAX-MON-SRT OF EUW002.   
+           ADD   2               TO LG-MAX-MON-SRT OF EUW002.   
+           MOVE ZONE[*I]         TO MT-ENE         OF EUW002.   
+           MOVE EUW002           TO VL-CHP-TSF OF WS-CMT-PGM.   
+           CALL 'EUU003'    USING WS-CMT-PGM.   
+           MOVE VL-CHP-TSF OF WS-CMT-PGM TO EUW002. 
+           MOVE MT-SRT OF EUW002         TO ZONO[*I].   
+*END
+*LOOP   
+*END
+*LOOP   
+*END
+*IF  [FIXE]  >  0  AND NOT [STITRE]  > 0
+*IF  [FIXE,1,1,3] = NUM 
+           ADD COUNTER TO COUNTING. 
+           MOVE COUNTING TO FIXED[*1].  
+*END
+*INCREMENT I FROM 1 BY 1 TO [FIXE,1]
+*IF [FIXE,1,I,3]  = ZONE
+           ENTER  SST60  SUBROUTINE REFERENCING '-' FIXDATA[*I].
+*ELSE   
+           MOVE                  FIXED[*I] TO FIXDATA[*I].  
+*END
+*LOOP   
+*END
+*IF     [PRINT] > 0 
+*IF   [OUTPUT,1,1,1] = PRINTER  
+*ELSE   
+           WRITE LISTE  FROM RECOUT.
+*END
+*END
+           ADD 1  TO NB-LUS.
+           ADD 1  TO LNCTR. 
+*IF  [STARTFIELD]  >  0 
+           IF  ZONE2  <  [STARTFIELD,1,1,1] 
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+*END
+*IF  [STARTREC]  >  0   
+           IF  NB-LUS  <  [STARTREC,1,1,1]  
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+*END
+           WRITE RECOUT.
+*IF   [MAXCOPY] 
+           IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.   
+*END
+*IF  [REPSIM]  > 0  
+           IF  NB-LUS  =  [REPSIM,1,1,1]
+           ADD 1  TO LNCTR. 
+           GO TO FINW   
+           ELSE  GO TO REPSIM.  
+*END
+           GO TO LECT.  
+       FINW.
+           DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.   
+           DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.   
+           CLOSE  TAPEIN.   
+           CLOSE  TAPEOUT.  
+           DISPLAY  REC-SKIPPED  UPON  PRINTER. 
+*IF  [PRINT]  > 0   
+*IF [OUTPUT,1,1,1]  =  PRINTER  
+*ELSE   
+           CLOSE PRINTOUT.  
+*END
+*END
+*IF [EURO] > 0  
+           ENTER MASM 'ACOB$RDMR' USING 
+             'END THREAD ;',
+             RDMS-STATUS, RDMS-COLUMN.  
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 0 TO RDMS-FLAG-THREAD.  
+*END
+           STOP RUN.
+*IF  [EURO]  > 0
+       RDMS-ERROR-PAR.  
+           DISPLAY '*** ERROR RDMS ***' UPON PRINTER.   
+           DISPLAY 'COLUMN = ' RDMS-COLUMN UPON PRINTER.
+           DISPLAY 'STATUS = ' RDMS-STATUS UPON PRINTER.
+           PERFORM TRAIT-RDMS.  
+           GO TO RDMS-ERROR-EX. 
+
+       TRAIT-RDMS.  
+           MOVE ZEROS TO RDMS-FLAG. 
+           PERFORM VISU-RDMS-COM VARYING RDMS-IND FROM 1 BY 1   
+               UNTIL RDMS-IND > 36. 
+           MOVE ZEROS TO RDMS-FLAG. 
+           PERFORM TRAIT-RDMS-ERROR 
+               UNTIL RDMS-FLAG NOT = ZEROS. 
+
+       TRAIT-RDMS-ERROR.
+           ENTER MASM 'ACOB$RDMR' USING 
+             'GETERROR INTO $P1, $P2, $P3, $P4 ;',  
+             RDMS-STATUS, RDMS-COLUMN,  
+             RDMS-ERROR-LINE (1), RDMS-ERROR-LINE (2),  
+             RDMS-ERROR-LINE (3), RDMS-ERROR-LINE (4).  
+           PERFORM VISU-RDMS-ERROR  
+             VARYING RDMS-IND FROM 1 BY 1   
+             UNTIL RDMS-IND > 4.
+
+       VISU-RDMS-ERROR. 
+           IF RDMS-ERROR-LINE (RDMS-IND) NOT = SPACE
+                DISPLAY RDMS-ERROR-LINE (RDMS-IND) UPON PRINTER 
+           ELSE MOVE 1 TO RDMS-FLAG.
+    
+       VISU-RDMS-COM.   
+           IF RLIN (RDMS-IND) NOT = SPACES  
+                DISPLAY RLIN (RDMS-IND) UPON PRINTER.   
+
+       RDMS-ERROR-EX.   
+*END
+#MAP    ,TPF$.CFH-COPY  
+IBANK,XU C$DML  
+IBANK,M  I$1,022000 
+IN       TPF$.  
+IN SYS$LIB$*ACOB-DML.CBEP$$ACOB/FULL-LIB-CB 
+IN SYS$LIB$*RSA.RDMR-ACOBDAT
+IN SYS$LIB$*RSA.CBEP$$RSA   
+DBANK,MUC    D$1
+FORM         I$1
+LIB          PRD*REL.   
+LIB          SYS*REL.   

@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\LOADIS_ASCII__STAA06_MJ_L754.LionSource
+APPNAME = LOADISASCIISTAA06MJL754
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,57 @@
+[
+  {
+    "Case": "E1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\I006MSG054",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\E1\\expected\\I006MSG054"
+  },
+  {
+    "Case": "R2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\OUT1",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\R2\\expected\\OUT1"
+  },
+  {
+    "Case": "R2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\OUT2",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\R2\\expected\\OUT2"
+  },
+  {
+    "Case": "AM1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\OUTASC",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\AM1\\expected\\OUTASC"
+  },
+  {
+    "Case": "RM2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\Z148SOLDEFWB",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\RM2\\expected\\Z148SOLDEFWB"
+  },
+  {
+    "Case": "RM2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\Z148SOLDEFWC",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\RM2\\expected\\Z148SOLDEFWC"
+  },
+  {
+    "Case": "C2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\I006KTVIRAAN",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\C2\\expected\\I006KTVIRAAN"
+  },
+  {
+    "Case": "C2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\I006KTVIRAAR",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\C2\\expected\\I006KTVIRAAR"
+  },
+  {
+    "Case": "RB2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\I0091ML120D",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\RB2\\expected\\I0091ML120D"
+  },
+  {
+    "Case": "RB2",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\I0091ML120C",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\RB2\\expected\\I0091ML120C"
+  },
+  {
+    "Case": "E19",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\BABATEST\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\BABA\\cases\\E19\\expected\\OUT"
+  }
+]

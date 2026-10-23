@@ -1,0 +1,18 @@
+From https://github.com/marky-T/177Xfer
+ * branch            main       -> FETCH_HEAD
+   65c9dc6..afe6a79  main       -> origin/main
+Updating 65c9dc6..afe6a79
+Fast-forward
+ .../AFBUS_2200COBOL.Application.deps.json          | 1385 +++++++++++++++++++
+ .../AFBUS_2200COBOL.Application.dll                |  Bin 0 -> 10240 bytes
+ .../AFBUS_2200COBOL.Application.pdb                |  Bin 0 -> 28160 bytes
+ .../AFBUS_2200COBOL.Database.deps.json             | 1388 ++++++++++++++++++++
+ .../AppDependencies/AFBUS_2200COBOL.Database.dll   |  Bin 0 -> 6144 bytes
+ .../AppDependencies/AFBUS_2200COBOL.Database.pdb   |  Bin 0 -> 26112 bytes
+ 6 files changed, 2773 insertions(+)
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Application.deps.json
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Application.dll
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Application.pdb
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Database.deps.json
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Database.dll
+ create mode 100644 CFH-COPY-Trial11/AppDependencies/AFBUS_2200COBOL.Database.pdb

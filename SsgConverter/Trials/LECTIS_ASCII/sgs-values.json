@@ -1,0 +1,19 @@
+{
+  "_source": "Trial3/manifest/programs.manifest.json - key LECTIS (paramOverrides brackets stripped + conditionValues)",
+  "ASCII": "1",
+  "INPUT,1,1,1": "FICHIN-1",
+  "INPUT,1,1,2": "120",
+  "INPUT,1,1,3": "1",
+  "LKEY,1,1,2": "8",
+  "LKEY,2,1,2": "4",
+  "LKEY,1,1,1": "0",
+  "LKEY,1,1,3": "0",
+  "LKEY": "2",
+  "KEYS": "0",
+  "NOLIST": "0",
+  "UN": "1",
+  "DEUX": "0",
+  "TROIS": "0",
+  "Y2K": "0",
+  "COND,1": "0"
+}

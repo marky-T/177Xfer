@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Federale, started 2026-10-22 14:36:48
+PASS GNFED          generated after                2026-10-22 10:49:02 (the build LionSource)
+PASS GNFED          imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS ASSURFED_UTILIT_CFH_COPY_GN rebuilt and delivered          10/22/2026 2:33:26 PM 10/22/2026 2:36:58 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNFED recorded as imported     not recorded: a subset of the programs was delivered
+=== Deliver : all passed

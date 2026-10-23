@@ -1,0 +1,8 @@
+Stage Package, environment CC-Federale, started 2026-10-22 15:02:35
+PASS Package        regression (information)       5 of 5 jobs not passed since the last delivery, listed in RELEASE-NOTES.txt
+PASS Package        1 program DLLs                 copied from the application, equal to the 177a rebuild
+PASS Package        1 skeletons, 2 includes        copied from the deployed (proven) set
+PASS Package        1 C# project folders           the C# the delivered DLLs were built from (177a rebuild)
+PASS Package        manifest                       28 files, 825 KB, SHA256 re-checked
+PASS Package        staged (local only)            E:\AMT_Work\Delivery\GN-20261022-1502-CFH-COPY
+=== Package : all passed

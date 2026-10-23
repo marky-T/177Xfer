@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = C:\\Amt\\Migration\\EclCobolPipeline\\output\\trial-12-archisepare.LionSource
+APPNAME = ARCHISEPARE_COBOL
+GENSET = Default from new application
+SYSOPT = FALSE

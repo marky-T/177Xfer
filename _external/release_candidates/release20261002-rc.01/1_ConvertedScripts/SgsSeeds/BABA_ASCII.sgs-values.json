@@ -1,0 +1,16 @@
+{
+  "_source": "Seeded from Examples/Output/BABA_ASCII.ps1 GetSgsValue keys (not in Trial3 manifest). Simplified ASCII variant; loop counts 0 so column/key/cond loops stay empty.",
+  "ASCII": "1",
+  "INPUT,1": "1",
+  "INPUT,1,1,1": "ECL-INPUT",
+  "OUTPUT,1": "1",
+  "OUTPUT,1,1,1": "ECL-OUTPUT",
+  "KEYS": "0",
+  "KEYS,1": "0",
+  "KEYS,1,1,1": "1",
+  "COND": "0",
+  "COND,1": "0",
+  "SEQERROR": "0",
+  "SEQERROR,1,1": "0",
+  "Y2K": "0"
+}

@@ -1,0 +1,4 @@
+FileVersion: 1.1.0.0
+ProductVersion: 8.0.26125.0
+AssemblyVersion (from AssemblyName): 8.0.26125.0
+AssemblyFullName: AFBUS_2200COBOL.Application, Version=8.0.26125.0, Culture=neutral, PublicKeyToken=null

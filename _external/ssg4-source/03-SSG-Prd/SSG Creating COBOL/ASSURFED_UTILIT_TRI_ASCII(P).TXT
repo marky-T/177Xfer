@@ -1,0 +1,118 @@
+*DEFINE    FILLADD
+*SET  FILLCTR  TO   [#1]-1    
+*IF FILLCTR IS SET
+              03  FILLER   PIC  X([*FILLCTR]).  
+*END  
+*END  
+#ACOB,IT         TPF$.TRI,TPF$.TRI  
+       IDENTIFICATION DIVISION.     
+       PROGRAM-ID.  SORT-[OUTPUT,1,1,1].  
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+*INCREMENT  A  TO  [INPUT,1]  
+           SELECT  TAPE-[*A]  ASSIGN
+*IF   [INPUT,1,A,1]  =  CARDREADER  
+                              CARD-READER.
+*ELSE 
+                                        DISC [INPUT,1,A,1]. 
+*END  
+*LOOP 
+           SELECT  TAPEOUT  ASSIGN  
+*IF [OUTPUT,1,1,1] = CARDPUNCH
+                         CARD-PUNCH.
+*ELSE 
+                              DISC [OUTPUT,1,1,1].    
+*END  
+           SELECT SORTFILE ASSIGN TO MASS-STORAGE XA. 
+       DATA DIVISION.   
+       FILE SECTION.    
+*INCREMENT  A  TO  [INPUT,1]  
+       FD  TAPE-[*A]    
+*IF   [INPUT,1,A,1]  =  CARDREADER  
+           LABEL  RECORD IS OMITTED 
+*ELSE 
+           LABEL RECORD STANDARD    
+                   BLOCK CONTAINS [INPUT,1,A,3] RECORDS     
+*END  
+                   DATA RECORD IS REC-IN-[*A].  
+       01  REC-IN-[*A]            PIC X([INPUT,1,A,2]).     
+*LOOP 
+*IF [OUTPUT,1,1,1] = CARDPUNCH
+       FD  TAPEOUT  LABEL RECORD OMITTED  
+*ELSE 
+       FD  TAPEOUT  LABEL RECORD IS STANDARD    
+*END  
+                    RECORD CONTAINS [OUTPUT,1,1,2] CHARACTERS     
+                    DATA RECORD IS REC-OUT.     
+       01  REC-OUT           PIC X([OUTPUT,1,1,2]).   
+       SD  SORTFILE     
+                    DATA RECORD IS SORT-REC.    
+       01  SORT-REC   PIC  X([OUTPUT,1,1,2]).   
+*CLEAR  FILLCTR   
+*INCREMENT  COL FROM 1 BY 1 TO [KEYS,1]   
+       01  SORT-R[*COL].
+*PROCESS  FILLADD [KEYS,1,COL,1]    
+           03  SORT-KEY-[*COL]     PIC X([KEYS,1,COL,2]).   
+*LOOP 
+       WORKING-STORAGE SECTION.     
+*INCREMENT  A  TO  [INPUT,1]  
+       01  INPUT-CT-MESS-[*A].
+           03  FILLER         PIC X(24)   
+                    VALUE  'INPUT RECORD COUNT FROM '.
+           03  FILLER         PIC X(12)   
+                    VALUE  '[INPUT,1,A,1]'.     
+           03  INPUT-CT-[*A]  PIC Z(11)9. 
+       01  IN-CT-[*A]         PIC  9(10)  COMP    VALUE ZERO.     
+*LOOP 
+       01  OUTPUT-CT-MESS.    
+           03  FILLER         PIC X(24)   
+                    VALUE  'OUTPUT RECORD COUNT TO  '.
+           03  FILLER         PIC X(12)   
+                    VALUE  '[OUTPUT,1,1,1] '.   
+           03  OUTPUT-CT      PIC  Z(11)9.
+       01  OUT-CT             PIC  9(10)   COMP   VALUE ZERO.     
+       PROCEDURE DIVISION.    
+       SORT-START SECTION.    
+       SORTING.   
+*INCREMENT  A  TO  [INPUT,1]  
+           OPEN INPUT  TAPE-[*A].   
+*LOOP 
+           OPEN OUTPUT TAPEOUT.     
+           SORT SORTFILE ON ASCENDING KEY 
+*INCREMENT  SK FROM 1    TO [KEYS,1]
+                          SORT-KEY-[*SK]  
+*LOOP 
+                              INPUT PROCEDURE  IS INP 
+                              OUTPUT PROCEDURE IS OUTP.     
+           GO  TO  CLOSE-FILES.     
+       INP SECTION.     
+*INCREMENT  B  TO  [INPUT,1]  
+       INPUT-PROC-[*B]. 
+           READ   TAPE-[*B]   INTO  SORT-REC    
+                    AT END GO TO  CLOSE-[*B].   
+           ADD  1   TO  IN-CT-[*B]. 
+           RELEASE  SORT-REC.                GO TO INPUT-PROC-[*B].     
+       CLOSE-[*B].   CLOSE  TAPE-[*B].    
+*LOOP 
+       INP-EXIT.    EXIT.     
+       OUTP SECTION.    
+       OUTPUT-PROC.     
+           RETURN SORTFILE              AT END GO TO OUTP-EXIT.   
+           ADD  1  TO  OUT-CT.
+           WRITE  REC-OUT  FROM SORT-REC.         GO TO OUTPUT-PROC.    
+       OUTP-EXIT.   EXIT.     
+       CLOSE-FILES  SECTION.  
+       ENDING-RUN.
+*INCREMENT   A  TO   [INPUT,1]
+           MOVE  IN-CT-[*A]   TO  INPUT-CT-[*A].
+           DISPLAY  INPUT-CT-MESS-[*A]  UPON PRINTER. 
+*LOOP 
+           MOVE  OUT-CT  TO  OUTPUT-CT.   
+           DISPLAY  OUTPUT-CT-MESS  UPON  PRINTER.    
+           CLOSE TAPEOUT.     
+           STOP RUN.    
+#MAP,N    ASSURFED*UTILITASCII.MAP1,TPF$.TRI    

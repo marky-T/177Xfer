@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSG-4 &mdash; Control Center Runbook</title>
+<style>
+  :root {
+    --nav-w:240px; --done:#1a7f4b; --prog:#b45309; --pend:#6b7280;
+    --bug:#b91c1c; --code-bg:#1e1e2e; --code-fg:#cdd6f4;
+    --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:var(--nav-w); min-width:var(--nav-w); background:#1e1b4b; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #312e81; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#f5f3ff; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#a78bfa; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#c4b5fd; text-decoration:none; transition:background .15s; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#312e81; color:#f5f3ff; border-left-color:#a78bfa; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#6d5fb5; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  nav ul li.sub a { padding-left:28px; font-size:11.5px; color:#a78bfa; }
+  main { flex:1; padding:28px 36px; max-width:1040px; }
+  .page-title h1 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:18px; }
+  .badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; white-space:nowrap; }
+  .badge-done { background:#dcfce7; color:var(--done); }
+  .badge-prog { background:#fef3c7; color:var(--prog); }
+  .badge-pend { background:#f3f4f6; color:var(--pend); }
+  .badge-info { background:#dbeafe; color:#1d4ed8; }
+  .badge-bug  { background:#fee2e2; color:var(--bug); }
+
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:26px; }
+  .section-card h2 { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border); }
+  .section-card h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .section-card p  { margin-bottom:10px; line-height:1.6; }
+  .section-card ul, .section-card ol { margin:0 0 10px 22px; line-height:1.7; }
+  .section-card li { margin-bottom:4px; }
+
+  code { background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+  pre { background:var(--code-bg); color:var(--code-fg); padding:12px 14px; border-radius:6px; overflow-x:auto; font-size:12px; line-height:1.55; margin:10px 0; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+  pre code { background:none; color:inherit; padding:0; }
+  pre .c { color:#7f849c; }
+
+  .warn        { background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .info-box    { background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .success-box { background:#f0fdf4; border-left:4px solid #22c55e; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .bug-box     { background:#fef2f2; border-left:4px solid #ef4444; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+
+  table.ref { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+  table.ref th { background:#f0f4f8; padding:7px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; }
+  table.ref td { padding:6px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.55; }
+  table.ref tr:nth-child(even) td { background:#fafafa; }
+  table.ref code { font-size:11.5px; }
+  table.ref td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  table.ref tr.total td { font-weight:700; background:#eef2ff; }
+
+  /* tabs */
+  .tabs { display:flex; gap:6px; border-bottom:3px solid #1e1b4b; margin-bottom:22px; }
+  .tabs button { background:#e5e7eb; border:1px solid #d1d5db; border-bottom:none; padding:10px 18px; font-size:13.5px; font-weight:600; color:#4b5563; cursor:pointer; border-radius:7px 7px 0 0; }
+  .tabs button:hover { color:#1e1b4b; background:#c7d2fe; border-color:#a5b4fc; }
+  .tabs button.active { color:#ffffff; background:#1e1b4b; border-color:#1e1b4b; box-shadow:inset 0 3px 0 #a78bfa; }
+  .tabs button.active::before { content:'\25B8 '; color:#a78bfa; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  .tabs.sub { border-bottom:2px solid #6366f1; margin-bottom:16px; gap:4px; }
+  .tabs.sub button { font-size:12.5px; padding:7px 14px; background:#f9fafb; color:#6b7280; border-color:#e5e7eb; }
+  .tabs.sub button:hover { background:#eef2ff; color:#3730a3; }
+  .tabs.sub button.active { background:#6366f1; color:#ffffff; border-color:#6366f1; box-shadow:none; }
+
+  /* phase strip */
+  .flow { display:flex; flex-wrap:wrap; gap:6px; align-items:stretch; margin:8px 0 14px; }
+  .flow a { flex:1 1 120px; display:block; text-decoration:none; background:#eef2ff; border:1px solid #c7d2fe; border-radius:6px; padding:8px 10px; font-size:12px; color:#1e1b4b; }
+  .flow a b { display:block; font-size:12.5px; color:#1d4ed8; margin-bottom:2px; }
+  .flow a.once { background:#fefce8; border-color:#fde68a; }
+  .flow a.each { background:#f0fdf4; border-color:#bbf7d0; }
+  .flow a.side { background:#f3f4f6; border-color:#d1d5db; border-style:dashed; }
+  .flow .arr { flex:0 0 auto; align-self:center; color:#6b7280; font-size:16px; }
+  .legend .l-side::before  { background:#f3f4f6; border:1px dashed #9ca3af; }
+  .legend { display:flex; gap:18px; flex-wrap:wrap; margin:4px 0 6px; font-size:12px; color:#374151; }
+  .legend span::before { content:''; display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  .legend .l-build::before { background:#eef2ff; border:1px solid #c7d2fe; }
+  .legend .l-once::before  { background:#fefce8; border:1px solid #fde68a; }
+  .legend .l-each::before  { background:#f0fdf4; border:1px solid #bbf7d0; }
+
+  .step { border-left:3px solid #c7d2fe; padding:2px 0 2px 14px; margin:12px 0; }
+  .step h4 { font-size:13.5px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .who { font-size:11px; font-weight:600; color:#6b7280; text-transform:uppercase; letter-spacing:.5px; margin-left:6px; }
+  .elev { background:#fee2e2; color:#b91c1c; }
+  .footer-bar { margin-top:36px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af; }
+  a { color:#1d4ed8; }
+</style>
+</head>
+<body>
+
+<nav id="sidenav">
+  <div class="logo">
+    <h1>SSG-4 Runbook</h1>
+    <p>Convert SSG + ECL + COBOL, run in Control Center</p>
+  </div>
+  <ul>
+    <li><a href="SSG-PowerShell-Trial-Progress.html">&#8596; Progress Tracker</a></li>
+    <li><a href="../Conversion/PROCESS.md">&#8596; PROCESS.md (pipeline)</a></li>
+    <li><a href="../.github/Copilot_Plans/261009-trial4-epic-strategy.md">&#8596; Trial 4 epic / strategy</a></li>
+    <li style="border-bottom:1px solid #312e81;margin:2px 0 6px;"></li>
+    <li class="section">Tab 1 &middot; Convert code</li>
+    <li><a href="#c-layers">Three layers, which tool</a></li>
+    <li><a href="#c-map">Conversion route</a></li>
+    <li><a href="#c-setup">C0 &middot; One-off set-up</a></li>
+    <li><a href="#c-ssg">C1 &middot; SSG skeletons</a></li>
+    <li><a href="#c-cards">C2 &middot; SGS cards</a></li>
+    <li><a href="#c-expand">C3 &middot; Expand to COBOL</a></li>
+    <li><a href="#c-cobol">C4 &middot; COBOL &rarr; LionSource</a></li>
+    <li><a href="#c-driver">C3+C4 &middot; Release driver</a></li>
+    <li><a href="#c-liondev">C5 &middot; LionDev 177</a></li>
+    <li><a href="#c-verify">C6 &middot; 177a rebuild, mock, package</a></li>
+    <li><a href="#c-ecl">C7 &middot; ECL layer</a></li>
+    <li><a href="#c-baba">C8 &middot; Generic BABA spec</a></li>
+<li><a href="#c-fusba">C9 &middot; Generic FUSBA spec</a></li>
+<li><a href="#c-chaban">C10 &middot; Generic CHABAN spec</a></li>
+<li><a href="#c-scangroup">C11 &middot; SCAN group (CONDIS2, SCAN, TAPELD)</a></li>
+<li><a href="#c-loadis">C12 &middot; LOADIS / UNLOADIS (no new program)</a></li>
+    <li><a href="#c-status">Programs in the chain</a></li>
+    <li><a href="#c-gotchas">Conversion gotchas</a></li>
+    <li class="section">Tab 2 &middot; Run in CC</li>
+    <li><a href="#s-map">Route map</a></li>
+    <li><a href="#s-build">A &middot; Build</a></li>
+    <li><a href="#s-mock">B &middot; Prove offline (mock)</a></li>
+    <li><a href="#s-deliver">C &middot; Deliver</a></li>
+    <li><a href="#s-setup">D &middot; One-off CC set-up</a></li>
+    <li class="sub"><a href="#s-reo">D4 &middot; Reorganize</a></li>
+    <li><a href="#s-session">E &middot; Each session</a></li>
+    <li><a href="#s-run">F &middot; Run one program</a></li>
+    <li class="sub"><a href="#s-programs">Per-program table</a></li>
+    <li><a href="#s-verify">G &middot; Verify</a></li>
+    <li><a href="#s-reset">H &middot; Reset / re-run</a></li>
+    <li class="section">Tab 3 &middot; Run record</li>
+    <li><a href="#run-last">Last &middot; 2026-10-20 full run</a></li>
+    <li class="sub"><a href="#r-summary">Summary</a></li>
+    <li class="sub"><a href="#r-results">Results per program</a></li>
+    <li class="sub"><a href="#r-stats">CC statistics</a></li>
+    <li class="sub"><a href="#r-open">Open items</a></li>
+    <li><a href="#run-prev">Previous &middot; 2026-10-20 pilot</a></li>
+    <li class="sub"><a href="#r-timeline">Set-up timeline</a></li>
+    <li class="sub"><a href="#r-problems">Problems met &amp; fixes</a></li>
+    <li><a href="#run-arch">To be archived</a></li>
+    <li class="section">Tab 4 &middot; Reference</li>
+    <li><a href="#x-env">Environment</a></li>
+    <li><a href="#x-scripts">Scripts</a></li>
+    <li><a href="#x-gotchas">Gotchas</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-title">
+    <h1>SSG-4 &mdash; Convert SSG + ECL + COBOL on AMT's own tools, and run the result in AMT Control Center</h1>
+    <p style="font-size:14px;color:#6b7280;margin-top:3px;">From SSG skeleton + runstream cards to a C# program DLL (AMT's converters and LionDev), delivered into the VM's Federale AMT 177a, started as a Control Center job and proved by byte-comparing its output. Objective 1 of the Trial 4 epic.</p>
+  </div>
+  <p class="page-meta">Last updated: 2026-10-21 &nbsp;|&nbsp; VM VMFEDPE08 (our copy of the client set-up) &nbsp;|&nbsp; Application <code>AFBUS_2200COBOL_AMT</code> (APPID 6) &nbsp;|&nbsp; Detail behind each step: <a href="../Conversion/PROCESS.md">PROCESS.md</a> Steps 0&ndash;8 &middot; Issues/ToDo: <a href="SSG-PowerShell-Trial-Progress.html#issues">tracker &sect;6/&sect;7</a></p>
+
+  <div class="tabs" role="tablist" data-group="main">
+    <button data-tab="tab-convert">1 &middot; Convert code (how to)</button>
+    <button data-tab="tab-steps">2 &middot; Run in Control Center (how to)</button>
+    <button data-tab="tab-run">3 &middot; Run record</button>
+    <button data-tab="tab-ref">4 &middot; Reference</button>
+  </div>
+
+  <!-- ═════════════════════════════ TAB 1: CONVERT CODE -->
+  <div class="tab-panel" data-group="main" id="tab-convert">
+
+    <div class="section-card" id="c-layers">
+      <h2>Three layers, and which AMT tool converts each</h2>
+      <p>A Federale report is three things on OS 2200. Trial 3 converted only the first (SSG) and its PowerShell ran to <code>Fin</code> because <code>Call-ExternalProgram</code> is a stub: there was never a program for <code>Xqt</code> to start. SSG-4 converts all three, on <b>AMT's own converters</b>, as a scripted pipeline.</p>
+      <table class="ref">
+        <tr><th>Layer</th><th>What it is</th><th>Acts at</th><th>Tool</th><th>Our step</th><th>Status</th></tr>
+        <tr><td><b>SSG skeleton</b></td><td>Template (<code>*SET</code>, <code>*DEFINE</code>, <code>*INCREMENT</code>, SGS lookups) that <i>generates</i> COBOL</td><td>generation time</td><td><code>SsgConverterConsole</code> (our fixed SSG-3 build)</td><td><a href="#c-ssg">C1</a></td><td><span class="badge badge-done">20 of 20</span></td></tr>
+        <tr><td><b>SGS cards</b></td><td>The parameters after each <code>@SSG</code> call in a runstream, up to <code>@EOF</code> (<code>INPUT INB,500,10</code>, <code>FIELDIN ...</code>)</td><td>input to generation</td><td>none in AMT (the converted runstream reads <code>P$SGS\&lt;run-id&gt;</code>)</td><td><a href="#c-cards">C2</a></td><td><span class="badge badge-done">371 calls exported</span></td></tr>
+        <tr><td><b>COBOL</b></td><td>The business logic SSG produces from skeleton + cards (<code>OPEN</code>/<code>READ</code>/<code>WRITE</code>)</td><td>run time</td><td><code>CobolConverterConsole</code> &rarr; <code>.LionSource</code> &rarr; LionDev 177 &rarr; C#</td><td><a href="#c-expand">C3</a>&ndash;<a href="#c-verify">C6</a></td><td><span class="badge badge-done">14 built, 13 delivered</span></td></tr>
+        <tr><td><b>ECL runstream</b></td><td>Job control: <code>@ASG</code>, <code>@USE</code>, <code>@SSG</code>, <code>@XQT</code></td><td>run time (the job)</td><td><code>EclConverterConsole</code> &rarr; PowerShell on <code>AmtPsEclLib</code></td><td><a href="#c-ecl">C7</a></td><td><span class="badge badge-prog">experiment E1 only</span></td></tr>
+      </table>
+      <div class="info-box"><b>Generation time vs run time.</b> SSG variables decide <i>what gets generated</i>; they are not run-time variables of the program. So the skeleton is <b>executed once per call</b> with that call's cards (C3), and the COBOL it emits is what gets converted and run. <b>Proof is an independent reference</b> (from the cards and skeleton logic), never the converter's own earlier output. <b>Search AMT first</b>: reuse AMT library behaviour (e.g. its own SGS functions) before writing any emulation.</div>
+    </div>
+
+    <div class="section-card" id="c-map">
+      <h2>Conversion route</h2>
+      <div class="legend"><span class="l-build">scripted step</span><span class="l-once">manual (LionDev)</span><span class="l-each">hand-off to Run in CC</span><span class="l-side">ECL branch (not yet in the release chain)</span></div>
+      <div class="flow">
+        <a href="#c-ssg"><b>C1 &middot; SSG source</b><code>SsgConverterConsole</code> &rarr; skeleton <code>.ps1</code></a><span class="arr">+</span>
+        <a href="#c-cards"><b>C2 &middot; Runstreams</b><code>Export-SgsCards</code> &rarr; one <code>.sgs</code> per call</a><span class="arr">&rarr;</span>
+        <a href="#c-expand"><b>C3 &middot; Expand</b>run skeleton with AMT's SGS functions &rarr; <code>.cob</code></a><span class="arr">&rarr;</span>
+        <a href="#c-cobol"><b>C4 &middot; Convert COBOL</b><code>CobolConverterConsole</code> &rarr; <code>.LionSource</code></a>
+      </div>
+      <div class="flow">
+        <span class="arr">&rarr;</span>
+        <a href="#c-liondev" class="once"><b>C5 &middot; LionDev 177</b>import, Get newest, generate &rarr; C# DLLs</a><span class="arr">&rarr;</span>
+        <a href="#c-verify"><b>C6 &middot; Verify</b>rebuild for 177a, mock tests, delivery package</a><span class="arr">&rarr;</span>
+        <a href="#s-deliver" class="each"><b>Tab 2 &middot; Deliver &amp; run</b>into <code>&lt;APPROOT&gt;</code>, Start Job, byte-compare</a>
+      </div>
+      <div class="flow">
+        <a href="#c-ecl" class="side"><b>C7 &middot; ECL</b>runstream &rarr; <code>EclConverterConsole</code> &rarr; <code>.ps1</code> (<code>Invoke-Ssg</code>, <code>Asg</code>, <code>Use</code>, <code>Xqt</code> &rarr; the C# program)</a>
+      </div>
+      <p><b>Short route:</b> once C0 and C1 are in place, C2&ndash;C4 are one command (<a href="#c-driver">release driver, Prepare</a>), then LionDev by hand (C5), then one command again (<a href="#c-verify">Verify</a>).</p>
+      <div class="warn">Inputs and outputs are <b>client data</b> and live outside the repo: sources in <code>E:\Repos\ssg4-source</code>, work in <code>E:\Repos\ssg4-work</code> and <code>E:\AMT_Work</code>. Only scripts, the checked-in <a href="../Conversion/Pipeline/WorkingExample-CFH-COPY_ASCII/README.md">working example</a> and docs are in git.</div>
+    </div>
+
+    <div class="section-card" id="c-setup">
+      <h2>C0 &middot; One-off set-up <span class="badge badge-done">done</span></h2>
+      <table class="ref">
+        <tr><th>Item</th><th>Where / value</th><th>Note</th></tr>
+        <tr><td>Runstreams</td><td><code>E:\Repos\ssg4-source\01-RunsPrd</code> (170 runstreams calling our templates), <code>RunsPrd-INDEX.csv</code> (all 1,080)</td><td>from the AMT172 source pack, hash-checked against <code>MANIFEST.csv</code></td></tr>
+        <tr><td>SSG sources (our 20)</td><td><code>SsgConverter\Examples\Input</code></td><td>read-only reference; <code>03-SSG-Prd</code> holds 43 others (not in scope)</td></tr>
+        <tr><td>SSG converter</td><td><code>SsgConverter\Build\Console\SsgConverterConsole.exe</code></td><td>verified; rebuild only for a converter fix</td></tr>
+        <tr><td>COBOL converter</td><td><code>E:\Repos\amt-go-net-ref\_build\CobolConverterConsole\CobolConverterConsole.exe</code> (8.0.26273.50, R&amp;D <code>develop</code>)</td><td>macros file <code>Trial3\macros\ssg-stub.macros.xml</code></td></tr>
+        <tr><td>ECL converter</td><td>installed build under <code>E:\Repos\z-old\AMT\MigrationTools\EclConverterConsole</code>; builds in <code>amt-go-net-ref\_build\EclConverterConsole-develop</code> and <code>amt-go-net-ours\_build\EclConverterConsole-ours</code></td><td>see C7</td></tr>
+        <tr><td>LionDev 177</td><td><code>E:\Amt</code> (8.0.26230.0), repository DB <code>AMT_REPOS177</code>, <code>Y:</code> &rarr; <code>E:\AMT_Y177\CSharpNet</code></td><td>set up by <code>Conversion\LionDevSetup\</code>; <code>E:\Amt</code> is AMT-only (Setup cleans it)</td></tr>
+        <tr><td><code>Lion.ini</code></td><td><code>ALLOW-DECODED-LIONSOURCE</code> on; <code>DBPSSW</code> typed plain once (LionDev encrypts it)</td><td>without the first, converter output is refused on import</td></tr>
+        <tr><td>Generation set</td><td><code>MsSql177</code>: local source <code>E:\AMT_Work\Apps177</code>, script <code>E:\AMT_Work\Script177</code>, MsSql, Vs2026</td><td>generator writes <code>Binaries</code> and <code>Development</code> under the local source</td></tr>
+        <tr><td>Mock system</td><td><code>E:\AMT_Work\MockSystem</code> (<code>AMT_MOCKSYS</code> + <code>AMT_MOCKAPP</code>, file controller on 18132)</td><td>for C6; never Federale's <code>AmtTools</code></td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="c-ssg">
+      <h2>C1 &middot; Convert the SSG skeletons <span class="badge badge-done">20 of 20</span></h2>
+<pre><code>SsgConverter\Build\Console\SsgConverterConsole.exe /SETTINGSFILE:"&lt;path&gt;.settings"
+<span class="c"># or</span>
+SsgConverter\Build\Console\SsgConverterConsole.exe /INPUT:"&lt;in&gt;" /OUTPUT:"&lt;out&gt;" /CONTINUEONERROR:TRUE /VERBOSE:2 /ENABLELOGFILE:TRUE /LOGFILE:"&lt;out&gt;"</code></pre>
+      <ul>
+        <li>Output: <code>SsgConverter\Examples\Output\&lt;Program&gt;.ps1</code> (the goldens). The base name is the <b>input file's</b> name, not the <code>PROGRAM-ID</code>.</li>
+        <li>Write to a scratch folder and diff against the goldens; every script must parse with <b>0 errors</b>. Optional run in the Tier-1 mock: <code>SsgConverter\Trials\Tier1Mock\Run-SsgPsTrial.ps1 -Program &lt;P&gt;</code>.</li>
+        <li>Read the log against the warning taxonomy (<a href="../SsgConverter/SsgConverter-COPILOT.md">SsgConverter-COPILOT.md</a>): <i>Orphaned data line</i> and <i>NOT IMPLEMENTED</i> are expected; <i>Error converting</i> and <i>IMPORTANT-WORKAROUND</i> are real.</li>
+        <li><b>Converter defect?</b> Use the fix routine in <code>SsgConverter\Trials\ConverterFix\</code>: <code>New-ConverterFix.ps1 -FixId T3-nnn -EditScript ...</code> (scratch build), <code>Test-ConverterFix.ps1</code> (reconverts all of <code>Examples\Input</code> with the scratch DLL, parse-checks and diffs each against its golden), then <code>Land-ConverterFix.ps1</code> <span class="badge elev">elevated</span> (backs up and copies the changed sources into <code>Source</code>, then rebuilds and lands). Do not touch KI-1..3 without a failing case.</li>
+      </ul>
+    </div>
+
+    <div class="section-card" id="c-cards">
+      <h2>C2 &middot; Export the SGS cards from the runstreams <span class="badge badge-done">done</span></h2>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Export-SgsCards.ps1 `
+  -RunstreamDir E:\Repos\ssg4-source\01-RunsPrd -OutDir E:\Repos\ssg4-work\sgs-cards</code></pre>
+      <ul>
+        <li>Writes one card file per <code>@SSG</code> call (<code>calls\&lt;runstream&gt;_&lt;run-id&gt;__L&lt;line&gt;.sgs</code>), <code>sgs-calls.csv</code> (call &rarr; template &rarr; our program key) and <code>sgs-warnings.csv</code>. 371 calls, 359 on our converted programs. Re-runs are byte-identical.</li>
+        <li>Applies SSG's own card rules first, so AMT sees what SSG saw: continuations (<code> ;</code>, <code>,;</code>) joined, cut at an unquoted period, spaces after a comma removed, <code>''</code> pairs dropped. Each change is listed as <i>Changed</i>; a quoted subfield with a space stays a <i>Warning</i>. Check: <code>Test-SgsCardRules.ps1</code>.</li>
+        <li>Template mapping: <code>*UTILIT.&lt;name&gt;/ASCII</code> in a runstream is the skeleton <code>&lt;name&gt;_ASCII</code>. <code>ARCHIFORMAT</code>, <code>ARCHISEPARE</code> and plain <code>CFH-COPY</code> have no call, so no real cards.</li>
+      </ul>
+    </div>
+
+    <div class="section-card" id="c-expand">
+      <h2>C3 &middot; Expand skeleton + cards to COBOL</h2>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-SsgExpansion.ps1 -Program CFH-COPY_ASCII `
+  -CardFile E:\Repos\ssg4-work\sgs-cards\calls\ASSURFED_F999RUN_AFPH12__L427.sgs `
+  -OutFile  E:\Repos\ssg4-work\expanded\CFH-COPY_ASCII.cob -RunInfo &lt;run-id&gt;,&lt;account&gt;,&lt;project&gt;</code></pre>
+      <ul>
+        <li>Runs the converted skeleton (C1) with <b>AMT's own</b> <code>AddTo-SgsList</code>, <code>GetSgsValue</code>, <code>CompareTypeSafe</code>, <code>RemoveFrom-SgsList</code>, <code>Sort-SgsList</code>, lifted unchanged from <code>SsgConverter\Trials\RealRuntime\AmtPsEclLib.psm1</code>; the Tier-1 mock only collects the output lines.</li>
+        <li>Two deliberate deviations from AMT, both per the SSG manual: labels case-insensitive (T3-023; <code>-AmtCaseSensitiveLabels</code> restores AMT's behaviour) and <code>INFO$</code> filled from <code>-RunInfo</code>.</li>
+        <li>Check the result has the real record shapes: for the <code>VIRM01_CO</code> cards, <code>RECIN PIC X(500)</code>, <code>RECOUT PIC X(135)</code>.</li>
+      </ul>
+    </div>
+
+    <div class="section-card" id="c-cobol">
+      <h2>C4 &middot; Convert the COBOL to a <code>.LionSource</code></h2>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-CobolConversion.ps1 `
+  -CobolFile E:\Repos\ssg4-work\expanded\CFH-COPY_ASCII.cob -Name CFH-COPY_ASCII   <span class="c"># -BaseYear 1957 is the default</span></code></pre>
+      <ul>
+        <li>Writes <code>&lt;WorkDir&gt;\out\&lt;Name&gt;.LionSource</code>, the logs and the <code>.xrf</code>. <b>Check <code>Errors</code></b> in the result before importing.</li>
+        <li>The object name in the <code>.LionSource</code> is the file name, and it must equal the <code>PROGRAM-ID</code>.</li>
+        <li>Exit code: 0 for warnings, 1 for errors; capture with redirection, not a pipe (a pipe gave a false <code>-1</code>).</li>
+        <li>Expected warnings on a clean run: customer settings not specified, XML comment elements in the macros file, <code>REDEFINES SIZE MISMATCH</code>.</li>
+      </ul>
+    </div>
+
+    <div class="section-card" id="c-driver">
+      <h2>C3+C4 &middot; The release driver (normal route)</h2>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-Ssg4Release.ps1 -Stage Prepare</code></pre>
+      <ul>
+        <li>For each program in <code>-Programs</code> (default: the 14 below) takes call <code>-CallIndex</code> (default 1) from <code>sgs-calls.csv</code>, expands it (C3) as <code>ASSURFED-UTILIT-&lt;KEY&gt;</code>, and converts all of them into <b>one application</b> <code>AFBUS_2200COBOL.LionSource</code> in <code>E:\Repos\ssg4-work\release</code> (via <code>Build-AppLionSource.ps1</code>).</li>
+        <li>Says whether the new <code>.LionSource</code> differs from the one imported last time (<code>-Previous</code>), and prints the LionDev steps with the exact file path. Stops on the first failure; changes nothing in Federale.</li>
+        <li>Progress lines are timestamped; full output goes to the work folder.</li>
+      </ul>
+    </div>
+
+    <div class="section-card" id="c-liondev">
+      <h2>C5 &middot; Import and generate in LionDev 177 <span class="who">you</span></h2>
+      <ol>
+        <li><b>File &rarr; Import &rarr; Lion Source File</b>. With <i>Skip duplicate objects</i> ticked every object loads as the next revision (<code>1.0 as 1.1</code>), changed or not.</li>
+        <li><b>View &rarr; Generation Sets</b>: use <code>MsSql177</code>. Use a new local source folder per LionDev version.</li>
+        <li><b>Get newest</b> on every imported program (Programs tab) <b>and</b> on the application options (System &rarr; Application). Revision Control must show no "* New *". Without this: "Object is not available in this generation set".</li>
+        <li>Stop the <code>LionDevNet_Generator</code> service (only one generator at a time); start <code>LionDevGenNet.exe</code> <i>after</i> <code>Lion.ini</code> has a working <code>DBPSSW</code>. <b>F6</b> &rarr; Programs &rarr; <b>Whole system</b>.</li>
+        <li>Check <code>Generated : n Not Generated : 0</code> and the log <code>&lt;local source&gt;\Development\Log\&lt;date&gt;\_Generate &lt;date&gt;.Log</code>. "IT'S NECESSARY TO RUN THE DATABASE REORGANIZE" means the schema changed: do <a href="#s-reo">D4</a> after delivery.</li>
+        <li>Keep a copy of the output before generating again (e.g. <code>E:\AMT_Work\Snapshots\Apps177-rev1.0</code>).</li>
+      </ol>
+      <p>Output: <code>E:\AMT_Work\Apps177\Binaries\Programs\ASSURFED_UTILIT_&lt;KEY&gt;.dll</code> plus the application DLLs.</p>
+    </div>
+
+    <div class="section-card" id="c-verify">
+      <h2>C6 &middot; Rebuild for 177a, mock test, package</h2>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-Ssg4Release.ps1 -Stage Verify</code></pre>
+      <ol>
+        <li>Refuses unless every generated DLL is newer than the <code>.LionSource</code> (so a stale generation cannot slip through).</li>
+        <li><b>Rebuild against Federale's 177a runtime</b> (<code>MockTest\Rebuild-SetAgainstRuntime.ps1</code>): LionDev 177 programs call a 7-argument base constructor that 177a does not have (<code>MissingMethodException</code>). The rebuild drops the two generation-stamp arguments, references copies of the 177a DLLs and flags every change (<code>// REBUILT-FOR-177A</code>, <code>REBUILT-FOR-177A.csv/.txt</code>). Output: <code>E:\AMT_Work\Rebuild177a\AFBUS_2200COBOL\Binaries</code>.</li>
+        <li><b>Mock tests</b> (<code>MockTest\Run-AllMockTests.ps1</code>, see <a href="#s-mock">tab 2 B</a>): warns on any failure.</li>
+        <li><b>Package</b> (<code>New-DeliveryPackage.ps1</code>): <code>E:\AMT_Work\Delivery\AFBUS_2200COBOL_AMT-&lt;date&gt;</code> with program and application DLLs, the flag files, <code>manifest.csv</code> (SHA256) and <code>DELIVERY-NOTES.txt</code>; RECAP left out (<code>-ExcludeFromPackage</code>, T3-027).</li>
+      </ol>
+      <div class="success-box">Next: <a href="#s-deliver">tab 2, C &middot; Deliver</a>.</div>
+    </div>
+
+    <div class="section-card" id="c-ecl">
+      <h2>C7 &middot; The ECL layer <span class="badge badge-prog">experiment, not in the release chain</span></h2>
+<pre><code>EclConverterConsole.exe /INPUTFILE:&lt;runstream&gt; /OUTPUT:&lt;folder&gt;   <span class="c"># or a folder of runstreams + skeletons</span></code></pre>
+      <ul>
+        <li><b>What it produces</b> (E1, <code>VIRM01_CO</code>): a PowerShell script on <code>AmtPsEclLib</code> where the <code>@SSG</code> call becomes <code>Invoke-Ssg -Skeleton "../../UTILIT_CFH-COPY_ASCII" -SgsFile "P$SGS\VIRM01"</code>, then <code>Asg</code>, <code>Use</code>, <code>Xqt "R, W" (".CFH-COPY")</code>, <code>Free</code>. Sorts become <code>AmtPsSortLib</code> calls; statements with no AMT equivalent become <code>OBS-*</code> comments.</li>
+        <li><b>Folder mode</b> finds a skeleton by file-name suffix: strip the <code>(P)</code> from runstream names and name our sources <code>ASSURFED_UTILIT_&lt;name&gt;.TXT</code>.</li>
+        <li><b>Use a build with our SSG library.</b> The installed console and R&amp;D <code>develop</code> convert 3 of 17 skeletons; with our 3 library files 17 of 17, identical to our goldens except <code>Fin</code> (left out for a called skeleton, correctly). R&amp;D questions: MT-033.</li>
+        <li><b>R&amp;D already delivered the converted runstreams</b> in <code>E:\Repos\Federale_InternalRelease\Scripts</code> (e.g. <code>ASSURFED_F999\RUN\ASSURFED_F999RUN_VIRM01_CO.ps1</code>), including the <code>@ADD</code> targets. Our task is to supply the programs those runstreams <code>Xqt</code>, and to combine the layers.</li>
+      </ul>
+      <div class="warn"><b>Survey 2026-10-20 (MT-043): how a converted runstream would reach our programs.</b> Read-only scan of R&amp;D's 2,760 converted scripts (<code>_scratch\C7-Survey.ps1</code>, results in <code>_scratch\c7-survey\</code>):
+        <ul style="margin-top:6px">
+          <li><b>12 of our 13 are called:</b> 293 <code>Invoke-Ssg</code> calls in 147 scripts (BABA 121, CFH-COPY 46, FUSBA 32, CHABAN 29, TABAN 27, CONDIS2 18, LOADIS 9, FUSBA2 4, UNLOADIS 4, LECTIS, LOADIS_MULTI, UNLOADIS_MULTI 1 each). CHAB100 is not found under that skeleton name.</li>
+          <li><b>Each call is followed by <code>Xqt</code> of the short utility name</b>: <code>.CFH-COPY</code> or <code>TPF$.BABA</code> etc. FUSBA2 also runs <code>FUSBA</code>; LOADIS_MULTI runs <code>LOADIS</code>; UNLOADIS_MULTI runs <code>UNLOADIS</code>.</li>
+          <li><b>How AMT resolves it</b> (<code>AmtPsEclLib</code> <code>Xqt</code> &rarr; <code>End-Xqt</code> &rarr; <code>Check-ReportName</code>): drop the qualifier up to the dot, <code>-</code> &rarr; <code>_</code>, then look up a job of that name <b>in the script's own application</b> (<code>AmtSettings.xml</code> <code>AppName</code> = <code>FEDERALE_APP</code>), trying type Report, then Executable, then <b>CobolProgram</b>. So <code>.CFH-COPY</code> looks for job <code>CFH_COPY</code>.</li>
+          <li><b>Three gaps:</b> (1) name: ours are <code>ASSURFED_UTILIT_&lt;KEY&gt;</code>; (2) application: ours are in <code>AFBUS_2200COBOL_AMT</code>; (3) <b>one name, many programs</b>: every call of a utility runs the same name, but each call's cards build a different program (e.g. CFH-COPY 80/22 at AFPH12, 500/135 at VIRM01_CO). FEDERALE_APP has no job by these names today (no <code>CFH_COPY</code>/<code>BABA</code>/... DLL), so these <code>Xqt</code>s cannot run now.</li>
+          <li><b>AMT hook found:</b> <code>CloneReports</code> in <code>AmtSettings.xml</code> (<code>&lt;OrginalReport Name="..." Clone="..."/&gt;</code>) maps an <code>Xqt</code> name to another job (not configured today). It maps one name to one job, so it covers gaps 1 (and 2 with a settings file for our application), not gap 3.</li>
+          <li><b>Not used at run time:</b> the <code>P$SGS\&lt;run-id&gt;</code> files do not exist; <code>Invoke-Ssg</code> logs a warning and continues. The skeleton's generated COBOL text is not compiled at run time, so the program the <code>Xqt</code> finds must be pre-built for that call.</li>
+        </ul>
+        <b>Reference to follow up:</b> <code>VIRM01_CO</code> line 484 (<code>Invoke-Ssg ... UTILIT_CFH-COPY_ASCII</code>, <code>Use INB</code>/<code>INC</code>, <code>Xqt "R, W" (".CFH-COPY")</code>) already has an independent mock reference: <code>E:\AMT_Work\MockTest\VIRM01\input\INB</code> (12,550 B, 500-byte records) and <code>expected\INC</code> (3,425 B, 135-byte records), and an earlier generated program for those cards named <code>CFH_COPY</code>. Proposed pilot: build CFH-COPY_ASCII from the L484 cards as job <code>CFH_COPY</code> in <code>AFBUS_2200COBOL_AMT</code>, run a cut-down VIRM01_CO script as a Script job in that application, compare <code>INC</code>.</div>
+      <div class="info-box" id="c-ecl-proposal"><b>The pilot Copilot proposes:</b>
+        <ol style="margin-top:6px">
+          <li>Build that call as job <code>CFH_COPY</code> in <code>AFBUS_2200COBOL_AMT</code>.</li>
+          <li>Run a cut-down VIRM01_CO script there as a Script job.</li>
+          <li>Byte-compare <code>INC</code> against the expected file.</li>
+        </ol>
+        Before scaling past one program we'd need your decision on gap 3: how to name and run a separate program per call.
+        <p style="margin-top:8px"><b>Quick try first (no rebuild):</b> the same three steps on the <b>AFPH12</b> call (<code>ASSURFED_F999RUN_AFPH12.ps1</code> LAB146: <code>Use INASC IAFB011FAI</code>, <code>Use OUTASC IAFB012FAI</code>, <code>Xqt "" (".CFH-COPY")</code>). Our delivered <code>ASSURFED_UTILIT_CFH_COPY_ASCII</code> was built from exactly that call, so step 1 is only a <code>CloneReports</code> entry (<code>CFH_COPY</code> &rarr; <code>ASSURFED_UTILIT_CFH_COPY_ASCII</code>) in a settings copy for our application; the reference is the independent <code>AFPH12_L427</code> pair already used in tab 2. R&amp;D's own converted skeleton is a failed-conversion stub (old SSG library), so the try uses ours from the ECL converter with our library (<code>_scratch\ecl-cmp3</code>, no <code>Fin</code>). Files go in a new folder <code>AmtTools\Basepaths\Scripts\SSG4\</code>; nothing existing is changed.</p>
+        <p style="margin-top:8px"><b>Quick try, 2026-10-20 14:53 (job <code>SSG4_AFPH12_CFH_COPY</code>, JobId 5450, run Id 137):</b> registered by <i>Read all jobs from system</i> (subfolders of the Script path are scanned), activated in Security &rarr; Jobs, started. <b>Worked:</b> <code>Initialize</code> with the settings copy connected to <code>AFBUS_2200COBOL_AMT</code>; <code>Invoke-Ssg</code> found and ran our skeleton. <b>Learned from the job log:</b> <code>Invoke-Ssg</code> reads the SGS file from <code>Extracts\P$SGS\&lt;run-id&gt;</code>; <code>Asg</code> looks for a file at <code>Extracts\&lt;qualifier&gt;\&lt;name&gt;</code> (here <code>Extracts\ASSURFED\IAFB011FAI</code>). The run aborted there (input staged one level too high); both files are now in place (cards = our exported AFPH12 L427 call). <b>Blocked:</b> 20 s later the BatchController wrote a bug report <i>DB: Lock request time out period exceeded</i> reading the process-job table, and has not taken a job since; a re-start was not picked up. Needs an elevated service restart before the next attempt. Not yet seen: whether <code>Xqt</code> &rarr; <code>CloneReports</code> reaches our program. Scripts: <code>_scratch\ecl-pilot\</code> (<code>Deploy-EclPilot.ps1</code>, <code>-Remove</code> undoes it; <code>Check-EclPilot.ps1</code>).</p>
+        <div class="success-box" style="margin-top:8px"><b>After the restart, 15:02 &mdash; PASS.</b> The queued runs executed. Job log: <code>XQT: .CFH-COPY</code> &rarr; <code>End-Xqt</code> &rarr; <i>Starting Cobol program: ASSURFED_UTILIT_CFH_COPY_ASCII</i> (the <code>CloneReports</code> mapping), 25 records read, <i>Script Done</i>. Output <code>Extracts\ASSURFED\IAFB012FAI.DAT</code>, 600 B, <b>byte-identical</b> to the independent <code>AFPH12_L427</code> reference. The BatchController shows the child as job <code>CFH_COPY</code> <i>Started by: AFPH12</i>. This is the first converted runstream step (ECL &rarr; <code>Invoke-Ssg</code> &rarr; <code>Xqt</code> &rarr; our C# program) proven in the real Control Center. Open side effect: BatchController lock timeouts around the script job (T3-038). Evidence: <code>_scratch\cc-runs\ECL-AFPH12\</code>.</div>
+        <div class="warn" id="c-ecl-percall" style="margin-top:8px"><b>Gap 3 sized &mdash; one program per call does not scale.</b> Distinct card sets among the real calls (<code>_scratch\c7-survey\Count-CardVariants.ps1</code>): CFH-COPY 47 calls / 33 sets (30 record shapes), BABA 122 / 98, FUSBA 32 / 20, CHABAN 30 / 22, TABAN 27 / 26, CONDIS2 18 / 14 (one shape). On OS 2200, <code>@SSG</code> generated and compiled a new program on every run, so this never mattered there. Options: (a) pre-build one program per distinct card set (hundreds of LionDev builds; any card change needs a rebuild); (b) <b>one program per utility that takes its record shapes and field lists from the SGS cards at run time</b> &mdash; the dynamic replacement for SSG, one DLL per utility, but it is new logic (not converter output) and needs its own reference tests, and the cards must reach the program (they are loaded by <code>Invoke-Ssg</code> in the script, not in the program); (c) generate and compile at run time &mdash; not practical (converter and LionDev in the run path). Decision needed.
+          <p style="margin-top:8px"><b>Owner, 2026-10-20:</b> (a) and (c) not pursued; (b) under consideration. Facts for (b): <code>Invoke-Ssg</code> is <b>R&amp;D's</b> (in <code>AmtPsEclLib</code>, R&amp;D source <code>Migration Tools\EclConverter\CmdLets</code>, Federale release 2026-09-08), not ours. What <i>is</i> ours: the converted skeleton script it calls (our SSG converter), which runs in the same session with the call's cards loaded, just before the <code>Xqt</code> &mdash; the natural hand-off point to the program, without changing R&amp;D's library. Size: one program per skeleton, at most 20 (17 have real calls), against about 275 distinct card sets over 359 calls for (a). The <code>Xqt</code> name alone does not pick the skeleton (FUSBA and FUSBA2 both run <code>FUSBA</code>; the MULTI pair run <code>LOADIS</code>/<code>UNLOADIS</code>), so the hand-off must also choose the program.</p>
+          <p style="margin-top:6px"><b>Spike plan (draft, for review):</b> <a href="../.github/Copilot_Plans/261020-mt043-cfh-copy-generic-spike.md">261020-mt043-cfh-copy-generic-spike.md</a> &mdash; one generic CFH-COPY program, proved in CC on AFPH12 (80/22) and VIRM01_CO (500/135) with the same DLL.</p>
+          <div class="success-box" style="margin-top:8px"><b>Spike result 2026-10-20: it works.</b> One DLL, <code>ASSURFED_UTILIT_CFH_COPY_GF</code>, built once and run on two calls with no rebuild. AFPH12 (80&rarr;22): output 600 B, <b>byte-identical</b>. VIRM01_CO (500&rarr;135, 10 moves + constant): output content identical, but the file is written in UTF-16 (<a href="SSG-PowerShell-Trial-Progress.html#T3-039">T3-039</a>) because the runstream pre-creates it with <code>Asy-Cat</code> under <code>UseUnicode=True</code>. How it works: the hand-off in our skeleton writes a parameter file (<code>SGSPARM</code>) from the call's cards, sets task value <code>RECSIZE&lt;output name&gt;</code> for the record length, and maps <code>CFH_COPY</code> to the generic program at run time. Dead ends on the way: <code>ASSIGN TO</code> a data item is generated as a literal file name, and the runtime overwrites the <code>RECORD VARYING</code> output length. Later on 2026-10-20 both were fixed. <b>T3-038</b> was our own SQL script leaving a transaction open on the job table. <b>T3-039</b> is fixed with <code>UseUnicode=False</code> in the SSG4 settings copy. Re-run: AFPH12 (job 591) and VIRM01 (job 593) both <b>Done</b>, both outputs <b>byte-identical</b>, no restart. Then the last limit was removed: <code>ASSURFED_UTILIT_CFH_COPY_GN</code> opens only <code>CFHIN</code>/<code>CFHOUT</code>, and the hand-off maps the call's real files onto them. AFPH12 (job 595), VIRM01 (597) and a call with <b>new, never-seen file names</b> (599, <code>ZZNEWIN</code>/<code>ZZNEWOUT</code>) were all Done and byte-identical from one DLL. <b>A new record format or file name needs no rebuild.</b> The 5 UL calls (T3-028, quoted all-space constant) now work too: VIRM01_UL (job 608) was byte-identical. <b>All 47 CFH-COPY calls are covered by one DLL.</b></div></div></div>
+    </div>
+
+    <div class="section-card" id="c-baba">
+      <h2>C8. Generic BABA &mdash; spec summary (done, 122 calls)</h2>
+      <p>BABA reads one file and splits it into one or two outputs by a record key. One generic program, <code>ASSURFED_UTILIT_BABA_GN</code>, built once, runs every call from its cards, the same way as CFH-COPY. Full spec: <code>Conversion\Pipeline\Generic\BABA\spec.md</code>. <b>Result 2026-10-20: done.</b> One CC script job ran the 7 test cases as 7 runstream-style steps (job 624, Done in 24 s): <b>11 of 11 outputs byte-identical</b>. On the way, the runtime misread a short-line parameter file for some sizes (T3-040); the hand-offs now write fixed-length lines (BABA 400, CFH-COPY 250), and the 4 CFH-COPY calls were re-run byte-identical.</p>
+      <table class="ref">
+        <tr><th>Card</th><th>Meaning</th></tr>
+        <tr><td><code>INPUT name,len,blk</code></td><td>the input (always one file)</td></tr>
+        <tr><td><code>OUTPUT name,len,blk [name,len,blk]</code></td><td>1 or 2 outputs, each with its own record length</td></tr>
+        <tr><td><code>KEYS mode pos,len[,value] &hellip;</code></td><td>mode <code>R</code> retain, <code>E</code> exclude, <code>ALL</code>; up to 8 key fields. No KEYS card = <code>ALL</code>. Each further KEYS card is one more set of values (up to 19)</td></tr>
+        <tr><td><code>SEQERROR MULTI</code></td><td>the key must ascend (else the run aborts); a record with the same key as the one before is a duplicate</td></tr>
+      </table>
+      <table class="ref">
+        <tr><th>Record goes to</th><th>Output 1</th><th>Output 2 (or dropped if only one output)</th></tr>
+        <tr><td><code>R</code></td><td>key equals any value set</td><td>otherwise</td></tr>
+        <tr><td><code>E</code></td><td>key equals no value set</td><td>key equals a value set</td></tr>
+        <tr><td><code>ALL</code> / no KEYS</td><td>every record</td><td>&ndash; (stays empty)</td></tr>
+        <tr><td>with <code>SEQERROR MULTI</code></td><td>first record of each key</td><td>duplicates (the R/E values are never tested: the skeleton jumps past them)</td></tr>
+      </table>
+      <p><b>Byte rules:</b> the key is the key fields concatenated in <i>card</i> order (not position order). A value is padded with spaces or cut to its field length; <code>BLANC</code> = spaces; <code>&lt;</code> becomes <code>;</code>. The record is written at the output's length, padded with spaces or cut.</p>
+      <table class="ref">
+        <tr><th>Check</th><th>Result</th></tr>
+        <tr><td>All 122 calls expanded with their own cards (<code>Expand-AllCalls.ps1</code>)</td><td>122 of 122 clean</td></tr>
+        <tr><td>Parameter file vs each expansion (lengths, names, key layout, values, mode, sequence)</td><td>118 MATCH; 3 differ only in the quoted value <code>'W'</code> (taken as <code>W</code>); 1 call has no files</td></tr>
+        <tr><td>Model of the generic program vs the <b>real</b> static BABA program (mock system, 30 records)</td><td>byte-identical</td></tr>
+        <tr><td>Test cases for CC (one per shape: E, R, ALL+MULTI, R+MULTI with 8 fields out of order, copy with 500&rarr;400, BLANC with 200&rarr;220, 19 value sets)</td><td>11 of 11 outputs <b>byte-identical in CC</b> (job 624, one script job, 7 runstream-style steps)</td></tr>
+      </table>
+      <div class="warn"><b>To confirm with R&amp;D (MT-033):</b> a quoted card value (<code>KEYS R 2,1,'W'</code>, 3 calls) is generated as <code>VALUE ''W''</code>, which is not a valid literal; taken as <code>W</code>. Two SINM05 value sets end in a lone <code>'</code> or <code>"</code>; taken literally.</div>
+    </div>
+
+    <div class="section-card" id="c-fusba">
+      <h2>C9. Generic FUSBA &mdash; spec summary (done, 36 calls)</h2>
+      <p>FUSBA merges two key-sorted files: file 1 is the <b>update</b> file, file 2 the <b>master</b>. The output is a copy of the master that is split, cut down or updated by the update file. FUSBA2 is a variant. Both are run with <code>@XQT TPF$.FUSBA</code>, so one generic program, <code>ASSURFED_UTILIT_FUSBA_GN</code>, covers all 36 calls (32 FUSBA, 4 FUSBA2). Full spec: <code>Conversion\Pipeline\Generic\FUSBA\spec.md</code>. <b>Result 2026-10-20: done.</b> All 4 modes proven against real programs; in CC <b>12 of 12 outputs byte-identical</b> (job 670), after two fixes: T3-041 (ours: the parameter file name stayed assigned between calls) and T3-040 (runtime reader rule; input maximum now 4001).</p>
+      <table class="ref">
+        <tr><th>Card</th><th>Meaning</th></tr>
+        <tr><td><code>INPUT f1,len,blk f2,len,blk</code></td><td>file 1 = update file, file 2 = master (always 2 files)</td></tr>
+        <tr><td><code>OUTPUT name,len,blk [name,len,blk]</code></td><td>1 or 2 outputs, each with its own record length</td></tr>
+        <tr><td><code>KEYS pos,len &hellip;</code> / <code>UPDATE pos,len &hellip;</code></td><td>key fields of the master / of the update file (up to 6)</td></tr>
+        <tr><td><code>ANNUL COPY</code> / <code>ANNUL YES</code></td><td>delete matched masters; <code>COPY</code> writes them to output 2</td></tr>
+        <tr><td><code>FIELDIN</code> / <code>FIELDOUT pos,len &hellip;</code></td><td>field <i>i</i> of the update record replaces field <i>i</i> of the output record (up to 3)</td></tr>
+      </table>
+      <table class="ref">
+        <tr><th>Mode (calls)</th><th>Master with no update</th><th>Master with a matching update</th></tr>
+        <tr><td><b>C</b> split, <code>ANNUL COPY</code> (27)</td><td>output 1</td><td>output 2</td></tr>
+        <tr><td><b>D</b> delete, <code>ANNUL YES</code> (2)</td><td>output 1</td><td>dropped</td></tr>
+        <tr><td><b>U</b> update, FUSBA with <code>FIELDIN</code> (3)</td><td>output 1 unchanged</td><td>output 1 with the fields replaced; the next update record is then read, so only the first master of a key is updated</td></tr>
+        <tr><td><b>M</b> update, FUSBA2 (4)</td><td>output 1 unchanged</td><td>output 1 with the fields replaced; every master with that key gets the same update</td></tr>
+      </table>
+      <p><b>Byte rules:</b> keys are the fields concatenated in <i>card</i> order and compared byte by byte. An update record with no master is skipped. Records are written at the output's length, padded with spaces or cut.</p>
+      <table class="ref">
+        <tr><th>Check</th><th>Result</th></tr>
+        <tr><td>All 36 calls expanded with their own cards</td><td>36 of 36 clean</td></tr>
+        <tr><td>Parameter file vs each expansion (names, lengths, both key layouts, field moves, mode)</td><td><b>36 MATCH</b> (C 27, D 2, U 3, M 4)</td></tr>
+        <tr><td>Model vs the <b>real</b> static FUSBA program (COMA16_U1, mode C, mock system)</td><td>LOA and SUP byte-identical</td></tr>
+        <tr><td>Model vs the independent FUSBA2 reference (<code>Ref\FUSBA2_L766</code>, mode M)</td><td>byte-identical</td></tr>
+        <tr><td>Hand-off dry run under StrictMode 2 (C and M cards)</td><td>clean; parameter file 80-byte lines</td></tr>
+        <tr><td>Modes D and U vs static reference programs <code>FUSBA_RD</code> / <code>FUSBA_RU</code> (built in the same LionDev round)</td><td>byte-identical (mock)</td></tr>
+        <tr><td>CC: one script job <code>SSG4_FUSBA_CASES</code>, 9 runstream-style steps (C &times;3, D &times;2, U &times;2, M &times;2), 12 outputs, each case under its own qualifier <code>FUSB&lt;case&gt;</code></td><td>job 640: only C1/C2 right, because every later case reused C1's parameter file (T3-041, ours, fixed). Job 650: 10 of 12; D1/D2 lost 28 master records each (T3-040: 136-byte lines). Job 670 with input maximum 4001: <b>12 of 12 byte-identical</b></td></tr>
+      </table>
+      <div class="warn"><b>Done:</b> BABA-GN and CFH-COPY-GN were regenerated with the T3-040 fix and re-run byte-identical on 2026-10-20 (see <a href="#c-chaban">C10</a>).</div>
+    </div>
+
+    <div class="section-card" id="c-chaban">
+      <h2>C10. Generic CHABAN &mdash; spec summary (done, 31 calls)</h2>
+      <p>CHABAN builds a file from the run stream's data images (the lines after <code>@XQT</code>). CHAB100 is the same with 100-byte cards; both run <code>@XQT .CHABAN</code>, so one generic program, <code>ASSURFED_UTILIT_CHABAN_GN</code>, covers all 31 calls. Full spec: <code>Conversion\Pipeline\Generic\CHABAN\spec.md</code>.</p>
+      <table class="ref">
+        <tr><th>Cards</th><th>Calls</th><th>Result</th></tr>
+        <tr><td>no <code>NUMB</code> (only <code>OUTPUT</code>, or <code>NUM n</code>)</td><td>13</td><td>empty output</td></tr>
+        <tr><td><code>NUMB n[,m]</code></td><td>18</td><td><code>m</code> records (default 1), each from ceil(length / 80) cards; an incomplete last record is dropped</td></tr>
+      </table>
+      <p><b>Card input (T3-032 solved for the generic programs).</b> AMT's <code>Xqt</code> data lines go to the run's Accept file; a <code>CARD-READER</code> file never receives them (static CHABAN, job 680: 0 records). The shared hand-off maps the generic program's input onto the Accept file (<code>Add-GnUseAlias CHAIN '*ACCEPT*'</code>), or onto an empty file when the step has no data lines. Proven in CC with the delivered CFH-COPY-GN (jobs 683, 684): 5 data lines, a blank one and a full 100-byte one included, byte for byte. No runtime change and no extra program.</p>
+      <table class="ref">
+        <tr><th>Check</th><th>Result</th></tr>
+        <tr><td>All 31 calls expanded with their own cards</td><td>31 of 31 clean</td></tr>
+        <tr><td>Parameter file vs each expansion (card length, output name and length, records, cards per record)</td><td><b>31 MATCH</b></td></tr>
+        <tr><td>CC: <code>SSG4_CHABAN_CASES</code>, 8 cases (no data lines, NUM, blank image, 4 cards + 1 extra, 2&times;2 with a short end, 5 cards to 400 B, 80-byte card cut to 58, CHAB100)</td><td><b>8 of 8 outputs byte-identical</b> (job 687, first run)</td></tr>
+      </table>
+      <div class="warn"><b>Done 2026-10-20 23:35:</b> BABA-GN and CFH-COPY-GN delivered with the T3-040 fix (input maximum 4001) after the imported revisions were generated. Regression: <code>SSG4_BABA_CASES</code> job 696 11 of 11, CFH-COPY pilots jobs 704/706/708/710 4 of 4, all byte-identical.</div>
+    </div>
+
+    <div class="section-card" id="c-scangroup">
+      <h2>C11. SCAN group: generic CONDIS2, SCAN, TAPELD (built and run in CC, 2026-10-21)</h2>
+      <p>Converter fixes T3-035, T3-036 and T3-043 were landed first (2026-10-21). Specs: <code>Conversion\Pipeline\Generic\CONDIS2\spec.md</code>, <code>Conversion\Pipeline\Generic\SCAN\spec.md</code>, <code>Conversion\Pipeline\Generic\TAPELD\spec.md</code>. The PG / FIXE cards are read from the raw card file (shared <code>Get-GnSgsCards</code> in <code>GnHandoff.ps1</code>, SSG quoting and continuation rules), because <code>AddTo-SgsList</code> splits quoted values at their spaces (T3-028).</p>
+      <table class="ref">
+        <tr><th>Program</th><th>Calls</th><th>Parameter file check</th><th>CC test</th></tr>
+        <tr><td><code>CONDIS2_GN</code>: PG CASE / OTHERWISE / MOVE (date codes D42 D24 D68 ...) / CONST, FILEIN to FILEOUT</td><td>18</td><td>18 MATCH (PAIJ01_UL expanded with the spaces of its double-quoted values protected as ~, T3-028); model == static CONDIS2 in mock, 3 of 3 (D42, D24/D68, 34 CASEs)</td><td><code>SSG4_CONDIS_CASES</code>, 6 cases, data files (<code>Test-CcJob -LogPrefix CONDTEST</code>): <b>job 714, 6 of 6 byte-identical</b></td></tr>
+        <tr><td><code>SCAN_GN</code>: print the input, <code>IF R &lt; n</code></td><td>19</td><td>19 MATCH (limit from the IF card: the converter drops <code>*EDIT</code> blocks, T3-045)</td><td rowspan="2"><code>SSG4_SCANGRP_PRINTS</code>, 8 cases, prints: generic == static reference (SCAN-RA/RB, TAPELD-RA/RB) and == text model (<code>Test-CcPrints.ps1</code>). <b>Job 769:</b> SCAN 4 of 4 match the model, the 2 reference cases byte-identical to the static print; TAPELD: 2 reference cases byte-identical to the static print, T3/T4 match the model; T1/T2 also match (123 and 55 lines) once <code>Test-CcPrints</code> splits lines at CR/FF too: a page break is written as <code>CR FF</code> before the title, with no LF. <b>8 of 8 cases pass.</b></td></tr>
+        <tr><td><code>TAPELD_GN</code>: CFH-COPY to PRINTER, page titles (STITRE)</td><td>14</td><td>14 MATCH against expansions with the titles' spaces protected</td></tr>
+      </table>
+      <p><b>Where the prints go (found 2026-10-21, job 756).</b> A COBOL program started by a script job's <code>Xqt</code> writes its print file to <code>Basepaths\Prints\&lt;date&gt;\&lt;Xqt name&gt;__&lt;time&gt;.&lt;FD&gt;.PRN</code> (UTF-16), e.g. <code>SCAN__013112361.PRT.PRN</code>, <code>TPF$__013124503.TAPEOUT.PRN</code>. The name is the Xqt name, not the program behind it. At job end, Cleanup deletes every print that was not printed (<code>RemoveNonPrintedFiles</code>; SSG4 settings have <code>DefaultDontPrint</code> True), so nothing is left in <code>Prints</code> or in CC's Prints tab. The test job copies each new PRN to <code>Extracts\PRINTCAP</code> right after each Xqt (<code>Save-GnPrints</code>), and <code>Test-CcPrints.ps1 -Folder ...\Extracts\PRINTCAP</code> checks the copies.</p>
+      <div class="warn"><b>Done 2026-10-21:</b> LionDev round done (9 programs, <code>SCANGRP1.LionSource</code>), delivered with <code>Deliver-GnPrograms</code> (its 4001 check now also accepts input records not named after the file), registered and activated in CC. <a href="SSG-PowerShell-Trial-Progress.html#T3-046">T3-046</a>: R&amp;D's converted <code>Hdg "P     text"</code> aborts a job (the test job uses <code>Hdg "P" ("text")</code>). Workaround in place: <code>Conversion\Pipeline\Patch-HdgOptions.ps1</code> writes patched copies of the released scripts (14 lines in 8 runstreams) and never changes the originals; deploy those when running real runstreams.</div>
+      <h3>Converter limits that affect these programs</h3>
+      <table class="ref">
+        <tr><th>Limit</th><th>Affects</th><th>Handled how</th></tr>
+        <tr><td><b>T3-045</b> <code>*EDIT ON</code> ... <code>*EDIT OFF</code> text blocks were dropped; fixed in scratch (lands with an elevated <code>Land-ConverterFix.ps1 -FixId T3-045</code>). Not implemented: IMGLEN$ overflow (automatic <code>;</code> split of an over-long image), format 2 (EDITAB$ nonzero), <code>*CREATE</code> images built in edit mode</td><td>SCAN (12 of 19 calls have the <code>IF R &lt; n</code> statement)</td><td>SCAN_GN reads the limit from the IF card; none of the 20 programs needs the unimplemented forms</td></tr>
+        <tr><td><b>ECL images inside <code>*EDIT</code> blocks</b> (<code>#ACOB,... &amp;</code>) are dropped, not converted. Outside edit blocks an ACOB / MAP image becomes <code>Call-ExternalProgram "ACOB" ...</code> (a no-op in AmtPsEclLib today)</td><td>BABA, CFH-COPY, CFH-COPY_ASCII, FUSBA, FUSBA2 (the compile line only; the program text is unaffected)</td><td>Not needed: programs are generated and compiled through LionDev, not through the ACOB statement. Revisit when ECL conversion is implemented</td></tr>
+        <tr><td><b>T3-028</b> AMT card reader splits quoted values at spaces</td><td>CONDIS2 (PG CASE blanks), TAPELD (FIXE titles), CFH-COPY (FIXE blanks)</td><td>Parameter writers read those cards from the raw card file; checks expand a copy with the spaces protected as <code>~</code></td></tr>
+        <tr><td><b>T3-046</b> R&amp;D ECL converter: <code>Hdg "P     text"</code></td><td>TAPELD runstream steps (14 lines)</td><td><code>Patch-HdgOptions.ps1</code> workaround; fix belongs to R&amp;D</td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="c-loadis">
+      <h2>C12. LOADIS / UNLOADIS on CFH-COPY-GN (no new program, run in CC 2026-10-21)</h2>
+      <p>LOADIS copies a sequential file into an indexed one (<code>ACCESS SEQUENTIAL</code>, one key from <code>KEYIS offset,length,rest</code>); UNLOADIS copies it back. Both have the same <code>INPUT</code>/<code>OUTPUT</code> cards as CFH-COPY, so the hand-off (<code>Conversion\Pipeline\Generic\LOADIS\gen\LoadisParm.ps1</code>, <code>Invoke-LoadisHandoff -Mode LOADIS|UNLOADIS</code>, in all four skeletons ASCII and MULTI) maps <code>Xqt TPF$.LOADIS</code> / <code>TPF$.UNLOADIS</code> to <code>CFH_COPY_GN</code> as a whole-record copy. For LOADIS it also reads the input, checks the key order and writes the <code>.Index</code> before the <code>Xqt</code>.</p>
+      <table class="ref">
+        <tr><th>Fact</th><th>Evidence</th></tr>
+        <tr><td>An AMT indexed file is the data file (records + CRLF) plus <code>&lt;file&gt;.DAT.Index</code>: <code>=W*2</code>, Int32 6, Int64 data length, data path (255 bytes), <code>01 01</code>, Int32 key count, Int32 key offset (0x115), Int32 key length (0x119), Int32 0, <code>Al</code>, Int32 entries, then per record in key order the key and an Int64 record number (0-based)</td><td>rebuilt byte for byte from the data file for both CC-written indexes</td></tr>
+        <tr><td>The static UNLOADIS reads the data file in stored order and ignores the <code>.Index</code></td><td>mock: reversed data with a valid index came out reversed; a header with another key gave no error (<code>check\Test-OptionD2.ps1</code>)</td></tr>
+        <tr><td>Job files are file-controller paths (<code>\EXTRACTS\...</code> from <code>Get-AssignedFile</code>); read and write them through <code>$global:AmtFile</code>, not <code>[IO.File]</code></td><td>first runs: relative path, and the file is locked by the job's own <code>Asg</code></td></tr>
+        <tr><td>An assigned output lives in <code>\EXTRACTS\TPF$&lt;run&gt;\&lt;qualifier&gt;\</code> until <code>Free</code>, which moves only the data file of a file the program did not open as indexed; the hand-off writes the index to both places. The runtime writes that TPF$ path, upper case, in the header</td><td>job log, job 807</td></tr>
+        <tr><td>The file controller's own <code>AddIndexKey</code> / <code>CreateRecordFile</code> / <code>AddRecord</code> cannot be used: <code>AddRecord</code> fails "file in use" and the key offset is stored as 0</td><td>probe, job 800</td></tr>
+      </table>
+      <table class="ref">
+        <tr><th>CC test</th><th>Result</th></tr>
+        <tr><td><code>SSG4_LOADIS_CASES</code>: static LOADIS vs the hand-off on the same input (ASCII 204 / 6,8 and MULTI 200 / 164,26), then UNLOADIS (<code>Prepare-LoadisCc.ps1</code>, <code>Check-LoadisCc.ps1</code>)</td><td><b>job 807</b>: data and <code>.Index</code> byte-identical to the static program's (the header path differs only by qualifier); UNLOADIS byte-identical to the independent expected files</td></tr>
+        <tr><td><code>SSG4_LOADIS_ALL</code>: every real call (10 LOADIS, 5 UNLOADIS), generated data in its layout: records 100&ndash;900, keys 0,13 &middot; 0,15 &middot; 0,17 &middot; 3,5 &middot; 5,7 &middot; 6,8 &middot; 164,26 (<code>Prepare-LoadisAll.ps1</code>, <code>Check-LoadisAll.ps1</code> with an independent index parser)</td><td><b>job 820: 15 of 15 pass</b></td></tr>
+        <tr><td><code>SSG4_LOADIS_ABORT</code> with command-line parameter <code>UNSORTED</code> / <code>DUPLICATE</code> (<code>Prepare-LoadisAbort.ps1</code>, <code>Check-LoadisAbort.ps1</code>)</td><td><b>jobs 836 / 837</b>: <code>IS.ERROR</code> with the right key, <code>RECORD EN ERREUR : 4 EME</code> / <code>6 EME</code>, job aborted before the program, no index left</td></tr>
+      </table>
+      <div class="warn"><b>Limits:</b> if a job aborts after a LOADIS but before <code>Free</code>, the index is already in the final folder beside the old data file. No program in our set reads an indexed file by key, so that is not tested directly; the index is byte-identical to the runtime's own. The static LOADIS silently drops out-of-order records (<a href="SSG-PowerShell-Trial-Progress.html#T3-029">T3-029</a>); the hand-off aborts as on the 2200 instead. Evidence: <code>_scratch\cc-runs\LOADIS-GN</code>, <code>LOADIS-ALL</code>, <code>LOADIS-ABORT</code>.</div>
+    </div>
+
+    <div class="section-card" id="c-status">
+      <h2>Programs in the chain</h2>
+      <table class="ref">
+        <tr><th>Group</th><th>Programs</th><th>Note</th></tr>
+        <tr><td><span class="badge badge-done">generic, built once (4)</span></td><td>CFH_COPY_GN (all 47 calls), BABA_GN (all 122 calls), FUSBA_GN (all 36 FUSBA/FUSBA2 calls), CHABAN_GN (all 31 CHABAN/CHAB100 calls)</td><td>run every call from its cards via the skeleton hand-off; a new format or file name needs no rebuild (<a href="#c-ecl">C7</a>, <a href="#c-baba">C8</a>, <a href="#c-fusba">C9</a>)</td></tr>
+        <tr><td><span class="badge badge-done">built and delivered (13)</span></td><td>CFH-COPY_ASCII, FUSBA2_ASCII, LECTIS_ASCII, LOADIS_ASCII, UNLOADIS_ASCII, LOADIS_MULTI, UNLOADIS_MULTI, CHAB100_ASCII, CHABAN_ASCII, BABA_ASCII, FUSBA_ASCII, CONDIS2_ASCII, TABAN_ASCII</td><td>run results: <a href="#r-results">tab 3</a></td></tr>
+        <tr><td><span class="badge badge-info">built, not delivered (1)</span></td><td>RECAP</td><td><code>CALL 'RSA$INIT'</code> (database) &mdash; T3-027</td></tr>
+        <tr><td><span class="badge badge-pend">not in the chain yet (6)</span></td><td>ARCHIFORMAT, ARCHISEPARE, CFH-COPY (plain)</td><td>no runstream call, so no real cards</td></tr>
+        <tr><td></td><td>EXTEUR</td><td>embedded LINC <code>INVOKE TABLE</code> (T3-037)</td></tr>
+        <tr><td><span class="badge badge-done">generic, built once, run in CC (3)</span></td><td>CONDIS2_GN (18 calls), SCAN_GN (19), TAPELD_GN (14)</td><td><a href="#c-scangroup">C11</a></td></tr>
+        <tr><td><span class="badge badge-done">no program of their own (2)</span></td><td>LOADIS (10 calls, ASCII + MULTI), UNLOADIS (5)</td><td>run on CFH_COPY_GN; the hand-off writes the index (<a href="#c-loadis">C12</a>)</td></tr>
+      </table>
+      <p style="font-size:12px;color:#6b7280;">Each built program comes from <b>one call's cards</b> (call 1 by default), so its tests cover that call's record layout only. 59 of 65 calls of the first five release programs expand and convert with 0 errors (<code>Invoke-RealCardBatch.ps1 -CallsPerProgram 100</code>).</p>
+    </div>
+
+    <div class="section-card" id="c-gotchas">
+      <h2>Conversion gotchas</h2>
+      <table class="ref">
+        <tr><th>Topic</th><th>What happens</th><th>What to do</th></tr>
+        <tr><td>BaseYear</td><td>Converter writes <code>BaseYear=0</code>; LionDev's Options screen crashes</td><td>Convert with <code>-BaseYear 1957</code> (default)</td></tr>
+        <tr><td><code>AMTSYSTEM</code></td><td>Machine variable points at Federale's <code>AmtTools</code>; <code>$env:</code> does not override it</td><td>Run AMT tools from a copy with the mock <code>Sys.ini</code> beside the exe; <code>/ANALYZEONLY</code> first</td></tr>
+        <tr><td>LionDev password</td><td>Empty or copied encrypted <code>DBPSSW</code> fails</td><td>Type it plain once; never in chat or files</td></tr>
+        <tr><td>Get newest</td><td>New generation set lacks imported objects</td><td>C5 step 3, every object, every time</td></tr>
+        <tr><td>Two generators</td><td>Service + window running: unreliable</td><td>Stop the service, use the window</td></tr>
+        <tr><td>Card parsing</td><td>AMT's <code>AddTo-SgsList</code> splits only on spaces and commas</td><td>Read <code>sgs-warnings.csv</code>; a <i>Warning</i> card may not expand right</td></tr>
+        <tr><td>Converter files protected</td><td><code>SsgConverter\Build</code> and <code>Source</code> refuse unelevated writes</td><td>Fix in a scratch copy; land with an elevated shell</td></tr>
+        <tr><td>177 vs 177a</td><td>177 programs fail on the 177a runtime</td><td>Always ship the C6 rebuilds; regenerate with a 177a LionDev when R&amp;D names the build</td></tr>
+        <tr><td>Database statements</td><td>RDMS <code>ENTER MASM</code> become comments; <code>RSA$INIT</code> calls a missing program</td><td>Deferred to the next phase (owner decision 2026-10-13)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═════════════════════════════ TAB 2: RUN IN CC -->
+  <div class="tab-panel" data-group="main" id="tab-steps">
+
+    <div class="section-card" id="s-map">
+      <h2>Route map</h2>
+      <div class="legend"><span class="l-build">Build/prove (per release)</span><span class="l-once">One-off per VM / per new release</span><span class="l-each">Every run</span></div>
+      <div class="flow">
+        <a href="#s-build"><b>A &middot; Build</b>cards &rarr; COBOL &rarr; LionSource &rarr; LionDev 177 &rarr; 177a rebuild</a>
+        <a href="#s-mock"><b>B &middot; Prove offline</b>mock system, independent references</a>
+        <a href="#s-deliver" class="once"><b>C &middot; Deliver</b>package into <code>&lt;APPROOT&gt;</code></a>
+        <a href="#s-setup" class="once"><b>D &middot; CC set-up</b>base path, reorganize, register</a>
+        <a href="#s-session" class="each"><b>E &middot; Session</b>Keycloak, services, log in</a>
+        <a href="#s-run" class="each"><b>F &middot; Run</b>Stage &rarr; Start Job &rarr; Compare &rarr; Clean</a>
+        <a href="#s-verify" class="each"><b>G &middot; Verify</b>log, bug reports, statistics</a>
+      </div>
+      <p><b>Proof rule:</b> a run counts only when the Control Center job ends <i>Done</i>, writes <b>no bug report</b>, and its output is <b>byte-identical</b> to an expected file. "Ran without error" alone is a smoke result, not a pass. Each expected file states its basis: an <i>independent reference</i> (worked out from the cards / skeleton logic, not from the C#) or only a <i>cross-check</i> against the earlier mock run.</p>
+      <div class="info-box"><b>Who does what.</b> Steps marked <span class="badge elev">elevated</span> need your elevated shell (I prepare the script, you run it). Keycloak sign-in is always yours; credentials never go into chat or files. Everything else (staging, starting jobs in the shared browser tab, comparing) I can drive, one job at a time.</div>
+    </div>
+
+    <div class="section-card" id="s-build">
+      <h2>A &middot; Build the program DLLs <span class="badge badge-done">done for 13 programs</span></h2>
+      <p>Covered step by step in the <a href="#c-layers">Convert code</a> tab (and <a href="../Conversion/PROCESS.md">PROCESS.md</a> Steps 1&ndash;5b); only the driver is repeated here.</p>
+      <div class="step"><h4>A1 &middot; Prepare <span class="who">script</span></h4>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-Ssg4Release.ps1 -Stage Prepare</code></pre>
+        <p>Exports cards, expands each skeleton with its cards to COBOL, converts to one application <code>.LionSource</code> (<code>E:\Repos\ssg4-work\release</code>) and prints the LionDev steps. Default <code>-Programs</code> is the 14-program set (RECAP is built but excluded from delivery, T3-027).</p></div>
+      <div class="step"><h4>A2 &middot; LionDev 177 <span class="who">you</span></h4>
+        <p>Import the <code>.LionSource</code>, <b>Get newest</b> on every program and on the application options, generate <b>Whole system</b>; check <code>Generated : n Not Generated : 0</code>.</p></div>
+      <div class="step"><h4>A3 &middot; Verify + rebuild for 177a <span class="who">script</span></h4>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\Invoke-Ssg4Release.ps1 -Stage Verify</code></pre>
+        <p>Rebuilds every program against Federale's <b>177a</b> runtime (LionDev here is 177; 177 programs fail on 177a with <code>MissingMethodException</code>), runs the mock tests (B) and stages the package in <code>E:\AMT_Work\Delivery\AFBUS_2200COBOL_AMT-&lt;date&gt;</code> with <code>manifest.csv</code> (SHA256).</p></div>
+    </div>
+
+    <div class="section-card" id="s-mock">
+      <h2>B &middot; Prove offline in the mock system <span class="badge badge-done">done</span></h2>
+      <p>Runs each DLL against a mock system DB and a private file controller (port 18132), never Federale's. This is where the expected files for step F come from.</p>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\MockTest\Run-AllMockTests.ps1</code></pre>
+      <table class="ref">
+        <tr><th>Part</th><th>Covers</th><th>Expected files (used again in F)</th></tr>
+        <tr><td>1 &middot; reference copy</td><td>CFH-COPY_ASCII (call AFPH12 line 427)</td><td><code>E:\AMT_Work\MockTest\AFPH12_L427\{input,expected}</code></td></tr>
+        <tr><td>2 &middot; smoke set</td><td>every program, made-up input from its INPUT cards (5 records each)</td><td>none (loads, opens files, ends)</td></tr>
+        <tr><td>3 &middot; reference tests</td><td>FUSBA2 merge, LOADIS&rarr;UNLOADIS round trips (ASCII and MULTI), CHAB100</td><td><code>E:\AMT_Work\MockTest\Ref\&lt;case&gt;</code></td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="s-deliver">
+      <h2>C &middot; Deliver into the application folder <span class="badge badge-done">done 2026-10-20</span></h2>
+      <div class="step"><h4>C1 &middot; Know the target</h4>
+        <p>Program jobs are found at <code>%APPROOT%\programs\&lt;name&gt;.dll</code>; <code>%APPROOT%</code> is the application's own <i>Application base path</i> (CC &rarr; System Configuration &rarr; Architecture &rarr; Applications &rarr; <code>AFBUS_2200COBOL_AMT</code> &rarr; Properties), now <code>E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries</code>. The shared Basepaths set (<code>default</code>) is <b>not</b> the place for this and must not be edited.</p></div>
+      <div class="step"><h4>C2 &middot; Back up, then copy <span class="who">script</span></h4>
+<pre><code>pwsh -NoProfile -File _scratch\Deliver-ToAmtFolder.ps1   <span class="c"># package Programs + Application into &lt;APPROOT&gt;</span>
+pwsh -NoProfile -File _scratch\Add-RuntimeDlls.ps1       <span class="c"># the 9 runtime DLLs Federale also keeps beside its programs</span></code></pre>
+        <p>Result: <code>Binaries\Programs</code> = 13 program DLLs + 177a <code>AFBUS_2200COBOL.Application/Database.dll</code> + 9 runtime DLLs + <code>REBUILT-FOR-177A.*</code>.</p></div>
+      <div class="step"><h4>C3 &middot; Restart the services <span class="badge elev">elevated</span></h4>
+<pre><code>cd E:\Repos\SsgTrial\SsgConverter\Trials\RealRuntime
+.\Manage-FederaleServices.ps1 -Action Restart      <span class="c"># Restart, not Start: Start skips running services</span></code></pre>
+        <p>BatchController only picks up new DLLs on restart. <code>FederaleTransactionServer</code> stopping shortly after is known (T3-014) and only matters for FEDERALE_APP.</p></div>
+    </div>
+
+    <div class="section-card" id="s-setup">
+      <h2>D &middot; One-off Control Center set-up <span class="badge badge-done">done 2026-10-20</span></h2>
+      <p>Needed once per VM, and again only when the application or its database schema changes (the LionDev generator log says "IT'S NECESSARY TO RUN THE DATABASE REORGANIZE").</p>
+
+      <div class="step"><h4>D1 &middot; Application base path <span class="who">you, in CC</span></h4>
+        <p>Set <code>AFBUS_2200COBOL_AMT</code>'s Application base path to end in <code>\Binaries</code> (see C1). Then restart the services (C3).</p></div>
+
+      <div class="step"><h4>D2 &middot; Remove orphan process jobs (only if the log shows them) <span class="who">you, SSMS</span></h4>
+        <p>If <code>FederaleBatchController.Log</code> shows "Unhandled job" lines on every start for an application that no longer exists, check with <code>Conversion\Pipeline\ControlCenter\Read-JobConfig.sql</code> and remove with <code>Remove-OrphanProcessJobs.sql</code> (transaction-wrapped; was jobs 30/31 of deleted APPID 4).</p></div>
+
+      <div class="step"><h4>D3 &middot; Register the jobs <span class="who">you or me, in CC</span></h4>
+        <p>System Configuration &rarr; Batch &amp; Forms &rarr; <b>AvailableJobs</b> &rarr; Application <code>AFBUS_2200COBOL_AMT</code> &rarr; <i>Read all jobs from system</i> &rarr; Refresh. The 13 programs appear as type <code>AmtCobolProgram</code> (JobIds 5396&ndash;5408). The AvailableForms scan error "Forms path not found ...\Server\bin" is harmless for a batch-only application. Security &rarr; Jobs: the programs were already ticked for Administrators.</p></div>
+
+      <div class="step" id="s-reo"><h4>D4 &middot; Reorganize the application database <span class="badge elev">elevated</span> <span class="who">you, GUI</span></h4>
+        <p>Without it every job ends with a bug report <i>Invalid object name 'dbo.AMTSYSCRITICALREPORT'</i> (output still correct).</p>
+        <ol>
+          <li>Runtime licence present at <code>E:\Amt\AmtRuntime.lic</code> (copy of <code>C:\Amt\lic\AmtRuntime.lic</code>). Do not touch Federale's own <code>AmtTools\AmtRuntime.lic</code>.</li>
+          <li>The Reorganize tool is <b>177</b> and cannot load the 177a application DLLs. Swap the 177 originals into <code>&lt;APPROOT&gt;\Application</code>:
+<pre><code>pwsh -NoProfile -File _scratch\Swap-ReoDlls.ps1   <span class="c"># keeps the 177a rebuilds in Application.rebuilt-177a</span></code></pre></li>
+          <li>Stop the Federale services (<code>Manage-FederaleServices.ps1 -Action Stop</code>).</li>
+          <li>Run <code>E:\Amt\AMTTools\Reorganize\AmtReorganize.exe</code>; tick <b>only</b> <code>VMFEDPE08 : AFBUS_2200COBOL_AMT : MSSQL [dbo]</code>; <i>Analyze selected</i>, then <i>Reo selected</i>.</li>
+          <li>Restart the services (C3).</li>
+        </ol>
+        <div class="bug-box"><b>Never</b> <i>Reo all</i>, and never reorganize <code>System</code> or <code>FEDERALE_APP</code>.</div>
+        <p>Creates <code>AMTSYSCRITICALREPORT</code>, <code>AMTSYSDMS2200DBKEY</code>, <code>AMTSYSSESSIONDATA</code>, <code>AMTSYSSESSIONFORMDATA</code>, sequence <code>seq_amtsysuniquenumber</code>, function <code>AMT_ENCRYPT</code>. Log: <code>AmtTools\Basepaths\Logs\&lt;date&gt;\Reorganize.Log</code>.</p></div>
+
+      <div class="step"><h4>D5 &middot; Let my shell clean job outputs <span class="badge elev">elevated</span></h4>
+<pre><code>pwsh -NoProfile -File Conversion\Pipeline\ControlCenter\Grant-ExtractsAccess.ps1</code></pre>
+        <p>Jobs write their outputs as the service account; this grants <code>VMFEDPE08\MTRUMAN</code> Modify on the <code>Extracts</code> folder only (inherited by new files), so re-runs need no elevated step.</p></div>
+    </div>
+
+    <div class="section-card" id="s-session">
+      <h2>E &middot; Each session (before any run)</h2>
+      <ol>
+        <li><b>Keycloak</b>: check with <code>pwsh -NoProfile -File _scratch\Check-Keycloak.ps1</code>. If down, in its own console: <code>cd C:\Tools\keycloak-26.7.2</code> then <code>bin\kc.bat start-dev</code> (leave the window open).</li>
+        <li><b>Services</b> <span class="badge elev">elevated</span>: <code>.\Manage-FederaleServices.ps1 -Action Restart</code> from <code>SsgConverter\Trials\RealRuntime</code> (Keycloak first, then services).</li>
+        <li><b>Log in</b> at <code>http://localhost:5100/</code> (realm <code>Federale</code>) &mdash; you type the password. Wait for the <i>Logon succeeded</i> home screen before anyone navigates the tab: navigating while the title is "OIDC Form_Post Response" breaks the login. Any service restart drops the session; log in again.</li>
+      </ol>
+    </div>
+
+    <div class="section-card" id="s-run">
+      <h2>F &middot; Run one program (repeat per program, strictly one at a time)</h2>
+      <div class="step"><h4>F1 &middot; Stage the input</h4>
+<pre><code>cd E:\Repos\SsgTrial\Conversion\Pipeline\ControlCenter
+pwsh -NoProfile -File .\Invoke-CcPilot.ps1 -Pilot &lt;PROGRAM&gt; -Action Stage</code></pre>
+        <p>Copies the mock-test input (or makes the 5-record smoke input) to <code>&lt;NAME&gt;.DAT</code> in <code>E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts</code>. Refuses if any input <i>or output</i> already exists (a leftover would give a false result).</p></div>
+      <div class="step"><h4>F2 &middot; Start the job in Control Center</h4>
+        <ol>
+          <li>Jobs &rarr; <b>Start Job</b>; Application <code>AFBUS_2200COBOL_AMT</code>.</li>
+          <li>Click the row <code>ASSURFED_UTILIT_&lt;PROGRAM&gt;</code>, then <b>Start job</b>.</li>
+          <li>Check the <i>New Start job</i> dialog: AppId 6, the right JobId, Jobtype <code>AmtCobolProgram</code>, File <code>%APPROOT%\programs\&lt;name&gt;.dll</code>, Queue <code>JOB_QUEUE1</code>; leave everything else default &rarr; <b>Ok</b>.</li>
+        </ol>
+        <p>A run takes about 2 s from queue to Done (0.2&ndash;0.9 s execution).</p></div>
+      <div class="step"><h4>F3 &middot; Compare</h4>
+<pre><code>pwsh -NoProfile -File .\Invoke-CcPilot.ps1 -Pilot &lt;PROGRAM&gt; -Action Compare</code></pre>
+        <p>Prints the last BatchController lines for the job (Running / Done / Error with Id and time), whether a bug report was written <i>since this run started</i> (with its first line), copies the outputs to <code>_scratch\cc-runs\&lt;PROGRAM&gt;</code>, then PASS/FAIL against the expected file with its basis &mdash; or, for smoke programs, the output sizes.</p></div>
+      <div class="step"><h4>F4 &middot; Clean</h4>
+<pre><code>pwsh -NoProfile -File .\Invoke-CcPilot.ps1 -Pilot &lt;PROGRAM&gt; -Action Clean</code></pre>
+        <p>Removes only that program's fixed input/output names (and their <code>.Index</code> files). Other files in Extracts (<code>ECL-*</code>, <code>FICHIN-1</code>, <code>OUTA.DAT</code>, <code>Archive-SSG-Verification</code>) belong to SSG-3 / FEDERALE_APP and are never touched.</p></div>
+      <div class="warn"><b>Round trips:</b> run <code>LOADIS_ASCII</code> before <code>UNLOADIS_ASCII</code> (Stage copies <code>OUTCLOA49.DAT</code>+<code>.Index</code> to <code>FSCR001ATO.DAT</code>+<code>.Index</code>), and <code>LOADIS_MULTI</code> before <code>UNLOADIS_MULTI</code> (reads <code>F006GRS.DAT</code> in place). Clean the UNLOADIS side first, then the LOADIS side.</div>
+
+      <h3 id="s-programs">Per-program table</h3>
+      <table class="ref">
+        <tr><th>Program (<code>-Pilot</code>)</th><th>JobId</th><th>Input staged</th><th>Output checked</th><th>Expected file / basis</th></tr>
+        <tr><td><code>CFH-COPY_ASCII</code></td><td>5397</td><td><code>INASC.DAT</code> 25 rec, 2,050 B</td><td><code>OUTASC.DAT</code></td><td><code>MockTest\AFPH12_L427\expected\OUTASC</code> &middot; <span class="badge badge-done">independent</span></td></tr>
+        <tr><td><code>LOADIS_ASCII</code></td><td>5404</td><td><code>B010SINAUTCL.DAT</code> 40 rec &times; 204</td><td><code>OUTCLOA49.DAT</code> (+.Index)</td><td><code>Ref\LOADIS_ASCII-UNLOADIS_ASCII\loaded.dat</code> &middot; <span class="badge badge-info">mock cross-check</span></td></tr>
+        <tr><td><code>UNLOADIS_ASCII</code></td><td>5407</td><td><code>FSCR001ATO.DAT</code>+.Index (= LOADIS output)</td><td><code>OUT.DAT</code></td><td><code>...\expected.bin</code> &middot; <span class="badge badge-done">independent</span></td></tr>
+        <tr><td><code>LOADIS_MULTI</code></td><td>5405</td><td><code>INVIGA50.DAT</code> 40 rec &times; 200</td><td><code>F006GRS.DAT</code> (+.Index)</td><td><code>Ref\LOADIS_MULTI-UNLOADIS_MULTI\loaded.dat</code> &middot; <span class="badge badge-info">mock cross-check</span></td></tr>
+        <tr><td><code>UNLOADIS_MULTI</code></td><td>5408</td><td>(reads <code>F006GRS.DAT</code> left by LOADIS_MULTI)</td><td><code>OUTVIGA50.DAT</code></td><td><code>...\expected.bin</code> &middot; <span class="badge badge-done">independent</span></td></tr>
+        <tr><td><code>FUSBA2_ASCII</code></td><td>5401</td><td><code>MAJ.DAT</code> 14 rec, <code>INP.DAT</code> 39 rec</td><td><code>OUT.DAT</code></td><td><code>Ref\FUSBA2_L766\OUT.expected</code> &middot; <span class="badge badge-done">independent</span> (model of the skeleton loop)</td></tr>
+        <tr><td><code>CHAB100_ASCII</code></td><td>5398</td><td><code>CAR.DAT</code> (data cards)</td><td><code>FILEIN.DAT</code></td><td><code>Ref\CHAB100\expected.bin</code> &middot; <span class="badge badge-bug">fails, T3-032</span></td></tr>
+        <tr><td><code>BABA_ASCII</code></td><td>5396</td><td><code>I001MSG054.DAT</code> 5 &times; 366 (made up)</td><td><code>I006MSG054.DAT</code> size</td><td><span class="badge badge-pend">smoke</span></td></tr>
+        <tr><td><code>CHABAN_ASCII</code></td><td>5399</td><td>none</td><td><code>OUT.DAT</code> size</td><td><span class="badge badge-pend">smoke</span></td></tr>
+        <tr><td><code>CONDIS2_ASCII</code></td><td>5400</td><td>none</td><td><code>FILEOUT.DAT</code> size</td><td><span class="badge badge-pend">smoke</span></td></tr>
+        <tr><td><code>FUSBA_ASCII</code></td><td>5402</td><td><code>CLE.DAT</code> 5 &times; 29, <code>UNL.DAT</code> 5 &times; 296</td><td><code>LOA.DAT</code>, <code>SUP.DAT</code> sizes</td><td><span class="badge badge-pend">smoke</span></td></tr>
+        <tr><td><code>LECTIS_ASCII</code></td><td>5403</td><td><code>I008TSTA696.DAT</code> 5 &times; 80</td><td>none (prints)</td><td><span class="badge badge-pend">smoke</span></td></tr>
+        <tr><td><code>TABAN_ASCII</code></td><td>5406</td><td><code>ICCS9GCL2.DAT</code> 5 &times; 300</td><td>none</td><td><span class="badge badge-bug">fails, T3-027 (RSA$INIT)</span></td></tr>
+      </table>
+      <p style="font-size:12px;color:#6b7280;">Mock paths are under <code>E:\AMT_Work\MockTest\</code>. The order used on 2026-10-20 (the table order) keeps each round trip together.</p>
+    </div>
+
+    <div class="section-card" id="s-verify">
+      <h2>G &middot; Verify (three independent views)</h2>
+      <table class="ref">
+        <tr><th>View</th><th>Where</th><th>What to look for</th></tr>
+        <tr><td>BatchController log</td><td><code>AmtTools\Basepaths\Logs\&lt;yyyyMMdd&gt;\FederaleBatchController.Log</code>, or CC &rarr; Processed &rarr; Logging</td><td><code>Running Id: n</code> then <code>Done Id: n</code> (or <code>Error</code>) with execution time</td></tr>
+        <tr><td>Bug reports</td><td><code>...\Logs\&lt;yyyyMMdd&gt;\&lt;JOB&gt;_BugReport.Log</code></td><td>none written at or after the run's start; if one is, read <i>exception message</i></td></tr>
+        <tr><td>Output</td><td><code>Invoke-CcPilot.ps1 -Action Compare</code>; copies in <code>_scratch\cc-runs\&lt;PROGRAM&gt;</code></td><td>PASS byte-identical (reference programs) or expected sizes (smoke)</td></tr>
+        <tr><td>CC statistics</td><td>CC &rarr; Processed &rarr; Statistics &rarr; <b>Data overview</b>, Aggregation <i>Detailed</i></td><td>one row per program; Amount = runs; <i>File Records</i> = records read+written that match the staged data</td></tr>
+      </table>
+      <div class="info-box">CC &rarr; Processed &rarr; <i>File Monitor</i> shows live file-controller sessions (BatchController heartbeats, our own CC session), not the jobs' files &mdash; not useful as evidence.</div>
+    </div>
+
+    <div class="section-card" id="s-reset">
+      <h2>H &middot; Reset / re-run</h2>
+      <ul>
+        <li>Same data again: <code>-Action Clean</code> then F1&ndash;F4. Stage refuses while old outputs exist, by design.</li>
+        <li>New DLLs: deliver (C2), restart services (C3); if the generator asked for it, reorganize again (D4).</li>
+        <li>After a reorganize, put the 177a application rebuilds back in <code>&lt;APPROOT&gt;\Application</code> from <code>Application.rebuilt-177a</code> (open item: not yet done; programs run from <code>Programs</code>, which has the 177a versions).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═════════════════════════════ TAB 3: RUN RECORD -->
+  <div class="tab-panel" data-group="main" id="tab-run">
+
+    <div class="info-box"><b>Up to three run records are kept here: Last, Previous, To be archived.</b> When a new run is recorded: (1) move the <i>To be archived</i> record to the top of <a href="SSG4-ControlCenter-Runbook-Archive.md">SSG4-ControlCenter-Runbook-Archive.md</a> (as Markdown); (2) <i>Previous</i> becomes <i>To be archived</i>; (3) <i>Last</i> becomes <i>Previous</i>; (4) the new run goes in <i>Last</i>. Section ids move with their record; the how-to tabs link to <code>#run-last</code>.</div>
+
+    <div class="tabs sub" data-group="run">
+      <button data-tab="run-last">Last &middot; 2026-10-20 13:11&ndash;13:24 &middot; all 13</button>
+      <button data-tab="run-prev">Previous &middot; 2026-10-20 11:58 &middot; pilot of 3</button>
+      <button data-tab="run-arch">To be archived &middot; (empty)</button>
+    </div>
+
+  <!-- ── LAST -->
+  <div class="tab-panel" data-group="run" id="run-last">
+
+    <div class="section-card" id="r-summary">
+      <h2>Last run &mdash; 2026-10-20 13:11&ndash;13:24 &middot; all 13 programs, after the reorganize</h2>
+      <div class="success-box"><b>All 13 delivered programs ran as real Control Center jobs</b> (Ids 124&ndash;136, 13:19&ndash;13:24, one at a time, after the database reorganize). <b>6 PASS</b> byte-identical (4 against an independent reference, 2 against the mock run), <b>5 smoke runs</b> ended Done with no bug report, <b>2 behave exactly as in the mock run</b>: TABAN_ASCII (T3-027) and CHAB100_ASCII (T3-032). Control Center's own statistics agree.</div>
+      <table class="ref">
+        <tr><th>Outcome</th><th class="n">Programs</th><th>Which</th></tr>
+        <tr><td><span class="badge badge-done">PASS &middot; independent</span></td><td class="n">4</td><td>CFH_COPY_ASCII, UNLOADIS_ASCII, UNLOADIS_MULTI, FUSBA2_ASCII</td></tr>
+        <tr><td><span class="badge badge-info">PASS &middot; mock cross-check</span></td><td class="n">2</td><td>LOADIS_ASCII, LOADIS_MULTI</td></tr>
+        <tr><td><span class="badge badge-pend">Smoke clean</span></td><td class="n">5</td><td>BABA_ASCII, CHABAN_ASCII, CONDIS2_ASCII, FUSBA_ASCII, LECTIS_ASCII</td></tr>
+        <tr><td><span class="badge badge-bug">Known failure</span></td><td class="n">2</td><td>TABAN_ASCII (Error, RSA$INIT), CHAB100_ASCII (Done, 0-byte output)</td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="r-last-timeline">
+      <h2>Timeline</h2>
+      <table class="ref">
+        <tr><th>Time</th><th>What happened</th></tr>
+        <tr><td>13:07:25</td><td>Services restarted after the reorganize (see Previous); clean BatchController start.</td></tr>
+        <tr><td>13:11</td><td>CFH_COPY_ASCII re-run (Id 123): Done 0.78 s, PASS, <b>no bug report</b> &mdash; reorganize confirmed.</td></tr>
+        <tr><td>13:15</td><td><code>Invoke-CcPilot.ps1</code> extended to all 13; <code>Grant-ExtractsAccess.ps1</code> run (D5); old outputs cleaned without elevation.</td></tr>
+        <tr><td>13:19&ndash;13:24</td><td>Full run, Ids 124&ndash;136 (below), one job at a time: Stage &rarr; Start Job &rarr; Compare &rarr; Clean.</td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="r-results">
+      <h2>Results per program (full run)</h2>
+      <table class="ref">
+        <tr><th>Id</th><th>Started</th><th>Program</th><th>CC status</th><th class="n">Exec ms</th><th>Bug report</th><th>Output</th><th>Result</th></tr>
+        <tr><td>124</td><td>13:19:26</td><td>LOADIS_ASCII</td><td>Done</td><td class="n">274</td><td>none</td><td><code>OUTCLOA49.DAT</code> 8,240 B</td><td><span class="badge badge-info">PASS mock</span></td></tr>
+        <tr><td>125</td><td>13:19:51</td><td>UNLOADIS_ASCII</td><td>Done</td><td class="n">225</td><td>none</td><td><code>OUT.DAT</code> 8,240 B</td><td><span class="badge badge-done">PASS</span></td></tr>
+        <tr><td>126</td><td>13:20:07</td><td>CFH_COPY_ASCII</td><td>Done</td><td class="n">209</td><td>none</td><td><code>OUTASC.DAT</code> 600 B</td><td><span class="badge badge-done">PASS</span></td></tr>
+        <tr><td>127</td><td>13:20:23</td><td>LOADIS_MULTI</td><td>Done</td><td class="n">217</td><td>none</td><td><code>F006GRS.DAT</code> 8,080 B</td><td><span class="badge badge-info">PASS mock</span></td></tr>
+        <tr><td>128</td><td>13:20:33</td><td>UNLOADIS_MULTI</td><td>Done</td><td class="n">175</td><td>none</td><td><code>OUTVIGA50.DAT</code> 8,080 B</td><td><span class="badge badge-done">PASS</span></td></tr>
+        <tr><td>129</td><td>13:20:47</td><td>FUSBA2_ASCII</td><td>Done</td><td class="n">217</td><td>none</td><td><code>OUT.DAT</code> 9,672 B</td><td><span class="badge badge-done">PASS</span></td></tr>
+        <tr><td>130</td><td>13:21:12</td><td>BABA_ASCII</td><td>Done</td><td class="n">182</td><td>none</td><td><code>I006MSG054.DAT</code> 1,840 B</td><td><span class="badge badge-pend">smoke OK</span></td></tr>
+        <tr><td>131</td><td>13:22:16</td><td>CHABAN_ASCII</td><td>Done</td><td class="n">174</td><td>none</td><td><code>OUT.DAT</code> 0 B</td><td><span class="badge badge-pend">smoke OK</span></td></tr>
+        <tr><td>132</td><td>13:22:47</td><td>CONDIS2_ASCII</td><td>Done</td><td class="n">175</td><td>none</td><td><code>FILEOUT.DAT</code> 0 B</td><td><span class="badge badge-pend">smoke OK</span></td></tr>
+        <tr><td>133</td><td>13:22:57</td><td>FUSBA_ASCII</td><td>Done</td><td class="n">221</td><td>none</td><td><code>LOA.DAT</code> 1,490 B, <code>SUP.DAT</code> 0 B</td><td><span class="badge badge-pend">smoke OK</span></td></tr>
+        <tr><td>134</td><td>13:23:09</td><td>LECTIS_ASCII</td><td>Done</td><td class="n">240</td><td>none</td><td>none (prints)</td><td><span class="badge badge-pend">smoke OK</span></td></tr>
+        <tr><td>135</td><td>13:23:21</td><td>TABAN_ASCII</td><td><b>Error</b></td><td class="n">851</td><td><b>yes</b>: <i>Invalid function call RSA$INIT. Should be AssemblyName.ClassName.MethodName</i></td><td>none</td><td><span class="badge badge-bug">T3-027</span></td></tr>
+        <tr><td>136</td><td>13:23:33</td><td>CHAB100_ASCII</td><td>Done</td><td class="n">173</td><td>none</td><td><code>FILEIN.DAT</code> 0 B (expected 102)</td><td><span class="badge badge-bug">T3-032</span></td></tr>
+      </table>
+      <p style="font-size:12px;color:#6b7280;">Evidence: outputs in <code>_scratch\cc-runs\&lt;PROGRAM&gt;</code>; log lines in <code>Logs\20261020\FederaleBatchController.Log</code>.</p>
+    </div>
+
+    <div class="section-card" id="r-stats">
+      <h2>Control Center statistics (corroboration)</h2>
+      <p>CC &rarr; Processed &rarr; Statistics &rarr; Data overview, All Applications, Detailed. Only runs after the reorganize are counted (the statistics tables did not exist before it), so CFH_COPY_ASCII shows 2 (Ids 123 and 126) and Ids 120&ndash;122 are absent.</p>
+      <table class="ref">
+        <tr><th>Program</th><th class="n">Amount</th><th class="n">Total ms</th><th class="n">Avg file ms</th><th class="n">File actions</th><th class="n">File records</th><th class="n">File stores</th><th>Matches staged data</th></tr>
+        <tr><td>CHAB100_ASCII</td><td class="n">1</td><td class="n">162</td><td class="n">0</td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td>0 records = 0-byte output (T3-032)</td></tr>
+        <tr><td>CHABAN_ASCII</td><td class="n">1</td><td class="n">165</td><td class="n">0</td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td>no input, 0-byte output</td></tr>
+        <tr><td>CONDIS2_ASCII</td><td class="n">1</td><td class="n">165</td><td class="n">4</td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td>no input, 0-byte output</td></tr>
+        <tr><td>TABAN_ASCII</td><td class="n">1</td><td class="n">840</td><td class="n">16</td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td>stopped before reading (RSA$INIT)</td></tr>
+        <tr><td>BABA_ASCII</td><td class="n">1</td><td class="n">173</td><td class="n">14</td><td class="n">13</td><td class="n">5</td><td class="n">6</td><td>5 records in</td></tr>
+        <tr><td>LECTIS_ASCII</td><td class="n">1</td><td class="n">230</td><td class="n">20</td><td class="n">13</td><td class="n">5</td><td class="n">0</td><td>5 records in, nothing written</td></tr>
+        <tr><td>FUSBA_ASCII</td><td class="n">1</td><td class="n">212</td><td class="n">33</td><td class="n">26</td><td class="n">10</td><td class="n">6</td><td>5 + 5 records in</td></tr>
+        <tr><td>CFH_COPY_ASCII</td><td class="n">2</td><td class="n">335</td><td class="n">45</td><td class="n">53</td><td class="n">25</td><td class="n">26</td><td>25 records</td></tr>
+        <tr><td>LOADIS_ASCII</td><td class="n">1</td><td class="n">260</td><td class="n">65</td><td class="n">83</td><td class="n">40</td><td class="n">40</td><td>40 records</td></tr>
+        <tr><td>LOADIS_MULTI</td><td class="n">1</td><td class="n">208</td><td class="n">38</td><td class="n">83</td><td class="n">40</td><td class="n">40</td><td>40 records</td></tr>
+        <tr><td>UNLOADIS_ASCII</td><td class="n">1</td><td class="n">214</td><td class="n">38</td><td class="n">83</td><td class="n">40</td><td class="n">41</td><td>40 records</td></tr>
+        <tr><td>UNLOADIS_MULTI</td><td class="n">1</td><td class="n">166</td><td class="n">5</td><td class="n">83</td><td class="n">40</td><td class="n">41</td><td>40 records</td></tr>
+        <tr><td>FUSBA2_ASCII</td><td class="n">1</td><td class="n">208</td><td class="n">37</td><td class="n">112</td><td class="n">53</td><td class="n">40</td><td>14 MAJ + 39 INP records</td></tr>
+        <tr class="total"><td>Total</td><td class="n">14</td><td class="n">3,338</td><td class="n">26</td><td class="n">553</td><td class="n">258</td><td class="n">240</td><td></td></tr>
+      </table>
+      <p style="font-size:12px;color:#6b7280;">File stores track the records written closely but not exactly (e.g. 40 for FUSBA2's 39 output records, 41 for UNLOADIS's 40); how AMT counts a store is not confirmed. Total ms agrees with the BatchController execution times (TABAN 840 vs 851).</p>
+    </div>
+
+    <div class="section-card" id="r-open">
+      <h2>Open items</h2>
+      <ul>
+        <li><b>T3-027</b> TABAN_ASCII (and RECAP): <code>CALL 'RSA$INIT'</code> has no AMT equivalent &mdash; database statements deferred to the next phase.</li>
+        <li><b>T3-032</b> CHAB100_ASCII: card-reader input not delivered to the program (0-byte <code>FILEIN.DAT</code>).</li>
+        <li><b>T3-035/036/037</b> converter issues from Batch 4 (see tracker &sect;6).</li>
+        <li>Restore the 177a rebuilds in <code>&lt;APPROOT&gt;\Application</code> (H).</li>
+        <li>Smoke programs have no reference output yet: an independent expected file per program would turn each into a real PASS.</li>
+        <li>Optional isolation: a separate Basepaths set / Configuration for <code>AFBUS_2200COBOL_AMT</code> so its Extracts are not shared with FEDERALE_APP.</li>
+        <li><b>MT-043</b> done for CFH-COPY and BABA (converted runstream steps run end to end in CC with one generic program each). FUSBA + FUSBA2 (36 calls): done, 12 of 12 in CC (<a href="#c-fusba">C9</a>). Next: regenerate BABA-GN and CFH-COPY-GN with the T3-040 fix, then CHABAN, RECAP, TABAN, SCAN/CONDIS2/TAPELD, LOADIS family.</li>
+        <li><b>MT-033</b> questions for R&amp;D: line reader merging short lines (T3-040), <code>CALL 'ABORT'</code> warning, quoted card values (<code>'W'</code>), <code>UseUnicode</code> for the client (T3-039).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── PREVIOUS -->
+  <div class="tab-panel" data-group="run" id="run-prev">
+
+    <div class="section-card" id="r-prev-summary">
+      <h2>Previous run &mdash; 2026-10-20 11:58&ndash;12:00 &middot; pilot of 3, before the reorganize</h2>
+      <div class="warn"><b>Outputs correct, but every job wrote a bug report.</b> First real Control Center runs of SSG-4 programs. All three outputs byte-identical to their expected files; each job then ended with <i>Invalid object name 'dbo.AMTSYSCRITICALREPORT'</i> in <code>ClearReportEntries</code>, because the application database had not been reorganized. Fixed in D4; confirmed by the Last run.</div>
+      <table class="ref">
+        <tr><th>Id</th><th>Started</th><th>Program</th><th>CC status</th><th>Bug report</th><th>Output</th><th>Result</th></tr>
+        <tr><td>120</td><td>11:58</td><td>CFH_COPY_ASCII</td><td>Done</td><td>yes (AMTSYSCRITICALREPORT)</td><td><code>OUTASC.DAT</code> 600 B</td><td><span class="badge badge-done">PASS output</span></td></tr>
+        <tr><td>121</td><td>11:59</td><td>LOADIS_ASCII</td><td>Done</td><td>yes (AMTSYSCRITICALREPORT)</td><td><code>OUTCLOA49.DAT</code> 8,240 B</td><td><span class="badge badge-info">PASS mock</span></td></tr>
+        <tr><td>122</td><td>12:00</td><td>UNLOADIS_ASCII</td><td>Done</td><td>yes (AMTSYSCRITICALREPORT)</td><td><code>OUT.DAT</code> 8,240 B</td><td><span class="badge badge-done">PASS output</span></td></tr>
+      </table>
+      <p style="font-size:12px;color:#6b7280;">Not counted in CC Statistics (the statistics tables only exist after the reorganize). Bug reports: <code>Logs\20261020\ASSURFED_UTILIT_*_BugReport.Log</code> (11:58&ndash;12:00).</p>
+    </div>
+
+    <div class="section-card" id="r-timeline">
+      <h2>Set-up timeline (the day's one-off work)</h2>
+      <table class="ref">
+        <tr><th>Time</th><th>What happened</th></tr>
+        <tr><td>morning</td><td>Found the application base path lacked <code>\Binaries</code> and the folder was parked in <code>z-old</code>; folder recreated, package delivered, base path edited in CC (D1, C2).</td></tr>
+        <tr><td>morning</td><td>Orphan process jobs 30/31 (deleted APPID 4) re-queued on every start; removed with <code>Remove-OrphanProcessJobs.sql</code> (D2).</td></tr>
+        <tr><td>morning</td><td>Services restarted; <i>Read all jobs from system</i> registered 54 jobs incl. the 13 programs (JobIds 5396&ndash;5408) (D3).</td></tr>
+        <tr><td>11:58&ndash;12:00</td><td>Pilot runs, Ids 120&ndash;122 (above).</td></tr>
+        <tr><td>to 13:06</td><td>Reorganize: licence copied to <code>E:\Amt</code>, 177 application DLLs swapped in (tool cannot load 177a), services stopped, <code>AFBUS_2200COBOL_AMT</code> only &mdash; completed 13:06:05 (D4).</td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="r-problems">
+      <h2>Problems met and how they were fixed</h2>
+      <table class="ref">
+        <tr><th>Symptom</th><th>Cause</th><th>Fix (step)</th></tr>
+        <tr><td>Jobs not found / wrong folder</td><td>Application base path without <code>\Binaries</code>; folder parked in <code>z-old</code></td><td>Recreate folder, deliver, edit base path in CC (C, D1)</td></tr>
+        <tr><td>"Unhandled job" on every BatchController start</td><td>Process jobs 30/31 of deleted APPID 4, invisible in CC</td><td><code>Remove-OrphanProcessJobs.sql</code> (D2)</td></tr>
+        <tr><td>Bug report <i>Invalid object name dbo.AMTSYSCRITICALREPORT</i></td><td>Application DB never reorganized</td><td>Reorganize (D4)</td></tr>
+        <tr><td>Reorganize: no licence</td><td><code>E:\Amt</code> had no <code>AmtRuntime.lic</code></td><td>Copy from <code>C:\Amt\lic</code></td></tr>
+        <tr><td>Reorganize: <i>Could not load ... Asysco.Amt.Runtime 8.0.26230.50</i></td><td>177 tool vs 177a application DLLs</td><td><code>Swap-ReoDlls.ps1</code> (177 originals for the reorganize only)</td></tr>
+        <tr><td>"Access denied" deleting job outputs</td><td>Outputs owned by the service account</td><td><code>Grant-ExtractsAccess.ps1</code> (D5)</td></tr>
+        <tr><td>Login reset mid-way</td><td>Tab navigated during "OIDC Form_Post Response"</td><td>Wait for <i>Logon succeeded</i> (E3)</td></tr>
+        <tr><td>Click on a job row timed out</td><td>CC keeps a hidden duplicate grid for some rows</td><td>Select the <i>visible</i> row (browser automation: <code>div:text-is('&lt;JOB&gt;') &gt;&gt; visible=true</code>)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── TO BE ARCHIVED -->
+  <div class="tab-panel" data-group="run" id="run-arch">
+    <div class="section-card">
+      <h2>To be archived &mdash; (empty)</h2>
+      <p>Filled when the next run is recorded (the current <i>Previous</i> moves here). Older records: <a href="SSG4-ControlCenter-Runbook-Archive.md">SSG4-ControlCenter-Runbook-Archive.md</a>.</p>
+    </div>
+  </div>
+  </div>
+
+  <!-- ═════════════════════════════ TAB 4: REFERENCE -->
+  <div class="tab-panel" data-group="main" id="tab-ref">
+
+    <div class="section-card" id="x-env">
+      <h2>Environment</h2>
+      <table class="ref">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Control Center</td><td><code>http://localhost:5100/</code> (user ADMIN)</td></tr>
+        <tr><td>Keycloak</td><td><code>http://localhost:8080</code>, realm <code>Federale</code>, client <code>federale-cc</code>; <code>C:\Tools\keycloak-26.7.2</code>, <code>bin\kc.bat start-dev</code></td></tr>
+        <tr><td>Services</td><td><code>Federale*</code>; <code>SsgConverter\Trials\RealRuntime\Manage-FederaleServices.ps1 -Action Restart|Stop</code> (elevated)</td></tr>
+        <tr><td>System DB</td><td><code>FEDERALE_SYSTEM</code> on <code>VMFEDPE08</code> (SSMS as <code>ava</code>)</td></tr>
+        <tr><td>Application</td><td>APPID 6 <code>AFBUS_2200COBOL_AMT</code>, kind 4096 (Cobol OS 2200), DB <code>AFBUS_2200COBOL_AMT</code>, config <code>default</code></td></tr>
+        <tr><td>Application base path</td><td><code>E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries</code> (<code>Programs</code>, <code>Application</code>, <code>Application.rebuilt-177a</code>)</td></tr>
+        <tr><td>Extracts (shared)</td><td><code>E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts</code></td></tr>
+        <tr><td>Logs</td><td><code>E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\&lt;yyyyMMdd&gt;\</code></td></tr>
+        <tr><td>Versions</td><td>LionDev / Reorganize 177 (8.0.26230.0); Federale runtime 177a (8.0.26230.50)</td></tr>
+        <tr><td>Job type</td><td><code>AmtCobolProgram</code> (JOBTYPE 5), file <code>%APPROOT%\programs\&lt;name&gt;.dll</code>, queue <code>JOB_QUEUE1</code></td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="x-scripts">
+      <h2>Scripts</h2>
+      <table class="ref">
+        <tr><th>Script</th><th>Purpose</th><th>Elevated</th></tr>
+        <tr><td><code>Conversion\Pipeline\Invoke-Ssg4Release.ps1</code></td><td>Build driver (Prepare / Verify)</td><td>no</td></tr>
+        <tr><td><code>Conversion\Pipeline\MockTest\Run-AllMockTests.ps1</code></td><td>Offline proof in the mock system</td><td>no</td></tr>
+        <tr><td><code>_scratch\Deliver-ToAmtFolder.ps1</code>, <code>_scratch\Add-RuntimeDlls.ps1</code></td><td>Deliver the package into <code>&lt;APPROOT&gt;</code></td><td>no</td></tr>
+        <tr><td><code>_scratch\Swap-ReoDlls.ps1</code></td><td>177 application DLLs in for the reorganize; 177a kept aside</td><td>no</td></tr>
+        <tr><td><code>Conversion\Pipeline\ControlCenter\Read-JobConfig.sql</code>, <code>Remove-OrphanProcessJobs.sql</code></td><td>Inspect / clean job tables</td><td>SSMS</td></tr>
+        <tr><td><code>Conversion\Pipeline\ControlCenter\Grant-ExtractsAccess.ps1</code></td><td>One-off Modify on Extracts for MTRUMAN</td><td><b>yes</b></td></tr>
+        <tr><td><code>Conversion\Pipeline\ControlCenter\Invoke-CcPilot.ps1</code></td><td>Stage / Compare / Clean for all 13 programs</td><td>no</td></tr>
+        <tr><td><code>_scratch\Check-Keycloak.ps1</code></td><td>Is Keycloak up</td><td>no</td></tr>
+        <tr><td><code>SsgConverter\Trials\RealRuntime\Manage-FederaleServices.ps1</code></td><td>Restart / stop the Federale services</td><td><b>yes</b></td></tr>
+      </table>
+    </div>
+
+    <div class="section-card" id="x-gotchas">
+      <h2>Gotchas</h2>
+      <ul>
+        <li><b>Restart, not Start</b>: <code>-Action Start</code> skips running services, so new DLLs are not picked up.</li>
+        <li><b>Basepaths set is shared</b> by FEDERALE_APP and AFBUS_2200COBOL_AMT; never edit it for this work.</li>
+        <li><b>Never</b> <i>Reo all</i>, never reorganize <code>System</code> or <code>FEDERALE_APP</code>.</li>
+        <li><b>177 vs 177a</b>: the Reorganize tool needs the 177 application DLLs; the runtime needs the 177a programs.</li>
+        <li><b>AMT adds <code>.DAT</code></b> to logical file names: <code>INASC</code> is read from <code>INASC.DAT</code>.</li>
+        <li><b>Indexed files</b> come as a pair (<code>X.DAT</code> + <code>X.DAT.Index</code>); copy and clean both.</li>
+        <li><b>First error is in the main trace</b>: check <code>FederaleBatchController.Log</code> before the per-job log (T3-010).</li>
+        <li><b>One job at a time</b>: jobs share the Extracts folder; a parallel run could read another's output.</li>
+        <li><b>FederaleTransactionServer</b> stops after start (T3-014): FEDERALE_APP only, ignore here.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bar">Companion to the <a href="SSG-PowerShell-Trial-Progress.html">Progress Tracker</a> (MT-009, MT-039, MT-042) and <a href="../Conversion/PROCESS.md">PROCESS.md</a>. Update the Run record tab after each reviewed CC run.</div>
+</main>
+
+<script>
+  function show(id) {
+    const p = document.getElementById(id);
+    if (!p || !p.classList.contains('tab-panel')) return;
+    const g = p.dataset.group;
+    document.querySelectorAll(`.tab-panel[data-group="${g}"]`).forEach(x => x.classList.toggle('active', x === p));
+    document.querySelectorAll(`.tabs[data-group="${g}"] button`).forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  }
+  function fromHash() {
+    const el = location.hash && document.getElementById(location.hash.slice(1));
+    const chain = [];
+    let p = el ? (el.classList.contains('tab-panel') ? el : el.closest('.tab-panel')) : null;
+    while (p) { chain.unshift(p); p = p.parentElement.closest('.tab-panel'); }
+    if (!chain.length) show('tab-convert');
+    chain.forEach(x => show(x.id));
+    if (!document.querySelector('.tab-panel[data-group="run"].active')) show('run-last');
+    if (el && !el.classList.contains('tab-panel')) el.scrollIntoView();
+  }
+  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+    history.replaceState(null, '', '#' + b.dataset.tab);
+    show(b.dataset.tab);
+    if (b.closest('.tabs').dataset.group === 'main') window.scrollTo(0, 0);
+  }));
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+</script>
+</body>
+</html>

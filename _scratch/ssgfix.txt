@@ -1,0 +1,25 @@
+already patched
+Build succeeded.
+    0 Error(s)
+built dll bytes: 52224  console dll bytes before: 51200
+Conversion complete: 20 succeeded, 0 failed
+ARCHIFORMAT.ps1: identical  parseErrors=0
+ARCHISEPARE.ps1: identical  parseErrors=0
+BABA_ASCII.ps1: CHANGED  parseErrors=0
+CFH-COPY_ASCII.ps1: CHANGED  parseErrors=0
+CFH-COPY.ps1: CHANGED  parseErrors=0
+CHAB100_ASCII.ps1: CHANGED  parseErrors=0
+CHABAN_ASCII.ps1: CHANGED  parseErrors=0
+CONDIS2_ASCII.ps1: identical  parseErrors=0
+EXTEUR.ps1: identical  parseErrors=0
+FUSBA_ASCII.ps1: CHANGED  parseErrors=0
+FUSBA2_ASCII.ps1: CHANGED  parseErrors=0
+LECTIS_ASCII.ps1: identical  parseErrors=0
+LOADIS_ASCII.ps1: CHANGED  parseErrors=0
+LOADIS_MULTI.ps1: CHANGED  parseErrors=0
+RECAP.ps1: CHANGED  parseErrors=0
+SCAN_ASCII.ps1: CHANGED  parseErrors=0
+TABAN_ASCII.ps1: CHANGED  parseErrors=0
+TAPELD_ASCII.ps1: CHANGED  parseErrors=0
+UNLOADIS_ASCII.ps1: CHANGED  parseErrors=0
+UNLOADIS_MULTI.ps1: CHANGED  parseErrors=0

@@ -11,6 +11,26 @@ namespace Ecl.SsgConverter {
   public sealed class SymstreamExpressionParser {
 
     /// <summary>
+    /// Position of the last binary '+' or '-' outside brackets and single quotes, or -1 (T3-043).
+    /// A sign is binary when the nearest non-blank character before it is not an operator or an opening bracket.
+    /// </summary>
+    private static Int32 FindLastAdditiveOperator (String text) {
+      Int32 depth = 0;
+      Boolean quoted = false;
+      Int32 found = -1;
+      Char previous = '\0';
+      for (Int32 i = 0; i < text.Length; i++) {
+        Char c = text[i];
+        if (c == '\'') { quoted = !quoted; }
+        else if (!quoted && c == '[') { depth++; }
+        else if (!quoted && c == ']') { depth--; }
+        else if (!quoted && depth == 0 && (c == '+' || c == '-') && previous != '\0' && "+-*/=<>(,".IndexOf(previous) < 0) { found = i; }
+        if (!Char.IsWhiteSpace(c)) { previous = c; }
+      }
+      return found;
+    } // FindLastAdditiveOperator
+
+    /// <summary>
     /// Parses a Symstream expression.
     /// </summary>
     /// <param name="text">The Symstream expression as source text.</param>
@@ -198,42 +218,19 @@ namespace Ecl.SsgConverter {
         }
       }
 
-      // -
-      if (text.Contains("-")) {
-        regex = new Regex(notPrecededByOpeningBracket + @"[ \t]*\-[ \t]*" + notFollowedByClosingBracket + notInSingleQuotes);
-        match = regex.Match(text);
-        if (match.Success && NotInPairsOfSingleQuotes(text, "-")) {
-          String left = text.Substring(0, match.Index);
-          // note: If left is empty we hit a unary negative, not a subtraction operation.
-          //       In that case we will ignore it, it will be dealt with later, below.
-          if (!String.IsNullOrEmpty(left)) {
-            String right = text.Substring(match.Index + match.Length);
-            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
-            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
-            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.Minus, exprRight);
-            return expression;
+      // + and - (one precedence level, evaluated left to right as in SSG: split at the LAST binary operator, T3-043)
+      if (text.Contains("-") || text.Contains("+")) {
+        Int32 split = FindLastAdditiveOperator(text);
+        if (split > -1) {
+          String left = text.Substring(0, split);
+          String right = text.Substring(split + 1);
+          if (!String.IsNullOrWhiteSpace(left) && !String.IsNullOrWhiteSpace(right)) {
+            SymstreamExpression exprLeft = Parse(left.Trim(), globalVariables, localVariables, identifierOverString);
+            SymstreamExpression exprRight = Parse(right.Trim(), globalVariables, localVariables, identifierOverString);
+            return new SymstreamExpressionBinary(exprLeft, text[split] == '-' ? BinaryOperator.Minus : BinaryOperator.Plus, exprRight);
           }
         }
       }
-
-      // +
-      if (text.Contains("+")) {
-        regex = new Regex(notPrecededByOpeningBracket + @"[ \t]*\+[ \t]*" + notFollowedByClosingBracket + notInSingleQuotes);
-        match = regex.Match(text);
-        if (match.Success && NotInPairsOfSingleQuotes(text, "+")) {
-          String left = text.Substring(0, match.Index);
-          // note: If left is empty we hit a unary positive, not an addition operation.
-          //       In that case we will ignore it, it will be dealt with later, below.
-          if (!String.IsNullOrEmpty(left)) {
-            String right = text.Substring(match.Index + match.Length);
-            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
-            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
-            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.Plus, exprRight);
-            return expression;
-          }
-        }
-      }
-
       // some string containing bracketed parts (which may be anywhere in the string)
       // this will root out any sneeky embedded bracketed references
       if (text.Contains("[") && !text.Contains("'") && !(text[0].Equals('[') && text[text.Length - 1].Equals(']'))) {

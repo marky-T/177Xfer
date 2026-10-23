@@ -1,0 +1,24 @@
+exists=True
+lines=15701
+--- function Initialize ---
+497: function Initialize {
+11301: function Initialize-IpfSystemVariables {
+14421: function Initialize-TaskObject {
+--- Connect ---
+597: # Connect to the application
+598: Connect-Application
+805: function Connect-Application {
+808: Connect to the application which is specified in AmtSettings.xml
+812: Abort "Connect-Application: Application not specified. Please check AmtSettings.xml"
+815: # Connect to the application
+821: $global:Com.Connect()
+824: Abort "Could not connect to application ""$($global:AppName)"", ERROR: $($global:Com.ErrorDescription)"
+826: Write-JobLog ("Successfully connected to application ""$($global:AppName)""") ([LoggingSeverity]::Info)
+846: } # Connect-Application
+10624: # Close the connection
+14523: # get the bulk copy object that is connected to the current application database
+14526: # for testing/debugging: use a custom connection to your favorite database
+14527: #$CS="Persist Security Info=true;Trusted_Connection=False;User Id=asy;Password=asy;Database=STA-PROD-L3;MultipleActiveResultSets=true;Server=VM-STA\MSSQL2012;Application Name=powershell_ise;Pooling=True;TrustServerCertificate=False;Encrypt=False;Connect Timeout=60"
+--- MsSql / SqlClient / wrapper ---
+14527: #$CS="Persist Security Info=true;Trusted_Connection=False;User Id=asy;Password=asy;Database=STA-PROD-L3;MultipleActiveResultSets=true;Server=VM-STA\MSSQL2012;Application Name=powershell_ise;Pooling=True;TrustServerCertificate=False;Encrypt=False;Connect Timeout=60"
+14528: #[System.Data.SqlClient.SqlBulkCopy]$BulkCopy = new-Object System.Data.SqlClient.SqlBulkCopy $CS

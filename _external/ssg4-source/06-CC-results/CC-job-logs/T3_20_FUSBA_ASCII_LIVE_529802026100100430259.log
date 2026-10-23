@@ -1,0 +1,17 @@
+T3_20_FUSBA_ASCII_LIVE started 2026-10-01 00:43:02
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.6
+
+2026-10-01 00:43:03 
+2026-10-01 00:43:03 Amt Sort PS library version: 60.31, date: 2026-04-13
+2026-10-01 00:43:03 [Sort-Init] Initializing Sort 
+2026-10-01 00:43:03 Info:  Script Started: T3_20_FUSBA_ASCII_LIVE
+2026-10-01 00:43:03 Error:  Error trapped:  Cannot index into a null array.
+2026-10-01 00:43:03 Error:  at Define_limpara, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\FUSBA_ASCII.ps1: line 50
+at <ScriptBlock>, C:\Amt\Working\Apps\AFBUS_2200COBOL\Binaries\Scripts\FUSBA_ASCII.ps1: line 430
+at <ScriptBlock>, C:\AMT\WORKING\APPS\AFBUS_2200COBOL\BINARIES\SCRIPTS\FUSBA_ASCII-LIVE.PS1: line 26
+at <ScriptBlock>, <No file>: line 1
+2026-10-01 00:43:03 Error:  AFBUS_2200COBOL  - T3_20_FUSBA_ASCII_LIVE : Script aborted.
+2026-10-01 00:43:03 
+2026-10-01 00:43:03 End Job. Start: 2026-10-01 00:43:01
+2026-10-01 00:43:03          End:   2026-10-01 00:43:03

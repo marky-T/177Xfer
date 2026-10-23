@@ -1,0 +1,14 @@
+=== Assurfed_Utilit_Baba_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Cfh_Copy_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Chaban_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Condis2_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Fusba_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Scan_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Tapeld_Gn: exit 0, errors 0
+Assurfed_Utilit_Baba_Gn.dll 23040 B 07:16:58
+Assurfed_Utilit_Cfh_Copy_Gn.dll 22016 B 07:17:33
+Assurfed_Utilit_Chaban_Gn.dll 16896 B 07:17:44
+Assurfed_Utilit_Condis2_Gn.dll 41984 B 07:17:55
+Assurfed_Utilit_Fusba_Gn.dll 26624 B 07:18:04
+Assurfed_Utilit_Scan_Gn.dll 19456 B 07:18:11
+Assurfed_Utilit_Tapeld_Gn.dll 19968 B 07:18:17

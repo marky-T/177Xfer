@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\cobol-run2\\out\\UNLOADIS_MULTI.LionSource
+APPNAME = UNLOADISMULTI
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol\\out\\FUSBA2_ASCII__VIRD03_L766.LionSource
+APPNAME = FUSBA2ASCIIVIRD03L766
+GENSET = Default from new application
+SYSOPT = FALSE

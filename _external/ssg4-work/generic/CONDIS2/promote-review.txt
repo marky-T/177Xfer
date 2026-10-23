@@ -1,0 +1,9 @@
+parse + old-reference scan: 8 scripts
+--- cc\Prepare-CondisCc.ps1
+  UE   VIRJ01_UE_L850    132 ->  132, groups 35: read 38, written 38, dropped 0
+  VG   -d_VIGD03_L894    231 ->  231, groups  2: read 10, written 10, dropped 0
+  SSG4_CONDIS_CASES.ps1 written, 6 steps, parse errors: 0
+job SSG4_CONDIS_CASES.ps1 unchanged: True
+deployed CondisParm.inc == Generic\CONDIS2 source: True
+compare AmtSettings.xml: 1/1 identical
+problems: 0

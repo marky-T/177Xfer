@@ -1,0 +1,4 @@
+--- BatchController: 20261021 22:26:11.863 12 Information SSG4_AFPH12_CFH_COPY Done Id: 838 Queue: JOB_QUEUE1 (Execution time: 00:00:14:837)
+--- AFPH12_83820261021222601911.log
+--- 1 of 1 outputs byte-identical
+=== SSG4_AFPH12_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\CFH-COPY\cc-runs\AFPH12\check.txt)

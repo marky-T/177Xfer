@@ -1,0 +1,150 @@
+﻿    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. MICHEL.  
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN  TO  CARD-READER. 
+           SELECT  TAPEIN  ASSIGN  TO  DISC FILEIN-1.  *> SSG-STUB [INPUT,1,1,1]
+           SELECT   TAPEOUT  ASSIGN  TO  PRINTER.   
+           SELECT  TAPEOUT  ASSIGN  TO  CARD-PUNCH. 
+           SELECT  TAPEOUT  ASSIGN  TO  DISC FILEOUT-1.  *> SSG-STUB [OUTPUT,1,1,1]
+           SELECT PRINTOUT ASSIGN TO PRINTER.   
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  PRINTOUT 
+           LABEL RECORD OMITTED 
+           DATA RECORD IS LISTE.
+       01  LISTE PIC X(132).
+       FD  TAPEIN   
+           LABEL RECORD OMITTED 
+           DATA RECORD IS   
+           REC11  *> SSG-STUB [*I]
+           RECIN.   
+           DATA RECORD RECIN.   
+       01  RECIN  PIC  X(80).  *> SSG-STUB [INPUT,1,1,2]
+       01  REC11.  *> SSG-STUB [*I]
+           06 ZONE1 PIC X(1).  *> SSG-STUB [*I], [FIELDIN,1,I,2]
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+           DATA RECORD IS   
+           REC11  *> SSG-STUB [*I]
+           RECIN.   
+           DATA RECORD RECIN.   
+       01     REC11.  *> SSG-STUB [*I]
+           06  ZONE1  PIC  9(1)V9(1).  *> SSG-STUB [*I], [FIELDIN,1,I,2], [FIELDIN,1,I,3]
+           06  ZONE1  PIC  X(1).  *> SSG-STUB [*I], [FIELDIN,1,I,2]
+       01  RECIN   PIC  X(80).  *> SSG-STUB [INPUT,1,1,2]
+       FD  TAPEOUT  
+           LABEL  RECORD OMITTED
+           DATA RECORD IS   
+           REC21  *> SSG-STUB [*I]
+           REC31  *> SSG-STUB [*I]
+           RECOUT.  
+           DATA RECORD RECOUT.  
+       01  RECOUT  PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  REC21.  *> SSG-STUB [*I]
+           06 ZONO1 PIC 9(1),9(1).  *> SSG-STUB [*I], [FIELDOUT,1,I,2], [FIELDOUT,1,I,3]
+           06 ZONO1 PIC X(1).  *> SSG-STUB [*I], [FIELDOUT,1,I,2]
+       01  REC31.  *> SSG-STUB [*I]
+           06 FIXDATA1 PIC X(1).  *> SSG-STUB [*I], [FIXE,1,I,2]
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS 1  RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+           DATA RECORD IS   
+           REC21  *> SSG-STUB [*I]
+           REC31  *> SSG-STUB [*I]
+           RECOUT.  
+           DATA RECORD RECOUT.  
+       01  RECOUT   PIC   X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+       01  REC21.  *> SSG-STUB [*I]
+           06  ZONO1  PIC 9(1),9(1).  *> SSG-STUB [*I], [FIELDOUT,1,I,2], [FIELDOUT,1,I,3]
+           06 ZONO1 PIC X(1).  *> SSG-STUB [*I], [FIELDOUT,1,I,2]
+       01  REC31.  *> SSG-STUB [*I]
+           06 FIXDATA1 PIC X(1).  *> SSG-STUB [*I], [FIXE,1,I,2]
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC  S9(10)  COMP  VALUE 0. 
+       77  LNCTR  PIC  S9(2)  VALUE 58. 
+       01  COPY-LIMIT         PIC 9(10) VALUE 1.  *> SSG-STUB [MAXCOPY,1,1,1]
+       01  TITLE-LINE         USAGE DISP-1. 
+           03  FILLER         PIC X(4) VALUE 'H,,,'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10)  VALUE '1234567890'.
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE SPACES.   
+           03  FILLER         PIC X(12) VALUE 'FILEIN-1'.  *> SSG-STUB [INPUT,1,1,1]
+           03  FILLER         PIC X(13) VALUE ' TO PRINTER '.   
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(10) VALUE '1234567890'. 
+           03  FILLER         PIC X(5)  VALUE '12 . '.  
+       01  RECW.
+           02 RECW1   PIC X(80).  *> SSG-STUB [INPUT,1,1,2]
+           02 RECW2  REDEFINES RECW1.   
+               03  RECW3  OCCURS 80.  *> SSG-STUB [INPUT,1,1,2]
+                    04  RECW4  PICTURE X.   
+       01  TAB11.  *> SSG-STUB [*I]
+               OR  1  =  SPACE  *> SSG-STUB [FIXE,1,I,3]
+           06  FIXED1  PIC  X(1)  VALUE SPACES.  *> SSG-STUB [*I], [FIXE,1,I,2]
+           06 FIXED1  PIC X(1) VALUE 1.  *> SSG-STUB [*I], [FIXE,1,I,2], [FIXE,1,I,3]
+       01  COUNT.   
+           03 COUNTING PIC S9(1)  VALUE 0.  *> SSG-STUB [FIXE,1,1,2]
+           03 COUNTER PIC S9(1) VALUE 1.  *> SSG-STUB [FIXE,1,1,2], [FIXE,1,1,4]
+       01   SWITCHES.   
+           03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN OUTPUT  PRINTOUT.   
+           OPEN INPUT TAPEIN.   
+           OPEN  OUTPUT  TAPEOUT.   
+       LECT.
+           MOVE SPACES TO RECOUT.   
+           IF  LNCTR  > 57  
+           MOVE  FIXED1   TO FIXDATA1  *> SSG-STUB [*I], [*I]
+           WRITE  RECOUT  AFTER  PAGE   
+           MOVE SPACES TO  RECOUT   
+           WRITE  RECOUT  AFTER  2  
+           MOVE 5 TO LNCTR. 
+           READ  TAPEIN  AT  END  GO TO  FINW.  
+           MOVE  RECIN  TO RECW.
+           IF  RECW4 (7) = '*' GO TO LECT.  
+       REPSIM.  
+           MOVE RECIN TO RECOUT.
+           MOVE                ZONE1 TO ZONO1.  *> SSG-STUB [*I], [*I]
+           ADD COUNTER TO COUNTING. 
+           MOVE COUNTING TO FIXED[*1].  
+           ENTER  SST60  SUBROUTINE REFERENCING '-' FIXDATA1.  *> SSG-STUB [*I]
+           MOVE                  FIXED1 TO FIXDATA1.  *> SSG-STUB [*I], [*I]
+           WRITE LISTE  FROM RECOUT AFTER 2.
+           ADD 1  TO NB-LUS.
+           ADD 1  TO LNCTR. 
+           IF  ZONE2  <  1  *> SSG-STUB [STARTFIELD,1,1,1]
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+           IF  NB-LUS  <  1  *> SSG-STUB [STARTREC,1,1,1]
+           ADD 1  TO REC-SKIPPED
+           GO TO LECT.  
+           WRITE RECOUT AFTER 2.
+           IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.   
+           IF  NB-LUS  =  1  *> SSG-STUB [REPSIM,1,1,1]
+           ADD 1  TO LNCTR. 
+           GO TO FINW   
+           ELSE  GO TO REPSIM.  
+           GO TO LECT.  
+       FINW.
+           DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.   
+           DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.   
+           CLOSE  TAPEIN.   
+           CLOSE  TAPEOUT.  
+           DISPLAY  REC-SKIPPED  UPON  PRINTER. 
+           CLOSE PRINTOUT.  
+           STOP RUN.

@@ -1,0 +1,6 @@
+Workspace : E:\Repos\SsgTrial\_scratch\fix-T3-045
+Edit log  : E:\Repos\SsgTrial\_scratch\fix-T3-045\edit.log
+[16:43:00] dotnet build...
+[16:43:07] Build finished.
+Build log : E:\Repos\SsgTrial\_scratch\fix-T3-045\build.log
+Build: OK

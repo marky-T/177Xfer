@@ -1,0 +1,4 @@
+Stage Deliver, environment CC-Federale, started 2026-10-22 15:31:39
+PASS GNFED          generated after                2026-10-22 10:49:02 (the build LionSource)
+FAIL GNFED          imported since the last delivery revision unchanged (ASSURFED_UTILIT_CFH_COPY_GN still 1.0.0.0): this LionSource differs from the last delivered one, so import it in LionDev and generate again
+=== Deliver : 1 failure(s)

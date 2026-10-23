@@ -1,0 +1,14 @@
+
+7-Zip 26.02 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-06-25
+
+Scanning the drive for archives:
+1 file, 57237694 bytes (55 MiB)
+
+Listing archive: E:\Repos\177Xfer_Verify\8.0.26230.0\Setup.exe
+
+
+Errors: 1
+
+ERROR: E:\Repos\177Xfer_Verify\8.0.26230.0\Setup.exe : Cannot open the file as archive
+
+

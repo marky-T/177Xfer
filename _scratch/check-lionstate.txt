@@ -1,0 +1,108 @@
+== time
+
+Monday, October 19, 2026 12:05:24 PM
+== source file state
+10/15/2026 6:13:14 PM DIFFERS from verified fix
+== Lion processes
+
+ProcessId Name                  CreationDate           CommandLine
+--------- ----                  ------------           -----------
+     4012 AmtFileController.exe 10/19/2026 11:19:43 AM 
+
+
+== Lion services
+
+Name                  Status StartType
+----                  ------ ---------
+LionDevGenNet        Stopped    Manual
+LionDevNet_Generator Stopped    Manual
+
+
+== Lion.ini (passwords hidden)
+****************************************************************************************
+*  Lion.ini for the LionDev-only install at E:\Amt (decision D9), AMT 177a.            *
+*  Created from Default_Lion.ini (AMT 177) on 2026-10-13.                              *
+*  Changed from the default: BACKUPDIR, SERVERNAMEREPOSDB, LIONDEVNETSERVERNAME,       *
+*  DBSNAME (AMT_REPOS177: fresh repository, the 179 one is untouched), DBUSER, DBPSSW. *
+*  DBPSSW: type the LionDev password here once; LionDev stores it encrypted after the  *
+*  first successful connection (an empty value fails to log in).                       *
+****************************************************************************************
+BACKUPRUNTIME=False
+BACKUPDIR=E:\Amt\Lion\Backup
+SELECTEDAPPLICATIONS=
+SELECTEDAPPPOOL=DefaultAppPool
+SINGLEAPPPOOL=False
+CONFIGUREAPPLICATIONSIIS=False
+WEBSITEROOT=Default Web Site
+VIRTUALFOLDER=AMT
+URL=http://localhost/AMT
+HELPURL=http://localhost/AMT/ControlCenter/Help
+#HELPURL=http://help.myasysco.com/AMT%20Helpfiles%20for%20LION/default.aspx
+
+
+[GENERAL]
+#APPLICATIONTYPE=AMT Lion
+DBSSYS=MSSQL
+SERVERNAMEREPOSDB=VMFEDPE08
+
+***** The server and servicename of the LionDev Generator *****
+LIONDEVNETSERVICENAME=LionDevNet_Generator
+LIONDEVNETSERVERNAME=VMFEDPE08
+DBSNAME=AMT_REPOS177
+ALLOW-DECODED-LIONSOURCE
+
+DBUSER=LionDev
+DBPSSW=<hidden>
+== Lion folder: newest files
+
+Name                                         Length LastWriteTime
+----                                         ------ -------------
+Lion.ini                                       1422 10/13/2026 1:10:21 PM
+Lion.ini.bak-124637                            1383 10/13/2026 12:40:49 PM
+Lion.Lic                                       1152 9/24/2026 8:33:07 AM
+LionDevGenNet.deps.json                       70382 8/28/2026 11:18:42 AM
+LionDevGenNet.runtimeconfig.json                563 8/28/2026 11:18:40 AM
+LionDevGenNet.exe                            193024 8/28/2026 11:18:36 AM
+LionDevGenNet.dll                            116736 8/28/2026 11:18:36 AM
+LionDev.deps.json                             82268 8/28/2026 11:18:26 AM
+LionDev.runtimeconfig.json                      563 8/28/2026 11:18:24 AM
+LionDev.dll                                 4298240 8/28/2026 11:18:20 AM
+LionDev.exe                                  192512 8/28/2026 11:18:20 AM
+NETCoreDependencyRemover.DEPS.JSON             1078 8/28/2026 11:07:38 AM
+NETCoreDependencyRemover.DLL                   9728 8/28/2026 11:07:38 AM
+NETCoreDependencyRemover.exe                 162816 8/28/2026 11:07:38 AM
+NETCoreDependencyRemover.RUNTIMECONFIG.JSON     386 8/28/2026 11:07:38 AM
+
+
+== Lion log folders
+
+Name           LastWriteTime
+----           -------------
+20261013       10/13/2026 1:08:39 PM
+LionRepository 10/13/2026 11:44:36 AM
+runtimes       10/13/2026 11:44:35 AM
+Support        10/13/2026 11:45:39 AM
+
+
+== Apps177 Development owners (sample)
+E:\AMT_Work\Apps177  owner=VMFEDPE08\MTRUMAN  write-for-Users=True  10/13/2026 1:05:25 PM
+E:\AMT_Work\Apps177\Development  owner=VMFEDPE08\MTRUMAN  write-for-Users=True  10/14/2026 10:25:18 PM
+E:\AMT_Work\Apps177\Development\Database\QueryObjects\QueryObjects.cs  owner=BUILTIN\Administrators  write-for-Users=False  10/14/2026 10:25:09 PM
+E:\AMT_Work\Apps177\Binaries\Programs  owner=VMFEDPE08\MTRUMAN  write-for-Users=True  10/15/2026 5:44:50 PM
+== generated program DLLs
+
+Name                               LastWriteTime
+----                               -------------
+ASSURFED_UTILIT_CFH_COPY_ASCII.dll 10/14/2026 10:25:17 PM
+ASSURFED_UTILIT_FUSBA2_ASCII.dll   10/14/2026 10:25:17 PM
+ASSURFED_UTILIT_LECTIS_ASCII.dll   10/14/2026 10:25:17 PM
+ASSURFED_UTILIT_LOADIS_ASCII.dll   10/14/2026 10:25:17 PM
+ASSURFED_UTILIT_RECAP.dll          10/14/2026 10:25:18 PM
+ASSURFED_UTILIT_UNLOADIS_ASCII.dll 10/14/2026 10:25:17 PM
+
+
+== LionSource
+
+[32;1mLastWriteTime : [0m10/15/2026 5:36:10 PM
+
+

@@ -1,0 +1,27 @@
+=== E:\Repos\Federale_InternalRelease\AmtTools\Sample_Sys.ini ===
+10: # <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+11: # <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+12: # <database name>        : System databasename for example LION_SYSTEMDEV
+19: [DATABASE SERVER]
+21: SYSTEMBASEPATH=<System basepath>
+22: SERVER TYPE=MSSQL
+23: SERVER NAME NET=<database servername>
+24: DATABASE NAME=<database name>
+=== E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini ===
+10: # <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+11: # <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+12: # <database name>        : System databasename for example LION_SYSTEMDEV
+19: [DATABASE SERVER]
+21: SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+22: SERVER TYPE=MSSQL
+23: SERVER NAME NET=VMFEDPE08
+24: DATABASE NAME=FEDERALE_SYSTEM
+=== E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\Sys.ini ===
+10: # <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+11: # <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+12: # <database name>        : System databasename for example LION_SYSTEMDEV
+19: [DATABASE SERVER]
+21: SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+22: SERVER TYPE=MSSQL
+23: SERVER NAME NET=VMFEDPE08
+24: DATABASE NAME=FEDERALE_SYSTEM

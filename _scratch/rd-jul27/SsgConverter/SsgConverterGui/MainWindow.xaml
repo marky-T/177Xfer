@@ -1,0 +1,136 @@
+<Window x:Class="Ssg.ConverterGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SSG Converter — Symbiont Stream to PowerShell" Height="650" Width="850"
+        MinHeight="500" MinWidth="650"
+        Background="#FFF5F5F5" Closing="Window_Closing">
+
+  <Grid Margin="12">
+    <Grid.RowDefinitions>
+      <!-- Settings area -->
+      <RowDefinition Height="Auto"/>
+      <!-- Action buttons -->
+      <RowDefinition Height="Auto"/>
+      <!-- Log output (fills remaining space) -->
+      <RowDefinition Height="*"/>
+      <!-- Status bar -->
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ROW 0: SETTINGS — File Paths + Options
+         ═══════════════════════════════════════════════════════════════════ -->
+    <Grid Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="240"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- LEFT: File Paths -->
+      <GroupBox Grid.Column="0" Header="File Paths" Margin="0,0,8,8" Padding="10,8">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+          </Grid.RowDefinitions>
+
+          <!-- Input Folder -->
+          <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource FieldLabel}" Text="Input Folder:"/>
+          <TextBox   Grid.Row="0" Grid.Column="1" x:Name="InputFolderTextBox" VerticalContentAlignment="Center" Height="24"
+                     ToolTip="Folder containing .ssg source files"/>
+          <Button    Grid.Row="0" Grid.Column="2" Style="{StaticResource BrowseButton}" Click="BrowseFolder_Click" Tag="InputFolderTextBox"/>
+
+          <!-- Output Folder -->
+          <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource FieldLabel}" Text="Output Folder:"/>
+          <TextBox   Grid.Row="1" Grid.Column="1" x:Name="OutputFolderTextBox" VerticalContentAlignment="Center" Height="24"
+                     ToolTip="Folder where generated PowerShell scripts are written"/>
+          <Button    Grid.Row="1" Grid.Column="2" Style="{StaticResource BrowseButton}" Click="BrowseFolder_Click" Tag="OutputFolderTextBox"/>
+
+          <!-- Log File -->
+          <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource FieldLabel}" Text="Log File:"/>
+          <TextBox   Grid.Row="2" Grid.Column="1" x:Name="LogFileTextBox" VerticalContentAlignment="Center" Height="24"
+                     ToolTip="Log file path"/>
+          <Button    Grid.Row="2" Grid.Column="2" Style="{StaticResource BrowseButton}" Content="Save As..." Click="BrowseSaveFile_Click" Tag="LogFileTextBox"/>
+        </Grid>
+      </GroupBox>
+
+      <!-- RIGHT: Options -->
+      <StackPanel Grid.Column="1">
+        <!-- Conversion Options -->
+        <GroupBox Header="Options" Padding="10,8" Margin="0,0,0,8">
+          <StackPanel>
+            <Grid Margin="0,0,0,6">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+
+              <TextBlock Grid.Column="0" Style="{StaticResource FieldLabel}" Text="Verbose:"/>
+              <ComboBox  Grid.Column="1" x:Name="VerboseComboBox" Height="24" VerticalContentAlignment="Center"/>
+            </Grid>
+
+            <CheckBox x:Name="ClearOutputCheckBox" Content="Clear output folder before conversion" Margin="0,4" IsChecked="True"/>
+            <CheckBox x:Name="ContinueOnErrorCheckBox" Content="Continue on exception" Margin="0,4"/>
+            <CheckBox x:Name="EnableLogFileCheckBox" Content="Enable log file" Margin="0,4"/>
+          </StackPanel>
+        </GroupBox>
+
+        <!-- Settings management -->
+        <GroupBox Header="Settings File" Padding="10,6">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Load..." Width="70" Height="24" Margin="0,0,8,0" Click="LoadSettings_Click"/>
+            <Button Content="Save..." Width="70" Height="24" Click="SaveSettings_Click"/>
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+    </Grid>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ROW 1: ACTION BUTTONS
+         ═══════════════════════════════════════════════════════════════════ -->
+    <Grid Grid.Row="1" Margin="0,4,0,8">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0" x:Name="ConvertButton" Content="▶  Convert" Width="120" Height="30"
+              FontSize="13" FontWeight="SemiBold" Click="ConvertButton_Click"
+              ToolTip="Start the SSG to PowerShell conversion"/>
+
+      <ProgressBar Grid.Column="1" x:Name="ProgressBar" Height="20" Margin="12,0" Minimum="0" Maximum="100" Visibility="Collapsed"/>
+
+      <ComboBox Grid.Column="2" x:Name="LogFilterComboBox" Width="100" Height="24" VerticalContentAlignment="Center"
+                SelectionChanged="LogFilter_Changed" ToolTip="Filter log messages by severity"/>
+      <Button Grid.Column="3" Content="Clear Log" Width="75" Height="24" Margin="8,0,0,0" Click="ClearLog_Click"/>
+    </Grid>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ROW 2: LOG OUTPUT
+         ═══════════════════════════════════════════════════════════════════ -->
+    <ListView Grid.Row="2" x:Name="LogListView" FontFamily="Consolas" FontSize="11"
+              BorderBrush="#FFCCCCCC" BorderThickness="1"
+              ScrollViewer.CanContentScroll="True"
+              VirtualizingPanel.IsVirtualizing="True"
+              VirtualizingPanel.VirtualizationMode="Recycling">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding DisplayText}" Foreground="{Binding Color}" TextWrapping="NoWrap"/>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ROW 3: STATUS BAR
+         ═══════════════════════════════════════════════════════════════════ -->
+    <TextBlock Grid.Row="3" x:Name="StatusText" Text="Ready" Margin="0,6,0,0" Foreground="Gray"/>
+  </Grid>
+</Window>

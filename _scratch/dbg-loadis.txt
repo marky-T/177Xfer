@@ -1,0 +1,23 @@
+
+Case   : DBG_LOADIS
+Result : PASS
+Exit   : 0
+Detail : ran to exit 0 (no expected file given)
+
+
+Sys.ini : E:\AMT_Work\MockSystem\Run_DBG_LOADIS\Sys.ini
+Server  : VMFEDPE08   Database: AMT_MOCKSYS   User: LionDev
+Running Company.AFBUS_2200COBOL.BusinessLogic.Assurfed_Utilit_Loadis_Ascii.Assurfed_Utilit_Loadis_Ascii in application AFBUS_2200COBOL
+19:42:52  Started revision: 1.1 AMT version: 1.0.0.0 Parameters: /I:E:\AMT_Work\MockSystem\Run_DBG_LOADIS\Sys.ini /APP:AFBUS_2200COBOL /TESTRUN
+19:42:54  Program execution time: 00:00:02:147
+19:42:54  Done
+Program exit code: 0
+
+
+Name                Length
+----                ------
+B010SINAUTCL.DAT      8240
+OUTCLOA49.DAT          618
+OUTCLOA49.DAT.Index    343
+
+

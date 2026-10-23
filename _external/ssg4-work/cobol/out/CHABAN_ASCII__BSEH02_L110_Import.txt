@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol\\out\\CHABAN_ASCII__BSEH02_L110.LionSource
+APPNAME = CHABANASCIIBSEH02L110
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,9 @@
+{
+  "jobname": "ARCHIFORMAT",
+  "fileAssignments": {
+    "FICREPORT":   "fic-report.dat",
+    "FICDESCRIPT": "fic-descript.dat",
+    "FICUNLOAD":   "fic-unload.dat",
+    "FICFORMAT":   "output.dat"
+  }
+}

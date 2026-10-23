@@ -1,0 +1,26 @@
+Install into FEDERALE_APP (verify every file against manifest.csv first). Steps marked CONFIRM depend on answers from R&D.
+1. Programs: copy Binaries\Programs\*.dll to E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries\Programs
+2. Application DLLs: none. The programs were generated for FEDERALE_APP (LionDev application AFBUS) and use its own AFBUS.Application/Database.
+3. Skeletons and includes -- REPLACES R&D FILES, CONFIRM WITH R&D FIRST.
+
+   The converted runstreams call each skeleton by a fixed relative path, e.g.
+       Invoke-Ssg -Skeleton "../../ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII"
+   i.e. the folder ASSURFED_UTILIT of the script set (beside ASSURFED_F999, Libraries and Settings). Today that folder holds
+   R&D's converted skeletons; for these 12 utilities they are 4-line failed-conversion stubs ("# ERROR: Conversion failed"),
+   so steps calling them do not work today. Ours have the same names and the full converted skeleton, with the hand-off inserted
+   right after param() and followed by return, so the step's Xqt starts the generic program. To use them they must be at that path under those names:
+     a. back up R&D's ASSURFED_UTILIT folder;
+     b. copy Scripts\ASSURFED_UTILIT\* from this package into it: 13 skeletons (those R&D has are overwritten;
+        R&D has no UTILIT_CHAB100_ASCII.ps1, MT-045) and 9 .inc files (new);
+     c. roll back = restore the backup.
+   The alternative (pointing ~2,800 runstreams elsewhere) is not proposed.
+
+4. Settings (the script set's Settings\AmtSettings.xml, which the runstreams load as ..\..\Settings\AmtSettings.xml; CONFIRM with R&D):
+   AppName must be FEDERALE_APP; UseUnicode False (T3-039: True makes Asy-Cat pre-create UTF-16 files; this affects every job using
+   that settings file); add the child elements of CloneReports.xml under <Amt> (Xqt name -> generic program; MT-044, CONFIRM the
+   element name OrginalReport).
+5. Check: run one real runstream that calls a converted utility; the job log shows the hand-off lines and the program's own output.
+6. Jobs: after "Read all jobs from system" Start Job also lists the ASSURFED_UTILIT_*_GN programs and the UTILIT_* skeletons. They are started only by a
+   calling parent (a converted runstream: Invoke-Ssg runs the skeleton, its Xqt starts the program). Ideally leave them unactivated in Security > Jobs;
+   if the application is switched on with Activate All they are startable, and started by hand they have no parameter file or cards (untested).
+Roll back: restore R&D's ASSURFED_UTILIT folder and the settings file from your backup and delete the ASSURFED_UTILIT_*_GN.dll files.

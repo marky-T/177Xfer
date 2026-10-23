@@ -1,0 +1,8 @@
+UTILIT_CONDIS2_ASCII.ps1 hand-off deployed, parse errors: 0
+D42  AUMH01_D3_L87     408 ->  400, groups  1: read 21, written 21, dropped 0
+DT   AUPA02_MJ_L68     204 ->  214, groups  1: read 20, written 20, dropped 0
+BD   PAIJ01_BD_L58      80 ->  200, groups  1: read 12, written 12, dropped 0
+UL   PAIJ01_UL_L85     220 ->  200, groups  5: read 15, written 15, dropped 0
+UE   VIRJ01_UE_L850    132 ->  132, groups 35: read 38, written 38, dropped 0
+VG   -d_VIGD03_L894    231 ->  231, groups  2: read 10, written 10, dropped 0
+SSG4_CONDIS_CASES.ps1 written, 6 steps, parse errors: 0

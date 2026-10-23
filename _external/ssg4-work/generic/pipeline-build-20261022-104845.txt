@@ -1,0 +1,13 @@
+Stage Build, environment CC-Federale, started 2026-10-22 10:48:45
+PASS CFH-COPY       program source                 ASSURFED_UTILIT_CFH_COPY_GN: new since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program ASSURFED_UTILIT_CFH_COPY_GN
+PASS BABA           program source                 ASSURFED_UTILIT_BABA_GN: new since the last build
+PASS FUSBA          program source                 ASSURFED_UTILIT_FUSBA_GN: new since the last build
+PASS CHABAN         program source                 ASSURFED_UTILIT_CHABAN_GN: new since the last build
+PASS CONDIS2        program source                 ASSURFED_UTILIT_CONDIS2_GN: new since the last build
+PASS SCAN           program source                 ASSURFED_UTILIT_SCAN_GN: new since the last build
+PASS TAPELD         program source                 ASSURFED_UTILIT_TAPELD_GN: new since the last build
+PASS COBOL converter (programs) 7 programs -> GNFED.LionSource exit 0, errors 0, warnings 4, 106 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNFED\out\GNFED.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

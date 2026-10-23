@@ -1,0 +1,7 @@
+=== 1. Logon/Logoff events 09/26/2026 19:00:00 to 09/26/2026 21:30:00 ===
+
+=== 2. Object deletion/access audits (4660/4663/4656) mentioning Lion, full window ===
+
+=== 3. Process creation audits (4688) 09/26/2026 19:00:00 to 09/26/2026 21:30:00 ===
+
+=== 4. Special logon / privilege use (4672/4778/4779) 09/26/2026 19:00:00 to 09/26/2026 21:30:00 ===

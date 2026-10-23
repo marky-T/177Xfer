@@ -1,0 +1,7 @@
+identical_to_validated_generator=True
+{
+  "date": "2026-10-05",
+  "jobId": "1085",
+  "programKey": "CFH-COPY",
+  "mechanicsFingerprint": "ab8477503143ef83baa49f8bcf96db51915a4c5ab8e4488245039b9616bb357b"
+}

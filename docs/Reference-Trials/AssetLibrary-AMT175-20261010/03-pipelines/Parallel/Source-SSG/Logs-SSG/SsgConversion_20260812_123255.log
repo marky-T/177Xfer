@@ -1,0 +1,8 @@
+﻿2026-08-12 12:32:55 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:32:55 [0] Phase     : SSG to PowerShell Converter
+2026-08-12 12:32:55 [0] Phase     : ------------------------------------------------------------
+2026-08-12 12:32:55 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-12 12:32:55 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-12 12:32:55 [0] Log       : SSG source files found: 1
+2026-08-12 12:32:56 [0] Log       : 
+2026-08-12 12:32:56 [0] Log       : Conversion complete: 1 succeeded, 0 failed

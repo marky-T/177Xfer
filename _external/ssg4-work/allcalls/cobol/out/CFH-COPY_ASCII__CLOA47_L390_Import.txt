@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\CFH-COPY_ASCII__CLOA47_L390.LionSource
+APPNAME = CFHCOPYASCIICLOA47L390
+GENSET = Default from new application
+SYSOPT = FALSE

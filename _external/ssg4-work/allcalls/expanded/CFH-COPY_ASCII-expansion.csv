@@ -1,0 +1,58 @@
+"Call","CardFile","Lines","Procedure","Error"
+"AFPH12_L427","calls\ASSURFED_F999RUN_AFPH12__L427.sgs","55","True",""
+"CCSA09_L362","calls\ASSURFED_F999RUN_CCSA09__L362.sgs","45","True",""
+"CCSM11_L239","calls\ASSURFED_F999RUN_CCSM11__L239.sgs","100","True",""
+"CCTA09_L172","calls\ASSURFED_F999RUN_CCTA09__L172.sgs","82","True",""
+"CLOA43_L387","calls\ASSURFED_F999RUN_CLOA43__L387.sgs","91","True",""
+"CLOA47_L390","calls\ASSURFED_F999RUN_CLOA47__L390.sgs","47","True",""
+"CLOA70_L312","calls\ASSURFED_F999RUN_CLOA70__L312.sgs","45","True",""
+"CLOA70_L331","calls\ASSURFED_F999RUN_CLOA70__L331.sgs","45","True",""
+"CLOA70_L350","calls\ASSURFED_F999RUN_CLOA70__L350.sgs","45","True",""
+"CLOA70_L369","calls\ASSURFED_F999RUN_CLOA70__L369.sgs","45","True",""
+"CLOA70_L388","calls\ASSURFED_F999RUN_CLOA70__L388.sgs","45","True",""
+"CLOA70_L407","calls\ASSURFED_F999RUN_CLOA70__L407.sgs","45","True",""
+"COCM03_L130","calls\ASSURFED_F999RUN_COCM03__L130.sgs","82","True",""
+"COCM03_L311","calls\ASSURFED_F999RUN_COCM03__L311.sgs","82","True",""
+"FPGA01_L76","calls\ASSURFED_F999RUN_FPGA01__L76.sgs","55","True",""
+"FPGA01_L137","calls\ASSURFED_F999RUN_FPGA01__L137.sgs","55","True",""
+"LRPA01_L106","calls\ASSURFED_F999RUN_LRPA01__L106.sgs","55","True",""
+"PBDA04_L152","calls\ASSURFED_F999RUN_PBDA04__L152.sgs","73","True",""
+"PBDA04_L292","calls\ASSURFED_F999RUN_PBDA04__L292.sgs","73","True",""
+"PBDA04_L545","calls\ASSURFED_F999RUN_PBDA04__L545.sgs","91","True",""
+"PBDA07_L181","calls\ASSURFED_F999RUN_PBDA07__L181.sgs","82","True",""
+"PBDA08_L126","calls\ASSURFED_F999RUN_PBDA08__L126.sgs","82","True",""
+"PBDA09_L96","calls\ASSURFED_F999RUN_PBDA09__L96.sgs","73","True",""
+"PBDA09_L201","calls\ASSURFED_F999RUN_PBDA09__L201.sgs","73","True",""
+"RISH02_L379","calls\ASSURFED_F999RUN_RISH02__L379.sgs","77","True",""
+"SOCH01_DB_L55","calls\ASSURFED_F999RUN_SOCH01_DB__L55.sgs","84","True",""
+"VIEA15_L43","calls\ASSURFED_F999RUN_VIEA15__L43.sgs","47","True",""
+"VIPM03_L805","calls\ASSURFED_F999RUN_VIPM03__L805.sgs","74","True",""
+"VIRA12_CO_L485","calls\ASSURFED_F999RUN_VIRA12_CO__L485.sgs","146","True",""
+"VIRA12_UL_L145","calls\ASSURFED_F999RUN_VIRA12_UL__L145.sgs","29","False","Cannot convert value ""'"" to type ""System.Int64"". Error: ""The input string ''' was not in a correct format."" At E:\Repos\SsgTrial\SsgConverter\Examples\Output\CFH-COPY_ASCII.ps1:14 char:3
++   Set-Variable -Name ""FILLCTR"" -Value (([Int64]$Parameters[0] - 1)) - …
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"VIRA15_CO_L402","calls\ASSURFED_F999RUN_VIRA15_CO__L402.sgs","146","True",""
+"VIRA15_UL_L161","calls\ASSURFED_F999RUN_VIRA15_UL__L161.sgs","29","False","Cannot convert value ""'"" to type ""System.Int64"". Error: ""The input string ''' was not in a correct format."" At E:\Repos\SsgTrial\SsgConverter\Examples\Output\CFH-COPY_ASCII.ps1:14 char:3
++   Set-Variable -Name ""FILLCTR"" -Value (([Int64]$Parameters[0] - 1)) - …
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"VIRA19_CO_L456","calls\ASSURFED_F999RUN_VIRA19_CO__L456.sgs","146","True",""
+"VIRA19_UL_L141","calls\ASSURFED_F999RUN_VIRA19_UL__L141.sgs","29","False","Cannot convert value ""'"" to type ""System.Int64"". Error: ""The input string ''' was not in a correct format."" At E:\Repos\SsgTrial\SsgConverter\Examples\Output\CFH-COPY_ASCII.ps1:14 char:3
++   Set-Variable -Name ""FILLCTR"" -Value (([Int64]$Parameters[0] - 1)) - …
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"VIRA25_L943","calls\ASSURFED_F999RUN_VIRA25__L943.sgs","146","True",""
+"VIRA29_CO_L428","calls\ASSURFED_F999RUN_VIRA29_CO__L428.sgs","146","True",""
+"VIRA30_L1050","calls\ASSURFED_F999RUN_VIRA30__L1050.sgs","155","True",""
+"VIRJ01_BD_L55","calls\ASSURFED_F999RUN_VIRJ01_BD__L55.sgs","164","True",""
+"VIRJ01_PP_L89","calls\ASSURFED_F999RUN_VIRJ01_PP__L89.sgs","148","True",""
+"VIRM01_CO_L484","calls\ASSURFED_F999RUN_VIRM01_CO__L484.sgs","146","True",""
+"VIRM01_UL_L160","calls\ASSURFED_F999RUN_VIRM01_UL__L160.sgs","29","False","Cannot convert value ""'"" to type ""System.Int64"". Error: ""The input string ''' was not in a correct format."" At E:\Repos\SsgTrial\SsgConverter\Examples\Output\CFH-COPY_ASCII.ps1:14 char:3
++   Set-Variable -Name ""FILLCTR"" -Value (([Int64]$Parameters[0] - 1)) - …
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"-d_AFID01_L145","calls\ASSURFED_F999RUN-d_AFID01__L145.sgs","65","True",""
+"-d_TABD52_L81","calls\ASSURFED_F999RUN-d_TABD52__L81.sgs","64","True",""
+"-d_VIRD03_L675","calls\ASSURFED_F999RUN-d_VIRD03__L675.sgs","100","True",""
+"-d_VIRD50_CO_L111","calls\ASSURFED_F999RUN-d_VIRD50_CO__L111.sgs","146","True",""
+"-d_VIRD50_UL_L134","calls\ASSURFED_F999RUN-d_VIRD50_UL__L134.sgs","29","False","Cannot convert value ""'"" to type ""System.Int64"". Error: ""The input string ''' was not in a correct format."" At E:\Repos\SsgTrial\SsgConverter\Examples\Output\CFH-COPY_ASCII.ps1:14 char:3
++   Set-Variable -Name ""FILLCTR"" -Value (([Int64]$Parameters[0] - 1)) - …
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+"-d_VIRD52_L670","calls\ASSURFED_F999RUN-d_VIRD52__L670.sgs","100","True",""

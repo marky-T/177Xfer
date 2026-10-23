@@ -1,0 +1,132 @@
+*. ===============================================// BRUNEOUTIL.Y2KUTI  
+*.  
+*. ----------------// LISTE DES DESSINS DE FICHIER (1 manuel - 3 auto)  
+*Add,a SGS BRUDESSIN1./DESSIN1  
+*Add,a SGS BRUDESSIN3./DESSIN3  
+*. --- TEMPORAIRE ---   
+#ASG,T Y2KUTI*TEMP. 
+#ED,IQ Y2KUTI*TEMP. 
+    
+EXIT
+*. --- TEMPORAIRE ---   
+*.  
+*Set STRINGCHAR$ = '*'  
+*Set FLAGDESSIN3 = 0
+*.  
+*. >>>>>>>>>// DEBUT DE LA BOUCLE DANS LA LISTE DES FICHIERS A TRAITER  
+*Increment I from 1 to [FILE]   
+*If [FILE,I,2,1]
+*    If [FILE,I,2,1] = NO   
+*        Iterate I  
+*    Endif  
+*Endif  
+#ERS TPF$.  
+*Set QUALIF = '[FILE,I,1,1,BSTR$]'  
+*Set NOMFIC = '[FILE,I,1,1,ASTR$]'  
+#MSG ***/ FICHIER A TRAITER : [*QUALIF]*[*NOMFIC]   
+*Set TYPF = '[FILE,I,1,3]'  
+*If [*TYPF] <> FD  And [*TYPF] <> AF And [*TYPF] <> AA  
+#MSG ***/ LE TYPE DE FICHIER EST INVALIDE, <> FD, AF, AA !  
+#MSG ***/ FICHIER [*QUALIF]*[*NOMFIC] NON TRAITE.   
+*    Iterate I  
+*Endif  
+*Set LONG = [FILE,I,1,4]
+*Set BLOC = [FILE,I,1,5]
+*Set DESSIN = 0 
+*Display '--> TYPE: [*TYPF]  LONGUEUR: [*LONG] BLOC: [*BLOC] '  
+*.  
+*. ----------------------------------------// RECHERCHE DES PARAMETRES  
+*Copy,a BRUNEOUTIL.Y2KUTI/PARAM 
+*.  
+*. ---------------------// RECHERCHE PRESENCE DU DESSIN 1 (BRUDESSIN1)  
+*Set TROUVE = 0 
+*Increment J from 1 to [DESSIN1]
+*If [DESSIN1,J,1,1] = [*NOMFIC] AND [DESSIN1,J,2,1] = [*QUALIF] 
+*    Set TROUVE = 1 
+*    Set DESSIN = 1 
+*    Exit   
+*Endif  
+*Loop   
+*.  
+*If [*TROUVE] = 0   
+*. ---------------------// RECHERCHE PRESENCE DU DESSIN 3 (BRUDESSIN3)  
+*    Increment J from 1 to [DESSIN3]
+*    If [DESSIN3,J,1,1] = [*NOMFIC] AND [DESSIN3,J,2,1] = [*QUALIF] 
+*        Set TROUVE = 1 
+*        Set DESSIN = 3 
+*        Exit   
+*    Endif  
+*    Loop   
+*Endif  
+*If [*TROUVE] = 1   
+*. ---------------------------------------------------// DESSIN TROUVE  
+*    If [*DESSIN] = 1   
+*        Add,a sgs BRUDESSIN1.[*NOMFIC]/[*QUALIF]   
+*. ----------------------------------------------// CONTROLE du DESSIN  
+#MSG ***/ CONTROLE DESSIN1  
+*        copy,a BRUNEOUTIL.Y2KCTL/CTL   
+*        If [*FLAGFATAL] > 0
+#MSG ***/ ERREUR : DESSIN1 ERRONE, FICHIER NON TRAITE !!
+*            Iterate I  
+*        Else   
+#MSG ***/ DESSIN1 OK
+*        Endif  
+*    Else   
+*        Add,a sgs BRUDESSIN3.[*NOMFIC]/[*QUALIF]   
+*    Endif  
+*    If [DATE] > 0  
+*. -------------------------------------------/ VERIFICATION DES DATES  
+#MSG ***/ VERIFICATION DES DATES : Y2KCTL (DESSIN[*DESSIN]) 
+*. -------  
+#SETC 0/S2  
+*        Copy,a BRUNEOUTIL.Y2KCTL/SYM   
+#TEST TE/0/S2   
+#JUMP ERRC  
+*        Copy,a BRUNEOUTIL.Y2KCTL/XQT   
+#ADD BRUNEOUTIL.Y2KUTI/TEMOIN   
+*.  
+*. -reste MISE @ JOUR TABLE y2d001 (R{sultats)  
+*.  
+#JUMP SUITC 
+#ERRC:  
+#MSG ***/ ERREUR : COMPILATION Y2KCTL !!
+#SUITC: 
+#SETC 0/S2  
+*. -------  
+*    Else   
+#MSG ***/ DESSIN BRUDESSIN1 ou 3 [*NOMFIC]/[*QUALIF] VIDE !!!   
+*. ????  Abort  
+*    Endif  
+*.  
+*else   
+*.  
+*. -------------------------// DESSIN NON TROUVE / ANALYSE DU FICHIER   
+#MSG ***/ DETERMINATION DESSIN3  : Y2KDES   
+*. -------  
+#SETC 0/S2  
+*    Copy,a BRUNEOUTIL.Y2KDES/SYM   
+#TEST TE/0/S2   
+#JUMP ERRD  
+*    Copy,a BRUNEOUTIL.Y2KDES/XQT   
+*    Copy,a BRUNEOUTIL.Y2KDES/EDI   
+*    Set FLAGDESSIN3 = [*FLAGDESSIN3] + 1   
+*. --------------------------------------------// pour r{-executer  
+#ED,UQ Y2KUTI*TEMP. 
+LAS 
+I FILE3  [*QUALIF]*[*NOMFIC], ,[*TYPF],[*LONG],[*BLOC]  
+EXIT
+#JUMP SUITD 
+#ERRD:  
+#MSG ***/ ERREUR : COMPILATION Y2KDES !!
+#SUITD: 
+#SETC 0/S2  
+*. -------  
+*Endif  
+*Loop   
+*.  
+*If FLAGDESSIN3 > 0 
+#ADD BRUNESSG.Y2KUTI/CTL
+*Endif  
+*. <<<<<<<<<<<// FIN DE LA BOUCLE DANS LA LISTE DES FICHIERS A TRAITER  
+*.  
+*. =====================================================// Fin Y2KUTI   

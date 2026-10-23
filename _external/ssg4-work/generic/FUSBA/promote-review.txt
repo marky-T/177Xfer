@@ -1,0 +1,28 @@
+parse + old-reference scan: 11 scripts
+--- check\Test-FusbaParm.ps1
+  Cross-check parm vs expansion: MATCH 36
+  By mode: C 27, D 2, M 4, U 3
+--- check\Classify-FusbaCalls.ps1
+  calls: 36; distinct procedure shapes: 5
+  --- card options
+   27 x FUSBA_ASCII, COPY, 2, False   e.g. COMA16_U1_L113
+    4 x FUSBA2_ASCII, {}, 1, True   e.g. -d_VIRD03_L766
+    3 x FUSBA_ASCII, {}, 1, True   e.g. MPMA02_L223
+    2 x FUSBA_ASCII, YES, 1, False   e.g. VIRJ01_UE_L283
+  --- shapes
+   27 x shape 1: FUSBA/COMA16_U1_L113, FUSBA/COMA16_U2_L82, FUSBA/COMA16_U3_L106, FUSBA/COMA16_U4_L103, FUSBA/COMA18_U1_L79, FUSBA/COMA18_U2_L109, FUSBA/MPMA01_U1_L74, FUSBA/MPMA01_U2_L74, FUSBA/MPMA01_U3_L74, FUSBA/MPMA01_U4_L74, FUSBA/VGGA01_L104, FUSBA/VGGA01_L433, FUSBA/VIGA22_L1100, FUSBA/VIGA71_L124, FUSBA/VIGA71_L424, FUSBA/VIRA06_MJ_L974, FUSBA/VIRA12_MJ_L1146, FUSBA/VIRA15_MJ_L1177, FUSBA/VIRA19_MJ_L1156, FUSBA/VIRM01_MJ_L1145, FUSBA/-d_VGGD01_L95, FUSBA/-d_VGGD01_L422, FUSBA/-d_VIGD03_L188, FUSBA/-d_VIGD13_L187, FUSBA/-d_VIGD26_L124, FUSBA/-d_VIGD26_L426, FUSBA/-d_VIRD50_MJ_L1113
+    4 x shape 2: FUSBA2/-d_VIRD03_L766, FUSBA2/-d_VIRD03_L802, FUSBA2/-d_VIRD52_L761, FUSBA2/-d_VIRD52_L797
+    2 x shape 3: FUSBA/-d_VIRD03_L707, FUSBA/-d_VIRD52_L702
+    2 x shape 4: FUSBA/VIRJ01_UE_L283, FUSBA/VIRJ01_UE_L701
+    1 x shape 5: FUSBA/MPMA02_L223
+--- cc\Prepare-FusbaCc.ps1
+  FUSBM2: INP 9,776 B, MAJ 1,512 B
+  FUSBU1: INP 3,078 B, MAJ 10,040 B
+  FUSBU2: CLE 6,834 B, UNL 528 B
+job SSG4_FUSBA_CASES.ps1 unchanged: True
+deployed FusbaParm.inc == Generic\FUSBA source: True
+compare parm: 36/36 identical
+compare crosscheck.csv: 1/1 identical
+compare inventory.csv: 1/1 identical
+compare AmtSettings.xml: 1/1 identical
+problems: 0

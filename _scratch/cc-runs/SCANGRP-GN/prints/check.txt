@@ -1,0 +1,10 @@
+PRN files since 01:22:18: 0, expected 12
+S1: no print file
+S2: no print file
+S3: no print file
+S4: no print file
+T1: no print file
+T2: no print file
+T3: no print file
+T4: no print file
+=== prints: 9 problem(s)

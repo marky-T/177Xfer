@@ -1,0 +1,11 @@
+UTILIT_SCAN_ASCII.ps1 hand-off deployed, parse errors: 0
+UTILIT_TAPELD_ASCII.ps1 hand-off deployed, parse errors: 0
+S1 SCAN    -d_VIRD36_MJ_L292  input R006VIRD36   26 records ->  128 model lines, reference ASSURFED_UTILIT_SCAN_RA
+S2 SCAN    PBDA04_L132        input IVIR002RAD   14 records ->   91 model lines, reference ASSURFED_UTILIT_SCAN_RB
+S3 SCAN    VIES01_L202        input INAVIES01     4 records ->    9 model lines
+S4 SCAN    CCSA14_L76         input INA           5 records ->   21 model lines
+T1 TAPELD  PBDA04_L805        input IPBA04CBB   120 records ->  123 model lines, reference ASSURFED_UTILIT_TAPELD_RA
+T2 TAPELD  VIRA12_PI_L590     input IN1          53 records ->   55 model lines, reference ASSURFED_UTILIT_TAPELD_RB
+T3 TAPELD  PBDA04_L339        input INP          10 records ->   11 model lines
+T4 TAPELD  -d_VIRD50_PI_L579  input IN1           5 records ->    6 model lines
+SSG4_SCANGRP_PRINTS.ps1 written, 8 steps, parse errors: 0

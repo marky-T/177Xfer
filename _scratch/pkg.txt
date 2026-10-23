@@ -1,0 +1,16 @@
+Staged: E:\AMT_Work\Delivery\AFBUS_2200COBOL_AMT-20261013-1740
+
+Path                                                  Bytes
+----                                                  -----
+Binaries\Application\AFBUS_2200COBOL.Application.dll   9728
+Binaries\Application\AFBUS_2200COBOL.Database.dll      5632
+Binaries\Application\Newtonsoft.Json.dll             723368
+Binaries\Programs\AFBUS_2200COBOL.Application.dll      9728
+Binaries\Programs\AFBUS_2200COBOL.Database.dll         5632
+Binaries\Programs\ASSURFED_UTILIT_CFH_COPY_ASCII.dll  13312
+Binaries\Programs\ASSURFED_UTILIT_FUSBA2_ASCII.dll    18944
+Binaries\Programs\ASSURFED_UTILIT_LECTIS_ASCII.dll    19968
+Binaries\Programs\ASSURFED_UTILIT_LOADIS_ASCII.dll    14336
+Binaries\Programs\ASSURFED_UTILIT_UNLOADIS_ASCII.dll  13312
+
+

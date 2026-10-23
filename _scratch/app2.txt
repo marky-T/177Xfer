@@ -1,0 +1,14 @@
+
+ProgramId                      Runstream                        Line CallsAvailable
+---------                      ---------                        ---- --------------
+ASSURFED-UTILIT-CFH-COPY-ASCII ASSURFED_F999RUN_AFPH12(P).TXT   427              47
+ASSURFED-UTILIT-FUSBA2-ASCII   ASSURFED_F999RUN-d_VIRD03(P).TXT 766               4
+ASSURFED-UTILIT-LECTIS-ASCII   ASSURFED_F999RUN_CCTA09(P).TXT   479               1
+ASSURFED-UTILIT-LOADIS-ASCII   ASSURFED_F999RUN_CLOA49(P).TXT   141               9
+ASSURFED-UTILIT-RECAP          ASSURFED_F999RUN_CCTA08(P).TXT   287              28
+ASSURFED-UTILIT-UNLOADIS-ASCII ASSURFED_F999RUN_CLOA43(P).TXT   473               4
+
+
+Application : AFBUS_2200COBOL   programs: 6
+Converter   : exit 0, errors 0, warnings 7, 63,995 bytes
+LionSource  : E:\Repos\ssg4-work\app2\cobol\out\AFBUS_2200COBOL.LionSource

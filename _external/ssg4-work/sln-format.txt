@@ -1,0 +1,29 @@
+HEAD lines: 48496
+4089: Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abrdms", "Programs\Abrdms\Abrdms.csproj", "{0880A441-C767-41A4-A626-41E6E6965896}"
+Global at 13871; lines before:
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Startup", "Common\Dlls\Startup\Startup.csproj", "{097F97F7-0C3C-42B9-BE75-74F232C5B517}"
+EndProject
+Global
+ProjectConfigurationPlatforms at 13876
+NestedProjects at 41582; first 2:
+		{DED3D329-6483-4675-BE5B-D160EBD1C653} = {4FD68C9F-BFD0-48A5-8F1C-A30DCB754EEB}
+		{54FE6A1A-CE47-4EC1-9BCB-271A75BBBA6C} = {4FD68C9F-BFD0-48A5-8F1C-A30DCB754EEB}
+solution platforms:
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DED3D329-6483-4675-BE5B-D160EBD1C653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED3D329-6483-4675-BE5B-D160EBD1C653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED3D329-6483-4675-BE5B-D160EBD1C653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED3D329-6483-4675-BE5B-D160EBD1C653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54FE6A1A-CE47-4EC1-9BCB-271A75BBBA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+Programs folder GUID line:
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Programs", "Programs", "{82d6c3de-9d65-4fab-8966-d39392282628}"
+settings HEAD lines: 45; last 3:
+                <BatchControllerName>WorkingBatchController</BatchControllerName>
+        </AmtSettings>
+</Amt>
+i/crlf  w/crlf  attr/-text            	BSP_AMT/Development/_All_.sln
+i/crlf  w/crlf  attr/-text            	Scripts/Settings/AmtSettings.xml

@@ -1,0 +1,8 @@
+Stage Package, environment CC-Trial, started 2026-10-22 00:27:26
+PASS Package        regression (information)       all 14 jobs passed since the last delivery
+PASS Package        7 program DLLs                 copied from the application, equal to the 177a rebuild
+PASS Package        13 skeletons, 9 includes       copied from the deployed (proven) set
+PASS Package        7 C# project folders           the C# the delivered DLLs were built from (177a rebuild)
+PASS Package        manifest                       157 files, 1681 KB, SHA256 re-checked
+PASS Package        staged (local only)            E:\AMT_Work\Delivery\GN-20261022-0027
+=== Package : all passed

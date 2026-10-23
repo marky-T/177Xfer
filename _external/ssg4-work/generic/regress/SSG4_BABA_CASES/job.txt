@@ -1,0 +1,4 @@
+--- BatchController: 20261021 23:53:17.107 12 Information SSG4_BABA_CASES Done Id: 1012 Queue: JOB_QUEUE1 (Execution time: 00:00:20:203)
+--- BABATEST_101220261021235259277.log
+--- 11 of 11 outputs byte-identical
+=== SSG4_BABA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_BABA_CASES\check.txt)

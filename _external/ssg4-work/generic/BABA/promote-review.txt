@@ -1,0 +1,19 @@
+parse + old-reference scan: 9 scripts
+--- check\Test-BabaParm.ps1
+  Cross-check parm vs expansion: DIFF 3, MATCH 118, NO-PARM 1
+    DEPM01_L139: NO-PARM parm: no INPUT card
+    SOCM02_D1_L83: DIFF: sets exp[ ] parm[W] 
+    SOCM03_D1_L89: DIFF: sets exp[ ] parm[W] 
+    SOCM10_D1_L86: DIFF: sets exp[ ] parm[W] 
+--- cc\Prepare-BabaCc.ps1
+  staged BABATEST\INASC 7,920 B
+  staged BABATEST\IRESMENS 9,060 B
+  staged BABATEST\Z148SOLDEFWD 3,060 B
+job SSG4_BABA_CASES.ps1 unchanged: True
+deployed BabaParm.inc == Generic\BABA source: True
+compare parm: 121/121 identical
+compare crosscheck.csv: 1/1 identical
+compare cc-cases.json: 0/1 identical DIFF: 
+compare E1: 3/3 identical
+compare AmtSettings.xml: 1/1 identical
+problems: 1

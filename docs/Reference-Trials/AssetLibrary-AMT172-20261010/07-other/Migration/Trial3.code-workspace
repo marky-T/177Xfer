@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "name": "Trial3",
+      "path": "Trial3"
+    },
+    {
+      "name": "templates",
+      "path": "C:\\Amt\\Parallel\\templates"
+    },
+    {
+      "name": "AMT175-.github",
+      "path": "C:\\Amt\\Parallel\\AMT175\\.github"
+    },
+    {
+      "name": "Amt-.github (migration prompts + instructions)",
+      "path": "C:\\Amt\\.github"
+    },
+    {
+      "name": "SSG-Source (read-only)",
+      "path": "C:\\Amt\\MainframeSource\\2026-07-07_SSG\\CreatingCobol"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.git": true
+    },
+    "search.exclude": {
+      "**/output": true,
+      "**/_baseline": true,
+      "**/_coboldeps": true
+    },
+    "powershell.scriptAnalysis.enable": true,
+    "editor.formatOnSave": false
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.powershell"
+    ]
+  }
+}

@@ -1,0 +1,561 @@
+@RUN,M/T   AFPH12,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ***********************************************************  
+@MSG       **** RECEPTION ET VERIFICATION FICHIERS FAILLITE GRAYDON  *  
+@MSG       ***********************************************************  
+@ . 
+@ . LE 12/07/2007 : CREATION DU RUN 
+@ . 
+@ . 
+@MSG       EDITION DU JCL.  
+@ . 
+@PRT,SC    F999RUN.AFPH12   
+@TIME   
+@ . 
+@MSG       TRANSFERT DES PROGRAMMES 
+@ASG,T     AFPH12,F///500   
+@COPY,A    APRD*BABS.AFB020,AFPH12.AFB020   
+@COPY,A    APRD*BABS.AFB021,AFPH12.AFB021   
+@COPY,A    APRD*BABS.AFB022,AFPH12.AFB022   
+@COPY,A    APRD*BABS.AFB023,AFPH12.AFB023   
+@COPY,A    APRD*BABS.AFB024,AFPH12.AFB024   
+@COPY,A    APRD*BABS.AFB025,AFPH12.AFB025   
+@ . 
+@ . ----------------------------------------------  
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . ----------------------------------------------  
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@. ==================================================================== 
+@LAB010: MSG 010. CREATION DU FICHIER VIDE RFAILLITEGRA(+1) 
+@ . =================================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@ERS        TPF$.   
+@ASG,CPV    RFAILLITEGRA(+1).,F/0/POS/4000  
+@USE        OUTA,RFAILLITEGRA(+1)   
+@ED,I       TPF$.   
+@SORT,ES
+COPY
+FILEIN=TPF$    MODE=CARDS   
+FILEOUT=OUTA   MODE=SDF    BLOCK=10 
+RSZ=500 
+@EOF
+@ERS        TPF$.   
+@FREE       RFAILLITEGRA(+1)
+@TIME   
+@ . =================================================================== 
+@LAB020: MSG 020. RECUP DU NOMBRE DE CYCLES DU FICHIER FAILLITE 
+@ . =========================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@DELETE,C   NBAFPH12.   
+@ASG,UP     NBAFPH12.,F///1000  
+@USE        INP,NBAFPH12.   
+@BRKPT      PRINT$/INP  
+@CYCLE      RFAILLITEGRA.   
+@BRKPT      PRINT$  
+@SYM        PRINT$,,PRSP
+@ED,UQN     NBAFPH12.   
+c /./ /A
+c /:/ /A G  
+SAVE
+EXIT
+@TIME   
+@ . =================================================================== 
+@LAB030: MSG 030. FUSION DE TOUS LES CYCLES DU FICHIER RFAILLITEGRA ORT 
+@ . =================================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@ERS TPF$.  
+@SSG,MNA   ,NBAFPH12.   
+SKEL
+#DELETE,C   IAFB001FAI. 
+#ASG,UP     IAFB001FAI.,F///10000   
+#USE        OUT,IAFB001FAI. 
+* Set nbcycbbl = [NO,1,4,1] - 1 
+* Increment i from 0 to [*nbcycbbl] 
+#ASG,A      RFAILLITEGRA(-[*i]).
+#USE        IN[*i],RFAILLITEGRA(-[*i]). 
+* Loop  
+#SORT,E 
+COPY
+*   Increment i from 0 to [*nbcycbbl]   
+FILEIN=IN[*i] MODE=SDF BLOCK=10 
+*   Loop
+FILEOUT=OUT   MODE=SDF BLOCK=10 
+DATA=ASCII  
+RSZ=500 
+*   Increment i from 0 to [*nbcycbbl]   
+#FREE       RFAILLITEGRA(-[*i]).
+*   Loop
+@EOF
+@EOF
+@FREE       IAFB001FAI. 
+@TIME   
+@ . =================================================================== 
+@LAB040: MSG 040. TEST PRESENCE DE RECORDS A TRAITER
+@ . =================================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE ASSURFED*IAFB001FAI
+LABEL MSGFIN
+@EOF
+@ . 
+@ . =================================================================== 
+@LAB050: MSG 050. SUPRESSION DE TOUS LES CYCLES DU FICHIER RFAILLITEGRA 
+@ . =================================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@CYCLE      RFAILLITEGRA.,0 
+@TIME   
+@ . =================================================================== 
+@LAB055: MSG 055. EXTRACTION FICHIER FAILLITE               ---  AFB021 
+@ . =================================================================== 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB055  
+@ . 
+@ASG,A     IAFB001FAI.  
+@USE       I-AFFILI,IAFB001FAI  
+@DELETE,C  IAFB002FAI.  
+@ASG,UP    IAFB002FAI.,F/0/POS/4000 
+@USE       O-AFFILI,IAFB002FAI. 
+@DELETE,C  AFPH12*IMP-AFB021.   
+@ASG,UP    AFPH12*IMP-AFB021.,F///1000  
+@USE       IMP,AFPH12*IMP-AFB021.   
+@XQT       AFPH12.AFB021
+@FREE      IAFB001FAI.  
+@FREE      IAFB002FAI.  
+@FREE      AFPH12*IMP-AFB021.   
+@TIME   
+@ . *      -----------------------------------------------------
+@LAB060:   MSG 060. TRI FICHIER SEQUENTIEL CREE (LONGUEUR FIXE) 
+@ . *      -----------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB060  
+@ . Tri sur nom + adresse + code postal + localite  
+@ASG,A     IAFB002FAI.  
+@USE       INASC,IAFB002FAI.
+@DELETE,C  IAFB003FAI.  
+@ASG,UP    IAFB003FAI.,F/0/POS/4000 
+@USE       OUTASC,IAFB003FAI.   
+@SORT,ES
+SORT
+FILEIN=INASC     BLOCK=10   
+FILEOUT=OUTASC   BLOCK=10   
+KEY=51,223,CH,A 
+RSZ=600 
+@ . *      ------------------------------------------------ 
+@LAB070:   MSG 070. SUPPRESSION MULTIPLES RECORDS AFFILIES  
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB070  
+@ . Suppression des multiples sur base du tri precedent 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INASC,600,10 
+OUTPUT     OUTASC,600,10
+KEYS       ALL 51,223   
+SEQERROR   MULTI
+@EOF
+@ASG,A     IAFB003FAI.  
+@USE       INASC,IAFB003FAI.
+@DELETE,C  IAFB004FAI.  
+@ASG,UP    IAFB004FAI.,F/0/POS/4000 
+@USE       OUTASC,IAFB004FAI.   
+@XQT       .BABA
+@ERS       TPF$.
+@FREE      IAFB003FAI.  
+@FREE      IAFB004FAI.  
+@TIME   
+@ . *      ------------------------------------------   
+@LAB100:   MSG 100. CREATION FICHIER INDEXE AFFILIES
+@ . *      ------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@ . Creation sur base du fichier trie precedemment  
+@ . Cles : unique     --> no de sequence
+@ .        secondaires --> cp+nom social,nom commercial,no rpm  
+@USE       I-AFFILI,IAFB004FAI. 
+@DELETE,C  IAFB005FAI.  
+@ASG,UP    IAFB005FAI.,F/0/POS/4000 
+@USE       O-AFFILI,IAFB005FAI. 
+@DELETE,C  AFPH12*IMP-AFB022.   
+@ASG,UP    AFPH12*IMP-AFB022.,F///1000  
+@USE       IMP,AFPH12*IMP-AFB022.   
+@XQT       AFPH12.AFB022
+@FREE      IAFB004FAI.  
+@FREE      IAFB005FAI.  
+@FREE      AFPH12*IMP-AFB022.   
+@TIME   
+@ . *      ------------------------------------------------ 
+@LAB105:   MSG 105. DECHARGEMENT TABLE RDMS AFFILIES AL027  
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB105  
+@ . Dechargement pour traitement sequentiel ensuite 
+@SETC      0/S2 
+@DELETE,C  IAFB-AL027.  
+@ASG,UP    IAFB-AL027.,F/0/POS/4000 
+@USE       MATR,IAFB-AL027. 
+@XQT SYS$LIB$*RSA.RSAC-COIVP
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+UNLOAD TO FILE MATR 
+SELECT MATRICC  
+FROM AL027  
+WHERE C_ANNUL = ' ';
+END THREAD; 
+EXIT;   
+@EOF
+@FREE      IAFB-AL027.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK:   MSG ** UNLOAD OK **  
+@ . *      -----------------------------------------------------
+@ . *      --------------------------------------------------------------   
+@LAB110:   MSG 110. COMPLETER MATRICULES AL027 AVEC DONNEES AFFI (itu019)   
+@ . *      --------------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ . Lecture sequentielle du fichier venant de l'AL027 (cree au lab  
+@ . precedent) et recherche des données affiliés via la routine ITU019  
+@ . afin de complèter le fichier pour rechercher correspondance 
+@ASG,A     IAFB-AL027.  
+@USE       I-AL027,IAFB-AL027.  
+@DELETE,C  IAFB006FAI.  
+@ASG,UP    IAFB006FAI.,F/0/POS/4000 
+@USE       O-SELECT,IAFB006FAI. 
+@DELETE,C  AFPH12*IMP-AFB020.   
+@ASG,UP    AFPH12*IMP-AFB020.,F///1000  
+@USE       IMP,AFPH12*IMP-AFB020.   
+@XQT       AFPH12.AFB020
+@FREE      IAFB-AL027.  
+@FREE      AFPH12*IMP-AFB020.   
+@FREE      IAFB006FAI.  
+@TIME   
+@LAB115:   MSG 115. RECH CORR AFFILIES DISQUETTE / AFFILIES FEDERALE
+@ . *      -------------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB115  
+@ . Lecture séquentielle du fichier créé au lab précédent   
+@ . pour rechercher correspondance avec fichier ISéq Faillite   
+@ASG,A     IAFB005FAI.  
+@USE       I-AFFILI,IAFB005FAI. 
+@ASG,A     IAFB006FAI.  
+@USE       I-AL027,IAFB006FAI.  
+@DELETE,C  IAFB009FAI.  
+@ASG,UP    IAFB009FAI.,F/0/POS/4000 
+@USE       O-SELECT,IAFB009FAI. 
+@DELETE,C  AFPH12*IMP-023RPM.   
+@ASG,UP    AFPH12*IMP-023RPM.,F///1000  
+@USE       IMP,AFPH12*IMP-023RPM.   
+@XQT       AFPH12.AFB023
+ZONE A VERIFIER                    RPM  
+@FREE      IAFB005FAI.  
+@FREE      IAFB006FAI.  
+@FREE      AFPH12*IMP-023RPM.   
+@FREE      IAFB009FAI.  
+@TIME   
+@ . *      -------------------------------------------------------------
+@LAB120:   MSG 120. RECH CORR AFFILIES DISQUETTE / AFFILIES FEDERALE
+@ . *      -------------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB120  
+@ . Lecture séquentielle du fichier créé au lab précédent   
+@ . pour rechercher correspondance avec fichier faillite
+@ASG,A     IAFB005FAI.  
+@USE       I-AFFILI,IAFB005FAI. 
+@ASG,A     IAFB006FAI.  
+@USE       I-AL027,IAFB006FAI.  
+@DELETE,C  IAFB007FAI.  
+@ASG,UP    IAFB007FAI.,F/0/POS/4000 
+@USE       O-SELECT,IAFB007FAI. 
+@DELETE,C  AFPH12*IMP-023NOM.   
+@ASG,UP    AFPH12*IMP-023NOM.,F///1000  
+@USE       IMP,AFPH12*IMP-023NOM.   
+@XQT       AFPH12.AFB023
+ZONE A VERIFIER                    CP NOM   
+@FREE      IAFB005FAI.  
+@FREE      IAFB006FAI.  
+@FREE      AFPH12*IMP-023NOM.   
+@FREE      IAFB007FAI.  
+@TIME   
+@LAB122:   MSG 122. RECH CORR AFFILIES CLES SECONDAIRES 
+@ . *      -------------------------------------------- 
+@ADD       SYS$*RUNS.REPRISE
+LAB122  
+@ASG,A     IAFB007FAI.  
+@USE       I-SELECT,IAFB007FAI. 
+@DELETE,C  IAFB007SEC.  
+@ASG,UP    IAFB007SEC.,F/0/POS/4000 
+@USE       O-SELECT,IAFB007SEC. 
+@DELETE,C  AFPH12*IMP-AFB025S.  
+@ASG,UP    AFPH12*IMP-AFB025S.,F///1000 
+@USE       IMP3,AFPH12*IMP-AFB025S. 
+@XQT       AFPH12.AFB025
+@FREE      IAFB007FAI.  
+@FREE      IAFB007SEC.  
+@FREE      AFPH12*IMP-AFB025S.  
+@TIME   
+@LAB123:   MSG 123. RECH CORR AFFILIES DISQUETTE / AFFILIES FEDERALE
+@ . *      -------------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB123  
+@ . Lecture séquentielle du fichier créé au lab précédent   
+@ . pour rechercher correspondance avec fichier ISéq faillite   
+@ASG,A     IAFB005FAI.  
+@USE       I-AFFILI,IAFB005FAI. 
+@ASG,A     IAFB006FAI.  
+@USE       I-AL027,IAFB006FAI.  
+@DELETE,C  IAFB008FAI.  
+@ASG,UP    IAFB008FAI.,F/0/POS/4000 
+@USE       O-SELECT,IAFB008FAI. 
+@DELETE,C  AFPH12*IMP-023NMC.   
+@ASG,UP    AFPH12*IMP-023NMC.,F///1000  
+@USE       IMP,AFPH12*IMP-023NMC.   
+@XQT       AFPH12.AFB023
+ZONE A VERIFIER                    NOM COMMERCIAL   
+@FREE      IAFB005FAI.  
+@FREE      IAFB006FAI.  
+@FREE      AFPH12*IMP-023NMC.   
+@FREE      IAFB008FAI.  
+@TIME   
+@LAB125:   MSG 125. RECH CORR AFFILIES CLES SECONDAIRES 
+@ . *      -------------------------------------------- 
+@ADD       SYS$*RUNS.REPRISE
+LAB125  
+@ASG,A     IAFB008FAI.  
+@USE       I-SELECT,IAFB008FAI. 
+@DELETE,C  IAFB008SEC.  
+@ASG,UP    IAFB008SEC.,F/0/POS/4000 
+@USE       O-SELECT,IAFB008SEC. 
+@DELETE,C  AFPH12*IMP-AFB025.   
+@ASG,UP    AFPH12*IMP-AFB025.,F///1000  
+@USE       IMP3,AFPH12*IMP-AFB025.  
+@XQT       AFPH12.AFB025
+@FREE      IAFB008FAI.  
+@FREE      IAFB008SEC.  
+@FREE      AFPH12*IMP-AFB025.   
+@TIME   
+@ . *      ------------------------------------ 
+@LAB140:   MSG 140. TRI FICHIER SELECTION CREE  
+@ . *      ------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB140  
+@ . Tri des records selectionnes sur no sequence + matricule
+@ . pour traitement sequentiel ensuite  
+@ASG,A     IAFB007FAI.  
+@ASG,A     IAFB007SEC.  
+@ASG,A     IAFB008FAI.  
+@ASG,A     IAFB008SEC.  
+@ASG,A     IAFB009FAI.  
+@USE       INASC1,IAFB007FAI.   
+@USE       INASCS,IAFB007SEC.   
+@USE       INASC2,IAFB008FAI.   
+@USE       INASC4,IAFB008SEC.   
+@USE       INASC3,IAFB009FAI.   
+@DELETE,C  IAFB010FAI.  
+@ASG,UP    IAFB010FAI.,F/0/POS/4000 
+@USE       OUTASC,IAFB010FAI.   
+@SORT,ES
+SORT
+FILEIN=INASC1    BLOCK=10   
+FILEIN=INASCS    BLOCK=10   
+FILEIN=INASC2    BLOCK=10   
+FILEIN=INASC3    BLOCK=10   
+FILEIN=INASC4    BLOCK=10   
+FILEOUT=OUTASC   BLOCK=10   
+KEY=1,15,CH,A   
+RSZ=80  
+@EOF
+@FREE      IAFB007FAI.  
+@FREE      IAFB007SEC.  
+@FREE      IAFB008FAI.  
+@FREE      IAFB008SEC.  
+@FREE      IAFB009FAI.  
+@FREE      IAFB010FAI.  
+@TIME   
+@LAB145:   MSG 145. SUPPRESSION MULTIPLES RECORDS AFFILIES  
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB145  
+@ . Suppression des multiples sur base du tri precedent 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INASC,80,10  
+OUTPUT     OUTASC,80,10 
+KEYS       ALL 1,15 
+SEQERROR   MULTI
+@EOF
+@ASG,A     IAFB010FAI.  
+@USE       INASC,IAFB010FAI.
+@DELETE,C  IAFB011FAI.  
+@ASG,UP    IAFB011FAI.,F/0/POS/4000 
+@USE       OUTASC,IAFB011FAI.   
+@XQT       .BABA
+@ERS       TPF$.
+@FREE      IAFB010FAI.  
+@FREE      IAFB011FAI.  
+@TIME   
+@LAB146:  MSG 146. CFH-COPY 
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB146  
+@ . creation fichier l=22   
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      INASC,80,10  
+OUTPUT     OUTASC,22,10 
+FIELDIN    1,15 
+FIELDOUT   1,15 
+@EOF
+@ASG,A     IAFB011FAI.  
+@USE       INASC,IAFB011FAI.
+@DELETE,C  IAFB012FAI.  
+@ASG,UP    IAFB012FAI.,F/0/POS/4000 
+@USE       OUTASC,IAFB012FAI.   
+@XQT       .CFH-COPY
+@ERS       TPF$.
+@FREE      IAFB011FAI.  
+@FREE      IAFB012FAI.  
+@TIME   
+@ . *      ------------------------------------ 
+@LAB150:   MSG 150. IMPRESSION CORRESPONDANCES  
+@ . *      ------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB150  
+@ . Lecture sequentielle du fichier de selection et lecture en parallele
+@ . du fichier sequentiel pur affilies pour recup. donnes : Impression  
+@ . des affilies ayant trouves correspondance dans AL027 (+ impression  
+@ . donnees AL027 pour pouvoir comparer) et impression des affilies 
+@ . n'ayant pas trouve correspondance sur l'AL027   
+@ASG,A     IAFB012FAI.  
+@USE       I-AFFILI,IAFB004FAI. 
+@ASG,A     IAFB004FAI.  
+@USE       I-SELECT,IAFB012FAI. 
+@DELETE,C  IFAIINCONNU3.
+@ASG,UP    IFAIINCONNU3.,F/0/POS/4000   
+@USE       I-INCONNU,IFAIINCONNU3   
+@DELETE,C  IFAICOMMUN3. 
+@ASG,UP    IFAICOMMUN3.,F/0/POS/4000
+@USE       I-COMMUN,IFAICOMMUN3 
+@DELETE,C  AFPH12*IMP-AFB024-1. 
+@ASG,UP    AFPH12*IMP-AFB024-1.,F///100000  
+@USE       IMP1,AFPH12*IMP-AFB024-1.
+@DELETE,C  AFPH12*IMP-AFB024-2. 
+@ASG,UP    AFPH12*IMP-AFB024-2.,F///100000  
+@USE       IMP2,AFPH12*IMP-AFB024-2.
+@DELETE,C  AFPH12*IMP-AFB024-3. 
+@ASG,UP    AFPH12*IMP-AFB024-3.,F///100000  
+@USE       IMP3,AFPH12*IMP-AFB024-3.
+@XQT       AFPH12.AFB024
+@FREE      IAFB012FAI.  
+@FREE      IFAICOMMUN3. 
+@FREE      IFAIINCONNU3.
+@FREE      AFPH12*IMP-AFB024-1. 
+@FREE      AFPH12*IMP-AFB024-2. 
+@FREE      AFPH12*IMP-AFB024-3. 
+@FREE      ISELECT03-2. 
+@TIME   
+@ . 
+@ . *      -------------------------------  
+@LAB250:   MSG 250. SAUVETAGE DES FICHIERS  
+@ . *      -------------------------------  
+@ADD       SYS$*RUNS.FASDIR 
+@TIME   
+@ . 
+@ . *      ------------------------------   
+@LAB255: MSG 255. ENVOI FICHIERS INTRANET   
+@ . *      ------------------------------   
+@ADD       F999TRANSF.AFPH12/2200PC 
+@TIME   
+@ . 
+@ . *      ---------------------------------------  
+@LAB260:   MSG 260. IMPRESSION FICHIER VIA F999SYM  
+@ . *      ---------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB260  
+@ADD       F999SYM.AFPH12   
+@TIME   
+@ . 
+@ . *      -----------------------------------------
+@LAB270:   MSG 270. DELETE DES FICHIERS TEMPORAIRES 
+@ . *      -----------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB270  
+@DELETE,C  IAFB001FAI.  
+@DELETE,C  IAFB002FAI.  
+@DELETE,C  IAFB003FAI.  
+@DELETE,C  IAFB004FAI.  
+@DELETE,C  IAFB005FAI.  
+@DELETE,C  IAFB-AL027.  
+@DELETE,C  IAFB006FAI.  
+@DELETE,C  IAFB007FAI.  
+@DELETE,C  IAFB007SEC.  
+@DELETE,C  IAFB008FAI.  
+@DELETE,C  IAFB008SEC.  
+@DELETE,C  IAFB009FAI.  
+@DELETE,C  IAFB010FAI.  
+@DELETE,C  IAFB011FAI.  
+@DELETE,C  IAFB012FAI.  
+@DELETE,C  IFAICOMMUN3. 
+@DELETE,C  IFAIINCONNU3.
+@DELETE,C  NBAFPH12.
+@TIME   
+@ . *      -------------------------------------
+@LAB300:   MSG 300. DELETE DU FICHIER DE REPRISE
+@ . *      -------------------------------------
+@ADD       SYS$*RUNS.REPDEL 
+LAB300  
+@MSG            ******************************************  
+@MSG            ***  LE RUN AFPH12 S'EST BIEN TERMINE  ***  
+@MSG            ******************************************  
+@QUAL,R 
+@FIN
+@MSGFIN: MSG * FICHIERS VIDES EN ENTREE 
+@ . 
+@CAT,P     FICHIERAFPD9.
+@ED,I      FICHIERAFPD9.
+BONJOUR,
+IL N'Y A PAS DE FICHIER FAILLITE A TRAITER DANS LE JOB AFPH12.  
+MERCI.  
+EXIT
+@FREE      FICHIERAFB1. 
+@TIME   
+@ADD       ESYS$AF*COM.TFR/SSG  
+MAIL FICHIERAFPD9,,TXT,''AFPH12: PAS DE FICHIER INPUT'',;   
+''BERGIERS YVES'',''DL-ALPHA'',''DEWOLF CHRISTEL'',''DL-DIP-GESTION''   
+@EOF
+@DELETE,C  FICHIERAFPD9.
+@TIME   
+@ . 
+@CYCLE      RFAILLITEGRA.,0 
+@DELETE,C   IAFB001FAI. 
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@ . 
+@TIME   
+@FIN

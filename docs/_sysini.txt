@@ -1,0 +1,29 @@
+#
+# This a sample Sys.ini
+#
+# The sys.ini needs to be placed within the systembase path of the lion enviroment
+# not in the lion directory of the lion enviroment. The sys.ini is used by the
+# different lion programs to get access to the correct system database.
+#
+
+# <Lion enviroment name> : Name of lion enviroment, for example BANKINGDEV or BANKINGTEST
+# <System basepath>      : Base directory of the application for example D:\Projects\BankingDev\
+# <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+# <database name>        : System databasename for example LION_SYSTEMDEV
+# <database user>        : Database user for example lionsystemuser, this will encrypted after first access
+
+#
+# MsSql System database configuration
+#
+[DATABASE SERVER]
+ENVIRONMENT=FEDERALE
+SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+SERVER TYPE=MSSQL
+SERVER NAME NET=VMFEDPE08
+DATABASE NAME=FEDERALE_SYSTEM
+DBUSER=285085106085
+SCHEMA=
+FILEGROUP=
+DATASCHEME=
+TABLENAME-PREFIX=FALSE
+=== sqlcmd.exe present: True ===

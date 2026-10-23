@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SSG Stub Macros — safety-net for residual SSG word tokens after pre-processing.
+
+  The PowerShell pre-processor (Remove-SsgDirectives.ps1) handles:
+    • Whole-line SSG control directives (*DEFINE, *INCREMENT, *LOOP, @UCOB, …)
+    • Inline [param] token substitution ([*I], [INPUT,1,1,n], [MONTANT,…], …)
+    • Compiler control cards (#ACOB, #MAP, #HDG, …)
+
+  This file handles any SSG-derived BARE WORD tokens that survive pre-processing
+  and reach the AMT CobolConverter token stream — typically level-number aliases
+  or filler identifiers emitted by *DEFINE-style constructs.
+
+  When adding a new SSG program:
+    1. Scan the SSG source for *DEFINE directives and non-standard bare identifiers.
+    2. For each bare word that is not a standard COBOL keyword or user data-name,
+       add a PrecompilerMacro entry here with a COBOL-safe replacement.
+    3. Do NOT add entries for [param]-style inline tokens — those are handled
+       by the pre-processor before this file is consulted.
+    4. Mark the entry with the program family it belongs to (comment).
+
+  Format: XML, root <PrecompilerSettings>, one <PrecompilerMacro> per entry.
+  Attributes:
+    Name            — token as it appears in the COBOL token stream (case-insensitive)
+    ReplacementText — COBOL-safe literal or identifier to substitute
+
+  ─────────────────────────────────────────────────────────────────────────────
+  Program inventory — macro token analysis
+  ─────────────────────────────────────────────────────────────────────────────
+  MONTANT_SIGNE  — 2 bare tokens (FILLUN, FILLDEU) from REDEFINES level aliases
+  COMPARE2       — 3 bare tokens (FIL1, FIL2, PAS)  from filler/step identifiers
+  LECTIS_MULT    — 0 bare tokens; all SSG constructs are [param] inline tokens
+                   handled by pre-processor. No entries required here.
+  TRI_ASCII      — 0 bare tokens; *DEFINE FILLADD body suppressed by pre-processor
+                   (*DEFINE block tracking); string *IF conditions handled by
+                   Resolve-SsgCondition string arm. No entries required here.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+<PrecompilerSettings>
+
+  <!-- MONTANT_SIGNE family — REDEFINES level-number aliases in WORKING-STORAGE -->
+  <PrecompilerMacro Name="FILLUN"   ReplacementText="01" />
+  <PrecompilerMacro Name="FILLDEU"  ReplacementText="01" />
+
+  <!-- COMPARE2 / CONDIS family — filler and step identifier aliases -->
+  <PrecompilerMacro Name="FIL1"     ReplacementText="01" />
+  <PrecompilerMacro Name="FIL2"     ReplacementText="01" />
+  <PrecompilerMacro Name="PAS"      ReplacementText="01" />
+  <PrecompilerMacro Name="  1 "     ReplacementText=" 01 " />
+  <PrecompilerMacro Name="  3 "     ReplacementText=" 03 " />
+
+  <!-- LECTIS_MULT family — no bare-word macro tokens identified.
+       All SSG directives are *IF/[param] style; pre-processor resolves fully.
+       Retained here as a placeholder to confirm analysis complete. -->
+
+  <!-- TRI_ASCII family — *DEFINE FILLADD body is fully suppressed by Remove-SsgDirectives.ps1
+       (*DEFINE block tracking added 2026-06-25). No bare-word tokens reach the converter.
+       Conversion: trial-06-sort-fichout-1 — 0 errors, 0 warnings. No new entries required. -->
+
+</PrecompilerSettings>

@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSG-ECL/SSG Command Matrix — Federale Migration</title>
+<style>
+  :root {
+    --nav-w:240px; --done:#1a7f4b; --prog:#b45309; --pend:#6b7280;
+    --bug:#b91c1c; --code-bg:#1e1e2e; --code-fg:#cdd6f4;
+    --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:var(--nav-w); min-width:var(--nav-w); background:#0f2832; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #1a4a5a; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#e0f2fe; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#7dd3fc; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#bae6fd; text-decoration:none; transition:background .15s; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#1a4a5a; color:#e0f2fe; border-left-color:#38bdf8; }
+  nav ul li a.active { background:#0c3344; color:#7dd3fc; border-left-color:#0ea5e9; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#3a7a90; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  nav ul li.sub a { padding-left:28px; font-size:11.5px; color:#7dd3fc; }
+  main { flex:1; padding:28px 36px; max-width:1100px; }
+  .page-title h1 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:22px; }
+  .badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
+  .badge-done { background:#dcfce7; color:var(--done); }
+  .badge-prog { background:#fef3c7; color:var(--prog); }
+  .badge-pend { background:#f3f4f6; color:var(--pend); }
+  .badge-info { background:#dbeafe; color:#1d4ed8; }
+
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:26px; }
+  .section-card h2 { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border); }
+  .section-card h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .section-card p  { margin-bottom:10px; line-height:1.6; }
+  .section-card ul { margin:0 0 10px 20px; line-height:1.7; }
+  .section-card li { margin-bottom:3px; }
+
+  .code-wrap { position:relative; margin:12px 0; }
+  .code-label { font-size:10px; color:#6b7280; font-family:monospace; background:#f3f4f6; padding:3px 10px; border-radius:4px 4px 0 0; display:inline-block; border:1px solid #e5e7eb; border-bottom:none; }
+  pre { background:var(--code-bg); color:var(--code-fg); padding:14px 18px; border-radius:0 6px 6px 6px; overflow-x:auto; font-size:12px; line-height:1.6; font-family:'Cascadia Code','Fira Code',Consolas,monospace; white-space:pre; }
+  code { background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+
+  .warn        { background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .info-box    { background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .success-box { background:#f0fdf4; border-left:4px solid #22c55e; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .danger-box  { background:#fef2f2; border-left:4px solid #ef4444; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+
+  /* Standard ref table */
+  table.ref { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+  table.ref th { background:#f0f4f8; padding:6px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; }
+  table.ref td { padding:5px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.55; }
+  table.ref tr:nth-child(even) td { background:#fafafa; }
+  table.ref code { font-size:11.5px; }
+
+  /* ── Matrix table ───────────────────────────────────────────── */
+  .matrix-wrap { overflow-x:auto; margin:10px 0 20px; border:1px solid #e5e7eb; border-radius:6px; }
+  table.matrix { border-collapse:collapse; font-size:12px; width:100%; }
+  table.matrix th.fixed-directive {
+    min-width:170px; max-width:200px; background:#f0f4f8;
+    padding:8px 10px; border:1px solid #ddd; font-size:12px; font-weight:600;
+    text-align:left; vertical-align:bottom; white-space:nowrap;
+  }
+  table.matrix th.fixed-desc {
+    min-width:190px; background:#f0f4f8;
+    padding:8px 10px; border:1px solid #ddd; font-size:12px; font-weight:600;
+    text-align:left; vertical-align:bottom;
+  }
+  table.matrix th.prog {
+    writing-mode:vertical-lr; transform:rotate(180deg);
+    min-width:30px; max-width:36px; height:88px;
+    padding:6px 5px; text-align:center; font-size:10px; font-weight:700;
+    border:1px solid #ddd; background:#f0f4f8; white-space:nowrap;
+    letter-spacing:.3px;
+  }
+  table.matrix th.prog.done-prog { background:#f0fdf4; color:var(--done); }
+  table.matrix th.prog.plan-prog { background:#fffbeb; color:#92400e; }
+
+  table.matrix td.directive {
+    font-family:'Cascadia Code','Fira Code',Consolas,monospace;
+    font-size:11.5px; padding:6px 10px; border:1px solid #ddd;
+    background:#fff; white-space:nowrap; vertical-align:middle;
+  }
+  table.matrix td.directive-desc {
+    font-size:12px; padding:5px 10px; border:1px solid #ddd;
+    background:#fff; color:#374151; vertical-align:middle;
+  }
+  table.matrix td.cell {
+    text-align:center; padding:4px 3px; border:1px solid #ddd;
+    vertical-align:middle; font-size:12px; min-width:30px;
+  }
+  table.matrix tr:nth-child(even) td { background:#fafafa; }
+  table.matrix tr:nth-child(even) td.directive,
+  table.matrix tr:nth-child(even) td.directive-desc { background:#f9fafb; }
+  table.matrix tr.group-header td { background:#e0f2fe; font-weight:700; font-size:11px; color:#0c4a6e; padding:4px 10px; letter-spacing:.5px; text-transform:uppercase; }
+
+  /* cell value styles */
+  .cv { font-size:13px; font-weight:700; }
+  .cv-yes  { color:var(--done); }
+  .cv-no   { color:#d1d5db; font-size:11px; font-weight:400; }
+  .cv-pend { color:#9ca3af; font-size:11px; }
+  .cv-plan { color:#b45309; font-size:12px; }
+  a.pat-link { font-size:10px; display:block; color:#1d4ed8; text-decoration:none; margin-top:1px; }
+  a.pat-link:hover { text-decoration:underline; }
+
+  /* ── Pattern cards ───────────────────────────────────────────── */
+  .pat-card { border:1px solid var(--border); border-radius:8px; margin-bottom:18px; overflow:hidden; }
+  .pat-card .pat-header { background:linear-gradient(135deg,#0f2832 0%,#0c4a6e 100%); padding:12px 18px; }
+  .pat-card .pat-header h3 { font-size:14px; font-weight:700; color:#e0f2fe; margin:0; }
+  .pat-card .pat-header p  { font-size:11px; color:#7dd3fc; margin:4px 0 0; }
+  .pat-card .pat-body { padding:16px 18px; background:white; }
+  .pat-body-cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .pat-col h4 { font-size:12px; font-weight:700; color:#374151; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid #e5e7eb; text-transform:uppercase; letter-spacing:.5px; }
+  .pat-col p { font-size:12px; line-height:1.6; color:#374151; margin-bottom:6px; }
+  .pat-col code { font-size:11px; }
+  .pat-col .note { font-size:11px; color:#6b7280; margin-top:6px; font-style:italic; }
+  .programs-badge { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+  .prog-badge { background:#f0f9ff; border:1px solid #bae6fd; border-radius:4px; padding:1px 6px; font-size:10.5px; color:#0369a1; font-family:Consolas,monospace; }
+  .prog-badge.done { background:#dcfce7; border-color:#bbf7d0; color:var(--done); }
+  .prog-badge.plan { background:#fef3c7; border-color:#fde68a; color:#92400e; }
+
+  .ssg-directive { color:#c084fc; font-weight:600; }
+  .ssg-param     { color:#fbbf24; }
+  .ssg-comment   { color:#6a9955; font-style:italic; }
+  .ps-cmd        { color:#4ec9b0; }
+  .ps-param      { color:#fbbf24; }
+  .ps-cmt        { color:#6a9955; font-style:italic; }
+  .cs-kw         { color:#569cd6; }
+  .cs-type       { color:#4ec9b0; }
+  .cs-cmt        { color:#6a9955; font-style:italic; }
+
+  .dot-done::before { content:'●'; color:var(--done); margin-right:5px; }
+  .dot-pend::before { content:'○'; color:var(--pend); margin-right:5px; }
+
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; text-decoration:none; font-size:13px; margin-bottom:18px; }
+  .back-link:hover { text-decoration:underline; }
+  .footer-bar { margin-top:36px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af; }
+  .footer-bar a { color:#1d4ed8; }
+  a { color:#1d4ed8; }
+</style>
+</head>
+<body>
+
+<nav id="sidenav">
+  <div class="logo">
+    <h1>Command Matrix</h1>
+    <p>ECL &amp; SSG Directive Map</p>
+  </div>
+  <ul>
+    <li><a href="AMT172-Setup-Guide.html" style="color:#60a5fa;border-left-color:#60a5fa;background:#0c2a38;">&#8592; AMT172 Setup Guide</a></li>
+    <li><a href="SSG-COBOL-Reference.html">&#8596; SSG/COBOL Reference</a></li>
+    <li><a href="SSG-ECL-PowerShell-Reference.html">&#8596; SSG-ECL / PowerShell</a></li>
+    <li><a href="SSG-Trial-Progress.html">&#8596; Trial Progress</a></li>
+    <li style="border-bottom:1px solid #1a4a5a;margin:2px 0 6px;"></li>
+    <li class="section">Overview</li>
+    <li><a href="#overview">1 · Overview</a></li>
+    <li class="section">ECL Directives</li>
+    <li><a href="#ecl-matrix">2 · ECL Directives Matrix</a></li>
+    <li class="section">SSG Macros</li>
+    <li><a href="#ssg-matrix">3 · SSG Macro Matrix</a></li>
+    <li class="section">Patterns</li>
+    <li><a href="#patterns">4 · Transformation Patterns</a></li>
+    <li class="sub"><a href="#pat-ssg-ia">@SSG,IA / @XQT / @USE</a></li>
+    <li class="sub"><a href="#pat-define">*DEFINE / *SET / *PROCESS</a></li>
+    <li class="sub"><a href="#pat-increment">*INCREMENT / *LOOP</a></li>
+    <li class="sub"><a href="#pat-if">*IF / *ELSE / *ENDIF</a></li>
+    <li class="sub"><a href="#pat-tokens">Token forms</a></li>
+    <li class="sub"><a href="#pat-ucob">#ucob,is / @UCOB,I</a></li>
+  </ul>
+</nav>
+
+<main>
+  <a class="back-link" href="AMT172-Setup-Guide.html">&#8592; AMT172 Setup Guide</a>
+
+  <div class="page-title">
+    <h1>ECL / SSG Command Matrix</h1>
+    <p style="font-size:14px;color:#6b7280;margin-top:3px;font-weight:400;">Which ECL and SSG constructs appear in which of the 16 programs &mdash; and what replaces them post-migration</p>
+  </div>
+  <p class="page-meta">Last updated: 2026-06-26 &nbsp;|&nbsp; AMT 172 (8.0.26125.0 RC1) &nbsp;|&nbsp; Data-driven by the <a href="SSG-Trial-Progress.html">trial pipeline</a> &mdash; populated program by program as trials run</p>
+
+  <!-- ─────────────────────────────── SECTION 1: OVERVIEW -->
+  <div class="section-card" id="overview">
+    <h2>1 &middot; Overview</h2>
+    <p>This page is a <strong>cross-reference matrix</strong>: rows = ECL or SSG directives, columns = the 16
+    ASSURFED utility programs. Cells are populated each time a program is processed through the
+    <a href="SSG-Trial-Progress.html">trial pipeline</a>. Each confirmed cell links to a
+    <strong>transformation pattern card</strong> in §4 showing exactly what the PowerShell pre-processor does
+    with the construct, and what C# AMT runtime result it produces.</p>
+
+    <table class="ref" style="margin-top:12px;">
+      <tr><th style="width:16%">Symbol</th><th>Meaning</th></tr>
+      <tr><td><span class="cv cv-yes">&#10003;</span></td><td>Confirmed present in this program's source during a trial run</td></tr>
+      <tr><td><span class="cv cv-yes">&#10003; <a class="pat-link" style="display:inline;">&#8594;Pn</a></span></td><td>Confirmed + link to transformation pattern card in §4</td></tr>
+      <tr><td><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td><td>Confirmed absent (explicitly verified during trial)</td></tr>
+      <tr><td><span class="cv cv-pend">&mdash;</span></td><td>Not yet analysed (program not yet run through pipeline)</td></tr>
+    </table>
+
+    <div class="warn">
+      <strong>Scope:</strong> This matrix covers constructs found <strong>within the SSG source <code>.TXT</code> files</strong>
+      (what the pre-processor handles) and in the production ECL runstreams (from <code>RunsPrd\</code>).
+      Production ECL rows are populated using <code>find-ssg-ecl.ps1</code> as each program is analysed.
+      <strong>Post-migration runtime</strong> = the AMT .NET C# runtime that executes the converted program
+      &mdash; <em>not</em> the PRD OS2200 ECL execution.
+    </div>
+
+    <p><strong>Column headers</strong> use short codes. Full names: <code>MON</code>=MONTANT_SIGNE, <code>LEC</code>=LECTIS_MULT,
+    <code>TRI</code>=TRI_ASCII, <code>ARB1</code>=ARCHITAB1, <code>CFH</code>=CFH-COPY,
+    <code>AFMT</code>=ARCHIFORMAT, <code>AINS</code>=ARCHIINSERT, <code>ASEP</code>=ARCHISEPARE,
+    <code>CMP2</code>=COMPARE2_ASCII, <code>COND</code>=CONDIS_ASCII, <code>ECLAT</code>=ECLAT,
+    <code>LMND</code>=LOADIS_MULT-NODUP, <code>SCAN</code>=SCAN-VAR_ASCII,
+    <code>TAPE</code>=TAPELD_DISTRIB, <code>UNL</code>=UNLOADIS_MULT, <code>ULND</code>=UNLOADIS_MULT-NODUP.</p>
+  </div>
+
+  <!-- ─────────────────────────────── SECTION 2: ECL MATRIX -->
+  <div class="section-card" id="ecl-matrix">
+    <h2>2 &middot; ECL Directives &mdash; by Program</h2>
+    <p>ECL (Executive Control Language) directives that appear in the ECL runstreams invoking each
+    program (from <code>RunsPrd\</code>) <em>and</em> ECL-style directives embedded inside the SSG/COBOL source itself.
+    Standard invocation directives (<code>@SSG,IA</code>, <code>@XQT</code>, <code>@USE</code>, <code>@FREE</code>)
+    are expected for all SSG-template programs; cells are pre-filled where the §4 ECL Invocation
+    Pattern applies. Runstream-specific directives are populated by <code>find-ssg-ecl.ps1</code> analysis.</p>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th class="fixed-directive">ECL Directive</th>
+            <th class="fixed-desc">Purpose</th>
+            <!-- done -->
+            <th class="prog done-prog">MON</th>
+            <th class="prog done-prog">LEC</th>
+            <th class="prog done-prog">TRI</th>
+            <th class="prog done-prog">ARB1</th>
+            <th class="prog done-prog">CFH</th>
+            <!-- pending -->
+            <th class="prog done-prog">AFMT</th>
+            <th class="prog">AINS</th>
+            <th class="prog done-prog">ASEP</th>
+            <th class="prog">CMP2</th>
+            <th class="prog">COND</th>
+            <th class="prog">ECLAT</th>
+            <th class="prog done-prog">LMND</th>
+            <th class="prog">SCAN</th>
+            <th class="prog done-prog">TAPE</th>
+            <th class="prog done-prog">UNL</th>
+            <th class="prog">ULND</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Group A: Standard invocation (production ECL runstreams) -->
+          <tr class="group-header"><td colspan="18">A &mdash; Standard Invocation (ECL runstreams in RunsPrd\)</td></tr>
+          <tr>
+            <td class="directive"><code>@SSG,IA</code></td>
+            <td class="directive-desc">Inline SSG assembly &mdash; compile template with param cards</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span><a class="pat-link" href="#pat-ucob">&#8594;P6</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span><a class="pat-link" href="#pat-ucob">&#8594;P6</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span><a class="pat-link" href="#pat-ucob">&#8594;P6</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@XQT .progname</code></td>
+            <td class="directive-desc">Execute compiled program (TPF$ namespace)</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@USE lname,phys</code></td>
+            <td class="directive-desc">Bind logical file name &rarr; physical path</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@FREE filename</code></td>
+            <td class="directive-desc">Release file assignment after run</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ssg-ia">&#8594;P1</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@ASG,UP</code></td>
+            <td class="directive-desc">Assign / create new temp file</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@ASG,A</code></td>
+            <td class="directive-desc">Assign existing catalogued file</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@DELETE,C</code></td>
+            <td class="directive-desc">Conditional delete (no error if absent)</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@CAT,P</code></td>
+            <td class="directive-desc">Catalog permanent file</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@ADD</code></td>
+            <td class="directive-desc">Include shared ECL stream inline</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@LAB</code> / <code>@EOF</code></td>
+            <td class="directive-desc">Label / conditional branch on failure</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>@ERS</code></td>
+            <td class="directive-desc">Erase scratch qualifier (temp cleanup)</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <!-- Group B: ECL directives embedded in SSG source files -->
+          <tr class="group-header"><td colspan="18">B &mdash; SSG-Embedded ECL (found inside the SSG source <code>.TXT</code> files)</td></tr>
+          <tr>
+            <td class="directive"><code>@UCOB,I</code></td>
+            <td class="directive-desc">Inline COBOL compile directive in SSG source</td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>#ucob,is</code></td>
+            <td class="directive-desc">Variant UCOB inline compile header (ARCHITAB1 style)</td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-ucob">&#8594;P6</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+          <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>#ACOB</code></td>
+            <td class="directive-desc">Assembler-COBOL bridge (OS2200 specific)</td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box">
+      <strong>Populate Group A rows</strong> using
+      <code>C:\Amt\Migration\find-ssg-ecl.ps1</code> &mdash;
+      searches ~800 ECL files in <code>RunsPrd\</code> for each program name.
+      Requires <code>GetEncoding(1252)</code> (standard grep tools miss matches).
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────── SECTION 3: SSG MATRIX -->
+  <div class="section-card" id="ssg-matrix">
+    <h2>3 &middot; SSG Macro Directives &mdash; by Program</h2>
+    <p>SSG (Source Statement Generator) constructs found inside each program&apos;s
+    <code>ASSURFED_UTILIT_&lt;name&gt;(P).TXT</code> source file. These are what
+    <code>Remove-SsgDirectives.ps1</code> processes during the trial pipeline run.</p>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th class="fixed-directive">SSG Construct</th>
+            <th class="fixed-desc">Purpose</th>
+            <th class="prog done-prog">MON</th>
+            <th class="prog done-prog">LEC</th>
+            <th class="prog done-prog">TRI</th>
+            <th class="prog done-prog">ARB1</th>
+            <th class="prog done-prog">CFH</th>
+            <th class="prog done-prog">AFMT</th>
+            <th class="prog">AINS</th>
+            <th class="prog done-prog">ASEP</th>
+            <th class="prog">CMP2</th>
+            <th class="prog">COND</th>
+            <th class="prog">ECLAT</th>
+            <th class="prog done-prog">LMND</th>
+            <th class="prog">SCAN</th>
+            <th class="prog done-prog">TAPE</th>
+            <th class="prog done-prog">UNL</th>
+            <th class="prog">ULND</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Group A: Macro definition & invocation -->
+          <tr class="group-header"><td colspan="18">A &mdash; Macro Definition &amp; Invocation</td></tr>
+          <tr>
+            <td class="directive"><code>*DEFINE</code>&hellip;<code>*END</code></td>
+            <td class="directive-desc">Named macro definition block</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>*SET</code></td>
+            <td class="directive-desc">Compute value within <code>*DEFINE</code> block</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>*PROCESS</code></td>
+            <td class="directive-desc">Invoke named macro; result stored as <code>[*var]</code></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-define">&#8594;P2</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <!-- Group B: Loop & conditional -->
+          <tr class="group-header"><td colspan="18">B &mdash; Loop Generation &amp; Conditionals</td></tr>
+          <tr>
+            <td class="directive"><code>*INCREMENT</code>&hellip;<code>*LOOP</code></td>
+            <td class="directive-desc">Generate repeated COBOL blocks (loop variable <code>[*I]</code>)</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-increment">&#8594;P3</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-increment">&#8594;P3</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-increment">&#8594;P3</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-increment">&#8594;P3</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-increment">&#8594;P3</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>*IF</code> / <code>*ELSE</code> / <code>*ENDIF</code></td>
+            <td class="directive-desc">Conditional code generation; evaluated by <code>-ConditionValues</code></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-if">&#8594;P4</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <!-- Group C: Parameter tokens -->
+          <tr class="group-header"><td colspan="18">C &mdash; Parameter Token Forms</td></tr>
+          <tr>
+            <td class="directive"><code>[PARAM,r,1,f]</code></td>
+            <td class="directive-desc">Standard 4-part numeric token (row / col=1 / field)</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>[PARAM,r,A,f]</code></td>
+            <td class="directive-desc">A-variant token (all/any &mdash; sort/array stream contexts)</td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>[PARAM,r,COL,f]</code></td>
+            <td class="directive-desc">Named-field token (COL = column width in sort key)</td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>[*varname]</code></td>
+            <td class="directive-desc">Computed reference &mdash; result of <code>*PROCESS</code> macro</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td class="directive"><code>[*I]</code></td>
+            <td class="directive-desc">Loop counter reference (current <code>*INCREMENT</code> value)</td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+          <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+            <td class="cell"><span class="cv cv-yes">&#10003;</span><a class="pat-link" href="#pat-tokens">&#8594;P5</a></td>
+            <td class="cell"><span style="color:#b91c1c;font-weight:700;">&#10007;</span></td>
+            <td class="cell"><span class="cv cv-pend">&mdash;</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:#6b7280;margin-top:4px;">
+      Column header colours: <span style="background:#f0fdf4;border:1px solid #bbf7d0;padding:1px 6px;border-radius:3px;font-size:11px;color:var(--done);">green</span> = trial pipeline done &amp; proven,
+      <span style="background:#fffbeb;border:1px solid #fde68a;padding:1px 6px;border-radius:3px;font-size:11px;color:#92400e;">amber</span> = planned (next run).
+    </p>
+  </div>
+
+  <!-- ─────────────────────────────── SECTION 4: PATTERNS -->
+  <div class="section-card" id="patterns">
+    <h2>4 &middot; Transformation Patterns</h2>
+    <p>Compact summary cards for each directive that appears in the matrices above.
+    Each card shows the <strong>PowerShell pre-processor action</strong> and the <strong>post-migration C# runtime result</strong>.
+    <em>Not</em> the PRD OS2200 ECL execution &mdash; these are the migration-side transformations.
+    For full deep-dive pattern cards (SSG source &rarr; C# code), see
+    <a href="SSG-COBOL-Reference.html#patterns">SSG/COBOL Reference &sect;7</a>.</p>
+
+    <!-- ── P1: @SSG,IA / @XQT / @USE / @FREE ── -->
+    <div class="pat-card" id="pat-ssg-ia">
+      <div class="pat-header">
+        <h3>P1 &mdash; <code>@SSG,IA</code> / <code>@XQT .progname</code> / <code>@USE</code> / <code>@FREE</code></h3>
+        <p>Standard ECL invocation pattern &mdash; replaces the full OS2200 compile &rarr; assign &rarr; execute &rarr; free lifecycle</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (pre-processor + harness)</h4>
+            <p><strong><code>@SSG,IA</code></strong> &rarr; replaced by the full pipeline:<br>
+            <code>Convert-SsgToLion.ps1</code> (Remove-SsgDirectives + CobolConverterConsole) produces a validated <code>.LionSource</code> candidate.</p>
+            <p><strong><code>@USE logicalname,physicalfile</code></strong> &rarr; <code>assign.json</code> <code>fileAssignments</code> map
+            (<code>"FILEIN-1": "input.dat"</code>) + <code>Copy-Item</code> into the per-job work dir in <code>Run-EclProof.ps1</code>.</p>
+            <p><strong><code>@XQT .MONTANT</code></strong> &rarr; <code>Run-EclProof.ps1</code> Xqt block invokes
+            <code>tools/refimpl/&lt;key&gt;.ps1</code> (Tier-1 oracle).</p>
+            <p><strong><code>@FREE</code></strong> &rarr; harness wipes and recreates the per-job work dir after each run (idempotent, no residue).</p>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p><strong><code>@SSG,IA</code></strong> &rarr; The compiled program is the <strong>generated C# class</strong>
+            imported from <code>.LionSource</code> into AMT Dev Studio.</p>
+            <p><strong><code>@USE</code> / file assignment</strong> &rarr; <code>m_FileInName</code> / <code>m_FileOutName</code>
+            fields in <code>Montant.Files.cs</code>, consumed by <code>SetOptions(m_FileInName, ...)</code>
+            (<a href="SSG-COBOL-Reference.html#pat-file-name">deep-dive: T4 pattern</a>).</p>
+            <p><strong><code>@XQT .progname</code></strong> &rarr; Tier-2 (future): <code>BatchController.Execute(programId)</code>
+            via <code>AmtPsEclLib</code>; Tier-1: direct refimpl call.</p>
+            <p><strong><code>@FREE</code></strong> &rarr; <code>AmtFileId</code> close / resource cleanup at end of run.</p>
+            <p class="note">See <a href="SSG-ECL-PowerShell-Reference.html#execution-model">SSG-ECL Reference &sect;2 — Execution Model</a> for the full Tier 1/2/3 breakdown.</p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Applies to:</strong>
+          <span class="prog-badge done">MON</span>
+          <span class="prog-badge done">LEC</span>
+          <span class="prog-badge done">TRI</span>
+          <span class="prog-badge done">ARB1</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">+ all remaining SSG-template programs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── P2: *DEFINE / *SET / *PROCESS ── -->
+    <div class="pat-card" id="pat-define">
+      <div class="pat-header">
+        <h3>P2 &mdash; <code>*DEFINE name</code> / <code>*SET varname TO expr</code> / <code>*PROCESS name args</code> / <code>*END</code></h3>
+        <p>Named macro definition and invocation &mdash; e.g. <code>FILUN</code> / <code>FILDEU</code> helpers in MONTANT_SIGNE</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (Remove-SsgDirectives.ps1)</h4>
+            <p>The entire <code>*DEFINE</code>&hellip;<code>*END</code> block is <strong>stripped</strong> from the output.
+            When a <code>*PROCESS macroname arg1 arg2</code> line is encountered, the pre-processor
+            evaluates the <code>*SET</code> arithmetic expression using the supplied arguments and stores
+            the result. Any subsequent <code>[*varname]</code> token in the COBOL body is then
+            substituted with the computed integer literal.</p>
+            <div class="code-wrap">
+              <span class="code-label">example (MONTANT_SIGNE)</span>
+              <pre><span class="ssg-directive">*DEFINE</span> FILUN
+<span class="ssg-directive">*SET</span> FILLUN TO [#1]-1   <span class="ssg-comment">← stripped from output</span>
+<span class="ssg-directive">*END</span>
+<span class="ssg-directive">*PROCESS</span> FILUN <span class="ssg-param">[MONTANT,I,1,1]</span>   <span class="ssg-comment">← evaluates FILLUN = offset-1</span>
+  03 FILLER PIC X(<span class="ssg-param">[*FILLUN]</span>).     <span class="ssg-comment">← [*FILLUN] → literal e.g. 1</span></pre>
+            </div>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p>The SSG macro <strong>becomes a static helper method</strong> in <code>LocalDefinitions.cs</code>.
+            The method implements the same arithmetic as the <code>*SET</code> expression:</p>
+            <div class="code-wrap">
+              <span class="code-label">csharp (generated — MONTANT_SIGNE)</span>
+              <pre><span class="cs-cmt">// SSG *DEFINE FILUN → *SET FILLUN TO [#1]-1</span>
+<span class="cs-kw">private static int</span> FilUn(<span class="cs-kw">int</span> offset) =&gt; offset - 1;
+
+<span class="cs-cmt">// SSG *DEFINE FILDEU → *SET FILLDEU TO [#1]-[#2]-[#3]+1</span>
+<span class="cs-kw">private static int</span> FilDeu(<span class="cs-kw">int</span> recSize, <span class="cs-kw">int</span> offset, <span class="cs-kw">int</span> width)
+    =&gt; recSize - offset - width + 1;</pre>
+            </div>
+            <p class="note">Full deep-dive: <a href="SSG-COBOL-Reference.html#pat-define-filun-fildeu">SSG/COBOL Reference &sect;7 — T2 pattern</a></p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Confirmed in:</strong>
+          <span class="prog-badge done">MON</span>
+          <span class="prog-badge done">CMP2</span>
+          <span class="prog-badge done">CFH</span>
+          <span class="prog-badge done">ASEP</span>
+          <span class="prog-badge done">AFMT</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">COMPARE2 uses *DEFINE for PAS/FILUN/FILDEUX macros (trial-10). CFH-COPY uses *DEFINE FILER + *SET FILLCTR (trial-11). ARCHISEPARE/ARCHIFORMAT use <strong>standalone *SET</strong> (no *DEFINE block): pure expression evaluation, e.g. <code>*SET [*c] = [*b]+[*a]-[key,1,1,3]+1</code> &mdash; including N-operand chains fixed at trial-13 (trial-12/13).</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── P3: *INCREMENT / *LOOP ── -->
+    <div class="pat-card" id="pat-increment">
+      <div class="pat-header">
+        <h3>P3 &mdash; <code>*INCREMENT I FROM n BY m TO [param]</code> &hellip; <code>*LOOP</code></h3>
+        <p>Loop-generate repeated COBOL blocks &mdash; N separate REDEFINES structures from one template</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (Remove-SsgDirectives.ps1)</h4>
+            <p>The pre-processor <strong>expands the loop</strong> at compile time: for each value of <code>I</code>
+            from <code>n</code> to the resolved upper bound, it emits one copy of the loop body with
+            <code>[*I]</code> substituted by the current counter value.
+            The <code>*INCREMENT</code> and <code>*LOOP</code> lines themselves are stripped.</p>
+            <div class="code-wrap">
+              <span class="code-label">ssg input → cobol output (n=1, bound=2)</span>
+              <pre><span class="ssg-directive">*INCREMENT</span> I FROM 1 BY 1 TO <span class="ssg-param">[MONTANT]</span>
+  01 WS-IN<span class="ssg-param">[*I]</span> REDEFINES WS-IN.
+<span class="ssg-directive">*LOOP</span>
+<span class="ssg-comment">↓ expands to:</span>
+  01 WS-IN1 REDEFINES WS-IN.
+  01 WS-IN2 REDEFINES WS-IN.</pre>
+            </div>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p>The N static REDEFINES overlays become a <strong>dynamic <code>foreach</code> loop</strong>
+            in the constructor of <code>LocalDefinitions.cs</code>, creating
+            <code>AmtStructure</code> + <code>AmtVarNumericOS2200</code> instances at runtime:</p>
+            <div class="code-wrap">
+              <span class="code-label">csharp (generated)</span>
+              <pre><span class="cs-kw">foreach</span> (<span class="cs-kw">var</span> (offset, width) <span class="cs-kw">in</span> fields) {
+  <span class="cs-kw">var</span> wsIn = <span class="cs-kw">new</span> <span class="cs-type">AmtStructure</span>();
+  wsIn.Redefines(m_Ws_In);
+  wsIn.AddAlphaFiller(FilUn(offset));
+  m_InFields.Add(<span class="cs-kw">new</span> <span class="cs-type">AmtVarNumericOS2200</span>(width, <span class="cs-kw">true</span>, wsIn));
+  wsIn.AddAlphaFiller(FilDeu(recSizeIn, offset, width));
+}</pre>
+            </div>
+            <p class="note">Full deep-dive: <a href="SSG-COBOL-Reference.html#pat-increment-loop">SSG/COBOL Reference &sect;7 — T1 pattern</a></p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Confirmed in:</strong>
+          <span class="prog-badge done">MON</span>
+          <span class="prog-badge done">ECLAT</span>
+          <span class="prog-badge done">LMND</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">ECLAT uses named loop variables (<code>[*a]</code>, <code>[*b]</code>, &hellip;) not <code>[*I]</code>; loop body manually expanded for key=1 (automated expansion deferred). Others: pending analysis.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── P4: *IF / *ELSE / *ENDIF ── -->
+    <div class="pat-card" id="pat-if">
+      <div class="pat-header">
+        <h3>P4 &mdash; <code>*IF condition</code> / <code>*ELSE</code> / <code>*ENDIF</code></h3>
+        <p>Conditional code generation &mdash; multi-variant programs (LECTIS, TRI_ASCII)</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (Remove-SsgDirectives.ps1)</h4>
+            <p><code>Resolve-SsgCondition</code> evaluates each <code>*IF</code> branch using the
+            <code>-ConditionValues</code> hashtable supplied via <code>programs.manifest.json</code>.
+            The <strong>selected branch body is kept</strong>; all other branches are stripped.
+            The <code>*IF</code> / <code>*ELSE</code> / <code>*ENDIF</code> lines themselves are removed.
+            String comparisons (<code>*IF [PARAM] = WORD</code>) are resolved against the matching
+            <code>-ParamOverrides</code> value.</p>
+            <p>Without correct <code>conditionValues</code>, multiple branches produce
+            duplicate DATA DIVISION entries that the AMT converter rejects with a
+            <em>&ldquo;duplicate field definition&rdquo;</em> error.</p>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p>There is <strong>no runtime conditional</strong>: the branch was already resolved
+            at pre-process time. The generated C# contains only the <em>selected</em> code path.
+            This is intentional &mdash; SSG conditionals are compile-time variant selection, not
+            runtime branching logic.</p>
+            <p>Example: LECTIS with <code>ASCII=1, LKEY=2</code> &rarr; the ASCII-mode, two-key
+            variant is the only code generated. The IS-file API
+            (<code>OpenFile</code> / <code>LocateRecordIndexedFile</code> / <code>ReadRandomAccessFileNextRecord</code>)
+            appears because the <code>UN=1</code> (unordered) branch was selected.</p>
+            <p class="note">See <a href="SSG-ECL-PowerShell-Reference.html#ssg-conditions">SSG-ECL Reference &sect;5 &mdash; *IF/*DEFINE Handling</a></p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Confirmed in:</strong>
+          <span class="prog-badge done">LEC</span>
+          <span class="prog-badge done">TRI</span>
+          <span class="prog-badge done">SCAN</span>
+          <span class="prog-badge done">ECLAT</span>
+          <span class="prog-badge done">CMP2</span>
+          <span class="prog-badge done">CFH</span>
+          <span class="prog-badge done">ASEP</span>
+          <span class="prog-badge done">LMND</span>
+          <span class="prog-badge done">UNL</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">ECLAT closes blocks with <code>*ENDIF</code> (not <code>*END</code>); matched by <code>^\*END(?:IF)?\b</code>. COMPARE2 uses bare conditions (<code>*IF [PARAM]</code>) and numeric OR (trial-10). CFH-COPY introduces string-string OR: <code>*IF [OUTPUT,1,1,1] = CARDPUNCH OR [OUTPUT,1,1,1] = PRINTER</code> (trial-11). ARCHISEPARE adds <code>*ELSEIF</code> + <code>branchTaken</code> tracking (trial-12). MON/AFMT confirmed absent; ARB1 no SSG directives.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── P5: Token forms ── -->
+    <div class="pat-card" id="pat-tokens">
+      <div class="pat-header">
+        <h3>P5 &mdash; Parameter Token Forms: <code>[PARAM,r,c,f]</code> / <code>[PARAM,r,A,f]</code> / <code>[PARAM,r,COL,f]</code> / <code>[*varname]</code> / <code>[*I]</code></h3>
+        <p>Inline ECL/SSG parameter substitution &mdash; the pre-processor's primary token replacement work</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (Remove-SsgDirectives.ps1)</h4>
+            <p>All token forms are substituted with literal values from the
+            <code>paramOverrides</code> hashtable in <code>programs.manifest.json</code>.
+            Unmatched tokens collapse to <code>1</code> (catch-all).</p>
+            <table class="ref" style="margin-top:8px;">
+              <tr><th>Token form</th><th>Example</th><th>Value from</th></tr>
+              <tr><td><code>[P,r,1,f]</code></td><td><code>[INPUT,1,1,1]</code></td><td><code>paramOverrides["[INPUT,1,1,1]"]</code></td></tr>
+              <tr><td><code>[P,r,A,f]</code></td><td><code>[INPUT,1,A,1]</code></td><td><code>paramOverrides["[INPUT,1,A,1]"]</code></td></tr>
+              <tr><td><code>[P,r,COL,f]</code></td><td><code>[KEYS,1,COL,2]</code></td><td><code>paramOverrides["[KEYS,1,COL,2]"]</code></td></tr>
+              <tr><td><code>[*varname]</code></td><td><code>[*FILLUN]</code></td><td>Result of last <code>*PROCESS FILUN</code></td></tr>
+              <tr><td><code>[*I]</code></td><td><code>WS-IN[*I]</code></td><td>Current <code>*INCREMENT</code> counter</td></tr>
+            </table>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p>Token substitution tier determines the C# construct:</p>
+            <table class="ref" style="margin-top:8px;">
+              <tr><th>Token</th><th>Tier</th><th>C# result</th></tr>
+              <tr><td><code>[INPUT,1,1,1]</code></td><td>T4</td><td><code>m_FileInName = "FILEIN-1"</code> &rarr; <code>SetOptions()</code></td></tr>
+              <tr><td><code>[INPUT,1,1,2]</code></td><td>T3</td><td><code>int recordSizeIn = 80</code> &rarr; <code>AmtVarAlpha(80)</code></td></tr>
+              <tr><td><code>[INPUT,1,1,3]</code></td><td>T5</td><td><code>int m_FileInBlockSize = 1</code> (stored, no API hook)</td></tr>
+              <tr><td><code>[OUTPUT,1,1,1]</code></td><td>T4</td><td>PROGRAM-ID seed + <code>m_FileOutName</code></td></tr>
+              <tr><td><code>[KEYS,1,COL,2]</code></td><td>T_SORT</td><td><code>int keyWidth = 8</code> &rarr; <code>SortFiles()</code> key spec</td></tr>
+              <tr><td><code>[LKEY,n,1,2]</code></td><td>T_KEY</td><td><code>int keyWidth</code> &rarr; indexed-file key spec</td></tr>
+            </table>
+            <p class="note">Full deep-dive: <a href="SSG-COBOL-Reference.html#pat-record-size">T3</a> / <a href="SSG-COBOL-Reference.html#pat-file-name">T4</a> / <a href="SSG-COBOL-Reference.html#pat-block-size">T5</a> pattern cards</p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Confirmed in:</strong>
+          <span class="prog-badge done">MON</span>
+          <span class="prog-badge done">LEC</span>
+          <span class="prog-badge done">TRI</span>
+          <span class="prog-badge done">ARB1</span>
+          <span class="prog-badge done">CMP2</span>
+          <span class="prog-badge done">CFH</span>
+          <span class="prog-badge done">ASEP</span>
+          <span class="prog-badge done">AFMT</span>
+          <span class="prog-badge done">LMND</span>
+          <span class="prog-badge done">UNL</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">COMPARE2 uses [INPUT,r,n,f] positional tokens and [*varname] computed results (trial-10). CFH-COPY adds [OUTPUT,r,n,f] tokens (trial-11). ARCHISEPARE/ARCHIFORMAT add [filein/fileout/key/rsz/table] tokens and [*a]&ndash;[*e] computed variables from standalone *SET chains (trial-12/13).</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── P6: #ucob,is / @UCOB,I ── -->
+    <div class="pat-card" id="pat-ucob">
+      <div class="pat-header">
+        <h3>P6 &mdash; <code>#ucob,is .name,.name</code> / <code>@UCOB,I</code></h3>
+        <p>Inline COBOL compile directives &mdash; programs using <code>#ucob,is</code> / <code>@UCOB,I</code> compile inline rather than via the SSG template (<code>@SSG,IA</code>) path</p>
+      </div>
+      <div class="pat-body">
+        <div class="pat-body-cols">
+          <div class="pat-col">
+            <h4>&#9654; PowerShell (Remove-SsgDirectives.ps1 &mdash; confirmed trial-07)</h4>
+            <p><code>#ucob,is .architab1,.architab1</code> is an <strong>ECL-embedded COBOL compile header</strong>:
+            it tells the OS2200 executor to compile the following COBOL inline (not via <code>@SSG,IA</code>).
+            This means ARCHITAB1 is <strong>plain COBOL</strong>, not an SSG macro template.</p>
+            <p><strong>Confirmed at trial-07:</strong> <code>Remove-SsgDirectives.ps1</code> strips the
+            <code>#ucob,is</code> header line via the <code>^#ucob\b</code> rule. The source has exactly
+            one such line (the opening header); no other UCOb-style directives appear.
+            Result: 120&nbsp;lines&nbsp;in &rarr; 119&nbsp;lines&nbsp;out, 1 control line stripped,
+            8 COBOL lines substituted (<code>[fname,1,1,1]</code>, <code>[tname,1,1,1/2]</code>&thinsp;&times;&thinsp;2,
+            <code>[key,1,1,1/2/3]</code>&thinsp;&times;&thinsp;2, each annotated <code>*&gt;&nbsp;SSG-STUB</code>).</p>
+            <p class="note">Candidate: <a href="EclCobolPipeline/candidates/trial-07-architab1/ARCHITAB1.TXT">EclCobolPipeline/candidates/trial-07-architab1/ARCHITAB1.TXT</a></p>
+          </div>
+          <div class="pat-col">
+            <h4>&#9654; C# post-migration runtime (AMT .NET)</h4>
+            <p>Because ARCHITAB1 is plain COBOL (not SSG macro), the generated C# is expected to be
+            <strong>simpler</strong> than MONTANT/LECTIS/TRI_ASCII &mdash; no <code>*INCREMENT</code> loop,
+            no <code>*DEFINE</code> helpers, no <code>*IF</code> variants.</p>
+            <p>The ECL stub rule applies from trial-07: any <code>[fname,1,1,1]</code> token substituted
+            should be renamed to an <code>ECL_</code>-prefixed identifier with a
+            <code>*&gt; SSG-STUB</code> annotation comment.</p>
+            <p class="note">See <a href="SSG-ECL-PowerShell-Reference.html#ecl-params">SSG-ECL Reference &sect;4 &mdash; Stub naming rule (from Trial 07)</a></p>
+          </div>
+        </div>
+        <div class="programs-badge" style="margin-top:12px;">
+          <strong style="font-size:11px;color:#374151;margin-right:4px;">Confirmed in:</strong>
+          <span class="prog-badge done">ARB1</span>
+          <span class="prog-badge done">ASEP</span>
+          <span class="prog-badge done">AFMT</span>
+          <span style="font-size:11px;color:#6b7280;margin-left:2px;">ARB1=<code>#ucob,is</code> (trial-07); ASEP=<code>#ucob,is</code> (trial-12); AFMT=<code>#ucob,is</code> (trial-13). MON / LEC / TRI confirmed absent.</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /patterns -->
+
+  <div class="footer-bar">
+    SSG-ECL / SSG Command Matrix &nbsp;|&nbsp; AMT 172 (8.0.26125.0 RC1) &nbsp;|&nbsp;
+    Federale migration &mdash; SSG/ECL &rarr; COBOL &rarr; Lion &rarr; C# &nbsp;|&nbsp;
+    <a href="SSG-COBOL-Reference.html">SSG/COBOL Reference</a> &nbsp;&middot;&nbsp;
+    <a href="SSG-ECL-PowerShell-Reference.html">SSG-ECL Reference</a> &nbsp;&middot;&nbsp;
+    <a href="SSG-Trial-Progress.html">Trial Progress</a>
+  </div>
+</main>
+
+</body>
+</html>

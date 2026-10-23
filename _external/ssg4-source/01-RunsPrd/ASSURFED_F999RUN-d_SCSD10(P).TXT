@@ -1,0 +1,159 @@
+@RUN,M/T   SCSD10,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ******************************************************** 
+@MSG       **                                                    ** 
+@MSG       **  TRAITEMENT DU BORDEREAU CAISSE DE COMPENSATION    ** 
+@MSG       **                  DDR ACTIF                         ** 
+@MSG       **                  ---------                         ** 
+@MSG       ******************************************************** 
+@ . LE 20/04/2016 : CREATION DU RUN 
+@ . LE __/__/____ : MODIFICATION DU RUN 
+@ . 
+@MSG       EDITION DU JCL.  
+@ . 
+@PRT,SC    F999RUN.SCSD10   
+@TIME   
+@ . 
+@MSG       TRANSFERT DES PROGRAMMES 
+@ . 
+@ASG,T     SCSD10.,F//POS/4000  
+@COPY,A    SCPRD*BABS.SCB293,SCSD10.SCB293  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE. 
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@TIME   
+@ . 
+@ . ====================================================================
+@ . BABA - SELECTION DU RECORD AYANT LE CODE C85
+@ . ====================================================================
+@ . 
+@LAB010: MSG 010. SELECTION ET FILTRAGE 
+@ADD       SYS$*RUNS.REPRISE
+LAB010  
+@ . 
+@ASG,AX    FBORDCC. 
+@USE       INA,FBORDCC. 
+@ . 
+@DELETE,C  R009BRDC85.  
+@ASG,UP    R009BRDC85.,F//POS/4000  
+@USE       OUTA,R009BRDC85. 
+@ . 
+@DELETE,C  I009BRDC80.  
+@ASG,UP    I009BRDC80.,F//POS/4000  
+@USE       OUTB,I009BRDC80. 
+@ . 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INA,300,10   
+OUTPUT     OUTA,300,10   OUTB,358,10
+KEYS       R  1,3,C85   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      R009BRDC85.  
+@FREE      I009BRDC80.  
+@FREE      FBORDCC. 
+@ . 
+@ . =================================================================== 
+@ . BABA - SEPARATION DDR ACTIF ET DDR PASSIF   
+@ . =================================================================== 
+@ . 
+@LAB015: MSG 015. SELECTION ET FILTRAGE 
+@ADD       SYS$*RUNS.REPRISE
+LAB015  
+@ . 
+@ASG,AX    I009BRDC80.  
+@USE       INA,I009BRDC80.  
+@ . 
+@DELETE,C  I009BRDC80A. 
+@ASG,UP    I009BRDC80A.,F//POS/4000 
+@USE       OUTA,I009BRDC80A.
+@ . 
+@DELETE,C  R009BRDC80P. 
+@ASG,UP    R009BRDC80P.,F//POS/4000 
+@USE       OUTB,R009BRDC80P.
+@ . 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INA,358,10   
+OUTPUT     OUTA,300,10   OUTB,358,10
+KEYS       R  4,5,00087 
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      I009BRDC80A. 
+@FREE      R009BRDC80P. 
+@ . 
+@ . ====================================================================
+@LAB020: MSG 025. SELECTION ET TRI POUR SCB293. 
+@ . ====================================================================
+@ADD       SYS$*RUNS.REPRISE
+LAB020  
+@ . 
+@ASG,A     I009BRDC80A. 
+@DELETE,C  I009BRDC80AT.
+@CAT,P     I009BRDC80AT.,F//POS/4000
+@ASG,A     I009BRDC80AT.
+@SORT,ES
+FILEIN=I009BRDC80A,F   BLOCK=10 
+FILEOUT=I009BRDC80AT,F BLOCK=10 
+ACCEPT=1,3,CAS,E,C81,OR 
+ACCEPT=1,3,CAS,E,C82
+KEY=18,2,CH,A,1    . Zone 03 : Numéro de suite = TP-DEM (1,2,3) 
+RECORD=100  
+RSZ=300 
+@EOF
+@TIME   
+@ . 
+@ . ====================================================================
+@ . CREATION DDR SCB293 ACTIF   
+@ . ====================================================================
+@ . 
+@LAB030: MSG 030. CREATION DDR ACTIF
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@ASG,AX    R009BRDC85.  
+@USE       IN-DATA-C85,R009BRDC85.  
+@ . 
+@ASG,AX    I009BRDC80AT.
+@USE       IN-DATA-C80,I009BRDC80AT.
+@ . 
+@XQT       SCSD10.SCB293
+@FREE      R009BRDC85.  
+@FREE      I009ERRBRDA. 
+@FREE      I009BRDC80AT.
+@TIME   
+@ . 
+@ . ====================================================================
+@ . 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS.   
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.copie/pc   
+@TIME   
+@ . 
+@LAB770: MSG 770. EXECUTION DELETE FICHIERS TRAVAUX.
+@ADD       SYS$*RUNS.REPRISE
+LAB770  
+@ . 
+@DELETE,C  I009BRDC80   
+@DELETE,C  I009BRDC80A  
+@DELETE,C  I009BRDC80AT 
+@FREE      R009BRDC85   
+@TIME   
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ADD       SYS$*RUNS.REPDEL 
+@ . 
+@MSG       *** LE RUN SCSD10 S'EST BIEN TERMINE *** 
+@ . 
+@QUAL,R 
+@FIN

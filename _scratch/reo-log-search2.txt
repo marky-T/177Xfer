@@ -1,0 +1,11 @@
+--- recently written files under E:\Amt (depth 4)
+--- sub-folders of Reorganize
+E:\Amt\AMTTools\Reorganize\ReorganizeAgent
+E:\Amt\AMTTools\Reorganize\runtimes
+--- E:\Amt top level
+dir  AMTTools
+dir  License
+dir  Lion
+dir  Setup
+file AmtLocalisation.xml
+file Sample_Sys.ini

@@ -1,0 +1,8 @@
+Name       : SCANGRP1
+Exit       : 0
+Errors     : 0
+Warnings   : 4
+FirstError : 
+OutFile    : E:\Repos\ssg4-work\generic\SCANGROUP\work1\out\SCANGRP1.LionSource
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 0

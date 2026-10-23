@@ -1,0 +1,19 @@
+######## CFH-COPY ########
+[mock] Set-Jobname T3_20_CFH_COPY_LIVE
+[mock] Initialize - settings: E:\Repos\_mock_amt_install\Scripts\SSGTRIAL\RUN\..\..\Settings\AmtSettings.xml
+[mock] Initialize OK - ScriptPath=E:\Repos\_mock_amt_install\Scripts ; seeded 20 SGS keys
+=== Initialize OK - live Connect-Application succeeded ===
+=== Running CFH-COPY.ps1 body ===
+=== Body completed without a thrown exception ===
+
+EXITCODE=0
+
+######## UNLOADIS_ASCII ########
+[mock] Set-Jobname T3_20_UNLOADIS_ASCII_LIVE
+[mock] Initialize - settings: E:\Repos\_mock_amt_install\Scripts\SSGTRIAL\RUN\..\..\Settings\AmtSettings.xml
+[mock] Initialize OK - ScriptPath=E:\Repos\_mock_amt_install\Scripts ; seeded 14 SGS keys
+=== Initialize OK - live Connect-Application succeeded ===
+=== Running UNLOADIS_ASCII.ps1 body ===
+=== Body completed without a thrown exception ===
+
+EXITCODE=0

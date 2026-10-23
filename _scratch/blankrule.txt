@@ -1,0 +1,42 @@
+== blank / whitespace-only lines in the 20 example inputs
+ARCHIFORMAT.TXT                    lines=  383 empty=  3 whitespace-only= 13
+ARCHISEPARE                        lines=  238 empty=  3 whitespace-only= 11
+BABA_ASCII.TXT                     lines=  426 empty=  0 whitespace-only=  1
+CFH-COPY_ASCII.TXT                 lines=  442 empty=  1 whitespace-only=  1
+CFH-COPY.TXT                       lines=  416 empty=  0 whitespace-only=  2
+CHAB100_ASCII.TXT                  lines=  268 empty=  1 whitespace-only=  0
+CHABAN_ASCII.TXT                   lines=  267 empty=  1 whitespace-only=  0
+CONDIS2_ASCII.TXT                  lines=  911 empty= 45 whitespace-only=  0
+EXTEUR.TXT                         lines=  961 empty= 49 whitespace-only= 74
+FUSBA_ASCII.TXT                    lines=  515 empty=  0 whitespace-only=  0
+FUSBA2_ASCII.TXT                   lines=  426 empty=  0 whitespace-only=  0
+LECTIS_ASCII.TXT                   lines=  356 empty=  0 whitespace-only=  3
+LOADIS_ASCII.TXT                   lines=  127 empty=  0 whitespace-only=  1
+LOADIS_MULTI.TXT                   lines=  257 empty=  1 whitespace-only=  0
+RECAP.TXT                          lines=  540 empty= 11 whitespace-only=  2
+SCAN_ASCII.TXT                     lines=  620 empty=  1 whitespace-only=  0
+TABAN_ASCII.TXT                    lines=  626 empty= 11 whitespace-only=  0
+TAPELD_ASCII.TXT                   lines=  635 empty=  9 whitespace-only=  3
+UNLOADIS_ASCII.TXT                 lines=  100 empty=  0 whitespace-only=  2
+UNLOADIS_MULTI.txt                 lines=  181 empty=  1 whitespace-only=  0
+== PILO / NSIGN / LBRK handling in the converter source
+SymstreamProcessor.cs:65: { "GOSCNT$", "" },
+SymstreamProcessor.cs:66: { "IMGLEN$", "" },
+SymstreamProcessor.cs:68: { "LBRK$", "" },
+SymstreamProcessor.cs:74: { "NSIGN$", "0" },
+SymstreamProcessor.cs:75: { "NSIGNCHAR$", "#" },
+SymstreamProcessor.cs:77: { "PILO$", "" },
+SymstreamProcessor.cs:1965: } else if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"]) && m_SystemVariables["NSIGN$"].Equals("0")) {
+SymstreamProcessor.cs:1970: if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"])) {
+SymstreamProcessor.cs:1974: if (lines[i].StartsWith(String.Format("{0}IPF", m_SystemVariables["NSIGNCHAR$"])) && (lines[i].Length == 4 || !Char.IsLetter(lines[i][4]))) 
+== variant A: R&D rule (IsNullOrEmpty) vs merged
+occurrences of old rule: 1
+    0 Error(s)
+
+Time Elapsed 00:00:04.81
+New-Item: E:\Repos\SsgTrial\_scratch\Check-BlankRule.ps1:24:16
+Line |
+  24 |  $o = "$v\out"; New-Item -ItemType Directory $o | Out-Null
+     |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | An item with the specified name E:\Repos\SsgTrial\_scratch\ssgvarA\out
+     | already exists.

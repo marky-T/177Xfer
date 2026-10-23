@@ -1,0 +1,3884 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=UNLOAD_ASCII_COBOL,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED_UTILIT_ARCHIFORMAT(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHIINSERT(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHISEPARE(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHITAB1(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_CFH-COPY(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_COMPARE2_ASCII(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_CONDIS_ASCII(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ECLAT(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_LECTIS_MULT(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_LOADIS_MULT-NODUP(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_MONTANT_SIGNE(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_SCAN-VAR_ASCII(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_TAPELD_DISTRIB(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_TRI_ASCII(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_UNLOADIS_MULT(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P),COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+<OBJECT=AMT_999-ESQL-ERR,COBOL COPY>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ESQL-INVOKE,COBOL COPY>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ESQL-USE,COBOL COPY>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=ESQL-USE-DYN,COBOL COPY>
+<VERSION=1.0>
+</OBJECT>
+<OBJECT=WS-ESQL-VAR,COBOL COPY>
+<VERSION=1.0>
+</OBJECT>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=UNLOAD_ASCII_COBOL,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=UNLOAD_ASCII_COBOL
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-07-02 01:07
+  Converted by user        : MARK.TRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1900
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED_UTILIT_ARCHIFORMAT(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_ARCHIFORMAT(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => Pour date table, null et cl�
+  2009-01-01 12:00  =>        print$,1.  *> SSG-STUB [filein,1,1,1]
+  2009-01-01 12:00  =>   ,,udssrc
+  2009-01-01 12:00  => table 1 for schema 1.  *> SSG-STUB [table,1,1,2], [table,1,1,1]
+  2009-01-01 12:00  =>s table 1 for schema 1 report.  *> SSG-STUB [table,1,1,2], [table,//1,1,1]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>        print$
+  2009-01-01 12:00  =>        print$,,nega/u
+  2009-01-01 12:00  =>ur description des champs
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>thread for udssrc read;
+  2009-01-01 12:00  =>fault qualifier 1;  *> SSG-STUB [table,1,1,1]
+  2009-01-01 12:00  => to file "1"  *> SSG-STUB [filein,1,2,1]
+  2009-01-01 12:00  =>ct *
+  2009-01-01 12:00  => 1  *> SSG-STUB [table,1,1,2]
+  2009-01-01 12:00  =>at internal
+  2009-01-01 12:00  => description only;
+  2009-01-01 12:00  =>read;
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***                    -- archiformat --                       ***
+  2009-01-01 12:00  =>***            Foramt donn�es pour archivage                   ***
+  2009-01-01 12:00  =>***                        == UCS ==                           ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     :                                                     *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : N�ga  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  :                                 (99)                *
+  2009-01-01 12:00  =>* Version  :                                 (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*    INPUT : 1 : report de la table                 *  *> SSG-STUB [filein,1,1,1]
+  2009-01-01 12:00  =>*    INPUT : 1 : description de la table            *  *> SSG-STUB [filein,1,2,1]
+  2009-01-01 12:00  =>*    INPUT : 1 : donn�es unload�es archiv�es        *  *> SSG-STUB [filein,1,3,1]
+  2009-01-01 12:00  =>*    OUTPUT: 1 : donn�es au  format  archive       *  *> SSG-STUB [fileout,1,1,1]
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => program-id.  archiformat.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select fic-report assign to disc      1.  *> SSG-STUB [filein//,1,1,1]
+  2009-01-01 12:00  =>     select fic-descript assign to disc    1.  *> SSG-STUB [filein//,1,2,1]
+  2009-01-01 12:00  =>     select fic-unload assign to disc      1.  *> SSG-STUB [filein//,1,3,1]
+  2009-01-01 12:00  =>     select fic-format assign to disc      1.  *> SSG-STUB [fileou//t,1,1,1]
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier du report
+  2009-01-01 12:00  => FD  fic-report.
+  2009-01-01 12:00  =>  1  lgn-rep               pic x(132).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier de description
+  2009-01-01 12:00  => FD  fic-descript.
+  2009-01-01 12:00  =>  1  lgn-des               pic x(132).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier d'unload des donn�es archiv�es
+  2009-01-01 12:00  => FD  fic-unload.
+  2009-01-01 12:00  =>  1  lgn-unl               pic x(1).  *> SSG-STUB [*b]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier format� pour l'archivage
+  2009-01-01 12:00  => FD  fic-format.
+  2009-01-01 12:00  =>  1  lgn-for               pic x(2).  *> SSG-STUB [*a]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Working-storage section.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>*enregistrement type 0
+  2009-01-01 12:00  =>   1 ws-don-0.
+  2009-01-01 12:00  =>     3 ws-0-typ           pic x value "0".
+  2009-01-01 12:00  =>     3 ws-0-nm-base       pic x(6) value "1".  *> SSG-STUB [table,//1,1,3]
+  2009-01-01 12:00  =>     3 ws-0-nm-table      pic x(30) value "1".  *> SSG-STUB [table//,1,1,2]
+  2009-01-01 12:00  =>     3 ws-0-dt-ach        pic 9(8).
+  2009-01-01 12:00  =>     3 ws-0-dt-maj.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-ss    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-aa    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-mm    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-jj    pic 99.
+  2009-01-01 12:00  =>*enregistrement type 1
+  2009-01-01 12:00  =>   1 ws-don-1.
+  2009-01-01 12:00  =>     3 ws-1-typ           pic x value "1".
+  2009-01-01 12:00  =>     3 ws-1-nm-cle        pic x(30) value "1".  *> SSG-STUB [key,1//,1,1]
+  2009-01-01 12:00  =>     3 ws-1-cle.
+  2009-01-01 12:00  =>      5 ws-1-typ-cle      pic x value "1".  *> SSG-STUB [key,1,1,2//]
+  2009-01-01 12:00  =>      5 ws-1-lg-cle       pic 99.99.
+  2009-01-01 12:00  =>*enregistrement type 2
+  2009-01-01 12:00  =>   1 ws-don-2.
+  2009-01-01 12:00  =>     3 ws-2-typ           pic x value "2".
+  2009-01-01 12:00  =>     3 ws-2-nm-chp        pic x(30).
+  2009-01-01 12:00  =>     3 ws-2-typ-chp       pic x(7).
+  2009-01-01 12:00  =>     3 ws-2-lg-chp        pic x(10).
+  2009-01-01 12:00  =>     3 ws-2-null          pic x(8).
+  2009-01-01 12:00  =>*enregistrement type 3
+  2009-01-01 12:00  =>   1 ws-don-3.
+  2009-01-01 12:00  =>     3 ws-3-typ           pic x value "3".
+  2009-01-01 12:00  =>     3 ws-3-nm-idx        pic x(30).
+  2009-01-01 12:00  =>     3 ws-3-nm-chp        pic x(30).
+  2009-01-01 12:00  =>     3 ws-3-tri           pic x(8).
+  2009-01-01 12:00  =>*enregistrement type 4
+  2009-01-01 12:00  =>   1 ws-don-4.
+  2009-01-01 12:00  =>     3 ws-4-typ           pic xx value "4A".
+  2009-01-01 12:00  =>     3 ws-4-don           pic x(1).  *> SSG-STUB [*b]
+  2009-01-01 12:00  =>*    3 ws-4-cle           pic x(1).  *> SSG-STUB [key,1,1,3]
+  2009-01-01 12:00  =>*enregistrement type 9
+  2009-01-01 12:00  =>   1 ws-don-9.
+  2009-01-01 12:00  =>     3 ws-9-typ           pic x value "9".
+  2009-01-01 12:00  =>     3 ws-9-nm-base       pic x(6) value "1".  *> SSG-STUB [table,//1,1,3]
+  2009-01-01 12:00  =>     3 ws-9-nm-table      pic x(30) value "1".  *> SSG-STUB [table//,1,1,2]
+  2009-01-01 12:00  =>     3 ws-9-dt-ach        pic 9(8).
+  2009-01-01 12:00  =>     3 ws-9-cpt-ach       pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>     3 ws-9-cpt-5         pic x(12) value "+00000000000".
+  2009-01-01 12:00  =>   1 unloadf              pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-unload        value 1.
+  2009-01-01 12:00  =>   1 table-null.
+  2009-01-01 12:00  =>     3 tnull              pic x occurs 70 times.
+  2009-01-01 12:00  =>  77 i                    pic 99.
+  2009-01-01 12:00  =>  77 i-buf                pic 99.
+  2009-01-01 12:00  =>  77 i-tot                pic 99.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*------------------ flag ---------------------------
+  2009-01-01 12:00  =>  77 fl-null              pic 9.
+  2009-01-01 12:00  =>*---------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*---------------- compteur -------------------------
+  2009-01-01 12:00  =>  77 cpt-char             pic 999.
+  2009-01-01 12:00  =>  77 cpt-ach              pic 9(11).
+  2009-01-01 12:00  =>  77 cpt-lu               pic 9(11).
+  2009-01-01 12:00  =>  77 cpt-achf             pic z(10)9.
+  2009-01-01 12:00  =>  77 cpt-luf              pic z(10)9.
+  2009-01-01 12:00  =>*----------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*------------------ POUR LA DATE ---------------------
+  2009-01-01 12:00  =>   1 dt-i.
+  2009-01-01 12:00  =>     3 aa-i               pic 9(4).
+  2009-01-01 12:00  =>     3 mm-i               pic 99.
+  2009-01-01 12:00  =>     3 jj-i               pic 99.
+  2009-01-01 12:00  =>   1 dt-fr.
+  2009-01-01 12:00  =>     3 jj-fr              pic 99.
+  2009-01-01 12:00  =>     3   pic x value '/'.
+  2009-01-01 12:00  =>     3 mm-fr              pic 99.
+  2009-01-01 12:00  =>     3   pic x value '/'.
+  2009-01-01 12:00  =>     3 aa-fr              pic 9(4).
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*-------------------
+  2009-01-01 12:00  =>   000-main.
+  2009-01-01 12:00  =>     open input fic-report fic-descript fic-unload
+  2009-01-01 12:00  =>          output fic-format
+  2009-01-01 12:00  =>     perform 100-type0 thru 100-exit
+  2009-01-01 12:00  =>     perform 101-type1 thru 101-exit
+  2009-01-01 12:00  =>     perform 102-type2 thru 102-exit
+  2009-01-01 12:00  =>     perform 103-type3 thru 103-exit
+  2009-01-01 12:00  =>     perform 104-type4 thru 104-exit
+  2009-01-01 12:00  =>     perform 105-type9 thru 105-exit
+  2009-01-01 12:00  =>     perform 106-tot thru 106-exit
+  2009-01-01 12:00  =>     close fic-report fic-descript fic-unload fic-format
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 0 ----------------
+  2009-01-01 12:00  =>  100-type0.
+  2009-01-01 12:00  =>     accept ws-0-dt-ach from date yyyymmdd
+  2009-01-01 12:00  =>*recherche de la date de cr�ation de la table
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit until lgn-rep(4:21)
+  2009-01-01 12:00  =>       = 'DD-PROCESS-TIME-STAMP'
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     move lgn-rep(7:2) to ws-0-dt-maj-aa
+  2009-01-01 12:00  =>     if ws-0-dt-maj-aa > 90
+  2009-01-01 12:00  =>       move 19 to ws-0-dt-maj-ss
+  2009-01-01 12:00  =>     else
+  2009-01-01 12:00  =>       move 20 to ws-0-dt-maj-ss
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     move lgn-rep(10:2) to ws-0-dt-maj-mm
+  2009-01-01 12:00  =>     move lgn-rep(13:2) to ws-0-dt-maj-jj
+  2009-01-01 12:00  =>     write lgn-for from ws-don-0
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 1 -----------------
+  2009-01-01 12:00  =>  101-type1.
+  2009-01-01 12:00  =>     move 1 to ws-1-lg-cle  *> SSG-STUB [key,1,1,3]
+  2009-01-01 12:00  =>     write lgn-for from ws-don-1
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 2 -----------------
+  2009-01-01 12:00  =>  102-type2.
+  2009-01-01 12:00  =>     perform until lgn-rep(1:7) = 'Columns'
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit 2 times
+  2009-01-01 12:00  =>*localisation de l'emplacement de yes/no pour NULL
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'Allowed'
+  2009-01-01 12:00  =>     move cpt-char to i-buf
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     perform 201-lec-descript thru 201-exit 2 times
+  2009-01-01 12:00  =>*localisation du nom du champ
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-des tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'TION.'
+  2009-01-01 12:00  =>     add 6 to cpt-char
+  2009-01-01 12:00  =>     perform 1 times  *> SSG-STUB [table,1,2,1]
+  2009-01-01 12:00  =>*chargement du nom et de la description des champs
+  2009-01-01 12:00  =>       move lgn-des(cpt-char:30) to ws-2-nm-chp
+  2009-01-01 12:00  =>       move lgn-des(6:7) to ws-2-typ-chp
+  2009-01-01 12:00  =>       move lgn-des(13:10) to ws-2-lg-chp
+  2009-01-01 12:00  =>       move lgn-rep to table-null
+  2009-01-01 12:00  =>       add 3 to i-buf giving i
+  2009-01-01 12:00  =>       move 0 to fl-null
+  2009-01-01 12:00  =>       add 2 to i giving i-tot
+  2009-01-01 12:00  =>*recherche 1 et ensuite 1 pour NULL  *> SSG-STUB [Y], [E]
+  2009-01-01 12:00  =>       perform until i >= i-tot
+  2009-01-01 12:00  =>         if tnull(i) = 'Y'
+  2009-01-01 12:00  =>           add 1 to i
+  2009-01-01 12:00  =>           if tnull(i) = 'E'
+  2009-01-01 12:00  =>             move 1 to fl-null
+  2009-01-01 12:00  =>           end-if
+  2009-01-01 12:00  =>         end-if
+  2009-01-01 12:00  =>         add 1 to i
+  2009-01-01 12:00  =>       end-perform
+  2009-01-01 12:00  =>       if fl-null = 1
+  2009-01-01 12:00  =>         move 'NULL' to ws-2-null
+  2009-01-01 12:00  =>       else
+  2009-01-01 12:00  =>         move space to ws-2-null
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>       write lgn-for from ws-don-2
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>       perform 201-lec-descript thru 201-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 3 -----------------
+  2009-01-01 12:00  =>  103-type3.
+  2009-01-01 12:00  =>     perform until lgn-rep(1:13) = 'Primary Key :'
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>*localisation de la cl�
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'PK_'
+  2009-01-01 12:00  =>     add 1 to cpt-char
+  2009-01-01 12:00  =>     move lgn-rep(cpt-char:30) to ws-3-nm-idx
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit 2 times
+  2009-01-01 12:00  =>     perform until lgn-rep(1:10) = space
+  2009-01-01 12:00  =>       move 0 to cpt-char
+  2009-01-01 12:00  =>       inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                       for characters
+  2009-01-01 12:00  =>                       before initial ','
+  2009-01-01 12:00  =>       subtract 4 from cpt-char
+  2009-01-01 12:00  =>*chargement du nom de la cl�
+  2009-01-01 12:00  =>       move lgn-rep(5:cpt-char) to ws-3-nm-chp
+  2009-01-01 12:00  =>       add 7 to cpt-char
+  2009-01-01 12:00  =>*chargement de l'ordre de tri
+  2009-01-01 12:00  =>       move lgn-rep(cpt-char:3) to ws-3-tri
+  2009-01-01 12:00  =>       write lgn-for from ws-don-3
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  103-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 4 -----------------
+  2009-01-01 12:00  =>  104-type4.
+  2009-01-01 12:00  =>     perform until fin-unload
+  2009-01-01 12:00  =>       perform 202-lec-unload thru 202-exit
+  2009-01-01 12:00  =>       if not fin-unload
+  2009-01-01 12:00  =>*chargement de la cl� d'archivage
+  2009-01-01 12:00  =>*d�j� r�p�t� via la jointure!!!!!
+  2009-01-01 12:00  =>*        move lgn-unl (1:1) to ws-4-cle  *> SSG-STUB [key,1,1,4], [key,1,1,3]
+  2009-01-01 12:00  =>         write lgn-for from ws-don-4
+  2009-01-01 12:00  =>         add 1 to cpt-ach
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  104-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 9 -----------------
+  2009-01-01 12:00  =>  105-type9.
+  2009-01-01 12:00  =>     accept ws-9-dt-ach from date yyyymmdd
+  2009-01-01 12:00  =>*comteur du nombre d'enregistrement de type 4
+  2009-01-01 12:00  =>     move cpt-ach to ws-9-cpt-ach
+  2009-01-01 12:00  =>     write lgn-for from ws-don-9
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  105-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----------------- RAPPORT  -----------------
+  2009-01-01 12:00  =>  106-tot.
+  2009-01-01 12:00  =>     move cpt-ach to cpt-achf
+  2009-01-01 12:00  =>     move cpt-lu to cpt-luf
+  2009-01-01 12:00  =>     move ws-0-dt-ach to dt-i
+  2009-01-01 12:00  =>     move aa-i to aa-fr
+  2009-01-01 12:00  =>     move mm-i to mm-fr
+  2009-01-01 12:00  =>     move jj-i to jj-fr
+  2009-01-01 12:00  =>     display "ARCHIFORMAT          RAPPORT          "
+  2009-01-01 12:00  =>       dt-fr upon printer
+  2009-01-01 12:00  =>     display "Enregistrements lus:" cpt-luf upon printer
+  2009-01-01 12:00  =>     display "Enregistrements 4 �crits:" cpt-achf upon printer
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  106-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DU REPORT --------------
+  2009-01-01 12:00  =>  200-lec-report.
+  2009-01-01 12:00  =>     read fic-report
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         display "fin du report" upon printer
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  200-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DU DESCRIPT ------------
+  2009-01-01 12:00  =>  201-lec-descript.
+  2009-01-01 12:00  =>     read fic-descript
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         display "fin de la description" upon printer
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  201-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DE L'UNLOAD --------------
+  2009-01-01 12:00  =>  202-lec-unload.
+  2009-01-01 12:00  =>     read fic-unload
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to unloadf
+  2009-01-01 12:00  =>       not at end
+  2009-01-01 12:00  =>         move lgn-unl(1:0) to ws-4-don(1:0)  *> SSG-STUB [*e], [*e//]
+  2009-01-01 12:00  =>         move lgn-unl(2:1)  *> SSG-STUB [*c], [table,1,2,1]
+  2009-01-01 12:00  =>           to ws-4-don(1:1)  *> SSG-STUB [*d], [table,1,2,1]
+  2009-01-01 12:00  =>         add 1 to cpt-lu
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  202-exit.
+  2009-01-01 12:00  =>     exit.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                    -- archiformat --                       ***
+  ***            Foramt donn?es pour archivage                   ***
+  ***                        == UCS ==                           ***
+  ***------------------------------------------------------------***
+  * Type     :                                                     *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : N?ga  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+  * Release  :                                 (99)                *
+  * Version  :                                 (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *                                                                *
+  *    INPUT : 1 : report de la table                 *   SSG-STUB
+  *    INPUT : 1 : description de la table            *   SSG-STUB
+  *    INPUT : 1 : donn?es unload?es archiv?es        *   SSG-STUB
+  *    OUTPUT: 1 : donn?es au  format  archive       *   SSG-STUB 
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHIINSERT(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_ARCHIINSERT(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>   ***------------------------------------------------------------//***
+  2009-01-01 12:00  =>***                   -- ARCHIINSERT --                        ***
+  2009-01-01 12:00  =>***             INSERTION DES CHERCHEUSES DANS                 ***
+  2009-01-01 12:00  =>***                LA TABLE CHERCHEUSE                         ***
+  2009-01-01 12:00  =>***                       == U C S ==                          ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     : BATCH                                               *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 04/03/2002                      (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  : 01                              (99)                *
+  2009-01-01 12:00  =>* Version  : 001                             (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*   INPUT:  chercheuse                                           *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => program-id.  ARCHIINSERT.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer
+  2009-01-01 12:00  =>     decimal-point comma.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select chercheuse assign to disc    1.  *> SSG-STUB [filein,1//,1,1]
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier chercheuse
+  2009-01-01 12:00  => FD  chercheuse.
+  2009-01-01 12:00  =>  1  no-rch              pic 9(1).  *> SSG-STUB [filein,1,1,2]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>*--------------- VARIABLES DE TRAVAIL ----------
+  2009-01-01 12:00  =>   1 lecturef                    pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-lecture              value 1.
+  2009-01-01 12:00  =>   1 ws-vl-pnt-rep.
+  2009-01-01 12:00  =>     3 ws-vl-cpt-lu-cpr         pic 9(10).
+  2009-01-01 12:00  =>     3 ws-vl-cpt-ins-cpr        pic 9(10).
+  2009-01-01 12:00  =>     3     pic x(40).
+  2009-01-01 12:00  =>*----------------------------------------------
+  2009-01-01 12:00  =>*---------------- FLAGS ------------------------
+  2009-01-01 12:00  =>  77 fl-pre                     pic 9.
+  2009-01-01 12:00  =>  77 fl-cpr                     pic 9.
+  2009-01-01 12:00  =>  77 fl-ins-cpr                 pic 9.
+  2009-01-01 12:00  =>  77 fl-rch-vide                pic 9.
+  2009-01-01 12:00  =>*-----------------------------------------------
+  2009-01-01 12:00  =>*------------- DATE ET HEURE -------------------
+  2009-01-01 12:00  =>   1 ws-date                     pic 9(8).
+  2009-01-01 12:00  =>   1 ws-dt-i redefines ws-date.
+  2009-01-01 12:00  =>     3 ws-aa-i                   pic 9(4).
+  2009-01-01 12:00  =>     3 ws-mm-i                   pic 99.
+  2009-01-01 12:00  =>     3 ws-jj-i                   pic 99.
+  2009-01-01 12:00  =>   1 ws-dt-fr.
+  2009-01-01 12:00  =>     3 ws-jj-fr                  pic 99.
+  2009-01-01 12:00  =>     3    pic x value "/".
+  2009-01-01 12:00  =>     3 ws-mm-fr                  pic 99.
+  2009-01-01 12:00  =>     3    pic x value "/".
+  2009-01-01 12:00  =>     3 ws-aa-fr                  pic 9(4).
+  2009-01-01 12:00  =>   1 ws-hre-tot.
+  2009-01-01 12:00  =>     3 ws-hre                   pic 9(6).
+  2009-01-01 12:00  =>     3     pic 99.
+  2009-01-01 12:00  =>*-----------------------------------------------
+  2009-01-01 12:00  =>*-------------- COMPTEURS ----------------------
+  2009-01-01 12:00  =>  77 cpt-commit                  PIC 999.
+  2009-01-01 12:00  =>  77 cpt-lu                      PIC 9(10).
+  2009-01-01 12:00  =>  77 cpt-ins                     pic 9(10).
+  2009-01-01 12:00  =>  77 cpt-luf                     PIC z(9)9.
+  2009-01-01 12:00  =>  77 cpt-insf                    pic z(9)9.
+  2009-01-01 12:00  =>*--------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*  VARIABLES DE CONTROLE RDMS ET ESQL
+  2009-01-01 12:00  =>*-------------------------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01 SQLSTATE                PIC X(05) USAGE DISPLAY.
+  2009-01-01 12:00  =>     COPY WS-ESQL-VAR  OF COMMONS.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     COPY ESQL-INVOKE OF COMMONS
+  2009-01-01 12:00  =>          REPLACING ==NM-TAB== BY ==CHK_PNT_RST==.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     COPY ESQL-INVOKE OF COMMONS
+  2009-01-01 12:00  =>          REPLACING ==NM-TAB== BY ==1==.  *> SSG-STUB [table,1,1,1//]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*==================*
+  2009-01-01 12:00  =>  000-main.
+  2009-01-01 12:00  =>     open input chercheuse
+  2009-01-01 12:00  =>     perform 010-init-db thru 010-exit
+  2009-01-01 12:00  =>     perform 020-init-var thru 020-exit
+  2009-01-01 12:00  =>     perform 030-pre-trait thru 030-exit
+  2009-01-01 12:00  =>     perform 040-lec-fic thru 040-exit
+  2009-01-01 12:00  =>     perform 050-rapport thru 050-exit
+  2009-01-01 12:00  =>     perform 060-fin-db thru 060-exit
+  2009-01-01 12:00  =>     close chercheuse
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*--------- INITIALISATION DE LA DB -----------------
+  2009-01-01 12:00  =>  010-init-db.
+  2009-01-01 12:00  =>     MOVE  "0"                   TO  WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     EXEC RDMS
+  2009-01-01 12:00  =>              BEGIN THREAD FOR UDSSRC UPDATE (QUICKLOOKS)
+  2009-01-01 12:00  =>     END-EXEC
+  2009-01-01 12:00  =>     IF  SQLCODE NOT = 0
+  2009-01-01 12:00  =>         PERFORM  999-ESQL-ERR
+  2009-01-01 12:00  =>         PERFORM  999-ESQL-ABORT
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     MOVE  "1"                   TO  WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     COPY  ESQL-USE              OF  COMMONS.
+  2009-01-01 12:00  =>     COPY  ESQL-USE-DYN          OF  COMMONS.
+  2009-01-01 12:00  =>     IF  SQLCODE NOT = 0
+  2009-01-01 12:00  =>         PERFORM  999-ESQL-ERR
+  2009-01-01 12:00  =>         PERFORM  999-ESQL-ABORT
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  010-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*-------- INIT DES VARIABLES -------------
+  2009-01-01 12:00  =>  020-init-var.
+  2009-01-01 12:00  =>     move zeroes to fl-pre
+  2009-01-01 12:00  =>                    fl-cpr
+  2009-01-01 12:00  =>                    fl-ins-cpr
+  2009-01-01 12:00  =>                    fl-rch-vide
+  2009-01-01 12:00  =>                    ws-date
+  2009-01-01 12:00  =>                    ws-hre
+  2009-01-01 12:00  =>                    ws-vl-pnt-rep
+  2009-01-01 12:00  =>                    cpt-commit
+  2009-01-01 12:00  =>                    cpt-lu
+  2009-01-01 12:00  =>                    cpt-ins
+  2009-01-01 12:00  =>                    cpt-luf
+  2009-01-01 12:00  =>                    cpt-insf
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  020-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----- PREMIERE LECTURE DU FICHIER  ---------
+  2009-01-01 12:00  =>  030-pre-trait.
+  2009-01-01 12:00  =>     read chercheuse
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to lecturef fl-rch-vide
+  2009-01-01 12:00  =>       not at end
+  2009-01-01 12:00  =>         move 1 to fl-pre
+  2009-01-01 12:00  =>         accept ws-hre-tot from time
+  2009-01-01 12:00  =>         perform 100-lec-cpr thru 100-exit
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     accept ws-date from date yyyymmdd
+  2009-01-01 12:00  =>     move ws-aa-i to ws-aa-fr
+  2009-01-01 12:00  =>     move ws-mm-i to ws-mm-fr
+  2009-01-01 12:00  =>     move ws-jj-i to ws-jj-fr
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  030-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*---------- LECTURE DU FICHIER ---------
+  2009-01-01 12:00  =>  040-lec-fic.
+  2009-01-01 12:00  =>     perform until fin-lecture
+  2009-01-01 12:00  =>       add 1 to cpt-lu
+  2009-01-01 12:00  =>       if fl-cpr = 1
+  2009-01-01 12:00  =>         add 1 to ws-vl-cpt-lu-cpr
+  2009-01-01 12:00  =>         perform until cpt-lu = ws-vl-cpt-lu-cpr
+  2009-01-01 12:00  =>           read chercheuse
+  2009-01-01 12:00  =>             at end
+  2009-01-01 12:00  =>               move 1 to lecturef
+  2009-01-01 12:00  =>               move cpt-lu to ws-vl-cpt-lu-cpr
+  2009-01-01 12:00  =>             not at end
+  2009-01-01 12:00  =>               add 1 to cpt-lu
+  2009-01-01 12:00  =>           end-read
+  2009-01-01 12:00  =>         end-perform
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>       perform 101-ins-rch thru 101-exit
+  2009-01-01 12:00  =>       read chercheuse
+  2009-01-01 12:00  =>         at end
+  2009-01-01 12:00  =>           move 1 to lecturef
+  2009-01-01 12:00  =>       end-read
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     if fl-rch-vide = 0
+  2009-01-01 12:00  =>       perform 102-del-cpr thru 102-exit
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  040-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- RAPPORT  --------
+  2009-01-01 12:00  =>  050-rapport.
+  2009-01-01 12:00  =>     move cpt-lu to cpt-luf
+  2009-01-01 12:00  =>     move cpt-ins to cpt-insf
+  2009-01-01 12:00  =>     display "ARCHIINSERT      Rapport       " ws-dt-fr
+  2009-01-01 12:00  =>       upon printer
+  2009-01-01 12:00  =>     display "tot lu = " cpt-luf upon printer
+  2009-01-01 12:00  =>     display "tot ins = " cpt-insf upon printer
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  050-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- FIN CONNECTION DB ------------
+  2009-01-01 12:00  =>  060-fin-db.
+  2009-01-01 12:00  =>     IF  WS-ESQL-FL-THREAD = "1"
+  2009-01-01 12:00  =>       EXEC RDMS  END THREAD  END-EXEC
+  2009-01-01 12:00  =>       MOVE 0 TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  060-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------- LECTURE DU PARAMETRE DE CHK_PNT_RST -------
+  2009-01-01 12:00  =>  100-lec-cpr.
+  2009-01-01 12:00  =>     exec RDMS
+  2009-01-01 12:00  =>       select vl_pnt_rep
+  2009-01-01 12:00  =>       into   :ws-vl-pnt-rep
+  2009-01-01 12:00  =>       from   chk_pnt_rst
+  2009-01-01 12:00  =>       where  mr_prg_maj   =  'ARCHII'
+  2009-01-01 12:00  =>     end-exec
+  2009-01-01 12:00  =>     evaluate sqlcode
+  2009-01-01 12:00  =>       when 0
+  2009-01-01 12:00  =>         move 1 to fl-cpr
+  2009-01-01 12:00  =>         move 0 to fl-ins-cpr
+  2009-01-01 12:00  =>         move ws-vl-cpt-ins-cpr to cpt-ins
+  2009-01-01 12:00  =>       when 100
+  2009-01-01 12:00  =>         move 1 to ws-vl-cpt-lu-cpr
+  2009-01-01 12:00  =>                   fl-ins-cpr
+  2009-01-01 12:00  =>         move 0 to fl-cpr
+  2009-01-01 12:00  =>       when other
+  2009-01-01 12:00  =>         move "100-lec-cpr" to ws-esql-trace
+  2009-01-01 12:00  =>         perform 999-esql-err
+  2009-01-01 12:00  =>         perform 999-esql-abort
+  2009-01-01 12:00  =>     end-evaluate
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>*----------- INSERT DANS LA TABLE CHERCHEUSE ------
+  2009-01-01 12:00  =>  101-ins-rch.
+  2009-01-01 12:00  =>     EXEC RDMS
+  2009-01-01 12:00  =>          INSERT INTO 1  *> SSG-STUB [table,1,1,1]
+  2009-01-01 12:00  =>           COLUMNS
+  2009-01-01 12:00  =>             (1       =     :no-rch)  *> SSG-STUB [table,1,1,2]
+  2009-01-01 12:00  =>     END-EXEC.
+  2009-01-01 12:00  =>     evaluate sqlcode
+  2009-01-01 12:00  =>       when 0
+  2009-01-01 12:00  =>         add 1 to cpt-ins
+  2009-01-01 12:00  =>         add 1 to cpt-commit
+  2009-01-01 12:00  =>         if cpt-commit > 500
+  2009-01-01 12:00  =>           perform 500-commit thru 500-exit
+  2009-01-01 12:00  =>         end-if
+  2009-01-01 12:00  =>*Continue si la cl{ existe!
+  2009-01-01 12:00  =>       when -6003
+  2009-01-01 12:00  =>         continue
+  2009-01-01 12:00  =>       when other
+  2009-01-01 12:00  =>         display "no chercheuse: " no-rch upon printer
+  2009-01-01 12:00  =>         MOVE "101-ins-rch" TO WS-ESQL-TRACE
+  2009-01-01 12:00  =>         PERFORM 999-ESQL-ERR
+  2009-01-01 12:00  =>         PERFORM 999-ESQL-ABORT
+  2009-01-01 12:00  =>     end-evaluate
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----------- DELETE DU PARAMETRE CPR -------
+  2009-01-01 12:00  =>  102-del-cpr.
+  2009-01-01 12:00  =>     exec RDMS
+  2009-01-01 12:00  =>       delete Chk_Pnt_Rst
+  2009-01-01 12:00  =>       where mr_prg_maj = 'ARCHII'
+  2009-01-01 12:00  =>     end-exec
+  2009-01-01 12:00  =>     if sqlcode not = 0
+  2009-01-01 12:00  =>        move "102-del-cpr" to ws-esql-trace
+  2009-01-01 12:00  =>        perform 999-esql-err
+  2009-01-01 12:00  =>        perform 999-esql-abort
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ EFFETUE UN COMMIT DANS LA DB ------------
+  2009-01-01 12:00  =>  500-commit.
+  2009-01-01 12:00  =>     perform 600-maj-cpr thru 600-exit
+  2009-01-01 12:00  =>     EXEC RDMS COMMIT WORK END-EXEC.
+  2009-01-01 12:00  =>     IF SQLCODE NOT = 0
+  2009-01-01 12:00  =>        MOVE "500-commit" TO WS-ESQL-TRACE
+  2009-01-01 12:00  =>        PERFORM 999-ESQL-ERR
+  2009-01-01 12:00  =>        PERFORM 999-ESQL-ABORT
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     move 0 to cpt-commit
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  500-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ MAJ DE CHK_PNT_RST -----------
+  2009-01-01 12:00  =>  600-maj-cpr.
+  2009-01-01 12:00  =>     move cpt-lu to ws-vl-cpt-lu-cpr
+  2009-01-01 12:00  =>     move cpt-ins to ws-vl-cpt-ins-cpr
+  2009-01-01 12:00  =>     if fl-ins-cpr = 1
+  2009-01-01 12:00  =>       exec RDMS
+  2009-01-01 12:00  =>         insert into chk_pnt_rst
+  2009-01-01 12:00  =>           columns (mr_prg_maj  =  'ARCHII',
+  2009-01-01 12:00  =>                    vl_pnt_rep  =  :ws-vl-pnt-rep,
+  2009-01-01 12:00  =>                    mr_dat_maj  =  :ws-date,
+  2009-01-01 12:00  =>                    mr_hre_maj  =  :ws-hre)
+  2009-01-01 12:00  =>       end-exec
+  2009-01-01 12:00  =>       evaluate sqlcode
+  2009-01-01 12:00  =>         when 0
+  2009-01-01 12:00  =>           move 0 to fl-ins-cpr
+  2009-01-01 12:00  =>         when 100
+  2009-01-01 12:00  =>           continue
+  2009-01-01 12:00  =>         when other
+  2009-01-01 12:00  =>         move "600-maj-cpr: insert" to ws-esql-trace
+  2009-01-01 12:00  =>         perform 999-esql-err
+  2009-01-01 12:00  =>         perform 999-esql-abort
+  2009-01-01 12:00  =>       end-evaluate
+  2009-01-01 12:00  =>     else
+  2009-01-01 12:00  =>       exec RDMS
+  2009-01-01 12:00  =>         update chk_pnt_rst
+  2009-01-01 12:00  =>           columns (vl_pnt_rep  =  :ws-vl-pnt-rep)
+  2009-01-01 12:00  =>           where    mr_prg_maj  =  'ARCHII'
+  2009-01-01 12:00  =>       end-exec
+  2009-01-01 12:00  =>       if sqlcode not = 0
+  2009-01-01 12:00  =>           move "600-maj-cpr: update" to ws-esql-trace
+  2009-01-01 12:00  =>           perform 999-esql-err
+  2009-01-01 12:00  =>           perform 999-esql-abort
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  600-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* GESTION DES ERREURS RDMS *
+  2009-01-01 12:00  =>****************************
+  2009-01-01 12:00  =>     COPY AMT_999-ESQL-ERRR          OF  COMMONS.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 999-ESQL-ABORT.
+  2009-01-01 12:00  =>*===============*
+  2009-01-01 12:00  =>     CALL "EREABT$".
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                   -- ARCHIINSERT --                        ***
+  ***             INSERTION DES CHERCHEUSES DANS                 ***
+  ***                LA TABLE CHERCHEUSE                         ***
+  ***                       == U C S ==                          ***
+  ***------------------------------------------------------------***
+  * Type     : BATCH                                               *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 04/03/2002                      (dd/mm/ccyy)        *
+  * Release  : 01                              (99)                *
+  * Version  : 001                             (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *   INPUT:  chercheuse                                           *
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHISEPARE(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_ARCHISEPARE(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>   ***------------------------------------------------------------//***
+  2009-01-01 12:00  =>***                  -- ARCHISEPARE --                         ***
+  2009-01-01 12:00  =>***            Separe les enregistrements a archiver           ***
+  2009-01-01 12:00  =>***                   et a ne pas archiver                     ***
+  2009-01-01 12:00  =>***                        == UCS ==                           ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     :                                                     *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  :                                 (99)                *
+  2009-01-01 12:00  =>* Version  :                                 (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*    INPUT : chercheuse : numero de sinistres a archiver         *
+  2009-01-01 12:00  =>*    INPUT : ficunload : unload de la table a archiver           *
+  2009-01-01 12:00  =>*    OUTPUT: ficarchi : enregistrements a archiver               *
+  2009-01-01 12:00  =>*    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => program-id.  ARCHISEPARE.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer
+  2009-01-01 12:00  =>     decimal-point comma.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select chercheuse assign to disc     1.  *> SSG-STUB [filein,//1,1,1]
+  2009-01-01 12:00  =>     select ficunload assign to disc      1.  *> SSG-STUB [filein,//1,2,1]
+  2009-01-01 12:00  =>     select ficarchi assign to disc       1.  *> SSG-STUB [fileout//,1,1,1]
+  2009-01-01 12:00  =>     select ficnarchi assign to disc      1.  *> SSG-STUB [fileout//,1,2,1]
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier chercheuse
+  2009-01-01 12:00  => FD  chercheuse.
+  2009-01-01 12:00  =>  1  cle-chercheuse        pic 9(1).  *> SSG-STUB [key,1,1,2]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*Unload de la table a archiver
+  2009-01-01 12:00  => FD  ficunload.
+  2009-01-01 12:00  =>  1  ligne-unload.
+  2009-01-01 12:00  =>     3 cle-unload          pic 9(1).  *> SSG-STUB [key,1,2,2]
+  2009-01-01 12:00  =>     3 filler              pic x(0).  *> SSG-STUB [*a]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier enregistrements a archiver
+  2009-01-01 12:00  => FD  ficarchi.
+  2009-01-01 12:00  =>  1  ligne-archi           pic x(32).  *> SSG-STUB [*c]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier enregistrement a ne pas archiver
+  2009-01-01 12:00  => FD  ficnarchi.
+  2009-01-01 12:00  =>  1  ligne-narchi          pic x(0).  *> SSG-STUB [*d]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Working-storage section.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>   1 ligne-type4.
+  2009-01-01 12:00  =>     3 cd-don                    pic x value "4".
+  2009-01-01 12:00  =>     3 cd-ach                    pic x.
+  2009-01-01 12:00  =>     3 tl-cle                    pic 9(1).  *> SSG-STUB [key,1,2,2//]
+  2009-01-01 12:00  =>     3 tl-don                    pic x(1).  *> SSG-STUB [rsz,1,1,1//]
+  2009-01-01 12:00  =>   1 ligne-type9.
+  2009-01-01 12:00  =>     3 cd-don9                   pic x value "9".
+  2009-01-01 12:00  =>     3 nm-bas9                   pic x(6).
+  2009-01-01 12:00  =>     3 nm-tab9                   pic x(30).
+  2009-01-01 12:00  =>     3 dt-ach9                   pic x(8).
+  2009-01-01 12:00  =>     3 cptach1                   pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>     3 cptach2                   pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>   1 lecrchf                     pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-lecrch               value 1.
+  2009-01-01 12:00  =>   1 lecunloadf                  pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-lecunload            value 1.
+  2009-01-01 12:00  =>*---------------- Pour le rapport ---------------------
+  2009-01-01 12:00  =>  77 cptlu                       pic 9(7).
+  2009-01-01 12:00  =>  77 cptarchi                    pic 9(7).
+  2009-01-01 12:00  =>  77 cptnarchi                   pic 9(7).
+  2009-01-01 12:00  =>  77 cptluf                      pic z(6)9.
+  2009-01-01 12:00  =>  77 cptarchif                   pic z(6)9.
+  2009-01-01 12:00  =>  77 cptnarchif                  pic z(6)9.
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>*------------------ POUR LA DATE ---------------------
+  2009-01-01 12:00  =>   1 date-i.
+  2009-01-01 12:00  =>     3 annee-i                   pic 9(4).
+  2009-01-01 12:00  =>     3 mois-i                    pic 99.
+  2009-01-01 12:00  =>     3 jour-i                    pic 99.
+  2009-01-01 12:00  =>   1 date-fr.
+  2009-01-01 12:00  =>     3 jour-fr                   pic 99.
+  2009-01-01 12:00  =>     3     pic x value '/'.
+  2009-01-01 12:00  =>     3 mois-fr                   pic 99.
+  2009-01-01 12:00  =>     3     pic x value '/'.
+  2009-01-01 12:00  =>     3 annee-fr                  pic 9(4).
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*-------------------
+  2009-01-01 12:00  =>   000-main.
+  2009-01-01 12:00  =>     open input chercheuse ficunload
+  2009-01-01 12:00  =>          output ficarchi ficnarchi
+  2009-01-01 12:00  =>     perform 100-lec-chercheuse thru 100-exit
+  2009-01-01 12:00  =>     perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>     perform 102-separe thru 102-exit
+  2009-01-01 12:00  =>     perform 103-date thru 103-exit
+  2009-01-01 12:00  =>     perform 104-rapport thru 104-exit
+  2009-01-01 12:00  =>     close chercheuse ficunload
+  2009-01-01 12:00  =>           ficarchi ficnarchi
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*---------- LECTURE DU NUMERO DE CHERCHEUSE -------------------
+  2009-01-01 12:00  =>  100-lec-chercheuse.
+  2009-01-01 12:00  =>     read chercheuse
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to lecrchf
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ LECTURE D'UN ENREGISTREMENT UNLOAD --------
+  2009-01-01 12:00  =>  101-lec-unload.
+  2009-01-01 12:00  =>     read ficunload
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to lecunloadf
+  2009-01-01 12:00  =>       not at end
+  2009-01-01 12:00  =>         add 1 to cptlu
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----- SEPARATION ENREGISTREMENT ARCHI ET NARCHI ---------
+  2009-01-01 12:00  =>  102-separe.
+  2009-01-01 12:00  =>     perform until fin-lecunload
+  2009-01-01 12:00  =>       if lecrchf not = 1
+  2009-01-01 12:00  =>         evaluate true
+  2009-01-01 12:00  =>*L'enregistrement est a archiver
+  2009-01-01 12:00  =>           when cle-chercheuse = cle-unload
+  2009-01-01 12:00  =>             move "A" to cd-ach
+  2009-01-01 12:00  =>             move cle-unload to tl-cle
+  2009-01-01 12:00  =>             move ligne-unload to tl-don
+  2009-01-01 12:00  =>             write ligne-archi from ligne-type4
+  2009-01-01 12:00  =>             add 1 to cptarchi
+  2009-01-01 12:00  =>             perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>             if cle-unload not = cle-chercheuse
+  2009-01-01 12:00  =>               perform 100-lec-chercheuse thru 100-exit
+  2009-01-01 12:00  =>             end-if
+  2009-01-01 12:00  =>*L'enregistrement ne doit pas etre archive
+  2009-01-01 12:00  =>           when cle-chercheuse > cle-unload
+  2009-01-01 12:00  =>             write ligne-narchi from ligne-unload
+  2009-01-01 12:00  =>             add 1 to cptnarchi
+  2009-01-01 12:00  =>             perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>*Decalage de cle
+  2009-01-01 12:00  =>           when cle-chercheuse < cle-unload
+  2009-01-01 12:00  =>             perform 100-lec-chercheuse
+  2009-01-01 12:00  =>         end-evaluate
+  2009-01-01 12:00  =>       else
+  2009-01-01 12:00  =>*Si la chercheuse est vide, il faut ecrire les enregistrements
+  2009-01-01 12:00  =>*  qui restent dans le fichier d'unload
+  2009-01-01 12:00  =>         write ligne-narchi from ligne-unload
+  2009-01-01 12:00  =>         add 1 to cptnarchi
+  2009-01-01 12:00  =>         perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>*Pour l'enregistrement de type9
+  2009-01-01 12:00  =>     move "1" to nm-bas9  *> SSG-STUB [tname,1,1,1]
+  2009-01-01 12:00  =>     move "1" to nm-tab9  *> SSG-STUB [tname,1,1,2]
+  2009-01-01 12:00  =>     accept date-i from date yyyymmdd
+  2009-01-01 12:00  =>     move date-i to dt-ach9
+  2009-01-01 12:00  =>     move cptarchi to cptach1
+  2009-01-01 12:00  =>                      cptach2
+  2009-01-01 12:00  =>     write ligne-archi from ligne-type9
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*---------------- DATE AU FORMAT FRANCAIS -------------
+  2009-01-01 12:00  =>  103-date.
+  2009-01-01 12:00  =>     move annee-i to annee-fr
+  2009-01-01 12:00  =>     move mois-i to mois-fr
+  2009-01-01 12:00  =>     move jour-i to jour-fr
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  103-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----------- DISPLAY DU RAPPORT -------------
+  2009-01-01 12:00  =>  104-rapport.
+  2009-01-01 12:00  =>     move cptlu to cptluf
+  2009-01-01 12:00  =>     move cptarchi to cptarchif
+  2009-01-01 12:00  =>     move cptnarchi to cptnarchif
+  2009-01-01 12:00  =>     display "Archisepare              Rapport             "
+  2009-01-01 12:00  =>       date-fr upon printer
+  2009-01-01 12:00  =>     display " " upon printer
+  2009-01-01 12:00  =>     display "Enregistrement lu : " cptluf upon printer
+  2009-01-01 12:00  =>     display "Enregistrement ecrit dans 1 : "  *> SSG-STUB [fileou//t,1,1,1]
+  2009-01-01 12:00  =>       cptarchif upon printer
+  2009-01-01 12:00  =>     display "Enregistrement ecrit dans 1 : "  *> SSG-STUB [fileou//t,1,2,1]
+  2009-01-01 12:00  =>       cptnarchif upon printer
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  104-exit.
+  2009-01-01 12:00  =>     exit.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                  -- ARCHISEPARE --                         ***
+  ***            Separe les enregistrements a archiver           ***
+  ***                   et a ne pas archiver                     ***
+  ***                        == UCS ==                           ***
+  ***------------------------------------------------------------***
+  * Type     :                                                     *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+  * Release  :                                 (99)                *
+  * Version  :                                 (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *                                                                *
+  *    INPUT : chercheuse : numero de sinistres a archiver         *
+  *    INPUT : ficunload : unload de la table a archiver           *
+  *    OUTPUT: ficarchi : enregistrements a archiver               *
+  *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ARCHITAB1(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_ARCHITAB1(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>   ***------------------------------------------------------------//***
+  2009-01-01 12:00  =>***                  -- architab1 --                         ***
+  2009-01-01 12:00  =>***            Pour creerle fichier pour architab2             ***
+  2009-01-01 12:00  =>***                        == UCS ==                           ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     :                                                     *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 18 avril 2001                   (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  :                                 (99)                *
+  2009-01-01 12:00  =>* Version  :                                 (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*    OUTPUT: ficout : renseignements pour architab2              *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => program-id.  architab1.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select ficout assign to disc      1.  *> SSG-STUB [fname,1,1,//1]
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier pour architab2
+  2009-01-01 12:00  => FD  ficout.
+  2009-01-01 12:00  =>  1  ligneout              pic x(80).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Working-storage section.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>   1 ligne-type0.
+  2009-01-01 12:00  =>     3 cd-don0                   pic x value "0".
+  2009-01-01 12:00  =>     3 nm-bas0                   pic x(6).
+  2009-01-01 12:00  =>     3 nm-tab0                   pic x(30).
+  2009-01-01 12:00  =>     3 dt-ach0                   pic x(8).
+  2009-01-01 12:00  =>     3 dt-tab                    pic x(8) value space.
+  2009-01-01 12:00  =>   1 ligne-type1.
+  2009-01-01 12:00  =>     3 cd-don1                   pic x value "1".
+  2009-01-01 12:00  =>     3 nm-cle                    pic x(30).
+  2009-01-01 12:00  =>     3 ds-cle.
+  2009-01-01 12:00  =>      5 type-cle                 pic x.
+  2009-01-01 12:00  =>      5 longueur                 pic 99.99.
+  2009-01-01 12:00  =>   1 ligne-type9.
+  2009-01-01 12:00  =>     3 cd-don9                   pic x value "9".
+  2009-01-01 12:00  =>     3 nm-bas9                   pic x(6).
+  2009-01-01 12:00  =>     3 nm-tab9                   pic x(30).
+  2009-01-01 12:00  =>     3 dt-ach9                   pic x(8).
+  2009-01-01 12:00  =>     3 nombre                    pic s9(11) sign leading
+  2009-01-01 12:00  =>       separate value 99999999999.
+  2009-01-01 12:00  =>     3 nombre2                   pic s9(11) sign leading
+  2009-01-01 12:00  =>       separate value 99999999999.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*-------------------
+  2009-01-01 12:00  =>   000-main.
+  2009-01-01 12:00  =>     open output ficout
+  2009-01-01 12:00  =>     perform 100-type0 thru 100-exit
+  2009-01-01 12:00  =>     perform 101-type1 thru 101-exit
+  2009-01-01 12:00  =>     perform 102-type9 thru 102-exit
+  2009-01-01 12:00  =>     close ficout
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 0 ----------------
+  2009-01-01 12:00  =>  100-type0.
+  2009-01-01 12:00  =>     move "1" to nm-bas0  *> SSG-STUB [tname,1,1,1]
+  2009-01-01 12:00  =>     move "1" to nm-tab0  *> SSG-STUB [tname,1,1,2]
+  2009-01-01 12:00  =>     accept dt-ach0 from date yyyymmdd
+  2009-01-01 12:00  =>     write ligneout from ligne-type0
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 1 -----------------
+  2009-01-01 12:00  =>  101-type1.
+  2009-01-01 12:00  =>     move "1" to nm-cle  *> SSG-STUB [key,1,1,1]
+  2009-01-01 12:00  =>     move "1" to type-cle  *> SSG-STUB [key,1,1,2]
+  2009-01-01 12:00  =>     move 1 to longueur  *> SSG-STUB [key,1,1,3]
+  2009-01-01 12:00  =>     write ligneout from ligne-type1
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 9 -----------------
+  2009-01-01 12:00  =>  102-type9.
+  2009-01-01 12:00  =>     move "1" to nm-bas9  *> SSG-STUB [tname,1,1,1]
+  2009-01-01 12:00  =>     move "1" to nm-tab9  *> SSG-STUB [tname,1,1,2]
+  2009-01-01 12:00  =>     accept dt-ach9 from date yyyymmdd
+  2009-01-01 12:00  =>     write ligneout from ligne-type9
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                  -- architab1 --                         ***  
+  ***            Pour creerle fichier pour architab2             ***
+  ***                        == UCS ==                           ***
+  ***------------------------------------------------------------***
+  * Type     :                                                     *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 18 avril 2001                   (dd/mm/ccyy)        *
+  * Release  :                                 (99)                *
+  * Version  :                                 (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *                                                                *
+  *    OUTPUT: ficout : renseignements pour architab2              *
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_CFH-COPY(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_CFH-COPY(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. 'CFH-COPY'.
+  2009-01-01 12:00  => AUTHOR. MICHEL REVISED BY BOURDEAUD HUY.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  TAPEIN  ASSIGN  TO  UNISERVO ECL-DISQ.  *> SSG-STUB [//INPUT,1,1,1]
+  2009-01-01 12:00  =>     SELECT  TAPEOUT  ASSIGN  TO  MASS-STORAGE "ECL-BDE1".  *> SSG//-STUB [OUTPUT,1,1,1]
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  TAPEIN
+  2009-01-01 12:00  =>     LABEL  RECORD  STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD RECIN.
+  2009-01-01 12:00  => 01  RECIN   PIC  X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => FD  TAPEOUT
+  2009-01-01 12:00  =>     LABEL  RECORD STANDARD
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 1  RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD RECOUT.
+  2009-01-01 12:00  => 01  RECOUT   PIC   X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  NB-LUS   PIC   9(10)  COMP  VALUE 0.
+  2009-01-01 12:00  => 01  COPY-LIMIT         PIC 9(10) VALUE 1.  *> SSG-STUB [MAXCOPY,1//,1,1]
+  2009-01-01 12:00  => 01   SWITCHES.
+  2009-01-01 12:00  =>     03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT TAPEIN.
+  2009-01-01 12:00  =>     OPEN  OUTPUT  TAPEOUT.
+  2009-01-01 12:00  => LECT.
+  2009-01-01 12:00  =>     MOVE SPACES TO RECOUT.
+  2009-01-01 12:00  =>     READ  TAPEIN  AT  END  GO TO  FINW.
+  2009-01-01 12:00  =>     MOVE RECIN TO RECOUT.
+  2009-01-01 12:00  =>     ADD 1  TO NB-LUS.
+  2009-01-01 12:00  =>     WRITE RECOUT.
+  2009-01-01 12:00  =>     IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.
+  2009-01-01 12:00  =>     GO TO LECT.
+  2009-01-01 12:00  => FINW.
+  2009-01-01 12:00  =>     DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.
+  2009-01-01 12:00  =>     DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.
+  2009-01-01 12:00  =>     CLOSE  TAPEIN.
+  2009-01-01 12:00  =>     CLOSE  TAPEOUT.
+  2009-01-01 12:00  =>     DISPLAY  REC-SKIPPED  UPON  PRINTER.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. MICHEL REVISED BY BOURDEAUD HUY.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_COMPARE2_ASCII(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_COMPARE2_ASCII(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>    IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID.    COMPARE.
+  2009-01-01 12:00  => AUTHOR.        HANSE.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. SPERRY-1100.
+  2009-01-01 12:00  => OBJECT-COMPUTER. SPERRY-1100.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT IN1 ASSIGN TO DISC ECL-DISQ.  *> SSG-STUB [INPUT,1,1,1//]
+  2009-01-01 12:00  =>     SELECT IN2 ASSIGN TO DISC 20.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     SELECT LISTING ASSIGN TO PRINTER.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  IN1
+  2009-01-01 12:00  =>     LABEL  RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 80 RECORDS  *> SSG-STUB [INPUT,1,1,4]
+  2009-01-01 12:00  =>     RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD IS ENR-IN1.
+  2009-01-01 12:00  => 01  ENR-IN1   PIC X(1).  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  => FD  IN2
+  2009-01-01 12:00  =>     LABEL  RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 80 RECORDS  *> SSG-STUB [INPUT,1,1,4]
+  2009-01-01 12:00  =>     RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD IS ENR-IN2.
+  2009-01-01 12:00  => 01  ENR-IN2   PIC X(1).  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  => FD  LISTING
+  2009-01-01 12:00  =>     LABEL RECORD IS OMITTED
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS
+  2009-01-01 12:00  =>     RECORD CONTAINS 132 CHARACTERS
+  2009-01-01 12:00  =>     DATA RECORD IS LIGNE.
+  2009-01-01 12:00  => 01  LIGNE PIC X(132).
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  L-NOLIGNE.
+  2009-01-01 12:00  =>     05 FILLER PIC X(50) VALUE
+  2009-01-01 12:00  =>     '----+----1----+----2----+----3----+----4----+----5'.
+  2009-01-01 12:00  =>     05 FILLER PIC X(50) VALUE
+  2009-01-01 12:00  =>     '----+----6----+----7----+----8----+----9----+----1'.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-IN1.
+  2009-01-01 12:00  =>     02 TAB-IN1 OCCURS 1 INDEXED BY XT1 PIC X(100).  *> SSG-STUB [//*A]
+  2009-01-01 12:00  => 01  WS-EXCL1-1 REDEFINES WS-IN1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     02 EXCL1-1              PIC X(1).  *> SSG-STUB [*I], [EXCLUDE//,1,I,2]
+  2009-01-01 12:00  => 01  WS-IN2.
+  2009-01-01 12:00  =>     02 TAB-IN2 OCCURS 1 INDEXED BY XT2 PIC X(100).  *> SSG-STUB [//*A]
+  2009-01-01 12:00  => 01  WS-EXCL2-1 REDEFINES WS-IN2.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     02 EXCL2-1              PIC X(1).  *> SSG-STUB [*I], [EXCLUDE//,1,I,2]
+  2009-01-01 12:00  => 01  WS-INDIC1.
+  2009-01-01 12:00  =>     02 FILLER          PIC X(4).
+  2009-01-01 12:00  => 01  WS-INDIC2.
+  2009-01-01 12:00  =>     02 FILLER          PIC X(4).
+  2009-01-01 12:00  => 01  LIGNE-NO-REC.
+  2009-01-01 12:00  =>   03  FILLER   PIC X(20) VALUE 'ENREGISTREMENT NO   '.
+  2009-01-01 12:00  =>   03  ZCT1     PIC 9(10) VALUE ZEROES.
+  2009-01-01 12:00  =>   03  FILLER   PIC X(4) VALUE ' (ECL-DISQ) '.  *> SSG-STUB [INPUT//,1,1,1], [*LONGUEUR]
+  2009-01-01 12:00  =>   03  FILLER   PIC X(3) VALUE ' / '.
+  2009-01-01 12:00  =>   03  ZCT2     PIC 9(10) VALUE ZEROES.
+  2009-01-01 12:00  =>   03  FILLER   PIC X(4) VALUE ' (20) '.  *> SSG-STUB [INPUT,1,1,2//], [*LONGUEUR]
+  2009-01-01 12:00  =>   03  FILLER   PIC X(9) VALUE 'NO DIFF: '.
+  2009-01-01 12:00  =>   03  ZCT3     PIC 9(6) VALUE ZEROES.
+  2009-01-01 12:00  => 01  CT1     PIC 9(10) COMP VALUE ZEROES.
+  2009-01-01 12:00  => 01  CT2     PIC 9(10) COMP VALUE ZEROES.
+  2009-01-01 12:00  => 01  SW-ANO  PIC 9          VALUE 0.
+  2009-01-01 12:00  => 01  DIFFERENCE         PIC 9            VALUE 0.
+  2009-01-01 12:00  => 01  NB-TOT-DIFFERENCE  PIC 9(6)         VALUE 0.
+  2009-01-01 12:00  => 01  WS-COMPTEUR-PRNT   PIC 9(6)         VALUE 0.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT IN1 IN2
+  2009-01-01 12:00  =>          OUTPUT LISTING.
+  2009-01-01 12:00  =>     MOVE SPACES TO LIGNE.
+  2009-01-01 12:00  =>     WRITE LIGNE AFTER PAGE.
+  2009-01-01 12:00  => LECTURE.
+  2009-01-01 12:00  =>     PERFORM LECTURE-IN1 THRU LECTURE-EX.
+  2009-01-01 12:00  =>     PERFORM LECTURE-IN2 THRU LECTURE-EX.
+  2009-01-01 12:00  => TEST.
+  2009-01-01 12:00  =>     IF WS-INDIC1 = WS-INDIC2  GO TO EGALITE.
+  2009-01-01 12:00  =>     IF WS-INDIC1 > WS-INDIC2  GO TO IN2-SEUL.
+  2009-01-01 12:00  =>     IF WS-INDIC1 < WS-INDIC2  GO TO IN1-SEUL.
+  2009-01-01 12:00  => EGALITE.
+  2009-01-01 12:00  =>     IF WS-INDIC1 = HIGH-VALUES GO TO FINI.
+  2009-01-01 12:00  =>     MOVE 0 TO SW-ANO.
+  2009-01-01 12:00  =>     SET XT1 XT2 TO 1.
+  2009-01-01 12:00  => BCL1.
+  2009-01-01 12:00  =>     IF XT1 > 1  GO TO IMP-EGAL.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     IF XT2 > 1  GO TO IMP-EGAL.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     IF TAB-IN1 (XT1) = TAB-IN2 (XT2)  GO TO RBCL1.
+  2009-01-01 12:00  =>     MOVE 1 TO DIFFERENCE.
+  2009-01-01 12:00  =>     MOVE 1 TO SW-ANO.
+  2009-01-01 12:00  => RBCL1.
+  2009-01-01 12:00  =>     SET XT1 XT2 UP BY 1.
+  2009-01-01 12:00  =>     GO TO BCL1.
+  2009-01-01 12:00  => IMP-EGAL.
+  2009-01-01 12:00  =>     IF SW-ANO = 0   GO TO LECTURE.
+  2009-01-01 12:00  =>     ADD  1 TO WS-COMPTEUR-PRNT.
+  2009-01-01 12:00  =>     IF NOT WS-COMPTEUR-PRNT > 0  *> SSG-STUB [*AIMPRIMER]
+  2009-01-01 12:00  =>        GO TO IMPRESSION.
+  2009-01-01 12:00  =>     GO TO LECTURE.
+  2009-01-01 12:00  => IMPRESSION.
+  2009-01-01 12:00  =>     MOVE CT1 TO ZCT1.
+  2009-01-01 12:00  =>     MOVE CT2 TO ZCT2.
+  2009-01-01 12:00  =>     DISPLAY ' ' UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY LIGNE-NO-REC                   UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY L-NOLIGNE                      UPON PRINTER.
+  2009-01-01 12:00  =>     SET XT1 TO 1.
+  2009-01-01 12:00  =>     SET XT2 TO 1.
+  2009-01-01 12:00  => BCL-IMP.
+  2009-01-01 12:00  =>     IF XT2 > 1   GO TO LECTURE.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     DISPLAY TAB-IN1 (XT1) UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY TAB-IN2 (XT2) UPON PRINTER.
+  2009-01-01 12:00  =>     SET XT1 UP BY 1
+  2009-01-01 12:00  =>     SET XT2 UP BY 1.
+  2009-01-01 12:00  =>     GO TO BCL-IMP.
+  2009-01-01 12:00  => IN1-SEUL.
+  2009-01-01 12:00  =>     DISPLAY '< ENREG. NO : ' CT1 UPON PRINTER.
+  2009-01-01 12:00  =>     PERFORM LECTURE-IN1 THRU LECTURE-EX.
+  2009-01-01 12:00  =>     GO TO TEST.
+  2009-01-01 12:00  => IN2-SEUL.
+  2009-01-01 12:00  =>     DISPLAY '> ENREG. NO :            - ' CT2 UPON PRINTER.
+  2009-01-01 12:00  =>     PERFORM LECTURE-IN2 THRU LECTURE-EX.
+  2009-01-01 12:00  =>     GO TO TEST.
+  2009-01-01 12:00  => LECTURE-IN1.
+  2009-01-01 12:00  =>     ADD DIFFERENCE TO NB-TOT-DIFFERENCE.
+  2009-01-01 12:00  =>     MOVE NB-TOT-DIFFERENCE TO ZCT3.
+  2009-01-01 12:00  =>     ADD 1 TO ZCT3.
+  2009-01-01 12:00  =>     MOVE 0 TO DIFFERENCE.
+  2009-01-01 12:00  =>     READ IN1 INTO WS-IN1 AT END
+  2009-01-01 12:00  =>                          MOVE HIGH-VALUES TO WS-INDIC1
+  2009-01-01 12:00  =>                          GO TO LECTURE-EX.
+  2009-01-01 12:00  =>     PERFORM EXCLUDE1 THRU EXCLUDE1-EXIT.
+  2009-01-01 12:00  =>     ADD 1 TO CT1.
+  2009-01-01 12:00  =>     GO TO LECTURE-EX.
+  2009-01-01 12:00  => LECTURE-IN2.
+  2009-01-01 12:00  =>     MOVE 0 TO DIFFERENCE.
+  2009-01-01 12:00  =>     READ IN2 INTO WS-IN2 AT END
+  2009-01-01 12:00  =>                          MOVE HIGH-VALUES TO WS-INDIC2
+  2009-01-01 12:00  =>                          GO TO LECTURE-EX.
+  2009-01-01 12:00  =>     PERFORM EXCLUDE2 THRU EXCLUDE2-EXIT.
+  2009-01-01 12:00  =>     ADD 1 TO CT2.
+  2009-01-01 12:00  => LECTURE-EX.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => EXCLUDE1.
+  2009-01-01 12:00  =>     MOVE ALL '*' TO EXCL1-1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  => EXCLUDE1-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => EXCLUDE2.
+  2009-01-01 12:00  =>     MOVE ALL '*' TO EXCL2-1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  => EXCLUDE2-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FINI.
+  2009-01-01 12:00  =>     DISPLAY '******************************'
+  2009-01-01 12:00  =>              UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 1 = ' CT1
+  2009-01-01 12:00  =>              UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NOMBRE ENREGISTREMENTS INPUT FICHIER 2 = ' CT2
+  2009-01-01 12:00  =>              UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NOMBRE ENREGISTREMENTS DIFFERENTS = '
+  2009-01-01 12:00  =>              NB-TOT-DIFFERENCE              UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY '******************************' UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY '**********************************************'
+  2009-01-01 12:00  =>              UPON PRINTER.
+  2009-01-01 12:00  =>     IF NB-TOT-DIFFERENCE > 0  *> SSG-STUB [*AIMPRIMER]
+  2009-01-01 12:00  =>           DISPLAY '* TOUTES LES DIFFERENCES NE SONT PAS LISTEES *//'
+  2009-01-01 12:00  =>           UPON PRINTER
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>           DISPLAY '*    TOUTES LES DIFFERENCES SONT LISTEES     *//'
+  2009-01-01 12:00  =>           UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY '**********************************************'
+  2009-01-01 12:00  =>              UPON PRINTER.
+  2009-01-01 12:00  =>     CLOSE IN1 IN2 LISTING.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. HANSE.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_CONDIS_ASCII(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_CONDIS_ASCII(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => Set Debug to ''
+  2009-01-01 12:00  =>eate SGS: LIST 0
+  2009-01-01 12:00  =>eate SGS: LISTM 0
+  2009-01-01 12:00  =>eate SGS: LISTA 1  *> SSG-STUB [LISTM,1,1,1]
+  2009-01-01 12:00  =>e Variable v
+  2009-01-01 12:00  => not 1  *> SSG-STUB [DMS,1,1]
+  2009-01-01 12:00  => Display 'Carte DMS incompl�te'
+  2009-01-01 12:00  => Display 'DMS UPDATE|RETRIEVAL'
+  2009-01-01 12:00  => Abort
+  2009-01-01 12:00  =>seIf 1 <> UPDATE and 1 <> RETRIEVAL  *> SSG-STUB [DMS,1,1,1], [DMS//,1,1,1]
+  2009-01-01 12:00  => Display 'Carte DMS incorrecte'
+  2009-01-01 12:00  => Display 'DMS UPDATE|RETRIEVAL'
+  2009-01-01 12:00  => Abort
+  2009-01-01 12:00  =>seIf 1 <> UPDATE and [Info$,1,4,1] <> UNIQU  *> SSG-STUB [DMS,1,1,//1]
+  2009-01-01 12:00  => Display 'User not authorized to update DMS'
+  2009-01-01 12:00  => Display 'Please contact your SSG administrator'
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>ES1 CONDIS,.CONDIS  *> SSG-STUB [*Debug]
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***                    -- CONDIS --                            ***
+  2009-01-01 12:00  =>***              UTILITAIRE - MODIF ZONE                       ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     : UTILITAIRE MODIF CONDITIONNELLE DE ZONES            *
+  2009-01-01 12:00  =>* Analyste : intdi                           (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : intdi                                               *
+  2009-01-01 12:00  =>* Release  : 01                              (99)                *
+  2009-01-01 12:00  =>* VersIon  : 001                             (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* SNIEZ  27/10/1997  ADDZ_____________________________  ______/__*
+  2009-01-01 12:00  =>* AGAIN  20/04/1998  DMS______________________________  ______/__*
+  2009-01-01 12:00  =>* AUSSI  26/08/1998  ADD QUAND ;0 <= AA <= _9_________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>**************************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROGRAM-ID.  CONDIS.
+  2009-01-01 12:00  =>*-----------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  =>*======================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => SOURCE-COMPUTER.  UNIVAC-1110.
+  2009-01-01 12:00  =>*----------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => OBJECT-COMPUTER.  UNIVAC-1110.
+  2009-01-01 12:00  =>*----------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     PRINTER IS PRINER.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  => 1  *> SSG-STUB [FD]
+  2009-01-01 12:00  =>     SELECT FILEIN ASSIGN TO MASS-STORAGE FILEIN.
+  2009-01-01 12:00  =>     SELECT FILEOUT ASSIGN TO MASS-STORAGE FILEOUT.
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  =>     SELECT FILEIN ASSIGN TO DISC FILEIN.
+  2009-01-01 12:00  =>     SELECT FILEOUT ASSIGN TO DISC FILEOUT.
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>     SELECT LIST-OUT ASSIGN TO PRINER.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  =>****************
+  2009-01-01 12:00  => SUBSCHEMA SECTION.
+  2009-01-01 12:00  => INVOKE SUBSCHEMA Y2SSCHEMA FILE Y2-SCHABS SCHEMA Y2SCHEMA
+  2009-01-01 12:00  =>     COPYING RECORDS    WORKING
+  2009-01-01 12:00  =>     COPYING DATA-NAMES WORKING
+  2009-01-01 12:00  =>     DMCA               WORKING
+  2009-01-01 12:00  =>     ERROR GEN-ERR-PAR
+  2009-01-01 12:00  =>     ROLLBACK RBK-PAR.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  FILEIN
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [FILE,1,1,2]
+  2009-01-01 12:00  =>         RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB [FILE,1,1,1]
+  2009-01-01 12:00  =>         LABEL RECORD STANDARD
+  2009-01-01 12:00  =>         DATA RECORD IS FSINPUT.
+  2009-01-01 12:00  => 01  FSINPUT.
+  2009-01-01 12:00  =>      02   FILLER    PIC X(1).  *> SSG-STUB [FILE,1,1,1]
+  2009-01-01 12:00  => FD  FILEOUT
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [FILE,1,1,2]
+  2009-01-01 12:00  =>         RECORD CONTAINS 1 CHARACTERS  *> SSG-STUB [FILE,1,1,1]
+  2009-01-01 12:00  =>         LABEL RECORD STANDARD
+  2009-01-01 12:00  =>         DATA RECORD IS FSOUTPUT.
+  2009-01-01 12:00  => 01  FSOUTPUT.
+  2009-01-01 12:00  =>     02   FILLER     PIC X(1).  *> SSG-STUB [FILE,1,1,1]
+  2009-01-01 12:00  => FD  LIST-OUT
+  2009-01-01 12:00  =>     LABEL RECORDS OMITTED
+  2009-01-01 12:00  =>     RECORD CONTAINS 0132
+  2009-01-01 12:00  =>     DATA RECORD LIST-OUT-R.
+  2009-01-01 12:00  => 01  LIST-OUT-R.
+  2009-01-01 12:00  =>     02 FILLER PIC X(0132).
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  MODIFIE               PIC 9(1).
+  2009-01-01 12:00  => 01  ANOMALIE              PIC 9(1).
+  2009-01-01 12:00  => 01  REC-LU                PIC 9(9).
+  2009-01-01 12:00  => 01  REC-MODIFIE           PIC 9(9).
+  2009-01-01 12:00  => 01  REC-FREE              PIC 9(9).
+  2009-01-01 12:00  => 01  REC-ECRIT             PIC 9(9).
+  2009-01-01 12:00  => 01  REC-ANOMALIE          PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO                PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-2000           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-2020           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-NUM2           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-NUM4           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-DMIN           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-DMAX           PIC 9(9).
+  2009-01-01 12:00  => 01  NB-ANO-9999           PIC 9(9).
+  2009-01-01 12:00  => 01  L1.
+  2009-01-01 12:00  =>     05 FILLER      PIC X(10) VALUE 'RECORD' .
+  2009-01-01 12:00  =>     05 L1-RECLU    PIC 9(09).
+  2009-01-01 12:00  =>     05 FILLER PIC X(02) VALUE SPACES.
+  2009-01-01 12:00  =>     05 L1-LIBELLE  PIC X(10).
+  2009-01-01 12:00  => 01  L-NOLIGNE.
+  2009-01-01 12:00  =>     05 FILLER PIC X(50) VALUE
+  2009-01-01 12:00  =>     '----+----1----+----2----+----3----+----4----+----5'.
+  2009-01-01 12:00  =>     05 FILLER PIC X(50) VALUE
+  2009-01-01 12:00  =>     '----+----6----+----7----+----8----+----9----+----1'.
+  2009-01-01 12:00  => 01  L-TOT.
+  2009-01-01 12:00  =>     05 L-TOT-LIB          PIC X(28).
+  2009-01-01 12:00  =>     05 L-TOT-NB           PIC Z(8)9.
+  2009-01-01 12:00  => 0 <> C and 1 = COND  *> SSG-STUB [*PARAMOLD], [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOCOND = 0 + 1  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  => Set NOZONECOND = 0
+  2009-01-01 12:00  => Set NOZONEADD  = 0
+  2009-01-01 12:00  => Set NOZONEADDL = 0
+  2009-01-01 12:00  => Set NOZONEADDZ = 0
+  2009-01-01 12:00  => Set NOZONERESU = 0
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADD  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADD = 0 + 1  *> SSG-STUB [*NOZONEADD]
+  2009-01-01 12:00  => 01  WS-ADD-0-0   PIC 9(3).  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  => 01  WR-ADD-0-0 REDEFINES  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     WS-ADD-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     03 WS-ADD-0-0-0        PIC X(1).  *> SSG-STUB [*NOCOND], [*NO//ZONEADD]
+  2009-01-01 12:00  =>     03 WS-ADD-0-0-1        PIC X(1).  *> SSG-STUB [*NOCOND], [*NO//ZONEADD]
+  2009-01-01 12:00  =>     03 WS-ADD-0-0-2        PIC X(1).  *> SSG-STUB [*NOCOND], [*NO//ZONEADD]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = RESU  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONERESU = 0 + 1  *> SSG-STUB [*NOZONERESU]
+  2009-01-01 12:00  => 01  WS-RESU-0-0  PIC X(1)  *> SSG-STUB [*NOCOND], [*NOZONERESU], //[PARAM,I,1,3]
+  2009-01-01 12:00  =>   VALUE '1'.  *> SSG-STUB [PARAM,I,1,4]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set PARAMOLD = 'C'
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  => Set PARAMOLD = ' '
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 01  ENR-INPUT.
+  2009-01-01 12:00  =>        03  FILLER                PIC X(1).  *> SSG-STUB [FILE,1,1//,1]
+  2009-01-01 12:00  => 01  P-INPUT               REDEFINES ENR-INPUT.
+  2009-01-01 12:00  =>t J = 1 + 1  *> SSG-STUB [*J]
+  2009-01-01 12:00  =>     03 P-INPUT-1              PIC X(100).  *> SSG-STUB [*J]
+  2009-01-01 12:00  =>t K = 0 + 100  *> SSG-STUB [*K]
+  2009-01-01 12:00  =>     03 P-INPUT-1              PIC X(0).  *> SSG-STUB [*J], [*L1]
+  2009-01-01 12:00  => 0 <> C and 1 = COND  *> SSG-STUB [*PARAMOLD], [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOCOND = 0 + 1  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  => Set NOZONECOND = 0
+  2009-01-01 12:00  => Set NOZONEADD  = 0
+  2009-01-01 12:00  => Set NOZONEADDL = 0
+  2009-01-01 12:00  => Set NOZONEADDZ = 0
+  2009-01-01 12:00  => Set NOZONERESU = 0
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONECOND = 0 + 1  *> SSG-STUB [*NOZONECOND]
+  2009-01-01 12:00  => 01  ENR-COND-0-0   REDEFINES ENR-INPUT.  *> SSG-STUB [*NOCOND], [//*NOZONECOND]
+  2009-01-01 12:00  => Set L1 = 1 - 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => If 0>0  *> SSG-STUB [*L1]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(0).  *> SSG-STUB [*L1]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>     03 COND-0-0  PIC X(1).  *> SSG-STUB [*NOCOND], [*NOZONECOND],// [PARAM,I,1,3]
+  2009-01-01 12:00  => Set L2 = 1 - 1 - 1 + 1  *> SSG-STUB [FILE,1,1,1], [PARAM,I,1,2], //[PARAM,I,1,3]
+  2009-01-01 12:00  => If 1>0  *> SSG-STUB [*L2]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(1).  *> SSG-STUB [*L2]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set PARAMOLD = 'C'
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  => Set PARAMOLD = ' '
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 01  ENR-OUTPUT.
+  2009-01-01 12:00  =>        03  FILLER                PIC X(1).  *> SSG-STUB [FILE,1,1//,1]
+  2009-01-01 12:00  => 01  P-OUTPUT               REDEFINES ENR-OUTPUT.
+  2009-01-01 12:00  =>t J = 1 + 1  *> SSG-STUB [*J]
+  2009-01-01 12:00  =>     03 P-OUTPUT-1              PIC X(100).  *> SSG-STUB [*J]
+  2009-01-01 12:00  =>t K = 0 + 100  *> SSG-STUB [*K]
+  2009-01-01 12:00  =>     03 P-OUTPUT-1              PIC X(0).  *> SSG-STUB [*J], [*L1]
+  2009-01-01 12:00  => 0 <> C and 1 = COND  *> SSG-STUB [*PARAMOLD], [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOCOND = 0 + 1  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  => Set NOZONECOND = 0
+  2009-01-01 12:00  => Set NOZONEADD  = 0
+  2009-01-01 12:00  => Set NOZONEADDL = 0
+  2009-01-01 12:00  => Set NOZONEADDZ = 0
+  2009-01-01 12:00  => Set NOZONERESU = 0
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = RESU  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONERESU = 0 + 1  *> SSG-STUB [*NOZONERESU]
+  2009-01-01 12:00  => 01  ENR-RESU-0-0   REDEFINES ENR-OUTPUT.  *> SSG-STUB [*NOCOND], //[*NOZONERESU]
+  2009-01-01 12:00  => Set L1 = 1 - 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => If 0>0  *> SSG-STUB [*L1]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(0).  *> SSG-STUB [*L1]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>     03 RESU-0-0  PIC X(1).  *> SSG-STUB [*NOCOND], [*NOZONERESU],// [PARAM,I,1,3]
+  2009-01-01 12:00  => Set L2 = 1 - 1 - 1 + 1  *> SSG-STUB [FILE,1,1,1], [PARAM,I,1,2], //[PARAM,I,1,3]
+  2009-01-01 12:00  => If 1>0  *> SSG-STUB [*L2]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(1).  *> SSG-STUB [*L2]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDL  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDL = 0 + 1  *> SSG-STUB [*NOZONEADDL]
+  2009-01-01 12:00  => 01  ENR-ADDL-0-0   REDEFINES ENR-OUTPUT.  *> SSG-STUB [*NOCOND], //[*NOZONEADDL]
+  2009-01-01 12:00  => Set L1 = 1 - 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => If 0>0  *> SSG-STUB [*L1]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(0).  *> SSG-STUB [*L1]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>     03 ADDL-0-0  PIC 9(1).  *> SSG-STUB [*NOCOND], [*NOZONEADDL],// [PARAM,I,1,3]
+  2009-01-01 12:00  => Set L2 = 1 - 1 - 1 + 1  *> SSG-STUB [FILE,1,1,1], [PARAM,I,1,2], //[PARAM,I,1,3]
+  2009-01-01 12:00  => If 1>0  *> SSG-STUB [*L2]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(1).  *> SSG-STUB [*L2]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADD  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADD = 0 + 1  *> SSG-STUB [*NOZONEADD]
+  2009-01-01 12:00  => 01  ENR-ADD-0-0   REDEFINES ENR-OUTPUT.  *> SSG-STUB [*NOCOND], [//*NOZONEADD]
+  2009-01-01 12:00  => Set L1 = 1 - 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => If 0>0  *> SSG-STUB [*L1]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(0).  *> SSG-STUB [*L1]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>     03 ADD-0-0  PIC 9(2).  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     03 R-ADD-0-0 REDEFINES  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>          ADD-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        05 ADD-0-0-1             PIC X(1).  *> SSG-STUB [*NOCOND],// [*NOZONEADD]
+  2009-01-01 12:00  =>        05 ADD-0-0-2             PIC X(1).  *> SSG-STUB [*NOCOND],// [*NOZONEADD]
+  2009-01-01 12:00  => Set L2 = 1 - 1 - 1  *> SSG-STUB [FILE,1,1,1], [PARAM,I,1,2]
+  2009-01-01 12:00  => If 1>0  *> SSG-STUB [*L2]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(1).  *> SSG-STUB [*L2]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDZ  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDZ = 0 + 1  *> SSG-STUB [*NOZONEADDZ]
+  2009-01-01 12:00  => 01  ENR-ADDZ-0-0   REDEFINES ENR-OUTPUT.  *> SSG-STUB [*NOCOND], //[*NOZONEADDZ]
+  2009-01-01 12:00  => Set L1 = 1 - 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => If 0>0  *> SSG-STUB [*L1]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(0).  *> SSG-STUB [*L1]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>     03 ADDZ-0-0  PIC 9(4).  *> SSG-STUB [*NOCOND], [*NOZONEADDZ]
+  2009-01-01 12:00  => Set L2 = 1 - 1 - 3  *> SSG-STUB [FILE,1,1,1], [PARAM,I,1,2]
+  2009-01-01 12:00  => If 1>0  *> SSG-STUB [*L2]
+  2009-01-01 12:00  =>     03 FILLER                   PIC X(1).  *> SSG-STUB [*L2]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set PARAMOLD = 'C'
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  => Set PARAMOLD = ' '
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>********************
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT FILEIN.
+  2009-01-01 12:00  =>     OPEN OUTPUT FILEOUT.
+  2009-01-01 12:00  =>     OPEN OUTPUT LIST-OUT.
+  2009-01-01 12:00  =>     IMPART.
+  2009-01-01 12:00  => 1 and 1 = UPDATE  *> SSG-STUB [DMS,1,1,1], [DMS,1,1]
+  2009-01-01 12:00  =>     OPEN 1 USAGE-MODE IS UPDATE.  *> SSG-STUB [Area,1,1,1]
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  =>     OPEN 1 USAGE-MODE IS RETRIEVAL.  *> SSG-STUB [Area,1,1,1]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>     MOVE 0 TO MODIFIE.
+  2009-01-01 12:00  =>     MOVE 0 TO ANOMALIE.
+  2009-01-01 12:00  =>     MOVE 0 TO REC-MODIFIE.
+  2009-01-01 12:00  =>     MOVE 0 TO REC-FREE.
+  2009-01-01 12:00  =>     MOVE 0 TO REC-ECRIT.
+  2009-01-01 12:00  =>     MOVE 0 TO REC-LU.
+  2009-01-01 12:00  =>     MOVE 0 TO REC-ANOMALIE.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-2000.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-2020.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-NUM2.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-NUM4.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-DMIN.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-DMAX.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-ANO-9999.
+  2009-01-01 12:00  => TRT.
+  2009-01-01 12:00  =>     READ FILEIN INTO ENR-INPUT
+  2009-01-01 12:00  =>       AT END GO TO FIN-TRT.
+  2009-01-01 12:00  =>     MOVE ENR-INPUT TO ENR-OUTPUT.
+  2009-01-01 12:00  =>     ADD 1 TO REC-LU.
+  2009-01-01 12:00  =>     MOVE 0 TO MODIFIE.
+  2009-01-01 12:00  =>     MOVE 0 TO ANOMALIE.
+  2009-01-01 12:00  => 0 <> C and 1 = COND  *> SSG-STUB [*PARAMOLD], [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOCOND = 0 + 1  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  => Set NOZONECOND = 0
+  2009-01-01 12:00  => Set NOZONEADD  = 0
+  2009-01-01 12:00  => Set NOZONEADDL = 0
+  2009-01-01 12:00  => Set NOZONEADDZ = 0
+  2009-01-01 12:00  => Set NOZONERESU = 0
+  2009-01-01 12:00  =>      .
+  2009-01-01 12:00  => CND-0.  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONECOND = 0 + 1  *> SSG-STUB [*NOZONECOND]
+  2009-01-01 12:00  => If 1 = #  *> SSG-STUB [PARAM,I,1,5]
+  2009-01-01 12:00  =>     IF COND-0-0 IS NOT EQUAL  *> SSG-STUB [*NOCOND], [*NOZONECOND//]
+  2009-01-01 12:00  =>                             TO '1'  *> SSG-STUB [PARAM,I,1,4]
+  2009-01-01 12:00  => ElseIf 1 = >  *> SSG-STUB [PARAM,I,1,5]
+  2009-01-01 12:00  =>     IF COND-0-0 IS > '1'  *> SSG-STUB [*NOCOND], [*NOZONECOND], [//PARAM,I,1,4]
+  2009-01-01 12:00  => ElseIf 1 = <  *> SSG-STUB [PARAM,I,1,5]
+  2009-01-01 12:00  =>     IF COND-0-0 IS < '1'  *> SSG-STUB [*NOCOND], [*NOZONECOND], [//PARAM,I,1,4]
+  2009-01-01 12:00  => Else
+  2009-01-01 12:00  =>     IF COND-0-0 = '1'  *> SSG-STUB [*NOCOND], [*NOZONECOND], [PAR//AM,I,1,4]
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADD  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADD = 0 + 1  *> SSG-STUB [*NOZONEADD]
+  2009-01-01 12:00  =>     PERFORM TRT-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        THRU FIN-TRT-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = RESU  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONERESU = 0 + 1  *> SSG-STUB [*NOZONERESU]
+  2009-01-01 12:00  =>     PERFORM TRT-RESU-0-0  *> SSG-STUB [*NOCOND], [*NOZONERESU]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDL  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDL = 0 + 1  *> SSG-STUB [*NOZONEADDL]
+  2009-01-01 12:00  =>     PERFORM TRT-ADDL-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADDL]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDZ  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDZ = 0 + 1  *> SSG-STUB [*NOZONEADDZ]
+  2009-01-01 12:00  =>     PERFORM TRT-ADDZ-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADDZ]
+  2009-01-01 12:00  =>        THRU FIN-TRT-ADDZ-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADDZ//]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set PARAMOLD = 'C'
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  => Set PARAMOLD = ' '
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>       .
+  2009-01-01 12:00  =>     ADD MODIFIE  TO REC-MODIFIE.
+  2009-01-01 12:00  =>     ADD MODIFIE  TO REC-FREE.
+  2009-01-01 12:00  =>     ADD ANOMALIE TO REC-ANOMALIE.
+  2009-01-01 12:00  =>     ADD 1        TO REC-ECRIT.
+  2009-01-01 12:00  =>     IF REC-LU > 1  *> SSG-STUB [LIST,1,1,1]
+  2009-01-01 12:00  =>     AND ANOMALIE EQUAL 0
+  2009-01-01 12:00  =>     AND MODIFIE EQUAL 0
+  2009-01-01 12:00  =>        GO TO PAS-ETAT.
+  2009-01-01 12:00  =>     IF REC-LU > 1  *> SSG-STUB [LIST,1,1,1]
+  2009-01-01 12:00  =>     AND MODIFIE EQUAL 0
+  2009-01-01 12:00  =>     AND ANOMALIE NOT EQUAL 0
+  2009-01-01 12:00  =>     AND REC-ANOMALIE > 1  *> SSG-STUB [LISTA,1,1,1]
+  2009-01-01 12:00  =>        GO TO PAS-ETAT.
+  2009-01-01 12:00  =>     IF REC-LU > 1  *> SSG-STUB [LIST,1,1,1]
+  2009-01-01 12:00  =>     AND ANOMALIE EQUAL 0
+  2009-01-01 12:00  =>     AND MODIFIE NOT EQUAL 0
+  2009-01-01 12:00  =>     AND REC-MODIFIE > 1  *> SSG-STUB [LISTM,1,1,1]
+  2009-01-01 12:00  =>        GO TO PAS-ETAT.
+  2009-01-01 12:00  =>     IF REC-LU > 1  *> SSG-STUB [LIST,1,1,1]
+  2009-01-01 12:00  =>     AND ANOMALIE NOT EQUAL 0
+  2009-01-01 12:00  =>     AND MODIFIE NOT EQUAL 0
+  2009-01-01 12:00  =>     AND REC-ANOMALIE > 1  *> SSG-STUB [LISTA,1,1,1]
+  2009-01-01 12:00  =>     AND REC-MODIFIE > 1  *> SSG-STUB [LISTM,1,1,1]
+  2009-01-01 12:00  =>        GO TO PAS-ETAT.
+  2009-01-01 12:00  =>     IF ANOMALIE NOT EQUAL 0
+  2009-01-01 12:00  =>        MOVE 'ANOMALIE' TO L1-LIBELLE
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        IF MODIFIE NOT EQUAL 0
+  2009-01-01 12:00  =>           MOVE 'MODIFIE' TO L1-LIBELLE
+  2009-01-01 12:00  =>        ELSE
+  2009-01-01 12:00  =>           MOVE 'LISTE' TO L1-LIBELLE
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>     MOVE REC-LU TO L1-RECLU.
+  2009-01-01 12:00  =>     MOVE SPACES TO LIST-OUT-R.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L1.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-NOLIGNE.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM P-INPUT-1  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM P-OUTPUT-1  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     MOVE SPACES TO LIST-OUT-R.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R.
+  2009-01-01 12:00  => PAS-ETAT.
+  2009-01-01 12:00  =>     WRITE FSOUTPUT FROM ENR-OUTPUT.
+  2009-01-01 12:00  =>     GO TO TRT.
+  2009-01-01 12:00  => FIN-TRT.
+  2009-01-01 12:00  =>     CLOSE FILEIN FILEOUT.
+  2009-01-01 12:00  =>     MOVE 'NB REC LUS                = ' TO L-TOT-LIB.
+  2009-01-01 12:00  =>     MOVE REC-LU                         TO L-TOT-NB.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE 'NB REC MODIFIES           = ' TO L-TOT-LIB.
+  2009-01-01 12:00  =>     MOVE REC-MODIFIE                    TO L-TOT-NB.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE 'NB REC ECRITS             = ' TO L-TOT-LIB.
+  2009-01-01 12:00  =>     MOVE REC-ECRIT                      TO L-TOT-NB.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE 'NB REC EN ANOMALIE        = ' TO L-TOT-LIB.
+  2009-01-01 12:00  =>     MOVE REC-ANOMALIE                   TO L-TOT-NB.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF REC-ANOMALIE EQUAL ZEROES GO TO FIN-TOT.
+  2009-01-01 12:00  =>     ADD
+  2009-01-01 12:00  =>        NB-ANO-2000
+  2009-01-01 12:00  =>        NB-ANO-2020
+  2009-01-01 12:00  =>        NB-ANO-NUM2
+  2009-01-01 12:00  =>        NB-ANO-NUM4
+  2009-01-01 12:00  =>        NB-ANO-DMIN
+  2009-01-01 12:00  =>        NB-ANO-DMAX
+  2009-01-01 12:00  =>        NB-ANO-9999
+  2009-01-01 12:00  =>     TO
+  2009-01-01 12:00  =>        NB-ANO
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>     MOVE ALL '-'                        TO L-TOT.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE 'NB ANOMALIES              = ' TO L-TOT-LIB.
+  2009-01-01 12:00  =>     MOVE NB-ANO                         TO L-TOT-NB.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE 'DONT :'                       TO L-TOT.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-2000 NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADD  : ;0 <= AA <= _9  = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-2000                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-2020 NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADD  : > _9 APRES ADD  = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-2020                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-NUM2 NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADDZ : NON NUMERIQUE   = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-NUM2                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-NUM4 NOT = 0
+  2009-01-01 12:00  =>        MOVE '   ADDZ : NON NUMERIQUE   = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-NUM4                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-DMIN NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADDZ : INF DATE MIN    = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-DMIN                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-DMAX NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADDZ : SUP DATE MAX    = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-DMAX                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     IF NB-ANO-9999 NOT EQUAL ZEROES
+  2009-01-01 12:00  =>        MOVE '   ADDZ : 9999            = ' TO L-TOT-LIB
+  2009-01-01 12:00  =>        MOVE NB-ANO-9999                    TO L-TOT-NB
+  2009-01-01 12:00  =>        WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     MOVE ALL '-'                        TO L-TOT.
+  2009-01-01 12:00  =>     WRITE LIST-OUT-R FROM L-TOT.
+  2009-01-01 12:00  =>     CLOSE LIST-OUT.
+  2009-01-01 12:00  => FIN-TOT.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 0 <> C and 1 = COND  *> SSG-STUB [*PARAMOLD], [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOCOND = 0 + 1  *> SSG-STUB [*NOCOND]
+  2009-01-01 12:00  => Set NOZONECOND = 0
+  2009-01-01 12:00  => Set NOZONEADD  = 0
+  2009-01-01 12:00  => Set NOZONEADDL = 0
+  2009-01-01 12:00  => Set NOZONEADDZ = 0
+  2009-01-01 12:00  => Set NOZONERESU = 0
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = BORNES  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => If 1 and [PARAM,I,1,2,LEN$] > 0  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  =>    Set DATE_MIN = 1  *> SSG-STUB [PARAM,I,1,2]
+  2009-01-01 12:00  => Else
+  2009-01-01 12:00  =>    Set DATE_MIN = 1901
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  => If 1 and [PARAM,I,1,3,LEN$] > 0  *> SSG-STUB [PARAM,I,1,3]
+  2009-01-01 12:00  =>    Set DATE_MAX = 1  *> SSG-STUB [PARAM,I,1,3]
+  2009-01-01 12:00  => Else
+  2009-01-01 12:00  =>    Set DATE_MAX = 2019
+  2009-01-01 12:00  => EndIf
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = RESU  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONERESU = 0 + 1  *> SSG-STUB [*NOZONERESU]
+  2009-01-01 12:00  => TRT-RESU-0-0.  *> SSG-STUB [*NOCOND], [*NOZONERESU]
+  2009-01-01 12:00  =>     MOVE 1 TO MODIFIE.
+  2009-01-01 12:00  =>     MOVE WS-RESU-0-0  *> SSG-STUB [*NOCOND], [*NOZONERESU]
+  2009-01-01 12:00  =>                             TO RESU-0-0.  *> SSG-STUB [*NOCOND], //[*NOZONERESU]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDL  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDL = 0 + 1  *> SSG-STUB [*NOZONEADDL]
+  2009-01-01 12:00  => TRT-ADDL-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADDL]
+  2009-01-01 12:00  =>     IF (ADDL-0-0 IS NUMERIC) AND NOT  *> SSG-STUB [*NOCOND], [*NO//ZONEADDL]
+  2009-01-01 12:00  =>        (ADDL-0-0 EQUAL TO ZEROES)  *> SSG-STUB [*NOCOND], [*NOZON//EADDL]
+  2009-01-01 12:00  =>        MOVE 1 TO MODIFIE
+  2009-01-01 12:00  =>        ADD 1 TO ADDL-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADDL], //[PARAM,I,1,4]
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADD  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADD = 0 + 1  *> SSG-STUB [*NOZONEADD]
+  2009-01-01 12:00  => TRT-ADD-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     IF (ADD-0-0-1 = ';')  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     AND (ADD-0-0-2 IS NUMERIC)  *> SSG-STUB [*NOCOND], [*NOZONEAD//D]
+  2009-01-01 12:00  =>        MOVE 1 TO WS-ADD-0-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>        MOVE 0 TO WS-ADD-0-0-1  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>        MOVE ADD-0-0-2  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>           TO WS-ADD-0-0-2  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-2000
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>     ELSE IF (ADD-0-0-1 = '_')  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>     AND (ADD-0-0-2 IS NUMERIC)  *> SSG-STUB [*NOCOND], [*NOZONEAD//D]
+  2009-01-01 12:00  =>        MOVE 1 TO WS-ADD-0-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>        MOVE 1 TO WS-ADD-0-0-1  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>        MOVE ADD-0-0-2  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>           TO WS-ADD-0-0-2  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-2000
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>     ELSE IF (ADD-0-0 EQUAL TO SPACES)  *> SSG-STUB [*NOCOND], [*N//OZONEADD]
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     ELSE IF (ADD-0-0 IS NOT NUMERIC)  *> SSG-STUB [*NOCOND], [*NO//ZONEADD]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-NUM2
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     ELSE IF (ADD-0-0 EQUAL TO ZEROES)  *> SSG-STUB [*NOCOND], [*N//OZONEADD]
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>                           TO WS-ADD-0-0.  *> SSG-STUB [*NOCOND], //[*NOZONEADD]
+  2009-01-01 12:00  =>     MOVE 1 TO MODIFIE
+  2009-01-01 12:00  =>     ADD 1 TO WS-ADD-0-0  *> SSG-STUB [*NOCOND], [*NOZONEADD], [PA//RAM,I,1,3]
+  2009-01-01 12:00  =>     IF WS-ADD-0-0 > 119  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-2020
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADD-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>     IF WS-ADD-0-0 > 99 AND  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        WS-ADD-0-0 < 110  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        MOVE ';' TO ADD-0-0-1  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     ELSE IF  WS-ADD-0-0 > 109 AND  *> SSG-STUB [*NOCOND], [*NOZON//EADD]
+  2009-01-01 12:00  =>              WS-ADD-0-0 < 120  *> SSG-STUB [*NOCOND], [*NOZONEADD//]
+  2009-01-01 12:00  =>        MOVE '_' TO ADD-0-0-1  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE WS-ADD-0-0-1  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>           TO ADD-0-0-1.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     MOVE WS-ADD-0-0-2  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>        TO ADD-0-0-2.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  => FIN-TRT-ADD-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADD]
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = ADDZ  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set NOZONEADDZ = 0 + 1  *> SSG-STUB [*NOZONEADDZ]
+  2009-01-01 12:00  => TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADDZ]
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 EQUAL TO SPACES)  *> SSG-STUB [*NOCOND], [*NOZON//EADDZ]
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEAD//DZ]
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 IS NOT NUMERIC)  *> SSG-STUB [*NOCOND], [*NOZONE//ADDZ]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-NUM4
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEAD//DZ]
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 EQUAL TO ZEROES)  *> SSG-STUB [*NOCOND], [*NOZON//EADDZ]
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEAD//DZ]
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 EQUAL TO 9999)  *> SSG-STUB [*NOCOND], [*NOZONEA//DDZ]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-9999
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE
+  2009-01-01 12:00  =>        GO TO FIN-TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEAD//DZ]
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 LESS 1901)  *> SSG-STUB [*DATE_MIN], [*NOCOND], //[*NOZONEADDZ]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-DMIN
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE.
+  2009-01-01 12:00  =>     IF (ADDZ-0-0 GREATER 2019)  *> SSG-STUB [*DATE_MAX], [*NOCOND//], [*NOZONEADDZ]
+  2009-01-01 12:00  =>        ADD 1 TO NB-ANO-DMAX
+  2009-01-01 12:00  =>        MOVE 1 TO ANOMALIE.
+  2009-01-01 12:00  =>     MOVE 1 TO MODIFIE.
+  2009-01-01 12:00  =>     ADD 1 TO ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADDZ], [PA//RAM,I,1,3]
+  2009-01-01 12:00  => FIN-TRT-ADDZ-0-0.  *> SSG-STUB [*NOCOND], [*NOZONEADDZ]
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  => 1 = COND  *> SSG-STUB [PARAM,I,1,1]
+  2009-01-01 12:00  => Set PARAMOLD = 'C'
+  2009-01-01 12:00  =>se
+  2009-01-01 12:00  => Set PARAMOLD = ' '
+  2009-01-01 12:00  =>dIf
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => GEN-ERR-PAR.
+  2009-01-01 12:00  =>     DISPLAY 'GENERAL ERROR ***' UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-STATUS      = ' ERROR-STATUS    UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-NUM         = ' ERROR-NUM       UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-AREA        = ' ERROR-AREA      UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-RECORD      = ' ERROR-RECORD    UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-SET         = ' ERROR-SET       UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'I/O-ERROR-STATUS  = ' IO-ERROR-STATUS UPON PRINTER.
+  2009-01-01 12:00  =>     CLOSE ALL ON ERROR GO TO DEPART-WITH-ROLLBACK.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => DEPART-WITH-ROLLBACK.
+  2009-01-01 12:00  =>     DEPART WITH ROLLBACK.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => RBK-PAR.
+  2009-01-01 12:00  =>     DISPLAY '------------------------------'       UPON PRINER.
+  2009-01-01 12:00  =>     DISPLAY 'NB REC LUS         = ' REC-LU         UPON PRINER.
+  2009-01-01 12:00  =>     DISPLAY 'NB REC MODIFIES    = ' REC-MODIFIE    UPON PRINER.
+  2009-01-01 12:00  =>     DISPLAY 'NB REC ECRITS      = ' REC-ECRIT      UPON PRINER.
+  2009-01-01 12:00  =>     DISPLAY '------------------------------'       UPON PRINER.
+  2009-01-01 12:00  =>     DISPLAY 'ROLLBACK ERROR ***' UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-STATUS      = ' ERROR-STATUS    UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-NUM         = ' ERROR-NUM       UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-AREA        = ' ERROR-AREA      UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-RECORD      = ' ERROR-RECORD    UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'ERROR-SET         = ' ERROR-SET       UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'I/O-ERROR-STATUS  = ' IO-ERROR-STATUS UPON PRINTER.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => RK2.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  *   Set Debug to '' 
+  *   Create SGS: LIST 0  
+  *   Create SGS: LISTM 0 
+  *   Create SGS: LISTA 1   SSG-STUB [LISTM,1,1,1]
+  *Remove Variable v  
+  *   If not 1   SSG-STUB [DMS,1,1]
+  *      Display 'Carte DMS incompl?te'   
+  *      Display 'DMS UPDATE|RETRIEVAL'   
+  *      Abort
+  *   ElseIf 1 <> UPDATE and 1 <> RETRIEVAL   SSG-STUB [DMS,1,1,1]
+  *      Display 'Carte DMS incorrecte'   
+  *      Display 'DMS UPDATE|RETRIEVAL'   
+  *      Abort
+  *   ElseIf 1 <> UPDATE and [Info$,1,4,1] <> UNIQU   SSG-STUB [DM
+  *      Display 'User not authorized to update DMS'  
+  *      Display 'Please contact your SSG administrator'  
+  *   EndIf   
+        **************************
+  PROGRAM-ID. *-----------* /.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_ECLAT(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_ECLAT(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>   ***************************************************************//****
+  2009-01-01 12:00  =>***                     -- UGXB02 --                            ***
+  2009-01-01 12:00  =>***     PROGRAMME D'EXTRACTION DES ENREGISTREMENTS A ARCHIVER   ***
+  2009-01-01 12:00  =>***                     ------------                            ***
+  2009-01-01 12:00  =>***                                                             ***
+  2009-01-01 12:00  =>*******************************************************************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*******************************************************************
+  2009-01-01 12:00  =>* Type     : BATCH RDMS                      (BATCH, TRANSACTION) *
+  2009-01-01 12:00  =>* Analyste : VG                              (INITIALES)          *
+  2009-01-01 12:00  =>* Auteur   : GIUSEPPI VALERIE                (NOM, PRENOM)        *
+  2009-01-01 12:00  =>* Release  : 01                              (2 CHIFFRES)         *
+  2009-01-01 12:00  =>* Version  : 001                             (3 CHIFFRES)         *
+  2009-01-01 12:00  =>*******************************************************************
+  2009-01-01 12:00  =>*  Modification                                                   *
+  2009-01-01 12:00  =>*  Qui ?    Quand ?     Quoi ?                             Projet *
+  2009-01-01 12:00  =>* .PP     .29/03/1996.  CREATION                          .ARCHIV
+  2009-01-01 12:00  =>* .       .__/__/____.                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/____.                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/____.                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/____.                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/___ .                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/___ .                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/___ .                                    .       *
+  2009-01-01 12:00  =>* .       .__/__/___ .                                    .       *
+  2009-01-01 12:00  =>*******************************************************************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. UGXB02.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => DATE-WRITTEN. 29/03/96.
+  2009-01-01 12:00  => DATE-COMPILED.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNISYS-2200.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNISYS-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     PRINTER IS PRINER
+  2009-01-01 12:00  =>     DECIMAL-POINT IS COMMA
+  2009-01-01 12:00  =>     PRINTER IS PRINTER
+  2009-01-01 12:00  =>     CARD-READER    CARD-READER
+  2009-01-01 12:00  =>     CARD-PUNCH     CARD-PUNCH
+  2009-01-01 12:00  =>     CONSOLE         CONSOLE
+  2009-01-01 12:00  =>     CURRENCY    "F".
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT 1 ASSIGN TO DISC 1.  *> SSG-STUB [FILEKEY,1,1,1], [FIL//EKEY,1,1,1]
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>     SELECT 1 ASSIGN TO DISC 1.  *> SSG-STUB [TABLE,1,1,1], [TABLE//,1,1,1]
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>     SELECT FARCHIVE ASSIGN TO DISC 1.  *> SSG-STUB [FARCHIVE,1,1,//1]
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>     SELECT FENCOURS ASSIGN TO DISC 1.  *> SSG-STUB [FENCOURS,1,1,//1]
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  1  *> SSG-STUB [FILEKEY,1,1,1]
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>*    DECLARATION DE LA CHERCHEUSE GENERE PAR SSG
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>      LABEL RECORDS ARE STANDARD.
+  2009-01-01 12:00  => 01  ENR-CHER.
+  2009-01-01 12:00  =>     02  KEY1   PIC X(1).  *> SSG-STUB [key,a,1,2], [*a]
+  2009-01-01 12:00  => FD  1  *> SSG-STUB [table,1,1,1]
+  2009-01-01 12:00  =>*   DECLARATION DU FICHIER SEQUENTIEL CONTENANT LA TABLE UNLOADEE
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>      LABEL RECORDS ARE STANDARD.
+  2009-01-01 12:00  => 01  ENR-TAB.
+  2009-01-01 12:00  =>     02  KEY-T1   PIC X(1).  *> SSG-STUB [key,b,1,2], [*B]
+  2009-01-01 12:00  => FD  FARCHIVE
+  2009-01-01 12:00  =>     LABEL RECORDS ARE STANDARD.
+  2009-01-01 12:00  => 01  ENR-ARC.
+  2009-01-01 12:00  =>     02 NOM-TAB         PIC X(30).
+  2009-01-01 12:00  =>     02 DAT-ARC.
+  2009-01-01 12:00  =>          03 DAT-SS     PIC 9(2).
+  2009-01-01 12:00  =>          03 DAT-DAT.
+  2009-01-01 12:00  =>              04 DAT-AA PIC 9(2).
+  2009-01-01 12:00  =>              04 DAT-MM PIC 9(2).
+  2009-01-01 12:00  =>              04 DAT-JJ PIC 9(2).
+  2009-01-01 12:00  =>     02 CLES-TAB        PIC X(1).  *> SSG-STUB [filekey,1,1,2]
+  2009-01-01 12:00  =>     02 ENR             PIC X(1).  *> SSG-STUB [table,1,1,2]
+  2009-01-01 12:00  => FD  FENCOURS
+  2009-01-01 12:00  =>     LABEL RECORDS ARE STANDARD.
+  2009-01-01 12:00  => 01  ENR-ENC            PIC X(1).  *> SSG-STUB [table,1,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  SEQ-KEY.
+  2009-01-01 12:00  =>     02 S-KEY1   PIC X(1).  *> SSG-STUB [key,a,1,2], [*a]
+  2009-01-01 12:00  => 01  SEQ-KEY-T.
+  2009-01-01 12:00  =>     02 S-KEY-T1   PIC X(1).  *> SSG-STUB [key,a,1,2], [*a]
+  2009-01-01 12:00  => 77  EOF-FILE            PIC X VALUE "0".
+  2009-01-01 12:00  => 77  EOF-CHER            PIC X VALUE "0".
+  2009-01-01 12:00  => 77  CPT-CHER            PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 77  CPT-FILE            PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 77  CPT-ENC             PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 77  CPT-ARC             PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 01  CPT-CHER-ED         PIC Z(10).
+  2009-01-01 12:00  => 01  CPT-FILE-ED         PIC Z(10).
+  2009-01-01 12:00  => 01  CPT-ENC-ED          PIC Z(10).
+  2009-01-01 12:00  => 01  CPT-ARC-ED          PIC Z(10).
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  => 000-MAIN.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>     PERFORM 010-OUVERTURE
+  2009-01-01 12:00  =>     PERFORM 020-TRT-PRINC UNTIL (EOF-CHER = "1" AND
+  2009-01-01 12:00  =>                                 EOF-FILE = "1")
+  2009-01-01 12:00  =>     IF EOF-FILE = "0"
+  2009-01-01 12:00  =>        PERFORM LEC-FILE
+  2009-01-01 12:00  =>*       PERFORM 030-TRT-SEC UNTIL (EOF-FILE = "1")
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     PERFORM 090-CLOTURE
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>******FONCTIONS*******
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  => LEC-CHER.
+  2009-01-01 12:00  =>     READ 1 AT END MOVE "1" TO EOF-CHER  *> SSG-STUB [filekey,1,1,//1]
+  2009-01-01 12:00  =>     END-READ
+  2009-01-01 12:00  =>     IF EOF-CHER = "0"
+  2009-01-01 12:00  =>        ADD 1 TO CPT-CHER
+  2009-01-01 12:00  =>        MOVE KEY1 to S-KEY1  *> SSG-STUB [*a], [*a]
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE HIGH-VALUE TO SEQ-KEY
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => LEC-FILE.
+  2009-01-01 12:00  =>     READ 1 AT END MOVE "1" TO EOF-FILE  *> SSG-STUB [table,1,1,1]
+  2009-01-01 12:00  =>     END-READ
+  2009-01-01 12:00  =>     IF EOF-FILE = "0"
+  2009-01-01 12:00  =>        ADD 1 TO CPT-FILE
+  2009-01-01 12:00  =>        MOVE KEY-T1 to S-KEY-T1  *> SSG-STUB [*a], [*a]
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE HIGH-VALUE TO SEQ-KEY-T
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => 010-OUVERTURE.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>     OPEN INPUT 1 1  *> SSG-STUB [filekey,1,1,1], [table,1,1,1]
+  2009-01-01 12:00  =>          OUTPUT FARCHIVE FENCOURS
+  2009-01-01 12:00  =>     ACCEPT DAT-DAT FROM DATE
+  2009-01-01 12:00  =>     PERFORM LEC-CHER
+  2009-01-01 12:00  =>     PERFORM LEC-FILE.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => 020-TRT-PRINC.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>     IF SEQ-KEY = SEQ-KEY-T
+  2009-01-01 12:00  =>          MOVE "1" TO NOM-TAB  *> SSG-STUB [table,1,1,3]
+  2009-01-01 12:00  =>          IF DAT-AA < 28
+  2009-01-01 12:00  =>             MOVE 20 TO DAT-SS
+  2009-01-01 12:00  =>          ELSE
+  2009-01-01 12:00  =>             MOVE 19 TO DAT-SS
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>          MOVE SEQ-KEY TO CLES-TAB
+  2009-01-01 12:00  =>          MOVE ENR-TAB TO ENR
+  2009-01-01 12:00  =>          WRITE ENR-ARC
+  2009-01-01 12:00  =>          ADD 1 TO CPT-ARC
+  2009-01-01 12:00  =>          PERFORM LEC-CHER
+  2009-01-01 12:00  =>          PERFORM LEC-FILE
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>       IF SEQ-KEY > SEQ-KEY-T
+  2009-01-01 12:00  =>          MOVE ENR-TAB TO ENR-ENC
+  2009-01-01 12:00  =>          WRITE ENR-ENC
+  2009-01-01 12:00  =>          ADD 1 TO CPT-ENC
+  2009-01-01 12:00  =>          PERFORM LEC-FILE
+  2009-01-01 12:00  =>       ELSE
+  2009-01-01 12:00  =>*         ERREUR
+  2009-01-01 12:00  =>          PERFORM LEC-CHER
+  2009-01-01 12:00  =>       END-IF
+  2009-01-01 12:00  =>     END-IF.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => 030-TRT-SEC.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>     MOVE ENR-TAB TO ENR-ENC
+  2009-01-01 12:00  =>     WRITE ENR-ENC
+  2009-01-01 12:00  =>     ADD 1 TO CPT-ENC
+  2009-01-01 12:00  =>     PERFORM LEC-FILE.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => 090-CLOTURE.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>     CLOSE 1 1 FARCHIVE FENCOURS  *> SSG-STUB [filekey,1,1,1], [ta//ble,1,1,1]
+  2009-01-01 12:00  =>     MOVE CPT-ENC TO CPT-ENC-ED
+  2009-01-01 12:00  =>     MOVE CPT-ARC TO CPT-ARC-ED
+  2009-01-01 12:00  =>     MOVE CPT-CHER TO CPT-CHER-ED
+  2009-01-01 12:00  =>     MOVE CPT-FILE TO CPT-FILE-ED
+  2009-01-01 12:00  =>     DISPLAY   '  LES TOTAUX DE CONTROLE:' UPON PRINER
+  2009-01-01 12:00  =>     DISPLAY   '  ***********************' UPON PRINER
+  2009-01-01 12:00  =>     DISPLAY             ' Nombre de records lus dans le fichier'
+  2009-01-01 12:00  =>     ' 1 : ' CPT-CHER-ED UPON PRINER  *> SSG-STUB [filekey,1,1,1]
+  2009-01-01 12:00  =>     DISPLAY             ' Nombre de records lus dans le fichier'
+  2009-01-01 12:00  =>     ' 1 : ' CPT-FILE-ED UPON PRINER  *> SSG-STUB [table,1,1,1]
+  2009-01-01 12:00  =>     DISPLAY           ' Nombre de records {crit dans le fichier'
+  2009-01-01 12:00  =>     ' 1 : ' CPT-ARC-ED UPON PRINER  *> SSG-STUB [farchive,1,1,1]
+  2009-01-01 12:00  =>     DISPLAY           ' Nombre de records {crit dans le fichier'
+  2009-01-01 12:00  =>     ' 1 : ' CPT-ENC-ED UPON PRINER.  *> SSG-STUB [fencours,1,1,1]
+  2009-01-01 12:00  =>CACHE/0,EXTENDED/0,NO-SHIFT,NO-DEBUG,OPTIM,SOURCE;
+  2009-01-01 12:00  =>NO-UREP-XREF
+  2009-01-01 12:00  =>
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  *******************************************************************   
+  ***                     -- UGXB02 --                            ***   
+  ***     PROGRAMME D'EXTRACTION DES ENREGISTREMENTS A ARCHIVER   ***   
+  ***                     ------------                            ***   
+  ***                                                             ***   
+  *******************************************************************   
+  *******************************************************************   
+  * Type     : BATCH RDMS                      (BATCH, TRANSACTION) *   
+  * Analyste : VG                              (INITIALES)          *   
+  * Auteur   : GIUSEPPI VALERIE                (NOM, PRENOM)        *   
+  * Release  : 01                              (2 CHIFFRES)         *   
+  * Version  : 001                             (3 CHIFFRES)         *   
+  *******************************************************************   
+  *  Modification                                                   *   
+  *  Qui ?    Quand ?     Quoi ?                             Projet *   
+  * .PP     .29/03/1996.  CREATION                          .ARCHIV 
+  * .       .__/__/____.                                    .       *   
+  * .       .__/__/____.                                    .       *   
+  * .       .__/__/____.                                    .       *   
+  * .       .__/__/____.                                    .       *   
+  * .       .__/__/___ .                                    .       *   
+  * .       .__/__/___ .                                    .       *   
+  * .       .__/__/___ .                                    .       *   
+  * .       .__/__/___ .                                    .       *   
+  *******************************************************************   
+  PROGRAM-ID. .
+  DATE-COMPILED. 29/03/96.
+  ENVIRONMENT. 
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_LECTIS_MULT(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_LECTIS_MULT(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. LECTIS.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY 12/05/82.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     DECIMAL-POINT IS COMMA
+  2009-01-01 12:00  =>         PAGE IS SAUT.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT FICHIN ASSIGN TO DISC ECL-DISQ  *> SSG-STUB [INPUT,1,1//,1]
+  2009-01-01 12:00  =>     RESERVE 10 AREAS
+  2009-01-01 12:00  =>         ACCESS MODE IS DYNAMIC
+  2009-01-01 12:00  =>              RECORD KEY IS SYMK
+  2009-01-01 12:00  =>     ALTERNATE RECORD KEY IS SYMK1 WITH DUPLICATES
+  2009-01-01 12:00  =>              ORGANIZATION INDEXED.
+  2009-01-01 12:00  =>     SELECT IMP ASSIGN TO PRINTER.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  FICHIN
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     RECORD CONTAINS 20 CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     DATA RECORD IS ZFICH1.
+  2009-01-01 12:00  => 01  ZFICH1.
+  2009-01-01 12:00  => FD  IMP
+  2009-01-01 12:00  =>     LABEL RECORD OMITTED
+  2009-01-01 12:00  =>     LINAGE IS 63
+  2009-01-01 12:00  =>     AT TOP 6
+  2009-01-01 12:00  =>     AT BOTTOM 3
+  2009-01-01 12:00  =>     DATA RECORD ZPRINT.
+  2009-01-01 12:00  => 01  ZPRINT             PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  WREC.
+  2009-01-01 12:00  =>     02 FILLER  PIC X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  TIT.
+  2009-01-01 12:00  =>     03  FILLER      PIC X(5) VALUE '***  '.
+  2009-01-01 12:00  =>     03  FILLER        PIC X(14) VALUE 'RECORD NUMERO '.
+  2009-01-01 12:00  =>     03  FILCO     PIC Z.ZZZ.ZZZ.
+  2009-01-01 12:00  =>     03  FILLER      PIC X(5) VALUE '  ***'.
+  2009-01-01 12:00  => 01  ZPR USAGE DISPLAY-1 VALUE ALL SPACES.
+  2009-01-01 12:00  =>     03  ZP1            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP2            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP3            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP4            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP5            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP6            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP7            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP8            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP9            PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP10           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP11           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP12           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP13           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP14           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP15           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP16           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP17           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP18           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP19           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03  ZP20           PIC X(100) USAGE DISPLAY-1.
+  2009-01-01 12:00  => 01  CTRLI PIC 9(10) COMP.
+  2009-01-01 12:00  => 01  CTR                PIC 9(10) COMP.
+  2009-01-01 12:00  => 01  INDICATIF.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => OUVERT.
+  2009-01-01 12:00  =>     OPEN OUTPUT IMP.
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP1 BEFORE PAGE.
+  2009-01-01 12:00  =>     OPEN INPUT FICHIN.
+  2009-01-01 12:00  => LECTURE.
+  2009-01-01 12:00  =>     READ FICHIN NEXT RECORD INTO WREC AT END GO TO FIN.
+  2009-01-01 12:00  =>     ADD 1 TO CTR.
+  2009-01-01 12:00  =>        IF
+  2009-01-01 12:00  =>     1  *> SSG-STUB [COND,1,I,1]
+  2009-01-01 12:00  =>              NEXT SENTENCE
+  2009-01-01 12:00  =>                                ELSE GO TO FIN.
+  2009-01-01 12:00  => SUITE.
+  2009-01-01 12:00  =>     MOVE CTR TO FILCO.
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM TIT BEFORE 1.
+  2009-01-01 12:00  =>     MOVE WREC TO ZPR.
+  2009-01-01 12:00  =>     PERFORM IMPRES THRU FIIMPRES.
+  2009-01-01 12:00  =>     GO TO LECTURE.
+  2009-01-01 12:00  => FIN.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZPRINT.
+  2009-01-01 12:00  =>     WRITE ZPRINT BEFORE SAUT.
+  2009-01-01 12:00  =>     DISPLAY '** FIN DU TRAVAIL **' UPON PRINTER.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     DISPLAY 'NOMBRE DE RECORDS LUS ** ' CTR UPON PRINTER.
+  2009-01-01 12:00  =>     CLOSE FICHIN IMP.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => IMPRES.
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP1 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP2 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP3 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP4 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP5 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP6 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP7 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP8 BEFORE 1.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP9 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP10 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP11 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP12 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP13 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP14 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP15 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP16 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP17 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP18 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP19 BEFORE 1.
+  2009-01-01 12:00  =>     ADD 100 TO CTRLI.
+  2009-01-01 12:00  =>     IF 20 = CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     IF 20 < CTRLI GO TO RAZ.  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     WRITE ZPRINT FROM ZP20 BEFORE 1.
+  2009-01-01 12:00  => RAZ.
+  2009-01-01 12:00  =>     MOVE  SPACES TO ZP1 ZP2 ZP3 ZP4 ZP5 ZP6 ZP7 ZP8.
+  2009-01-01 12:00  =>     MOVE  SPACES TO ZP9 ZP10 ZP11 ZP12 ZP13 ZP14 ZP15 ZP16.
+  2009-01-01 12:00  =>     MOVE  SPACES TO ZP17 ZP18 ZP19 ZP20.
+  2009-01-01 12:00  =>       MOVE ZEROES TO CTRLI.
+  2009-01-01 12:00  =>     MOVE ALL '*' TO ZPRINT.
+  2009-01-01 12:00  =>     WRITE ZPRINT BEFORE 1.
+  2009-01-01 12:00  => FIIMPRES.
+  2009-01-01 12:00  =>     EXIT.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY 12/05/82.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_LOADIS_MULT-NODUP(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_LOADIS_MULT-NODUP(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. LOADIS-ASCII.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY 13/05/82.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  BDE1  ASSIGN TO  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>         DISC ECL-DISQ.  *> SSG-STUB [INPUT,1,1,1]
+  2009-01-01 12:00  =>     SELECT DISQ ASSIGN TO DISC  "ECL-BDE1"  *> SSG-STUB [OUTPUT,1//,1,1]
+  2009-01-01 12:00  =>     RESERVE 20 AREAS
+  2009-01-01 12:00  =>     ORGANIZATION IS INDEXED
+  2009-01-01 12:00  =>      ACCESS  MODE IS DYNAMIC RECORD KEY IS CLEF
+  2009-01-01 12:00  =>     ALTERNATE RECORD KEY IS CLEG.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  BDE1  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD
+  2009-01-01 12:00  =>       BLOCK CONTAINS 1   RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     RECORD CONTAINS 20 CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     DATA RECORD IS  Z1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  => 01  Z1   PIC  X(20).  *> SSG-STUB [*I], [INPUT,1,1,2]
+  2009-01-01 12:00  => FD  DISQ   LABEL RECORD STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>     RECORD  CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>       DATA RECORD IS ZDISQ CLEFA.
+  2009-01-01 12:00  => 01  ZDISQ  PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => 01  CLEFA.
+  2009-01-01 12:00  =>     02 CLEF PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>     02 CLEG PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  FF  PIC  9(10)  COMP  VALUE 1.
+  2009-01-01 12:00  => 77  CTRIN  PIC  9(10)  COMP  VALUE  0.
+  2009-01-01 12:00  => 01  WREC.
+  2009-01-01 12:00  =>     02 FILLER  PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => 01  WREC1     REDEFINES  WREC.
+  2009-01-01 12:00  =>     02 KEYA PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>     02 KEYB PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT  BDE1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     OPEN  OUTPUT  DISQ.
+  2009-01-01 12:00  => LECT.
+  2009-01-01 12:00  =>     GO TO LECT1 FINB  DEPENDING  ON FF.
+  2009-01-01 12:00  => LECT1.
+  2009-01-01 12:00  =>     MOVE SPACES TO Z1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     READ  BDE1  INTO  WREC  AT END ADD 1 TO FF  GO TO LECT.
+  2009-01-01 12:00  =>     GO TO CONT.
+  2009-01-01 12:00  => CONT.
+  2009-01-01 12:00  =>     MOVE KEYA     TO  CLEF.
+  2009-01-01 12:00  =>     MOVE KEYB     TO  CLEG.
+  2009-01-01 12:00  =>     ADD  1  TO  CTRIN.
+  2009-01-01 12:00  =>     WRITE ZDISQ FROM WREC INVALID KEY GO TO  ERRDISQ.
+  2009-01-01 12:00  =>     MOVE SPACES TO WREC WREC1 ZDISQ.
+  2009-01-01 12:00  =>     GO TO LECT.
+  2009-01-01 12:00  => FINB.
+  2009-01-01 12:00  =>     DISPLAY 'NB.RECORDS ECRITS'  CTRIN  UPON PRINTER.
+  2009-01-01 12:00  =>     CLOSE  DISQ.
+  2009-01-01 12:00  =>     CLOSE  BDE1.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => ERRDISQ.
+  2009-01-01 12:00  =>     DISPLAY 'IS.ERROR'  CLEF  UPON  PRINTER.
+  2009-01-01 12:00  =>     ENTER ASM 'ABORT'.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY 13/05/82.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_MONTANT_SIGNE(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_MONTANT_SIGNE(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>    IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. MONTANT.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  FILEIN  ASSIGN TO DISC ECL-DISQ.  *> SSG-STUB [INPUT,//1,1,1]
+  2009-01-01 12:00  =>     SELECT  FILEOUT ASSIGN TO DISC "ECL-BDE1".  *> SSG-STUB [OUTP//UT,1,1,1]
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  FILEIN
+  2009-01-01 12:00  =>     LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     RECORD CONTAINS 20  CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>     DATA RECORD IS REC-IN.
+  2009-01-01 12:00  => 01  REC-IN             PIC X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => FD  FILEOUT
+  2009-01-01 12:00  =>     LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>     RECORD CONTAINS 80  CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>     DATA RECORD IS REC-OUT.
+  2009-01-01 12:00  => 01  REC-OUT            PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  WS-IN  PIC X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  WS-IN1 REDEFINES WS-IN.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>         03 FILLER    PIC X(1).  *> SSG-STUB [*FILLUN]
+  2009-01-01 12:00  =>         03 MONTANT1  PIC S9(9).  *> SSG-STUB [*I], [MONTANT,I,1,2//]
+  2009-01-01 12:00  =>         03 FILLER    PIC X(1).  *> SSG-STUB [*FILLDEU]
+  2009-01-01 12:00  => 01  WS-OUT  PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => 01  WS-OUT1 REDEFINES WS-OUT.  *> SSG-STUB [*I]
+  2009-01-01 12:00  =>         03 FILLER    PIC X(1).  *> SSG-STUB [*FILLUN]
+  2009-01-01 12:00  =>         03 MONTANT1  PIC S9(9).  *> SSG-STUB [*I], [MONTANT,I,1,2//]
+  2009-01-01 12:00  =>         03 FILLER    PIC X(1).  *> SSG-STUB [*FILLDEU]
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT FILEIN
+  2009-01-01 12:00  =>          OUTPUT FILEOUT.
+  2009-01-01 12:00  => LECTURE.
+  2009-01-01 12:00  =>     READ FILEIN INTO WS-IN AT END GO TO FIN.
+  2009-01-01 12:00  =>     MOVE WS-IN TO WS-OUT.
+  2009-01-01 12:00  =>     COMPUTE MONTANT1 OF WS-OUT1 = MONTANT1 OF WS-IN1 * +1  *> SSG//-STUB [*I], [*I], [*I], [*I]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     WRITE REC-OUT FROM WS-OUT.
+  2009-01-01 12:00  =>     GO TO LECTURE.
+  2009-01-01 12:00  => FIN.
+  2009-01-01 12:00  =>     CLOSE FILEIN FILEOUT.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_SCAN-VAR_ASCII(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_SCAN-VAR_ASCII(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. SCAN.
+  2009-01-01 12:00  => AUTHOR.     HANSE.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER.  UNISYS-2200.
+  2009-01-01 12:00  => OBJECT-COMPUTER.  UNISYS-2200.
+  2009-01-01 12:00  => SPECIAL-NAMES.  PRINTER IS LISTE.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  TAPEIN  ASSIGN
+  2009-01-01 12:00  =>                        DISC ECL-DISQ.  *> SSG-STUB [INPUT,1,1,1]
+  2009-01-01 12:00  =>     SELECT  PRT  ASSIGN  TO  PRINTER.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  TAPEIN
+  2009-01-01 12:00  =>             LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>F 1 > 3  *> SSG-STUB [INPUT,1,1]
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 80  RECORDS  *> SSG-STUB [INPUT,1,1,4]
+  2009-01-01 12:00  =>LSE
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>ND
+  2009-01-01 12:00  =>     RECORD CONTAINS 20  CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  ZIN                PIC X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.
+  2009-01-01 12:00  => 01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  ZONE-LECTURE PIC X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  REC-AREA.
+  2009-01-01 12:00  =>     03  PRINT-LINE-1             PIC X(100).  *> SSG-STUB [*A]
+  2009-01-01 12:00  => 01  SKIP                         PIC  9(10)  COMP VALUE 0.
+  2009-01-01 12:00  => 01  LINE-CNT            PIC 9(10) COMP    VALUE 66.
+  2009-01-01 12:00  => 01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.
+  2009-01-01 12:00  => 01  CTRLU                        PIC  9(10)  COMP VALUE 0.
+  2009-01-01 12:00  => 01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 01  H-LINE   USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  =>     03 FILLER    PIC X(10) VALUE '1234567890'.
+  2009-01-01 12:00  => 01  CT-LINE                               USAGE  DISPLAY-1.
+  2009-01-01 12:00  =>     03 FILLER       PIC XX  VALUE '**'.
+  2009-01-01 12:00  =>     03 CT-CT        PIC ZZZZ9.
+  2009-01-01 12:00  =>     03 FILLER        PIC XX   VALUE '**'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(122) VALUE SPACES.
+  2009-01-01 12:00  => 01  F-LINE  USAGE DISPLAY-1.
+  2009-01-01 12:00  =>     03 FILLER        PIC XX  VALUE '**'.
+  2009-01-01 12:00  =>     03 F-CT        PIC ZZZZ9.
+  2009-01-01 12:00  =>     03 FILLER         PIC XX   VALUE '**'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '1.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '2.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '3.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '4.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '5.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '6.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '7.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '8.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '9.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '0.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '1.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '2.........'.
+  2009-01-01 12:00  =>     03 FILLER          PIC X(10) VALUE '3..'.
+  2009-01-01 12:00  => 01  FIVE-CT PIC 9(10) COMP VALUE 6.
+  2009-01-01 12:00  => 01  M-LINE                                USAGE  DISPLAY-1.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(20)
+  2009-01-01 12:00  =>         VALUE '** END SCAN **      '.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(37)
+  2009-01-01 12:00  =>         VALUE  'RECORDS READ FROM ECL-DISQ = '.  *> SSG-STUB [INP//UT,1,1,1]
+  2009-01-01 12:00  =>     03  M-CT           PIC Z(10)9.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(19)
+  2009-01-01 12:00  =>         VALUE  ' RECORD MATCHING = '.
+  2009-01-01 12:00  =>     03  FN-CT          PIC Z(10)9.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => OPEN-FILES SECTION.
+  2009-01-01 12:00  => FIRST-READ.
+  2009-01-01 12:00  =>     OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.
+  2009-01-01 12:00  => LR.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZIN.
+  2009-01-01 12:00  =>     READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT.
+  2009-01-01 12:00  =>     ADD 1 TO CTRLU.
+  2009-01-01 12:00  => PLUS-UN.
+  2009-01-01 12:00  =>     ADD 1 TO REC-IN-CT.
+  2009-01-01 12:00  => SUITE-RECHERCHE.
+  2009-01-01 12:00  => FOUND-REC.
+  2009-01-01 12:00  =>     ADD  1  TO  REC-FOUND-CT.
+  2009-01-01 12:00  =>     MOVE ZERO  TO  LINE-CNT.
+  2009-01-01 12:00  =>     ADD 1 TO FIVE-CT.
+  2009-01-01 12:00  =>     IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT
+  2009-01-01 12:00  =>       WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT
+  2009-01-01 12:00  =>      ELSE   MOVE REC-IN-CT TO CT-CT
+  2009-01-01 12:00  =>       WRITE PRT-LINE FROM CT-LINE AFTER 1.
+  2009-01-01 12:00  =>     ADD 1 TO LINE-CNT.
+  2009-01-01 12:00  =>     MOVE  1  TO  SKIP.
+  2009-01-01 12:00  =>     WRITE  PRT-LINE  FROM  PRINT-LINE-1  AFTER ADVANCING SKIP.  *//> SSG-STUB [*A]
+  2009-01-01 12:00  =>     ADD 1 TO LINE-CNT.
+  2009-01-01 12:00  =>     MOVE 1 TO SKIP.
+  2009-01-01 12:00  =>     MOVE SPACES  TO REC-AREA.
+  2009-01-01 12:00  =>     MOVE  1  TO  SKIP.     GO  TO  LR.
+  2009-01-01 12:00  => END-OUT.
+  2009-01-01 12:00  =>     MOVE  REC-IN-CT  TO  M-CT.
+  2009-01-01 12:00  =>     MOVE REC-FOUND-CT  TO  FN-CT.
+  2009-01-01 12:00  =>     WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.
+  2009-01-01 12:00  =>     CLOSE  TAPEIN  PRT.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  =>L &
+  2009-01-01 12:00  =>F ECL-DISQ . &  *> SSG-STUB [INPUT,1,1,1]
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. HANSE.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_TAPELD_DISTRIB(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_TAPELD_DISTRIB(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. 'CFH-COPY'.
+  2009-01-01 12:00  => AUTHOR. MICHEL.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     DECIMAL-POINT IS COMMA.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  TAPEIN  ASSIGN  TO  DISC ECL-DISQ.  *> SSG-STUB [INPU//T,1,1,1]
+  2009-01-01 12:00  =>     SELECT  TAPEOUT  ASSIGN  TO  DISC "ECL-BDE1".  *> SSG-STUB [O//UTPUT,1,1,1]
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  TAPEIN
+  2009-01-01 12:00  =>     LABEL  RECORD  STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1  RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD RECIN.
+  2009-01-01 12:00  => 01  RECIN   PIC  X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => FD  TAPEOUT
+  2009-01-01 12:00  =>     LABEL  RECORD STANDARD
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 1  RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>     DATA RECORD RECOUT.
+  2009-01-01 12:00  => 01  RECOUT   PIC   X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  NB-LUS   PIC  S9(10)  COMP  VALUE 0.
+  2009-01-01 12:00  => 77  LNCTR  PIC  S9(2)  VALUE 58.
+  2009-01-01 12:00  => 01  COPY-LIMIT         PIC 9(10) VALUE 1.  *> SSG-STUB [MAXCOPY,1//,1,1]
+  2009-01-01 12:00  => 01   SWITCHES.
+  2009-01-01 12:00  =>     03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT TAPEIN.
+  2009-01-01 12:00  =>     OPEN  OUTPUT  TAPEOUT.
+  2009-01-01 12:00  => LECT.
+  2009-01-01 12:00  =>     MOVE SPACES TO RECOUT.
+  2009-01-01 12:00  =>     READ  TAPEIN  AT  END  GO TO  FINW.
+  2009-01-01 12:00  =>     MOVE RECIN TO RECOUT.
+  2009-01-01 12:00  =>     ADD 1  TO NB-LUS.
+  2009-01-01 12:00  =>     ADD 1  TO LNCTR.
+  2009-01-01 12:00  =>     WRITE RECOUT AFTER 2.
+  2009-01-01 12:00  =>     IF  NB-LUS  NOT <  COPY-LIMIT  GO TO FINW.
+  2009-01-01 12:00  =>     GO TO LECT.
+  2009-01-01 12:00  => FINW.
+  2009-01-01 12:00  =>     DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.
+  2009-01-01 12:00  =>     DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.
+  2009-01-01 12:00  =>     CLOSE  TAPEIN.
+  2009-01-01 12:00  =>     CLOSE  TAPEOUT.
+  2009-01-01 12:00  =>     DISPLAY  REC-SKIPPED  UPON  PRINTER.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. MICHEL.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_TRI_ASCII(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_TRI_ASCII(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>    IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID.  SORT-"ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,1]
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1106.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  TAPE-1  ASSIGN  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>                                  DISC 1.  *> SSG-STUB [INPUT,1,A,//1]
+  2009-01-01 12:00  =>     SELECT  TAPEOUT  ASSIGN
+  2009-01-01 12:00  =>                        DISC "ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,//1]
+  2009-01-01 12:00  =>     SELECT SORTFILE ASSIGN TO MASS-STORAGE XA.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  TAPE-1  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD
+  2009-01-01 12:00  =>             BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [INPUT,1,A,3]
+  2009-01-01 12:00  =>             DATA RECORD IS REC-IN-1.  *> SSG-STUB [*A]
+  2009-01-01 12:00  => 01  REC-IN-1            PIC X(1).  *> SSG-STUB [INPUT,1,A,2], [*A//]
+  2009-01-01 12:00  => FD  TAPEOUT  LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>              RECORD CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1//,1,2]
+  2009-01-01 12:00  =>              DATA RECORD IS REC-OUT.
+  2009-01-01 12:00  => 01  REC-OUT           PIC X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => SD  SORTFILE
+  2009-01-01 12:00  =>              DATA RECORD IS SORT-REC.
+  2009-01-01 12:00  => 01  SORT-REC   PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  => 01  SORT-R1.  *> SSG-STUB [*COL]
+  2009-01-01 12:00  =>     03  SORT-KEY-1     PIC X(1).  *> SSG-STUB [KEYS,1,COL,2], [*C//OL]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  INPUT-CT-MESS-1.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     03  FILLER         PIC X(24)
+  2009-01-01 12:00  =>              VALUE  'INPUT RECORD COUNT FROM '.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(12)
+  2009-01-01 12:00  =>              VALUE  '1'.  *> SSG-STUB [INPUT,1,A,1]
+  2009-01-01 12:00  =>     03  INPUT-CT-1  PIC Z(11)9.  *> SSG-STUB [*A]
+  2009-01-01 12:00  => 01  IN-CT-1         PIC  9(10)  COMP    VALUE ZERO.  *> SSG-STUB //[*A]
+  2009-01-01 12:00  => 01  OUTPUT-CT-MESS.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(24)
+  2009-01-01 12:00  =>              VALUE  'OUTPUT RECORD COUNT TO  '.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(12)
+  2009-01-01 12:00  =>              VALUE  '"ECL-BDE1" '.  *> SSG-STUB [OUTPUT,1,1,1]
+  2009-01-01 12:00  =>     03  OUTPUT-CT      PIC  Z(11)9.
+  2009-01-01 12:00  => 01  OUT-CT             PIC  9(10)   COMP   VALUE ZERO.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => SORT-START SECTION.
+  2009-01-01 12:00  => SORTING.
+  2009-01-01 12:00  =>     OPEN INPUT  TAPE-1.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     OPEN OUTPUT TAPEOUT.
+  2009-01-01 12:00  =>     SORT SORTFILE ON ASCENDING KEY
+  2009-01-01 12:00  =>                    SORT-KEY-1  *> SSG-STUB [*SK]
+  2009-01-01 12:00  =>                        INPUT PROCEDURE  IS INP
+  2009-01-01 12:00  =>                        OUTPUT PROCEDURE IS OUTP.
+  2009-01-01 12:00  =>     GO  TO  CLOSE-FILES.
+  2009-01-01 12:00  => INP SECTION.
+  2009-01-01 12:00  => INPUT-PROC-1.  *> SSG-STUB [*B]
+  2009-01-01 12:00  =>     READ   TAPE-1   INTO  SORT-REC  *> SSG-STUB [*B]
+  2009-01-01 12:00  =>              AT END GO TO  CLOSE-1.  *> SSG-STUB [*B]
+  2009-01-01 12:00  =>     ADD  1   TO  IN-CT-1.  *> SSG-STUB [*B]
+  2009-01-01 12:00  =>     RELEASE  SORT-REC.                GO TO INPUT-PROC-1.  *> SSG//-STUB [*B]
+  2009-01-01 12:00  => CLOSE-1.   CLOSE  TAPE-1.  *> SSG-STUB [*B], [*B]
+  2009-01-01 12:00  => INP-EXIT.    EXIT.
+  2009-01-01 12:00  => OUTP SECTION.
+  2009-01-01 12:00  => OUTPUT-PROC.
+  2009-01-01 12:00  =>     RETURN SORTFILE              AT END GO TO OUTP-EXIT.
+  2009-01-01 12:00  =>     ADD  1  TO  OUT-CT.
+  2009-01-01 12:00  =>     WRITE  REC-OUT  FROM SORT-REC.         GO TO OUTPUT-PROC.
+  2009-01-01 12:00  => OUTP-EXIT.   EXIT.
+  2009-01-01 12:00  => CLOSE-FILES  SECTION.
+  2009-01-01 12:00  => ENDING-RUN.
+  2009-01-01 12:00  =>     MOVE  IN-CT-1   TO  INPUT-CT-1.  *> SSG-STUB [*A], [*A]
+  2009-01-01 12:00  =>     DISPLAY  INPUT-CT-MESS-1  UPON PRINTER.  *> SSG-STUB [*A]
+  2009-01-01 12:00  =>     MOVE  OUT-CT  TO  OUTPUT-CT.
+  2009-01-01 12:00  =>     DISPLAY  OUTPUT-CT-MESS  UPON  PRINTER.
+  2009-01-01 12:00  =>     CLOSE TAPEOUT.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_UNLOADIS_MULT(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_UNLOADIS_MULT(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. UNLOAD-ASCII.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY 13/05/82.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT BDE  ASSIGN  TO
+  2009-01-01 12:00  =>         DISC "ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,1]
+  2009-01-01 12:00  =>     SELECT DISQ ASSIGN  TO  DISC  ECL-DISQ  *> SSG-STUB [INPUT,1,//1,1]
+  2009-01-01 12:00  =>     RESERVE 20 AREAS
+  2009-01-01 12:00  =>        ORGANIZATION IS INDEXED
+  2009-01-01 12:00  =>        ACCESS MODE IS SEQUENTIAL RECORD KEY IS  CLEF
+  2009-01-01 12:00  =>     ALTERNATE RECORD KEY IS CLEG WITH DUPLICATES.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  BDE  BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>         RECORD CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>          LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>          DATA RECORD IS  ZBDE.
+  2009-01-01 12:00  => 01  ZBDE    PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FD  DISQ   LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>         RECORD CONTAINS 20 CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>            DATA RECORD  IS ZDISQ.
+  2009-01-01 12:00  => 01  ZDISQ.
+  2009-01-01 12:00  =>     02 CLEF PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>     02 CLEG PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  CTR     PIC  9(10)  COMP  VALUE  0.
+  2009-01-01 12:00  => 77  REP     PIC  X.
+  2009-01-01 12:00  => 77  MAXBDE  PIC  9(10)   COMP  VALUE   99999999.
+  2009-01-01 12:00  => 01  MES1.
+  2009-01-01 12:00  =>     02 FILLER  PIC X(19) VALUE 'NB.ARTICLES ECRITS='.
+  2009-01-01 12:00  =>     02 CTR-1   PIC 9(7).
+  2009-01-01 12:00  => 01  ZBUF.
+  2009-01-01 12:00  =>        06 FILLER  PIC  X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  ZBUF1      REDEFINES  ZBUF.
+  2009-01-01 12:00  =>         02 RKEY1 PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>         02 RKEY2 PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEB.
+  2009-01-01 12:00  =>     OPEN OUTPUT  BDE.
+  2009-01-01 12:00  =>     OPEN  INPUT   DISQ.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZBUF.
+  2009-01-01 12:00  =>     MOVE ALL ' ' TO CLEF.
+  2009-01-01 12:00  => DEBF.
+  2009-01-01 12:00  =>     READ DISQ INTO ZBUF AT END GO TO FBDE.
+  2009-01-01 12:00  =>     ADD  1  TO  CTR.
+  2009-01-01 12:00  =>     WRITE  ZBDE  FROM ZBUF.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZBUF.
+  2009-01-01 12:00  =>     MOVE  CTR  TO  CTR-1.
+  2009-01-01 12:00  =>     GO TO DEBF.
+  2009-01-01 12:00  => CLOS.
+  2009-01-01 12:00  =>     CLOSE  BDE.
+  2009-01-01 12:00  =>     CLOSE  DISQ.
+  2009-01-01 12:00  =>     STOP  RUN.
+  2009-01-01 12:00  => FBDE.
+  2009-01-01 12:00  =>     DISPLAY  'FIN DE FICHIER' UPON  CONSOLE.
+  2009-01-01 12:00  =>     MOVE   CTR   TO CTR-1.
+  2009-01-01 12:00  =>     DISPLAY  MES1   UPON  CONSOLE.
+  2009-01-01 12:00  =>     GO TO  CLOS.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY 13/05/82.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P),COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P)
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. UNLOAD-ASCII.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY 13/05/82.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT BDE  ASSIGN  TO
+  2009-01-01 12:00  =>         DISC "ECL-BDE1".  *> SSG-STUB [OUTPUT,1,1,1]
+  2009-01-01 12:00  =>     SELECT DISQ ASSIGN  TO  DISC  ECL-DISQ  *> SSG-STUB [INPUT,1,//1,1]
+  2009-01-01 12:00  =>     RESERVE 20 AREAS
+  2009-01-01 12:00  =>        ORGANIZATION IS INDEXED
+  2009-01-01 12:00  =>        ACCESS MODE IS SEQUENTIAL RECORD KEY IS  CLEF
+  2009-01-01 12:00  =>     ALTERNATE RECORD KEY IS CLEG.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  BDE  BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [OUTPUT,1,1,3]
+  2009-01-01 12:00  =>         RECORD CONTAINS 80 CHARACTERS  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>          LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>          DATA RECORD IS  ZBDE.
+  2009-01-01 12:00  => 01  ZBDE    PIC  X(80).  *> SSG-STUB [OUTPUT,1,1,2]
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FD  DISQ   LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 1 RECORDS  *> SSG-STUB [INPUT,1,1,3]
+  2009-01-01 12:00  =>         RECORD CONTAINS 20 CHARACTERS  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  =>            DATA RECORD  IS ZDISQ.
+  2009-01-01 12:00  => 01  ZDISQ.
+  2009-01-01 12:00  =>     02 CLEF PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>     02 CLEG PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  CTR     PIC  9(10)  COMP  VALUE  0.
+  2009-01-01 12:00  => 77  REP     PIC  X.
+  2009-01-01 12:00  => 77  MAXBDE  PIC  9(10)   COMP  VALUE   99999999.
+  2009-01-01 12:00  => 01  MES1.
+  2009-01-01 12:00  =>     02 FILLER  PIC X(19) VALUE 'NB.ARTICLES ECRITS='.
+  2009-01-01 12:00  =>     02 CTR-1   PIC 9(7).
+  2009-01-01 12:00  => 01  ZBUF.
+  2009-01-01 12:00  =>        06 FILLER  PIC  X(20).  *> SSG-STUB [INPUT,1,1,2]
+  2009-01-01 12:00  => 01  ZBUF1      REDEFINES  ZBUF.
+  2009-01-01 12:00  =>         02 RKEY1 PIC X(8).  *> SSG-STUB [KEYIS,1,1,2]
+  2009-01-01 12:00  =>         02 RKEY2 PIC X(12).  *> SSG-STUB [KEYIS,2,1,2]
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEB.
+  2009-01-01 12:00  =>     OPEN OUTPUT  BDE.
+  2009-01-01 12:00  =>     OPEN  INPUT   DISQ.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZBUF.
+  2009-01-01 12:00  =>     MOVE ALL ' ' TO CLEF.
+  2009-01-01 12:00  => DEBF.
+  2009-01-01 12:00  =>     READ DISQ INTO ZBUF AT END GO TO FBDE.
+  2009-01-01 12:00  =>     ADD  1  TO  CTR.
+  2009-01-01 12:00  =>     WRITE  ZBDE  FROM ZBUF.
+  2009-01-01 12:00  =>     MOVE SPACES TO ZBUF.
+  2009-01-01 12:00  =>     MOVE  CTR  TO  CTR-1.
+  2009-01-01 12:00  =>     GO TO DEBF.
+  2009-01-01 12:00  => CLOS.
+  2009-01-01 12:00  =>     CLOSE  BDE.
+  2009-01-01 12:00  =>     CLOSE  DISQ.
+  2009-01-01 12:00  =>     STOP  RUN.
+  2009-01-01 12:00  => FBDE.
+  2009-01-01 12:00  =>     DISPLAY  'FIN DE FICHIER' UPON  CONSOLE.
+  2009-01-01 12:00  =>     MOVE   CTR   TO CTR-1.
+  2009-01-01 12:00  =>     DISPLAY  MES1   UPON  CONSOLE.
+  2009-01-01 12:00  =>     GO TO  CLOS.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY 13/05/82.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+<OBJECT=AMT_999-ESQL-ERR,COBOL COPY>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL COPY>
+</REVDATA>
+<DATA=Options>
+  Name=AMT_999-ESQL-ERR
+  Description=COBOL COPY
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => 999-ESQL-ERR.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* ESQL ERROR                                                      *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     PERFORM 999-ESQL-GET-ERR
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     IF WS-ESQL-FL-THREAD = '1'
+  2009-01-01 12:00  =>          EXEC RDMS ROLLBACK WORK END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*         EXEC SQL END THREAD    END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*         MOVE '0' TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 999-ESQL-ERR-NO-DISP.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* ESQL ERROR                                                      *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     IF WS-ESQL-FL-THREAD = '1'
+  2009-01-01 12:00  =>          EXEC RDMS ROLLBACK WORK END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*         EXEC SQL END THREAD    END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*         MOVE '0' TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 999-ESQL-GET-ERR.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* DISPLAY DE L'ERREUR ESQL                                        *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     MOVE SQLCODE      TO WS-ESQL-SQLCODE
+  2009-01-01 12:00  =>     MOVE ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>                       TO WS-ESQL-ERROR-STATUS
+  2009-01-01 12:00  =>     MOVE AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>                       TO WS-ESQL-AUX-INFO
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     DISPLAY "*** ESQL ERROR ***"          UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "TRACE       = " WS-ESQL-TRACE  UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "SQLCODE     = " SQLCODE      UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "ERROR-SATUS = " ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>                                           UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "AUX-INFO    = " AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>                                           UPON PRINTER
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     MOVE "0" TO WS-ESQL-FL
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM UNTIL WS-ESQL-FL = "1"
+  2009-01-01 12:00  =>          EXEC RDMS GETERROR INTO
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (1), :WS-ESQL-LB-ERR (2),
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (3), :WS-ESQL-LB-ERR (4),
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (5)
+  2009-01-01 12:00  =>          END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (1) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (2) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (3) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (4) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (5) UPON PRINTER
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>          IF  WS-ESQL-LB-ERR (1) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (2) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (3) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (4) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (5) = SPACES
+  2009-01-01 12:00  =>               MOVE "1" TO WS-ESQL-FL
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>     END-PERFORM
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM VARYING WS-ESQL-IX-CML FROM 1 BY 1
+  2009-01-01 12:00  =>               UNTIL WS-ESQL-IX-CML > 200
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-CML (WS-ESQL-IX-CML) UPON PRINTER
+  2009-01-01 12:00  =>     END-PERFORM
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     MOVE WS-ESQL-SQLCODE      TO SQLCODE
+  2009-01-01 12:00  =>     MOVE WS-ESQL-ERROR-STATUS TO ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>     MOVE WS-ESQL-AUX-INFO     TO AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>     .
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+</OBJECT>
+<OBJECT=ESQL-INVOKE,COBOL COPY>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL COPY>
+</REVDATA>
+<DATA=Options>
+  Name=ESQL-INVOKE
+  Description=COBOL COPY
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>     INVOKE TABLE NM-TAB OF AFTST FROM REPOSITORY.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+</OBJECT>
+<OBJECT=ESQL-USE,COBOL COPY>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL COPY>
+</REVDATA>
+<DATA=Options>
+  Name=ESQL-USE
+  Description=COBOL COPY
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>     EXEC RDMS  USE DEFAULT QUALIFIER AFTST  END-EXEC
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+</OBJECT>
+<OBJECT=ESQL-USE-DYN,COBOL COPY>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL COPY>
+</REVDATA>
+<DATA=Options>
+  Name=ESQL-USE-DYN
+  Description=COBOL COPY
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>     EXEC RDMS
+  2009-01-01 12:00  =>        EXECUTE IMMEDIATE
+  2009-01-01 12:00  =>           'USE DEFAULT QUALIFIER AFTST'
+  2009-01-01 12:00  =>     END-EXEC
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+</OBJECT>
+<OBJECT=WS-ESQL-VAR,COBOL COPY>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL COPY>
+</REVDATA>
+<DATA=Options>
+  Name=WS-ESQL-VAR
+  Description=COBOL COPY
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>     EXEC RDMS BEGIN DECLARE SECTION END-EXEC.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  RDMCA.
+  2009-01-01 12:00  =>     05  ERROR-STATUS              PIC 9999.
+  2009-01-01 12:00  =>     05  AUX-INFO                  PIC S9(9)  BINARY.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     EXEC RDMS END   DECLARE SECTION END-EXEC.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  SQLCODE                       PIC S9(9)  BINARY.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-ESQL-VAR.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL               PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-THREAD        PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-ROLLBACK      PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-END-THREAD    PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-ABORT         PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-SQLCODE          PIC S9(9) BINARY.
+  2009-01-01 12:00  =>      05  WS-ESQL-RDMCA.
+  2009-01-01 12:00  =>          10  WS-ESQL-ERROR-STATUS PIC 9999.
+  2009-01-01 12:00  =>          10  WS-ESQL-AUX-INFO     PIC S9(9) BINARY.
+  2009-01-01 12:00  =>      05  WS-ESQL-DS-CMD.
+  2009-01-01 12:00  =>          10  WS-ESQL-CML          PIC X(40) OCCURS 200
+  2009-01-01 12:00  =>                                   INDEXED BY WS-ESQL-IX-CML.
+  2009-01-01 12:00  =>      05  WS-ESQL-DS-ERR.
+  2009-01-01 12:00  =>          10  WS-ESQL-LB-ERR       PIC X(132) OCCURS 5
+  2009-01-01 12:00  =>                                   INDEXED BY WS-ESQL-IX-ERR.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-ESQL-WORK-AREA-SIZE       PIC S1(36) BINARY-1.
+  2009-01-01 12:00  => 01  WS-ESQL-TRACE                PIC X(40).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-ESQL-CT-DEADLOCK          PIC S9(2)  COMP.
+  2009-01-01 12:00  => 01  WS-ESQL-FL-DEADLOCK          PIC S9(2)  COMP.
+  2009-01-01 12:00  => 01  CS-ESQL-NO-MSG-DEADLOCK      PIC 9(05)  VALUE 1993.
+  2009-01-01 12:00  => 01  WS-ESQL-MSG-VAR-001          PIC X(40).
+  2009-01-01 12:00  =>
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+</OBJECT>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

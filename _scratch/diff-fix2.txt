@@ -1,0 +1,108 @@
+=================== ARCHIFORMAT
+diff --git "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\ARCHIFORMAT.ps1" "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\ARCHIFORMAT.ps1"
+index 8a13bc2..9ecd7e8 100644
+--- "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\ARCHIFORMAT.ps1"
++++ "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\ARCHIFORMAT.ps1"
+@@ -4,36 +4,29 @@ param([string[]]$Parameters)
+ 
+-# Pour date table, null et cl∩┐╜
+-# Embedded content (unconverted):
+-#   #
+-#   #delete,c     [filein,1,1,1].   
+-#   #asg,up       [filein,1,1,1].,f/0/pos/4000  
+-#   #brkpt        print$,[filein,1,1,1].
+-#   #dd,e    ,,udssrc   
+-#   report table [table,1,1,2] for schema [table,1,1,1].
+-#   process table [table,1,1,2] for schema [table,1,1,1] report.
+-#   exit
+-#   #brkpt        print$
+-#   #sym          print$,,nega/u
+-#   #free         [filein,1,1,1].   
+-#   @ . Pour description des champs
+-#   #
+-#   #delete,c     [filein,1,2,1].   
+-#   #asg,up       [filein,1,2,1].,f/0/pos/4000  
+-#   @ . 
+-#   #
+-#   #xqt,e        sys$lib$*rsa.rsac-coivp   
+-#   begin thread for udssrc read;
+-#   use default qualifier [table,1,1,1];
+-#   unload to file "[filein,1,2,1]"
+-#   select *
+-#   from [table,1,1,2]
+-#   format internal
+-#   with description only;
+-#   end thread;
+-#   exit;
+-#   #free         [filein,1,2,1].   
+-#   @ . 
+-#   #
+-#   #asg,a        [filein,1,1,1].   
+-#   #asg,a        [filein,1,2,1].   
++# @ . Pour date table, null et cl∩┐╜
++Delete "C" ("[filein")
++Asg "P, U" ("[filein")
++Brkpt ("[filein")
++# @DD,e    ,,udssrc    ΓÇö DMS Data Definition
++Brkpt ("")
++Sym "" "print`$" 1 "nega/u" ""
++Free "" ("[filein")
++# @ . Pour description des champs 
++Delete "C" ("[filein")
++Asg "P, U" ("[filein")
++# @ . 
++Xqt "E" ("sys`$lib`$*rsa.rsac-coivp")
++DataLineOrNoStatement ("begin thread for udssrc read;")
++DataLineOrNoStatement ("use default qualifier [table,1,1,1];")
++DataLineOrNoStatement ("unload to file "[filein,1,2,1]"")
++DataLineOrNoStatement ("select *")
++DataLineOrNoStatement ("from [table,1,1,2]")
++DataLineOrNoStatement ("format internal")
++DataLineOrNoStatement ("with description only;")
++DataLineOrNoStatement ("end thread;")
++DataLineOrNoStatement ("exit;")
++Free "" ("[filein")
++# @ . 
++Asg "A" ("[filein")
++Asg "A" ("[filein")
++Fin
+ $A = (2 + ((GetSgsValue ("key,1,1,3")) + ((GetSgsValue ("rsz,1,1,1")) + (GetSgsValue ("table,1,2,1")))))
+@@ -198,2 +191,3 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
+ # Orphaned data line: stop run
+=================== CFH-COPY_ASCII
+diff --git "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\CFH-COPY_ASCII.ps1" "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\CFH-COPY_ASCII.ps1"
+index f41a64c..ededadd 100644
+--- "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\CFH-COPY_ASCII.ps1"
++++ "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\CFH-COPY_ASCII.ps1"
+@@ -313,4 +313,3 @@ If ((CompareTypeSafe (GetSgsValue ("OUTPUT,1,1,1")) "EqualTo" "PRINTER")) {
+   DataLineOrNoStatement ("           03  FILLER         PIC X(10) VALUE '1234567890'. ")
+-  # '.  
+-  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12")
++  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12 . '.  ")
+ }
+=================== TAPELD_ASCII
+diff --git "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\TAPELD_ASCII.ps1" "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\TAPELD_ASCII.ps1"
+index ef0b5b6..5b5ceef 100644
+--- "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\TAPELD_ASCII.ps1"
++++ "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\TAPELD_ASCII.ps1"
+@@ -382,4 +382,3 @@ If ((CompareTypeSafe (GetSgsValue ("OUTPUT,1,1,1")) "EqualTo" "PRINTER")) {
+   DataLineOrNoStatement ("           03  FILLER         PIC X(10) VALUE '1234567890'. ")
+-  # '.  
+-  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12")
++  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12 . '.  ")
+ }
+=================== LOADIS_MULTI
+diff --git "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\LOADIS_MULTI.ps1" "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\LOADIS_MULTI.ps1"
+index 1f1b726..d137aca 100644
+--- "a/E:\\Repos\\SsgTrial\\SsgConverter\\Examples\\Output\\LOADIS_MULTI.ps1"
++++ "b/E:\\Repos\\SsgTrial\\_scratch\\ssgfix2\\out\\LOADIS_MULTI.ps1"
+@@ -29,4 +29,3 @@ DataLineOrNoStatement ("       IDENTIFICATION DIVISION. ")
+ DataLineOrNoStatement ("       PROGRAM-ID. LOADIS.  ")
+-# 
+-DataLineOrNoStatement ("       AUTHOR.     H A N S E")
++DataLineOrNoStatement ("       AUTHOR.     H A N S E .  ")
+ DataLineOrNoStatement ("       ENVIRONMENT DIVISION.")
+@@ -71,2 +70,3 @@ If ((CompareTypeSafe (GetSgsValue ("KEYIS")) "GreaterThan" 3)) {
+ }
++DataLineOrNoStatement ("           .")
+ DataLineOrNoStatement ("       DATA DIVISION.   ")

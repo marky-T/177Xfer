@@ -1,0 +1,4 @@
+HEAD: test-release-20261002
+upstream: origin/test-release-20261002
+remote has branch: 61480e6a8722fb7a6853ad7800a816975702146b	refs/heads/test-release-20261002
+last commit: 61480e6 Add SSG->PowerShell test release release20261002-rc.01 (20 programs: bodies + CC wrappers + original source + README + release notes)

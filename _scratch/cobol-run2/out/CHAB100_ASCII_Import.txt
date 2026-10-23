@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\cobol-run2\\out\\CHAB100_ASCII.LionSource
+APPNAME = CHAB100ASCII
+GENSET = Default from new application
+SYSOPT = FALSE

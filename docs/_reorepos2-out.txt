@@ -1,0 +1,7 @@
+2026/09/22 : 13:50:15 : Scanning installation to determine which version has been installed.
+2026/09/22 : 13:50:16 : Current version: AMT 177
+2026/09/22 : 13:50:16 : Lion version ready.
+2026/09/22 : 13:50:16 : Start reo repository.
+2026/09/22 : 13:50:17 : No new updates have been found, 8.0.26230.0 is already installed and CLEANINSTALL is not specified.
+2026/09/22 : 13:50:17 : Scanning installation to determine which version has been installed.
+2026/09/22 : 13:50:17 : Current version: AMT 177

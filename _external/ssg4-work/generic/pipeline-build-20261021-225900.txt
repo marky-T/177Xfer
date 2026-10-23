@@ -1,0 +1,13 @@
+Stage Build, environment CC-Trial, started 2026-10-21 22:59:00
+PASS CFH-COPY       program source                 ASSURFED_UTILIT_CFH_COPY_GN: unchanged since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program ASSURFED_UTILIT_CFH_COPY_GN
+PASS BABA           program source                 ASSURFED_UTILIT_BABA_GN: unchanged since the last build
+PASS FUSBA          program source                 ASSURFED_UTILIT_FUSBA_GN: unchanged since the last build
+PASS CHABAN         program source                 ASSURFED_UTILIT_CHABAN_GN: unchanged since the last build
+PASS CONDIS2        program source                 ASSURFED_UTILIT_CONDIS2_GN: unchanged since the last build
+PASS SCAN           program source                 ASSURFED_UTILIT_SCAN_GN: unchanged since the last build
+PASS TAPELD         program source                 ASSURFED_UTILIT_TAPELD_GN: unchanged since the last build
+PASS COBOL converter 7 programs -> one LionSource   exit 0, errors 0, warnings 4, 106 KB
+PASS LionSource     vs the previous build          identical (nothing new to import)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource, Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

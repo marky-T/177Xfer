@@ -1,0 +1,44 @@
+== mojibake-looking characters in our source (file:line: text)
+SymstreamExpressionMigrator.cs:350: // Stray trailing ']' - treat remaining text (including this ']') as a literal part
+SymstreamExpressionMigrator.cs:351: m_LogObject.Warning(0, $"  SSG source bug: stray trailing ']' in expression '{s}' - tolerating as literal character.");
+SymstreamExpressionParser.cs:317: // guard: operand empty after unary strip (e.g. standalone '-' or '---') - treat as literal
+SymstreamExpressionParser.cs:332: // guard: operand empty after unary strip - treat as literal
+SymstreamProcessor.cs:271: m_LogObject.Warning(0, String.Format("  Not implemented - emitted as comment: {0}", trimmed));
+SymstreamProcessor.cs:610: // No message - just a variable name (e.g. *ACCEPT lab)
+SymstreamProcessor.cs:1508: // Emitted as a comment - see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
+SymstreamProcessor.cs:1510: "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop - PowerShell has no labelled continue. " +
+SymstreamProcessor.cs:1516: " R&D fix required - see SsgConverter-Fix-20260820.md Fix 11.", variableName));
+SymstreamProcessor.cs:1591: //   *PCONTROL `APRTCN$ image`
+== non-ASCII in the 27 July base and R&D develop for the same files
+E:\Repos\SsgTrial\_scratch\rd-jul27\SsgConverter\SsgConverter: 4 lines
+E:\Repos\amt-go-net-ref\Migration Tools\SsgConverter\SsgConverter: 4 lines
+== manuals (pdf/docx) under docs
+     99629  eference Docs\00_HOME.pdf
+   8971422  eference Docs\78307709-002.pdf
+   3615692  eference Docs\78307949-031.pdf
+   2858793  eference Docs\78310281-034.pdf
+  13772622  eference Docs\78310448-005.pdf
+   4536551  eference Docs\78310455-021.pdf
+   4530979  eference Docs\78310455-022.pdf
+   1452275  eference Docs\78311784-010.pdf
+    628106  eference Docs\82252461-003.pdf
+   4374116  eference Docs\AMT Installation and Configuration (AICL).docx
+   2237953  eference Docs\Avanade_AMT_COBOL_FileConverter_.pdf
+   2297467  eference Docs\ECL to PowerShell (E2P).archived-20260626-080543.docx
+   1530035  eference Docs\Migrate AMT LION to Csharp.docx
+    753244  eference Docs\OS2200 COBOL to AMT LION Tech Specs.docx
+   1425012  eference Docs\Overview Batch Jobs in AMT - from ECL to PowerShell.docx
+    150016  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\Amt\AI generated Library for VS\AMT175_ParallelRun_GuidePackage_v3.docx
+    150016  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\Amt\AI generated Library for VS\AMT175_ParallelRun_GuidePackage_v3x.docx
+   2297467  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\ReferenceDocuments\AMT_ECLtoPowershell\ECL to PowerShell (E2P).archived-20260626-080543.docx
+   1425012  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\ReferenceDocuments\AMT_ECLtoPowershell\Overview Batch Jobs in AMT - from ECL to PowerShell.docx
+    583949  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\ReferenceDocuments\KeyCloak\Quick start guide AMT-KeyCloak.docx
+    762139  eference-Trials\AssetLibrary-AMT172-20261010\01-docs-html\Working\SSG 2\ssg 2 pla a.pdf
+    122880  eference-Trials\AssetLibrary-AMT172-20261010\06-plans\ReferenceDocuments\Plans\AMT175_Repeatable_Migration_Pipeline_Plan.docx
+    150016  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\Amt\AI generated Library for VS\AMT175_ParallelRun_GuidePackage_v3.docx
+    150016  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\Amt\AI generated Library for VS\AMT175_ParallelRun_GuidePackage_v3x.docx
+   2297467  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\ReferenceDocuments\AMT_ECLtoPowershell\ECL to PowerShell (E2P).archived-20260626-080543.docx
+   1425012  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\ReferenceDocuments\AMT_ECLtoPowershell\Overview Batch Jobs in AMT - from ECL to PowerShell.docx
+    583949  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\ReferenceDocuments\KeyCloak\Quick start guide AMT-KeyCloak.docx
+    762139  eference-Trials\AssetLibrary-AMT175-20261010\01-docs-html\Working\SSG 2\ssg 2 pla a.pdf
+    122880  eference-Trials\AssetLibrary-AMT175-20261010\06-plans\ReferenceDocuments\Plans\AMT175_Repeatable_Migration_Pipeline_Plan.docx

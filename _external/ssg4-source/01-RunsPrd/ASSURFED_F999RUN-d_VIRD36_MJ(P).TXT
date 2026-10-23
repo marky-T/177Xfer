@@ -1,0 +1,414 @@
+@RUN,M/T   VIRD36,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       **********************************************************   
+@MSG       **                                                      **   
+@MSG       **                                                      **   
+@MSG       **           TAXE ANTICIPEE - FICHIER  FISC             **   
+@MSG       **      -------------------------------------------     **   
+@MSG       **                                                      **   
+@MSG       **********************************************************   
+@ .        -------------------------------------------------------------
+@ .        LE 06/03/03: REMPLACEMENT DE L'UTILITAIRE DE TRANSFERT   
+@ .                   : REMPLACEMENT INCENDIES PAR FAS/INCENDIE 
+@ .        LE 02/04/10: Màj table RDMS TELT 
+@ .        LE 13/04/10: Màj table RDMS TELT --> ajout VIB671
+@ .        LE 26/09/16: Changement description et longueur Fichier FISC 
+@ .                     Ajout transexcel    P14125/05 - FVDK
+@ .        -------------------------------------------------------------
+@ .        -------------------------------------------------------------
+@MSG       ENREGISTREMENT DES PARAMETRES - EDITIONS 
+@ .        -------------------------------------------------------------
+@PRT,SC    F999CONTROLE.VIRD36  
+@MSG,N     EDITION DU RUN.  
+@PRT,SC    F999RUN-D.VIRD36/MJ  
+@ADD       F999PARA.VIRD36  
+@TIME   
+@ .        -------------------------------------------------------------
+@MSG       TRANSFERT DES PROGRAMMES.
+@ .        -------------------------------------------------------------
+@ASG,T     VIRD36.,F/0/POS/4000 
+@ASG,A     ABSVIE.  
+@COPY,A    VPRD*BABS.VIR015,VIRD36.VIR015   
+@COPY,A    VPRD*BABS.VIB050,VIRD36.VIB050   
+@COPY,A    VPRD*BABS.VIB670,VIRD36.VIB670   
+@COPY,A    VPRD*BABS.VIB671,VIRD36.VIB671   
+@ .        -------------------------------------------------------------
+@FREE      F999CONSOLE. 
+@TIME   
+@ .        -------------------------------------------------------------
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB010: MSG 010. DECHARGEMENT BANDE TAXATION - SORT
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ .        -------------------------------------------------------------
+@ASG,A     B006TAXCRS.  
+@USE       INC,B006TAXCRS   
+@DELETE,C  I006TAXSORT. 
+@CAT,P     I006TAXSORT,F/0/POS/4000 
+@ASG,AX    I006TAXSORT  
+@SORT,ES
+FILEIN=INC,F           BLOCK=10 
+FILEOUT=I006TAXSORT,F  BLOCK=10 
+KEY=1,20,CH,A,1 
+RSZ=700 
+RECORD=5
+@EOF
+@ERS       TPF$.
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB020: MSG 020. ELIMINATION DES CONTRATS - BABA   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ .        -------------------------------------------------------------
+@ASG,A     I006TAXSORT. 
+@DELETE,C  I006TAXBABA. 
+@CAT,P     I006TAXBABA,F/0/POS/4000 
+@ASG,A     I006TAXBABA. 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      I006TAXSORT,700,10   
+OUTPUT     I006TAXBABA,700,10   
+@ADD       CPVIRD36.BABA1   
+@EOF
+@XQT,WR    .BABA
+@FREE      I006TAXBABA. 
+@FREE      I006TAXSORT. 
+@ERS       TPF$.
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB030: MSG 030. FUSION DIAMANT - SORT 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ .        -------------------------------------------------------------
+@ASG,AX    R006DIAMCRS. 
+@USE       INA,R006DIAMCRS. 
+@ASG,AX    I006TAXBABA  
+@USE       INB,I006TAXBABA  
+@DELETE,C  I006TAXE.
+@CAT,P     I006TAXE,F/0/POS/4000
+@ASG,AX    I006TAXE 
+@SORT,ES
+FILEIN=INA,F        BLOCK=10
+FILEIN=INB,F        BLOCK=10
+FILEOUT=I006TAXE,F  BLOCK=10
+KEY=1,20,CH,A,1 
+RSZ=700 
+RECORD=5
+@EOF
+@ERS    TPF$.   
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB040: MSG 040. CREATION FISC - VIR015
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ .        -------------------------------------------------------------
+@ASG,AX    I006TAXE.
+@USE       RESTAX,I006TAXE. 
+@DELETE,C  I006TAX015.  
+@CAT,P     I006TAX015,F/0/POS/4000  
+@ASG,AX    I006TAX015.  
+@USE       FISCTRS,I006TAX015   
+@DELETE,C  VIRD36*I006ANO.  
+@CAT,P     VIRD36*I006ANO.,F///10000
+@ASG,AX    VIRD36*I006ANO.  
+@USE       IMP-ANO,VIRD36*I006ANO.  
+@DELETE,C  VIRD36*I006RPT.  
+@CAT,P     VIRD36*I006RPT.,F///10000
+@ASG,AX    VIRD36*I006RPT.  
+@USE       IMP-RPT,VIRD36*I006RPT.  
+@SETC      1/S3 
+@XQT       VIRD36.VIR015
+@ADD       F999CONTROLE.VIRD36  
+@TIME   
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@SETC      0/S3 
+@FREE      I006TAX015.  
+@FREE      VIRD36*I006ANO.  
+@FREE      VIRD36*I006RPT.  
+@FREE      I006TAXE.
+@ERS       TPF$.
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB050: MSG 050. TRI I006TAX015 SUR NO POLICE - SORT   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ .        -------------------------------------------------------------
+@ASG,A      I006TAX015. 
+@DELETE,C   I006TAX015T.
+@CAT,P      I006TAX015T,F/0/POS/4000
+@ASG,A      I006TAX015T.
+@SORT,ES
+FILEIN=I006TAX015,F    BLOCK=10 
+FILEOUT=I006TAX015T,F  BLOCK=10 
+KEY=149,7,CH,A,1
+RSZ=304 
+@EOF
+@FREE       I006TAX015. 
+@FREE       I006TAX015T.
+@ERS        TPF$.   
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB060: MSG 060. SEPARATION NOM PRENOM - VIB050
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ .        -------------------------------------------------------------
+@ASG,A     I006TAX015T. 
+@USE       ITAXE,I006TAX015T.   
+@DELETE,C  R006VIRD36.  
+@CAT,P     R006VIRD36.,F/0/POS/4000 
+@ASG,A     R006VIRD36.  
+@USE       OTAXE,R006VIRD36 
+@DELETE,C  R006MODD36.  
+@CAT,P     R006MODD36.,F/0/POS/4000 
+@ASG,A     R006MODD36.  
+@USE       OFVIE,R006MODD36 
+@DELETE,C  VIRD36*IMPLIST050.   
+@CAT,P     VIRD36*IMPLIST050.,F///10000 
+@ASG,A     VIRD36*IMPLIST050.   
+@USE       LISTE,VIRD36*IMPLIST050  
+@DELETE,C  VIRD36*IMPCTRL050.   
+@CAT,P     VIRD36*IMPCTRL050.,F///10000 
+@ASG,A     VIRD36*IMPCTRL050.   
+@USE       LISTCTRL,VIRD36*IMPCTRL050   
+@XQT       VIRD36.VIB050
+@FREE      I006TAX015T. 
+@FREE      VIRD36*IMPLIST050.   
+@FREE      VIRD36*IMPCTRL050.   
+@FREE      R006VIRD36.  
+@FREE      R006MODD36.  
+@ERS       TPF$.
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB065: MSG 065. TRI R006VIRD36 SUR NO ORDRE - SORT
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB065  
+@ .        -------------------------------------------------------------
+@ASG,A      R006VIRD36. 
+@DELETE,C   R006VIRD36T.
+@CAT,P      R006VIRD36T,F/0/POS/4000
+@ASG,A      R006VIRD36T.
+@SORT,ES
+FILEIN=R006VIRD36,F    BLOCK=10 
+FILEOUT=R006VIRD36T,F  BLOCK=10 
+KEY=1,6,CH,A,1  
+RSZ=304 
+@EOF
+@FREE       R006VIRD36. 
+@FREE       R006VIRD36T.
+@ERS        TPF$.   
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB066: MSG 066. Formatage EXCEL FISC SERVICE NON-DEFINITIF
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB066  
+@ .        -------------------------------------------------------------
+@ASG,A    R006VIRD36T.  
+@USE      FILEIN,R006VIRD36T.   
+@ . 
+@DELETE,C R006VIRD36EX. 
+@CAT,P    R006VIRD36EX.,F/0/POS/4000
+@ASG,A    R006VIRD36EX. 
+@USE      FILEOUT,R006VIRD36EX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  304   
+COL  1,6,,''Nombre suite''  
+COL  7,30,,''Nom''  
+COL  37,12,,''Prenom un''   
+COL  49,12,,''Prenom deux'' 
+COL  61,32,,''Adresse'' 
+COL  93,20,,''Code postal'' 
+COL  113,25,,''Localite''   
+COL  138,2,,''Code pays''   
+COL  140,1,,''Code sexe''   
+COL  141,8,JJMMAAAA,''Date naissance''  
+COL  149,30,,''Police'' 
+COL  179,20,,''Denomination''   
+COL  199,1,,''Nature un''   
+COL  200,1,,''Nature deux'' 
+COL  201,10,MNT,''Mt Cap Vie''  
+COL  211,10,MNT,''Mt Cap Dec''  
+COL  221,8,JJMMAAAA,''Dt effet''
+COL  229,10,MNT,''Mt base 10''  
+COL  239,10,MNT,''Mt base 16''  
+COL  249,10,MNT,''Mt base 33''  
+COL  259,10,MNT,''Mt base 65''  
+COL  269,10,MNT,''Mt base 8''   
+COL  279,10,MNT,''Mt base 1''   
+COL  289,1,,''Devise''  
+COL  290,1,,''Cd langue''   
+COL  291,6,MMAAAA,''Dt echeance''   
+COL  297,8,JJMMAAAA,''Dt paiement'' 
+TABUL '';'' 
+@EOF
+@FREE   R006VIRD36T.
+@FREE   R006VIRD36EX.   
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB200: MSG 200. SAUVETAGE RESULTAT CYCLE  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ .        -------------------------------------------------------------
+@ASG,A     I006TAXE.
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006TAXCRS  
+@FREE      F999STAR.
+@USE       OUTA,B006TAXCRS(+1)  
+@SORT,ES
+FILEIN=I006TAXE,F    BLOCK=10   
+FILEOUT=OUTA,F       BLOCK=10   
+KEY=1,20,CH,A,1 
+RSZ=700 
+RECORD=5
+@EOF
+@ERS    TPF$.   
+@TIME   
+@ .        -------------------------------------------------------------
+@LAB210: MSG 210. SCAN FICHIER TAXE CROISIERE   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ .        -------------------------------------------------------------
+@ASG,A     R006VIRD36.  
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+ASCII   
+INPUT      R006VIRD36,304,5 
+@EOF
+@XQT       TPF$.SCAN
+@ERS       TPF$.
+@FREE      R006VIRD36.  
+@TIME   
+@ . 
+@LAB220: MSG 220. Màj table RDMS TELT - VIB670  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@.    Input 
+@ASG,AX    B006TAXCRS.  
+@USE       TAXCRS,B006TAXCRS.   
+@.    Output
+@DELETE,C  I006EXD36.   
+@ASG,UP    I006EXD36.,F/0/POS/4000  
+@USE       EXCADD,I006EXD36.
+@XQT       VIRD36.VIB670
+@FREE      B006TAXCRS.  
+@FREE      I006EXD36.   
+@ERS       tpf$.
+@ . 
+@LAB230: MSG 230. Formatage EXCEL des ajouts.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ASG,A    I006EXD36.
+@USE      FILEIN,I006EXD36. 
+@ . 
+@DELETE,C I006VIRD36EX. 
+@CAT,P    I006VIRD36EX.,F/0/POS/4000
+@ASG,A    I006VIRD36EX. 
+@USE      FILEOUT,I006VIRD36EX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  50
+COL 1,6,,''Radical police'' 
+COL 7,1,,''Suffixe police'' 
+COL 8,1,,''Code mvt''   
+COL 9,8,AAAAMMJJ,''Date mvt''   
+COL 17,1,,''Code origine''  
+COL 18,2,,''Code anomalie'' 
+COL 20,8,AAAAMMJJ,''Date création'' 
+COL 28,8,,''Initiales création''
+TABUL '';'' 
+@EOF
+@FREE   I006EXD36.  
+@FREE   I006VIRD36EX.   
+@TIME   
+@ . 
+@LAB240: MSG 240. EXECUTION SORT B006TAXCRS.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ . 
+@ASG,A     b006TAXCRS.  
+@DELETE,C  I006TAXCRS.  
+@ASG,UP    I006TAXCRS.,F/0/POS/4000 
+@USE       INA,b006TAXCRS.  
+@USE       OUT,I006TAXCRS.  
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUT,F   BLOCK=10
+KEY=3,7,CH,A,1  
+RSZ=700 
+RECORD=30   
+DELDUPS 
+@EOF
+@TIME   
+@ . 
+@LAB250: MSG 250. Màj table RDMS TELT - VIB671  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB250  
+@.    Input 
+@ASG,AX    i006TAXCRS.  
+@USE       TAXCRS,i006TAXCRS.   
+@.    Output
+@DELETE,C  I006EX671.   
+@ASG,UP    I006EX671.,F/0/POS/4000  
+@USE       EXCDEL,I006EX671.
+@XQT       VIRD36.VIB671
+@FREE      i006TAXCRS.  
+@FREE      I006EX671.   
+@ERS       tpf$.
+@ . 
+@LAB260: MSG 260. Formatage EXCEL des delete.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB260  
+@ASG,A    I006EX671.
+@USE      FILEIN,I006EX671. 
+@ . 
+@DELETE,C I006DELD36EX. 
+@CAT,P    I006DELD36EX.,F/0/POS/4000
+@ASG,A    I006DELD36EX. 
+@USE      FILEOUT,I006DELD36EX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  50
+COL 1,6,,''Radical police'' 
+COL 7,1,,''Suffixe police'' 
+TABUL '';'' 
+@EOF
+@FREE   I006EX671.  
+@FREE   I006DELD36EX.   
+@TIME   
+@ . 
+@ .        -------------------------------------------------------------
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       LE RUN VIRD36/MJ S'EST BIEN BIEN TERMINE 
+@MSG       -------------------------------------------------------------
+@QUAL,R 
+@FIN

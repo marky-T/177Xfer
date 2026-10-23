@@ -1,0 +1,139 @@
+==== Asysco.Amt.Runtime.Support.Cobol.AmtCobolSupport.ConvertMainframeFileName
+  call String.IsNullOrEmpty
+  fld  String.Empty
+  str  "requestInfo"
+  call ArgumentNullException..ctor
+  call AmtSupport.IsAbsolutePath
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsASeries
+  call AmtRequestInfo.get_Configuration
+  call IAmtConfiguration.get_BasePaths
+  str  ""
+  str  ""
+  call AmtCobolSupport.ConvertASeriesFileName
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsOS2200
+  call AmtRequestInfo.get_Configuration
+  call IAmtConfiguration.get_BasePaths
+  call AmtCobolSupport.ConvertOS2200FileName
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsIbm
+  call AmtRequestInfo.get_Configuration
+  call IAmtConfiguration.get_BasePaths
+  call AmtCobolSupport.ConvertIbmFileName
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsMiFo
+  call AmtCobolSupport.ConvertMiFoFileName
+==== Asysco.Amt.Runtime.Files.AmtFileId.GetPhysicalFile
+  fld  field m_Session
+  call AmtBaseSessionData.get_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsOS2200
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsIbm
+  call String.IsNullOrEmpty
+  call AmtRequestInfoRt.get_SysItems
+  call AmtSystemDefinitions.get_TaskValue
+  call String.IsNullOrEmpty
+  call Path.GetFileNameWithoutExtension
+  call AmtTask..ctor
+  call AmtRequestInfoRt.get_SysItems
+  call AmtSystemDefinitions.get_TaskValue
+  call AmtTask.SetNewTaskValues
+  call AmtTask.GetTVCustom
+  call String.IsNullOrEmpty
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsIbm
+  call String.IndexOf
+  call String.Substring
+  call String.Trim
+  call String.get_Length
+  call String.Substring
+  call String.Trim
+  call String.ToUpperInvariant
+  str  "DUMMY"
+  call String.op_Equality
+  call Type.GetTypeFromHandle
+  call Enum.Parse
+  call Type.GetTypeFromHandle
+  fld  field m_JobFileOpenMode
+  call Enum.IsDefined
+  call String.op_Equality
+  call Path.IsPathRooted
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsOS2200
+  str  "TPF"
+  call AmtTask.GetTVCustom
+  call String.IsNullOrEmpty
+  call AmtSupport.AddBackslash
+  str  ".DAT"
+  call String.Concat
+  str  "RECSIZE"
+  call String.Concat
+  call AmtTask.GetTVCustom
+  call String.IsNullOrEmpty
+  call AmtStrings.StrToInt32
+  call AmtFileId.SetRecordSize
+  call IDisposable.Dispose
+==== Asysco.Amt.Runtime.Skeleton.AmtCobolIbmCicsFunctions.GetPhysicalFile
+  fld  field m_Parent
+  call AmtBaseSkeleton.get_RequestInfo
+  fld  field m_LogicalVsamDbFiles
+  call ..ctor
+  fld  field m_LogicalVsamDbFiles
+  call .TryGetValue
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsMiFo
+  call AmtRequestInfo.get_SysDbs
+  call AmtRtSupport.ReadEnvironmentValue
+  call AmtTask..ctor
+  call AmtRequestInfoRt.get_SysItems
+  call AmtSystemDefinitions.get_TaskValue
+  call AmtTask.SetNewTaskValues
+  call AmtTask.GetTVCustom
+  call String.IsNullOrEmpty
+  call String.IndexOf
+  call String.Substring
+  call String.Trim
+  call String.get_Length
+  call String.Substring
+  call String.Trim
+  call String.ToUpperInvariant
+  str  "DUMMY"
+  call String.op_Equality
+  str  "Amt VSAM in database: DUMMY not supported."
+  call NotSupportedException..ctor
+  call IDisposable.Dispose
+  call Path.GetFileNameWithoutExtension
+  fld  field m_LogicalVsamDbFiles
+  call .Add
+  fld  field m_LogicalVsamDbFiles
+  call .Add
+==== Asysco.Amt.Runtime.Skeleton.AmtBaseCobolSkeleton.ConvertMainframeFileName
+  fld  field m_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsASeries
+  fld  field m_RequestInfo
+  call AmtRequestInfo.get_Configuration
+  call IAmtConfiguration.get_BasePaths
+  fld  field m_GlbDef
+  call AmtCobolGlobalDefinitions.get_UserCode
+  call AmtVarString.get_Value
+  call Object.ToString
+  fld  field m_GlbDef
+  call AmtCobolGlobalDefinitions.get_PackName
+  call AmtVarString.get_Value
+  call Object.ToString
+  call AmtCobolSupport.ConvertASeriesFileName
+  fld  field m_RequestInfo
+  call AmtCobolSupport.ConvertMainframeFileName

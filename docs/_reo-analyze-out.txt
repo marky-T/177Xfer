@@ -1,0 +1,6 @@
+===== AMT .NET REO started =====
+License valid.
+Database or application dll not correct for application AFBUS_2200COBOL.
+Error: Failed loading assembly: Can't find application or database dll.
+Error with reorganize analyze for application: AFBUS_2200COBOL no database connection.
+Reo done.

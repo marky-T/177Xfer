@@ -1,0 +1,21 @@
+=== Mock install dry-run ===
+Staging: C:\Users\MTRUMAN\AppData\Local\Temp\18\ssg-mockinstall-a92fdc00e7c947cf923c6cdee9068372\Scripts
+
+  CFH-COPY         exit=0 PASS
+  UNLOADIS_ASCII   exit=0 PASS
+
+Dry-run: 2 passed / 0 failed
+
+Passed Results
+------ -------                                                                  
+  True {@{Program=CFH-COPY; ExitCode=0; Passed=True; Output=[mock] Set-Jobname …
+
+--- fingerprint gate ---
+Mechanics UNCHANGED since the last live validation.
+  last validated: 2026-10-02 (JobId 1085, CFH-COPY)
+  -> discretionary: cite that proof, or re-run the test-proof anyway (ask the user).
+
+Fingerprint                                                      Changed Prior
+-----------                                                      ------- -----
+ab8477503143ef83baa49f8bcf96db51915a4c5ab8e4488245039b9616bb357b   False @{_com…
+

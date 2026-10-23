@@ -1,0 +1,111 @@
+  360:       Justification = "Not an issue, The close call is different that the dispose call.")]
+  361:     private void CheckDisconnectedClients () {
+  362:       AmtSysSession sysSession = null;
+  363:       AmtSysProcessJob sysProcJob = null;
+  364:       try {
+  365:         List<ClientInfo> clients = Clients.GetSnapshotClients();
+  366:         foreach (ClientInfo client in clients) {
+  367:           Boolean valid = true;
+  368:           TimeSpan elapsed = AmtDateSupport.Now - client.LastAction;
+  369:           switch (client.ClientType) {
+  370:             case AmtFcClientType.Listboxes:
+  371:             case AmtFcClientType.Images:
+  372:             case AmtFcClientType.Downloader:
+  373:             case AmtFcClientType.FileExplorer:
+  374:             case AmtFcClientType.FileController:
+  375:             case AmtFcClientType.SpareFileController:
+  376:             case AmtFcClientType.RemoteDll:
+  377:             case AmtFcClientType.RemoteDebugger:
+  378:             case AmtFcClientType.Help:
+  379:               if (elapsed.TotalMinutes < ((AmtFileService)AmtFileService.Service).ForcedTimeout) {
+  380:                 continue;
+  381:               }
+  382:               valid = false;
+  383:               break;
+  384:             case AmtFcClientType.Form:
+  385:             case AmtFcClientType.CobolProgramOnline:
+  386:               if (elapsed.TotalMinutes < ((AmtFileService)AmtFileService.Service).FormsForcedTimeout) {
+  387:                 continue;
+  388:               }
+  389:               if (client.TransactionId > 0) {
+  390:               }
+  391:               if (client.GetSnapshotHandles().Count > 0) { // When the client has open files check that the client has still a session
+  392:                 if (sysSession == null) {
+  393:                   sysSession = new AmtSysSession(m_SysDbs);
+  394:                 }
+  395:                 if (!sysSession.SelectByStation(client.Station)) {
+  396:                   valid = false;
+  397:                 }
+  398:                 sysSession.Close();
+  399:               } else {
+  400:                 valid = false;
+  401:               }
+  402:               break;
+  403:             case AmtFcClientType.Logging:
+  404:               if (elapsed.TotalMinutes < ((AmtFileService)AmtFileService.Service).LoggingForcedTimeout) {
+  405:                 continue;
+  406:               }
+  407:               valid = false;
+  408:               break;
+  409:             case AmtFcClientType.Report:
+  410:             case AmtFcClientType.Script:
+  411:             case AmtFcClientType.CobolProgramBatch:
+  412:               if (elapsed.TotalMinutes < ((AmtFileService)AmtFileService.Service).BatchRunningCheckInterval) {
+  413:                 continue;
+  414:               }
+  415:               if (sysProcJob == null) {
+  416:                 sysProcJob = new AmtSysProcessJob(m_SysDbs);
+  417:               }
+  418:               if (!sysProcJob.SelectByRequestId(client.RequestId)) {
+  419:                 valid = false;
+  420:               }
+  421:               sysProcJob.Close();
+  422:               break;
+  423:             default:
+  424:               // Log bugreport so we know a value in AmtFcClientType is missing....
+  425:               try {
+  426:                 throw new AmtException("Invalid client type " + client.ClientType.ToString());
+  427:               } catch (Exception ex) {
+  428:                 AmtFileService.Service.HandleException(ex, true);
+  429:               }
+  430:               // Log bugreport End
+  431:               // Fall back to default timeout
+  432:               if (elapsed.TotalMinutes < ((AmtFileService)AmtFileService.Service).ForcedTimeout) {
+  433:                 continue;
+  434:               }
+  435:               valid = false;
+  436:               break;
+  437: 
+  438:           }
+  439:           if (!valid) {
+  440:             AmtLog.Log(AmtLogSeverity.Information, AmtFileService.Service.ServiceName, AmtLocalise.DisconnectedClient, client.GetClientErrorInfo());
+  441:             if (AmtLog.IsDebugEnabled) {
+  442:               AmtLog.TraceLog("CheckDisconnectedClients: ClientId=" + client.ClientId + ", BatchId=" + client.BatchId.ToString() +
+  443:                 ", Station=" + client.Station + ", ClientType=" + client.ClientType.ToString() +
+  444:                 ", Program=" + client.Program);
+  445:             }
+  446:             List<FileHandle> openHandles = client.GetSnapshotHandles();
+  447:             foreach (FileHandle handle in openHandles) {
+  448:               OpenedFiles.ForceClose(client, handle);
+  449:             }
+  450:             Clients.RemoveClient(client.ClientId, "Client no longer running");
+  451:           }
+  452:         }
+  453:         Clients.CleanDisconnectedClientsList();
+  454:       } catch (Exception ex) {
+  455:         AmtFileService.Service.HandleException(ex, true);
+  456:       } finally {
+  457:         if (sysSession != null) {
+  458:           sysSession.Dispose();
+  459:         }
+  460:         if (sysProcJob != null) {
+  461:           sysProcJob.Dispose();
+  462:         }
+  463:       }
+  464:     } // CheckDisconnectedClients
+  465: 
+  466:   } // Class FileControllerHost
+  467: 
+  468: } // Namespace Asysco.Amt.AmtFileController
+  469: 
+  470: 

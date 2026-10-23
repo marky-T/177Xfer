@@ -1,0 +1,83 @@
+﻿2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:36 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-08-21 00:21:36 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:40 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:40 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-08-21 00:21:40 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Error     : ERR 000065 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000069 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000070 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000071 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000072 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000073 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000074 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000075 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000076 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000077 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000078 End of statement expected but 3 found
+2026-08-21 00:21:41 [0] Error     : ERR 000082 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000086 End of statement expected but 1 found
+2026-08-21 00:21:41 [0] Error     : ERR 000128 File CHERCHEUSE must have at least 1 layout.
+2026-08-21 00:21:41 [0] Error     : ERR 000128 File FICUNLOAD must have at least 1 layout.
+2026-08-21 00:21:41 [0] Error     : ERR 000128 File FICARCHI must have at least 1 layout.
+2026-08-21 00:21:41 [0] Error     : ERR 000128 File FICNARCHI must have at least 1 layout.
+2026-08-21 00:21:41 [0] Error     : ERR 000146 Operand END-READ is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000147 Operand END-READ must be a variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000157 Operand END-READ is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000158 Operand END-READ must be a numeric variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000168 Operand CLE-CHERCHEUSE is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000168 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000170 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000170 Invalid expression [CLE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000171 Operand LIGNE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000171 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000172 Operand LIGNE-ARCHI is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000172 Operand LIGNE-ARCHI must be a variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000172 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-08-21 00:21:41 [0] Error     : ERR 000175 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000175 Operand CLE-CHERCHEUSE is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000177 Unexpected token END-IF, expected: 
+2026-08-21 00:21:41 [0] Error     : ERR 000179 Operand CLE-CHERCHEUSE is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000179 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Operand LIGNE-NARCHI is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Operand LIGNE-NARCHI must be a variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Operand LIGNE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Operand LIGNE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000180 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000184 Operand CLE-CHERCHEUSE is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000184 Operand CLE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000186 Unexpected token END-EVALUATE, expected: 
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Operand LIGNE-NARCHI is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Operand LIGNE-NARCHI must be a variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000190 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Operand LIGNE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Operand LIGNE-UNLOAD is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000190 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-21 00:21:41 [0] Error     : ERR 000193 Unexpected token END-IF, expected: 
+2026-08-21 00:21:41 [0] Error     : ERR 000202 Operand LIGNE-ARCHI is not declared.
+2026-08-21 00:21:41 [0] Error     : ERR 000202 Operand LIGNE-ARCHI must be a variable.
+2026-08-21 00:21:41 [0] Error     : ERR 000202 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------
+2026-08-21 00:21:41 [0] Phase     : D O N E
+2026-08-21 00:21:41 [0] Phase     : ------------------------------------------------------------

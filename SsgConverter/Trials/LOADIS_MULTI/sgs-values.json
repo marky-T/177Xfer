@@ -1,0 +1,21 @@
+{
+  "_source": "Derived from SSG-Source/LOADIS_MULTI.TXT directives; mirror of UNLOADIS_MULTI's SGS table (Trials/UNLOADIS_MULTI/sgs-values.json) with INPUT/OUTPUT roles swapped (LOADIS reads BDE, writes indexed DISQ).",
+  "ASCII": "1",
+  "SFS": "0",
+  "INPUT,1,1": "3",
+  "INPUT,1,1,1": "ECL-BDE1",
+  "INPUT,1,1,2": "80",
+  "INPUT,1,1,3": "1",
+  "OUTPUT,1,1,1": "ECL-DISQ",
+  "OUTPUT,1,1,2": "20",
+  "OUTPUT,1,1,3": "1",
+  "OUTPUT,1,1,4": "0",
+  "KEYIS": "2",
+  "KEYIS,1,1,1": "0",
+  "KEYIS,1,1,2": "8",
+  "KEYIS,1,1,3": "12",
+  "KEYIS,2,1": "4",
+  "KEYIS,2,1,1": "0",
+  "KEYIS,2,1,2": "12",
+  "KEYIS,2,1,3": "8"
+}

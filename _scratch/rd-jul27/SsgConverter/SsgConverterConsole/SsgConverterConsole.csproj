@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>SsgConverterConsole</RootNamespace>
+    <AssemblyName>SsgConverterConsole</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\amt.net\security\signingkeys\sourceproprietary.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\Amt.Net\AmtAssemblyInfo.cs" Link="Properties\AmtAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SsgConverter\SsgConverter.csproj" />
+    <ProjectReference Include="..\..\EclConverter\EclToAstOs2200\EclToAstOs2200.csproj" />
+    <ProjectReference Include="..\..\EclConverter\EclParserOs2200\EclParserOs2200.csproj" />
+    <ProjectReference Include="..\..\ConverterSupport\ConverterSupport.csproj" />
+    <ProjectReference Include="..\..\PowerShellWriter\PowerShellWriter.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+FileDescription: Asysco Lion Setup
+ProductName: Asysco Lion
+CompanyName: Asysco Software BV
+FileVersion: 8.0.26230.0
+ProductVersion: AMT 177 - 260818
+OriginalFilename: Setup.dll
+InternalName: Setup.dll
+LegalCopyright: Copyright © Asysco software 1998 - 2026

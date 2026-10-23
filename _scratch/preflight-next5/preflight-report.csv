@@ -1,0 +1,6 @@
+"Program","CallsAvailable","ExpandOk","Lines","AmtMsgs","ConvExit","Errors","Warnings","Defect"
+"CONDIS2_ASCII","18","True","566","0","0","0","22",""
+"EXTEUR","1","True","715","0","1","99","7","converter error: ERROR: ERR 000249 Field DB-EU001 is expected to have sub items but none found."
+"SCAN_ASCII","19","False","31","0","-","-","-","expansion failed: Error          : Cannot convert value ""R"" to type ""System.Int64"". Error: ""The"
+"TABAN_ASCII","27","True","301","0","0","0","7",""
+"TAPELD_ASCII","14","False","25","1","-","-","-","expansion failed: Error          : Cannot convert value ""CADR"" to type ""System.Int32"". Error:"

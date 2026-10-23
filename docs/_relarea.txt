@@ -1,0 +1,32 @@
+remote: origin	https://dev.azure.com/avanade-lt-coe/Federale/_git/Federale_InternalRelease (fetch) | origin	https://dev.azure.com/avanade-lt-coe/Federale/_git/Federale_InternalRelease (push)
+branch: main
+top-level entries:
+[D] AFBUS_AMT
+[D] AmtFramework
+[D] AmtLion
+[D] AmtTools
+[D] Scripts
+[D] TestAutomation
+[D] Valtab
+[F] .gitattributes
+[F] .gitignore
+[F] Build-And-Publish.ps1
+[F] Directory.Build.props
+[F] Lion.lic
+[F] README.md
+Scripts\ children (first 25):
+  AFLINC
+  AFLINC_START$
+  ASSURFED_F999
+  ASSURFED_UTILIT
+  DIA_DBASSG
+  ESYS$AF_COM
+  ESYS$AF_RUN
+  EUDEV_REPSSG
+  Libraries
+  Settings
+  SSGTRIAL
+  SYS_POTIER
+  SYS_ROCH
+  SYS$_RUNS
+Scripts_SSG exists: False

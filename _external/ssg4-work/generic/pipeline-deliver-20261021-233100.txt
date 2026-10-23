@@ -1,0 +1,19 @@
+Stage Deliver, environment CC-Trial, started 2026-10-21 23:31:00
+PASS GNBUILD        generated after                2026-10-21 22:59:21 (the build LionSource)
+PASS GNBUILD        imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               10/21/2026 11:18:46 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_BABA_GN pre-build checks               10/21/2026 11:18:45 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_FUSBA_GN pre-build checks               10/21/2026 11:18:48 PM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CHABAN_GN pre-build checks               10/21/2026 11:18:47 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CONDIS2_GN pre-build checks               10/21/2026 11:18:47 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_SCAN_GN pre-build checks               10/21/2026 11:18:50 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_TAPELD_GN pre-build checks               10/21/2026 11:18:50 PM ok (1 varying input(s) at 4001)
+PASS GNREF          generated after                2026-10-21 23:16:51 (the build LionSource)
+PASS GNREF          imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CONDIS2_RV pre-build checks               10/21/2026 11:18:48 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_CONDIS2_RD pre-build checks               10/21/2026 11:18:47 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RA pre-build checks               10/21/2026 11:18:50 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RB pre-build checks               10/21/2026 11:18:50 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RA pre-build checks               10/21/2026 11:18:50 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RB pre-build checks               10/21/2026 11:18:51 PM ok (static reference: T3-040 input check skipped)
+=== Deliver : all passed

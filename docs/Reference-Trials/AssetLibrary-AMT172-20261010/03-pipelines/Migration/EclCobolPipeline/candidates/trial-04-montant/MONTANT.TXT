@@ -1,0 +1,47 @@
+﻿       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. MONTANT. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  FILEIN  ASSIGN TO DISC FILEIN-1.
+           SELECT  FILEOUT ASSIGN TO DISC FILEOUT-1.   
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  FILEIN   
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS
+           RECORD CONTAINS 80  CHARACTERS
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X(80). 
+       FD  FILEOUT  
+           LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 1  RECORDS   
+           RECORD CONTAINS 80  CHARACTERS   
+           DATA RECORD IS REC-OUT.  
+       01  REC-OUT            PIC X(80).
+       WORKING-STORAGE SECTION. 
+       01  WS-IN  PIC X(80). 
+       01  WS-IN1 REDEFINES WS-IN.   
+               03 FILLER    PIC X(1).   
+               03 MONTANT1  PIC S9(9). 
+               03 FILLER    PIC X(1).  
+       01  WS-OUT  PIC X(80).   
+       01  WS-OUT1 REDEFINES WS-OUT. 
+               03 FILLER    PIC X(1).   
+               03 MONTANT1  PIC S9(9). 
+               03 FILLER    PIC X(1).  
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT FILEIN
+                OUTPUT FILEOUT. 
+       LECTURE. 
+           READ FILEIN INTO WS-IN AT END GO TO FIN. 
+           MOVE WS-IN TO WS-OUT.
+           COMPUTE MONTANT1 OF WS-OUT1 = MONTANT1 OF WS-IN1 * +1
+
+           WRITE REC-OUT FROM WS-OUT.   
+           GO TO LECTURE.   
+       FIN. 
+           CLOSE FILEIN FILEOUT.
+           STOP RUN.

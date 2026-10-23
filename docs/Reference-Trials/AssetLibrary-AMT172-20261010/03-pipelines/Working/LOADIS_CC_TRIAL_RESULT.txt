@@ -1,0 +1,9 @@
+﻿LOADIS_MULT_NODUP CC trial result
+- Job completed with BatchController ReportFinished exit code 0 and JobState 19.
+- Output file produced: C:\Amt\Working\Lion\Files\Extracts\ECL-TAPEOUT.DAT
+- Verification against C:\Amt\Migration\EclCobolPipeline\fixtures\LOADIS_MULT-NODUP\expected.dat:
+  - bytes: expected=95, actual=246
+  - lines: expected=4, actual=3
+  - content: not byte-for-byte identical; first diff at byte 20 (expected CR/LF, actual 'A').
+- Observed runtime behavior: the program wrote 80-character records, while the fixture expected compact 20-character records plus a trailer line.
+- Conclusion: runtime execution succeeded, but the fixture/output contract does not match the deployed program layout.

@@ -1,0 +1,729 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=CONDIS2ASCII,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=CONDIS2,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=CONDIS2ASCII,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=CONDIS2ASCII
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-10-12 11:10
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=0
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=CONDIS2,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=CONDIS2
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***                    -- CONDIS2 --
+  2009-01-01 12:00  =>***              UTILITAIRE - CFH-COPY CONDITIONNEL            ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     : UTILITAIRE TRANSFERT DE ZONES CONDITIONNEL          *
+  2009-01-01 12:00  =>* Analyste : SABLON                          (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : SABLON                                              *
+  2009-01-01 12:00  =>* Release  : 01                              (99)                *
+  2009-01-01 12:00  =>* VersIon  : 001                             (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* ModIfIcatIons :                                                *
+  2009-01-01 12:00  =>* QuI ?  Quand ?     QuoI ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>**************************
+  2009-01-01 12:00  => PROGRAM-ID.  CONDIS2.
+  2009-01-01 12:00  =>*-----------*
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  =>*======================*
+  2009-01-01 12:00  => SOURCE-COMPUTER.  UNIVAC-1110.
+  2009-01-01 12:00  =>*----------------*
+  2009-01-01 12:00  => OBJECT-COMPUTER.  UNIVAC-1110.
+  2009-01-01 12:00  =>*----------------*
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     PRINTER IS PRINER.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT FILEIN ASSIGN TO DISC FILEIN.
+  2009-01-01 12:00  =>     SELECT FILEOUT ASSIGN TO DISC FILEOUT.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  =>****************
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  =>*------------*
+  2009-01-01 12:00  => FD  FILEIN
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10 RECORDS
+  2009-01-01 12:00  =>         RECORD CONTAINS 80 CHARACTERS
+  2009-01-01 12:00  =>         LABEL RECORD STANDARD
+  2009-01-01 12:00  =>         DATA RECORD IS FSINPUT.
+  2009-01-01 12:00  => 01  FSINPUT.
+  2009-01-01 12:00  =>      02   FILLER    PIC X(80).
+  2009-01-01 12:00  => FD  FILEOUT
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10 RECORDS
+  2009-01-01 12:00  =>         RECORD CONTAINS 80 CHARACTERS
+  2009-01-01 12:00  =>         LABEL RECORD STANDARD
+  2009-01-01 12:00  =>         DATA RECORD IS FSOUTPUT.
+  2009-01-01 12:00  => 01  FSOUTPUT.
+  2009-01-01 12:00  =>     02   FILLER     PIC X(80).
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  =>*************************
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22A-200X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22A-201X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22A-202X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22A-203X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22B-200X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22B-201X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22B-202X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-22B-203X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66A-200X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66A-201X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66A-202X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66A-203X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66B-200X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66B-201X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66B-202X      PIC X.
+  2009-01-01 12:00  => 01  WS-RECORD-TRANSFORME-66B-203X      PIC X.
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22A-200X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22A-201X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22A-202X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22A-203X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22B-200X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22B-201X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22B-202X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-22B-203X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66A-200X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66A-201X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66A-202X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66A-203X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66B-200X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66B-201X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66B-202X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-TRANSFORME-66B-203X      PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-LU                PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-ECRIT             PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-OTHER             PIC 9(6).
+  2009-01-01 12:00  => 01  NB-REC-NONECRIT          PIC 9(6).
+  2009-01-01 12:00  => 01  WS-A6.
+  2009-01-01 12:00  =>     02 WS-A6-YY.
+  2009-01-01 12:00  =>        03 WS-A6-Y1           PIC X(01).
+  2009-01-01 12:00  =>        03 WS-A6-Y2           PIC X(01).
+  2009-01-01 12:00  =>     02 WS-A6-MM              PIC X(02).
+  2009-01-01 12:00  =>     02 WS-A6-JJ              PIC X(02).
+  2009-01-01 12:00  => 01  WS-A8.
+  2009-01-01 12:00  =>     02 WS-A8-YYY.
+  2009-01-01 12:00  =>        03 WS-A8-SS           PIC X(02).
+  2009-01-01 12:00  =>        03 FILLER             PIC X(01).
+  2009-01-01 12:00  =>     02 WS-A8-Y4              PIC X(01).
+  2009-01-01 12:00  =>     02 WS-A8-MM              PIC X(02).
+  2009-01-01 12:00  =>     02 WS-A8-JJ              PIC X(02).
+  2009-01-01 12:00  => 01  WS-A8-BIS REDEFINES WS-A8.
+  2009-01-01 12:00  =>     02 ws-a8-yy              pic x(02).
+  2009-01-01 12:00  =>     02 ws-a8-yymmjj          PIC X(06).
+  2009-01-01 12:00  => 01  WS-A4.
+  2009-01-01 12:00  =>     02 WS-A4-SS              PIC X(02).
+  2009-01-01 12:00  =>     02 WS-A4-AA.
+  2009-01-01 12:00  =>        03 WS-A4-A1           PIC X(01).
+  2009-01-01 12:00  =>        03 WS-A4-A2           PIC X(01).
+  2009-01-01 12:00  => 01  WS-A2.
+  2009-01-01 12:00  =>        03 WS-A2-A1           PIC X(01).
+  2009-01-01 12:00  =>        03 WS-A2-A2           PIC X(01).
+  2009-01-01 12:00  => 01  NB-REC-CASE-0            PIC 9(6).
+  2009-01-01 12:00  => 01  ENR-INPUT.
+  2009-01-01 12:00  =>        03  FILLER                PIC X(80).
+  2009-01-01 12:00  => 01  ENR-OUTPUT.
+  2009-01-01 12:00  =>        03  FILLER                PIC X(80).
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>********************
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT  FILEIN
+  2009-01-01 12:00  =>          OUTPUT FILEOUT.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-LU.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-ECRIT.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-NONECRIT.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22A-200X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22A-201X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22A-202X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22A-203X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22B-200X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22B-201X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22B-202X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-22B-203X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66A-200X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66A-201X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66A-202X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66A-203X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66B-200X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66B-201X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66B-202X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-TRANSFORME-66B-203X.
+  2009-01-01 12:00  =>     MOVE 0 TO NB-REC-OTHER.
+  2009-01-01 12:00  => TRT.
+  2009-01-01 12:00  =>     READ FILEIN INTO ENR-INPUT AT END GO TO FIN-TRT.
+  2009-01-01 12:00  =>     MOVE SPACES TO ENR-OUTPUT.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22A-200X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22A-201X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22A-202X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22A-203X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22B-200X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22B-201X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22B-202X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-22B-203X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66A-200X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66A-201X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66A-202X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66A-203X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66B-200X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66B-201X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66B-202X.
+  2009-01-01 12:00  =>     MOVE 'N' TO WS-RECORD-TRANSFORME-66B-203X.
+  2009-01-01 12:00  =>     ADD 1 TO NB-REC-LU.
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-CASE-0
+  2009-01-01 12:00  =>        PERFORM WRITE-REC-OUTPUT THRU WRITE-REC-OUTPUT-EXIT
+  2009-01-01 12:00  =>        GO TO TRT.
+  2009-01-01 12:00  => CASE-NON-PREVU.
+  2009-01-01 12:00  =>*    pas d'ecriture sur le fichier de sortie .....
+  2009-01-01 12:00  =>     GO TO TRT.
+  2009-01-01 12:00  => FIN-TRT.
+  2009-01-01 12:00  =>     DISPLAY 'NB ENREGISTREMENTS LUS    = ' NB-REC-LU
+  2009-01-01 12:00  =>                          UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB ENREGISTREMENTS ECRITS = ' NB-REC-ECRIT
+  2009-01-01 12:00  =>                          UPON PRINTER.
+  2009-01-01 12:00  =>     SUBTRACT NB-REC-ECRIT FROM NB-REC-LU GIVING NB-REC-NONECRIT.
+  2009-01-01 12:00  =>     IF NB-REC-NONECRIT > 0
+  2009-01-01 12:00  =>        DISPLAY '*******************************' UPON PRINTER
+  2009-01-01 12:00  =>        DISPLAY '*   attention                 *' UPON PRINTER
+  2009-01-01 12:00  =>        DISPLAY '*   certains records ne       *' UPon printer
+  2009-01-01 12:00  =>        DISPLAY '*   respectent aucun case     *' UPON PRInter
+  2009-01-01 12:00  =>        DISPLAY '*   et ne figurent donc pas   *' UPON PRInter
+  2009-01-01 12:00  =>        DISPLAY '*   sur le fichier output     *' UPON PRInter
+  2009-01-01 12:00  =>        DISPLAY '*******************************' UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB ENREGISTREMENTS OTHER = ' NB-REC-OTHER
+  2009-01-01 12:00  =>                                          UPON PRINTER.
+  2009-01-01 12:00  =>     display ' ' upon printer.
+  2009-01-01 12:00  =>     display ' ' upon printer.
+  2009-01-01 12:00  =>     display ' ' upon printer.
+  2009-01-01 12:00  =>     display ' ' upon printer.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 0X --> ;X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22A-200X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 1X --> _X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22A-201X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 2X --> |X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22A-202X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 3X --> ~X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22A-203X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) ;X --> 0X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22B-200X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) _X --> 1X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22B-201X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) |X --> 2X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22B-202X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) ~X --> 3X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-22B-203X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 0X --> ;X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66A-200X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 1X --> _X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66A-201X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 2X --> |X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66A-202X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 3X --> ~X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66A-203X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) ;X --> 0X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66B-200X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) _X --> 1X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66B-201X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) |X --> 2X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66B-202X UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) ~X --> 3X    = '
+  2009-01-01 12:00  =>             NB-REC-TRANSFORME-66B-203X UPON PRINTER.
+  2009-01-01 12:00  =>     CLOSE FILEIN FILEOUT.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => TRANSFO-DATE-4-2.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     MOVE WS-A4-AA TO WS-A2.
+  2009-01-01 12:00  =>     IF ((WS-A4 > '1999') AND (WS-A4 < '2010'))
+  2009-01-01 12:00  =>        MOVE ';' TO WS-A2-A1.
+  2009-01-01 12:00  =>     IF ((WS-A4 > '2009') AND (WS-A4 < '2020'))
+  2009-01-01 12:00  =>        MOVE '_' TO WS-A2-A1.
+  2009-01-01 12:00  =>     IF ((WS-A4 > '2019') AND (WS-A4 < '2030'))
+  2009-01-01 12:00  =>        MOVE '|' TO WS-A2-A1.
+  2009-01-01 12:00  =>     IF ((WS-A4 > '2029') AND (WS-A4 < '2040'))
+  2009-01-01 12:00  =>        MOVE '~' TO WS-A2-A1.
+  2009-01-01 12:00  => TRANSFO-DATE-4-2-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-2-4.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     IF WS-A2 = '00'
+  2009-01-01 12:00  =>        MOVE '0000' TO WS-A4
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2 = '  '
+  2009-01-01 12:00  =>        MOVE '    ' TO WS-A4
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = ';'
+  2009-01-01 12:00  =>        MOVE '20' TO WS-A4-SS
+  2009-01-01 12:00  =>        MOVE '0'  TO WS-A4-A1
+  2009-01-01 12:00  =>        MOVE WS-A2-A2  TO WS-A4-A2
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '_'
+  2009-01-01 12:00  =>        MOVE '20' TO WS-A4-SS
+  2009-01-01 12:00  =>        MOVE '1'  TO WS-A4-A1
+  2009-01-01 12:00  =>        MOVE WS-A2-A2  TO WS-A4-A2
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '|'
+  2009-01-01 12:00  =>        MOVE '20' TO WS-A4-SS
+  2009-01-01 12:00  =>        MOVE '2'  TO WS-A4-A1
+  2009-01-01 12:00  =>        MOVE WS-A2-A2  TO WS-A4-A2
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '~'
+  2009-01-01 12:00  =>        MOVE '20' TO WS-A4-SS
+  2009-01-01 12:00  =>        MOVE '3'  TO WS-A4-A1
+  2009-01-01 12:00  =>        MOVE WS-A2-A2  TO WS-A4-A2
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>     MOVE '19'     TO WS-A4-SS.
+  2009-01-01 12:00  =>     MOVE WS-A2    TO WS-A4-AA.
+  2009-01-01 12:00  =>     GO TO TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-2-4-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-22A.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '0'
+  2009-01-01 12:00  =>        MOVE ';'      TO WS-A2-A1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-200X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '1'
+  2009-01-01 12:00  =>        MOVE '_'      TO WS-A2-A1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-201X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '2'
+  2009-01-01 12:00  =>        MOVE '|'      TO WS-A2-A1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-202X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '3'
+  2009-01-01 12:00  =>        MOVE '~'      TO WS-A2-A1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-203X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22A-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-22A-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-66A.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     IF WS-A6 NOT NUMERIC
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF ((WS-A6-MM > '15') or (WS-A6-MM = '00'))
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF ((WS-A6-JJ > '35') or (WS-A6-JJ = '00'))
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '0'
+  2009-01-01 12:00  =>        MOVE ';'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-200X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '1'
+  2009-01-01 12:00  =>        MOVE '_'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-201X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '2'
+  2009-01-01 12:00  =>        MOVE '|'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-202X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '3'
+  2009-01-01 12:00  =>        MOVE '~'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-203X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-66A-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-66B.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = ';'
+  2009-01-01 12:00  =>        MOVE '0'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-200X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '_'
+  2009-01-01 12:00  =>        MOVE '1'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-201X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '|'
+  2009-01-01 12:00  =>        MOVE '2'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-202X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '~'
+  2009-01-01 12:00  =>        MOVE '3'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-203X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-66B-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-66B-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-68.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     MOVE WS-A6 TO WS-A8-YYMMJJ.
+  2009-01-01 12:00  =>     MOVE '19'  to WS-A8-YY.
+  2009-01-01 12:00  =>     IF WS-A6 = '      '
+  2009-01-01 12:00  =>        MOVE '        ' to WS-A8
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6 = '000000'
+  2009-01-01 12:00  =>        MOVE '00000000' to WS-A8
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = ';'
+  2009-01-01 12:00  =>        MOVE '200'    TO WS-A8-YYY
+  2009-01-01 12:00  =>        MOVE WS-A6-Y2 TO WS-A8-Y4
+  2009-01-01 12:00  =>        MOVE WS-A6-MM TO WS-A8-MM
+  2009-01-01 12:00  =>        MOVE WS-A6-JJ TO WS-A8-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '_'
+  2009-01-01 12:00  =>        MOVE '201'    TO WS-A8-YYY
+  2009-01-01 12:00  =>        MOVE WS-A6-Y2 TO WS-A8-Y4
+  2009-01-01 12:00  =>        MOVE WS-A6-MM TO WS-A8-MM
+  2009-01-01 12:00  =>        MOVE WS-A6-JJ TO WS-A8-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '|'
+  2009-01-01 12:00  =>        MOVE '202'    TO WS-A8-YYY
+  2009-01-01 12:00  =>        MOVE WS-A6-Y2 TO WS-A8-Y4
+  2009-01-01 12:00  =>        MOVE WS-A6-MM TO WS-A8-MM
+  2009-01-01 12:00  =>        MOVE WS-A6-JJ TO WS-A8-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>     IF WS-A6-Y1 = '~'
+  2009-01-01 12:00  =>        MOVE '203'    TO WS-A8-YYY
+  2009-01-01 12:00  =>        MOVE WS-A6-Y2 TO WS-A8-Y4
+  2009-01-01 12:00  =>        MOVE WS-A6-MM TO WS-A8-MM
+  2009-01-01 12:00  =>        MOVE WS-A6-JJ TO WS-A8-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-68-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-86.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     MOVE WS-A8-YYMMJJ TO WS-A6.
+  2009-01-01 12:00  =>     IF WS-A8 NOT NUMERIC
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF ((WS-A8-MM > '15') or (WS-A8-MM = '00'))
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF ((WS-A8-JJ > '35') or (WS-A8-JJ = '00'))
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF WS-A8-YYY = '200'
+  2009-01-01 12:00  =>        MOVE ';'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE WS-A8-Y4 TO WS-A6-Y2
+  2009-01-01 12:00  =>        MOVE WS-A8-MM TO WS-A6-MM
+  2009-01-01 12:00  =>        MOVE WS-A8-JJ TO WS-A6-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF WS-A8-YYY = '201'
+  2009-01-01 12:00  =>        MOVE '_'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE WS-A8-Y4 TO WS-A6-Y2
+  2009-01-01 12:00  =>        MOVE WS-A8-MM TO WS-A6-MM
+  2009-01-01 12:00  =>        MOVE WS-A8-JJ TO WS-A6-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF WS-A8-YYY = '202'
+  2009-01-01 12:00  =>        MOVE '|'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE WS-A8-Y4 TO WS-A6-Y2
+  2009-01-01 12:00  =>        MOVE WS-A8-MM TO WS-A6-MM
+  2009-01-01 12:00  =>        MOVE WS-A8-JJ TO WS-A6-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF WS-A8-YYY = '203'
+  2009-01-01 12:00  =>        MOVE '~'      TO WS-A6-Y1
+  2009-01-01 12:00  =>        MOVE WS-A8-Y4 TO WS-A6-Y2
+  2009-01-01 12:00  =>        MOVE WS-A8-MM TO WS-A6-MM
+  2009-01-01 12:00  =>        MOVE WS-A8-JJ TO WS-A6-JJ
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>     IF WS-A8-SS = '19'
+  2009-01-01 12:00  =>        MOVE WS-A8-YYMMJJ   TO WS-A6
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-86-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-22B.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     IF WS-A2-A1 = ';'
+  2009-01-01 12:00  =>        MOVE '0'      TO WS-A2-A1
+  2009-01-01 12:00  =>        move 'Y' TO WS-RECORD-TRANSFORME-22B-200X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '_'
+  2009-01-01 12:00  =>        MOVE '1'      TO WS-A2-A1
+  2009-01-01 12:00  =>        move 'Y' TO WS-RECORD-TRANSFORME-22B-201X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '|'
+  2009-01-01 12:00  =>        MOVE '2'      TO WS-A2-A1
+  2009-01-01 12:00  =>        move 'Y' TO WS-RECORD-TRANSFORME-22B-202X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22B-EXIT.
+  2009-01-01 12:00  =>     IF WS-A2-A1 = '~'
+  2009-01-01 12:00  =>        MOVE '3'      TO WS-A2-A1
+  2009-01-01 12:00  =>        move 'Y' TO WS-RECORD-TRANSFORME-22B-203X
+  2009-01-01 12:00  =>        GO TO TRANSFO-DATE-22B-EXIT.
+  2009-01-01 12:00  => TRANSFO-DATE-22B-EXIT.
+  2009-01-01 12:00  =>******************
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => WRITE-REC-OUTPUT.
+  2009-01-01 12:00  =>*******************
+  2009-01-01 12:00  =>     ADD 1 TO NB-REC-ECRIT.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22A-200X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22A-200X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22A-201X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22A-201X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22A-202X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22A-202X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22A-203X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22A-203X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22B-200X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22B-200X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22B-201X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22B-201X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22B-202X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22B-202X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-22B-203X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-22B-203X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66A-200X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66A-200X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66A-201X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66A-201X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66A-202X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66A-202X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66A-203X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66A-203X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66B-200X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66B-200X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66B-201X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66B-201X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66B-202X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66B-202X.
+  2009-01-01 12:00  =>     IF WS-RECORD-TRANSFORME-66B-203X = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO NB-REC-TRANSFORME-66B-203X.
+  2009-01-01 12:00  =>     WRITE FSOUTPUT FROM ENR-OUTPUT.
+  2009-01-01 12:00  => WRITE-REC-OUTPUT-EXIT.
+  2009-01-01 12:00  =>************************
+  2009-01-01 12:00  =>     EXIT.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                    -- CONDIS2 --  
+  ***              UTILITAIRE - CFH-COPY CONDITIONNEL            ***
+  ***------------------------------------------------------------***
+  * Type     : UTILITAIRE TRANSFERT DE ZONES CONDITIONNEL          *
+  * Analyste : SABLON                          (INITIALES)         *
+  * Auteur   : SABLON                                              *
+  * Release  : 01                              (99)                *
+  * VersIon  : 001                             (999)               *
+  *----------------------------------------------------------------*
+  * ModIfIcatIons :                                                *
+  * QuI ?  Quand ?     QuoI ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  **************************
+  PROGRAM-ID. .
+  *-----------* 
+  / 
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

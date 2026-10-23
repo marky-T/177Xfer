@@ -1,0 +1,1324 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Federale SSG-COBOL Utility Programs — Reference &amp; Investigation</title>
+<style>
+  :root {
+    --nav-w:240px; --done:#1a7f4b; --prog:#b45309; --pend:#6b7280;
+    --bug:#b91c1c; --code-bg:#1e1e2e; --code-fg:#cdd6f4;
+    --border:#e5e7eb; --accent:#1d4ed8; --bg:#f9fafb; --card:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:14px; background:var(--bg); color:#111827; display:flex; min-height:100vh; }
+  nav { width:var(--nav-w); min-width:var(--nav-w); background:#1e293b; color:#e2e8f0; position:sticky; top:0; height:100vh; overflow-y:auto; flex-shrink:0; }
+  nav .logo { padding:14px 16px 10px; border-bottom:1px solid #334155; }
+  nav .logo h1 { font-size:13px; font-weight:700; color:#f1f5f9; letter-spacing:.5px; text-transform:uppercase; }
+  nav .logo p  { font-size:11px; color:#94a3b8; margin-top:3px; }
+  nav ul { list-style:none; padding:4px 0; }
+  nav ul li a { display:block; padding:7px 16px; font-size:12px; color:#cbd5e1; text-decoration:none; transition:background .15s; border-left:3px solid transparent; }
+  nav ul li a:hover { background:#334155; color:#f1f5f9; border-left-color:#60a5fa; }
+  nav ul li a.active { background:#1e3a5f; color:#93c5fd; border-left-color:#3b82f6; }
+  nav ul li.section { padding:10px 16px 3px; font-size:10px; color:#64748b; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  nav ul li.sub a { padding-left:28px; font-size:11.5px; color:#94a3b8; }
+  main { flex:1; padding:28px 36px; max-width:980px; }
+  .page-title h1 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:4px; }
+  .page-meta { font-size:12px; color:#6b7280; margin-bottom:22px; }
+  .badge { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
+  .badge-done { background:#dcfce7; color:var(--done); }
+  .badge-prog { background:#fef3c7; color:var(--prog); }
+  .badge-pend { background:#f3f4f6; color:var(--pend); }
+  .badge-info { background:#dbeafe; color:#1d4ed8; }
+
+  /* Cards */
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:22px 26px; margin-bottom:26px; }
+  .section-card h2 { font-size:16px; font-weight:700; color:#0f172a; margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid var(--border); }
+  .section-card h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .section-card h4 { font-size:13px; font-weight:600; color:#374151; margin:12px 0 6px; }
+  .section-card p  { margin-bottom:10px; line-height:1.6; }
+  .section-card ul, .section-card ol { margin:0 0 10px 20px; line-height:1.7; }
+  .section-card li { margin-bottom:3px; }
+
+  /* Code */
+  .code-wrap { position:relative; margin:12px 0; }
+  .code-label { font-size:10px; color:#6b7280; font-family:monospace; background:#f3f4f6; padding:3px 10px; border-radius:4px 4px 0 0; display:inline-block; border:1px solid #e5e7eb; border-bottom:none; }
+  pre { background:var(--code-bg); color:var(--code-fg); padding:15px 18px; border-radius:0 6px 6px 6px; overflow-x:auto; font-size:12px; line-height:1.6; font-family:'Cascadia Code','Fira Code',Consolas,'Courier New',monospace; white-space:pre; }
+  code { background:#f3f4f6; color:#be185d; padding:1px 5px; border-radius:3px; font-size:12px; font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+
+  /* Callout boxes */
+  .warn        { background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .info-box    { background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+  .success-box { background:#f0fdf4; border-left:4px solid #22c55e; padding:10px 14px; border-radius:4px; margin:12px 0; font-size:13px; line-height:1.6; }
+
+  /* Tables */
+  table.ref { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+  table.ref th { background:#f0f4f8; padding:6px 10px; border:1px solid #ddd; text-align:left; font-weight:600; font-size:12px; }
+  table.ref td { padding:5px 10px; border:1px solid #ddd; vertical-align:top; line-height:1.55; }
+  table.ref tr:nth-child(even) td { background:#fafafa; }
+  table.ref code { font-size:11.5px; }
+
+  /* Status indicators */
+  .dot-done::before { content:'●'; color:var(--done); margin-right:5px; }
+  .dot-pend::before { content:'○'; color:var(--pend); margin-right:5px; }
+  .dot-prog::before { content:'◑'; color:var(--prog); margin-right:5px; }
+
+  /* SSG / ECL syntax colouring (for use inside <pre> via <span>) */
+  .ssg-directive { color:#c084fc; font-weight:600; }   /* *DEFINE *SET *INCREMENT etc  */
+  .ssg-param     { color:#fbbf24; }                    /* [INPUT,1,1,1] macro params    */
+  .ssg-comment   { color:#6a9955; font-style:italic; } /* ← annotations                 */
+  .ssg-keyword   { color:#569cd6; }                    /* COBOL division headers         */
+  .ecl-directive { color:#4ec9b0; font-weight:600; }   /* @XQT @ASG @USE etc            */
+  .ecl-file      { color:#ce9178; }                    /* file names in ECL              */
+  .csharp-kw     { color:#569cd6; }
+  .csharp-type   { color:#4ec9b0; }
+  .csharp-cmt    { color:#6a9955; font-style:italic; }
+  .csharp-str    { color:#ce9178; }
+
+  /* Example header banner */
+  .example-header { background:linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 100%); color:white; padding:16px 22px; border-radius:8px 8px 0 0; }
+  .example-header h3 { font-size:16px; font-weight:700; color:white; margin:0; }
+  .example-header p  { font-size:12px; color:#bfdbfe; margin:5px 0 0; }
+  .example-body { border:1px solid #c7d2fe; border-top:none; border-radius:0 0 8px 8px; padding:22px 26px; margin-bottom:28px; background:white; }
+  .example-body h3 { font-size:14px; font-weight:600; color:#1d4ed8; margin:18px 0 8px; }
+  .example-body h3:first-child { margin-top:0; }
+  .example-body p  { margin-bottom:10px; line-height:1.6; }
+  .example-body ul, .example-body ol { margin:0 0 10px 20px; line-height:1.7; }
+
+  /* Back / nav links */
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:#1d4ed8; text-decoration:none; font-size:13px; margin-bottom:18px; }
+  .back-link:hover { text-decoration:underline; }
+  .footer-bar { margin-top:36px; padding-top:14px; border-top:1px solid var(--border); font-size:12px; color:#9ca3af; }
+  .footer-bar a { color:#1d4ed8; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ SIDEBAR NAV -->
+<nav id="sidenav">
+  <div class="logo">
+    <h1>SSG-COBOL</h1>
+    <p>Reference &amp; Investigation</p>
+  </div>
+  <ul>
+    <li><a href="AMT172-Setup-Guide.html" style="color:#60a5fa;border-left-color:#60a5fa;background:#1a2e4a;">&#8592; AMT172 Setup Guide</a></li>
+    <li><a href="SSG-ECL-PowerShell-Reference.html">&#8596; SSG-ECL / PowerShell</a></li>
+    <li><a href="SSG-Trial-Progress.html">&#8596; Trial Progress</a></li>
+    <li><a href="SSG-ECL-Command-Matrix.html">&#8596; ECL/SSG Command Matrix</a></li>
+    <li style="border-bottom:1px solid #334155;margin:2px 0 6px;"></li>
+    <li class="section">Overview</li>
+    <li><a href="#overview">1 · Overview</a></li>
+    <li class="section">Background</li>
+    <li><a href="#ecl-primer">2 · ECL Primer</a></li>
+    <li><a href="#ssg-macros">3 · SSG Macro Language</a></li>
+    <li><a href="#invocation">4 · ECL Invocation Pattern</a></li>
+    <li class="section">Programs</li>
+    <li><a href="#inventory">5 · 16 Programs Inventory</a></li>
+    <li class="section">Examples</li>
+    <li><a href="#examples">6 · Worked Examples</a></li>
+    <li class="sub"><a href="#ex1">Ex 1 · MONTANT_SIGNE</a></li>
+    <li class="sub"><a href="#ex2">Ex 2 · LECTIS_MULT</a></li>
+    <li class="sub"><a href="#ex3">Ex 3 · TRI_ASCII (SORT)</a></li>
+
+    <li class="section">Patterns</li>
+    <li><a href="#patterns">7 &middot; Transformation Patterns</a></li>  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════ MAIN -->
+<main>
+  <a class="back-link" href="AMT172-Setup-Guide.html">&#8592; AMT172 Setup Guide</a>
+
+  <div class="page-title">
+    <h1>Federale SSG-COBOL Utility Programs</h1>
+    <p style="font-size:14px;color:#6b7280;margin-top:3px;font-weight:400;">Reference &amp; Investigation</p>
+  </div>
+  <p class="page-meta">Last updated: 2026-06-25 &nbsp;|&nbsp; AMT 172 (8.0.26125.0 RC1) &nbsp;|&nbsp; Federale migration — AFBUS COBOL batch utilities</p>
+
+  <!-- ─────────────────────────────────────────── SECTION 1: OVERVIEW -->
+  <div class="section-card" id="overview">
+    <h2>1. Overview</h2>
+    <p>
+      Federale (Belgian insurance company) uses a set of <strong>16 SSG-COBOL utility programs</strong> as
+      reusable batch file-transformation building blocks within its Unisys 2200 (OS 2200) mainframe estate.
+      These programs are stored in the mainframe file library <code>*UTILIT</code> and correspond to the
+      files in <code>SSG Prd / SSG Creating COBOL</code> from the 2025 code drop.
+    </p>
+    <p>
+      Unlike conventional compiled programs, these are <strong>SSG (Source Statement Generator) templates</strong>
+      — parameterised COBOL source that is compiled <em>inline at job runtime</em> by the ECL job stream,
+      not pre-compiled. Each invocation can produce a COBOL program with a different record layout by
+      varying its macro parameters (record sizes, field positions, number of fields, etc.).
+    </p>
+    <p>
+      In the AMT 172 migration project, these programs are converted to C# using the COBOL Converter tool
+      (Phase 12 → <code>.LionSource</code>) and then generated into a C# assembly by LionDevGenNet (Phase 13).
+    </p>
+    <div class="info-box">
+      <strong>Source location (mainframe code drop):</strong><br>
+      <code>C:\Amt\MainframeSource\Codedrop 2025\SSG Prd\SSG Creating COBOL\</code><br>
+      16 files, all prefixed <code>ASSURFED_UTILIT_</code>, Windows-1252 encoded.
+    </div>
+    <div class="warn">
+      <strong>&#9888; Encoding note:</strong> All ECL and SSG source files in this code drop are
+      <strong>Windows-1252 encoded</strong>. VS Code's built-in search and grep tools return no results
+      on these files. Always use PowerShell for any file reading or searching:<br><br>
+      <code>$bytes = [System.IO.File]::ReadAllBytes($path)</code><br>
+      <code>$text  = [System.Text.Encoding]::GetEncoding(1252).GetString($bytes)</code>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 2: ECL PRIMER -->
+  <div class="section-card" id="ecl-primer">
+    <h2>2. Unisys ECL — Key Directives</h2>
+    <p>
+      ECL (Executive Control Language) is the Unisys OS 2200 equivalent of JCL (IBM z/OS) or Windows
+      batch scripts. A job stream is stored as a <code>.TXT</code> file in <code>RunsPrd\</code>.
+      The directives relevant to SSG-COBOL program invocation are listed below.
+    </p>
+    <table class="ref">
+      <thead>
+        <tr><th style="width:34%">Directive</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>@ASG,UP filename,options</code></td>
+          <td>Assign (create) a new temporary file. <code>UP</code> = unscratched permanent. Options include <code>F/granules/type/blocks</code>.</td>
+        </tr>
+        <tr>
+          <td><code>@ASG,A filename</code></td>
+          <td>Assign an existing catalogued file for use in this run.</td>
+        </tr>
+        <tr>
+          <td><code>@USE logicalname,physicalfile</code></td>
+          <td>Bind a logical file name (the name used inside the program, e.g. <code>INB</code>) to a physical file path.</td>
+        </tr>
+        <tr>
+          <td><code>@DELETE,C filename</code></td>
+          <td>Delete a file if it exists. <code>,C</code> = conditional — no error if the file is absent.</td>
+        </tr>
+        <tr>
+          <td><code>@CAT,P filename,options</code></td>
+          <td>Catalog (create) a permanent file. <code>F/0/POS/nnnn</code> = fixed organisation, 0 initial granules, POS type, nnnn block capacity.</td>
+        </tr>
+        <tr>
+          <td><code>@SSG,IA *qualifier.element/type</code></td>
+          <td>
+            <strong>Inline SSG assembly.</strong> Reads SSG macro parameters from the lines that follow,
+            compiles the SSG-COBOL template on-the-fly, and makes the resulting program available for
+            <code>@XQT</code>. The compiled object is stored in the <code>TPF$</code> temporary namespace.<br>
+            <code>IA</code> = Inline Assembly. <code>*qualifier.element/type</code> identifies the source
+            in the mainframe library (e.g. <code>*UTILIT.CFH-COPY/ASCII</code>).
+          </td>
+        </tr>
+        <tr>
+          <td><code>@XQT .progname</code><br><code>@XQT,WR .progname</code></td>
+          <td>Execute a compiled program. The <code>.</code> prefix means "this run's TPF$ namespace" (the just-compiled object). <code>WR</code> = write-run (retain the run image).</td>
+        </tr>
+        <tr>
+          <td><code>@FREE filename</code></td>
+          <td>Release a file assignment — detaches the logical name from the physical file.</td>
+        </tr>
+        <tr>
+          <td><code>@ADD qualifier*element</code></td>
+          <td>Include another ECL stream inline, similar to <code>#include</code>. Commonly used for shared restart/recovery ECL (e.g. <code>@ADD SYS$*RUNS.REPRISE</code>).</td>
+        </tr>
+        <tr>
+          <td><code>@LAB label: MSG text</code></td>
+          <td>Define a label with a console message. Other directives can branch to it on failure.</td>
+        </tr>
+        <tr>
+          <td><code>@EOF</code></td>
+          <td>End-of-file marker / conditional branch: if the preceding command failed, execution skips to this point or to a named label.</td>
+        </tr>
+        <tr>
+          <td><code>@TIME</code></td>
+          <td>Emit a timestamp entry to the job log.</td>
+        </tr>
+        <tr>
+          <td><code>@ERS qualifier$</code></td>
+          <td>Erase a scratch qualifier (all temporary files under that qualifier for this run).</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <strong>File naming convention:</strong> Unisys files use a <em>qualifier*element</em> naming scheme.
+      <code>*UTILIT</code> is a library qualifier (not a folder path). <code>TPF$</code> is the scratch/temp
+      qualifier used during inline compilation. The dot prefix in <code>@XQT .MONTANT</code> means
+      "the object named MONTANT in this run's TPF$ scratch space."
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 3: SSG MACROS -->
+  <div class="section-card" id="ssg-macros">
+    <h2>3. SSG Macro Language</h2>
+    <p>
+      SSG (Source Statement Generator) is Unisys's pre-processor for COBOL on OS 2200. It expands
+      parameterised templates into standard COBOL source before the COBOL compiler runs. Think of it
+      as a macro assembler for COBOL — closer in spirit to C <code>#define</code> than to COBOL COPY
+      statements, because it can conditionally generate or loop-generate entire DATA DIVISION entries.
+    </p>
+
+    <h3>3.1 Directives</h3>
+    <table class="ref">
+      <thead><tr><th style="width:38%">Directive</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>*DEFINE name</code> … <code>*END</code></td>
+          <td>Define a named macro. The body contains one or more <code>*SET</code> statements.
+              Positional arguments are referenced as <code>[#1]</code>, <code>[#2]</code>, <code>[#3]</code>.</td>
+        </tr>
+        <tr>
+          <td><code>*SET varname TO expression</code></td>
+          <td>Within a <code>*DEFINE</code> block: compute a value and store it.
+              Arithmetic on positional arguments and constants is supported.</td>
+        </tr>
+        <tr>
+          <td><code>*PROCESS macroname arg1 arg2 …</code></td>
+          <td>Invoke a named macro with arguments. The result is stored as <code>[*varname]</code>
+              (using the variable name from the macro's <code>*SET</code> statement).</td>
+        </tr>
+        <tr>
+          <td><code>*INCREMENT I FROM n BY m TO [param]</code></td>
+          <td>Loop start: generate repeated COBOL code blocks. Loop variable <code>I</code> runs
+              from <code>n</code> to <code>[param]</code> in steps of <code>m</code>.
+              Use <code>[*I]</code> inside the block to embed the counter.</td>
+        </tr>
+        <tr>
+          <td><code>*LOOP</code></td>
+          <td>End of <code>*INCREMENT</code> loop. Everything between <code>*INCREMENT</code>
+              and <code>*LOOP</code> is repeated once per iteration.</td>
+        </tr>
+        <tr>
+          <td><code>*IF</code> / <code>*ELSE</code> / <code>*ENDIF</code></td>
+          <td>Conditional code generation based on parameter values or other SSG variables.</td>
+        </tr>
+        <tr>
+          <td><code>#ACOB</code></td>
+          <td>Assembler-COBOL bridge directive (OS 2200 specific). Marks an inline assembler section.</td>
+        </tr>
+        <tr>
+          <td><code>@UCOB,I target1,target2</code></td>
+          <td>ECL directive embedded in the SSG source: compile the following COBOL inline.
+              <code>I</code> = immediate. Output objects are written to the <code>TPF$</code>
+              scratch space under the specified names.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3.2 Parameter Address Syntax</h3>
+    <p>
+      SSG macro parameters are supplied as a structured table on the control cards following
+      <code>@SSG,IA</code>. Individual values within that table are addressed using
+      <strong>four-part notation</strong>:
+    </p>
+    <div class="code-wrap">
+      <span class="code-label">SSG parameter address syntax</span>
+      <pre><span class="ssg-param">[PARAM, row, col, field]</span>
+
+  PARAM  — parameter group name (matches the control card keyword, e.g. INPUT, OUTPUT, MONTANT)
+  row    — row number within that group (usually 1)
+  col    — column/item number within the row (usually 1)
+  field  — position of the sub-value within that item (1-based)
+
+Examples from MONTANT_SIGNE:
+
+  <span class="ssg-param">[INPUT,1,1,1]</span>  → INPUT param, row 1, col 1, field 1  =  logical file name   (e.g. "INB")
+  <span class="ssg-param">[INPUT,1,1,2]</span>  → INPUT param, row 1, col 1, field 2  =  record size          (e.g. 80)
+  <span class="ssg-param">[INPUT,1,1,3]</span>  → INPUT param, row 1, col 1, field 3  =  blocking factor       (e.g. 1)
+  <span class="ssg-param">[MONTANT]</span>      → MONTANT param (scalar) =  number of amount fields  (e.g. 3)
+  <span class="ssg-param">[MONTANT,I,1,1]</span> → MONTANT param, row I (loop var), col 1, field 1  =  byte offset of field I
+  <span class="ssg-param">[MONTANT,I,1,2]</span> → MONTANT param, row I, col 1, field 2  =  digit width of field I</pre>
+    </div>
+
+    <h3>3.3 Computed References</h3>
+    <p>
+      When a <code>*PROCESS</code> macro is invoked, it stores its computed result in the named variable
+      from the macro's <code>*SET</code> statement. That result is then referenced as
+      <code>[*varname]</code> in the surrounding COBOL:
+    </p>
+    <div class="code-wrap">
+      <span class="code-label">FILUN macro definition and usage (from MONTANT_SIGNE)</span>
+      <pre><span class="ssg-directive">*DEFINE</span> FILUN                       <span class="ssg-comment">← define a macro named FILUN</span>
+<span class="ssg-directive">*SET</span> FILLUN  TO  [#1]-1             <span class="ssg-comment">← FILLUN = arg1 minus 1  (converts 1-based offset → filler byte count)</span>
+<span class="ssg-directive">*END</span>
+
+Usage in DATA DIVISION:
+<span class="ssg-directive">*PROCESS</span> FILUN <span class="ssg-param">[MONTANT,I,1,1]</span>      <span class="ssg-comment">← invoke FILUN, passing field-start offset as argument 1</span>
+               03 FILLER  PIC X(<span class="ssg-param">[*FILLUN]</span>). <span class="ssg-comment">← reference the computed result</span></pre>
+    </div>
+
+    <h3>3.4 Loop Generation</h3>
+    <p>
+      The <code>*INCREMENT … *LOOP</code> construct generates repeated COBOL statements, substituting
+      <code>[*I]</code> with the current loop counter. This is how a single SSG template produces
+      N separate REDEFINES overlays — one per parameterised field — without any manual repetition:
+    </p>
+    <div class="code-wrap">
+      <span class="code-label">Loop pattern — generates WS-IN1, WS-IN2, … WS-INn  (n = [MONTANT])</span>
+      <pre><span class="ssg-directive">*INCREMENT</span> I FROM 1 BY 1 TO <span class="ssg-param">[MONTANT]</span>        <span class="ssg-comment">← loop: I = 1, 2, … MONTANT</span>
+       01  WS-IN<span class="ssg-param">[*I]</span> REDEFINES WS-IN.              <span class="ssg-comment">← generates: WS-IN1 REDEFINES WS-IN, WS-IN2 REDEFINES WS-IN, …</span>
+<span class="ssg-directive">*PROCESS</span> FILUN  <span class="ssg-param">[MONTANT,I,1,1]</span>               <span class="ssg-comment">← compute filler = offset[I] − 1</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLUN]</span>).     <span class="ssg-comment">← skip bytes to reach field position</span>
+               03 MONTANT<span class="ssg-param">[*I]</span>  PIC S9(<span class="ssg-param">[MONTANT,I,1,2]</span>). <span class="ssg-comment">← named signed numeric: MONTANT1, MONTANT2, …</span>
+<span class="ssg-directive">*PROCESS</span> FILDEU <span class="ssg-param">[INPUT,1,1,2]</span> <span class="ssg-param">[MONTANT,I,1,1]</span> <span class="ssg-param">[MONTANT,I,1,2]</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLDEU]</span>).    <span class="ssg-comment">← remaining bytes to end of record</span>
+<span class="ssg-directive">*LOOP</span>                                              <span class="ssg-comment">← end loop</span></pre>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 4: INVOCATION -->
+  <div class="section-card" id="invocation">
+    <h2>4. ECL Invocation Pattern</h2>
+    <p>
+      The following is a real ECL extract from job stream
+      <code>ASSURFED_F999RUN_VIRM01_CO(P).TXT</code>, showing a complete <code>CFH-COPY</code>
+      invocation. This pattern — <em>compile with parameters, then assign files, then execute</em>
+      — applies to all 16 SSG-COBOL utility programs.
+    </p>
+    <div class="code-wrap">
+      <span class="code-label">ASSURFED_F999RUN_VIRM01_CO(P).TXT — CFH-COPY invocation (annotated)</span>
+      <pre><span class="ssg-comment">@ .  ───────────────────────────────────────────────────────────────────</span>
+<span class="ssg-comment">@MSG  RECOPIER LES ENREGISTREMENTS  D'UN FICHIER ASCII.</span>
+<span class="ssg-comment">@ .  ───────────────────────────────────────────────────────────────────</span>
+
+<span class="ecl-directive">@SSG,IA</span>  <span class="ecl-file">*UTILIT.CFH-COPY/ASCII</span>           <span class="ssg-comment">← STEP 1: Compile SSG template from library *UTILIT</span>
+<span class="ssg-keyword">SGS</span>                                      <span class="ssg-comment">            SSG control card</span>
+<span class="ssg-keyword">ASCII</span>                                    <span class="ssg-comment">            Parameter group name</span>
+<span class="ssg-param">INPUT      INB,500,10</span>                   <span class="ssg-comment">            INPUT param: logname=INB, recsize=500, blocking=10</span>
+<span class="ssg-param">OUTPUT     INC,135,10</span>                   <span class="ssg-comment">            OUTPUT param: logname=INC, recsize=135, blocking=10</span>
+<span class="ssg-param">FIELDIN    6,9 19,6 403,2 57,8 65,4 113,24 161,24 405,16 421,24 265,8</span>
+<span class="ssg-param">FIELDOUT   11,9 20,6 26,2 28,8 36,4 40,24 64,24 88,16 104,24 128,8</span>
+                                         <span class="ssg-comment">← blank line terminates the SSG parameter block</span>
+<span class="ecl-directive">@ASG,A</span>     <span class="ecl-file">I006VRM01ATT.</span>                <span class="ssg-comment">← STEP 2: Assign physical input file</span>
+<span class="ecl-directive">@USE</span>       <span class="ecl-file">INB,I006VRM01ATT.</span>            <span class="ssg-comment">            Bind logical name INB → physical file I006VRM01ATT</span>
+<span class="ecl-directive">@DELETE,C</span>  <span class="ecl-file">I006VRM01ATC.</span>                <span class="ssg-comment">← STEP 3: Clear output file (conditional)</span>
+<span class="ecl-directive">@CAT,P</span>     <span class="ecl-file">I006VRM01ATC,F/0/POS/4000</span>   <span class="ssg-comment">            Create new permanent output file</span>
+<span class="ecl-directive">@ASG,A</span>     <span class="ecl-file">I006VRM01ATC.</span>                <span class="ssg-comment">            Assign it</span>
+<span class="ecl-directive">@USE</span>       <span class="ecl-file">INC,I006VRM01ATC</span>             <span class="ssg-comment">            Bind logical name INC → physical file I006VRM01ATC</span>
+<span class="ecl-directive">@XQT,WR</span>    .CFH-COPY                    <span class="ssg-comment">← STEP 4: Execute compiled program (. = TPF$ scope)</span>
+<span class="ecl-directive">@FREE</span>      <span class="ecl-file">I006VRM01ATC.</span>                <span class="ssg-comment">← STEP 5: Release file assignments</span>
+<span class="ecl-directive">@FREE</span>      <span class="ecl-file">I006VRM01ATT.</span>
+<span class="ecl-directive">@ERS</span>       TPF$.                        <span class="ssg-comment">            Erase all TPF$ temp files from this run</span>
+<span class="ecl-directive">@TIME</span>                                   <span class="ssg-comment">            Write timestamp to job log</span>
+<span class="ecl-directive">@EOF</span>                                    <span class="ssg-comment">            End of this job step</span></pre>
+    </div>
+
+    <h3>Key Observations</h3>
+    <ul>
+      <li>
+        <strong>Compile first, assign files second.</strong>
+        The <code>@SSG,IA</code> block with its parameter cards precedes the <code>@ASG</code>/<code>@USE</code>
+        file assignments. The SSG compiler only needs the parameter values (record sizes, field specs);
+        the physical file bindings come later.
+      </li>
+      <li>
+        <strong>Logical names in SSG parameters match <code>@USE</code> bindings.</strong>
+        <code>INPUT  INB,500,10</code> tells the compiled COBOL to <code>SELECT FILEIN ASSIGN TO DISC INB</code>.
+        The ECL then binds <code>INB</code> to a real file via <code>@USE INB,I006VRM01ATT.</code>
+      </li>
+      <li>
+        <strong>Record size and blocking factor are macro parameters.</strong>
+        The same CFH-COPY template produces programs with completely different record structures in
+        different job streams — no recompilation of the canonical source is needed.
+      </li>
+      <li>
+        <strong><code>*UTILIT</code> is a Unisys file library qualifier</strong>, not a directory
+        path. On the mainframe it identifies the library where the SSG source element resides.
+      </li>
+      <li>
+        <strong><code>@XQT .PROGNAME</code> uses a dot prefix</strong> to reference the just-compiled
+        program object that was placed in the <code>TPF$</code> temporary namespace by <code>@SSG,IA</code>.
+      </li>
+      <li>
+        <strong>The compiled PROGRAM-ID may differ from the source element name.</strong>
+        <code>MONTANT_SIGNE</code> (source element name) compiles a program whose
+        <code>PROGRAM-ID</code> is simply <code>MONTANT</code>. The <code>@XQT .MONTANT</code>
+        directive uses the PROGRAM-ID, not the element name.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 5: INVENTORY -->
+  <div class="section-card" id="inventory">
+    <h2>5. The 16 ASSURFED Utility Programs</h2>
+    <p>
+      All 16 programs are in <code>C:\Amt\MainframeSource\Codedrop 2025\SSG Prd\SSG Creating COBOL\</code>,
+      each stored as <code>ASSURFED_UTILIT_&lt;name&gt;(P).TXT</code>.
+      Investigation proceeds program-by-program as migration work requires.
+    </p>
+    <table class="ref">
+      <thead>
+        <tr>
+          <th style="width:22%">Program</th>
+          <th style="width:16%">Category</th>
+          <th>Likely Purpose</th>
+          <th style="width:18%">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>MONTANT_SIGNE</code></td>
+          <td>Numeric</td>
+          <td>Extract N signed numeric (S9) amount fields from fixed-width records; multiply each by +1 (sign-normalisation); write to output. PROGRAM-ID: MONTANT.</td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; Example 1</span></td>
+        </tr>
+        <tr>
+          <td><code>CFH-COPY</code></td>
+          <td>Field copy</td>
+          <td>Copy and reformat selected fields from INPUT to OUTPUT using FIELDIN / FIELDOUT position-length specification pairs. ASCII mode variant confirmed in ECL.</td>
+          <td><span class="dot-prog"></span><span class="badge badge-prog">Partially known</span></td>
+        </tr>
+        <tr>
+          <td><code>ARCHIFORMAT</code></td>
+          <td>Archive</td>
+          <td>Format records for archive output.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>ARCHIINSERT</code></td>
+          <td>Archive</td>
+          <td>Insert records into archive file.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>ARCHISEPARE</code></td>
+          <td>Archive</td>
+          <td>Separate / split archive records.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>ARCHITAB1</code></td>
+          <td>Archive</td>
+          <td>Archive table processing (single table type).</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>COMPARE2_ASCII</code></td>
+          <td>Compare</td>
+          <td>Compare two ASCII sequential files; report differences. (Trial 02 source used for early converter testing.)</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>CONDIS_ASCII</code></td>
+          <td>Condition</td>
+          <td>Conditional ASCII data processing or filtering.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>ECLAT</code></td>
+          <td>Split / Distribute</td>
+          <td>Split (éclatement) and distribute records across multiple output streams. (Note: ECL search hits for "ECLAT" are often French words — not calls to this program.)</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>LECTIS_MULT</code></td>
+          <td>Read</td>
+          <td>Multi-stream read from IS (Information Store) files.</td>
+          <td><span class="dot-done"></span><span class="badge badge-done">&#10003; Example 2</span></td>
+        </tr>
+        <tr>
+          <td><code>LOADIS_MULT-NODUP</code></td>
+          <td>Load</td>
+          <td>Load IS without duplicates from multiple input streams.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>SCAN-VAR_ASCII</code></td>
+          <td>Scan</td>
+          <td>Scan variable-length ASCII records.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>TAPELD_DISTRIB</code></td>
+          <td>Tape / Load</td>
+          <td>Load and distribute data from tape input.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>TRI_ASCII</code></td>
+          <td>Sort</td>
+          <td>Sort ASCII records.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>UNLOADIS_MULT</code></td>
+          <td>Unload</td>
+          <td>Multi-stream unload from IS files.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+        <tr>
+          <td><code>UNLOADIS_MULT-NODUP</code></td>
+          <td>Unload</td>
+          <td>Multi-stream unload from IS without duplicates.</td>
+          <td><span class="dot-pend"></span><span class="badge badge-pend">Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <strong>Finding ECL call sites:</strong> Use
+      <code>C:\Amt\Migration\find-ssg-ecl.ps1</code> to search the ~800 ECL files in
+      <code>RunsPrd\</code> for program name patterns. Remember to use
+      <code>GetEncoding(1252)</code> — standard grep tools will not find matches.
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 6: EXAMPLES HEADER -->
+  <div class="section-card" id="examples">
+    <h2>6. Worked Examples</h2>
+    <p>
+      Each example below documents one SSG-COBOL program end-to-end: original SSG source &rarr;
+      ECL invocation pattern &rarr; SSG expansion concept &rarr; generated C# output.
+      Examples are added progressively as investigation proceeds.
+    </p>
+    <table class="ref">
+      <thead><tr><th>#</th><th>Program</th><th>Description</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="#ex1">MONTANT_SIGNE</a></td>
+          <td>Numeric amount field extractor — stubbed macros (TRIAL04)</td>
+          <td><span class="badge badge-done">&#10003; Done</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="#ex2">LECTIS_MULT</a></td>
+          <td>IS file multi-stream reader &#8212; IS-file API, CARTE key-list mode, T3/T4/T_KEY/T_KEYS/T_COND transforms (TRIAL05)</td>
+          <td><span class="badge badge-done">&#10003; Done</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ EXAMPLE 1: MONTANT_SIGNE -->
+  <div id="ex1">
+    <div class="example-header">
+      <h3>Example 1 &mdash; MONTANT_SIGNE</h3>
+      <p>Numeric amount field extractor &nbsp;&#183;&nbsp; PROGRAM-ID: MONTANT &nbsp;&#183;&nbsp; <span class="badge badge-done" style="background:rgba(255,255,255,.15);color:#bbf7d0;">&#10003; Trial 04 &mdash; Generated 2026-06-23</span></p>
+    </div>
+    <div class="example-body">
+
+      <h3>Purpose</h3>
+      <p>
+        <code>MONTANT_SIGNE</code> reads fixed-width sequential records, extracts
+        <strong>N signed numeric (S9) amount fields</strong> at parameterised byte offsets, multiplies
+        each by <code>+1</code> (an identity transform — value preservation with sign normalisation),
+        and writes the result to an output file. The compiled PROGRAM-ID is <code>MONTANT</code>.
+      </p>
+      <p>
+        In an AFBUS batch job, this utility normalises monetary amounts from one fixed-width file layout
+        to another, where the number of amount fields, their byte positions, and their digit widths all
+        vary per invocation via SSG macro parameters.
+      </p>
+
+      <h3>SSG Source — Full Annotated Listing</h3>
+      <p>Source file: <code>ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT</code> &nbsp;(64 lines, Windows-1252 encoded)</p>
+      <div class="code-wrap">
+        <span class="code-label">ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT — full source with annotations</span>
+        <pre><span class="ssg-comment">╔══ MACRO DEFINITIONS ═══════════════════════════════════════════════════════════════╗</span>
+<span class="ssg-directive">*DEFINE</span> FILUN                           <span class="ssg-comment">← Macro: "Filler UNique" — filler before a field</span>
+<span class="ssg-directive">*SET</span> FILLUN  TO  [#1]-1                 <span class="ssg-comment">   FILLUN = arg1 − 1  (1-based offset → 0-based filler count)</span>
+<span class="ssg-directive">*END</span>
+<span class="ssg-directive">*DEFINE</span> FILDEU                          <span class="ssg-comment">← Macro: "Filler DEUx" — trailing filler after a field</span>
+<span class="ssg-directive">*SET</span> FILLDEU TO  [#1]-[#2]-[#3]+1      <span class="ssg-comment">   FILLDEU = recsize − field_start − field_width + 1</span>
+<span class="ssg-directive">*END</span>
+<span class="ssg-comment">╚════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+<span class="ecl-directive">@UCOB,I</span>   TPF$.NAME$,TPF$.MONTANT       <span class="ssg-comment">← ECL: compile COBOL inline → TPF$.MONTANT temp object</span>
+       <span class="ssg-keyword">IDENTIFICATION DIVISION.</span>
+       <span class="ssg-keyword">PROGRAM-ID.</span> MONTANT.              <span class="ssg-comment">← PROGRAM-ID is MONTANT (not MONTANT_SIGNE — that is the source element name)</span>
+       <span class="ssg-keyword">ENVIRONMENT DIVISION.</span>
+       <span class="ssg-keyword">CONFIGURATION SECTION.</span>
+       <span class="ssg-keyword">INPUT-OUTPUT SECTION.</span>
+       <span class="ssg-keyword">FILE-CONTROL.</span>
+           SELECT  FILEIN  ASSIGN TO DISC <span class="ssg-param">[INPUT,1,1,1]</span>.  <span class="ssg-comment">← Logical name from INPUT param field 1 (e.g. INB)</span>
+           SELECT  FILEOUT ASSIGN TO DISC <span class="ssg-param">[OUTPUT,1,1,1]</span>. <span class="ssg-comment">← Logical name from OUTPUT param field 1 (e.g. OUTB)</span>
+       <span class="ssg-keyword">DATA DIVISION.</span>
+       <span class="ssg-keyword">FILE SECTION.</span>
+       FD  FILEIN
+           LABEL RECORD IS STANDARD
+           BLOCK CONTAINS <span class="ssg-param">[INPUT,1,1,3]</span>  RECORDS          <span class="ssg-comment">← INPUT field 3 = blocking factor (e.g. 1)</span>
+           RECORD CONTAINS <span class="ssg-param">[INPUT,1,1,2]</span>  CHARACTERS       <span class="ssg-comment">← INPUT field 2 = record size in bytes (e.g. 80)</span>
+           DATA RECORD IS REC-IN.
+       01  REC-IN             PIC X(<span class="ssg-param">[INPUT,1,1,2]</span>).           <span class="ssg-comment">← Physical record buffer</span>
+       FD  FILEOUT
+           LABEL RECORD IS STANDARD
+           BLOCK CONTAINS <span class="ssg-param">[OUTPUT,1,1,3]</span>  RECORDS
+           RECORD CONTAINS <span class="ssg-param">[OUTPUT,1,1,2]</span>  CHARACTERS
+           DATA RECORD IS REC-OUT.
+       01  REC-OUT            PIC X(<span class="ssg-param">[OUTPUT,1,1,2]</span>).
+       <span class="ssg-keyword">WORKING-STORAGE SECTION.</span>
+       01  WS-IN  PIC X(<span class="ssg-param">[INPUT,1,1,2]</span>).                    <span class="ssg-comment">← Working copy of input record</span>
+
+<span class="ssg-comment">╔══ INPUT REDEFINES: generate MONTANT overlay structures on WS-IN ════════════════════╗</span>
+<span class="ssg-directive">*INCREMENT</span> I FROM 1 BY 1 TO <span class="ssg-param">[MONTANT]</span>            <span class="ssg-comment">← Loop: I = 1 to MONTANT (e.g. 3 for 3 amount fields)</span>
+       01  WS-IN<span class="ssg-param">[*I]</span> REDEFINES WS-IN.                <span class="ssg-comment">← Generates WS-IN1, WS-IN2, WS-IN3 — all overlay WS-IN</span>
+<span class="ssg-directive">*PROCESS</span> FILUN <span class="ssg-param">[MONTANT,I,1,1]</span>                  <span class="ssg-comment">← Compute filler before field I</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLUN]</span>).         <span class="ssg-comment">← Skip bytes to reach field position</span>
+               03 MONTANT<span class="ssg-param">[*I]</span>  PIC S9(<span class="ssg-param">[MONTANT,I,1,2]</span>). <span class="ssg-comment">← Signed numeric: MONTANT1, MONTANT2, MONTANT3</span>
+<span class="ssg-directive">*PROCESS</span> FILDEU <span class="ssg-param">[INPUT,1,1,2]</span> <span class="ssg-param">[MONTANT,I,1,1]</span> <span class="ssg-param">[MONTANT,I,1,2]</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLDEU]</span>).        <span class="ssg-comment">← Remaining bytes to end of record</span>
+<span class="ssg-directive">*LOOP</span>                                               <span class="ssg-comment">← End loop</span>
+<span class="ssg-comment">╚════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+       01  WS-OUT  PIC X(<span class="ssg-param">[OUTPUT,1,1,2]</span>).                <span class="ssg-comment">← Working copy of output record</span>
+
+<span class="ssg-comment">╔══ OUTPUT REDEFINES: generate MONTANT overlay structures on WS-OUT ══════════════════╗</span>
+<span class="ssg-directive">*INCREMENT</span> I FROM 1 BY 1 TO <span class="ssg-param">[MONTANT]</span>
+       01  WS-OUT<span class="ssg-param">[*I]</span> REDEFINES WS-OUT.
+<span class="ssg-directive">*PROCESS</span> FILUN <span class="ssg-param">[MONTANT,I,1,1]</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLUN]</span>).
+               03 MONTANT<span class="ssg-param">[*I]</span>  PIC S9(<span class="ssg-param">[MONTANT,I,1,2]</span>).
+<span class="ssg-directive">*PROCESS</span> FILDEU <span class="ssg-param">[OUTPUT,1,1,2]</span> <span class="ssg-param">[MONTANT,I,1,1]</span> <span class="ssg-param">[MONTANT,I,1,2]</span>
+               03 FILLER    PIC X(<span class="ssg-param">[*FILLDEU]</span>).
+<span class="ssg-directive">*LOOP</span>
+<span class="ssg-comment">╚════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+       <span class="ssg-keyword">PROCEDURE DIVISION.</span>
+       DEBUT.                                         <span class="ssg-comment">← French: "Start"</span>
+           OPEN INPUT FILEIN
+                OUTPUT FILEOUT.
+       LECTURE.                                       <span class="ssg-comment">← French: "Read"</span>
+           READ FILEIN INTO WS-IN AT END GO TO FIN.
+           MOVE WS-IN TO WS-OUT.                      <span class="ssg-comment">← Copy whole record first</span>
+
+<span class="ssg-comment">╔══ PROCEDURE LOOP: compute MontantN = MontantN * 1 for each amount field ════════════╗</span>
+<span class="ssg-directive">*INCREMENT</span> I FROM 1 BY 1 TO <span class="ssg-param">[MONTANT]</span>
+           COMPUTE MONTANT<span class="ssg-param">[*I]</span> OF WS-OUT<span class="ssg-param">[*I]</span> = MONTANT<span class="ssg-param">[*I]</span> OF WS-IN<span class="ssg-param">[*I]</span> * +1
+<span class="ssg-directive">*LOOP</span>                                               <span class="ssg-comment">← * +1 = identity × sign preservation</span>
+<span class="ssg-comment">╚════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+           WRITE REC-OUT FROM WS-OUT.
+           GO TO LECTURE.
+       FIN.                                           <span class="ssg-comment">← French: "End"</span>
+           CLOSE FILEIN FILEOUT.
+           STOP RUN.</pre>
+      </div>
+
+      <h3>SSG Invocation Parameters</h3>
+      <p>When an ECL job calls this program, it supplies the following parameter block to <code>@SSG,IA</code>:</p>
+      <table class="ref">
+        <thead><tr><th>Parameter group</th><th>Fields (comma-separated on control card)</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>INPUT</code></td>
+            <td><code>logname, recsize, blocking</code></td>
+            <td>Logical name of the input file (bound via <code>@USE</code>), record length in bytes, blocking factor.</td>
+          </tr>
+          <tr>
+            <td><code>OUTPUT</code></td>
+            <td><code>logname, recsize, blocking</code></td>
+            <td>Same for the output file. Input and output record sizes may differ.</td>
+          </tr>
+          <tr>
+            <td><code>MONTANT</code></td>
+            <td>One row per field: <code>offset, width</code></td>
+            <td>
+              Number of amount fields = number of MONTANT rows = <code>[MONTANT]</code> scalar.<br>
+              Each row: <code>[MONTANT,I,1,1]</code> = 1-based byte offset of field I,
+              <code>[MONTANT,I,1,2]</code> = digit width (for <code>PIC S9(n)</code>).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>SSG Expansion — Conceptual Result</h3>
+      <p>
+        For <code>MONTANT=3</code>, field specs <code>(1,7) (10,7) (19,7)</code> and input record size 80,
+        the SSG expander generates the following COBOL (illustration — not actual expanded output):
+      </p>
+      <div class="code-wrap">
+        <span class="code-label">Expanded COBOL — conceptual (MONTANT=3, recsize=80, fields at offsets 1, 10, 19 each 7 digits wide)</span>
+        <pre>       01  WS-IN  PIC X(80).
+       01  WS-IN1 REDEFINES WS-IN.
+               03 FILLER    PIC X(0).   <span class="ssg-comment">← FILUN(1)  = 1−1 = 0 bytes filler</span>
+               03 MONTANT1  PIC S9(7).  <span class="ssg-comment">← field 1: 7 signed digits at offset 1</span>
+               03 FILLER    PIC X(73).  <span class="ssg-comment">← FILDEU(80,1,7)  = 80−1−7+1 = 73</span>
+       01  WS-IN2 REDEFINES WS-IN.
+               03 FILLER    PIC X(9).   <span class="ssg-comment">← FILUN(10) = 10−1 = 9 bytes filler</span>
+               03 MONTANT2  PIC S9(7).
+               03 FILLER    PIC X(64).  <span class="ssg-comment">← FILDEU(80,10,7) = 80−10−7+1 = 64</span>
+       01  WS-IN3 REDEFINES WS-IN.
+               03 FILLER    PIC X(18).  <span class="ssg-comment">← FILUN(19) = 19−1 = 18 bytes filler</span>
+               03 MONTANT3  PIC S9(7).
+               03 FILLER    PIC X(55).  <span class="ssg-comment">← FILDEU(80,19,7) = 80−19−7+1 = 55</span>
+      <span class="ssg-comment">… WS-OUT1 / WS-OUT2 / WS-OUT3 generated identically from OUTPUT params …</span>
+
+       PROCEDURE DIVISION.
+       DEBUT.
+           OPEN INPUT FILEIN  OUTPUT FILEOUT.
+       LECTURE.
+           READ FILEIN INTO WS-IN AT END GO TO FIN.
+           MOVE WS-IN TO WS-OUT.
+           COMPUTE MONTANT1 OF WS-OUT1 = MONTANT1 OF WS-IN1 * +1.
+           COMPUTE MONTANT2 OF WS-OUT2 = MONTANT2 OF WS-IN2 * +1.
+           COMPUTE MONTANT3 OF WS-OUT3 = MONTANT3 OF WS-IN3 * +1.
+           WRITE REC-OUT FROM WS-OUT.
+           GO TO LECTURE.
+       FIN.
+           CLOSE FILEIN FILEOUT.  STOP RUN.</pre>
+      </div>
+
+      <h3>Generated C# — Key Files (TRIAL04)</h3>
+      <p>
+        Generated by LionDevGenNet from stub parameters (MONTANT=1, record size=80 chars).
+        Path: <code>C:\Amt\Working\Apps\AFBUS_COBOL\Source_AMTLion\Development\Programs\Montant\</code>
+      </p>
+      <div class="code-wrap">
+        <span class="code-label">Montant.Core.cs — business logic (core loop)</span>
+        <pre><span class="csharp-kw">private void</span> <span class="csharp-type">Amt_Main</span>() {
+  lab_Debut:
+    <span class="csharp-type">OpenFile</span>(Filein,  AmtCobolFileOpenMode.Input,  <span class="csharp-kw">false</span>);
+    <span class="csharp-type">OpenFile</span>(Fileout, AmtCobolFileOpenMode.Output, <span class="csharp-kw">false</span>);
+
+  lab_Lecture:
+    <span class="csharp-kw">if</span> (!<span class="csharp-type">ReadSequentialFile</span>(Filein, m_Fd_Rec_In, m_LocDef.Ws_In)) {
+      <span class="csharp-kw">goto</span> lab_Fin;                                    <span class="csharp-cmt">// AT END</span>
+    }
+    m_LocDef.Ws_Out.Value         = m_LocDef.Ws_In.Value;     <span class="csharp-cmt">// MOVE WS-IN TO WS-OUT</span>
+    m_LocDef.Montant1_1.IntValue  = m_LocDef.Montant1.IntValue * 1; <span class="csharp-cmt">// COMPUTE MONTANT1 * +1</span>
+    <span class="csharp-type">WriteSequentialFile</span>(Fileout, m_Fd_Rec_Out, m_LocDef.Ws_Out.Value);
+    <span class="csharp-kw">goto</span> lab_Lecture;
+
+  lab_Fin:
+    <span class="csharp-type">CloseFile</span>(Filein);
+    <span class="csharp-type">CloseFile</span>(Fileout);
+    <span class="csharp-type">StopRun</span>();
+}</pre>
+      </div>
+      <div class="code-wrap">
+        <span class="code-label">Montant.Files.cs — file declarations</span>
+        <pre><span class="csharp-cmt">// FILEIN / FILEOUT declared as AMT sequential file identifiers</span>
+m_Filein  = <span class="csharp-kw">new</span> AmtFileId(<span class="csharp-str">"FILEIN"</span>,  <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, AmtFileRecordEnding.Default);
+m_Fileout = <span class="csharp-kw">new</span> AmtFileId(<span class="csharp-str">"FILEOUT"</span>, <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, AmtFileRecordEnding.Default);
+files.AddFileId(m_Filein);
+files.AddFileId(m_Fileout);
+
+<span class="csharp-cmt">// Physical file names applied at reset — "FILEIN-1" / "FILEOUT-1"</span>
+m_Filein.SetOptions (<span class="csharp-str">"FILEIN-1"</span>,  <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, AmtFileRecordEnding.Default);
+m_Fileout.SetOptions(<span class="csharp-str">"FILEOUT-1"</span>, <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, <span class="csharp-kw">false</span>, AmtFileRecordEnding.Default);</pre>
+      </div>
+
+      <h3>Generated File Inventory</h3>
+      <table class="ref">
+        <thead><tr><th>File</th><th>Size</th><th>Key content</th></tr></thead>
+        <tbody>
+          <tr><td><code>Montant.cs</code></td><td>5,393 b</td><td>Class constructor, <code>static Main()</code> entry point, extends <code>AmtBaseCobolProgram</code></td></tr>
+          <tr><td><code>Montant.Core.cs</code></td><td>—</td><td>Business logic: open → read loop → COMPUTE → write → close</td></tr>
+          <tr><td><code>Montant.Files.cs</code></td><td>—</td><td>File declarations: FILEIN, FILEOUT as <code>AmtFileId</code></td></tr>
+          <tr><td><code>Fd_Rec_In.cs</code></td><td>—</td><td>Input FD record: <code>AmtVarAlpha</code> 80 chars (stub size)</td></tr>
+          <tr><td><code>Fd_Rec_Out.cs</code></td><td>—</td><td>Output FD record: <code>AmtVarAlpha</code> 80 chars (stub size)</td></tr>
+          <tr><td><code>LocalDefinitions.cs</code></td><td>2,961 b</td><td>WS-IN, WS-IN1 REDEFINES, WS-OUT, WS-OUT1 REDEFINES, MONTANT1, MONTANT1_1</td></tr>
+          <tr><td><code>Montant.csproj</code></td><td>3,597 b</td><td>References: <code>Asysco.Amt.Runtime.Cobol</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Migration Notes</h3>
+      <div class="info-box">
+        <strong>TRIAL04 — stub parameters used:</strong>
+        <ul style="margin:6px 0 0 18px;">
+          <li><code>ssg-stub.macros.xml</code> stubs all SSG macro conditionals</li>
+          <li>MONTANT = 1 (single amount field); record size = 80 chars</li>
+          <li>Produces one REDEFINES overlay: <code>WS-IN1</code>, field <code>MONTANT1</code> (alias <code>Montant1_1</code> in C#)</li>
+          <li>Two generation warnings: <em>REDEFINES SIZE MISMATCH</em> at source lines 25 and 30 — expected, because stub record size (80) does not match the field offset arithmetic for a single-field record at offset 1</li>
+        </ul>
+      </div>
+      <div class="warn">
+        <strong>TRIAL05 (planned):</strong> Re-run conversion with real SSG macro parameter values
+        extracted from an actual ECL job that calls
+        <code>@SSG,IA *UTILIT.MONTANT_SIGNE/SSG</code>. This will produce correct REDEFINES field layouts
+        and eliminate the SIZE MISMATCH warnings. The <code>Montant1_1</code> naming (loop-var 1, field 1)
+        will expand to <code>MontantN_1</code> for each of the N amount fields.
+      </div>
+
+    </div><!-- /example-body -->
+  </div><!-- /ex1 -->
+
+  <!-- ═══════════════════════════════════════════ EXAMPLE 2: LECTIS_MULT -->
+  <div id="ex2">
+    <div class="example-header">
+      <h3>Example 2 &mdash; LECTIS_MULT</h3>
+      <p>IS file multi-stream reader &nbsp;&#183;&nbsp; PROGRAM-ID: LECTIS &nbsp;&#183;&nbsp; <span class="badge badge-done" style="background:rgba(255,255,255,.15);color:#bbf7d0;">&#10003; Trial 05 &mdash; Generated + Trial 2026-06-25</span></p>
+    </div>
+    <div class="example-body">
+
+      <h3>Purpose</h3>
+      <p><code>LECTIS_MULT</code> reads records from one or more IS (Information Store) files &#8212; indexed sequential files backed by SQL in the WORKING_AFBUS_COBOL database. It optionally filters records by a CARTE key-list file, then outputs all matched records via <code>DISPLAY UPON PRINTER</code>. The compiled PROGRAM-ID is <code>LECTIS</code>.</p>
+      <p>IS files differ from flat files: they are SQL-backed, opened with <code>OpenFile()</code>, positioned with <code>LocateRecordIndexedFile()</code>, and iterated with <code>ReadRandomAccessFileNextRecord()</code>. Mock data for trials = SQL INSERT rows, not <code>.DAT</code> files.</p>
+
+      <h3>ECL invocation pattern</h3>
+      <div class="code-wrap"><span class="code-label">ecl-template</span><pre>@RUN LECTIS_MULT
+@PARAM [COND,1]=0          // condition count (0 = no filtering)
+@PARAM [ASCII]=1           // ASCII mode
+@PARAM [LKEY]=1            // 1 key field per record
+@PARAM [LKEY,1,1,1]=0      // key offset (byte)
+@PARAM [LKEY,1,1,2]=8      // key width (bytes)
+@PARAM [LKEY,1,1,3]=1      // alt key width
+@PARAM [KEYS]=0            // 0 = sequential (no CARTE key list)
+@PARAM [UN]=1              // 1 input file
+@PARAM [INPUT,1,1,1]=FICHIN-1  // IS file name
+@PARAM [INPUT,1,1,2]=120       // record size</pre></div>
+
+      <h3>SSG expansion concept</h3>
+      <p>Three key branching constructs govern what code is generated:</p>
+      <ul>
+        <li><strong><code>[UN]/[DEUX]/[TROIS]</code></strong> &#8212; selects whether 1, 2, or 3 FICHIN streams are opened. Only the selected branches survive pre-processing.</li>
+        <li><strong><code>[KEYS]</code></strong> &#8212; when 0: sequential read mode (all records). When &gt;0: CARTE mode &#8212; a separate flat key-list file (<code>CARTE-1</code>) drives which records to read.</li>
+        <li><strong><code>[COND,1]</code></strong> &#8212; when 0: the conditional filter block is a no-op; delete all 3 lines (see bare-IF fix below).</li>
+      </ul>
+
+      <h3>Generated C# structure</h3>
+      <table class="ref">
+        <thead><tr><th>File</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td><code>Lectis.cs</code></td><td>Main program; <code>CreateDefinitions()</code> wires all SSG params (m_FichinName, m_FichinRecordSize, m_PrimaryKeyWidth, m_AltKeyWidth, m_KeysCount=0, m_CondCount=0)</td></tr>
+          <tr><td><code>Lectis.Core.cs</code></td><td>LECTURE loop; IS-file open/read/close; CARTE branch: <code>if (m_KeysCount &gt; 0) goto lab_CarteMode</code>; CARTE key-match loop</td></tr>
+          <tr><td><code>Lectis.Files.cs</code></td><td>All IS-file and CARTE field declarations: m_FichinRecordSize, m_FichinName, m_PrimaryKeyWidth, m_AltKeyWidth, m_KeysCount, m_CarteName, m_Fd_Carte, m_Carte, m_CondCount</td></tr>
+          <tr><td><code>Fd_Zfich1.cs</code></td><td>IS-file record layout; constructor: <code>(int recordSize, int primaryKeyWidth, int altKeyWidth)</code></td></tr>
+          <tr><td><code>Fd_Carte.cs</code></td><td>CARTE key-list record layout (new file &#8212; created in Phase 18 T_KEYS transform)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>IS-file API (LECTIS AFC methods)</h3>
+      <div class="code-wrap"><span class="code-label">csharp</span><pre>// Open IS file (ORGANIZATION INDEXED in COBOL = IS in AMT)
+OpenFile(m_FichinName, m_Fd_Zfich1, ...);
+
+// Sequential read (KEYS=0 mode — no CARTE)
+while (ReadRandomAccessFileNextRecord(m_Fd_Zfich1, ...) == AmtAfcResult.Ok)
+{
+    DisplayUponPrinter(m_Fd_Zfich1.Ws_Fich1);
+}
+CloseFile(m_Fd_Zfich1);
+
+// CARTE mode (KEYS>0) — position by each key in the list
+while (ReadNextKeyFromCarte()) {
+    LocateRecordIndexedFile(m_Fd_Zfich1, m_Carte.CarteKey, ...);
+    while (ReadRandomAccessFileNextRecord(m_Fd_Zfich1, ...) == AmtAfcResult.Ok)
+        DisplayUponPrinter(m_Fd_Zfich1.Ws_Fich1);
+}</pre></div>
+
+      <h3>Bare-IF fix (new pattern — recorded here as Bug 17a)</h3>
+      <p>When <code>[COND,1,I,1]</code> with COND,1=0 resolves to an empty string, CobolConverter generates:</p>
+      <div class="code-wrap"><span class="code-label">cobol-bad</span><pre>       IF
+           NEXT SENTENCE
+       ELSE
+           GO TO FIN.        &lt;-- ERR 000084: empty IF condition</pre></div>
+      <p><strong>Fix:</strong> The whole block is a no-op when COND,1=0. Delete all 3 lines in the pre-processor output before conversion. <em>Do not add a macro stub</em> &#8212; the empty token is intentional (no condition = pass all records).</p>
+
+      <h3>T_KEYS trial result</h3>
+      <p>With <code>m_KeysCount=1</code> and CARTE-1 containing keys <code>AAAAAAAA</code> and <code>CCCCCCCC</code>, IS file containing <code>AAAAAAAA</code>, <code>BBBBBBBB</code>, <code>CCCCCCCC</code>:</p>
+      <ul>
+        <li><code>AAAAAAAA</code> &#8212; printed &#10003;</li>
+        <li><code>BBBBBBBB</code> &#8212; <em>skipped</em> (not in CARTE key list) &#10003;</li>
+        <li><code>CCCCCCCC</code> &#8212; printed &#10003;</li>
+      </ul>
+      <p>Reverted to <code>m_KeysCount=0</code> for the production baseline (sequential mode).</p>
+
+    </div><!-- /example-body -->
+  </div><!-- /ex2 -->
+
+
+  <!-- EXAMPLE 3: TRI_ASCII / SORT-FICHOUT-1 -->
+  <div id="ex3">
+    <div class="example-header">
+      <h3>Example 3 &mdash; TRI_ASCII</h3>
+      <p>ASCII sort utility &nbsp;&#183;&nbsp; PROGRAM-ID: SORT-FICHOUT-1 &nbsp;&#183;&nbsp;
+         <span class="badge badge-done" style="background:rgba(255,255,255,.15);color:#bbf7d0;">&#10003; Trial 06 &mdash; Generated + Trial 2026-06-25</span></p>
+    </div>
+    <div class="example-body">
+
+      <h3>Purpose</h3>
+      <p><strong>TRI_ASCII</strong> reads a flat sequential file (<code>FICHIN-1</code>), sorts
+      records ascending by an 8-byte ASCII key at offset 0, and writes the sorted output to
+      <code>FICHOUT-1</code>.  The program is a direct SSG-parameterised wrapper around the OS2200
+      SORT verb and is the canonical example of the <strong>T_SORT</strong> transform tier.</p>
+
+      <h3>SSG Invocation Parameters</h3>
+      <table class="ref">
+        <thead><tr><th>ECL Parameter</th><th>Address</th><th>Stub Value</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>INPUT</code></td><td><code>[INPUT,1,A,1]</code></td><td>FICHIN-1</td><td>Input file name (TAPE-1)</td></tr>
+          <tr><td><code>INPUT</code></td><td><code>[INPUT,1,A,2]</code></td><td>80</td><td>Input record size (bytes)</td></tr>
+          <tr><td><code>OUTPUT</code></td><td><code>[OUTPUT,1,1,1]</code></td><td>FICHOUT-1</td><td>Output file name (TAPEOUT)</td></tr>
+          <tr><td><code>OUTPUT</code></td><td><code>[OUTPUT,1,1,2]</code></td><td>80</td><td>Output record size (bytes); also SD record size</td></tr>
+          <tr><td><code>KEYS</code></td><td><code>[KEYS,1,COL,1]</code></td><td>0</td><td>Sort key offset (bytes from record start; 0 = no filler)</td></tr>
+          <tr><td><code>KEYS</code></td><td><code>[KEYS,1,COL,2]</code></td><td>8</td><td>Sort key width (bytes)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Pre-Processor Fixes (Phase 19)</h3>
+      <div class="info-box">
+        <ul style="margin:4px 0 0 18px;">
+          <li><strong><code>*DEFINE FILLADD</code> block suppression</strong> â€” the macro body (including
+          nested <code>*IF</code>) is fully stripped by <code>Remove-SsgDirectives.ps1</code> before passing
+          to CobolConverter.  Without this, a stray <code>03 FILLER PIC X(1).</code> appeared before
+          <code>IDENTIFICATION DIVISION</code>, aborting the converter.</li>
+          <li><strong>String <code>*IF</code> comparison</strong> â€” <code>*IF [INPUT,1,A,1] = CARDREADER</code>
+          compares a <em>string-valued</em> SSG parameter against a bare keyword.
+          <code>Resolve-SsgCondition</code> now has a string-comparison arm that looks up
+          <code>ParamOverrides["INPUT,1,A,1"]</code> and returns <code>false</code> for the CARDREADER
+          and CARDPUNCH branches, emitting only the DISC branch.</li>
+        </ul>
+      </div>
+
+      <h3>Generated C# Structure</h3>
+      <table class="ref">
+        <thead><tr><th>File</th><th>Key content</th></tr></thead>
+        <tbody>
+          <tr><td><code>Sort_Fichout_1.cs</code></td><td>Entry point, <code>CreateDefinitions()</code></td></tr>
+          <tr><td><code>Sort_Fichout_1.Core.cs</code></td><td>Sort_Start(), Inp(), Outp(), Close_Files() with <code>SortFiles()</code> call</td></tr>
+          <tr><td><code>Sort_Fichout_1.Files.cs</code></td><td>T3/T4/T_SORT fields + wired constructors + <code>SetOptions(m_FichinName, &hellip;)</code></td></tr>
+          <tr><td><code>Fd_Rec_In_1.cs</code></td><td>T3: <code>int recordSize = 80</code> param on constructor</td></tr>
+          <tr><td><code>Fd_Rec_Out.cs</code></td><td>T3: <code>int recordSize = 80</code> param on constructor</td></tr>
+          <tr><td><code>Fd_Sort_Rec.cs</code></td><td>T3: SD record size = <code>m_RecordSizeOut</code></td></tr>
+          <tr><td><code>Fd_Sort_R1.cs</code></td><td>T_SORT: filler if <code>keyOffset &gt; 0</code>, <code>keyWidth</code> on Sort_Key_1</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Sort Runtime API</h3>
+      <div class="code-wrap">
+        <span class="code-label">Sort_Fichout_1.Core.cs â€” SortFiles call</span>
+        <pre><span class="csharp-type">SortFiles</span>(Sortfile,
+    <span class="csharp-kw">new</span> Tuple&lt;AmtVariable, AmtOrder&gt;[] {
+        Tuple.Create((<span class="csharp-type">AmtVariable</span>)m_Fd_Sort_R1.Sort_Key_1, AmtOrder.Ascending)
+    }, <span class="csharp-kw">false</span>);</pre>
+      </div>
+      <p class="note">Use <code>SortFiles(fileId, tupleArray, descend)</code>.
+      <strong>Not</strong> <code>AmtAfcSortInfo</code> (IBM DFSORT only).</p>
+
+      <h3>Trial 06 Result</h3>
+      <div class="info-box">
+        Input <code>FICHIN-1.DAT</code> (3 records: ZZZ / AAA / MMM) &rarr;
+        Output <code>FICHOUT-1.DAT</code>: <strong>AAA / MMM / ZZZ</strong> &nbsp;&#10003;
+      </div>
+
+    </div><!-- /example-body -->
+  </div><!-- /ex3 -->
+  <!-- Footer -->
+  <div class="footer-bar">
+    Federale SSG-COBOL Reference &nbsp;&middot;&nbsp; AMT 172 Migration &nbsp;&middot;&nbsp; 2026-06-25
+    &nbsp;&middot;&nbsp; <a href="AMT172-Setup-Guide.html">&#8592; Back to Setup Guide</a>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="section-card" id="patterns">
+    <h2>7. Transformation Patterns</h2>
+    <p>Each pattern was first validated on <strong>MONTANT_SIGNE</strong> and then applied to all other
+    programs where the same SSG construct appears. Patterns are recorded in dependency order (T2 before T1 before T3).</p>
+
+    <!-- ── T2: *DEFINE FILUN ────────────────────────────────────── -->
+    <div class="pattern-card" id="pat-define-filun-fildeu">
+      <div class="example-header">
+        <h3>Pattern: <code>*DEFINE FILUN</code> / <code>*DEFINE FILDEU</code> &rarr; static helper methods</h3>
+        <p>First applied: MONTANT_SIGNE &mdash; 2026-06-25 &nbsp;|&nbsp; Tier: T2</p>
+      </div>
+      <div class="example-body">
+        <h3>SSG Original</h3>
+        <div class="code-wrap"><span class="code-label">ssg-cobol</span><pre>*DEFINE FILUN
+*SET FILLUN  TO  [#1]-1
+*END
+*DEFINE FILDEU
+*SET FILLDEU TO  [#1]-[#2]-[#3]+1
+*END</pre></div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap"><span class="code-label">csharp</span><pre>// Added to LocalDefinitions.cs
+
+// SSG: *DEFINE FILUN &rarr; *SET FILLUN TO [#1]-1 &rarr; filler bytes before a signed field
+private static int FilUn(int offset) =&gt; offset - 1;
+
+// SSG: *DEFINE FILDEU &rarr; *SET FILLDEU TO [#1]-[#2]-[#3]+1 &rarr; trailing filler bytes
+private static int FilDeu(int recordSize, int offset, int width) =&gt; recordSize - offset - width + 1;</pre></div>
+        <h3>Notes / Gotchas</h3>
+        <p>These are pure arithmetic helpers with no side effects. They must be added before T1 because
+        the T1 loop calls them inside the constructor. Parameter names map directly: <code>[#1]</code>=offset,
+        <code>[#2]</code>=recordSize, <code>[#3]</code>=width for FILDEU. For MONTANT baseline (offset=2, width=9,
+        recordSize=80): FilUn(2)=1, FilDeu(80,2,9)=70 &mdash; fixing the pre-Phase-15 hardcoded trailing
+        filler of 1 (SIZE MISMATCH warning is now eliminated).</p>
+        <h3>Applies to programs</h3>
+        <p>All 16 SSG utility programs that use <code>REDEFINES</code> overlays over a working-storage record.</p>
+      </div>
+    </div>
+
+    <!-- ── T1: *INCREMENT *LOOP ──────────────────────────────────── -->
+    <div class="pattern-card" id="pat-increment-loop">
+      <div class="example-header">
+        <h3>Pattern: <code>*INCREMENT I FROM 1 BY 1 TO [MONTANT] &hellip; *LOOP</code> &rarr; C# <code>foreach</code></h3>
+        <p>First applied: MONTANT_SIGNE &mdash; 2026-06-25 &nbsp;|&nbsp; Tier: T1</p>
+      </div>
+      <div class="example-body">
+        <h3>SSG Original</h3>
+        <div class="code-wrap"><span class="code-label">ssg-cobol</span><pre>*INCREMENT I FROM 1 BY 1 TO [MONTANT]
+       01  WS-IN[*I] REDEFINES WS-IN.
+*PROCESS FILUN [MONTANT,I,1,1]
+               03 FILLER    PIC X([*FILLUN]).
+               03 MONTANT[*I]  PIC S9([MONTANT,I,1,2]).
+*PROCESS FILDEU [INPUT,1,1,2] [MONTANT,I,1,1] [MONTANT,I,1,2]
+               03 FILLER    PIC X([*FILLDEU]).
+*LOOP
+&hellip;same pattern for WS-OUT&hellip;
+
+       PROCEDURE DIVISION.
+*INCREMENT I FROM 1 BY 1 TO [MONTANT]
+           COMPUTE MONTANT[*I] OF WS-OUT[*I] = MONTANT[*I] OF WS-IN[*I] * +1
+*LOOP</pre></div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap"><span class="code-label">csharp</span><pre>// LocalDefinitions.cs &mdash; constructor (T1+T2 combined)
+// Before: individual hardcoded AmtStructure/AmtVarNumericOS2200 fields
+// After:  loop over (offset, width)[] fields array
+
+private readonly List&lt;AmtStructure&gt; m_InStructures;
+private readonly List&lt;AmtStructure&gt; m_OutStructures;
+private readonly List&lt;AmtVarNumericOS2200&gt; m_InFields;
+private readonly List&lt;AmtVarNumericOS2200&gt; m_OutFields;
+
+public IReadOnlyList&lt;AmtVarNumericOS2200&gt; InFields { ... }
+public IReadOnlyList&lt;AmtVarNumericOS2200&gt; OutFields { ... }
+
+// Constructor loop:
+foreach (var (offset, width) in fields) {
+    var wsIn = new AmtStructure();
+    wsIn.Redefines(m_Ws_In);
+    wsIn.AddAlphaFiller(FilUn(offset));
+    m_InFields.Add(new AmtVarNumericOS2200(width, true, wsIn));
+    wsIn.AddAlphaFiller(FilDeu(recordSizeIn, offset, width));
+    m_InStructures.Add(wsIn);
+
+    var wsOut = new AmtStructure();
+    wsOut.Redefines(m_Ws_Out);
+    wsOut.AddAlphaFiller(FilUn(offset));
+    m_OutFields.Add(new AmtVarNumericOS2200(width, true, wsOut));
+    wsOut.AddAlphaFiller(FilDeu(recordSizeOut, offset, width));
+    m_OutStructures.Add(wsOut);
+}
+
+// Montant.Core.cs &mdash; COMPUTE becomes loop
+// Before: m_LocDef.Montant1_1.IntValue = m_LocDef.Montant1.IntValue * 1;
+// After:
+for (int i = 0; i &lt; m_LocDef.InFields.Count; i++) {
+    m_LocDef.OutFields[i].IntValue = m_LocDef.InFields[i].IntValue * 1;
+}</pre></div>
+        <h3>Notes / Gotchas</h3>
+        <p>The SSG loop generates N separate COBOL 01-level REDEFINES structures at compile time; the C#
+        equivalent creates them dynamically at runtime. <code>AllocStructure()</code> must be called after
+        all REDEFINES entries are built &mdash; not inside the loop. Each <code>AmtStructure</code> reference
+        must be kept alive (stored in the list) to prevent GC collection of the shared memory buffer.
+        <code>IReadOnlyList</code> prevents callers from accidentally modifying the field list while
+        allowing indexed access in the COMPUTE loop.</p>
+        <h3>Applies to programs</h3>
+        <p>All 16 SSG utility programs where <code>*INCREMENT &hellip; *LOOP</code> generates REDEFINES overlays.</p>
+      </div>
+    </div>
+
+    <!-- ── T3: Record-size params ────────────────────────────────── -->
+    <div class="pattern-card" id="pat-record-size">
+      <div class="example-header">
+        <h3>Pattern: <code>[INPUT,1,1,2]</code> / <code>[OUTPUT,1,1,2]</code> &rarr; constructor <code>int recordSizeIn, int recordSizeOut</code></h3>
+        <p>First applied: MONTANT_SIGNE &mdash; 2026-06-25 &nbsp;|&nbsp; Tier: T3</p>
+      </div>
+      <div class="example-body">
+        <h3>SSG Original</h3>
+        <div class="code-wrap"><span class="code-label">ssg-cobol</span><pre>FD  FILEIN
+    RECORD CONTAINS [INPUT,1,1,2]  CHARACTERS
+    DATA RECORD IS REC-IN.
+01  REC-IN   PIC X([INPUT,1,1,2]).
+01  WS-IN    PIC X([INPUT,1,1,2]).
+
+FD  FILEOUT
+    RECORD CONTAINS [OUTPUT,1,1,2]  CHARACTERS
+    DATA RECORD IS REC-OUT.
+01  REC-OUT  PIC X([OUTPUT,1,1,2]).
+01  WS-OUT   PIC X([OUTPUT,1,1,2]).</pre></div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap"><span class="code-label">csharp</span><pre>// LocalDefinitions.cs
+public LocalDefinitions(Montant parentObject, int recordSizeIn, int recordSizeOut,
+                        (int offset, int width)[] fields) : base(parentObject) {
+    m_Ws_In  = new AmtVarAlpha(recordSizeIn);   // was: new AmtVarAlpha(80)
+    m_Ws_Out = new AmtVarAlpha(recordSizeOut);  // was: new AmtVarAlpha(80)
+    ...
+}
+
+// Fd_Rec_In.cs
+public Fd_Rec_In(Montant parentObject, int recordSize) {
+    m_Rec_In = new AmtVarAlpha(recordSize, m_DataRecord);  // was: new AmtVarAlpha(80, ...)
+}
+
+// Fd_Rec_Out.cs
+public Fd_Rec_Out(Montant parentObject, int recordSize) {
+    m_Rec_Out = new AmtVarAlpha(recordSize, m_DataRecord);  // was: new AmtVarAlpha(80, ...)
+}
+
+// Montant.Files.cs &mdash; FilesCreate (backward-compat default 80)
+m_Fd_Rec_In  = new Fd_Rec_In(this, 80);
+m_Fd_Rec_Out = new Fd_Rec_Out(this, 80);
+
+// Montant.cs &mdash; CreateDefinitions (backward-compat defaults)
+m_LocDef = new LocalDefinitions(this, 80, 80, new[] { (offset: 2, width: 9) });</pre></div>
+        <h3>Notes / Gotchas</h3>
+        <p>The hardcoded <code>80</code> default matches the TRIAL04/TRIAL05 ECL invocation. Future ECL-driven
+        configurations should pass actual values from the ECL job parameters. Note that
+        <code>FilesCreate</code> is in <code>Montant.Files.cs</code> (partial class), not <code>Montant.cs</code>;
+        both files need updating when the parameter source changes. The cache path in
+        <code>CreateDefinitions</code> reuses an existing instance via <code>ApplyNewParent</code> and does not
+        call the constructor, so it is unaffected by the signature change.</p>
+        <h3>Applies to programs</h3>
+        <p>All 16 SSG utility programs that use <code>[INPUT,1,1,2]</code> / <code>[OUTPUT,1,1,2]</code> ECL parameters for FD record sizes.</p>
+      </div>
+    </div>
+
+    <!-- ── T4: File-name suffix [INPUT,1,1,1] / [OUTPUT,1,1,1] ──────────────────────── -->
+    <div class="pattern-card" id="pat-file-name">
+      <div class="example-header">
+        <h3>Pattern: <code>[INPUT,1,1,1]</code> / <code>[OUTPUT,1,1,1]</code> &rarr; fields <code>m_FileInName</code> / <code>m_FileOutName</code></h3>
+        <p>First applied: MONTANT_SIGNE &mdash; 2026-06-25 &nbsp;|&nbsp; Tier: T4</p>
+      </div>
+      <div class="example-body">
+        <h3>SSG Original</h3>
+        <div class="code-wrap"><span class="code-label">ssg-cobol</span><pre>FILE-CONTROL.
+    SELECT  FILEIN  ASSIGN TO DISC [INPUT,1,1,1].
+    SELECT  FILEOUT ASSIGN TO DISC [OUTPUT,1,1,1].</pre></div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap"><span class="code-label">csharp</span><pre>// Montant.Files.cs — new private fields (was hardcoded literal in SetOptions)
+// ECL: [INPUT,1,1,1]  — SELECT FILEIN ASSIGN TO DISC &lt;name&gt;
+private string m_FileInName;
+// ECL: [OUTPUT,1,1,1] — SELECT FILEOUT ASSIGN TO DISC &lt;name&gt;
+private string m_FileOutName;
+
+internal void FilesReset() {
+    m_Fd_Rec_In.Init();
+    // SSG: [INPUT,1,1,1] file assignment name
+    m_Filein.SetOptions(m_FileInName, false, false, false, AmtFileRecordEnding.Default);
+
+    m_Fd_Rec_Out.Init();
+    // SSG: [OUTPUT,1,1,1] file assignment name
+    m_Fileout.SetOptions(m_FileOutName, false, false, false, AmtFileRecordEnding.Default);
+}
+
+// Montant.cs — CreateDefinitions(), set before FilesCreate/FilesReset
+m_FileInName  = "FILEIN-1";   // ECL: [INPUT,1,1,1]  stub value
+m_FileOutName = "FILEOUT-1";  // ECL: [OUTPUT,1,1,1] stub value
+FilesCreate(m_Files, m_RequestInfo);
+FilesReset();</pre></div>
+        <h3>Notes / Gotchas</h3>
+        <p>The fields must be set <em>before</em> <code>FilesReset()</code> is called in <code>CreateDefinitions()</code>;
+        <code>FilesReset()</code> is in the <code>Montant.Files.cs</code> partial class and consumes them immediately.
+        The stub value (<code>"FILEIN-1"</code> / <code>"FILEOUT-1"</code>) is the file assignment from TRIAL04&rsquo;s ECL job.
+        A future tier can replace the stub strings with a runtime lookup of actual ECL job parameters.</p>
+        <h3>Applies to programs</h3>
+        <p>All 16 SSG utility programs that use <code>[INPUT,1,1,1]</code> / <code>[OUTPUT,1,1,1]</code> ECL parameters for file assignments.</p>
+      </div>
+    </div>
+
+    <!-- ── T5: Block-size [INPUT,1,1,3] / [OUTPUT,1,1,3] ─────────────────────────── -->
+    <div class="pattern-card" id="pat-block-size">
+      <div class="example-header">
+        <h3>Pattern: <code>[INPUT,1,1,3]</code> / <code>[OUTPUT,1,1,3]</code> &rarr; fields <code>m_FileInBlockSize</code> / <code>m_FileOutBlockSize</code></h3>
+        <p>First applied: MONTANT_SIGNE &mdash; 2026-06-25 &nbsp;|&nbsp; Tier: T5 &nbsp;|&nbsp; <em>Stored only &mdash; no AMT flat-file API hook</em></p>
+      </div>
+      <div class="example-body">
+        <h3>SSG Original</h3>
+        <div class="code-wrap"><span class="code-label">ssg-cobol</span><pre>FD  FILEIN
+    BLOCK CONTAINS [INPUT,1,1,3]  RECORDS
+    RECORD CONTAINS [INPUT,1,1,2]  CHARACTERS
+
+FD  FILEOUT
+    BLOCK CONTAINS [OUTPUT,1,1,3]  RECORDS
+    RECORD CONTAINS [OUTPUT,1,1,2]  CHARACTERS</pre></div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap"><span class="code-label">csharp</span><pre>// Montant.Files.cs — stored as private int fields; no current AMT flat-file API accepts them
+// ECL: [INPUT,1,1,3]  — BLOCK CONTAINS n RECORDS (no flat-file API hook; stored for reference)
+private int m_FileInBlockSize;
+// ECL: [OUTPUT,1,1,3] — BLOCK CONTAINS n RECORDS (no flat-file API hook; stored for reference)
+private int m_FileOutBlockSize;
+
+// Montant.cs — CreateDefinitions(), ECL stub values set for reference
+m_FileInBlockSize  = 1;   // ECL: [INPUT,1,1,3]  stub value
+m_FileOutBlockSize = 1;   // ECL: [OUTPUT,1,1,3] stub value</pre></div>
+        <h3>Notes / Gotchas</h3>
+        <p><code>BLOCK CONTAINS n RECORDS</code> is the OS2200 physical blocking factor for tape/disk.
+        The AMT runtime&rsquo;s <code>AmtFileId</code> constructor and <code>SetOptions()</code> have no block-size
+        parameter for flat-file I/O; the runtime handles buffering internally.
+        The fields are stored to preserve the SSG construct identity and to support a future tier
+        that wires them if a streaming or tape-emulation API becomes available.
+        The CS0414 &ldquo;assigned but never used&rdquo; build warning is expected and intentional.</p>
+        <h3>Applies to programs</h3>
+        <p>All 16 SSG utility programs with <code>BLOCK CONTAINS [INPUT,1,1,3]</code> FD clauses.
+        Block size is likely irrelevant for all flat-file runtime targets in this migration.</p>
+      </div>
+    </div>
+
+
+      <!-- â”€â”€ T_SORT: SORT key â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+      <div id="pat-tsort" class="pattern-card">
+        <h3>Pattern: <code>[KEYS,1,COL,1]</code> / <code>[KEYS,1,COL,2]</code>
+&rarr; constructor <code>int keyOffset, int keyWidth</code></h3>
+        <h3>SSG Original</h3>
+        <div class="code-wrap">
+          <span class="code-label">SSG-COBOL SD definition</span>
+          <pre>SD  SORTFILE  DATA RECORD IS SORT-REC.
+01  SORT-REC  PIC X([OUTPUT,1,1,2]).     *> SD record = output record size
+01  SORT-R1.
+    *DEFINE FILLADD [KEYS,1,COL,1]       *> emits FILLER if offset > 0
+    03  SORT-KEY-1  PIC X([KEYS,1,COL,2]).  *> sort key width</pre>
+        </div>
+        <h3>C# Implementation</h3>
+        <div class="code-wrap">
+          <span class="code-label">Fd_Sort_R1.cs â€” parameterised sort key</span>
+          <pre><span class="csharp-kw">public</span> Fd_Sort_R1 (Sort_Fichout_1 parentObject, AmtFileLayout sharedLayout,
+                    <span class="csharp-kw">int</span> keyOffset = 0, <span class="csharp-kw">int</span> keyWidth = 8) {
+  m_DataRecord = <span class="csharp-kw">new</span> AmtStructure();
+  {
+    m_Sort_R1 = <span class="csharp-kw">new</span> AmtStructure(m_DataRecord);
+    {
+      <span class="csharp-kw">if</span> (keyOffset &gt; 0) { <span class="csharp-kw">new</span> AmtVarAlpha(keyOffset, m_Sort_R1); }  <span class="csharp-cmt">// FILLER</span>
+      m_Sort_Key_1 = <span class="csharp-kw">new</span> AmtVarAlpha(keyWidth, m_Sort_R1);
+    }
+  }
+  <span class="csharp-kw">if</span> (sharedLayout != <span class="csharp-kw">null</span>) { m_DataRecord.Redefines(sharedLayout.DataRecord); }
+  AllocateStructures();
+}</pre>
+        </div>
+        <div class="code-wrap">
+          <span class="code-label">Sort_Fichout_1.Files.cs â€” T_SORT fields + FilesCreate wiring</span>
+          <pre><span class="csharp-cmt">// T_SORT fields (defaults = stub values)</span>
+<span class="csharp-kw">private int</span>    m_SortKeyOffset = 0;   <span class="csharp-cmt">// [KEYS,1,COL,1]</span>
+<span class="csharp-kw">private int</span>    m_SortKeyWidth  = 8;   <span class="csharp-cmt">// [KEYS,1,COL,2]</span>
+
+<span class="csharp-cmt">// Fd_Sort_Rec also gets the output record size (T3)</span>
+m_Fd_Sort_Rec = <span class="csharp-kw">new</span> Fd_Sort_Rec(this, m_RecordSizeOut);
+m_Fd_Sort_R1  = <span class="csharp-kw">new</span> Fd_Sort_R1(this, m_Fd_Sort_Rec, m_SortKeyOffset, m_SortKeyWidth);</pre>
+        </div>
+        <h3>Notes / Gotchas</h3>
+        <ul>
+          <li><code>*DEFINE FILLADD</code> macro body must be suppressed by <code>Remove-SsgDirectives.ps1</code>
+          before passing to CobolConverter; it only emits the C# filler logic at runtime via
+          <code>keyOffset &gt; 0</code>.</li>
+          <li>When <code>keyOffset = 0</code> (key at start of record) no FILLER is created â€” the
+          <code>AmtVarAlpha(0, â€¦)</code> path is avoided entirely.</li>
+          <li><code>Fd_Sort_Rec</code> (the SD flat record) uses <code>m_RecordSizeOut</code>, not a separate
+          parameter â€” the sort workspace record is the same size as the output record.</li>
+          <li>The <code>SortFiles</code> API (AMT sort) takes a <code>Tuple&lt;AmtVariable, AmtOrder&gt;[]</code>.
+          Multi-key sorts add further tuples to the array; ascending = <code>AmtOrder.Ascending</code>.</li>
+        </ul>
+        <h3>Applies to programs</h3>
+        <p>All SSG utility programs that use the OS2200 <code>SORT</code> verb with parameterised key
+        address (<code>[KEYS,1,COL,1]</code> / <code>[KEYS,1,COL,2]</code>).
+        Currently: <strong>TRI_ASCII</strong> (SORT-FICHOUT-1).</p>
+      </div>
+  </div><!-- /patterns -->
+</main>
+
+<script>
+  // Scroll-spy: highlight active nav link as user scrolls
+  const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+  const targets  = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function onScroll() {
+    let cur = targets[0];
+    targets.forEach(t => { if (window.scrollY + 100 >= t.offsetTop) cur = t; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>

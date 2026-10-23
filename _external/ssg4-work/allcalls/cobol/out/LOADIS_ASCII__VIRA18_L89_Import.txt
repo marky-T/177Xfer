@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\LOADIS_ASCII__VIRA18_L89.LionSource
+APPNAME = LOADISASCIIVIRA18L89
+GENSET = Default from new application
+SYSOPT = FALSE

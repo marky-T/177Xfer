@@ -1,0 +1,9 @@
+{
+  "Defaults": {
+    "MaxElapsedSec": 600,
+    "MaxCpuSec": 300,
+    "StallSec": 120,
+    "PollSec": 1
+  },
+  "Programs": {}
+}

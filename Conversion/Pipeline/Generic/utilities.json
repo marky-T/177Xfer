@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "note": "One entry per generic utility. Paths are relative to Conversion\\Pipeline\\Generic. Test-GnUtilities.ps1 checks that every file named here exists.",
+  "utilities": [
+    {
+      "utility": "CFH-COPY", "folder": "CFH-COPY", "calls": 47,
+      "check": { "crosscheck": { "MATCH": 41, "DIFF": 1, "EXPANSION-INCOMPLETE": 5 }, "known": "AFID01 FIXE '+' quoted-card difference (parm is SSG-correct); 5 UL expansions broken by the quoted-space FIXE (T3-028)" },
+      "program": "ASSURFED_UTILIT_CFH_COPY_GN", "programSource": "CFH-COPY/gen/ASSURFED-UTILIT-CFH-COPY-GN.cob",
+      "xqt": ["CFH_COPY"], "parmFile": "CFHPARM", "parmRecordLength": 250, "fixedFiles": ["CFHIN", "CFHOUT"],
+      "include": "CfhCopyParm", "includeSource": "CFH-COPY/gen/CfhCopyParm.ps1",
+      "skeletons": [ { "skeleton": "UTILIT_CFH-COPY_ASCII", "call": "Invoke-CfhCopyHandoff -Program 'ASSURFED_UTILIT_CFH_COPY_GN' -FixedNames" } ],
+      "tests": { "parameterCheck": "CFH-COPY/check/Test-CfhParm.ps1", "prepare": ["CFH-COPY/cc/Prepare-GnRun.ps1", "CFH-COPY/cc/Prepare-FixeCheck.ps1"],
+        "ccJobs": ["SSG4_AFPH12_CFH_COPY", "SSG4_VIRM01_CFH_COPY", "SSG4_NEWNAME_CFH_COPY", "SSG4_VIRM01UL_CFH_COPY", "SSG4_VIRJ01PP_CFH_COPY"], "check": "CFH-COPY/cc/Check-GfRun.ps1", "provenInCc": "jobs 704-712" }
+    },
+    {
+      "utility": "LOADIS", "folder": "LOADIS", "calls": 10, "usesProgramOf": "CFH-COPY",
+      "check": { "offlineOutput": [ "ASCII: 40 keys | DAT same | Index same", "MULTI: 40 keys | DAT same | Index same", "INVALID KEY at record 2" ] },
+      "program": "ASSURFED_UTILIT_CFH_COPY_GN", "xqt": ["LOADIS", "UNLOADIS"], "parmFile": "CFHPARM", "parmRecordLength": 250, "fixedFiles": ["CFHIN", "CFHOUT"],
+      "include": "LoadisParm", "includeSource": "LOADIS/gen/LoadisParm.ps1",
+      "skeletons": [
+        { "skeleton": "UTILIT_LOADIS_ASCII", "call": "Invoke-LoadisHandoff -Mode LOADIS" },
+        { "skeleton": "UTILIT_LOADIS_MULTI", "call": "Invoke-LoadisHandoff -Mode LOADIS" },
+        { "skeleton": "UTILIT_UNLOADIS_ASCII", "call": "Invoke-LoadisHandoff -Mode UNLOADIS" },
+        { "skeleton": "UTILIT_UNLOADIS_MULTI", "call": "Invoke-LoadisHandoff -Mode UNLOADIS" } ],
+      "tests": { "offline": "LOADIS/check/Test-IndexWriter.ps1", "prepare": ["LOADIS/cc/Prepare-LoadisCc.ps1", "LOADIS/cc/Prepare-LoadisAll.ps1", "LOADIS/cc/Prepare-LoadisAbort.ps1"],
+        "ccJobs": ["SSG4_LOADIS_CASES", "SSG4_LOADIS_ALL", "SSG4_LOADIS_ABORT"], "check": "LOADIS/cc/Check-LoadisAll.ps1", "provenInCc": "jobs 807, 820, 836, 837" }
+    },
+    {
+      "utility": "BABA", "folder": "BABA", "calls": 122,
+      "check": { "crosscheck": { "MATCH": 118, "DIFF": 3, "NO-PARM": 1 }, "known": "3 calls with a quoted 'W' key value (taken as W); DEPM01_L139 has no files" },
+      "program": "ASSURFED_UTILIT_BABA_GN", "programSource": "BABA/gen/ASSURFED-UTILIT-BABA-GN.cob",
+      "xqt": ["BABA"], "parmFile": "BABPARM", "parmRecordLength": 400, "fixedFiles": ["BABIN", "BABOUT1", "BABOUT2"],
+      "include": "BabaParm", "includeSource": "BABA/gen/BabaParm.ps1",
+      "skeletons": [ { "skeleton": "UTILIT_BABA_ASCII", "call": "Invoke-BabaHandoff" } ],
+      "tests": { "parameterCheck": "BABA/check/Test-BabaParm.ps1", "prepare": ["BABA/cc/Prepare-BabaCc.ps1"], "ccJobs": ["SSG4_BABA_CASES"], "check": "BABA/cc/Check-BabaCc.ps1", "provenInCc": "job 696" }
+    },
+    {
+      "utility": "FUSBA", "folder": "FUSBA", "calls": 36,
+      "check": { "crosscheck": { "MATCH": 36 } },
+      "program": "ASSURFED_UTILIT_FUSBA_GN", "programSource": "FUSBA/gen/ASSURFED-UTILIT-FUSBA-GN.cob",
+      "xqt": ["FUSBA"], "parmFile": "FUSPARM", "parmRecordLength": 80, "fixedFiles": ["FUSIN1", "FUSIN2", "FUSOUT1", "FUSOUT2"],
+      "include": "FusbaParm", "includeSource": "FUSBA/gen/FusbaParm.ps1",
+      "skeletons": [
+        { "skeleton": "UTILIT_FUSBA_ASCII", "call": "Invoke-FusbaHandoff -Variant FUSBA" },
+        { "skeleton": "UTILIT_FUSBA2_ASCII", "call": "Invoke-FusbaHandoff -Variant FUSBA2" } ],
+      "tests": { "parameterCheck": "FUSBA/check/Test-FusbaParm.ps1", "prepare": ["FUSBA/cc/Prepare-FusbaCc.ps1"], "ccJobs": ["SSG4_FUSBA_CASES"], "check": "FUSBA/cc/Check-FusbaCc.ps1", "provenInCc": "job 782" }
+    },
+    {
+      "utility": "CHABAN", "folder": "CHABAN", "calls": 31,
+      "check": { "crosscheck": { "MATCH": 31 } },
+      "program": "ASSURFED_UTILIT_CHABAN_GN", "programSource": "CHABAN/gen/ASSURFED-UTILIT-CHABAN-GN.cob",
+      "xqt": ["CHABAN"], "parmFile": "CHAPARM", "parmRecordLength": 80, "fixedFiles": ["CHAIN", "CHAOUT"],
+      "include": "ChabanParm", "includeSource": "CHABAN/gen/ChabanParm.ps1",
+      "skeletons": [
+        { "skeleton": "UTILIT_CHABAN_ASCII", "call": "Invoke-ChabanHandoff -Variant CHABAN" },
+        { "skeleton": "UTILIT_CHAB100_ASCII", "call": "Invoke-ChabanHandoff -Variant CHAB100" } ],
+      "tests": { "parameterCheck": "CHABAN/check/Test-ChabanParm.ps1", "prepare": ["CHABAN/cc/Prepare-ChabanCc.ps1"], "ccJobs": ["SSG4_CHABAN_CASES"], "provenInCc": "job 687" }
+    },
+    {
+      "utility": "CONDIS2", "folder": "CONDIS2", "calls": 18,
+      "check": { "crosscheck": { "MATCH": 18 } },
+      "program": "ASSURFED_UTILIT_CONDIS2_GN", "programSource": "CONDIS2/gen/ASSURFED-UTILIT-CONDIS2-GN.cob",
+      "xqt": ["CONDIS2"], "parmFile": "CONPARM", "parmRecordLength": 250, "fixedFiles": ["FILEIN", "FILEOUT"],
+      "include": "CondisParm", "includeSource": "CONDIS2/gen/CondisParm.ps1",
+      "skeletons": [ { "skeleton": "UTILIT_CONDIS2_ASCII", "call": "Invoke-CondisHandoff" } ],
+      "tests": { "parameterCheck": "CONDIS2/check/Test-CondisParm.ps1", "prepare": ["CONDIS2/cc/Prepare-CondisCc.ps1"], "ccJobs": ["SSG4_CONDIS_CASES"], "provenInCc": "job 714" }
+    },
+    {
+      "utility": "SCAN", "folder": "SCAN", "calls": 19,
+      "check": { "crosscheck": { "MATCH": 19 } },
+      "program": "ASSURFED_UTILIT_SCAN_GN", "programSource": "SCAN/gen/ASSURFED-UTILIT-SCAN-GN.cob",
+      "xqt": ["SCAN"], "parmFile": "SCANPARM", "parmRecordLength": 80, "fixedFiles": ["SCANIN"],
+      "include": "ScanParm", "includeSource": "SCAN/gen/ScanParm.ps1",
+      "skeletons": [ { "skeleton": "UTILIT_SCAN_ASCII", "call": "Invoke-ScanHandoff" } ],
+      "tests": { "parameterCheck": "SCAN/check/Test-ScanParm.ps1", "prepare": ["SCANGROUP/cc/Prepare-ScanGroupCc.ps1"], "ccJobs": ["SSG4_SCANGRP_PRINTS"], "provenInCc": "job 769" }
+    },
+    {
+      "utility": "TAPELD", "folder": "TAPELD", "calls": 14,
+      "check": { "crosscheck": { "MATCH": 14 } },
+      "program": "ASSURFED_UTILIT_TAPELD_GN", "programSource": "TAPELD/gen/ASSURFED-UTILIT-TAPELD-GN.cob",
+      "xqt": ["TPF$"], "parmFile": "TAPPARM", "parmRecordLength": 250, "fixedFiles": ["TAPLIN"],
+      "include": "TapeldParm", "includeSource": "TAPELD/gen/TapeldParm.ps1",
+      "skeletons": [ { "skeleton": "UTILIT_TAPELD_ASCII", "call": "Invoke-TapeldHandoff" } ],
+      "tests": { "parameterCheck": "TAPELD/check/Test-TapeldParm.ps1", "prepare": ["SCANGROUP/cc/Prepare-ScanGroupCc.ps1"], "ccJobs": ["SSG4_SCANGRP_PRINTS"], "provenInCc": "job 769" }
+    }
+  ],
+  "references": [
+    {
+      "name": "SCAN group", "builder": "SCANGROUP/gen/Build-ScanGroup.ps1", "utilities": ["CONDIS2", "SCAN", "TAPELD"],
+      "programs": [
+        "ASSURFED_UTILIT_CONDIS2_RV", "ASSURFED_UTILIT_CONDIS2_RD", "ASSURFED_UTILIT_SCAN_RA",
+        "ASSURFED_UTILIT_SCAN_RB", "ASSURFED_UTILIT_TAPELD_RA", "ASSURFED_UTILIT_TAPELD_RB"
+      ]
+    }
+  ],
+  "regress": [
+    { "job": "SSG4_AFPH12_CFH_COPY", "utilities": ["CFH-COPY"], "logPrefix": "AFPH12", "cases": "CFH-COPY\\cc-case-AFPH12.json" },
+    { "job": "SSG4_VIRM01_CFH_COPY", "utilities": ["CFH-COPY"], "logPrefix": "VIRM01", "cases": "CFH-COPY\\cc-case-VIRM01.json" },
+    { "job": "SSG4_NEWNAME_CFH_COPY", "utilities": ["CFH-COPY"], "logPrefix": "NEWNAME", "cases": "CFH-COPY\\cc-case-NEWNAME.json" },
+    { "job": "SSG4_VIRM01UL_CFH_COPY", "utilities": ["CFH-COPY"], "logPrefix": "VIRM01UL", "cases": "CFH-COPY\\cc-case-VIRM01UL.json" },
+    { "job": "SSG4_VIRJ01PP_CFH_COPY", "utilities": ["CFH-COPY"], "logPrefix": "CFHFIX", "cases": "CFH-COPY\\cc-case-VIRJ01PP.json" },
+    { "job": "SSG4_BABA_CASES", "utilities": ["BABA"], "logPrefix": "BABATEST", "cases": "BABA\\cc-cases.json" },
+    { "job": "SSG4_CHABAN_CASES", "utilities": ["CHABAN"], "logPrefix": "CHABTEST", "cases": "CHABAN\\cc-cases.json" },
+    { "job": "SSG4_FUSBA_CASES", "utilities": ["FUSBA"], "logPrefix": "FUSBATEST", "cases": "FUSBA\\cc-cases.json" },
+    { "job": "SSG4_CONDIS_CASES", "utilities": ["CONDIS2"], "logPrefix": "CONDTEST", "cases": "CONDIS2\\cc-cases.json" },
+    { "job": "SSG4_SCANGRP_PRINTS", "utilities": ["SCAN", "TAPELD"], "logPrefix": "SCANGRP", "prints": "SCANGROUP\\cc-prints.json" },
+    { "job": "SSG4_LOADIS_CASES", "utilities": ["LOADIS"], "logPrefix": "LOADTEST", "check": { "script": "LOADIS/cc/Check-LoadisCc.ps1" } },
+    { "job": "SSG4_LOADIS_ALL", "utilities": ["LOADIS"], "logPrefix": "LOADALL", "check": { "script": "LOADIS/cc/Check-LoadisAll.ps1" } },
+    { "job": "SSG4_LOADIS_ABORT", "param": "UNSORTED", "utilities": ["LOADIS"], "logPrefix": "LOADABRT", "expectError": true, "check": { "script": "LOADIS/cc/Check-LoadisAbort.ps1", "args": ["-Case", "UNSORTED"], "after": true } },
+    { "job": "SSG4_LOADIS_ABORT", "param": "DUPLICATE", "utilities": ["LOADIS"], "logPrefix": "LOADABRT", "expectError": true, "check": { "script": "LOADIS/cc/Check-LoadisAbort.ps1", "args": ["-Case", "DUPLICATE"], "after": true } }
+  ],
+  "shared": {
+    "environments": "environments.psd1", "handoffLibrary": "GnHandoff.ps1", "skeletons": "skeletons",
+    "deploySkeleton": "Deploy-GnSkeleton.ps1", "deployScriptSet": "Deploy-GnScriptSet.ps1", "deliverPrograms": "Deliver-GnPrograms.ps1",
+    "testJob": "Test-CcJob.ps1", "testPrints": "Test-CcPrints.ps1", "review": "Test-Promotion.ps1",
+    "lionSourceBuild": "SCANGROUP/gen/Build-ScanGroup.ps1"
+  }
+}

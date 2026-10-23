@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-10-21 23:51:33
+PASS SSG4_AFPH12_CFH_COPY regression                     --- 1 of 1 outputs byte-identical | === SSG4_AFPH12_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_AFPH12_CFH_COPY\check.txt)
+=== Regress : all passed

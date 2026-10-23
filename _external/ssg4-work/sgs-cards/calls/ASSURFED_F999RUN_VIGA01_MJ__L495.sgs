@@ -1,0 +1,14 @@
+INPUT      I006VGB036EC,300,10
+OUTPUT     I006GVG4213,300,10   I006GVG421A,300,10
+KEYS       R     197,2,30
+KEYS       R     197,2,31
+KEYS       R     197,2,32
+KEYS       R     197,2,33
+KEYS       R     197,2,34
+KEYS       R     197,2,35
+KEYS       R     197,2,36
+KEYS       R     197,2,37
+KEYS       R     197,2,38
+KEYS       R     197,2,39
+KEYS       R     197,2,99
+ASCII

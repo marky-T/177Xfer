@@ -1,0 +1,7 @@
+
+Program                     Generated              Built                  Check                           Delivered
+-------                     ---------              -----                  -----                           ---------
+ASSURFED_UTILIT_BABA_GN     10/20/2026 11:34:25 PM 10/20/2026 11:35:12 PM ok (1 varying input(s) at 4001) yes, hash ok
+ASSURFED_UTILIT_CFH_COPY_GN 10/20/2026 11:34:25 PM 10/20/2026 11:35:15 PM ok (1 varying input(s) at 4001) yes, hash ok
+
+

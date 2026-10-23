@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\CFH-COPY_ASCII__VIRA12_CO_L485.LionSource
+APPNAME = CFHCOPYASCIIVIRA12COL485
+GENSET = Default from new application
+SYSOPT = FALSE

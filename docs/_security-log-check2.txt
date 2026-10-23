@@ -1,0 +1,141 @@
+=== 0. Current audit policy (which categories are actually logged) ===
+System audit policy
+
+Category/Subcategory                      Setting
+System
+  Security System Extension               Success and Failure
+
+  System Integrity                        Success and Failure
+
+  IPsec Driver                            Success and Failure
+
+  Other System Events                     Success and Failure
+
+  Security State Change                   Success and Failure
+
+Logon/Logoff
+  Logon                                   Success and Failure
+
+  Logoff                                  Success
+
+  Account Lockout                         Success and Failure
+
+  IPsec Main Mode                         No Auditing
+
+  IPsec Quick Mode                        No Auditing
+
+  IPsec Extended Mode                     No Auditing
+
+  Special Logon                           Success and Failure
+
+  Other Logon/Logoff Events               Success and Failure
+
+  Network Policy Server                   Success and Failure
+
+  User / Device Claims                    No Auditing
+
+  Group Membership                        Success and Failure
+
+  Access Rights                           No Auditing
+
+Object Access
+  File System                             Success and Failure
+
+  Registry                                Success and Failure
+
+  Kernel Object                           Success and Failure
+
+  SAM                                     Success and Failure
+
+  Certification Services                  Success and Failure
+
+  Application Generated                   No Auditing
+
+  Handle Manipulation                     No Auditing
+
+  File Share                              Success and Failure
+
+  Filtering Platform Packet Drop          No Auditing
+
+  Filtering Platform Connection           No Auditing
+
+  Other Object Access Events              Success and Failure
+
+  Detailed File Share                     No Auditing
+
+  Removable Storage                       No Auditing
+
+  Central Policy Staging                  No Auditing
+
+Privilege Use
+  Non Sensitive Privilege Use             Failure
+
+  Other Privilege Use Events              No Auditing
+
+  Sensitive Privilege Use                 Success and Failure
+
+Detailed Tracking
+  Process Creation                        No Auditing
+
+  Process Termination                     Success
+
+  DPAPI Activity                          No Auditing
+
+  RPC Events                              No Auditing
+
+  Plug and Play Events                    Success
+
+  Token Right Adjusted Events             No Auditing
+
+Policy Change
+  Audit Policy Change                     Success and Failure
+
+  Authentication Policy Change            Success and Failure
+
+  Authorization Policy Change             No Auditing
+
+  MPSSVC Rule-Level Policy Change         No Auditing
+
+  Filtering Platform Policy Change        No Auditing
+
+  Other Policy Change Events              Failure
+
+Account Management
+  Computer Account Management             No Auditing
+
+  Security Group Management               Success and Failure
+
+  Distribution Group Management           No Auditing
+
+  Application Group Management            No Auditing
+
+  Other Account Management Events         No Auditing
+
+  User Account Management                 Success and Failure
+
+DS Access
+  Directory Service Access                No Auditing
+
+  Directory Service Changes               No Auditing
+
+  Directory Service Replication           No Auditing
+
+  Detailed Directory Service Replication  No Auditing
+
+Account Logon
+  Kerberos Service Ticket Operations      No Auditing
+
+  Other Account Logon Events              Success and Failure
+
+  Kerberos Authentication Service         No Auditing
+
+  Credential Validation                   Success and Failure
+
+
+=== 1. Total Security log record count (sanity check log isn't empty/cleared) ===
+RecordCount=23795  OldestRecordTime=547209  IsEnabled=True
+
+=== 2. Any Security event at all in full weekend window (no Id filter) - count + first/last ===
+Count=0
+
+=== 3. Logon (4624) / Logoff (4634) / Lock-Unlock (4800/4801) - FULL weekend window ===

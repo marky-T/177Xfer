@@ -1,0 +1,38 @@
+From https://github.com/marky-T/177Xfer
+ * branch            main       -> FETCH_HEAD
+   0f816b5..65c9dc6  main       -> origin/main
+Updating 0f816b5..65c9dc6
+Fast-forward
+ .../CSharpSource/Assurfed_Utilit_Cfh_Copy.Core.cs  |   47 +
+ .../CSharpSource/Assurfed_Utilit_Cfh_Copy.Files.cs |   49 +
+ .../CSharpSource/Assurfed_Utilit_Cfh_Copy.cs       |  149 ++
+ .../CSharpSource/Assurfed_Utilit_Cfh_Copy.csproj   |   76 ++
+ .../CSharpSource/Assurfed_Utilit_Cfh_Copy_Info.cs  |   39 +
+ CFH-COPY-Trial11/CSharpSource/Fd_Recin.cs          |   40 +
+ CFH-COPY-Trial11/CSharpSource/Fd_Recout.cs         |   40 +
+ CFH-COPY-Trial11/CSharpSource/LocalDefinitions.cs  |   65 +
+ .../CSharpSource/PrintDefinitions.Designer.cs      |   42 +
+ CFH-COPY-Trial11/CSharpSource/PrintDefinitions.cs  |   30 +
+ .../Assurfed_Utilit_Cfh_Copy.deps.json             | 1433 ++++++++++++++++++++
+ .../CompiledBinary/Assurfed_Utilit_Cfh_Copy.dll    |  Bin 0 -> 13312 bytes
+ .../CompiledBinary/Assurfed_Utilit_Cfh_Copy.pdb    |  Bin 0 -> 54784 bytes
+ CFH-COPY-Trial11/MockInputFiles/assign.json        |    7 +
+ CFH-COPY-Trial11/MockInputFiles/expected.dat       |    3 +
+ CFH-COPY-Trial11/MockInputFiles/input.dat          |    3 +
+ 16 files changed, 2023 insertions(+)
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Assurfed_Utilit_Cfh_Copy.Core.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Assurfed_Utilit_Cfh_Copy.Files.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Assurfed_Utilit_Cfh_Copy.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Assurfed_Utilit_Cfh_Copy.csproj
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Assurfed_Utilit_Cfh_Copy_Info.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Fd_Recin.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/Fd_Recout.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/LocalDefinitions.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/PrintDefinitions.Designer.cs
+ create mode 100644 CFH-COPY-Trial11/CSharpSource/PrintDefinitions.cs
+ create mode 100644 CFH-COPY-Trial11/CompiledBinary/Assurfed_Utilit_Cfh_Copy.deps.json
+ create mode 100644 CFH-COPY-Trial11/CompiledBinary/Assurfed_Utilit_Cfh_Copy.dll
+ create mode 100644 CFH-COPY-Trial11/CompiledBinary/Assurfed_Utilit_Cfh_Copy.pdb
+ create mode 100644 CFH-COPY-Trial11/MockInputFiles/assign.json
+ create mode 100644 CFH-COPY-Trial11/MockInputFiles/expected.dat
+ create mode 100644 CFH-COPY-Trial11/MockInputFiles/input.dat

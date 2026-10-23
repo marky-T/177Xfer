@@ -1,0 +1,94 @@
+identity: Mark Truman <mark.truman@avanade.com>
+staged=83 outsideScripts_SSG=0
+commit: [feature/federale/ssg-scripts-release 47cdf43f35] Add Scripts_SSG: SSG->PowerShell converted report bundle (20 programs: bodies + CC wrappers + original source + README/notes). Live-validated for CFH-COPY on AMT172 (JobId 1085, exit 0).
+commit:  83 files changed, 19193 insertions(+)
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/ARCHIFORMAT.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/ARCHISEPARE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/BABA_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/CFH-COPY.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/CFH-COPY_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/CHAB100_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/CHABAN_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/CONDIS2_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/EXTEUR.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/FUSBA2_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/FUSBA_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/LECTIS_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/LOADIS_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/LOADIS_MULTI.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/RECAP.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/SCAN_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/TABAN_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/TAPELD_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/UNLOADIS_ASCII.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Bodies/UNLOADIS_MULTI.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Generate-Release-Wrappers.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/ARCHIFORMAT.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/ARCHISEPARE.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/BABA_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/CFH-COPY.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/CFH-COPY_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/CHAB100_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/CHABAN_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/CONDIS2_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/EXTEUR.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/FUSBA2_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/FUSBA_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/LECTIS_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/LOADIS_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/LOADIS_MULTI.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/RECAP.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/SCAN_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/TABAN_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/TAPELD_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/UNLOADIS_ASCII.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/SgsSeeds/UNLOADIS_MULTI.sgs-values.json
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/ARCHIFORMAT.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/ARCHISEPARE
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/BABA_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/CFH-COPY.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/CFH-COPY_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/CHAB100_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/CHABAN_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/CONDIS2_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/EXTEUR.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/FUSBA2_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/FUSBA_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/LECTIS_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/LOADIS_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/LOADIS_MULTI.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/RECAP.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/SCAN_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/TABAN_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/TAPELD_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/UNLOADIS_ASCII.TXT
+commit:  create mode 100644 Scripts_SSG/2_OriginalSource/UNLOADIS_MULTI.txt
+commit:  create mode 100644 Scripts_SSG/README.md
+commit:  create mode 100644 Scripts_SSG/RELEASE-NOTES.md
+HEAD: 47cdf43f35  Mark Truman <mark.truman@avanade.com>  Add Scripts_SSG: SSG->PowerShell converted report bundle (20 programs: bodies + CC wrappers + original source + README/notes). Live-validated for CFH-COPY on AMT172 (JobId 1085, exit 0).
+Scripts_SSG files in HEAD: 83
+VALIDATION-PROMPT present: 0
+push:
+To https://dev.azure.com/avanade-lt-coe/Federale/_git/Federale_InternalRelease
+ + 1bb3a0aec8...47cdf43f35 feature/federale/ssg-scripts-release -> feature/federale/ssg-scripts-release (forced update)
+remote tip: 47cdf43f35da6a0f5fbe420071b90a64e9b4c914	refs/heads/feature/federale/ssg-scripts-release

@@ -1,0 +1,12 @@
+
+Name                      DisplayName                             Status
+----                      -----------                             ------
+FederaleBatchController   Federale BatchController               Running
+FederaleBlazorAPI         Federale Blazor API                    Running
+FederaleBlazorClient      Federale Blazor Client                 Running
+FederaleControlCenter     Federale Control Center                Running
+FederaleControlCenterBL   Federale Control Center Business Logic Running
+FederaleFileController    Federale FileController                Running
+FederalePrintController   Federale PrintController               Running
+FederaleTransactionServer Federale TransactionServer             Running
+

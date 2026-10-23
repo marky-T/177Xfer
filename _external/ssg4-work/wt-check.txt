@@ -1,0 +1,15 @@
+worktree writable: yes
+owner: BUILTIN\Administrators
+sln bytes: 3960863; projects: 6933
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.0
+MinimumVisualStudioVersion = 18.4.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abrdms", "Programs\Abrdms\Abrdms.csproj", "{0880A441-C767-41A4-A626-41E6E6965896}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Amt", "Amt", "{4fd68c9f-bfd0-48a5-8f1c-a30dcb754eeb}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server (Lion)", "Server (Lion)", "{43810e5d-a277-43e8-860e-a46f7c32abc1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server (COBOL)", "Server (COBOL)", "{408892f5-d934-4d92-a213-75fa14a269b5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Programs", "Programs", "{82d6c3de-9d65-4fab-8966-d39392282628}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{d38808c5-9859-44d0-accd-b216032e03fd}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{268e92d8-562e-4ff8-816a-a590f09b03d9}"
+NestedProjects at line 41582

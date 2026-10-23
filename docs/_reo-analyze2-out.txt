@@ -1,0 +1,119 @@
+===== AMT .NET REO started =====
+License valid.
+Database FEDERALE_AFBUS_2200COBOL : Database FEDERALE_AFBUS_2200COBOL
+Check database object lengths.
+Check database object lengths done.
+Check database filegroups.
+Check database object lengths done.
+Analyze database tables.
+Create table AMTSYSSCHEMAINFO : New table.
+Table AMTSYSSCHEMAINFO New column SCHEMAVERSION : New column.
+Create table AMTSYSCRITICALREPORT : New table.
+Table AMTSYSCRITICALREPORT New column ID : New column.
+Table AMTSYSCRITICALREPORT New column APPID : New column.
+Table AMTSYSCRITICALREPORT New column COUNT : New column.
+Table AMTSYSCRITICALREPORT New column VALUE1 : New column.
+Table AMTSYSCRITICALREPORT New column VALUE2 : New column.
+Create table AMTSYSDMS2200DBSKEY : New table.
+Table AMTSYSDMS2200DBSKEY New column AREANAME : New column.
+Table AMTSYSDMS2200DBSKEY New column MAXDBSKEY : New column.
+Create table AMTSYSINDEXLOGIC : New table.
+Table AMTSYSINDEXLOGIC New column INDEXNAME : New column.
+Table AMTSYSINDEXLOGIC New column INDEXLOGIC : New column.
+Create table AMTSYSREOARRAYITEM : New table.
+Table AMTSYSREOARRAYITEM New column TABLENAME : New column.
+Table AMTSYSREOARRAYITEM New column FIELD : New column.
+Table AMTSYSREOARRAYITEM New column LENGTH : New column.
+Table AMTSYSREOARRAYITEM New column DECIMAL : New column.
+Table AMTSYSREOARRAYITEM New column ITEMTYPE : New column.
+Table AMTSYSREOARRAYITEM New column SIGNED : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS1 : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS2 : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS3 : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS4 : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS5 : New column.
+Table AMTSYSREOARRAYITEM New column OCCURS6 : New column.
+Create table AMTSYSREODATA : New table.
+Table AMTSYSREODATA New column KEY1 : New column.
+Table AMTSYSREODATA New column KEY2 : New column.
+Table AMTSYSREODATA New column SUBKEY : New column.
+Table AMTSYSREODATA New column VALUE1 : New column.
+Table AMTSYSREODATA New column VALUE2 : New column.
+Create table AMTSYSSESSIONDATA : New table.
+Table AMTSYSSESSIONDATA New column STATION : New column.
+Table AMTSYSSESSIONDATA New column APPID : New column.
+Table AMTSYSSESSIONDATA New column TRANSNO : New column.
+Table AMTSYSSESSIONDATA New column SESSIONNO : New column.
+Table AMTSYSSESSIONDATA New column DATA : New column.
+Table AMTSYSSESSIONDATA New column PREVFORM : New column.
+Create table AMTSYSSESSIONFORMDATA : New table.
+Table AMTSYSSESSIONFORMDATA New column STATION : New column.
+Table AMTSYSSESSIONFORMDATA New column FORM : New column.
+Table AMTSYSSESSIONFORMDATA New column SESSIONNO : New column.
+Table AMTSYSSESSIONFORMDATA New column APPID : New column.
+Table AMTSYSSESSIONFORMDATA New column SUBKEY : New column.
+Table AMTSYSSESSIONFORMDATA New column DATA : New column.
+Create table AMTSYSTABLEVERSION : New table.
+Table AMTSYSTABLEVERSION New column TABLENAME : New column.
+Table AMTSYSTABLEVERSION New column VERSION : New column.
+Table AMTSYSTABLEVERSION New column REODATETIME : New column.
+Table AMTSYSTABLEVERSION New column VERSIONDLL : New column.
+Table AMTSYSTABLEVERSION New column CHECKDATETIME : New column.
+Analyze database tables done.
+Analyze database indexes.
+Table AMTSYSCRITICALREPORT Create index PKAMTSYSCRITICALREPORT : New index, due to new table.
+Table AMTSYSINDEXLOGIC Create index PKAMTSYSINDEXLOGIC : New index, due to new table.
+Table AMTSYSREOARRAYITEM Create index PKAMTSYSREOARRAYITEM : New index, due to new table.
+Table AMTSYSREODATA Create index PKAMTSYSREODATA : New index, due to new table.
+Table AMTSYSSCHEMAINFO Create index PKAMTSYSSCHEMAINFO : New index, due to new table.
+Table AMTSYSSESSIONDATA Create index PKAMTSYSSESSIONDATA : New index, due to new table.
+Table AMTSYSSESSIONFORMDATA Create index PKAMTSYSSESSIONFORMDATA : New index, due to new table.
+Table AMTSYSTABLEVERSION Create index PKAMTSYSTABLEVERSION : New index, due to new table.
+Analyze database indexes done.
+Analyze database foreignkeys.
+Analyze database foreignkeys done.
+Analyze database triggers.
+Analyze database triggers done.
+Analyze database views.
+Analyze database views done.
+Analyze database synonyms.
+Analyze database synonyms done.
+Analyze database sequences.
+Create sequence seq_amtsysuniquenumber : New sequence.
+Analyze database sequences done.
+Analyze database stored procedures.
+Create Stored Procedure asy_reverse : New stored procedure.
+Create Stored Procedure asy_getdstdate : New stored procedure.
+Create Stored Procedure asy_getlocaltime : New stored procedure.
+Create Stored Procedure AMT_DELETEREODATA : New stored procedure.
+Create Stored Procedure AMT_DELETESYSINDEXLOGIC : New stored procedure.
+Create Stored Procedure AMT_DELETE_AMTSYSREOARRAYITEM : New stored procedure.
+Create Stored Procedure AMT_SETREODATA : New stored procedure.
+Create Stored Procedure AMT_INSERT_AMTSYSREOARRAYITEM : New stored procedure.
+Create Stored Procedure AMT_INSERTSYSINDEXLOGIC : New stored procedure.
+Analyze database stored procedures done.
+Analyze database functions.
+Create Function asy_reverse_5 : New function.
+Create Function asy_reverse_10 : New function.
+Create Function asy_reverse_50 : New function.
+Create Function asy_reverse_100 : New function.
+Create Function asy_reverse_500 : New function.
+Create Function ASY_DT_CURRENTDATE : New function.
+Create Function ASY_DT_CURRENTTIME : New function.
+Create Function ASY_DT_CURRENTTIMESTAMP : New function.
+Create Function ASY_DT_CURRENTTIMESTAMPOFFSET : New function.
+Create Function ASY_DT_TIMESTAMP : New function.
+Create Function ASY_DT_TIMESTAMP_ISO : New function.
+Create Function ASY_DATEADD : New function.
+Create Function ASY_DATEDIFF : New function.
+Create Function ASY_DATEPART : New function.
+Create Function ASY_CURRENTDATE : New function.
+Create Function ASY_CURRENTTIME : New function.
+Create Function ASY_CURRENTTIMESTAMP : New function.
+Create Function ASY_TIMESTAMP : New function.
+Create Function AMT_DECRYPT : New function.
+Create Function AMT_ENCRYPT : New function.
+Analyze database functions done.
+Analyze done FEDERALE_AFBUS_2200COBOL : Analyze is done, 92 actions found.
+Finished reorganize analysis for application: AFBUS_2200COBOL.
+Reo done.

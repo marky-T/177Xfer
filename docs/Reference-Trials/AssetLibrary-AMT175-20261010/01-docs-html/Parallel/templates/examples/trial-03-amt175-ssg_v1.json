@@ -1,0 +1,360 @@
+{
+  "templateVersion": "v1",
+  "trialName": "trial-03-amt175-ssg",
+  "generatedAt": "2026-08-19T14:00:00Z",
+  "description": "AMT175 Trial 3 — SSG 2026-07-07 drop (20 programs). Pilot = UNLOADIS_ASCII (done). Phase 3 COBOL→C# stream via Remove-SsgDirectives + CobolConverterConsole.",
+  "programRows": [
+    {
+      "programId": "UNLOADIS_ASCII",
+      "ssgElementName": "UNLOADIS_ASCII",
+      "category": "Unload",
+      "description": "UNLOAD-ASCII sequential unload utility (2026-07-07 drop variant)",
+      "status": "in-progress",
+      "trialNumber": "trial3-15",
+      "candidateBytes": 7330,
+      "candidateLink": "",
+      "notes": "Pilot. SSG strip + CobolConverterConsole done (7330 B LionSource). LionDev import done 2026-08-19 00:32 (v1.1). F7 + Generate C# done 2026-08-19 19:08 (Revision 1.1, AFBUS_COBOL). Phase 6 run in CC pending."
+    },
+    {
+      "programId": "ARCHIFORMAT",
+      "ssgElementName": "ARCHIFORMAT",
+      "category": "Archive",
+      "description": "ARCHIFORMAT table-format archive utility (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap with Trial 2 ARCHIFORMAT. Diff 2026-07-07 source vs Codedrop 2025 before reusing overrides."
+    },
+    {
+      "programId": "ARCHISEPARE",
+      "ssgElementName": "ARCHISEPARE",
+      "category": "Archive",
+      "description": "ARCHISEPARE archive separator (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap with Trial 2 ARCHISEPARE. Diff source before reusing overrides."
+    },
+    {
+      "programId": "BABA_ASCII",
+      "ssgElementName": "BABA_ASCII",
+      "category": "New",
+      "description": "BABA_ASCII — new program (no Trial 2 equivalent); fixtures/goldens to be authored",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program. Fixtures and expected.dat must be authored from scratch."
+    },
+    {
+      "programId": "CFH-COPY",
+      "ssgElementName": "CFH-COPY",
+      "category": "Copy",
+      "description": "CFH-COPY file copy utility (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "CFH-COPY_ASCII",
+      "ssgElementName": "CFH-COPY_ASCII",
+      "category": "Copy",
+      "description": "CFH-COPY_ASCII ASCII copy variant (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "CHAB100_ASCII",
+      "ssgElementName": "CHAB100_ASCII",
+      "category": "New",
+      "description": "CHAB100_ASCII — new program; fixtures to be authored",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program. Fixtures and expected.dat to be authored."
+    },
+    {
+      "programId": "CHABAN_ASCII",
+      "ssgElementName": "CHABAN_ASCII",
+      "category": "New",
+      "description": "CHABAN_ASCII — new program; Steps 1+2 done",
+      "status": "in-progress",
+      "trialNumber": "trial3",
+      "candidateBytes": 11481,
+      "candidateLink": "",
+      "notes": "SSG strip + CobolConverterConsole done (11481 B LionSource). LionDev import done 04:41. F7 + Generate C# done 19:08 (Rev 1.2). CHABAN_RUN executed 04:48 + 23:03 via pwsh 7.6.3 harness (Script Done, 729B log). Phase 6 confirmed running."
+    },
+    {
+      "programId": "CONDIS2_ASCII",
+      "ssgElementName": "CONDIS2_ASCII",
+      "category": "New",
+      "description": "CONDIS2_ASCII condition-based filter variant 2 — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program. Fixtures to be authored."
+    },
+    {
+      "programId": "EXTEUR",
+      "ssgElementName": "EXTEUR",
+      "category": "New",
+      "description": "EXTEUR extract utility — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program."
+    },
+    {
+      "programId": "FUSBA2_ASCII",
+      "ssgElementName": "FUSBA2_ASCII",
+      "category": "New",
+      "description": "FUSBA2_ASCII fusion variant 2 — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program."
+    },
+    {
+      "programId": "FUSBA_ASCII",
+      "ssgElementName": "FUSBA_ASCII",
+      "category": "New",
+      "description": "FUSBA_ASCII fusion utility — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program."
+    },
+    {
+      "programId": "LECTIS_ASCII",
+      "ssgElementName": "LECTIS_ASCII",
+      "category": "Read",
+      "description": "LECTIS_ASCII multi-key sequential reader ASCII variant (overlap variant mismatch — Trial 2 = LECTIS_MULT)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Variant mismatch: Trial 2 is LECTIS_MULT (120-char, 2-key); this is LECTIS_ASCII (356-line raw SSG). Do NOT reuse Trial 2 overrides/goldens. Fresh analysis required."
+    },
+    {
+      "programId": "LOADIS_ASCII",
+      "ssgElementName": "LOADIS_ASCII",
+      "category": "Load",
+      "description": "LOADIS_ASCII sequential load utility (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "LOADIS_MULTI",
+      "ssgElementName": "LOADIS_MULTI",
+      "category": "Load",
+      "description": "LOADIS_MULTI multi-record load utility (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "RECAP",
+      "ssgElementName": "RECAP",
+      "category": "New",
+      "description": "RECAP recapitulation utility — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program."
+    },
+    {
+      "programId": "SCAN_ASCII",
+      "ssgElementName": "SCAN_ASCII",
+      "category": "Scan",
+      "description": "SCAN_ASCII scan utility ASCII variant (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "TABAN_ASCII",
+      "ssgElementName": "TABAN_ASCII",
+      "category": "New",
+      "description": "TABAN_ASCII table-based utility — new program",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "New program."
+    },
+    {
+      "programId": "TAPELD_ASCII",
+      "ssgElementName": "TAPELD_ASCII",
+      "category": "Tape",
+      "description": "TAPELD_ASCII tape load ASCII variant (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source."
+    },
+    {
+      "programId": "UNLOADIS_ASCII",
+      "ssgElementName": "UNLOADIS_MULTI",
+      "category": "Unload",
+      "description": "UNLOADIS_MULTI multi-record unload utility (overlap — diff vs Trial 2 required)",
+      "status": "pending",
+      "trialNumber": "",
+      "candidateBytes": 0,
+      "candidateLink": "",
+      "notes": "Overlap. Diff source. Note: Trial 2 UNLOADIS_MULT (nodup) is a separate variant."
+    }
+  ],
+  "commandMatrixRows": [
+    {
+      "groupHeader": "A — Standard Invocation",
+      "directiveName": "#ACOB,I",
+      "description": "COBOL compilation header (OS2200 inline COBOL compile directive)",
+      "programColumns": {
+        "UNLOADIS_ASCII": "YES",
+        "ARCHIFORMAT": "YES",
+        "ARCHISEPARE": "YES",
+        "LECTIS_ASCII": "YES",
+        "LOADIS_ASCII": "YES"
+      },
+      "patternBadges": []
+    },
+    {
+      "groupHeader": "",
+      "directiveName": "*IF [ASCII]",
+      "description": "Selects ASCII variant (vs EBCDIC/OS2200 native); set ASCII=1 in conditionValues",
+      "programColumns": {
+        "UNLOADIS_ASCII": "YES",
+        "ARCHIFORMAT": "YES",
+        "ARCHISEPARE": "YES",
+        "LECTIS_ASCII": "YES",
+        "LOADIS_ASCII": "YES",
+        "SCAN_ASCII": "YES",
+        "TAPELD_ASCII": "YES"
+      },
+      "patternBadges": []
+    },
+    {
+      "groupHeader": "B — File Assignment",
+      "directiveName": "[INPUT,x,x,x]",
+      "description": "Input file designator / record length / block factor",
+      "programColumns": {
+        "UNLOADIS_ASCII": "YES",
+        "ARCHIFORMAT": "YES",
+        "ARCHISEPARE": "YES",
+        "LECTIS_ASCII": "YES",
+        "LOADIS_ASCII": "YES",
+        "SCAN_ASCII": "YES"
+      },
+      "patternBadges": []
+    },
+    {
+      "groupHeader": "",
+      "directiveName": "[OUTPUT,x,x,x]",
+      "description": "Output file designator / record length / block factor",
+      "programColumns": {
+        "UNLOADIS_ASCII": "YES",
+        "ARCHIFORMAT": "YES",
+        "ARCHISEPARE": "YES",
+        "SCAN_ASCII": "YES",
+        "TAPELD_ASCII": "YES"
+      },
+      "patternBadges": []
+    },
+    {
+      "groupHeader": "C — Key / Sort",
+      "directiveName": "[KEYIS,x,x,x]",
+      "description": "Key definition (position, length, direction) for indexed file access",
+      "programColumns": {
+        "UNLOADIS_ASCII": "YES",
+        "LECTIS_ASCII": "YES",
+        "LOADIS_ASCII": "YES"
+      },
+      "patternBadges": []
+    }
+  ],
+  "runbookEntries": [
+    {
+      "toolName": "Remove-SsgDirectives.ps1",
+      "description": "Strips SSG directives and substitutes [param] tokens with concrete values. Produces clean COBOL suitable for CobolConverterConsole.",
+      "usageExample": ".\\Remove-SsgDirectives.ps1 -InputFile raw.TXT -OutputFile candidate.TXT -ParamOverrides @{'[INPUT,1,1,1]'='FICHIN-1'} -ConditionValues @{'ASCII'=1}",
+      "parameters": [
+        { "name": "-InputFile", "description": "Raw SSG-COBOL source (.TXT)" },
+        { "name": "-OutputFile", "description": "Clean COBOL candidate output (.TXT)" },
+        { "name": "-ParamOverrides", "description": "Hashtable of [TOKEN]=value pairs (program-specific)" },
+        { "name": "-ConditionValues", "description": "Hashtable of PARAM=numeric pairs for *IF evaluation" },
+        { "name": "-AnnotateStubs", "description": "Switch: appends *> SSG-STUB annotation to substituted lines" }
+      ],
+      "outputs": "Clean COBOL file with all SSG directives removed and tokens replaced",
+      "notes": "Located at C:\\Amt\\Migration\\Templates\\Remove-SsgDirectives.ps1 (shared). Rewrite output BOM-free before passing to CobolConverterConsole (bug#14)."
+    },
+    {
+      "toolName": "CobolConverterConsole.exe",
+      "description": "Converts clean COBOL candidate to .LionSource (AMT object definitions). Use v8.0.26125.50 only.",
+      "usageExample": "CobolConverterConsole trial3-15-unload-ascii.settings",
+      "parameters": [
+        { "name": "<settings-file>", "description": "Path to .settings JSON file (AppName, BatchDir, OutputFile, GlobalCopyDir)" }
+      ],
+      "outputs": ".LionSource file containing <OBJECT=PROGRAM-ID,COBOL PROGRAM> blocks. Note: 'Objects processed: 0' in summary is misleading — check for <OBJECT> in output.",
+      "notes": "Path: C:\\Dev\\amt-go-net-net8\\Migration Tools\\CobolToAmt\\CobolConverterConsole\\bin\\Debug\\net8.0\\CobolConverterConsole.exe. Template: C:\\Amt\\Migration\\Templates\\trial-settings-template.json."
+    },
+    {
+      "toolName": "trial-pilot-template.ps1",
+      "description": "End-to-end pilot runner: SSG strip → BOM fix → settings build → CobolConverterConsole in one script.",
+      "usageExample": "Copy trial-pilot-template.ps1 to Run-Pilot-<PROGRAM>.ps1, fill in $programKey/$programId/$paramOverrides/$conditionValues, then run.",
+      "parameters": [
+        { "name": "$programKey", "description": "SSG element name (e.g. UNLOADIS_ASCII)" },
+        { "name": "$programId", "description": "COBOL PROGRAM-ID (e.g. UNLOAD-ASCII)" },
+        { "name": "$paramOverrides", "description": "Hashtable of ECL token overrides" },
+        { "name": "$conditionValues", "description": "Hashtable of *IF condition values" }
+      ],
+      "outputs": "candidates\\trial3-<programid>\\<PROGRAM-ID>.TXT and output\\trial3-<programid>.LionSource",
+      "notes": "Template at C:\\Amt\\Migration\\Templates\\trial-pilot-template.ps1. Handles BOM-fix and settings-file generation automatically."
+    },
+    {
+      "toolName": "SsgConverterConsole.exe",
+      "description": "Converts SSG batch SYMSTREAM to PowerShell (.ps1 using AmtPsEclLib). NOT for CreatingCobol input — will crash.",
+      "usageExample": "SsgConverterConsole /INPUT:<symstream-folder> /OUTPUT:<output-folder> /VERBOSE:2",
+      "parameters": [
+        { "name": "/INPUT", "description": "Folder containing SSG batch symstream files" },
+        { "name": "/OUTPUT", "description": "Output folder for generated .ps1 files" },
+        { "name": "/VERBOSE", "description": "Verbosity 0-3" },
+        { "name": "/CONTINUEONERROR", "description": "TRUE to continue past per-file errors" }
+      ],
+      "outputs": "Generated .ps1 batch scripts using AmtPsEclLib.psm1 functions",
+      "notes": "Path: C:\\Amt\\Parallel\\AMT175\\8.0.26188.0\\MigrationTools\\SsgConverter\\...\\SsgConverterConsole.exe. PARKED for 2026-07-07 drop (CreatingCobol only — wrong input type)."
+    },
+    {
+      "toolName": "Update-TrialProgress.ps1",
+      "description": "Generates SSG-Trial-Progress HTML from trial JSON content file. Replaces @slot:programRows in template.",
+      "usageExample": ".\\Update-TrialProgress.ps1 -ContentFile ../examples/trial-03-amt175-ssg_v1.json -OutputDir ../output",
+      "parameters": [
+        { "name": "-ContentFile", "description": "Path to JSON conforming to schema_v1.json" },
+        { "name": "-OutputDir", "description": "Output directory for generated HTML" },
+        { "name": "-TemplateVersion", "description": "Template version suffix (default: v1)" }
+      ],
+      "outputs": "SSG-Trial-Progress_<YYYYMMDD-HHMMSS>.html",
+      "notes": "Located at C:\\Amt\\Parallel\\templates\\tools\\. Run Validate-TrialHTML.ps1 on output."
+    }
+  ]
+}

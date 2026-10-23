@@ -1,0 +1,18 @@
+=== AmtTools\Sys.ini (non-secret keys) ===
+# <database servername>  : Database servername/instance name for example MYSERVER\MSSQL2008
+# <database name>        : System databasename for example LION_SYSTEMDEV
+ENVIRONMENT=FEDERALE
+SYSTEMBASEPATH=E:\Repos\Federale_InternalRelease\AFBUS_AMT
+DBUSER=285085106085
+
+=== AmtSettings.xml AppName/env lines ===
+<AppName>FEDERALE_APP</AppName>
+<IniFile>E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini</IniFile>
+<TransactionServer>Grpc:localhost:8031</TransactionServer>
+<ApplicationKind>CobolOS2200</ApplicationKind>
+<FileControllerName>FederaleFileController</FileControllerName>
+<BatchControllerName>FederaleBatchController</BatchControllerName>
+
+=== SQL databases (name only) ===
+Invoke-Sqlcmd localhost failed: The term 'Invoke-Sqlcmd' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.

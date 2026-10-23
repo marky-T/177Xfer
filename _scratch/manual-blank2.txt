@@ -1,0 +1,21 @@
+   440: You can use SSG to create symbolic streams such as data images, OS 2200 Exec
+   867: B      Format 4 only. Do not create an SGS for blank images. Requires the L option.
+  1148: is the number of blank lines at the top of page. Can be supplied by a numeric
+  1152: is the number of blank lines at the bottom of the page. Can be supplied by a
+  1222: Is a string that does not begin with a semicolon ( ; ) and does not contain a space,
+  1413: ?    If the version name of an element is blank, that field exists but returns zero
+  4378: K   List the generated output images following this breakpoint until the next
+  4401: the image. The name specifies the destination of all generated output images
+  4407: All generated output images encountered before the first *BRKPT directive in a
+  4412: generated output stream. This last part is the collection of output images generated
+  4788: TCF set) chain. If /version-name is omitted, a blank version name is assumed. Once
+  7115: In this example, n is the number of data images following -10,20.
+  8344: are the relative line numbers where a change is to be made to the data images
+  8348: numbered relative line 0. Data images following that line-change statement, until
+  8356: indicates that any data images in the TCF following this line change statement,
+  8363: removed. Data images in the TCF following this line change statement are to
+  8388: before inserting any data images and are inserted into the PCF stream after
+  8392: The following example shows how line change statements and data images in a PCF
+  8413: ?       If the first image in a PCF or TCF stream is a data image, SSG assumes the
+ 10031: 0035 00     *. they are processed, the "Yes" line next to TCFU1 is a blank line
+total hits: 20

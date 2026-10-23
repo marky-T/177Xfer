@@ -1,0 +1,10 @@
+{
+  "jobname": "ARCHISEPARE",
+  "fileAssignments": {
+    "CHERCHEUSE": "chercheuse.dat",
+    "FICUNLOAD": "ficunload.dat",
+    "FICARCHI": "ficarchi.dat",
+    "FICNARCHI": "ficnarchi.dat",
+    "PRINTER": "output.dat"
+  }
+}

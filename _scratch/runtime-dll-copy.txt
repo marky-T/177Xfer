@@ -1,0 +1,1 @@
+copied 9, already present 0, missing in Federale: Asysco.Amt.Pdf, Asysco.Amt.RestApi, Asysco.Amt.WebServices, BCrypt.Net-Next-StrongName, DSNUPROC, DSNUTILB, FluentFtp, Grpc.Core.Api, Grpc.Net.Client, Newtonsoft.Json, protobuf-net, protobuf-net.Grpc, Renci.SshNet, System.ServiceModel.Primitives

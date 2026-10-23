@@ -1,0 +1,92 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\ssg4-work\app3\cobol\AFBUS_2200COBOL.settings
+Applications to convert:
+  - AFBUS_2200COBOL
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   AFBUS_2200COBOL
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: ASSURFED-UTILIT-CFH-COPY-ASCII.TXT
+Reading source: ASSURFED-UTILIT-FUSBA2-ASCII.TXT
+Reading source: ASSURFED-UTILIT-LECTIS-ASCII.TXT
+Reading source: ASSURFED-UTILIT-LOADIS-ASCII.TXT
+WARNING: WAR 000014 RESERVE is obsolete.
+Reading source: ASSURFED-UTILIT-RECAP.TXT
+Reading source: ASSURFED-UTILIT-UNLOADIS-ASCII.TXT
+WARNING: WAR 000014 RESERVE is obsolete.
+6 source(s) read
+
+Analyzing source: ASSURFED-UTILIT-CFH-COPY-ASCII
+Analyzing source: ASSURFED-UTILIT-FUSBA2-ASCII
+Analyzing source: ASSURFED-UTILIT-LECTIS-ASCII
+WARNING: WAR 000085 MOVE WREC TO ZPR size discrepancy due to display-1 vars
+Analyzing source: ASSURFED-UTILIT-LOADIS-ASCII
+Analyzing source: ASSURFED-UTILIT-RECAP
+Analyzing source: ASSURFED-UTILIT-UNLOADIS-ASCII
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+6 source(s) processed
+
+*** PHASE: AFBUS_2200COBOL CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          6         1031      171     
+
+List of unresolved calls:
+Source                 No of calls
+ABORT                         2
+EUU003                       10
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:02:616
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 0
+Warnings: 7
+Todos: 0
+Logs: 27
+
+
+=== Conversion Completed ===
+
+Conversion completed with warnings.

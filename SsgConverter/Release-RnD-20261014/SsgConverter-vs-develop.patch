@@ -1,0 +1,794 @@
+diff --git a/SsgConverter/SymstreamExpressionMigrator.cs b/SsgConverter/SymstreamExpressionMigrator.cs
+index 6c2f6b1..1928e18 100644
+--- a/SsgConverter/SymstreamExpressionMigrator.cs
++++ b/SsgConverter/SymstreamExpressionMigrator.cs
+@@ -58,6 +58,14 @@ namespace Ecl.SsgConverter {
+         SymstreamExpression left = be.Left;
+         PSAstOperatorType binaryOperator = SymstreamBinaryOperatorToPowerShellBinaryOperator(be.BinaryOperator);
+         SymstreamExpression right = be.Right;
++
++        // note: "VALUE OF [x]" asks for the numeric value of x. The parser sees the words as a text operand joined to the
++        //       reference with +, which made the comparison string-vs-number and never true. Keep only the reference.
++        SymstreamExpressionPrimitive valueOfWord = left as SymstreamExpressionPrimitive;
++        if (binaryOperator == PSAstOperatorType.Add && valueOfWord != null && valueOfWord.PrimitiveType == PrimitiveType.LiteralString
++            && String.Equals(valueOfWord.Image.Trim(), "VALUE OF", StringComparison.OrdinalIgnoreCase)) {
++          return Migrate(right);
++        }
+         if (IsComparisonOperator(binaryOperator)) {
+           // note: We have to do the comparison at runtime because left may be "12" (a string) and right may be 3 (an integer), in which case
+           //       (left -gt right) would yield false because PowerShell will is convert 3 to a string to enable a comparison. If both operands
+@@ -66,7 +74,7 @@ namespace Ecl.SsgConverter {
+           PsAstExprMethod compareMethod = new PsAstExprMethod("CompareTypeSafe", Migrate(left), new PsAstExprPrimitive(binaryOperator.ToString(), true), Migrate(right));
+           powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(compareMethod));
+         } else {
+-          PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(Migrate(left), binaryOperator, Migrate(right));
++          PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(MigrateOperand(left, right, binaryOperator), binaryOperator, MigrateOperand(right, left, binaryOperator));
+           powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(bo));
+         }
+         return powerShellExpressionBlock;
+@@ -81,23 +89,23 @@ namespace Ecl.SsgConverter {
+         switch (ue.UnaryOperator) {
+           case UnaryOperator.Negative:
+           case UnaryOperator.Positive:
+-            // operand shoud be a primitive
+             SymstreamExpressionPrimitive primitiveOperand = operand as SymstreamExpressionPrimitive;
+-            if (primitiveOperand == null) {
+-              throw new SymstreamException("SymstreamExpressionPrimitive expected.");
+-            }
+-
+-            String sign = String.Empty;
+-            if (ue.UnaryOperator == UnaryOperator.Negative) {
+-              sign = "-";
+-            }
+-
+-            if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
+-              powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
++            if (primitiveOperand != null) {
++              String sign = String.Empty;
++              if (ue.UnaryOperator == UnaryOperator.Negative) {
++                sign = "-";
++              }
++              if (primitiveOperand.PrimitiveType == PrimitiveType.Identifier) {
++                powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image, PsAstPrimitiveType.LocalObject));
++              } else {
++                powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
++              }
+             } else {
+-              powerShellExpressionBlock.AddExpression(new PsAstExprPrimitive(sign + primitiveOperand.Image));
++              // non-primitive operand: emit (0 - expr) or (0 + expr)
++              PsAstExprBlock migratedOperand = Migrate(operand);
++              PSAstOperatorType op = ue.UnaryOperator == UnaryOperator.Negative ? PSAstOperatorType.Substract : PSAstOperatorType.Add;
++              powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(new PsAstExprBinaryOperator(new PsAstExprPrimitive("0"), op, migratedOperand)));
+             }
+-
+             break;
+           case UnaryOperator.Not:
+             powerShellExpressionBlock.AddExpression(new PsAstExprUnary(PSAstOperatorType.Not, Migrate(operand)));
+@@ -158,6 +166,25 @@ namespace Ecl.SsgConverter {
+       throw new SymstreamException("Apparently we missed something.");
+     } // Migrate
+ 
++    /// <summary>
++    /// Migrates one operand of a binary operator. A define parameter ([#1]) arrives as a string in PowerShell, and
++    /// "6" + 1 is "61" there, so an arithmetic operand that is a define parameter is converted to a number first.
++    /// </summary>
++    private PsAstExprBase MigrateOperand (SymstreamExpression operand, SymstreamExpression otherOperand, PSAstOperatorType binaryOperator) {
++      Boolean arithmetic = binaryOperator == PSAstOperatorType.Add || binaryOperator == PSAstOperatorType.Substract
++        || binaryOperator == PSAstOperatorType.Multiply || binaryOperator == PSAstOperatorType.Divide || binaryOperator == PSAstOperatorType.Modulo;
++      SymstreamExpressionPrimitive primitive = operand as SymstreamExpressionPrimitive;
++      SymstreamExpressionPrimitive otherPrimitive = otherOperand as SymstreamExpressionPrimitive;
++      Boolean otherIsText = otherPrimitive != null && otherPrimitive.PrimitiveType == PrimitiveType.LiteralString;
++      if (arithmetic && !otherIsText && primitive != null && primitive.PrimitiveType == PrimitiveType.BracketedReference) {
++        Match parameterReference = Regex.Match(primitive.Image, @"^\[#(\d+)\]$");
++        if (parameterReference.Success && Int32.Parse(parameterReference.Groups[1].Value) > 0) {
++          return new PsAstExprPrimitive("[Int64]$Parameters[" + (Int32.Parse(parameterReference.Groups[1].Value) - 1) + "]", false);
++        }
++      }
++
++      return Migrate(operand);
++    } // MigrateOperand
+     /// <summary>
+     /// Returns the provided string with any bracketed references replaced
+     /// by those references wrapped in GetSgsValue function calls. String
+@@ -293,7 +320,7 @@ namespace Ecl.SsgConverter {
+     /// </summary>
+     /// <param name="s">The string to be split.</param>
+     /// <returns>A list of separated parts.</returns>
+-    private List<String> SplitBracketedReferencesAndLiteralParts (String s) {
++    public List<String> SplitBracketedReferencesAndLiteralParts (String s) {
+ 
+       List<String> parts = new List<String>();
+ 
+diff --git a/SsgConverter/SymstreamExpressionParser.cs b/SsgConverter/SymstreamExpressionParser.cs
+index 1ce8968..b6f38f9 100644
+--- a/SsgConverter/SymstreamExpressionParser.cs
++++ b/SsgConverter/SymstreamExpressionParser.cs
+@@ -26,6 +26,11 @@ namespace Ecl.SsgConverter {
+ 
+       text = text.Trim();
+ 
++      // guard: whitespace-only input trims to empty
++      if (String.IsNullOrEmpty(text)) {
++        throw new ArgumentException("The expression text may not be null or empty.");
++      }
++
+       // note: We would start with parenthesized parts but these do not
+       //       occur in STA sources so we can skip them for now.
+ 
+@@ -104,10 +109,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, "<=")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -118,10 +125,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, "<>")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -132,10 +141,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, ">=")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -146,10 +157,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, "<")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -160,10 +173,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, "=")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -174,10 +189,12 @@ namespace Ecl.SsgConverter {
+         if (match.Success && NotInPairsOfSingleQuotes(text, ">")) {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -267,6 +284,7 @@ namespace Ecl.SsgConverter {
+         // note: left may be a unary operator, we do not want to treat those as strings so cancel the whole thing if this is the case
+         if (!left.StartsWith("NOT", StringComparison.OrdinalIgnoreCase) && !left.StartsWith("-") && !left.StartsWith("+")) {
+           SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++          if (String.IsNullOrEmpty(right)) { return exprLeft; }
+           SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+           SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.Plus, exprRight);
+           return expression;
+@@ -296,9 +314,12 @@ namespace Ecl.SsgConverter {
+         match = regex.Match(text);
+         if (match.Success) {
+           String operand = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
+-          return expression;
++          // guard: operand empty after unary strip (e.g. standalone '-' or '---') — treat as literal
++          if (!String.IsNullOrWhiteSpace(operand)) {
++            SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -308,9 +329,12 @@ namespace Ecl.SsgConverter {
+         match = regex.Match(text);
+         if (match.Success) {
+           String operand = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
+-          return expression;
++          // guard: operand empty after unary strip — treat as literal
++          if (!String.IsNullOrWhiteSpace(operand)) {
++            SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
++            return expression;
++          }
+         }
+       }
+ 
+@@ -429,9 +453,15 @@ namespace Ecl.SsgConverter {
+     /// <returns>A value indicating whether the specified text is a search conditional or not.</returns>
+     private Boolean IsSearchConditional (String text) {
+ 
+-      return text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
+-        text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
+-        text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase);
++      // require both the object keyword AND the SEARCH keyword to avoid false positives
++      // on COBOL identifiers that happen to start with ROW/COLUMN/KEYWORD after a binary split
++      if (text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
++          text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
++          text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase)) {
++        return text.IndexOf(" SEARCH ", StringComparison.OrdinalIgnoreCase) > -1 ||
++               text.IndexOf("\tSEARCH ", StringComparison.OrdinalIgnoreCase) > -1;
++      }
++      return false;
+     } // IsSearchConditional
+ 
+     /// <summary>
+diff --git a/SsgConverter/SymstreamProcessor.cs b/SsgConverter/SymstreamProcessor.cs
+index 556ff80..c5c4336 100644
+--- a/SsgConverter/SymstreamProcessor.cs
++++ b/SsgConverter/SymstreamProcessor.cs
+@@ -18,6 +18,20 @@ namespace Ecl.SsgConverter {
+     private const String BooleanEvaluateFunctionName = "BooleanEvaluate";
+ 
+     private static readonly DirectiveId[] m_DirectiveIds = (DirectiveId[])Enum.GetValues(typeof(DirectiveId));
++
++    /// <summary>
++    /// Arguments for: Set-Variable -Name "NAME" -Value (value) -Scope 1, i.e. assign in the scope that called the define function.
++    /// </summary>
++    private static List<PsAstExprBase> SetVariableInCallerScope (String variableName, PsAstExprBase value) {
++      return new List<PsAstExprBase> {
++        new PsAstExprPrimitive("-Name", false),
++        new PsAstExprPrimitive(variableName, true),
++        new PsAstExprPrimitive("-Value", false),
++        new PsAstExprParenthesized(value),
++        new PsAstExprPrimitive("-Scope", false),
++        new PsAstExprPrimitive("1", false)
++      };
++    }
+     
+     private readonly IMigLogger m_LogObject;
+     private readonly IContentLineConverter m_ContentLineConverter;
+@@ -30,6 +44,7 @@ namespace Ecl.SsgConverter {
+     private Boolean m_EmbeddedInIpf = false;
+     private List<PsAstInstrBlock> m_InstructionBlocksBeingBuilt = new List<PsAstInstrBlock>();
+     private Stack<String> m_InnerMostLoopVariable = new Stack<String>();
++    private Int32 m_DefineDepth = 0;
+     private String m_DirectivePrefix = "*";
+     private Dictionary<String, String> m_SystemVariables = new Dictionary<String, String>() {
+ 
+@@ -138,13 +153,73 @@ namespace Ecl.SsgConverter {
+     /// <returns>A PowerShell expression object that represents the provided Symstream expression.</returns>
+     private PsAstExprBlock SymstreamExpressionToPowerShellExpression (String expression, List<String> globalVariables, List<String> localVariables, Boolean identifierOverString = false) {
+ 
+-      // parse the expression
+-      SymstreamExpression ssExpression = m_ExpressionParser.Parse(expression, globalVariables, localVariables, identifierOverString);
+-
+-      // migrate the expression to a PsAstExprBlock
+-      return m_ExpressionMigrator.Migrate(ssExpression);
++      try {
++        SymstreamExpression ssExpression = m_ExpressionParser.Parse(expression, globalVariables, localVariables, identifierOverString);
++        return m_ExpressionMigrator.Migrate(ssExpression);
++      } catch (Exception ex) {
++        // rethrow with the expression text and file context so failures are diagnosable
++        throw new SymstreamException(
++          String.Format("Expression parse/migrate failed in '{0}'.\r\n  Expression: [{1}]\r\n  Cause: {2}",
++            m_FileBeingMigrated, expression, ex.Message));
++      }
+     } // SymstreamExpressionToPowerShellExpression
+ 
++    /// <summary>
++    /// Converts a Symstream output/data line to a PowerShell expression that yields the line's text.
++    /// Literal text is emitted verbatim as double-quoted string segments (never parsed as arithmetic
++    /// operators), while only [bracketed] references are converted - with variable context - so a data
++    /// line such as "06 FILLER PIC X([FILLCTR])." becomes ("06 FILLER PIC X(" + ($FILLCTR) + ".")
++    /// rather than a broken operator expression.
++    /// </summary>
++    /// <param name="line">The Symstream output/data line.</param>
++    /// <param name="globalVariables">The current set of global variables if there is one.</param>
++    /// <param name="localVariables">The current set of local variables if there is one.</param>
++    /// <returns>A PowerShell expression object that yields the output line's text.</returns>
++    private PsAstExprBase OutputLineToPowerShellExpression (String line, List<String> globalVariables, List<String> localVariables) {
++
++      List<String> parts = m_ExpressionMigrator.SplitBracketedReferencesAndLiteralParts(line);
++      PsAstExprBase result = null;
++
++      foreach (String part in parts) {
++        PsAstExprBase segment;
++        if (part.Length > 0 && part[0] == '[') {
++          // a [bracketed] reference: convert with variable context ($var, GetSgsValue(...), $Parameters[n], ...)
++          segment = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(part, globalVariables, localVariables));
++        } else {
++          // literal text: emit verbatim as a double-quoted PowerShell string
++          segment = new PsAstExprPrimitive(QuoteForPowerShellDoubleQuotedString(part), false);
++        }
++
++        result = (result == null) ? segment : new PsAstExprBinaryOperator(result, PSAstOperatorType.Add, segment);
++      }
++
++      // an empty line still needs to be a valid PowerShell expression
++      if (result == null) {
++        result = new PsAstExprPrimitive("\"\"", false);
++      }
++
++      return new PsAstExprParenthesized(result);
++    } // OutputLineToPowerShellExpression
++
++    /// <summary>
++    /// Wraps literal text as a PowerShell double-quoted string, escaping the characters that are
++    /// special inside such a string (backtick, double quote, dollar).
++    /// </summary>
++    /// <param name="s">The literal text.</param>
++    /// <returns>A PowerShell double-quoted string literal.</returns>
++    private static String QuoteForPowerShellDoubleQuotedString (String s) {
++      StringBuilder sb = new StringBuilder();
++      sb.Append('"');
++      foreach (Char c in s) {
++        if (c == '`' || c == '"' || c == '$') {
++          sb.Append('`');
++        }
++        sb.Append(c);
++      }
++      sb.Append('"');
++      return sb.ToString();
++    } // QuoteForPowerShellDoubleQuotedString
++
+     /// <summary>
+     /// Gets a directive's options as a string of option characters.
+     /// </summary>
+@@ -187,6 +262,16 @@ namespace Ecl.SsgConverter {
+       return result;
+     } // IsVariableName
+ 
++    /// <summary>
++    /// Emits a warning log entry and a PS comment for a directive that is recognised but not yet implemented.
++    /// Use instead of throwing so the file conversion continues rather than failing.
++    /// </summary>
++    private void EmitNotImplemented (PsAstInstrBlock block, String sourceLine) {
++      String trimmed = sourceLine.Trim();
++      m_LogObject.Warning(0, String.Format("  Not implemented — emitted as comment: {0}", trimmed));
++      block.AddComment(String.Format(" NOT IMPLEMENTED: {0}", trimmed));
++    } // EmitNotImplemented
++
+     /// <summary>
+     /// Converts continued lines (broken by ";") to single lines.
+     /// </summary>
+@@ -363,7 +448,7 @@ namespace Ecl.SsgConverter {
+ 
+       List<String> newList = new List<String>();
+       foreach (String s in strings) {
+-        if (!String.IsNullOrEmpty(s)) {
++        if (!String.IsNullOrWhiteSpace(s)) {
+           newList.Add(s);
+         }
+       }
+@@ -590,8 +675,16 @@ namespace Ecl.SsgConverter {
+               //       and the created variables are never referenced so supporting the creation
+               //       of plain global variables should suffice for now.
+               String variableName = lines[i].Substring(7).Trim().ToUpperInvariant();
+-              PsAstExprPrimitive parameter = new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject);
+-              powerSkel.AddMethodInvoke("Clear-Variable", parameter);
++              // *CLEAR sets the (local or global) variable to 0, creating it if it does not exist.
++              // Emit a null-safe assignment rather than `Clear-Variable $name` (which passed the
++              // variable's value as -Name and threw when the variable was unset - issue T3-003).
++              if (m_DefineDepth > 0) {
++                powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(variableName, new PsAstExprPrimitive("0", false, PsAstPrimitiveType.Normal)));
++              } else {
++                powerSkel.AddAssignment(
++                  new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject),
++                  new PsAstExprPrimitive("0", false, PsAstPrimitiveType.Normal));
++              }
+               globalVariables.Add(variableName);
+               break;
+             }
+@@ -699,9 +792,15 @@ namespace Ecl.SsgConverter {
+               define.Body.AddEmptyLine();
+ 
+               i++;
+-              for (; (i < lines.Count) && !lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparison.OrdinalIgnoreCase); i++) {
++              DirectiveId endDefId;
++              m_DefineDepth++;
++              for (; i < lines.Count; i++) {
++                if (lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparison.OrdinalIgnoreCase)) break;
++                // accept deprecated *End as *ENDDEFINE terminator
++                if (IsDirective(lines[i], m_DirectivePrefix, out endDefId) && endDefId == DirectiveId.End) break;
+                 define.Body.AddInstrBlock(Convert(lines, ref i, globalVariables));
+               }
++              m_DefineDepth--;
+ 
+               if (i == lines.Count) {
+                 // no more lines and no *ENDDEFINE encountered
+@@ -916,7 +1015,8 @@ namespace Ecl.SsgConverter {
+               i++;
+               DirectiveId loopId;
+               for (; (i < lines.Count); i++) {
+-                if ((IsDirective(lines[i], m_DirectivePrefix, out loopId)) && (loopId == DirectiveId.EndDo)) {
++                // accept deprecated *End as *ENDDO terminator
++                if ((IsDirective(lines[i], m_DirectivePrefix, out loopId)) && (loopId == DirectiveId.EndDo || loopId == DirectiveId.End)) {
+                   break;
+                 }
+ 
+@@ -1262,6 +1362,14 @@ namespace Ecl.SsgConverter {
+               match = regex.Match(s);
+               if (match.Success) {
+                 incrementVariable = match.Value;
++                if (incrementVariable.StartsWith("+")) {
++                  // some SSG sources write "*INCREMENT +I ..." with a leading '+' on the variable
++                  // name itself (not an operator); every other reference to the same loop variable
++                  // in the source (e.g. bracketed [PG,I,1,1]) omits the '+', so strip it here too -
++                  // otherwise the declare ($+I, invalid PowerShell) and the condition/increment
++                  // (sanitised to $_I by the AST writer) end up as two different, mismatched names.
++                  incrementVariable = incrementVariable.Substring(1);
++                }
+                 m_InnerMostLoopVariable.Push(incrementVariable);
+               } else {
+                 throw new SymstreamException("No INCREMENT variable found after *INCREMENT.");
+@@ -1403,7 +1511,16 @@ namespace Ecl.SsgConverter {
+               if (String.IsNullOrEmpty(variableName) || variableName.Equals(m_InnerMostLoopVariable.Peek())) {
+                 powerSkel.AddMethodInvoke("continue");
+               } else {
+-                throw new SymstreamException(String.Format("*ITERATE variable is not the inner most loop variable, this is not supported. Line: {0}", lines[i]));
++                // *ITERATE on an outer loop variable has no direct PowerShell equivalent (no labelled continue)
++                // Emitted as a comment — see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
++                m_LogObject.Error(0, String.Format(
++                  "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop — PowerShell has no labelled continue. " +
++                  "The iterate directive is emitted as a comment; the loop body will NOT skip remaining statements. " +
++                  "See SsgConverter-Fix-20260820.md Fix 11 for the proper R&D fix.", variableName));
++                powerSkel.AddComment(String.Format(
++                  " IMPORTANT-WORKAROUND: *ITERATE {0} skips to the next iteration of an outer loop." +
++                  " PowerShell 'continue' only affects the innermost loop, so this is a no-op here." +
++                  " R&D fix required — see SsgConverter-Fix-20260820.md Fix 11.", variableName));
+               }
+ 
+               break;
+@@ -1453,8 +1570,26 @@ namespace Ecl.SsgConverter {
+ 
+           // MULTIPLY
+           case DirectiveId.Multiply: {
+-              // not used in STA sources
+-              throw new SymstreamException(String.Format(Unexpected, directiveId, i));
++              // Format:
++              //   *MULTIPLY number1 BY number2 GIVING variable-name
++              String mulLine = lines[i].ToUpperInvariant();
++              Int32 mulBy = mulLine.IndexOf(" BY ");
++              Int32 mulGiving = mulLine.IndexOf(" GIVING ");
++              if (mulBy > -1 && mulGiving > -1 && mulGiving > mulBy) {
++                String mulNum1 = lines[i].Substring(10, mulBy - 10).Trim();
++                String mulNum2 = lines[i].Substring(mulBy + 4, mulGiving - mulBy - 4).Trim();
++                String mulVar  = lines[i].Substring(mulGiving + 8).Trim();
++                PsAstExprPrimitive mulTarget = new PsAstExprPrimitive(mulVar, PsAstPrimitiveType.LocalObject);
++                PsAstExprBinaryOperator mulOp = new PsAstExprBinaryOperator(
++                  SymstreamExpressionToPowerShellExpression(mulNum1, globalVariables, localVariables),
++                  PSAstOperatorType.Multiply,
++                  SymstreamExpressionToPowerShellExpression(mulNum2, globalVariables, localVariables));
++                powerSkel.AddAssignment(mulTarget, mulOp);
++                globalVariables.Add(mulVar.ToUpperInvariant());
++              } else {
++                EmitNotImplemented(powerSkel, lines[i]);
++              }
++              break;
+             }
+ 
+           // PCONTROL []
+@@ -1575,6 +1710,11 @@ namespace Ecl.SsgConverter {
+                 }
+ 
+                 powerSkel.AddMethodInvoke("RemoveFrom-SgsList", psParameters);
++              } else if (target.Equals("VARIABLE")) {
++                // remove the named variable from scope; subsequent references treat it as an unquoted string
++                String varName = lines[i].Substring(charBehindWord).Trim().ToUpperInvariant();
++                globalVariables.Remove(varName);
++                powerSkel.AddComment(" Removed variable: " + varName);
+               } else {
+                 throw new SymstreamException(String.Format("Target {0} for *REMOVE directive is not supported (line {1}).", target, i));
+               }
+@@ -1679,7 +1819,12 @@ namespace Ecl.SsgConverter {
+ 
+               // convert the target expression
+               PsAstExprBase targetExpr = SymstreamExpressionToPowerShellExpression(target, globalVariables, localVariables);
+-              powerSkel.AddAssignment(targetExpr, sourceExpr);
++              if (m_DefineDepth > 0 && IsVariableName(target)) {
++                // SSG variables are global; a plain assignment inside a PowerShell function would only change a local copy.
++                powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(target.ToUpperInvariant(), sourceExpr));
++              } else {
++                powerSkel.AddAssignment(targetExpr, sourceExpr);
++              }
+               break;
+             }
+ 
+@@ -1726,10 +1871,6 @@ namespace Ecl.SsgConverter {
+ 
+                     String[] subnames = name.Split(',');
+ 
+-                    if (subnames.Length > 1) {
+-                      throw new SymstreamException(String.Format("*SORT name field too complex: {0}", name));
+-                    }
+-
+                     // initialize parameters to default values
+                     String label = String.Empty;
+                     String startSgs = "0";
+@@ -1803,7 +1944,8 @@ namespace Ecl.SsgConverter {
+             }
+ 
+           default: {
+-              throw new SymstreamException(String.Format(Unexpected, directiveId, i));
++              EmitNotImplemented(powerSkel, lines[i]);
++              break;
+             }
+         }
+       } else if (lines[i].StartsWith(String.Format("{0}/", m_DirectivePrefix))) {
+@@ -1870,6 +2012,12 @@ namespace Ecl.SsgConverter {
+ 
+         // caller will increment i thus skipping the next directive, => set i one back
+         i--;
++      } else if (lines[i].StartsWith("[")) {
++        powerSkel.AddComment(" This was a stand-alone bracketed reference line.");
++        PsAstExprBase psDataLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
++
++        powerSkel.AddMethodInvoke("DataLineOrNoStatement", psDataLine);
++
+       } else if (IsComment(lines[i], m_DirectivePrefix, out commentTextStart)) {
+         powerSkel.AddComment(lines[i].Substring(commentTextStart));
+       } else if (lines[i].StartsWith(m_DirectivePrefix)) {
+@@ -1906,12 +2054,13 @@ namespace Ecl.SsgConverter {
+           powerSkel.AddMethodInvoke(name, parametersAsExpressions);
+         }
+       } else if (!String.IsNullOrEmpty(lines[i])) {
+-        // Output data line (not a directive, not ECL). This includes lines that begin with a bracketed
+-        // reference. In Symstream, any non-directive line is an output statement written verbatim to the
+-        // generated stream, with only [...] references substituted, => emit as literal text (not parsed
+-        // as an expression).
+-        String expanded = m_ExpressionMigrator.WrapSgsReferencesInFunctionCalls(lines[i], true, true);
+-        powerSkel.AddMethodInvoke("DataLineOrNoStatement", new PsAstExprPrimitive(expanded, false));
++        // Plain text output line (not a directive, not ECL, not a standalone bracket reference).
++        // In Symstream, any non-directive line is an output statement written to the generated stream
++        // (SSG manual 78311784-010 sec 4.3), including whitespace-only (blank) images - see T3-001.
++        // Emit it as literal text with only [bracketed] references substituted - never parse the
++        // COBOL/text as an arithmetic expression (that produced invalid PowerShell).
++        PsAstExprBase psOutputLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
++        powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+       }
+ 
+       return powerSkel;
+diff --git a/SsgConverterConsole/Os2200ContentConverter.cs b/SsgConverterConsole/Os2200ContentConverter.cs
+index 426ae84..8ddbbab 100644
+--- a/SsgConverterConsole/Os2200ContentConverter.cs
++++ b/SsgConverterConsole/Os2200ContentConverter.cs
+@@ -51,7 +51,13 @@ namespace SsgConverterConsole {
+ 
+       // Parse through ECL pipeline
+       EclParserOs2200 parser = new EclParserOs2200(m_LogObject);
+-      EclObjectOs2200 eclObject = parser.Parse(eclLines, EclObjectType.Runstream);
++      EclObjectOs2200 eclObject;
++      try {
++        eclObject = parser.Parse(eclLines, EclObjectType.Runstream);
++      } catch (Exception ex) {
++        m_LogObject.Warning(0, String.Format("ECL parse failed for content block in '{0}': {1} — content skipped.", containingFile, ex.Message));
++        return null;
++      }
+ 
+       if (eclObject.Statements.Count == 0) { return null; }
+ 
+@@ -60,7 +66,12 @@ namespace SsgConverterConsole {
+       EclMigrateSummaryOs2200 summary = new EclMigrateSummaryOs2200();
+       summary.InitSummary(false, String.Empty);
+       EclMigrateOs2200 migrator = new EclMigrateOs2200(m_Vocabulary, psClass, m_LogObject, m_Options, summary, eclObject);
+-      migrator.MigrateStatements();
++      try {
++        migrator.MigrateStatements();
++      } catch (Exception ex) {
++        m_LogObject.Warning(0, String.Format("ECL migration failed for content block in '{0}': {1} — content skipped.", containingFile, ex.Message));
++        return null;
++      }
+ 
+       return psClass.Body;
+     }
+diff --git a/SsgConverterConsole/Program.cs b/SsgConverterConsole/Program.cs
+index 87efd89..23f6518 100644
+--- a/SsgConverterConsole/Program.cs
++++ b/SsgConverterConsole/Program.cs
+@@ -1,6 +1,7 @@
+ using System;
+ using System.Collections.Generic;
+ using System.IO;
++using System.Linq;
+ using System.Text;
+ using Avanade.LtCoE.MigSupport;
+ using Ecl.SsgConverter;
+@@ -65,6 +66,10 @@ namespace SsgConverterConsole {
+         String logPath = settings.LogFile;
+         if (Directory.Exists(logPath) || !Path.HasExtension(logPath)) {
+           logPath = Path.Combine(logPath, $"SsgConversion_{DateTime.Now:yyyyMMdd_HHmmss}.log");
++        } else {
++          // always unique per run so repeated Convert clicks never hit a locked file
++          String dir = Path.GetDirectoryName(logPath) ?? String.Empty;
++          logPath = Path.Combine(dir, $"{Path.GetFileNameWithoutExtension(logPath)}_{DateTime.Now:HHmmss}{Path.GetExtension(logPath)}");
+         }
+         String logDir = Path.GetDirectoryName(logPath);
+         if (!String.IsNullOrEmpty(logDir) && !Directory.Exists(logDir)) {
+@@ -75,10 +80,9 @@ namespace SsgConverterConsole {
+         logger.AddAppender(fileAppender);
+       }
+ 
+-      if (ownLogger) {
+-        logger.Start(1);
+-        logger.ThreadStarted(0);
+-      }
++      // Always start after all appenders are added so every appender receives the Start signal
++      logger.Start(1);
++      logger.ThreadStarted(0);
+ 
+       try {
+         logger.Phase(0, "SSG to PowerShell Converter");
+@@ -124,6 +128,18 @@ namespace SsgConverterConsole {
+               continue;
+             }
+ 
++            // Warn when a file has no SSG directives — it is probably plain COBOL with an ECL header
++            String[] ssgKeywords = { "*IF", "*SET", "*DEFINE", "*LOOP", "*INCREMENT", "*DO",
++                                     "*ENDDEFINE", "*ENDIF", "*ENDDO", "*SORT", "*REMOVE",
++                                     "*CLEAR", "*DISPLAY", "*ABORT", "*EXIT", "*RETURN" };
++            Int32 ssgDirectiveCount = lines.Where(l => {
++              String t = l.TrimStart().ToUpperInvariant();
++              return ssgKeywords.Any(k => t.StartsWith(k + " ") || t.StartsWith(k + ",") || t == k);
++            }).Count();
++            if (ssgDirectiveCount == 0) {
++              logger.Warning(0, $"  No SSG directives recognised in '{fileName}' — file may be plain COBOL rather than SSG. Output will be comments only.");
++            }
++
+             // Convert SSG to PowerShell AST
+             PsAstInstrBlock block = processor.Convert(lines, fileName);
+ 
+@@ -158,9 +174,10 @@ namespace SsgConverterConsole {
+         logger.Log(0, String.Empty);
+         logger.Log(0, $"Conversion complete: {successCount} succeeded, {errorCount} failed");
+ 
+-        return errorCount == 0;
++        Boolean result = errorCount == 0;
++        return result;
+       } catch (Exception ex) {
+-        logger.Error(0, ex.Message);
++        try { logger.Error(0, ex.Message); } catch { }
+         return false;
+       }
+     }
+diff --git a/SsgConverterGui/App.xaml.cs b/SsgConverterGui/App.xaml.cs
+index df5f0e6..d3ef73b 100644
+--- a/SsgConverterGui/App.xaml.cs
++++ b/SsgConverterGui/App.xaml.cs
+@@ -1,3 +1,4 @@
++using System;
+ using System.Windows;
+ 
+ namespace Ssg.ConverterGui {
+@@ -6,6 +7,13 @@ namespace Ssg.ConverterGui {
+   /// Application entry point
+   /// </summary>
+   public partial class App : Application {
+-  }
+ 
++    protected override void OnStartup (StartupEventArgs e) {
++      base.OnStartup(e);
++      DispatcherUnhandledException += (s, ex) => {
++        MessageBox.Show(ex.Exception.ToString(), "Unhandled Error", MessageBoxButton.OK, MessageBoxImage.Error);
++        ex.Handled = true;
++      };
++    }
++  }
+ }
+diff --git a/SsgConverterGui/MainWindow.xaml.cs b/SsgConverterGui/MainWindow.xaml.cs
+index 40e4e82..68a1f9e 100644
+--- a/SsgConverterGui/MainWindow.xaml.cs
++++ b/SsgConverterGui/MainWindow.xaml.cs
+@@ -27,6 +27,24 @@ namespace Ssg.ConverterGui {
+     public MainWindow () {
+       InitializeComponent();
+       InitializeControls();
++      // load settings from command-line arg after controls are ready
++      String[] args = Environment.GetCommandLineArgs();
++      if (args.Length > 1) {
++        LoadSettingsFromFile(args[1]);
++      }
++    }
++
++    /// <summary>
++    /// Load a settings file by path — called from App.xaml.cs for command-line args.
++    /// </summary>
++    internal void LoadSettingsFromFile (String path) {
++      SsgConversionSettings settings = SsgSettingsSupport.LoadSettings(path, out String error);
++      if (settings != null) {
++        ApplySettingsToUi(settings);
++        StatusText.Text = $"Loaded: {System.IO.Path.GetFileName(path)}";
++      } else {
++        MessageBox.Show(error ?? $"Could not load: {path}", "Load Error", MessageBoxButton.OK, MessageBoxImage.Error);
++      }
+     }
+ 
+     private void InitializeControls () {
+@@ -70,24 +88,25 @@ namespace Ssg.ConverterGui {
+       SsgConversionSettings settings = BuildSettings();
+       SetConverting(true);
+ 
+-      Boolean success = await Task.Run(() => RunConversion(settings));
+-
+-      SetConverting(false);
+-      StatusText.Text = success ? "Conversion completed successfully." : "Conversion completed with errors.";
++      try {
++        Boolean success = await Task.Run(() => RunConversion(settings));
++        SetConverting(false);
++        StatusText.Text = success ? "Conversion completed successfully." : "Conversion completed with errors.";
++      } catch (Exception ex) {
++        SetConverting(false);
++        StatusText.Text = "Conversion failed with an exception.";
++        MessageBox.Show(ex.ToString(), "Conversion Error", MessageBoxButton.OK, MessageBoxImage.Error);
++      }
+     }
+ 
+     private Boolean RunConversion (SsgConversionSettings settings) {
+       MigLogger logger = new MigLogger();
+ 
+-      // Add UI log appender
++      // Add UI log appender — Start is called by Program.RunConversion after all appenders are added
+       UiLogAppender uiAppender = new UiLogAppender(this);
+       uiAppender.Verbose = (MigLogVerbose)settings.VerboseLevel;
+       logger.AddAppender(uiAppender);
+ 
+-      // Initialize logger
+-      logger.Start(1);
+-      logger.ThreadStarted(0);
+-
+       // Delegate to the shared conversion logic in SsgConverterConsole
+       return Program.RunConversion(settings, logger);
+     }

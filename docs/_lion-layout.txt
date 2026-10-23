@@ -1,0 +1,10 @@
+=== top level ===
+[D] .git
+[D] Lion
+
+=== LionDev*/AmtReorganize/Setup exe locations ===
+C:\Amt\Working\Lion\Lion\LionDev.exe
+C:\Amt\Working\Lion\Lion\LionDevGenNet.exe
+
+=== *.lic ===
+C:\Amt\Working\Lion\Lion\Default_Lion.Lic

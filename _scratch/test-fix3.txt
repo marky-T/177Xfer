@@ -1,0 +1,108 @@
+Conversion complete: 20 succeeded, 0 failed
+
+== parse, diff against goldens, Tier-1
+ARCHIFORMAT        parse=0 differing=0    tier1=OK lines=0
+ARCHISEPARE        parse=0 differing=0    tier1=OK lines=154
+BABA_ASCII         parse=0 differing=24   tier1=OK lines=104
+CFH-COPY_ASCII     parse=0 differing=14   tier1=OK lines=47
+CFH-COPY           parse=0 differing=14   tier1=OK lines=46
+CHAB100_ASCII      parse=0 differing=0    tier1=OK lines=133
+CHABAN_ASCII       parse=0 differing=0    tier1=OK lines=133
+CONDIS2_ASCII      parse=0 differing=84   tier1=OK lines=479
+EXTEUR             parse=0 differing=0    tier1=OK lines=617
+FUSBA_ASCII        parse=0 differing=4    tier1=OK lines=39
+FUSBA2_ASCII       parse=0 differing=2    tier1=OK lines=69
+LECTIS_ASCII       parse=0 differing=0    tier1=OK lines=181
+LOADIS_ASCII       parse=0 differing=0    tier1=OK lines=70
+LOADIS_MULTI       parse=0 differing=0    tier1=OK lines=97
+RECAP              parse=0 differing=0    tier1=OK lines=224
+SCAN_ASCII         parse=0 differing=72   tier1=OK lines=104
+TABAN_ASCII        parse=0 differing=0    tier1=OK lines=215
+TAPELD_ASCII       parse=0 differing=4    tier1=OK lines=50
+UNLOADIS_ASCII     parse=0 differing=0    tier1=OK lines=65
+UNLOADIS_MULTI     parse=0 differing=0    tier1=OK lines=65
+
+== changed lines
+---- BABA_ASCII
+-          $YLG = (GetSgsValue ("y2k,$a,b,3"))
++          $YLG = (GetSgsValue ("y2k,$a,$b,3"))
+-          $YCH = (GetSgsValue ("y2k,$a,b,2"))
++          $YCH = (GetSgsValue ("y2k,$a,$b,2"))
+-          $PAR = $par + " " + (GetSgsValue ("keys,$c,d,1")) + "," + (GetSgsValue ("keys,$c,d,2")) + "," + (GetSgsValue ("keys,$c,d,3")) + " "
++          $PAR = $par + " " + (GetSgsValue ("keys,$c,$d,1")) + "," + (GetSgsValue ("keys,$c,$d,2")) + "," + (GetSgsValue ("keys,$c,$d,3")) + " "
+-        $YTR = (GetSgsValue ("keys,$c,ych,3,substr$,$ypos,ylg"))
++        $YTR = (GetSgsValue ("keys,$c,$ych,3,substr$,$ypos,$ylg"))
+-          $YTR = (GetSgsValue ("keys,$c,ych,3,substr$,1,$yls")) + $yan
++          $YTR = (GetSgsValue ("keys,$c,$ych,3,substr$,1,$yls")) + $yan
+-          $YTR = $YTR + (GetSgsValue ("keys,$c,ych,3,substr$,$yls,ylg1"))
++          $YTR = $YTR + (GetSgsValue ("keys,$c,$ych,3,substr$,$yls,$ylg1"))
+---- CFH-COPY_ASCII
+-          $YCH = (GetSgsValue ("y2k,$a,b,2"))
++          $YCH = (GetSgsValue ("y2k,$a,$b,2"))
+-          $PAR = $par + " " + (GetSgsValue ("FIXE,$c,d,1")) + "," + (GetSgsValue ("FIXE,$c,d,2")) + "," + (GetSgsValue ("FIXE,$c,d,3")) + " "
++          $PAR = $par + " " + (GetSgsValue ("FIXE,$c,$d,1")) + "," + (GetSgsValue ("FIXE,$c,$d,2")) + "," + (GetSgsValue ("FIXE,$c,$d,3")) + " "
+-        $YTR = (GetSgsValue ("FIXE,$c,ych,3,substr$,$ypos,ylg"))
++        $YTR = (GetSgsValue ("FIXE,$c,$ych,3,substr$,$ypos,$ylg"))
+-          $YTR = (GetSgsValue ("FIXE,$c,ych,3,substr$,1,$yls")) + $yan
++          $YTR = (GetSgsValue ("FIXE,$c,$ych,3,substr$,1,$yls")) + $yan
+-          $YTR = $YTR + (GetSgsValue ("FIXE,$c,ych,3,substr$,$yls,ylg1"))
++          $YTR = $YTR + (GetSgsValue ("FIXE,$c,$ych,3,substr$,$yls,$ylg1"))
+-        $PAR = $par + " " + (GetSgsValue ("FIXE,$c,ych,1")) + "," + (GetSgsValue ("FIXE,$c,ych,2")) + "," + $YTR
++        $PAR = $par + " " + (GetSgsValue ("FIXE,$c,$ych,1")) + "," + (GetSgsValue ("FIXE,$c,$ych,2")) + "," + $YTR
+---- CFH-COPY
+-          $YCH = (GetSgsValue ("y2k,$a,b,2"))
++          $YCH = (GetSgsValue ("y2k,$a,$b,2"))
+-          $PAR = $par + " " + (GetSgsValue ("FIXE,$c,d,1")) + "," + (GetSgsValue ("FIXE,$c,d,2")) + "," + (GetSgsValue ("FIXE,$c,d,3")) + " "
++          $PAR = $par + " " + (GetSgsValue ("FIXE,$c,$d,1")) + "," + (GetSgsValue ("FIXE,$c,$d,2")) + "," + (GetSgsValue ("FIXE,$c,$d,3")) + " "
+-        $YTR = (GetSgsValue ("FIXE,$c,ych,3,substr$,$ypos,ylg"))
++        $YTR = (GetSgsValue ("FIXE,$c,$ych,3,substr$,$ypos,$ylg"))
+-          $YTR = (GetSgsValue ("FIXE,$c,ych,3,substr$,1,$yls")) + $yan
++          $YTR = (GetSgsValue ("FIXE,$c,$ych,3,substr$,1,$yls")) + $yan
+-          $YTR = $YTR + (GetSgsValue ("FIXE,$c,ych,3,substr$,$yls,ylg1"))
++          $YTR = $YTR + (GetSgsValue ("FIXE,$c,$ych,3,substr$,$yls,$ylg1"))
+-        $PAR = $par + " " + (GetSgsValue ("FIXE,$c,ych,1")) + "," + (GetSgsValue ("FIXE,$c,ych,2")) + "," + $YTR
++        $PAR = $par + " " + (GetSgsValue ("FIXE,$c,$ych,1")) + "," + (GetSgsValue ("FIXE,$c,$ych,2")) + "," + $YTR
+---- CONDIS2_ASCII
+-        If (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D42") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 4))) {
++        If (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D42") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 4))) {
+-        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D24") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 2))) {
++        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D24") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 2))) {
+-        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D22A") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 2))) {
++        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D22A") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 2))) {
+-        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D22B") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 2))) {
++        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D22B") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 2))) {
+-        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D66A") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 6))) {
++        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D66A") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 6))) {
+-        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,J,4")) "EqualTo" "D66B") -and (CompareTypeSafe (GetSgsValue ("PG,$I,J,2")) "EqualTo" 6))) {
++        } elseif (((CompareTypeSafe (GetSgsValue ("PG,$I,$J,4")) "EqualTo" "D66B") -and (CompareTypeSafe (GetSgsValue ("PG,$I,$J,2")) "EqualTo" 6))) {
+---- FUSBA_ASCII
+-  If (((CompareTypeSafe (GetSgsValue ("UPDATE")) "GreaterThan" 0) -and (CompareTypeSafe -not (GetSgsValue ("ANNUL")) "GreaterThan" 0))) {
++  If (((CompareTypeSafe (GetSgsValue ("UPDATE")) "GreaterThan" 0) -and (-not (CompareTypeSafe (GetSgsValue ("ANNUL")) "GreaterThan" 0)))) {
+-    If ((CompareTypeSafe -not (GetSgsValue ("INPUT,1")) "GreaterThan" $B)) {
++    If ((-not (CompareTypeSafe (GetSgsValue ("INPUT,1")) "GreaterThan" $B))) {
+---- FUSBA2_ASCII
+-If (-not (GetSgsValue ("NOLIST"))) {
++If ((-not (GetSgsValue ("NOLIST")))) {
+---- SCAN_ASCII
+-        $PAR = $PAR + " " + (GetSgsValue ("IF,$Z1,Z3,1")) + "," + (GetSgsValue ("IF,$Z1,Z3,2"))
++        $PAR = $PAR + " " + (GetSgsValue ("IF,$Z1,$Z3,1")) + "," + (GetSgsValue ("IF,$Z1,$Z3,2"))
+-        $PAR = $PAR + " " + (GetSgsValue ("IF,$Z1,Z3,1"))
++        $PAR = $PAR + " " + (GetSgsValue ("IF,$Z1,$Z3,1"))
+-        $YCH = (GetSgsValue ("Y2K,$A,B,2"))
++        $YCH = (GetSgsValue ("Y2K,$A,$B,2"))
+-        $YPOS = (GetSgsValue ("Y2K,$A,B,1"))
++        $YPOS = (GetSgsValue ("Y2K,$A,$B,1"))
+-            $YAN = (GetSgsValue ("IF,$Z1,BCL,1,SUBSTR$,$SIE,2"))
++            $YAN = (GetSgsValue ("IF,$Z1,$BCL,1,SUBSTR$,$SIE,2"))
+-            $YAN = "(" + (GetSgsValue ("IF,$Z1,BCL,1,SUBSTR$,$SI3,1"))
++            $YAN = "(" + (GetSgsValue ("IF,$Z1,$BCL,1,SUBSTR$,$SI3,1"))
+---- TAPELD_ASCII
+-    If (((CompareTypeSafe -not (GetSgsValue ("FIXE,1,$I")) "GreaterThan" 0) -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES ;"))) {
++    If (((-not (CompareTypeSafe (GetSgsValue ("FIXE,1,$I")) "GreaterThan" 0)) -or (CompareTypeSafe (GetSgsValue ("FIXE,1,$I,3")) "EqualTo" "SPACES ;"))) {
+-If (((CompareTypeSafe (GetSgsValue ("FIXE")) "GreaterThan" 0) -and (CompareTypeSafe -not (GetSgsValue ("STITRE")) "GreaterThan" 0))) {
++If (((CompareTypeSafe (GetSgsValue ("FIXE")) "GreaterThan" 0) -and (-not (CompareTypeSafe (GetSgsValue ("STITRE")) "GreaterThan" 0)))) {
+
+== expansion with the real cards
+BABA_ASCII     exit 0  System.Object[]
+FUSBA_ASCII    exit 0  System.Object[]
+CHABAN_ASCII   exit 0  System.Object[]

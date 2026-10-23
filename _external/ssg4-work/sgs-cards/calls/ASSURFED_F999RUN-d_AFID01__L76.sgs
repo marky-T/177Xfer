@@ -1,0 +1,4 @@
+ASCII
+INPUT          INA,16,10
+OUTPUT         OUT1,16,10  OUT2,16,10
+KEYS           R 9,8,00000000

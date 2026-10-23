@@ -1,0 +1,290 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'TABAN'. 
+       AUTHOR. BOURDEAUD HUY PIERRE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER.     UNIVAC-1100-60EIS.  
+       OBJECT-COMPUTER.     UNIVAC-1100-60EIS.  
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT   IMP   ASSIGN  TO  PRINTER.  
+           SELECT  TAPE1  ASSIGN  TO
+               DISC ICCS9GCL2.  
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  IMP   LABEL RECORD  OMITTED  
+                    LINAGE IS 63
+                    LINES AT TOP 6  
+                    LINES AT BOTTOM 3   
+                 DATA  RECORD  IS  LIGNE.   
+       01  LIGNE   PIC  X(132) DISP-1.  
+       FD  TAPE1  LABEL RECORD  STANDARD
+                  BLOCK  CONTAINS  10  RECORDS   
+             DATA RECORD IS RECE1  REC1.
+       01  RECE1  PIC  X(300).
+       01  REC1. 
+               06 FILLER  PIC  X(112).   
+              06 LMONT1  PIC  S9(9).  
+              06 RMONT1 REDEFINES LMONT1. 
+                   07 TMONT1 PIC 9 OCCURS 9 TIMES INDEXED 
+                       BY KMONT1.
+       01  INDICATIF1.   
+               06 FILLER  PIC  X(1).   
+               06 LIND1  PIC  X(1).  
+       01  CCART  PIC 9.
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC   9(10) COMP VALUE  0.  
+       77  FIRS     PIC   9(10) COMP VALUE  0.  
+       01  ZONE-WORK.   
+           02 LMONT1 PIC SH9(18).
+           02 FILLER PIC X. 
+       01  SUB-TOTAL.   
+           03  MONT1    PIC  SH9(18)  VALUE 0.   
+           03 FILLER PIC X. 
+       01  TOTAL.   
+           03  MONT1   PIC  SH9(18)  VALUE  0.   
+           03 FILLER PIC X. 
+       01  W-INDIC. 
+           02  IND1    PIC  X(1).
+       01  W-INDIC-OLD. 
+           02  IND1  PIC X(1).   
+       01  W-ZERO.  
+           03  MONT1  PIC  SH9(18)  VALUE 0. 
+           03 FILLER PIC X. 
+       01  TIT-TOTAL.   
+           02  FILLER  PIC  X(16)  VALUE  '***TABAN FIN ***'.   
+           02  FILLER  PIC  X(15)  VALUE  ' NB.ENREG.LUS= '.
+           02  P-LUS   PIC  Z(8)9.  
+       01  TIT-RUPT1.   
+           02  FILLI   PIC  X(14) VALUE '***RUPTURE*** '.   
+           02  IND1  PIC X(1).   
+           02  FILLER   PIC  X   VALUE SPACE.   
+       01  LIGNES-SUB.  
+           02  LIG-SUB1. 
+             03 FA1   PIC X(12)  VALUE '*SOUS-TOTAL*'.   
+       01  ADETAIL. 
+           03 DMONT1  PIC SH9(18)  VALUE 0.  
+           03 FILLER PIC X. 
+       01  CDTOAF.  
+           03  CDTOAF-PRM-ENE.  
+               05  CDTOAF-DT-ENE.   
+                   07  CDTOAF-AA-ENE.   
+                       09  CDTOAF-A1-ENE       PIC X(01).   
+                       09  CDTOAF-A2-ENE       PIC X(01).   
+                   07  CDTOAF-MM-ENE           PIC X(02).   
+                   07  CDTOAF-JJ-ENE           PIC X(02).   
+           03  CDTOAF-PRM-SRT.  
+               05  CDTOAF-DT-SRT-9             PIC 9(08).   
+               05  CDTOAF-DT-SRT REDEFINES CDTOAF-DT-SRT-9. 
+                   07  CDTOAF-SSAA-SRT         PIC X(04).   
+                   07  CDTOAF-SSAA-SRT-RDF REDEFINES CDTOAF-SSAA-SRT.   
+                      09  CDTOAF-SS-SRT        PIC X(02).   
+                      09  CDTOAF-AA-SRT.
+                          11  CDTOAF-A1-SRT    PIC X(01).   
+                          11  CDTOAF-A2-SRT    PIC X(01).   
+                   07  CDTOAF-MM-SRT           PIC X(02).   
+                   07  CDTOAF-JJ-SRT           PIC X(02).   
+               05  CDTOAF-DTE-SRT REDEFINES CDTOAF-DT-SRT-9.
+                   07  CDTOAF-SSS-SRT          PIC X(02).   
+                   07  CDTOAF-DT6-SRT          PIC X(06).   
+               05  CDTOAF-DTE2-SRT REDEFINES CDTOAF-DT-SRT-9.   
+                   07  CDTOAF-SS2-SRT          PIC X(02).   
+                   07  CDTOAF-AAMM-SRT         PIC X(04).   
+                   07  CDTOAF-JJ2-SRT          PIC X(02).   
+       01  EUW002.  
+           03  WS-PTR-ENE.  
+               05  WS-PTR-ENE-MON-ENE.  
+                   07  MT-ENE              PIC S9(17).  
+                   07  MT-ENE-SGN          PIC X(01).   
+                   07  MT-ENE-CHI          PIC 9(02).   
+               05  WS-PTR-ENE-MON-SRT.  
+                   07  LG-MAX-MON-SRT      PIC 9(03).   
+                   07  CD-FMT-MON-SRT      PIC X(01).   
+                   07  WS-PTR-FAC-MON-SRT.  
+                       09  FL-IMP-APO      PIC X(01).   
+                       09  FL-IMP-EUR      PIC X(01).   
+                       09  FL-IMP-BEF      PIC X(01).   
+                       09  FL-PLT-SGN      PIC X(01).   
+                       09  FL-TRD-SGN      PIC X(01).   
+                       09  FL-SGN-FIX      PIC X(01).   
+                       09  FL-SGN-VUE      PIC X(01).   
+                       09  FL-CAD-PRC      PIC X(01).   
+                       09  FL-CAD-CNV      PIC X(01).   
+                       09  FL-IMP-PNT      PIC X(01).   
+                       09  FL-000          PIC X(01).   
+                       09  CD-DET-MON      PIC X(01).   
+                       09  FILLER          PIC X(19).   
+           03  WS-PTR-SRT.  
+               05  WS-MON-SRT-001.  
+                   07  MT-SRT              PIC X(100).  
+               05  WS-MON-SRT-002.  
+                   07  MT-SRT-PRC          PIC X(50).   
+                   07  MT-SRT-CNV          PIC X(50).   
+                   07  TL-PTH-GCH          PIC X(01).   
+                   07  TL-PTH-DRT          PIC X(01).   
+               05  LG-MON-SRT              PIC 9(02).   
+               05  LB-DVI-PRC              PIC X(03).   
+               05  LB-DVI-CNV              PIC X(03).   
+           03  WS-PTR-ENE-SRT.  
+               05  FILLER                  PIC X(10).   
+           03  WS-IFN-EUR.  
+               05  FILLER                  PIC X(10).   
+       01  WS-CMT-PGM.  
+           03  NM-PGM-APL               PIC X(08).  
+           03  NM-NOM-ENV               PIC X(08).  
+           03  NM-NOM-COP               PIC X(08).  
+           03  NM-NOM-DEM               PIC X(08).  
+           03  VL-CDE-RET               PIC S9(04). 
+           03  VL-MOT-CDE               PIC S9(04). 
+           03  LB-MSG-RET               PIC X(30).  
+           03  CD-DBG-PRG               PIC X(1).   
+           03  FILLER                   PIC X(7).   
+           03  VL-CHP-TSF               PIC X(3922).
+       01  RDMS-QUALIFIER                        PIC X(12). 
+       01  RDMS-IND                              PIC 9(2).  
+       01  RDMS-STATUS                           PIC 9999  VALUE 0. 
+       01  RDMS-SAV-STATUS                       PIC 9999  VALUE 0. 
+       01  RDMS-ROLLB                            PIC 9     VALUE 0. 
+       01  RDMS-COLUMN                           PIC S1(36).
+       01  RDMS-SAV-COLUMN                       PIC S1(36).
+       01  RDMS-FLAG                             PIC 9     VALUE 0. 
+       01  RDMS-FLAG-THREAD                      PIC 9     VALUE 0. 
+       01  RDMS-RESULT. 
+             05 RDMS-ERROR-LINE OCCURS 4         PIC X(80). 
+       01  RDMS-COM.
+             05 RLIN            OCCURS 36        PIC X(40). 
+       01  ZONE-25                               PIC Z(18). 
+       PROCEDURE DIVISION.  
+       DEBUT.   OPEN INPUT TAPE1.   
+           MOVE  SPACES  TO  LIGNES-SUB.
+           MOVE  '*SOUS-TOTAL*'  TO  FA1.
+           OPEN OUTPUT  IMP.
+           CALL 'RSA$INIT'. 
+           ENTER MASM 'ACOB$RDMR' USING 
+             'BEGIN THREAD FOR APPLICATION UDSSRC READ;',   
+             RDMS-STATUS, RDMS-COLUMN.  
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 1 TO RDMS-FLAG-THREAD.  
+           ENTER MASM 'ACOB$RDMR' USING 
+             'USE DEFAULT QUALIFIER AFLINC;',   
+             RDMS-STATUS, RDMS-COLUMN.  
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           ENTER MASM 'ACOB$RDMR' USING 
+             'USE DEFAULT VERSION PRODUCTION ;',
+             RDMS-STATUS, RDMS-COLUMN.  
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 0 TO RDMS-FLAG. 
+           MOVE 'TABAN'     TO NM-PGM-APL   OF WS-CMT-PGM.  
+           MOVE 'BATCH'     TO NM-NOM-ENV   OF WS-CMT-PGM.  
+           MOVE 'Y'         TO CD-DBG-PRG   OF WS-CMT-PGM.  
+           MOVE 'EUW002'    TO NM-NOM-COP   OF WS-CMT-PGM.  
+           MOVE 'SERVICE1'  TO NM-NOM-DEM   OF WS-CMT-PGM.  
+           MOVE SPACES      TO WS-PTR-ENE   OF EUW002.  
+           MOVE 'R'         TO FL-PLT-SGN   OF EUW002.  
+           MOVE '2'         TO FL-TRD-SGN   OF EUW002.  
+           MOVE 'Y'         TO MT-ENE-SGN   OF EUW002.  
+           MOVE '1'         TO CD-FMT-MON-SRT  OF EUW002.   
+           MOVE 'Y'         TO FL-IMP-PNT      OF EUW002.   
+           MOVE 'N'         TO FL-000          OF EUW002.   
+       LECT.  READ TAPE1  AT END GO TO FINBDE.  
+           IF LMONT1  OF REC1 NUMERIC GO TO EXIT1. 
+           IF LMONT1 OF REC1 = SPACES 
+           MOVE ZEROES TO LMONT1 OF REC1 GO TO EXIT1.  
+           PERFORM PMONT1 VARYING KMONT1 FROM 1 BY 1 UNTIL
+               KMONT1 = (9 + 1).  
+       EXIT1.
+           MOVE CORRESPONDING REC1 TO ZONE-WORK. 
+           ADD  1  TO  NB-LUS.  
+           MOVE  LIND1  TO  IND1  OF  W-INDIC.
+           IF  FIRS  =  0  MOVE  1  TO  FIRS  GO TO CONT1.  
+           IF  W-INDIC-OLD  GREATER THAN W-INDIC  GO TO  ERR-SEQ.   
+           IF  W-INDIC  NOT EQUAL TO W-INDIC-OLD  GO TO RUPT.   
+       LECT2.   
+           ADD   LMONT1 OF ZONE-WORK TO  MONT1  OF  SUB-TOTAL.
+           GO TO LECT.  
+       RUPT.
+           PERFORM  IMP-INDIC-OLD.  
+           PERFORM   IMP-SUB-TOTAL. 
+           ADD  CORRESPONDING  SUB-TOTAL   TO  TOTAL.   
+       CONT1.   
+           MOVE  0  TO MONT1   OF SUB-TOTAL. 
+           MOVE  W-INDIC  TO  W-INDIC-OLD.  
+           GO TO LECT2. 
+       FINBDE.  
+           PERFORM  RUPT.   
+           PERFORM  IMP-TOTAL.  
+           MOVE  NB-LUS  TO   P-LUS.
+           WRITE  LIGNE  FROM  TIT-TOTAL  AFTER  3. 
+       FF. CLOSE  TAPE1.
+           CLOSE  IMP.  
+           ENTER MASM 'ACOB$RDMR' USING 
+             'END THREAD ;',
+             RDMS-STATUS, RDMS-COLUMN.  
+           IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR. 
+           MOVE 0 TO RDMS-FLAG-THREAD.  
+           STOP RUN.
+       IMP-INDIC-OLD.   
+           MOVE CORRESPONDING  W-INDIC-OLD  TO TIT-RUPT1.   
+           WRITE LIGNE  FROM  TIT-RUPT1  AFTER  2.  
+       IMP-SUB-TOTAL.   
+           MOVE 17     TO MT-ENE-CHI OF EUW002. 
+           MOVE 25     TO LG-MAX-MON-SRT OF EUW002. 
+           MOVE MONT1     OF SUB-TOTAL TO MT-ENE OF EUW002.  
+           MOVE EUW002       TO VL-CHP-TSF  OF WS-CMT-PGM.  
+           CALL 'EUU003'     USING WS-CMT-PGM.  
+           MOVE VL-CHP-TSF   OF WS-CMT-PGM TO EUW002.   
+           MOVE MT-SRT       OF EUW002 TO MONT1 OF LIGNES-SUB.   
+       IMP-TOTAL.   
+           MOVE '*****TOTAL GENERAL *****'  TO  LIGNE.  
+            WRITE  LIGNE  AFTER PAGE.   
+           MOVE 17     TO MT-ENE-CHI OF EUW002. 
+           MOVE 25     TO LG-MAX-MON-SRT OF EUW002. 
+           MOVE MONT1     OF TOTAL TO MT-ENE OF EUW002.  
+           MOVE EUW002       TO VL-CHP-TSF  OF WS-CMT-PGM.  
+           CALL 'EUU003'     USING WS-CMT-PGM.  
+           MOVE VL-CHP-TSF   OF WS-CMT-PGM TO EUW002.   
+           MOVE MT-SRT       OF EUW002 TO MONT1 OF LIGNES-SUB.   
+       ERR-SEQ. 
+           MOVE      '*ANCIEN INDIC*'          TO  FILLI.   
+           MOVE      '**ERREUR DE SEQUENCE**'  TO  LIGNE.   
+           WRITE  LIGNE  AFTER  5.  
+           PERFORM   IMP-INDIC-OLD. 
+           MOVE      '*NOUVEL INDIC*'     TO  FILLI.
+           MOVE  CORRESPONDING   W-INDIC  TO  W-INDIC-OLD.  
+           PERFORM   IMP-INDIC-OLD. 
+           GO  TO  FF.  
+       PMONT1.   
+           IF TMONT1 (KMONT1) = SPACES MOVE ZEROES TO 
+               TMONT1 (KMONT1).   
+       RDMS-ERROR-PAR.  
+           DISPLAY '*** ERROR RDMS ***' UPON PRINTER.   
+           DISPLAY 'COLUMN = ' RDMS-COLUMN UPON PRINTER.
+           DISPLAY 'STATUS = ' RDMS-STATUS UPON PRINTER.
+           PERFORM TRAIT-RDMS.  
+           GO TO RDMS-ERROR-EX. 
+       TRAIT-RDMS.  
+           MOVE ZEROS TO RDMS-FLAG. 
+           PERFORM VISU-RDMS-COM VARYING RDMS-IND FROM 1 BY 1   
+               UNTIL RDMS-IND > 36. 
+           MOVE ZEROS TO RDMS-FLAG. 
+           PERFORM TRAIT-RDMS-ERROR 
+               UNTIL RDMS-FLAG NOT = ZEROS. 
+       TRAIT-RDMS-ERROR.
+           ENTER MASM 'ACOB$RDMR' USING 
+             'GETERROR INTO $P1, $P2, $P3, $P4 ;',  
+             RDMS-STATUS, RDMS-COLUMN,  
+             RDMS-ERROR-LINE (1), RDMS-ERROR-LINE (2),  
+             RDMS-ERROR-LINE (3), RDMS-ERROR-LINE (4).  
+           PERFORM VISU-RDMS-ERROR  
+             VARYING RDMS-IND FROM 1 BY 1   
+             UNTIL RDMS-IND > 4.
+       VISU-RDMS-ERROR. 
+           IF RDMS-ERROR-LINE (RDMS-IND) NOT = SPACE
+                DISPLAY RDMS-ERROR-LINE (RDMS-IND) UPON PRINTER 
+           ELSE MOVE 1 TO RDMS-FLAG.
+       VISU-RDMS-COM.   
+           IF RLIN (RDMS-IND) NOT = SPACES  
+                DISPLAY RLIN (RDMS-IND) UPON PRINTER.   
+       RDMS-ERROR-EX.   

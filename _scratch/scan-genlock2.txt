@@ -1,0 +1,80 @@
+   41: lock
+  102: UPDATE 
+  110: DELETE FROM 
+  178: LOCK
+  224: WHERE (NAME IN (SELECT NAME                 FROM (SELECT COUNT(*) AS EXPR1, NAME FROM                      (SELECT DISTINCT REVTREE.OBJECTID, REVTREE.NAME                        FROM 
+  227: Lion Developer generator is already running !
+  249: Generating Global Definition File
+  255: Generating 
+  443: Another process is loading application [
+  484:  * Code temperarly blocked as the generation of the webservice for
+  696: m_Locker
+  879: Generating application
+  890: Generating dictionaries
+  944: activeborder
+  945: activecaption
+  946: inactivecaption
+  947: activecaptiontext
+  953: inactiveborder
+  960: inactivecaptiontext
+  963: gradientactivecaption
+  964: gradientinactivecaption
+ 1630: Update result field(s).
+ 1640: Update the order field value with the next set order value.
+ 1906: m_AutomaticLocking
+ 2076: No active levelbreak
+ 2091: SetActiveControlName
+ 2092: GenTblQueDmsUpdate instr:
+ 2139: block
+ 2184: CloseAndLock
+ 2197: LockRegion
+ 2204: UnlockRegion
+ 2812:   SET @P_OUT = (SELECT MIN (
+ 2814:   SET @P_OUT = (SELECT MAX (
+ 2821:     SELECT MIN (
+ 2823:     SELECT MAX (
+ 2836:   SELECT @
+ 2848:     SELECT COUNT(
+ 2849:     SELECT SUM(
+ 2852:     UPDATE 
+ 2940: instrBlock
+ 3683: SetNextActiveControlName
+ 3927: LockRecord
+ 3964: UnlockRecord
+ 4002: DELETE 
+ 4047: CobolSetLockParams
+ 4307: DMSTATUS(DEADLOCK)
+ 4336: DMSTATUS(NOTLOCKED)
+ 4345: DMSTATUS(INUSE)
+ 4380: CRITICALBLOCK
+ 4456: DMStatus_Deadlock
+ 4459: DMStatus_NotLocked
+ 4468: DMStatus_Inuse
+ 4485: CriticalBlock
+ 4740: DFHRESP(QBUSY)
+ 4770: DFHRESP(ENQBUSY)
+ 4774: DFHRESP(SYSBUSY)
+ 4775: DFHRESP(SESSBUSY)
+ 4795: DFHRESP(SPOLBUSY)
+ 4807: DFHRESP(LOCKED)
+ 4808: DFHRESP(RECORDBUSY)
+ 4813: DFHRESP(PROCESSBUSY)
+ 4814: DFHRESP(ACTIVITYBUSY)
+ 5065: FETCH-WITH-LOCK
+ 5093: FetchWithLock
+ 5111: Lock
+== neighbours of 'Another process'
+  437: COMPILE
+  438: SKIP
+  439: Application options object is available in this generation set. See Revision Control [Open, REV]
+  440: WHERE GENSETID = ?
+  441:  AND KIND = ?
+  442: <LOADING>
+  443: Another process is loading application [
+  444: Please contact ASYSCO software bv. (http://www.asysco.com) for ordering a new license.
+  445: Your license expires at : 
+  446: Please contact Asysco software bv (http://www.asysco.com) to order more licenses.
+  447: com.avanade.ltcoe.amt.runtime.cobol.transaction.ibm.cics.options
+  448: Possible invalid expression found for the where clause. Left side is expression!>>> 
+  449: ObjectName,Line,TargetName,TargetFormat,TargetLength,TargetDecimals,Source, Format
+--

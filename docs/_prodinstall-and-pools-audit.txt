@@ -1,0 +1,17 @@
+=== 1. ProdInstall / PInstall / AmtProdInstall.config search ===
+E:\Repos\Federale_InternalRelease\AmtLion\AmtProdInstall\AmtProdInstall\Sample_AmtProdInstall.config | 09/17/2026 00:21:30
+
+=== 2. PowerShellHost SqlClient closure freshness ===
+Microsoft.Data.SqlClient.dll | 06/24/2026 21:55:00 | 7.0.2.26175
+Microsoft.Data.SqlClient.Extensions.Abstractions.dll | 06/24/2026 21:25:32 | 7.0.2.26175
+Microsoft.Data.SqlClient.Internal.Logging.dll | 06/24/2026 20:59:02 | 7.0.2.26175
+native SNI: 01/16/2025 00:23:36
+
+=== 3. All BatchWorking pool folder names under AFBUS_2200COBOL ===
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.1
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.2
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.1\Common
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.1\Common\Subprograms
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.2\Common
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.2\Common\Subprograms

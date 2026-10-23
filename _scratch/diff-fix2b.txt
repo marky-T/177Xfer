@@ -1,0 +1,100 @@
+=================== ARCHIFORMAT
+@@ -198,0 +199 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -214,0 +216 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -220,0 +223 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -270,0 +274 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -299,0 +304 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -313,0 +319 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -321,0 +328 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -335,0 +343 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -343,0 +352 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -351,0 +361 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+@@ -364,0 +375 @@ Call-ExternalProgram "ucob" "I, S" ("\archiformat")
++# Orphaned data line: .
+=================== ARCHISEPARE
+@@ -146,0 +147 @@ DataLineOrNoStatement ("           stop run ")
++DataLineOrNoStatement ("           .")
+@@ -152,0 +154 @@ DataLineOrNoStatement ("           end-read ")
++DataLineOrNoStatement ("           .")
+@@ -162,0 +165 @@ DataLineOrNoStatement ("           end-read ")
++DataLineOrNoStatement ("           .")
+@@ -205,0 +209 @@ DataLineOrNoStatement ("           write ligne-archi from ligne-type9   ")
++DataLineOrNoStatement ("           .")
+@@ -212,0 +217 @@ DataLineOrNoStatement ("           move jour-i to jour-fr   ")
++DataLineOrNoStatement ("           .")
+@@ -227,0 +233 @@ DataLineOrNoStatement ("             cptnarchif upon printer")
++DataLineOrNoStatement ("           .")
+=================== CFH-COPY
+@@ -293,2 +293 @@ If ((CompareTypeSafe (GetSgsValue ("OUTPUT,1,1,1")) "EqualTo" "PRINTER")) {
+-  # '.  
+-  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12")
++  DataLineOrNoStatement ("           03  FILLER         PIC X(5)  VALUE '12 . '.  ")
+=================== CHAB100_ASCII
+@@ -56,2 +56,4 @@ Function Define_calmax {
+-  $A = $Parameters[0] / 100
+-  $A = $Parameters[0] % 100
++  $SsgDividend = $Parameters[0]
++  $SsgDivisor = 100
++  Set-Variable -Name "A" -Value (($SsgDividend - ($SsgDividend % $SsgDivisor)) / $SsgDivisor) -Scope 1
++  Set-Variable -Name "B" -Value ($SsgDividend % $SsgDivisor) -Scope 1
+=================== EXTEUR
+@@ -51,2 +51 @@ DataLineOrNoStatement ("      ************************* ")
+-# 
+-DataLineOrNoStatement ("       PROGRAM-ID. EXTEUR")
++DataLineOrNoStatement ("       PROGRAM-ID. EXTEUR . ")
+@@ -98,2 +97,4 @@ If ((CompareTypeSafe (GetSgsValue ("LONG,1,1,1")) "GreaterThan" 0)) {
+-  $NB100 = (GetSgsValue ("LONG,1,1,1")) / 100
+-  $NB100 = (GetSgsValue ("LONG,1,1,1")) % 100
++  $SsgDividend = (GetSgsValue ("LONG,1,1,1"))
++  $SsgDivisor = 100
++  $NB100 = ($SsgDividend - ($SsgDividend % $SsgDivisor)) / $SsgDivisor
++  $RST100 = $SsgDividend % $SsgDivisor
+@@ -186,2 +187,4 @@ If ((CompareTypeSafe (GetSgsValue ("LONG,1,1,1")) "GreaterThan" 0)) {
+-  $NB100 = (GetSgsValue ("LONG,1,1,1")) / 100
+-  $NB100 = (GetSgsValue ("LONG,1,1,1")) % 100
++  $SsgDividend = (GetSgsValue ("LONG,1,1,1"))
++  $SsgDivisor = 100
++  $NB100 = ($SsgDividend - ($SsgDividend % $SsgDivisor)) / $SsgDivisor
++  $RST100 = $SsgDividend % $SsgDivisor
+@@ -341,2 +344 @@ DataLineOrNoStatement ("    ")
+-# 
+-DataLineOrNoStatement ("       01 SQLSTATE           PIC X(05) USAGE DISPLAY")
++DataLineOrNoStatement ("       01 SQLSTATE           PIC X(05) USAGE DISPLAY .  ")
+@@ -471,0 +474 @@ DataLineOrNoStatement ("           OPEN INPUT  INA  ")
++DataLineOrNoStatement ("           .")
+@@ -510,0 +514 @@ DataLineOrNoStatement ("           END-IF   ")
++DataLineOrNoStatement ("           .")
+@@ -536,0 +541 @@ DataLineOrNoStatement ("           DISPLAY 'PHASE ACTUELLE : ' C-PHA-EUR '/' WS-
++DataLineOrNoStatement ("           .")
+@@ -589,0 +595 @@ DataLineOrNoStatement ("           CLOSE LISTE ANOA INA OUTA")
++DataLineOrNoStatement ("           .")
+@@ -710 +716 @@ DataLineOrNoStatement ("            WRITE REC-FILE-OUTA ")
+-# 
++DataLineOrNoStatement ("            .   ")
+@@ -807,0 +814 @@ For ([Int32]$I = 1; $I -le (GetSgsValue ("COND")); $I++) {
++      DataLineOrNoStatement ("           .")
+@@ -833,0 +841 @@ DataLineOrNoStatement ("           END-IF   ")
++DataLineOrNoStatement ("           .")
+@@ -839,0 +848 @@ DataLineOrNoStatement ("           END-IF   ")
++DataLineOrNoStatement ("           .")
+@@ -849,0 +859 @@ DataLineOrNoStatement ("           END-IF   ")
++DataLineOrNoStatement ("           .")
+@@ -898,0 +909 @@ DataLineOrNoStatement ("           MOVE WS-ESQL-AUX-INFO     TO AUX-INFO     OF
++DataLineOrNoStatement ("           .")
+=================== UNLOADIS_MULTI
+@@ -30,2 +30 @@ DataLineOrNoStatement ("       PROGRAM-ID. UNLOADIS.")
+-# 
+-DataLineOrNoStatement ("       AUTHOR.     H A N S E")
++DataLineOrNoStatement ("       AUTHOR.     H A N S E .  ")
+@@ -70,0 +70 @@ If ((CompareTypeSafe (GetSgsValue ("KEYIS")) "GreaterThan" 3)) {
++DataLineOrNoStatement ("           .")

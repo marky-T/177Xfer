@@ -1,0 +1,15 @@
+=== 1. Every AmtSqlServerWrapper.dll under Federale_InternalRelease ===
+E:\Repos\Federale_InternalRelease\AmtTools\SqlServerWrapper\Asysco.Amt.AmtSqlServerWrapper.dll | HasDll=True | HasNativeSNI=True
+
+=== 2. cfh-copy.ps1 locations under AFBUS_2200COBOL ===
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Scripts\CFH-COPY.ps1
+
+=== 3. AFBUS_2200COBOL top-level dirs ===
+Binaries
+Source
+
+=== 4. Compiled Assurfed_Utilit_Cfh_Copy DLL locations ===
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\Programs\Assurfed_Utilit_Cfh_Copy.dll | LastWriteTime=9/22/2026 5:26:12 PM | HasSqlClientDllHere=False
+E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Source\Cobol_AMT\Binaries\Programs\ASSURFED_UTILIT_CFH_COPY.dll | LastWriteTime=9/24/2026 8:33:48 AM | HasSqlClientDllHere=False
+
+=== 5. Sys.ini / AmtSettings.xml under AFBUS_2200COBOL ===

@@ -1,0 +1,14 @@
+parse + old-reference scan: 5 scripts
+--- check\Test-ChabanParm.ps1
+  Cross-check parm vs expansion: MATCH 31
+  By records/cards-per-record: 0x1 8, 0x2 1, 0x3 3, 0x7 1, 1x1 3, 1x3 2, 1x4 11, 1x5 1, 2x2 1
+--- cc\Prepare-ChabanCc.ps1
+  R58   COCA11_L23               len   58 card  80 records 1 x 1 cards; 1 data images -> 1 record(s)
+  C100  -d_EUPD01_L15            len  100 card 100 records 1 x 1 cards; 1 data images -> 1 record(s)
+  SSG4_CHABAN_CASES.ps1 written, 8 steps, parse errors: 0
+job SSG4_CHABAN_CASES.ps1 unchanged: True
+deployed ChabanParm.inc == Generic\CHABAN source: True
+compare parm: 31/31 identical
+compare crosscheck.csv: 1/1 identical
+compare expected: 8/8 identical
+problems: 0

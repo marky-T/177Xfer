@@ -1,0 +1,3 @@
+ASCII: 40 keys | DAT same | Index same
+MULTI: 40 keys | DAT same | Index same
+reversed: 1 keys accepted, INVALID KEY at record 2 (R9751885)

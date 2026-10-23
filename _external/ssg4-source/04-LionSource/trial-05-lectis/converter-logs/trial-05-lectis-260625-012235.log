@@ -1,0 +1,146 @@
+﻿2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:22:44 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-06-25 01:22:44 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Error     : ERR 000136 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000136 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000136 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000138 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000139 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000142 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000143 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000146 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000147 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000160 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000161 Operand ZPR is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000168 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000168 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000170 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000170 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000172 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000174 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000174 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000176 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000176 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000178 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000180 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000180 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000182 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000182 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000184 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000189 Operand SYMK is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000189 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000190 Operand ZPR is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000195 Operand SYMK1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000195 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000196 Operand ZPR is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000201 Operand SYMK2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000201 Operand INDICATIF2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000202 Operand ZPR is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000209 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000218 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000218 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000218 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000222 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000222 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000222 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000226 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000226 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000226 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000230 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000230 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000230 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000234 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000234 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000234 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000238 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000238 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000238 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000242 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000242 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000242 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000246 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000246 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000246 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000249 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000249 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000249 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000253 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000253 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000253 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000257 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000257 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000257 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000261 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000261 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000261 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000265 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000265 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000265 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000269 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000269 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000269 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000273 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000273 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000273 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000277 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000277 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000277 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000281 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000281 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000281 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000285 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000285 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000285 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000289 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000289 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000289 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000293 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000293 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000293 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP1 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP2 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP3 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP4 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP5 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP6 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP7 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000295 Operand ZP8 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP9 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP10 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP11 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP12 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP13 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP14 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP15 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000296 Operand ZP16 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000297 Operand ZP17 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000297 Operand ZP18 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000297 Operand ZP19 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000297 Operand ZP20 is defined duplicately, please specify containing structure.
+2026-06-25 01:23:30 [0] Error     : ERR 000300 ZPRINT must be a file record defined in an FD entry
+2026-06-25 01:23:30 [0] Error     : ERR 000353 Unexpected token ASSURFED, expected: 
+2026-06-25 01:23:30 [0] Error     : ERR 000154 Expression [1] must be Boolean.
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:30 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-06-25 01:23:30 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:31 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:31 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-06-25 01:23:31 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:31 [0] Phase     : ------------------------------------------------------------
+2026-06-25 01:23:31 [0] Phase     : D O N E
+2026-06-25 01:23:31 [0] Phase     : ------------------------------------------------------------

@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\cobol-run2\\out\\UNLOADIS_ASCII.LionSource
+APPNAME = UNLOADISASCII
+GENSET = Default from new application
+SYSOPT = FALSE

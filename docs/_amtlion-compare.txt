@@ -1,0 +1,8 @@
+=== top-level dirs matching *lion* under root ===
+AmtLion
+Lion
+
+=== compare AmtLion vs AmtLion2 ===
+AmtLion: count=3766 sizeMB=50.2
+   top: Amt-Lion Services.sln, Amt-Lion-Client.sln, Amt-Lion.sln, AmtProdInstall, ApplicationManager, ApplicationServer, Asysco.Amt.Lion.Grpc, CommunicationManager, CommunicationServer, Documentation, Lion, Lion60Installer, Lion60Installer.sln, LionClient, LionDebugger, LionDebuggerHost, LionDebuggerLib, LionProtocol, LionWebDeploymentProjects, RestartService, Test, WebDeployment
+AmtLion2: MISSING

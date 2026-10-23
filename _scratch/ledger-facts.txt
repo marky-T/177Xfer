@@ -1,0 +1,84 @@
+SsgConverter-Fix-20260820.md  17686 bytes
+SsgConverter-Fix-20260909.md  4713 bytes
+
+=== SsgConverter-Fix-20260820.md
+   1: # SsgConverter Local Fixes - 2026-08-20 / 2026-08-21
+   9: ## Conversion results after all fixes
+  24: ## Known issues - NOT fixed (no failing test case to prove; do not change without evidence)
+  26: ### KI-3 - Mixed ECL + SSG + COBOL files: ECL runstream section is not converted
+  46: ### KI-1 - XOR/OR/AND binary operators missing empty-right guard
+  56: ### KI-2 - Pre-existing bug: `*DIVIDE` assigns modulo result to wrong variable
+  68: ## Fix 1 - ERROR-A: deprecated `*End` not accepted as `*DEFINE` block terminator
+ 121: ## Fix 1 - ERROR-A: deprecated `*End` not accepted as `*DEFINE` block terminator
+ 164: ## Fix 2 - ERROR-A (related): deprecated `*End` not accepted as `*DO` block terminator
+ 196: ## Fix 3 - ERROR-B: `SymstreamExpressionPrimitive expected` for unary sign with non-primitive operand
+ 266: ## Validation scenarios (recommended re-run)
+ 275: ## Known pre-existing issues (not fixed here)
+ 281: ## Fix 4 - IndexOutOfRange: whitespace-only line reaches expression parser
+ 322: ## Fix 5 - "expression text may not be null or empty": unary recursion on dash-separator strings
+ 359: ## Os2200ContentConverter - ECL pipeline guards (Fix 6)
+ 367: ## Fix 7 - GUI: MigFileAppender NullReferenceException on conversion (2026-08-21)
+
+=== SsgConverter-Fix-20260909.md
+   1: # SsgConverter Fix - 2026-09-09
+   7: ## Symptom
+  14: ## Root cause
+  32: ## Fix
+  45: ### Files changed
+  51: ## Verification (Tier-1 mock harness)
+  64: ## Repeatable routine
+  71: ## Deployment status / follow-ups
+
+=== diff stats vs the 27 July AMT 178 base (ignoring line endings)
+SymstreamProcessor.cs              vs jul27: 176/24   vs R&D develop: 174/25
+SymstreamExpressionMigrator.cs     vs jul27: 43/16   vs R&D develop: 43/16
+SymstreamExpressionParser.cs       vs jul27: 63/33   vs R&D develop: 63/33
+
+=== hunk headers vs jul27 (Processor)
+@@ -21,0 +22,14 @@ namespace Ecl.SsgConverter {
+@@ -32,0 +47 @@ namespace Ecl.SsgConverter {
+@@ -141,5 +156,9 @@ namespace Ecl.SsgConverter {
+@@ -147,0 +167,56 @@ namespace Ecl.SsgConverter {
+@@ -189,0 +265,10 @@ namespace Ecl.SsgConverter {
+@@ -366 +451 @@ namespace Ecl.SsgConverter {
+@@ -593,2 +678,10 @@ namespace Ecl.SsgConverter {
+@@ -702 +795,6 @@ namespace Ecl.SsgConverter {
+@@ -704,0 +803 @@ namespace Ecl.SsgConverter {
+@@ -919 +1018,2 @@ namespace Ecl.SsgConverter {
+@@ -1253,0 +1354,2 @@ namespace Ecl.SsgConverter {
+@@ -1262,0 +1365,8 @@ namespace Ecl.SsgConverter {
+@@ -1271,0 +1382 @@ namespace Ecl.SsgConverter {
+@@ -1279,0 +1391 @@ namespace Ecl.SsgConverter {
+@@ -1365,2 +1477,2 @@ namespace Ecl.SsgConverter {
+@@ -1374,0 +1487,3 @@ namespace Ecl.SsgConverter {
+@@ -1399 +1514,10 @@ namespace Ecl.SsgConverter {
+@@ -1449,2 +1573,20 @@ namespace Ecl.SsgConverter {
+@@ -1570,0 +1713,5 @@ namespace Ecl.SsgConverter {
+@@ -1675 +1822,6 @@ namespace Ecl.SsgConverter {
+@@ -1722,4 +1873,0 @@ namespace Ecl.SsgConverter {
+@@ -1799 +1947,2 @@ namespace Ecl.SsgConverter {
+@@ -1868 +2017 @@ namespace Ecl.SsgConverter {
+@@ -1909,2 +2058,5 @@ namespace Ecl.SsgConverter {
+
+=== hunk headers vs jul27 (Migrator)
+@@ -60,0 +61,8 @@ namespace Ecl.SsgConverter {
+@@ -69 +77 @@ namespace Ecl.SsgConverter {
+@@ -84 +91,0 @@ namespace Ecl.SsgConverter {
+@@ -86,11 +93,10 @@ namespace Ecl.SsgConverter {
+@@ -98 +104,4 @@ namespace Ecl.SsgConverter {
+@@ -100 +108,0 @@ namespace Ecl.SsgConverter {
+@@ -160,0 +169,19 @@ namespace Ecl.SsgConverter {
+@@ -296 +323 @@ namespace Ecl.SsgConverter {
+
+=== hunk headers vs jul27 (Parser)
+@@ -28,0 +29,5 @@ namespace Ecl.SsgConverter {
+@@ -107,4 +112,6 @@ namespace Ecl.SsgConverter {
+@@ -121,4 +128,6 @@ namespace Ecl.SsgConverter {
+@@ -135,4 +144,6 @@ namespace Ecl.SsgConverter {
+@@ -149,4 +160,6 @@ namespace Ecl.SsgConverter {
+@@ -163,4 +176,6 @@ namespace Ecl.SsgConverter {
+@@ -177,4 +192,6 @@ namespace Ecl.SsgConverter {
+@@ -269,0 +287 @@ namespace Ecl.SsgConverter {
+@@ -299,3 +317,6 @@ namespace Ecl.SsgConverter {
+@@ -311,3 +332,6 @@ namespace Ecl.SsgConverter {
+@@ -432,3 +456,9 @@ namespace Ecl.SsgConverter {

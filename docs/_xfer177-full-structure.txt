@@ -1,0 +1,6 @@
+--- top-level entries ---
+[D] .git
+[D] ConvertedSSG
+[D] Lion
+
+--- AmtReorganize/AmtReoConsole/Setup.exe/*.dat/*.7z locations ---

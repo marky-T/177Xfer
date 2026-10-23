@@ -1,0 +1,10 @@
+Stage Build, environment CC-Trial, started 2026-10-21 22:59:04
+PASS CFH-COPY       program source                 ASSURFED_UTILIT_CFH_COPY_GN: unchanged since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program ASSURFED_UTILIT_CFH_COPY_GN
+FAIL BABA           program source                 no input FD VARYING 1 TO 4001 (T3-040)
+PASS FUSBA          program source                 ASSURFED_UTILIT_FUSBA_GN: unchanged since the last build
+PASS CHABAN         program source                 ASSURFED_UTILIT_CHABAN_GN: unchanged since the last build
+PASS CONDIS2        program source                 ASSURFED_UTILIT_CONDIS2_GN: unchanged since the last build
+PASS SCAN           program source                 ASSURFED_UTILIT_SCAN_GN: CHANGED since the last build
+PASS TAPELD         program source                 ASSURFED_UTILIT_TAPELD_GN: unchanged since the last build
+=== Build : 1 failure(s)

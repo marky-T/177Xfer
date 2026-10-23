@@ -1,0 +1,59 @@
+Source updated: 94887 bytes
+== Rebuild library ==
+    0 Error(s)
+
+Time Elapsed 00:00:03.62
+Refreshed E:\Repos\SsgTrial\SsgConverter\Build\Console\SsgConverter.dll (52224 bytes)
+Refreshed E:\Repos\SsgTrial\SsgConverter\Build\Gui\SsgConverter.dll (52224 bytes)
+Backed up goldens -> E:\Repos\SsgTrial\SsgConverter\_backup\Output-20261015-173457
+== Reconvert -> E:\Repos\SsgTrial\SsgConverter\Examples\Output ==
+Conversion complete: 20 succeeded, 0 failed
+== Summary ==
+
+[32;1mProgram       [0m[32;1m ParseErrors[0m[32;1m Ran[0m[32;1m Lines[0m
+[32;1m-------       [0m [32;1m-----------[0m [32;1m---[0m [32;1m-----[0m
+ARCHIFORMAT              0 OK      0
+ARCHISEPARE              0 OK    154
+BABA_ASCII               0 OK    104
+CFH-COPY                 0 OK     46
+CFH-COPY_ASCII           0 OK     47
+CHAB100_ASCII            0 OK    133
+CHABAN_ASCII             0 OK    133
+CONDIS2_ASCII            0 OK    479
+EXTEUR                   0 OK    617
+FUSBA_ASCII              0 OK     39
+FUSBA2_ASCII             0 OK     69
+LECTIS_ASCII             0 OK    181
+LOADIS_ASCII             0 OK     70
+LOADIS_MULTI             0 OK     97
+RECAP                    0 OK    224
+SCAN_ASCII               0 OK    104
+TABAN_ASCII              0 OK    215
+TAPELD_ASCII             0 OK     50
+UNLOADIS_ASCII           0 OK     65
+UNLOADIS_MULTI           0 OK     65
+
+
+[32;1mProgram       [0m[32;1m ParseErrors[0m[32;1m Ran[0m[32;1m Lines[0m
+[32;1m-------       [0m [32;1m-----------[0m [32;1m---[0m [32;1m-----[0m
+ARCHIFORMAT              0 OK      0
+ARCHISEPARE              0 OK    154
+BABA_ASCII               0 OK    104
+CFH-COPY                 0 OK     46
+CFH-COPY_ASCII           0 OK     47
+CHAB100_ASCII            0 OK    133
+CHABAN_ASCII             0 OK    133
+CONDIS2_ASCII            0 OK    479
+EXTEUR                   0 OK    617
+FUSBA_ASCII              0 OK     39
+FUSBA2_ASCII             0 OK     69
+LECTIS_ASCII             0 OK    181
+LOADIS_ASCII             0 OK     70
+LOADIS_MULTI             0 OK     97
+RECAP                    0 OK    224
+SCAN_ASCII               0 OK    104
+TABAN_ASCII              0 OK    215
+TAPELD_ASCII             0 OK     50
+UNLOADIS_ASCII           0 OK     65
+UNLOADIS_MULTI           0 OK     65
+

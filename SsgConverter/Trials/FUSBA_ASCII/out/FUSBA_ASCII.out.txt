@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID.  FUSION-0.  
+       AUTHOR. BOURDEAUD HUY PIERRE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-60. 
+       OBJECT-COMPUTER. UNIVAC-1100-60. 
+       SPECIAL-NAMES.     PRINTER   IS   LISTE. 
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+       DATA DIVISION.   
+       FILE SECTION.
+       WORKING-STORAGE SECTION. 
+       77  INPUT-CT           PIC 9(10)  COMP  VALUE 0. 
+       77  OUTPUT-CT                PIC 9(10)  COMP  VALUE 0.   
+       01  DISPLAY-LINE   USAGE DISPLAY-1   VALUE SPACES.   
+               03  DISP-MESSAGE        PIC X(24).   
+               03  DISP-FNAME          PIC X(12).   
+               03  DISP-CT             PIC Z(11)9.  
+               03  FILLER              PIC X(84).   
+       PROCEDURE DIVISION.  
+       MERGE-0-FILES  SECTION.  
+       OPEN-AND-FIRST-READ. 
+           GO  TO  FUSION.  
+       FUSION SECTION.  
+       ENDING-ROUTINES SECTION. 
+       PRINT-FILE-CTS.  
+           MOVE  '   TOTAL RECORDS READ   '  TO  DISP-MESSAGE.  
+           MOVE  INPUT-CT  TO  DISP-CT. 
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+           MOVE  '   TOTAL RECORDS WRITTEN'  TO  DISP-MESSAGE.  
+           MOVE  OUTPUT-CT  TO  DISP-CT.
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+           STOP RUN.
+       ABORT-ROUTINES SECTION.  
+       SEQUENCE-ERRORS. 
+           STOP RUN.

@@ -1,0 +1,13 @@
+SymstreamProcessor.cs:271 OURS: m_LogObject.Warning(0, String.Format("  Not implemented - emitted as comment: {0}", trimmed));
+SymstreamProcessor.cs:610 R&D: // No message - just a variable name (e.g. *ACCEPT lab)
+SymstreamProcessor.cs:1515 OURS: // Emitted as a comment - see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
+SymstreamProcessor.cs:1517 OURS: "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop - PowerShell has no labelled continue. " +
+SymstreamProcessor.cs:1523 OURS: " R&D fix required - see SsgConverter-Fix-20260820.md Fix 11.", variableName));
+SymstreamExpressionMigrator.cs:350 R&D: // Stray trailing ']' - treat remaining text (including this ']') as a literal part
+SymstreamExpressionMigrator.cs:351 R&D: m_LogObject.Warning(0, $"  SSG source bug: stray trailing ']' in expression '{s}' - tolerating as literal char
+SymstreamExpressionParser.cs:317 OURS: // guard: operand empty after unary strip (e.g. standalone '-' or '---') - treat as literal
+SymstreamExpressionParser.cs:332 OURS: // guard: operand empty after unary strip - treat as literal
+--- BOM / line endings of ours
+SymstreamProcessor.cs: BOM=False CRLF=2078 size=93429
+SymstreamExpressionMigrator.cs: BOM=False CRLF=657 size=28356
+SymstreamExpressionParser.cs: BOM=False CRLF=492 size=24053

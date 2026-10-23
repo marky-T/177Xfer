@@ -1,0 +1,397 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=CFHCOPYASCIIVIRJ01BDL55,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=CFH-COPY,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=CFHCOPYASCIIVIRJ01BDL55,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=CFHCOPYASCIIVIRJ01BDL55
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-10-13 19:10
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=CFH-COPY,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=CFH-COPY
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. 'CFH-COPY'.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY PIERRE.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT  TAPEIN  ASSIGN  TO
+  2009-01-01 12:00  =>             DISC  I006SANTE.
+  2009-01-01 12:00  =>     SELECT TAPEOUT ASSIGN TO
+  2009-01-01 12:00  =>             DISC  R006SOINSA.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  TAPEIN
+  2009-01-01 12:00  =>     LABEL  RECORD  STANDARD
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10  RECORDS
+  2009-01-01 12:00  =>     DATA RECORD IS
+  2009-01-01 12:00  =>     REC11
+  2009-01-01 12:00  =>     REC12
+  2009-01-01 12:00  =>     REC13
+  2009-01-01 12:00  =>     REC14
+  2009-01-01 12:00  =>     REC15
+  2009-01-01 12:00  =>     REC16
+  2009-01-01 12:00  =>     REC17
+  2009-01-01 12:00  =>     REC18
+  2009-01-01 12:00  =>     REC19
+  2009-01-01 12:00  =>     REC110
+  2009-01-01 12:00  =>     REC111
+  2009-01-01 12:00  =>     REC112
+  2009-01-01 12:00  =>     REC113
+  2009-01-01 12:00  =>     RECIN.
+  2009-01-01 12:00  => 01     REC11.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(1).
+  2009-01-01 12:00  =>     06  ZONE1  PIC  X(1).
+  2009-01-01 12:00  => 01     REC12.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(5).
+  2009-01-01 12:00  =>     06  ZONE2  PIC  X(6).
+  2009-01-01 12:00  => 01     REC13.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(12).
+  2009-01-01 12:00  =>     06  ZONE3  PIC  X(2).
+  2009-01-01 12:00  => 01     REC14.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(15).
+  2009-01-01 12:00  =>     06  ZONE4  PIC  X(2).
+  2009-01-01 12:00  => 01     REC15.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(18).
+  2009-01-01 12:00  =>     06  ZONE5  PIC  X(4).
+  2009-01-01 12:00  => 01     REC16.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(23).
+  2009-01-01 12:00  =>     06  ZONE6  PIC  X(2).
+  2009-01-01 12:00  => 01     REC17.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(26).
+  2009-01-01 12:00  =>     06  ZONE7  PIC  X(6).
+  2009-01-01 12:00  => 01     REC18.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(33).
+  2009-01-01 12:00  =>     06  ZONE8  PIC  X(6).
+  2009-01-01 12:00  => 01     REC19.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(40).
+  2009-01-01 12:00  =>     06  ZONE9  PIC  X(12).
+  2009-01-01 12:00  => 01     REC110.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(53).
+  2009-01-01 12:00  =>     06  ZONE10  PIC  X(2).
+  2009-01-01 12:00  => 01     REC111.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(56).
+  2009-01-01 12:00  =>     06  ZONE11  PIC  X(2).
+  2009-01-01 12:00  => 01     REC112.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(59).
+  2009-01-01 12:00  =>     06  ZONE12  PIC  X(4).
+  2009-01-01 12:00  => 01     REC113.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(64).
+  2009-01-01 12:00  =>     06  ZONE13  PIC  X(8).
+  2009-01-01 12:00  => 01  RECIN   PIC  X(80).
+  2009-01-01 12:00  => FD  TAPEOUT
+  2009-01-01 12:00  =>     LABEL  RECORD STANDARD
+  2009-01-01 12:00  =>     BLOCK  CONTAINS 10  RECORDS
+  2009-01-01 12:00  =>     DATA RECORD IS
+  2009-01-01 12:00  =>     REC21
+  2009-01-01 12:00  =>     REC22
+  2009-01-01 12:00  =>     REC23
+  2009-01-01 12:00  =>     REC24
+  2009-01-01 12:00  =>     REC25
+  2009-01-01 12:00  =>     REC26
+  2009-01-01 12:00  =>     REC27
+  2009-01-01 12:00  =>     REC28
+  2009-01-01 12:00  =>     REC29
+  2009-01-01 12:00  =>     REC210
+  2009-01-01 12:00  =>     REC211
+  2009-01-01 12:00  =>     REC212
+  2009-01-01 12:00  =>     REC213
+  2009-01-01 12:00  =>     RECOUT.
+  2009-01-01 12:00  => 01  RECOUT   PIC   X(200).
+  2009-01-01 12:00  => 01  REC21.
+  2009-01-01 12:00  =>     06 ZONO1 PIC X(1).
+  2009-01-01 12:00  => 01  REC22.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(14).
+  2009-01-01 12:00  =>     06 ZONO2 PIC X(6).
+  2009-01-01 12:00  => 01  REC23.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(98).
+  2009-01-01 12:00  =>     06 ZONO3 PIC X(2).
+  2009-01-01 12:00  => 01  REC24.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(28).
+  2009-01-01 12:00  =>     06 ZONO4 PIC X(2).
+  2009-01-01 12:00  => 01  REC25.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(30).
+  2009-01-01 12:00  =>     06 ZONO5 PIC X(4).
+  2009-01-01 12:00  => 01  REC26.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(34).
+  2009-01-01 12:00  =>     06 ZONO6 PIC X(2).
+  2009-01-01 12:00  => 01  REC27.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(36).
+  2009-01-01 12:00  =>     06 ZONO7 PIC X(6).
+  2009-01-01 12:00  => 01  REC28.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(42).
+  2009-01-01 12:00  =>     06 ZONO8 PIC X(6).
+  2009-01-01 12:00  => 01  REC29.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(48).
+  2009-01-01 12:00  =>     06 ZONO9 PIC X(12).
+  2009-01-01 12:00  => 01  REC210.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(60).
+  2009-01-01 12:00  =>     06 ZONO10 PIC X(2).
+  2009-01-01 12:00  => 01  REC211.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(62).
+  2009-01-01 12:00  =>     06 ZONO11 PIC X(2).
+  2009-01-01 12:00  => 01  REC212.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(64).
+  2009-01-01 12:00  =>     06 ZONO12 PIC X(4).
+  2009-01-01 12:00  => 01  REC213.
+  2009-01-01 12:00  =>               06 FILLER PIC  X(68).
+  2009-01-01 12:00  =>     06 ZONO13 PIC X(8).
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  NB-LUS   PIC   9(10)  COMP  VALUE 0.
+  2009-01-01 12:00  => 01   SWITCHES.
+  2009-01-01 12:00  =>     03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT TAPEIN.
+  2009-01-01 12:00  =>     OPEN  OUTPUT  TAPEOUT.
+  2009-01-01 12:00  => LECT.
+  2009-01-01 12:00  =>     MOVE SPACES TO RECOUT.
+  2009-01-01 12:00  =>     READ  TAPEIN  AT  END  GO TO  FINW.
+  2009-01-01 12:00  =>     MOVE                ZONE1 TO ZONO1.
+  2009-01-01 12:00  =>     MOVE                ZONE2 TO ZONO2.
+  2009-01-01 12:00  =>     MOVE                ZONE3 TO ZONO3.
+  2009-01-01 12:00  =>     MOVE                ZONE4 TO ZONO4.
+  2009-01-01 12:00  =>     MOVE                ZONE5 TO ZONO5.
+  2009-01-01 12:00  =>     MOVE                ZONE6 TO ZONO6.
+  2009-01-01 12:00  =>     MOVE                ZONE7 TO ZONO7.
+  2009-01-01 12:00  =>     MOVE                ZONE8 TO ZONO8.
+  2009-01-01 12:00  =>     MOVE                ZONE9 TO ZONO9.
+  2009-01-01 12:00  =>     MOVE                ZONE10 TO ZONO10.
+  2009-01-01 12:00  =>     MOVE                ZONE11 TO ZONO11.
+  2009-01-01 12:00  =>     MOVE                ZONE12 TO ZONO12.
+  2009-01-01 12:00  =>     MOVE                ZONE13 TO ZONO13.
+  2009-01-01 12:00  =>     ADD 1  TO NB-LUS.
+  2009-01-01 12:00  =>     WRITE RECOUT.
+  2009-01-01 12:00  =>     GO TO LECT.
+  2009-01-01 12:00  => FINW.
+  2009-01-01 12:00  =>     DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.
+  2009-01-01 12:00  =>     DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.
+  2009-01-01 12:00  =>     CLOSE  TAPEIN.
+  2009-01-01 12:00  =>     CLOSE  TAPEOUT.
+  2009-01-01 12:00  =>     DISPLAY  REC-SKIPPED  UPON  PRINTER.
+  2009-01-01 12:00  =>     STOP RUN.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY PIERRE.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+IN
+CFH-COPY_ASCII__VIRJ01_BD_L55
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

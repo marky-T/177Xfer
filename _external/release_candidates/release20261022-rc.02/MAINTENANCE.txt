@@ -1,0 +1,14 @@
+Maintaining these programs after hand-over (Federale maintains the PowerShell and the C#; nothing is converted again).
+- A call's cards: read at run time from the parameter file the hand-off writes. Changing a call means changing its runstream cards; nothing is rebuilt.
+- Hand-off and parameter file layout (PowerShell): the .inc files in Scripts\ASSURFED_UTILIT, edited in place. GnHandoff.inc is the common part
+  (parameter file, Free/Asg/Use, record sizes). A skeleton is R&D's converted skeleton with the hand-off call inserted after param(), then return.
+- Program logic (C#): open Sources\CSharp\GenericPrograms.sln in Visual Studio (7 project(s), net10.0). They are the project folders the delivered
+  DLLs were built from, for the 177a runtime; the one change to the generated code is marked REBUILT-FOR-177A (generation date and time dropped
+  from the base(...) call). Set AmtRuntimeDir in Sources\CSharp\Directory.Build.props to the folder with your runtime DLLs (Asysco.Amt.*,
+  ComScript, ...), or build with -p:AmtRuntimeDir=...; the application DLLs come from AmtApplicationDir (your own AFBUS.Application/Database) and Newtonsoft.Json from Sources\CSharp\lib.
+  Built unchanged against the Federale runtime folder, the projects give the delivered DLLs byte for byte. Output goes to Binaries\Programs.
+- Keep every input file's record maximum at 4001 (AmtVarAlpha(4001, ...) in the Fd_*.cs files; T3-040), or long cards are cut.
+- Which program an Xqt name starts: CloneReports in AmtSettings.xml (CloneReports.xml here). In the run history the program appears as a child job
+  named after the Xqt (e.g. CFH_COPY, TPF$ for TAPELD), "Started by" the calling parent runstream, not as ASSURFED_UTILIT_*_GN.
+- Reference\Cobol: the COBOL each program was generated from, for reading only; it is not maintained.
+- Re-test after a change: compare outputs byte for byte against known-good results. The Control Center regression used for this release (14 jobs) is not part of this package.

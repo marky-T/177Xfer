@@ -1,0 +1,12 @@
+log: E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleBatchController.Log  (last write 10/20/2026 13:07:30)
+** AmtService started at : 2026-10-20 13:07:25 **
+20261020 13:07:26.689 8 Information FederaleBatchController (1) StartPending
+20261020 13:07:26.808 8 Information FederaleBatchController (1) Running
+20261020 13:07:27.547 18 Information Starting scan of new/updated/remove forms, report and scripts.
+20261020 13:07:27.573 11 Information Start recover.
+20261020 13:07:27.587 11 Information Recover done.
+20261020 13:07:27.587 11 Information FederaleBatchController up and running
+20261020 13:07:27.588 20 Information Start statistics calculation thread.
+20261020 13:07:30.550 18 Information This batchcontroller is marked for synchronizing forms, reports and scripts.
+20261020 13:07:30.550 18 Information Reading information from database.
+20261020 13:07:30.556 18 Information No auto synchronization configured. Synchronizing stopped.

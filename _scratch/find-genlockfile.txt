@@ -1,0 +1,102 @@
+== files written since 15 Oct 17:00 under the generation set folders (excluding generated sources)
+
+FullName                                                            Length LastWriteTime
+--------                                                            ------ -------------
+E:\AMT_Work\Apps177\Binaries\Programs\LIONGENERATES.NOW                  4 10/15/2026 5:44:50 PM
+E:\AMT_Work\Apps177\Binaries\Server\LIONGENERATES.NOW                    4 10/15/2026 5:44:50 PM
+E:\AMT_Work\Apps177\Development\Log\20261015\_Generate 20261015.Log  15399 10/15/2026 5:56:52 PM
+
+
+
+
+
+FullName                                                                                               Length LastWriteTime
+--------                                                                                               ------ -------------
+C:\ProgramData\GuestConfig\extension_logs\Microsoft.AzureData.WindowsAgent.SqlServer\unifiedagent.log 8072724 10/19/2026 11:19:54 AM
+C:\ProgramData\Microsoft\Windows Defender\IMpService77BDAF73-B396-481F-9042-AD358843EC24.lock               0 10/19/2026 11:19:58 AM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\DefenderAgentScan.exe                419896 10/15/2026 10:51:40 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\DlpUserAgent.exe                     522752 10/15/2026 10:51:40 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\af-ZA\mpuxagent.dll.mui               43576 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\am-ET\mpuxagent.dll.mui               32280 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\ar-SA\mpuxagent.dll.mui               36376 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\as-IN\mpuxagent.dll.mui               43584 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\az-Latn-AZ\mpuxagent.dll.mui          43024 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\bg-BG\mpuxagent.dll.mui               44056 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\bn-IN\mpuxagent.dll.mui               45120 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\bs-Latn-BA\mpuxagent.dll.mui          42520 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\ca-ES\mpuxagent.dll.mui               44056 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\ca-ES-valencia\mpuxagent.dll.mui      44056 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\cs-CZ\mpuxagent.dll.mui               41024 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\cy-GB\mpuxagent.dll.mui               45120 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\da-DK\mpuxagent.dll.mui               42560 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\de-DE\mpuxagent.dll.mui               47168 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\el-GR\mpuxagent.dll.mui               46616 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\en-GB\mpuxagent.dll.mui               40512 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\en-US\mpuxagent.dll.mui               40472 10/15/2026 10:51:41 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\es-ES\mpuxagent.dll.mui               45120 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\es-MX\mpuxagent.dll.mui               45080 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\et-EE\mpuxagent.dll.mui               42520 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\eu-ES\mpuxagent.dll.mui               43072 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\fa-IR\mpuxagent.dll.mui               40512 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\fi-FI\mpuxagent.dll.mui               43584 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\fil-PH\mpuxagent.dll.mui              47128 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\fr-CA\mpuxagent.dll.mui               47128 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\fr-FR\mpuxagent.dll.mui               46656 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\ga-IE\mpuxagent.dll.mui               44568 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\gd-GB\mpuxagent.dll.mui               47640 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\gl-ES\mpuxagent.dll.mui               43544 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\gu-IN\mpuxagent.dll.mui               44096 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\he-IL\mpuxagent.dll.mui               34840 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\hi-IN\mpuxagent.dll.mui               44608 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\hr-HR\mpuxagent.dll.mui               43544 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\hu-HU\mpuxagent.dll.mui               44568 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\id-ID\mpuxagent.dll.mui               42008 10/15/2026 10:51:42 PM
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26100.4-0\is-IS\mpuxagent.dll.mui               40984 10/15/2026 10:51:42 PM
+
+
+== lock-looking files anywhere under E:\AMT_Work and E:\Amt
+
+FullName                                                                                                             Length LastWriteTime
+--------                                                                                                             ------ -------------
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\debugging-generating-for-debug.html                                 7473 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\edit-lock.html                                                      6452 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-an-amt-lion-application.html                             5912 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-an-application.html                                      8326 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-from-the-repository-view.html                            6484 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-keys-for-encryption.html                                 6863 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-keys.html                                                6121 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-required-objects.html                                    5632 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating-the-application.html                                     6151 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\generating.html                                                     5466 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\locktable.html                                                      6708 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\Commands\locktable.jpg                                4729 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\Developer\BlockSelection.jpg                         47827 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\Developer\GlobalDefinitionsBlockDefinitions.png      71124 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\Developer\HistoryMergeExampleLockedLionAMT76.png     24146 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\Syntax\ffisfilelocked.png                             2327 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\toolbar_reference\BlockCommentToolbarButton25.jpg      989 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\toolbar_reference\BlockUncommentToolbarButton25.jpg   1018 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ApplicationCenterCore\wwwroot\Help\assets\images\toolbar_reference\Lock24x24.jpg                        947 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\debugging-generating-for-debug.html                                     7473 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\edit-lock.html                                                          6452 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-an-amt-lion-application.html                                 5912 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-an-application.html                                          8326 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-from-the-repository-view.html                                6484 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-keys-for-encryption.html                                     6863 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-keys.html                                                    6121 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-required-objects.html                                        5632 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating-the-application.html                                         6151 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\generating.html                                                         5466 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\locktable.html                                                          6708 8/24/2026 6:53:00 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\Commands\locktable.jpg                                    4729 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\Developer\BlockSelection.jpg                             47827 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\Developer\GlobalDefinitionsBlockDefinitions.png          71124 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\Developer\HistoryMergeExampleLockedLionAMT76.png         24146 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\Syntax\ffisfilelocked.png                                 2327 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\toolbar_reference\BlockCommentToolbarButton25.jpg          989 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\toolbar_reference\BlockUncommentToolbarButton25.jpg       1018 9/9/2025 11:29:26 AM
+E:\Amt\AMTTools\ControlCenterCore\wwwroot\Help\assets\images\toolbar_reference\Lock24x24.jpg                            947 9/9/2025 11:29:26 AM
+E:\Amt\Lion\Support\Java\Client\web\app\src\assets\image\ms-symbollockup_signin_dark.png                               1886 5/7/2026 1:33:52 PM
+E:\Amt\Lion\Support\Java\Client\web\app\src\assets\image\ms-symbollockup_signin_light.png                              1877 5/7/2026 1:33:52 PM
+
+

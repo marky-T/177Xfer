@@ -1,0 +1,16 @@
+base(...) calls rewritten in 9 file(s)
+
+Program                    Built FirstError
+-------                    ----- ----------
+ASSURFED_UTILIT_CONDIS2_GN  True 
+ASSURFED_UTILIT_CONDIS2_RD  True 
+ASSURFED_UTILIT_CONDIS2_RV  True 
+ASSURFED_UTILIT_SCAN_GN     True 
+ASSURFED_UTILIT_SCAN_RA     True 
+ASSURFED_UTILIT_SCAN_RB     True 
+ASSURFED_UTILIT_TAPELD_GN   True 
+ASSURFED_UTILIT_TAPELD_RA   True 
+ASSURFED_UTILIT_TAPELD_RB   True 
+
+
+Output: E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Binaries\Programs

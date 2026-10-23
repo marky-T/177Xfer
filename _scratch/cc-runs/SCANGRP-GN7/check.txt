@@ -1,0 +1,2 @@
+--- BatchController: 20261021 01:33:04.072 11 Information SSG4_SCANGRP_PRINTS Done Id: 769 Queue: JOB_QUEUE1 (Execution time: 00:00:32:524)
+--- SCANGRP_76920261021013235646.log

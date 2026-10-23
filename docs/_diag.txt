@@ -1,0 +1,7 @@
+REAL remote main tip: 17c06431a9d5e3b2a5e1ea18ad42a258a4ef8851	refs/heads/main
+local origin/main ref: 82883357f05d5ada7340466947d687e42bee4c76
+identity(local) name: 
+identity(local) email: 
+identity(global) name: 
+identity(global) email: 
+staged now (Scripts_SSG count): 84

@@ -18,6 +18,20 @@ namespace Ecl.SsgConverter {
     private const String BooleanEvaluateFunctionName = "BooleanEvaluate";
 
     private static readonly DirectiveId[] m_DirectiveIds = (DirectiveId[])Enum.GetValues(typeof(DirectiveId));
+
+    /// <summary>
+    /// Arguments for: Set-Variable -Name "NAME" -Value (value) -Scope 1, i.e. assign in the scope that called the define function.
+    /// </summary>
+    private static List<PsAstExprBase> SetVariableInCallerScope (String variableName, PsAstExprBase value) {
+      return new List<PsAstExprBase> {
+        new PsAstExprPrimitive("-Name", false),
+        new PsAstExprPrimitive(variableName, true),
+        new PsAstExprPrimitive("-Value", false),
+        new PsAstExprParenthesized(value),
+        new PsAstExprPrimitive("-Scope", false),
+        new PsAstExprPrimitive("1", false)
+      };
+    }
     
     private readonly IMigLogger m_LogObject;
     private readonly IContentLineConverter m_ContentLineConverter;
@@ -30,7 +44,10 @@ namespace Ecl.SsgConverter {
     private Boolean m_EmbeddedInIpf = false;
     private List<PsAstInstrBlock> m_InstructionBlocksBeingBuilt = new List<PsAstInstrBlock>();
     private Stack<String> m_InnerMostLoopVariable = new Stack<String>();
+    private Int32 m_DefineDepth = 0;
     private String m_DirectivePrefix = "*";
+    private String m_EditSymbol = "&";
+    private Boolean m_UsesEdit = false;
     private Dictionary<String, String> m_SystemVariables = new Dictionary<String, String>() {
 
       // note: Empy values have not been initialized because they are not supported yet.
@@ -115,6 +132,27 @@ namespace Ecl.SsgConverter {
       lines = ProcessComments(lines, m_DirectivePrefix);
       lines = CondenseDirectives(lines, m_DirectivePrefix);
 
+      // T3-045: edit mode is switched on and off at run time (inside *IF / *LOOP), so its state lives in two generated variables.
+      m_EditSymbol = "&";
+      m_UsesEdit = false;
+      Regex editOn = new Regex("^" + Regex.Escape(m_DirectivePrefix) + @"EDIT(,\S)?\s+ON\b", RegexOptions.IgnoreCase);
+      for (Int32 e = 0; e < lines.Count; e++) {
+        if (editOn.IsMatch(lines[e]) && EditBlockIsText(lines, e)) { m_UsesEdit = true; break; }
+      }
+      if (m_UsesEdit) {
+        powerSkel.AddAssignment(EdtVar("Edt_On"), new PsAstExprPrimitive("0", false));
+        powerSkel.AddAssignment(EdtVar("Edt_Buf"), new PsAstExprPrimitive("", true));
+      }
+
+      // A *DEFINE body may use a variable that is first *SET/*CLEARed further down (T3-036): register all targets first.
+      Regex setTarget = new Regex("^" + Regex.Escape(m_DirectivePrefix) + @"(SET|CLEAR)\s+([^\s=]+)", RegexOptions.IgnoreCase);
+      foreach (String line in lines) {
+        Match m = setTarget.Match(line);
+        if (m.Success && IsVariableName(m.Groups[2].Value) && !globalVariables.Contains(m.Groups[2].Value.ToUpperInvariant())) {
+          globalVariables.Add(m.Groups[2].Value.ToUpperInvariant());
+        }
+      }
+
       // convert directives
       for (Int32 i = 0; i < lines.Count; i++) {
         powerSkel.AddInstrBlock(Convert(lines, ref i, globalVariables));
@@ -148,6 +186,62 @@ namespace Ecl.SsgConverter {
             m_FileBeingMigrated, expression, ex.Message));
       }
     } // SymstreamExpressionToPowerShellExpression
+
+    /// <summary>
+    /// Converts a Symstream output/data line to a PowerShell expression that yields the line's text.
+    /// Literal text is emitted verbatim as double-quoted string segments (never parsed as arithmetic
+    /// operators), while only [bracketed] references are converted - with variable context - so a data
+    /// line such as "06 FILLER PIC X([FILLCTR])." becomes ("06 FILLER PIC X(" + ($FILLCTR) + ".")
+    /// rather than a broken operator expression.
+    /// </summary>
+    /// <param name="line">The Symstream output/data line.</param>
+    /// <param name="globalVariables">The current set of global variables if there is one.</param>
+    /// <param name="localVariables">The current set of local variables if there is one.</param>
+    /// <returns>A PowerShell expression object that yields the output line's text.</returns>
+    private PsAstExprBase OutputLineToPowerShellExpression (String line, List<String> globalVariables, List<String> localVariables) {
+
+      List<String> parts = m_ExpressionMigrator.SplitBracketedReferencesAndLiteralParts(line);
+      PsAstExprBase result = null;
+
+      foreach (String part in parts) {
+        PsAstExprBase segment;
+        if (part.Length > 0 && part[0] == '[') {
+          // a [bracketed] reference: convert with variable context ($var, GetSgsValue(...), $Parameters[n], ...)
+          segment = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(part, globalVariables, localVariables));
+        } else {
+          // literal text: emit verbatim as a double-quoted PowerShell string
+          segment = new PsAstExprPrimitive(QuoteForPowerShellDoubleQuotedString(part), false);
+        }
+
+        result = (result == null) ? segment : new PsAstExprBinaryOperator(result, PSAstOperatorType.Add, segment);
+      }
+
+      // an empty line still needs to be a valid PowerShell expression
+      if (result == null) {
+        result = new PsAstExprPrimitive("\"\"", false);
+      }
+
+      return new PsAstExprParenthesized(result);
+    } // OutputLineToPowerShellExpression
+
+    /// <summary>
+    /// Wraps literal text as a PowerShell double-quoted string, escaping the characters that are
+    /// special inside such a string (backtick, double quote, dollar).
+    /// </summary>
+    /// <param name="s">The literal text.</param>
+    /// <returns>A PowerShell double-quoted string literal.</returns>
+    private static String QuoteForPowerShellDoubleQuotedString (String s) {
+      StringBuilder sb = new StringBuilder();
+      sb.Append('"');
+      foreach (Char c in s) {
+        if (c == '`' || c == '"' || c == '$') {
+          sb.Append('`');
+        }
+        sb.Append(c);
+      }
+      sb.Append('"');
+      return sb.ToString();
+    } // QuoteForPowerShellDoubleQuotedString
 
     /// <summary>
     /// Gets a directive's options as a string of option characters.
@@ -202,6 +296,24 @@ namespace Ecl.SsgConverter {
     } // EmitNotImplemented
 
     /// <summary>
+    /// Tells whether the image may end in a " . " comment: a directive or an embedded ECL image (# or @). Output text may not.
+    /// </summary>
+    private static Boolean CarriesComment (String line, String directivePrefix) {
+      return line.StartsWith(directivePrefix) || line.StartsWith("#") || line.StartsWith("@");
+    } // CarriesComment
+
+    /// <summary>
+    /// Assigns an SSG variable. SSG variables are global, so inside a define the assignment goes to the caller's scope.
+    /// </summary>
+    private void AssignSsgVariable (PsAstInstrBlock block, String name, PsAstExprBase value) {
+      if (m_DefineDepth > 0) {
+        block.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(name.ToUpperInvariant(), value));
+      } else {
+        block.AddAssignment(new PsAstExprPrimitive(name, PsAstPrimitiveType.LocalObject), value);
+      }
+    } // AssignSsgVariable
+
+    /// <summary>
     /// Converts continued lines (broken by ";") to single lines.
     /// </summary>
     /// <param name="lines">The collection of lines to be converted.</param>
@@ -216,8 +328,8 @@ namespace Ecl.SsgConverter {
 
         String lineWithoutComment;
 
-        // separate any comment from the line being evaluated
-        Int32 commentStart = line.IndexOf(" . ");
+        // separate any comment from the line being evaluated (directive and ECL images only, manual 4.3: other images are output text)
+        Int32 commentStart = (CarriesComment(line, directivePrefix) || mergedLine.Length > 0) ? line.IndexOf(" . ") : -1;
         if (commentStart > -1) {
           mergedLines.Add(String.Format("* . {0}", line.Substring(commentStart + 3).TrimStart()));
           lineWithoutComment = line.Substring(0, commentStart).TrimEnd();
@@ -225,7 +337,9 @@ namespace Ecl.SsgConverter {
           lineWithoutComment = line;
         }
 
-        if (lineWithoutComment.StartsWith(directivePrefix) && lineWithoutComment.EndsWith(";")) {
+        if ((lineWithoutComment.StartsWith(directivePrefix) || mergedLine.Length > 0) && lineWithoutComment.TrimEnd().EndsWith(";")) {
+          // blanks after the continuation ';' are allowed, and a continuation line may continue again (T3-035)
+          lineWithoutComment = lineWithoutComment.TrimEnd();
           if (lineWithoutComment.StartsWith(String.Format("{0}. ", directivePrefix))) {
             // Just add comment lines containing a ';'.
             mergedLines.Add(lineWithoutComment);
@@ -303,7 +417,10 @@ namespace Ecl.SsgConverter {
       String prefixSpaceDot = String.Format("{0} .", directivePrefix);
 
       foreach (String line in lines) {
-        if (!line.StartsWith(prefixDotSpace) && !line.StartsWith(prefixSpaceDot) && line.Contains(" . ")) {
+        if (!CarriesComment(line, directivePrefix)) {
+          // an image that is neither a directive nor an ECL image is output text and stays unchanged (manual 4.3)
+          processedLines.Add(line);
+        } else if (!line.StartsWith(prefixDotSpace) && !line.StartsWith(prefixSpaceDot) && line.Contains(" . ")) {
           commentPos = line.IndexOf(" . ");
           processedLines.Add(prefixDotSpace + line.Substring(commentPos + 2).Trim());
           processedLines.Add(line.Substring(0, commentPos).Trim());
@@ -442,6 +559,21 @@ namespace Ecl.SsgConverter {
 
       return false;
     } // IsEditOffDirective
+
+    private static PsAstExprPrimitive EdtVar (String name) {
+      return new PsAstExprPrimitive(name, PsAstPrimitiveType.LocalObject);
+    } // EdtVar
+
+    /// <summary>
+    /// Tells whether the *EDIT ON block starting at onIndex holds only plain text images (up to the first *EDIT OFF):
+    /// blocks with ECL images (# or @) are not converted (T3-045).
+    /// </summary>
+    private Boolean EditBlockIsText (IReadOnlyList<String> lines, Int32 onIndex) {
+      for (Int32 j = onIndex + 1; j < lines.Count && !IsEditOffDirective(lines[j], m_DirectivePrefix); j++) {
+        if (lines[j].StartsWith("#") || lines[j].StartsWith("@")) { return false; }
+      }
+      return true;
+    } // EditBlockIsText
 
     /// <summary>
     /// Gets the first word found in the specified string.
@@ -604,8 +736,16 @@ namespace Ecl.SsgConverter {
               //       and the created variables are never referenced so supporting the creation
               //       of plain global variables should suffice for now.
               String variableName = lines[i].Substring(7).Trim().ToUpperInvariant();
-              PsAstExprPrimitive parameter = new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject);
-              powerSkel.AddMethodInvoke("Clear-Variable", parameter);
+              // *CLEAR sets the (local or global) variable to 0, creating it if it does not exist.
+              // Emit a null-safe assignment rather than `Clear-Variable $name` (which passed the
+              // variable's value as -Name and threw when the variable was unset - issue T3-003).
+              if (m_DefineDepth > 0) {
+                powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(variableName, new PsAstExprPrimitive("0", false, PsAstPrimitiveType.Normal)));
+              } else {
+                powerSkel.AddAssignment(
+                  new PsAstExprPrimitive(variableName, PsAstPrimitiveType.LocalObject),
+                  new PsAstExprPrimitive("0", false, PsAstPrimitiveType.Normal));
+              }
               globalVariables.Add(variableName);
               break;
             }
@@ -650,9 +790,9 @@ namespace Ecl.SsgConverter {
 
                   powerSkel.AddMethodInvoke("AddTo-SgsListFromFile", new PsAstExprPrimitive(s, false, false, false));
                 } else {
-                  // it's an SGS image
+                  // it's an SGS image: literal text with [..] references, like an output line (manual 5.2.10), not an expression
                   List<PsAstExprBase> psParameters = new List<PsAstExprBase>();
-                  psParameters.Add(SymstreamExpressionToPowerShellExpression(s, globalVariables, localVariables));
+                  psParameters.Add(OutputLineToPowerShellExpression(s, globalVariables, localVariables));
 
                   powerSkel.AddMethodInvoke("AddTo-SgsList", psParameters);
                 }
@@ -714,12 +854,14 @@ namespace Ecl.SsgConverter {
 
               i++;
               DirectiveId endDefId;
+              m_DefineDepth++;
               for (; i < lines.Count; i++) {
                 if (lines[i].Trim().StartsWith(String.Format("{0}ENDDEFINE", m_DirectivePrefix), StringComparison.OrdinalIgnoreCase)) break;
                 // accept deprecated *End as *ENDDEFINE terminator
                 if (IsDirective(lines[i], m_DirectivePrefix, out endDefId) && endDefId == DirectiveId.End) break;
                 define.Body.AddInstrBlock(Convert(lines, ref i, globalVariables));
               }
+              m_DefineDepth--;
 
               if (i == lines.Count) {
                 // no more lines and no *ENDDEFINE encountered
@@ -780,24 +922,28 @@ namespace Ecl.SsgConverter {
               String number2 = lines[i].Substring(indexBy + separatorLength, indexGiving - indexBy - separatorLength);
               String variables = lines[i].Substring(indexGiving + 8);
               String[] splitVariables = variables.Split(',');
-
-              if (splitVariables.Length > 0) {
-                // $VariableName1 = [math]::floor([int] $Number1 / [int] $Number2)
-                PsAstExprPrimitive target = new PsAstExprPrimitive(splitVariables[0], PsAstPrimitiveType.LocalObject);
-                PsAstExprBlock num1 = SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables);
-                PsAstExprBlock num2 = SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables);
-                PsAstExprBinaryOperator div = new PsAstExprBinaryOperator(num1, PSAstOperatorType.Divide, num2);
-                // TODO: It may still need the [math]::floor() part
-                powerSkel.AddAssignment(target, div);
-                globalVariables.Add(splitVariables[0].ToUpperInvariant());
+              for (Int32 v = 0; v < splitVariables.Length; v++) {
+                splitVariables[v] = splitVariables[v].Trim();
               }
 
+              // First variable = quotient, second (if any) = remainder; both integers. The numbers go into temporaries first,
+              // so a target may also occur in the numbers, and the second target may repeat the first (then only the remainder is kept).
+              PsAstExprPrimitive dividend = new PsAstExprPrimitive("SsgDividend", PsAstPrimitiveType.LocalObject);
+              PsAstExprPrimitive divisor = new PsAstExprPrimitive("SsgDivisor", PsAstPrimitiveType.LocalObject);
+              powerSkel.AddAssignment(dividend, SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables));
+              powerSkel.AddAssignment(divisor, SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables));
+
+              // (dividend - remainder) is an exact multiple of the divisor, so the division needs no floor.
+              PsAstExprBinaryOperator remainder = new PsAstExprBinaryOperator(dividend, PSAstOperatorType.Modulo, divisor);
+              PsAstExprBinaryOperator quotient = new PsAstExprBinaryOperator(
+                new PsAstExprParenthesized(new PsAstExprBinaryOperator(dividend, PSAstOperatorType.Substract, new PsAstExprParenthesized(remainder))),
+                PSAstOperatorType.Divide,
+                divisor);
+
+              AssignSsgVariable(powerSkel, splitVariables[0], quotient);
+              globalVariables.Add(splitVariables[0].ToUpperInvariant());
               if (splitVariables.Length > 1) {
-                PsAstExprPrimitive target = new PsAstExprPrimitive(splitVariables[0], PsAstPrimitiveType.LocalObject);
-                PsAstExprBlock num1 = SymstreamExpressionToPowerShellExpression(number1, globalVariables, localVariables);
-                PsAstExprBlock num2 = SymstreamExpressionToPowerShellExpression(number2, globalVariables, localVariables);
-                PsAstExprBinaryOperator mod = new PsAstExprBinaryOperator(num1, PSAstOperatorType.Modulo, num2);
-                powerSkel.AddAssignment(target, mod);
+                AssignSsgVariable(powerSkel, splitVariables[1], remainder);
                 globalVariables.Add(splitVariables[1].ToUpperInvariant());
               }
 
@@ -980,6 +1126,15 @@ namespace Ecl.SsgConverter {
               String line = lines[i];
               String s;
 
+              if (m_UsesEdit && IsEditOffDirective(line, m_DirectivePrefix)) {
+                // *EDIT OFF outputs the image built so far; outside edit mode it is ignored (manual 5.2.16).
+                PsAstInstrIf offIf = powerSkel.AddIf(EdtVar("Edt_On"));
+                offIf.IfPart.AddMethodInvoke("DataLineOrNoStatement", EdtVar("Edt_Buf"));
+                offIf.IfPart.AddAssignment(EdtVar("Edt_On"), new PsAstExprPrimitive("0", false));
+                offIf.IfPart.AddAssignment(EdtVar("Edt_Buf"), new PsAstExprPrimitive("", true));
+                break;
+              }
+
               // note: We are assuming EDITAB$ to be zero (no tabs)
 
               // get option
@@ -1023,6 +1178,15 @@ namespace Ecl.SsgConverter {
                     //comment = s.Substring(4);
                   }
                 }
+              }
+
+              if (m_UsesEdit && EditBlockIsText(lines, i)) {
+                // T3-045: the edit symbol ends the used part of an image (default &); *EDIT ON starts a new image
+                // (an *EDIT ON in edit mode destroys a partially edited image).
+                m_EditSymbol = String.IsNullOrEmpty(s) ? "&" : s.Substring(0, 1);
+                powerSkel.AddAssignment(EdtVar("Edt_On"), new PsAstExprPrimitive("1", false));
+                powerSkel.AddAssignment(EdtVar("Edt_Buf"), new PsAstExprPrimitive("", true));
+                break;
               }
 
               StringBuilder sb = new StringBuilder();
@@ -1270,6 +1434,8 @@ namespace Ecl.SsgConverter {
               String byValue = String.Empty;
               String whileVariable = String.Empty;
               Boolean? whileCondition = null;
+              Boolean hasExplicitFrom = false;
+              Boolean hasExplicitTo = false;
 
               String s = lines[i].ToUpperInvariant();
               Regex regex;
@@ -1279,6 +1445,14 @@ namespace Ecl.SsgConverter {
               match = regex.Match(s);
               if (match.Success) {
                 incrementVariable = match.Value;
+                if (incrementVariable.StartsWith("+")) {
+                  // some SSG sources write "*INCREMENT +I ..." with a leading '+' on the variable
+                  // name itself (not an operator); every other reference to the same loop variable
+                  // in the source (e.g. bracketed [PG,I,1,1]) omits the '+', so strip it here too -
+                  // otherwise the declare ($+I, invalid PowerShell) and the condition/increment
+                  // (sanitised to $_I by the AST writer) end up as two different, mismatched names.
+                  incrementVariable = incrementVariable.Substring(1);
+                }
                 m_InnerMostLoopVariable.Push(incrementVariable);
               } else {
                 throw new SymstreamException("No INCREMENT variable found after *INCREMENT.");
@@ -1288,6 +1462,7 @@ namespace Ecl.SsgConverter {
               match = regex.Match(s);
               if (match.Success) {
                 fromValue = match.Value;
+                hasExplicitFrom = true;
               } else {
                 fromValue = "1";
               }
@@ -1296,6 +1471,7 @@ namespace Ecl.SsgConverter {
               match = regex.Match(s);
               if (match.Success) {
                 toValue = match.Value;
+                hasExplicitTo = true;
               } else {
                 toValue = "1";
               }
@@ -1381,8 +1557,8 @@ namespace Ecl.SsgConverter {
                 forInstruction.Body.AddInstrBlock(Convert(lines, ref i, globalVariables, localVariables));
               }
 
-              if (i == lines.Count) {
-                // no more lines and no *LOOP encountered
+              if (i == lines.Count && !(hasExplicitFrom && hasExplicitTo)) {
+                // no more lines and no *LOOP encountered, and the *INCREMENT is not self-bounded
                 StringBuilder sb = new StringBuilder();
                 foreach (String line in lines) {
                   sb.AppendLine(line);
@@ -1390,6 +1566,9 @@ namespace Ecl.SsgConverter {
 
                 throw new SymstreamException("No *LOOP encountered after *INCREMENT. See lines below.\r\n\r\n" + sb.ToString());
               }
+
+              // A self-bounded *INCREMENT (explicit FROM/TO) needs no closing *LOOP: the
+              // FROM/TO bounds define the iteration count and the consumed lines form the body.
 
               localVariables.Remove(incrementVariable);
               m_InnerMostLoopVariable.Pop();
@@ -1723,7 +1902,12 @@ namespace Ecl.SsgConverter {
 
               // convert the target expression
               PsAstExprBase targetExpr = SymstreamExpressionToPowerShellExpression(target, globalVariables, localVariables);
-              powerSkel.AddAssignment(targetExpr, sourceExpr);
+              if (m_DefineDepth > 0 && IsVariableName(target)) {
+                // SSG variables are global; a plain assignment inside a PowerShell function would only change a local copy.
+                powerSkel.AddMethodInvoke("Set-Variable", SetVariableInCallerScope(target.ToUpperInvariant(), sourceExpr));
+              } else {
+                powerSkel.AddAssignment(targetExpr, sourceExpr);
+              }
               break;
             }
 
@@ -1913,7 +2097,7 @@ namespace Ecl.SsgConverter {
         i--;
       } else if (lines[i].StartsWith("[")) {
         powerSkel.AddComment(" This was a stand-alone bracketed reference line.");
-        PsAstExprBase psDataLine = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(lines[i], globalVariables, localVariables));
+        PsAstExprBase psDataLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
 
         powerSkel.AddMethodInvoke("DataLineOrNoStatement", psDataLine);
 
@@ -1952,11 +2136,32 @@ namespace Ecl.SsgConverter {
         if (!name.Equals(DefinePrefix)) {
           powerSkel.AddMethodInvoke(name, parametersAsExpressions);
         }
-      } else if (!String.IsNullOrWhiteSpace(lines[i])) {
+      } else if (!String.IsNullOrEmpty(lines[i])) {
         // Plain text output line (not a directive, not ECL, not a standalone bracket reference).
-        // In Symstream, any non-directive line is an output statement written to the generated stream.
-        PsAstExprBase psOutputLine = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(lines[i], globalVariables, localVariables));
-        powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+        // In Symstream, any non-directive line is an output statement written to the generated stream
+        // (SSG manual 78311784-010 sec 4.3), including whitespace-only (blank) images - see T3-001.
+        // Emit it as literal text with only [bracketed] references substituted - never parse the
+        // COBOL/text as an arithmetic expression (that produced invalid PowerShell).
+        PsAstExprBase psOutputLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
+        if (!m_UsesEdit) {
+          powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+        } else {
+          // T3-045: in edit mode the part before the edit symbol is appended to the image being built; an image without the
+          // edit symbol is appended whole, output, and ends edit mode. Outside edit mode the image is output as is.
+          Int32 symPos = lines[i].IndexOf(m_EditSymbol, StringComparison.Ordinal);
+          PsAstInstrIf editIf = powerSkel.AddIf(EdtVar("Edt_On"));
+          if (symPos >= 0) {
+            if (symPos > 0) {
+              editIf.IfPart.AddAssignment(EdtVar("Edt_Buf"), OutputLineToPowerShellExpression(lines[i].Substring(0, symPos), globalVariables, localVariables), PSAstOperatorType.Add);
+            }
+          } else {
+            editIf.IfPart.AddAssignment(EdtVar("Edt_Buf"), OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables), PSAstOperatorType.Add);
+            editIf.IfPart.AddMethodInvoke("DataLineOrNoStatement", EdtVar("Edt_Buf"));
+            editIf.IfPart.AddAssignment(EdtVar("Edt_On"), new PsAstExprPrimitive("0", false));
+            editIf.IfPart.AddAssignment(EdtVar("Edt_Buf"), new PsAstExprPrimitive("", true));
+          }
+          editIf.ElsePart.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+        }
       }
 
       return powerSkel;

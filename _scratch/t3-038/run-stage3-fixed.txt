@@ -1,0 +1,9 @@
+17:50:35
+20261020	17:49:50.298	 11	Information	SSG4_T3038_PROBE Running Id: 591 Queue: JOB_QUEUE1 Agent: ?
+20261020	17:49:50.332	 11	Information	SSG4_T3038_PROBE Queued Id: 591 Queue: JOB_QUEUE1
+20261020	17:50:00.214	 11	Information	CFH_COPY Running Id: 592 Queue: JOB_QUEUE1 Agent: 1
+20261020	17:50:00.215	 11	Information	CFH_COPY Queued Id: 592 Queue: JOB_QUEUE1 Started by: AFPH12
+20261020	17:50:02.432	 11	Information	CFH_COPY Done Id: 592 Queue: JOB_QUEUE1 (Execution time: 00:00:00:858)
+20261020	17:50:04.457	 11	Information	SSG4_T3038_PROBE Done Id: 591 Queue: JOB_QUEUE1 (Execution time: 00:00:14:148)
+--- bug reports after 17:30: 
+--- IAFB012FAI.DAT: 600 B 17:50:02

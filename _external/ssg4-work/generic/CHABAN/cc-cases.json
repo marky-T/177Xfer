@@ -1,0 +1,42 @@
+[
+  {
+    "Case": "E0",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBE0\\I006VI027",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\E0\\expected\\I006VI027"
+  },
+  {
+    "Case": "EN",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBEN\\I996RIST",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\EN\\expected\\I996RIST"
+  },
+  {
+    "Case": "B1",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBB1\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\B1\\expected\\OUT"
+  },
+  {
+    "Case": "R4",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBR4\\I009PAI120R",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\R4\\expected\\I009PAI120R"
+  },
+  {
+    "Case": "R22",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBR22\\OUT",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\R22\\expected\\OUT"
+  },
+  {
+    "Case": "R5",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBR5\\ID50AVISVIDE",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\R5\\expected\\ID50AVISVIDE"
+  },
+  {
+    "Case": "R58",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBR58\\OUTA",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\R58\\expected\\OUTA"
+  },
+  {
+    "Case": "C100",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CHBC100\\FILEIN",
+    "Expected": "E:\\Repos\\ssg4-work\\generic\\CHABAN\\expected\\C100\\expected\\FILEIN"
+  }
+]

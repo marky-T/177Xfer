@@ -1,0 +1,100 @@
+==== Asysco.Amt.Runtime.Files.AmtFileId.SetOptions
+  call Object.ToString
+  fld  field m_Session
+  call AmtBaseSessionData.get_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_FileRecordEnding
+  call AmtFileId.ChangeRecordEnding
+==== Asysco.Amt.Runtime.Files.AmtFileId.SetOptions
+  call AmtFileId.GetPhysicalFile
+  call AmtFileId.set_FileName
+  fld  field m_Session
+  call AmtBaseSessionData.get_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_FileRecordEnding
+  call AmtFileId.ChangeRecordEnding
+==== Asysco.Amt.Runtime.Skeleton.AmtBaseCobolSkeleton.OpenFile
+  str  "file"
+  call ArgumentNullException..ctor
+  call AmtFileId.get_DummyFile
+  call AmtFileId.SetFileStatus
+  call AmtFileId.get_IsOpen
+  call AmtFileId.SetFileStatus
+  call AmtFileId.get_Title
+  call AmtVariable.IsNull
+  call AmtFileId.get_Title
+  call Object.ToString
+  call AmtBaseCobolSkeleton.ConvertMainframeFileName
+  call AmtFileId.set_FileName
+  call AmtFileId.get_FileName
+  call AmtBaseCobolSkeleton.ConvertMainframeFileName
+  call AmtFileId.set_FileName
+  fld  field m_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsIbm
+  call AmtFileId.get_JobFileOpenMode
+  fld  field m_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsMiFo
+  call AmtFileId.get_FileName
+  str  "NUL"
+  call String.op_Equality
+  call AmtFileId.get_FileName
+  str  "\NUL.DAT"
+  call String.EndsWith
+  call AmtFileId.set_Eof
+  call AmtFileId.set_FileOpenMode
+  call AmtFileId.set_DummyFile
+  fld  field m_RequestInfo
+  call AmtRequestInfoRt.get_AppOptions
+  call AmtApplicationOptions.get_ApplicationKind
+  call AmtRtBehaveAs.IsASeries
+  call AmtFileId.get_FileName
+  call String.IsNullOrEmpty
+  call AmtFileId.get_FileId
+  call AmtFileId.set_FileName
+  call AmtFileId.CreateTempFile
+  fld  field m_SysItems
+  call AmtSystemDefinitions.get_ResOk
+  call AmtFileId.get_IsOpen
+  call AmtVariable.SetStatus
+  call AmtFileId.get_FileName
+  call String.IsNullOrEmpty
+  call AmtFileId.get_FileId
+  call AmtBaseCobolSkeleton.ConvertMainframeFileName
+  call AmtFileId.set_FileName
+  call AmtFileId.CreateTempFile
+  call AmtFileId.CreateCobolOutputFile
+  call AmtFileId.set_Exists
+  call AmtFileId.WaitForFile
+  call AmtFileId.Open
+  call AmtFileId.Append
+  call AmtFileId.Open
+  call AmtFileId.set_FileOpenMode
+==== Asysco.Amt.Runtime.Skeleton.Eztrieve.AmtBaseEztActivity.OpenFile
+  str  "eztFile"
+  call ArgumentNullException..ctor
+  call AmtBaseEztFile.get_FileObject
+  call AmtFileId.CreateTempFile
+  fld  field m_BaseParent
+  call AmtBaseEztFile.get_FileObject
+  call AmtBaseCobolSkeleton.OpenFile
+  call AmtBaseEztFile.set_Sfp
+  call AmtBaseEztFile.set_Presence
+  call AmtBaseEztFile.set_RecordCount
+  call AmtBaseEztFile.set_FileOpenMode
+  call AmtBaseEztFile.set_LockFile
+  call AmtBaseEztFile.get_FileLayout
+  call AmtFileLayout.get_DataRecord
+  call AmtVariable.IsNull
+  call AmtBaseEztFile.get_FileLayout
+  call AmtFileLayout.get_DataRecord
+  call AmtConstRuntime.get_SpacesValueString
+  call AmtAlphaValue.op_Implicit
+  call AmtStructure.set_Value
+  call AmtBaseEztFile.get_FileLayout
+  call AmtFileLayout.get_DataGroup
+  call AmtStringValue.get_Empty
+  call AmtVariable.Setto

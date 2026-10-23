@@ -1,0 +1,7 @@
+remote main: d7baf30267bd8ab82e19bc12275c9804a8af0145	refs/heads/main
+remote branches:
+refs/heads/AMT177
+refs/heads/T3-LiveRun-Results-20261001
+refs/heads/T3ConvertedSSG
+refs/heads/T3ConvertedSSG-20
+refs/heads/main

@@ -1,0 +1,19 @@
+00_HOME.md                                                       22449 chars  ssg-hits=2  first: # ClearPath OS 2200 Release 19.0 Product Documentation Library (Index) **Part
+78307709-002.md                                                2261327 chars  ssg-hits=8  first: # ASCII COBOL Programming Reference Manual **Part Number:** 78307709-002 *
+78307949-031.md                                                1209324 chars  ssg-hits=13  first: # 78307949-031 ClearPath OS 2200 Software Executive Control Language (ECL)
+78310281-034.md                                                 934148 chars  ssg-hits=19  first: # 78310281-034 ClearPath OS 2200 Exec System Software Operations Referenc
+78310448-005.md                                                1535945 chars  ssg-hits=0  first: # UCS COBOL Compiler Programming Reference Manual, Volume 1: COBOL Statements 
+78310455-021.md                                                1833975 chars  ssg-hits=14  first: # COBOL Compiler Programming Reference Manual, Volume 2: Compiler and System Int
+78310455-022.md                                                1872778 chars  ssg-hits=14  first: # COBOL Compiler Programming Reference Manual, Volume 2: Compiler and System Int
+78311784-010.md                                                 560760 chars  ssg-hits=694  first: # Symbolic Stream Generator (SSG) Programming Reference Manual **Part Number:
+82252461-003.md                                                 130574 chars  ssg-hits=7  first: # 82252461-003 ClearPath OS 2200 Software ClearPath Extension Kit for OS 2
+AMT Installation and Configuration (AICL).md                     86669 chars  ssg-hits=0  first: AMT Installation andConfiguration TrainingAMT Installation andConfiguration Trai
+AMT-LION Primary Developer Training (ALPD).md                   331348 chars  ssg-hits=0  first:  Table of contents 1 Introduction 16 1.1 AMT LION Primary Developer Train
+Avanade_AMT_COBOL_FileConverter_.md                              25962 chars  ssg-hits=0  first: # Avanade_AMT_COBOL_FileConverter_ AMT COBOL FILECONVERTER TRAINING MANUA
+ECL to PowerShell (E2P).archived-20260626-080543.md              22251 chars  ssg-hits=0  first:  Table of contents 1 Introduction 5 1.1 PowerShell scripting 5 1.2 Atten
+Migrate AMT LION to Csharp.md                                    16672 chars  ssg-hits=0  first:  # Table of contents 1 Glossary of terms 4 2 Introduction 5 ### 2.1 Migr
+ONLINE-MANUALS.md                                                  902 chars  ssg-hits=0  first: # AMT Lion Online Manuals ## Links | Manual | URL | |--------|-----| | A
+OS2200 COBOL to AMT LION Tech Specs.md                            3893 chars  ssg-hits=1  first:  Migration Technology OS2200 COBOL to AMT LION Asysc
+Overview Batch Jobs in AMT - from ECL to PowerShell.md           21047 chars  ssg-hits=0  first:  # Glossary # Introduction ## PowerShell scripting This document g
+--- the root of the SsgTrial docs for an SSG manual
+E:\Repos\SsgTrial\docs\Reference Docs\78311784-010.md  *INCREMENT/*DEFINE hits=76

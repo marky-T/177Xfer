@@ -1,0 +1,22 @@
+[
+  {
+    "Case": "AFPH12",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\ASSURFED\\IAFB012FAI",
+    "Expected": "E:\\AMT_Work\\MockTest\\AFPH12_L427\\expected\\OUTASC"
+  },
+  {
+    "Case": "VIRM01",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\ASSURFED\\I006VRM01ATC",
+    "Expected": "E:\\AMT_Work\\MockTest\\VIRM01\\expected\\INC"
+  },
+  {
+    "Case": "NEWNAME",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\ASSURFED\\ZZTESTOUT",
+    "Expected": "E:\\AMT_Work\\MockTest\\AFPH12_L427\\expected\\OUTASC"
+  },
+  {
+    "Case": "VIRM01UL",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\ASSURFED\\F006KTMAJ3",
+    "Expected": "E:\\AMT_Work\\MockTest\\VIRM01_UL\\expected\\F006KTMAJ3"
+  }
+]

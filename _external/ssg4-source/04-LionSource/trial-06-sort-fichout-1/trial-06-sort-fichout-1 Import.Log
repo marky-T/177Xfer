@@ -1,0 +1,9 @@
+﻿20260625 14:52 Starting
+20260625 14:52 Loading file: C:\Amt\Migration\CobolConvert\output\trial-06-sort-fichout-1.LionSource
+20260625 14:52 File version: 6
+20260625 14:52 Exported with program version: 
+20260625 14:52 Loading application AFBUS_COBOL under AFBUS_COBOL
+20260625 14:52 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.4
+20260625 14:52 Loading DMS Schema:  1.0 as 1.3
+20260625 14:52 Loading Cobol Program: SORT-FICHOUT-1 1.0 as 1.0
+20260625 14:52 Done in 00:00:00

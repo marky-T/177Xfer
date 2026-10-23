@@ -1,0 +1,36 @@
+Processor on disk == intended: False   (disk 91203, intended 91203)
+warning: in the working copy of 'E:\Repos\SsgTrial\_scratch\ssgmerge2\intended.cs', LF will be replaced by CRLF the next time Git touches it
+diff --git "a/E:\\Repos\\SsgTrial\\_scratch\\ssgmerge2\\intended.cs" "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamProcessor.cs"
+index ac830bc..034649a 100644
+--- "a/E:\\Repos\\SsgTrial\\_scratch\\ssgmerge2\\intended.cs"
++++ "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamProcessor.cs"
+@@ -268,7 +268,7 @@ namespace Ecl.SsgConverter {
+     /// </summary>
+     private void EmitNotImplemented (PsAstInstrBlock block, String sourceLine) {
+       String trimmed = sourceLine.Trim();
+-      m_LogObject.Warning(0, String.Format("  Not implemented - emitted as comment: {0}", trimmed));
++      m_LogObject.Warning(0, String.Format("  Not implemented ΓÇö emitted as comment: {0}", trimmed));
+       block.AddComment(String.Format(" NOT IMPLEMENTED: {0}", trimmed));
+     } // EmitNotImplemented
+ 
+@@ -1512,15 +1512,15 @@ namespace Ecl.SsgConverter {
+                 powerSkel.AddMethodInvoke("continue");
+               } else {
+                 // *ITERATE on an outer loop variable has no direct PowerShell equivalent (no labelled continue)
+-                // Emitted as a comment - see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
++                // Emitted as a comment ΓÇö see SsgConverter-Fix-20260820.md Fix 11 for R&D notes
+                 m_LogObject.Error(0, String.Format(
+-                  "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop - PowerShell has no labelled continue. " +
++                  "  IMPORTANT-WORKAROUND applied: *ITERATE {0} targets an outer loop ΓÇö PowerShell has no labelled continue. " +
+                   "The iterate directive is emitted as a comment; the loop body will NOT skip remaining statements. " +
+                   "See SsgConverter-Fix-20260820.md Fix 11 for the proper R&D fix.", variableName));
+                 powerSkel.AddComment(String.Format(
+                   " IMPORTANT-WORKAROUND: *ITERATE {0} skips to the next iteration of an outer loop." +
+                   " PowerShell 'continue' only affects the innermost loop, so this is a no-op here." +
+-                  " R&D fix required - see SsgConverter-Fix-20260820.md Fix 11.", variableName));
++                  " R&D fix required ΓÇö see SsgConverter-Fix-20260820.md Fix 11.", variableName));
+               }
+ 
+               break;
+line endings: CRLF=2078 bare-LF=0
+Parser em-dash lines remaining: 2

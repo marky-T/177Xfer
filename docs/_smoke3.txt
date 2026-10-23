@@ -1,0 +1,23 @@
+=== Build-Release: 2 program(s) requested ===
+Destination: E:\Repos\release_candidates\_smoketest2
+
+  included CFH-COPY         tier1=pass lines=45 unmocked=0
+  EXCLUDED NOT_A_REAL_PROGRAM no converted body in Examples/Output; no sgs-values.json seed; no original source in Examples/Input
+
+Generating wrappers...
+Generated E:\Repos\release_candidates\_smoketest2\1_ConvertedScripts\Wrappers\CFH-COPY-LIVE.ps1 (job: T3_20_CFH_COPY_LIVE)
+
+Done - 1 wrapper(s) written to E:\Repos\release_candidates\_smoketest2\1_ConvertedScripts\Wrappers
+
+=== Build complete ===
+Included : 1
+Excluded : 1
+Wrappers : 1 (all parse 0)
+Manifest : E:\Repos\release_candidates\_smoketest2\build-manifest.json
+
+Next: populate README.md / RELEASE-NOTES.md from the templates, then run Mock-Install-Dryrun.ps1.
+
+Dest                                    Included
+----                                    --------                                
+E:\Repos\release_candidates\_smoketest2 {@{Program=CFH-COPY; Original=CFH-COPY.…
+

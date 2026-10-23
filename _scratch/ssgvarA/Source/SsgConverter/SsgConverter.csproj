@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>Ecl.SsgConverter</RootNamespace>
+    <AssemblyName>SsgConverter</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <!-- ProjectReferences swapped for shipped binaries in _deps (source projects not available) -->
+  <ItemGroup>
+    <Reference Include="PowerShellGenerator">
+      <HintPath>..\_deps\PowerShellGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="ConverterSupport">
+      <HintPath>..\_deps\ConverterSupport.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

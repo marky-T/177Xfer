@@ -1,0 +1,181 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright c Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\SsgTrial\_scratch\preflight-next5\cobol\EXTEUR\EXTEUR.settings
+Applications to convert:
+  - EXTEUR
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   EXTEUR
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: EXTEUR.TXT
+ERROR: ERR 000249 Field DB-EU001 is expected to have sub items but none found.
+ERROR: ERR 000250 End of statement expected but REPLACE found
+ERROR: ERR 000251 End of statement expected but INVOKE found
+ERROR: ERR 000252 End of statement expected but REPLACE found
+ERROR: ERR 000319 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+ERROR: ERR 000328 Unexpected token END-IF, expected: .
+ERROR: ERR 000329 Unexpected token END-IF, expected: 
+ERROR: ERR 000373 Unexpected token END-IF, expected: .
+ERROR: ERR 000374 Unexpected token END-IF, expected: 
+ERROR: ERR 000381 Unexpected token END-IF, expected: .
+ERROR: ERR 000382 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+ERROR: ERR 000389 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000389 Operand C-PHA-EUR must be a variable.
+ERROR: ERR 000398 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000399 Operand END-IF is not declared.
+ERROR: ERR 000400 Operand END-IF must be a variable.
+ERROR: ERR 000401 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000402 Operand END-IF is not declared.
+ERROR: ERR 000403 Operand END-IF must be a variable.
+ERROR: ERR 000405 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000405 Invalid expression [C-PHA-EUR] encountered.
+ERROR: ERR 000439 End of statement expected but END-IF found
+ERROR: ERR 000457 Operand END-IF is not declared.
+ERROR: ERR 000458 Operand END-IF must be a variable.
+ERROR: ERR 000496 Unexpected token END-IF, expected: .
+ERROR: ERR 000497 Unexpected token END-IF, expected: 
+ERROR: ERR 000499 Operand END-IF is not declared.
+ERROR: ERR 000500 Operand END-IF must be a variable.
+ERROR: ERR 000499 Operand END-IF is not declared.
+ERROR: ERR 000501 Operand END-IF must be a variable.
+ERROR: ERR 000512 Unexpected token END-IF, expected: .
+ERROR: ERR 000513 Unexpected token END-IF, expected: 
+ERROR: ERR 000515 Operand END-IF is not declared.
+ERROR: ERR 000516 Operand END-IF must be a variable.
+ERROR: ERR 000515 Operand END-IF is not declared.
+ERROR: ERR 000517 Operand END-IF must be a variable.
+WARNING: WAR 000542 Compare between Alpha and Numeric item [INA.MT-S-0-1 (Numeric)] and [SPACE (Alpha)].
+ERROR: ERR 000549 Operand END-DIVIDE is not declared.
+ERROR: ERR 000550 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000555 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000556 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000555 Operand END-IF is not declared.
+ERROR: ERR 000557 Operand END-IF must be a variable.
+ERROR: ERR 000564 Operand END-DIVIDE is not declared.
+ERROR: ERR 000565 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000569 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000570 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000569 Operand END-IF is not declared.
+ERROR: ERR 000571 Operand END-IF must be a variable.
+ERROR: ERR 000569 Operand END-IF is not declared.
+ERROR: ERR 000572 Operand END-IF must be a variable.
+ERROR: ERR 000579 Operand END-DIVIDE is not declared.
+ERROR: ERR 000580 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000586 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000587 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000586 Operand END-IF is not declared.
+ERROR: ERR 000588 Operand END-IF must be a variable.
+ERROR: ERR 000586 Operand END-IF is not declared.
+ERROR: ERR 000589 Operand END-IF must be a variable.
+ERROR: ERR 000595 Operand END-DIVIDE is not declared.
+ERROR: ERR 000596 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000601 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000602 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000601 Operand END-IF is not declared.
+ERROR: ERR 000603 Operand END-IF must be a variable.
+ERROR: ERR 000601 Operand END-IF is not declared.
+ERROR: ERR 000604 Operand END-IF must be a variable.
+ERROR: ERR 000605 Operand END-IF is not declared.
+ERROR: ERR 000606 Operand END-IF must be a variable.
+ERROR: ERR 000605 Operand END-IF is not declared.
+ERROR: ERR 000607 Operand END-IF must be a variable.
+ERROR: ERR 000638 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+WARNING: WAR 000638 Paragraph name END-IF already exists within this section.
+ERROR: ERR 000649 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+WARNING: WAR 000649 Paragraph name END-IF already exists within this section.
+ERROR: ERR 000686 Operand END-IF is not declared.
+ERROR: ERR 000687 Operand END-IF must be a variable.
+ERROR: ERR 000686 Operand END-PERFORM is not declared.
+ERROR: ERR 000688 Operand END-PERFORM must be a variable.
+ERROR: ERR 000694 End of statement expected but END-PERFORM found
+ERROR: ERR 000703 Unexpected token SYS, expected: 
+ERROR: ERR 000704 Unexpected token LINK, expected: 
+ERROR: ERR 000705 Unexpected token TEMPABS, expected: 
+ERROR: ERR 000706 Unexpected token EXTEUR, expected: 
+ERROR: ERR 000707 Unexpected token EXTEUR, expected: 
+ERROR: ERR 000710 Unexpected token LIBCODENAME, expected: 
+ERROR: ERR 000711 Operand SIZE is not declared.
+ERROR: ERR 000711 Operand SIZE must be an integer variable, a condition name or a switch mnemonic
+ERROR: ERR 000711 Operand = is not declared.
+ERROR: ERR 000711 Operand SIZE is not declared.
+ERROR: ERR 000711 Operand + is not declared.
+ERROR: ERR 000711 Operand FOR is not declared.
+ERROR: ERR 000711 Operand URTS is not declared.
+ERROR: ERR 000711 Operand $TABLES is not declared.
+ERROR: ERR 000711 Unexpected end of statement
+ERROR: ERR 000712 Operand ALS_INIT_SIZE is not declared.
+ERROR: ERR 000712 Operand ALS_INIT_SIZE must be an integer variable, a condition name or a switch mnemonic
+ERROR: ERR 000712 Operand = is not declared.
+ERROR: ERR 000712 Unexpected end of statement
+ERROR: ERR 000715 Unexpected token SYS, expected: 
+1 source(s) read
+
+Analyzing source: EXTEUR
+ERROR: ERR 000391 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000391 SQL Table/View EU001 not found
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+1 source(s) processed
+
+*** PHASE: EXTEUR CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          1         715       715     
+
+List of unresolved calls:
+Source                 No of calls
+MSGERR                        1
+BLOACE                        1
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:00:687
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 99
+Warnings: 7
+Todos: 0
+Logs: 17
+
+
+=== Conversion Completed ===
+
+Conversion completed with errors.

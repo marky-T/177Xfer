@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ASSURFED_UTILIT_CHABAN_GN": {
+      "commandName": "Executable",
+      "executablePath": "Y:\\Amt.net\\AmtBatchController\\AmtBatchControllerAgent\\bin\\Debug\\net10.0-windows\\AmtBatchControllerAgent.exe",
+      "commandLineArgs": "/RUN:ASSURFED_UTILIT_CHABAN_GN /APP:AFBUS /MANUALLY /VS"
+    }
+  }
+}

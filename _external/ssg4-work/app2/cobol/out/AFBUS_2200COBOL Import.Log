@@ -1,0 +1,14 @@
+﻿20261013 15:15 Starting
+20261013 15:15 Loading file: E:\Repos\ssg4-work\app2\cobol\out\AFBUS_2200COBOL.LionSource
+20261013 15:15 File version: 6
+20261013 15:15 Exported with program version: 
+20261013 15:15 Loading application AFBUS_2200COBOL under AFBUS_2200COBOL
+20261013 15:15 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.1
+20261013 15:15 Loading DMS Schema:  1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-CFH-COPY-ASCII 1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-FUSBA2-ASCII 1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-LECTIS-ASCII 1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-LOADIS-ASCII 1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-RECAP 1.0 as 1.1
+20261013 15:15 Loading Cobol Program: ASSURFED-UTILIT-UNLOADIS-ASCII 1.0 as 1.1
+20261013 15:15 Done in 00:00:00

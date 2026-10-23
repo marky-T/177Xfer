@@ -1,0 +1,202 @@
+*DEFINE  FILER    
+*SET  FILLCTR TO   [#1]-1     
+*IF FILLCTR  IS  SET    
+           02  FILLER  PIC  X([*FILLCTR]).
+*END  
+*END  
+*IF [ASCII] > 0   
+#ACOB,IPEC  .LOADIS/ASCII,.LOADIS/ASCII   
+*ELSE 
+#ACOB,IET .LOADIS/ASCII,.LOADIS/ASCII     
+*END  
+
+       IDENTIFICATION DIVISION.     
+       PROGRAM-ID. LOADIS-ASCII.    
+       AUTHOR. BOURDEAUD HUY 13/05/82.    
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+*INCREMENT  I  FROM  1  BY 1 TO [INPUT,1] 
+           SELECT  BDE[*I]  ASSIGN TO     
+*IF [INPUT,1,1] > 3     
+               UNISERVO [INPUT,1,1,1].    
+*ELSE 
+               DISC [INPUT,1,1,1].  
+*END  
+*LOOP 
+           SELECT DISQ ASSIGN TO DISC  [OUTPUT,1,1,1] 
+           RESERVE 20 AREAS   
+           ORGANIZATION IS INDEXED  
+            ACCESS  MODE IS DYNAMIC RECORD KEY IS CLEF
+*IF [KEYIS] > 2   
+           ALTERNATE RECORD KEY IS CLEG   
+           ALTERNATE RECORD KEY IS CLEH.  
+*ELSE 
+           ALTERNATE RECORD KEY IS CLEG.  
+*END  
+       DATA DIVISION.   
+       FILE SECTION.    
+*INCREMENT I FROM 1 BY 1 TO  [INPUT,1]    
+       FD  BDE[*I]
+           LABEL RECORD STANDARD    
+             BLOCK CONTAINS [INPUT,1,1,3]   RECORDS   
+           RECORD CONTAINS [INPUT,1,1,2] CHARACTERS   
+           DATA RECORD IS  Z[*I].   
+       01  Z[*I]   PIC  X([INPUT,1,1,2]). 
+*LOOP 
+       FD  DISQ   LABEL RECORD STANDARD   
+           BLOCK CONTAINS [OUTPUT,1,1,3] RECORDS
+           RECORD  CONTAINS [OUTPUT,1,1,2] CHARACTERS 
+             DATA RECORD IS ZDISQ CLEFA.  
+       01  ZDISQ  PIC  X([OUTPUT,1,1,2]). 
+       01  CLEFA. 
+*IF [KEYIS] = 2   
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER PIC X([KEYIS,1,1,1]).
+           02 CLEF PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 CLEG PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+*ELSE 
+           02 CLEF PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 CLEG PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+*END  
+*ELSE 
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER PIC X([KEYIS,1,1,1]).
+           02 CLEF PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 CLEG PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+           02 CLEH PIC X([KEYIS,3,1,2]).  
+*IF [KEYIS,3,1,3] > 0   
+           02 FILLER PIC X([KEYIS,3,1,3]).
+*END  
+*ELSE 
+           02 CLEF PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 CLEG PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+           02 CLEH PIC X([KEYIS,3,1,2]).  
+*IF [KEYIS,3,1,3] > 0   
+           02 FILLER PIC X([KEYIS,3,1,3]).
+*END  
+*END  
+*END  
+       WORKING-STORAGE SECTION.     
+       77  FF  PIC  9(10)  COMP  VALUE 1. 
+       77  CTRIN  PIC  9(10)  COMP  VALUE  0.   
+       01  WREC.  
+           02 FILLER  PIC  X([OUTPUT,1,1,2]).   
+       01  WREC1     REDEFINES  WREC.     
+*IF [KEYIS] = 2   
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER   PIC  X([KEYIS,1,1,1]).   
+           02 KEYA PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 KEYB PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+*ELSE 
+           02 KEYA PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 KEYB PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+*END  
+*ELSE 
+*IF [KEYIS,1,1,1] > 0   
+           02 FILLER   PIC  X([KEYIS,1,1,1]).   
+           02 KEYA PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 KEYB PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+           02 KEYC PIC X([KEYIS,3,1,2]).  
+*IF [KEYIS,3,1,3] > 0   
+           02 FILLER PIC X([KEYIS,3,1,3]).
+*END  
+*ELSE 
+           02 KEYA PIC X([KEYIS,1,1,2]).  
+*IF [KEYIS,1,1,3] > 0   
+           02 FILLER PIC X([KEYIS,1,1,3]).
+*END  
+           02 KEYB PIC X([KEYIS,2,1,2]).  
+*IF [KEYIS,2,1,3] > 0   
+           02 FILLER PIC X([KEYIS,2,1,3]).
+*END  
+           02 KEYC PIC X([KEYIS,3,1,2]).  
+*IF [KEYIS,3,1,3] > 0   
+           02 FILLER PIC X([KEYIS,3,1,3]).
+*END  
+*END  
+*END  
+       PROCEDURE DIVISION.    
+       DEBUT.     
+*INCREMENT  I  FROM  1  BY 1 TO [INPUT,1] 
+           OPEN INPUT  BDE[*I].     
+*LOOP 
+           OPEN  OUTPUT  DISQ.
+       LECT.
+           GO TO LECT1 FINB  DEPENDING  ON FF.  
+       LECT1.     
+*INCREMENT I FROM 1 BY 1 TO [INPUT,1]     
+           MOVE SPACES TO Z[*I].    
+*LOOP 
+           READ  BDE1  INTO  WREC  AT END ADD 1 TO FF  GO TO LECT.
+           GO TO CONT.  
+       CONT.
+*IF [KEYIS] = 2   
+           MOVE KEYA     TO  CLEF.  
+           MOVE KEYB     TO  CLEG.  
+*ELSE 
+           MOVE KEYA     TO  CLEF.  
+           MOVE KEYB     TO  CLEG.  
+           MOVE KEYC     TO  CLEH.  
+*END  
+           ADD  1  TO  CTRIN. 
+           WRITE ZDISQ FROM WREC INVALID KEY GO TO  ERRDISQ.
+           MOVE SPACES TO WREC WREC1 ZDISQ.     
+           GO TO LECT.  
+       FINB.
+           DISPLAY 'NB.RECORDS ECRITS'  CTRIN  UPON PRINTER.
+           CLOSE  DISQ. 
+*INCREMENT I FROM 1 BY 1 TO [INPUT,1]     
+           CLOSE  BDE[*I].    
+*LOOP 
+           STOP RUN.    
+       ERRDISQ.   
+           DISPLAY 'IS.ERROR'  CLEF  UPON  PRINTER.   
+           ENTER ASM 'ABORT'. 
+#MAP,N    ASSURFED*UTILITASCII.MAP,TPF$.LOADIS  
+#HDG,N

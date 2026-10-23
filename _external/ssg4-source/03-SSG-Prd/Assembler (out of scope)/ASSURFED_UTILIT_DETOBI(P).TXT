@@ -1,0 +1,37 @@
+       AXR$ .     
+$(0) .
+TAB    +         0 .    
+SAVR   RES       4 .    
+SIX    +         6 .    
+DIX    +         012 .  
+$(1) .
+DETOBI*  DS      A2,SAVR .     SAUVE LES REG A2,A3    
+       DS        A4,SAVR+2 .       A4,A5  
+       SZ        TAB .  
+       DSL       A1,18 .       DEPLACEMENT DANS A1    
+       SSL       A2,18 .       LONGUEUR DANS A2 
+       ANA,U     A2,+1 .       LONG - 1   
+       MSI       A1,SIX .      NB DE SHIFTS DANS A1   
+BOUC0  LA        A4,0,A0 .     CHARGE LE MOT    
+       LSSL      A4,2,A1 .     LOCALISE LE CHIFFRE ET 
+       SSL       A4,32 .       LE CONVERTIT EN BINAIRE
+       LA        A3,A2 .       CHARGE LA LONG DANS A3 
+       ANA,U     A3,+1 .       UN EN MOINS
+       TNG,U     A3,+0 .       LE CHIFFRE EST-IL A    
+       J         ADDIT .       MULTIPLIER PAR DIX  NON
+BOUC1  MSI       A4,DIX .      OUI  
+       JGD       A3,BOUC1 .    AUTANT DE FOIS QUE NECESSAIRE
+ADDIT  AA        A4,TAB .      ADDITIONNE LE CUMUL    
+       SA        A4,TAB .      ET RESTORE 
+       AA        A1,SIX .      INCREMENTE LE NB DE SHIFTS   
+       TNG,U     A1,+36 .      SI PERMIS  
+       J         TST .         OUI  
+       AA,U      A0,+1 .       POINTE SUR LE MOT SUIVANT    
+       SZ        A1 .          NB DE SHIFTS A ZERO    
+TST    JGD       A2,BOUC0 .    FIN DU NBR A CONVERTIR ?     
+       LA        A0,TAB .      RESULTAT DANS A0 
+       SZ        A1 .          ZERO DANS A1     
+       DL        A2,SAVR .     RESTORE LES REGISTRES  
+       DL        A4,SAVR+2 .   RESTORE LES REGISTRES  
+       J         0,X11 .       RETOUR     
+       END .

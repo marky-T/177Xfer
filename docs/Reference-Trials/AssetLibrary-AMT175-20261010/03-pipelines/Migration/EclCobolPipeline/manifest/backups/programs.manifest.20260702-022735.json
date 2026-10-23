@@ -1,0 +1,609 @@
+﻿{
+    "_description":  "Manifest of ECL/SSG programs in the parallel conversion stream. Each entry is processed by Run-EclPipeline.ps1. paramOverrides drive inline ECL token substitution ([TOKEN]=value); conditionValues drive SSG *IF branch evaluation (PARAM=value). status \u0027done\u0027 = validated trial; \u0027planned\u0027 = scaffolded, overrides to be confirmed.",
+    "_markerConvention":  "Generated stub identifiers carry ECL_/SSG_ prefixes so lineage survives into C# for AMT visual comparison.",
+    "programs":  [
+                     {
+                         "key":  "MONTANT",
+                         "description":  "MONTANT_SIGNE numeric-edit utility",
+                         "programId":  "MONTANT",
+                         "sourceFile":  "ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT",
+                         "settingsFile":  "trial-03-montant.settings",
+                         "candidateDir":  "trial-03-montant",
+                         "outputName":  "trial-03-montant.LionSource",
+                         "paramOverrides":  {
+
+                                            },
+                         "conditionValues":  {
+
+                                             },
+                         "status":  "done",
+                         "notes":  "Intentionally empty: MONTANT_SIGNE is the built-in baseline of Remove-SsgDirectives.ps1, so the script defaults ([INPUT,1,1,1]=FILEIN-1, record/block 80/1, [MONTANT,I,1,2]=9, [MONTANT]=1) reproduce the validated candidate verbatim. No *IF conditions exist, so no -ConditionValues are required. Verified by diff against candidates/trial-03-montant.",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/montant.ps1",
+                                       "fixtureDir":  "fixtures/montant",
+                                       "inputSpec":  "80-char fixed records, CRLF-delimited; MONTANT1 PIC S9(9) at cols 2-10, FILLER at col 1 and col 11.",
+                                       "fileAssignments":  {
+                                                               "FILEIN-1":  "input.dat",
+                                                               "FILEOUT-1":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/montant/expected.dat",
+                                       "notes":  "Tier-1 golden hand-derived independently of refimpl; OS2200 zoned-decimal sign (positive {,A-I / negative },J-R on trailing digit) cross-checked vs the Phase-14 C# FILEOUT-1.DAT (4-\u003eD, 9-\u003eI, 1-\u003eA)."
+                                   }
+                     },
+                     {
+                         "key":  "LECTIS",
+                         "description":  "LECTIS_MULT multi-key sequential reader",
+                         "programId":  "LECTIS",
+                         "sourceFile":  "ASSURFED_UTILIT_LECTIS_MULT(P).TXT",
+                         "settingsFile":  "trial-05-lectis.settings",
+                         "candidateDir":  "trial-05-lectis",
+                         "outputName":  "trial-05-lectis.LionSource",
+                         "paramOverrides":  {
+                                                "[INPUT,1,1,1]":  "FICHIN-1",
+                                                "[INPUT,1,1,2]":  "120",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[LKEY,1,1,2]":  "8",
+                                                "[LKEY,2,1,2]":  "4"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "LKEY":  "2",
+                                                 "KEYS":  "0",
+                                                 "NOLIST":  "0",
+                                                 "UN":  "1",
+                                                 "DEUX":  "0",
+                                                 "TROIS":  "0",
+                                                 "Y2K":  "0",
+                                                 "COND,1":  "0"
+                                             },
+                         "status":  "done",
+                         "notes":  "Override set captured from the validated trial-05 LECTIS run.",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/lectis.ps1",
+                                       "fixtureDir":  "fixtures/lectis",
+                                       "inputSpec":  "120-char fixed records (flat-sequential; ORGANIZATION INDEXED with ACCESS MODE DYNAMIC reads sequentially at Tier 1 via START \u003e LOW-VALUES + READ NEXT). SYMK PIC X(8) at cols 1-8, SYMK1 PIC X(4) at cols 9-12.",
+                                       "fileAssignments":  {
+                                                               "FICHIN-1":  "input.dat",
+                                                               "IMP":  "output.prn"
+                                                           },
+                                       "expectedFile":  "fixtures/lectis/expected.dat",
+                                       "notes":  "Tier-1 golden is the logical PRINTER output (no LINAGE page-control headers; BEFORE PAGE / BEFORE SAUT produce plain blank lines; DISPLAY...UPON PRINTER omitted). Reference for indexed file semantics: ALPD Â§18.1.3 (File indexes) + Â§18.1.7 (File functions). C# API (OpenFile/LocateRecordIndexedFile/ReadRandomAccessFileNextRecord/CloseFile) generated automatically; not documented in available refs."
+                                   }
+                     },
+                     {
+                         "key":  "TRI_ASCII",
+                         "description":  "SORT-FICHOUT-1 ASCII sort utility",
+                         "programId":  "SORT-FICHOUT-1",
+                         "sourceFile":  "ASSURFED_UTILIT_TRI_ASCII(P).TXT",
+                         "settingsFile":  "trial-06-sort-fichout-1.settings",
+                         "candidateDir":  "trial-06-tri-ascii",
+                         "outputName":  "trial-06-sort-fichout-1.LionSource",
+                         "paramOverrides":  {
+                                                "[OUTPUT,1,1,1]":  "FICHOUT-1",
+                                                "[INPUT,1,A,1]":  "FICHIN-1",
+                                                "[INPUT,1,A,2]":  "80",
+                                                "[KEYS,1,COL,2]":  "8"
+                                            },
+                         "conditionValues":  {
+                                                 "INPUT,1":  "1",
+                                                 "KEYS,1":  "1"
+                                             },
+                         "status":  "done",
+                         "notes":  "Overrides reconstructed from the validated candidate + setup guide: [OUTPUT,1,1,1]=FICHOUT-1 drives PROGRAM-ID SORT-FICHOUT-1 and the CARDPUNCH *IF else-branch; [INPUT,1,A,1]=FICHIN-1 drives the input file + CARDREADER *IF else-branch; [INPUT,1,A,2]=80 sets REC-IN-1; [KEYS,1,COL,2]=8 sets the sort key width. conditionValues is non-empty to enable *IF branch evaluation (single TAPE-1 / single SORT-KEY-1). Verified by diff against candidates/trial-06-tri-ascii.",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/tri_ascii.ps1",
+                                       "fixtureDir":  "fixtures/tri_ascii",
+                                       "inputSpec":  "80-char fixed records, CRLF-delimited; SORT-KEY-1 PIC X(8) at cols 1-8, ascending ASCII.",
+                                       "fileAssignments":  {
+                                                               "FICHIN-1":  "input.dat",
+                                                               "FICHOUT-1":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/tri_ascii/expected.dat",
+                                       "notes":  "Tier-1 golden is sorted order (AAA / MMM / ZZZ) matching Phase-14 cross-check FICHOUT-1.DAT in Extracts. Sort uses PowerShell Sort-Object on Substring(0,8) â€” same ASCII ordering as AMT SortFiles API."
+                                   }
+                     },
+                     {
+                         "key":  "ARCHITAB1",
+                         "description":  "ARCHITAB1 table-archive utility",
+                         "programId":  "ARCHITAB1",
+                         "sourceFile":  "ASSURFED_UTILIT_ARCHITAB1(P).TXT",
+                         "settingsFile":  "trial-07-architab1.settings",
+                         "candidateDir":  "trial-07-architab1",
+                         "outputName":  "trial-07-architab1.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[fname,1,1,1]":  "\u0027\"ECL-FNAME\"\u0027",
+                                                "[tname,1,1,1]":  "ECL-TNAME1",
+                                                "[tname,1,1,2]":  "ECL-TNAME2",
+                                                "[key,1,1,1]":  "ECL-KEY1",
+                                                "[key,1,1,2]":  "ECL-KEY2",
+                                                "[key,1,1,3]":  "00.00"
+                                            },
+                         "conditionValues":  {
+
+                                             },
+                         "status":  "done",
+                         "notes":  "Trial-07. Pure output generator (no COBOL input file). 3x80 recs (type 0/1/9) to ficout. #ucob,is lines auto-stripped. ACCEPT dt-ach FROM DATE YYYYMMDD pinned via input.dat param card (line1=20260627). nombre/nombre2 PIC S9(11) SIGN LEADING SEPARATE VALUE 99999999999. At Tier 2 mask dt-ach cols (type0 \u0026 type9 cols 38-45) when diffing vs real C#. -AnnotateStubs ON.",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/architab1.ps1",
+                                       "fixtureDir":  "fixtures/architab1",
+                                       "inputSpec":  "No COBOL input file. input.dat is a one-line ECL parameter card supplying run-date (yyyymmdd) so the Tier-1 golden is deterministic. FICOUT = output.dat (pure output generator).",
+                                       "fileAssignments":  {
+                                                               "DATECARD":  "input.dat",
+                                                               "FICOUT":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/architab1/expected.dat",
+                                       "notes":  "246 bytes, 3 records (type0/1/9), each 80 chars + CRLF. ECL-stub values: nm-bas0/9=\u0027ECL-TN\u0027(truncated X(6)), nm-tab0/9=\u0027ECL-TNAME2\u0027padded, nm-cle=\u0027ECL-KEY1\u0027padded, type-cle=\u0027E\u0027(truncated X(1)), longueur=\u002700.00\u0027. dt-ach pinned to 20260627. Tier-2 must mask dt-ach cols 38-45 in type0+type9 rows."
+                                   }
+                     },
+                     {
+                         "key":  "SCAN",
+                         "description":  "SCAN-VAR_ASCII record-scan utility",
+                         "programId":  "SCAN",
+                         "sourceFile":  "ASSURFED_UTILIT_SCAN-VAR_ASCII(P).TXT",
+                         "settingsFile":  "trial-08-scan.settings",
+                         "candidateDir":  "trial-08-scan",
+                         "outputName":  "trial-08-scan.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[INPUT,1,1,1]":  "ECL-FICHIN-1",
+                                                "[INPUT,1,1,2]":  "80",
+                                                "[INPUT,1,1,3]":  "1"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "INPUT,1,1":  "3",
+                                                 "BLOCK":  "0",
+                                                 "OMITTED":  "0",
+                                                 "DESC":  "0",
+                                                 "KEY":  "0",
+                                                 "INDIC":  "0",
+                                                 "IF":  "0",
+                                                 "NOCONT":  "0",
+                                                 "TITLE":  "0",
+                                                 "LIST":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/scan.ps1",
+                                       "fixtureDir":  "fixtures/scan",
+                                       "fileAssignments":  {
+                                                               "FICHIN-1":  "input.dat",
+                                                               "PRT":  "output.prn"
+                                                           },
+                                       "expectedFile":  "fixtures/scan/expected.dat",
+                                       "expectedBytes":  732,
+                                       "expectedLines":  16,
+                                       "notes":  "3 x 80-char input records (80 A\u0027s / B\u0027s / C\u0027s). Output: 6 content lines (100 chars) + 9 blank lines (AFTER ADVANCING 10) + 1 M-LINE (100 chars). diff=0 = PASS."
+                                   },
+                         "notes":  "Trial-08. Simplest \u0027scan-all\u0027 variant: ASCII mode, 80-char fixed records, no KEY/IF/DESC/INDIC/NOCONT conditions. PROGRAM-ID=SCAN. -AnnotateStubs ON. #MAP,#HDG,*EDIT stripped by Remove-SsgDirectives. Known P4 issue: nested \u0027* IF\u0027 (with spaces) directives are not matched by the Remove-SsgDirectives strip pattern (which requires *IF with no gap) -- causes duplicate BLOCK CONTAINS in FD; harmless for Tier-1 proof since refimpl is used."
+                     },
+                     {
+                         "key":  "ECLAT",
+                         "description":  "Archive-extraction merge: FILEKEY search file + TABLE file â†’ matched records to FARCHIVE; unmatched TABLE records to FENCOURS. PROGRAM-ID UGXB02.",
+                         "programId":  "UGXB02",
+                         "sourceFile":  "ASSURFED_UTILIT_ECLAT(P).TXT",
+                         "settingsFile":  "trial-09-eclat.settings",
+                         "candidateDir":  "trial-09-eclat",
+                         "outputName":  "trial-09-eclat.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[key]":  "1",
+                                                "[key,1,1,1]":  "1",
+                                                "[key,1,1,2]":  "10",
+                                                "[key,1,1,3]":  "1",
+                                                "[filekey,1,1,1]":  "ECL-FILEKEY",
+                                                "[filekey,1,1,2]":  "10",
+                                                "[table,1,1,1]":  "ECL-TABLE",
+                                                "[table,1,1,2]":  "20",
+                                                "[table,1,1,3]":  "ARCHIVE-TABLE",
+                                                "[farchive,1,1,1]":  "ECL-FARCHIVE",
+                                                "[fencours,1,1,1]":  "ECL-FENCOURS"
+                                            },
+                         "conditionValues":  {
+                                                 "key":  "1"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/eclat.ps1",
+                                       "fixtureDir":  "fixtures/eclat",
+                                       "inputSpec":  "FILEKEY: 10-byte fixed records, CRLF-delimited (primary input = input.dat). TABLE: 20-byte fixed records, CRLF-delimited (table.dat, same fixture dir). Both sorted ascending on 10-byte key.",
+                                       "fileAssignments":  {
+                                                               "FILEKEY":  "input.dat",
+                                                               "TABLE":  "table.dat",
+                                                               "FARCHIVE":  "archive.dat",
+                                                               "FENCOURS":  "encours.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/eclat/expected.dat",
+                                       "expectedBytes":  162,
+                                       "expectedLines":  3,
+                                       "notes":  "2 FILEKEY recs (AAAA000001, CCCC000003) + 3 TABLE recs (AAAA/BBBB/CCCC). Merge: AAAA+AAAA â†’ FARCHIVE; CCCC\u003eBBBB â†’ FENCOURS(BB); CCCC+CCCC â†’ FARCHIVE. Output: 2 FARCHIVE recs (68+2=70 bytes each) + 1 FENCOURS rec (20+2=22 bytes) = 162 bytes. Date pinned to 20260629 (DAT-SS=20, year 26\u003c28). NOM-TAB = \u0027ARCHIVE-TABLE\u0027 padded to 30. Combined output (FARCHIVE then FENCOURS) written to encours.dat."
+                                   },
+                         "notes":  "Trial-09. key=1 (single key field). *INCREMENT loop bodies manually expanded to key=1. *ENDIF fix applied to Remove-SsgDirectives. Merge algorithm: sorted FILEKEY + TABLE on key; matched â†’ FARCHIVE (NOM-TAB/DAT-ARC/CLES-TAB/ENR); TABLE-only â†’ FENCOURS. -AnnotateStubs ON."
+                     },
+                     {
+                         "key":  "COMPARE2",
+                         "description":  "COMPARE2_ASCII dual-file comparison utility: reads IN1 and IN2, reports differing records to LISTING. PROGRAM-ID COMPARE.",
+                         "programId":  "COMPARE",
+                         "sourceFile":  "ASSURFED_UTILIT_COMPARE2_ASCII(P).TXT",
+                         "settingsFile":  "trial-10-compare2.settings",
+                         "candidateDir":  "trial-10-compare2",
+                         "outputName":  "trial-10-compare2.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[INPUT,1,1,1]":  "ECL-FICHIN-1",
+                                                "[INPUT,1,1,2]":  "ECL-FICHIN-2",
+                                                "[INPUT,1,1,3]":  "100",
+                                                "[INPUT,1,1,4]":  "1"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "LABELOMIT":  "0",
+                                                 "INDIC":  "0",
+                                                 "EXCLUDE":  "0",
+                                                 "LIST":  "0",
+                                                 "UN":  "0",
+                                                 "DEUX":  "0",
+                                                 "EGALITE":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/compare2.ps1",
+                                       "fixtureDir":  "fixtures/compare2",
+                                       "inputSpec":  "IN1: 3x100-char fixed CRLF records (A*100, B*100, C*100). IN2: identical. Both ASCII, no differences.",
+                                       "fileAssignments":  {
+                                                               "IN1":  "input.dat",
+                                                               "IN2":  "input2.dat",
+                                                               "LISTING":  "listing.prn"
+                                                           },
+                                       "expectedFile":  "fixtures/compare2/expected.dat",
+                                       "expectedBytes":  1206,
+                                       "expectedLines":  9,
+                                       "notes":  "Simplified variant: no INDIC/EXCLUDE/LIST. AIMPRIMER=0. Two identical 3-rec files -\u003e 0 differences -\u003e FINI summary only. 9 x 132-char CRLF lines = 1206 bytes."
+                                   },
+                         "notes":  "Trial-10. Dual-file compare, simplest variant: ASCII mode, 100-char records, no INDIC/EXCLUDE/LIST conditions. *DEFINE macros PAS/FILUN/FILDEUX present (all bodies stripped). OR-condition and bare *IF extensions added to Remove-SsgDirectives. #TIME stripped."
+                     },
+                     {
+                         "key":  "CFH-COPY",
+                         "description":  "General-purpose file copy utility: reads TAPEIN, copies records to TAPEOUT. Simplest variant: ASCII mode, 80-char records, all optional features off (FIELDIN/FIELDOUT/FIXE/PRINT/MAXCOPY/Y2K/REPRISE/REPSIM/SUPCOM=0).",
+                         "programId":  "CFH-COPY",
+                         "sourceFile":  "ASSURFED_UTILIT_CFH-COPY(P).TXT",
+                         "settingsFile":  "trial-11-cfh-copy.settings",
+                         "candidateDir":  "trial-11-cfh-copy",
+                         "outputName":  "trial-11-cfh-copy.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[INPUT,1,1,1]":  "ECL-TAPEIN",
+                                                "[INPUT,1,1,2]":  "80",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[OUTPUT,1,1,1]":  "ECL-TAPEOUT",
+                                                "[OUTPUT,1,1,2]":  "80",
+                                                "[OUTPUT,1,1,3]":  "1"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "PRINT":  "0",
+                                                 "FIELDIN":  "0",
+                                                 "FIELDOUT":  "0",
+                                                 "FIXE":  "0",
+                                                 "REPRISE":  "0",
+                                                 "MAXCOPY":  "0",
+                                                 "SUPCOM":  "0",
+                                                 "REPSIM":  "0",
+                                                 "STARTFIELD":  "0",
+                                                 "STARTREC":  "0",
+                                                 "Y2K":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/cfh-copy.ps1",
+                                       "fixtureDir":  "fixtures/cfh-copy",
+                                       "inputSpec":  "TAPEIN: 3x80-char fixed CRLF records (COPY-INPUT-RECORD-001/002/003, padded to 80 chars).",
+                                       "fileAssignments":  {
+                                                               "TAPEIN":  "input.dat",
+                                                               "TAPEOUT":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/cfh-copy/expected.dat",
+                                       "expectedBytes":  246,
+                                       "expectedLines":  3,
+                                       "notes":  "Simplified variant: ASCII=1, all optional params=0. Pure READ-WRITE copy: output bytes identical to input bytes (no FIELDIN/FIELDOUT/FIXE transforms). FINW DISPLAY statements go UPON PRINTER (stdout only)."
+                                   },
+                         "notes":  "Trial-11. Simple READ-WRITE file copy, ASCII mode, 80-char records. String-string OR condition handler added to Resolve-SsgCondition for *IF [OUTPUT,1,1,1]=CARDPUNCH OR [OUTPUT,1,1,1]=PRINTER."
+                     },
+                     {
+                         "key":  "ARCHIFORMAT",
+                         "description":  "Archive formatter: reads RSA schema report + column description + unload data, writes fixed-size archive records (types 0-4,9). Simplified: key=10, rsz=55, ncols=2, record size [*a]=69.",
+                         "programId":  "ARCHIFORMAT",
+                         "sourceFile":  "ASSURFED_UTILIT_ARCHIFORMAT(P).TXT",
+                         "settingsFile":  "trial-13-archiformat.settings",
+                         "candidateDir":  "trial-13-archiformat",
+                         "outputName":  "trial-13-archiformat.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[filein,1,1,1]":  "ECL-FICREPORT",
+                                                "[filein,1,2,1]":  "ECL-FICDESCRIPT",
+                                                "[filein,1,3,1]":  "ECL-FICUNLOAD",
+                                                "[fileout,1,1,1]":  "ECL-FICFORMAT",
+                                                "[key,1,1,1]":  "CLE-TABLE",
+                                                "[key,1,1,2]":  "N",
+                                                "[key,1,1,3]":  "10",
+                                                "[rsz,1,1,1]":  "55",
+                                                "[table,1,1,1]":  "SCHEMA1",
+                                                "[table,1,1,2]":  "TABLE-ARCH",
+                                                "[table,1,1,3]":  "ARCHIS",
+                                                "[table,1,2,1]":  "2"
+                                            },
+                         "conditionValues":  {
+
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/archiformat.ps1",
+                                       "fixtureDir":  "fixtures/archiformat",
+                                       "inputSpec":  "fic-report: 12x132-char CRLF lines (schema header + date + column section + PK section). fic-descript: 4x132-char CRLF lines (2 column desc rows). fic-unload: 2x68-char CRLF records (10-digit key + 55-byte data + 3-byte filler). Combined output: 8 fmt records (type 0,1,2x2,3,4x2,9) padded to 69 chars + 3 printer lines.",
+                                       "fileAssignments":  {
+                                                               "FICREPORT":  "fic-report.dat",
+                                                               "FICDESCRIPT":  "fic-descript.dat",
+                                                               "FICUNLOAD":  "fic-unload.dat",
+                                                               "FICFORMAT":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/archiformat/expected.dat",
+                                       "expectedBytes":  689,
+                                       "expectedLines":  11,
+                                       "notes":  "key=10/N/CLE-TABLE, rsz=55, ncols=2, [*a]=69. RSA report+descript+unload to archive format (types 0,1,2x2,3,4x2,9). Combined output: fic-format records + printer lines. Tier-2 must mask dt-ach, dt-maj, dt-fr (run-date sensitive)."
+                                   }
+                     },
+                     {
+                         "key":  "ARCHISEPARE",
+                         "description":  "Sorted-merge separator: reads chercheuse (search keys) and ficunload (table unload), routes matching records to ficarchi (archive) and non-matching to ficnarchi. Simplified variant: key at record start (key,1,2,1=0), 10-digit key, 40-char records.",
+                         "programId":  "ARCHISEPARE",
+                         "sourceFile":  "ASSURFED_UTILIT_ARCHISEPARE(P).TXT",
+                         "settingsFile":  "trial-12-archisepare.settings",
+                         "candidateDir":  "trial-12-archisepare",
+                         "outputName":  "trial-12-archisepare.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[filein,1,1,1]":  "ECL-CHERCHEUSE",
+                                                "[filein,1,2,1]":  "ECL-FICUNLOAD",
+                                                "[fileout,1,1,1]":  "ECL-FICARCHI",
+                                                "[fileout,1,2,1]":  "ECL-FICNARCHI",
+                                                "[key,1,1,2]":  "10",
+                                                "[key,1,2,1]":  "0",
+                                                "[key,1,2,2]":  "10",
+                                                "[rsz,1,1,1]":  "40",
+                                                "[tname,1,1,1]":  "ARCHIS",
+                                                "[tname,1,1,2]":  "CHERCHEUSE-TABLE-ARCH"
+                                            },
+                         "conditionValues":  {
+                                                 "key,1,2,1":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/archisepare.ps1",
+                                       "fixtureDir":  "fixtures/archisepare",
+                                       "inputSpec":  "CHERCHEUSE: 2x10-digit CRLF key records (keys 2,5). FICUNLOAD: 4x40-char CRLF records (keys 1,2,3,5 with 30-char data filler). Sorted ascending.",
+                                       "fileAssignments":  {
+                                                               "CHERCHEUSE":  "chercheuse.dat",
+                                                               "FICUNLOAD":  "ficunload.dat",
+                                                               "FICARCHI":  "ficarchi.dat",
+                                                               "FICNARCHI":  "ficnarchi.dat",
+                                                               "PRINTER":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/archisepare/expected.dat",
+                                       "expectedBytes":  496,
+                                       "expectedLines":  10,
+                                       "notes":  "key,1,2,1=0 (key at start). ficarchi=2 type4+1 type9; ficnarchi=2 records. Combined out: ficarchi+ficnarchi+printer. Date pinned to run date; Tier-2 must mask dt-ach9 + date-fr."
+                                   }
+                     },
+                     {
+                         "key":  "LOADIS_MULT-NODUP",
+                         "description":  "Load IS-file from sequential input with duplicate suppression (INVALID KEY -\u003e abort). Reads BDE records, writes to indexed DISQ file (primary key CLEF + alternate CLEG). Simplified: ASCII=1, INPUT,1=1, KEYIS=2, no fillers.",
+                         "programId":  "LOADIS-ASCII",
+                         "sourceFile":  "ASSURFED_UTILIT_LOADIS_MULT-NODUP(P).TXT",
+                         "settingsFile":  "trial-14-loadis-ascii.settings",
+                         "candidateDir":  "trial-14-loadis-ascii",
+                         "outputName":  "trial-14-loadis-ascii.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[ASCII]":  "1",
+                                                "[INPUT,1]":  "1",
+                                                "[INPUT,1,1,1]":  "\"ECL-BDE1\"",
+                                                "[INPUT,1,1,2]":  "80",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[OUTPUT,1,1,1]":  "ECL-DISQ",
+                                                "[OUTPUT,1,1,2]":  "20",
+                                                "[OUTPUT,1,1,3]":  "1",
+                                                "[KEYIS]":  "2",
+                                                "[KEYIS,1,1,1]":  "0",
+                                                "[KEYIS,1,1,2]":  "8",
+                                                "[KEYIS,1,1,3]":  "0",
+                                                "[KEYIS,2,1,2]":  "12",
+                                                "[KEYIS,2,1,3]":  "0"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "INPUT,1":  "1",
+                                                 "INPUT,1,1":  "3",
+                                                 "KEYIS":  "2",
+                                                 "KEYIS,1,1,1":  "0",
+                                                 "KEYIS,1,1,3":  "0",
+                                                 "KEYIS,2,1,3":  "0",
+                                                 "FILLCTR":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/loadis_mult-nodup.ps1",
+                                       "fixtureDir":  "fixtures/LOADIS_MULT-NODUP",
+                                       "inputSpec":  "BDE1: 3x80-char CRLF records (A*80, B*80, C*80). Primary keys AAAAAAAA/BBBBBBBB/CCCCCCCC, no duplicates.",
+                                       "fileAssignments":  {
+                                                               "BDE1":  "input.dat",
+                                                               "DISQ":  "disq.dat",
+                                                               "PRINTER":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/LOADIS_MULT-NODUP/expected.dat",
+                                       "expectedBytes":  95,
+                                       "expectedLines":  4,
+                                       "notes":  "ASCII=1, INPUT,1=1 (single BDE1), KEYIS=2, no fillers. DISQ is IS-file; refimpl writes sequentially. Clean input -\u003e INVALID KEY never fires. Output: 3x20-char DISQ records + PRINTER line NB.RECORDS ECRITS0000000003."
+                                   }
+                     },
+                     {
+                         "key":  "UNLOADIS_MULT",
+                         "description":  "Unload IS-file to sequential flat output. Reads indexed DISQ file sequentially, writes 80-char BDE records, displays count to CONSOLE. Reverse of LOADIS_MULT-NODUP. Simplified: ASCII=1, OUTPUT,1,1=3 (DISC), KEYIS=2, no fillers.",
+                         "programId":  "UNLOAD-ASCII",
+                         "sourceFile":  "ASSURFED_UTILIT_UNLOADIS_MULT(P).TXT",
+                         "settingsFile":  "trial-15-unload-ascii.settings",
+                         "candidateDir":  "trial-15-unload-ascii",
+                         "outputName":  "trial-15-unload-ascii.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[ASCII]":  "1",
+                                                "[OUTPUT,1,1]":  "3",
+                                                "[OUTPUT,1,1,1]":  "\"ECL-BDE1\"",
+                                                "[OUTPUT,1,1,2]":  "80",
+                                                "[OUTPUT,1,1,3]":  "1",
+                                                "[INPUT,1,1,1]":  "ECL-DISQ",
+                                                "[INPUT,1,1,2]":  "20",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[KEYIS]":  "2",
+                                                "[KEYIS,1,1,1]":  "0",
+                                                "[KEYIS,1,1,2]":  "8",
+                                                "[KEYIS,1,1,3]":  "0",
+                                                "[KEYIS,2,1,2]":  "12",
+                                                "[KEYIS,2,1,3]":  "0",
+                                                "[MAXREC]":  "0"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "OUTPUT,1,1":  "3",
+                                                 "KEYIS":  "2",
+                                                 "KEYIS,1,1,1":  "0",
+                                                 "KEYIS,1,1,3":  "0",
+                                                 "KEYIS,2,1,3":  "0",
+                                                 "MAXREC":  "0",
+                                                 "FILLCTR":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/unloadis_mult.ps1",
+                                       "fixtureDir":  "fixtures/UNLOADIS_MULT",
+                                       "inputSpec":  "DISQ: 3x20-char CRLF records (CLEF=8+CLEG=12). AAAAAAAABBBBBBBBBBBB / CCCCCCCCDDDDDDDDDDDD / EEEEEEEEFFFFFFFFFFFF.",
+                                       "fileAssignments":  {
+                                                               "DISQ":  "disq.dat",
+                                                               "BDE":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/UNLOADIS_MULT/expected.dat",
+                                       "expectedBytes":  290,
+                                       "expectedLines":  5,
+                                       "notes":  "ASCII=1, OUTPUT,1,1=3 (DISC), KEYIS=2, no fillers. DISQ is IS-file read sequentially. Output: 3x80-char BDE records (20-byte DISQ content padded to 80) + FIN DE FICHIER + NB.ARTICLES ECRITS=0000003."
+                                   }
+                     },
+                     {
+                         "key":  "UNLOADIS_MULT-NODUP",
+                         "description":  "Unload IS-file to sequential flat output (no-duplicate key variant). Same logic as UNLOADIS_MULT; ALTERNATE RECORD KEY IS CLEG without WITH DUPLICATES. Simplified: ASCII=1, OUTPUT,1,1=3 (DISC), KEYIS=2, no fillers.",
+                         "programId":  "UNLOAD-ASCII",
+                         "sourceFile":  "ASSURFED_UTILIT_UNLOADIS_MULT-NODUP(P).TXT",
+                         "settingsFile":  "trial-16-unload-ascii-nodup.settings",
+                         "candidateDir":  "trial-16-unload-ascii-nodup",
+                         "outputName":  "trial-16-unload-ascii-nodup.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[ASCII]":  "1",
+                                                "[OUTPUT,1,1]":  "3",
+                                                "[OUTPUT,1,1,1]":  "\"ECL-BDE1\"",
+                                                "[OUTPUT,1,1,2]":  "80",
+                                                "[OUTPUT,1,1,3]":  "1",
+                                                "[INPUT,1,1,1]":  "ECL-DISQ",
+                                                "[INPUT,1,1,2]":  "20",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[KEYIS]":  "2",
+                                                "[KEYIS,1,1,1]":  "0",
+                                                "[KEYIS,1,1,2]":  "8",
+                                                "[KEYIS,1,1,3]":  "0",
+                                                "[KEYIS,2,1,2]":  "12",
+                                                "[KEYIS,2,1,3]":  "0",
+                                                "[MAXREC]":  "0"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "OUTPUT,1,1":  "3",
+                                                 "KEYIS":  "2",
+                                                 "KEYIS,1,1,1":  "0",
+                                                 "KEYIS,1,1,3":  "0",
+                                                 "KEYIS,2,1,3":  "0",
+                                                 "MAXREC":  "0",
+                                                 "FILLCTR":  "0"
+                                             },
+                         "status":  "done",
+                         "proof":  {
+                                       "executor":  "refimpl",
+                                       "refImpl":  "tools/refimpl/unloadis_mult-nodup.ps1",
+                                       "fixtureDir":  "fixtures/UNLOADIS_MULT-NODUP",
+                                       "inputSpec":  "DISQ: 3x20-char CRLF records (CLEF=8+CLEG=12). AAAAAAAABBBBBBBBBBBB / CCCCCCCCDDDDDDDDDDDD / EEEEEEEEFFFFFFFFFFFF. Identical fixtures to UNLOADIS_MULT (NODUP distinction is IS-file creation, not sequential read).",
+                                       "fileAssignments":  {
+                                                               "DISQ":  "disq.dat",
+                                                               "BDE":  "output.dat"
+                                                           },
+                                       "expectedFile":  "fixtures/UNLOADIS_MULT-NODUP/expected.dat",
+                                       "expectedBytes":  290,
+                                       "expectedLines":  5,
+                                       "notes":  "ASCII=1, OUTPUT,1,1=3 (DISC), KEYIS=2, no fillers. Only difference from UNLOADIS_MULT: ALTERNATE RECORD KEY IS CLEG without WITH DUPLICATES clause."
+                                   }
+                     },
+                     {
+                         "key":  "TAPELD_DISTRIB",
+                         "description":  "Tape load/distribute file copy utility. Same COBOL template as CFH-COPY but with extended parameters (STITRE, FIXE field layout). Simplified: ASCII=1, DISC I/O, all optional params=0 — reduces to pure record-for-record copy identical to CFH-COPY trial-11.",
+                         "programId":  "CFH-COPY",
+                         "sourceFile":  "ASSURFED_UTILIT_TAPELD_DISTRIB(P).TXT",
+                         "settingsFile":  "trial-17-tapeld-distrib.settings",
+                         "candidateDir":  "trial-17-tapeld-distrib",
+                         "outputName":  "trial-17-tapeld-distrib.LionSource",
+                         "annotateStubs":  true,
+                         "paramOverrides":  {
+                                                "[ASCII]":  "1",
+                                                "[INPUT,1,1,1]":  "ECL-TAPEIN",
+                                                "[INPUT,1,1,2]":  "80",
+                                                "[INPUT,1,1,3]":  "1",
+                                                "[OUTPUT,1,1,1]":  "\"ECL-TAPEOUT\"",
+                                                "[OUTPUT,1,1,2]":  "80",
+                                                "[OUTPUT,1,1,3]":  "1",
+                                                "[PRINT]":  "0",
+                                                "[FIELDIN]":  "0",
+                                                "[FIELDOUT]":  "0",
+                                                "[FIXE]":  "0",
+                                                "[SUPCOM]":  "0",
+                                                "[MAXCOPY]":  "0",
+                                                "[REPSIM]":  "0",
+                                                "[STARTFIELD]":  "0",
+                                                "[STARTREC]":  "0",
+                                                "[STITRE]":  "0"
+                                            },
+                         "conditionValues":  {
+                                                 "ASCII":  "1",
+                                                 "PRINT":  "0",
+                                                 "FIELDIN":  "0",
+                                                 "FIELDOUT":  "0",
+                                                 "FIXE":  "0",
+                                                 "SUPCOM":  "0",
+                                                 "MAXCOPY":  "0",
+                                                 "REPSIM":  "0",
+                                                 "STARTFIELD":  "0",
+                                                 "STARTREC":  "0",
+                                                 "STITRE":  "0",
+                                                 "FILLCTR":  "0"
+                                             },
+                         "status":  "planned"
+                     }
+                 ]
+}

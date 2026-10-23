@@ -1,0 +1,15 @@
+﻿20261022 10:51 Starting
+20261022 10:51 Loading file: E:\Repos\ssg4-work\generic\build\GNFED\out\GNFED.LionSource
+20261022 10:51 File version: 6
+20261022 10:51 Exported with program version: 
+20261022 10:51 Loading application AFBUS under AFBUS
+20261022 10:51 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.0
+20261022 10:51 Loading DMS Schema:  1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-BABA-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-CFH-COPY-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-CHABAN-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-CONDIS2-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-FUSBA-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-SCAN-GN 1.0 as 1.0
+20261022 10:51 Loading Cobol Program: ASSURFED-UTILIT-TAPELD-GN 1.0 as 1.0
+20261022 10:51 Done in 00:00:00

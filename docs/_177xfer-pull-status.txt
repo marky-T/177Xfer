@@ -1,0 +1,6 @@
+branch: main
+head: d7baf30267bd8ab82e19bc12275c9804a8af0145
+log:
+d7baf30 Add 16SSGCobolFiles.LionSource
+afe6a79 Add AFBUS_2200COBOL app-level Application/Database assemblies (v8.0.26125.0) needed by CFH-COPY
+65c9dc6 Add CFH-COPY trial-11 C# source, compiled binary, and mock input files

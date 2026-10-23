@@ -1,0 +1,461 @@
+{
+  "templateVersion": "v1",
+  "trialName": "trial-04-loadis",
+  "generatedAt": "2026-08-26T09:15:00Z",
+  "description": "Trial 04 Data Loading - LOADIS pipeline validation and runbook",
+  "programRows": [
+    {
+      "programId": "MONTANT_SIGNE",
+      "ssgElementName": "MONTANT_SIGNE",
+      "category": "Core Processing",
+      "description": "Signed monetary amount computation",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 8420,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/montant_signe.cbl",
+      "notes": "Validated with LOADIS pipeline in Trial 04"
+    },
+    {
+      "programId": "LECTIS_MULT",
+      "ssgElementName": "LECTIS_MULT",
+      "category": "Data Reading",
+      "description": "Multi-record reader with checkpoint support",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 12650,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/lectis_mult.cbl",
+      "notes": "Checkpoint resume testing passed"
+    },
+    {
+      "programId": "TRI_ASCII",
+      "ssgElementName": "TRI_ASCII",
+      "category": "Sorting",
+      "description": "ASCII sort with variable key",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 5890,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/tri_ascii.cbl",
+      "notes": "Multi-key sort validated"
+    },
+    {
+      "programId": "ARCHITAB1",
+      "ssgElementName": "ARCHITAB1",
+      "category": "File Management",
+      "description": "Archive table builder - primary",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 14200,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/architab1.cbl",
+      "notes": "ECL runtime integration complete; ready for production"
+    },
+    {
+      "programId": "CFH-COPY",
+      "ssgElementName": "CFH-COPY",
+      "category": "Copy Members",
+      "description": "Central file header definition",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 2340,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/copybooks/cfh.cpy",
+      "notes": "Integration testing complete"
+    },
+    {
+      "programId": "ARCHIFORMAT",
+      "ssgElementName": "ARCHIFORMAT",
+      "category": "File Management",
+      "description": "Archive formatter - data transformation",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 9800,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/archiformat.cbl",
+      "notes": "Format specification validated; all tests passing"
+    },
+    {
+      "programId": "ARCHIINSERT",
+      "ssgElementName": "ARCHIINSERT",
+      "category": "File Management",
+      "description": "Archive insertion with validation",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 7650,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/archiinsert.cbl",
+      "notes": "Validation rules enforced; production ready"
+    },
+    {
+      "programId": "ARCHISEPARE",
+      "ssgElementName": "ARCHISEPARE",
+      "category": "File Management",
+      "description": "Archive separator/splitter",
+      "status": "in-progress",
+      "trialNumber": 4,
+      "candidateBytes": 6200,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/feat/trial4/archisepare.cbl",
+      "notes": "Final testing in progress; expected completion today"
+    },
+    {
+      "programId": "COMPARE2_ASCII",
+      "ssgElementName": "COMPARE2_ASCII",
+      "category": "Comparison",
+      "description": "Two-file ASCII comparison",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 4520,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/compare2_ascii.cbl",
+      "notes": "Architecture team resolved file I/O pattern issue; all tests passing"
+    },
+    {
+      "programId": "CONDIS_ASCII",
+      "ssgElementName": "CONDIS_ASCII",
+      "category": "Comparison",
+      "description": "Conditional distribution - ASCII",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 8900,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/condis_ascii.cbl",
+      "notes": "Conditional logic pattern resolved; production ready"
+    },
+    {
+      "programId": "ECLAT",
+      "ssgElementName": "ECLAT",
+      "category": "Core Processing",
+      "description": "ECL attribute test utility",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 3100,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/eclat.ecl",
+      "notes": "Continuous integration passing"
+    },
+    {
+      "programId": "LOADIS_MULT-NODUP",
+      "ssgElementName": "LOADIS_MULT-NODUP",
+      "category": "Data Loading",
+      "description": "Load with deduplication - multi-key",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 11200,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/loadis_mult_nodup.cbl",
+      "notes": "Trial 04 focal point; full dedup pipeline tested at scale"
+    },
+    {
+      "programId": "SCAN-VAR_ASCII",
+      "ssgElementName": "SCAN-VAR_ASCII",
+      "category": "Data Scanning",
+      "description": "Variable-key pattern scanner",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 5670,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/scan_var_ascii.cbl",
+      "notes": "Pattern matching performance optimized for Trial 04 dataset sizes"
+    },
+    {
+      "programId": "TAPELD_DISTRIB",
+      "ssgElementName": "TAPELD_DISTRIB",
+      "category": "Data Distribution",
+      "description": "Tape load distribution handler",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 9340,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/tapeld_distrib.cbl",
+      "notes": "ECL pipeline integration complete; tape throughput verified"
+    },
+    {
+      "programId": "UNLOADIS_MULT",
+      "ssgElementName": "UNLOADIS_MULT",
+      "category": "Data Extraction",
+      "description": "Multi-file unload without dedup",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 7890,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/unloadis_mult.cbl",
+      "notes": "Multi-format export tested with CSV, JSON, XML"
+    },
+    {
+      "programId": "UNLOADIS_MULT-NODUP",
+      "ssgElementName": "UNLOADIS_MULT-NODUP",
+      "category": "Data Extraction",
+      "description": "Multi-file unload with deduplication",
+      "status": "done",
+      "trialNumber": 4,
+      "candidateBytes": 8340,
+      "candidateLink": "https://gitlab.com/amt172/ssg-sources/-/blob/main/unloadis_mult_nodup.cbl",
+      "notes": "Dedup performance benchmark: 85M records in 12 seconds"
+    }
+  ],
+  "commandMatrixRows": [
+    {
+      "groupHeader": "A — Standard Invocation",
+      "directiveName": "%%ERUN",
+      "description": "Execute ECL program with standard runtime",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "YES",
+        "CFH": "YES",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "YES",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "YES",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["common", "required"]
+    },
+    {
+      "groupHeader": null,
+      "directiveName": "%%DEBUGRUN",
+      "description": "Execute with debug tracing enabled",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "NO",
+        "CFH": "NO",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "NO",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "NO",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["debug"]
+    },
+    {
+      "groupHeader": "B — File Assignment",
+      "directiveName": "%%ASSIGN",
+      "description": "Assign file to logical unit",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "YES",
+        "CFH": "YES",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "YES",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["required", "file-io"]
+    },
+    {
+      "groupHeader": null,
+      "directiveName": "%%FILEINPUT",
+      "description": "Define input file parameters",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "YES",
+        "CFH": "NO",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "YES",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["file-io"]
+    },
+    {
+      "groupHeader": "C — Output Binding",
+      "directiveName": "%%FILEOUTPUT",
+      "description": "Define output file parameters",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "YES",
+        "CFH": "NO",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "YES",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["file-io"]
+    },
+    {
+      "groupHeader": null,
+      "directiveName": "%%REDIRECT",
+      "description": "Redirect output to alternate file",
+      "programColumns": {
+        "MON": "YES",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "YES",
+        "CFH": "NO",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "YES",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["advanced"]
+    },
+    {
+      "groupHeader": "D — Data Transformation",
+      "directiveName": "%%DEDUP",
+      "description": "Remove duplicate records (Trial 04 focus)",
+      "programColumns": {
+        "MON": "NO",
+        "LEC": "NO",
+        "TRI": "NO",
+        "ARB1": "NO",
+        "CFH": "NO",
+        "AFMT": "YES",
+        "AINS": "YES",
+        "ASEP": "NO",
+        "CMP2": "NO",
+        "COND": "NO",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "NO",
+        "TAPE": "NO",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["trial-04", "key-feature"]
+    },
+    {
+      "groupHeader": null,
+      "directiveName": "%%SCALE",
+      "description": "Scale processing for large datasets",
+      "programColumns": {
+        "MON": "NO",
+        "LEC": "YES",
+        "TRI": "YES",
+        "ARB1": "NO",
+        "CFH": "NO",
+        "AFMT": "NO",
+        "AINS": "NO",
+        "ASEP": "NO",
+        "CMP2": "YES",
+        "COND": "YES",
+        "ECLAT": "NO",
+        "LMND": "YES",
+        "SCAN": "YES",
+        "TAPE": "YES",
+        "UNL": "YES",
+        "ULND": "YES"
+      },
+      "patternBadges": ["performance", "trial-04"]
+    }
+  ],
+  "runbookEntries": [
+    {
+      "toolName": "LOADIS_MULT-NODUP",
+      "description": "Load with deduplication - multi-key loading and duplicate removal (Trial 04 primary focus)",
+      "filePath": "C:\\Amt\\Sources\\loadis_mult_nodup.cbl",
+      "usageExample": "%%ERUN \"LOADIS_MULT-NODUP\" %%FILEINPUT LU01 \"raw-85M.dat\" %%FILEOUTPUT LU02 \"dedup.dat\" KEYS=\"EMP_ID,DEPT\" DEDUP=YES",
+      "parameters": ["LU01:input-file (85M+ records)", "LU02:output-file", "KEYS:emp_id,dept", "DEDUP:yes/no", "SCALE:standard/xl/xxl"],
+      "outputs": "Deduplicated records; timing: ~12 seconds for 85M records on standard hardware",
+      "notes": "Trial 04 benchmark: Dedup 85M records by (EMP_ID, DEPT); performance target: <15 seconds"
+    },
+    {
+      "toolName": "LECTIS_MULT",
+      "description": "Multi-record reader with checkpoint support - used for LOADIS input in Trial 04",
+      "filePath": "C:\\Amt\\Sources\\lectis_mult.cbl",
+      "usageExample": "%%ERUN \"LECTIS_MULT\" %%FILEINPUT LU01 \"raw.dat\" %%FILEOUTPUT LU02 \"records.out\" CHECKPOINT=YES CHKPT_INTERVAL=1000000",
+      "parameters": ["LU01:input", "LU02:output", "CHECKPOINT:yes/no", "CHKPT_INTERVAL:number"],
+      "outputs": "Sequential records with checkpoint markers every N records",
+      "notes": "In Trial 04, CHKPT_INTERVAL=1M for 85M record dataset enables resume capability"
+    },
+    {
+      "toolName": "ARCHIFORMAT",
+      "description": "Archive formatter - data transformation for LOADIS pipeline in Trial 04",
+      "filePath": "C:\\Amt\\Sources\\archiformat.cbl",
+      "usageExample": "%%ERUN \"ARCHIFORMAT\" %%FILEINPUT LU01 \"dedup.dat\" %%FILEOUTPUT LU02 \"archive.bin\" BLOCKSIZE=8192 ENCODING=EBCDIC",
+      "parameters": ["LU01:input", "LU02:output", "BLOCKSIZE:4096|8192|16384", "ENCODING:EBCDIC|ASCII"],
+      "outputs": "Formatted binary archive with metadata",
+      "notes": "Trial 04 uses ENCODING=EBCDIC for mainframe compatibility"
+    },
+    {
+      "toolName": "UNLOADIS_MULT-NODUP",
+      "description": "Multi-file unload with deduplication - export unique records from LOADIS",
+      "filePath": "C:\\Amt\\Sources\\unloadis_mult_nodup.cbl",
+      "usageExample": "%%ERUN \"UNLOADIS_MULT-NODUP\" %%FILEINPUT LU01 \"archive.bin\" %%FILEOUTPUT LU02 \"export.csv\" FORMAT=CSV KEYS=\"EMP_ID,DEPT\"",
+      "parameters": ["LU01:input", "LU02:output", "FORMAT:CSV|JSON|XML|FIXED", "KEYS:column-list"],
+      "outputs": "Deduplicated export in specified format; Trial 04: CSV export 45M unique records",
+      "notes": "Trial 04 performance: Export 45M unique records in <8 seconds"
+    },
+    {
+      "toolName": "SCAN-VAR_ASCII",
+      "description": "Variable-key pattern scanner - detect anomalies in LOADIS output",
+      "filePath": "C:\\Amt\\Sources\\scan_var_ascii.cbl",
+      "usageExample": "%%ERUN \"SCAN-VAR_ASCII\" %%FILEINPUT LU01 \"dedup.dat\" %%FILEOUTPUT LU02 \"anomalies.txt\" PATTERN=\"^[A-Z]{3}[0-9]{5}$\" INVERTED=NO",
+      "parameters": ["LU01:input", "LU02:output", "PATTERN:regex", "INVERTED:yes/no"],
+      "outputs": "Records matching (or not matching if INVERTED=YES) the pattern",
+      "notes": "Trial 04 uses pattern ^[A-Z]{3}[0-9]{5}$ to validate EMP_ID format; ~2% anomaly rate"
+    },
+    {
+      "toolName": "COMPARE2_ASCII",
+      "description": "Two-file ASCII comparison - validate LOADIS dedup accuracy",
+      "filePath": "C:\\Amt\\Sources\\compare2_ascii.cbl",
+      "usageExample": "%%ERUN \"COMPARE2_ASCII\" %%FILEINPUT LU01 \"expected.dat\" %%FILEINPUT LU02 \"dedup.dat\" %%FILEOUTPUT LU03 \"diff.txt\"",
+      "parameters": ["LU01:expected-file", "LU02:actual-file", "LU03:diff-output", "BYLINE:yes/no"],
+      "outputs": "Line-by-line diff report; in Trial 04, expected: zero differences",
+      "notes": "Trial 04 validation: Compare deduplicated output against expected result set"
+    },
+    {
+      "toolName": "MONTANT_SIGNE",
+      "description": "Signed monetary amount computation - used for LOADIS financial data",
+      "filePath": "C:\\Amt\\Sources\\montant_signe.cbl",
+      "usageExample": "%%ERUN \"MONTANT_SIGNE\" %%FILEINPUT LU01 \"raw-amounts.dat\" %%FILEOUTPUT LU02 \"signed-amounts.out\" PRECISION=4",
+      "parameters": ["LU01:input-amounts", "LU02:output", "PRECISION:1-6"],
+      "outputs": "Signed amounts in COMP-3 format with specified decimal precision",
+      "notes": "Trial 04 processes financial dedup with PRECISION=4 (2 decimal places)"
+    },
+    {
+      "toolName": "ARCHITAB1",
+      "description": "Archive table builder - primary archive structure for LOADIS Trial 04",
+      "filePath": "C:\\Amt\\Sources\\architab1.cbl",
+      "usageExample": "%%ERUN \"ARCHITAB1\" %%FILEINPUT LU01 \"formatted.dat\" %%FILEOUTPUT LU02 \"archive.tbl\" BLOCKSIZE=8192 INDEXES=YES",
+      "parameters": ["LU01:formatted-input", "LU02:archive-output", "BLOCKSIZE:4096|8192", "INDEXES:yes/no"],
+      "outputs": "Binary archive table with optional index structures",
+      "notes": "Trial 04 builds 45M-record archive with full index support for retrieval"
+    },
+    {
+      "toolName": "ECLAT",
+      "description": "ECL attribute test utility - continuous validation of LOADIS attributes",
+      "filePath": "C:\\Amt\\Sources\\eclat.ecl",
+      "usageExample": "%%ERUN ECLAT ATTRIBUTE=\"LoadisDedup.ecl\" VERBOSE=YES TIMEOUT=300",
+      "parameters": ["ATTRIBUTE:ecl-file", "VERBOSE:yes/no", "TIMEOUT:seconds"],
+      "outputs": "Test results: PASS/FAIL counts; Trial 04 CI: 847 tests passing",
+      "notes": "Trial 04 includes 50+ new unit tests for dedup algorithms"
+    }
+  ]
+}

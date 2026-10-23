@@ -1,0 +1,13 @@
+
+   Id ProcessName                                   MainWindowTitle
+   -- -----------                                   ---------------
+14572 AmtBatchController                            
+ 3892 AmtFileController                             
+ 4036 AmtPrintService                               
+ 6544 AmtTransactionAgent                           
+ 7860 AmtTransactionAgent                           
+ 3900 AmtTransactionServer                          
+ 4012 Asysco.Amt.ControlCenter.BusinessLogic.WebApi 
+ 5408 Asysco.Amt.ControlCenter.Html5Web.Core        
+13120 LionDev                                       Please wait while the appli…
+

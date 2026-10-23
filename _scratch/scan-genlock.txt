@@ -1,0 +1,63 @@
+== LionDev.dll
+REVGENSTATUS
+REVGENREQ
+<GENERATING>
+REVCONTROL A,(SELECT APPID, OBJECTID, REVID FROM REVSET WHERE APPID = ? AND GENSETID = ?) B WHERE A.APPID = B.APPID AND A.OBJECTID = B.OBJECTID AND A.REVID = B.REVID
+ other request before generating
+ other requests before generating
+Generating.
+Generator is busy
+== LionGeneratorBusinessLogic.dll
+REVGENREQ
+Lion Developer generator is already running !
+Generating Global Definition File
+Generating 
+Another process is loading application [
+Generating application
+Generating dictionaries
+== LionRepository.dll
+ REVGENSTATUSID))
+IDX_REVGENSTATUS1 ON 
+REVGENSTATUS (APPID, GENDATETIMEUTC, STATUSORDER)
+IDX_REVGENSTATUS2 ON 
+REVGENSTATUS (APPID, STN, GENDATETIMEUTC, STATUSORDER)
+REVGENSTATUS (APPID              INTEGER  NOT NULL, GENDATE            INTEGER  NOT NULL, GENTIME            INTEGER  NOT NULL, VOLGNR             INTEGER  NOT NULL, STN                CHAR(17), MESSAGE            VARCHAR(255), OBJECTID           INTEGER, LINENR             INTEGER, 
+IDX_REVGENSTATUS  ON 
+REVGENSTATUS (APPID, STN, GENDATE, GENTIME, VOLGNR)
+SELECT * FROM (SELECT GENSETID FROM 
+REVGENSTATUS2 (APPID              INTEGER  NOT NULL, GENSETID           INTEGER  NOT NULL, GENDATE            INTEGER  NOT NULL, GENTIME            INTEGER  NOT NULL, STATUSORDER        INTEGER  NOT NULL, STN                
+REVGENREQ MODIFY("APPLICATION" 
+REVGENREQ MODIFY("DESCR" 
+REVGENREQ MODIFY("NAME" 
+REVGENREQ MODIFY("STN" 
+REVGENREQ MODIFY("USERID" 
+REVGENSTATUS MODIFY("MESSAGE" 
+REVGENSTATUS MODIFY("STN" 
+REVGENREQ ALTER COLUMN APPLICATION 
+REVGENREQ ALTER COLUMN DESCR 
+REVGENREQ ALTER COLUMN NAME 
+REVGENREQ ALTER COLUMN STN 
+REVGENREQ ALTER COLUMN USERID 
+REVGENSTATUS ALTER COLUMN MESSAGE 
+REVGENSTATUS ALTER COLUMN STN 
+IDX_REVGENSTATUS1
+REVGENSTATUS2 (APPID, GENSETID, GENDATE, GENTIME, VOLGNR, STN, MESSAGE, OBJECTID, LINENR) SELECT APPID, GENSETID, GENDATE, GENTIME, STATUSORDER, STN, MESSAGE, OBJECTID, LINENR FROM 
+REVGENREQ (VOLGNR      INTEGER NOT NULL, GENSETID    INTEGER NOT NULL,APPID       INTEGER NOT NULL,OBJECTID    INTEGER NOT NULL,REVID       INTEGER NOT NULL,KIND        INTEGER,PRIORITY    INTEGER,USERID      
+DROP CONSTRAINT PK_REVGENSTATUS
+DROP COLUMN REVGENSTATUSID
+Object [%s] is locked. Please unlock object before deleting it from this generation set.
+Do you want to assign all current revisions from <CR><LF>generation set [%s] to label [%s] ?
+Can't delete generation set [%s] because there is still a window open on it<CR><LF>Window: [%s]
+Revision [%s] can't be selected because in the same generation set<CR><LF>revision [%s] is locked. Please use OPEN <object> <REVID> to view<CR><LF>another revision or checkin/unlock the locked revision.
+Error generating script [%s]: [%s]
+Generating application definitions
+DeleteGenReqOther=
+<GENERATING>
+REVGENREQ
+== XgenParser.dll
+Converted from XGEN/DD source
+Converted from COGEN
+Converted from XGEN source
+Converted from XGEN layout definition
+converted from an XGEN DEFINE
+Converted from COGEN source

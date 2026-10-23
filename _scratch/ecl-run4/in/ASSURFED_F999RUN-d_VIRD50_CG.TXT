@@ -1,0 +1,186 @@
+@RUN,M/T   VIRD50,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ******************************************************   
+@MSG       **  M.A.J. VIE INDIVIDUELLE. MODULE VIRD50/CG      ***   
+@MSG       **  NOM DU RUN DANS SCHEDULER VIRD50CG             ***   
+@MSG       ******************************************************   
+@ . LE 12/04/95: CREATION DU RUN
+@ . LE 08/06/07: Mise à jour à la demande (P06104/01) - JLH 
+@ . LE 07/01/2013: Suppression création RVIRD37CPT (P12090/01-JLH). 
+@ . LE 14/06/2017: Comptabilisation via logiciel UNIT4 (P15080/01-FJ)   
+@ . LE 22/10/2018: Création d'un nouveau flux ISIE (1000422)
+@ . 
+@MSG       ENREGISTREMENT DES PARAMETRES + EDITION  
+@ADD       F999PARA.VIRD50  
+@TIME   
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN-D.VIRD50/CG  
+@TIME   
+@ . *************************************************** 
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VIRD50CG.,F/0/POS/4000   
+@COPY,A    CPTPRD*BABS.CGB022,VIRD50CG.CGB022   
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB501: MSG 501. SELECTION ENROL PRIMES SUR DT ENROLEMENT. BABA.   
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB501  
+@ASG,A     ID50VRD50ATX.
+@USE       INA,ID50VRD50ATX.
+@ERS       TPF$.
+@DELETE,C  ID50TERMVIE. 
+@ASG,UP    ID50TERMVIE.,F/1/POS/4000
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      INA,500,10   
+OUTPUT     ID50TERMVIE,500,10   
+@ADD       CPVIRD50.BABA1   
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      INA  
+@FREE      ID50TERMVIE. 
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB503: MSG 503. SELECTION ENROL PRIMES SUR DT ENROLEMENT. BABA.   
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB503  
+@ASG,A     ID50VRD50ATX.
+@USE       INA,ID50VRD50ATX.
+@ERS       TPF$.
+@DELETE,C  ID50TERMVIEA.
+@ASG,UP    ID50TERMVIEA.,F/1/POS/4000   
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      INA,500,10   
+OUTPUT     ID50TERMVIEA,500,10  
+@ADD       CPVIRD50.BABA2   
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      INA  
+@FREE      ID50TERMVIEA.
+@TIME   
+@ . -------------------------------------------------------------   
+@LAB510: MSG 510. FUSION DES FICHIERS TERME POUR CGB022. SORT.  
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB510  
+@ASG,A     ID50TERMVIE. 
+@ASG,A     ID50TERMVIEA.
+@DELETE,C  VIRD50*ID50TERM022T. 
+@ASG,UP    VIRD50*ID50TERM022T.,F/1/POS/4000
+@USE       FOUT,VIRD50*ID50TERM022T.
+@SORT,ES
+COPY
+FILEIN=ID50TERMVIE,F    BLOCK=10
+FILEIN=ID50TERMVIEA,F   BLOCK=10
+FILEOUT=FOUT,F          BLOCK=10
+RSZ=500 
+@EOF
+@FREE      VIRD50*ID50TERM022T. 
+@TIME   
+@ . ------------------------------------------------------------------- 
+@LAB512: MSG 512. MOUVEMENTS COMPTABLES A DESTINATION DE ISIE.  
+@ . ------------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB512  
+@ . 
+@ASG,AX    VIRD50*ID50TERM022T. 
+@USE       IN-PRM-VIE,VIRD50*ID50TERM022T.  
+@ . 
+@DELETE,C  VIRD50*IISIE.
+@CAT,P     VIRD50*IISIE.,F/0/POS/4000   
+@ASG,AX    VIRD50*IISIE.
+@USE       OUT-MVT-CPT,VIRD50*IISIE.
+@ . 
+@DELETE,C  VIRD50*ICGB022ANO.   
+@CAT,P     VIRD50*ICGB022ANO.,F/0/POS/4000  
+@ASG,AX    VIRD50*ICGB022ANO.   
+@USE       OUT-LST-ANO,VIRD50*ICGB022ANO.   
+@ . 
+@XQT       VIRD50CG.CGB022  
+@ADD       F999CONTROLE.VIRD50  
+@ . 
+@FREE      VIRD50*ID50TERM022T. 
+@FREE      VIRD50*IISIE.
+@FREE      VIRD50*ICGB022ANO.   
+@TIME   
+@ . 
+@ . -------------------------------------------------------------   
+@LAB515: MSG 515. TEST PRESENCE FICHIER ANOMALIES.  
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB515  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE VIRD50*ICGB022ANO. 
+LABEL LAB777
+@EOF
+@ . 
+@ . -------------------------------------------------------------   
+@LAB520: MSG 520. CREATION FICHIER EXCEL LISTE ANOMALIES. TRANSEXCEL.   
+@ . -------------------------------------------------------------   
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB520  
+@ . 
+@ASG,A     VIRD50*ICGB022ANO.   
+@USE       FILEIN,VIRD50*ICGB022ANO.
+@ . 
+@DELETE,C  VIRD50*IXLSCPTELI.   
+@CAT,P     VIRD50*IXLSCPTELI.,F/0/POS/4000  
+@ASG,AX    VIRD50*IXLSCPTELI.   
+@USE       FILEOUT,VIRD50*IXLSCPTELI.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 98 
+COL 1,6,,''Matric'' 
+COL 7,2,,''Br'' 
+COL 9,6,,''Police'' 
+COL 15,1,,''Suf''   
+COL 16,8,,''Dt ech''
+COL 24,6,,''Dt compt''  
+COL 30,8,,''Dt enrol''  
+COL 38,6,,''Cpt debit'' 
+COL 44,6,,''Cpt credit''
+COL 50,8,,''No piece''  
+COL 58,12,MNT,''Prime totale''  
+COL 70,12,MNT,''Taxe totale''   
+COL 82,8,V5,''Taux princ''  
+COL 90,8,V5,''Taux compl''  
+TABUL '';'' 
+@EOF
+@ERS       TPF$.
+@FREE      VIRD50*ICGB022ANO.   
+@FREE      VIRD50*IXLSCPTELI.   
+@ . 
+@TIME   
+@ . 
+@ . -------------------------------------------------------------   
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE. 
+@ . -------------------------------------------------------------   
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       *** LE RUN VIRD50/CG S'EST BIEN TERMINE ***  
+@QUAL,R 
+@FIN

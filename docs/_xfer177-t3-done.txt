@@ -1,0 +1,5 @@
+EXIT=0
+--- top-level entries ---
+[D] .git
+[D] ConvertedSSG
+[D] Lion

@@ -1,0 +1,21 @@
+--- $global:Com assignment / creation ---
+128: [Object]$global:Com          = $null
+363: [String]$global:ComScriptDll            = $null
+542: [String]$global:ComScriptDll              = GetAmtSetting "ComScript"
+589: # Create COM object of ComScript module
+590: Add-Type -Path $global:ComScriptDll
+591: $global:Com = New-Object Asysco.Amt.Scripting.Comscript
+607: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Path object" $global:Com.ErrorDescription
+613: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Message object" $global:Com.ErrorDescription
+615: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript File object" $global:Com.ErrorDescription
+617: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Job object" $global:Com.ErrorDescription
+619: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Report object" $global:Com.ErrorDescription
+621: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Print object" $global:Com.ErrorDescription
+623: Check-RuntimeError $global:Com.ErrorCode "Init Create Com" "Failed initializing Comscript Database object" $global:Com.ErrorDescription
+1709: Tries to retrieve the batch ID from Comscript
+3170: $global:Com = $null
+14586: # Have ComScript fill up the data table object (this is about 4 times as fast compared
+14635: # Have ComScript fill up the data table object (this is about 4 times as fast compared
+14684: # Have ComScript fill up the data table object (this is about 4 times as fast compared
+14733: # Have ComScript fill up the data table object (this is about 4 times as fast compared
+14849: The code is the integer value of ComScript's AmtJobState, the returned name is the enum's name.

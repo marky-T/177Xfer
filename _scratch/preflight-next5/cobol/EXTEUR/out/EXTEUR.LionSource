@@ -1,0 +1,947 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=EXTEUR,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=EXTEUR,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=EXTEUR,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=EXTEUR
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-10-19 16:10
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=EXTEUR,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=EXTEUR
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>  TEMPUCS,F///5000
+  2009-01-01 12:00  =>I  ,TEMPUCS.EXTEUR,,,MAIN-PROGRAM,COMPAT/FULLHV377,;
+  2009-01-01 12:00  =>     CACHE/0,EXTENDED/0,NO-SHIFT,NO-DEBUG,OPTIM,NO-SOURCE,;
+  2009-01-01 12:00  =>     NO-UREP-XREF
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>* PROGRAMME GENERE LE  A
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***               REPRISE FICHIER EXTERIEUR                    ***
+  2009-01-01 12:00  =>***                     == U C S ==                            ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     : BATCH                                               *
+  2009-01-01 12:00  =>* Analyste : SABLON ERIC                     (INITIALES, NM, PN) *
+  2009-01-01 12:00  =>* Auteur   : DESGARDIN PASCAL                (INITIALES, NM, PN) *
+  2009-01-01 12:00  =>* Ecrit le :                  (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  : 01                              (99)                *
+  2009-01-01 12:00  =>* Version  : 001                             (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>* SQUELETTE BATCH SIMPLIFIE                                      *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>*************************
+  2009-01-01 12:00  => PROGRAM-ID. EXTEUR .
+  2009-01-01 12:00  => AUTHOR. DESGARDIN PASCAL
+  2009-01-01 12:00  => DATE-WRITTEN. 27/12/2000.
+  2009-01-01 12:00  => DATE-COMPILED.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  =>**********************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNISYS-2200.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNISYS-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     CARD-READER    CARD-READER
+  2009-01-01 12:00  =>     CARD-PUNCH     CARD-PUNCH
+  2009-01-01 12:00  =>     PRINTER        PRINTER
+  2009-01-01 12:00  =>     CONSOLE        CONSOLE
+  2009-01-01 12:00  =>     DECIMAL-POINT  COMMA
+  2009-01-01 12:00  =>     CURRENCY       "F".
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*FICHIER INPUT
+  2009-01-01 12:00  =>     SELECT INA         ASSIGN TO DISC INA.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*FICHIER OUTPUT : DESSIN DE FICHIER
+  2009-01-01 12:00  =>     SELECT OUTA        ASSIGN TO DISC OUTA.
+  2009-01-01 12:00  =>     SELECT ANOA        ASSIGN TO DISC ANOA.
+  2009-01-01 12:00  =>     SELECT LISTE       ASSIGN TO PRINTER.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  =>***************
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FD  INA
+  2009-01-01 12:00  =>     LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     RECORD CONTAINS 200 CHARACTERS
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10 RECORDS
+  2009-01-01 12:00  =>     DATA RECORD IS REC-FILE-INA.
+  2009-01-01 12:00  => 01  REC-FILE-INA.
+  2009-01-01 12:00  =>        05  FILLER                PIC X(200).
+  2009-01-01 12:00  => 01  ENR-INPUT100.
+  2009-01-01 12:00  =>        05  ENRIN-1       PIC X(100).
+  2009-01-01 12:00  =>        05  ENRIN-2       PIC X(100).
+  2009-01-01 12:00  => 01  ENRIN-MT-0-1.
+  2009-01-01 12:00  =>     05 FILLER                   PIC X(48).
+  2009-01-01 12:00  =>     05 MTINX-0-1.
+  2009-01-01 12:00  =>        10 MT-S-0-1    PIC S9(12).
+  2009-01-01 12:00  =>        10 MT-TEST-0-1 REDEFINES MT-S-0-1.
+  2009-01-01 12:00  =>           15 MT-SP-0-1      PIC 9(11).
+  2009-01-01 12:00  =>           15 MT-TEST-0-1-1  PIC X(01).
+  2009-01-01 12:00  =>        10 MT-TEST2-0-1 REDEFINES MT-S-0-1.
+  2009-01-01 12:00  =>           15 MT-TEST2-0-1-1  PIC X(01).
+  2009-01-01 12:00  =>           15 MT-SL-0-1      PIC 9(11).
+  2009-01-01 12:00  =>        10 MT-NS-0-1 REDEFINES MT-S-0-1 PIC 9(12).
+  2009-01-01 12:00  =>    05 FILLER                   PIC X(272).
+  2009-01-01 12:00  => 01 ENRGT-DEVISE-INA.
+  2009-01-01 12:00  => 05 FILLER                   PIC X(95).
+  2009-01-01 12:00  => 05 DEVISE-INA           PIC X(3).
+  2009-01-01 12:00  => 05 FILLER                   PIC X(135).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FD  OUTA
+  2009-01-01 12:00  =>     LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     RECORD CONTAINS 200 CHARACTERS
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10 RECORDS
+  2009-01-01 12:00  =>     DATA RECORD IS REC-FILE-OUTA.
+  2009-01-01 12:00  => 01  REC-FILE-OUTA.
+  2009-01-01 12:00  =>        05  FILLER                PIC X(200).
+  2009-01-01 12:00  => 01  ENR-INPUT100.
+  2009-01-01 12:00  =>        05  ENRIN-1       PIC X(100).
+  2009-01-01 12:00  =>        05  ENRIN-2       PIC X(100).
+  2009-01-01 12:00  => 01  ENRIN-MT-0-1.
+  2009-01-01 12:00  =>     05 FILLER                   PIC X(48).
+  2009-01-01 12:00  =>     05 MTINX-0-1.
+  2009-01-01 12:00  =>        10 MT-S-0-1    PIC S9(12).
+  2009-01-01 12:00  =>        10 MT-TEST-0-1 REDEFINES MT-S-0-1.
+  2009-01-01 12:00  =>           15 MT-SP-0-1      PIC 9(11).
+  2009-01-01 12:00  =>           15 MT-TEST-0-1-1  PIC X(01).
+  2009-01-01 12:00  =>        10 MT-TEST2-0-1 REDEFINES MT-S-0-1.
+  2009-01-01 12:00  =>           15 MT-TEST2-0-1-1  PIC X(01).
+  2009-01-01 12:00  =>           15 MT-SL-0-1      PIC 9(11).
+  2009-01-01 12:00  =>        10 MT-NS-0-1 REDEFINES MT-S-0-1 PIC 9(12).
+  2009-01-01 12:00  =>    05 FILLER                   PIC X(272).
+  2009-01-01 12:00  => 01 ENRGT-DEVISE-OUTA.
+  2009-01-01 12:00  => 05 FILLER                   PIC X(95).
+  2009-01-01 12:00  => 05 DEVISE-OUTA           PIC X(3).
+  2009-01-01 12:00  => 05 FILLER                   PIC X(135).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => FD  ANOA
+  2009-01-01 12:00  =>     LABEL RECORD IS STANDARD
+  2009-01-01 12:00  =>     RECORD CONTAINS 200 CHARACTERS
+  2009-01-01 12:00  =>     BLOCK CONTAINS 10 RECORDS
+  2009-01-01 12:00  =>     DATA RECORD IS REC-ANOA.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  REC-ANOA.
+  2009-01-01 12:00  =>     03  REC-ANOA-DATA            PIC X(200).
+  2009-01-01 12:00  => FD  LISTE
+  2009-01-01 12:00  =>     LABEL RECORD IS OMITTED
+  2009-01-01 12:00  =>     LINAGE 63 TOP 6 BOTTOM 3
+  2009-01-01 12:00  =>     DATA RECORD IS LIGNE.
+  2009-01-01 12:00  => 01  LIGNE                        PIC X(132).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* .FL. VARIABLES DE CONTROLE                                      *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  => 77  WS-PARAM-COMMIT-N            PIC 9(08).
+  2009-01-01 12:00  => 77  WS-PARAM-INSERT              PIC X(01).
+  2009-01-01 12:00  => 77  WS-COMMIT-NB                 PIC 9(12) VALUE 0.
+  2009-01-01 12:00  => 77  WS-TOTAL-NB                  PIC 9(12) VALUE 0.
+  2009-01-01 12:00  => 77  WS-ERREUR-NB                 PIC 9(12) VALUE 0.
+  2009-01-01 12:00  => 77  SW-END                       PIC 9(01).
+  2009-01-01 12:00  => 77  SW-ERREUR                    PIC 9(01).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* .CS. CONSTANTES                                                 *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  => 01  CS-NM-PRG                    PIC X(06)
+  2009-01-01 12:00  =>                                  VALUE "EXTPLA".
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* .WK. VARIABLES DE TRAVAIL                                       *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  => 01  WK-CURRENT-DATE.
+  2009-01-01 12:00  =>     03  WK-D8-TODAY              PIC  9(08).
+  2009-01-01 12:00  =>     03  WK-D8-TODAY-S1           REDEFINES WK-D8-TODAY.
+  2009-01-01 12:00  =>         05  WK-CC-TODAY          PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-YY-TODAY          PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-MM-TODAY          PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-DD-TODAY          PIC  9(02).
+  2009-01-01 12:00  =>     03  WK-D8-TODAY-S2           REDEFINES WK-D8-TODAY.
+  2009-01-01 12:00  =>         05  WK-Y4-TODAY          PIC  9(04).
+  2009-01-01 12:00  =>         05  FILLER               PIC  9(04).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     03  WK-T8-NOW                PIC  9(08).
+  2009-01-01 12:00  =>     03  WK-T8-NOW-S1             REDEFINES WK-T8-NOW.
+  2009-01-01 12:00  =>         05  WK-HH-NOW            PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-MI-NOW            PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-SC-NOW            PIC  9(02).
+  2009-01-01 12:00  =>         05  WK-CS-NOW            PIC  9(02).
+  2009-01-01 12:00  =>     03  WK-T8-NOW-S2             REDEFINES WK-T8-NOW.
+  2009-01-01 12:00  =>         05  WK-T6-NOW-HHMISC     PIC  9(06).
+  2009-01-01 12:00  =>         05  FILLER               PIC  9(02).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     03  FILLER                   PIC  X(05).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WK-DT-INTER                  PIC 9(8).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WK-DT-INTER-S1               REDEFINES  WK-DT-INTER.
+  2009-01-01 12:00  =>     03  WK-Y4-INTER              PIC 9999.
+  2009-01-01 12:00  =>     03  WK-MM-INTER              PIC 99.
+  2009-01-01 12:00  =>     03  WK-DD-INTER              PIC 99.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-NB-REC-LUS              PIC 9(10).
+  2009-01-01 12:00  => 01  WS-NB-REC-ECR              PIC 9(08).
+  2009-01-01 12:00  => 01  WS-NB-REC-ERR              PIC 9(08).
+  2009-01-01 12:00  => 01  WS-NB-REC-MAJ              PIC 9(10).
+  2009-01-01 12:00  => 01  WS-MAJ                     PIC 9(01).
+  2009-01-01 12:00  => 01  WS-PARAM-BIDON                       PIC X(12).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01 SQLSTATE           PIC X(05) USAGE DISPLAY .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-SIGNE                 PIC X.
+  2009-01-01 12:00  =>     88 VAL-NEGA    VALUE IS 'J' THRU 'R'.
+  2009-01-01 12:00  =>     88 VAL-POS    VALUE IS 'A' THRU 'I'.
+  2009-01-01 12:00  =>     88 VAL-ZERO    VALUE IS '{', '}', '!', '?'.
+  2009-01-01 12:00  =>     88 VAL-NS      VALUE IS '0' THRU '9'.
+  2009-01-01 12:00  =>     88 VAL-SP      VALUE IS '+' THRU '-'.
+  2009-01-01 12:00  => 01  WS-DEVISE-2200      PIC X(03).
+  2009-01-01 12:00  => 01  WS-PAS-CONVERTION   PIC 9(01) VALUE 0.
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* .PM. STRUCTURES DE PARAMETRES POUR PROCEDURES EXTERNES         *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  MSGERR.
+  2009-01-01 12:00  =>     03 MSGERR-MSG-ENE.
+  2009-01-01 12:00  =>        05 MSGERR-NO                       PIC 9(05).
+  2009-01-01 12:00  =>        05 MSGERR-CD-RLG                   PIC X(01).
+  2009-01-01 12:00  =>        05 MSGERR-VAR-001                  PIC X(40).
+  2009-01-01 12:00  =>        05 MSGERR-VAR-002                  PIC X(16).
+  2009-01-01 12:00  =>     03 MSGERR-MSG-SRT.
+  2009-01-01 12:00  =>        05 MSGERR-CD-STA                   PIC 9(01).
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-NORMAL                VALUE 0.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-NONTROUVE             VALUE 1.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-AUTRE-ERR-RDMS        VALUE 2.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-PARAM1-NONTROUVE      VALUE 3.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-PARAM2-NONTROUVE      VALUE 4.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-AUCUN-PARAM           VALUE 5.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-MASQUE1-NONTROUV      VALUE 6.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-MASQUE2-NONTROUV      VALUE 7.
+  2009-01-01 12:00  =>           88 MSGERR-STATUS-AUCUN-MASQUE          VALUE 8.
+  2009-01-01 12:00  =>        05 MSGERR-LB                       PIC X(71).
+  2009-01-01 12:00  =>        05 MSGERR-CD-TYP                   PIC X(01).
+  2009-01-01 12:00  =>           88 MSGERR-TYPE-ERREUR                  VALUE 'E'.
+  2009-01-01 12:00  =>           88 MSGERR-TYPE-INFORMATION             VALUE 'I'.
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  => 01  DB-EU001.
+  2009-01-01 12:00  =>          REPLACE ==01== BY ==03==.
+  2009-01-01 12:00  =>          INVOKE TABLE EU001 OF AFLINC FROM REPOSITORY.
+  2009-01-01 12:00  =>          REPLACE OFF.
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* .DB. VARIABLES RDMS                                             *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     EXEC RDMS BEGIN DECLARE SECTION END-EXEC.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  RDMCA.
+  2009-01-01 12:00  =>     05  ERROR-STATUS              PIC 9999.
+  2009-01-01 12:00  =>     05  AUX-INFO                  PIC S9(9)  BINARY.
+  2009-01-01 12:00  =>     EXEC RDMS END   DECLARE SECTION END-EXEC.
+  2009-01-01 12:00  => 01  SQLCODE                       PIC S9(9)  BINARY.
+  2009-01-01 12:00  => 01  WS-ESQL-VAR.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL               PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-THREAD        PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-ROLLBACK      PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-END-THREAD    PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-FL-ABORT         PIC X.
+  2009-01-01 12:00  =>      05  WS-ESQL-SQLCODE          PIC S9(9) BINARY.
+  2009-01-01 12:00  =>      05  WS-ESQL-RDMCA.
+  2009-01-01 12:00  =>          10  WS-ESQL-ERROR-STATUS PIC 9999.
+  2009-01-01 12:00  =>          10  WS-ESQL-AUX-INFO     PIC S9(9) BINARY.
+  2009-01-01 12:00  =>      05  WS-ESQL-DS-CMD.
+  2009-01-01 12:00  =>          10  WS-ESQL-CML          PIC X(40) OCCURS 200
+  2009-01-01 12:00  =>                                   INDEXED BY WS-ESQL-IX-CML.
+  2009-01-01 12:00  =>      05  WS-ESQL-DS-ERR.
+  2009-01-01 12:00  =>          10  WS-ESQL-LB-ERR       PIC X(132) OCCURS 5
+  2009-01-01 12:00  =>                                   INDEXED BY WS-ESQL-IX-ERR.
+  2009-01-01 12:00  => 01  WS-ESQL-WORK-AREA-SIZE       PIC S1(36) BINARY-1.
+  2009-01-01 12:00  => 01  WS-ESQL-TRACE                PIC X(40).
+  2009-01-01 12:00  => 01  WS-ESQL-CT-DEADLOCK          PIC S9(2)  COMP.
+  2009-01-01 12:00  => 01  WS-ESQL-FL-DEADLOCK          PIC S9(2)  COMP.
+  2009-01-01 12:00  => 01  CS-ESQL-NO-MSG-DEADLOCK      PIC 9(05)  VALUE 1993.
+  2009-01-01 12:00  => 01  WS-ESQL-MSG-VAR-001          PIC X(40).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 01  WS-RDMS.
+  2009-01-01 12:00  =>     03  RDMS-QUALIFIER                        PIC X(12).
+  2009-01-01 12:00  =>     03  RDMS-IND                              PIC 9(3).
+  2009-01-01 12:00  =>     03  RDMS-STATUS                           PIC 9999.
+  2009-01-01 12:00  =>     03  RDMS-SAV-STATUS                       PIC 9999.
+  2009-01-01 12:00  =>     03  RDMS-ROLLB                            PIC 9.
+  2009-01-01 12:00  =>     03  RDMS-COLUMN                           PIC S1(36).
+  2009-01-01 12:00  =>     03  RDMS-SAV-COLUMN                       PIC S1(36).
+  2009-01-01 12:00  =>     03  RDMS-FLAG                             PIC 9.
+  2009-01-01 12:00  =>     03  RDMS-FLAG-THREAD                      PIC 9.
+  2009-01-01 12:00  =>     03  RDMS-RESULT.
+  2009-01-01 12:00  =>           05 RDMS-ERROR-LINE OCCURS 4         PIC X(80).
+  2009-01-01 12:00  =>     03  RDMS-COM.
+  2009-01-01 12:00  =>           05 RLIN            OCCURS 200       PIC X(40).
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>/
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>********************
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>* .000. TRAITEMENT GENERAL (MAIN)                                 *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 000-MAIN.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>     PERFORM 010-INIT-FICHIER        THRU 010-EXIT.
+  2009-01-01 12:00  =>     PERFORM 020-INIT-VARIABLES      THRU 020-EXIT.
+  2009-01-01 12:00  =>     PERFORM 030-INIT-DB             THRU 030-EXIT.
+  2009-01-01 12:00  =>     PERFORM 035-RECHERCHE-PHASE THRU 035-EXIT.
+  2009-01-01 12:00  =>     PERFORM UNTIL SW-END = 1
+  2009-01-01 12:00  =>        PERFORM 040-TRAITEMENT          THRU 040-EXIT
+  2009-01-01 12:00  =>     END-PERFORM.
+  2009-01-01 12:00  =>     PERFORM 090-CLOTURE             THRU 090-EXIT.
+  2009-01-01 12:00  =>     IF WS-NB-REC-ERR > 0
+  2009-01-01 12:00  =>        DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>        DISPLAY '*     GRAVE ERREUR (OVERFLOW)     *'
+  2009-01-01 12:00  =>        DISPLAY '*        ABORT DU PROGRAMME       *'
+  2009-01-01 12:00  =>        DISPLAY '*        CONTACTER J-Y NAUW       *'
+  2009-01-01 12:00  =>        DISPLAY '*       APPELER LES POMPIERS      *'
+  2009-01-01 12:00  =>        DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>        CALL "EREABT$"
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => 000-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>* .010. OUVERTURE DES FICHIERS                                    *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 010-INIT-FICHIER.
+  2009-01-01 12:00  =>*-----------------*
+  2009-01-01 12:00  =>     OPEN OUTPUT LISTE ANOA OUTA
+  2009-01-01 12:00  =>     OPEN INPUT  INA
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => 010-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>* .020. INITIALISATION VARIABLES                                  *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  => 020-INIT-VARIABLES.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     INITIALIZE WS-NB-REC-LUS
+  2009-01-01 12:00  =>                WS-NB-REC-ECR
+  2009-01-01 12:00  =>                WS-NB-REC-ERR.
+  2009-01-01 12:00  => 020-INIT-DATE.
+  2009-01-01 12:00  =>     MOVE FUNCTION CURRENT-DATE TO WK-CURRENT-DATE.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  => 020-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>* .030. INITIALISATION DB                                         *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  => 030-INIT-DB.
+  2009-01-01 12:00  =>*------------*
+  2009-01-01 12:00  =>     MOVE "0" TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     EXEC RDMS BEGIN THREAD READ END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     IF  SQLCODE NOT = 0
+  2009-01-01 12:00  =>          MOVE "100- BEGIN THREAD" TO WS-ESQL-TRACE
+  2009-01-01 12:00  =>          PERFORM 999-ESQL-ERR
+  2009-01-01 12:00  =>          PERFORM 090-CLOTURE THRU 090-EXIT
+  2009-01-01 12:00  =>          CALL "EREABT$"
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     MOVE "1" TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     EXEC RDMS  USE DEFAULT QUALIFIER AFLINC END-EXEC
+  2009-01-01 12:00  =>     EXEC RDMS  USE DEFAULT VERSION PRODUCTION  END-EXEC
+  2009-01-01 12:00  =>     IF  SQLCODE NOT = 0
+  2009-01-01 12:00  =>          PERFORM 999-ESQL-ERR
+  2009-01-01 12:00  =>          PERFORM 090-CLOTURE THRU 090-EXIT
+  2009-01-01 12:00  =>          CALL "EREABT$"
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => 030-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 035-RECHERCHE-PHASE.
+  2009-01-01 12:00  =>*-------------------*
+  2009-01-01 12:00  =>     MOVE 0 TO C-PHA-EUR.
+  2009-01-01 12:00  =>     EXEC RDMS
+  2009-01-01 12:00  =>           SELECT
+  2009-01-01 12:00  =>                 C_PHA_EUR
+  2009-01-01 12:00  =>              INTO :C-PHA-EUR
+  2009-01-01 12:00  =>              FROM
+  2009-01-01 12:00  =>                 EU001
+  2009-01-01 12:00  =>     END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     IF C-PHA-EUR = '100' OR = '200'
+  2009-01-01 12:00  =>        MOVE 'BEF' TO WS-DEVISE-2200
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     IF C-PHA-EUR = '300' OR = '350' OR = '400'
+  2009-01-01 12:00  =>        MOVE 'EUR' TO WS-DEVISE-2200
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     DISPLAY 'PHASE ACTUELLE : ' C-PHA-EUR '/' WS-DEVISE-2200
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => 035-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>* .040. TRAITEMENT PROPRE AU PROGRAMME BATCH                      *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 040-TRAITEMENT.
+  2009-01-01 12:00  =>*---------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* TRAITEMENT DIVERS                                              *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     MOVE 0 TO SW-ERREUR.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM  500-LECTURE-INA
+  2009-01-01 12:00  =>         THRU 500-LECTURE-INA-EXIT.
+  2009-01-01 12:00  =>     IF SW-END = 1
+  2009-01-01 12:00  =>        PERFORM 510-MAJ-PARAM-DB
+  2009-01-01 12:00  =>        GO TO 040-EXIT.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     ADD 1 TO WS-NB-REC-ECR.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* CAS OVERFLOW
+  2009-01-01 12:00  =>     IF SW-ERREUR = 1
+  2009-01-01 12:00  =>        ADD 1 TO WS-NB-REC-ERR
+  2009-01-01 12:00  =>        MOVE REC-FILE-INA OF INA TO REC-ANOA-DATA
+  2009-01-01 12:00  =>        WRITE REC-ANOA
+  2009-01-01 12:00  =>     END-IF.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 040-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>* .090. CLOTURE GENERALE                                         *
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 090-CLOTURE.
+  2009-01-01 12:00  =>*------------*
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS LUS     : ' WS-NB-REC-LUS
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS MAJ     : ' WS-NB-REC-MAJ
+  2009-01-01 12:00  =>     DISPLAY 'NB RECORDS ERREUR  : ' WS-NB-REC-ERR
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     IF  WS-ESQL-FL-THREAD = "1"
+  2009-01-01 12:00  =>          EXEC RDMS END THREAD END-EXEC
+  2009-01-01 12:00  =>          MOVE "0" TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     END-IF.
+  2009-01-01 12:00  =>     CLOSE LISTE ANOA INA OUTA
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => 090-EXIT.  EXIT.
+  2009-01-01 12:00  =>*---------*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>* .500. LECTURES DB                                              *
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>*  DECLARATION CURSEUR                                            *
+  2009-01-01 12:00  =>*=================================================================*
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  =>*-----------------*
+  2009-01-01 12:00  => 500-LECTURE-INA.
+  2009-01-01 12:00  =>      READ INA AT END MOVE 1 TO SW-END.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      IF SW-END = 1
+  2009-01-01 12:00  =>         GO TO 500-LECTURE-INA-EXIT.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      MOVE 0 TO WS-MAJ.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      ADD 1 TO WS-NB-REC-LUS
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      MOVE REC-FILE-INA TO
+  2009-01-01 12:00  =>           REC-FILE-OUTA
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      MOVE 0 TO WS-PAS-CONVERTION
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      IF WS-DEVISE-2200 = 'BEF'
+  2009-01-01 12:00  =>         IF DEVISE-INA NOT = 'BEF' AND NOT =
+  2009-01-01 12:00  =>                             'EUR'
+  2009-01-01 12:00  =>            DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>            DISPLAY '*     GRAVE ERREUR DE DEVISE      *'
+  2009-01-01 12:00  =>            DISPLAY '*        ABORT DU PROGRAMME       *'
+  2009-01-01 12:00  =>            DISPLAY '*        CONTACTER J-Y NAUW       *'
+  2009-01-01 12:00  =>            DISPLAY '*       APPELER LES POMPIERS      *'
+  2009-01-01 12:00  =>            DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>            CALL "EREABT$"
+  2009-01-01 12:00  =>         END-IF
+  2009-01-01 12:00  =>         IF DEVISE-INA = 'BEF'
+  2009-01-01 12:00  =>            MOVE 1 TO WS-PAS-CONVERTION
+  2009-01-01 12:00  =>         END-IF
+  2009-01-01 12:00  =>      END-IF
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      IF WS-DEVISE-2200 = 'EUR'
+  2009-01-01 12:00  =>         IF DEVISE-INA NOT = 'BEF' AND NOT =
+  2009-01-01 12:00  =>                             'EUR'
+  2009-01-01 12:00  =>            DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>            DISPLAY '*     GRAVE ERREUR DE DEVISE      *'
+  2009-01-01 12:00  =>            DISPLAY '*        ABORT DU PROGRAMME       *'
+  2009-01-01 12:00  =>            DISPLAY '*        CONTACTER J-Y NAUW       *'
+  2009-01-01 12:00  =>            DISPLAY '*       APPELER LES POMPIERS      *'
+  2009-01-01 12:00  =>            DISPLAY '*---------------------------------*'
+  2009-01-01 12:00  =>            CALL "EREABT$"
+  2009-01-01 12:00  =>         END-IF
+  2009-01-01 12:00  =>         IF DEVISE-INA = 'EUR'
+  2009-01-01 12:00  =>            MOVE 1 TO WS-PAS-CONVERTION
+  2009-01-01 12:00  =>         END-IF
+  2009-01-01 12:00  =>      END-IF
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>      IF WS-PAS-CONVERTION = 1
+  2009-01-01 12:00  =>         GO TO SUITE.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM CASE-0.
+  2009-01-01 12:00  => SUITE.
+  2009-01-01 12:00  =>      COMPUTE WS-NB-REC-MAJ = WS-NB-REC-MAJ + WS-MAJ
+  2009-01-01 12:00  =>         MOVE WS-DEVISE-2200 TO DEVISE-OUTA
+  2009-01-01 12:00  =>      WRITE REC-FILE-OUTA
+  2009-01-01 12:00  =>      .
+  2009-01-01 12:00  => 500-LECTURE-INA-EXIT. EXIT.
+  2009-01-01 12:00  => 500-VERIF-PARAM-DB.
+  2009-01-01 12:00  =>*
+  2009-01-01 12:00  => 510-MAJ-PARAM-DB.
+  2009-01-01 12:00  =>      PERFORM 020-INIT-DATE.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>* .600. TRAITEMENT DES CASES ET CALCULS                          *
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  => 600-CASE-1.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => CASE-0.
+  2009-01-01 12:00  =>*----------*
+  2009-01-01 12:00  =>     IF MT-S-0-1 OF INA NOT = SPACES AND NOT = 0
+  2009-01-01 12:00  =>       MOVE MT-TEST2-0-1-1 OF INA TO WS-SIGNE
+  2009-01-01 12:00  =>       IF VAL-SP
+  2009-01-01 12:00  =>         IF WS-DEVISE-2200 = 'EUR'
+  2009-01-01 12:00  =>           DIVIDE MT-SL-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-SL-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-DIVIDE
+  2009-01-01 12:00  =>         ELSE
+  2009-01-01 12:00  =>           MULTIPLY MT-SL-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-SL-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-MULTIPLY
+  2009-01-01 12:00  =>         END-IF
+  2009-01-01 12:00  =>        ELSE
+  2009-01-01 12:00  =>        MOVE MT-TEST-0-1-1 OF INA TO WS-SIGNE
+  2009-01-01 12:00  =>        IF VAL-NEGA OR VAL-POS OR VAL-ZERO
+  2009-01-01 12:00  =>          IF WS-DEVISE-2200 = 'EUR'
+  2009-01-01 12:00  =>           DIVIDE MT-S-0-1  OF INA  BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-S-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-DIVIDE
+  2009-01-01 12:00  =>          ELSE
+  2009-01-01 12:00  =>           MULTIPLY MT-S-0-1  OF INA  BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-S-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-MULTIPLY
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>        END-IF
+  2009-01-01 12:00  =>        IF VAL-NS
+  2009-01-01 12:00  =>          IF WS-DEVISE-2200 = 'EUR'
+  2009-01-01 12:00  =>           DIVIDE MT-NS-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-NS-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR
+  2009-01-01 12:00  =>              MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-DIVIDE
+  2009-01-01 12:00  =>          ELSE
+  2009-01-01 12:00  =>           MULTIPLY MT-NS-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-NS-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR
+  2009-01-01 12:00  =>              MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-MULTIPLY
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>        END-IF
+  2009-01-01 12:00  =>        IF VAL-SP
+  2009-01-01 12:00  =>          IF WS-DEVISE-2200 = 'EUR'
+  2009-01-01 12:00  =>           DIVIDE MT-SP-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-SP-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-DIVIDE
+  2009-01-01 12:00  =>          ELSE
+  2009-01-01 12:00  =>           MULTIPLY MT-SP-0-1   OF INA
+  2009-01-01 12:00  =>              BY 0,403399
+  2009-01-01 12:00  =>              GIVING MT-SP-0-1 OF OUTA
+  2009-01-01 12:00  =>              ROUNDED ON SIZE ERROR MOVE 1 TO SW-ERREUR
+  2009-01-01 12:00  =>           END-MULTIPLY
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>        END-IF
+  2009-01-01 12:00  =>        MOVE 1 TO WS-MAJ
+  2009-01-01 12:00  =>       END-IF
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  =>* .900. TRAITEMENT DES ANOMALIES                                 *
+  2009-01-01 12:00  =>*================================================================*
+  2009-01-01 12:00  => 999-ESQL-ERR.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* ESQL ERROR                                                      *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     IF  SQLCODE = -6010
+  2009-01-01 12:00  =>          MOVE CS-ESQL-NO-MSG-DEADLOCK TO MSGERR-NO
+  2009-01-01 12:00  =>          MOVE '1'                     TO MSGERR-CD-RLG
+  2009-01-01 12:00  =>          MOVE WS-ESQL-TRACE           TO MSGERR-VAR-001
+  2009-01-01 12:00  =>          CALL 'MSGERR' USING MSGERR
+  2009-01-01 12:00  =>          DISPLAY MSGERR-LB (1:60) UPON CONSOLE
+  2009-01-01 12:00  =>          CALL 'BLOACE' USING WS-ESQL-TRACE
+  2009-01-01 12:00  =>          ADD  1 TO WS-ESQL-CT-DEADLOCK
+  2009-01-01 12:00  =>          MOVE 1 TO WS-ESQL-FL-DEADLOCK
+  2009-01-01 12:00  =>          IF  WS-ESQL-CT-DEADLOCK < 6
+  2009-01-01 12:00  =>               PERFORM 090-CLOTURE THRU 090-EXIT
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>               GO TO 000-MAIN
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>     PERFORM 999-ESQL-GET-ERR
+  2009-01-01 12:00  =>     IF WS-ESQL-FL-THREAD = '1'
+  2009-01-01 12:00  =>          EXEC RDMS ROLLBACK WORK END-EXEC
+  2009-01-01 12:00  =>*         EXEC SQL END THREAD    END-EXEC
+  2009-01-01 12:00  =>*         MOVE '0' TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  => 999-ESQL-ERR-NO-DISP.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* ESQL ERROR                                                      *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     IF WS-ESQL-FL-THREAD = '1'
+  2009-01-01 12:00  =>          EXEC RDMS ROLLBACK WORK END-EXEC
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*         EXEC SQL END THREAD    END-EXEC
+  2009-01-01 12:00  =>*         MOVE '0' TO WS-ESQL-FL-THREAD
+  2009-01-01 12:00  =>     END-IF
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => 999-ESQL-GET-ERR.
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>* DISPLAY DE L'ERREUR ESQL                                        *
+  2009-01-01 12:00  =>*-----------------------------------------------------------------*
+  2009-01-01 12:00  =>     MOVE SQLCODE      TO WS-ESQL-SQLCODE
+  2009-01-01 12:00  =>     MOVE ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>                       TO WS-ESQL-ERROR-STATUS
+  2009-01-01 12:00  =>     MOVE AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>                        TO WS-ESQL-AUX-INFO
+  2009-01-01 12:00  =>     DISPLAY "*** ESQL ERROR ***"          UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "TRACE       = " WS-ESQL-TRACE  UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "SQLCODE     = " SQLCODE      UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "ERROR-SATUS = " ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>                                           UPON PRINTER
+  2009-01-01 12:00  =>     DISPLAY "AUX-INFO    = " AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>                                           UPON PRINTER
+  2009-01-01 12:00  =>     MOVE "0" TO WS-ESQL-FL
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM UNTIL WS-ESQL-FL = "1"
+  2009-01-01 12:00  =>          EXEC RDMS GETERROR INTO
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (1), :WS-ESQL-LB-ERR (2),
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (3), :WS-ESQL-LB-ERR (4),
+  2009-01-01 12:00  =>            :WS-ESQL-LB-ERR (5)
+  2009-01-01 12:00  =>          END-EXEC
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (1) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (2) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (3) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (4) UPON PRINTER
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-LB-ERR (5) UPON PRINTER
+  2009-01-01 12:00  =>          IF  WS-ESQL-LB-ERR (1) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (2) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (3) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (4) = SPACES
+  2009-01-01 12:00  =>          AND WS-ESQL-LB-ERR (5) = SPACES
+  2009-01-01 12:00  =>               MOVE "1" TO WS-ESQL-FL
+  2009-01-01 12:00  =>          END-IF
+  2009-01-01 12:00  =>     END-PERFORM
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     PERFORM VARYING WS-ESQL-IX-CML FROM 1 BY 1
+  2009-01-01 12:00  =>               UNTIL WS-ESQL-IX-CML > 200
+  2009-01-01 12:00  =>          DISPLAY WS-ESQL-CML (WS-ESQL-IX-CML) UPON PRINTER
+  2009-01-01 12:00  =>     END-PERFORM
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>     MOVE WS-ESQL-SQLCODE      TO SQLCODE
+  2009-01-01 12:00  =>     MOVE WS-ESQL-ERROR-STATUS TO ERROR-STATUS OF RDMCA
+  2009-01-01 12:00  =>     MOVE WS-ESQL-AUX-INFO     TO AUX-INFO     OF RDMCA
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>   SYS$LIB$*APP$3.
+  2009-01-01 12:00  =>  LINK$PF,SYS$LIB$*APP$3.
+  2009-01-01 12:00  =>  TEMPABS,F///5000
+  2009-01-01 12:00  =>S ,TPF$.EXTEUR
+  2009-01-01 12:00  =>   INCLUDE    TEMPUCS.EXTEUR
+  2009-01-01 12:00  =>   OUTPUT ZOOM
+  2009-01-01 12:00  =>   RESOLVE ALL REFERENCES USING LOCAL_DEFS,SYS$LIB$*EMOMRTS.,
+  2009-01-01 12:00  =>               LIBCODENAME,UTST*OBJ
+  2009-01-01 12:00  =>   SET SIZE=SIZE + 32734 FOR URTS$TABLES
+  2009-01-01 12:00  =>   SET ALS_INIT_SIZE = 0117000
+  2009-01-01 12:00  =>   DELETE ALL DEFINITION EXCEPT START$
+  2009-01-01 12:00  =>   PROCESS FOR EXTENDED
+  2009-01-01 12:00  =>SYS$LIB$*APP$3.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+EXTEUR
+IN
+EXTEUR
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

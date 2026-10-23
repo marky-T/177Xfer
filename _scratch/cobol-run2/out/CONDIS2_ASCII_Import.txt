@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\SsgTrial\\_scratch\\cobol-run2\\out\\CONDIS2_ASCII.LionSource
+APPNAME = CONDIS2ASCII
+GENSET = Default from new application
+SYSOPT = FALSE

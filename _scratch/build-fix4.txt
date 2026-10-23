@@ -1,0 +1,5 @@
+patched E:\Repos\SsgTrial\_scratch\ssgfix4\src\SsgConverter\SymstreamProcessor.cs (94969 bytes)
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.25

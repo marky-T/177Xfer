@@ -1,0 +1,1767 @@
+@RUN,M/T   VIGD13,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG,N     *******************************************************  
+@MSG ** VIGD13 RECUP FICHIERS CLOTURE --> VIE GROUPE  **
+@MSG,N     *******************************************************  
+@ . 
+@ . LE 27 AVRIL 2004 : CREATION DU RUN  
+@ . LE 08/03/2006 : Suppression de l'alpha vie groupe (P05034/01)   
+@ . LE 28/10/2008 : Mise droits acquis en EXCEL       (P07083/01)   
+@ . LE 16/01/2009 : Classification des zones IFRS (P08034/02)   
+@ . LE 14/06/2013 : Archivage PER800 (P23032/01) - JLH  
+@ . LE 14/06/2016 : Création fichiers AD, Fonds PB, Cap Vie PB - P15120/03  
+@ . LE 06/04/2017 : Liste garantie minimale (P15121/01) 
+@ . LE 30/08/2021 : Ajout du NISS - (D_000170)  
+@ . 
+@ .   SELECTION DES GROUPES CONFIDENTIELS   
+@ . 
+@ .   TRAITEMENT DES MOUVEMENTS 
+@ .        1 ) SELECTION DES MOUVEMENTS PAR DATE
+@ .        2 ) SEPARER LES MOUVEMENTS DES GROUPES CONFIDENTIELS DES AUTRES  
+@ .        3 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ .                      MOUVEMENTS DES GROUPES CONFIDENTIELS   
+@ .                      MOUVEMENTS DES AUTRES GROUPES  
+@ . 
+@ .   TRAITEMENT DES CONTRATS   
+@ .        1 ) UNLOAD DES CONTRATS DE GROUPE NON CONFIDENTIEL   
+@ .        2 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ .        3 ) UNLOAD DES CONTRATS DE GROUPE CONFIDENTIEL   
+@ .        4 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ . 
+@ .   TRAITEMENT DES COUCHES
+@ .        1 ) UNLOAD DES COUCHES DE GROUPE NON CONFIDENTIEL
+@ .        2 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ .        3 ) UNLOAD DES COUCHES DE GROUPE CONFIDENTIEL
+@ .        4 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ . 
+@ .   TRAITEMENT DES DROITS ACQUIS  
+@ .        1 ) SELECTION DES DROITS ACQUIS DE GROUPE NON CONFIDENTIEL   
+@ .            ET DES DIFFERENTES COUCHES DE LA GARANTIE MINIMALE   
+@ .        2 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ .        3 ) SELECTION DES DROITS ACQUIS DE GROUPE CONFIDENTIEL   
+@ .            ET DES DIFFERENTES COUCHES DE LA GARANTIE MINIMALE   
+@ .        4 ) FORMATAGE EXCEL (TRANSEXCEL) 
+@ . 
+@ .   TRAITEMENT DES AFFAIRES DIRECTES, FONDS PB, CAP VIE PB
+@ .        1 ) CREATION DES DIFFERENTS FICHIERS 
+@ .        2 ) FORMATAGES EXCEL (TRANSEXCEL)
+@ . 
+@TIME   
+@MSG,N     TRANSFERT DES PROGRAMMES.
+@ASG,T     VIGD13.,F///10000
+@ . Copie des programmes de reprise 
+@COPY,A    VPRD*BABS.VGB209,VIGD13.VGB209   
+@COPY,A    VPRD*BABS.VGB310,VIGD13.VGB310   
+@COPY,A    VPRD*BABS.VGB346,VIGD13.VGB346   
+@TIME   
+@ . 
+@LAB000: MSG,N 000. PROCEDURE DE RESTART AUTOMATIQUE
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@LAB200: MSG,N 200. DECHARGEMENT DES GROUPES CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ . 
+@DELETE,C  IUNLVD132.   
+@CAT,P     IUNLVD132.,F/0/POS/4000  
+@USE       UNL,IUNLVD132.   
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VGD002_GRP_CFL IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT  DISTINCT (NO_GRP) 
+  FROM VGD002_GRP_CFL   
+  ORDER BY NO_GRP   
+  FORMAT EXTERNAL;  
+  UNLOCK VGD002_GRP_CFL;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE IUNLVD132.
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VGD002_GRP_CFL **  
+@ABORT  
+@OK: MSG ** UNLOAD VGD002_GRP_CFL OK ** 
+@TIME   
+@ . 
+@LAB210:  MSG,N 210.  SELECTION DES MOUVEMENTS DU MOIS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ . 
+@ASG,A    B006GPOLM.
+@USE      INP,B006GPOLM.
+@ . 
+@DELETE,C ID13GPOLM.
+@CAT,P    ID13GPOLM.,F/0/POS/4000   
+@ASG,A    ID13GPOLM.
+@USE      F3,ID13GPOLM. 
+@ . 
+@ERS       TPF$.
+@ . 
+@SSG,MNA
+SGS 
+@ADD   F999CONTROLE.VIGD10  
+@EOF
+SKEL
+* Set nom = '_[datime$,1,7,1]-[datime$,1,4,1]'  
+*SET IMGLEN$=132
+*INCREMENT T FROM 1 BY 1 TO [DATE]  
+*SET     VAR2    TO   '[DATE,T,1,1]'
+*SET     VARE    TO 'MAJ'   
+*IF [*VAR2] = [*VARE]   
+*SET     VAR21   TO '[DATE,T,3,1]'  
+*SET     VARE2    TO 'GROUPE'   
+*IF [*VAR21] = [*VARE2] 
+*SET TEMP  TO '[DATE,T,4,1]'
+*IF NOT [*DAMAMJ]   
+*SET     DAMAMJ TO '[DATE,T,4,1]'   
+*ELSE   
+*IF  [*DAMAMJ] <  [*TEMP]   
+*SET     DAMAMJ TO '[DATE,T,4,1]'   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*SET DAMAA TO [*DAMAMJ,SUBSTR$,1,4] 
+*SET DAMMM TO [*DAMAMJ,SUBSTR$,5,2] 
+*SET     BLANC = ' '
+*SET     ZERO = 0   
+*SET     SITU2  TO [*DAMAMJ,SUBSTR$,5,1]
+*IF [*SITU2] =  [*BLANC]
+*SET  SITU2  TO [*ZERO] 
+*SET  SUITMOIS  TO [*DAMAMJ,SUBSTR$,6,1]
+*SET  SITUM TO '[*ZERO][*SUITMOIS]' 
+*ELSE   
+*SET SITUM =[*DAMMM]
+*ENDIF  
+*SET DAMMAA TO '[*DAMAMJ,SUBSTR$,1,4][*SITUM]'  
+#SORT,EA
+FILEIN=INP,F MODE=SDF   
+FILEOUT=F3,F MODE=SDF   
+KEY=8,8,CH,A,1        .NO GOUPE 
+RSZ=500 
+ACCEPT=195,6,ASC,E,[*DAMMAA]
+@EOF
+@ . 
+@FREE  B006GPOLM
+@FREE  ID13GPOLM.   
+@TIME   
+@ . 
+@LAB230: MSG,N 230. SEPARATION GROUPES CONFIDENTIELS ET NON CONFIDENTIELS   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ . 
+@ERS   TPF$.
+@ . 
+@ASG,A     ID13GPOLM.   
+@USE       FICH,ID13GPOLM.  
+@ . 
+@ASG,A     IUNLVD132.   
+@USE       CLE1,IUNLVD132.  
+@ . 
+@DELETE,C  ID13CONF.
+@CAT,P     ID13CONF.,F/1/POS/4000   
+@ASG,A     ID13CONF.
+@USE       DEL1,ID13CONF.   
+@ . 
+@DELETE,C  ID13NOCONF.  
+@CAT,P     ID13NOCONF.,F/1/POS/4000 
+@ASG,A     ID13NOCONF.  
+@USE       DEL2,ID13NOCONF. 
+@ . 
+@SSG,IA  *UTILIT.FUSBA/ASCII
+SGS 
+ASCII   
+INPUT   CLE1,8,10   FICH,500,10 
+OUTPUT  DEL2,500,10 DEL1,500,10 
+KEYS    8,8 
+UPDATE  1,8 
+ANNUL   COPY
+NOLIST  
+@EOF
+@ . 
+@XQT   TPF$.FUSBA   
+@ . 
+@FREE  ID13GPOLMT.  
+@FREE  IUNLVD132.   
+@FREE  ID13NOCONF.  
+@FREE  ID13CONF.
+@TIME   
+@ . 
+@LAB240: MSG,N 240. TRI DES DONNEES DE TYPE MOUVEMENT NON CONFIDENTIEL  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ . 
+@ASG,A    ID13NOCONF.   
+@USE      FICH,ID13NOCONF.  
+@ . 
+@DELETE,C ID13NOCONFT.  
+@CAT,P    ID13NOCONFT.,F/1/POS/4000 
+@ASG,A    ID13NOCONFT.  
+@USE      FOCH,ID13NOCONFT. 
+@ . 
+@SORT,EA
+FILEIN=FICH,F   BLOCK=10  MODE=SDF  
+FILEOUT=FOCH,F  BLOCK=10  MODE=SDF  
+KEY=193,2,CH,A,1  .CODE MOUVEMENT   
+KEY=16,6,CH,A,2   .RADICAL POLICE   
+KEY=22,1,CH,A,3   .SUFFIXE POLICE   
+KEY=7,1,CH,A,4    .CODE TARIF   
+KEY=168,5,CH,D,5  .CODE ANNEE TARIF 
+RSZ=500 
+@EOF
+@ . 
+@FREE  ID13NOCONF.  
+@FREE  ID13NOCONFT. 
+@TIME   
+@ . 
+@LAB250: MSG,N 250. TRI DES DONNEES DE TYPE MOUVEMENT CONFIDENTIEL  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB250  
+@ . 
+@ASG,A    ID13CONF. 
+@USE      FICH,ID13CONF.
+@ . 
+@DELETE,C ID13CONFT.
+@CAT,P    ID13CONFT.,F/1/POS/4000   
+@ASG,A    ID13CONFT.
+@USE      FOCH,ID13CONFT.   
+@ . 
+@SORT,EA
+FILEIN=FICH,F   BLOCK=10  MODE=SDF  
+FILEOUT=FOCH,F  BLOCK=10  MODE=SDF  
+KEY=193,2,CH,A,1  .CODE MOUVEMENT   
+KEY=16,6,CH,A,2   .RADICAL POLICE   
+KEY=22,1,CH,A,3   .SUFFIXE POLICE   
+KEY=7,1,CH,A,4    .CODE TARIF   
+KEY=168,5,CH,D,5  .CODE ANNEE TARIF 
+RSZ=500 
+@EOF
+@ . 
+@FREE  ID13CONF.
+@FREE  ID13CONFT.   
+@TIME   
+@ . 
+@LAB260: MSG,N 260. FORMATAGE MOUVEMENTS GROUPES CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB260  
+@ . 
+@ERS   TPF$.
+@ . 
+@ASG,A    ID13CONFT.
+@USE      FILEIN,ID13CONFT. 
+@ . 
+@DELETE,C ID13CONFTEX.  
+@CAT,P    ID13CONFTEX.,F/0/POS/4000 
+@ASG,A    ID13CONFTEX.  
+@USE      FILEOUT,ID13CONFTEX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 500
+COL  193,2,,''Code mouvement''  
+COL  16,6,,''Radical police''   
+COL  22,1,,''Suffixe police''   
+COL  7,1,,''Code tarif''
+COL  168,5,,''Code année tarif''
+COL  1,6,,''Code bande''
+COL  8,8,,''N° de groupe''  
+COL  23,32,,''Nom'' 
+COL  55,6,AAAAMM,''Date de naissance''  
+COL  61,6,AAAAMM,''Date d’effet''   
+COL  67,2,,''Code terme''   
+COL  69,6,,''N° d’assuré''  
+COL  75,2,,''Code périodicité'' 
+COL  77,4,,''Rapport de coassurance''   
+COL  81,2,,''Code co-assurance''
+COL  83,2,,''Intermédiaire - type'' 
+COL  85,5,,''Intermédiaire - n°''   
+COL  90,2,,''Astérisque''   
+COL  92,1,,''Code réassurance'' 
+COL  93,4,V2,''Taux d’aggravation'' 
+COL  97,1,,''Code prime''   
+COL  98,1,,''Code exonération fiscale'' 
+COL  99,1,,''Code index''   
+COL  100,1,,''Code garantie''   
+COL  101,1,,''Code sexe''   
+COL  102,2,,''Code production'' 
+COL  147,1,,''Code réassurance''
+COL  148,8,,''N° de réassurance''   
+COL  156,12,MNT,''Commission non amortie''  
+COL  173,2,,''N° de la couche'' 
+COL  175,2,,''Nombre de couche''
+COL  195,6,AAAAMM,''Date du dernier mouvement'' 
+COL  201,12,MNT,''MAJ - capital décès'' 
+COL  213,12,MNT,''MAJ - capital vie''   
+COL  225,12,MNT,''MAJ - prime commerciale annuelle''
+COL  237,12,MNT,''MAJ - prime inventaire annuelle'' 
+COL  249,12,MNT,''MAJ - prime commerciale unique''  
+COL  261,12,MNT,''MAJ - prime inventaire unique''   
+COL  273,12,MNT,''MAJ - montant de surprime - 1''   
+COL  285,12,MNT,''MAJ - montant de surprime - 2''   
+COL  299,2,,''MAJ - code combinaison''  
+COL  301,12,MNT,''ANC - capital décès'' 
+COL  313,12,MNT,''ANC - capital vie''   
+COL  325,12,MNT,''ANC - prime commerciale annuelle''
+COL  337,12,MNT,''ANC - prime inventaire annuelle'' 
+COL  349,12,MNT,''ANC - prime commerciale unique''  
+COL  361,12,MNT,''ANC - prime inventaire unique''   
+COL  373,12,MNT,''ANC - montant de surprime - 1''   
+COL  385,12,MNT,''ANC - montant de surprime - 2''   
+COL  399,2,,''ANC - code combinaison''  
+COL  401,12,MNT,''MOUV - capital décès''
+COL  413,12,MNT,''MOUV - capital vie''  
+COL  425,12,MNT,''MOUV - prime commerciale annuelle''   
+COL  437,12,MNT,''MOUV - prime inventaire annuelle''
+COL  449,12,MNT,''MOUV - prime commerciale unique'' 
+COL  461,12,MNT,''MOUV - prime inventaire unique''  
+COL  473,12,MNT,''MOUV - montant de surprime - 1''  
+COL  485,12,MNT,''MOUV - montant de surprime - 2''  
+COL  177,8,AAAAMMJJ,''Date exécution''  
+COL  185,4,,''Heure exécution'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE  ID13CONFTEX. 
+@FREE  ID13CONFT.   
+@TIME   
+@ . 
+@LAB270: MSG,N 270. FORMATAGE MOUVEMENTS GROUPES NON CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB270  
+@ . 
+@ERS   TPF$.
+@ . 
+@ASG,A    ID13NOCONFT.  
+@USE      FILEIN,ID13NOCONFT.   
+@ . 
+@DELETE,C ID13NOCONFTX. 
+@CAT,P    ID13NOCONFTX.,F/0/POS/4000
+@ASG,A    ID13NOCONFTX. 
+@USE      FILEOUT,ID13NOCONFTX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 500
+COL  193,2,,''Code mouvement''  
+COL  16,6,,''Radical police''   
+COL  22,1,,''Suffixe police''   
+COL  7,1,,''Code tarif''
+COL  168,5,,''Code année tarif''
+COL  1,6,,''Code bande''
+COL  8,8,,''N° de groupe''  
+COL  23,32,,''Nom'' 
+COL  55,6,AAAAMM,''Date de naissance''  
+COL  61,6,AAAAMM,''Date d’effet''   
+COL  67,2,,''Code terme''   
+COL  69,6,,''N° d’assuré''  
+COL  75,2,,''Code périodicité'' 
+COL  77,4,,''Rapport de coassurance''   
+COL  81,2,,''Code co-assurance''
+COL  83,2,,''Intermédiaire - type'' 
+COL  85,5,,''Intermédiaire - n°''   
+COL  90,2,,''Astérisque''   
+COL  92,1,,''Code réassurance'' 
+COL  93,4,V2,''Taux d’aggravation'' 
+COL  97,1,,''Code prime''   
+COL  98,1,,''Code exonération fiscale'' 
+COL  99,1,,''Code index''   
+COL  100,1,,''Code garantie''   
+COL  101,1,,''Code sexe''   
+COL  102,2,,''Code production'' 
+COL  147,1,,''Code réassurance''
+COL  148,8,,''N° de réassurance''   
+COL  156,12,MNT,''Commission non amortie''  
+COL  173,2,,''N° de la couche'' 
+COL  175,2,,''Nombre de couche''
+COL  195,6,AAAAMM,''Date du dernier mouvement'' 
+COL  201,12,MNT,''MAJ - capital décès'' 
+COL  213,12,MNT,''MAJ - capital vie''   
+COL  225,12,MNT,''MAJ - prime commerciale annuelle''
+COL  237,12,MNT,''MAJ - prime inventaire annuelle'' 
+COL  249,12,MNT,''MAJ - prime commerciale unique''  
+COL  261,12,MNT,''MAJ - prime inventaire unique''   
+COL  273,12,MNT,''MAJ - montant de surprime - 1''   
+COL  285,12,MNT,''MAJ - montant de surprime - 2''   
+COL  299,2,,''MAJ - code combinaison''  
+COL  301,12,MNT,''ANC - capital décès'' 
+COL  313,12,MNT,''ANC - capital vie''   
+COL  325,12,MNT,''ANC - prime commerciale annuelle''
+COL  337,12,MNT,''ANC - prime inventaire annuelle'' 
+COL  349,12,MNT,''ANC - prime commerciale unique''  
+COL  361,12,MNT,''ANC - prime inventaire unique''   
+COL  373,12,MNT,''ANC - montant de surprime - 1''   
+COL  385,12,MNT,''ANC - montant de surprime - 2''   
+COL  399,2,,''ANC - code combinaison''  
+COL  401,12,MNT,''MOUV - capital décès''
+COL  413,12,MNT,''MOUV - capital vie''  
+COL  425,12,MNT,''MOUV - prime commerciale annuelle''   
+COL  437,12,MNT,''MOUV - prime inventaire annuelle''
+COL  449,12,MNT,''MOUV - prime commerciale unique'' 
+COL  461,12,MNT,''MOUV - prime inventaire unique''  
+COL  473,12,MNT,''MOUV - montant de surprime - 1''  
+COL  485,12,MNT,''MOUV - montant de surprime - 2''  
+COL  177,8,AAAAMMJJ,''Date exécution''  
+COL  185,4,,''Heure exécution'' 
+TABUL '';'' 
+@EOF
+@FREE  ID13NOCONFTX.
+@FREE  ID13NOCONFT. 
+@TIME   
+@ . 
+@LAB300: MSG,N 300. DECHARGEMENT CONTRATS GROUPES NON CONFIDENTIELS 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ . 
+@DELETE,C  IUNLVD133A.  
+@CAT,P     IUNLVD133A.,F/0/POS/4000 
+@USE       UNL,IUNLVD133A.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VGD003_GRP_CON IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD002_GRP_CFL IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM   VGD003_GRP_CON A   
+  WHERE  A.NO_GRP NOT IN
+    (SELECT  DISTINCT (NO_GRP)  
+     FROM VGD002_GRP_CFL)   
+  ORDER BY A.NO_GRP, A.NO_RAD_POL, A.NO_SUF_POL, A.CD_TRF   
+  FORMAT EXTERNAL;  
+  UNLOCK VGD003_GRP_CON;
+  UNLOCK VGD002_GRP_CFL;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE IUNLVD133A.   
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VGD003_GRP_CON **  
+@ABORT  
+@OK: MSG ** UNLOAD VGD003_GRP_CON OK ** 
+@TIME   
+@ . 
+@LAB305: MSG,N 305. AJOUT DU CLASSEMENT IFRS CONTRATS (NON CONFIDENTIELS)   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB305  
+@ . 
+@ASG,A    IUNLVD133A.   
+@USE      FICH-IN,IUNLVD133A.   
+@ . 
+@DELETE,C IUNLVD133X.   
+@CAT,P    IUNLVD133X.,F/1/POS/4000  
+@ASG,A    IUNLVD133X.   
+@USE      FICH-OUT,IUNLVD133X.  
+@ . 
+@DELETE,C ID13VG209AN.  
+@CAT,P    ID13VG209AN.,F/1/POS/4000 
+@ASG,A    ID13VG209AN.  
+@USE      FICH-ANO,ID13VG209AN. 
+@ . 
+@XQT,R  VIGD13.VGB209   
+@ . 
+@FREE IUNLVD133A.   
+@FREE IUNLVD133X.   
+@FREE ID13VG209AN.  
+@TIME   
+@ . 
+@LAB307: MSG,N 307. RESTORE OLD FILE LAYOUT 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB307  
+@ . 
+@ASG,A     IUNLVD133X.  
+@USE       CON,IUNLVD133X.  
+@ . 
+@DELETE,C  IUNLVD133.   
+@ASG,UP    IUNLVD133.,F/0/POS/4000  
+@USE       CON1,IUNLVD133.  
+@ . 
+@SORT,ES
+COPY
+FILEIN=CON,F        BLOCK=10
+FILEOUT=CON1,F        BLOCK=10  
+SELECT=1,300,1  
+RSZ=300 
+@EOF
+@ . 
+@FREE      IUNLVD133.   
+@FREE      IUNLVD133X.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB310: MSG,N 310. FORMATAGE CONTRATS GROUPES NON CONFIDENTIELS
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB310  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVD133X.   
+@USE      FILEIN,IUNLVD133X.
+@ . 
+@DELETE,C IUNLVD133EX.  
+@CAT,P    IUNLVD133EX.,F/0/POS/4000 
+@ASG,A    IUNLVD133EX.  
+@USE      FILEOUT,IUNLVD133EX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 340
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 10,1,,''Tarif'' 
+COL 12,6,,''Source''
+COL 28,1,,''Sexe''  
+COL 30,1,,''Rl''
+COL 32,32,,''Nom''  
+COL 65,2,,''Comb''  
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 79,6,AAAAMM,''Date sit''
+COL 86,2,,''Terme'' 
+COL 89,6,,''Num ass''   
+COL 96,2,,''Period''
+COL 99,4,,''Rap coass'' 
+COL 104,2,,''Coass''
+COL 107,2,,''Int type'' 
+COL 110,5,,''Int num''  
+COL 116,7,VIRGULE,''Taux aggr'' 
+COL 123,1,,''Code pr''  
+COL 125,1,,''Exo fisc'' 
+COL 127,1,,''Index''
+COL 129,1,,''Garantie'' 
+COL 131,2,,''Prod'' 
+COL 134,6,,''N° de PH - 1'' 
+COL 141,6,,''N° de PH - 2'' 
+COL 148,6,,''N° de PH - 3'' 
+COL 155,13,SMNT,''Surpr ra''
+COL 169,13,SMNT,''Surpr mi''
+COL 184,4,MMJJ,''Ech res''  
+COL 189,2,,''Mat cl 1'' 
+COL 192,6,,''Mat cl 2'' 
+COL 200,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 210,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 217,6,,''Programme de dernière mise à jour''
+COL 224,6,,''Run de dernière mise à jour''  
+COL 231,6,,''Codif''
+COL 238,6,,''Verif''
+COL 246,8,AAAAMMJJ,''Date Mvt'' 
+COL 255,2,,''Code Mvt'' 
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 302,8,,''Group Origine''
+COL 311,2,,''Type Groupe''  
+COL 314,8,AAAAMMJJ,''Date Debut Groupe''
+COL 323,2,,''Statut Professionnel'' 
+COL 329,11,,''NISS''
+COL 326,2,,''Statut Groupe''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IUNLVD133EX.  
+@FREE IUNLVD133X.   
+@TIME   
+@ . 
+@LAB311: MSG,N 311. TEST PRESENCE ANOMALIES NISS (NON CONFIDENTIELS)
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB311  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE  ID13VG209AN.  
+LABEL LAB320
+@EOF
+@TIME   
+@ . 
+@LAB312: MSG,N 312. FORMATAGE FICH ANOM NISS - TRANSEXCEL -  NON CONFID.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB312  
+@ . 
+@ASG,A    ID13VG209AN.  
+@USE      FILEIN,ID13VG209AN.   
+@ . 
+@DELETE,C ID13VG209AE.  
+@CAT,P    ID13VG209AE.,F/0/POS/4000 
+@ASG,A    ID13VG209AE.  
+@USE      FILEOUT,ID13VG209AE.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 100
+COL 1,8,,''Groupe'' 
+COL 9,6,,''Rad pol''
+COL 15,1,,''Suf pol''   
+COL 16,11,,''NISS'' 
+COL 27,8,JJMMAAAA,''Date naiss''
+COL 35,1,,''Sexe''  
+COL 36,40,,''Libelle''  
+TABUL '';'' 
+@EOF
+@ . 
+@FREE ID13VG209AE.  
+@FREE ID13VG209AN.  
+@TIME   
+@ . 
+@LAB320: MSG,N 320. DECHARGEMENT CONTRATS GROUPES CONFIDENTIELS 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ . 
+@DELETE,C  IUNLVD133CA. 
+@CAT,P     IUNLVD133CA.,F/0/POS/4000
+@USE       UNL,IUNLVD133CA. 
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VGD003_GRP_CON IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD002_GRP_CFL IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM VGD003_GRP_CON A 
+  WHERE A.NO_GRP IN 
+    (SELECT  DISTINCT (NO_GRP)  
+     FROM VGD002_GRP_CFL)   
+  ORDER BY A.NO_GRP, A.NO_RAD_POL, A.NO_SUF_POL, A.CD_TRF   
+  FORMAT EXTERNAL;  
+  UNLOCK VGD003_GRP_CON;
+  UNLOCK VGD002_GRP_CFL;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE IUNLVD133CA.  
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VGD003_GRP_CON **  
+@ABORT  
+@OK: MSG ** UNLOAD VGD003_GRP_CON OK ** 
+@TIME   
+@ . 
+@LAB325: MSG,N 325. AJOUT DU CLASSEMENT IFRS CONTRATS (CONFIDENTIELS)   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB325  
+@ . 
+@ASG,A    IUNLVD133CA.  
+@USE      FICH-IN,IUNLVD133CA.  
+@ . 
+@DELETE,C IUNLVD133XCO. 
+@CAT,P    IUNLVD133XCO.,F/1/POS/4000
+@ASG,A    IUNLVD133XCO. 
+@USE      FICH-OUT,IUNLVD133XCO.
+@ . 
+@DELETE,C ID13VG209ANC. 
+@CAT,P    ID13VG209ANC.,F/1/POS/4000
+@ASG,A    ID13VG209ANC. 
+@USE      FICH-ANO,ID13VG209ANC.
+@ . 
+@XQT,R  VIGD13.VGB209   
+@ . 
+@FREE IUNLVD133XCO. 
+@FREE IUNLVD133CA.  
+@FREE ID13VG209ANC. 
+@TIME   
+@.  
+@LAB327: MSG,N 327. RESTORE OLD FILE LAYOUT 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB327  
+@ . 
+@ASG,A     IUNLVD133XCO.
+@USE       CON,IUNLVD133XCO.
+@ . 
+@DELETE,C  IUNLVD133CO. 
+@ASG,UP    IUNLVD133CO.,F/0/POS/4000
+@USE       CON1,IUNLVD133CO.
+@ . 
+@SORT,ES
+COPY
+FILEIN=CON,F        BLOCK=10
+FILEOUT=CON1,F      BLOCK=10
+SELECT=1,300,1  
+RSZ=300 
+@EOF
+@ . 
+@FREE      IUNLVD133CO. 
+@FREE      IUNLVD133XCO.
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB330: MSG,N 330. FORMATAGE CONTRATS GROUPES CONFIDENTIELS
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB330  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVD133XCO. 
+@USE      FILEIN,IUNLVD133XCO.  
+@ . 
+@DELETE,C IUNLVD133COX. 
+@CAT,P    IUNLVD133COX.,F/0/POS/4000
+@ASG,A    IUNLVD133COX. 
+@USE      FILEOUT,IUNLVD133COX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 340
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 10,1,,''Tarif'' 
+COL 12,6,,''Source''
+COL 28,1,,''Sexe''  
+COL 30,1,,''Rl''
+COL 32,32,,''Nom''  
+COL 65,2,,''Comb''  
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 79,6,AAAAMM,''Date sit''
+COL 86,2,,''Terme'' 
+COL 89,6,,''Num ass''   
+COL 96,2,,''Period''
+COL 99,4,,''Rap coass'' 
+COL 104,2,,''Coass''
+COL 107,2,,''Int type'' 
+COL 110,5,,''Int num''  
+COL 116,7,VIRGULE,''Taux aggr'' 
+COL 123,1,,''Code pr''  
+COL 125,1,,''Exo fisc'' 
+COL 127,1,,''Index''
+COL 129,1,,''Garantie'' 
+COL 131,2,,''Prod'' 
+COL 134,6,,''N° de PH - 1'' 
+COL 141,6,,''N° de PH - 2'' 
+COL 148,6,,''N° de PH - 3'' 
+COL 155,13,SMNT,''Surpr ra''
+COL 169,13,SMNT,''Surpr mi''
+COL 184,4,MMJJ,''Ech res''  
+COL 189,2,,''Mat cl 1'' 
+COL 192,6,,''Mat cl 2'' 
+COL 200,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 210,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 217,6,,''Programme de dernière mise à jour''
+COL 224,6,,''Run de dernière mise à jour''  
+COL 231,6,,''Codif''
+COL 238,6,,''Verif''
+COL 246,8,AAAAMMJJ,''Date Mvt'' 
+COL 255,2,,''Code Mvt'' 
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 302,8,,''Group Origine''
+COL 311,2,,''Type Groupe''  
+COL 314,8,AAAAMMJJ,''Date Debut Groupe''
+COL 323,2,,''Statut Professionnel'' 
+COL 329,11,,''NISS''
+COL 326,2,,''Statut Groupe''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IUNLVD133COX. 
+@FREE IUNLVD133XCO. 
+@TIME   
+@ . 
+@LAB331: MSG,N 331. TEST PRESENCE ANOMALIES NISS (CONFIDENTIELS)
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB331  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE  ID13VG209ANC. 
+LABEL LAB400
+@EOF
+@TIME   
+@ . 
+@LAB332: MSG,N 332. FORMATAGE FICH ANOM NISS - TRANSEXCEL - CONFIDENTIEL
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB332  
+@ . 
+@ASG,A    ID13VG209ANC. 
+@USE      FILEIN,ID13VG209ANC.  
+@ . 
+@DELETE,C ID13VG209AEC. 
+@CAT,P    ID13VG209AEC.,F/0/POS/4000
+@ASG,A    ID13VG209AEC. 
+@USE      FILEOUT,ID13VG209AEC. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 100
+COL 1,8,,''Groupe'' 
+COL 9,6,,''Rad pol''
+COL 15,1,,''Suf pol''   
+COL 16,11,,''NISS'' 
+COL 27,8,JJMMAAAA,''Date naiss''
+COL 35,1,,''Sexe''  
+COL 36,40,,''Libelle''  
+TABUL '';'' 
+@EOF
+@ . 
+@FREE ID13VG209AEC. 
+@FREE ID13VG209ANC. 
+@TIME   
+@ . 
+@LAB400: MSG,N 400. DECHARGEMENT COUCHES GROUPES NON CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB400  
+@ . 
+@DELETE,C  IUNLVD134.   
+@CAT,P     IUNLVD134.,F/0/POS/6000  
+@USE       UNL,IUNLVD134.   
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VGD004_GRP_CCH IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD003_GRP_CON IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD002_GRP_CFL IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD006_DET_GRP IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT VGD004_GRP_CCH.* , VGD003_GRP_CON.NO_GRP   
+        ,VGD006_DET_GRP.NO_GRP_ORI  
+        ,VGD006_DET_GRP.CD_GRP  
+        ,VGD006_DET_GRP.DT_DEB_GRP  
+        ,VGD006_DET_GRP.CD_STA_PFL  
+        ,VGD006_DET_GRP.CD_STA_GRP  
+  FROM VGD004_GRP_CCH A , VGD003_GRP_CON B, VGD006_DET_GRP C
+ WHERE VGD003_GRP_CON.NO_RAD_POL =  VGD004_GRP_CCH.NO_RAD_POL   
+   AND VGD003_GRP_CON.NO_SUF_POL =  VGD004_GRP_CCH.NO_SUF_POL   
+   AND VGD003_GRP_CON.CD_TRF     =  VGD004_GRP_CCH.CD_TRF   
+   AND VGD003_GRP_CON.NO_GRP NOT IN 
+           (SELECT DISTINCT (NO_GRP) FROM VGD002_GRP_CFL)   
+   AND VGD006_DET_GRP.NO_GRP     = VGD003_GRP_CON.NO_GRP
+   AND VGD006_DET_GRP.NO_SIT     IN (SELECT MAX(NO_SIT) 
+                                       FROM VGD006_DET_GRP D
+                                      WHERE D.NO_GRP = C.NO_GRP  )  
+  ORDER BY  B.NO_GRP,   
+            A.NO_RAD_POL,   
+            A.NO_SUF_POL,   
+            A.CD_TRF,   
+            A.CD_ANN_TRF
+  FORMAT EXTERNAL;  
+  UNLOCK VGD004_GRP_CCH;
+  UNLOCK VGD003_GRP_CON;
+  UNLOCK VGD002_GRP_CFL;
+  UNLOCK VGD006_DET_GRP;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE IUNLVD134.
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VGD004_GRP_CCH **  
+@ABORT  
+@OK: MSG ** UNLOAD VGD004_GRP_CCH OK ** 
+@TIME   
+@ . 
+@LAB405: MSG,N 405. DECHARGEMENT COUCHES GROUPES NON CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB405  
+@ . 
+@ASG,A     IUNLVD134.   
+@USE       FILEIN,IUNLVD134.
+@DELETE,C  IUNLVD134A.  
+@ASG,UP    IUNLVD134A.,F/0/POS/4000 
+@USE       FILEOUT,IUNLVD134A.  
+@ASG       *UTILIT. 
+@ERS       TPF$ 
+@SSG,I     *UTILIT.CONDIS2/ASCII
+SGS 
+ASCII   
+FILEIN     231,10   
+FILEOUT    231,10   
+PG CASE    214,2,01 
+PG MOVE    1,204,1 196,8,205 214,18,214 
+PG OTHERWISE
+PG MOVE    1,231,1  
+@EOF
+@XQT        TPF$.CONDIS2
+@FREE       *UTILIT.
+@FREE       IUNLVD134.  
+@FREE       IUNLVD134A. 
+@ERS        TPF$
+@TIME   
+@ . 
+@LAB410: MSG,N 410. FORMATAGE COUCHES GROUPES NON CONFIDENTIELS 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB410  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVD134A.   
+@USE      FILEIN,IUNLVD134A.
+@ . 
+@DELETE,C IUNLVD134EX.  
+@CAT,P    IUNLVD134EX.,F/0/POS/4000 
+@ASG,A    IUNLVD134EX.  
+@USE      FILEOUT,IUNLVD134EX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 231
+COL 196,8,,''Num gpe''  
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 10,1,,''Tarif'' 
+COL 12,5,,''Annee tarif''   
+COL 18,6,,''Source''
+COL 25,13,SMNT,''CD''   
+COL 39,13,SMNT,''CV''   
+COL 53,13,SMNT,''PAC''  
+COL 67,13,SMNT,''PAI''  
+COL 81,13,SMNT,''PUC''  
+COL 95,13,SMNT,''PUI''  
+COL 109,13,SMNT,''Dpa max'' 
+COL 124,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 134,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 141,6,,''Programme de dernière mise à jour''
+COL 148,6,,''Run de dernière mise à jour''  
+COL 155,6,,''Codif''
+COL 162,6,,''Verif''
+COL 169,13,SMNT,''Dpa min'' 
+COL 184,8,AAAAMMJJ,''Date dernier mouvement''   
+COL 193,2,,''Code dernier mouvement''   
+COL 205,8,,''Group Origine''
+COL 214,2,,''Type Groupe''  
+COL 218,8,AAAAMMJJ,''Date Debut Groupe''
+COL 227,2,,''Statut Professionnel'' 
+COL 230,2,,''Statut Groupe''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IUNLVD134EX.  
+@FREE IUNLVD134A.   
+@TIME   
+@.  
+@LAB420: MSG,N 420. DECHARGEMENT COUCHES GROUPES CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB420  
+@ . 
+@DELETE,C  IUNLVD134CO. 
+@CAT,P     IUNLVD134CO.,F/0/POS/4000
+@USE       UNL,IUNLVD134CO. 
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VGD004_GRP_CCH IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD003_GRP_CON IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD002_GRP_CFL IN EXCLUSIVE RETRIEVAL MODE;  
+LOCK TABLE VGD006_DET_GRP IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT  VGD004_GRP_CCH.* , VGD003_GRP_CON.NO_GRP  
+        ,VGD006_DET_GRP.NO_GRP_ORI  
+        ,VGD006_DET_GRP.CD_GRP  
+        ,VGD006_DET_GRP.DT_DEB_GRP  
+        ,VGD006_DET_GRP.CD_STA_PFL  
+        ,VGD006_DET_GRP.CD_STA_GRP  
+  FROM VGD004_GRP_CCH A, VGD003_GRP_CON B, VGD006_DET_GRP C 
+   WHERE VGD003_GRP_CON.NO_RAD_POL =  VGD004_GRP_CCH.NO_RAD_POL 
+     AND VGD003_GRP_CON.NO_SUF_POL =  VGD004_GRP_CCH.NO_SUF_POL 
+     AND VGD003_GRP_CON.CD_TRF     =  VGD004_GRP_CCH.CD_TRF 
+     AND VGD003_GRP_CON.NO_GRP IN   
+                     (SELECT DISTINCT (NO_GRP) FROM VGD002_GRP_CFL) 
+     AND  C.NO_GRP = B.NO_GRP   
+     AND  C.NO_SIT     IN (SELECT MAX(NO_SIT)   
+                             FROM VGD006_DET_GRP D  
+                            WHERE D.NO_GRP = C.NO_GRP  )
+  ORDER BY  B.NO_GRP,   
+            A.NO_RAD_POL,   
+            A.NO_SUF_POL,   
+            A.CD_TRF,   
+            A.CD_ANN_TRF
+  FORMAT EXTERNAL;  
+  UNLOCK VGD004_GRP_CCH;
+  UNLOCK VGD003_GRP_CON;
+  UNLOCK VGD002_GRP_CFL;
+  UNLOCK VGD006_DET_GRP;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE      IUNLVD134CO. 
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VGD004_GRP_CCH **  
+@ABORT  
+@OK: MSG ** UNLOAD VGD004_GRP_CCH OK ** 
+@TIME   
+@ . 
+@LAB425: MSG,N 425. DECHARGEMENT COUCHES GROUPES NON CONFIDENTIELS  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB425  
+@ . 
+@ASG,A     IUNLVD134CO. 
+@USE       FILEIN,IUNLVD134CO.  
+@DELETE,C  IUNLVD134CA. 
+@ASG,UP    IUNLVD134CA.,F/0/POS/4000
+@USE       FILEOUT,IUNLVD134CA. 
+@ASG       *UTILIT. 
+@ERS       TPF$ 
+@SSG,I     *UTILIT.CONDIS2/ASCII
+SGS 
+ASCII   
+FILEIN     231,10   
+FILEOUT    231,10   
+PG CASE    214,2,01 
+PG MOVE    1,204,1 196,8,205 214,18,214 
+PG OTHERWISE
+PG MOVE    1,231,1  
+@EOF
+@XQT        TPF$.CONDIS2
+@FREE       *UTILIT.
+@FREE       IUNLVD134CO.
+@FREE       IUNLVD134CA.
+@ERS        TPF$
+@TIME   
+@ . 
+@ . 
+@LAB430: MSG,N 430. FORMATAGE COUCHES GROUPES CONFIDENTIELS 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB430  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVD134CA.  
+@USE      FILEIN,IUNLVD134CA.   
+@ . 
+@DELETE,C IUNLVD134COX. 
+@CAT,P    IUNLVD134COX.,F/0/POS/4000
+@ASG,A    IUNLVD134COX. 
+@USE      FILEOUT,IUNLVD134COX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 231
+COL 196,8,,''Num gpe''  
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 10,1,,''Tarif'' 
+COL 12,5,,''Annee tarif''   
+COL 18,6,,''Source''
+COL 25,13,SMNT,''CD''   
+COL 39,13,SMNT,''CV''   
+COL 53,13,SMNT,''PAC''  
+COL 67,13,SMNT,''PAI''  
+COL 81,13,SMNT,''PUC''  
+COL 95,13,SMNT,''PUI''  
+COL 109,13,SMNT,''Dpa max'' 
+COL 124,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 134,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 141,6,,''Programme de dernière mise à jour''
+COL 148,6,,''Run de dernière mise à jour''  
+COL 155,6,,''Codif''
+COL 162,6,,''Verif''
+COL 169,13,SMNT,''Dpa min'' 
+COL 184,8,AAAAMMJJ,''Date dernier mouvement''   
+COL 193,2,,''Code dernier mouvement''   
+COL 205,8,,''Group Origine''
+COL 214,2,,''Type Groupe''  
+COL 218,8,AAAAMMJJ,''Date Debut Groupe''
+COL 227,2,,''Statut Professionnel'' 
+COL 230,2,,''Statut Groupe''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IUNLVD134COX. 
+@FREE IUNLVD134CA.  
+@TIME   
+@ . 
+@LAB500: MSG,N 500. SELECTION DROITS ACQUIS (NON CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB500  
+@ . 
+@ASG,A    IUNLVD133.
+@USE      ICON,IUNLVD133.   
+@ . 
+@DELETE,CN ID13VG310NC. 
+@ASG,UP    ID13VG310NC.,F/1/POS/4000
+@USE       DA,ID13VG310NC.  
+@ . 
+@DELETE,CN ID13VG310NCG.
+@ASG,UP    ID13VG310NCG.,F/1/POS/4000   
+@USE       GM,ID13VG310NCG. 
+@ . 
+@DELETE,CN ID13VG310NCA.
+@ASG,UP    ID13VG310NCA.,F/1/POS/4000   
+@USE       ANO,ID13VG310NCA.
+@ . 
+@XQT,R  VIGD13.VGB310   
+@ . 
+@FREE IUNLVD133.
+@FREE ID13VG310NC.  
+@FREE ID13VG310NCG. 
+@FREE ID13VG310NCA. 
+@TIME   
+@ . 
+@LAB505: MSG,N 505. FORMATAGE DROITS ACQUIS (NON CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB505  
+@ . 
+@ASG,A    ID13VG310NC.  
+@USE      FILEIN,ID13VG310NC.   
+@ . 
+@DELETE,C IUNLVD13NCEX. 
+@CAT,P    IUNLVD13NCEX.,F/0/POS/4000
+@ASG,A    IUNLVD13NCEX. 
+@USE      FILEOUT,IUNLVD13NCEX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 220
+COL 1,6,,''Radical police'' 
+COL 7,1,,''Suffixe police'' 
+COL 8,1,,''Code tarif'' 
+COL 9,8,AAAAMMJJ,''Date effet'' 
+COL 17,1,,''Code prime''
+COL 18,8,,''N° groupe'' 
+COL 26,3,,''N° situation groupe''   
+COL 29,12,MNT,''R1''
+COL 41,12,MNT,''R2''
+COL 53,12,MNT,''R3''
+COL 65,12,MNT,''R4''
+COL 77,12,MNT,''P1''
+COL 89,12,MNT,''P2''
+COL 101,12,MNT,''P3''   
+COL 113,12,MNT,''Gar Min Cap Tot''  
+COL 125,12,MNT,''Gar Min Ind''  
+COL 137,12,MNT,''Prest acq''
+COL 149,12,MNT,''Res acq''  
+COL 161,12,MNT,''Res AD''   
+COL 173,12,MNT,''Res PB''   
+COL 185,12,MNT,''Res Fonds PB'' 
+COL 197,1,,''Code origine'' 
+COL 198,8,AAAAMMJJ,''Date màj'' 
+COL 206,6,,''Initiales màj''
+COL 212,1,,''Rien trouvé''  
+COL 213,1,,''Rien trouvé dans la durée''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310NC.
+@FREE   IUNLVD13NCEX.   
+@TIME   
+@ . 
+@LAB510: MSG,N 510. TEST PRESENCE ANOMALIES (NON CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB510  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE  ID13VG310NCA. 
+LABEL LAB520
+@EOF
+@TIME   
+@ . 
+@LAB515: MSG,N 515. FORMATAGE LISTE ANOMALIES (NON CONFIDENTIELS)   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB515  
+@ . 
+@ASG,A    ID13VG310NCA. 
+@USE      FILEIN,ID13VG310NCA.  
+@ . 
+@DELETE,C ID13ANNCEX.   
+@CAT,P    ID13ANNCEX.,F/0/POS/4000  
+@ASG,A    ID13ANNCEX.   
+@USE      FILEOUT,ID13ANNCEX.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 110
+COL 1,8,,''N° groupe''  
+COL 9,6,,''Radical police'' 
+COL 15,1,,''Suffixe police''
+COL 16,1,,''Code tarif''
+COL 17,8,AAAAMMJJ,''Date effet''
+COL 25,12,MNT,''Total mt gar min''  
+COL 37,60,,''Message Erreur''   
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310NCA.   
+@FREE   ID13ANNCEX. 
+@TIME   
+@ . 
+@LAB520: MSG,N 520. FORMATAGE GARANTIE MINIMALE (NON CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB520  
+@ . 
+@ASG,A    ID13VG310NCG. 
+@USE      FILEIN,ID13VG310NCG.  
+@ . 
+@DELETE,C ID13GMNCEX.   
+@CAT,P    ID13GMNCEX.,F/0/POS/4000  
+@ASG,A    ID13GMNCEX.   
+@USE      FILEOUT,ID13GMNCEX.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 80 
+COL 1,8,,''N° groupe''  
+COL 9,6,,''Radical police'' 
+COL 15,1,,''Suffixe police''
+COL 16,1,,''Code tarif''
+COL 17,8,AAAAMMJJ,''Date effet''
+COL 25,8,AAAAMMJJ,''Date référence situation''  
+COL 33,12,MNT,''Gar Min Cap''   
+COL 45,1,,''Code origine''  
+COL 46,8,AAAAMMJJ,''Date màj''  
+COL 54,6,,''Initiales màj'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310NCG.   
+@FREE   ID13GMNCEX. 
+@TIME   
+@ . 
+@LAB530: MSG,N 530. SELECTION DROITS ACQUIS (CONFIDENTIEL)  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB530  
+@ . 
+@ASG,A    IUNLVD133CO.  
+@USE      ICON,IUNLVD133CO. 
+@ . 
+@DELETE,CN ID13VG310CO. 
+@ASG,UP    ID13VG310CO.,F/1/POS/4000
+@USE       DA,ID13VG310CO.  
+@ . 
+@DELETE,CN ID13VG310COG.
+@ASG,UP    ID13VG310COG.,F/1/POS/4000   
+@USE       GM,ID13VG310COG. 
+@ . 
+@DELETE,CN ID13VG310COA.
+@ASG,UP    ID13VG310COA.,F/1/POS/4000   
+@USE       ANO,ID13VG310COA.
+@ . 
+@ . 
+@XQT,R  VIGD13.VGB310   
+@ . 
+@FREE IUNLVD133CO.  
+@FREE ID13VG310CO.  
+@FREE ID13VG310COG. 
+@FREE ID13VG310COA. 
+@TIME   
+@ . 
+@LAB535: MSG,N 535. FORMATAGE DROITS ACQUIS (CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB535  
+@ . 
+@ASG,A    ID13VG310CO.  
+@USE      FILEIN,ID13VG310CO.   
+@ . 
+@DELETE,C IUNLVD13COEX. 
+@CAT,P    IUNLVD13COEX.,F/0/POS/4000
+@ASG,A    IUNLVD13COEX. 
+@USE      FILEOUT,IUNLVD13COEX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 220
+COL 1,6,,''Radical police'' 
+COL 7,1,,''Suffixe police'' 
+COL 8,1,,''Code tarif'' 
+COL 9,8,AAAAMMJJ,''Date effet'' 
+COL 17,1,,''Code prime''
+COL 18,8,,''N° groupe'' 
+COL 26,3,,''N° situation groupe''   
+COL 29,12,MNT,''R1''
+COL 41,12,MNT,''R2''
+COL 53,12,MNT,''R3''
+COL 65,12,MNT,''R4''
+COL 77,12,MNT,''P1''
+COL 89,12,MNT,''P2''
+COL 101,12,MNT,''P3''   
+COL 113,12,MNT,''Gar Min Cap Tot''  
+COL 125,12,MNT,''Gar Min Ind''  
+COL 137,12,MNT,''Prest acq''
+COL 149,12,MNT,''Res acq''  
+COL 161,12,MNT,''Res AD''   
+COL 173,12,MNT,''Res PB''   
+COL 185,12,MNT,''Res Fonds PB'' 
+COL 197,1,,''Code origine'' 
+COL 198,8,AAAAMMJJ,''Date màj'' 
+COL 206,6,,''Initiales màj''
+COL 212,1,,''Rien trouvé''  
+COL 213,1,,''Rien trouvé dans la durée''
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310CO.
+@FREE   IUNLVD13COEX.   
+@TIME   
+@ . 
+@LAB540: MSG,N 540. TEST PRESENCE ANOMALIES (CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB540  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE  ID13VG310COA. 
+LABEL LAB550
+@EOF
+@TIME   
+@ . 
+@LAB545: MSG,N 545. FORMATAGE LISTE ANOMALIES (CONFIDENTIELS)   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB545  
+@ . 
+@ASG,A    ID13VG310COA. 
+@USE      FILEIN,ID13VG310COA.  
+@ . 
+@DELETE,C ID13ANCOEX.   
+@CAT,P    ID13ANCOEX.,F/0/POS/4000  
+@ASG,A    ID13ANCOEX.   
+@USE      FILEOUT,ID13ANCOEX.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 110
+COL 1,8,,''N° groupe''  
+COL 9,6,,''Radical police'' 
+COL 15,1,,''Suffixe police''
+COL 16,1,,''Code tarif''
+COL 17,8,AAAAMMJJ,''Date effet''
+COL 25,12,MNT,''Total mt gar min''  
+COL 37,60,,''Message Erreur''   
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310COA.   
+@FREE   ID13ANCOEX. 
+@TIME   
+@ . 
+@LAB550: MSG,N 550. FORMATAGE GARANTIE MINIMALE (CONFIDENTIELS) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB550  
+@ . 
+@ASG,A    ID13VG310COG. 
+@USE      FILEIN,ID13VG310COG.  
+@ . 
+@DELETE,C ID13GMCOEX.   
+@CAT,P    ID13GMCOEX.,F/0/POS/4000  
+@ASG,A    ID13GMCOEX.   
+@USE      FILEOUT,ID13GMCOEX.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 80 
+COL 1,8,,''N° groupe''  
+COL 9,6,,''Radical police'' 
+COL 15,1,,''Suffixe police''
+COL 16,1,,''Code tarif''
+COL 17,8,AAAAMMJJ,''Date effet''
+COL 25,8,AAAAMMJJ,''Date référence situation''  
+COL 33,12,MNT,''Gar Min Cap''   
+COL 45,1,,''Code origine''  
+COL 46,8,AAAAMMJJ,''Date màj''  
+COL 54,6,,''Initiales màj'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE   ID13VG310COG.   
+@FREE   ID13GMCOEX. 
+@TIME   
+@ . 
+@LAB600: MSG,N 600. FUSION CONTRATS (CONFID ET NON) SUIVANT TARIF ET COMB   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB600  
+@ . 
+@ASG,A     IUNLVD133.   
+@USE       CON1,IUNLVD133.  
+@ . 
+@ASG,A     IUNLVD133CO. 
+@USE       CON2,IUNLVD133CO.
+@ . 
+@DELETE,C  IVD13CONT.   
+@ASG,UP    IVD13CONT.,F/0/POS/4000  
+@USE       CON,IVD13CONT.   
+@ . 
+@SORT,ES
+COPY
+FILEIN=CON1,F        BLOCK=10   
+FILEIN=CON2,F        BLOCK=10   
+FILEOUT=CON,F        BLOCK=10   
+KEY=19,8,CH,A,1               .NUMERO GROUPE
+KEY=1,6,CH,A,2                .RADICAL POLICE   
+KEY=8,1,CH,A,3                .SUFFIXE POLICE   
+KEY=10,1,CH,A,4               .CODE TARIF   
+ACCEPT=10,1,ASC,E,2,AND       .CODE TARIF = 2 ET
+ACCEPT=65,2,ASC,L,75          .COMBINAISON < 75 
+ACCEPT=10,1,ASC,E,3,AND       .CODE TARIF = 3 ET
+ACCEPT=65,2,ASC,L,75          .COMBINAISON < 75 
+ACCEPT=10,1,ASC,E,7           .CODE TARIF = 7   
+RSZ=300 
+@EOF
+@ . 
+@FREE      IUNLVD133.   
+@FREE      IUNLVD133CO. 
+@FREE      IVD13CONT.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB610: MSG,N 610. CREATION DES FICHIERS AD, FONDS PB, CV PB POUR RESERVES 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB610  
+@ . 
+@ASG,A    IVD13CONT.
+@USE      FCH-IN,IVD13CONT. 
+@ . 
+@DELETE,C IVD13AD.  
+@CAT,P    IVD13AD.,F/1/POS/4000 
+@ASG,A    IVD13AD.  
+@USE      FCH-OUT-AD,IVD13AD.   
+@ . 
+@DELETE,C IVD13FONDPB.  
+@CAT,P    IVD13FONDPB.,F/1/POS/4000 
+@ASG,A    IVD13FONDPB.  
+@USE      FCH-OUT-FOND,IVD13FONDPB. 
+@ . 
+@DELETE,C IVD13CVPB.
+@CAT,P    IVD13CVPB.,F/1/POS/4000   
+@ASG,A    IVD13CVPB.
+@USE      FCH-OUT-CVPB,IVD13CVPB.   
+@ . 
+@XQT,R  VIGD13.VGB346   
+@ . 
+@FREE IVD13CONT.
+@FREE IVD13AD.  
+@FREE IVD13FONDPB.  
+@FREE IVD13CVPB.
+@TIME   
+@ . 
+@LAB620: MSG,N 620. EXTRACTION AFFAIRES DIRECTES TARIF 2,3 ET TARIF 7   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB620  
+@ . 
+@ASG,A     IVD13AD. 
+@USE       INAD,IVD13AD.
+@ . 
+@DELETE,C  IVD13AD7.
+@ASG,UP    IVD13AD7.,F/0/POS/4000   
+@USE       OUTAD7,IVD13AD7. 
+@ . 
+@DELETE,C  IVD13AD23.   
+@ASG,UP    IVD13AD23.,F/0/POS/4000  
+@USE       OUTAD23,IVD13AD23.   
+@ . 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INAD,425,10  
+OUTPUT     OUTAD7,425,10   OUTAD23,425,10   
+KEYS       R   10,1,7         .CODE TARIF   
+@EOF
+@XQT       TPF$.BABA
+@ . 
+@FREE      IVD13AD. 
+@FREE      IVD13AD7.
+@FREE      IVD13AD23.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB630: MSG,N 630. FORMATAGE AFFAIRES DIRECTES TARIF 2,3   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB630  
+@ . 
+@ASG,A    IVD13AD23.
+@USE      FILEIN,IVD13AD23. 
+@ . 
+@DELETE,C IVD13AD23X.   
+@CAT,P    IVD13AD23X.,F/0/POS/4000  
+@ASG,A    IVD13AD23X.   
+@USE      FILEOUT,IVD13AD23X.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 425
+COL 10,1,,''Tarif'' 
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 28,1,,''Sexe''  
+COL 86,2,,''Terme'' 
+COL 311,8,AAAAMMJJ,''Date fin prime''   
+COL 184,4,MMJJ,''Ech rés''  
+COL 65,2,,''Comb''  
+COL 96,2,ALPHAG,''Période'' 
+COL 330,5,,''Année tarif''  
+COL 336,12,SMNT,''CD''  
+COL 349,12,SMNT,''CV''  
+COL 362,12,SMNT,''PAC'' 
+COL 375,12,SMNT,''PAI'' 
+COL 388,12,SMNT,''PUC'' 
+COL 401,12,SMNT,''PUI'' 
+COL 414,12,SMNT,''Dpa max'' 
+COL 302,8,AAAAMMJJ,''Date effet ct''
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 89,6,,''Num ass''   
+COL 123,1,,''Code pr''  
+COL 320,7,,''VIP''  
+COL 328,1,,''A garder = 1'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IVD13AD23.
+@FREE IVD13AD23X.   
+@ERS    TPF$
+@TIME   
+@ . 
+@LAB640: MSG,N 640. FORMATAGE AFFAIRES DIRECTES TARIF 7 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB640  
+@ . 
+@ASG,A    IVD13AD7. 
+@USE      FILEIN,IVD13AD7.  
+@ . 
+@DELETE,C IVD13AD7X.
+@CAT,P    IVD13AD7X.,F/0/POS/4000   
+@ASG,A    IVD13AD7X.
+@USE      FILEOUT,IVD13AD7X.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 425
+COL 10,1,,''Tarif'' 
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 28,1,,''Sexe''  
+COL 86,2,,''Terme'' 
+COL 311,8,AAAAMMJJ,''Date fin prime''   
+COL 184,4,MMJJ,''Ech rés''  
+COL 65,2,,''Comb''  
+COL 96,2,ALPHAG,''Période'' 
+COL 330,5,,''Année tarif''  
+COL 336,12,SMNT,''CD''  
+COL 349,12,SMNT,''CV''  
+COL 362,12,SMNT,''PAC'' 
+COL 375,12,SMNT,''PAI'' 
+COL 388,12,SMNT,''PUC'' 
+COL 401,12,SMNT,''PUI'' 
+COL 414,12,SMNT,''Dpa max'' 
+COL 302,8,AAAAMMJJ,''Date effet ct''
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 89,6,,''Num ass''   
+COL 123,1,,''Code pr''  
+COL 320,7,,''VIP''  
+COL 328,1,,''A garder = 1'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IVD13AD7. 
+@FREE IVD13AD7X.
+@ERS    TPF$
+@TIME   
+@ . 
+@LAB650: MSG,N 650. FORMATAGE FONDS PB  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB650  
+@ . 
+@ASG,A    IVD13FONDPB.  
+@USE      FILEIN,IVD13FONDPB.   
+@ . 
+@DELETE,C IVD13FONDPBX. 
+@CAT,P    IVD13FONDPBX.,F/0/POS/4000
+@ASG,A    IVD13FONDPBX. 
+@USE      FILEOUT,IVD13FONDPBX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 356
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 330,12,SMNT,''Fonds PB''
+COL 343,12,SMNT,''Fonds 1985''  
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 86,2,,''Terme'' 
+COL 28,1,,''Sexe''  
+COL 356,1,,''Système PB''   
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 89,6,,''Num ass''   
+COL 123,1,,''Code pr''  
+COL 320,7,,''VIP''  
+COL 328,1,,''A garder = 1'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IVD13FONDPB.  
+@FREE IVD13FONDPBX. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB660: MSG,N 660. FORMATAGE CAPITAL VIE PB
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB660  
+@ . 
+@ASG,A    IVD13CVPB.
+@USE      FILEIN,IVD13CVPB. 
+@ . 
+@DELETE,C IVD13CVPBX.   
+@CAT,P    IVD13CVPBX.,F/0/POS/4000  
+@ASG,A    IVD13CVPBX.   
+@USE      FILEOUT,IVD13CVPBX.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 427
+COL 10,1,,''Tarif'' 
+COL 19,8,,''Num gpe''   
+COL 1,6,,''Rad pol''
+COL 8,1,,''Suf pol''
+COL 69,8,AAAAMMJJ,''Date nais'' 
+COL 28,1,,''Sexe''  
+COL 86,2,,''Terme'' 
+COL 311,8,AAAAMMJJ,''Date fin paiement''
+COL 184,4,MMJJ,''Ech rés''  
+COL 65,2,,''Comb''  
+COL 96,2,ALPHAG,''Période'' 
+COL 330,5,,''Année tarif''  
+COL 336,12,SMNT,''CD''  
+COL 349,12,SMNT,''CV''  
+COL 362,12,SMNT,''PAC'' 
+COL 375,12,SMNT,''PAI'' 
+COL 388,12,SMNT,''PUC'' 
+COL 401,12,SMNT,''PUI'' 
+COL 414,12,SMNT,''Dpa max'' 
+COL 427,1,,''Système PB''   
+COL 258,10,,''ZONE-IFRS''   
+COL 269,10,,''ZONE-CTR''
+COL 280,10,,''ZONE-SEG''
+COL 291,10,,''ZONE-RISK''   
+COL 89,6,,''Num ass''   
+COL 123,1,,''Code pr''  
+COL 320,7,,''VIP''  
+COL 328,1,,''A garder = 1'' 
+TABUL '';'' 
+@EOF
+@ . 
+@FREE IVD13CVPB.
+@FREE IVD13CVPBX.   
+@ERS    TPF$
+@TIME   
+@ . 
+@LAB700: MSG,N 700. TRANSFERT DES FICHIERS VERS INTRANET
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD  F999TRANSF.VIGD13/2200PC  
+@ . 
+@TIME   
+@ . 
+@LAB770: MSG,N 770. SUPPRESSION DES FICHIERS INTERMEDIAIRES 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@ . 
+@DELETE,C  IUNLVD133A.  
+@DELETE,C  IUNLVD133CA. 
+@DELETE,C  IUNLVD133.   
+@DELETE,C  IUNLVD133X.  
+@DELETE,C  IUNLVD133EX. 
+@DELETE,C  IUNLVD133CO. 
+@DELETE,C  IUNLVD133XCO.
+@DELETE,C  IUNLVD133COX.
+@DELETE,C  ID13VG209AN. 
+@DELETE,C  ID13VG209AE. 
+@DELETE,C  ID13VG209ANC.
+@DELETE,C  ID13VG209AEC.
+@DELETE,C  IUNLVD134.   
+@DELETE,C  IUNLVD134A.  
+@DELETE,C  IUNLVD134EX. 
+@DELETE,C  IUNLVD134CO. 
+@DELETE,C  IUNLVD134CA. 
+@DELETE,C  IUNLVD134COX.
+@DELETE,C  IUNLVD132.   
+@DELETE,C  ID13GPOLM.   
+@DELETE,C  ID13CONF.
+@DELETE,C  ID13CONFT.   
+@DELETE,C  ID13CONFTEX. 
+@DELETE,C  ID13NOCONF.  
+@DELETE,C  ID13NOCONFT. 
+@DELETE,C  ID13NOCONFTX.
+@DELETE,C  ID13VG310NC. 
+@DELETE,C  ID13VG310NCG.
+@DELETE,C  ID13VG310NCA.
+@DELETE,C  IUNLVD13COEX.
+@DELETE,C  ID13GMNCEX.  
+@DELETE,C  ID13ANNCEX.  
+@DELETE,C  IUNLVD13NCEX.
+@DELETE,C  ID13GMCOEX.  
+@DELETE,C  ID13ANCOEX.  
+@DELETE,C  ID13VG310CO. 
+@DELETE,C  ID13VG310COG.
+@DELETE,C  ID13VG310COA.
+@DELETE,C  IVD13CONT.   
+@DELETE,C  IVD13AD. 
+@DELETE,C  IVD13AD7.
+@DELETE,C  IVD13AD7X.   
+@DELETE,C  IVD13AD23.   
+@DELETE,C  IVD13AD23X.  
+@DELETE,C  IVD13FONDPB. 
+@DELETE,C  IVD13FONDPBX.
+@DELETE,C  IVD13CVPB.   
+@DELETE,C  IVD13CVPBX.  
+@ . 
+@TIME   
+@ . 
+@LAB777: MSG,N 777. DELETE DU FICHIER DE REPRISE
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@ . 
+@TIME   
+@ . 
+@MSG,N       ****** LE MODULE VIGD13 S'EST BIEN TERMINE ******  
+@QUAL,R 
+@FIN

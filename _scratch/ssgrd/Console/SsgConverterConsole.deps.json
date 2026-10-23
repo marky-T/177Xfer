@@ -1,0 +1,342 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "SsgConverterConsole/1.0.0": {
+        "dependencies": {
+          "EclParserOs2200": "1.0.0",
+          "EclToAstOs2200": "1.0.0",
+          "SsgConverter": "1.0.0",
+          "ConverterSupport": "8.0.26188.0",
+          "PowerShellGenerator": "8.0.26188.0",
+          "PowerShellWriter": "8.0.26188.0"
+        },
+        "runtime": {
+          "SsgConverterConsole.dll": {}
+        }
+      },
+      "EclParser/1.0.0": {
+        "runtime": {
+          "EclParser.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EclParserOs2200/1.0.0": {
+        "dependencies": {
+          "EclParser": "1.0.0"
+        },
+        "runtime": {
+          "EclParserOs2200.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EclToAst/1.0.0": {
+        "dependencies": {
+          "EclParser": "1.0.0"
+        },
+        "runtime": {
+          "EclToAst.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EclToAstOs2200/1.0.0": {
+        "dependencies": {
+          "EclParser": "1.0.0",
+          "EclParserOs2200": "1.0.0",
+          "EclToAst": "1.0.0",
+          "IpfConverter": "1.0.0"
+        },
+        "runtime": {
+          "EclToAstOs2200.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "IpfConverter/1.0.0": {
+        "runtime": {
+          "IpfConverter.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SsgConverter/1.0.0": {
+        "runtime": {
+          "SsgConverter.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "ConverterSupport/8.0.26188.0": {
+        "runtime": {
+          "ConverterSupport.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "PowerShellGenerator/8.0.26188.0": {
+        "runtime": {
+          "PowerShellGenerator.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "PowerShellWriter/8.0.26188.0": {
+        "runtime": {
+          "PowerShellWriter.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "PythonWriter/8.0.26188.0": {
+        "runtime": {
+          "PythonWriter.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "PowerShellSyntax/8.0.26188.0": {
+        "runtime": {
+          "PowerShellSyntax.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "PythonSyntax/8.0.26188.0": {
+        "runtime": {
+          "PythonSyntax.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "Asysco.Amt.AmtSharedDataModel/8.0.26188.0": {
+        "runtime": {
+          "Asysco.Amt.AmtSharedDataModel.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "Asysco.Amt.Libs/8.0.26188.0": {
+        "runtime": {
+          "Asysco.Amt.Libs.dll": {
+            "assemblyVersion": "8.0.26188.0",
+            "fileVersion": "8.0.26188.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
+      "protobuf-net.Core/3.0.0.0": {
+        "runtime": {
+          "protobuf-net.Core.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.2.56.57311"
+          }
+        }
+      },
+      "YamlDotNet/17.0.0.0": {
+        "runtime": {
+          "YamlDotNet.dll": {
+            "assemblyVersion": "17.0.0.0",
+            "fileVersion": "17.0.1.0"
+          }
+        }
+      },
+      "Grpc.Net.Client/2.0.0.0": {
+        "runtime": {
+          "Grpc.Net.Client.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.76.0.0"
+          }
+        }
+      },
+      "protobuf-net.Grpc/1.0.0.0": {
+        "runtime": {
+          "protobuf-net.Grpc.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.2.5.6714"
+          }
+        }
+      },
+      "Grpc.Core.Api/2.0.0.0": {
+        "runtime": {
+          "Grpc.Core.Api.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.76.0.0"
+          }
+        }
+      },
+      "protobuf-net/3.0.0.0": {
+        "runtime": {
+          "protobuf-net.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.2.56.57311"
+          }
+        }
+      },
+      "BCrypt.Net-Next.StrongName/4.1.0.0": {
+        "runtime": {
+          "BCrypt.Net-Next.StrongName.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
+          }
+        }
+      },
+      "Grpc.Net.Common/2.0.0.0": {
+        "runtime": {
+          "Grpc.Net.Common.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.76.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SsgConverterConsole/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EclParser/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EclParserOs2200/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EclToAst/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EclToAstOs2200/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IpfConverter/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SsgConverter/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ConverterSupport/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PowerShellGenerator/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PowerShellWriter/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PythonWriter/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PowerShellSyntax/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PythonSyntax/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Asysco.Amt.AmtSharedDataModel/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Asysco.Amt.Libs/8.0.26188.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "protobuf-net.Core/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YamlDotNet/17.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Grpc.Net.Client/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "protobuf-net.Grpc/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Grpc.Core.Api/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "protobuf-net/3.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BCrypt.Net-Next.StrongName/4.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Grpc.Net.Common/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

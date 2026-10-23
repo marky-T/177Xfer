@@ -1,0 +1,21 @@
+parse + old-reference scan: 3 scripts
+--- gen\Build-ScanGroup.ps1
+  [31;1m&: [0mE:\Repos\SsgTrial\Conversion\Pipeline\Generic\SCANGROUP\gen\Build-ScanGroup.ps1:50:5[0m
+  [31;1m[0m[36;1mLine |[0m
+  [31;1m[0m[36;1m[36;1m  50 | [0m   & [36;1m"$gn\..\Invoke-CobolConversion.ps1"[0m -CobolFile $files -ProgramId  .[0m
+  [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+  [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe module 'System.Collections.Specialized.OrderedDictionary' could not[0m
+  [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mbe loaded. For more information, run 'Import-Module[0m
+  [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mSystem.Collections.Specialized.OrderedDictionary'.[0m
+--- cc\Prepare-ScanGroupCc.ps1
+  T3 TAPELD  PBDA04_L339        input INP          10 records ->   11 model lines
+  T4 TAPELD  -d_VIRD50_PI_L579  input IN1           5 records ->    6 model lines
+  SSG4_SCANGRP_PRINTS.ps1 written, 8 steps, parse errors: 0
+job SSG4_SCANGRP_PRINTS.ps1 unchanged: True
+deployed ScanParm.inc == Generic\SCANGROUP source: True
+deployed TapeldParm.inc == Generic\SCANGROUP source: True
+compare ref: 6/6 identical
+compare SCANGRP1.LionSource: 0/1 identical DIFF: 
+compare cases: 16/16 identical
+compare AmtSettings.xml: 1/1 identical
+problems: 1

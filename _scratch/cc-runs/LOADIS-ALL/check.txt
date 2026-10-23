@@ -1,0 +1,2 @@
+--- BatchController: 20261021 20:23:47.460 12 Information SSG4_LOADIS_ALL Done Id: 820 Queue: JOB_QUEUE1 (Execution time: 00:00:36:408)
+--- LOADALL_82020261021202313553.log

@@ -1,0 +1,8 @@
+ahead/behind vs origin/main: 0	0
+tracked changes (porcelain):
+untracked top-level (??):
+?? AmtLion/
+?? Lion.lic
+?? Scripts/SSGTRIAL/
+?? Scripts/Settings/AmtSettings.xml
+?? Scripts/Settings/AmtSettings.xml.bak-20260922-preAFBUS2200COBOL

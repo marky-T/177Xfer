@@ -1,0 +1,24 @@
+
+Program        ExportedCalls
+-------        -------------
+ARCHISEPARE                0
+CFH-COPY                   0
+BABA_ASCII               122
+CHABAN_ASCII              30
+UNLOADIS_ASCII             4
+ARCHIFORMAT                0
+LOADIS_ASCII               9
+UNLOADIS_MULTI             1
+CHAB100_ASCII              1
+LOADIS_MULTI               1
+LECTIS_ASCII               1
+FUSBA2_ASCII               4
+CFH-COPY_ASCII            47
+FUSBA_ASCII               32
+RECAP                     28
+TABAN_ASCII               27
+TAPELD_ASCII              14
+CONDIS2_ASCII             18
+EXTEUR                     1
+SCAN_ASCII                19
+

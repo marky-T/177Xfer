@@ -1,0 +1,6 @@
+CFH-COPY_ASCII: 47 calls, 42 with a procedure division, 5 errors
+  VIRA12_UL_L145: Cannot convert value "'" to type "System.Int64". Error: "The input string ''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\
+  VIRA15_UL_L161: Cannot convert value "'" to type "System.Int64". Error: "The input string ''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\
+  VIRA19_UL_L141: Cannot convert value "'" to type "System.Int64". Error: "The input string ''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\
+  VIRM01_UL_L160: Cannot convert value "'" to type "System.Int64". Error: "The input string ''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\
+  -d_VIRD50_UL_L134: Cannot convert value "'" to type "System.Int64". Error: "The input string ''' was not in a correct format." At E:\Repos\SsgTrial\_scratch\fix-T3-SCAN\

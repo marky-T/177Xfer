@@ -1,0 +1,10 @@
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Libraries
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Settings
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSGTRIAL
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Libraries\AmtPsCustomerLib.psm1
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Libraries\AmtPsEclLib.psm1
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Libraries\AmtPsSortLib.psm1
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Libraries\EclOptions.psm1
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Settings\AmtSettings.xml
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSGTRIAL\RUN
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSGTRIAL\RUN\CFH-COPY.ps1

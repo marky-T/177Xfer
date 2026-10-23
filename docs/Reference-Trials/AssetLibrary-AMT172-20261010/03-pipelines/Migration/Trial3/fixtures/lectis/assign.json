@@ -1,0 +1,8 @@
+{
+  "_description": "Tier-1 file-assignment map for LECTIS, modelled on the AMT PowerShell ECL skeleton. Input is a flat-sequential 120-char file (Tier-1 reads indexed FICHIN sequentially via START > LOW-VALUES + READ NEXT; no AMT indexed stack required at Tier 1). Output is the IMP printer file captured as a text .prn.",
+  "jobname": "LECTIS",
+  "fileAssignments": {
+    "FICHIN-1": "input.dat",
+    "IMP": "output.prn"
+  }
+}

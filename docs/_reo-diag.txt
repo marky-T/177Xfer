@@ -1,0 +1,34 @@
+=== 1. AMT top-level ===
+AMTTools
+Apps
+ExtraTools
+License
+Lion
+MigrationTools
+Setup
+
+=== 2. App base path layout (AFBUS_2200COBOL_AMT) ===
+E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries
+E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Development
+
+=== 3. Application.dll / Database.dll files under AMT (name + path + version) ===
+AFBUS_2200COBOL.Application.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Application | 9/25/2026 4:14:12 PM
+AFBUS_2200COBOL.Database.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Application | 9/25/2026 4:14:10 PM
+AFBUS_2200COBOL.Application.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Common\Copies\ProcedureDivision | 9/25/2026 4:14:12 PM
+AFBUS_2200COBOL.Database.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Common\Copies\ProcedureDivision | 9/25/2026 4:14:10 PM
+AFBUS_2200COBOL.Application.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Common\Subprograms | 9/25/2026 4:14:12 PM
+AFBUS_2200COBOL.Database.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Common\Subprograms | 9/25/2026 4:14:10 PM
+AFBUS_2200COBOL.Application.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Programs | 9/25/2026 4:14:12 PM
+AFBUS_2200COBOL.Database.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Programs | 9/25/2026 4:14:10 PM
+AFBUS_2200COBOL.Application.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Server\bin | 9/25/2026 4:14:12 PM
+AFBUS_2200COBOL.Database.dll | E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries\Server\bin | 9/25/2026 4:14:10 PM
+
+=== 4. Sys.ini (base path + DB) ===
+
+=== 5. Reorganize folder present? ===
+E:\Repos\AMT\AMTTools\Reorganize\AmtReoConsole.exe
+E:\Repos\AMT\AMTTools\Reorganize\AmtReorganize.exe
+E:\Repos\AMT\AMTTools\Reorganize\AmtReorganizeService.exe
+
+=== 6. Any lingering FEDERALE_AFBUS_2200COBOL refs in AMT config (json/xml/ini) ===
+E:\Repos\AMT\Lion\Lion.ini:6

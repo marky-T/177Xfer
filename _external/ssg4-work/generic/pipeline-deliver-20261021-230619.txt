@@ -1,0 +1,10 @@
+Stage Deliver, environment CC-Trial, started 2026-10-21 23:06:19
+PASS Deliver        generated after                2000-01-01 00:00:00 (-Since)
+PASS ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               10/20/2026 11:34:25 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_BABA_GN pre-build checks               10/20/2026 11:34:25 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_FUSBA_GN pre-build checks               10/21/2026 1:13:00 AM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CHABAN_GN pre-build checks               10/21/2026 1:12:59 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CONDIS2_GN pre-build checks               10/21/2026 1:12:59 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_SCAN_GN pre-build checks               10/21/2026 1:13:01 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_TAPELD_GN pre-build checks               10/21/2026 1:13:01 AM ok (1 varying input(s) at 4001)
+=== Deliver : all passed

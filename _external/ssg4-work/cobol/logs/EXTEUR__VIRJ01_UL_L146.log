@@ -1,0 +1,144 @@
+﻿2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-10-12 14:59:11 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:11 [0] Error     : ERR 000219 Field DB-EU001 is expected to have sub items but none found.
+2026-10-12 14:59:11 [0] Error     : ERR 000220 End of statement expected but REPLACE found
+2026-10-12 14:59:11 [0] Error     : ERR 000221 End of statement expected but INVOKE found
+2026-10-12 14:59:11 [0] Error     : ERR 000222 End of statement expected but REPLACE found
+2026-10-12 14:59:11 [0] Error     : ERR 000285 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-10-12 14:59:11 [0] Error     : ERR 000294 Unexpected token END-IF, expected: .
+2026-10-12 14:59:11 [0] Error     : ERR 000295 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000306 Unresolved file definition (FD) 010-EXIT
+2026-10-12 14:59:11 [0] Error     : ERR 000331 Unexpected token END-IF, expected: .
+2026-10-12 14:59:11 [0] Error     : ERR 000332 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000339 Unexpected token END-IF, expected: .
+2026-10-12 14:59:11 [0] Error     : ERR 000340 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000345 Operand C-PHA-EUR is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000345 Operand C-PHA-EUR must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000353 Operand C-PHA-EUR is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000354 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000355 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000356 Operand C-PHA-EUR is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000357 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000358 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000359 Operand C-PHA-EUR is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000359 Invalid expression [C-PHA-EUR] encountered.
+2026-10-12 14:59:11 [0] Error     : ERR 000359 Operand 035-EXIT is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000360 Invalid expression [035-EXIT] encountered.
+2026-10-12 14:59:11 [0] Error     : ERR 000385 End of statement expected but END-IF found
+2026-10-12 14:59:11 [0] Error     : ERR 000399 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000400 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000402 Unresolved file definition (FD) 090-EXIT
+2026-10-12 14:59:11 [0] Error     : ERR 000430 Unexpected token END-IF, expected: .
+2026-10-12 14:59:11 [0] Error     : ERR 000431 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000433 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000434 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000433 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000435 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000445 Unexpected token END-IF, expected: .
+2026-10-12 14:59:11 [0] Error     : ERR 000446 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000448 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000449 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000448 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000450 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000458 End of statement expected but 500-LECTURE-INA-EXIT found
+2026-10-12 14:59:11 [0] Error     : ERR 000476 Operand END-DIVIDE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000477 Operand END-DIVIDE must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000482 Operand END-MULTIPLY is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000483 Operand END-MULTIPLY must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000482 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000484 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000491 Operand END-DIVIDE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000492 Operand END-DIVIDE must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000496 Operand END-MULTIPLY is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000497 Operand END-MULTIPLY must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000496 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000498 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000496 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000499 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000506 Operand END-DIVIDE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000507 Operand END-DIVIDE must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000513 Operand END-MULTIPLY is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000514 Operand END-MULTIPLY must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000513 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000515 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000513 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000516 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000522 Operand END-DIVIDE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000523 Operand END-DIVIDE must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000528 Operand END-MULTIPLY is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000529 Operand END-MULTIPLY must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000528 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000530 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000528 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000531 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000532 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000533 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000532 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000534 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000538 Paragraph 999-ESQL-ERR must not be nested within another statement. Please code a preceding period.
+2026-10-12 14:59:11 [0] Error     : ERR 000561 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000562 Paragraph 999-ESQL-ERR-NO-DISP must not be nested within another statement. Please code a preceding period.
+2026-10-12 14:59:11 [0] Error     : ERR 000570 Unexpected token END-IF, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000604 Operand END-IF is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000605 Operand END-IF must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000604 Operand END-PERFORM is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000606 Operand END-PERFORM must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000610 End of statement expected but END-PERFORM found
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand SYS is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand SYS must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand $LIB is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand $LIB must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand $ is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand $ must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand * is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand * must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand APP is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand APP must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000613 Operand $3 is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000615 Operand $3 must be a variable.
+2026-10-12 14:59:11 [0] Error     : ERR 000616 Unexpected token LINK, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000617 Unexpected token TEMPABS, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000618 Unexpected token EXTEUR, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000619 Unexpected token EXTEUR, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000622 Unexpected token LIBCODENAME, expected: 
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand SIZE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand SIZE must be an integer variable, a condition name or a switch mnemonic
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand = is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand SIZE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand + is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand FOR is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand URTS is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Operand $TABLES is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000623 Unexpected end of statement
+2026-10-12 14:59:11 [0] Error     : ERR 000624 Operand ALS_INIT_SIZE is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000624 Operand ALS_INIT_SIZE must be an integer variable, a condition name or a switch mnemonic
+2026-10-12 14:59:11 [0] Error     : ERR 000624 Operand = is not declared.
+2026-10-12 14:59:11 [0] Error     : ERR 000624 Unexpected end of statement
+2026-10-12 14:59:11 [0] Error     : ERR 000627 Unexpected token SYS, expected: 
+2026-10-12 14:59:12 [0] Error     : ERR 000347 Operand C-PHA-EUR is not declared.
+2026-10-12 14:59:12 [0] Error     : ERR 000347 SQL Table/View EU001 not found
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : EXTEURVIRJ01ULL146 CONVERSION STATISTICS
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------
+2026-10-12 14:59:12 [0] Phase     : D O N E
+2026-10-12 14:59:12 [0] Phase     : ------------------------------------------------------------

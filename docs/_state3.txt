@@ -1,0 +1,6 @@
+current branch: feature/federale/ssg-scripts-release
+feature branch last commit: 82883357f0 Merged PR 12624: Valtab that can be loaded in the control center
+main last commit: 82883357f0 Merged PR 12624: Valtab that can be loaded in the control center
+remote has feature branch: 82883357f05d5ada7340466947d687e42bee4c76	refs/heads/feature/federale/ssg-scripts-release
+_fedpush.txt exists: True
+index.lock present (push/commit in progress?): False

@@ -1,0 +1,319 @@
+﻿2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:17 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-08-18 18:26:17 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:23 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:23 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-08-18 18:26:23 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:23 [0] Error     : ERR 000075 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000079 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000083 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000087 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000168 File FIC-REPORT must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000168 File FIC-DESCRIPT must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000168 File FIC-UNLOAD must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000168 File FIC-FORMAT must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000187 Operand LGN-REP(4:21) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000190 Operand LGN-REP(7:2) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000190 Invalid expression [LGN-REP(7:2)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000194 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000195 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000196 Operand LGN-REP(10:2) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000196 Invalid expression [LGN-REP(10:2)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000197 Operand LGN-REP(13:2) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000197 Invalid expression [LGN-REP(13:2)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000198 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000198 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000198 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000205 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000205 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000205 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000211 Operand LGN-REP(1:7) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000213 Unexpected token END-PERFORM, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000217 Operand LGN-REP is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000217 Operand LGN-REP must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000225 Operand LGN-DES is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000225 Operand LGN-DES must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000231 Operand LGN-DES(CPT-CHAR:30) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000231 Invalid expression [LGN-DES(CPT-CHAR:30)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000232 Operand LGN-DES(6:7) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000232 Invalid expression [LGN-DES(6:7)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000233 Operand LGN-DES(13:10) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000233 Invalid expression [LGN-DES(13:10)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000234 Operand LGN-REP is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000234 Invalid expression [LGN-REP] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000243 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000244 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000243 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000245 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000246 Operand END-PERFORM is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000247 Operand END-PERFORM must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000251 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000252 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000253 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000253 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000253 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000256 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000262 Operand LGN-REP(1:13) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000264 Unexpected token END-PERFORM, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000267 Operand LGN-REP is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000267 Operand LGN-REP must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000271 Operand LGN-REP(CPT-CHAR:30) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000271 Invalid expression [LGN-REP(CPT-CHAR:30)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000273 Operand LGN-REP(1:10) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000275 Operand LGN-REP is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000275 Operand LGN-REP must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000280 Operand LGN-REP(5:CPT-CHAR) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000280 Invalid expression [LGN-REP(5:CPT-CHAR)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000283 Operand LGN-REP(CPT-CHAR:3) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000283 Invalid expression [LGN-REP(CPT-CHAR:3)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000284 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000284 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000284 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000286 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000298 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000298 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000298 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000299 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000300 Operand END-IF must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000299 Operand END-PERFORM is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000301 Operand END-PERFORM must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000310 Operand LGN-FOR is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000310 Operand LGN-FOR must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000310 LGN-FOR must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000334 End of statement expected but END-READ found
+2026-08-18 18:26:23 [0] Error     : ERR 000334 Paragraph END-READ must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000343 End of statement expected but END-READ found
+2026-08-18 18:26:23 [0] Error     : ERR 000343 Paragraph END-READ must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000353 Operand LGN-UNL(1:0) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000353 Invalid expression [LGN-UNL(1:0)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000354 Operand LGN-UNL(2:1) is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000354 Invalid expression [LGN-UNL(2:1)] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000356 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000357 Operand END-READ must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000054 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000103  in copy: ESQL-INVOKE|NM-TAB|CHK_PNT_RST End of statement expected but INVOKE found
+2026-08-18 18:26:23 [0] Error     : ERR 000106  in copy: ESQL-INVOKE|NM-TAB|1 End of statement expected but INVOKE found
+2026-08-18 18:26:23 [0] Error     : ERR 000108 File CHERCHEUSE must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000130 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000133 Unexpected token 'USE DEFAULT QUALIFIER AFTST', expected: ','
+2026-08-18 18:26:23 [0] Error     : ERR 000137 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000167 Unexpected token END-READ, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000187 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000188 Operand END-READ must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000187 Operand END-PERFORM is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000189 Operand END-PERFORM must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000187 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000190 Operand END-IF must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000194 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000195 Operand END-READ must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000194 Operand END-PERFORM is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000196 Operand END-PERFORM must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000199 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000218 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000219 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000244 Paragraph END-EVALUATE must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000250 Unexpected token =, expected: ')'
+2026-08-18 18:26:23 [0] Error     : ERR 000260 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000265 Operand NO-RCH is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000265 Invalid expression [NO-RCH] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000269 Paragraph END-EVALUATE must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000283 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000295 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000306 Unexpected token =, expected: ')'
+2026-08-18 18:26:23 [0] Error     : ERR 000321 Unexpected token END-EVALUATE, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000324 Unexpected token (, expected: Set
+2026-08-18 18:26:23 [0] Error     : ERR 000332 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000340  in copy: 999-ESQL-ERR Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000340  in copy: 999-ESQL-ERR Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000342 Paragraph 999-ESQL-ABORT must not be nested within another statement. Please code a preceding period.
+2026-08-18 18:26:23 [0] Error     : ERR 000065 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000069 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000070 End of statement expected but 3 found
+2026-08-18 18:26:23 [0] Error     : ERR 000071 End of statement expected but 3 found
+2026-08-18 18:26:23 [0] Error     : ERR 000075 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000079 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000121 File CHERCHEUSE must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000121 File FICUNLOAD must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000121 File FICARCHI must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000121 File FICNARCHI must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000139 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000140 Operand END-READ must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000150 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000151 Operand END-READ must be a numeric variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000161 Operand CLE-CHERCHEUSE is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000161 Operand CLE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000163 Operand CLE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000163 Invalid expression [CLE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000164 Operand LIGNE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000164 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000165 Operand LIGNE-ARCHI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000165 Operand LIGNE-ARCHI must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000165 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000168 Operand CLE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000168 Operand CLE-CHERCHEUSE is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000170 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000172 Operand CLE-CHERCHEUSE is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000172 Operand CLE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Operand LIGNE-NARCHI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Operand LIGNE-NARCHI must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Operand LIGNE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Operand LIGNE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000173 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000177 Operand CLE-CHERCHEUSE is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000177 Operand CLE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000179 Unexpected token END-EVALUATE, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Operand LIGNE-NARCHI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Operand LIGNE-NARCHI must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000183 LIGNE-NARCHI must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Operand LIGNE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Operand LIGNE-UNLOAD is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000183 Invalid expression [LIGNE-UNLOAD] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000186 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000195 Operand LIGNE-ARCHI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000195 Operand LIGNE-ARCHI must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000195 LIGNE-ARCHI must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000057 End of statement expected but 1 found
+2026-08-18 18:26:23 [0] Error     : ERR 000083 File FICOUT must have at least 1 layout.
+2026-08-18 18:26:23 [0] Error     : ERR 000098 Operand LIGNEOUT is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000098 Operand LIGNEOUT must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000098 LIGNEOUT must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000107 Operand LIGNEOUT is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000107 Operand LIGNEOUT must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000107 LIGNEOUT must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000116 Operand LIGNEOUT is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000116 Operand LIGNEOUT must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000116 LIGNEOUT must be a file record defined in an FD entry
+2026-08-18 18:26:23 [0] Error     : ERR 000049 End of statement expected but ** found
+2026-08-18 18:26:23 [0] Error     : ERR 000052 End of statement expected but * found
+2026-08-18 18:26:23 [0] Error     : ERR 000054 End of statement expected but SOURCE-COMPUTER found
+2026-08-18 18:26:23 [0] Error     : ERR 000055 End of statement expected but * found
+2026-08-18 18:26:23 [0] Error     : ERR 000057 End of statement expected but OBJECT-COMPUTER found
+2026-08-18 18:26:23 [0] Error     : ERR 000058 End of statement expected but * found
+2026-08-18 18:26:23 [0] Error     : ERR 000060 End of statement expected but SPECIAL-NAMES found
+2026-08-18 18:26:23 [0] Error     : ERR 000073 End of statement expected but ** found
+2026-08-18 18:26:23 [0] Error     : ERR 000075 End of statement expected but INVOKE found
+2026-08-18 18:26:23 [0] Error     : ERR 000076 End of statement expected but COPYING found
+2026-08-18 18:26:23 [0] Error     : ERR 000164 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000178 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000197 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000211 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000224 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000237 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000254 Picture has illegal characters [X(0)]
+2026-08-18 18:26:23 [0] Error     : ERR 000269 End of statement expected but ** found
+2026-08-18 18:26:23 [0] Error     : ERR 000276 Area expected, but 1 found.
+2026-08-18 18:26:23 [0] Error     : ERR 000278 Area expected, but 1 found.
+2026-08-18 18:26:23 [0] Error     : ERR 000577 Unexpected token *, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000580 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000580 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000581 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000581 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000582 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000582 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000583 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000583 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000584 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000584 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000585 Operand IO-ERROR-STATUS is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000585 Invalid expression [IO-ERROR-STATUS] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000585 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000585 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000587 Unexpected token *, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000591 Unexpected token *, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000593 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000593 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000594 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000594 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000595 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000595 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000596 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000596 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000597 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000597 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000599 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000599 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000600 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000600 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000601 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000601 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000602 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000602 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000603 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000603 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000604 Operand IO-ERROR-STATUS is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000604 Invalid expression [IO-ERROR-STATUS] encountered.
+2026-08-18 18:26:23 [0] Error     : ERR 000605 End of statement expected but * found
+2026-08-18 18:26:23 [0] Error     : ERR 000605 DISPLAY output device [PRI] unknown
+2026-08-18 18:26:23 [0] Error     : ERR 000604 Operand PRI is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000066 Picture [] for var [FILLER] not supported.
+2026-08-18 18:26:23 [0] Error     : ERR 000066 Picture has illegal characters [X(-1)]
+2026-08-18 18:26:23 [0] Error     : ERR 000074 Picture [] for var [FILLER] not supported.
+2026-08-18 18:26:23 [0] Error     : ERR 000074 Picture has illegal characters [X(-1)]
+2026-08-18 18:26:23 [0] Error     : ERR 000118 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000125 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000126 Operand END-READ must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000131 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000132 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000135 Operand END-READ is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000136 Operand END-READ must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000141 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000142 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000160 Operand END-IF is not declared.
+2026-08-18 18:26:23 [0] Error     : ERR 000161 Operand END-IF must be a variable.
+2026-08-18 18:26:23 [0] Error     : ERR 000177 Unexpected token END-IF, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000204 Unexpected token CACHE, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000207 Unexpected token ARCH, expected: 
+2026-08-18 18:26:23 [0] Error     : ERR 000210 Unexpected token LIBCODENAME, expected: 
+2026-08-18 18:26:24 [0] Error     : ERR 000019 End of statement expected but F found
+2026-08-18 18:26:24 [0] Error     : ERR 000020 End of statement expected but BLOCK found
+2026-08-18 18:26:24 [0] Error     : ERR 000020 End of statement expected but LSE found
+2026-08-18 18:26:24 [0] Error     : ERR 000022 End of statement expected but ND found
+2026-08-18 18:26:24 [0] Error     : ERR 000025 End of statement expected but 01 found
+2026-08-18 18:26:24 [0] Error     : ERR 000082 File TAPEIN must have at least 1 layout.
+2026-08-18 18:26:24 [0] Error     : ERR 000087 Operand ZIN is not declared.
+2026-08-18 18:26:24 [0] Error     : ERR 000087 Operand ZIN must be a variable.
+2026-08-18 18:26:24 [0] Error     : ERR 000114 Unexpected token ON, expected: 
+2026-08-18 18:26:24 [0] Error     : ERR 000116 Unexpected token &, expected: 
+2026-08-18 18:26:24 [0] Error     : ERR 000032 Key CLEF has not been declared for file DISQ.
+2026-08-18 18:26:24 [0] Error     : ERR 000032 Key CLEG has not been declared for file DISQ.
+2026-08-18 18:26:24 [0] Error     : ERR 000041 Field ZBUF1 is expected to have sub items but none found.
+2026-08-18 18:26:24 [0] Error     : ERR 000047 Operand CLEF is not declared.
+2026-08-18 18:26:24 [0] Error     : ERR 000047 Operand CLEF must be a variable.
+2026-08-18 18:26:24 [0] Error     : ERR 000032 Key CLEF has not been declared for file DISQ.
+2026-08-18 18:26:24 [0] Error     : ERR 000032 Key CLEG has not been declared for file DISQ.
+2026-08-18 18:26:24 [0] Error     : ERR 000041 Field ZBUF1 is expected to have sub items but none found.
+2026-08-18 18:26:24 [0] Error     : ERR 000047 Operand CLEF is not declared.
+2026-08-18 18:26:24 [0] Error     : ERR 000047 Operand CLEF must be a variable.
+2026-08-18 18:26:24 [0] Error     : ERR 000226 SQL Table/View chk_pnt_rst not found
+2026-08-18 18:26:24 [0] Error     : ERR 000250 SQL Table/View 1 not found
+2026-08-18 18:26:24 [0] Error     : ERR 000276 SQL Table/View Chk_Pnt_Rst not found
+2026-08-18 18:26:24 [0] Error     : ERR 000306 SQL Table/View chk_pnt_rst not found
+2026-08-18 18:26:24 [0] Error     : ERR 000324 SQL Table/View chk_pnt_rst not found
+2026-08-18 18:26:24 [0] Error     : ERR 000586 DEPART-WITH-ROLLBACK must be a section or paragraph within this program
+2026-08-18 18:26:24 [0] Error     : ERR 000084 Unexpected end of statement
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Error     : Error creating output file [C:\\Users\\MARK~1.xrf]
+2026-08-18 18:26:24 [0] Error     : Error creating output file [C:\\Users\\MARK~1_Import.txt]
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : AFBUS_COBOL CONVERSION STATISTICS
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------
+2026-08-18 18:26:24 [0] Phase     : D O N E
+2026-08-18 18:26:24 [0] Phase     : ------------------------------------------------------------

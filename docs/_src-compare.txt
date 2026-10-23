@@ -1,0 +1,4 @@
+SSG-Source exists: False ; Input exists: True
+=== SSG-Source files ===
+
+=== hash compare (match base name, case/ext-insensitive) ===

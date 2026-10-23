@@ -1,0 +1,139 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. SCAN.
+       AUTHOR. BOURDEAUD HUY P. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. 
+       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. 
+       SPECIAL-NAMES.  PRINTER IS LISTE.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN   
+                              DISC IVIR002CLO.   
+           SELECT  PRT  ASSIGN  TO  PRINTER.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+                   LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 10  RECORDS
+           RECORD CONTAINS 900  CHARACTERS
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X(900). 
+       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   
+       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  
+       WORKING-STORAGE SECTION. 
+       01  ZONE-LECTURE PIC X(900).   
+       01  REC-AREA.
+           03  PRINT-LINE-1             PIC X(100).  
+           03  PRINT-LINE-101             PIC X(100).  
+           03  PRINT-LINE-201             PIC X(100).  
+           03  PRINT-LINE-301             PIC X(100).  
+           03  PRINT-LINE-401             PIC X(100).  
+           03  PRINT-LINE-501             PIC X(100).  
+           03  PRINT-LINE-601             PIC X(100).  
+           03  PRINT-LINE-701             PIC X(100).  
+           03  PRINT-LINE-801             PIC X(100).  
+       01  SKIP                         PIC  9(10)  COMP VALUE 0.   
+       01  LINE-CNT            PIC 9(10) COMP    VALUE 66.  
+       01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.   
+       01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0. 
+       01  H-LINE   USAGE DISPLAY-1.
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+       01  CT-LINE                               USAGE  DISPLAY-1.  
+           03 FILLER       PIC XX  VALUE '**'.  
+           03 CT-CT        PIC ZZZZZZ9. 
+           03 FILLER        PIC XX   VALUE '**'.
+           03 FILLER          PIC X(121) VALUE SPACES.  
+       01  F-LINE  USAGE DISPLAY-1. 
+           03 FILLER        PIC XX  VALUE '**'. 
+           03 F-CT        PIC ZZZZZZ9.  
+           03 FILLER         PIC XX   VALUE '**'.   
+           03 FILLER          PIC X(08) VALUE '........'.   
+           03 FILLER          PIC X(10) VALUE '2.........'. 
+           03 FILLER          PIC X(10) VALUE '3.........'. 
+           03 FILLER          PIC X(10) VALUE '4.........'. 
+           03 FILLER          PIC X(10) VALUE '5.........'. 
+           03 FILLER          PIC X(10) VALUE '6.........'. 
+           03 FILLER          PIC X(10) VALUE '7.........'. 
+           03 FILLER          PIC X(10) VALUE '8.........'. 
+           03 FILLER          PIC X(10) VALUE '9.........'. 
+           03 FILLER          PIC X(10) VALUE '0.........'. 
+           03 FILLER          PIC X(10) VALUE '1.........'. 
+           03 FILLER          PIC X(10) VALUE '2.........'. 
+           03 FILLER          PIC X(03) VALUE '3..'.
+       01  FIVE-CT PIC 9(10) COMP VALUE 6.  
+       01  M-LINE                                USAGE  DISPLAY-1.  
+           03  FILLER         PIC X(20) 
+               VALUE '** END SCAN **      '.
+           03  FILLER         PIC X(37) 
+               VALUE  'RECORDS READ FROM IVIR002CLO = '. 
+           03  M-CT           PIC Z(10)9.   
+           03  FILLER         PIC X(19) 
+               VALUE  ' RECORD MATCHING = '.
+           03  FN-CT          PIC Z(10)9.   
+       PROCEDURE DIVISION.  
+       OPEN-FILES SECTION.  
+       FIRST-READ.  
+           OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.   
+       LR. READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT. 
+           ADD 1 TO REC-IN-CT.  
+       TEST-FIELDS. 
+                   GO TO FOUND-REC. 
+           GO TO LR.
+       SUITE-RECHERCHE. 
+       FOUND-REC.   
+           ADD  1  TO  REC-FOUND-CT.
+           MOVE ZERO  TO  LINE-CNT. 
+           ADD 1 TO FIVE-CT.
+           IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT
+             WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT   
+            ELSE   MOVE REC-IN-CT TO CT-CT  
+             WRITE PRT-LINE FROM CT-LINE AFTER 1.   
+           ADD 1 TO LINE-CNT.   
+           MOVE  1  TO  SKIP.   
+           WRITE  PRT-LINE  FROM  PRINT-LINE-1  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-101  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-201  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-301  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-401  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-501  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-601  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-701  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           WRITE  PRT-LINE  FROM  PRINT-LINE-801  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+           MOVE SPACES  TO REC-AREA.
+           MOVE  1  TO  SKIP.     GO  TO  LR.   
+       END-OUT. 
+           MOVE  REC-IN-CT  TO  M-CT.   
+           MOVE REC-FOUND-CT  TO  FN-CT.
+           WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.   
+           CLOSE  TAPEIN  PRT.  
+           STOP RUN.

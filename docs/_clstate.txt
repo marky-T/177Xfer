@@ -1,0 +1,11 @@
+local HEAD: 1bb3a0aec8 Remove VALIDATION-PROMPT.md from Scripts_SSG (internal dev artifact) and drop its references in README/RELEASE-NOTES
+VP in HEAD tree: 0
+Scripts_SSG files in HEAD: 83
+remote tip: 555c32b4b172ed012541729b281d0bdbbda8dd50	refs/heads/feature/federale/ssg-scripts-release
+local branch tip: 1bb3a0aec8abfb08c75f485d66c1b6237e94a884
+uncommitted:
+?? AmtLion/
+?? Lion.lic
+?? Scripts/SSGTRIAL/
+?? Scripts/Settings/AmtSettings.xml
+?? Scripts/Settings/AmtSettings.xml.bak-20260922-preAFBUS2200COBOL

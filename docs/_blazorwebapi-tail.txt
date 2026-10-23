@@ -1,0 +1,150 @@
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 15372                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	10:48:33.450	 37	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 15372                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	11:18:33.487	 84	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 23076                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	11:20:34.946	 11	Information	SESSION CLEANUP: Started the session validator timer | Interval [00h:30m:00s]
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 23076                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	11:50:34.974	 42	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 23076                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	12:20:35.005	 81	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 23076                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	12:50:35.034	 48	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 23076                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	13:20:35.053	 85	Information	SESSION CLEANUP: Session validator timer ticked | No sessions to dispose
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.exe                      **
+**  Version           : AMT 177a - 260818                                                                             **
+**  File version      : 8.0.26230.50                                                                                  **
+**  Full version      : 8.0.26230.50                                                                                  **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 14 days.                                                                                      **
+**  PID               : 7512                                                                                          **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      :  (8)  MHz.                                                                                    **
+**  Physical memory   : 0                                                                                             **
+**  Running as        : VMFEDPE08$                                                                                    **
+************************************************************************************************************************
+
+20260924	14:20:48.728	 11	Information	SESSION CLEANUP: Started the session validator timer | Interval [00h:30m:00s]

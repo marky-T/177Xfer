@@ -1,0 +1,3 @@
+EXIT=0
+sizeMB=982.9
+filecount=1306

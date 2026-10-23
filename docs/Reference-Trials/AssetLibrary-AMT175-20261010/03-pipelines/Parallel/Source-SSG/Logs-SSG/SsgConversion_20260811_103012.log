@@ -1,0 +1,9 @@
+﻿2026-08-11 10:30:12 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:30:12 [0] Phase     : SSG to PowerShell Converter
+2026-08-11 10:30:12 [0] Phase     : ------------------------------------------------------------
+2026-08-11 10:30:12 [0] Log       : Input folder : C:\Amt\Parallel\Source-SSG\Input-SSG
+2026-08-11 10:30:12 [0] Log       : Output folder: C:\Amt\Parallel\Source-SSG\Output-SSG
+2026-08-11 10:30:12 [0] Log       : SSG source files found: 8
+2026-08-11 10:30:12 [0] Error     :   Error converting ASSURFED_UTILIT_LECTIS_MULT(P): Index was outside the bounds of the array.
+2026-08-11 10:30:12 [0] Log       : 
+2026-08-11 10:30:12 [0] Log       : Conversion complete: 0 succeeded, 1 failed

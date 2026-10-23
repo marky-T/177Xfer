@@ -1,0 +1,14 @@
+  Determining projects to restore...
+  Restored E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SsgConverter.csproj (in 194 ms).
+E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SymstreamExpressionParser.cs(80,20): warning CS0219: The variable 'notPrecededByOpeningBracket' is assigned but its value is never used [E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SsgConverter.csproj]
+E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SymstreamExpressionParser.cs(81,20): warning CS0219: The variable 'notFollowedByClosingBracket' is assigned but its value is never used [E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SsgConverter.csproj]
+  SsgConverter -> E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\bin\Debug\net10.0\SsgConverter.dll
+
+Build succeeded.
+
+E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SymstreamExpressionParser.cs(80,20): warning CS0219: The variable 'notPrecededByOpeningBracket' is assigned but its value is never used [E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SsgConverter.csproj]
+E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SymstreamExpressionParser.cs(81,20): warning CS0219: The variable 'notFollowedByClosingBracket' is assigned but its value is never used [E:\Repos\SsgTrial\_scratch\fix-T3-045\src\SsgConverter\SsgConverter.csproj]
+    2 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.13

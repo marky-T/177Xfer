@@ -1,0 +1,155 @@
+diff --git "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SymstreamExpressionParser.cs" "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamExpressionParser.cs"
+index 606fc06..873c25c 100644
+--- "a/E:\\Repos\\amt-go-net-ref\\Migration Tools\\SsgConverter\\SsgConverter\\SymstreamExpressionParser.cs"	
++++ "b/E:\\Repos\\SsgTrial\\SsgConverter\\Source\\SsgConverter\\SymstreamExpressionParser.cs"
+@@ -27,4 +27,9 @@ namespace Ecl.SsgConverter {
+       text = text.Trim();
+ 
++      // guard: whitespace-only input trims to empty
++      if (String.IsNullOrEmpty(text)) {
++        throw new ArgumentException("The expression text may not be null or empty.");
++      }
++
+       // note: We would start with parenthesized parts but these do not
+       //       occur in STA sources so we can skip them for now.
+@@ -105,8 +110,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThanOrEqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -119,8 +126,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.UnequalTo, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -133,8 +142,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThanOrEqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -147,8 +158,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.LessThan, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -161,8 +174,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.EqualTo, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -175,8 +190,10 @@ namespace Ecl.SsgConverter {
+           String left = text.Substring(0, match.Index);
+           String right = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
+-          return expression;
++          if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right)) {
++            SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.GreaterThan, exprRight);
++            return expression;
++          }
+         }
+       }
+@@ -268,4 +285,5 @@ namespace Ecl.SsgConverter {
+         if (!left.StartsWith("NOT", StringComparison.OrdinalIgnoreCase) && !left.StartsWith("-") && !left.StartsWith("+")) {
+           SymstreamExpression exprLeft = Parse(left, globalVariables, localVariables, identifierOverString);
++          if (String.IsNullOrEmpty(right)) { return exprLeft; }
+           SymstreamExpression exprRight = Parse(right, globalVariables, localVariables, identifierOverString);
+           SymstreamExpressionBinary expression = new SymstreamExpressionBinary(exprLeft, BinaryOperator.Plus, exprRight);
+@@ -297,7 +315,10 @@ namespace Ecl.SsgConverter {
+         if (match.Success) {
+           String operand = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
+-          return expression;
++          // guard: operand empty after unary strip (e.g. standalone '-' or '---') ΓÇö treat as literal
++          if (!String.IsNullOrWhiteSpace(operand)) {
++            SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Negative, exprOperand);
++            return expression;
++          }
+         }
+       }
+@@ -309,7 +330,10 @@ namespace Ecl.SsgConverter {
+         if (match.Success) {
+           String operand = text.Substring(match.Index + match.Length);
+-          SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
+-          SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
+-          return expression;
++          // guard: operand empty after unary strip ΓÇö treat as literal
++          if (!String.IsNullOrWhiteSpace(operand)) {
++            SymstreamExpression exprOperand = Parse(operand, globalVariables, localVariables, identifierOverString);
++            SymstreamExpressionUnary expression = new SymstreamExpressionUnary(UnaryOperator.Positive, exprOperand);
++            return expression;
++          }
+         }
+       }
+@@ -430,7 +454,13 @@ namespace Ecl.SsgConverter {
+     private Boolean IsSearchConditional (String text) {
+ 
+-      return text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
+-        text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
+-        text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase);
++      // require both the object keyword AND the SEARCH keyword to avoid false positives
++      // on COBOL identifiers that happen to start with ROW/COLUMN/KEYWORD after a binary split
++      if (text.StartsWith("ROW ", StringComparison.OrdinalIgnoreCase) ||
++          text.StartsWith("COLUMN ", StringComparison.OrdinalIgnoreCase) ||
++          text.StartsWith("KEYWORD ", StringComparison.OrdinalIgnoreCase)) {
++        return text.IndexOf(" SEARCH ", StringComparison.OrdinalIgnoreCase) > -1 ||
++               text.IndexOf("\tSEARCH ", StringComparison.OrdinalIgnoreCase) > -1;
++      }
++      return false;
+     } // IsSearchConditional
+ 

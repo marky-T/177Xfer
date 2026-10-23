@@ -1,0 +1,139 @@
+
+       IDENTIFICATION DIVISION.     
+       PROGRAM-ID.    CHABAN. 
+       AUTHOR. BOURDEAUD HUY. 
+       ENVIRONMENT DIVISION.  
+       CONFIGURATION SECTION. 
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           PAGE IS SAUT.
+       INPUT-OUTPUT SECTION.  
+       FILE-CONTROL.    
+           SELECT FIC ASSIGN TO DISC FICHOUT-1.  
+           SELECT CAR ASSIGN TO CARD-READER.    
+       DATA DIVISION.   
+       FILE SECTION.    
+       FD  FIC    
+           BLOCK 1 RECORDS   
+           LABEL RECORD STANDARD    
+           DATA RECORD ZFIC.  
+       01  ZFIC               PIC X(80).  
+       FD  CAR    
+           LABEL RECORD OMITTED     
+           DATA RECORD ZIN.   
+       01  ZIN      PIC X(80).
+       WORKING-STORAGE SECTION.     
+       01  COUNTERS  VALUE ALL ZEROES.    
+           03  CTOUT          PIC S9(7).  
+           03  CTFS           PIC S9(5).  
+           03  CTCAR          PIC S9(5).  
+       01  ZOUT     VALUE SPACES.   
+           03  ZT1         PIC X(80).  
+       01  ZOUTR    REDEFINES ZOUT. 
+           03  ZTR OCCURS 80 PIC X. 
+       01  ZCAR.  
+           03  FILLER         PIC X(80).
+       01  ZCPOS REDEFINES ZCAR.    
+           03  ZCEM OCCURS 80 PIC X.
+       01  INDEKS.
+           03  IED            PIC S9999 VALUE 1.
+           03  IEF            PIC S9999 VALUE 1.
+           03  IRD            PIC S9999 VALUE 1.
+       01  ZTIT.  
+           03  FILLER      PIC X(4) VALUE ALL '*'.    
+           03  FILLER         PIC X(2) VALUE SPACES.  
+           03  FILLER         PIC X(16) VALUE 'RECORD NUMERO **'. 
+           03  FILCT          PIC Z(7).   
+       01  CTSPEC             PIC S9(7) VALUE 0.
+       01  CTTEST             PIC S9(7) VALUE 0.
+       01  NBFOIS             PIC S9(7) VALUE 0.
+       01  ZONE               PIC X VALUE SPACES.     
+       01  TABLE-ALPHA        PIC X(26) VALUE   
+                              'ABCDEFGHIJKLMNOPQRSTUVWXYZ'. 
+       01  TABALPHA REDEFINES TABLE-ALPHA.
+           03  ALPHA OCCURS 26  PIC X.    
+       01  VALEUR             PIC S9999 VALUE 0.
+       01  VINSIX             PIC S99  VALUE 26.
+       01  ZREP               PIC S9999 VALUE 0.
+       01  DIX                PIC S99  VALUE 10.
+       01  TABLE-NUM      PIC X(10) VALUE '0123456789'.     
+       01  TABNUM  REDEFINES TABLE-NUM.   
+           03  NUMER  OCCURS 10         PIC X.  
+       01  RETOUR        PIC X VALUE SPACE.     
+       PROCEDURE DIVISION.    
+       P1.  
+           OPEN INPUT CAR OUTPUT FIC.     
+       PAR1.   
+           ADD 1 TO CTSPEC.    
+           READ CAR INTO ZT1 AT END GO TO STATIS.  
+           ADD 1 TO CTCAR.    
+           PERFORM ECRIOUT THRU FIECRIOUT.
+       STATIS.    
+           DISPLAY 'STATISTIQUES DE CREATION' UPON PRINTER. 
+           DISPLAY 'NOMBRE DE CARTES DONNEES LUES' UPON PRINTER.  
+           ADD CTFS CTCAR GIVING CTTEST.  
+           DISPLAY CTTEST UPON PRINTER.   
+           DISPLAY 'NOMBRE DE CARTES DONNEES POUR FS' CTFS  
+                                        UPON PRINTER. 
+           DISPLAY 'NOMBRE DE CARTES DONNEES CREATION' CTCAR
+                                        UPON PRINTER. 
+           DISPLAY 'NOMBRE DE RECORDS CREES' CTOUT  UPON PRINTER. 
+           IF CTSPEC = CTTEST 
+                    DISPLAY 'FIN DU TRAVAIL,TOUT EST OK' UPON PRINTER   
+           ELSE DISPLAY 'VERIFIER OUTPUT' 'IL Y AVAIT TROP PEU DE CARTES
+      -      ' DONNEES OU FS' UPON PRINTER.     
+       FIN. 
+           CLOSE FIC CAR.     
+           STOP RUN.    
+       ECRIOUT.   
+           WRITE ZFIC FROM ZOUT.    
+           ADD 1 TO CTOUT.    
+       FIECRIOUT. 
+           EXIT.  
+       PARAG.     
+           MOVE ZCEM (IED) TO ZTR (IRD).  
+           ADD 1 TO IED IRD.  
+           IF IED NOT > IEF GO TO PARAG.  
+       FIPARAG.   
+           EXIT.  
+       RECHA.     
+           MOVE 0 TO IED.     
+       INC1.
+           ADD 1 TO IED.
+           IF ZONE = ALPHA (IED) GO TO CONT1.   
+           IF IED < 26 GO TO INC1.  
+           GO TO RECHN. 
+       CONT1.     
+           SUBTRACT IED FROM VINSIX GIVING ZREP.
+           IF ZREP NOT < VALEUR ADD VALEUR TO IED     
+                                MOVE ALPHA (IED) TO ZONE    
+                                MOVE SPACE TO RETOUR  
+                                GO TO FIRECHA.  
+           SUBTRACT ZREP FROM VALEUR GIVING IED.
+           MOVE ALPHA (IED) TO ZONE.
+           MOVE 'R' TO RETOUR.
+           MOVE 1 TO VALEUR.  
+           GO TO FIRECHA.     
+       RECHN.     
+           MOVE 0 TO IED.     
+       INC2.
+           ADD 1 TO IED.
+           IF ZONE = NUMER (IED) GO TO CONT2.   
+           IF IED < 10 GO TO INC2.  
+           MOVE '*' TO ZONE.  
+           MOVE SPACE TO RETOUR.    
+           GO TO FIRECHA.     
+       CONT2.     
+           SUBTRACT IED FROM DIX GIVING ZREP.   
+           IF ZREP NOT < VALEUR ADD VALEUR TO IED     
+                                MOVE NUMER (IED) TO ZONE    
+                                MOVE SPACE TO RETOUR  
+.                               GO TO FIRECHA.  
+           SUBTRACT ZREP FROM VALEUR GIVING IED.
+           MOVE NUMER (IED) TO ZONE.
+           MOVE 'R' TO RETOUR.
+           MOVE 1 TO VALEUR.  
+           GO TO FIRECHA.     
+       FIRECHA.   
+           EXIT.  

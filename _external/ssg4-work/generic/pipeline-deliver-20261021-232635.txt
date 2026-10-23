@@ -1,0 +1,13 @@
+Stage Deliver, environment CC-Trial, started 2026-10-21 23:26:35
+PASS GNBUILD        generated after                2026-10-21 22:59:21 (the build LionSource)
+PASS GNBUILD        imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               10/21/2026 11:18:46 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_BABA_GN pre-build checks               10/21/2026 11:18:45 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_FUSBA_GN pre-build checks               10/21/2026 11:18:48 PM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CHABAN_GN pre-build checks               10/21/2026 11:18:47 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CONDIS2_GN pre-build checks               10/21/2026 11:18:47 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_SCAN_GN pre-build checks               10/21/2026 11:18:50 PM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_TAPELD_GN pre-build checks               10/21/2026 11:18:50 PM ok (1 varying input(s) at 4001)
+PASS GNREF          generated after                2026-10-21 23:16:51 (the build LionSource)
+FAIL GNREF          imported since the last delivery revision unchanged (ASSURFED_UTILIT_CONDIS2_RV still 1.1.0.0; ASSURFED_UTILIT_CONDIS2_RD still 1.1.0.0; ASSURFED_UTILIT_SCAN_RA still 1.1.0.0; ASSURFED_UTILIT_SCAN_RB still 1.1.0.0; ASSURFED_UTILIT_TAPELD_RA still 1.1.0.0; ASSURFED_UTILIT_TAPELD_RB still 1.1.0.0): this LionSource differs from the last delivered one, so import it in LionDev and generate again
+=== Deliver : 1 failure(s)

@@ -1,0 +1,5 @@
+--- BatchController: 20261021 23:52:30.654 12 Information SSG4_VIRM01UL_CFH_COPY Done Id: 1008 Queue: JOB_QUEUE1 (Execution time: 00:00:08:094)
+--- VIRM01UL_10082026102123522587.log
+  2026-10-21 23:52:26 Info: SSG-4 hand-off (CFH-COPY): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\ASSURFED\CFHPARM (3 lines); CFHIN=I006KTMAJ1 CFHOUT=F006KTMAJ3; Xqt CFH_COPY -> ASSURFED_UTILIT_CFH_COPY_GN
+VIRM01UL F006KTMAJ3.DAT    22,550 B vs expected    22,550 B: PASS byte-identical
+--- 1 of 1 outputs byte-identical

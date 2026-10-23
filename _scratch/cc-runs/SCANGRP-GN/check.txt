@@ -1,0 +1,4 @@
+--- BatchController: 20261021 01:22:27.867 11 Information SSG4_SCANGRP_PRINTS Error Id: 721 Queue: JOB_QUEUE1 (Execution time: 00:00:06:114)
+--- SCANGRP_72120261021012224861.log
+  2026-10-21 01:22:26 Info: SSG-4 hand-off (SCAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGS1\SCANPARM (2 lines); SCANIN=R006VIRD36; Xqt SCAN -> ASSURFED_UTILIT_SCAN_GN
+  FLAG 2026-10-21 01:22:26 Error: AFBUS_2200COBOL_AMT - SCANGRP : Report [SCAN] not found (JobIdByJobName returned -1)

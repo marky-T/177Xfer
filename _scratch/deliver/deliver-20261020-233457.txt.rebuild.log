@@ -1,0 +1,9 @@
+base(...) calls rewritten in 2 file(s)
+
+Program                     Built FirstError
+-------                     ----- ----------
+ASSURFED_UTILIT_BABA_GN      True 
+ASSURFED_UTILIT_CFH_COPY_GN  True 
+
+
+Output: E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Binaries\Programs

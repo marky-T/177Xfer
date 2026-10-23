@@ -1,0 +1,23 @@
+# MT-025 live batch run list - one program KEY per line.
+# '#' comments and blank lines are ignored. KEY must match an existing <KEY>-LIVE.ps1
+# wrapper deployed alongside Run-LiveBatch.ps1 (same folder, Scripts\SSGTRIAL\RUN\).
+ARCHIFORMAT
+ARCHISEPARE
+BABA_ASCII
+CFH-COPY
+CFH-COPY_ASCII
+CHAB100_ASCII
+CHABAN_ASCII
+CONDIS2_ASCII
+EXTEUR
+FUSBA_ASCII
+FUSBA2_ASCII
+LECTIS_ASCII
+LOADIS_ASCII
+LOADIS_MULTI
+RECAP
+SCAN_ASCII
+TABAN_ASCII
+TAPELD_ASCII
+UNLOADIS_ASCII
+UNLOADIS_MULTI

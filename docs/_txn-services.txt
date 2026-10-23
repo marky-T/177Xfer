@@ -1,0 +1,8 @@
+
+Name                      DisplayName                                    Status
+----                      -----------                                    ------
+FederaleTransactionServer Federale TransactionServer                    Running
+KtmRm                     KtmRm for Distributed Transaction Coordinator Stopped
+MSDTC                     Distributed Transaction Coordinator           Running
+
+

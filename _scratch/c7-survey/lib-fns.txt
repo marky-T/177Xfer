@@ -1,0 +1,139 @@
+=== Check-AddFileName @ 4740
+function Check-AddFileName {
+  <#
+      Change filename on an @ADD or *ADD SGS statement to a fully qualified path
+      [String] AddFile
+      Full qualified filename
+  param (
+    [Parameter(Mandatory=$true)][String]$AddFile
+  )
+  $AddFile = $AddFile.ToUpperInvariant()
+  if ($AddFile.EndsWith(".")) {
+    $AddFile = $AddFile.Substring(0, $AddFile.Length - 1)  # Strip dot at end
+  }
+  [String]$Filename = Get-AssignedFile $AddFile 
+  if (!(Check-FileControlError 0)) {
+    if ($AddFile.StartsWith("TPF$.")) {
+      $Filename = (Add-BackSlash $global:TempFolder) +  $AddFile.SubString(5)
+    } else {
+      $Filename = Check-ProgramFile $AddFile
+      if ((Check-FileControlError 53)) {
+        $Filename = Get-JobFileName $AddFile
+      }
+    }
+  }
+  return $Filename
+} # Check-AddFileName
+function Add-ParameterFile {
+  <#
+      ECL equivalent: @ADD 
+      The @ADD statement lets you include canned runstreams or data for repetitive functions.
+      This routine should only be called for parameter files, script files will be dot sourced
+      [String] AddFile
+  param (
+    [Parameter(Mandatory=$true)][String]$AddFile
+  )
+  if (Process-Skip "ADD: $AddFile") {
+    return
+  }
+  Write-Joblog "ADD: $AddFile" ([LoggingSeverity]::Info)
+  [String]$Filename = Check-AddFileName $AddFile
+  [String]$Cyclename = ""
+  if (!(Find-AssignedFileInList $Filename)) {
+    if (!(File-Exists $Filename)) {
+      Abort "File not found.`r`nFileName: $Filename`r`nCycleName: $CycleName nor as non file cycle" 
+    }
+  } else {
+=== Add-Sgs @ 11172
+function Add-Sgs {
+  <#
+      ECL, SSG equivalent: *ADD SGS
+      Include a file containing SGS labels
+      [String] AddFile
+  param (
+    [Parameter(Mandatory=$true)][String]$AddFile
+  )
+  [String]$Filename = Check-AddFileName $AddFile
+  if (!(File-Exists $Filename)) {
+    Abort "File not found.`r`nFileName: $FileName"
+  }
+  [String]$Line = ""
+  [Boolean]$Append = $false
+  [Object]$AddFileStream = Open-TextFile $Filename $global:Const_SharedRead $global:Const_FileEnc_Autodetect $Append
+  while (-not ($AddFileStream.EndOfFile)) {
+    $Line = $AddFileStream.ReadLine()
+    AddTo-SgsList $Line
+  }
+  [Boolean]$CloseResult = Close-TextFile $AddFileStream
+} # Add-Sgs
+function SearchConditional { 
+  <#
+      Searches SGS data.
+      Performs a Row, Column, or Keyword Search Conditional (section 5.2.25.6 in SGS Programming Reference Manual).
+      [String] The type of search ("Row", "Column" or "Keyword").
+      [String] The direction of the search ("Ascending" or "Descending").
+      [String] The argument behind FROM.
+      [String] The argument behind FOR.
+  param (
+    [String]$SearchObject,
+    [String]$SearchDirection,
+    [String]$FromClause,
+    [String]$ForExpressionValue
+  )
+  if ($SearchObject -eq "Column") {
+    if ($SearchDirection -eq "Descending") {
+      return $false
+    } else {
+      [Boolean]$SkipTillFrom = $false
+      if ($global:SgsLabels.ContainsKey($FromClause)) {
+        [Boolean]$SkipTillFrom = $true
+      }
+      foreach ($kvp in $global:SgsLabels.GetEnumerator()) {
+=== Asg @ 4824
+function Asg {
+  <#
+      ECL equivalent: @ASG / @@ASG
+      The @ASG statement is used to name a file, state its I/O facility requirements, and assign 
+      it to the requesting run under the given external file name.
+      [String] 
+      [String] AsgFile
+  param (
+    [String]$Options,
+    [Parameter(Mandatory=$true)][String]$AsgFile
+  )
+  if (Process-Skip "ASG [$($Options)]: $AsgFile") {
+    return
+  }
+  Check-FinishStatement
+  Write-Joblog "ASG: $AsgFile" ([LoggingSeverity]::Info)
+  Write-Joblog "ASG Options: $Options" ([LoggingSeverity]::Info)
+  $AsgFile = $AsgFile.ToUpperInvariant().Trim()
+  Replace-Asterisks ([Ref]$AsgFile)
+  $AsgFile = $AsgFile.Replace("/", "\")
+  [String]$Filename = $AsgFile
+  [String]$File     = ""
+  [String]$UseName  = ""
+  [Boolean]$Tasg    = $false
+  [AsgOptions]$AsgOptions = Parse-Options $Options ([AsgOptions])
+  if ($Filename.EndsWith(".")) {
+    $Filename = $Filename.Substring(0, $Filename.Length - 1)  # Strip dot at end
+  }  
+  if ($Filename.Contains(".")) {
+    Abort "File extensions are not allowed."
+  }
+  if ($Filename -eq "") {
+    Abort "No filename specified."
+  }
+  if ($AsgOptions.HasFlag([AsgOptions]::P)) {
+    Write-JobLog "Ignored option P." ([LoggingSeverity]::Info)
+  }
+  if ($AsgOptions.HasFlag([AsgOptions]::Q)) {
+    $Tasg = $true
+  }
+  if ($Tasg) {
+    if ($AsgOptions.HasFlag([AsgOptions]::C)) {
+      Abort "Option C found for TASG (Option Q). This is not valid."
+    }
+    if ($AsgOptions.HasFlag([AsgOptions]::R)) {
+=== Get-PhysicalFilename not found
+=== Get-Fullfilename not found

@@ -1,0 +1,9 @@
+== * lines in the 20 inputs whose first word is not a known directive: 0
+== * lines that are comments (*.) in the inputs: 118
+== lines with * in column 1 that look like COBOL comments (text after * starts with a space and has COBOL-ish words)
+CONDIS2_ASCII.TXT: *   If [PG,I,1,1] = CASE
+CONDIS2_ASCII.TXT: *      Set NOCASE = [*NOCASE] + 1   
+CONDIS2_ASCII.TXT: *   Endif   
+CONDIS2_ASCII.TXT: *   If [PG,I,1,1] = CASE  OR [PG,I,1,1] = OTHERWISE 
+CONDIS2_ASCII.TXT: *      Set NOCASE = [*NOCASE] + 1   
+count: 242

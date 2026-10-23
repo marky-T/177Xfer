@@ -1,0 +1,983 @@
+@RUN,M/T   VIRD03,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG       *******************************************************  
+@MSG       ** RUN VIRD03                                        **  
+@MSG       ** RECUPERATION DES FICHIERS DE LA CLÔTURE           **  
+@MSG       **                           --> VIE INDIVIDUELLE    **  
+@MSG       *******************************************************  
+@ . 
+@ . LE 22 AVRIL 2004 : CREATION DU RUN  
+@ . 
+@ .   TRAITEMENT DES PRENEURS   
+@ .        1) TRI DES DONNEES   
+@ .        2) FORMATAGE EXCEL (TRANSEXCEL)  
+@ . 
+@ .   TRAITEMENT DES MOUVEMENTS 
+@ .        1) SELECTION DES MOUVEMENT PAR DATE  
+@ .        2) FORMATAGE EXCEL (TRANSEXCEL)  
+@ . 
+@ .   TRAITEMENT DES CONTRATS   
+@ .        1) UNLOAD (VID003_IND_CON)   
+@ .        2) FORMATAGE EXCEL (TRANSEXCEL)  
+@ . 
+@ .   TRAITEMENT DES COUCHES
+@ .        1 UNLOAD (VID004_IND_CCH)
+@ .        2 FORMATAGE EXCEL (TRANSEXCEL)   
+@ . 
+@ .   TRAITEMENT DES INTERMEDIAIRES 
+@ .        1) TRI DES DONNEES   
+@ .        2) FORMATAGE EXCEL (TRANSEXCEL)  
+@ . 
+@ .   TRAITEMENT DES AFFAIRES DIRECTES ET PARTICIPATIONS BENEFICIAIRES  
+@ .        1) TRI DES DONNEES   
+@ .        2) FUSION DES DONNEES CONTRATS - IFRS - PRENEURS - COUCHES   
+@ .        3) FORMATAGE EXCEL (TRANSEXCEL)  
+@ . 
+@ . Modification par JLH   le 21/06/2007 - P06104/01
+@ . Modification par KALAL le 30/06/2008 - P08034/02
+@ . Modification par SICIL le 08/12/2017 - P15120/03
+@ .                        AJOUT F999CONTROLE.VIRD03
+@ . -----------------------------------------------------   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     VIRD3T,//POS/4000
+@COPY,A    VPRD*BABS.VIB167,VIRD3T.VIB167   
+@COPY,A    VPRD*BABS.VIB168,VIRD3T.VIB168   
+@COPY,A    VIPRD*BABS.VIB189,VIRD3T.VIB189  
+@ . -----------------------------------------   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB005: MSG 005. GESTION DES CONTRATS TEMPORAIRE ET SRD NON-FUMEUR 
+@ .               COMBINAISON 46 ET 49. 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB005  
+@ . 
+@XQT,R     VIRD3T.VIB167
+@ . 
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB100: MSG 100. TRI DES DONNEES DE TYPE PRENEUR   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ . 
+@ASG,A    B006ALPHA.
+@USE      FICH,B006ALPHA.   
+@ . 
+@DELETE,C I006ALPHA.
+@CAT,P    I006ALPHA,F/1/POS/4000
+@ASG,A    I006ALPHA.
+@USE      FOCH,I006ALPHA.   
+@ . 
+@SORT,EA
+FILEIN=FICH,F   BLOCK=10  MODE=SDF  
+FILEOUT=FOCH,F  BLOCK=10  MODE=SDF  
+KEY=6,6,CH,A,1        .RADICAL POLICE   
+KEY=12,1,CH,A,2       .SUFFIXE POLICE   
+RSZ=500 
+@EOF
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB110: MSG 110. FORMATAGE DES DONNEES DE TYPE PRENEUR 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    I006ALPHA.
+@USE      FILEIN,I006ALPHA. 
+@ . 
+@DELETE,C I006ALPHAEX.  
+@CAT,P    I006ALPHAEX.,F/0/POS/4000 
+@ASG,A    I006ALPHAEX.  
+@USE      FILEOUT,I006ALPHAEX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  500   
+COL 6,6,,''Radical police'' 
+COL 12,1,,''Suffixe police''
+COL 1,4,,''Code Bande'' 
+COL 13,2,,''Code branche''  
+COL 19,6,,''N° de matricule ''  
+COL 25,32,,''Nom''  
+COL 57,32,,''Suite du nom ''
+COL 89,32,,''Adresse''  
+COL 121,32,,''Suite adresse''   
+COL 157,4,,''Code postal''  
+COL 161,32,,''Localité''
+COL 198,3,,''Code canton''  
+COL 201,1,,''Régime linguistique''  
+COL 202,1,,''Code sexe''
+COL 203,6,,''Assuré 1 - n° ''   
+COL 209,32,,''Assuré 1 - nom''  
+COL 241,8,JJMMAAAA,''Assuré 1 - date de naissance'' 
+COL 249,1,,''Assuré 1 - code sexe'' 
+COL 251,6,,''Assuré 2 - n° ''   
+COL 257,32,,''Assuré 2 - nom''  
+COL 289,8,JJMMAAAA,''Assuré 2 - date de naissance'' 
+COL 297,1,,''Assuré 2 - code sexe'' 
+COL 301,32,,''Bénéficiaire 1 en cas de décès''  
+COL 333,32,,''Bénéficiaire 2 en cas de décès '' 
+COL 365,32,,''Bénéficiaire en cas de vie''  
+COL 397,32,,''Clé de tri alpha''
+COL 429,8,JJMMAAAA,''Date émission''
+COL 437,2,,''Code mouvement''   
+COL 439,4,,''N° de pid''
+COL 443,6,HHMMSS,''Heure de mise à jour''   
+COL 449,1,,''Code projet valable''  
+COL 450,6,AAMMJJ,''Date de mise à jour''
+COL 497,2,,'' Assuré 1 - année ''   
+COL 499,2,,'' Assuré 2 - année ''   
+TABUL '';'' 
+@EOF
+@FREE   I006ALPHA.  
+@FREE   I006ALPHAEX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB200:  MSG 200. SELECTION DES MOUVEMENTS DU MOIS 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ . 
+@ASG,A     B006NUMMOU.  
+@USE       INP,B006NUMMOU.  
+@ . 
+@DELETE,C  I006NUMMOU.  
+@CAT,P     I006NUMMOU,F/0/POS/4000  
+@ASG,A     I006NUMMOU.  
+@USE       F3,I006NUMMOU.   
+@ . 
+@ERS       TPF$.
+@ . 
+@SSG,MNA
+SGS 
+@ADD   *F999CONTROLE.VIRA06 
+@ADD   *F999CONTROLE.VIRA12 
+@ADD   *F999CONTROLE.VIRA15 
+@ADD   *F999CONTROLE.VIRA19 
+@ADD   *F999CONTROLE.VIRD13 
+@ADD   *F999CONTROLE.VIRM01 
+@EOF
+SKEL
+* Set nom = '_[datime$,1,7,1]-[datime$,1,4,1]'  
+*SET IMGLEN$=132
+*INCREMENT T FROM 1 BY 1 TO [DATE]  
+*SET     VAR2    TO   '[DATE,T,1,1]'
+*SET     VARE    TO 'MAJ'   
+*IF [*VAR2] = [*VARE]   
+*SET     VAR21   TO '[DATE,T,3,1]'  
+*SET     VARE2    TO 'INDIVIDUELLE' 
+*IF [*VAR21] = [*VARE2] 
+*SET TEMP  TO '[DATE,T,4,1]'
+*IF NOT [*DAMAMJ]   
+*SET     DAMAMJ TO '[DATE,T,4,1]'   
+*ELSE   
+*IF  [*DAMAMJ] <  [*TEMP]   
+*SET     DAMAMJ TO '[DATE,T,4,1]'   
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*ENDIF  
+*LOOP   
+*SET DAMAA TO [*DAMAMJ,SUBSTR$,1,4] 
+*SET DAMMM TO [*DAMAMJ,SUBSTR$,5,2] 
+*SET     BLANC = ' '
+*SET     ZERO = 0   
+*SET     SITU2  TO [*DAMAMJ,SUBSTR$,5,1]
+*IF [*SITU2] =  [*BLANC]
+*SET  SITU2  TO [*ZERO] 
+*SET  SUITMOIS  TO [*DAMAMJ,SUBSTR$,6,1]
+*SET  SITUM TO '[*ZERO][*SUITMOIS]' 
+*ELSE   
+*SET SITUM =[*DAMMM]
+*ENDIF  
+*SET DAMMAA TO '[*SITUM][*DAMAMJ,SUBSTR$,1,4]'  
+#SORT,EA
+FILEIN=INP,F  MODE=SDF  
+FILEOUT=F3,F  MODE=SDF  
+RSZ=500 
+ACCEPT=395,6,ASC,E,[*DAMMAA]
+KEY=391,1,CH,A,1     .CODE MOUVEMENT
+KEY=6,6,CH,A,2       .RADICAL POLICE
+KEY=12,1,CH,A,3      .SUFIXE POLICE 
+@EOF
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB210: MSG 210. FORMATAGE DES DONNEES DE TYPE MOUVEMENT   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    I006NUMMOU.   
+@USE      FILEIN,I006NUMMOU.
+@ . 
+@DELETE,C I006NUMMOUX.  
+@CAT,P    I006NUMMOUX.,F/0/POS/4000 
+@ASG,A    I006NUMMOUX.  
+@USE      FILEOUT,I006NUMMOUX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  500   
+COL 391,2,,''Code mouvement''   
+COL 6,6,,''Radical police'' 
+COL 12,1,,''Suffixe police''
+COL 1,1,,''Nombre de ?''
+COL 2,3,,''Code bande'' 
+COL 13,2,,''Code branche''  
+COL 19,6,,''N° de matricule''   
+COL 25,32,,''Nom''  
+COL 57,32,,''Suite du nom'' 
+COL 89,3,,''Code canton''   
+COL 92,6,,''Assuré 1 - n°'' 
+COL 98,8,JJMMAAAA,''Assuré 1 - date de naissance''  
+COL 106,2,,''Intermédiaire 1 - type''   
+COL 108,5,,''Intermédiaire 1 - n°'' 
+COL 113,2,,''Intermédiaire 2 - type''   
+COL 115,5,,''Intermédiaire 2 - n°'' 
+COL 120,2,,''Code nature garantie'' 
+COL 122,1,,''Code source production''   
+COL 123,8,JJMMAAAA,''Date terme de garantie''   
+COL 131,1,,''Code périodicité'' 
+COL 132,4,JJMM,''Date échéance réserve''
+COL 136,1,,''Code système réassureur''  
+COL 137,4,,''Code combinaison'' 
+COL 141,4,,''Code combinaison complémentaire 1''
+COL 145,4,,''Code combinaison complémentaire 2''
+COL 149,4,,''Code combinaison complémentaire 3''
+COL 153,4,,''Code combinaison complémentaire 4''
+COL 157,4,,''Code combinaison complémentaire 5''
+COL 161,2,,''Code source production mouvement'' 
+COL 163,12,MNT,''Prime commerciale unique'' 
+COL 175,12,MNT,''Prime inventaire unique''  
+COL 187,12,MNT,''Prime périodique totale''  
+COL 199,12,MNT,''Capital décès''
+COL 211,12,MNT,''Capital vie''  
+COL 223,12,MNT,''Prime commerciale annuelle''   
+COL 235,12,MNT,''Prime inventaire annuelle''
+COL 247,12,MNT,''Garantie complémentaire 1''
+COL 259,12,MNT,''Prime complémentaire 1''   
+COL 271,12,MNT,''Garantie complémentaire 2''
+COL 283,12,MNT,''Prime complémentaire 2''   
+COL 295,12,MNT,''Garantie complémentaire 3''
+COL 307,12,MNT,''Prime complémentaire 3''   
+COL 319,12,MNT,''Garantie complémentaire 4''
+COL 331,12,MNT,''Prime complémentaire 4''   
+COL 343,12,MNT,''Garantie complémentaire 5''
+COL 355,12,MNT,''Prime complémentaire 5''   
+COL 367,12,MNT,''Prime + aggrav. + fract.'' 
+COL 379,12,MNT,''Prime cmpl. + aggrav. + fract.''   
+COL 393,8,JJMMAAAA,''Date d’émission''  
+COL 401,4,NUM,''Année d’émission de contrat''   
+COL 405,8,AAAAMMJJ,''Date exécution''   
+TABUL '';'' 
+@EOF
+@FREE   I006NUMMOU. 
+@FREE   I006NUMMOUX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB300: MSG 300. DECHARGEMENT DES DONNEES DE TYPE CONTRAT  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ . 
+@DELETE,C  IUNLVID03A.  
+@CAT,P     IUNLVID03A.,F/0/POS/4000 
+@USE       UNL,IUNLVID03A.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VID003_IND_CON IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM VID003_IND_CON   
+  FORMAT EXTERNAL;  
+  UNLOCK VID003_IND_CON;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE   IUNLVID03A. 
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VID003_IND_CON **  
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB305: MSG 305. AJOUT DU CLASSEMENT IFRS AU FICHIER   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB305  
+@ . 
+@ASG,A    IUNLVID03A.   
+@USE      FICH-IN,IUNLVID03A.   
+@ . 
+@DELETE,C IUNLVID003.   
+@CAT,P    IUNLVID003.,F/1/POS/4000  
+@ASG,A    IUNLVID003.   
+@USE      FICH-OUT,IUNLVID003.  
+@ . 
+@XQT,R     VIRD3T.VIB168
+@ . 
+@FREE IUNLVID03A.   
+@FREE IUNLVID003.   
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB310: MSG 310. FORMATAGE DES DONNEES DE TYPE CONTRAT 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB310  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVID003.   
+@USE      FILEIN,IUNLVID003.
+@ . 
+@DELETE,C IUNLVID03EX.  
+@CAT,P    IUNLVID03EX.,F/0/POS/4000 
+@ASG,A    IUNLVID03EX.  
+@USE      FILEOUT,IUNLVID03EX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  804   
+COL 1,6,,''Radical police'' 
+COL 8,1,,''Suffixe police'' 
+COL 10,4,,''Code source encodage''  
+COL 15,2,,''Code Branche''  
+COL 18,6,,''N° matricule''  
+COL 25,6,,''Matricule ristourne - 1''   
+COL 32,6,,''Matricule ristourne - 2''   
+COL 39,6,,''Matricule ristourne - 3''   
+COL 46,1,,''Code état cicil''   
+COL 48,1,,''Code visite médicale''  
+COL 50,1,,''Code exonération fiscale''  
+COL 52,2,,''Code nature garantie''  
+COL 55,1,,''Code source production''
+COL 58,8,AAAAMMJJ,''Date effet de situation''   
+COL 67,3,,''Durée de garantie - mois''  
+COL 71,3,,''Durée de garantie - années''
+COL 76,8,AAAAMMJJ,''Date terme de garantie''
+COL 85,3,,''Durée de paiement de prime  - mois''
+COL 89,3,,''Durée de paiement de prime - années''   
+COL 94,8,AAAAMMJJ,''Date terme de paiement des primes'' 
+COL 103,1,,''Code périodicité'' 
+COL 106,4,MMJJ,''Date échéance réserve''
+COL 111,7,,''N° de risque BTR'' 
+COL 119,2,,''Code combinaison'' 
+COL 122,2,,''Complément combinaison (SRD)'' 
+COL 125,5,VIRGULE,''Taux de croissance garantie''   
+COL 131,1,,''Code nature de croissance''
+COL 133,8,VIRGULE,''Taux fixe'' 
+COL 142,13,SMNT,''Dernier remboursement effectué''  
+COL 157,8,AAAAMMJJ,''Date validité de garantie (SRD)''  
+COL 166,2,,''Code combinaison cmpl -1'' 
+COL 169,5,VIRGULE,''Taux de croissance sinistralité cmpl - 1''  
+COL 175,2,,''Code délais de carence cmpl - 1''  
+COL 178,13,SMNT,''Montant de garantie cmpl - 1''
+COL 192,9,VIRGULE,''Tarif cmpl - 1''
+COL 202,4,,''Taux aggravation cmpl - 1''
+COL 207,13,SMNT,''Prime annuelle cmpl - 1'' 
+COL 222,6,AAAAMM,''Date terme de paiement cmpl - 1''
+COL 229,5,VIRGULE,''Taux de croissance cmpl - 1''   
+COL 235,1,,''Code nature de croissance cmpl - 1''   
+COL 237,2,,''Code combinaison cmpl -2'' 
+COL 240,5,VIRGULE,''Taux de croissance sinistralité cmpl - 2''  
+COL 246,2,,''Code délais de carence cmpl - 2''  
+COL 249,13,SMNT,''Montant de garantie cmpl - 2''
+COL 263,9,VIRGULE,''Tarif cmpl - 2''
+COL 273,4,,''Taux aggravation cmpl - 2''
+COL 278,13,SMNT,''Prime annuelle cmpl - 2'' 
+COL 292,7,AAAAMM,''Date terme de paiement cmpl - 2''
+COL 300,5,VIRGULE,''Taux de croissance cmpl - 2''   
+COL 306,1,,''Code nature de croissance cmpl - 2''   
+COL 308,2,,''Code combinaison cmpl -3'' 
+COL 311,5,VIRGULE,''Taux de croissance sinistralité cmpl - 3''  
+COL 317,2,,''Code délais de carence cmpl - 3''  
+COL 320,13,SMNT,''Montant de garantie cmpl - 3''
+COL 334,9,VIRGULE,''Tarif cmpl - 3''
+COL 344,4,,''Taux d’aggravation cmpl - 3''  
+COL 349,13,SMNT,''Prime annuelle cmpl - 3'' 
+COL 364,6,AAAAMM,''Date terme de paiement cmpl - 3''
+COL 371,5,VIRGULE,''Taux de croissance cmpl - 3''   
+COL 377,1,,''Code nature de croissance cmpl - 3''   
+COL 379,2,,''Code combinaison cmpl -4'' 
+COL 382,5,VIRGULE,''Taux de croissance sinistralité cmpl - 4''  
+COL 388,2,,''Code délais de carence cmpl - 4''  
+COL 391,13,SMNT,''Montant de garantie cmpl - 4''
+COL 405,9,VIRGULE,''Tarif cmpl - 4''
+COL 415,4,,''Taux aggravation cmpl - 4''
+COL 420,13,SMNT,''Prime annuelle cmpl - 4'' 
+COL 435,6,AAAAMM,''Date terme de paiement cmpl - 4''
+COL 442,5,VIRGULE,''Taux de croissance cmpl - 4''   
+COL 448,1,,''Code nature de croissance cmpl - 4''   
+COL 450,2,,''Code combinaison cmpl -5'' 
+COL 453,5,VIRGULE,''Taux de croissance sinistralité cmpl - 5''  
+COL 459,2,,''Code délais de carence cmpl - 5''  
+COL 462,13,SMNT,''Montant de garantie cmpl - 5''
+COL 476,9,VIRGULE,''Tarif cmpl - 5''
+COL 486,4,,''Taux aggravation cmpl - 5''
+COL 491,13,SMNT,''Prime annuelle cmpl - 5'' 
+COL 506,6,AAAAMM,''Date terme de paiement cmpl - 5''
+COL 513,5,VIRGULE,''Taux de croissance cmpl - 5''   
+COL 519,1,,''Code nature de croissance cmpl - 5''   
+COL 521,13,SMNT,''Prime + aggrav. + fract.''
+COL 535,13,SMNT,''Prime périodique''
+COL 549,13,SMNT,''Taxe périodique'' 
+COL 563,13,SMNT,''Sous total périodique''   
+COL 577,13,SMNT,''Prime cmpl + aggrav. + fract.''   
+COL 591,13,SMNT,''Prime périodique complémentaire'' 
+COL 605,13,SMNT,''Taxe complémentaire'' 
+COL 619,13,SMNT,''Sous total complémentaire''   
+COL 633,13,SMNT,''Prime périodique totale'' 
+COL 647,2,,''Code nature décroissance (SRD)''   
+COL 650,7,VIRGULE,''Taux index''
+COL 658,2,,''Code base index''  
+COL 661,1,,''Code nature index''
+COL 663,2,,''Code dernier mouvement''   
+COL 667,8,AAAAMMJJ,''Date émission du contrat'' 
+COL 677,8,AAAAMMJJ,''Date effet du contrat''
+COL 687,11,,''N° de registre national'' 
+COL 699,4,,''Pourcentage de réversibilité'' 
+COL 704,5,,''Année émission du contrat''
+COL 710,6,VIRGULE,''Pourcentage de cotisation des revenus'' 
+COL 718,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 728,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 735,6,,''Programme de dernière mise à jour''
+COL 742,6,,''Run de dernière mise à jour''  
+COL 749,6,,''Initiales du codificateur''
+COL 756,6,,''Initiales du vérificateur''
+COL 762,10,,''ZONE-IFRS''   
+COL 773,10,,''ZONE-CTR''
+COL 784,10,,''ZONE-SEG''
+COL 795,10,,''ZONE-RISK''   
+TABUL '';'' 
+@EOF
+@FREE   IUNLVID003. 
+@FREE   IUNLVID03EX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB400: MSG 400. DECHARGEMENT DES DONNEES DE TYPE COUCHE   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB400  
+@ . 
+@DELETE,C  IUNLVID004.  
+@CAT,P     IUNLVID004.,F/0/POS/4000 
+@USE       UNL,IUNLVID004.  
+@ . 
+@XQT,E     SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK TABLE VID004_IND_CCH IN EXCLUSIVE RETRIEVAL MODE;  
+UNLOAD TO FILE "UNL"
+  SELECT *  
+  FROM VID004_IND_CCH   
+  FORMAT EXTERNAL;  
+  UNLOCK VID004_IND_CCH;
+END THREAD; 
+EXIT;   
+@ . 
+@FREE   IUNLVID004. 
+@ . 
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD VID004_IND_CCH **  
+@ABORT  
+@OK: MSG ** UNLOAD OK **
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB410: MSG 410. FORMATAGE DES DONNEES DE TYPE COUCHE  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB410  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A    IUNLVID004.   
+@USE      FILEIN,IUNLVID004.
+@ . 
+@DELETE,C IUNLVID04EX.  
+@CAT,P    IUNLVID04EX.,F/0/POS/4000 
+@ASG,A    IUNLVID04EX.  
+@USE      FILEOUT,IUNLVID04EX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  272   
+COL 1,6,,''Radical police'' 
+COL 8,1,,''Suffixe police'' 
+COL 10,5,,''Code année tarif''  
+COL 16,4,,''Code source d’encodage''
+COL 21,13,SMNT,''Capital décès''
+COL 35,13,SMNT,''Capital vie''  
+COL 49,9,VIRGULE,''Taux de zillmérisation'' 
+COL 59,13,SMNT,''Capital bloqué''   
+COL 73,13,SMNT,''Réserve à l’échéance'' 
+COL 87,9,VIRGULE,''Tarif de la prie commerciale annuelle''  
+COL 97,13,SMNT,''Prime commerciale annuelle''   
+COL 111,9,VIRGULE,''Tarif de la prime inventaire annuelle'' 
+COL 121,13,SMNT,''Prime inventaire annuelle''   
+COL 135,9,VIRGULE,''Tarif de la prime commerciale unique''  
+COL 145,13,SMNT,''Prime commerciale unique''
+COL 159,9,VIRGULE,''Tarif de la prime inventaire unique''   
+COL 169,13,SMNT,''Prime inventaire unique'' 
+COL 183,13,SMNT,''Montant de bonus au terme''   
+COL 197,2,,''Code dernier mouvement''   
+COL 200,13,SMNT,''Montant de delta prime maximum''  
+COL 214,13,SMNT,''Montant de delta prime minimum''  
+COL 229,8,AAAAMMJJ,''Date de dernière mise à jour'' 
+COL 239,6,HHMMSS,''Heure de dernière mise à jour''  
+COL 246,6,,''Programme de dernière mise à jour''
+COL 253,6,,''Run de dernière mise à jour''  
+COL 260,6,,''Initiales du codificateur''
+COL 267,6,,''Initiales du vérificateur''
+TABUL '';'' 
+@EOF
+@FREE   IUNLVID004. 
+@FREE   IUNLVID04EX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB500: MSG 500. TRI DES DONNEES DE TYPE INTERMEDIAIRE 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB500  
+@ . 
+@ASG,A    B006INTERM.   
+@USE      FICH,B006INTERM.  
+@DELETE,C I006INTERM.   
+@ . 
+@CAT,P    I006INTERM,F/1/POS/4000   
+@ASG,A    I006INTERM.   
+@USE      FOCH,I006INTERM.  
+@ . 
+@SORT,EA
+FILEIN=FICH,F   BLOCK=10  MODE=SDF  
+FILEOUT=FOCH,F  BLOCK=10  MODE=SDF  
+KEY=6,6,CH,A,1         .RADICAL POLICE  
+KEY=12,1,CH,A,2        .SUFIXE POLICE   
+RSZ=100 
+@EOF
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB510: MSG 510. FORMATAGE DES DONNEES DE TYPE INTERMEDIAIRE   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB510  
+@.  
+@ERS    TPF$
+@ . 
+@ASG,A    I006INTERM
+@USE      FILEIN,I006INTERM 
+@ . 
+@DELETE,C I006INTERMX.  
+@CAT,P    I006INTERMX.,F/0/POS/4000 
+@ASG,A    I006INTERMX.  
+@USE      FILEOUT,I006INTERMX.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  100   
+COL  6,6,,''Radical police''
+COL  12,1,,''Suffixe police''   
+COL  1,4,,''Code bande''
+COL  13,2,,''Code branche'' 
+COL  19,6,,''N° matricule'' 
+COL  25,2,,''Intermédiaire - type'' 
+COL  27,5,,''Intermédiaire - n°''   
+COL  33,6,MMAAAA,''Date échéance acquisition''  
+COL  39,10,MNT,''Montant acquisition''  
+COL  49,6,MMAAAA,''Date échéance encaissement - 1'' 
+COL  55,3,,''Pourcentage de prime encaissement - 1''
+COL  58,3,V1,''Taux commercial encaissement - 1''   
+COL  61,6,MMAAAA,''Date échéance encaissement - 2'' 
+COL  67,3,,''Pourcentage de prime encaissement - 2''
+COL  70,3,V1,''Taux commercial encaissement - 2''   
+COL  73,1,,''Code statistique'' 
+COL  74,6,AAMMJJ,''Date de mise à jour''
+COL  80,1,,''Code projet valable''  
+COL  81,6,HHMMSS,''Heure de mise à jour''   
+COL  87,4,,''N° de Pid''
+COL  91,2,,''Code dernier mouvement''   
+COL  93,8,JJMMAAAA,''Date émission''
+TABUL '';'' 
+@EOF
+@FREE   I006INTERM. 
+@FREE   I006INTERMX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB600: MSG 600. DONNEES TYPE CONTRAT COMBINAISON <> 50
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB600  
+@ . 
+@ASG,AX    IUNLVID003.  
+@USE       INP,IUNLVID003.  
+@ . 
+@DELETE,C  ICONCOMBD03. 
+@CAT,P     ICONCOMBD03.,F//POS/4000 
+@ASG,A     ICONCOMBD03. 
+@USE       OUT,ICONCOMBD03. 
+@ . 
+@SORT,ES
+COPY
+FILEIN=INP,F         BLOCK=10   
+FILEOUT=OUT,F        BLOCK=10   
+KEY=1,6,CH,A,1                .RADICAL POLICE   
+KEY=8,1,CH,A,2                .SUFFIXE POLICE   
+ACCEPT=119,2,ASC,NE,50        .COMBINAISON <> 50
+RSZ=804 
+@EOF
+@ . 
+@FREE      IUNLVID003.  
+@FREE      ICONCOMBD03. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB605: MSG 605. DONNEES TYPE CONTRAT + IFRS   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB605  
+@ . 
+@ASG,AX    ICONCOMBD03. 
+@USE       INP,ICONCOMBD03. 
+@ . 
+@DELETE,C  ICONIFRSD03. 
+@CAT,P     ICONIFRSD03.,F//POS/4000 
+@ASG,A     ICONIFRSD03. 
+@USE       OUT,ICONIFRSD03. 
+@ . 
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      INP,804,10   
+OUTPUT     OUT,52,10
+FIELDIN    1,6  8,1  762,10  773,10  784,10  795,10 
+FIELDOUT   1,6  8,1   10,10   21,10   32,10   43,10 
+@EOF
+@XQT       TPF$.CFH-COPY
+@ . 
+@FREE      ICONCOMBD03. 
+@FREE      ICONIFRSD03. 
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB610: MSG 610. FUSION DONNEES TYPE CONTRAT + IFRS + PRENEUR  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB610  
+@ . 
+@ASG,AX    B006ALPHA.   
+@USE       MAJ,B006ALPHA.   
+@ . 
+@ASG,AX    ICONIFRSD03. 
+@USE       INP,ICONIFRSD03. 
+@ . 
+@DELETE,C  ICONALPHAD03.
+@CAT,P     ICONALPHAD03.,F//POS/5000
+@ASG,A     ICONALPHAD03.
+@USE       OUT,ICONALPHAD03.
+@ . 
+@SSG,IA    *UTILIT.FUSBA/ASCII  
+SGS 
+ASCII   
+INPUT      MAJ,500,10   INP,52,10   
+OUTPUT     OUT,70,10
+KEYS       1,6  8,1 
+UPDATE     6,6  12,1
+FIELDIN    203,6  241,8  249,1  
+FIELDOUT    54,6   61,8   70,1  
+NOLIST  
+@EOF
+@XQT       TPF$.FUSBA   
+@ . 
+@FREE      B006ALPHA.   
+@FREE      ICONIFRSD03. 
+@FREE      ICONALPHAD03.
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB615: MSG 615. CREATION DES FICHIERS AD ET PB POUR RESERVES  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB615  
+@ . 
+@DELETE,C ICCHD03AD.
+@CAT,P    ICCHD03AD.,F/1/POS/4000   
+@ASG,A    ICCHD03AD.
+@USE      FCH-OUT-AD,ICCHD03AD. 
+@ . 
+@DELETE,C ICCHD03PB.
+@CAT,P    ICCHD03PB.,F/1/POS/4000   
+@ASG,A    ICCHD03PB.
+@USE      FCH-OUT-PB,ICCHD03PB. 
+@ . 
+@XQT,R  VIRD3T.VIB189   
+@ADD    F999CONTROLE.VIRD03 
+@ . 
+@FREE ICCHD03AD.
+@FREE ICCHD03PB.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB620: MSG 620. FUSION DONNEES TYPE CONTRAT + IFRS + PRENEUR + AD 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB620  
+@ . 
+@ASG,AX    ICONALPHAD03.
+@USE       MAJ,ICONALPHAD03.
+@ . 
+@ASG,AX    ICCHD03AD.   
+@USE       INP,ICCHD03AD.   
+@ . 
+@DELETE,C  IAFFDIRD03.  
+@CAT,P     IAFFDIRD03.,F//POS/5000  
+@ASG,A     IAFFDIRD03.  
+@USE       OUT,IAFFDIRD03.  
+@ . 
+@SSG,IA    *UTILIT.FUSBA2/ASCII 
+SGS 
+ASCII   
+INPUT      MAJ,70,10   INP,184,10   
+OUTPUT     OUT,246,10   
+KEYS       1,6  8,1 
+UPDATE     1,6  8,1 
+FIELDIN    10,61
+FIELDOUT   186,61   
+NOLIST  
+@EOF
+@XQT       TPF$.FUSBA   
+@ . 
+@FREE      ICONALPHAD03.
+@FREE      ICCHD03AD.   
+@FREE      IAFFDIRD03.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB625: MSG 625. FUSION DONNEES TYPE CONTRAT + IFRS + PRENEUR + PB 
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB625  
+@ . 
+@ASG,AX    ICONALPHAD03.
+@USE       MAJ,ICONALPHAD03.
+@ . 
+@ASG,AX    ICCHD03PB.   
+@USE       INP,ICCHD03PB.   
+@ . 
+@DELETE,C  IPARBEND03.  
+@CAT,P     IPARBEND03.,F//POS/5000  
+@ASG,A     IPARBEND03.  
+@USE       OUT,IPARBEND03.  
+@ . 
+@SSG,IA    *UTILIT.FUSBA2/ASCII 
+SGS 
+ASCII   
+INPUT      MAJ,70,10   INP,186,10   
+OUTPUT     OUT,248,10   
+KEYS       1,6  8,1 
+UPDATE     1,6  8,1 
+FIELDIN    10,61
+FIELDOUT   188,61   
+NOLIST  
+@EOF
+@XQT       TPF$.FUSBA   
+@ . 
+@FREE      ICONALPHAD03.
+@FREE      ICCHD03PB.   
+@FREE      IPARBEND03.  
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB630: MSG 630. FORMATAGE FICHIER AFFAIRES DIRECTES   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB630  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A     IAFFDIRD03.  
+@USE       FILEIN,IAFFDIRD03.   
+@ . 
+@DELETE,C  IAFFDIRD03EX.
+@CAT,P     IAFFDIRD03EX.,F/0/POS/4000   
+@ASG,A     IAFFDIRD03EX.
+@USE       FILEOUT,IAFFDIRD03EX.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  246   
+COL 1,6,,''Radical police'' 
+COL 8,1,,''Suffixe police'' 
+COL 237,8,JJMMAAAA,''Assuré 1 - Date naissance''
+COL 246,1,,''Assuré 1 - Sexe''  
+COL 10,8,AAAAMMJJ,''Date terme de garantie''
+COL 19,8,AAAAMMJJ,''Date terme de paiement des primes'' 
+COL 28,4,MMJJ,''Date échéance réserve'' 
+COL 33,2,,''Code combinaison''  
+COL 36,1,,''Code périodicité''  
+COL 68,5,,''Code année tarif''  
+COL 74,12,SMNT,''Capital décès''
+COL 87,12,SMNT,''Capital vie''  
+COL 100,12,SMNT,''Montant de bonus au terme''   
+COL 113,12,SMNT,''Prime commerciale annuelle''  
+COL 126,12,SMNT,''Prime inventaire annuelle''   
+COL 139,12,SMNT,''Prime commerciale unique''
+COL 152,12,SMNT,''Prime inventaire unique'' 
+COL 165,12,SMNT,''Montant de delta prime maximum''  
+COL 178,7,V6,''Taux de zillmérisation'' 
+COL 38,6,V5,''Taux fixe''   
+COL 45,8,AAAAMMJJ,''Date validité de garantie (SRD)''   
+COL 54,2,,''Code nature décroissance (SRD)''
+COL 57,8,AAAAMMJJ,''Date effet du contrat'' 
+COL 186,10,,''ZONE-IFRS''   
+COL 197,10,,''ZONE-CTR''
+COL 208,10,,''ZONE-SEG''
+COL 219,10,,''ZONE-RISK''   
+COl 230,6,,''Assuré 1 - Numéro''
+COL 66,1,,''Code exonération fiscale''  
+TABUL '';'' 
+@EOF
+@FREE      IAFFDIRD03.  
+@FREE      IAFFDIRD03EX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB635: MSG 635. FORMATAGE FICHIER PARTICIPATIONS BENEFICIAIRES
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB635  
+@ . 
+@ERS    TPF$
+@ . 
+@ASG,A     IPARBEND03.  
+@USE       FILEIN,IPARBEND03.   
+@ . 
+@DELETE,C  IPARBEND03EX.
+@CAT,P     IPARBEND03EX.,F/0/POS/4000   
+@ASG,A     IPARBEND03EX.
+@USE       FILEOUT,IPARBEND03EX.
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  248   
+COL 1,6,,''Radical police'' 
+COL 8,1,,''Suffixe police'' 
+COL 239,8,JJMMAAAA,''Assuré 1 - Date naissance''
+COL 248,1,,''Assuré 1 - Sexe''  
+COL 10,8,AAAAMMJJ,''Date terme de garantie''
+COL 19,8,AAAAMMJJ,''Date terme de paiement des primes'' 
+COL 28,4,MMJJ,''Date échéance réserve'' 
+COL 33,2,,''Code combinaison''  
+COL 36,1,,''Code périodicité''  
+COL 68,5,,''Code année tarif''  
+COL 74,12,SMNT,''Capital décès''
+COL 87,12,SMNT,''Capital vie''  
+COL 100,12,SMNT,''Montant de bonus au terme''   
+COL 113,12,SMNT,''Prime commerciale annuelle''  
+COL 126,12,SMNT,''Prime inventaire annuelle''   
+COL 139,12,SMNT,''Prime commerciale unique''
+COL 152,12,SMNT,''Prime inventaire unique'' 
+COL 165,12,SMNT,''Montant de delta prime maximum''  
+COL 178,7,V6,''Taux de zillmérisation'' 
+COL 38,6,V5,''Taux fixe''   
+COL 45,8,AAAAMMJJ,''Date validité de garantie (SRD)''   
+COL 54,2,,''Code nature décroissance (SRD)''
+COL 57,8,AAAAMMJJ,''Date effet du contrat'' 
+COL 186,1,,''Type PB''  
+COL 188,10,,''ZONE-IFRS''   
+COL 199,10,,''ZONE-CTR''
+COL 210,10,,''ZONE-SEG''
+COL 221,10,,''ZONE-RISK''   
+COl 232,6,,''Assuré 1 - Numéro''
+COL 66,1,,''Code exonération fiscale''  
+TABUL '';'' 
+@EOF
+@FREE      IPARBEND03.  
+@FREE      IPARBEND03EX.
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.FASDIR 
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB710: MSG 710. TRANSFERT DES FICHIERS VERS INTRANET  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB710  
+@ . 
+@ADD F999TRANSF.VIRD03/2200PC   
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB770: MSG 770. SUPPRESSION DES FICHIERS INTERMEDIAIRES   
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@ . 
+@DELETE,C I006ALPHA.
+@DELETE,C I006ALPHAEX.  
+@DELETE,C I006INTERM.   
+@DELETE,C I006INTERMX.  
+@DELETE,C I006NUMMOU.   
+@DELETE,C I006NUMMOUX.  
+@DELETE,C IUNLVID03A.   
+@DELETE,C IUNLVID003.   
+@DELETE,C IUNLVID03EX.  
+@DELETE,C IUNLVID004.   
+@DELETE,C IUNLVID04EX.  
+@DELETE,C ICONCOMBD03.  
+@DELETE,C ICONIFRSD03.  
+@DELETE,C ICONALPHAD03. 
+@DELETE,C ICCHD03AD.
+@DELETE,C ICCHD03PB.
+@DELETE,C IAFFDIRD03.   
+@DELETE,C IAFFDIRD03EX. 
+@DELETE,C IPARBEND03.   
+@DELETE,C IPARBEND03EX. 
+@TIME   
+@ . 
+@ . --------------------------------------------------------------- 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . --------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPDEL   
+@ . 
+@TIME   
+@ . 
+@MSG       ****** LE MODULE VIRD03 S'EST BIEN TERMINE ******
+@QUAL,R 
+@FIN

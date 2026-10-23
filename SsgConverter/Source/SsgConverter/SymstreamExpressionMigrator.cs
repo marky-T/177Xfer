@@ -58,15 +58,37 @@ namespace Ecl.SsgConverter {
         SymstreamExpression left = be.Left;
         PSAstOperatorType binaryOperator = SymstreamBinaryOperatorToPowerShellBinaryOperator(be.BinaryOperator);
         SymstreamExpression right = be.Right;
+
+        // note: "VALUE OF [x]" asks for the numeric value of x. The parser sees the words as a text operand joined to the
+        //       reference with +, which made the comparison string-vs-number and never true. Keep only the reference.
+        SymstreamExpressionPrimitive valueOfWord = left as SymstreamExpressionPrimitive;
+        if (binaryOperator == PSAstOperatorType.Add && valueOfWord != null && valueOfWord.PrimitiveType == PrimitiveType.LiteralString
+            && String.Equals(valueOfWord.Image.Trim(), "VALUE OF", StringComparison.OrdinalIgnoreCase)) {
+          return Migrate(right);
+        }
         if (IsComparisonOperator(binaryOperator)) {
           // note: We have to do the comparison at runtime because left may be "12" (a string) and right may be 3 (an integer), in which case
           //       (left -gt right) would yield false because PowerShell will is convert 3 to a string to enable a comparison. If both operands
           //       can be interpreted a numbers they should be compared as such. We can only know this for sure at runtime.
 
+          // NOT applies to the whole relation (manual Table 5-3): NOT [A] > 0 means NOT ([A] > 0)
+          SymstreamExpressionUnary notLeft = left as SymstreamExpressionUnary;
+          Boolean negate = notLeft != null && notLeft.UnaryOperator == UnaryOperator.Not;
+          if (negate) {
+            left = notLeft.Operand;
+          }
+
           PsAstExprMethod compareMethod = new PsAstExprMethod("CompareTypeSafe", Migrate(left), new PsAstExprPrimitive(binaryOperator.ToString(), true), Migrate(right));
-          powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(compareMethod));
+          if (negate) {
+            PsAstExprBlock comparison = new PsAstExprBlock();
+            comparison.SkipSurroundingBlock = true;
+            comparison.AddExpression(new PsAstExprParenthesized(compareMethod));
+            powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(new PsAstExprUnary(PSAstOperatorType.Not, comparison)));
+          } else {
+            powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(compareMethod));
+          }
         } else {
-          PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(Migrate(left), binaryOperator, Migrate(right));
+          PsAstExprBinaryOperator bo = new PsAstExprBinaryOperator(MigrateOperand(left, right, binaryOperator), binaryOperator, MigrateOperand(right, left, binaryOperator));
           powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(bo));
         }
         return powerShellExpressionBlock;
@@ -100,7 +122,7 @@ namespace Ecl.SsgConverter {
             }
             break;
           case UnaryOperator.Not:
-            powerShellExpressionBlock.AddExpression(new PsAstExprUnary(PSAstOperatorType.Not, Migrate(operand)));
+            powerShellExpressionBlock.AddExpression(new PsAstExprParenthesized(new PsAstExprUnary(PSAstOperatorType.Not, Migrate(operand))));
             break;
           default:
             throw new SymstreamException(String.Format("Unknown operator type encountered: {0}", ue.UnaryOperator));
@@ -158,6 +180,25 @@ namespace Ecl.SsgConverter {
       throw new SymstreamException("Apparently we missed something.");
     } // Migrate
 
+    /// <summary>
+    /// Migrates one operand of a binary operator. A define parameter ([#1]) arrives as a string in PowerShell, and
+    /// "6" + 1 is "61" there, so an arithmetic operand that is a define parameter is converted to a number first.
+    /// </summary>
+    private PsAstExprBase MigrateOperand (SymstreamExpression operand, SymstreamExpression otherOperand, PSAstOperatorType binaryOperator) {
+      Boolean arithmetic = binaryOperator == PSAstOperatorType.Add || binaryOperator == PSAstOperatorType.Substract
+        || binaryOperator == PSAstOperatorType.Multiply || binaryOperator == PSAstOperatorType.Divide || binaryOperator == PSAstOperatorType.Modulo;
+      SymstreamExpressionPrimitive primitive = operand as SymstreamExpressionPrimitive;
+      SymstreamExpressionPrimitive otherPrimitive = otherOperand as SymstreamExpressionPrimitive;
+      Boolean otherIsText = otherPrimitive != null && otherPrimitive.PrimitiveType == PrimitiveType.LiteralString;
+      if (arithmetic && !otherIsText && primitive != null && primitive.PrimitiveType == PrimitiveType.BracketedReference) {
+        Match parameterReference = Regex.Match(primitive.Image, @"^\[#(\d+)\]$");
+        if (parameterReference.Success && Int32.Parse(parameterReference.Groups[1].Value) > 0) {
+          return new PsAstExprPrimitive("[Int64]$Parameters[" + (Int32.Parse(parameterReference.Groups[1].Value) - 1) + "]", false);
+        }
+      }
+
+      return Migrate(operand);
+    } // MigrateOperand
     /// <summary>
     /// Returns the provided string with any bracketed references replaced
     /// by those references wrapped in GetSgsValue function calls. String
@@ -293,7 +334,7 @@ namespace Ecl.SsgConverter {
     /// </summary>
     /// <param name="s">The string to be split.</param>
     /// <returns>A list of separated parts.</returns>
-    private List<String> SplitBracketedReferencesAndLiteralParts (String s) {
+    public List<String> SplitBracketedReferencesAndLiteralParts (String s) {
 
       List<String> parts = new List<String>();
 
@@ -589,7 +630,7 @@ namespace Ecl.SsgConverter {
     /// <returns>The processed and possibly modified input string.</returns>
     private String PrefixLoneIdentifiersWithDollar (String s) {
 
-      Regex regex = new Regex(@",[A-Za-z][A-Za-z0-9]*(,|\])");
+      Regex regex = new Regex(@",[A-Za-z][A-Za-z0-9]*(?=,|\])");
 
       Int32 remainingPartIndex = 0;
       String expanded = String.Empty;

@@ -1,0 +1,20 @@
+************************************************************************************************************************
+**                                       S T A R T U P   I N F O R M A T I O N                                        **
+************************************************************************************************************************
+**  Application       : E:\Repos\Federale_InternalRelease\Lion\LionDev.exe                                            **
+**  Version           : AMT 177 - 260818                                                                              **
+**  File version      : 8.0.26230.0                                                                                   **
+**  Full version      : 8.0.26230.0                                                                                   **
+**  Product           : Amt Development.NET                                                                           **
+**  System up time    : 13 days.                                                                                      **
+**  PID               : 21724                                                                                         **
+**  Server            : VMFEDPE08                                                                                     **
+**  Operating system  : Microsoft Windows NT 10.0.26100.0                                                             **
+**  .NET Runtime      : 10.0.11                                                                                       **
+**  Processor(s)      : AMD EPYC 7763 64-Core Processor (8) 2445 MHz.                                                 **
+**  Physical memory   : 33497812                                                                                      **
+**  Running as        : MTRUMAN                                                                                       **
+************************************************************************************************************************
+
+20260923	13:03:53.183	 2	Information	Localizer constructor - XML file path: null
+20260923	13:03:53.184	 2	Information	No localization file path provided. Skip localization loading.

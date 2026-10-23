@@ -1,0 +1,47 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. BOURDEAUD HUY PIERRE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-10. 
+       OBJECT-COMPUTER. UNIVAC-1100-10. 
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN  TO   
+                   DISC  F12VIER01A. 
+           SELECT TAPEOUT ASSIGN TO 
+                   DISC  OUT.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS 10  RECORDS
+           DATA RECORD RECIN.   
+       01  RECIN   PIC  X(400).   
+       FD  TAPEOUT  
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS 10  RECORDS  
+           DATA RECORD RECOUT.  
+       01  RECOUT   PIC   X(400).
+       WORKING-STORAGE SECTION. 
+       77  NB-LUS   PIC   9(10)  COMP  VALUE 0. 
+       01   SWITCHES.   
+           03  REC-SKIPPED  PIC  S9(6) VALUE ZEROES.
+       PROCEDURE DIVISION.  
+       DEBUT.   
+           OPEN INPUT TAPEIN.   
+           OPEN  OUTPUT  TAPEOUT.   
+       LECT.
+           MOVE SPACES TO RECOUT.   
+           READ  TAPEIN  AT  END  GO TO  FINW.  
+           MOVE RECIN TO RECOUT.
+           ADD 1  TO NB-LUS.
+           WRITE RECOUT.
+           GO TO LECT.  
+       FINW.
+           DISPLAY  '*CFH-COPY  FIN*'  UPON  PRINTER.   
+           DISPLAY  '*NB-ENREG-LUS ='  NB-LUS  UPON  PRINTER.   
+           CLOSE  TAPEIN.   
+           CLOSE  TAPEOUT.  
+           DISPLAY  REC-SKIPPED  UPON  PRINTER. 
+           STOP RUN.

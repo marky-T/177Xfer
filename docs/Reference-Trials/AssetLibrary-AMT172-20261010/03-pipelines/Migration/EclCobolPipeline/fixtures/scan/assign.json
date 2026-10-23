@@ -1,0 +1,8 @@
+{
+  "_description": "Tier-1 file-assignment map for SCAN. FICHIN-1 = input (80-char fixed records), PRT = printer output. Modelled on the AMT PowerShell ECL skeleton (jobname -> file assignments -> Xqt).",
+  "jobname": "SCAN",
+  "fileAssignments": {
+    "FICHIN-1": "input.dat",
+    "PRT": "output.prn"
+  }
+}

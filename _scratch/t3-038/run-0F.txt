@@ -1,0 +1,22 @@
+17:23:44
+**  AmtService started at : 2026-10-20 11:17:28                                                                       **
+20261020	11:17:29.364	 8	Information	FederaleBatchController (1) Running
+20261020	17:19:57.800	 11	Information	FederaleBatchController stop request
+20261020	17:19:59.802	 11	Information	Killing all running processes by BatchController Shutdown: FederaleBatchController
+20261020	17:20:17.273	 15	Information	FederaleBatchController (1) Stopped
+**  AmtService started at : 2026-10-20 17:20:17                                                                       **
+20261020	17:20:18.022	 8	Information	FederaleBatchController (1) Running
+20261020	17:20:18.329	 18	Information	Starting scan of new/updated/remove forms, report and scripts.
+20261020	17:20:18.349	 11	Information	Start recover.
+20261020	17:20:18.365	 11	Warning	Unhandled job found, ProcessJobId: 485 Name: SSG4_T3038_PROBE Status: Running
+20261020	17:20:18.393	 11	Information	SSG4_T3038_PROBE Queued Id: 485 Queue: JOB_QUEUE1
+20261020	17:20:18.399	 11	Information	Recover done.
+20261020	17:20:18.399	 11	Information	FederaleBatchController up and running
+20261020	17:20:20.689	 11	Information	SSG4_T3038_PROBE Error Id: 485 Queue: JOB_QUEUE1 (Execution time: 00:07:03:004)
+20261020	17:20:20.709	 11	Information	SSG4_T3038_PROBE Running Id: 589 Queue: JOB_QUEUE1 Agent: ?
+20261020	17:20:20.742	 11	Information	SSG4_T3038_PROBE Queued Id: 589 Queue: JOB_QUEUE1
+--- bug reports: 2026-10-20 17:09:12, 2026-10-20 17:13:45, 2026-10-20 17:18:44, 2026-10-20 17:20:44
+== AFPH12_58920261020172023100.log
+2026-10-20 17:20:23 Msg: T3-038 probe stage [0F] settings \SCRIPTS\SSG4\ASSURFED_F999\RUN\..\..\..\Settings\AmtSettings.xml
+2026-10-20 17:20:23 Info:  T3-038 probe stage [0F] settings \SCRIPTS\SSG4\ASSURFED_F999\RUN\..\..\..\Settings\AmtSettings.xml
+2026-10-20 17:20:23 Info:  Script Done: AFPH12

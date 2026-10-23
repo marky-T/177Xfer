@@ -1,0 +1,29 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. SCAN.
+       AUTHOR. BOURDEAUD HUY P. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. 
+       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. 
+       SPECIAL-NAMES.  PRINTER IS LISTE.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN   
+                              DISC INA.   
+           SELECT  PRT  ASSIGN  TO  PRINTER.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+                   LABEL RECORD IS STANDARD 
+           BLOCK CONTAINS 10  RECORDS
+           RECORD CONTAINS 300  CHARACTERS
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X(300). 
+       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   
+       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  
+       WORKING-STORAGE SECTION. 
+       01  ZONE-LECTURE PIC X(300).   
+       01  REC-AREA.
+           03  PRINT-LINE-1             PIC X(100).  
+           03  PRINT-LINE-101             PIC X(100).  
+           03  PRINT-LINE-201             PIC X(100).  

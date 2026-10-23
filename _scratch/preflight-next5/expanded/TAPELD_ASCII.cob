@@ -1,0 +1,25 @@
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. MICHEL.  
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1106.
+       OBJECT-COMPUTER. UNIVAC-1106.
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA.  
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN  TO  DISC INP.  
+           SELECT   TAPEOUT  ASSIGN  TO  PRINTER.   
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS 10  RECORDS
+           DATA RECORD IS   
+           REC11 
+           REC12 
+           REC13 
+           RECIN.   
+       01     REC11. 

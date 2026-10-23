@@ -1,0 +1,1 @@
+C:\Amt\Referenece\myasyscohelp\OS2200\Creating-and-adding-the-Application-Database.md:74: - **SQL Support Assembly:** location of an optional .NET assembly used in SQL Server as a CLR stored

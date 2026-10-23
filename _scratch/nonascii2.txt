@@ -1,0 +1,56 @@
+== code points of non-ASCII chars in our source (distinct)
+U+2018 x2
+U+2014 x9
+== same for Jul27 base
+U+2018 x2
+U+2014 x3
+== which of the 4 Jul27 lines
+SymstreamExpressionMigrator.cs:323
+SymstreamExpressionMigrator.cs:324
+SymstreamProcessor.cs:525
+SymstreamProcessor.cs:1456
+== PDF titles (raw metadata scan)
+00_HOME.pdf: ClearPath OS 2200 Release 19.0 Product Documentation Library
+78307709-002.pdf: (no title)
+78307949-031.pdf: (no title)
+78310281-034.pdf: (no title)
+78310448-005.pdf: (no title)
+78310455-021.pdf: (no title)
+78310455-022.pdf: (no title)
+78311784-010.pdf: (no title)
+82252461-003.pdf: Contents
+Avanade_AMT_COBOL_FileConverter_.pdf: (no title)
+Migration CobolToC
+00_HOME.md
+00_HOME.pdf
+78307709-002.md
+78307709-002.pdf
+78307949-031.md
+78307949-031.pdf
+78310281-034.md
+78310281-034.pdf
+78310448-005.md
+78310448-005.pdf
+78310455-021.md
+78310455-021.pdf
+78310455-022.md
+78310455-022.pdf
+78311784-010.md
+78311784-010.pdf
+82252461-003.md
+82252461-003.pdf
+AMT Installation and Configuration (AICL).docx
+AMT Installation and Configuration (AICL).md
+AMT-LION Primary Developer Training (ALPD).md
+Avanade_AMT_COBOL_FileConverter_.md
+Avanade_AMT_COBOL_FileConverter_.pdf
+ECL to PowerShell (E2P).archived-20260626-080543.docx
+ECL to PowerShell (E2P).archived-20260626-080543.md
+Migrate AMT LION to Csharp.docx
+Migrate AMT LION to Csharp.md
+ONLINE-MANUALS.md
+OS2200 COBOL to AMT LION Tech Specs.doc
+OS2200 COBOL to AMT LION Tech Specs.docx
+OS2200 COBOL to AMT LION Tech Specs.md
+Overview Batch Jobs in AMT - from ECL to PowerShell.docx
+Overview Batch Jobs in AMT - from ECL to PowerShell.md

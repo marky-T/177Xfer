@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\allcalls\\cobol\\out\\UNLOADIS_ASCII__EXPD05_LO_L11.LionSource
+APPNAME = UNLOADISASCIIEXPD05LOL11
+GENSET = Default from new application
+SYSOPT = FALSE

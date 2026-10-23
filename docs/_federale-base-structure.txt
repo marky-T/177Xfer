@@ -1,0 +1,15 @@
+path_exists=True
+--- top-level entries under Binaries ---
+[D] Application
+[D] BatchWorking
+[D] Common
+[D] Programs
+[D] Reports
+[D] Server
+[D] Working
+
+--- top-level entries under AFBUS_AMT (parent) ---
+[D] Binaries
+[D] BuildLog
+[D] Development
+[D] SystemLogging

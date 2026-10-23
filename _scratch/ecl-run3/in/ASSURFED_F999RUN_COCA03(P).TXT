@@ -1,0 +1,750 @@
+@RUN,M/T   COCA03,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@FREE      TPF$.
+@ASG,T     TPF$.
+@ . 
+@SYM       PRINT$,,PRSP 
+@ . 
+@MSG       *=======================================================*
+@MSG       **                                                     **
+@MSG       ** COMMISSIONS ANNUELLES :   SELECTION                 **
+@MSG       **                         + VALIDATION                **
+@MSG       **                         + CALCUL     COMMISSIONS    **
+@MSG       **                                                     **
+@MSG       *=======================================================*
+@MSG       ** P92057/08  BDB  MODIFICATION STRUCTURETABLES        **
+@MSG       **                 20/09/1999                          **
+@MSG       ** P92057/08  BDB  MODIF. AA PARAM POUR EXEC DECEMBRE  **
+@MSG       **                 17/11/1999                          **
+@MSG       ** ?          ?    AJOUT ELEMENT SYM POUR IMPRESSION   **
+@MSG       **                 DANS LE RUN 17/09/2002              **
+@MSG       ** P02064     BDB  SECURISATION LOAD, UNLOAD ...       **
+@MSG       **                 29/10/2002                          **
+@MSG       ** ?               REMPL FASDIR PAR COPIE SUR PC POUR  **
+@MSG       **                 GRAVURE 27/11/03                    **
+@MSG       ** P03046    VANKE ETAT G,S - VALIDATION ANNUELLE      **
+@MSG       **                 06/04/2005                          **
+@MSG       ** P07006    ARNAU ENVOIE DET/CLC COMM ANNUELLES PAR   **
+@MSG       **                 INTRANET 09/08/2007                 **
+@MSG       *=======================================================*
+@ . 
+@MSG       EDITION DU JCL.  
+@PRT,SC    *F999RUN.COCA03  
+@TIME   
+@MSG       ** TRANSFERT DES PROGRAMMES.         **  
+@ASG,T     COCA03,F///1000  
+@COPY,A    COPRD*BABS.COCB29,COCA03.COCB29  
+@COPY,A    COPRD*BABS.COCB31,COCA03.COCB31  
+@COPY,A    COPRD*BABS.COCB32,COCA03.COCB32  
+@COPY,A    COPRD*BABS.COCB58,COCA03.COCB58  
+@COPY,A    CPRD*BABS.COB081,COCA03.COB081   
+@COPY,A    CPRD*BABS.COB082,COCA03.COB082   
+@ . 
+@COPY,A    AFLINC*REP$ABS.SWB003,COCA03.SWB003  
+@COPY,A    AFLINC*REP$ABS.SWB004,COCA03.SWB004  
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB000:   MSG 000. PROCEDURE DE RESTART AUTOMATIQUE      - RESTART 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ . *      ========================================================*
+@ . *      SELECTION
+@ . *      ========================================================*
+@ . 
+@ . *      --------------------------------------------------------*
+@LAB010:   MSG 010.  UNLOAD DES BASES COMMISSIONS          - UNLOAD 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@SETC      0/S2 
+@DELETE,C          I214COCA03.  
+@CAT,P             I214COCA03.,F/100/POS/4000   
+@ASG,A             I214COCA03.  
+@ . 
+@XQT,E SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+LOCK BAS_MVT_CMM IN EXCLUSIVE RETRIEVAL;
+UNLOAD TO FILE "ASSURFED*I214COCA03."   
+  SELECT NO_BAS_CMM, NO_DRT_CMM, NO_LOT, NO_EVT, NO_MVT, MT_BAS_CMM,
+         CD_RSQ, CD_ETA_PAI_PRM 
+  FROM BAS_MVT_CMM  
+  WHERE NO_MVT_CMM          =  0    AND 
+        CD_ETA_BAS_CMM      = 'GB'  AND 
+       (CD_ETA_PAI_PRM      = 'A'   OR  
+        CD_ETA_PAI_PRM      = 'C'   OR  
+        CD_ETA_PAI_PRM      = 'G'    )  
+  FORMAT INTERNAL;  
+END THREAD; 
+EXIT;   
+@ . 
+@FREE              I214COCA03.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC:     MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK:       MSG ** UNLOAD OK **  
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB020:   MSG 020. GENERATION DES PARAMETRES              - SWB003 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@DELETE,C          COCA03*IMP-SWB003-1. 
+@CAT,P             COCA03*IMP-SWB003-1.,F///1000
+@ASG,A             COCA03*IMP-SWB003-1. 
+@ . 
+@XQT,R COCA03.SWB003
+COCA03  
+@ . 
+@COPY,C      PRINT,COCA03*IMP-SWB003-1. 
+@DELETE,C    PRINT  
+@FREE              COCA03*IMP-SWB003-1. 
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB030:   MSG 030. SELECTION DES COMMISSIONS ANNUELLES    - COCB29 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ . 
+@ASG,AX            I214COCA03.  
+@USE        IN-MBC,I214COCA03.  
+@DELETE,C          I214COCB29-C.
+@ASG,UP            I214COCB29-C.,F/0/POS/4000   
+@USE       OUT-CRD,I214COCB29-C.
+@DELETE,C          I214COCB29-D.
+@ASG,UP            I214COCB29-D.,F/0/POS/4000   
+@USE       OUT-DBT,I214COCB29-D.
+@DELETE,C          COCA03*IMP-COCB29-A. 
+@ASG,UP            COCA03*IMP-COCB29-A.,F/0/POS/4000
+@USE       OUT-ANO,COCA03*IMP-COCB29-A. 
+@DELETE,C          COCA03*IMP-COCB29-B. 
+@ASG,UP            COCA03*IMP-COCB29-B.,F/0/POS/4000
+@USE       OUT-CTL,COCA03*IMP-COCB29-B. 
+@ . 
+@XQT  COCA03.COCB29 
+@ . 
+@FREE              I214COCA03.  
+@FREE              I214COCB29-C.
+@FREE              I214COCB29-D.
+@FREE              COCA03*IMP-COCB29-A. 
+@FREE              COCA03*IMP-COCB29-B. 
+@TIME   
+@ . 
+@ . *      ========================================================*
+@ . *      VALIDATION   
+@ . *      ========================================================*
+@ . 
+@ . *      --------------------------------------------------------*
+@LAB040:   MSG 040. TRI FICHIER PRIMES DEBIT A VALIDER       - SORT 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ . 
+@ASG,AX            I214COCB29-D.
+@USE            IN,I214COCB29-D.
+@DELETE,C          I214COCB29-T.
+@ASG,UP            I214COCB29-T.,F/0/POS/4000   
+@USE           OUT,I214COCB29-T.
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=79,9,CH,A,1    .No matricule (7 positions) + Branche (2 positions) !
+KEY=89,9,CH,A,2    .No police (7 positions) + Suffixe (2 positions) 
+KEY=45,16,CH,A,3   .Date échéance (8 pos.) + date comptable (8 pos.)
+KEY=77,2,CH,A,4    .Code objec  
+KEY=43,2,CH,A,5    .Code état paiement prime
+RECORD=300  
+RSZ=240            .Longueur record 240 bytes   
+@EOF
+@ . 
+@FREE              I214COCB29-D.
+@FREE              I214COCB29-T.
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB050:   MSG 050. VALIDATION PAIEMENT PRIMES DEBIT        - COCB31
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ . 
+@ASG,AX            I214COCB29-T.
+@USE        IN-DBT,I214COCB29-T.
+@DELETE,C          I214COCB31-A.
+@ASG,UP            I214COCB31-A.,F/0/POS/4000   
+@USE        OUT-DA,I214COCB31-A.
+@DELETE,C          I214COCB31-B.
+@ASG,UP            I214COCB31-B.,F/0/POS/4000   
+@USE        OUT-DV,I214COCB31-B.
+@DELETE,C          COCA03*IMP-COCB31-A. 
+@ASG,UP            COCA03*IMP-COCB31-A.,F/0/POS/4000
+@USE       OUT-ANO,COCA03*IMP-COCB31-A. 
+@DELETE,C          COCA03*IMP-COCB31-B. 
+@ASG,UP            COCA03*IMP-COCB31-B.,F/0/POS/4000
+@USE       OUT-CTL,COCA03*IMP-COCB31-B. 
+@DELETE,C          COCA03*IMP-COCB31-C. 
+@ASG,UP            COCA03*IMP-COCB31-C.,F/0/POS/4000
+@USE        OUT-SP,COCA03*IMP-COCB31-C. 
+@DELETE,C          COCA03*IMP-COCB31-D. 
+@ASG,UP            COCA03*IMP-COCB31-D.,F/0/POS/4000
+@USE        OUT-NS,COCA03*IMP-COCB31-D. 
+@ . 
+@XQT COCA03.COCB31  
+@ . 
+@FREE              I214COCB29-T.
+@FREE              I214COCB31-A.
+@FREE              I214COCB31-B.
+@FREE              COCA03*IMP-COCB31-A. 
+@FREE              COCA03*IMP-COCB31-B. 
+@FREE              COCA03*IMP-COCB31-C. 
+@FREE              COCA03*IMP-COCB31-D. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB060:   MSG 060. TRI DU FICHIER COMMISS CREDITS A VALIDER - SORT 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ . 
+@ASG,AX            I214COCB29-C.
+@USE            IN,I214COCB29-C.
+@DELETE,C          I214COCB29-X.
+@ASG,UP            I214COCB29-X.,F/0/POS/4000   
+@USE           OUT,I214COCB29-X.
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=109,7,CH,A,1   .Type intermédiaire (2 pos.) + No Interm. (7 pos.)   
+KEY=79,9,CH,A,2    .Numéro matricule (7 pos.) + Branche (2 pos.) !  
+KEY=89,9,CH,A,3    .No Police (7 pos.) + Suffixe (2 pos.)   
+KEY=101,8,CH,A,4   .Date effet situation
+KEY=45,8,CH,A,5    .Date échéance   
+RECORD=300  
+RSZ=240            .Longueur record 240 bytes   
+@EOF
+@ . 
+@FREE              I214COCB29-C.
+@FREE              I214COCB29-X.
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB070:   MSG 070. TRI DU FICHIER COMMISSIONS DEBITS VALIDES - SORT
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB070  
+@ . 
+@ASG,AX            I214COCB31-B.
+@USE            IN,I214COCB31-B.
+@DELETE,C          I214COCA03D. 
+@ASG,UP            I214COCA03D.,F/0/POS/4000
+@USE           OUT,I214COCA03D. 
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=109,7,CH,A,1   .Type intermédiaire (2 pos.) + No Interm. (5 pos.)   
+KEY=79,9,CH,A,2    .No matricule (7 pos.) + Branche (2 pos.)!   
+KEY=89,9,CH,A,3    .No police (7 pos.) + Suffixe (2 pos.)   
+KEY=101,8,CH,A,4   .Date effet situation
+KEY=45,8,CH,A,5    .Date échéance   
+RECORD=300  
+RSZ=240            .Longueur record 240 bytes   
+@EOF
+@ . 
+@FREE              I214COCB31-B.
+@FREE              I214COCA03D. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB100:   MSG 100. VALIDATION PAIEMENT PRIMES CREDIT       - COCB32
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB100  
+@ . 
+@ASG,AX            I214COCB29-X.
+@USE        IN-CRD,I214COCB29-X.
+@ASG,AX            I214COCA03D. 
+@USE        IN-DBT,I214COCA03D. 
+@DELETE,C          I214COCA03C. 
+@ASG,UP            I214COCA03C.,F/0/POS/4000
+@USE        OUT-CV,I214COCA03C. 
+@DELETE,C          I214COCA03A. 
+@ASG,UP            I214COCA03A.,F/0/POS/4000
+@USE      OUT-ANO2,I214COCA03A. 
+@DELETE,C          I214COCA03M. 
+@ASG,UP            I214COCA03M.,F/0/POS/4000
+@USE      OUT-ANO3,I214COCA03M. 
+@DELETE,C          COCA03*IMP-COCB32-B. 
+@ASG,UP            COCA03*IMP-COCB32-B.,F/0/POS/4000
+@USE       OUT-CTL,COCA03*IMP-COCB32-B. 
+@DELETE,C          COCA03*IMP-COCB32-C. 
+@ASG,UP            COCA03*IMP-COCB32-C.,F/0/POS/4000
+@USE       OUT-CNC,COCA03*IMP-COCB32-C. 
+@DELETE,C          COCA03*IMP-COCB32-D. 
+@ASG,UP            COCA03*IMP-COCB32-D.,F/0/POS/4000
+@USE       OUT-CSP,COCA03*IMP-COCB32-D. 
+@ . 
+@XQT COCA03.COCB32  
+@ . 
+@FREE              I214COCA03D. 
+@FREE              I214COCA03C. 
+@FREE              I214COCB29-X.
+@FREE              I214COCA03A. 
+@FREE              I214COCA03M. 
+@FREE              COCA03*IMP-COCB32-B. 
+@FREE              COCA03*IMP-COCB32-C. 
+@FREE              COCA03*IMP-COCB32-D. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB101:   MSG 101. TRI FICHIER ANOMALIES POUR LA LISTE       - SORT
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB101  
+@ASG,AX            I214COCA03A. 
+@USE            IN,I214COCA03A. 
+@DELETE,C          I214COCA03A2.
+@ASG,UP            I214COCA03A2.,F/0/POS/4000   
+@USE           OUT,I214COCA03A2.
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=109,07,CH,A,01 .Type intermédiaire (2 pos.) + No Interm. (5 pos.)   
+KEY=211,10,CH,A,02 .Droit à commission  
+KEY=001,10,CH,A,03 .No base commission  
+KEY=079,09,CH,A,04 .Matricule   
+KEY=086,03,CH,A,05 .Branche 
+KEY=089,07,CH,A,06 .Police  
+KEY=096,02,CH,A,07 .Suffixe 
+KEY=098,03,CH,A,08 .Avenant 
+KEY=020,07,CH,A,09 .Lot 
+KEY=027,06,CH,A,10 .Evt 
+KEY=033,03,CH,A,11 .Mvt 
+KEY=045,08,CH,A,12 .Echéance
+KEY=077,02,CH,A,13 .Code objet  
+RECORD=300  
+RSZ=290            .Longueur record 290 bytes   
+@EOF
+@ . 
+@FREE              I214COCA03A. 
+@FREE              I214COCA03A2.
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB102:   MSG 102. LISTE ANOMALIES DE VALIDATION CREDIT   - COB081 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB102  
+@ASG,AX            I214COCA03A2.
+@USE     I-FCH-IME,I214COCA03A2.
+@DELETE,C          COCA03*P-COB081-ANO. 
+@ASG,UP            COCA03*P-COB081-ANO.,F/0/POS/4000
+@USE     O-IME-ANO,COCA03*P-COB081-ANO. 
+@DELETE,C          COCA03*P-COB081-CTL. 
+@ASG,UP            COCA03*P-COB081-CTL.,F/0/POS/4000
+@USE     O-IME-CTL,COCA03*P-COB081-CTL. 
+@ . 
+@XQT COCA03.COB081  
+@ . 
+@FREE              I214COCA03A2.
+@FREE              COCA03*P-COB081-ANO. 
+@FREE              COCA03*P-COB081-CTL. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB103:   MSG 103. TRI FICHIER MVTS CMM  POUR LA LISTE       - SORT
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB103  
+@ASG,AX            I214COCA03M. 
+@USE            IN,I214COCA03M. 
+@DELETE,C          I214COCA03M2.
+@ASG,UP            I214COCA03M2.,F/0/POS/4000   
+@USE           OUT,I214COCA03M2.
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=057,02,CH,A,01 .Code type intermédiaire 
+KEY=139,05,CH,A,02 .No intermédiaire
+KEY=001,10,CH,A,03 .No droit à commission   
+KEY=151,07,CH,A,04 .Matricule   
+KEY=020,12,CH,A,05 .Branche police suffixe  
+KEY=136,03,CH,A,06 .Avenant 
+KEY=323,08,CH,A,07 .Date effet situation
+KEY=197,10,CH,A,08 .No Base commission  
+RECORD=300  
+RSZ=550            .Longueur record 550 bytes   
+@EOF
+@ . 
+@FREE              I214COCA03M. 
+@FREE              I214COCA03M2.
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB104:   MSG 104. LISTE MVTS CMM DE VALID. CREDIT ANOM.  - COB081 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB104  
+@ASG,AX            I214COCA03M2.
+@USE     I-FCH-IME,I214COCA03M2.
+@DELETE,C          COCA03*P-COB082-CMM. 
+@ASG,UP            COCA03*P-COB082-CMM.,F/0/POS/4000
+@USE     O-IME-CMM,COCA03*P-COB082-CMM. 
+@DELETE,C          COCA03*P-COB082-CTL. 
+@ASG,UP            COCA03*P-COB082-CTL.,F/0/POS/4000
+@USE     O-IME-CTL,COCA03*P-COB082-CTL. 
+@ . 
+@XQT COCA03.COB082  
+@ . 
+@FREE              I214COCA03M2.
+@FREE              COCA03*P-COB082-CMM. 
+@FREE              COCA03*P-COB082-CTL. 
+@ERS               TPF$.
+@TIME   
+@ . 
+@ . *      ========================================================*
+@ . *      CALCUL COMMISSION
+@ . *      ========================================================*
+@ . 
+@ . *      --------------------------------------------------------*
+@LAB110:   MSG 110.  FUSION DEBIT ET CREDIT                  - SORT 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB110  
+@ . 
+@DELETE,C          I214COCA03E. 
+@CAT,P             I214COCA03E.,F/100/POS/4000  
+@ASG,A             I214COCA03E. 
+@USE           OUT,I214COCA03E. 
+@ASG,AX            I214COCA03D. 
+@USE           IN1,I214COCA03D. 
+@ASG,AX            I214COCA03C. 
+@USE           IN2,I214COCA03C. 
+@ . 
+@SORT,ES
+FILEIN=IN1  
+FILEIN=IN2  
+FILEOUT=OUT 
+KEY=109,7,CH,A,1   .Intermédiaire   
+KEY=138,3,CH,A,2   .CVN-GRP 
+KEY=141,2,CH,A,3   .Code action 
+RECORD=300  
+RSZ=240            .Longueur record 
+@EOF
+@ . 
+@FREE              I214COCA03E. 
+@FREE              I214COCA03D. 
+@FREE              I214COCA03C. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB120:   MSG 120.  EXTRACTION DES CODES ACTION A BLANC     - COPY 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ . 
+@DELETE,C          I214COCA03F. 
+@CAT,P             I214COCA03F.,F/100/POS/4000  
+@ASG,A             I214COCA03F. 
+@ASG,A             I214COCA03E. 
+@ . 
+@SORT,ES
+COPY
+FILEIN=I214COCA03E,F    MODE=SDF
+FILEOUT=I214COCA03F,F   MODE=SDF
+ACCEPT=141,2,OCT,G,040040    .Code action '040''040' blanco blanco  
+@EOF
+@ . 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB130:   MSG 130. CALCUL COMMISSIONS ANNUELLES           - COCB58 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB130  
+@ . 
+@ASG,AX            I214COCA03F. 
+@USE        IN-CMM,I214COCA03F. 
+@DELETE,C          R214COCA03.  
+@CAT,P             R214COCA03.,F/100/POS/4000   
+@ASG,A             R214COCA03.  
+@USE       OUT-CMM,R214COCA03.  
+@DELETE,C          COCA03*IMP-COCB58-A. 
+@ASG,UP            COCA03*IMP-COCB58-A.,F/0/POS/4000
+@USE       OUT-CAC,COCA03*IMP-COCB58-A. 
+@DELETE,C          COCA03*IMP-COCB58-B. 
+@ASG,UP            COCA03*IMP-COCB58-B.,F/0/POS/4000
+@USE       OUT-ANO,COCA03*IMP-COCB58-B. 
+@DELETE,C          COCA03*IMP-COCB58-C. 
+@ASG,UP            COCA03*IMP-COCB58-C.,F/0/POS/4000
+@USE       OUT-CTL,COCA03*IMP-COCB58-C. 
+@ . 
+@XQT COCA03.COCB58  
+@ . 
+@FREE              COCA03*IMP-COCB58-A. 
+@FREE              COCA03*IMP-COCB58-B. 
+@FREE              COCA03*IMP-COCB58-C. 
+@FREE              R214COCA03.  
+@FREE              I214COCA03F. 
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB140:   MSG 140.  EXTRACTION "DETAIL COMM ANNUELLES"      - BABA 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@ . 
+@ASG,A        R214COCA03.   
+@USE          FILIN,R214COCA03. 
+@DELETE,C     I214COCA03P.  
+@CAT,P        I214COCA03P.,F/100/POS/4000   
+@ASG,A        I214COCA03P.  
+@USE          FILOUT,I214COCA03P
+@ . 
+@ERS          TPF$. 
+@SSG,IA      *UTILIT.BABA/ASCII 
+SGS 
+INPUT         FILIN,240,10  
+OUTPUT        FILOUT,240,10 
+ASCII   
+KEYS          R 141,2,CA
+@EOF
+@XQT         .BABA  
+@ERS          TPF$. 
+@FREE         FILIN 
+@FREE         FILOUT
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB150:   MSG 150. TRI FICHIER DETAIL COMMISSIONS ANNUELLES - SORT 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ . 
+@ASG,AX            I214COCA03P. 
+@USE            IN,I214COCA03P. 
+@DELETE,C          I214COCA03Q. 
+@ASG,UP            I214COCA03Q.,F/0/POS/4000
+@USE           OUT,I214COCA03Q. 
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=109,7,CH,A,1   .Intermédiaire   
+KEY=138,3,CH,A,2   .Code groupe convention  
+KEY=79,7,CH,A,3    .Matricule   
+KEY=86,3,CH,A,4    .Branche 
+KEY=89,9,CH,A,5    .No police (7 positions) + Suffixe (2 positions) 
+KEY=98,3,CH,A,6    .Avt 
+KEY=77,2,CH,A,7    .Code objet  
+KEY=1,10,CH,A,8    .No base commission  
+RECORD=300  
+RSZ=240            .Longueur record 240 bytes   
+@EOF
+@ . 
+@FREE              I214COCA03P. 
+@FREE              I214COCA03Q. 
+@ERS               TPF$.
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB160:   MSG 160.  EXTRACTION "CALCUL COMM ANNUELLES"      - BABA 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB160  
+@ . 
+@ASG,A        I214COCA03Q.  
+@USE          FILIN,I214COCA03Q.
+@DELETE,C     I214COCA03R.  
+@CAT,P        I214COCA03R.,F/100/POS/4000   
+@ASG,A        I214COCA03R.  
+@USE          FILOUT,I214COCA03R
+@ . 
+@ERS          TPF$. 
+@SSG,IA      *UTILIT.BABA/ASCII 
+SGS 
+INPUT         FILIN,240,10  
+OUTPUT        FILOUT,240,10 
+ASCII   
+KEYS          R 214,1,* 
+@EOF
+@XQT         .BABA  
+@ERS          TPF$. 
+@FREE         FILIN 
+@FREE         FILOUT
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB170:   MSG 170. TRI FICHIER CALCUL COMMISSIONS ANNUELLES - SORT 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ . 
+@ASG,AX            I214COCA03R. 
+@USE            IN,I214COCA03R. 
+@DELETE,C          I214COCA03S. 
+@ASG,UP            I214COCA03S.,F/0/POS/4000
+@USE           OUT,I214COCA03S. 
+@ . 
+@SORT,ES
+FILEIN=IN   
+FILEOUT=OUT 
+KEY=109,7,CH,A,1   .Intermédiaire   
+KEY=138,3,CH,A,2   .Code groupe convention  
+RECORD=300  
+RSZ=240            .Longueur record 240 bytes   
+@EOF
+@ . 
+@FREE              I214COCA03R. 
+@FREE              I214COCA03S. 
+@ERS               TPF$.
+@TIME   
+@ . 
+@LAB200: MSG 200. PREPA FICHIER DET EN EXCEL
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,A     I214COCA03Q. 
+@USE       FILEIN,I214COCA03Q   
+@DELETE,C  I-XLS-CA.
+@ASG,UP    I-XLS-CA.,F/0/POS/4000   
+@USE       FILEOUT,I-XLS-CA 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 240
+COL  1,10,,''no base cmm''  
+COL  11,9,MNT,''mt base cmm''   
+COL  20,7,,''lot''  
+COL  27,6,,''evt''  
+COL  33,3,,''mvt''  
+COL  45,8,AAAAMMJJ,''dt échéance''  
+COL  61,8,AAAAMMJJ,''dt début MP''  
+COL  69,8,AAAAMMJJ,''dt fin MP''
+COL  77,2,ALPHAG,''cd objet''   
+COL  79,7,,''matricule''
+COL  86,3,ALPHAG,''bch''
+COL  89,7,,''police''   
+COL  98,3,ALPHAG,''avn''
+COL  116,3,,''cd div''  
+COL  109,7,ALPHAG,''imd''   
+COL  138,3,ALPHAG,''grp convention''
+@EOF
+@ERS TPF$.  
+@FREE I214COCA03Q.  
+@FREE I-XLS-CA. 
+@ . 
+@LAB220: MSG 220. PREPA FICHIER CLC EN EXCEL
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,A     I214COCA03S. 
+@USE       FILEIN,I214COCA03S   
+@DELETE,C  I-XLS-AST.   
+@ASG,UP    I-XLS-AST.,F/0/POS/4000  
+@USE       FILEOUT,I-XLS-AST
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 240
+COL  109,7,ALPHAG,''imd''   
+COL  138,3,ALPHAG,''grp convention''
+COL  155,8,MNT,''base cmm (CALCOM)''
+COL  163,8,MNT,''mt cmm (CALCOM)''  
+COL  171,8,,''no élém conv (CALCOM)''   
+COL  179,8,,''no bar conv (CALCOM)''
+@EOF
+@ERS TPF$.  
+@FREE I214COCA03S.  
+@FREE I-XLS-AST.
+@ . 
+@LAB230: MSG 230. ENVOIE INTRANET   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ . 
+@ADD     F999TRANSF.COCA03/2200PC   
+@ . 
+@ . 
+@ . *      --------------------------------------------------------*
+@LAB610:   MSG 610. CLOTURE PARAMETRES DE CONTROLE         - SWB004 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB610  
+@ . 
+@DELETE,C          COCA03*IMP-SWB004-1. 
+@CAT,P             COCA03*IMP-SWB004-1.,F///1000
+@ASG,A             COCA03*IMP-SWB004-1. 
+@ . 
+@XQT COCA03.SWB004  
+COCA03  
+@ . 
+@COPY,C      PRINT,COCA03*IMP-SWB004-1. 
+@DELETE,C    PRINT  
+@FREE              COCA03*IMP-SWB004-1. 
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB700:   MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE - FTP
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ . 
+@ADD       SYS$*RUNS.COPIE/PC   
+@ . 
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB740:   MSG 740. IMPRESSION DES LISTES VIA F999SYM         - SYM 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ . 
+@ADD       F999SYM.COCA03   
+@ . 
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB750:   MSG 750. DELETE DES FICHIERS                    - DELETE 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPRISE  
+LAB750  
+@ . 
+@DELETE,C          I214COCA03.  
+@DELETE,C          I214COCA03C. 
+@DELETE,C          I214COCA03D. 
+@DELETE,C          I214COCA03E. 
+@DELETE,C          I214COCA03F. 
+@DELETE,C          I214COCA03A. 
+@DELETE,C          I214COCA03M. 
+@DELETE,C          I214COCA03A2.
+@DELETE,C          I214COCA03M2.
+@ . 
+@DELETE,C          I214COCA03P. 
+@DELETE,C          I214COCA03Q. 
+@DELETE,C          I214COCA03R. 
+@DELETE,C          I214COCA03S. 
+@ . 
+@DELETE,C          I214COCB29-C.
+@DELETE,C          I214COCB29-D.
+@DELETE,C          I214COCB29-T.
+@DELETE,C          I214COCB29-X.
+@ . 
+@DELETE,C          I214COCB31-A.
+@DELETE,C          I214COCB31-B.
+@ . 
+@DELETE,C          I-XLS-CA.
+@DELETE,C          I-XLS-AST.   
+@TIME   
+@ . *      --------------------------------------------------------*
+@LAB777:   MSG 777. DELETE DU FICHIER DE REPRISE           - REPDEL 
+@ . *      --------------------------------------------------------*
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       *****  LE RUN COCA03 S'EST BIEN TERMINE  *****   
+@ . 
+@FREE           COCA03  
+@QUAL,R 
+@FIN

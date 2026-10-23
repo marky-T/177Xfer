@@ -1,0 +1,583 @@
+@RUN,M/T   AFPD05,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,1,PRSP
+@ .        *===========================================================*
+@MSG       * AFPD05 - COMPARAISON DONNEES AFFILIES CHAMBRES SYNDICALES *
+@MSG       *                          AVEC AL027                       *
+@ .        *===========================================================*
+@MSG       * P02064 : 26/09/2002 : BDB : SECURISER UNLOAD              *
+@ .        *===========================================================*
+@ . 
+@ . LE 10/03/03: REMPLACEMENT DE L'UTILITAIRE DE TRANSFERT  
+@ . LE 31/01/06: RECHERCHE DU NO RPM A LA PLACE DU NO TVA   
+@ . LE 20/11/06: RECH DONNEES AFFI DANS INTERVENANT ET SUPPRES DONNEES  
+@ .              AFFI DANS AL027
+@ . LE 01/09/11: AJOUT DE DONNEES DANS LE FICHIER DES CONFEDERATIONS
+@ . 
+@ADD       F999PARA.AFPD05  
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.AFPD05  
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN-D.AFPD05 
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     AFPD05.,F///1000 
+@COPY,A    APRD*BABS.AFB010,AFPD05.AFB010   
+@COPY,A    APRD*BABS.AFB011,AFPD05.AFB011   
+@COPY,A    APRD*BABS.AFB012,AFPD05.AFB012   
+@COPY,A    APRD*BABS.AFB013,AFPD05.AFB013   
+@COPY,A    APRD*BABS.AFB028,AFPD05.AFB028   
+@COPY,A    APRD*BABS.AFB029,AFPD05.AFB029   
+@COPY,A    APRD*BABS.AFB020,AFPD05.AFB020   
+@TIME   
+@ . *      ------------------------------------------   
+@LAB010:   MSG 010. PROCEDURE DE RESTART AUTOMATIQUE
+@ . *      ------------------------------------------   
+@ADD       SYS$*RUNS.RESTART
+?JOB-ID?
+@TIME   
+@ . 
+@ . *      ---------------------------------------------------------
+@LAB020:   MSG 020. EXTRACTION DONNEES AFFILIES CHAMBRES SYNDICALES 
+@MSG                                                          AFB010
+@ . *      ---------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB020  
+@ . Une disquette est fournie regulierement par les chambres syndicales 
+@ . Elle contient les donnees de leurs affilies 
+@ . Un record est compose de 30 zones separees par des tabulations  
+@ . ==> longueur variable   
+@ASG,A     FAFFILI05.   
+@USE       I-AFFILI,FAFFILI05.  
+@DELETE,C  IAFFILI05.   
+@ASG,UP    IAFFILI05.,F/0/POS/4000  
+@USE       O-AFFILI,IAFFILI05.  
+@DELETE,C  AFPD05*IMP-AFB010.   
+@ASG,UP    AFPD05*IMP-AFB010.,F///1000  
+@USE       IMP,AFPD05*IMP-AFB010.   
+@XQT       AFPD05.AFB010
+@ADD       F999CONTROLE.AFPD05  
+@FREE      FAFFILI05.   
+@FREE      IAFFILI05.   
+@FREE      AFPD05*IMP-AFB010.   
+@TIME   
+@ . *      -----------------------------------------------------
+@LAB030:   MSG 030. TRI FICHIER SEQUENTIEL CREE (LONGUEUR FIXE) 
+@ . *      -----------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . Tri sur nom + adresse + code postal + localite  
+@ .  + telephone 1 + telephone 2 + no rpm + confederation + % attribution   
+@ASG,A     IAFFILI05.   
+@USE       INASC,IAFFILI05. 
+@DELETE,C  IAFFILI05-2. 
+@ASG,UP    IAFFILI05-2.,F/0/POS/4000
+@USE       OUTASC,IAFFILI05-2.  
+@SORT,ES
+SORT
+FILEIN=INASC     BLOCK=10   
+FILEOUT=OUTASC   BLOCK=10   
+KEY=43,220,CH,A 
+RSZ=262 
+@EOF
+@FREE      IAFFILI05.   
+@FREE      IAFFILI05-2. 
+@TIME   
+@ . *      ------------------------------------------------ 
+@LAB040:   MSG 040. SUPPRESSION MULTIPLES RECORDS AFFILIES  
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB040  
+@ . Suppression des multiples sur base du tri precedent 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+ASCII   
+INPUT      INASC,262,10 
+OUTPUT     OUTASC,262,10
+KEYS       ALL 43,220   
+SEQERROR   MULTI
+@EOF
+@ASG,A     IAFFILI05-2. 
+@USE       INASC,IAFFILI05-2.   
+@DELETE,C  IAFFILI05-3. 
+@ASG,UP    IAFFILI05-3.,F/0/POS/4000
+@USE       OUTASC,IAFFILI05-3.  
+@XQT       .BABA
+@ERS       TPF$.
+@FREE      IAFFILI05-2. 
+@FREE      IAFFILI05-3. 
+@TIME   
+@ . *      ------------------------------------------   
+@LAB050:   MSG 050. CREATION FICHIER INDEXE AFFILIES              AFB011
+@ . *      ------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB050  
+@ . Creation sur base du fichier trie precedemment  
+@ . Cles : unique     --> no de sequence
+@ .        secondaires --> nom, telephone 1, telephone 2, no TVA
+@ASG,A     IAFFILI05-3. 
+@USE       I-AFFILI,IAFFILI05-3.
+@DELETE,C  IAFFILI05-4. 
+@ASG,UP    IAFFILI05-4.,F/0/POS/4000
+@USE       O-AFFILI,IAFFILI05-4.
+@DELETE,C  AFPD05*IMP-AFB011.   
+@ASG,UP    AFPD05*IMP-AFB011.,F///1000  
+@USE       IMP,AFPD05*IMP-AFB011.   
+@XQT       AFPD05.AFB011
+@FREE      IAFFILI05-3. 
+@FREE      IAFFILI05-4. 
+@FREE      AFPD05*IMP-AFB011.   
+@TIME   
+@ . *      ------------------------------------------------ 
+@LAB060:   MSG 060. DECHARGEMENT TABLE RDMS AFFILIES AL027  
+@ . *      ------------------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB060  
+@ . Dechargement pour traitement sequentiel ensuite 
+@SETC      0/S2 
+@DELETE,C  IAL027-05.   
+@ASG,UP    IAL027-05.,F/0/POS/4000  
+@USE       MATR,IAL027-05.  
+@XQT SYS$LIB$*RSA.RSAC-COIVP
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+UNLOAD TO FILE MATR 
+SELECT MATRICC  
+FROM AL027; 
+END THREAD; 
+EXIT;   
+@EOF
+@FREE      IAL027-05.   
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK:   MSG ** UNLOAD OK **  
+@TIME   
+@ . *      --------------------------------------------------------------   
+@LAB070:   MSG 070. COMPLETER MATRICULES AL027 AVEC DONNEES AFFI (itu019)   
+@ . *      --------------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB070  
+@ . Lecture sequentielle du fichier venant de l'AL027 (cree au lab  
+@ . precedent) et recherche des données affiliés via la routine ITU019  
+@ . afin de complèter le fichier pour rechercher correspondance 
+@ASG,A     IAL027-05.   
+@USE       I-AL027,IAL027-05.   
+@DELETE,C  ISELECT05.   
+@ASG,UP    ISELECT05.,F/0/POS/4000  
+@USE       O-SELECT,ISELECT05.  
+@DELETE,C  AFPD05*IMP-AFB020.   
+@ASG,UP    AFPD05*IMP-AFB020.,F///1000  
+@USE       IMP,AFPD05*IMP-AFB020.   
+@XQT       AFPD05.AFB020
+@FREE      IAL027-05.   
+@FREE      AFPD05*IMP-AFB020.   
+@FREE      ISELECT05.   
+@TIME   
+@ . *      -------------------------------------------------------------
+@LAB100:   MSG 100. RECH CORR AFFILIES DISQUETTE / AFFILIES FEDERALE
+@ . *      -------------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@ . Lecture séquentielle du fichier créé au lab précédent   
+@ . pour rechercher correspondance avec fichier ISéq Chambre Synd   
+@ASG,A     IAFFILI05-4. 
+@USE       I-AFFILI,IAFFILI05-4.
+@ASG,A     ISELECT05.   
+@USE       I-AL027,ISELECT05.   
+@DELETE,C  ISELECT05-1. 
+@ASG,UP    ISELECT05-1.,F/0/POS/4000
+@USE       O-SELECT,ISELECT05-1.
+@DELETE,C  AFPD05*IMP-AFB012.   
+@ASG,UP    AFPD05*IMP-AFB012.,F///1000  
+@USE       IMP,AFPD05*IMP-AFB012.   
+@XQT       AFPD05.AFB012
+@ADD       F999CONTROLE.AFPD05  
+@FREE      IAFFILI05-4. 
+@FREE      ISELECT05.   
+@FREE      AFPD05*IMP-AFB012.   
+@FREE      ISELECT05-1. 
+@TIME   
+@ . *      ------------------------------------ 
+@LAB110:   MSG 110. TRI FICHIER SELECTION CREE  
+@ . *      ------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB110  
+@ . Tri des records selectionnes sur no sequence + matricule
+@ . pour traitement sequentiel ensuite  
+@ASG,A     ISELECT05-1. 
+@USE       INASC,ISELECT05-1.   
+@DELETE,C  ISELECT05-2. 
+@ASG,UP    ISELECT05-2.,F/0/POS/4000
+@USE       OUTASC,ISELECT05-2.  
+@SORT,ES
+SORT
+FILEIN=INASC     BLOCK=10   
+FILEOUT=OUTASC   BLOCK=10   
+KEY=1,15,CH,A   
+RSZ=22  
+@EOF
+@FREE      ISELECT05-1. 
+@FREE      ISELECT05-2. 
+@TIME   
+@ . *      ---------------------------------
+@LAB120:   MSG 120. TRI FICHIER COTISATIONS 
+@ . *      ---------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB120  
+@ . Tri sur no matricule + police   
+@ADD       CPAFPD05.DEPENSE 
+@DELETE,C  I8CLOA35C05. 
+@ASG,UP    I8CLOA35C05.,F/0/POS/4000
+@USE       OUTASC,I8CLOA35C05.  
+@SORT,ES
+SORT
+FILEIN=INASC,F   BLOCK=10   
+FILEOUT=OUTASC,F BLOCK=10   
+KEY=1,8,CH,A,1  
+KEY=33,8,CH,A,2 
+RSZ=200 
+@EOF
+@FREE    INASC. 
+@FREE    I8CLOA35C05.   
+@TIME   
+@ . *      ------------------------------------ 
+@LAB130:   MSG 130. IMPRESSION CORRESPONDANCES                    AFB013
+@ . *      ------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB130  
+@ . Lecture sequentielle du fichier de selection et lecture en parallele
+@ . du fichier sequentiel pur affilies pour recup. donnes : Impression  
+@ . des affilies ayant trouves correspondance dans AL027 (+ impression  
+@ . donnees AL027 pour pouvoir comparer) et impression des affilies 
+@ . n'ayant pas trouve correspondance sur l'AL027   
+@ASG,A     IAFFILI05-3. 
+@USE       I-AFFILI,IAFFILI05-3.
+@ASG,A     ISELECT05-2. 
+@USE       I-SELECT,ISELECT05-2.
+@ASG,A     I8CLOA35C05. 
+@USE       I-COTTOT,I8CLOA35C05.
+@DELETE,C  IAFFINCONNU5.
+@ASG,UP    IAFFINCONNU5.,F/0/POS/4000   
+@USE       I-INCONNU,IAFFINCONNU5   
+@DELETE,C  IAFFCOMMUN5. 
+@ASG,UP    IAFFCOMMUN5.,F/0/POS/4000
+@USE       I-COMMUN,IAFFCOMMUN5 
+@DELETE,C  AFPD05*IMP-AFB013-1. 
+@ASG,UP    AFPD05*IMP-AFB013-1.,F///100000  
+@USE       IMP1,AFPD05*IMP-AFB013-1.
+@DELETE,C  AFPD05*IMP-AFB013-2. 
+@ASG,UP    AFPD05*IMP-AFB013-2.,F///100000  
+@USE       IMP2,AFPD05*IMP-AFB013-2.
+@DELETE,C  AFPD05*IMP-AFB013-3. 
+@ASG,UP    AFPD05*IMP-AFB013-3.,F///100000  
+@USE       IMP3,AFPD05*IMP-AFB013-3.
+@DELETE,C  ITOT013D05.  
+@ASG,UP    ITOT013D05.,F///100  
+@USE       F-TOTAUX,ITOT013D05. 
+@XQT       AFPD05.AFB013
+@FREE      IAFFILI05-3. 
+@FREE      IAFFCOMMUN5. 
+@FREE      IAFFINCONNU5.
+@FREE      I8CLOA35C05. 
+@FREE      AFPD05*IMP-AFB013-1. 
+@FREE      AFPD05*IMP-AFB013-2. 
+@FREE      AFPD05*IMP-AFB013-3. 
+@FREE      ISELECT05-2. 
+@FREE      ITOT013D05.  
+@TIME   
+@ . *      ------------------------------------ 
+@LAB140:   MSG 140. TRI FICHIER AFFILIES CONNUS 
+@ . *      ------------------------------------ 
+@ADD       SYS$*RUNS.REPRISE
+LAB140  
+@ . Tri des records selectionnes sur matricule  
+@ASG,A     IAFFCOMMUN5. 
+@USE       INASC,IAFFCOMMUN5.   
+@DELETE,C  IAFFCOMMUN5T.
+@ASG,UP    IAFFCOMMUN5T.,F/0/POS/4000   
+@USE       OUTASC,IAFFCOMMUN5T. 
+@SORT,ES
+SORT
+FILEIN=INASC     BLOCK=10   
+FILEOUT=OUTASC   BLOCK=10   
+KEY=264,8,CH,A  
+RSZ=305 
+@EOF
+@FREE      IAFFCOMMUN5. 
+@FREE      IAFFCOMMUN5T.
+@TIME   
+@ . *      ---------------------------------
+@LAB150:   MSG 150. CHIFFRE D'AFFAIRE TOTAL                       AFB029
+@ . *      ---------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB150  
+@ASG,A     IAFFCOMMUN5T.
+@USE       I-AFFIL,IAFFCOMMUN5T.
+@ASG,A     ITOT013D05.  
+@USE       I-TOTAUX,ITOT013D05. 
+@ASG,A     I8CLOA35C05. 
+@USE       I-COTTOT,I8CLOA35C05.
+@DELETE,C  IAFFCOMMUN5A.
+@ASG,UP    IAFFCOMMUN5A.,F/0/POS/4000   
+@USE       O-AFFIL,IAFFCOMMUN5A.
+@DELETE,C  ICOTATB29D5. 
+@ASG,UP    ICOTATB29D5.,F/0/POS/4000
+@USE       O-FCH-COT,ICOTATB29D5.   
+@DELETE,C  ITOT029D05.  
+@ASG,UP    ITOT029D05.,F/0/POS/4000 
+@USE       O-TOTAUX,ITOT029D05. 
+@XQT       AFPD05.AFB029
+@FREE      IAFFCOMMUN5T.
+@FREE      ITOT013D05.  
+@FREE      I8CLOA35C05. 
+@FREE      IAFFCOMMUN5A.
+@FREE      ICOTATB29D5. 
+@FREE      ITOT029D05.  
+@TIME   
+@ . *      ----------------------------------------------------------   
+@LAB200:   MSG 200. TRANSFORMATION EXCEL DU FICHIER AFFILIES COMMUNS
+@ . *      ----------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB200  
+@ASG,A     IAFFCOMMUN5A.
+@USE       FILEIN,IAFFCOMMUN5A. 
+@DELETE,C  AFPD05*FAFFCOMMUN5.  
+@ASG,UP    AFPD05*FAFFCOMMUN5.,F/0/POS/4000 
+@USE       FILEOUT,AFPD05*FAFFCOMMUN5   
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 305
+COL  1,35,,''Qualité Civile''   
+COL  36,35,,''Nom'' 
+COL  71,35,,''Suite Nom''   
+COL  106,35,,''Adresse''
+COL  141,5,,''No''  
+COL  146,5,,''Boîte''   
+COL  151,4,,''C Postal''
+COL  155,30,,''Localité''   
+COL  185,10,ALPHAG,''Téléphone''
+COL  195,10,ALPHAG,''Téléphone/Fax''
+COL  205,10,ALPHAG,''RPM Fédérale'' 
+COL  215,35,,''Confédération''  
+COL  250,6,ALPHAG,''% attrib.'' 
+COL  256,8,NUM,''No intervenant''   
+COL  264,8,NUM,''No client''
+COL  272,10,,''Date annul'' 
+COL  282,12,MNT,''C.A.''
+COL  294,12,MNT,''C.A. attrib.''
+@EOF
+@ERS       TPF$.
+@FREE      IAFFCOMMUN5A.
+@FREE      AFPD05*FAFFCOMMUN5.  
+@TIME   
+@ . *      -----------------------------------------------------------  
+@LAB210:   MSG 210. TRANSFORMATION EXCEL DU FICHIER AFFILIES INCONNUS   
+@ . *      ----------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB210  
+@ASG,A     IAFFINCONNU5.
+@USE       FILEIN,IAFFINCONNU5. 
+@DELETE,C  AFPD05*FAFFINCONNU5. 
+@ASG,UP    AFPD05*FAFFINCONNU5.,F/0/POS/4000
+@USE       FILEOUT,AFPD05*FAFFINCONNU5  
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 255
+COL  1,35,,''Qualité Civile''   
+COL  36,35,,''Nom'' 
+COL  71,35,,''Suite Nom''   
+COL  106,35,,''Adresse''
+COL  141,5,,''No''  
+COL  146,5,,''Boîte''   
+COL  151,4,,''C Postal''
+COL  155,30,,''Localité''   
+COL  185,10,ALPHAG,''Téléphone''
+COL  195,10,ALPHAG,''Téléphone/Fax''
+COL  205,10,ALPHAG,''RPM''  
+COL  215,35,,''Confédération''  
+COL  250,6,ALPHAG,''% attrib.'' 
+@EOF
+@ERS       TPF$.
+@FREE      IAFFINCONNU5.
+@FREE      AFPD05*FAFFINCONNU5. 
+@TIME   
+@ . *      -----------------------------------------------------------  
+@LAB250:   MSG 250. TRI FICHIER COTISATIONS ATTRIBUEES => AFB028  SORT  
+@ . *      -----------------------------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB250  
+@ . Tri sur branche 
+@ASG,A     ICOTATB29D5. 
+@USE       INASC,ICOTATB29D5.   
+@DELETE,C  ICOTATB29D5T.
+@ASG,UP    ICOTATB29D5T.,F/0/POS/4000   
+@USE       OUTASC,ICOTATB29D5T. 
+@SORT,ES
+SORT
+FILEIN=INASC,F   BLOCK=10   
+FILEOUT=OUTASC,F BLOCK=10   
+KEY=21,3,CH,A   
+RSZ=222 
+@EOF
+@TIME   
+@ . 
+@ . *      ---------------------------------------------
+@LAB260:   MSG 260. IMPRESSION COTISATIONS TOTAUX RECAP 
+@ . *      ---------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB260  
+@ASG,A     ICOTATB29D5T.
+@USE       I-FCH-COT,ICOTATB29D5T.  
+@ASG,A     ITOT029D05.  
+@USE       I-FCH-TOT,ITOT029D05.
+@DELETE,C  I-AFB028BCH5.
+@ASG,UP    I-AFB028BCH5.,F///100000 
+@USE       O-PRM-BCH,I-AFB028BCH5.  
+@DELETE,C  I-AFB028SOC5.
+@ASG,UP    I-AFB028SOC5.,F///100000 
+@USE       O-PRM-SOC,I-AFB028SOC5.  
+@DELETE,C  I-NM-CFD-05. 
+@ASG,UP    I-NM-CFD-05.,F///100000  
+@USE       O-FCH-CFD,I-NM-CFD-05.   
+@XQT       AFPD05.AFB028
+@FREE      ITOT029D05.  
+@FREE      ICOTATB29D5T.
+@FREE      I-AFB028BCH5.
+@FREE      I-AFB028SOC5.
+@FREE      I-NM-CFD-05. 
+@TIME   
+@ . 
+@ . *      ---------------------------------------------------------
+@LAB300:   MSG 300. TRANSFORMATION EXCEL DU FICHIER PRIMES / BRANCHE
+@ . *      ---------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB300  
+@ASG,A     I-AFB028BCH5.
+@USE       FILEIN,I-AFB028BCH5. 
+@DELETE,C  AFPD05*FPRM-BCH. 
+@ASG,UP    AFPD05*FPRM-BCH.,F/0/POS/4000
+@USE       FILEOUT,AFPD05*FPRM-BCH  
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 53 
+COL  1,6,ALPHAG,''Branche'' 
+COL  7,35,,''C.A. attribué''
+COL  42,12,,''% répartition''   
+@EOF
+@ERS       TPF$.
+@FREE      I-AFB028BCH5.
+@FREE      AFPD05*FPRM-BCH. 
+@TIME   
+@ . 
+@ . *      ---------------------------------------------------------
+@LAB310:   MSG 310. TRANSFORMATION EXCEL DU FICHIER PRIMES / SOCIETE
+@ . *      ---------------------------------------------------------
+@ADD       SYS$*RUNS.REPRISE
+LAB310  
+@ASG,A     I-AFB028SOC5.
+@USE       FILEIN,I-AFB028SOC5. 
+@DELETE,C  AFPD05*FPRM-SOC. 
+@ASG,UP    AFPD05*FPRM-SOC.,F/0/POS/4000
+@USE       FILEOUT,AFPD05*FPRM-SOC  
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 60 
+COL  1,20,,''Société''  
+COL  21,32,,''C.A. attribué''   
+COL  53,8,,''% répartition''
+@EOF
+@ERS       TPF$.
+@FREE      I-AFB028SOC5.
+@FREE      AFPD05*FPRM-SOC. 
+@TIME   
+@ . 
+@ . *      ---------------------------------------------------  
+@LAB320:   MSG 320. TRANSFORMATION EXCEL DU FICHIER DES TOTAUX  
+@ . *      ---------------------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB320  
+@ASG,A     ITOT029D05.  
+@USE       FILEIN,ITOT029D05.   
+@DELETE,C  AFPD05*FTOT-CFD. 
+@ASG,UP    AFPD05*FTOT-CFD.,F/0/POS/4000
+@USE       FILEOUT,AFPD05*FTOT-CFD  
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 88 
+COL  1,35,,''Confédération''
+COL  36,7,NUM,''Nombre de membres connus''  
+COL  59,7,NUM,''Nombre de membres inconnus''
+COL  66,7,NUM,''Nombre total de membres''   
+COL  43,16,MNT,''C.A. total (EUR)'' 
+COL  73,16,MNT,''C.A. attribué total (EUR)''
+@EOF
+@ERS       TPF$.
+@FREE      ITOT029D05.  
+@FREE      AFPD05*FTOT-CFD. 
+@TIME   
+@ . 
+@ . *      -------------------------------------------------------------
+@LAB350: MSG 350. ENVOI SUR PC DES FICHIERS EXCEL PAR BRANCHE ET SOCIETE
+@MSG      ET DES FICHIERS EXCEL AFFILIES COMMUNS ET INCONNUS
+@ . *      -------------------------------------------------------------
+@ADD SYS$*RUNS.REPRISE  
+LAB350  
+@ADD       F999TRANSF.AFPD05/2200PC 
+@ . *      -------------------------------  
+@LAB700:   MSG 700. SAUVETAGE DES FICHIERS  
+@ . *      -------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.FASDIR 
+@TIME   
+@ . *      ---------------------------------------  
+@LAB710:   MSG 710. IMPRESSION FICHIER VIA F999SYM  
+@ . *      ---------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB710  
+@ADD       F999SYM.AFPD05   
+@TIME   
+@ . *      ---------------------------------------- 
+@LAB720:   MSG 720. DELETE DES FICHIERS TEMPORAIRES 
+@ . *      ---------------------------------------- 
+@ADD       SYS$*RUNS.REPRISE
+LAB720  
+@CYCLE,C   FAFFILI05.,0 
+@CYCLE,C   FAFFILI05.,32
+@DELETE,C  IAFFILI05.   
+@DELETE,C  IAFFILI05-2. 
+@DELETE,C  IAFFILI05-3. 
+@DELETE,C  IAFFILI05-4. 
+@DELETE,C  IAL027-05.   
+@DELETE,C  ISELECT05.   
+@DELETE,C  ISELECT05-1. 
+@DELETE,C  ISELECT05-2. 
+@DELETE,C  ICOTATB29D5. 
+@DELETE,C  ICOTATB29D5T.
+@DELETE,C  I8CLOA35C05. 
+@DELETE,C  IAFFCOMMUN5. 
+@DELETE,C  IAFFCOMMUN5T.
+@DELETE,C  IAFFCOMMUN5A.
+@DELETE,C  IAFFINCONNU5.
+@DELETE,C  AFPD05*FPRM-SOC. 
+@DELETE,C  AFPD05*FPRM-BCH. 
+@DELETE,C  AFPD05*FTOT-CFD. 
+@DELETE,C  AFPD05*FAFFCOMMUN5.  
+@DELETE,C  AFPD05*FAFFINCONNU5. 
+@DELETE,C  I-AFB028BCH5.
+@DELETE,C  I-AFB028SOC5.
+@DELETE,C  I-NM-CFD-05. 
+@DELETE,C  ITOT013D05.  
+@DELETE,C  ITOT029D05.  
+@FREE      CPAFPD05.
+@DELETE,C  CPAFPD05.
+@TIME   
+@ . *      -------------------------------------
+@LAB770:   MSG 770. DELETE DU FICHIER DE REPRISE
+@ . *      -------------------------------------
+@ADD       SYS$*RUNS.REPDEL 
+@MSG            ******************************************  
+@MSG            ***  LE RUN AFPD05 S'EST BIEN TERMINE  ***  
+@MSG            ******************************************  
+@QUAL,R 
+@FIN

@@ -1,0 +1,18 @@
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36
+E:\Repos\Federale_InternalRelease\AmtTools\ComModule
+  dll: 06/24/2026 21:55:00
+  sni: 01/16/2025 00:23:36

@@ -1,0 +1,24 @@
+lines with a double quote in column 1: 0
+SET of PILO/LBRK/IMGLEN/NSIGN: 0
+--- ours vs jul27 base: where is the whitespace rule
+warning: in the working copy of 'E:\Repos\SsgTrial\_scratch\rd-jul27\SsgConverter\SsgConverter\SymstreamProcessor.cs', LF will be replaced by CRLF the next time Git touches it
+
+-        if (!String.[7mIsNullOrEmpty[0m(s)) {
++        if (!String.[7mIsNullOrWhiteSpace[0m(s)) {
+-      } else if (!String.[7mIsNullOrEmpty[0m(lines[i])) {
++      } else if (!String.[7mIsNullOrWhiteSpace[0m(lines[i])) {
+--- Fix-20260820 notes mentioning blank
+SsgConverter-Fix-20260820.md:51: `if (!String.IsNullOrEmpty(left) && !String.IsNullOrWhiteSpace(right))`.
+SsgConverter-Fix-20260820.md:281: ## Fix 4 - IndexOutOfRange: whitespace-only line reaches expression parser
+SsgConverter-Fix-20260820.md:285: **Root cause:** Two guards used `String.IsNullOrEmpty` instead of `String.IsNullOrWhiteSpace`:
+SsgConverter-Fix-20260820.md:286: 1. `RemoveEmpty()` in `SymstreamProcessor.cs` kept whitespace-only `splitParameters` entries.
+SsgConverter-Fix-20260820.md:287: 2. The DataLine path in `Convert()` used `!String.IsNullOrEmpty(lines[i])` - a line containing only spaces passed the check, then `SymstreamExpressionToPowerShe
+SsgConverter-Fix-20260820.md:298: if (!String.IsNullOrEmpty(s)) {
+SsgConverter-Fix-20260820.md:300: if (!String.IsNullOrWhiteSpace(s)) {
+SsgConverter-Fix-20260820.md:306: } else if (!String.IsNullOrEmpty(lines[i])) {
+SsgConverter-Fix-20260820.md:308: } else if (!String.IsNullOrWhiteSpace(lines[i])) {
+SsgConverter-Fix-20260820.md:315: if (String.IsNullOrEmpty(text)) {
+SsgConverter-Fix-20260820.md:333: Unary `-` and `+` guards (~lines 301, 315): only recurse if operand is non-whitespace:
+SsgConverter-Fix-20260820.md:342: if (!String.IsNullOrWhiteSpace(operand)) {
+SsgConverter-Fix-20260820.md:353: if (String.IsNullOrEmpty(right)) { return exprLeft; }  // added
+

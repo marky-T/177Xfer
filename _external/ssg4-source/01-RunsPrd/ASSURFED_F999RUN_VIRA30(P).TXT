@@ -1,0 +1,1298 @@
+@RUN,M/T   VIRA30,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       *******************************************  
+@MSG       **  ENROLEMENT MATRICULE RISTOURNES VIE  **  
+@MSG       *******************************************  
+@ . 
+@ . LE 25/03/94: NOUVELLE ADAPATION DU RUN  
+@ . LE 01/03/02: SAUVETAGE I006VIR305 POUR VIRD37   
+@ . LE 01/10/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . LE 17/02/03: ADAPTATION SAUVETAGE INCENDIE POUR CLOTURE 
+@ . LE 27/11/03: REMPL FASDIR PAR COPIE SUR PC POUR GRAVURE 
+@ . LE 13/05/04: REMPLACEMENT INVENTAIRE EN COURS PAR   
+@ .                              CONTRATS AVEC TOTAUX   
+@ . LE 06/03/06: INTRODUCTION PGM VIB137 (RECALCUL) 
+@ . LE 31/07/07: REORG DIP - E06026/02 - PAR ARNAUTS B  
+@ . LE 24/10/08: REMPLACEMENT DU PGM VIR365 PAR VIR497  
+@ .              AJOUT DES PROGRAMMES COCB41 ET COCB42  
+@ . LE 07/01/2013: Suppression création RVIRD37CPT (P12090/01-JLH). 
+@ . LE 17/07/2017: Préparation nouveau logiciel UNIT4 (P15080/01 - FJ)  
+@ . LE 22/10/2018: Création d'un nouveau flux ISIE (1000422)
+@ . 
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.VIRA30  
+@TIME   
+@MSG       EDITION DU JCL.  
+@PRT,SC    F999RUN.VIRA30   
+@TIME   
+@ . ------------------------------------------------------------------  
+@MSG       TRANSFERT DES PROGRAMMES.
+@ . ------------------------------------------------------------------  
+@ASG,T     VIRA30.,F///5000 
+@COPY,A    ASSURFED*ABSVIE.VIR302,VIRA30.VIR302 
+@COPY,A    ASSURFED*ABSVIE.VIR304,VIRA30.VIR304 
+@COPY,A    ASSURFED*ABSVIE.VIR305,VIRA30.VIR305 
+@COPY,A    ASSURFED*ABSVIE.VIR306,VIRA30.VIR306 
+@COPY,A    ASSURFED*ABSVIE.VIR307,VIRA30.VIR307 
+@COPY,A    ASSURFED*ABSVIE.VIR308,VIRA30.VIR308 
+@COPY,A    VPRD*BABS.VIR309,VIRA30.VIR309   
+@COPY,A    ASSURFED*ABSVIE.VIR313,VIRA30.VIR313 
+@COPY,A    ASSURFED*ABSVIE.VIR316,VIRA30.VIR316 
+@COPY,A    VPRD*BABS.VIR348,VIRA30.VIR348   
+@COPY,A    VPRD*BABS.VIR349,VIRA30.VIR349   
+@COPY,A    ASSURFED*ABSVIE.VIR360,VIRA30.VIR360 
+@COPY,A    ASSURFED*ABSVIE.VIR361,VIRA30.VIR361 
+@COPY,A    ASSURFED*ABSVIE.VIR993,VIRA30.VIR993 
+@COPY,A    ASSURFED*ABSVIE.VIR994,VIRA30.VIR994 
+@COPY,A    ASSURFED*ABSVIE.VIR981,VIRA30.VIR981 
+@COPY,A    ASSURFED*ABSVIE.VIR362,VIRA30.VIR362 
+@COPY,A    ASSURFED*ABSVIE.VIR363,VIRA30.VIR363 
+@COPY,A    ASSURFED*ABSVIE.VIR364,VIRA30.VIR364 
+@COPY,A    ASSURFED*ABSVIE.VIR497,VIRA30.VIR497 
+@COPY,A    COPRD*BABS.COCB41,VIRA30.COCB41  
+@COPY,A    COPRD*BABS.COCB42,VIRA30.COCB42  
+@COPY,A    ASSURFED*ABSVIE.VIR366,VIRA30.VIR366 
+@COPY,A    ASSURFED*ABSVIE.VIR370,VIRA30.VIR370 
+@COPY,A    ASSURFED*ABSVIE.VIR371,VIRA30.VIR371 
+@COPY,A    VIPRD*BABS.VIB137,VIRA30.VIB137  
+@COPY,A    CPTPRD*BABS.CGB022,VIRA30.CGB022 
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB001: MSG 001. CREATION ENR.TERMES MATR. RISTOURNES ANNUEL VIR302.   
+@ . ------------------------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB001  
+@ . 
+@ASG,A     FVIRT01CON.  
+@USE       INUMVIE,FVIRT01CON.  
+@DELETE,C  I006VIR302.  
+@CAT,P     I006VIR302,F///500   
+@ASG,AX    I006VIR302.  
+@USE       OTRMNUMVIE,I006VIR302.   
+@XQT       VIRA30.VIR302
+@ADD       F999CONTROLE.VIRA30  
+@FREE      FVIRT01CON.  
+@FREE      I006VIR302.  
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB002: MSG 002. EXECUTION TRI I006VIR302 POUR VIR304. 
+@ . ------------------------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB002  
+@ . 
+@ASG,A     I006VIR302.  
+@DELETE,C  I006VIR302T. 
+@CAT,P     I006VIR302T,F/0/POS/4000 
+@ASG,AX    I006VIR302T. 
+@SORT,ES
+FILEIN=I006VIR302,F   BLOCK=10  
+FILEOUT=I006VIR302T,F   BLOCK=10
+KEY=6,7,CH,A,1  
+KEY=13,2,CH,A,2 
+KEY=19,6,CH,A,3 
+KEY=61,4,CH,A,4 
+KEY=59,2,CH,A,5 
+KEY=57,2,CH,A,6 
+RSZ=500 
+RECORD=10   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB003: MSG 003. COMPLETER FICHIER VIE IND. TER. NUM. VIR304.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB003  
+@ASG,A     B006INTERM.  
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006INTERM  
+@FREE      F999STAR.
+@ASG,A     I006VIR302T. 
+@DELETE,C  I006VIR304.  
+@CAT,P     I006VIR304,F/0/POS/4000  
+@ASG,AX    I006VIR304.  
+@USE       I-INTVIE,B006INTERM. 
+@USE       ITRMNUMVIE,I006VIR302T.  
+@USE       O-INTVIE,B006INTERM(+1). 
+@USE       OTRMNUMVIE,I006VIR304.   
+@XQT       VIRA30.VIR304
+@FREE      B006INTERM.  
+@FREE      B006INTERM(+1).  
+@FREE      I006VIR302T. 
+@FREE      I006VIR304.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB004: MSG 004. NO CPTE PIECE ET DATE ENROL. SUR FICHIER VIE IND. VIR305. 4.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB004  
+@ASG,A     I006VIR304.  
+@DELETE,C  I006VIR305.  
+@CAT,P     I006VIR305,F/0/POS/4000  
+@ASG,AX    I006VIR305.  
+@USE       ITRMNUMVIE,I006VIR304
+@USE       OTRMNUMVIE,I006VIR305
+@DELETE,C  VIRA30*IMP-VIR305.   
+@ASG,UP    VIRA30*IMP-VIR305.,F///10000 
+@USE       INA,VIRA30*IMP-VIR305.   
+@BRKPT     PRINT$/INA   
+@XQT       VIRA30.VIR305
+@ADD       F999CONTROLE.VIRA30  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA30*IMP-VIR305.   
+@FREE      I006VIR304.  
+@FREE      I006VIR305.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB006: MSG 006. IMP. JOURN. ENROL. VIE IND. POUR SERVICE VIE. VIR307. 6.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB006  
+@ASG,AX    I006VIR305.  
+@USE       ITRMNUMVIE,I006VIR305.   
+@DELETE,C  VIRA30*IMP-VIR307.   
+@ASG,UP    VIRA30*IMP-VIR307.,F///10000 
+@USE       INP,VIRA30*IMP-VIR307.   
+@XQT       VIRA30.VIR307
+@ADD       F999CONTROLE.VIRA30  
+@FREE      VIRA30*IMP-VIR307.   
+@FREE      I006VIR305.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB007: MSG 007. TRI I006VIR305 POUR VIR308.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB007  
+@ASG,A     I006VIR305.  
+@DELETE,C  I006VIR305T. 
+@CAT,P     I006VIR305T,F/0/POS/4000 
+@ASG,AX    I006VIR305T. 
+@SORT,ES
+FILEIN=I006VIR305,F  BLOCK=10   
+FILEOUT=I006VIR305T,F   BLOCK=10
+KEY=27,6,CH,A,1 
+KEY=6,7,CH,A,2  
+KEY=13,2,CH,A,3 
+KEY=19,6,CH,A,4 
+KEY=61,4,CH,A,5 
+KEY=59,2,CH,A,6 
+KEY=57,2,CH,A,7 
+RSZ=500 
+RECORD=10   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB010: MSG 010. IMP. JOURN. ENROL. VIE POUR CPT. 1ER MATR. RIST. VIR308. 10.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ASG,A     I006VIR305T. 
+@USE       ITRMNUMVIE,I006VIR305T   
+@DELETE,C  VIRA30*IMP-VIR308.   
+@ASG,UP    VIRA30*IMP-VIR308.,F///10000 
+@USE       IMP,VIRA30*IMP-VIR308.   
+@XQT       VIRA30.VIR308
+@ADD       F999CONTROLE.VIRA30  
+@FREE      VIRA30*IMP-VIR308.   
+@FREE      I006VIR305T. 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB011: MSG 011. CREAT. ENREG. CHERCHEUSE RIST. VIE IND. VIR309.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB011  
+@ASG,A     I006VIR305.  
+@DELETE,C  I006VIR309.  
+@CAT,P     I006VIR309,F/0/POS/4000  
+@ASG,AX    I006VIR309.  
+@USE       ITRMNUMVIE,I006VIR305
+@USE       OCHERCHRIST,I006VIR309   
+@XQT       VIRA30.VIR309
+@FREE      I006VIR305.  
+@FREE      I006VIR309.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB012: MSG 012. CREAT. ENREG. ALPHA MATR. RISTOURNES. VIR348. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB012  
+@ASG,A     I006VIR305.  
+@USE       ITRMNUMVIE,I006VIR305.   
+@ASG,A     B006ALPHA.   
+@USE       IALFVIE,B006ALPHA.   
+@DELETE,C  I006VIR348.  
+@CAT,P     I006VIR348,F/0/POS/4000  
+@ASG,AX    I006VIR348.  
+@USE       OTRMALF,I006VIR348   
+@XQT       VIRA30.VIR348
+@FREE      I006VIR305.  
+@FREE      B006ALPHA.   
+@FREE      I006VIR348.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB013: MSG 013. TRI FICHIER ENROL COMPLETE POUR VIR349.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB013  
+@ASG,A     I006VIR348.  
+@DELETE,C  I006VIR348T. 
+@CAT,P     I006VIR348T,F/0/POS/4000 
+@ASG,AX    I006VIR348T. 
+@SORT,ES
+FILEIN=I006VIR348,F   BLOCK=10  
+FILEOUT=I006VIR348T,F  BLOCK=10 
+KEY=79,6,CH,A,1 
+KEY=6,7,CH,A,2  
+KEY=13,2,CH,A,3 
+KEY=19,6,CH,A,4 
+KEY=29,4,CH,A,5 
+KEY=27,2,CH,A,6 
+KEY=25,2,CH,A,7 
+RSZ=300 
+RECORD=10   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB014: MSG 014. IMP. LISTE ALPHA MATR. RIST. VIR349.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB014  
+@ASG,A     I006VIR348T. 
+@USE       ITRMALF,I006VIR348T  
+@DELETE,C  VIRA30*IMP-VIR349.   
+@ASG,UP    VIRA30*IMP-VIR349.,F///10000 
+@USE       IMP,VIRA30*IMP-VIR349.   
+@BRKPT     PRINT$/IMP   
+@XQT       VIRA30.VIR349
+@ADD       F999CONTROLE.VIRA30  
+@BRKPT     PRINT$   
+@SYM       PRINT$,1,PRSP
+@FREE      VIRA30*IMP-VIR349.   
+@FREE      I006VIR348T. 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB015: MSG 015. CREAT. ENR. NON SOLDE VIE IND. + MAJ SOLDE CPT COURANTS. 15.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB015  
+@ASG,A     I006VIR305.  
+@DELETE,C  I006VIR313.  
+@CAT,P     I006VIR313,F/0/POS/4000  
+@ASG,AX    I006VIR313.  
+@USE       ITRMNUMVIE,I006VIR305.   
+@USE       OENREG-NS,I006VIR313.
+@XQT       VIRA30.VIR313
+@FREE      I006VIR313.  
+@FREE      I006VIR305.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB016: MSG 016. CREATION FICHIER TERMES AVIS FICTIF - CHABAN. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB016  
+@DELETE,C  I006TRMAVI.  
+@CAT,P     I006TRMAVI,F/0/POS/4000  
+@ASG,AX    I006TRMAVI.  
+@SSG,IA    *UTILIT.CHABAN/ASCII 
+SGS 
+ASCII   
+OUTPUT     I006TRMAVI,300,0 
+LIST YES
+NUMB       4,1  
+FLDSEL     0
+MOD        0
+@EOF
+@XQT,WR    .CHABAN  
+@FREE      I006TRMAVI.  
+@ERS       TPF$.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB017: MSG 017. MAJ NON SOLDE AVEC TERMES DB ENROL. VIR316.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB017  
+@ASG,A     I006TRMAVI.  
+@ASG,A     I006VIR313.  
+@ASG,A     F006NONSOL.  
+@ASG,CP    F006NONSOL(+1).,F/0/POS/4000 
+@ASG,A     F006SOL. 
+@ASG,CP    F006SOL(+1).,F/0/POS/4000
+@DELETE,C  I006TRMAVIW. 
+@CAT,P     I006TRMAVIW,F/0/POS/4000 
+@ASG,AX    I006TRMAVIW. 
+@USE       ITRMAVIS,I006TRMAVI. 
+@USE       OTRMAVIS,I006TRMAVIW.
+@USE       C39,I006VIR313   
+@USE       C41,F006NONSOL.  
+@USE       C42,F006SOL. 
+@USE       C43,F006NONSOL(+1).  
+@USE       C44,F006SOL(+1). 
+@DELETE,C  VIRA30*IMP-VIR316.   
+@ASG,UP    VIRA30*IMP-VIR316.,F///10000 
+@USE       INA,VIRA30*IMP-VIR316.   
+@BRKPT     PRINT$/INA   
+@XQT       VIRA30.VIR316
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA30*IMP-VIR316.   
+@FREE      I006VIR313.  
+@FREE      F006NONSOL.  
+@FREE      F006NONSOL(+1).  
+@FREE      F006SOL. 
+@FREE      F006SOL(+1). 
+@FREE      I006TRMAVI.  
+@FREE      I006TRMAVIW. 
+@TIME   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB020: MSG 020. CREATION ENR. PTS COMMMISSIONS DU MOIS - VIR360.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ASG,A     I006VIR305   
+@DELETE,C  I006VIR360.  
+@CAT,P     I006VIR360,F/0/POS/4000  
+@ASG,AX    I006VIR360   
+@USE       ITRMNUMVIE,I006VIR305
+@USE       OPAICOM,I006VIR360   
+@XQT       VIRA30.VIR360
+@FREE      I006VIR305   
+@FREE      I006VIR360.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB021: MSG 021. COMPLETER PTS COMMISSIONS PAR L'ALPHA - VIR361.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB021  
+@ASG,A     B006ALPHA.   
+@ASG,A     I006VIR360.  
+@DELETE,C  I006VIR361.  
+@CAT,P     I006VIR361,F/0/POS/4000  
+@ASG,AX    I006VIR361   
+@USE       OPAICOM,I006VIR361   
+@USE       IPAICOM,I006VIR360   
+@USE       IALFVIE,B006ALPHA
+@XQT       VIRA30.VIR361
+@FREE      I006VIR360.  
+@FREE      I006VIR361.  
+@FREE      B006ALPHA.   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB022: MSG 022. TRI POUR VIR362.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB022  
+@ASG,A     B006COMIMP.  
+@USE       INA,B006COMIMP.  
+@ASG,A     I006VIR361.  
+@DELETE,C  I006VIR361T  
+@CAT,P     I006VIR361T,F/0/POS/4000 
+@ASG,AX    I006VIR361T  
+@SORT,ES
+FILEIN=I006VIR361,F    BLOCK=10 
+FILEIN=INA,F           BLOCK=10 
+FILEOUT=I006VIR361T,F  BLOCK=10 
+KEY=2,7,CH,A,1  
+KEY=9,2,CH,A,2  
+KEY=15,6,CH,A,3 
+KEY=21,6,CH,A,4 
+RSZ=300 
+RECORD=5
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB023: MSG 023. TRI DU F006SOL POUR VIR362.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB023  
+@ASG,A     F006SOL. 
+@DELETE,C  I006SOLT 
+@CAT,P     I006SOLT,F/0/POS/4000
+@ASG,AX    I006SOLT 
+@ASG,A     B006SOLARCH. 
+@USE       INA,B006SOLARCH. 
+@SORT,ES
+FILEIN=F006SOL,F    BLOCK=10
+FILEIN=INA,F        BLOCK=10
+FILEOUT=I006SOLT,F  BLOCK=10
+KEY=6,7,CH,A,1  
+KEY=13,2,CH,A,2 
+KEY=19,6,CH,A,3 
+KEY=49,6,CH,A,4 
+RSZ=200 
+RECORD=2000 
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB024: MSG 024. DETERMINATION PAYABLE OU IMPAYABLE -  VIR362. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB024  
+@ASG,A     I006SOLT 
+@ASG,A     I006VIR361T. 
+@DELETE,C  I006VIR362.  
+@CAT,P     I006VIR362,F/0/POS/4000  
+@ASG,AX    I006VIR362   
+@USE       IPAICOM,I006VIR361T  
+@USE       ISOLDE,I006SOLT  
+@USE       OPAICOM,I006VIR362   
+@XQT       VIRA30.VIR362
+@FREE      I006VIR361T. 
+@FREE      I006SOLT 
+@FREE      I006VIR362   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB025: MSG 025. DETERMINER ECHEANCE AU NONSOLDE - VIR363. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB025  
+@ASG,A     F006NONSOL.  
+@ASG,A     I006VIR362.  
+@DELETE,C  I006VIR363.  
+@CAT,P     I006VIR363,F/0/POS/4000  
+@ASG,AX    I006VIR363.  
+@USE       INSOLDE,F006NONSOL   
+@USE       IPAICOM,I006VIR362   
+@USE       OPAICOM,I006VIR363   
+@XQT       VIRA30.VIR363
+@FREE      F006NONSOL.  
+@FREE      I006VIR362.  
+@FREE      I006VIR363.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB026: MSG 026. DETERMINER  COMMISSION DEBIT POUR COMMISSION. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB026  
+@MSG       CREDIT  -  VIR364.   
+@ASG,A     I006VIR363   
+@DELETE,C  I006VIR364   
+@CAT,P     I006VIR364,F/0/POS/4000  
+@ASG,AX    I006VIR364.  
+@USE       IPAICOM,I006VIR363   
+@USE       OPAICOM,I006VIR364   
+@XQT       VIRA30.VIR364
+@ADD       F999CONTROLE.VIRA30  
+@FREE      I006VIR363.  
+@FREE      I006VIR364   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB027: MSG 027. EXECUTION TRI FICHIER I006VIR364 POUR VIR497. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB027  
+@ASG,A     I006VIR364.  
+@DELETE,C  I006VIR364T. 
+@CAT,P     I006VIR364T,F/0/POS/4000 
+@ASG,AX    I006VIR364T  
+@SORT,ES
+FILEIN=I006VIR364,F   BLOCK=10  
+FILEOUT=I006VIR364T,F BLOCK=10  
+RSZ=300 
+RECORD=5
+KEY=93,7,CH,A,1 
+KEY=2,7,CH,A,2  
+KEY=9,2,CH,A,3  
+KEY=15,6,CH,A,4 
+KEY=21,6,CH,A,5 
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB030: MSG 030. LISTE COMMISSIONS PAYABLES  - VIR497. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ASG,A     I006VIR364T. 
+@USE       IPAICOM,I006VIR364T  
+@ASG,A     B006COMARCH. 
+@USE       ICOMARCH,B006COMARCH.
+@DELETE,C  I006VIR365   
+@CAT,P     I006VIR365,F/0/POS/4000  
+@ASG,AX    I006VIR365   
+@USE       OCOMARCH,I006VIR365  
+@DELETE,C  I006VIR497.  
+@ASG,UP    I006VIR497.,F/0/POS/4000 
+@USE       OPAICOM,I006VIR497   
+@DELETE,C  VIRA30*IMP-VIR365.   
+@ASG,UP    VIRA30*IMP-VIR365.,F///10000 
+@USE       INA,VIRA30*IMP-VIR365.   
+@BRKPT     PRINT$/INA   
+@XQT       VIRA30.VIR497
+@ADD       F999CONTROLE.VIRA30  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA30*IMP-VIR365.   
+@FREE      I006VIR364T  
+@FREE      I006VIR365   
+@FREE      I006VIR497.  
+@FREE      B006COMARCH. 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB031: MSG 031. VALIDATION COMMISSIONS - COCB41   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB031  
+@MSG       COCB41   
+@ASG,A     I006VIR497.  
+@USE       IN-PAICOM,I006VIR497 
+@DELETE,C  I006COCB41.  
+@ASG,UP    I006COCB41.,F/0/POS/4000 
+@USE       OUT-PAICOM,I006COCB41
+@DELETE,C  VIRA30*P-COCB41-ANO. 
+@ASG,UP    VIRA30*P-COCB41-ANO,F/0/POS/4000 
+@USE       OUT-ANO,VIRA30*P-COCB41-ANO  
+@XQT       VIRA30.COCB41
+@FREE      I006VIR497.  
+@FREE      I006COCB41.  
+@FREE      VIRA30*P-COCB41-ANO. 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB032: MSG 032. TEST PRESENCE LISTE D ANOMALIE
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB032  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE VIRA30*P-COCB41-ANO
+LABEL LAB034
+@EOF
+@ . ------------------------------------------------------------------  
+@LAB033: MSG 033. TRANSFORMATION FICHIER ANOMALIES EN FICHIER EXCEL 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB033  
+@ . 
+@ASG,AX    VIRA30*P-COCB41-ANO. 
+@USE       FILEIN,VIRA30*P-COCB41-ANO.  
+@DELETE,C  VIRA30*FICHEXANO.
+@ASG,UP    VIRA30*FICHEXANO.,F/1/POS/4000   
+@USE       FILEOUT,VIRA30*FICHEXANO.
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 293
+COL 007,03,,''BRANCHE'' 
+COL 010,07,,''POLICE''  
+COL 019,07,,''MATRICULE''   
+COL 040,02,,''CD TYP IMD''  
+COL 042,05,,''NO INTERMEDIAIRE''
+COL 065,08,MNT,''MT COMMISSION''
+COL 073,01,,''CD ETAT'' 
+COL 074,08,,''DT ETAT'' 
+COL 142,02,,''CD ORI''  
+COL 196,01,,''CD SOC''  
+COL 198,08,,''DT PRISE EN CHARGE''  
+COL 220,71,,''MESSAGE'' 
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@TIME   
+@.  
+@ . ------------------------------------------------------------------  
+@LAB034: MSG 034. INSERTION DES COMMISSIONS - COCB42
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB034  
+@MSG       COCB42   
+@ASG,A     I006COCB41.  
+@USE       IN-PAICOM,I006COCB41 
+@XQT       VIRA30.COCB42
+@FREE      I006COCB41.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB041: MSG 041. LISTE COMMISSIONS IMPAYABLES - VIR366.
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB041  
+@ASG,A     I006VIR364T. 
+@ASG,A     I006VIR365   
+@USE       IPAICOM,I006VIR364T  
+@USE       ICOMARCH,I006VIR365  
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006COMARCH 
+@FREE      F999STAR.
+@USE       OCOMARCH,B006COMARCH(+1).
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006COMIMP  
+@FREE      F999STAR.
+@USE       OCOMIMP,B006COMIMP(+1).  
+@DELETE,C  VIRA30*IMP-VIR366.   
+@ASG,UP    VIRA30*IMP-VIR366.,F///10000 
+@USE       INA,VIRA30*IMP-VIR366.   
+@BRKPT     PRINT$/INA   
+@XQT       VIRA30.VIR366
+@ADD       F999CONTROLE.VIRA30  
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      VIRA30*IMP-VIR366.   
+@FREE      I006VIR364T  
+@FREE      I006VIR365   
+@FREE      B006COMIMP(+1).  
+@FREE      B006COMARCH(+1). 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB042: MSG 042. COMPLETER BANDE COMM. ACQUIS. VIR370. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB042  
+@ASG,A     B006COMACQ.  
+@USE       ICOMACQ,B006COMACQ.  
+@ASG,A     I006VIR361   
+@USE       IPAICOM,I006VIR361   
+@DELETE,C  I006VIR370   
+@CAT,P     I006VIR370,F/0/POS/4000  
+@ASG,AX    I006VIR370   
+@USE       OCOMACQ,I006VIR370   
+@XQT       VIRA30.VIR370
+@FREE      I006VIR361   
+@FREE      I006VIR370   
+@FREE      B006COMACQ.  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB043: MSG 043. COMPLETER AVEC DATE PAIEMENT - VIR371.
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB043  
+@ASG,A     I006VIR370   
+@USE       ICOMACQ,I006VIR370   
+@ASG,A     I006VIR364.  
+@USE       IPAICOM,I006VIR364   
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006COMACQ  
+@FREE      F999STAR.
+@USE       OCOMACQ,B006COMACQ(+1).  
+@XQT       VIRA30.VIR371
+@ADD       F999CONTROLE.VIRA30  
+@FREE      B006COMACQ(+1).  
+@FREE      I006VIR370   
+@FREE      I006VIR371   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB044: MSG 044. SAUVETAGE FICHIER CHERCHEUSE MATRICULE RISTOURNE. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB044  
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006VIRA30  
+@FREE      F999STAR 
+@USE       OUT,B006VIRA30(+1).  
+@ASG,A     I006VIR309.  
+@SORT,ES
+COPY
+FILEIN=I006VIR309,F      BLOCK=10   
+FILEOUT=OUT              BLOCK=10   
+RSZ=80  
+@EOF
+@FREE      B006VIRA30(+1).  
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB045: MSG 045. EXECUTION PROGRAM VIB137. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB045  
+@ASG,A     I006VIR305.  
+@USE       F-TERME,I006VIR305.  
+@ASG,AX    FVIR001CON.  
+@USE       F-INVENT,FVIR001CON. 
+@ASG,AX    B006ALPHA.   
+@USE       F-ALPHA,B006ALPHA.   
+@DELETE,C  I006VRA30ATX.
+@CAT,P     I006VRA30ATX.,F///10000  
+@ASG,AX    I006VRA30ATX.
+@USE       F-TER-ATX,I006VRA30ATX.  
+@DELETE,C  I006VRA30STX.
+@CAT,P     I006VRA30STX.,F///10000  
+@ASG,AX    I006VRA30STX.
+@USE       F-TER-STX,I006VRA30STX.  
+@DELETE,C  I006VRA30ANO.
+@CAT,P     I006VRA30ANO.,F///10000  
+@ASG,AX    I006VRA30ANO.
+@USE       F-ANOMALIE.,I006VRA30ANO.
+@DELETE,C  VIRA30*IMP-VIB137.   
+@CAT,P     VIRA30*IMP-VIB137.,f///10000 
+@ASG,AX    VIRA30*IMP-VIB137.   
+@USE       TOTAUX,VIRA30*IMP-VIB137.
+@ASG,AX    F006ALPHV.   
+@USE       AALPHA,F006ALPHV.
+@XQT,WR    VIRA30.VIB137
+@FREE      VIRA30*IMP-VIB137.   
+@FREE      I006VRA30ANO.
+@FREE      I006VRA30ATX.
+@FREE      I006VRA30STX.
+@FREE      B006ALPHA.   
+@FREE      I006VIR305.  
+@FREE      FVIR001CON.  
+@FREE      F006ALPHV.   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB046: MSG 046. TRI I006VRA30ATX. pour VIR306.
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB046  
+@ASG,A     I006VRA30ATX.
+@DELETE,C  I006VIR305TA 
+@ASG,UP    I006VIR305TA.,F/0/POS/4000   
+@SORT,ES
+FILEIN=I006VRA30ATX,F     BLOCK=10  
+FILEOUT=I006VIR305TA,F    BLOCK=10  
+KEY=6,7,CH,A,1  
+KEY=13,2,CH,A,2 
+KEY=19,6,CH,A,3 
+KEY=61,4,CH,A,4 
+KEY=59,2,CH,A,5 
+KEY=57,2,CH,A,6 
+RSZ=500 
+RECORD=25   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB047: MSG 047. IMPR. JOURN. ENROL. VIE IND. POUR COMPTABILITE. VIR306. 5.
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB047  
+@ASG,A     I006VIR305TA.
+@USE       ITRMNUMVIE,I006VIR305TA  
+@DELETE,C  VIRA30*IMP-VIR306.   
+@ASG,UP    VIRA30*IMP-VIR306.,F///10000 
+@USE       LSTENR,VIRA30*IMP-VIR306.
+@XQT       VIRA30.VIR306
+@ADD       F999CONTROLE.VIRA30  
+@FREE      VIRA30*IMP-VIR306.   
+@FREE      I006VIR305TA.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB050: MSG 050. FUSION TERMES NUMERIQUES POUR CONSERVATION.   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ASG,A     B006TERMNUM. 
+@USE       INA,B006TERMNUM. 
+@ASG,A     I006VRA30ATX.
+@ASG,A     F999STAR.
+@ADD,P     F999STAR.B006TERMNUM 
+@FREE      F999STAR.
+@USE       OUTA,B006TERMNUM(+1).
+@SORT,ES
+FILEIN=INA,F         BLOCK=10   
+FILEIN=I006VRA30ATX,F  BLOCK=10 
+FILEOUT=OUTA,F       BLOCK=10   
+KEY=6,7,CH,A,1  
+KEY=13,2,CH,A,2 
+KEY=19,6,CH,A,3 
+KEY=61,4,CH,A,4 
+KEY=59,2,CH,A,5 
+RSZ=500 
+RECORD=300  
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------- 
+@LAB052: MSG 052. MOUVEMENTS COMPTABLES A DESTINATION DE ISIE.  
+@ . ------------------------------------------------------------------- 
+@ADD SYS$*RUNS.REPRISE  
+LAB052  
+@ . 
+@ASG,AX    I006VRA30ATX.
+@USE       IN-PRM-VIE,I006VRA30ATX. 
+@ . 
+@DELETE,C  VIRA30*IISIE.
+@CAT,P     VIRA30*IISIE.,F/0/POS/4000   
+@ASG,AX    VIRA30*IISIE.
+@USE       OUT-MVT-CPT,VIRA30*IISIE.
+@ . 
+@DELETE,C  VIRA30*ICGB022ANO.   
+@CAT,P     VIRA30*ICGB022ANO.,F/0/POS/4000  
+@ASG,AX    VIRA30*ICGB022ANO.   
+@USE       OUT-LST-ANO,VIRA30*ICGB022ANO.   
+@ . 
+@XQT       VIRA30.CGB022
+@ADD       F999CONTROLE.VIRA30  
+@ . 
+@FREE      I006VRA30ATX.
+@FREE      VIRA30*IISIE.
+@FREE      VIRA30*ICGB022ANO.   
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB054: MSG 054. TEST PRESENCE FICHIER ANOMALIES.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB054  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE VIRA30*ICGB022ANO. 
+LABEL LAB056
+@EOF
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB055: MSG 055. CREATION FICHIER EXCEL LISTE ANOMALIES. TRANSEXCEL.   
+@ . ------------------------------------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB055  
+@ . 
+@ASG,A     VIRA30*ICGB022ANO.   
+@USE       FILEIN,VIRA30*ICGB022ANO.
+@ . 
+@DELETE,C  VIRA30*IXLSCPTELI.   
+@CAT,P     VIRA30*IXLSCPTELI.,F/0/POS/4000  
+@ASG,AX    VIRA30*IXLSCPTELI.   
+@USE       FILEOUT,VIRA30*IXLSCPTELI.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 98 
+COL 1,6,,''Matric'' 
+COL 7,2,,''Br'' 
+COL 9,6,,''Police'' 
+COL 15,1,,''Suf''   
+COL 16,8,,''Dt ech''
+COL 24,6,,''Dt compt''  
+COL 30,8,,''Dt enrol''  
+COL 38,6,,''Cpt debit'' 
+COL 44,6,,''Cpt credit''
+COL 50,8,,''No piece''  
+COL 58,12,MNT,''Prime totale''  
+COL 70,12,MNT,''Taxe totale''   
+COL 82,8,V5,''Taux princ''  
+COL 90,8,V5,''Taux compl''  
+TABUL '';'' 
+@EOF
+@ERS       TPF$.
+@FREE      VIRA30*ICGB022ANO.   
+@FREE      VIRA30*IXLSCPTELI.   
+@ . 
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB056: MSG 056. EXECUTION TRI B006INTERM.POUR VIR993. 
+@ . ------------------------------------------------------------------  
+@ADD SYS$*RUNS.REPRISE  
+LAB056  
+@ . 
+@ASG,A     B006INTERM.  
+@USE       INA,B006INTERM.  
+@DELETE,C  I006INTTRI.  
+@CAT,P     I006INTTRI,F/0/POS/4000  
+@ASG,AX    I006INTTRI   
+@SORT,ES
+FILEIN=INA,F          BLOCK=10  
+FILEOUT=I006INTTRI,F  BLOCK=10  
+KEY=6,7,CH,A,1  
+KEY=25,7,CH,A,2 
+RSZ=100 
+RECORD=30   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB057: MSG 057. EXECUTION SORT F006NONSOL POUR VIR994.
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB057  
+@ASG,A     F006NONSOL.  
+@DELETE,C  I006NSOLTRI. 
+@CAT,P     I006NSOLTRI,F/0/POS/4000 
+@ASG,AX    I006NSOLTRI. 
+@SORT,ES
+FILEIN=F006NONSOL,F    BLOCK=10 
+FILEOUT=I006NSOLTRI,F  BLOCK=10 
+KEY=6,7,CH,A,1  
+KEY=49,6,CH,A,2 
+RSZ=200 
+RECORD=30   
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB060: MSG 060. CREATION FICH INTERM VIE IND I/S. -  VIR993.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@ASG,A     I006INTTRI.  
+@DELETE,C  F006INTV.
+@CAT,PV    F006INTV,F/0/POS/4000
+@ASG,AX    F006INTV.
+@USE       I-INTVIE,I006INTTRI. 
+@USE       O-INTVIE,F006INTV.   
+@XQT       VIRA30.VIR993
+@FREE      I006INTTRI.  
+@FREE      F006INTV.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB061: MSG 061. CREATION FICH NON-SOLDE VIE IND I/S.  -  VIR994.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB061  
+@ASG,A     I006NSOLTRI. 
+@DELETE,C  F006NSOLV.   
+@CAT,PV    F006NSOLV,F/0/POS/4000   
+@ASG,AX    F006NSOLV.   
+@USE       I-NSLDVIE,I006NSOLTRI.   
+@USE       O-NSLDVIE,F006NSOLV. 
+@XQT       VIRA30.VIR994
+@FREE      I006NSOLTRI. 
+@FREE      F006NSOLV.   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB062: MSG 062. EXECUTION PROGRAM VIR981. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB062  
+@ASG,A     B006COMARCH. 
+@USE       INA,B006COMARCH. 
+@ASG,A     B006COMIMP.  
+@USE       INAA,B006COMIMP. 
+@DELETE,C  I006VIR981T. 
+@CAT,P     I006VIR981T,F/0/POS/4000 
+@ASG,AX    I006VIR981T. 
+@SORT,ES
+FILEIN=INA,F           BLOCK=10 
+FILEIN=INAA,F          BLOCK=10 
+FILEOUT=I006VIR981T,F  BLOCK=10 
+KEY=2,7,CH,A,1  
+KEY=93,7,CH,A,2 
+KEY=21,6,CH,A,3 
+RSZ=300 
+RECORD=100  
+@EOF
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB063: MSG 063. EXECUTION PROGRAM VIR981. 
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB063  
+@ASG,A     I006VIR981T. 
+@DELETE,C  F006COMM.
+@CAT,PV    F006COMM,F/0/POS/4000
+@ASG,AX    F006COMM.
+@USE       ICOMM,I006VIR981T.   
+@USE       OCOMM,F006COMM.  
+@XQT       VIRA30.VIR981
+@FREE      I006VIR981T. 
+@FREE      F006COMM.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB064: MSG 064. TRI FICHIER EXCELL
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB064  
+@ASG,A     I006VRA30ATX.
+@USE       INA,I006VRA30ATX.
+@DELETE,C  I006VRA30ATT.
+@ASG,UP    I006VRA30ATT.,F///40000  
+@USE       OUT,I006VRA30ATT.
+@SORT,ES
+FILEIN=INA,F           BLOCK=10 
+FILEOUT=OUT,F          BLOCK=10 
+KEY=6,7,CH,A,1  
+KEY=13,2,CH,A,2 
+KEY=19,6,CH,A,3 
+KEY=61,4,CH,A,4 
+KEY=59,2,CH,A,5 
+KEY=57,2,CH,A,6 
+RSZ=500 
+@TIME   
+@EOF
+@ . ------------------------------------------------------------------  
+@LAB065: MSG 065  TRI FICHIER EXCELL INDEXATION (ISOLER COMPL GROUPE)   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB065  
+@MSG  RECOPIER LES ENREGISTREMENTS  D'UN FICHIER ASCII. 
+@SSG,IA  *UTILIT.CFH-COPY/ASCII 
+SGS 
+ASCII   
+INPUT      INB,500,10   
+OUTPUT     INC,127,10   
+FIELDIN  6,7 13,2 19,6 403,1 404,1 57,8 65,4 113,24 161,24 405,16 421,24
+FIELDOUT  11,7 18,2 20,6 26,1 27,1 28,8 36,4 40,24 64,24 88,16 104,24   
+FIXE 1,10,TAX-CLASIQ
+@EOF
+@ASG,A     I006VRA30ATT.
+@USE       INB,I006VRA30ATT.
+@DELETE,C  I006VRA30ATC.
+@CAT,P     I006VRA30ATC,F/1/POS/7000
+@ASG,A     I006VRA30ATC.
+@USE       INC,I006VRA30ATC 
+@XQT,WR    .CFH-COPY
+@FREE      I006VRA30ATC.
+@FREE      I006VRA30ATT.
+@ERS  TPF$. 
+@TIME   
+@EOF
+@ . ------------------------------------------------------------------  
+@LAB066: MSG 066. INDEX. CLASSIQUE : TRANSEXCEL DONNEES CONTRAT INDIV   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB066  
+@ERS       TPF$.
+@ASG,A     I006VRA30ATC.
+@USE       FILEIN,I006VRA30ATC. 
+@DELETE,C  I006VRA30ATE.
+@CAT,P     I006VRA30ATE.,F///50000  
+@ASG,A     I006VRA30ATE.
+@USE       FILEOUT,I006VRA30ATE.
+@.  
+@ADD *UTILIT.TRANSEXCEL 
+LONG 127
+COL 1,10,,''identifiant''   
+COL 11,6,,''radical''   
+COL 17,1,,''suffixe''   
+COL 18,2,,''branche''   
+COL 20,6,,''matricule'' 
+COL 26,1,,''sexe contr''
+COL 27,1,,''fiscalite'' 
+COL 28,8,JJMMAAAA,''date enrolement''   
+COL 36,4,,''comb''  
+COL 40,12,MNT,''prime-nette-AP''
+COL 52,12,MNT,''taxe-ap''   
+COL 64,12,MNT,''prime-nette-Comp''  
+COL 76,12,MNT,''taxe-Comp'' 
+COL 88,8,V5,''taxe-ap'' 
+COL 96,8,V5,''taxe-comp''   
+COL 104,12,MNT,''taxe-AP-Recalc''   
+COL 116,12,MNT,''taxe-Comp-Recalc'' 
+TABUL '';'' 
+@EOF
+@FREE      I006VRA30ATC.
+@FREE      I006VRA30ATE.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB067: MSG 067. TRANSFORMATION FICHIER ANOMALIE VERS EXCEL
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB067  
+@ . 
+@ASG,A    I006VRA30ANO. 
+@USE      FILEIN,I006VRA30ANO.  
+@DELETE,C IVRA30ANOXLS. 
+@ASG,UP   IVRA30ANOXLS.,F//POS/4095 
+@USE      FILEOUT,IVRA30ANOXLS. 
+@ADD      *UTILIT.TRANSEXCEL
+LONG 120
+COL  1,7,,''POLICE''
+COL  8,2,,''BRANCHE''   
+COL  10,6,,''MATRICULE''
+COL  16,30,,''LIBELLE ANOMALIE''
+COL  46,30,,''COMMENTAIRE'' 
+COL  76,40,,''PARAM INPUT OU MT PLAFOND CALCULE''   
+COL  116,5,,''CD RET ROUTINE''  
+@EOF
+@FREE     I006VRA30ANO. 
+@FREE     IVRA30ANOXLS. 
+@ . ------------------------------------------------------------------  
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB710: MSG 710. ENVOIS INTRANET   
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB710  
+@ADD       F999TRANSF.VIRA30/2200PC 
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB720: MSG 720. NETTOYAGE DES SYMBIONTS.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB720  
+@ED,UQ     VIRA30*IMP-VIR305.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR306.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR307.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR308.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR349.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR316.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR365.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     VIRA30*IMP-VIR366.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB740: MSG 740. IMPRESSION FICHIER VIA F999SYM
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB740  
+@ADD       F999SYM.VIRA30   
+@TIME   
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB760: MSG 760. Envoi Mail si fichier IXLSCPTELI pas vide.
+@ . ------------------------------------------------------------------  
+@ADD       SYS$*RUNS.REPRISE
+LAB760  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE VIRA30*IXLSCPTELI. 
+LABEL LAB770
+@EOF
+@ . 
+@ADD ESYS$AF*COM.TFR/SSG
+MAIL VIRA30*IXLSCPTELI,,TXT,;   
+  ''RUN VIRA30 - MOUVEMENTS COMPTABLES ELIMINES'',; 
+     ''FJ'',''SABLO'',''RONVA'' 
+@EOF
+@ . 
+@ . ------------------------------------------------------------------  
+@LAB770: MSG 770. DELETE DES FICHIERS.  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@DELETE,C  I006TRMAVI.  
+@DELETE,C  I006TRMAVIW. 
+@DELETE,C  I006VIR981T. 
+@DELETE,C  I006VIR302.  
+@DELETE,C  I006VIR302T. 
+@DELETE,C  I006VIR304.  
+@DELETE,C  I006VIR305.  
+@DELETE,C  I006VIR305T. 
+@DELETE,C  I006VIR309.  
+@DELETE,C  I006VIR313.  
+@DELETE,C  I006VIR360.  
+@DELETE,C  I006VIR361.  
+@DELETE,C  I006VIR361T. 
+@DELETE,C  I006SOLT.
+@DELETE,C  I006VIR362.  
+@DELETE,C  I006VIR363.  
+@DELETE,C  I006VIR364.  
+@DELETE,C  I006VIR981T. 
+@DELETE,C  I006INTTRI.  
+@DELETE,C  I006NSOLTRI. 
+@DELETE,C  I006VIR364T. 
+@DELETE,C  I006VIR365.  
+@DELETE,C  I006VIR497.  
+@DELETE,C  I006COCB41.  
+@DELETE,C  I006VIR370.  
+@DELETE,C  I006VIR371.  
+@DELETE,C  I006VIR348.  
+@DELETE,C  I006VIR348T. 
+@DELETE,C  I006SELECT.  
+@DELETE,C  I006VRA30ATX.
+@DELETE,C  I006VRA30STX.
+@DELETE,C  I006VRA30ATT.
+@DELETE,C  I006VRA30ANO.
+@DELETE,C  I006VRA30ATC.
+@DELETE,C  I006VRA30ATE.
+@DELETE,C  IVRA30ANOXLS.
+@DELETE,C  I006VIR305TA.
+@DELETE,C  VIRA30*FICHEXANO.
+@DELETE,C  VIRA30*IISIE.
+@DELETE,C  VIRA30*ICGB022ANO.   
+@DELETE,C  VIRA30*IXLSCPTELI.   
+@FREE      VIRA30.  
+@DELETE,C  VIRA30.  
+@DELETE,C  CPVIRA30.
+@TIME   
+@ . ------------------------------------------------------------------  
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . ------------------------------------------------------------------  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@ . 
+@MSG       *** FIN DU RUN VIRA30 ***
+@QUAL,R 
+@FIN

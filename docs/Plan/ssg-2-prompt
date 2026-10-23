@@ -1,0 +1,1002 @@
+FEDERALE_OS2200_PHASE1_COPILOT_PROMPT_PACK.md
+# Federale OS 2200 Phase 1 — Copilot Prompt Pack
+
+## Purpose
+
+Use this prompt pack when analysing or modifying the Federale ECL, SSG, COBOL, and AMT conversion pipeline.
+
+The objective is to reconstruct and preserve the **original intended OS 2200 behaviour** before changing the converters.
+
+The migration target is:
+
+ECL / SSG / COBOL
+→ ECL Converter + SSG Converter + COBOL Converter
+→ C# / PowerShell / AMT Libraries
+→ AMT Control Center
+→ Equivalent observable business behaviour
+
+---
+
+# 1. Evidence Rules
+
+Treat evidence in this order:
+
+1. **Official Unisys OS 2200 manuals**
+2. **Actual Federale source**
+3. **Federale runstreams / invocation examples**
+4. **Existing converter implementation**
+5. **Existing internal analysis**
+6. **Inference**
+
+Never use converted PowerShell or C# as evidence of what the original Unisys program was supposed to do.
+
+For every important conclusion classify it as:
+
+- `PROVEN_BY_UNISYS_MANUAL`
+- `OBSERVED_IN_FEDERALE_SOURCE`
+- `DERIVED_WORKING_MODEL`
+- `ASSUMPTION`
+- `UNKNOWN`
+
+Do not silently convert an assumption into a fact.
+
+---
+
+# 2. Current Working Execution Model
+
+> **Important:** This is a research-derived engineering model, not a diagram copied from a Unisys manual.
+
+The current working model is:
+
+```text
+SSG Skeleton / Symstream
+        |
+        v
+SSG Interpreter
+        |
+        | generation-time processing
+        | *SET
+        | *DEFINE
+        | *PROCESS
+        | *INCREMENT
+        | SGS references
+        | variable substitution
+        v
+Generated Symbolic Stream
+        |
+        +----------------------+
+        |                      |
+        v                      v
+Generated COBOL          Generated ECL
+        |                      |
+        +----------+-----------+
+                   |
+                   v
+             COBOL BUILD
+                   |
+          +--------+--------+
+          |                 |
+          v                 v
+
+        ACOB              UCOB
+          |                 |
+          v                 v
+    Relocatable           Object
+      Element             Module
+          |
+          v
+         MAP
+          |
+          v
+    Absolute Element
+
+          \                 /
+           +-------+-------+
+                   |
+                   v
+                  XQT
+                   |
+                   v
+            Program Runtime
+                   |
+                   v
+       COBOL OPEN / READ /
+          PROCESS / WRITE
+                   |
+                   v
+        Business Output Files
+
+3. Critical Correction
+
+Do not model this as:
+
+SSG
+→ UCOB
+→ MAP
+→ ACOB
+→ Execute
+
+
+The current evidence indicates that this is incorrect.
+
+The working model contains two COBOL compilation paths.
+
+ACOB path
+COBOL
+  ↓
+ACOB
+  ↓
+Relocatable Element
+  ↓
+MAP
+  ↓
+Absolute Element
+  ↓
+XQT
+
+UCOB path
+COBOL
+  ↓
+UCOB
+  ↓
+Object Module
+  ↓
+Link / Load / Execution mechanism
+  ↓
+XQT
+
+
+Therefore:
+
+ACOB is currently understood as a COBOL compiler.
+UCOB is currently understood as a COBOL compiler.
+MAP belongs to the collection/linking lifecycle.
+XQT is the execution boundary.
+
+Do not assume MAP is mandatory after UCOB.
+
+Do not assume ACOB executes COBOL.
+
+4. Generation Time vs Runtime
+
+This distinction is mandatory.
+
+Generation-time behaviour
+
+Examples:
+
+*SET
+*DEFINE
+*PROCESS
+*INCREMENT
+SGS lookup
+variable substitution
+conditional generation
+generated COBOL
+generated ECL
+
+
+These operations affect what source/runstream is generated.
+
+They must not automatically become runtime C# or PowerShell variables.
+
+Runtime behaviour
+
+Examples:
+
+OPEN
+READ
+MOVE
+COMPUTE
+WRITE
+CLOSE
+
+
+These belong to the executing business program.
+
+Always ask:
+
+Does this operation happen while SSG constructs the stream, or when the generated program executes?
+
+5. # Statements
+
+Federale source may contain statements such as:
+
+#UCOB
+#ACOB
+#MAP
+#XQT
+
+
+Do not assume these are separate commands named #UCOB, #ACOB, etc.
+
+The current manual-backed working model indicates that SSG can transform a leading:
+
+#
+
+
+into:
+
+@
+
+
+in generated output under the applicable SSG sign-character configuration.
+
+Therefore:
+
+#ACOB
+
+
+may generate:
+
+@ACOB
+
+
+and:
+
+#XQT
+
+
+may generate:
+
+@XQT
+
+
+Do not implement this as an unconditional textual # → @ replacement.
+
+Reproduce the actual SSG semantics.
+
+6. File Assignment Model
+
+Keep these concepts separate:
+
+SSG-generated filename
+
+logical/internal program filename
+
+physical OS 2200 file/resource
+
+
+The working runtime model is:
+
+ASG
+ ↓
+Assigned file/resource
+ ↓
+USE
+ ↓
+Internal/logical filename
+ ↓
+XQT
+ ↓
+Executing program
+ ↓
+OPEN / READ / WRITE
+
+
+Do not confuse resource assignment with business file I/O.
+
+7. Migration Principle
+
+Do not mechanically translate every OS 2200 command into a PowerShell function.
+
+Instead determine the semantic responsibility.
+
+For example:
+
+@ASG
+@USE
+@MAP
+@XQT
+
+
+represent OS 2200 facilities.
+
+The AMT implementation may reproduce those semantics through:
+
+AMT libraries
+Control Center
+.NET runtime behaviour
+PowerShell orchestration
+generated C#
+
+The target does not need to look syntactically like OS 2200.
+
+It needs to behave equivalently where behaviour matters.
+
+8. Reference Oracle Strategy
+
+Do not use the existing converters as the definition of correctness.
+
+Incorrect:
+
+Converter output
+      ↓
+Assume output is correct
+      ↓
+Test converter against itself
+
+
+Correct:
+
+Official Unisys Manuals
+        +
+Actual Federale Source
+        |
+        v
+Independent Semantic Reconstruction
+        |
+        v
+Reference Implementation
+        |
+        v
+Known Expected Behaviour
+
+
+The reference implementation becomes the behavioural oracle.
+
+9. Differential Validation Model
+
+Run two independent paths.
+
+                 IDENTICAL INPUTS
+                       |
+            +----------+----------+
+            |                     |
+            v                     v
+
+     Reference Oracle       Converter Pipeline
+            |                     |
+            |              ECL Converter
+            |              SSG Converter
+            |              COBOL Converter
+            |                     |
+            |                     v
+            |               C# / PS1 /
+            |               AMT Libraries
+            |                     |
+            |                     v
+            |              AMT Control Center
+            |                     |
+            +----------+----------+
+                       |
+                       v
+              Differential Compare
+
+
+Both paths must receive identical:
+
+parameters
+mocked files
+record layouts
+logical bindings
+test conditions
+10. What to Compare
+
+Do not test only whether the program runs.
+
+Generation comparison
+
+Compare:
+
+resolved parameters
+generated field counts
+offsets
+widths
+generated structures
+generated program calls
+logical filenames
+generated execution instructions
+Runtime comparison
+
+Compare:
+
+input records consumed
+output records produced
+record lengths
+field values
+unchanged bytes
+output file creation
+exit status
+errors
+relevant logs
+Intermediate comparison
+
+Where possible compare:
+
+generation manifest
+binding trace
+invocation trace
+record-processing trace
+11. First Reference Program
+
+Use:
+
+ASSURFED_UTILIT_MONTANT_SIGNE(P).TXT
+
+
+as the initial proving candidate unless stronger source evidence identifies a better program.
+
+Reasons:
+
+SSG parameters
+*DEFINE
+*SET
+*INCREMENT
+generated COBOL
+generated record layouts
+field offsets
+field widths
+input/output files
+UCOB compilation
+observable runtime record processing
+
+This allows SSG generation behaviour and COBOL runtime behaviour to be tested separately.
+
+12. MONTANT_SIGNE Working Flow
+SSG Parameters
+     |
+     +-- INPUT
+     +-- OUTPUT
+     +-- MONTANT
+     |
+     v
+SSG Generation
+     |
+     +-- calculate filler lengths
+     +-- calculate field positions
+     +-- generate COBOL declarations
+     +-- generate amount overlays
+     |
+     v
+Generated COBOL
+     |
+     v
+UCOB
+     |
+     v
+Runtime Program
+     |
+     v
+XQT
+     |
+     v
+OPEN INPUT
+OPEN OUTPUT
+     |
+     v
+READ RECORD
+     |
+     v
+COPY RECORD
+     |
+     v
+PROCESS CONFIGURED
+AMOUNT FIELDS
+     |
+     v
+WRITE RECORD
+     |
+     v
+REPEAT
+     |
+     v
+CLOSE FILES
+
+13. Reference Implementation
+
+Build the reference independently of the production converters.
+
+Suggested structure:
+
+Reference/
+|
++-- Parameters/
+|   +-- SsgParameterModel
+|
++-- Generation/
+|   +-- SsgGenerationModel
+|   +-- GenerationManifest
+|
++-- Files/
+|   +-- LogicalFileBinding
+|   +-- FixedRecordReader
+|   +-- FixedRecordWriter
+|
++-- CobolSemantics/
+|   +-- SignedDisplayCodec
+|   +-- RecordOverlay
+|
++-- Runtime/
+|   +-- MontantReferenceProgram
+|
++-- Tests/
+    +-- MockInputs
+    +-- ExpectedOutputs
+    +-- DifferentialTests
+
+
+These are implementation suggestions, not Unisys terminology.
+
+14. Generation Manifest
+
+Produce a machine-readable representation of the resolved SSG model.
+
+Example structure:
+
+{
+  "program": "MONTANT",
+  "input": {
+    "logicalName": "FILEIN",
+    "recordLength": 80
+  },
+  "output": {
+    "logicalName": "FILEOUT",
+    "recordLength": 80
+  },
+  "amountFields": [
+    {
+      "offset": 10,
+      "length": 8
+    },
+    {
+      "offset": 30,
+      "length": 8
+    }
+  ]
+}
+
+
+The values above are examples only.
+
+Never copy example values into production logic unless they are proven from the actual Federale source/parameters.
+
+15. Converter Responsibilities
+SSG Converter
+
+Responsible for reproducing:
+
+parameter resolution
+SGS lookup
+variable evaluation
+conditional generation
+iteration
+process expansion
+generated source
+generated ECL
+
+Do not automatically convert every SSG variable into a runtime PowerShell variable.
+
+ECL Converter
+
+Responsible for reproducing the intent of:
+
+resource assignment
+logical file binding
+execution ordering
+program invocation
+status handling
+cleanup
+
+AMT equivalents may replace literal OS 2200 commands.
+
+COBOL Converter
+
+Responsible for reproducing:
+
+record layouts
+REDEFINES
+numeric representation
+OPEN
+READ
+WRITE
+EOF behaviour
+business calculations
+record preservation
+AMT Libraries
+
+Prefer existing AMT runtime capabilities where they genuinely reproduce the required semantics.
+
+Do not create custom emulation before checking whether AMT already provides the required facility.
+
+16. Mandatory Copilot Rules
+Rule 1
+
+Never infer original Unisys behaviour from converted PowerShell or C#.
+
+Rule 2
+
+Before implementing a semantic behaviour, classify the evidence:
+
+PROVEN_BY_UNISYS_MANUAL
+OBSERVED_IN_FEDERALE_SOURCE
+DERIVED_WORKING_MODEL
+ASSUMPTION
+UNKNOWN
+
+Rule 3
+
+Never invent missing Unisys behaviour.
+
+If evidence is insufficient, write:
+
+UNKNOWN
+
+
+or:
+
+ASSUMPTION
+
+Rule 4
+
+Preserve the distinction between:
+
+SSG generation time
+
+
+and:
+
+program runtime
+
+Rule 5
+
+Do not model ACOB as the execution stage.
+
+Current working model:
+
+ACOB = compiler
+MAP  = collection/link stage
+XQT  = execution
+
+Rule 6
+
+Do not assume:
+
+UCOB -> MAP
+
+
+is mandatory.
+
+Rule 7
+
+Do not translate OS 2200 commands literally unless required.
+
+Translate their semantics.
+
+Rule 8
+
+Validate behaviour rather than generated syntax.
+
+Rule 9
+
+Before creating new C#, PowerShell, or runtime emulation, search the existing AMT libraries and project assets for equivalent functionality.
+
+Rule 10
+
+Do not modify production converters until the reference behaviour for the selected test case is understood.
+
+17. Mock Test Set
+
+Create synthetic fixed-width records.
+
+Minimum tests:
+
+Test	PurposeBaseline	Normal record transformation
+Multiple fields	Verify repeated generated overlays
+Zero	Verify zero representation
+Negative	Verify signed representation
+Boundary width	Verify maximum field width
+Invalid numeric	Verify deterministic failure
+Empty file	Verify EOF behaviour
+Generation variation	Change SGS parameters and verify generated model changes
+Binding variation	Change physical file while keeping logical model unchanged
+Invalid offset	Verify generation-time validation
+
+Do not use production-sensitive data.
+
+18. Difference Classification
+
+Every oracle/converter mismatch must be classified as one of:
+
+CONVERTER_DEFECT
+
+AMT_PLATFORM_ADAPTATION
+
+UNSUPPORTED_SOURCE_CONSTRUCT
+
+REFERENCE_IMPLEMENTATION_DEFECT
+
+UNRESOLVED_UNISYS_SEMANTIC
+
+FEDERALE_SOURCE_AMBIGUITY
+
+
+Do not silently change expected output to make a failing converter pass.
+
+19. Open Evidence Items
+
+Keep these explicitly open until proven.
+
+XQT
+
+Need authoritative evidence for:
+
+parameter passing
+completion behaviour
+synchronous/asynchronous semantics
+return/status behaviour
+COBOL signed numeric representation
+
+Need authoritative Unisys COBOL evidence for:
+
+signed DISPLAY
+sign/overpunch representation
+positive values
+negative values
+zero
+
+Do not invent the codec.
+
+MONTANT_SIGNE invocation
+
+Need the actual:
+
+@SSG invocation
+SGS parameter block
+INPUT parameters
+OUTPUT parameters
+MONTANT parameters
+ASG/USE bindings
+Platform version
+
+Need the actual Federale:
+
+OS 2200 release
+SSG version
+COBOL compiler/version
+
+Version-sensitive behaviour must be checked against the correct manual.
+
+20. Copilot Session Start Prompt
+
+Use the following at the beginning of a working session.
+
+PROMPT
+
+You are assisting with the Federale OS 2200 to AMT migration.
+
+Read and follow this prompt pack before analysing or changing any ECL, SSG, COBOL, C#, PowerShell, converter, or AMT runtime code.
+
+Your primary objective is to preserve the original intended behaviour of the Federale OS 2200 programs.
+
+Do not treat the existing converters or their generated PowerShell/C# as the definition of correct behaviour.
+
+Use this evidence hierarchy:
+
+Official Unisys OS 2200 manuals.
+Actual Federale source.
+Actual Federale runstreams and invocation evidence.
+Existing converter implementation.
+Existing internal documentation.
+Explicitly labelled inference.
+
+For every important semantic conclusion classify it as:
+
+PROVEN_BY_UNISYS_MANUAL
+OBSERVED_IN_FEDERALE_SOURCE
+DERIVED_WORKING_MODEL
+ASSUMPTION
+UNKNOWN
+
+Never invent missing behaviour.
+
+Maintain a strict distinction between SSG generation-time behaviour and runtime program behaviour.
+
+The current working model is:
+
+SSG skeleton → SSG interpretation → generated COBOL/ECL → COBOL compilation → executable/object form → file/resource binding → XQT execution → runtime COBOL processing → business output.
+
+Do not assume ACOB and UCOB are sequential.
+
+Current working compiler paths are:
+
+ACOB → relocatable element → MAP → absolute element
+
+and:
+
+UCOB → object module → applicable link/load/execution mechanism.
+
+XQT is the execution boundary in the current working model.
+
+Before modifying a converter:
+
+Identify the original source construct.
+Determine whether it operates at generation time, build time, binding time, or runtime.
+Find the supporting Unisys manual evidence where available.
+Find the actual Federale usage.
+Describe the required observable behaviour.
+Check existing AMT libraries and project assets for equivalent functionality.
+Compare against the independent reference oracle.
+Only then propose a converter change.
+
+If evidence is missing, stop and identify exactly what evidence is required.
+
+Do not fill gaps with plausible behaviour.
+
+For MONTANT_SIGNE, use the independent reference implementation and mocked files as the initial behavioural oracle.
+
+The goal is not merely:
+
+"the converted code compiles."
+
+The goal is:
+
+"given equivalent logical parameters and input data, the AMT implementation produces behaviour equivalent to the intended Federale OS 2200 program."
+
+21. Copilot Investigation Prompt
+
+Use this when analysing a specific source construct.
+
+PROMPT
+
+Investigate the following Federale source construct:
+
+<PASTE SOURCE HERE>
+
+Do not modify code yet.
+
+Analyse it using the Federale OS 2200 Phase 1 evidence rules.
+
+Return:
+
+1. Source construct
+
+Identify exactly what is present.
+
+2. Execution stage
+
+Classify it as one or more of:
+
+SSG generation time
+generated ECL
+generated COBOL
+compilation
+collection/linking
+file/resource binding
+program execution
+business runtime
+3. Evidence
+
+For each semantic claim provide:
+
+Claim	Evidence Classification	Source	Manual/Page or Federale Location	Confidence
+
+Do not invent page references.
+
+4. Original intended behaviour
+
+Describe only behaviour supported by evidence.
+
+5. Current converter behaviour
+
+Identify what the converter currently produces.
+
+Do not assume that behaviour is correct.
+
+6. Semantic difference
+
+Compare:
+
+Original intended behaviour
+vs
+Current converter behaviour
+
+7. AMT equivalent
+
+Search existing AMT/project assets before proposing new implementation.
+
+8. Recommendation
+
+Classify the result as:
+
+NO_CHANGE_REQUIRED
+CONVERTER_DEFECT
+AMT_PLATFORM_ADAPTATION
+UNSUPPORTED_SOURCE_CONSTRUCT
+REFERENCE_IMPLEMENTATION_DEFECT
+UNRESOLVED_UNISYS_SEMANTIC
+FEDERALE_SOURCE_AMBIGUITY
+
+Do not implement anything until the semantic difference is established.
+
+22. Copilot Converter-Fix Prompt
+
+Use only after the reference behaviour is established.
+
+PROMPT
+
+We have established the expected behaviour for this Federale construct using the Phase 1 evidence model and reference oracle.
+
+Now inspect the relevant converter implementation.
+
+Before changing code:
+
+Identify the smallest converter component responsible.
+Explain why the current output differs from the reference behaviour.
+Search for existing reusable converter/AMT functionality.
+Propose the smallest reversible change.
+Identify regression risk.
+Define tests before implementation.
+Preserve existing behaviour for unrelated constructs.
+
+Do not perform a broad rewrite.
+
+Prefer a controlled, auditable change.
+
+After implementation compare:
+
+Reference Oracle
+vs
+Converter Output running in AMT Control Center
+
+
+using identical mocked inputs.
+
+Report differences explicitly.
+
+23. Definition of Done
+
+A migrated program is not proven because:
+
+conversion completed;
+C# compiled;
+PowerShell executed;
+Control Center launched the program.
+
+It is proven when:
+
+relevant original semantics are understood;
+manual evidence exists where applicable;
+actual Federale source behaviour is understood;
+assumptions are explicitly recorded;
+an independent reference implementation exists;
+mocked inputs produce deterministic expected outputs;
+converter-generated output runs in AMT Control Center;
+both paths receive equivalent inputs;
+observable outputs match;
+remaining differences are explained and classified.
+24. Core Principle
+
+Always work in this direction:
+
+Original Unisys semantics
+        ↓
+Federale source behaviour
+        ↓
+Independent reference behaviour
+        ↓
+Converter behaviour
+        ↓
+AMT Control Center behaviour
+
+
+Never reverse the evidence chain into:
+
+Current converter behaviour
+        ↓
+Assumed original behaviour
+
+
+The reference oracle exists to prevent that mistake.
+
+
+**Recommended repository location:**
+
+```text
+docs/
+└── copilot/
+    └── prompt-packs/
+        └── FEDERALE_OS2200_PHASE1_COPILOT_PROMPT_PACK.md
+
+
+For your existing instruction-driven workflow, I’d keep this as a reference prompt pack rather than putting all of it into the permanent Copilot instructions. The permanent instructions can simply tell Copilot to read this pack before doing Federale ECL/SSG/COBOL converter work.

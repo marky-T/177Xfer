@@ -1,0 +1,30 @@
+total rows: 371; covered call sites: 302
+BABA_ASCII        122
+CFH-COPY_ASCII     47
+CHAB100_ASCII       1
+CHABAN_ASCII       30
+CONDIS2_ASCII      18
+FUSBA_ASCII        32
+FUSBA2_ASCII        4
+LOADIS_ASCII        9
+LOADIS_MULTI        1
+SCAN_ASCII         19
+TAPELD_ASCII       14
+UNLOADIS_ASCII      4
+UNLOADIS_MULTI      1
+--- by program
+BABA_GN         122  runstreams 83
+CFH_COPY_GN      62  runstreams 48
+CHABAN_GN        31  runstreams 27
+CONDIS2_GN       18  runstreams 12
+FUSBA_GN         36  runstreams 27
+SCAN_GN          19  runstreams 11
+TAPELD_GN        14  runstreams 8
+distinct runstreams: 153
+--- not covered (other keys in the csv)
+                   11
+EXTEUR              1
+FILE_SSG            1
+LECTIS_ASCII        1
+RECAP              28
+TABAN_ASCII        27

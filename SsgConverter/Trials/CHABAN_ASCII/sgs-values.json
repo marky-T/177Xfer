@@ -1,0 +1,10 @@
+{
+  "_source": "Seeded from Examples/Output/CHABAN_ASCII.ps1 GetSgsValue keys (not in Trial3 manifest). Simplified ASCII variant; loop counts 0 so field/mod loops stay empty.",
+  "ASCII": "1",
+  "OUTPUT,1,1,1": "ECL-OUTPUT",
+  "OUTPUT,1,1,2": "80",
+  "OUTPUT,1,1,3": "1",
+  "LIST": "0",
+  "MOD": "0",
+  "NUMB": "0"
+}

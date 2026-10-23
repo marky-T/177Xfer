@@ -1,16 +1,12 @@
 {
   "folders": [
     {
-      "name": "Trial3",
+      "name": "Trial3 (SSG-3 pipeline, reference)",
       "path": "Trial3"
     },
     {
-      "name": "SsgConverter",
+      "name": "SsgConverter (SSG-3 converter + release tooling, live until SSG-4 proven)",
       "path": "SsgConverter"
-    },
-    {
-      "name": "SSG-Source (read-only)",
-      "path": "SSG-Source"
     },
     {
       "name": "docs",
@@ -19,6 +15,14 @@
     {
       "name": ".github (migration prompts + instructions)",
       "path": ".github"
+    },
+    {
+      "name": "AMT tools (moved to z-old 2026-10-12, read-only)",
+      "path": "../z-old/AMT"
+    },
+    {
+      "name": "SSG-4 R&D amt-go-net (Migration Tools source, read-only)",
+      "path": "../amt-go-net-ref"
     }
   ],
   "settings": {
@@ -32,7 +36,8 @@
       "**/_coboldeps": true
     },
     "powershell.scriptAnalysis.enable": true,
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "chat.useCustomizationsInParentRepositories": true
   },
   "extensions": {
     "recommendations": [

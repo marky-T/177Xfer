@@ -1,0 +1,500 @@
+@RUN,M/T   PBDA08,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       **********************************************************   
+@MSG       **                                                      **   
+@MSG       **          MAJ ANNUELLE PARTIELLE DES PB               **   
+@MSG       **                   VIE GROUPE                         **   
+@MSG       **                                                      **   
+@MSG       **********************************************************   
+@ . 
+@ . LE 02/11/92: CREATION DU RUN
+@ . LE 11/06/97: AJOUTE DES FICHIERS D'IMPRESSIONS  
+@ . LE 22/03/02: AJOUTE D'1 FICHIER  D'IMPRESSION (LISTCOMB2)   
+@ . LE 24/09/02: AJOUT ELEMENT SYM POUR REMPLACER IMPRESSION DANS RUN   
+@ . LE 19/02/03: ADAPTATION SAUVETAGE INCENDIE POUR CLOTURE 
+@ . LE 26/11/03: REMPL FASDIR PAR COPIE SUR PC POUR GRAVURE 
+@ . LE 20/12/04: adaptation a n-couches 
+@ . LE 21/10/10: F10127/01 (JLH) - MAJ EXCEPTIONS CONTRATS  
+@ . LE 21/10/10: F10127/01 (JLH) - MAJ EXCEPTIONS CONTRATS  
+@ . LE 11/10/24: AJOUT LAB F999TRANSF   
+@ . 
+@MSG       EDITION DES PARAMETRAGES 
+@TIME   
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@TIME   
+@MSG       EDITION DU JCL.  
+@TIME   
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     PBDA08.,F/0/POS/5000 
+@ . *************************************************** 
+@COPY,A    VPRD*BABS.PBB309,PBDA08.PBB309   
+@COPY,A    VPRD*BABS.PBB313,PBDA08.PBB313   
+@COPY,A    VPRD*BABS.PBB022,PBDA08.PBB022   
+@COPY,A    VPRD*BABS.PBB041,PBDA08.PBB041   
+@COPY,A    AFLINC*REP$ABS.SWB003,PBDA08.SWB003  
+@COPY,A    AFLINC*REP$ABS.SWB004,PBDA08.SWB004  
+@.  
+@TIME   
+@ . 
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ . 
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . ******************************************************************* 
+@LAB003: MSG 003. GENERATION DES PARAMETRES POUR LE RUN. (SWB003)   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB003  
+@XQT       PBDA08.SWB003
+PBDA08  
+@TIME   
+@ . ******************************************************************* 
+@LAB010: MSG  10. CHARGEMENT INVENT GRP 3112AAAA
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB010  
+@ASG,A     FVGR001CLO.  
+@USE       INA,FVGR001CLO.  
+@DELETE,C  IVGR001RES.  
+@CAT,P     IVGR001RES,F/1/POS/4000  
+@ASG,AX    IVGR001RES.  
+@USE       OUTA,IVGR001RES. 
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=16,7,CH,A,1 
+KEY=7,1,CH,A,2  
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@FREE      INA. 
+@FREE      IVGR001RES.  
+@TIME   
+@ . ******************************************************************* 
+@LAB020: MSG  20. SCAN INVENT GRP 3112AAAA  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB020  
+@ASG,AX    IVGR001RES.  
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+ASCII   
+INPUT      IVGR001RES,500,10
+IF R < 10   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      IVGR001RES.  
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB030: MSG  30. CHARGEMANT INVENT HISTORIQUE (COUCHES) GRP 3112AAAA   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB030  
+@ASG,A     FVGR002CLO.  
+@USE       INA,FVGR002CLO.  
+@DELETE,C  IVGR002RES.  
+@CAT,P     IVGR002RES,F/1/POS/4000  
+@ASG,AX    IVGR002RES.  
+@USE       OUTA,IVGR002RES. 
+@SORT,ES
+FILEIN=INA,F    BLOCK=10
+FILEOUT=OUTA,F  BLOCK=10
+KEY=16,7,CH,A,1 
+KEY=7,1,CH,A,2  
+KEY=321,5,CH,A,3
+RSZ=500 
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB040: MSG 040. CREATION COU HIS GRP 3112AAAA POUR I/O
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB040  
+@ASG,A     IVGR002RES.  
+@DELETE,C  IVGR002RES2. 
+@ASG,UP    IVGR002RES2.,F/1/POS/4000
+@SSG,IA    *UTILIT.CFH-COPY/ASCII   
+SGS 
+ASCII   
+INPUT      IVGR002RES,500,10
+OUTPUT     IVGR002RES2,500,10   
+FIELDIN    1,22 7,1  321,5 29,471   
+FIELDOUT   1,22 23,1 24,5  29,471   
+@EOF
+@XQT,WR    .CFH-COPY
+@FREE      IVGR002RES.  
+@FREE      IVGR002RES2. 
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB050: MSG 050. SCAN COU HIS GRP 3112AAAA I/O 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB050  
+@ASG,A     IVGR002RES2. 
+@USE       INA,IVGR002RES2. 
+@SSG,IA    *UTILIT.SCAN/ASCII   
+SGS 
+INPUT      INA,500,10   
+IF R < 10   
+ASCII   
+@EOF
+@XQT,WR    TPF$.SCAN
+@FREE      INA. 
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB060: MSG 060. CREATION COU HIS GRP 3112AAAA EN I/O  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB060  
+@DELETE,C  IVGR002RESIO.
+@CAT,P     IVGR002RESIO,F/0/POS/4000
+@ASG,A     IVGR002RESIO 
+@ASG,A     IVGR002RES2. 
+@USE       INA,IVGR002RES2. 
+@USE       OUT,IVGR002RESIO.
+@SORT,E 
+FILEIN=INA,F  MODE=SDF     BLOCK=10 
+FILEOUT=OUT,F MODE=MSAM    BLOCK=10 
+MSKEY=16,13 
+DATA=ASCII  
+RSZ=500 
+COPY
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB200: MSG 200.     MISE A JOUR ANNUELLE DE LA DB PB  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,A     IVGR001RES.  
+@USE       IENC3112,IVGR001RES. 
+@ASG,A     IVGR002RESIO.
+@USE       IHIS3112,IVGR002RESIO.   
+@DELETE,C  IPBA08DT.
+@CAT,P     IPBA08DT.,F/0/POS/4000   
+@ASG,A     IPBA08DT.
+@USE       LISDATEFF,IPBA08DT.  
+@DELETE,C  IPBA08C2.
+@CAT,P     IPBA08C2.,F/0/POS/4000   
+@ASG,A     IPBA08C2.
+@USE       LISTCOMB2,IPBA08C2.  
+@DELETE,C  IPBA08PL.
+@CAT,P     IPBA08PL.,F/1/POS/4000   
+@ASG,A     IPBA08PL.
+@USE       PETITLIST,IPBA08PL.  
+@DELETE,C  IPBA08GL.
+@CAT,P     IPBA08GL.,F/1/POS/4000   
+@ASG,A     IPBA08GL.
+@USE       GRANDLIST,IPBA08GL.  
+@DELETE,C  PBDA08*IMP-PBB309C.  
+@CAT,P     PBDA08*IMP-PBB309C.,F///10000
+@ASG,A     PBDA08*IMP-PBB309C.  
+@USE       LISTCTRL,PBDA08*IMP-PBB309C. 
+@DELETE,C  PBDA08*IMP-PBB309E.  
+@CAT,P     PBDA08*IMP-PBB309E.,F///10000
+@ASG,A     PBDA08*IMP-PBB309E.  
+@USE       LISTERR,PBDA08*IMP-PBB309E.  
+@XQT       PBDA08.PBB309
+@FREE      PBDA08*IMP-PBB309C.  
+@FREE      PBDA08*IMP-PBB309E.  
+@FREE      IVGR001RES.  
+@FREE      IVGR002RESIO.
+@FREE      IPBA08GL.
+@FREE      IPBA08PL.
+@FREE      IPBA08C2.
+@FREE      IPBA08DT.
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB210: MSG 210.     TRI FICHIER IMPRESSION PETITE LISTE   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB210  
+@ASG,A     IPBA08PL.
+@DELETE,C  IPBA08PLB.   
+@ASG,UP    IPBA08PLB,F/1/POS/4000   
+@SORT,E 
+FILEIN=IPBA08PL.,F      MODE=SDF
+FILEOUT=IPBA08PLB,F     MODE=SDF
+DATA=ASCII  
+RSZ=50  
+KEY=1,17,S,A
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB220: MSG 220. IMPRESSION PETITE  LISTE  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ASG,AX    IPBA08PLB.   
+@USE       IPB-ETCO,IPBA08PLB.  
+@DELETE,C  PBDA08*IMP-PBB022A.  
+@CAT,P     PBDA08*IMP-PBB022A.,F/1/POS/4000 
+@ASG,AX    PBDA08*IMP-PBB022A.  
+@USE       LISTE,PBDA08*IMP-PBB022A.
+@XQT,WR    PBDA08.PBB022
+@FREE      PBDA08*IMP-PBB022A.  
+@FREE      IPBA08PLB.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB230: MSG 230.     TRI FICHIER IMPRESSION GRANDE LISTE   
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ASG,A     IPBA08GL.
+@DELETE,C  IPBA08GLB.   
+@ASG,UP    IPBA08GLB,F/1/POS/4000   
+@SORT,E 
+FILEIN=IPBA08GL.,F      MODE=SDF
+FILEOUT=IPBA08GLB,F     MODE=SDF
+DATA=ASCII  
+RSZ=50  
+KEY=1,17,S,A
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB240: MSG 240. IMPRESSION GRANDE  LISTE  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ASG,AX    IPBA08GLB.   
+@USE       IPB-ETCO,IPBA08GLB.  
+@DELETE,C  PBDA08*IMP-PBB022B.  
+@CAT,P     PBDA08*IMP-PBB022B.,F/1/POS/4000 
+@ASG,AX    PBDA08*IMP-PBB022B.  
+@USE       LISTE,PBDA08*IMP-PBB022B.
+@XQT,WR    PBDA08.PBB022
+@FREE      PBDA08*IMP-PBB022B.  
+@FREE      IPBA08GLB.   
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB300: MSG 300.     TRI FICHIER CHANGEMENT ANNEE REFERENCE
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB300  
+@ASG,A     IPBA08DT.
+@DELETE,C  IPBA08DTB.   
+@ASG,UP    IPBA08DTB,F/0/POS/4000   
+@SORT,E 
+FILEIN=IPBA08DT.,F      MODE=SDF
+FILEOUT=IPBA08DTB,F     MODE=SDF
+DATA=ASCII  
+RSZ=80  
+KEY=16,4,CH,A,1 
+KEY=12,4,CH,A,2 
+KEY=1,7,CH,A,3  
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB310: MSG 310. IMPRESSION CHANGEMENT ANNEE REFERENCE PB  
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB310  
+@ASG,A     IPBA08DTB.   
+@DELETE,C  PBDA08*IMP-LAB310.   
+@CAT,P     PBDA08*IMP-LAB310.,F/0/POS/4000  
+@ASG,AX    PBDA08*IMP-LAB310.   
+@USE       INP,PBDA08*IMP-LAB310.   
+@BRKPT     PRINT$/INP   
+@SSG,IA    *UTILIT.TAPELD/ASCII 
+SGS 
+INPUT  IPBA08DTB,80,10  
+ASCII   
+OUTPUT  PRINTER,132,1   
+FIELDIN  16,4 12,4 1,6 7,1 8,2  
+FIELDOUT 1,4 7,4 13,6 20,1 22,2 
+FIXE  1,25,'AN-DB NV-AN  POLICE  COMB' ;
+      31,34,'CHANGEMENT ANNEE REFERENCE PB GRP' 
+STITRE  YES 
+@EOF
+@EOF
+@HDG,P CHANGEMENT ANNEE REFERENCE PB GROUPE 
+@XQT,WR    TPF$.
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      PBDA08*IMP-LAB310.   
+@FREE      IPBA08DTB.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . ******************************************************************* 
+@LAB340: MSG 340.     TRI FICHIER CHANGEMENT COMBINAISON
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB340  
+@ASG,A     IPBA08C2.
+@DELETE,C  IPBA08C2B.   
+@ASG,UP    IPBA08C2B,F/0/POS/4000   
+@SORT,E 
+FILEIN=IPBA08C2.,F      MODE=SDF
+FILEOUT=IPBA08C2B,F     MODE=SDF
+DATA=ASCII  
+RSZ=80  
+KEY=1,7,CH,A,1  
+SORT
+@EOF
+@ERS       TPF$.
+@TIME   
+@ . ******************************************************************* 
+@LAB350: MSG 350. IMPRESSION CHANGEMENT  COMBINAISON
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB350  
+@ASG,A     IPBA08C2B.   
+@DELETE,C  PBDA08*IMP-LAB350.   
+@CAT,P     PBDA08*IMP-LAB350.,F/0/POS/4000  
+@ASG,AX    PBDA08*IMP-LAB350.   
+@USE       INP,PBDA08*IMP-LAB350.   
+@BRKPT     PRINT$/INP   
+@SSG,IA    *UTILIT.TAPELD/ASCII 
+SGS 
+INPUT  IPBA08C2B,80,10  
+ASCII   
+OUTPUT  PRINTER,132,1   
+FIELDIN  8,2 10,2 1,6 7,1 12,8  
+FIELDOUT 3,2 10,2 16,6 23,1 25,8
+FIXE  1,22,'CMB-DB CMB-INV  POLICE' ;   
+      26,6,'GROUPE' 
+STITRE  YES 
+@EOF
+@HDG,P CHANGEMENT COMBINAISON   
+@XQT,WR    TPF$.
+@BRKPT     PRINT$   
+@SYM       PRINT$,,PRSP 
+@FREE      PBDA08*IMP-LAB350.   
+@FREE      IPBA08C2B.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . =====================================================   
+@LAB360: MSG 360. RÉPERCUSSION D'UNE SUPPRESSION D'UNE COUCHE DE
+@MSG     L'INVENTAIRE VG DANS LA BASE DE DONNEES DES PB EN MILIEU D'ANNEE   
+@ADD       SYS$*RUNS.REPRISE
+LAB360  
+@DELETE,C  PBDA08*IMP-PBB041.   
+@ASG,UP    PBDA08*IMP-PBB041.,F//POS/40950  
+@USE       LISTE, PBDA08*IMP-PBB041.
+@XQT       PBDA08.PBB041
+@FREE      PBDA08*IMP-PBB041.   
+@TIME   
+@ . ******************************************************************* 
+@LAB400: MSG 400.     MISE A JOUR EXCEPTIONS CONTRATS  - PBB313 
+@ . ******************************************************************* 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB400  
+@XQT       PBDA08.PBB313
+@EOF
+@TIME   
+@ . 
+@ . =====================================================   
+@LAB700: MSG 700. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB700  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@LAB720: MSG 720. CLOTURE DES PARAMETRES AU NIVEAU DU RUN.(SWB004)  
+@ . 
+@ADD       SYS$*RUNS.REPRISE
+LAB720  
+@ . 
+@XQT       PBDA08.SWB004
+PBDA08  
+@ . 
+@TIME   
+@ . 
+@LAB725: MSG 725. TRANSFERT FICHIER - F999TRANSF
+@ADD SYS$*RUNS.REPRISE  
+LAB725  
+@ . 
+@ADD       F999TRANSF.PBDA08/2200PC 
+@ . 
+@TIME   
+@ . 
+@LAB730: MSG 730. NETTOYAGE DES SYMBIONTS D'IMPRESSION. 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB730  
+@ED,UQ     PBDA08*IMP-LAB310.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@ED,UQ     PBDA08*IMP-LAB350.   
+F @XQT  
+D+  
+F @BRKPT
+D+  
+EXIT
+@TIME   
+@LAB740: MSG 740. IMPRESSION SUR IMPRIMENTE LASER VIA F999SYM   
+@ADD       SYS$*RUNS.REPRISE
+LAB740  
+@ . 
+@ADD       F999SYM.PBDA08   
+@TIME   
+@ . 
+@ . =====================================================   
+@ . 
+@LAB750: MSG 750. EXECUTION DELETE DES FICHIERS DE TRAVAIL  
+@ADD       SYS$*RUNS.REPRISE
+LAB750  
+@ . 
+@DELETE,C  IPBA08PL.
+@DELETE,C  IPBA08PLB.   
+@DELETE,C  IPBA08GL.
+@DELETE,C  IPBA08GLB.   
+@DELETE,C  IVGR001RES.  
+@DELETE,C  IVGR002RES.  
+@DELETE,C  IVGR002RES2. 
+@DELETE,C  IVGR002RESIO.
+@DELETE,C  IPBA08DT.
+@DELETE,C  IPBA08DTB.   
+@DELETE,C  IPBA08C2.
+@DELETE,C  IPBA08C2B.   
+@TIME   
+@ . 
+@LAB777: MSG 777. DELETE DU FICHIER DE REPRISE  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@MSG       *** LE RUN PBDA08 S'EST BIEN TERMINE *** 
+@ . 
+@QUAL,R 
+@FIN

@@ -1,0 +1,1469 @@
+---- SCAN_ASCII
++$Edt_On = 0
++$Edt_Buf = ""
+-    DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FIL4) + ").   ")
++    If ($Edt_On) {
++      $Edt_Buf += ("           03  FILLER         PIC X(" + ($FIL4) + ").   ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FIL4) + ").   ")
++    }
+-    DataLineOrNoStatement ("           03  FILLER           PIC X(" + ($FIL5) + "). ")
++    If ($Edt_On) {
++      $Edt_Buf += ("           03  FILLER           PIC X(" + ($FIL5) + "). ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           03  FILLER           PIC X(" + ($FIL5) + "). ")
++    }
+-DataLineOrNoStatement ("       IDENTIFICATION DIVISION. ")
+-DataLineOrNoStatement ("       PROGRAM-ID. SCAN.")
+-DataLineOrNoStatement ("       AUTHOR. BOURDEAUD HUY P. ")
+-DataLineOrNoStatement ("       ENVIRONMENT DIVISION.")
+-DataLineOrNoStatement ("       CONFIGURATION SECTION.   ")
+-DataLineOrNoStatement ("       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. ")
+-DataLineOrNoStatement ("       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. ")
+-DataLineOrNoStatement ("       SPECIAL-NAMES.  PRINTER IS LISTE.")
+-DataLineOrNoStatement ("       INPUT-OUTPUT SECTION.")
+-DataLineOrNoStatement ("       FILE-CONTROL.")
+-DataLineOrNoStatement ("           SELECT  TAPEIN  ASSIGN   ")
++If ($Edt_On) {
++  $Edt_Buf += ("       IDENTIFICATION DIVISION. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       IDENTIFICATION DIVISION. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       PROGRAM-ID. SCAN.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       PROGRAM-ID. SCAN.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       AUTHOR. BOURDEAUD HUY P. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       AUTHOR. BOURDEAUD HUY P. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       ENVIRONMENT DIVISION.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       ENVIRONMENT DIVISION.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       CONFIGURATION SECTION.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       CONFIGURATION SECTION.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       SPECIAL-NAMES.  PRINTER IS LISTE.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       SPECIAL-NAMES.  PRINTER IS LISTE.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       INPUT-OUTPUT SECTION.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       INPUT-OUTPUT SECTION.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FILE-CONTROL.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FILE-CONTROL.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           SELECT  TAPEIN  ASSIGN   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           SELECT  TAPEIN  ASSIGN   ")
++}
+-  DataLineOrNoStatement ("                              UNISERVO " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++  If ($Edt_On) {
++    $Edt_Buf += ("                              UNISERVO " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("                              UNISERVO " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++  }
+-  DataLineOrNoStatement ("                              DISC " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++  If ($Edt_On) {
++    $Edt_Buf += ("                              DISC " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("                              DISC " + ((GetSgsValue ("INPUT,1,1,1"))) + ".   ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           SELECT  PRT  ASSIGN  TO  PRINTER.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           SELECT  PRT  ASSIGN  TO  PRINTER.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       DATA DIVISION.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       DATA DIVISION.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FILE SECTION.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FILE SECTION.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FD  TAPEIN   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FD  TAPEIN   ")
+-DataLineOrNoStatement ("           SELECT  PRT  ASSIGN  TO  PRINTER.")
+-DataLineOrNoStatement ("       DATA DIVISION.   ")
+-DataLineOrNoStatement ("       FILE SECTION.")
+-DataLineOrNoStatement ("       FD  TAPEIN   ")
+-  DataLineOrNoStatement ("                   LABEL RECORD IS OMITTED  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("                   LABEL RECORD IS OMITTED  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("                   LABEL RECORD IS OMITTED  ")
++  }
++} else {
++  If ($Edt_On) {
++    $Edt_Buf += ("                   LABEL RECORD IS STANDARD ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("                   LABEL RECORD IS STANDARD ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           BLOCK CONTAINS " + ((GetSgsValue ("INPUT,1,1,3"))) + "  RECORDS")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           BLOCK CONTAINS " + ((GetSgsValue ("INPUT,1,1,3"))) + "  RECORDS")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           RECORD CONTAINS " + ((GetSgsValue ("INPUT,1,1,2"))) + "  CHARACTERS")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
+-  DataLineOrNoStatement ("                   LABEL RECORD IS STANDARD ")
++  DataLineOrNoStatement ("           RECORD CONTAINS " + ((GetSgsValue ("INPUT,1,1,2"))) + "  CHARACTERS")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           DATA RECORD IS REC-IN.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           DATA RECORD IS REC-IN.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  REC-IN             PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + "). ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  REC-IN             PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + "). ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   ")
+-DataLineOrNoStatement ("           BLOCK CONTAINS " + ((GetSgsValue ("INPUT,1,1,3"))) + "  RECORDS")
+-DataLineOrNoStatement ("           RECORD CONTAINS " + ((GetSgsValue ("INPUT,1,1,2"))) + "  CHARACTERS")
+-DataLineOrNoStatement ("           DATA RECORD IS REC-IN.   ")
+-DataLineOrNoStatement ("       01  REC-IN             PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + "). ")
+-DataLineOrNoStatement ("       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   ")
+-  DataLineOrNoStatement ("       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  ")
++  }
+-  DataLineOrNoStatement ("       01  PRT-LINE           PIC X(100).   ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  PRT-LINE           PIC X(100).   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  PRT-LINE           PIC X(100).   ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       WORKING-STORAGE SECTION. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       WORKING-STORAGE SECTION. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  ZONE-LECTURE PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + ").   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  ZONE-LECTURE PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + ").   ")
+-DataLineOrNoStatement ("       WORKING-STORAGE SECTION. ")
+-DataLineOrNoStatement ("       01  ZONE-LECTURE PIC X(" + ((GetSgsValue ("INPUT,1,1,2"))) + ").   ")
+-    DataLineOrNoStatement ("       01  ZONE-LECTURE" + ($I) + " REDEFINES ZONE-LECTURE. ")
++    If ($Edt_On) {
++      $Edt_Buf += ("       01  ZONE-LECTURE" + ($I) + " REDEFINES ZONE-LECTURE. ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("       01  ZONE-LECTURE" + ($I) + " REDEFINES ZONE-LECTURE. ")
++    }
+-    DataLineOrNoStatement ("               03 INDIC" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++    If ($Edt_On) {
++      $Edt_Buf += ("               03 INDIC" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("               03 INDIC" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++    }
+-  DataLineOrNoStatement ("       01  W-INDIC. ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  W-INDIC. ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  W-INDIC. ")
++  }
+-    DataLineOrNoStatement ("           02 IND" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + "). ")
++    If ($Edt_On) {
++      $Edt_Buf += ("           02 IND" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + "). ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           02 IND" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + "). ")
++    }
++  }
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  W-INDIC-1.   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  W-INDIC-1.   ")
+-  DataLineOrNoStatement ("       01  W-INDIC-1.   ")
+-    DataLineOrNoStatement ("           02 IND-1" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++    If ($Edt_On) {
++      $Edt_Buf += ("           02 IND-1" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           02 IND-1" + ($I) + " PIC X(" + ((GetSgsValue ("INDIC,1,$I,2"))) + ").   ")
++    }
+-DataLineOrNoStatement ("       01  REC-AREA.")
++If ($Edt_On) {
++  $Edt_Buf += ("       01  REC-AREA.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  REC-AREA.")
++}
+-  DataLineOrNoStatement ("           03  PRINT-LINE-" + ($A) + "             PIC X(100).  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("           03  PRINT-LINE-" + ($A) + "             PIC X(100).  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           03  PRINT-LINE-" + ($A) + "             PIC X(100).  ")
++  }
+-      DataLineOrNoStatement ("       01  REC-AREA-REDEFINES-" + ($RD) + "  REDEFINES  REC-AREA.   ")
++      If ($Edt_On) {
++        $Edt_Buf += ("       01  REC-AREA-REDEFINES-" + ($RD) + "  REDEFINES  REC-AREA.   ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("       01  REC-AREA-REDEFINES-" + ($RD) + "  REDEFINES  REC-AREA.   ")
++      }
+-        DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++        If ($Edt_On) {
++          $Edt_Buf += ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++        }
++      }
++      If ($Edt_On) {
++        $Edt_Buf += ("           03  FIELD-" + ($RD) + "         PIC X(" + ((GetSgsValue ("IF,$RD,$IFPTR,2"))) + ").  ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           03  FIELD-" + ($RD) + "         PIC X(" + ((GetSgsValue ("IF,$RD,$IFPTR,2"))) + ").  ")
+-      DataLineOrNoStatement ("           03  FIELD-" + ($RD) + "         PIC X(" + ((GetSgsValue ("IF,$RD,$IFPTR,2"))) + ").  ")
+-        DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++        If ($Edt_On) {
++          $Edt_Buf += ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           03  FILLER         PIC X(" + ($FILLCTR) + ").")
++        }
+-      DataLineOrNoStatement ("       01  AREARU" + ($I) + " REDEFINES REC-AREA.   ")
++      If ($Edt_On) {
++        $Edt_Buf += ("       01  AREARU" + ($I) + " REDEFINES REC-AREA.   ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("       01  AREARU" + ($I) + " REDEFINES REC-AREA.   ")
++      }
+-        DataLineOrNoStatement ("           03  FILLER      PIC X(" + ($FILLCTR) + ").   ")
++        If ($Edt_On) {
++          $Edt_Buf += ("           03  FILLER      PIC X(" + ($FILLCTR) + ").   ")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           03  FILLER      PIC X(" + ($FILLCTR) + ").   ")
++        }
++      }
++      If ($Edt_On) {
++        $Edt_Buf += ("           03  FILTSTRU" + ($I) + "   PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           03  FILTSTRU" + ($I) + "   PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").")
+-      DataLineOrNoStatement ("           03  FILTSTRU" + ($I) + "   PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").")
+-        DataLineOrNoStatement ("           03  FILLER      PIC X(" + ($FILCT2) + ").")
++        If ($Edt_On) {
++          $Edt_Buf += ("           03  FILLER      PIC X(" + ($FILCT2) + ").")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           03  FILLER      PIC X(" + ($FILCT2) + ").")
++        }
+-    DataLineOrNoStatement ("       01  TSTFINA. ")
++    If ($Edt_On) {
++      $Edt_Buf += ("       01  TSTFINA. ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("       01  TSTFINA. ")
++    }
+-      DataLineOrNoStatement ("           03  TSTFINA" + ($K) + "      PIC X(" + ((GetSgsValue ("NOCONT,1,$K,2"))) + ")   ")
++      If ($Edt_On) {
++        $Edt_Buf += ("           03  TSTFINA" + ($K) + "      PIC X(" + ((GetSgsValue ("NOCONT,1,$K,2"))) + ")   ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           03  TSTFINA" + ($K) + "      PIC X(" + ((GetSgsValue ("NOCONT,1,$K,2"))) + ")   ")
++      }
+-        DataLineOrNoStatement ("               VALUE SPACES.")
++        If ($Edt_On) {
++          $Edt_Buf += ("               VALUE SPACES.")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("               VALUE SPACES.")
++        }
+-        DataLineOrNoStatement ("               VALUE '" + ((GetSgsValue ("NOCONT,1,$K,3"))) + "'.  ")
++        If ($Edt_On) {
++          $Edt_Buf += ("               VALUE '" + ((GetSgsValue ("NOCONT,1,$K,3"))) + "'.  ")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("               VALUE '" + ((GetSgsValue ("NOCONT,1,$K,3"))) + "'.  ")
++        }
+-    DataLineOrNoStatement ("       01  MOTST.   ")
++    If ($Edt_On) {
++      $Edt_Buf += ("       01  MOTST.   ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("       01  MOTST.   ")
++    }
+-      DataLineOrNoStatement ("           03  MOTST" + ($I) + "    PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").  ")
++      If ($Edt_On) {
++        $Edt_Buf += ("           03  MOTST" + ($I) + "    PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").  ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           03  MOTST" + ($I) + "    PIC X(" + ((GetSgsValue ("NOCONT,1,$I,2"))) + ").  ")
++      }
+-    DataLineOrNoStatement ("       01  TSTFINB      PIC S9(7) VALUE " + ((GetSgsValue ("NOCONT,1,1,1"))) + ". ")
++    If ($Edt_On) {
++      $Edt_Buf += ("       01  TSTFINB      PIC S9(7) VALUE " + ((GetSgsValue ("NOCONT,1,1,1"))) + ". ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("       01  TSTFINB      PIC S9(7) VALUE " + ((GetSgsValue ("NOCONT,1,1,1"))) + ". ")
++    }
+-DataLineOrNoStatement ("       01  SKIP                         PIC  9(10)  COMP VALUE 0.   ")
+-DataLineOrNoStatement ("       01  LINE-CNT            PIC 9(10) COMP    VALUE 66.  ")
+-DataLineOrNoStatement ("       01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.   ")
+-DataLineOrNoStatement ("       01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0. ")
++If ($Edt_On) {
++  $Edt_Buf += ("       01  SKIP                         PIC  9(10)  COMP VALUE 0.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  SKIP                         PIC  9(10)  COMP VALUE 0.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  LINE-CNT            PIC 9(10) COMP    VALUE 66.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  LINE-CNT            PIC 9(10) COMP    VALUE 66.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0. ")
++}
+-  DataLineOrNoStatement ("       01  H-LINE   USAGE DISPLAY-1.")
+-} else {
+-  DataLineOrNoStatement ("       01  H-LINE.  ")
+-}
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
+-DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  H-LINE   USAGE DISPLAY-1.")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  H-LINE   USAGE DISPLAY-1.")
++  }
++} else {
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  H-LINE.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  H-LINE.  ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER    PIC X(10) VALUE '1234567890'.   ")
++}
+-  DataLineOrNoStatement ("       01  CT-LINE                               USAGE  DISPLAY-1.  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  CT-LINE                               USAGE  DISPLAY-1.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  CT-LINE                               USAGE  DISPLAY-1.  ")
++  }
+-  DataLineOrNoStatement ("       01  CT-LINE. ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  CT-LINE. ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  CT-LINE. ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER       PIC XX  VALUE '**'.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER       PIC XX  VALUE '**'.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 CT-CT        PIC ZZZZZZ9. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 CT-CT        PIC ZZZZZZ9. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER        PIC XX   VALUE '**'.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER        PIC XX   VALUE '**'.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(121) VALUE SPACES.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(121) VALUE SPACES.  ")
+-DataLineOrNoStatement ("           03 FILLER       PIC XX  VALUE '**'.  ")
+-DataLineOrNoStatement ("           03 CT-CT        PIC ZZZZZZ9. ")
+-DataLineOrNoStatement ("           03 FILLER        PIC XX   VALUE '**'.")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(121) VALUE SPACES.  ")
+-  DataLineOrNoStatement ("       01  F-LINE  USAGE DISPLAY-1. ")
+-} else {
+-  DataLineOrNoStatement ("       01  F-LINE.  ")
+-}
+-DataLineOrNoStatement ("           03 FILLER        PIC XX  VALUE '**'. ")
+-DataLineOrNoStatement ("           03 F-CT        PIC ZZZZZZ9.  ")
+-DataLineOrNoStatement ("           03 FILLER         PIC XX   VALUE '**'.   ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(08) VALUE '........'.   ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '3.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '4.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '5.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '6.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '7.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '8.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '9.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '0.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '1.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
+-DataLineOrNoStatement ("           03 FILLER          PIC X(03) VALUE '3..'.")
+-DataLineOrNoStatement ("       01  FIVE-CT PIC 9(10) COMP VALUE 6.  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  F-LINE  USAGE DISPLAY-1. ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  F-LINE  USAGE DISPLAY-1. ")
++  }
++} else {
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  F-LINE.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  F-LINE.  ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER        PIC XX  VALUE '**'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER        PIC XX  VALUE '**'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 F-CT        PIC ZZZZZZ9.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 F-CT        PIC ZZZZZZ9.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER         PIC XX   VALUE '**'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER         PIC XX   VALUE '**'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(08) VALUE '........'.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(08) VALUE '........'.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '3.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '3.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '4.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '4.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '5.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '5.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '6.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '6.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '7.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '7.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '8.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '8.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '9.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '9.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '0.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '0.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '1.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '1.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(10) VALUE '2.........'. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03 FILLER          PIC X(03) VALUE '3..'.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03 FILLER          PIC X(03) VALUE '3..'.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       01  FIVE-CT PIC 9(10) COMP VALUE 6.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       01  FIVE-CT PIC 9(10) COMP VALUE 6.  ")
++}
+-  DataLineOrNoStatement ("       01  M-LINE                                USAGE  DISPLAY-1.  ")
+-} else {
+-  DataLineOrNoStatement ("       01  M-LINE.  ")
+-}
+-DataLineOrNoStatement ("           03  FILLER         PIC X(20) ")
+-DataLineOrNoStatement ("               VALUE '** END SCAN **      '.")
+-DataLineOrNoStatement ("           03  FILLER         PIC X(37) ")
+-DataLineOrNoStatement ("               VALUE  'RECORDS READ FROM " + ((GetSgsValue ("INPUT,1,1,1"))) + " = '. ")
+-DataLineOrNoStatement ("           03  M-CT           PIC Z(10)9.   ")
+-DataLineOrNoStatement ("           03  FILLER         PIC X(19) ")
+-DataLineOrNoStatement ("               VALUE  ' RECORD MATCHING = '.")
+-DataLineOrNoStatement ("           03  FN-CT          PIC Z(10)9.   ")
+-DataLineOrNoStatement ("       PROCEDURE DIVISION.  ")
+-DataLineOrNoStatement ("       OPEN-FILES SECTION.  ")
+-DataLineOrNoStatement ("       FIRST-READ.  ")
+-DataLineOrNoStatement ("           OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.   ")
+-DataLineOrNoStatement ("       LR. READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT. ")
+-DataLineOrNoStatement ("           ADD 1 TO REC-IN-CT.  ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  M-LINE                                USAGE  DISPLAY-1.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  M-LINE                                USAGE  DISPLAY-1.  ")
++  }
++} else {
++  If ($Edt_On) {
++    $Edt_Buf += ("       01  M-LINE.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       01  M-LINE.  ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03  FILLER         PIC X(20) ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03  FILLER         PIC X(20) ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("               VALUE '** END SCAN **      '.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("               VALUE '** END SCAN **      '.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03  FILLER         PIC X(37) ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03  FILLER         PIC X(37) ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("               VALUE  'RECORDS READ FROM " + ((GetSgsValue ("INPUT,1,1,1"))) + " = '. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("               VALUE  'RECORDS READ FROM " + ((GetSgsValue ("INPUT,1,1,1"))) + " = '. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03  M-CT           PIC Z(10)9.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03  M-CT           PIC Z(10)9.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03  FILLER         PIC X(19) ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03  FILLER         PIC X(19) ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("               VALUE  ' RECORD MATCHING = '.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("               VALUE  ' RECORD MATCHING = '.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           03  FN-CT          PIC Z(10)9.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           03  FN-CT          PIC Z(10)9.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       PROCEDURE DIVISION.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       PROCEDURE DIVISION.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       OPEN-FILES SECTION.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       OPEN-FILES SECTION.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FIRST-READ.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FIRST-READ.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       LR. READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       LR. READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           ADD 1 TO REC-IN-CT.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           ADD 1 TO REC-IN-CT.  ")
++}
+-  DataLineOrNoStatement ("       TEST-FIELDS. ")
++  If ($Edt_On) {
++    $Edt_Buf += ("       TEST-FIELDS. ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("       TEST-FIELDS. ")
++  }
++    $Edt_On = 1
++    $Edt_Buf = ""
++    If ($ANDIND) {
++      If ($Edt_On) {
++        $Edt_Buf += ("              ")
++      } else {
++        DataLineOrNoStatement ("              & ")
++      }
++    } else {
++      If ($Edt_On) {
++        $Edt_Buf += ("           IF  ")
++      } else {
++        DataLineOrNoStatement ("           IF  &")
++      }
++    }
++    If (((CompareTypeSafe (GetSgsValue ("IF,$TS,$IFPTR,1")) "EqualTo" "R") -or (CompareTypeSafe (GetSgsValue ("IF,$TS,$IFPTR,1")) "EqualTo" "RECORD"))) {
++      If ($Edt_On) {
++        $Edt_Buf += (" REC-IN-CT ")
++      } else {
++        DataLineOrNoStatement (" REC-IN-CT &")
++      }
++    } else {
++      If ($Edt_On) {
++        $Edt_Buf += (" FIELD-" + ($TS) + " ")
++      } else {
++        DataLineOrNoStatement (" FIELD-" + ($TS) + " &  ")
++      }
++    }
++    For ([Int32]$SF = 2; $SF -le (GetSgsValue ("IF,$TS")); $SF++) { 
++      If (((CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1")) "EqualTo" "QUOTE") -or (CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1")) "EqualTo" "Q"))) {
++        If ($Edt_On) {
++          $Edt_Buf += (" " + ((GetSgsValue ("IF,$TS,$SF,2"))) + " ")
++        } else {
++          DataLineOrNoStatement (" " + ((GetSgsValue ("IF,$TS,$SF,2"))) + " & ")
++        }
++      } else {
++        If ((CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,1,1")) "EqualTo" "(")) {
++          If ($Edt_On) {
++            $Edt_Buf += ("      ';" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++            DataLineOrNoStatement $Edt_Buf
++            $Edt_On = 0
++            $Edt_Buf = ""
++          } else {
++            DataLineOrNoStatement ("      ';" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++          }
++        } else {
++          If ((CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,1,1")) "EqualTo" "_")) {
++            If ($Edt_On) {
++              $Edt_Buf += ("      '_" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++              DataLineOrNoStatement $Edt_Buf
++              $Edt_On = 0
++              $Edt_Buf = ""
++            } else {
++              DataLineOrNoStatement ("      '_" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++            }
++          } else {
++            If ((CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,1,1")) "EqualTo" "|")) {
++              If ($Edt_On) {
++                $Edt_Buf += ("      '|" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++                DataLineOrNoStatement $Edt_Buf
++                $Edt_On = 0
++                $Edt_Buf = ""
++              } else {
++                DataLineOrNoStatement ("      '|" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++              }
++            } else {
++              If ((CompareTypeSafe (GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,1,1")) "EqualTo" "~")) {
++                If ($Edt_On) {
++                  $Edt_Buf += ("      '~" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++                  DataLineOrNoStatement $Edt_Buf
++                  $Edt_On = 0
++                  $Edt_Buf = ""
++                } else {
++                  DataLineOrNoStatement ("      '~" + ((GetSgsValue ("IF,$TS,$SF,1,SUBSTR$,2,1"))) + "'   ")
++                }
++              } else {
++                If ($Edt_On) {
++                  $Edt_Buf += (" " + ((GetSgsValue ("IF,$TS,$SF,1"))) + " ")
++                } else {
++                  DataLineOrNoStatement (" " + ((GetSgsValue ("IF,$TS,$SF,1"))) + " & ")
++                }
++              }
++            }
++          }
++        }
++      }
++      $FIELDCT = $SF
++      If ((CompareTypeSafe $FIELDCT "GreaterThan" 5)) {
++        If ($Edt_On) {
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        }
++        $Edt_On = 1
++        $Edt_Buf = ""
++        If ($Edt_On) {
++          $Edt_Buf += ("               ")
++        } else {
++          DataLineOrNoStatement ("               &")
++        }
++      }
++    }
++    If ($Edt_On) {
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    }
+-        DataLineOrNoStatement ("                   GO TO FOUND-REC. ")
++        If ($Edt_On) {
++          $Edt_Buf += ("                   GO TO FOUND-REC. ")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("                   GO TO FOUND-REC. ")
++        }
+-        DataLineOrNoStatement ("           MOVE FILTSTRU" + ($I) + " TO MOTST" + ($I) + ".  ")
++        If ($Edt_On) {
++          $Edt_Buf += ("           MOVE FILTSTRU" + ($I) + " TO MOTST" + ($I) + ".  ")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           MOVE FILTSTRU" + ($I) + " TO MOTST" + ($I) + ".  ")
++        }
++      }
++      If ($Edt_On) {
++        $Edt_Buf += ("              INSPECT TSTFINA REPLACING ALL '(' BY ';'. ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("              INSPECT TSTFINA REPLACING ALL '(' BY ';'. ")
++      }
++      If ($Edt_On) {
++        $Edt_Buf += ("              IF MOTST NOT < TSTFINA GO TO END-OUT. ")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("              IF MOTST NOT < TSTFINA GO TO END-OUT. ")
+-      DataLineOrNoStatement ("              INSPECT TSTFINA REPLACING ALL '(' BY ';'. ")
+-      DataLineOrNoStatement ("              IF MOTST NOT < TSTFINA GO TO END-OUT. ")
+-      DataLineOrNoStatement ("           IF REC-IN-CT NOT < TSTFINB GO TO END-OUT.")
++      If ($Edt_On) {
++        $Edt_Buf += ("           IF REC-IN-CT NOT < TSTFINB GO TO END-OUT.")
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           IF REC-IN-CT NOT < TSTFINB GO TO END-OUT.")
++      }
+-    DataLineOrNoStatement ("           GO TO SUITE-RECHERCHE.   ")
++    If ($Edt_On) {
++      $Edt_Buf += ("           GO TO SUITE-RECHERCHE.   ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           GO TO SUITE-RECHERCHE.   ")
++    }
+-    DataLineOrNoStatement ("           GO TO LR.")
++    If ($Edt_On) {
++      $Edt_Buf += ("           GO TO LR.")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           GO TO LR.")
++    }
+-DataLineOrNoStatement ("       SUITE-RECHERCHE. ")
++If ($Edt_On) {
++  $Edt_Buf += ("       SUITE-RECHERCHE. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       SUITE-RECHERCHE. ")
++}
+-  DataLineOrNoStatement ("           MOVE REC-AREA TO ZONE-LECTURE.   ")
++  If ($Edt_On) {
++    $Edt_Buf += ("           MOVE REC-AREA TO ZONE-LECTURE.   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           MOVE REC-AREA TO ZONE-LECTURE.   ")
++  }
+-      DataLineOrNoStatement ("           MOVE INDIC" + ($I) + " TO IND" + ($I))
++      If ($Edt_On) {
++        $Edt_Buf += ("           MOVE INDIC" + ($I) + " TO IND" + ($I))
++        DataLineOrNoStatement $Edt_Buf
++        $Edt_On = 0
++        $Edt_Buf = ""
++      } else {
++        DataLineOrNoStatement ("           MOVE INDIC" + ($I) + " TO IND" + ($I))
++      }
+-        DataLineOrNoStatement ("           MOVE SPACES TO IND-1" + ($I) + ".")
++        If ($Edt_On) {
++          $Edt_Buf += ("           MOVE SPACES TO IND-1" + ($I) + ".")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           MOVE SPACES TO IND-1" + ($I) + ".")
++        }
+-        DataLineOrNoStatement ("           MOVE '" + ((GetSgsValue ("INDIC,$N,$I,3"))) + "' TO IND-1" + ($I) + ".   ")
++        If ($Edt_On) {
++          $Edt_Buf += ("           MOVE '" + ((GetSgsValue ("INDIC,$N,$I,3"))) + "' TO IND-1" + ($I) + ".   ")
++          DataLineOrNoStatement $Edt_Buf
++          $Edt_On = 0
++          $Edt_Buf = ""
++        } else {
++          DataLineOrNoStatement ("           MOVE '" + ((GetSgsValue ("INDIC,$N,$I,3"))) + "' TO IND-1" + ($I) + ".   ")
++        }
+-    DataLineOrNoStatement ("           INSPECT W-INDIC-1 REPLACING ALL '(' BY ';'.  ")
+-    DataLineOrNoStatement ("           IF W-INDIC = W-INDIC-1 GO TO FOUND-REC.  ")
+-  }
+-  DataLineOrNoStatement ("           GO TO LR.")
+-}
+-DataLineOrNoStatement ("       FOUND-REC.   ")
+-DataLineOrNoStatement ("           ADD  1  TO  REC-FOUND-CT.")
+-DataLineOrNoStatement ("           MOVE ZERO  TO  LINE-CNT. ")
+-DataLineOrNoStatement ("           ADD 1 TO FIVE-CT.")
+-DataLineOrNoStatement ("           IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT")
+-DataLineOrNoStatement ("             WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT   ")
+-DataLineOrNoStatement ("            ELSE   MOVE REC-IN-CT TO CT-CT  ")
+-DataLineOrNoStatement ("             WRITE PRT-LINE FROM CT-LINE AFTER 1.   ")
+-DataLineOrNoStatement ("           ADD 1 TO LINE-CNT.   ")
+-DataLineOrNoStatement ("           MOVE  1  TO  SKIP.   ")
+-For ([Int32]$A = 1; $A -le (GetSgsValue ("INPUT,1,1,2")); $A += 100) { 
+-  DataLineOrNoStatement ("           WRITE  PRT-LINE  FROM  PRINT-LINE-" + ($A) + "  AFTER ADVANCING SKIP.")
++    If ($Edt_On) {
++      $Edt_Buf += ("           INSPECT W-INDIC-1 REPLACING ALL '(' BY ';'.  ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           INSPECT W-INDIC-1 REPLACING ALL '(' BY ';'.  ")
++    }
++    If ($Edt_On) {
++      $Edt_Buf += ("           IF W-INDIC = W-INDIC-1 GO TO FOUND-REC.  ")
++      DataLineOrNoStatement $Edt_Buf
++      $Edt_On = 0
++      $Edt_Buf = ""
++    } else {
++      DataLineOrNoStatement ("           IF W-INDIC = W-INDIC-1 GO TO FOUND-REC.  ")
++    }
++  }
++  If ($Edt_On) {
++    $Edt_Buf += ("           GO TO LR.")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           GO TO LR.")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       FOUND-REC.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       FOUND-REC.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           ADD  1  TO  REC-FOUND-CT.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           ADD  1  TO  REC-FOUND-CT.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE ZERO  TO  LINE-CNT. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE ZERO  TO  LINE-CNT. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           ADD 1 TO FIVE-CT.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           ADD 1 TO FIVE-CT.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("             WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("             WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("            ELSE   MOVE REC-IN-CT TO CT-CT  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("            ELSE   MOVE REC-IN-CT TO CT-CT  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("             WRITE PRT-LINE FROM CT-LINE AFTER 1.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("             WRITE PRT-LINE FROM CT-LINE AFTER 1.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           ADD 1 TO LINE-CNT.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
+-  DataLineOrNoStatement ("           MOVE 1 TO SKIP.  ")
+-}
+-DataLineOrNoStatement ("           MOVE SPACES  TO REC-AREA.")
+-DataLineOrNoStatement ("           MOVE  1  TO  SKIP.     GO  TO  LR.   ")
+-DataLineOrNoStatement ("       END-OUT. ")
+-DataLineOrNoStatement ("           MOVE  REC-IN-CT  TO  M-CT.   ")
+-DataLineOrNoStatement ("           MOVE REC-FOUND-CT  TO  FN-CT.")
+-DataLineOrNoStatement ("           WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.   ")
+-DataLineOrNoStatement ("           CLOSE  TAPEIN  PRT.  ")
+-DataLineOrNoStatement ("           STOP RUN.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE  1  TO  SKIP.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE  1  TO  SKIP.   ")
++}
++For ([Int32]$A = 1; $A -le (GetSgsValue ("INPUT,1,1,2")); $A += 100) { 
++  If ($Edt_On) {
++    $Edt_Buf += ("           WRITE  PRT-LINE  FROM  PRINT-LINE-" + ($A) + "  AFTER ADVANCING SKIP.")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           WRITE  PRT-LINE  FROM  PRINT-LINE-" + ($A) + "  AFTER ADVANCING SKIP.")
++  }
++  If ($Edt_On) {
++    $Edt_Buf += ("           ADD 1 TO LINE-CNT.   ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           ADD 1 TO LINE-CNT.   ")
++  }
++  If ($Edt_On) {
++    $Edt_Buf += ("           MOVE 1 TO SKIP.  ")
++    DataLineOrNoStatement $Edt_Buf
++    $Edt_On = 0
++    $Edt_Buf = ""
++  } else {
++    DataLineOrNoStatement ("           MOVE 1 TO SKIP.  ")
++  }
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE SPACES  TO REC-AREA.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE SPACES  TO REC-AREA.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE  1  TO  SKIP.     GO  TO  LR.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE  1  TO  SKIP.     GO  TO  LR.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("       END-OUT. ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("       END-OUT. ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE  REC-IN-CT  TO  M-CT.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE  REC-IN-CT  TO  M-CT.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           MOVE REC-FOUND-CT  TO  FN-CT.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           MOVE REC-FOUND-CT  TO  FN-CT.")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.   ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.   ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           CLOSE  TAPEIN  PRT.  ")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           CLOSE  TAPEIN  PRT.  ")
++}
++If ($Edt_On) {
++  $Edt_Buf += ("           STOP RUN.")
++  DataLineOrNoStatement $Edt_Buf
++  $Edt_On = 0
++  $Edt_Buf = ""
++} else {
++  DataLineOrNoStatement ("           STOP RUN.")
++}

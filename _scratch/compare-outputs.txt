@@ -1,0 +1,44 @@
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.20
+== convert with ssgmerged
+Conversion complete: 20 succeeded, 0 failed
+== convert with ssgrd
+--Error:   Error converting BABA_ASCII: This is unexpected. DirectiveId: End  Line: 2
+--Error:   Error converting CFH-COPY: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting CFH-COPY_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting CHAB100_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting CHABAN_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting FUSBA2_ASCII: This is unexpected. DirectiveId: End  Line: 2
+--Error:   Error converting FUSBA_ASCII: This is unexpected. DirectiveId: End  Line: 2
+--Error:   Error converting LOADIS_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting LOADIS_MULTI: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting RECAP: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting SCAN_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting TABAN_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting TAPELD_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting UNLOADIS_ASCII: This is unexpected. DirectiveId: End  Line: 5
+--Error:   Error converting UNLOADIS_MULTI: This is unexpected. DirectiveId: End  Line: 5
+Conversion complete: 5 succeeded, 15 failed
+Program            ours=merged rd=merged  parse(rd/merged) rd vs ours (+/-)
+ARCHIFORMAT        SAME        SAME       0/0              none
+ARCHISEPARE        SAME        DIFF       30/0             26/21
+BABA_ASCII         SAME        DIFF       missing/0        none
+CFH-COPY_ASCII     SAME        DIFF       missing/0        none
+CFH-COPY           SAME        DIFF       missing/0        none
+CHAB100_ASCII      SAME        DIFF       missing/0        none
+CHABAN_ASCII       SAME        DIFF       missing/0        none
+CONDIS2_ASCII      SAME        DIFF       68/0             92/92
+EXTEUR             SAME        DIFF       118/0            190/116
+FUSBA_ASCII        SAME        DIFF       missing/0        none
+FUSBA2_ASCII       SAME        DIFF       missing/0        none
+LECTIS_ASCII       SAME        DIFF       0/0              63/60
+LOADIS_ASCII       SAME        DIFF       missing/0        none
+LOADIS_MULTI       SAME        DIFF       missing/0        none
+RECAP              SAME        DIFF       missing/0        none
+SCAN_ASCII         SAME        DIFF       missing/0        none
+TABAN_ASCII        SAME        DIFF       missing/0        none
+TAPELD_ASCII       SAME        DIFF       missing/0        none
+UNLOADIS_ASCII     SAME        DIFF       missing/0        none
+UNLOADIS_MULTI     SAME        DIFF       missing/0        none

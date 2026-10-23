@@ -1,0 +1,29 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. 'CFH-COPY'.  
+       AUTHOR. BOURDEAUD HUY PIERRE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-10. 
+       OBJECT-COMPUTER. UNIVAC-1100-10. 
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN  TO   
+                   DISC  I006KTMAJ1. 
+           SELECT TAPEOUT ASSIGN TO 
+                   DISC  F006KTMAJ3.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+           LABEL  RECORD  STANDARD  
+           BLOCK CONTAINS 10  RECORDS
+           DATA RECORD RECIN.   
+       01  RECIN   PIC  X(900).   
+       FD  TAPEOUT  
+           LABEL  RECORD STANDARD   
+           BLOCK  CONTAINS 10  RECORDS  
+           DATA RECORD RECOUT.  
+       01  RECOUT   PIC   X(900).
+       01  REC31.
+                     06 FILLER PIC  X(70).  
+           06 FIXDATA1 PIC X(8).  
+       01  REC32.

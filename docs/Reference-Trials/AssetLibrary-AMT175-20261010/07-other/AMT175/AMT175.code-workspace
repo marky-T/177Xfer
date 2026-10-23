@@ -1,0 +1,68 @@
+{
+  "folders": [
+    {
+      "name": "AmtTools (rebuild + CC/Keycloak config)",
+      "path": "C:\\Amt\\Parallel\\AMT175\\AmtTools"
+    },
+    {
+      "name": "SsgConverter-source",
+      "path": "C:\\Amt\\Parallel\\AMT175\\8.0.26188.0\\MigrationTools\\SsgConverter\\SsgConverter"
+    },
+    {
+      "name": "AMT175-Properties (launchSettings)",
+      "path": "C:\\Amt\\Parallel\\AMT175\\Properties"
+    },
+    {
+      "name": "AMT175-Lion (Lion.ini / LincToLion.ini)",
+      "path": "C:\\Amt\\Parallel\\AMT175\\Lion"
+    },
+    {
+      "name": "AMT175-.github (instructions + plans)",
+      "path": "C:\\Amt\\Parallel\\AMT175\\.github"
+    },
+    {
+      "name": "AMT_ReferenceDocuments (read-only)",
+      "path": "C:\\Amt\\AMT_ReferenceDocuments"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/.vs": true,
+      "**/_deps": true
+    },
+    "search.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/_deps": true,
+      "**/runtimes": true,
+      "**/*.dll": true,
+      "**/*.pdb": true,
+      "**/*.nupkg": true,
+      "**/*.suo": true
+    },
+    "chat.promptFilesLocations": {
+      "C:\\Amt\\Parallel\\AMT175\\.github\\prompts": true
+    },
+    "dotnet.defaultSolution": "disable",
+    "powershell.scriptAnalysis.enable": true,
+    "editor.formatOnSave": false,
+    "files.watcherExclude": {
+      "**/bin/**": true,
+      "**/obj/**": true,
+      "**/.vs/**": true,
+      "**/_deps/**": true,
+      "**/runtimes/**": true,
+      "**/AMT_ReferenceDocuments/**": true
+    },
+    "files.readonlyInclude": {
+      "**/AMT_ReferenceDocuments/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.csharp"
+    ]
+  }
+}

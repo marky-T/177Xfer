@@ -1,0 +1,458 @@
+==== Asysco.Lion.Generator.LionGenerateMain.GenerateStart
+  call LionGenerateGeneralParam.IsJava
+  call CobolGenApplication.get_JavaKeepIntellijSettings
+  call LionGenerateMain.BackupIdeaFolder
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_SourceDirBinRoot
+  call Path.Combine
+  str  "LIONGENERATES.NOW"
+  call Path.Combine
+  call File.Exists
+  call Directory.Exists
+  call AmtFileSupport.ForceDirectories
+  str  "LIONGENERATES.NOW"
+  call Path.Combine
+  str  "LOCK"
+  call File.WriteAllText
+==== Asysco.Lion.Generator.LionGenerateMain.GenerateReady
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_SourceDirBinRoot
+  str  "LIONGENERATES.NOW"
+  call Path.Combine
+  call File.Exists
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_SourceDirBinRoot
+  str  "LIONGENERATES.NOW"
+  call Path.Combine
+  call AmtFileSupport.FileDelete
+  call LionGenerateGeneralParam.IsJava
+  call CobolGenApplication.get_JavaKeepIntellijSettings
+  call LionGenerateMain.RestoreIdeaFolder
+==== Asysco.Lion.Generator.LionGenerateThread.SetSwitches
+  fld  String.Empty
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionCommonRepos.GetApplicationKind
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  fld  field m_General
+  call LionGenerateGeneralParam.ResetGenData
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.Reset
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionLicense.get_LicRec
+  call LionLicenseRec.get_GenSources
+  call LionGenData.set_GenWithSources
+  fld  field m_General
+  call LionGenerateGeneralParam.get_CobolParser
+  fld  field m_General
+  call LionGenerateGeneralParam.get_CobolParser
+  call CobolGeneratorParser.get_CobolApp
+  call LionTreeKindSupport.GetAmtApplicationKind
+  call MigLionApp.set_Env
+  call AmtStringList..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_RevisionMode
+  call LionCommonRepos.GetRevision
+  str  "Application options object is available in this generation set. See Revision Control [Open, REV]"
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_RevisionMode
+  call LionCommonRepos.ReadOptions
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionPropertiesSupport.GetPropValue
+  call LionGenData.set_AppNameWm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameWm
+  call LionCommonRepos.RemoveMin
+  call LionGenData.set_AppNameRm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionPropertiesSupport.GetPropValue
+  call LionGenData.set_AppDesc
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.set_GenerationType
+  call LionPropertiesSupport.GetPropValue
+  call String.IsNullOrEmpty
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.set_SignEncoding
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionPropertiesSupport.GetPropValue
+  call AmtStrings.StrToInt32
+  call LionGenData.set_SignEncoding
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppKind
+  call LionTreeKindSupport.IsCobolApplication
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_QueRevSet
+  str  "SELECT * FROM "
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_DBLincDb
+  call AmtDatabase.get_SchemaPrefix
+  str  "REVSET"
+  call String.Concat
+  str  "WHERE GENSETID = ?"
+  str  " AND KIND = ?"
+  call AmtDbsSupport.PrepareOpen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_QueRevSet
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  call AmtQuery.SetParamInt32
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_QueRevSet
+  call AmtQuery.SetParamInt32
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_QueRevSet
+  call AmtDbsSupport.OpenPrepared
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.set_DataComTablesDefined
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  call LionDD.get_QueRevSet
+  call AmtQuery.Close
+  fld  field m_MainThread
+  call AmtStringList..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  call LionCommonRepos.ReadOptions
+  call AmtStringList.get_Count
+  call AmtStringList.get_Item
+  str  "<LOADING>"
+  call String.op_Equality
+  str  "Another process is loading application ["
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameWm
+  str  "] at the moment. Generator is waiting for this process to been finished."
+  call String.Concat
+  call AmtStringList.get_Item
+  str  "<GENERATING>"
+  call String.op_Equality
+  str  "Another process is generating application ["
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameWm
+  str  "] at the moment. Generator is waiting for this process to been finished."
+  call String.Concat
+  call AmtStringList.get_Item
+  str  "<LOADREQUESTED>"
+  call String.op_Equality
+  str  "Another process is waiting to load application ["
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameWm
+  str  "]. Generator is waiting for this process to been finished."
+  call String.Concat
+  fld  field m_General
+  call LionGenerateGeneralParam.set_TargetDBS
+  fld  field m_General
+  call LionGenerateGeneralParam.set_SswSavesource
+  call LionGenerateThread.GetDbsParam
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_OverruleAppName
+  call String.IsNullOrEmpty
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_OverruleAppName
+  call LionGenData.set_AppNameWm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameWm
+  call LionCommonRepos.RemoveMin
+  call LionGenData.set_AppNameRm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  String.Empty
+  call LionGenData.set_AppNameSuffix
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameRm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameSuffix
+  call String.Concat
+  call LionGenData.set_AppNameNamespace
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_NamespaceCompanyApp
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameNamespace
+  str  "."
+  call String.Concat
+  call LionGenData.set_NamespaceCompanyApp
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Logger
+  call LionGenData.InitializeGenCorrections
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Casing
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call LionCasing2.InitCasing
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Naming
+  fld  field m_General
+  call LionNamingRecord.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_VsAstType
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Naming
+  call LionVsAstType.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_VsAstType
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_NamespaceCompanyApp
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Naming
+  call LionNamingRecord.get_NamespaceBL
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppNameRm
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppKind
+  call LionVsAstType.InitGenerated
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_SourcePlatform
+  call VsAstType.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call VsAstExprProperty.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call VsAstExprEnum.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call VsAstExprPrimitive.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call VsAstMember.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_VsTarget
+  call VsAstExprMethod.Init
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.Clear
+  fld  field m_General
+  call LionGenerateGeneralParam.set_LabelUnique
+  fld  field m_General
+  call LionGenerateGeneralParam.get_GenFileAppender
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_LogVerbosity
+  call .get_HasValue
+  call ..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_LogVerbosity
+  call .get_Value
+  call MigFileAppender.set_Verbose
+  fld  field m_General
+  call LionGenerateGeneralParam.get_DbLogAppender
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_LogVerbosity
+  call .get_HasValue
+  call ..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_LogVerbosity
+  call .get_Value
+  call DbLogAppender.set_Verbose
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppKind
+  call LionTreeKindSupport.IsLionApplication
+  call AmtStringList..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Dd
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenSetId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_AppId
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_RevisionMode
+  call LionCommonRepos.ReadOptions
+  call AmtStringList.get_Item
+  call AmtStrings.Copy
+  call AmtStrings.StrToInt32
+  call AmtStringList.get_Item
+  call AmtStrings.IndexOf
+  call AmtStringList.get_Item
+  call AmtStrings.Copy
+  call AmtStrings.StrTrueFalseToBoolean
+  call AmtStringList.get_Item
+  call AmtStrings.Copy
+  call LionLanguageInfo..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.Add
+  call AmtStringList.get_Item
+  call AmtStrings.Copy
+  call LionLanguageInfo..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.Add
+  call AmtStringList.get_Count
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.get_Default
+  str  "ENGLISH"
+  call LionLanguageInfo..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.Add
+  str  "ENGLISH"
+  call LionLanguageInfo..ctor
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_Languages
+  call LionLanguagesCollection.Add
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  str  "[DEBUG]"
+  call AmtStrings.IndexOf
+  call LionGenData.set_GenRepDebug
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  str  "[TESTGEN]"
+  call AmtStrings.IndexOf
+  call LionGenData.set_TestGenerate
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenWithSources
+  fld  field m_General
+  str  "[SOURCE]"
+  call AmtStrings.IndexOf
+  call LionGenerateGeneralParam.set_SswSavesource
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  str  "[GLGTRACE]"
+  call AmtStrings.IndexOf
+  call LionGenData.set_Glgtrace
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  str  "[DELAYED]"
+  call AmtStrings.IndexOf
+  fld  field m_General
+  call LionGenerateGeneralParam.get_SswSavesource
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenRepDebug
+  call LionGenData.set_DelayedGen
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  str  "[FILEREF]"
+  call AmtStrings.IndexOf
+  fld  field m_General
+  call LionGenerateGeneralParam.get_SswSavesource
+  call LionGenData.set_LibsFileref
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenerationType
+  fld  field m_General
+  call LionGenerateGeneralParam.set_SswSavesource
+  fld  field m_General
+  call LionGenerateGeneralParam.get_CobolParser
+  call CobolGeneratorParser.get_CobolApp
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenRepDebug
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_GenPublicInDebug
+  call MigLionApp.set_DisableNativeVars
+  fld  field m_General
+  call LionGenerateGeneralParam.get_CobolParser
+  call CobolGeneratorParser.get_CobolApp
+  fld  field m_General
+  call LionGenerateGeneralParam.get_Gen
+  call LionGenData.get_XGenDbUnderscore
+  call MigLionApp.set_XGenDbUnderscore

@@ -1,0 +1,3 @@
+--- BatchController: 20261021 22:36:03.683 12 Information SSG4_LOADIS_CASES Done Id: 895 Queue: JOB_QUEUE1 (Execution time: 00:00:16:201)
+--- LOADTEST_89520261021223549992.log
+=== SSG4_LOADIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\LOADIS\cc-runs\regress-cases\check.txt)

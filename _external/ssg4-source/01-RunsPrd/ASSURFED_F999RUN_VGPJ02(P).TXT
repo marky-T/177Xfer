@@ -1,0 +1,808 @@
+@RUN,M/T   VGPJ02,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM,u     PRINT$,,PRSP 
+@MSG,N     **************************************************** 
+@MSG,N     **  RUN VGPJ02 - IMPRESSION DES DOCUMENTS DE LA   ** 
+@MSG,N     **  REDUCTION TOTALE PAR LA TECHNIQUE GdD         ** 
+@MSG,N     **************************************************** 
+@ . 
+@ .  Pasop : un seul fichier indexé et une table RDMS sont utilisés.
+@ .  kalal : le 14/10/2002  
+@ .  LECTURE DE L'INVENTAIRE EN TABLE PLUTÔT QUE L'INDEXE   
+@ .  SUPPRESSION DE LA REINTRODUCTION EN MACHINE TOUTES LES HEURES  
+@ .  Ajout article 24 - calcul garanties minimales (P06065)-JLH 
+@ .  Changement dessin VGR008 (P07080)-JLH  
+@ .  Ajout trace delete TMP_SEQ_RDM (F09175/01) - JLH   
+@ .  Sauvetage TMP_SEQ_RDM sur fichier plat (P10073/15) - JLH   
+@ .  Màj table sorties pour SIGEDIS (P10073/15) - JLH   
+@ .  P10073/27 --> régimes hors LPC - JLH   
+@ .  31/03/2015 - P14039/01 - SUPPRESSION ASG,AX F005TABSDF - ME
+@ .  P10073/27(2) --> tranferIn interne vers structure accueil - JLH
+@ .  P15121/01 --> Art24-Calcul par couche - JLHO   
+@ .  P15121/01 --> Art24-Calcul par couche - JLHO   
+@ .  P1000356/01 ---> Passer les docs GDD groupe classique en Exstream  
+@ . 
+@MSG       EDITION DU FICHIER DE CONTROLE.  
+@PRT,SC    F999CONTROLE.VGPJ02  
+@TIME   
+@MSG,N     EDITION DU JCL.  
+@PRT,SC    F999RUN.VGPJ02   
+@TIME   
+@ . 
+@MSG,N     TRANSFERT DES PROGRAMMES.
+@ . 
+@ASG,T     VGPJ02,F/1/POS/4000  
+@COPY,A    VGRPRD*BABS.VGB110,VGPJ02.VGB110 
+@COPY,A    VGRPRD*BABS.VGB502,VGPJ02.VGB502 
+@COPY,A    VPRD*BABS.VGB191,VGPJ02.VGB191   
+@COPY,A    VPRD*BABS.VGB192,VGPJ02.VGB192   
+@COPY,A    VPRD*BABS.VGB193,VGPJ02.VGB193   
+@COPY,A    VPRD*BABS.VGB194,VGPJ02.VGB194   
+@COPY,A    VPRD*BABS.VGB195,VGPJ02.VGB195   
+@COPY,A    VPRD*BABS.VGB222,VGPJ02.VGB222   
+@COPY,A    VPRD*BABS.VGB235,VGPJ02.VGB235   
+@COPY,A    VPRD*BABS.VGB240,VGPJ02.VGB240   
+@COPY,A    VPRD*BABS.VGB241,VGPJ02.VGB241   
+@TIME   
+@ . 
+@LAB000: MSG,N 000. PROCEDURE DE RESTART AUTOMATIQUE.   
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB010: MSG 010. VGB192 : SAUV. DONNEES VGP AVANT RED. TOT.   VGB192   
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB010  
+@ . 
+@ERS       TPF$.
+@.    Output
+@DELETE,C  VGPJ02*IMP-VGB192.   
+@ASG,UP    VGPJ02*IMP-VGB192.,F///10000 
+@USE       LISTE,VGPJ02*IMP-VGB192. 
+@XQT       VGPJ02.VGB192
+@ERS       TPF$.
+@FREE      VGPJ02*IMP-VGB192.   
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB020: MSG 020. VGB193 : SAUV. DONNEES VGP APRES RED. TOT.   VGB193   
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB020  
+@ . 
+@ERS       TPF$.
+@.    Output
+@DELETE,C  VGPJ02*IMP-VGB193.   
+@ASG,UP    VGPJ02*IMP-VGB193.,F///10000 
+@USE       LISTE,VGPJ02*IMP-VGB193. 
+@XQT       VGPJ02.VGB193
+@ERS       TPF$.
+@FREE      VGPJ02*IMP-VGB193.   
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB030: MSG,N 030. CALCUL GARANTIES MINIMALES               VGB191 
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB030  
+@ERS       TPF$.
+@DELETE,C  I024VGB191EX.
+@ASG,UP    I024VGB191EX.,F/0/POS/4000   
+@USE       EXANO,I024VGB191EX.  
+@DELETE,C  VGPJ02*P-VGB191-CTL. 
+@ASG,UP    VGPJ02*P-VGB191-CTL.,F///10000   
+@USE       LISTE,VGPJ02*P-VGB191-CTL.   
+@DELETE,C  VGPJ02*TABLEAU.  
+@ASG,UP    VGPJ02*TABLEAU.,F///10000
+@USE       PRT025-INT,VGPJ02*TABLEAU.   
+@DELETE,C  VGPJ02*TAB01XLS. 
+@ASG,UP    VGPJ02*TAB01XLS.,F/0/POS/4000
+@USE       EX125A-INT,VGPJ02*TAB01XLS.  
+@DELETE,C  VGPJ02*TAB02XLS. 
+@ASG,UP    VGPJ02*TAB02XLS.,F/0/POS/4000
+@USE       EX125B-INT,VGPJ02*TAB02XLS.  
+@ASG,A     F005TABSDF.  
+@USE       IINDEX,F005TABSDF.   
+@XQT       VGPJ02.VGB191
+@FREE      VGPJ02*P-VGB191-CTL. 
+@FREE      VGPJ02*TABLEAU.  
+@FREE      I024VGB191EX.
+@FREE      VGPJ02*TAB01XLS. 
+@FREE      VGPJ02*TAB02XLS. 
+@FREE      F005TABSDF.  
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB040: MSG,N 040. Formatage pour EXCEL
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB040  
+@ERS       TPF$.
+@ASG,A    I024VGB191EX. 
+@USE      FILEIN,I024VGB191EX.  
+@ . 
+@DELETE,C I02UNLGM24EX. 
+@CAT,P    I02UNLGM24EX.,F/0/POS/4000
+@ASG,A    I02UNLGM24EX. 
+@USE      FILEOUT,I02UNLGM24EX. 
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  150   
+COL 1,8,,''N° groupe''  
+COL 9,6,,''Radical police'' 
+COL 15,1,,''Suffixe police''
+COL 16,8,AAAAMMJJ,''Date GMx''  
+COL 24,8,AAAAMMJJ,''Date CTRx'' 
+COL 32,8,AAAAMMJJ,''Date GM0''  
+COL 40,8,AAAAMMJJ,''Date dernière màj alpha''   
+COL 48,8,,''Groupe origine''
+COL 56,1,,''Code origine DA''   
+COL 57,8,AAAAMMJJ,''Date affiliation''  
+COL 65,8,AAAAMMJJ,''Date effet police'' 
+COL 73,8,AAAAMMJJ,''Date fin prime''
+COL 81,8,AAAAMMJJ,''Date terme contrat''
+COL 89,1,,''Origine contrat''   
+COL 90,2,,''Type règlement groupe'' 
+COL 92,1,,''Code rétroactif''   
+COL 93,1,,''Code message''  
+COL 94,5,,''N° message''
+COL 99,5,,''N° message''
+COL 104,5,,''N° message''   
+COL 109,5,,''N° message''   
+COL 114,5,,''N° message''   
+COL 119,5,,''N° message''   
+COL 124,5,,''N° message''   
+COL 129,5,,''N° message''   
+COL 134,5,,''N° message''   
+COL 139,5,,''N° message''   
+TABUL '';'' 
+@EOF
+@FREE   I024VGB191EX.   
+@FREE   I02UNLGM24EX.   
+@ERS       TPF$.
+@ . 
+@LAB042: MSG 042 TEST EXISTENCE FICHIER EXCEL TAB01XLS-SYB003   
+@ . ---------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB042  
+@ADD      ESYS$AF*COM.SYB003
+FILE      VGPJ02*TAB01XLS.  
+LABEL     LAB044
+@EOF
+@ . 
+@FREE     VGPJ02*TAB01XLS.  
+@TIME   
+@ . 
+@LAB043: MSG 043. CREATION FICHIER EXCEL INTERV. (VIA VGU125)   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB043  
+@ . 
+@ASG,A     VGPJ02*TAB01XLS. 
+@USE       FILEIN,VGPJ02*TAB01XLS.  
+@DELETE,C  VGPJ02*I001TABXLS1.  
+@CAT,P     VGPJ02*I001TABXLS1,F/0/POS/4000  
+@ASG,A     VGPJ02*I001TABXLS1.  
+@USE       FILEOUT,VGPJ02*I001TABXLS1.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  600   
+COL 1,9,,''Num Ligne''  
+COL 10,6,,''Rad Pol''   
+COL 16,1,,''Suf Pol''   
+COL 17,8,,''Groupe''
+COL 25,3,,''Sit Grp''   
+COL 28,3,,''n1 a n''
+COL 31,3,,''r0 a r''
+COL 34,5,,''GMo a GMr'' 
+COL 39,8,AAAAMMJJ,''Tr1=D(n)''  
+COL 47,8,AAAAMMJJ,''Tr2=D(n+1)-1j'' 
+COL 55,3,,''I=D(n+1)-D(n)'' 
+COL 58,3,,''Mois Prime=I(n+1)'' 
+COL 61,3,,''Mois Risque''   
+COL 64,3,,''Mois Ref''  
+COL 67,8,AAAAMMJJ,''Date GMr''  
+COL 75,8,AAAAMMJJ,''Date PRr''  
+COL 83,8,AAAAMMJJ,''Dt Don.Couche Deb'' 
+COL 91,8,AAAAMMJJ,''Dt Don.Couche Fin'' 
+COL 99,8,AAAAMMJJ,''Date Pivot new''
+COL 107,5,V2,''Pivot new''  
+COL 112,8,AAAAMMJJ,''Date Pivot Old''   
+COL 120,5,V2,''Pivot old''  
+COL 125,5,V2,''Ind.Cal.''   
+COL 130,12,MNT,''CD new''   
+COL 142,12,MNT,''V new''
+COL 154,18,V9,''TAC new''   
+COL 172,12,MNT,''PRisque new''  
+COL 184,12,MNT,''PAC new''  
+COL 196,12,MNT,''PAI new''  
+COL 208,12,MNT,''PUC new''  
+COL 220,12,MNT,''PUI new''  
+COL 232,12,MNT,''P new''
+COL 244,8,V5,''Charg.Moyen new''
+COL 252,8,V5,''Charg.Contrat new''  
+COL 260,12,MNT,''CD old''   
+COL 272,12,MNT,''V old''
+COL 284,18,V9,''TAC old''   
+COL 302,12,MNT,''PRisque old''  
+COL 314,12,MNT,''PAC old''  
+COL 326,12,MNT,''PAI old''  
+COL 338,12,MNT,''PUC old''  
+COL 350,12,MNT,''PUI old''  
+COL 362,12,MNT,''P old''
+COL 374,14,V5,''Charg.Moyen old''   
+COL 388,14,V5,''Charg.Contrat old'' 
+COL 402,12,MNT,''GMcap.''   
+COL 414,12,MNT,''GMind.''   
+COL 426,75,,''Vide''
+COL 501,8,,''Nom Pgm''  
+COL 568,12,,''Nom Run'' 
+COL 509,1,,''Cd Tarif'' 
+COL 510,8,AAAAMMJJ,''Dt Terme Contrat'' 
+COL 518,4,JJMM,''Ech.Reserve''  
+COL 522,1,ALPHAG,''Periodicite''
+COL 523,2,,''Nb Mois''  
+COL 525,1,ALPHAG,''Mod Paiement''   
+COL 526,8,AAAAMMJJ,''Dt Der.GMo''   
+COL 534,8,AAAAMMJJ,''Dt Dem.GMx''   
+COL 542,8,AAAAMMJJ,''Dt Affiliation''   
+COL 550,8,AAAAMMJJ,''Dt Fin Prime'' 
+COL 558,2,,''Formule Utilisee'' 
+COL 560,8,AAAAMMJJ,''Dt Sortie''
+COL 580,20,,'' ''   
+TABUL '';'' 
+@EOF
+@FREE      VGPJ02*TAB01XLS. 
+@FREE      VGPJ02*I001TABXLS1.  
+@TIME   
+@ . 
+@LAB044: MSG 044 TEST EXISTENCE FICHIER EXCEL TAB02XLS-SYB003   
+@ . ---------------------------------------------------------   
+@ADD       SYS$*RUNS.REPRISE
+LAB044  
+@ADD      ESYS$AF*COM.SYB003
+FILE      VGPJ02*TAB02XLS.  
+LABEL     LAB050
+@EOF
+@ . 
+@FREE      VGPJ02*TAB02XLS. 
+@TIME   
+@ . 
+@LAB045: MSG 045. CREATION FICHIER EXCEL COUCHES GM 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB045  
+@ . 
+@ASG,A     VGPJ02*TAB02XLS. 
+@USE       FILEIN,VGPJ02*TAB02XLS.  
+@DELETE,C  VGPJ02*I002TABXLS2.  
+@CAT,P     VGPJ02*I002TABXLS2,F/0/POS/4000  
+@ASG,A     VGPJ02*I002TABXLS2.  
+@USE       FILEOUT,VGPJ02*I002TABXLS2.  
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG  600   
+COL 1,9,,''Num Ligne''  
+COL 10,6,,''Rad Pol''   
+COL 16,1,,''Suf Pol''   
+COL 17,8,,''Groupe''
+COL 25,3,,''Sit Grp''   
+COL 28,3,,''n1 a n''
+COL 31,3,,''r0 a r''
+COL 34,5,,''GMo a GMr'' 
+COL 39,8,AAAAMMJJ,''Tr1=D(n)''  
+COL 47,8,AAAAMMJJ,''Tr2=D(n+1)-1j'' 
+COL 55,3,,''I=D(n+1)-D(n)'' 
+COL 58,3,,''Mois Prime=I(n+1)'' 
+COL 61,3,,''Mois Risque''   
+COL 64,3,,''Mois Ref''  
+COL 67,8,AAAAMMJJ,''Date GMr''  
+COL 75,8,AAAAMMJJ,''Date PRr''  
+COL 83,8,AAAAMMJJ,''Dt Don.Couche Deb'' 
+COL 91,8,AAAAMMJJ,''Dt Don.Couche Fin'' 
+COL 99,8,AAAAMMJJ,''Date Pivot new''
+COL 107,5,V2,''Pivot new''  
+COL 112,8,AAAAMMJJ,''Date Pivot Old''   
+COL 120,5,V2,''Pivot old''  
+COL 125,5,V2,''Ind.Cal.''   
+COL 130,12,MNT,''CD new''   
+COL 142,12,MNT,''V new''
+COL 154,18,V9,''TAC new''   
+COL 172,12,MNT,''PRisque new''  
+COL 184,12,MNT,''PAC new''  
+COL 196,12,MNT,''PAI new''  
+COL 208,12,MNT,''PUC new''  
+COL 220,12,MNT,''PUI new''  
+COL 232,12,MNT,''P new''
+COL 244,8,V5,''Charg.Moyen new''
+COL 252,8,V5,''Charg.Contrat new''  
+COL 260,12,MNT,''CD old''   
+COL 272,12,MNT,''V old''
+COL 284,18,V9,''TAC old''   
+COL 302,12,MNT,''PRisque old''  
+COL 314,12,MNT,''PAC old''  
+COL 326,12,MNT,''PAI old''  
+COL 338,12,MNT,''PUC old''  
+COL 350,12,MNT,''PUI old''  
+COL 362,12,MNT,''P old''
+COL 374,14,V5,''Charg.Moyen old''   
+COL 388,14,V5,''Charg.Contrat old'' 
+COL 402,12,MNT,''GMcap.''   
+COL 414,12,MNT,''GMind.''   
+COL 426,8,AAAAMMJJ,''Date debut taux''  
+COL 434,8,AAAAMMJJ,''Date fin taux''
+COL 442,8,V5,''Taux max ref''   
+COL 450,8,V5,''Taux cor ref''   
+COL 458,8,V5,''Taux cha ref''   
+COL 466,8,V5,''Prorata T''  
+COL 474,8,V5,''Prorata OLD T''  
+COL 482,6,V5,''Char Cou''   
+COL 488,6,V5,''Char Cou Old''   
+COL 494,6,V5,''Cor Cou''
+COL 500,1,,'' ''
+COL 501,8,,''Nom Pgm''  
+COL 568,12,,''Nom Run'' 
+COL 509,1,,''Cd Tarif'' 
+COL 510,8,AAAAMMJJ,''Dt Terme Contrat'' 
+COL 518,4,JJMM,''Ech.Reserve''  
+COL 522,1,ALPHAG,''Periodicite''
+COL 523,2,,''Nb Mois''  
+COL 525,1,ALPHAG,''Mod Paiement''   
+COL 526,8,AAAAMMJJ,''Dt Der.GMo''   
+COL 534,8,AAAAMMJJ,''Dt Dem.GMx''   
+COL 542,8,AAAAMMJJ,''Dt Affiliation''   
+COL 550,8,AAAAMMJJ,''Dt Fin Prime'' 
+COL 558,2,,''Formule Utilisee'' 
+COL 560,8,AAAAMMJJ,''Dt Sortie''
+COL 580,20,,'' ''   
+TABUL '';'' 
+@EOF
+@FREE      VGPJ02*TAB02XLS. 
+@FREE      VGPJ02*I002TABXLS2.  
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB050: MSG,N 050. Tableau de Financement : unload TMP_SEQ_RDM-VGB194  
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB050  
+@ERS       TPF$.
+@DELETE,CN I002UNLTMP.  
+@ASG,UP    I002UNLTMP.,F/1/POS/4000 
+@USE       OAVENANT,I002UNLTMP. 
+@XQT       VGPJ02.VGB194
+@FREE      I002UNLTMP.  
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB060: MSG,N 060. Tri du FICHIER UNLOADE.                      - SORT 
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB060  
+@ERS       TPF$.
+@ASG,A     I002UNLTMP.  
+@USE       INA,I002UNLTMP.  
+@DELETE,CN I002UNLTMPT. 
+@ASG,UP    I002UNLTMPT.,F/0/POS/4000
+@USE       OUT,I002UNLTMPT. 
+@SORT,ES
+FILEIN=INA,F       BLOCK=10 
+FILEOUT=OUT,F      BLOCK=10 
+KEY=399,6,CH,A,1   . Initiales  
+KEY=39,8,CH,A,2    . No Groupe tab fin  
+KEY=16,8,CH,A,3    . Date GMx   
+KEY=192,1,CH,A,4   . Cd Dormeur (A/D)   
+KEY=33,6,CH,A,5    . No Assuré  
+KEY=208,7,CH,A,6   . Radical
+RSZ=500 
+RECORD=10   
+@EOF
+@TIME   
+@ . 
+@ . =============================================*  
+@LAB070: MSG,N 070. Dispatcher impressions - BABA   
+@ . =============================================*  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB070  
+@ERS       TPF$.
+@ASG,A     I002UNLTMPT. 
+@DELETE,C  I002UNLTMP1. 
+@CAT,P     I002UNLTMP1.,F/0/POS/4000
+@ASG,AX    I002UNLTMP1. 
+@DELETE,C  I002UNLTMP2. 
+@CAT,P     I002UNLTMP2.,F/0/POS/4000
+@ASG,AX    I002UNLTMP2. 
+@SSG,IA    *UTILIT.BABA/ASCII   
+SGS 
+INPUT      I002UNLTMPT,500,10   
+OUTPUT     I002UNLTMP2,500,10   I002UNLTMP1,500,10  
+KEYS   R   405,17,VIECOM2   
+ASCII   
+@EOF
+@XQT       TPF$.BABA
+@ERS       TPF$.
+@FREE      I002UNLTMPT. 
+@FREE      I002UNLTMP1. 
+@FREE      I002UNLTMP2. 
+@TIME   
+@ . 
+@ . ==================================================================* 
+@LAB100: MSG,N 100. Tableau de Financ. (1) : màj input tab. fin-VGB195  
+@ . ==================================================================* 
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB100  
+@ERS       TPF$.
+@ASG,A     I002UNLTMP1. 
+@USE       IAVENANT,I002UNLTMP1.
+@DELETE,CN I002TABFIN1. 
+@ASG,UP    I002TABFIN1.,F/1/POS/4000
+@USE       OAVENANT,I002TABFIN1.
+@DELETE,C  VGPJ02*P-VGB195-AN1. 
+@ASG,UP    VGPJ02*P-VGB195-AN1.,F///10000   
+@USE       OREJET,VGPJ02*P-VGB195-AN1.  
+@XQT       VGPJ02.VGB195
+@FREE      I002UNLTMP1. 
+@FREE      I002TABFIN1. 
+@FREE      VGPJ02*P-VGB195-AN1. 
+@TIME   
+@ . 
+@ . ==================================================================* 
+@LAB110: MSG,N 110. Tableau de Financ. (2) : màj input tab. fin-VGB195  
+@ . ==================================================================* 
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB110  
+@ERS       TPF$.
+@ASG,A     I002UNLTMP2. 
+@USE       IAVENANT,I002UNLTMP2.
+@DELETE,CN I002TABFIN2. 
+@ASG,UP    I002TABFIN2.,F/1/POS/4000
+@USE       OAVENANT,I002TABFIN2.
+@DELETE,C  VGPJ02*P-VGB195-AN2. 
+@ASG,UP    VGPJ02*P-VGB195-AN2.,F///10000   
+@USE       OREJET,VGPJ02*P-VGB195-AN2.  
+@XQT       VGPJ02.VGB195
+@FREE      I002UNLTMP2. 
+@FREE      I002TABFIN2. 
+@FREE      VGPJ02*P-VGB195-AN2. 
+@TIME   
+@ . 
+@ . *    ------------------------------------------------------------*  
+@LAB120: MSG 120. Tableau de Financement : IMPRESSION (1)    - VGB222   
+@ . *    ------------------------------------------------------------*  
+@ADD SYS$*RUNS.REPRISE  
+LAB120  
+@ASG,A     I002TABFIN1. 
+@USE       IAVENANT,I002TABFIN1.
+@ . 
+@DELETE,C  VGPJ02*P-VGB222-TA1. 
+@ASG,UP    VGPJ02*P-VGB222-TA1.,F///10000   
+@USE       OTABFIN,VGPJ02*P-VGB222-TA1  
+@DELETE,C  I002VG222AV1.
+@ASG,UP    I002VG222AV1.,F///10000  
+@USE       OAVENANT,I002VG222AV1.   
+@ . 
+@XQT       VGPJ02.VGB222
+@ADD       F999CONTROLE.VGPJ02  
+@FREE      VGPJ02*P-VGB222-TA1. 
+@FREE      I002TABFIN1. 
+@FREE      I002VG222AV1.
+@TIME   
+@ . 
+@ . *    ------------------------------------------------------------*  
+@LAB130: MSG 130. Tableau de Financement : IMPRESSION (2)    - VGB222   
+@ . *    ------------------------------------------------------------*  
+@ADD SYS$*RUNS.REPRISE  
+LAB130  
+@ASG,A     I002TABFIN2. 
+@USE       IAVENANT,I002TABFIN2.
+@ . 
+@DELETE,C  VGPJ02*P-VGB222-TA2. 
+@ASG,UP    VGPJ02*P-VGB222-TA2.,F///10000   
+@USE       OTABFIN,VGPJ02*P-VGB222-TA2  
+@DELETE,C  I002VG222AV2.
+@ASG,UP    I002VG222AV2.,F///10000  
+@USE       OAVENANT,I002VG222AV2.   
+@ . 
+@XQT       VGPJ02.VGB222
+@ADD       F999CONTROLE.VGPJ02  
+@FREE      VGPJ02*P-VGB222-TA2. 
+@FREE      I002TABFIN2. 
+@FREE      I002VG222AV2.
+@TIME   
+@ . 
+@ . =================================================*  
+@LAB140: MSG,N 140. Fusion fichiers pour EXCEL - SORT   
+@ . =================================================*  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB140  
+@ERS       TPF$.
+@ASG,A     I002VG222AV1.
+@USE       IN1,I002VG222AV1.
+@ASG,A     I002VG222AV2.
+@USE       IN2,I002VG222AV2.
+@DELETE,CN I002VG222AVN.
+@ASG,UP    I002VG222AVN.,F/0/POS/4000   
+@USE       OUT,I002VG222AVN.
+@SORT,ES
+FILEIN=IN1,F       BLOCK=10 
+FILEIN=IN2,F       BLOCK=10 
+FILEOUT=OUT,F      BLOCK=10 
+KEY=399,6,CH,A,1   . Initiales  
+KEY=39,8,CH,A,2    . No Groupe tab fin  
+KEY=16,8,CH,A,3    . Date GMx   
+KEY=192,1,CH,A,4   . Cd Dormeur (A/D)   
+KEY=33,6,CH,A,5    . No Assuré  
+KEY=208,7,CH,A,6   . Radical
+RSZ=500 
+RECORD=10   
+@EOF
+@TIME   
+@ . 
+@ . *    ------------------------------------------------------------*  
+@LAB150: MSG 150. FORMATAGES EXCEL (TRANSEXCEL) : tableau financement   
+@ . *    ------------------------------------------------------------*  
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB150  
+@ASG,A     I002VG222AVN.
+@USE       FILEIN,I002VG222AVN. 
+@ . 
+@DELETE,C  I002FINPC.   
+@CAT,P     I002FINPC.,F/0/POS/4000  
+@ASG,A     I002FINPC.   
+@USE       FILEOUT,I002FINPC.   
+@ . 
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 500
+COL 399,05,,''User''
+COL 001,08,,''N° de groupe''
+COL 009,01,,''Catégorie''   
+COL 010,06,,''Radical police''  
+COL 016,08,AAAAMMJJ,''Date effet sit''  
+COL 024,01,,''Origine'' 
+COL 025,08,,''N° Groupe Avenant''   
+COL 039,08,,''N° de groupe''
+COL 047,96,,''Organisateur''
+COL 191,01,,''Rl''  
+COL 192,01,,''Code Dormeur''
+COL 193,02,,''Type de groupe''  
+COL 195,08,,''Groupe Origine''  
+COL 203,02,,''Type réglement''  
+COL 205,02,,''Statut prof'' 
+COL 207,01,,''Code financement pat''
+COL 208,07,,''Contrat'' 
+COL 215,01,,''Code prime''  
+COL 033,06,,''N° Assuré''   
+COL 216,32,,''Nom assuré''  
+COL 248,08,AAAAMMJJ,''Date naissance''  
+COL 256,01,,''Sexe''
+COL 257,12,MNT,''C.Pers - GM''  
+COL 269,12,MNT,''C.Pers - R.AD''
+COL 281,12,MNT,''C.Pers - R.PB''
+COL 293,12,MNT,''C.Pers - R.PBF''   
+COL 305,12,MNT,''C.Pers - A Financer''  
+COL 353,12,MNT,''C.Pat - GM''   
+COL 341,12,MNT,''C.Pat - R.AD'' 
+COL 329,12,MNT,''C.Pat - R.PB'' 
+COL 317,12,MNT,''C.Pat - R.PBF''
+COL 365,12,MNT,''C.Pat - A Financer''   
+COL 377,12,MNT,''Total à financer'' 
+COL 389,01,,''Type de ligne''   
+@EOF
+@ . 
+@FREE      I002FINPC.   
+@ERS       TPF$.
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB160: MSG,N 160. Unload TMP_SEQ_RDM (Réduction totale)   
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB160  
+@ . 
+@DELETE,C  VGPJ02*TMPSEQRDM.
+@CAT,P     VGPJ02*TMPSEQRDM.,F/0/POS/4000   
+@ASG,A     VGPJ02*TMPSEQRDM.
+@XQT,E SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ UDSMSG;
+LOCK TABLE AFLINC.TMP_SEQ_RDM:production IN PROTECTED RETRIEVAL MODE;   
+UNLOAD TO FILE "VGPJ02*TMPSEQRDM." USING IO 
+SELECT * FROM AFLINC.TMP_SEQ_RDM:production 
+         WHERE MR_PRG_MAJ='VGB108'  
+         AND   LEFT(TL_OCR,1) = 'C' 
+         AND   MR_RUN_MAJ='VGPJ02'  
+FORMAT INTERNAL;
+UNLOCK AFLINC.TMP_SEQ_RDM:production;   
+END THREAD; 
+@FREE      VGPJ02*TMPSEQRDM.
+@TIME   
+@TIME   
+@ . 
+@LAB170: MSG 170. Sauvetage pour SIGEDIS
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB170  
+@ASG,AX    VGPJ02*TMPSEQRDM.
+@USE       INA,VGPJ02*TMPSEQRDM.
+@ASG,AX    F001TSRDM.   
+@USE       INB,F001TSRDM.   
+@ASG,CP    F001TSRDM(+1),F/0/POS/4000   
+@USE       OUT,F001TSRDM(+1).   
+@SORT,ES
+COPY
+FILEIN=INB,F           BLOCK=10 
+FILEOUT=OUT,F          BLOCK=10 
+KEY=3055,7,CH,A,1                .Date création 
+RSZ=3069
+RECORD=40   
+@EOF
+@TIME   
+@ . 
+@LAB200: MSG 200. Tri F001TSRDM.
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB200  
+@ASG,AX    VGPJ02*TMPSEQRDM.
+@USE       INA,VGPJ02*TMPSEQRDM.
+@DELETE,C  I001TSRDM.   
+@CAT,P     I001TSRDM.,F/0/POS/4000  
+@ASG,A     I001TSRDM.   
+@USE       OUT,I001TSRDM.   
+@SORT,ES
+FILEIN=INA,F           BLOCK=10 
+FILEOUT=OUT,F          BLOCK=10 
+KEY=414,8,CH,A,1               .GROUPE ORIGINE  
+KEY=430,6,CH,A,2               .RADICAL POLICE  
+KEY=314,8,CH,D,3               .DATE JOUR CALCUL
+DELDUPS 
+RSZ=3069
+ACCEPT=322,8,ASC,GE,20120101,AND
+ACCEPT=346,1,ASC,E,3
+RECORD=40   
+@EOF
+@TIME   
+@ . 
+@LAB220: MSG 220. Màj table réduction totale vie groupe  VGD022 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB220  
+@ . 
+@ASG,A      I001TSRDM.  
+@USE        TSR,I001TSRDM.  
+@XQT        VGPJ02.VGB235   
+@ . 
+@FREE       I001TSRDM.  
+@TIME   
+@ . 
+@LAB230: MSG 230. Màj table envoi SIGEDIS  VGD023 (accueil) 
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB230  
+@ . 
+@ASG,A      VGPJ02*TMPSEQRDM.   
+@USE        TSR,VGPJ02*TMPSEQRDM.   
+@XQT        VGPJ02.VGB240   
+@ . 
+@FREE       VGPJ02*TMPSEQRDM.   
+@TIME   
+@ . 
+@LAB240: MSG 240. Création TfrtIn --> structure accueil (VGD024)
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ . 
+@ASG,A      I001TSRDM.  
+@USE        TSR,I001TSRDM.  
+@XQT        VGPJ02.VGB241   
+@ . 
+@FREE       I001TSRDM.  
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB250: MSG,N 250. CREATION FICHIER EXSTREAM DOC. REDUCTION TOTALE 
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB250  
+@ . 
+@DELETE,C    I002VGB502EX.  
+@CAT,P       I002VGB502EX.,F/1/POS/4000 
+@ASG,AX      I002VGB502EX.  
+@USE DOC-OUT,I002VGB502EX.  
+@XQT  VGPJ02.VGB502 
+@FREE        I002VGB502EX.  
+@TIME   
+@ . 
+@ . ======================================================  
+@LAB310: MSG,N 310. NETTOYAGE DE LA TABLE TMP-SEQ-RDM.  
+@ . ======================================================  
+@ . 
+@ADD     SYS$*RUNS.REPRISE  
+LAB310  
+@ . 
+@DELETE,C  I02TMPSEQRDM.
+@CAT,P     I02TMPSEQRDM.,F/0/POS/4000   
+@ASG,A     I02TMPSEQRDM.
+@USE       TRACE,I02TMPSEQRDM.  
+@XQT       VGPJ02.VGB110
+@FREE      I02TMPSEQRDM.
+@TIME   
+@ . 
+@ . *    -------------------------------------------------------------* 
+@LAB320: MSG 320. Envois INTRANET.  
+@ . *    -------------------------------------------------------------* 
+@ADD SYS$*RUNS.REPRISE  
+LAB320  
+@ . 
+@ . 
+@ADD  F999TRANSF.VGPJ02/2200PC  
+@ . 
+@ERS       TPF$.
+@TIME   
+@ . 
+@LAB750: MSG 750. SAUVETAGE DES FICHIERS.   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB750  
+@ADD       SYS$*RUNS.FASDIR 
+@TIME   
+@ . 
+@LAB760: MSG 760. IMPRESSION DES FICHIER VIA F999SYM
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB760  
+@ADD   F999SYM.VGPJ02   
+@TIME   
+@ . 
+@LAB770: MSG 770. DELETE DES FICHIERS   
+@ . 
+@ADD SYS$*RUNS.REPRISE  
+LAB770  
+@CYCLE,C   F001TSRDM.,3 
+@CYCLE,C   F001TSRDM.,32
+@DELETE,C  VGPJ02*TMPSEQRDM.
+@DELETE,C  I024VGB191EX.
+@DELETE,C  I02UNLGM24EX.
+@DELETE,C  I002UNLTMP.  
+@DELETE,C  I002UNLTMPT. 
+@DELETE,C  I002UNLTMP1. 
+@DELETE,C  I002UNLTMP2. 
+@DELETE,C  I002TABFIN1. 
+@DELETE,C  I002TABFIN2. 
+@DELETE,C  I002VG222AV1.
+@DELETE,C  I002VG222AV2.
+@DELETE,C  I002VG222AVN.
+@DELETE,C  I002FINPC.   
+@DELETE,C  I002VGB502EX.
+@DELETE,C  I02TMPSEQRDM.
+@DELETE,C  I001TSRDM.   
+@DELETE,C  VGPJ02*TAB01XLS. 
+@DELETE,C  VGPJ02*TAB02XLS. 
+@DELETE,C  VGPJ02*I001TABXLS1.  
+@DELETE,C  VGPJ02*I002TABXLS2.  
+@TIME   
+@ . ======================================================  
+@LAB777: MSG,N 777. DELETE DU FICHIER DE REPRISE
+@ . ======================================================  
+@ . 
+@ADD SYS$*RUNS.REPDEL   
+@TIME   
+@MSG,N     *** LE RUN VGPJ02 S'EST BIEN TERMINE *** 
+@ . 
+@FREE      VGPJ02   
+@QUAL,R 
+@FIN

@@ -1,0 +1,446 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=TABANASCII,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=TABAN,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=TABANASCII,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=TABANASCII
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-10-12 11:10
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=0
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=TABAN,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=TABAN
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  => PROGRAM-ID. 'TABAN'.
+  2009-01-01 12:00  => AUTHOR. BOURDEAUD HUY PIERRE.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER.     UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER.     UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     DECIMAL-POINT IS COMMA.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT   IMP   ASSIGN  TO  PRINTER.
+  2009-01-01 12:00  =>     SELECT  TAPE1  ASSIGN  TO
+  2009-01-01 12:00  =>         DISC ECL-TAPE1.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  IMP   LABEL RECORD  OMITTED
+  2009-01-01 12:00  =>              LINAGE IS 63
+  2009-01-01 12:00  =>              LINES AT TOP 6
+  2009-01-01 12:00  =>              LINES AT BOTTOM 3
+  2009-01-01 12:00  =>           DATA  RECORD  IS  LIGNE.
+  2009-01-01 12:00  => 01  LIGNE   PIC  X(132) DISP-1.
+  2009-01-01 12:00  => FD  TAPE1  LABEL RECORD  STANDARD
+  2009-01-01 12:00  =>            BLOCK  CONTAINS  1  RECORDS
+  2009-01-01 12:00  =>       DATA RECORD IS RECE1  REC1.
+  2009-01-01 12:00  => 01  RECE1  PIC  X(80).
+  2009-01-01 12:00  => 01  CCART  PIC 9.
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 77  NB-LUS   PIC   9(10) COMP VALUE  0.
+  2009-01-01 12:00  => 77  FIRS     PIC   9(10) COMP VALUE  0.
+  2009-01-01 12:00  => 01  ZONE-WORK.
+  2009-01-01 12:00  => 01  SUB-TOTAL.
+  2009-01-01 12:00  => 01  TOTAL.
+  2009-01-01 12:00  => 01  W-ZERO.
+  2009-01-01 12:00  => 01  TIT-TOTAL.
+  2009-01-01 12:00  =>     02  FILLER  PIC  X(16)  VALUE  '***TABAN FIN ***'.
+  2009-01-01 12:00  =>     02  FILLER  PIC  X(15)  VALUE  ' NB.ENREG.LUS= '.
+  2009-01-01 12:00  =>     02  P-LUS   PIC  Z(8)9.
+  2009-01-01 12:00  => 01  LIGNES-SUB.
+  2009-01-01 12:00  => 01  ADETAIL.
+  2009-01-01 12:00  => 01  CDTOAF.
+  2009-01-01 12:00  =>     03  CDTOAF-PRM-ENE.
+  2009-01-01 12:00  =>         05  CDTOAF-DT-ENE.
+  2009-01-01 12:00  =>             07  CDTOAF-AA-ENE.
+  2009-01-01 12:00  =>                 09  CDTOAF-A1-ENE       PIC X(01).
+  2009-01-01 12:00  =>                 09  CDTOAF-A2-ENE       PIC X(01).
+  2009-01-01 12:00  =>             07  CDTOAF-MM-ENE           PIC X(02).
+  2009-01-01 12:00  =>             07  CDTOAF-JJ-ENE           PIC X(02).
+  2009-01-01 12:00  =>     03  CDTOAF-PRM-SRT.
+  2009-01-01 12:00  =>         05  CDTOAF-DT-SRT-9             PIC 9(08).
+  2009-01-01 12:00  =>         05  CDTOAF-DT-SRT REDEFINES CDTOAF-DT-SRT-9.
+  2009-01-01 12:00  =>             07  CDTOAF-SSAA-SRT         PIC X(04).
+  2009-01-01 12:00  =>             07  CDTOAF-SSAA-SRT-RDF REDEFINES CDTOAF-SSAA-SRT.
+  2009-01-01 12:00  =>                09  CDTOAF-SS-SRT        PIC X(02).
+  2009-01-01 12:00  =>                09  CDTOAF-AA-SRT.
+  2009-01-01 12:00  =>                    11  CDTOAF-A1-SRT    PIC X(01).
+  2009-01-01 12:00  =>                    11  CDTOAF-A2-SRT    PIC X(01).
+  2009-01-01 12:00  =>             07  CDTOAF-MM-SRT           PIC X(02).
+  2009-01-01 12:00  =>             07  CDTOAF-JJ-SRT           PIC X(02).
+  2009-01-01 12:00  =>         05  CDTOAF-DTE-SRT REDEFINES CDTOAF-DT-SRT-9.
+  2009-01-01 12:00  =>             07  CDTOAF-SSS-SRT          PIC X(02).
+  2009-01-01 12:00  =>             07  CDTOAF-DT6-SRT          PIC X(06).
+  2009-01-01 12:00  =>         05  CDTOAF-DTE2-SRT REDEFINES CDTOAF-DT-SRT-9.
+  2009-01-01 12:00  =>             07  CDTOAF-SS2-SRT          PIC X(02).
+  2009-01-01 12:00  =>             07  CDTOAF-AAMM-SRT         PIC X(04).
+  2009-01-01 12:00  =>             07  CDTOAF-JJ2-SRT          PIC X(02).
+  2009-01-01 12:00  => 01  EUW002.
+  2009-01-01 12:00  =>     03  WS-PTR-ENE.
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-ENE.
+  2009-01-01 12:00  =>             07  MT-ENE              PIC S9(17).
+  2009-01-01 12:00  =>             07  MT-ENE-SGN          PIC X(01).
+  2009-01-01 12:00  =>             07  MT-ENE-CHI          PIC 9(02).
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-SRT.
+  2009-01-01 12:00  =>             07  LG-MAX-MON-SRT      PIC 9(03).
+  2009-01-01 12:00  =>             07  CD-FMT-MON-SRT      PIC X(01).
+  2009-01-01 12:00  =>             07  WS-PTR-FAC-MON-SRT.
+  2009-01-01 12:00  =>                 09  FL-IMP-APO      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-EUR      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-BEF      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-PLT-SGN      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-TRD-SGN      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-SGN-FIX      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-SGN-VUE      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-CAD-PRC      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-CAD-CNV      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-PNT      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-000          PIC X(01).
+  2009-01-01 12:00  =>                 09  CD-DET-MON      PIC X(01).
+  2009-01-01 12:00  =>                 09  FILLER          PIC X(19).
+  2009-01-01 12:00  =>     03  WS-PTR-SRT.
+  2009-01-01 12:00  =>         05  WS-MON-SRT-001.
+  2009-01-01 12:00  =>             07  MT-SRT              PIC X(100).
+  2009-01-01 12:00  =>         05  WS-MON-SRT-002.
+  2009-01-01 12:00  =>             07  MT-SRT-PRC          PIC X(50).
+  2009-01-01 12:00  =>             07  MT-SRT-CNV          PIC X(50).
+  2009-01-01 12:00  =>             07  TL-PTH-GCH          PIC X(01).
+  2009-01-01 12:00  =>             07  TL-PTH-DRT          PIC X(01).
+  2009-01-01 12:00  =>         05  LG-MON-SRT              PIC 9(02).
+  2009-01-01 12:00  =>         05  LB-DVI-PRC              PIC X(03).
+  2009-01-01 12:00  =>         05  LB-DVI-CNV              PIC X(03).
+  2009-01-01 12:00  =>     03  WS-PTR-ENE-SRT.
+  2009-01-01 12:00  =>         05  FILLER                  PIC X(10).
+  2009-01-01 12:00  =>     03  WS-IFN-EUR.
+  2009-01-01 12:00  =>         05  FILLER                  PIC X(10).
+  2009-01-01 12:00  => 01  WS-CMT-PGM.
+  2009-01-01 12:00  =>     03  NM-PGM-APL               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-ENV               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-COP               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-DEM               PIC X(08).
+  2009-01-01 12:00  =>     03  VL-CDE-RET               PIC S9(04).
+  2009-01-01 12:00  =>     03  VL-MOT-CDE               PIC S9(04).
+  2009-01-01 12:00  =>     03  LB-MSG-RET               PIC X(30).
+  2009-01-01 12:00  =>     03  CD-DBG-PRG               PIC X(1).
+  2009-01-01 12:00  =>     03  FILLER                   PIC X(7).
+  2009-01-01 12:00  =>     03  VL-CHP-TSF               PIC X(3922).
+  2009-01-01 12:00  => 01  RDMS-QUALIFIER                        PIC X(12).
+  2009-01-01 12:00  => 01  RDMS-IND                              PIC 9(2).
+  2009-01-01 12:00  => 01  RDMS-STATUS                           PIC 9999  VALUE 0.
+  2009-01-01 12:00  => 01  RDMS-SAV-STATUS                       PIC 9999  VALUE 0.
+  2009-01-01 12:00  => 01  RDMS-ROLLB                            PIC 9     VALUE 0.
+  2009-01-01 12:00  => 01  RDMS-COLUMN                           PIC S1(36).
+  2009-01-01 12:00  => 01  RDMS-SAV-COLUMN                       PIC S1(36).
+  2009-01-01 12:00  => 01  RDMS-FLAG                             PIC 9     VALUE 0.
+  2009-01-01 12:00  => 01  RDMS-FLAG-THREAD                      PIC 9     VALUE 0.
+  2009-01-01 12:00  => 01  RDMS-RESULT.
+  2009-01-01 12:00  =>       05 RDMS-ERROR-LINE OCCURS 4         PIC X(80).
+  2009-01-01 12:00  => 01  RDMS-COM.
+  2009-01-01 12:00  =>       05 RLIN            OCCURS 36        PIC X(40).
+  2009-01-01 12:00  => 01  ZONE-25                               PIC Z(18).
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.   OPEN INPUT TAPE1.
+  2009-01-01 12:00  =>     MOVE  SPACES  TO  LIGNES-SUB.
+  2009-01-01 12:00  =>     OPEN OUTPUT  IMP.
+  2009-01-01 12:00  =>     CALL 'RSA$INIT'.
+  2009-01-01 12:00  =>     ENTER MASM 'ACOB$RDMR' USING
+  2009-01-01 12:00  =>       'BEGIN THREAD FOR APPLICATION UDSSRC READ;',
+  2009-01-01 12:00  =>       RDMS-STATUS, RDMS-COLUMN.
+  2009-01-01 12:00  =>     IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR.
+  2009-01-01 12:00  =>     MOVE 1 TO RDMS-FLAG-THREAD.
+  2009-01-01 12:00  =>     ENTER MASM 'ACOB$RDMR' USING
+  2009-01-01 12:00  =>       'USE DEFAULT QUALIFIER AFLINC;',
+  2009-01-01 12:00  =>       RDMS-STATUS, RDMS-COLUMN.
+  2009-01-01 12:00  =>     IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR.
+  2009-01-01 12:00  =>     ENTER MASM 'ACOB$RDMR' USING
+  2009-01-01 12:00  =>       'USE DEFAULT VERSION PRODUCTION ;',
+  2009-01-01 12:00  =>       RDMS-STATUS, RDMS-COLUMN.
+  2009-01-01 12:00  =>     IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR.
+  2009-01-01 12:00  =>     MOVE 0 TO RDMS-FLAG.
+  2009-01-01 12:00  =>     MOVE 'TABAN'     TO NM-PGM-APL   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'BATCH'     TO NM-NOM-ENV   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO CD-DBG-PRG   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'EUW002'    TO NM-NOM-COP   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'SERVICE1'  TO NM-NOM-DEM   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE SPACES      TO WS-PTR-ENE   OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'R'         TO FL-PLT-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE '2'         TO FL-TRD-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO MT-ENE-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE '1'         TO CD-FMT-MON-SRT  OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO FL-IMP-PNT      OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'N'         TO FL-000          OF EUW002.
+  2009-01-01 12:00  => LECT.  READ TAPE1  AT END GO TO FINBDE.
+  2009-01-01 12:00  =>     ADD  1  TO  NB-LUS.
+  2009-01-01 12:00  =>     IF  FIRS  =  0  MOVE  1  TO  FIRS  GO TO CONT1.
+  2009-01-01 12:00  => LECT2.
+  2009-01-01 12:00  =>     GO TO LECT.
+  2009-01-01 12:00  => CONT1.
+  2009-01-01 12:00  =>     GO TO LECT2.
+  2009-01-01 12:00  => FINBDE.
+  2009-01-01 12:00  =>     ADD  CORRESPONDING  SUB-TOTAL  TO  TOTAL.
+  2009-01-01 12:00  =>     PERFORM  IMP-TOTAL.
+  2009-01-01 12:00  =>     MOVE  NB-LUS  TO   P-LUS.
+  2009-01-01 12:00  =>     WRITE  LIGNE  FROM  TIT-TOTAL  AFTER  3.
+  2009-01-01 12:00  => FF. CLOSE  TAPE1.
+  2009-01-01 12:00  =>     CLOSE  IMP.
+  2009-01-01 12:00  =>     ENTER MASM 'ACOB$RDMR' USING
+  2009-01-01 12:00  =>       'END THREAD ;',
+  2009-01-01 12:00  =>       RDMS-STATUS, RDMS-COLUMN.
+  2009-01-01 12:00  =>     IF RDMS-STATUS NOT = 0 GO TO RDMS-ERROR-PAR.
+  2009-01-01 12:00  =>     MOVE 0 TO RDMS-FLAG-THREAD.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => IMP-TOTAL.
+  2009-01-01 12:00  =>     MOVE '*****TOTAL GENERAL *****'  TO  LIGNE.
+  2009-01-01 12:00  =>      WRITE  LIGNE  AFTER PAGE.
+  2009-01-01 12:00  =>     MOVE 17     TO MT-ENE-CHI OF EUW002.
+  2009-01-01 12:00  =>     MOVE 25     TO LG-MAX-MON-SRT OF EUW002.
+  2009-01-01 12:00  => RDMS-ERROR-PAR.
+  2009-01-01 12:00  =>     DISPLAY '*** ERROR RDMS ***' UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'COLUMN = ' RDMS-COLUMN UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'STATUS = ' RDMS-STATUS UPON PRINTER.
+  2009-01-01 12:00  =>     PERFORM TRAIT-RDMS.
+  2009-01-01 12:00  =>     GO TO RDMS-ERROR-EX.
+  2009-01-01 12:00  => TRAIT-RDMS.
+  2009-01-01 12:00  =>     MOVE ZEROS TO RDMS-FLAG.
+  2009-01-01 12:00  =>     PERFORM VISU-RDMS-COM VARYING RDMS-IND FROM 1 BY 1
+  2009-01-01 12:00  =>         UNTIL RDMS-IND > 36.
+  2009-01-01 12:00  =>     MOVE ZEROS TO RDMS-FLAG.
+  2009-01-01 12:00  =>     PERFORM TRAIT-RDMS-ERROR
+  2009-01-01 12:00  =>         UNTIL RDMS-FLAG NOT = ZEROS.
+  2009-01-01 12:00  => TRAIT-RDMS-ERROR.
+  2009-01-01 12:00  =>     ENTER MASM 'ACOB$RDMR' USING
+  2009-01-01 12:00  =>       'GETERROR INTO $P1, $P2, $P3, $P4 ;',
+  2009-01-01 12:00  =>       RDMS-STATUS, RDMS-COLUMN,
+  2009-01-01 12:00  =>       RDMS-ERROR-LINE (1), RDMS-ERROR-LINE (2),
+  2009-01-01 12:00  =>       RDMS-ERROR-LINE (3), RDMS-ERROR-LINE (4).
+  2009-01-01 12:00  =>     PERFORM VISU-RDMS-ERROR
+  2009-01-01 12:00  =>       VARYING RDMS-IND FROM 1 BY 1
+  2009-01-01 12:00  =>       UNTIL RDMS-IND > 4.
+  2009-01-01 12:00  => VISU-RDMS-ERROR.
+  2009-01-01 12:00  =>     IF RDMS-ERROR-LINE (RDMS-IND) NOT = SPACE
+  2009-01-01 12:00  =>          DISPLAY RDMS-ERROR-LINE (RDMS-IND) UPON PRINTER
+  2009-01-01 12:00  =>     ELSE MOVE 1 TO RDMS-FLAG.
+  2009-01-01 12:00  => VISU-RDMS-COM.
+  2009-01-01 12:00  =>     IF RLIN (RDMS-IND) NOT = SPACES
+  2009-01-01 12:00  =>          DISPLAY RLIN (RDMS-IND) UPON PRINTER.
+  2009-01-01 12:00  => RDMS-ERROR-EX.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  PROGRAM-ID. .
+  ENVIRONMENT. BOURDEAUD HUY PIERRE.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

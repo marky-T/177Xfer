@@ -1,0 +1,83 @@
+SymstreamProcessor.cs: conflicts=2
+SymstreamExpressionMigrator.cs: conflicts=0
+SymstreamExpressionParser.cs: conflicts=0
+
+== R&D changes since the 27 July release (SymstreamProcessor.cs, jul27 -> develop)
+@@ -1253,2 +1253,4 @@ namespace Ecl.SsgConverter {
+               Boolean? whileCondition = null;
++              Boolean hasExplicitFrom = false;
++              Boolean hasExplicitTo = false;
+ 
+@@ -1271,2 +1273,3 @@ namespace Ecl.SsgConverter {
+                 fromValue = match.Value;
++                hasExplicitFrom = true;
+               } else {
+@@ -1279,2 +1282,3 @@ namespace Ecl.SsgConverter {
+                 toValue = match.Value;
++                hasExplicitTo = true;
+               } else {
+@@ -1364,4 +1368,4 @@ namespace Ecl.SsgConverter {
+ 
+-              if (i == lines.Count) {
+-                // no more lines and no *LOOP encountered
++              if (i == lines.Count && !(hasExplicitFrom && hasExplicitTo)) {
++                // no more lines and no *LOOP encountered, and the *INCREMENT is not self-bounded
+                 StringBuilder sb = new StringBuilder();
+@@ -1374,2 +1378,5 @@ namespace Ecl.SsgConverter {
+ 
++              // A self-bounded *INCREMENT (explicit FROM/TO) needs no closing *LOOP: the
++              // FROM/TO bounds define the iteration count and the consumed lines form the body.
++
+               localVariables.Remove(incrementVariable);
+@@ -1865,8 +1872,2 @@ namespace Ecl.SsgConverter {
+         i--;
+-      } else if (lines[i].StartsWith("[")) {
+-        powerSkel.AddComment(" This was a stand-alone bracketed reference line.");
+-        PsAstExprBase psDataLine = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(lines[i], globalVariables, localVariables));
+-
+-        powerSkel.AddMethodInvoke("DataLineOrNoStatement", psDataLine);
+-
+       } else if (IsComment(lines[i], m_DirectivePrefix, out commentTextStart)) {
+@@ -1907,6 +1908,8 @@ namespace Ecl.SsgConverter {
+       } else if (!String.IsNullOrEmpty(lines[i])) {
+-        // Plain text output line (not a directive, not ECL, not a standalone bracket reference).
+-        // In Symstream, any non-directive line is an output statement written to the generated stream.
+-        PsAstExprBase psOutputLine = new PsAstExprParenthesized(SymstreamExpressionToPowerShellExpression(lines[i], globalVariables, localVariables));
+-        powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
++        // Output data line (not a directive, not ECL). This includes lines that begin with a bracketed
++        // reference. In Symstream, any non-directive line is an output statement written verbatim to the
++        // generated stream, with only [...] references substituted, => emit as literal text (not parsed
++        // as an expression).
++        String expanded = m_ExpressionMigrator.WrapSgsReferencesInFunctionCalls(lines[i], true, true);
++        powerSkel.AddMethodInvoke("DataLineOrNoStatement", new PsAstExprPrimitive(expanded, false));
+       }
+
+== conflict hunks
+-- lines 2015-2023
+   <<<<<<< ours
+         } else if (lines[i].StartsWith("[")) {
+           powerSkel.AddComment(" This was a stand-alone bracketed reference line.");
+           PsAstExprBase psDataLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
+   
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", psDataLine);
+   
+   =======
+   >>>>>>> rd
+-- lines 2059-2075
+   <<<<<<< ours
+         } else if (!String.IsNullOrWhiteSpace(lines[i])) {
+           // Plain text output line (not a directive, not ECL, not a standalone bracket reference).
+           // In Symstream, any non-directive line is an output statement written to the generated stream.
+           // Emit it as literal text with only [bracketed] references substituted - never parse the
+           // COBOL/text as an arithmetic expression (that produced invalid PowerShell).
+           PsAstExprBase psOutputLine = OutputLineToPowerShellExpression(lines[i], globalVariables, localVariables);
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", psOutputLine);
+   =======
+         } else if (!String.IsNullOrEmpty(lines[i])) {
+           // Output data line (not a directive, not ECL). This includes lines that begin with a bracketed
+           // reference. In Symstream, any non-directive line is an output statement written verbatim to the
+           // generated stream, with only [...] references substituted, => emit as literal text (not parsed
+           // as an expression).
+           String expanded = m_ExpressionMigrator.WrapSgsReferencesInFunctionCalls(lines[i], true, true);
+           powerSkel.AddMethodInvoke("DataLineOrNoStatement", new PsAstExprPrimitive(expanded, false));
+   >>>>>>> rd

@@ -1,0 +1,18 @@
+"Program","Call","Cards","ExpandExit","ExpandError","Lines","ProgramId","ConvExit","Errors","Warnings","OutBytes","FirstError"
+"BABA_ASCII","ASSURFED_F999RUN_2PPJ11(P).TXT:74","4","1","","35",,,,,,
+"CFH-COPY_ASCII","ASSURFED_F999RUN_AFPH12(P).TXT:427","5","0","","55","CFH-COPY","0","0","4","6875",
+"CHAB100_ASCII","ASSURFED_F999RUN-d_EUPD01(P).TXT:15","4","0","","140","CHABAN","1","1","4","11652","ERROR: ERR 000034 Field ZCAR is expected to have sub items but none found."
+"CHABAN_ASCII","ASSURFED_F999RUN_BSEH02(P).TXT:110","5","0","","139","CHABAN","1","1","4","11610","ERROR: ERR 000034 Field ZCAR is expected to have sub items but none found."
+"CONDIS2_ASCII","ASSURFED_F999RUN_AUMH01_D3(P).TXT:87","4","1","","120",,,,,,
+"EXTEUR","ASSURFED_F999RUN_VIRJ01_UL(P).TXT:146","4","0","","627","EXTEUR","1","117","6","43488","ERROR: ERR 000219 Field DB-EU001 is expected to have sub items but none found."
+"FUSBA_ASCII","ASSURFED_F999RUN_COMA16_U1(P).TXT:113","7","1","","83",,,,,,
+"FUSBA2_ASCII","ASSURFED_F999RUN-d_VIRD03(P).TXT:766","8","0","","162","FUSION-OUT","0","0","4","13188",
+"LECTIS_ASCII","ASSURFED_F999RUN_CCTA09(P).TXT:479","4","0","","181","LECTIS","0","0","5","14081",
+"LOADIS_ASCII","ASSURFED_F999RUN_CLOA49(P).TXT:141","4","0","","71","LOADIS-ASCII","0","0","5","7891",
+"LOADIS_MULTI","ASSURFED_F999RUN_VIGA50(P).TXT:129","4","0","","93","LOADIS","1","3","7","8772","ERROR: ERR 000018 End of statement expected but DATA found"
+"RECAP","ASSURFED_F999RUN_CCTA08(P).TXT:287","9","0","","489","RECAP","0","0","4","32032",
+"SCAN_ASCII","ASSURFED_F999RUN_CCSA14(P).TXT:76","3","1","","29",,,,,,
+"TABAN_ASCII","ASSURFED_F999RUN_CCSA09(P).TXT:340","4","0","","290","TABAN","1","4","7","21756","ERROR: ERR 000238 Operand LIGNES-SUB.MONT1 is not declared."
+"TAPELD_ASCII","ASSURFED_F999RUN_PBDA04(P).TXT:199","7","1","","24",,,,,,
+"UNLOADIS_ASCII","ASSURFED_F999RUN_CLOA43(P).TXT:473","4","0","","63","UNLOAD-ASCII","0","0","5","7453",
+"UNLOADIS_MULTI","ASSURFED_F999RUN_VIGA50(P).TXT:45","4","0","","62","UNLOADIS","1","3","5","7257","ERROR: ERR 000017 End of statement expected but DATA found"

@@ -1,0 +1,86 @@
+=== 1. AmtTools deps.json referencing Microsoft.Data.SqlClient ===
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\AmtBatchController.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\AmtPowershellHost.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\AmtBatchControllerAgent.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost\AmtPowershellHost.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\AmtFileController.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtPrintService\AmtPrintService.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\AmtTransactionServer.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\TransactionAgentCore\AmtTransactionAgent.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\BlazorWebAPI.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\ComModule\AmtCOMModule.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript\ComScript.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\Asysco.Amt.ControlCenter.Html5Web.Core.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\TransactionRendererBlazor\Asysco.Amt.Blazor.TransactionRenderer.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterWebApi\Asysco.Amt.ControlCenter.BusinessLogic.WebApi.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\Opconservice\AmtOpConService.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\AmtReoConsole.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\AmtReorganize.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\AmtReorganizeService.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\ReorganizeAgent\AmtReorganizeAgent.deps.json | HasDll=True | HasNativeSNI=True
+E:\Repos\Federale_InternalRelease\AmtTools\SqlServerWrapper\Asysco.Amt.AmtSqlServerWrapper.deps.json | HasDll=False | HasNativeSNI=False
+
+=== 2. Physical Microsoft.Data.SqlClient.dll under AmtTools ===
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtFileController\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtPrintService\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtPrintService\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtPrintService\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\TransactionAgentCore\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\TransactionAgentCore\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\AmtTransactionServer\TransactionAgentCore\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\BlazorWebApi\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComModule\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComModule\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComModule\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ComScript\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\TransactionRendererBlazor\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\TransactionRendererBlazor\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterCore\TransactionRendererBlazor\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterWebApi\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterWebApi\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\ControlCenterWebApi\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\Opconservice\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\Opconservice\runtimes\unix\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\Opconservice\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\Microsoft.Data.SqlClient.dll | FileVersion=7.0.1.26114 | ProductVersion=7.0.1+1b18a276671cd9b4d2c0a7cf0bab6c4aaf6472c9
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\ReorganizeAgent\Microsoft.Data.SqlClient.dll | FileVersion=7.0.1.26114 | ProductVersion=7.0.1+1b18a276671cd9b4d2c0a7cf0bab6c4aaf6472c9
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\ReorganizeAgent\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.1.26114 | ProductVersion=7.0.1+1b18a276671cd9b4d2c0a7cf0bab6c4aaf6472c9
+E:\Repos\Federale_InternalRelease\AmtTools\Reorganize\runtimes\win\lib\net9.0\Microsoft.Data.SqlClient.dll | FileVersion=7.0.1.26114 | ProductVersion=7.0.1+1b18a276671cd9b4d2c0a7cf0bab6c4aaf6472c9
+
+=== 3. Candidate source folder (dev build, Release) ===
+Microsoft.Data.SqlClient.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+Microsoft.Data.SqlClient.Extensions.Abstractions.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+Microsoft.Data.SqlClient.Internal.Logging.dll | FileVersion=7.0.2.26175 | ProductVersion=7.0.2+8c70cec98444338ddb0b97be94c34fde93970241
+runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll | FileVersion=6.02.0 | ProductVersion=6.02.0
+
+=== 4. AmtTools\AmtBatchController exe locations ===
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\BatchControllerAgentCore\AmtBatchControllerAgent.exe
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\CallDllNet\Asysco.Amt.CallDll.exe
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\CallDllNet48\Asysco.Amt.CallDll.net48.exe
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\PowerShellHost\AmtPowershellHost.exe
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\AmtBatchController.exe
+E:\Repos\Federale_InternalRelease\AmtTools\AmtBatchController\AmtPowershellHost.exe
+
+=== 5. Network check ===
+api.nuget.org:443 reachable = True

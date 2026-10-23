@@ -1,0 +1,21 @@
+=== ReportPool copies of Assurfed_Utilit_Cfh_Copy.dll ===
+9/24/2026 1:36:03 PM | E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.1\Assurfed_Utilit_Cfh_Copy.dll | 18560 bytes
+9/24/2026 1:36:03 PM | E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\BatchWorking\FederaleBatchController\ReportPool.2\Assurfed_Utilit_Cfh_Copy.dll | 18560 bytes
+9/24/2026 1:36:03 PM | E:\Repos\Federale_InternalRelease\AFBUS_2200COBOL\Binaries\Programs\Assurfed_Utilit_Cfh_Copy.dll | 18560 bytes
+
+=== SqlServerWrapper folder current state ===
+Asysco.Amt.AmtSharedDataModel.dll | 08/28/2026 10:39:28
+Asysco.Amt.AmtSqlServerWrapper.deps.json | 08/28/2026 11:08:40
+Asysco.Amt.AmtSqlServerWrapper.dll | 08/28/2026 11:08:38
+Asysco.Amt.Libs.dll | 08/28/2026 10:39:40
+Microsoft.Data.SqlClient.dll | 06/24/2026 21:55:00
+Microsoft.Data.SqlClient.Extensions.Abstractions.dll | 06/24/2026 21:25:32
+Microsoft.Data.SqlClient.Internal.Logging.dll | 06/24/2026 20:59:02
+HasNativeSNI: True
+HasManagedDll: True
+
+=== AmtSettings.xml AppName (deployed copies) ===
+--- E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\Settings\AmtSettings.xml ---
+<AppName>AFBUS_2200COBOL</AppName>
+--- E:\Repos\Federale_InternalRelease\Scripts\Settings\AmtSettings.xml ---
+<AppName>AFBUS_2200COBOL</AppName>

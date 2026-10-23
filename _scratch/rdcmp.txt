@@ -1,0 +1,26 @@
+R&D files: 21
+Our files: 21
+only in R&D: 
+only in ours: 
+IContentLineConverter.cs                      same  (R&D 973 B, ours 973 B, 0 differing lines)
+StreamGenerationStatements.cs                 same  (R&D 8,919 B, ours 8,919 B, 0 differing lines)
+SymstreamExpressionMigrator.cs                DIFFERENT  (R&D 25,832 B, ours 28,356 B, 55 differing lines)
+SymstreamExpressionParser.cs                  DIFFERENT  (R&D 22,457 B, ours 24,053 B, 96 differing lines)
+SymstreamProcessor.cs                         DIFFERENT  (R&D 84,358 B, ours 92,755 B, 205 differing lines)
+Enums\DirectiveId.cs                          same  (R&D 3,561 B, ours 3,561 B, 0 differing lines)
+Enums\SsgSourceType.cs                        same  (R&D 339 B, ours 339 B, 0 differing lines)
+Enums\VariableType.cs                         same  (R&D 332 B, ours 332 B, 0 differing lines)
+Exceptions\SymstreamException.cs              same  (R&D 1,313 B, ours 1,313 B, 0 differing lines)
+Expressions\SymstreamExpression.cs            same  (R&D 238 B, ours 238 B, 0 differing lines)
+Expressions\SymstreamExpressionBinary.cs      same  (R&D 1,402 B, ours 1,402 B, 0 differing lines)
+Expressions\SymstreamExpressionPrimitive.cs   same  (R&D 1,128 B, ours 1,128 B, 0 differing lines)
+Expressions\SymstreamExpressionSearchConditional.cs same  (R&D 4,442 B, ours 4,442 B, 0 differing lines)
+Expressions\SymstreamExpressionUnary.cs       same  (R&D 1,109 B, ours 1,109 B, 0 differing lines)
+Expressions\Enums\BinaryOperator.cs           same  (R&D 1,101 B, ours 1,101 B, 0 differing lines)
+Expressions\Enums\PrimitiveType.cs            same  (R&D 833 B, ours 833 B, 0 differing lines)
+Expressions\Enums\SearchDirection.cs          same  (R&D 407 B, ours 407 B, 0 differing lines)
+Expressions\Enums\SearchObject.cs             same  (R&D 731 B, ours 731 B, 0 differing lines)
+Expressions\Enums\UnaryOperator.cs            same  (R&D 421 B, ours 421 B, 0 differing lines)
+Properties\AssemblyInfo.cs                    same  (R&D 332 B, ours 332 B, 0 differing lines)
+--- git history of our copy (first commits touching the converter source)
+b786f7c 2026-09-08 Initial import: SsgConverter release + SSG trial (Trial3) + source + docs

@@ -1,0 +1,450 @@
+@RUN,M/T   SCTD01,EXPLOITATION,ASSURFED,S8000   
+@QUAL,D    ASSURFED 
+@QUAL      ASSURFED 
+@SYM       PRINT$,,PRSP 
+@MSG       ***********************************************************  
+@MSG       **    CONFECTIONNER ET LISTER SITUATION                  **  
+@MSG       **        EVOLUTION DEPENSES ET RESERVES SC              **  
+@MSG       ***********************************************************  
+@ . LE 20/08/2021 : CREATION DU RUN A PARTIR DE SCTM01  
+@ . LE 01/07/2025 : D436 : Controle mensuel des  depenses et reserves@  
+@TIME   
+@ . 
+@MSG       TRANSFERT DES PROGRAMMES.
+@ASG,T     SCTD01.,F///99999
+@COPY,A    SCPRD*BABS.SCB244,SCTD01.SCB244  
+@COPY,A    SCPRD*BABS.SCB245,SCTD01.SCB245  
+@COPY,A    SCPRD*BABS.SCB247,SCTD01.SCB247  
+@COPY,A    SCPRD*BABS.SCB248,SCTD01.SCB248  
+@COPY,A    SCPRD*BABS.SCB271,SCTD01.SCB271  
+@COPY,A    SCPRD*BABS.SCB310,SCTD01.SCB310  
+@TIME   
+@ . 
+@ .      =========================================  
+@LAB000: MSG 000. PROCEDURE DE RESTART AUTOMATIQUE  
+@ .      =========================================  
+@ADD SYS$*RUNS.RESTART  
+?JOB-ID?
+@TIME   
+@ . 
+@ .      ====================================================   
+@LAB030: MSG 030.  CONFECTION SIT MENSUELLE DEP et RES SC. SCB244   
+@ .      ========================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB030  
+@ . 
+@DELETE,C  SCTD01*ISCB244DON.   
+@ASG,UP    SCTD01*ISCB244DON,F//POS/4000
+@USE       OUTFILE,SCTD01*ISCB244DON.   
+@XQT       SCTD01.SCB244
+@FREE      SCTD01*ISCB244DON.   
+@TIME   
+@ . 
+@ .      =================================  
+@LAB040: MSG 040.  TRI POUR IMPRIMER. SORT  
+@ .      =================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB040  
+@ . 
+@ASG,A     SCTD01*ISCB244DON.   
+@USE       FIN,SCTD01*ISCB244DON.   
+@DELETE,C  SCTD01*ISCB244DONT.  
+@ASG,UP    SCTD01*ISCB244DONT,F//POS/4000   
+@USE       FOUT,SCTD01*ISCB244DONT. 
+@SORT,E 
+FILEIN=FIN,F MODE=SDF   
+FILEOUT=FOUT,F MODE=SDF 
+KEY=2,12,S,A,1   . no sinistre  
+KEY=14,3,S,A,2   . branche  
+KEY=20,3,S,A,3   . code division
+KEY=23,3,S,A,4   . code subdivision 
+KEY=1,1,S,A,5    . type montant 
+RSZ=450 
+@EOF
+@FREE      SCTD01*ISCB244DON.   
+@FREE      SCTD01*ISCB244DONT.  
+@TIME   
+@ . 
+@ .      ====================================================   
+@LAB050: MSG 050.  LISTER SIT MENSUELLE DEP et RES SC. SCB245   
+@ .      ====================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB050  
+@ . 
+@DELETE,C  SCTD01*ISCB245OUT.   
+@ASG,UP    SCTD01*ISCB245OUT,F//POS/4000
+@USE       FICHOUT,SCTD01*ISCB245OUT.   
+@ASG,A     SCTD01*ISCB244DONT,F//POS/4000   
+@USE       FICHIN,SCTD01*ISCB244DONT.   
+@XQT       SCTD01.SCB245
+@FREE      SCTD01*ISCB244DONT.  
+@FREE      SCTD01*ISCB245OUT.   
+@TIME   
+@ . 
+@ .      ====================================================   
+@LAB060: MSG 060.  CONFECTION EVOLUTION DEP et RES SC. SCB247   
+@ .      ====================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB060  
+@ . 
+@DELETE,C  SCTD01*ISCB247DON.   
+@ASG,UP    SCTD01*ISCB247DON,F//POS/4000
+@USE       OUTFILE,SCTD01*ISCB247DON.   
+@XQT       SCTD01.SCB247
+@FREE      SCTD01*ISCB247DON.   
+@TIME   
+@ . 
+@ .      ===========================================
+@LAB070: MSG 070.  TRI POUR IMPRIMER EVOLUTION. SORT
+@ .      ===========================================
+@ADD       SYS$*RUNS.REPRISE
+LAB070  
+@ . 
+@ASG,A     SCTD01*ISCB247DON.   
+@USE       FIN,SCTD01*ISCB247DON.   
+@DELETE,C  SCTD01*ISCB247DONT.  
+@ASG,UP    SCTD01*ISCB247DONT,F//POS/4000   
+@USE       FOUT,SCTD01*ISCB247DONT. 
+@SORT,E 
+FILEIN=FIN,F MODE=SDF   
+FILEOUT=FOUT,F MODE=SDF 
+KEY=5,3,S,A,1   . code branche  
+KEY=8,3,S,A,2   . code division 
+KEY=1,4,S,A,3   . année 
+RSZ=52  
+@EOF
+@FREE      SCTD01*ISCB247DON.   
+@FREE      SCTD01*ISCB247DONT.  
+@TIME   
+@ . 
+@ .      ====================================================== 
+@LAB100: MSG 100.  LISTER EVOL. MENSUELLE DEP et RES SC. SCB248 
+@ .      ====================================================== 
+@ADD       SYS$*RUNS.REPRISE
+LAB100  
+@ . 
+@DELETE,C  SCTD01*TXT-SCB248.   
+@ASG,UP    SCTD01*TXT-SCB248,F//POS/4000
+@USE       FICHOUT,SCTD01*TXT-SCB248.   
+@DELETE,C  SCTD01*ICPTSCB248.   
+@ASG,UP    SCTD01*ICPTSCB248,F//POS/4000
+@USE       FCHCPT,SCTD01*ICPTSCB248.
+@ASG,A     SCTD01*ISCB247DONT,F//POS/4000   
+@USE       FICHIN,SCTD01*ISCB247DONT.   
+@XQT       SCTD01.SCB248
+@FREE      SCTD01*ISCB247DONT.  
+@FREE      SCTD01*ICPTSCB248.   
+@FREE      SCTD01*TXT-SCB248.   
+@TIME   
+@ . 
+@ .      ============================================== 
+@LAB130: MSG 130. TOTAUX EVOLUTION DEP et RES SC. RECAP 
+@ .      ============================================== 
+@ADD       SYS$*RUNS.REPRISE
+LAB130  
+@ . 
+@ASG,A     SCTD01*ISCB247DONT.  
+@USE       FILEIN,SCTD01*ISCB247DONT.   
+@DELETE,C  SCTD01*ISCB248TOT.   
+@ASG,UP    SCTD01*ISCB248TOT.,F/0/POS/4000  
+@USE       FILEOUT,SCTD01*ISCB248TOT.   
+@SSG,IA    *UTILIT.RECAP
+SGS 
+ASCII   
+INPUT      FILEIN,80,10 
+OUTPUT     FILEOUT,80,10
+FIELDIN    5,3  8,3  1,4  11,14  25,14  39,14  53,14  67,14 
+FIELDOUT   1,3  4,3  7,4  11,14  25,14  39,14  53,14  67,14 
+TOTIN                     11,14  25,14  39,14  53,14  67,14 
+TOTOUT                    11,14  25,14  39,14  53,14  67,14 
+INDIC      5,3  8,3  1,4        .TOTAUX PAR BRANCHE/DIVISION/ANNEE  
+@EOF
+@XQT       TPF$.RECAP   
+@ERS TPF$.  
+@FREE      SCTD01*ISCB247DONT.  
+@FREE      SCTD01*ISCB248TOT.   
+@TIME   
+@ . 
+@ .      =============================================  
+@LAB140: MSG 140. Liste des sinistres connexes. SCB271  
+@ .      =============================================  
+@ADD SYS$*RUNS.REPRISE  
+LAB140  
+@ . 
+@DELETE,C  SCTD01*ISCB271.  
+@ASG,UP    SCTD01*ISCB271,///500
+@USE       FIC271,SCTD01*ISCB271.   
+@XQT       SCTD01.SCB271
+@FREE      SCTD01*ISCB271.  
+@TIME   
+@ . 
+@ .      =======================================================
+@LAB160: MSG 160. TRANSFORMATION FICHIER EN EXCEL. TRANSEXCEL   
+@ .      ====================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB160  
+@ . 
+@ASG,AX    SCTD01*ISCB245OUT.   
+@USE       FILEIN,SCTD01*ISCB245OUT.
+@DELETE,C  SCTD01*XLS-SCB245.   
+@ASG,UP    SCTD01*XLS-SCB245.,F/1/POS/4000  
+@USE       FILEOUT,SCTD01*XLS-SCB245.   
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 565
+COL 1,12,,''NO SIN''
+COL 13,8,,''DATE SIN''  
+COL 21,7,,''NO CLIENT'' 
+COL 28,3,,''BRANCHE''   
+COL 31,7,,''POLICE''
+COL 38,3,,''AVENANT''   
+COL 41,2,,''NO PTV''
+COL 43,7,,''CD RISQ''   
+COL 50,10,,''CD POSTAL''
+COL 60,6,,''NO EVT''
+COL 66,8,,''DT REOUV''  
+COL 74,8,,''DT OUVER''  
+COL 82,8,,''DT CLOT''   
+COL 90,3,,''TYPE SIN''  
+COL 93,10,,''CD CAUSE'' 
+COL 103,8,,''DT NAIS CDU''  
+COL 111,8,,''DT PRMS CDU''  
+COL 119,1,,''CVN RDR''  
+COL 120,10,,''CD RSP''  
+COL 130,1,,''FL GRA''   
+COL 131,1,,''VEH IMM''  
+COL 132,1,,''CONNEXE''  
+COL 133,3,,''CD DIV''   
+COL 136,3,,''CD SUBDIV''
+COL 139,14,mnt,''DEP BAT''  
+COL 153,14,mnt,''DEP CON''  
+COL 167,14,mnt,''DEP GAR DIV''  
+COL 181,14,mnt,''DEP MAT''  
+COL 195,14,mnt,''DEP COR''  
+COL 209,14,mnt,''DEP HON''  
+COL 223,14,mnt,''DEP RMB PRM''  
+COL 237,14,mnt,''DEP FRS HON''  
+COL 251,14,mnt,''DEP FRS DOS''  
+COL 265,14,mnt,''DEP PCP''  
+COL 279,14,mnt,''DEP MUT''  
+COL 293,14,mnt,''DEP AUT''  
+COL 307,14,mnt,''PUB''  
+COL 321,14,mnt,''REC BAT''  
+COL 335,14,mnt,''REC CON''  
+COL 349,14,mnt,''REC GAR DIV''  
+COL 363,14,mnt,''REC MAT''  
+COL 377,14,mnt,''REC COR''  
+COL 391,14,mnt,''REC HON''  
+COL 405,14,mnt,''REC RMB PRM''  
+COL 419,14,mnt,''REC FRS HON''  
+COL 433,14,mnt,''REC FRS DOS''  
+COL 447,14,mnt,''REC PCP''  
+COL 461,14,mnt,''REC MUT''  
+COL 475,14,mnt,''REC AUT''  
+COL 489,14,mnt,''FRANCHISES''   
+COL 503,18,,''CODES FRANCHISES''
+COL 521,14,mnt,''COUT NON PREVUS''  
+COL 535,14,mnt,''RESERVES'' 
+COL 552,14,mnt,''RES. REC. CERTAINS''   
+@EOF
+@ERS TPF$.  
+@FREE FILEIN
+@FREE FILEOUT   
+@TIME   
+@ . 
+@ .      =============================================================  
+@LAB170: MSG 170. FORMATAGE TOTAUX EVOLUTION DEP et RES SC. TRANSEXCEL  
+@ .      =============================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB170  
+@ . 
+@ASG,A     SCTD01*ISCB248TOT.   
+@USE       FILEIN,SCTD01*ISCB248TOT.
+@DELETE,C  SCTD01*XLS-SCB248.   
+@ASG,UP    SCTD01*XLS-SCB248.,F/0/POS/4000  
+@USE       FILEOUT,SCTD01*XLS-SCB248.   
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 80 
+COL  1,3,,''Branche''   
+COL  4,3,,''Division''  
+COL  7,4,,''Année sin'' 
+COL  11,14,MNT,''Total Réserves au 31/12''  
+COL  25,14,MNT,''Total Rés.rec. certains au 31/12'' 
+COL  39,14,MNT,''Total Dépenses''   
+COL  53,14,MNT,''Total Réserves''   
+COL  67,14,MNT,''Total Rés. rec. certains'' 
+TABUL '';'' 
+@EOF
+@ERS TPF$.  
+@FREE      SCTD01*ISCB248TOT.   
+@FREE      SCTD01*XLS-SCB248.   
+@TIME   
+@ . 
+@ .      =========================================================  
+@LAB200: MSG 200. TRANSFORMATION EXCEL FICHIER ISCB271. TRANSEXCEL  
+@ .      =========================================================  
+@ADD       SYS$*RUNS.REPRISE
+LAB200  
+@ . 
+@ASG,A     SCTD01*ISCB271.  
+@USE       FILEIN,SCTD01*ISCB271.   
+@DELETE,C  SCTD01*ISCB271XL.
+@ASG,UP    SCTD01*ISCB271XL.,F/0/POS/4000   
+@USE       FILEOUT,SCTD01*ISCB271XL.
+@ADD       *UTILIT.TRANSEXCEL   
+LONG 106
+COL  1,12,num,''Sinistre''  
+COL  13,3,,''Branche''  
+COL  16,1,,''Cas grave''
+COL  17,14,mnt,''Dépense''  
+COL  31,16,mnt,''Réserve''  
+COL  47,10,,''Connexité''   
+COL  57,12,num,''Sinistre connexe'' 
+COL  69,3,,''Branche connexe''  
+COL  72,1,,''Cas grave connexe''
+COL  73,14,mnt,''Dépense connexe''  
+COL  87,16,mnt,''Réserve connexe''  
+COL 103,8,num,''Date mise à jour''  
+@EOF
+@ERS TPF$.  
+@FREE      SCTD01*ISCB271.  
+@FREE      SCTD01*ISCB271XL.
+@TIME   
+@ . 
+@ .      ===================================================
+@LAB210: MSG 210. LISTE DES DEPENSES PAR SINISTRE - ytd. RSA
+@ .      ===================================================
+@ . Liste des dépenses entre 1/1 et fin du mois écoulé  
+@ADD       SYS$*RUNS.REPRISE
+LAB210  
+@ . 
+@SETC      0/S2 
+@DELETE,C  SCTD01*IMP-RSA.  
+@ASG,UP    SCTD01*IMP-RSA.,F///4000 
+@XQT,E SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+UNLOAD TO FILE "SCTD01*IMP-RSA" 
+    
+SELECT no_sin, sum(md_cpt)  
+  FROM SCD201_OPR_FNC     SOF,  
+       SCD202_LGN_MON     SLM,  
+       SCD108_CAT_CPT_COO SCCC  
+ WHERE SOF.CD_ETA         = 'DEBI'  
+   AND SOF.DT_ETA_TRI between year(curdate())*10000 
+                      and     year(curdate())*10000+month(curdate())*100
+   AND SOF.FL_CPN_GEN     = 'Y' 
+   AND SLM.NO_OPR_FNC     = SOF.NO_OPR_FNC  
+   AND SLM.CD_CAT_CPT     = SCCC.CD_CAT_CPT 
+   AND SCCC.DT_DEB       <= SOF.DT_CPT  
+   AND SCCC.DT_FIN       >= SOF.DT_CPT  
+   AND SCCC.FL_CUT        = 'Y' 
+ GROUP BY no_sin
+ ORDER BY no_sin
+    
+FORMAT EXTERNAL;
+EXIT;   
+@FREE      SCTD01*IMP-RSA.  
+@TEST      TE/0/S2  
+@JUMP      ERRC 
+@JUMP      OK   
+@ERRC: MSG ** PROBLEME DANS L'UNLOAD ** 
+@ABORT  
+@OK:   MSG ** UNLOAD OK **  
+@TIME   
+@ . 
+@ .      ====================================================   
+@LAB220: MSG 220. TRANSFORMATION FICHIER EN EXCEL. TRANSEXCEL   
+@ .      ====================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB220  
+@ . 
+@ASG,A     SCTD01*IMP-RSA.  
+@USE       FILEIN,SCTD01*IMP-RSA.   
+@DELETE,C  SCTD01*XLS-RSA.  
+@CAT,P     SCTD01*XLS-RSA.,F/1/POS/4000 
+@ASG,A     SCTD01*XLS-RSA.  
+@USE       FILEOUT,SCTD01*XLS-RSA.  
+@ADD        *UTILIT.TRANSEXCEL  
+LONG  120   
+col 002,012,ALPHAG,''Sinistre'' 
+col 015,025,VIRGULE,''Dépenses'',TOT
+@EOF
+@FREE      SCTD01*IMP-RSA.  
+@FREE      SCTD01*XLS-RSA.  
+@TIME   
+@ . 
+@LAB240: MSG 240.  Controle mensuel des  depenses et reserves SCB310
+@ .      ============================================================   
+@ADD SYS$*RUNS.REPRISE  
+LAB240  
+@ . 
+@DELETE,C  SCTD01*TXT-SCB310.   
+@ASG,UP    SCTD01*TXT-SCB310,///500 
+@USE       FICHOUT,SCTD01*TXT-SCB310.   
+@ASG,A     SCTD01*ISCB248TOT,F//POS/4000
+@USE       FICHIN,SCTD01*ISCB248TOT.
+@XQT       SCTD01.SCB310
+@FREE      SCTD01*TXT-SCB310.   
+@FREE      SCTD01*ISCB248TOT.   
+@TIME   
+@ .      ========================================================   
+@LAB400: MSG 400. ENVOI SUR PC *XLS-SCB245 et *TXT-SCB248. 2200PC   
+@ .      ========================================================   
+@ADD       SYS$*RUNS.REPRISE
+LAB400  
+@ . 
+@ADD       F999TRANSF.SCTD01/2200PC 
+@ . 
+@TIME   
+@ . 
+@LAB700: MSG 700. Envoi Mail si fichier R009CPTELI pas vide.
+@ADD       SYS$*RUNS.REPRISE
+LAB700  
+@ . 
+@ADD ESYS$AF*COM.SYB003 
+FILE SCTD01*R009CPTELI. 
+LABEL LAB710
+@EOF
+@ . 
+@ADD ESYS$AF*COM.TFR/SSG
+MAIL SCTD01*R009CPTELI,,TXT,''Mvts comptables avec montant = 0'',;  
+     ''FJ'',''SABLO'',''RONVA'' 
+@EOF
+@ . 
+@LAB710: MSG 710. SAUVETAGE DES FICHIERS SUR PC POUR GRAVURE
+@ADD       SYS$*RUNS.REPRISE
+LAB710  
+@ADD       SYS$*RUNS.COPIE/PC   
+@TIME   
+@ . 
+@LAB770: MSG 770. DELETE DES FICHIERS TEMPORAIRES.  
+@ADD       SYS$*RUNS.REPRISE
+LAB770  
+@ . 
+@DELETE,C  SCTD01*ISCB244DON.   
+@DELETE,C  SCTD01*ISCB244DONT.  
+@DELETE,C  SCTD01*ISCB245OUT.   
+@DELETE,C  SCTD01*XLS-SCB245.   
+@DELETE,C  SCTD01*ISCB247DON.   
+@DELETE,C  SCTD01*ISCB247DONT.  
+@DELETE,C  SCTD01*ISCB248TOT.   
+@DELETE,C  SCTD01*ICPTSCB248.   
+@DELETE,C  SCTD01*XLS-SCB248.   
+@DELETE,C  SCTD01*TXT-SCB248.   
+@DELETE,C  SCTD01*IMP-RSA.  
+@DELETE,C  SCTD01*XLS-RSA.  
+@DELETE,C  SCTD01*ISCB271.  
+@DELETE,C  SCTD01*ISCB271XL.
+@DELETE,C  SCTD01*IPRD-U4.  
+@DELETE,C  SCTD01*R009CPTELI.   
+@TIME   
+@ .      ================================== 
+@LAB777: MSG 777. DELETE FICHIER DE REPRISE 
+@ .      ================================== 
+@ADD       SYS$*RUNS.REPDEL 
+@TIME   
+@MSG       **********************************************   
+@MSG       ***    LE RUN SCTD01 S'EST BIEN TERMINE    ***   
+@MSG       **********************************************   
+@QUAL,R 
+@FIN

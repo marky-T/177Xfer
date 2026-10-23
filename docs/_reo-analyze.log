@@ -1,0 +1,3 @@
+﻿20260922 13:35:11  Database or application dll not correct for application AFBUS_2200COBOL.
+Error: Failed loading assembly: Can't find application or database dll.
+20260922 13:35:11  Error with reorganize analyze for application: AFBUS_2200COBOL no database connection.

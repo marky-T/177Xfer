@@ -1,0 +1,1 @@
+2026-10-21: GNREF.LionSource was not imported itself. The 6 reference programs came in through SCANGROUP\work1\out\SCANGRP1.LionSource; their COBOL is identical to GNREF's after whitespace normalisation (checked for all 6), and they were delivered 23:20. imported.LionSource is therefore recorded as equivalent.

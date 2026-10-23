@@ -1,0 +1,14 @@
+C:\Amt\lic\AmtRuntime.lic                                                 318 B  2026-09-24  42DCFB7AFA
+C:\Amt\lic\Lion.Lic                                                     1,152 B  2026-09-24  3C9F8FCED3
+none     E:\Amt
+none     E:\Amt\License
+E:\Amt\Lion\Default_Lion.Lic                                              512 B  2023-06-05  92A03DCD43
+E:\Amt\Lion\Lion.Lic                                                    1,152 B  2026-09-24  3C9F8FCED3
+none     E:\Amt\AMTTools
+none     E:\Amt\AMTTools\Reorganize
+E:\Repos\Federale_InternalRelease\Lion.lic                                800 B  2026-09-24  CA99BC4129
+E:\Repos\Federale_InternalRelease\AmtTools\AmtRuntime.lic                 356 B  2024-10-21  471CC2B9AE
+MISSING  E:\Repos\Federale_InternalRelease\AmtTools\Reorganize
+E:\Repos\z-old\AMT\AmtRuntime.lic                                         318 B  2026-09-24  42DCFB7AFA
+none     E:\Repos\z-old\AMT\License
+none     E:\Repos\AMT

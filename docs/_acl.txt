@@ -1,0 +1,9 @@
+--- whoami groups (Administrators line) ---
+NT AUTHORITY\Local account and member of Administrators group Well-known group S-1-5-114    Group used for deny only                          
+BUILTIN\Administrators                                        Alias            S-1-5-32-544 Group used for deny only                          
+--- ACL on .git ---
+BUILTIN\Administrators Allow  FullControl
+BUILTIN\Administrators Allow  FullControl
+BUILTIN\Users Allow  ReadAndExecute, Synchronize
+BUILTIN\Users Allow  CreateDirectories
+BUILTIN\Users Allow  CreateFiles

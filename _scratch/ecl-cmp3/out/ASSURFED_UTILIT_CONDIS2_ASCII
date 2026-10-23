@@ -1,0 +1,911 @@
+*.............................................  
+*.  VERIFICATION DES CARTES SGS 
+*.............................................  
+*Set FLAGABORT = 0  
+*Set NOCASE = 0 
+*Set NOOTHER = 0
+*Set NOMOVE = 0 
+*Set NOCONST = 0
+*Increment +I FROM 1 BY 1 TO [PG]   
+*If [PG,I,1,1] = CASE   
+*Set NOCASE = [*NOCASE] + 1 
+*If [*NOCASE] <> 1 AND [*NOMOVE] = 0 AND [*NOCONST] = 0 
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   UNE CARTE PG du genre CASE (condition)     -'  
+*Display '   DOIT ETRE TOUJOURS ETRE SUIVIE             -'  
+*Display '   D UNE CARTE PG DU GENRE                    -'  
+*Display '             - MOVE                           -'  
+*Display '     (et/ou) - CONST                          -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*ELSE   
+*Set NOMOVE = 0 
+*Set NOCONST = 0
+*Endif  
+*Elseif [PG,I,1,1] = OTHERWISE  
+*Set NOOTHER = [*NOOTHER] + 1   
+*If [*CASE] = 0 
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   IL FAUT DES CARTES CASE AVANT UNE CARTE    -'  
+*Display '             OTHERWISE                        -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*If [*NOOTHER] > 1  
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   ON NE PEUT AVOIR QU UNE CARTE PG GU GENRE  -'  
+*Display '             OTHERWISE                        -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*If [*NOMOVE] = 0 AND [*NOCONST] = 0
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   UNE CARTE PG du genre CASE (condition)     -'  
+*Display '   DOIT ETRE TOUJOURS ETRE SUIVIE             -'  
+*Display '   D UNE CARTE PG DU GENRE                    -'  
+*Display '             - MOVE                           -'  
+*Display '     (et/ou) - CONST                          -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*Set NOMOVE = 0 
+*Set NOCONST = 0
+*Elseif [PG,I,1,1] = MOVE   
+*Set NOMOVE = [*NOMOVE] + 1 
+*If [*NOMOVE] > 1   
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   IL Y A PLUS D UNE CARTE PG DU GENRE        -'  
+*Display '             - MOVE                           -'  
+*Display '   APRES UNE CONDITION  (CASE OU OTHERWISE)   -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*Elseif [PG,I,1,1] = CONST  
+*Set NOCONST = [*NOCONST] + 1   
+*If [*NOCONST] > 1  
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   IL Y A PLUS D UNE CARTE PG DU GENRE        -'  
+*Display '             - CONST                          -'  
+*Display '   APRES UNE CONDITION  (CASE OU OTHERWISE)   -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*ELSE   
+*Display '-----------------------------------------------'  
+*Display '   ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR  -'  
+*Display '-----------------------------------------------'  
+*Display '   UNE CARTE PG CONTIENT UNE CLAUSE AUTRE QUE -'  
+*Display '             - CASE                           -'  
+*Display '             - MOVE                           -'  
+*Display '             - CONST                          -'  
+*Display '             - OTHERWISE                      -'  
+*Display '-----------------------------------------------'  
+*Set FLAGABORT = 1  
+*Endif  
+*Loop   
+*If [ASCII] 
+#ACOB,IE  condis2,.condis2  
+*ELSE   
+#ACOB,ITE  condis2,.condis2 
+*Endif  
+      ***------------------------------------------------------------***
+      ***                    -- CONDIS2 --  
+      ***              UTILITAIRE - CFH-COPY CONDITIONNEL            ***
+      ***------------------------------------------------------------***
+      * Type     : UTILITAIRE TRANSFERT DE ZONES CONDITIONNEL          *
+      * Analyste : SABLON                          (INITIALES)         *
+      * Auteur   : SABLON                                              *
+      * Release  : 01                              (99)                *
+      * VersIon  : 001                             (999)               *
+      *----------------------------------------------------------------*
+      * ModIfIcatIons :                                                *
+      * QuI ?  Quand ?     QuoI ?                             Projet/Ph*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      * _____  __/__/____  _________________________________  ______/__*
+      ***------------------------------------------------------------***
+
+       IDENTIFICATION DIVISION. 
+      **************************
+
+       PROGRAM-ID.  CONDIS2.
+      *-----------* 
+
+      / 
+       ENVIRONMENT DIVISION.
+      **********************
+
+       CONFIGURATION SECTION.   
+      *======================*  
+
+       SOURCE-COMPUTER.  UNIVAC-1110.   
+      *----------------*
+
+       OBJECT-COMPUTER.  UNIVAC-1110.   
+      *----------------*
+
+       SPECIAL-NAMES.   
+           PRINTER IS PRINER.   
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT FILEIN ASSIGN TO DISC FILEIN. 
+           SELECT FILEOUT ASSIGN TO DISC FILEOUT.   
+
+       DATA DIVISION.   
+      ****************  
+       FILE SECTION.
+      *------------*
+       FD  FILEIN   
+           BLOCK CONTAINS [FILEIN,1,1,2] RECORDS
+               RECORD CONTAINS [FILEIN,1,1,1] CHARACTERS
+               LABEL RECORD STANDARD
+               DATA RECORD IS FSINPUT.  
+       01  FSINPUT. 
+            02   FILLER    PIC X([FILEIN,1,1,1]).   
+
+       FD  FILEOUT  
+           BLOCK CONTAINS [FILEOUT,1,1,2] RECORDS   
+               RECORD CONTAINS [FILEOUT,1,1,1] CHARACTERS   
+               LABEL RECORD STANDARD
+               DATA RECORD IS FSOUTPUT. 
+       01  FSOUTPUT.
+           02   FILLER     PIC X([FILEOUT,1,1,1]).  
+
+       WORKING-STORAGE SECTION. 
+      ************************* 
+       01  WS-RECORD-TRANSFORME-22A-200X      PIC X.
+       01  WS-RECORD-TRANSFORME-22A-201X      PIC X.
+       01  WS-RECORD-TRANSFORME-22A-202X      PIC X.
+       01  WS-RECORD-TRANSFORME-22A-203X      PIC X.
+       01  WS-RECORD-TRANSFORME-22B-200X      PIC X.
+       01  WS-RECORD-TRANSFORME-22B-201X      PIC X.
+       01  WS-RECORD-TRANSFORME-22B-202X      PIC X.
+       01  WS-RECORD-TRANSFORME-22B-203X      PIC X.
+       01  WS-RECORD-TRANSFORME-66A-200X      PIC X.
+       01  WS-RECORD-TRANSFORME-66A-201X      PIC X.
+       01  WS-RECORD-TRANSFORME-66A-202X      PIC X.
+       01  WS-RECORD-TRANSFORME-66A-203X      PIC X.
+       01  WS-RECORD-TRANSFORME-66B-200X      PIC X.
+       01  WS-RECORD-TRANSFORME-66B-201X      PIC X.
+       01  WS-RECORD-TRANSFORME-66B-202X      PIC X.
+       01  WS-RECORD-TRANSFORME-66B-203X      PIC X.
+       01  NB-REC-TRANSFORME-22A-200X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22A-201X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22A-202X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22A-203X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22B-200X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22B-201X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22B-202X      PIC 9(6).
+       01  NB-REC-TRANSFORME-22B-203X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66A-200X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66A-201X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66A-202X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66A-203X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66B-200X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66B-201X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66B-202X      PIC 9(6).
+       01  NB-REC-TRANSFORME-66B-203X      PIC 9(6).
+       01  NB-REC-LU                PIC 9(6).   
+       01  NB-REC-ECRIT             PIC 9(6).   
+       01  NB-REC-OTHER             PIC 9(6).   
+       01  NB-REC-NONECRIT          PIC 9(6).   
+       01  WS-A6.   
+           02 WS-A6-YY. 
+              03 WS-A6-Y1           PIC X(01).  
+              03 WS-A6-Y2           PIC X(01).  
+           02 WS-A6-MM              PIC X(02).  
+           02 WS-A6-JJ              PIC X(02).  
+
+       01  WS-A8.   
+           02 WS-A8-YYY.
+              03 WS-A8-SS           PIC X(02).  
+              03 FILLER             PIC X(01).  
+           02 WS-A8-Y4              PIC X(01).  
+           02 WS-A8-MM              PIC X(02).  
+           02 WS-A8-JJ              PIC X(02).  
+
+       01  WS-A8-BIS REDEFINES WS-A8.   
+           02 ws-a8-yy              pic x(02).  
+           02 ws-a8-yymmjj          PIC X(06).  
+
+       01  WS-A4.   
+           02 WS-A4-SS              PIC X(02).  
+           02 WS-A4-AA. 
+              03 WS-A4-A1           PIC X(01).  
+              03 WS-A4-A2           PIC X(01).  
+       01  WS-A2.   
+              03 WS-A2-A1           PIC X(01).  
+              03 WS-A2-A2           PIC X(01).  
+       01  NB-REC-CASE-0            PIC 9(6).   
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*   If [PG,I,1,1] = CASE
+*      Set NOCASE = [*NOCASE] + 1   
+       01  NB-REC-CASE-[*NOCASE]    PIC 9(6).   
+
+*   Endif   
+*Loop   
+       01  ENR-INPUT.   
+              03  FILLER                PIC X([FILEIN,1,1,1]).  
+*.----------------------------------------------------------------- 
+*. enregistrement input 
+*.----------------------------------------------------------------- 
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*.  
+*. cas du case  
+*.  
+*   If [PG,I,1,1] = CASE  OR [PG,I,1,1] = OTHERWISE 
+*      Set NOCASE = [*NOCASE] + 1   
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K=[*J]-1  
+       01  ENR-CASE-[*NOCASE]-[*K]       REDEFINES ENR-INPUT.   
+*         Set L1 = [PG,I,J,1] - 1   
+*         If [*L1]>0
+           03 FILLER                   PIC X([*L1]).
+*         Endif 
+           03 CASE-[*NOCASE]-[*K]  PIC X([PG,I,J,2]).   
+*         Set L2 = [FILEIN,1,1,1] - [PG,I,J,1] - [PG,I,J,2] + 1 
+*         If [*L2]>0
+           03 FILLER                   PIC X([*L2]).
+*         Endif 
+*      Loop 
+*.  
+*. cas du move  
+*.  
+*   Elseif [PG,I,1,1] = MOVE
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K = [*J] - 1  
+       01  ENRIN-MOVE-[*NOCASE]-[*K]   REDEFINES ENR-INPUT. 
+*         Set L1 = [PG,I,J,1] - 1   
+*         If [*L1]>0
+           03 FILLER                   PIC X([*L1]).
+*         Endif 
+*         If [PG,I,J,4] 
+*             If [PG,I,J,4] = D42 AND [PG,I,J,2] = 4
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(04).   
+*             Elseif [PG,I,J,4] = D24 AND [PG,I,J,2] = 2
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(02).   
+*             Elseif [PG,I,J,4] = D22A AND [PG,I,J,2] = 2   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(02).   
+*             Elseif [PG,I,J,4] = D22B AND [PG,I,J,2] = 2   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(02).   
+*             Elseif [PG,I,J,4] = D66A AND [PG,I,J,2] = 6   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(06).   
+*             Elseif [PG,I,J,4] = D66B AND [PG,I,J,2] = 6   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(06).   
+*             Elseif [PG,I,J,4] = D86  AND [PG,I,J,2] = 8   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(08).   
+*             Elseif [PG,I,J,4] = D68  AND [PG,I,J,2] = 6   
+           03 MOVEIN-[*NOCASE]-[*K]    PIC X(06).   
+*             Else  
+*              Display '------------------------------------------------'   
+*              Display '  ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR     '   
+*              Display '------------------------------------------------'   
+*              Display ' CONTRADICTION ENTRE LA LONGUEUR DuUNE ZONE     '   
+*              Display '  ET SA DECLARATION EN DATE                     '   
+*              Display '  SI PARAM = D42 ---> la date input est en 4 pos'   
+*              Display '  SI PARAM = D24 ---> la date input est en 2 pos'   
+*              Display '  SI PARAM = D22A---> la date input est en 2 pos'   
+*              Display '  SI PARAM = D22B---> la date input est en 2 pos'   
+*              Display '  SI PARAM = D68 ---> la date input est en 6 pos'   
+*              Display '  SI PARAM = D86 ---> la date input est en 8 pos'   
+*              Display '  SI PARAM = D66A---> la date input est en 6 pos'   
+*              Display '  SI PARAM = D66B---> la date input est en 6 pos'   
+*              Display '------------------------------------------------'   
+*              Set FLAGABORT = 1
+*             Endif 
+*          Else 
+           03 MOVEIN-[*NOCASE]-[*K]  PIC X([PG,I,J,2]). 
+*          Endif
+*          Set L2 = [FILEIN,1,1,1] - [PG,I,J,1] - [PG,I,J,2] + 1
+*          If [*L2]>0   
+           03 FILLER                   PIC X([*L2]).
+*          Endif
+*       Loop
+*    Endif  
+*Loop   
+
+
+       01  ENR-OUTPUT.  
+              03  FILLER                PIC X([FILEOUT,1,1,1]). 
+*.  
+*. enregistrement output
+*.  
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*.  
+*. cas du case  
+*.  
+*   If [PG,I,1,1] = CASE  OR [PG,I,1,1] = OTHERWISE 
+*      Set NOCASE = [*NOCASE] + 1   
+*.  
+*. cas du move  
+*.  
+*   Elseif [PG,I,1,1] = MOVE
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K = [*J] - 1  
+       01  ENROUT-MOVE-[*NOCASE]-[*K]   REDEFINES ENR-OUTPUT.   
+*         Set L1 = [PG,I,J,3] - 1   
+*         If [*L1]>0
+           03 FILLER                   PIC X([*L1]).
+*         Endif 
+*         If [PG,I,J,4] 
+*            If [PG,I,J,4] = D42 AND [PG,I,J,2] = 4 
+           03 MOVEOUT-[*NOCASE]-[*K]       PIC X(02).   
+*            Elseif [PG,I,J,4] = D24 AND [PG,I,J,2] = 2 
+           03 MOVEOUT-[*NOCASE]-[*K]       PIC X(04).   
+*            Elseif [PG,I,J,4] = D22A AND [PG,I,J,2] = 2
+           03 MOVEOUT-[*NOCASE]-[*K]       PIC X(02).   
+*            Elseif [PG,I,J,4] = D22B AND [PG,I,J,2] = 2
+           03 MOVEOUT-[*NOCASE]-[*K]       PIC X(02).   
+*            Elseif [PG,I,J,4] = D66A AND [PG,I,J,2] = 6
+           03 MOVEOUT-[*NOCASE]-[*K]    PIC X(06).  
+*            Elseif [PG,I,J,4] = D66B AND [PG,I,J,2] = 6
+           03 MOVEOUT-[*NOCASE]-[*K]    PIC X(06).  
+*            Elseif [PG,I,J,4] = D86  AND [PG,I,J,2] = 8
+           03 MOVEOUT-[*NOCASE]-[*K]    PIC X(06).  
+*             Elseif [PG,I,J,4] = D68  AND [PG,I,J,2] = 6   
+           03 MOVEOUT-[*NOCASE]-[*K]    PIC X(08).  
+*            Else   
+*              Display '------------------------------------------------'   
+*              Display '  ERREUR ERREUR ERREUR ERREUR ERREUR ERREUR     '   
+*              Display '------------------------------------------------'   
+*              Display ' CONTRADICTION ENTRE LA LONGUEUR D'UNE ZONE     '   
+*              Display '  ET SA DECLARATION EN DATE                     '   
+*              Display '  SI PARAM = D42 ---> la date input est en 4 pos'   
+*              Display '  SI PARAM = D24 ---> la date input est en 2 pos'   
+*              Display '  SI PARAM = D22A---> la date input est en 2 pos'   
+*              Display '  SI PARAM = D22B---> la date input est en 2 pos'   
+*              Display '------------------------------------------------'   
+*              Set FLAGABORT = 1
+*            Endif  
+*         Else  
+           03 MOVEOUT-[*NOCASE]-[*K]  PIC X([PG,I,J,2]).
+*         Endif 
+*         If [PG,I,J,4] = D42 AND [PG,I,J,2] = 4
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 2 + 1  
+*         Elseif [PG,I,J,4] = D24 AND [PG,I,J,2] = 2
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 4 + 1  
+*         Elseif [PG,I,J,4] = D22A AND [PG,I,J,2] = 2   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 2 + 1  
+*         Elseif [PG,I,J,4] = D22B AND [PG,I,J,2] = 2   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 2 + 1  
+*         Elseif [PG,I,J,4] = D66A AND [PG,I,J,2] = 6   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 6 + 1  
+*         Elseif [PG,I,J,4] = D66B AND [PG,I,J,2] = 6   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 6 + 1  
+*         Elseif [PG,I,J,4] = D86  AND [PG,I,J,2] = 8   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 6 + 1  
+*         Elseif [PG,I,J,4] = D68  AND [PG,I,J,2] = 6   
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - 8 + 1  
+*         Else  
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,3] - [PG,I,J,2] + 1 
+*         Endif 
+*         If [*L2]>0
+           03 FILLER                   PIC X([*L2]).
+*         Endif 
+*      Loop 
+*.  
+*. cas du const 
+*.  
+*      Elseif [PG,I,1,1] = CONST
+*         Increment +J FROM 2 BY 1 TO [PG,I]
+*            Set K = [*J] - 1   
+       01  ENROUT-CONST-[*NOCASE]-[*K]   REDEFINES ENR-OUTPUT.  
+*            Set L1 = [PG,I,J,1] - 1
+*            If [*L1]>0 
+           03 FILLER                   PIC X([*L1]).
+*            Endif  
+           03 CONST-[*NOCASE]-[*K]  PIC X([PG,I,J,2]).  
+*            Set L2 = [FILEOUT,1,1,1] - [PG,I,J,1] - [PG,I,J,2] + 1 
+*            If [*L2]>0 
+           03 FILLER                   PIC X([*L2]).
+*            Endif  
+*         Loop  
+*      Endif
+*Loop   
+       PROCEDURE DIVISION.  
+      ********************  
+       DEBUT.   
+           OPEN INPUT  FILEIN   
+                OUTPUT FILEOUT. 
+           MOVE 0 TO NB-REC-LU. 
+           MOVE 0 TO NB-REC-ECRIT.  
+           MOVE 0 TO NB-REC-NONECRIT.   
+           MOVE 0 TO NB-REC-TRANSFORME-22A-200X.
+           MOVE 0 TO NB-REC-TRANSFORME-22A-201X.
+           MOVE 0 TO NB-REC-TRANSFORME-22A-202X.
+           MOVE 0 TO NB-REC-TRANSFORME-22A-203X.
+           MOVE 0 TO NB-REC-TRANSFORME-22B-200X.
+           MOVE 0 TO NB-REC-TRANSFORME-22B-201X.
+           MOVE 0 TO NB-REC-TRANSFORME-22B-202X.
+           MOVE 0 TO NB-REC-TRANSFORME-22B-203X.
+           MOVE 0 TO NB-REC-TRANSFORME-66A-200X.
+           MOVE 0 TO NB-REC-TRANSFORME-66A-201X.
+           MOVE 0 TO NB-REC-TRANSFORME-66A-202X.
+           MOVE 0 TO NB-REC-TRANSFORME-66A-203X.
+           MOVE 0 TO NB-REC-TRANSFORME-66B-200X.
+           MOVE 0 TO NB-REC-TRANSFORME-66B-201X.
+           MOVE 0 TO NB-REC-TRANSFORME-66B-202X.
+           MOVE 0 TO NB-REC-TRANSFORME-66B-203X.
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*   If [PG,I,1,1] = CASE
+*      Set NOCASE = [*NOCASE] + 1   
+           MOVE 0 TO NB-REC-CASE-[*NOCASE]. 
+*   Endif   
+*Loop   
+           MOVE 0 TO NB-REC-OTHER.  
+       TRT. 
+           READ FILEIN INTO ENR-INPUT AT END GO TO FIN-TRT. 
+           MOVE SPACES TO ENR-OUTPUT.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22A-200X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22A-201X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22A-202X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22A-203X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22B-200X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22B-201X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22B-202X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-22B-203X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66A-200X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66A-201X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66A-202X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66A-203X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66B-200X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66B-201X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66B-202X.   
+           MOVE 'N' TO WS-RECORD-TRANSFORME-66B-203X.   
+           ADD 1 TO NB-REC-LU.  
+
+*.  
+*. les conditions   
+*.  
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*.  
+*. cas du case  
+*.  
+*   If [PG,I,1,1] = CASE
+*      Set NOCASE = [*NOCASE] + 1   
+*      If [*NOCASE] <> 1
+*         Set K = [*NOCASE] - 1 
+              ADD 1 TO NB-REC-CASE-[*K] 
+              PERFORM WRITE-REC-OUTPUT THRU WRITE-REC-OUTPUT-EXIT   
+              GO TO TRT.
+*      Endif
+       CASE-[*NOCASE].  
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K = [*J] - 1  
+           IF CASE-[*NOCASE]-[*K] = '[PG,I,J,3]'
+*      Loop 
+*   Elseif [PG,I,1,1] = OTHERWISE   
+*      Set NOCASE = [*NOCASE] + 1   
+*      If NOCASE <> 1   
+*         Set K = [*NOCASE] - 1 
+              ADD 1 TO NB-REC-CASE-[*K] 
+              PERFORM WRITE-REC-OUTPUT THRU WRITE-REC-OUTPUT-EXIT   
+              GO TO TRT.
+*      Endif
+       OTHER.   
+*   Elseif [PG,I,1,1] = MOVE
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K = [*J] - 1  
+*         If [PG,I,J,4] 
+*            If [PG,I,J,4] = D24
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A2   
+              PERFORM TRANSFO-DATE-2-4  THRU TRANSFO-DATE-2-4-EXIT  
+              MOVE WS-A4 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D42
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A4   
+              PERFORM TRANSFO-DATE-4-2 THRU TRANSFO-DATE-4-2-EXIT   
+              MOVE WS-A2 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D22A   
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A2   
+              PERFORM TRANSFO-DATE-22A THRU TRANSFO-DATE-22A-EXIT   
+              MOVE WS-A2 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D22B   
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A2   
+              PERFORM TRANSFO-DATE-22B THRU TRANSFO-DATE-22B-EXIT   
+              MOVE WS-A2 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D66A   
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A6   
+              PERFORM TRANSFO-DATE-66A THRU TRANSFO-DATE-66A-EXIT   
+              MOVE WS-A6 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D66B   
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A6   
+              PERFORM TRANSFO-DATE-66B THRU TRANSFO-DATE-66B-EXIT   
+              MOVE WS-A6 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D68
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A6   
+              PERFORM TRANSFO-DATE-68  THRU TRANSFO-DATE-68-EXIT
+              MOVE WS-A8 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Elseif [PG,I,J,4] = D86
+              MOVE MOVEIN-[*NOCASE]-[*K] TO WS-A8   
+              PERFORM TRANSFO-DATE-86 THRU TRANSFO-DATE-86-EXIT 
+              MOVE WS-A6 TO MOVEOUT-[*NOCASE]-[*K]  
+*            Endif  
+*         Else  
+              MOVE MOVEIN-[*NOCASE]-[*K] TO MOVEOUT-[*NOCASE]-[*K]  
+*         Endif 
+*      Loop 
+*   Elseif [PG,I,1,1] = CONST   
+*      Increment +J FROM 2 BY 1 TO [PG,I]   
+*         Set K = [*J] - 1  
+              MOVE '[PG,I,J,3]' TO CONST-[*NOCASE]-[*K] 
+*      Loop 
+*   Endif   
+*Loop   
+*. -----------------------------------------------------
+*If [*NOOTHER]=0
+              ADD 1 TO NB-REC-CASE-[*NOCASE]
+              PERFORM WRITE-REC-OUTPUT THRU WRITE-REC-OUTPUT-EXIT   
+              GO TO TRT.
+*ELSE   
+              ADD 1 TO NB-REC-OTHER 
+              PERFORM WRITE-REC-OUTPUT THRU WRITE-REC-OUTPUT-EXIT   
+              GO TO TRT.
+*Endif  
+       CASE-NON-PREVU.  
+      *    pas d'ecriture sur le fichier de sortie .....
+           GO TO TRT.   
+
+       FIN-TRT. 
+           DISPLAY 'NB ENREGISTREMENTS LUS    = ' NB-REC-LU 
+                                UPON PRINTER.   
+           DISPLAY 'NB ENREGISTREMENTS ECRITS = ' NB-REC-ECRIT  
+                                UPON PRINTER.   
+           SUBTRACT NB-REC-ECRIT FROM NB-REC-LU GIVING NB-REC-NONECRIT. 
+           IF NB-REC-NONECRIT > 0   
+              DISPLAY '*******************************' UPON PRINTER
+              DISPLAY '*   attention                 *' UPON PRINTER
+              DISPLAY '*   certains records ne       *' UPon printer
+              DISPLAY '*   respectent aucun case     *' UPON PRInter
+              DISPLAY '*   et ne figurent donc pas   *' UPON PRInter
+              DISPLAY '*   sur le fichier output     *' UPON PRInter
+              DISPLAY '*******************************' UPON PRINTER.   
+
+*Set NOCASE = 0 
+*Increment +I FROM 1 BY 1 TO [PG]   
+*If [PG,I,1,1] = CASE   
+*Set NOCASE = [*NOCASE] + 1 
+           DISPLAY 'NB ENREGISTREMENTS CONDITION NO [*NOCASE] = '   
+                   NB-REC-CASE-[*NOCASE]   UPON PRINTER.
+*Endif  
+*Loop   
+           DISPLAY 'NB ENREGISTREMENTS OTHER = ' NB-REC-OTHER   
+                                                UPON PRINTER.   
+           display ' ' upon printer.
+           display ' ' upon printer.
+           display ' ' upon printer.
+           display ' ' upon printer.
+
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 0X --> ;X    = '
+                   NB-REC-TRANSFORME-22A-200X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 1X --> _X    = '
+                   NB-REC-TRANSFORME-22A-201X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 2X --> |X    = '
+                   NB-REC-TRANSFORME-22A-202X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22A) 3X --> ~X    = '
+                   NB-REC-TRANSFORME-22A-203X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) ;X --> 0X    = '
+                   NB-REC-TRANSFORME-22B-200X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) _X --> 1X    = '
+                   NB-REC-TRANSFORME-22B-201X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) |X --> 2X    = '
+                   NB-REC-TRANSFORME-22B-202X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (22B) ~X --> 3X    = '
+                   NB-REC-TRANSFORME-22B-203X UPON PRINTER. 
+
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 0X --> ;X    = '
+                   NB-REC-TRANSFORME-66A-200X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 1X --> _X    = '
+                   NB-REC-TRANSFORME-66A-201X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 2X --> |X    = '
+                   NB-REC-TRANSFORME-66A-202X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66A) 3X --> ~X    = '
+                   NB-REC-TRANSFORME-66A-203X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) ;X --> 0X    = '
+                   NB-REC-TRANSFORME-66B-200X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) _X --> 1X    = '
+                   NB-REC-TRANSFORME-66B-201X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) |X --> 2X    = '
+                   NB-REC-TRANSFORME-66B-202X UPON PRINTER. 
+           DISPLAY 'NB RECORDS AYANT SUBI TRANSFO (66B) ~X --> 3X    = '
+                   NB-REC-TRANSFORME-66B-203X UPON PRINTER. 
+
+           CLOSE FILEIN FILEOUT.
+           STOP RUN.
+
+       TRANSFO-DATE-4-2.
+      ******************
+           MOVE WS-A4-AA TO WS-A2.  
+           IF ((WS-A4 > '1999') AND (WS-A4 < '2010'))   
+              MOVE ';' TO WS-A2-A1. 
+           IF ((WS-A4 > '2009') AND (WS-A4 < '2020'))   
+              MOVE '_' TO WS-A2-A1. 
+           IF ((WS-A4 > '2019') AND (WS-A4 < '2030'))   
+              MOVE '|' TO WS-A2-A1. 
+           IF ((WS-A4 > '2029') AND (WS-A4 < '2040'))   
+              MOVE '~' TO WS-A2-A1. 
+
+       TRANSFO-DATE-4-2-EXIT.   
+      ******************
+           EXIT.
+
+
+       TRANSFO-DATE-2-4.
+      ******************
+           IF WS-A2 = '00'  
+              MOVE '0000' TO WS-A4  
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           IF WS-A2 = '  '  
+              MOVE '    ' TO WS-A4  
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           IF WS-A2-A1 = ';'
+              MOVE '20' TO WS-A4-SS 
+              MOVE '0'  TO WS-A4-A1 
+              MOVE WS-A2-A2  TO WS-A4-A2
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           IF WS-A2-A1 = '_'
+              MOVE '20' TO WS-A4-SS 
+              MOVE '1'  TO WS-A4-A1 
+              MOVE WS-A2-A2  TO WS-A4-A2
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           IF WS-A2-A1 = '|'
+              MOVE '20' TO WS-A4-SS 
+              MOVE '2'  TO WS-A4-A1 
+              MOVE WS-A2-A2  TO WS-A4-A2
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           IF WS-A2-A1 = '~'
+              MOVE '20' TO WS-A4-SS 
+              MOVE '3'  TO WS-A4-A1 
+              MOVE WS-A2-A2  TO WS-A4-A2
+              GO TO TRANSFO-DATE-2-4-EXIT.  
+           MOVE '19'     TO WS-A4-SS.   
+           MOVE WS-A2    TO WS-A4-AA.   
+           GO TO TRANSFO-DATE-2-4-EXIT. 
+
+       TRANSFO-DATE-2-4-EXIT.   
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-22A.
+      ******************
+           IF WS-A2-A1 = '0'
+              MOVE ';'      TO WS-A2-A1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-200X 
+              GO TO TRANSFO-DATE-22A-EXIT.  
+           IF WS-A2-A1 = '1'
+              MOVE '_'      TO WS-A2-A1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-201X 
+              GO TO TRANSFO-DATE-22A-EXIT.  
+           IF WS-A2-A1 = '2'
+              MOVE '|'      TO WS-A2-A1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-202X 
+              GO TO TRANSFO-DATE-22A-EXIT.  
+           IF WS-A2-A1 = '3'
+              MOVE '~'      TO WS-A2-A1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-22A-203X 
+              GO TO TRANSFO-DATE-22A-EXIT.  
+
+       TRANSFO-DATE-22A-EXIT.   
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-66A.
+      ******************
+           IF WS-A6 NOT NUMERIC 
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF ((WS-A6-MM > '15') or (WS-A6-MM = '00'))  
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF ((WS-A6-JJ > '35') or (WS-A6-JJ = '00'))  
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF WS-A6-Y1 = '0'
+              MOVE ';'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-200X 
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF WS-A6-Y1 = '1'
+              MOVE '_'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-201X 
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF WS-A6-Y1 = '2'
+              MOVE '|'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-202X 
+              GO TO TRANSFO-DATE-66A-EXIT.  
+           IF WS-A6-Y1 = '3'
+              MOVE '~'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66A-203X 
+              GO TO TRANSFO-DATE-66A-EXIT.  
+
+       TRANSFO-DATE-66A-EXIT.   
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-66B.
+      ******************
+           IF WS-A6-Y1 = ';'
+              MOVE '0'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-200X 
+              GO TO TRANSFO-DATE-66B-EXIT.  
+           IF WS-A6-Y1 = '_'
+              MOVE '1'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-201X 
+              GO TO TRANSFO-DATE-66B-EXIT.  
+           IF WS-A6-Y1 = '|'
+              MOVE '2'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-202X 
+              GO TO TRANSFO-DATE-66B-EXIT.  
+           IF WS-A6-Y1 = '~'
+              MOVE '3'      TO WS-A6-Y1 
+              MOVE 'Y' TO WS-RECORD-TRANSFORME-66B-203X 
+              GO TO TRANSFO-DATE-66B-EXIT.  
+
+       TRANSFO-DATE-66B-EXIT.   
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-68. 
+      ******************
+           MOVE WS-A6 TO WS-A8-YYMMJJ.  
+           MOVE '19'  to WS-A8-YY.  
+           IF WS-A6 = '      '  
+              MOVE '        ' to WS-A8  
+              GO TO TRANSFO-DATE-68-EXIT.   
+           IF WS-A6 = '000000'  
+              MOVE '00000000' to WS-A8  
+              GO TO TRANSFO-DATE-68-EXIT.   
+           IF WS-A6-Y1 = ';'
+              MOVE '200'    TO WS-A8-YYY
+              MOVE WS-A6-Y2 TO WS-A8-Y4 
+              MOVE WS-A6-MM TO WS-A8-MM 
+              MOVE WS-A6-JJ TO WS-A8-JJ 
+              GO TO TRANSFO-DATE-68-EXIT.   
+           IF WS-A6-Y1 = '_'
+              MOVE '201'    TO WS-A8-YYY
+              MOVE WS-A6-Y2 TO WS-A8-Y4 
+              MOVE WS-A6-MM TO WS-A8-MM 
+              MOVE WS-A6-JJ TO WS-A8-JJ 
+              GO TO TRANSFO-DATE-68-EXIT.   
+           IF WS-A6-Y1 = '|'
+              MOVE '202'    TO WS-A8-YYY
+              MOVE WS-A6-Y2 TO WS-A8-Y4 
+              MOVE WS-A6-MM TO WS-A8-MM 
+              MOVE WS-A6-JJ TO WS-A8-JJ 
+              GO TO TRANSFO-DATE-68-EXIT.   
+           IF WS-A6-Y1 = '~'
+              MOVE '203'    TO WS-A8-YYY
+              MOVE WS-A6-Y2 TO WS-A8-Y4 
+              MOVE WS-A6-MM TO WS-A8-MM 
+              MOVE WS-A6-JJ TO WS-A8-JJ 
+              GO TO TRANSFO-DATE-68-EXIT.   
+
+       TRANSFO-DATE-68-EXIT.
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-86. 
+      ******************
+           MOVE WS-A8-YYMMJJ TO WS-A6.  
+           IF WS-A8 NOT NUMERIC 
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF ((WS-A8-MM > '15') or (WS-A8-MM = '00'))  
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF ((WS-A8-JJ > '35') or (WS-A8-JJ = '00'))  
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF WS-A8-YYY = '200' 
+              MOVE ';'      TO WS-A6-Y1 
+              MOVE WS-A8-Y4 TO WS-A6-Y2 
+              MOVE WS-A8-MM TO WS-A6-MM 
+              MOVE WS-A8-JJ TO WS-A6-JJ 
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF WS-A8-YYY = '201' 
+              MOVE '_'      TO WS-A6-Y1 
+              MOVE WS-A8-Y4 TO WS-A6-Y2 
+              MOVE WS-A8-MM TO WS-A6-MM 
+              MOVE WS-A8-JJ TO WS-A6-JJ 
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF WS-A8-YYY = '202' 
+              MOVE '|'      TO WS-A6-Y1 
+              MOVE WS-A8-Y4 TO WS-A6-Y2 
+              MOVE WS-A8-MM TO WS-A6-MM 
+              MOVE WS-A8-JJ TO WS-A6-JJ 
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF WS-A8-YYY = '203' 
+              MOVE '~'      TO WS-A6-Y1 
+              MOVE WS-A8-Y4 TO WS-A6-Y2 
+              MOVE WS-A8-MM TO WS-A6-MM 
+              MOVE WS-A8-JJ TO WS-A6-JJ 
+              GO TO TRANSFO-DATE-86-EXIT.   
+           IF WS-A8-SS = '19'   
+              MOVE WS-A8-YYMMJJ   TO WS-A6  
+              GO TO TRANSFO-DATE-86-EXIT.   
+
+       TRANSFO-DATE-86-EXIT.
+      ******************
+           EXIT.
+
+       TRANSFO-DATE-22B.
+      ******************
+           IF WS-A2-A1 = ';'
+              MOVE '0'      TO WS-A2-A1 
+              move 'Y' TO WS-RECORD-TRANSFORME-22B-200X 
+              GO TO TRANSFO-DATE-22B-EXIT.  
+           IF WS-A2-A1 = '_'
+              MOVE '1'      TO WS-A2-A1 
+              move 'Y' TO WS-RECORD-TRANSFORME-22B-201X 
+              GO TO TRANSFO-DATE-22B-EXIT.  
+           IF WS-A2-A1 = '|'
+              MOVE '2'      TO WS-A2-A1 
+              move 'Y' TO WS-RECORD-TRANSFORME-22B-202X 
+              GO TO TRANSFO-DATE-22B-EXIT.  
+           IF WS-A2-A1 = '~'
+              MOVE '3'      TO WS-A2-A1 
+              move 'Y' TO WS-RECORD-TRANSFORME-22B-203X 
+              GO TO TRANSFO-DATE-22B-EXIT.  
+
+       TRANSFO-DATE-22B-EXIT.   
+      ******************
+           EXIT.
+
+       WRITE-REC-OUTPUT.
+      *******************   
+           ADD 1 TO NB-REC-ECRIT.   
+           IF WS-RECORD-TRANSFORME-22A-200X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22A-200X.  
+           IF WS-RECORD-TRANSFORME-22A-201X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22A-201X.  
+           IF WS-RECORD-TRANSFORME-22A-202X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22A-202X.  
+           IF WS-RECORD-TRANSFORME-22A-203X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22A-203X.  
+           IF WS-RECORD-TRANSFORME-22B-200X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22B-200X.  
+           IF WS-RECORD-TRANSFORME-22B-201X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22B-201X.  
+           IF WS-RECORD-TRANSFORME-22B-202X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22B-202X.  
+           IF WS-RECORD-TRANSFORME-22B-203X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-22B-203X.  
+           IF WS-RECORD-TRANSFORME-66A-200X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66A-200X.  
+           IF WS-RECORD-TRANSFORME-66A-201X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66A-201X.  
+           IF WS-RECORD-TRANSFORME-66A-202X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66A-202X.  
+           IF WS-RECORD-TRANSFORME-66A-203X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66A-203X.  
+           IF WS-RECORD-TRANSFORME-66B-200X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66B-200X.  
+           IF WS-RECORD-TRANSFORME-66B-201X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66B-201X.  
+           IF WS-RECORD-TRANSFORME-66B-202X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66B-202X.  
+           IF WS-RECORD-TRANSFORME-66B-203X = 'Y'   
+              ADD 1 TO NB-REC-TRANSFORME-66B-203X.  
+
+           WRITE FSOUTPUT FROM ENR-OUTPUT.  
+
+       WRITE-REC-OUTPUT-EXIT.   
+      ************************  
+           EXIT.
+
+
+
+#MAP,N  ASSURFED*UTILITASCII.MAP,TPF$.CONDIS2   
+*If [*FLAGABORT] = 1
+*ABORT  
+*Endif  

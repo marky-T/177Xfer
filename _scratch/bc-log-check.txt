@@ -1,0 +1,18 @@
+=== E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261019\FederaleBatchController.Log (8055 bytes)
+9: ** AmtService started at : 2026-10-19 11:16:49 **
+29: 20261019 11:17:15.746 12 Warning Unhandled job found, ProcessJobId: 30 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+30: 20261019 11:17:15.777 12 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 30 Queue: JOB_QUEUE1
+31: 20261019 11:17:15.777 12 Warning Unhandled job found, ProcessJobId: 31 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+32: 20261019 11:17:15.785 12 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 31 Queue: JOB_QUEUE1
+48: ** AmtService started at : 2026-10-19 11:19:44 **
+66: 20261019 11:20:08.154 12 Warning Unhandled job found, ProcessJobId: 30 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+67: 20261019 11:20:08.170 12 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 30 Queue: JOB_QUEUE1
+68: 20261019 11:20:08.171 12 Warning Unhandled job found, ProcessJobId: 31 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+69: 20261019 11:20:08.171 12 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 31 Queue: JOB_QUEUE1
+=== E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261020\FederaleBatchController.Log (8224 bytes)
+9: ** AmtService started at : 2026-10-19 11:19:44 **
+56: ** AmtService started at : 2026-10-20 10:01:38 **
+74: 20261020 10:01:41.791 11 Warning Unhandled job found, ProcessJobId: 30 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+75: 20261020 10:01:41.804 11 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 30 Queue: JOB_QUEUE1
+76: 20261020 10:01:41.804 11 Warning Unhandled job found, ProcessJobId: 31 Name: ASSURFED_UTILIT_CFH_COPY Status: Queued
+77: 20261020 10:01:41.805 11 Information ASSURFED_UTILIT_CFH_COPY Queued Id: 31 Queue: JOB_QUEUE1

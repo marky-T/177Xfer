@@ -1,0 +1,5 @@
+Stage Package, environment CC-Trial, started 2026-10-22 00:01:42
+FAIL Package        regression current             1 job(s) without a PASS newer than the last delivery: run -Stage Regress
+PASS Package        deployed set == utilities.json 8 utilities, 13 skeleton entries checked, problems: 0
+PASS Package        built == imported              both LionSources equal what LionDev generated the delivered programs from
+=== Package : 1 failure(s)

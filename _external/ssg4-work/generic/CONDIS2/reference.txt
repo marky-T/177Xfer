@@ -1,0 +1,13 @@
+D42 static ASSURFED_UTILIT_CONDIS2_ASCII.dll vs model: PASS FILEOUT.DAT matches the expected file (8442 bytes)
+Stop-Process: E:\Repos\SsgTrial\Conversion\Pipeline\MockTest\MockFc.ps1:5:54
+Line |
+   5 |  . like 'E:\AMT_Work\MockSystem\FC\*') { Stop-Process -Id $_.Id -Force }
+     |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find a process with the process identifier 58320.
+UE static ASSURFED_UTILIT_CONDIS2_RV.dll vs model: PASS FILEOUT.DAT matches the expected file (5092 bytes)
+Stop-Process: E:\Repos\SsgTrial\Conversion\Pipeline\MockTest\MockFc.ps1:5:54
+Line |
+   5 |  . like 'E:\AMT_Work\MockSystem\FC\*') { Stop-Process -Id $_.Id -Force }
+     |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find a process with the process identifier 14396.
+DT static ASSURFED_UTILIT_CONDIS2_RD.dll vs model: PASS FILEOUT.DAT matches the expected file (4320 bytes)

@@ -1,0 +1,6 @@
+ASCII
+OUTPUT     OUTB,200,10
+NUM        3
+FLDSEL     0
+MOD        0
+LIST       YES

@@ -1,0 +1,16 @@
+ASSURFED-UTILIT-CFH-COPY-ASCII: oldLines=55 newLines=55 differingLines=0
+ASSURFED-UTILIT-FUSBA2-ASCII: oldLines=162 newLines=172 differingLines=10
+    => 03 COMPARE-FILE-1-FIELD-1
+    => PIC  X(6).
+    => 03  FILLER  PIC  X(1).
+    => 03 COMPARE-FILE-1-FIELD-2
+    => PIC  X(1).
+    => 03 FILLER   PIC X(62).
+    => 03  COMPARE-FILE-2-FIELD-1   PIC  X(6).
+    => 03  FILLER                   PIC  X(1).
+    => 03  COMPARE-FILE-2-FIELD-2   PIC  X(1).
+    => 03  FILLER                   PIC  X(176).
+ASSURFED-UTILIT-LECTIS-ASCII: oldLines=181 newLines=181 differingLines=0
+ASSURFED-UTILIT-LOADIS-ASCII: oldLines=71 newLines=71 differingLines=0
+ASSURFED-UTILIT-RECAP: oldLines=489 newLines=489 differingLines=0
+ASSURFED-UTILIT-UNLOADIS-ASCII: oldLines=63 newLines=63 differingLines=0

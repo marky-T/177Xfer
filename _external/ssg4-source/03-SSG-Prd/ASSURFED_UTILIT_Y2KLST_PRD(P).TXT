@@ -1,0 +1,29 @@
+*.  
+*Set STRINGCHAR$ = '*'  
+*.  
+*. >>>>>>>>>// DEBUT DE LA BOUCLE DANS LA LISTE DES FICHIERS A TRAITER  
+*Increment I from 1 to [FILE]   
+*If [FILE,I,2,1]
+*    If [FILE,I,2,1] = NO   
+*        Iterate I  
+*    Endif  
+*Endif  
+#ERS TPF$.  
+*Set QUALIF = '[FILE,I,1,1,BSTR$]'  
+*Set NOMFIC = '[FILE,I,1,1,ASTR$]'  
+#MSG ***/ FICHIER A TRAITER : [*QUALIF]*[*NOMFIC]   
+@XQT,E SYS$LIB$*RSA.RSAC-COIVP  
+BEGIN THREAD FOR UDSSRC READ;   
+USE DEFAULT QUALIFIER AFLINC;   
+DECLARE JLH1 CURSOR SELECT dat_xqt, typ_rul, num_seq_001, num_seq_002,  
+                           rul_001, rul_002, rul_003, rul_004,  
+                           rul_005, rul_006 
+  FROM y2d001   
+       where nom_fch = '[*QUALIF]*[*NOMFIC]'
+                               ;
+DISPLAY NEXT 999 OF JLH1;   
+END THREAD; 
+EXIT;   
+*Loop   
+*.  
+*. =====================================================// Fin Y2KUTI   

@@ -1,0 +1,29 @@
+
+=== 1. Inputs
+cards: E:\Repos\ssg4-work\sgs-cards   skeletons: E:\Repos\SsgTrial\SsgConverter\Examples\Output   programs: CFH-COPY_ASCII, FUSBA2_ASCII, LECTIS_ASCII, LOADIS_ASCII, RECAP, UNLOADIS_ASCII
+
+=== 2. Expand skeletons and convert the COBOL (one application)
+
+ProgramId                      Runstream                        Line CallsAvailable
+---------                      ---------                        ---- --------------
+ASSURFED-UTILIT-CFH-COPY-ASCII ASSURFED_F999RUN_AFPH12(P).TXT   427              47
+ASSURFED-UTILIT-FUSBA2-ASCII   ASSURFED_F999RUN-d_VIRD03(P).TXT 766               4
+ASSURFED-UTILIT-LECTIS-ASCII   ASSURFED_F999RUN_CCTA09(P).TXT   479               1
+ASSURFED-UTILIT-LOADIS-ASCII   ASSURFED_F999RUN_CLOA49(P).TXT   141               9
+ASSURFED-UTILIT-RECAP          ASSURFED_F999RUN_CCTA08(P).TXT   287              28
+ASSURFED-UTILIT-UNLOADIS-ASCII ASSURFED_F999RUN_CLOA43(P).TXT   473               4
+
+
+Application : AFBUS_2200COBOL   programs: 6
+Converter   : exit 0, errors 0, warnings 7, 63,995 bytes
+LionSource  : E:\Repos\ssg4-work\release\cobol\out\AFBUS_2200COBOL.LionSource
+
+=== 3. What changed since the last import
+No difference: the LionSource is the same as the one already imported.
+
+=== 4. Now in LionDev 177 (manual)
+  1. File > Import > Lion Source File: E:\Repos\ssg4-work\release\cobol\out\AFBUS_2200COBOL.LionSource
+  2. Revision Control (F12): Get newest on every program (Programs tab) and on System > Application; nothing may show '* New *'.
+  3. Generation (F6) > Programs > Whole system. Keep the generator window (LionDevGenNet) open; it must have been started after Lion.ini had a working DBPSSW.
+  4. Wait for 'Generated: n Not Generated: 0'. If the DMS schema changed the generator also says the database reorganise is needed.
+  Then run:  pwsh -NoProfile -File E:\Repos\SsgTrial\Conversion\Pipeline\Invoke-Ssg4Release.ps1 -Stage Verify
