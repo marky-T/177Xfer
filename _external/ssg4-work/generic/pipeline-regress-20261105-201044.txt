@@ -1,0 +1,6 @@
+Stage Regress, environment CC-Trial, started 2026-11-05 20:10:44
+PASS prepare        Prepare-CondisCc.ps1           inputs, job scripts and hand-offs staged
+PASS prepare        Prepare-CondisSCc.ps1          inputs, job scripts and hand-offs staged
+FAIL SSG4_CONDIS_CASES regression                     PASS 2026-11-05 17:51:04 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_CONDIS2S_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_CONDIS2S_CASES'), then -Stage Regress -Job SSG4_CONDIS2S_CASES -StartLine '<ccStartJob line>'
+=== Regress : 2 failure(s)

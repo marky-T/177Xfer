@@ -1,0 +1,2648 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from an A-Series environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='Y'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default
+  
+-->
+<ROUTINES>
+
+<OBJECT name='ADD-TIMEUNITS' description='Add time units to specified date or time'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  daypos : integer value 1
+  daynum : alpha 2 value '00'
+booleans
+
+end_definitions
+
+
+routine main (intime string, informat string, units integer, unitformat alpha 1, outformat: realstring optional): realstring
+var
+    i_time   : integer
+    s_format : string
+begin_routine
+    if outformat = '' then outformat := informat
+    if intime = 'TODAY'
+      s_format := ''
+    else
+      s_format := informat
+    endif
+    if unitformat in ['M', 'Y'] //preserve day number, even if it's invalid
+      asy-string := unstring (informat, daypos, 'DD')
+      daypos -= 2
+      if copy(informat, daypos, 2) = 'DD'
+        daynum := copy (intime, daypos, 2)
+        if daynum > '28'
+          replace (intime, daypos, '01')
+        endif
+      endif
+    endif
+    i_time := xtime (intime, s_format, units, unitformat)
+    result := xtimeformat (i_time, outformat)
+    if daynum > '28'
+      if outformat <> informat
+        daypos := 1
+        asy-string := unstring (outformat, daypos, 'DD')
+        daypos -= 2
+      endif
+      if copy(outformat, daypos, 2) = 'DD'
+        replace (result, daypos, daynum)
+      endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='ASY-SENDTOPRINTER' description='Process COMS output string as print data'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+    cr      : alpha 1 value '@0D@'
+    crlf    : alpha 2 value '@0D@@0A@'
+    lf      : alpha 1 value '@0A@'
+    ws-null : structure
+      asy-filler-1 : numeric 2 comp value 0
+    end_structure
+    esc            : alpha 1 value '@1B@'
+    finaltag       : alpha 2 value '@1b@E'
+    reclen         : integer value 96 // 1 added for CR each unstring
+var
+    len            : integer
+    partlen        : integer
+    pos-cr         : integer
+    pos-crlf       : integer
+    prevpos        : integer
+    countcr        : integer
+    countlf        : integer
+    printbuffer    : list(alpha 2000)
+    ix_buffer      : integer
+    save_msgrecord : alpha 2000
+    msgpart        : realstring
+    leftover       : realstring
+
+    null_count     : integer
+    ff_count       : integer
+    lf_count       : integer
+    firstline      : boolean
+    b_escape       : boolean
+    prev_escape    : boolean
+booleans
+
+end_definitions
+
+routine main (s_msg : realstring, s_dest : string)
+begin_routine
+    null_count := 0
+    inspect (s_msg)
+        counting (null_count, trailing, ws-null)
+    endinspect
+    if null_count > 0
+        s_msg := copy (s_msg, 1, length(s_msg) - null_count)
+    endif
+    if (s_msg = finaltag)
+        if (leftover <> '')
+          printrecord (leftover)
+        endif
+        freeoutput ()
+        prout.printer := ''
+        exit
+    endif
+    if (prout.printer = '')
+        if (leftover <> '')
+          s_msg := leftover & s_msg
+          leftover := ''
+        endif
+        prout.maxlines       := 0
+        prout.hookparameters := 'NOTRANS'
+        prout.printer        := s_dest
+    endif
+    b_escape  := (copy(s_msg, 1, 1) = esc)
+    firstline := true
+    pos-crlf    := 1
+    len       := length (s_msg)
+    pos-cr    := 1
+    loop
+        prevpos   := pos-cr
+        msgpart := unstring (s_msg, pos-cr, cr, false)
+        //Check if the line contains a FF
+        //The last FF should not be printed, because this would mean an empty page
+        lf_count  := 0
+        ff_count  := 0
+        inspect (msgpart)
+            counting (lf_count, all, lf)
+            counting (ff_count, all, '')
+            replacing (all, ws-null, ' ')
+        endinspect
+
+        if length (msgpart) = lf_count + ff_count
+            printbuffer.add(msgpart)
+        //This is to prevent a last empty line is being printed
+        //PO50 always printed a 2nd page because of an empty line at the end
+        else
+            if (prevpos + length(msgpart) > len)
+                leftover := msgpart
+                break
+            endif
+            if printbuffer.count > 0
+                save_msgrecord := msgpart
+                loop for ix_buffer := 1 to printbuffer.count
+                    printrecord (printbuffer[ix_buffer])
+                endloop
+                printbuffer.clear ()
+                msgpart := save_msgrecord
+            endif
+            printrecord (msgpart)
+        endif
+        if pos-cr > len then break
+    endloop
+    prev_escape := b_escape
+end_routine
+
+
+routine printrecord (printstring: string)
+begin_routine
+    if copy(printstring, 1, 1) = ''
+        if prout.linesprinted > 0 then skip(top)
+        printstring := copy(printstring, 2)
+    endif
+    lf_count := 0
+    inspect(printstring)
+        counting (lf_count, leading, lf)
+    endinspect
+    if lf_count > 0
+        skip(lf_count - 1)
+        printstring := copy(printstring, lf_count + 1)
+    endif
+    msgrec := printstring
+    if (lf_count > 0) or (firstline and (not b_escape) and (not prev_escape) )
+        print (msgrec)
+    else
+        print (msgrec, noskip)
+    endif
+    firstline := false
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='END-TRANS' description='Commit after predetermined number of loops'>
+<OPTIONS kind='I' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+    gi-trans += 1
+    if b_always or (gi-trans >= gi-end-trans)
+        if z-dms1-trans-state = 1 then commit ()
+        z-dms1-trans-state := 0
+        gi-trans           := 0
+    endif
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='END-TRANS-AUDIT' description='Commit and audit after predetermined number of loops'>
+<OPTIONS kind='I' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+    gi-trans += 1
+    if b_always or (gi-trans >= gi-end-trans)
+        if z-dms1-trans-state = 1
+            if testrequest (req-restartareas, gc-add)
+                restartareas.insert ()
+                testdbstatus (gc-add, 'RESTARTAREAS')
+            else
+                restartareas.update (*)
+                testdbstatus (gc-chg, 'RESTARTAREAS')
+            endif
+            req-restartareas := gc-chg
+            commit ()
+            restartareas.findcurrent (recno_restartareas, locked)
+        endif
+        z-dms1-trans-state := 0
+        gi-trans           := 0
+    endif
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='GENTEMPFILE' description='Generate temp file name'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_pos : integer
+  s_tmp : string
+
+booleans
+
+end_definitions
+
+
+routine main(ps_filename: string): string
+begin_routine
+  // check if ps_filename contains lion.var-param.file-path. this part of
+  // ps_filename will be removed. only the file itself will be modified.
+  i_pos := 1
+  s_tmp := unstring(ps_filename, i_pos, lion.var-param.file-path)
+  if s_tmp = ''
+    // lion.var-param.file-path found in ps_filename. s_tmp contains the
+    // part of ps_filename before the lion.var-param.file-path.
+    ps_filename := unstring(ps_filename, i_pos, lion.var-param.file-path)
+  else
+    ps_filename := s_tmp
+  endif
+  ps_filename := asy-filename(ps_filename + ' ON TEMP')
+  s_tmp := ps_filename & '.' & si-unique
+  result := s_tmp
+end_routine
+
+</CODE>
+</OBJECT>
+
+
+<OBJECT name='HOSTNAME' description='Return server name'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main : string
+begin_routine    
+    result := si-servername
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SET-EDIT-ERROR' description='Show error message and set highlight indicator'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s-msg: string optional): alpha 1
+begin_routine
+    lasterror    := true
+    b-edit-error := true
+    if s-msg = gc-no-msg
+        asy-error-message := ''
+    elseif s-msg <> ''
+        if asy-error-message <> ''
+            asy-error-message &= ' ' & s-msg & ';'
+        else
+            asy-error-message := s-msg & ';'
+        endif
+    endif
+    result := gc-att-highlight
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='ABSENT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (n_state: numeric 1 optional): boolean
+begin_routine
+  if n_state = 0 then n_state := current-state
+  result := (n_state > 2)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='CALC-SCROLL-LINE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+
+begin_definitions
+const
+
+var
+  a_action   : alpha 1
+  a_char     : alpha 1
+  i_char     : integer
+  i_scroll   : integer
+  new_page   : integer
+booleans
+
+end_definitions
+
+
+routine main (a_input: alpha 5, i_pagesize: integer): alpha 5
+begin_routine
+  if (scroll-line = 0)
+    scroll-line := 1
+    scroll-page := 1
+  endif
+  //determine action
+  loop for i_char := 1 to 5
+    a_char := copy(a_input, i_char, 1)
+    if a_char in ['+', '-', '>', '<', '@']
+      a_action := a_char
+      replace (a_input, i_char, ' ')
+      break
+
+    elseif a_input in ['L', '.'] //advance to last duplicate
+      scroll-line := 900000 //page is calculated in program
+      result := '-'
+      exit
+    endif
+  endloop
+  //determine number
+  a_input := trim(a_input)
+  i_scroll := strtoint (a_input)
+  if a_input = '' //presume 1
+    i_scroll := 1
+  endif
+
+  //compute new scroll line depending on action and number
+  new_page := 0
+  startcase a_action
+  case ' ' //absolute page
+    result := '+'
+    new_page := i_scroll
+  case '+' //advance number of pages
+    result := '+'
+    new_page := scroll-page + i_scroll
+  case '-' //backup  number of pages
+    result := '-'
+    new_page := scroll-page - i_scroll
+    scroll-line := 0 //enforce new calculation if new_page <= 0
+  case '>' //advance number of entries
+    result := '>' & a_input
+    scroll-line += i_scroll
+  case '<' //backup  number of entries
+    result := '<' & a_input
+    scroll-line -= i_scroll
+  case '@' //absolute entry
+    result := '+'
+    scroll-line := i_scroll
+  endcase
+
+  if new_page > 0
+    scroll-line := (new_page - 1) * i_pagesize + 1
+    scroll-page := new_page
+  elseif scroll-line <= 1
+    scroll-line := 1
+    scroll-page := 1
+    result := '+'
+  else
+    calc-scroll-page (i_pagesize, scroll-line) //scroll-page is calculated
+  endif
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='CALC-SCROLL-PAGE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (i_pagesize: integer, i_scrolline: integer) : integer
+begin_routine
+  scroll-page := i_scrolline / i_pagesize
+  if (scroll-line mod i_pagesize) > 0
+    scroll-page += 1
+  endif
+  result := scroll-page
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='DONE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (n_state: numeric 1 optional): boolean
+begin_routine
+  if n_state = 0 then n_state := current-state
+  result := (n_state = 4)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='NONE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (n_state: numeric 1 optional): boolean
+begin_routine
+  if n_state = 0 then n_state := current-state
+  result := (n_state = 3)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='NUMTOSTR' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (i_in: integer, i_len : integer): string
+begin_routine
+  result := copy (i_in, 1)
+  result := copy('000000000000000000000000000', 1, i_len - length(result)) + result
+  if i_in < 0 then result := '-' & copy (i_in, 1)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='PRESENT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (n_state: numeric 1 optional): boolean
+begin_routine
+  if n_state = 0 then n_state := current-state
+  result := (n_state = 2)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='RESET-STATE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (var n_state: numeric 1)
+begin_routine
+    n_state := 1
+    resok := true //resok remaining false could cause trouble
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SET-STATE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (var n_state: numeric 1)
+begin_routine
+  if resok
+    n_state := 2 //results in present
+  else
+    if n_state < 2
+       n_state := 3 //results in absent / none 
+    else
+       n_state := 4 //results in absent / done 
+    endif
+  endif
+  current-state := n_state
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SPELLAMOUNT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  inarr  : numeric 1 [17]
+  instr  : string
+  runlth : numeric 2 value 18
+  runamt : numeric 17.2
+  outstr : string
+  //vars used in spell999
+  teenarray : alpha 10 [19]
+  tenarray  : alpha 10 [9]
+  intot     : numeric 2
+
+booleans
+
+end_definitions
+
+
+routine main (inamt financial 17.2, no-zero-cents boolean optional): string
+begin_routine
+  teenarray[1]  := 'One'
+  teenarray[2]  := 'Two'
+  teenarray[3]  := 'Three'
+  teenarray[4]  := 'Four'
+  teenarray[5]  := 'Five'
+  teenarray[6]  := 'Six'
+  teenarray[7]  := 'Seven'
+  teenarray[8]  := 'Eight'
+  teenarray[9]  := 'Nine'
+  teenarray[10] := 'Ten'
+  teenarray[11] := 'Eleven'
+  teenarray[12] := 'Twelve'
+  teenarray[13] := 'Thirteen'
+  teenarray[14] := 'Fourteen'
+  teenarray[15] := 'Fifteen'
+  teenarray[16] := 'Sixteen'
+  teenarray[17] := 'Seventeen'
+  teenarray[18] := 'Eighteen'
+  teenarray[19] := 'Ninteen'
+  
+  tenarray[2]   := 'Twenty'
+  tenarray[3]   := 'Thirty'
+  tenarray[4]   := 'Forty'
+  tenarray[5]   := 'Fifty'
+  tenarray[6]   := 'Sixty'
+  tenarray[7]   := 'Seventy'
+  tenarray[8]   := 'Eighty'
+  tenarray[9]   := 'Ninety'
+
+  inarr[] := inamt
+  instr   := format(inamt)
+  runlth  := length(instr)
+  runamt  := inamt
+
+  if runlth > 15
+      outstr := spell999(inarr[1], inarr[2], inarr[3]) + ' Trillion'
+      RUNLTH := RUNLTH -3
+  endif
+  if runlth > 12
+      if inarr[4] + inarr[5] + inarr[6] <> 0
+          if outstr <> '' then outstr := outstr + ', '
+          outstr := outstr + spell999(inarr[4], inarr[5], inarr[6]) + ' Billion'
+      endif
+      runlth := runlth -3
+  endif
+  if runlth > 9
+      if inarr[7] + inarr[8] + inarr[9] <> 0
+          if outstr <> '' then outstr := outstr + ', '
+          outstr := outstr + spell999(inarr[7], inarr[8], inarr[9]) + ' Million'
+      endif
+      runlth := runlth -3
+  endif
+  if runlth > 6
+      if inarr[10] + inarr[11] + inarr[12] <> 0
+          if outstr <> '' then outstr := outstr + ', '
+          outstr := outstr + spell999(inarr[10], inarr[11], inarr[12]) + ' Thousand'
+      endif
+      runlth := runlth -3
+  endif
+  if runlth > 3
+      if inarr[13] + inarr[14] + inarr[15] <> 0
+          if outstr <> '' then outstr := outstr + ', '
+          outstr := outstr + spell999(inarr[13], inarr[14], inarr[15])
+      endif
+      runlth := runlth -3
+  endif
+  if runlth <= 3
+      if outstr <> '' then outstr := outstr + ', AND'
+      if inarr[16] + inarr[17] = 0 and no-zero-cents = false then outstr := outstr + ' XX/100'
+      if inarr[16] + inarr[17] <> 0 then outstr := outstr + ' ' + inarr[16] + '' + inarr[17] + '/100'
+  endif
+  result := suc(trim(outstr))
+end_routine
+
+routine spell999 (inhun numeric 1, inten numeric 1, inone numeric 1): string
+begin_routine  
+  intot         := inten + '' + inone
+  
+  if intot = 0
+      result := ''
+  elseif intot < 20
+      result := teenarray[intot]
+  else
+      result := tenarray[inten] + '-' + teenarray[inone]
+  endif
+  
+  if inhun > 0 and intot <> 0 then  result := teenarray[inhun] + ' Hundred and ' + result
+  if inhun > 0 and intot = 0 then  result := teenarray[inhun] + ' Hundred ' + result
+  
+  result := ' ' + result
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='STRTONUM' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  temp   : string
+  invoer : structure
+    voor : structure
+      voorpos : alpha 1 [18]
+    end_structure
+    achter : structure
+      achterpos : alpha 1 [18]
+    end_structure
+  end_structure
+  uitvoer     : numeric 36.18 redefines invoer
+  pos         : integer
+  pos1        : integer
+  sign        : signed 1 value 1
+  signfound   : boolean value false
+  numberfound : boolean
+  thousandcnt : integer
+
+booleans
+
+end_definitions
+
+
+routine main (inp : string ) : signed 36.18
+begin_routine
+  setto('0',invoer)
+  resok := true
+  pos1  := 1
+  pos   := 1
+  temp  := unstring (inp,pos1,'.')
+  //replace leading and trailing spaces by zeroes
+  replace(voor,19 - length(temp),temp)
+  // sign trailing no decimals
+  if pos1 <= length(inp)
+      achter := copy(inp,pos1)
+  // end replace leading and trailing spaces by zeroes
+  elseif voorpos[18] = '-'
+      sign      := -1
+      signfound := true
+      setto('0',voor)
+      temp := unstring(voor,pos,'')
+      setto('0',voor)
+      replace(voor,19 - length(temp),temp)
+  elseif voorpos[18] = '+'
+      sign      := +1
+      signfound := true
+      temp      := unstring(voor,pos,'')
+      setto('0',voor)
+      replace(voor,19 - length(temp),temp)
+  endif
+  //end sign trailing no decimals
+      
+  thousandcnt := 0
+  temp        := ''
+  loop for pos := 1 to 18
+      if numeric(voorpos[pos])
+          if voorpos[pos] > '0' then numberfound := true  // only numeric and , allowed
+          temp += voorpos[pos]
+          if thousandcnt > 0 then thousandcnt += 1
+      elseif numberfound
+          if voorpos[pos] = ','
+              if not thousandcnt in [0,1,4]   // after a thousand seperator three numerics are needed
+                  resok  := false
+                  result := 0
+                  exit module
+              endif
+              temp        := '0' & temp
+              thousandcnt := 1
+          else
+              resok  := false
+              result := 0
+              exit module
+          endif
+      elseif voorpos[pos] = ''   // could be sign is separated by space(s)
+          temp += '0'
+      elseif voorpos[pos] = '+'
+          if signfound
+              resok  := false
+              result := 0
+              exit module
+          endif
+          temp      := '0' & temp
+          sign      := 1
+          signfound := true
+      elseif voorpos[pos] = '-'
+          if signfound
+              resok  := false
+              result := 0
+              exit module
+          endif
+          temp      := '0' & temp
+          sign      := -1
+          signfound := true
+      else
+          resok  := false
+          result := 0
+          exit module
+      endif
+  endloop
+  if not thousandcnt in [0,1,4]
+      resok  := false
+      result := 0
+      exit module
+  endif
+  voor        := temp
+  numberfound := false
+  loop for pos := length(inp) - (pos1 - 1) downto 1
+      if numeric(achterpos[pos])
+          numberfound := true
+      elseif numberfound
+          resok  := false
+          result := 0
+          exit module
+      elseif achterpos[pos] = ''  // could be trailing sign is separated by space(s)
+          achterpos[pos] := '0'
+      elseif achterpos[pos] = '+'
+          if signfound
+              resok  := false
+              result := 0
+              exit module
+          endif
+          achterpos[pos] := '0'
+          sign           := 1
+          signfound      := true
+      elseif achterpos[pos] = '-'
+          if signfound
+              resok  := false
+              result := 0
+              exit module
+          endif
+          achterpos[pos] := '0'
+          sign           := -1
+          signfound      := true
+      else
+          resok  := false
+          result := 0
+          exit module
+      endif
+  endloop
+  result := uitvoer * sign
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='TESTALPHAPLUS' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i : integer
+  sa-1 : alpha 1
+
+booleans
+
+end_definitions
+
+
+routine main (inparam: string, plusvalue: string): boolean
+begin_routine
+  result := true
+  if alphabetic(inparam)
+    exit
+  endif
+  loop for i := 1 to length(inparam)
+    sa-1 := copy(inparam, i, 1)
+    if not (sa-1 in [plusvalue])
+      result := false
+      exit
+    endif
+  endloop
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='TESTDATE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s_date: string optional, s_format: string optional, required: boolean optional): boolean
+begin_routine
+  if (not required) and (strtoint(s_date) = 0)
+     result := true
+  else
+     result := (xtime (s_date, s_format) > 0)
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='TESTNUMERIC' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (rs_num: realstring): boolean
+begin_routine
+  inspect (rs_num)
+    replacing (leading, ' ', '0')
+  endinspect
+  result := numeric (rs_num)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='TESTNUMERICFMT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    ch_sign : alpha 1 value ' '
+    n_dec   : numeric 18.18
+    a_dec   : alpha 18 value '000000000000000000'
+    ar_num  : alpha 1[36]
+    i_cnt,
+    i_pos,
+    i_len   : integer
+    s_num,
+    s_dec   : string
+    b_lead,
+    b_sep   : boolean
+
+booleans
+
+end_definitions
+routine main (s_in: string, i_dig: integer optional, i_dec: integer optional): boolean
+begin_routine
+    result        := false
+    z-ns-results  := 1
+    z-ns-dec-found := 0
+    asy-auxnumfmt := 0
+    //z-ns-dec-format := 0
+    if s_in = '' //empty input is interpreted as zero
+        z-ns-results  := 0
+        result := true
+        exit
+    endif
+    if i_dig = 0 and i_dec = 0
+        i_dig := 18
+        i_dec := 18
+    endif
+    ar_num[] := trim (s_in)
+    i_len    := length (ar_num[])
+    //first, strip the sign off
+    if ar_num[1] in ['+', '-']
+        ch_sign  := ar_num[1]
+        ar_num[] := trim (copy (ar_num[], 2))
+    elseif ar_num[i_len] in ['+', '-']
+        ch_sign  := ar_num[i_len]
+        ar_num[] := trim (copy (ar_num[], 1, i_len - 1))
+    endif
+    if ch_sign <> ' ' then i_len := length(ar_num[])
+    loop for i_pos := 1 to i_len
+        if s_num = '' and ar_num[i_pos] = '0'
+            //ignore leading zeroes
+            b_lead := true
+        elseif ar_num[i_pos] = '.' //decimal point
+            if b_sep and i_cnt <> 3 then exit
+            s_dec := trim(copy (ar_num[], i_pos + 1))
+            break
+        elseif ar_num[i_pos] = ',' //separator char
+            if not b_sep
+                if not (i_cnt in [1..3]) then exit //the first group may have 1, 2 or 3 digits (leading zeroes excluded)
+                b_sep := true
+            else  //after the first separator, we expect groups of 3 digits
+                if i_cnt <> 3 then exit
+            endif
+            b_sep := true
+            i_cnt := 0
+        elseif ar_num[i_pos] in ['0'..'9']
+            i_cnt += 1
+            s_num &= ar_num[i_pos]
+        elseif i_pos = i_len
+            if ar_num[i_pos] in ['{','A'..'I']
+                i_cnt   += 1
+                s_num   &= overpunchvalue(ar_num[i_pos])
+                ch_sign := '+'
+            elseif ar_num[i_pos] in ['}','J'..'R']
+                i_cnt   += 1
+                s_num   &= overpunchvalue(ar_num[i_pos])
+                ch_sign := '-'
+            else
+                exit
+            endif
+        else
+            exit
+        endif
+    endloop
+    if s_num = '' and s_dec = '' and not b_lead then exit
+    if s_dec <> ''
+        z-ns-dec-found := length (s_dec)
+        if not numeric (s_dec) or z-ns-dec-found > i_dec then exit
+        replace(a_dec, 1, s_dec)
+        n_dec := a_dec
+    elseif b_sep and i_cnt <> 3
+        exit
+    endif
+    if s_num <> ''
+        if not numeric(s_num) or length (s_num) > i_dig then exit
+        asy-auxnumfmt := strtoint (s_num)
+    endif
+    asy-auxnumfmt += n_dec
+    if ch_sign = '-' then asy-auxnumfmt := asy-auxnumfmt * (-1)
+    z-ns-results := 0
+    result := true
+end_routine
+
+
+routine overpunchvalue (a_in : alpha 1) : alpha 1
+begin_routine
+    result := a_in
+    startcase a_in
+    case '{' '}'
+        result := '0'
+    case 'A' 'J'
+        result := '1'
+    case 'B' 'K'
+        result := '2'
+    case 'C' 'L'
+        result := '3'
+    case 'D' 'M'
+        result := '4'
+    case 'E' 'N'
+        result := '5'
+    case 'F' 'O'
+        result := '6'
+    case 'G' 'P'
+        result := '7'
+    case 'H' 'Q'
+        result := '8'
+    case 'I' 'R'
+        result := '9'
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='TESTREQUEST' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (var req: alpha 3, com: alpha 3, b_file: boolean optional): boolean
+begin_routine
+  if req = com
+    result := true
+    req := ''
+    if not b_file then z-dms1-trans-state := 1
+  else
+    result := false
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XCAT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s_input: realstring): realstring
+begin_routine
+  result := s_input
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XCENTER' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  s_result : realstring
+  i_inputlen, i_totlen, i, i_position : integer
+
+booleans
+
+end_definitions
+
+
+routine main (s_input: realstring, i_size : integer): realstring
+begin_routine
+  if i_size <= 0 then i_size := length(s_input)
+  s_input := trim(s_input)
+  i_inputlen  := length(s_input) / 2
+  i_totlen := i_size / 2
+  i_position := i_totlen - i_inputlen
+  loop for i := 1 to i_position
+    s_result := s_result & ' '
+  endloop
+  s_result := s_result + s_input
+  loop for i := length(s_result) to i_size - 1
+    s_result := s_result & ' '
+  endloop
+  result := s_result
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XCOMPRESS' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i, l: integer
+
+booleans
+
+end_definitions
+
+
+routine main (source: string, compresschar: alpha 1 optional, option: string optional): realstring
+begin_routine
+  //replace any multiple occurrence of compresschar with a single occurrence
+  result := source
+  l      := length(result)
+  i      := 1
+
+  if l < 2 then exit
+
+  if option = 'LEAD'
+    if copy(result, 1, 1) = compresschar
+      loop while i < l
+        i += 1
+        if copy(result, i, 1) <> compresschar then break
+      endloop
+      if i > 2 then result := copy (result, i - 1)
+    endif
+  elseif option = 'TRAIL'
+    if copy(result, l, 1) = compresschar
+      l -= 1
+      loop while l > 0
+        if copy(result, l, 1) <> compresschar then break
+        l -= 1
+      endloop
+      result := copy (result, 1, l + 1) //keep 1 compresschar in place
+    endif
+  else //ALL option is default
+    loop while l > 1
+      if copy(result, l, 1) = compresschar
+        i := l - 1
+        loop while i > 0
+          if copy(result, i, 1) <> compresschar then break
+          i -= 1
+        endloop
+        if i < l - 1 then result := copy (result, 1, i) & copy (result, l) //keep 1 compresschar in place
+        l := i - 1
+      else
+        l -= 1
+      endif
+    endloop
+  endif
+  xgen-result-size := length(result)
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XDELETE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    tmpstr : string
+
+booleans
+
+end_definitions
+
+
+routine main (instr string, start-col numeric 3, stop-col numeric 3 optional): realstring
+begin_routine
+  //------------------------------------------------------------------------------
+  //xdelete, a string function, returns a string item with its sub-string from
+  // start-col to stop-col of string-expression deleted. if the optional stop-col
+  // parameter is not specified, then length (instr) is assumed.
+  //------------------------------------------------------------------------------
+  if stop-col = 0 then stop-col := length(instr)
+
+  if start-col = 0 then start-col := 1
+  if start-col > length(instr) then start-col := length(instr)
+
+  tmpstr := copy(instr, 1, start-col - 1) + copy(instr, stop-col + 1, length(instr))
+  result := tmpstr
+  //global variable for the returned string's length
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XFORMAT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    z_out    : financial 36.18 format 'ZZZZZZZZZZZZZZZZZ9.999999999999999999+' //leading zeros are suppressed, not trimmed
+    s_format : structure
+      a_num    : alpha 18
+      a_period : alpha 1
+      a_dec    : alpha 18
+      a_sign   : alpha 1
+    end_structure
+    i_start : integer
+
+booleans
+
+end_definitions
+
+
+routine main (n_val: financial 36.18, i_len: integer, i_dec: integer optional, b_signed: boolean optional): string
+begin_routine
+    z_out    := n_val
+    s_format := z_out
+    i_len    -= i_dec //we need digits before decimal point
+    i_start  := 19 - i_len
+    result   := copy (a_num, i_start, i_len)
+    if i_dec > 0
+        if trim (result) = '0'
+            result := '.' & copy(a_dec, 1, i_dec)   //Mainframe shows no leading zero
+        else
+            result &= '.' & copy(a_dec, 1, i_dec)
+        endif
+    endif
+    if b_signed and a_sign <> '+'
+        result := a_sign & result
+    endif
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XINSERT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  x      : integer
+  y      : integer
+  tmpstr : realstring
+
+booleans
+
+end_definitions
+
+
+routine main (orgstr realstring, newstr realstring, srtcol numeric 3, newsize numeric 3 optional): realstring
+begin_routine
+  if srtcol < 1 then srtcol := 1
+  if srtcol > length(orgstr) then srtcol := length(orgstr)
+  if newsize = 0 then newsize := length(newstr)
+  if newsize > length(newstr)
+      x := 0
+      y := newsize - length(newstr) - 1
+      loop
+          newstr &= ' '
+          if x = y then break
+          x += 1
+      endloop
+  endif
+  if newsize < length(newstr) then newstr := copy(newstr, 1, newsize)
+  if srtcol <> 1 then tmpstr := copy(orgstr, 1, srtcol)
+  tmpstr &= newstr
+  if srtcol <> length(orgstr) then tmpstr &= copy(orgstr, srtcol, length(orgstr))
+  :end
+  result           := tmpstr
+  //global variable for the returned string's length
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XLEFT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s_input: string, i_size : integer optional): string
+begin_routine
+    result := trim(s_input)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XNUM' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    zp-val       : signed 36.18 format '-ZZZZZZZZZZZZZZZZZZ.ZZZZZZZZZZZZZZZZZZ'
+    zp-array     : alpha 1 [38] redefines zp-val
+    np-val       : signed 36.18 format '+999999999999999999.999999999999999999'
+    np-array     : alpha 1 [38] redefines np-val
+    result-val   : alpha 38
+    result-array : alpha 1 [38] redefines result-val
+
+    i-val,
+    i-len,
+    i-dot,
+    i-valpos,
+    i-respos       : integer
+    b-bz           : boolean
+    a-floatchar    : alpha 1 value '@00@'
+
+end_definitions
+
+
+routine main (n_val: signed 36.18, picture: string optional): string
+begin_routine
+    if length (picture) = 0
+        // no picture supplied, just return the n_val (as string)
+        i-val  := n_val
+        result := i-val
+    else
+        picture        := expand(picture)
+        i-len          := length (picture)
+        result-array[] := picture
+        zp-val         := n_val
+        np-val         := n_val
+        i-val          := n_val
+        b-bz           := true
+        i-dot          := 1
+        result         := unstring (picture, i-dot, '.')
+        if i-dot <= i-len
+            i-respos := i-dot //is 1 position beyond '.'
+            i-valpos := 21    //dito
+            loop while i-respos <= i-len
+                if result-array[i-respos] = '9'
+                    result-array[i-respos] := np-array[i-valpos]
+                    b-bz                   := false
+                    i-valpos               += 1
+                elseif result-array[i-respos] = 'Z'
+                    result-array[i-respos] := np-array[i-valpos]
+                    i-valpos               += 1
+                elseif result-array[i-respos] = '+'
+                    result-array[i-respos] := np-array[1]
+                elseif result-array[i-respos] = '-'
+                    result-array[i-respos] := zp-array[1]
+                // else result-array[i-respos] remains what it is
+                endif
+                i-respos += 1
+            endloop
+            i-dot -= 1
+            loop while i-valpos <= 36
+                np-array[i-valpos] := '0'
+                i-valpos           += 1
+            endloop
+            n_val := np-val
+        endif
+        i-respos := i-dot - 1
+        i-valpos := 19
+        loop while i-respos > 0
+            if result-array[i-respos] = '9'
+                result-array[i-respos] := np-array[i-valpos]
+                b-bz                   := false
+                i-valpos               -= 1
+            elseif result-array[i-respos] = 'Z'
+                result-array[i-respos] := zp-array[i-valpos]
+                a-floatchar            := 'Z'
+                i-valpos               -= 1
+            elseif result-array[i-respos] = 'B'
+                result-array[i-respos] := ' '
+            elseif result-array[i-respos] = ','
+                if result-array[i-respos - 1] <> '9'
+                    if zp-array[i-valpos] = ' '
+                        if a-floatchar = si-hex00value //hasn't been set yet
+                            a-floatchar := result-array[i-respos - 1]
+                            result-array[i-respos] := setoutputchar(a-floatchar)
+                        else
+                            result-array[i-respos] := ' '
+                        endif
+                    endif
+                endif
+            elseif result-array[i-respos] in ['$', '+', '-']
+                if zp-array[i-valpos] <> ' ' and i-valpos > 1
+                    result-array[i-respos] := zp-array[i-valpos]
+                elseif (a-floatchar = si-hex00value)
+                    a-floatchar := result-array[i-respos]
+                    result-array[i-respos] := setoutputchar(a-floatchar)
+                elseif result-array[i-respos] = a-floatchar //floatchar is already in output, so we'll have a space
+                    result-array[i-respos] := ' '
+                else
+                    result-array[i-respos] := setoutputchar(result-array[i-respos])
+                endif
+                if (result-array[i-respos] <> '$')
+                    i-valpos               -= 1
+                endif
+            // else result-array[i-respos] remains what it is
+            endif
+            i-respos -= 1
+        endloop
+        if n_val = 0 and b-bz then result-val := ''
+        result := copy (result-val, 1, i-len)
+    endif
+end_routine
+
+routine expand(pic : string) : string
+var
+    picval  : alpha 1 [38]
+    resval  : alpha 1 [38] values all ''
+    prevval : alpha 1 value ' '
+    piclen  : integer
+    picpos  : integer
+    respos  : integer
+    posval  : integer
+begin_routine
+    inspect (pic)
+        counting (piclen, all, '(')
+    endinspect
+    if (piclen = 0)
+        result := pic
+        exit
+    endif
+    picval[] := pic
+    piclen   := length (pic)
+    picpos   := 1
+    respos   := 1
+    loop while picpos <= piclen
+        if picval[picpos] = '('
+            posval := 0
+            loop while picpos <= piclen
+                picpos += 1
+                if picval[picpos] = ')'
+                    break
+                endif
+                posval := 10 * posval + strtoint(picval[picpos])
+            endloop
+            loop while posval > 1 //we have 1 occurrence of the char already in resval
+                resval[respos] := prevval
+                respos         += 1
+                posval         -= 1
+            endloop
+        else
+            resval[respos] := picval[picpos]
+            respos         += 1
+            prevval        := picval[picpos]
+        endif
+        picpos += 1
+    endloop
+    result := resval[]
+end_routine
+
+
+routine setoutputchar(picchar : alpha 1) : alpha 1
+begin_routine
+    startcase picchar
+    case 'Z'
+        result := ' '
+    case '$'
+        result := '$'
+    case '+'
+        result := np-array[1]
+    case '-'
+        result := zp-array[1]
+    else
+        result := picchar
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XNUMFMT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+    i               : integer
+    i_len           : integer
+    i_sep           : integer value 0
+    a_char          : alpha 1
+    a_sign          : alpha 1
+    s_numeric_value : string
+    s_decimal_value : string
+    b_decimals      : boolean
+    b_error         : boolean
+    n_value         : numeric 36.18
+    n_value2        : structure redefines n_value
+      a_numeric  : alpha 18
+      a_decimals : alpha 18
+    end_structure
+
+end_definitions
+
+
+routine main (string-expression : string, error-val : signed 36.18 optional) : signed 36.18
+begin_routine
+    string-expression := trim(string-expression)
+    i_len := length(string-expression)
+    loop for i := 1 to i_len
+        a_char := copy(string-expression, i, 1)
+        startcase a_char
+        case '0'..'9'
+            if b_decimals
+                s_decimal_value &= a_char
+            else
+                s_numeric_value &= a_char
+            endif
+        case '+' '-'
+            if a_sign = '' //can appear only once
+              a_sign := a_char
+            else
+              b_error := true
+            endif
+        case '.'
+            if b_decimals
+              b_error := true //only one period allowed
+            elseif i_sep > 0
+              if i - i_sep <> 4 then b_error := true //last thousand separator must be 4 positions before decimal char
+              i_sep := 0 //don't evaluate again after the loop
+            endif
+            b_decimals := true
+        case ','
+            if b_decimals
+              b_error := true
+            elseif i_sep > 0
+              if i - i_sep <> 4 then b_error := true //last thousand separator must be 4 positions before this one
+            elseif i > 4 or i = 1 //first separator must be on 2nd, 3rd or 4th position
+              b_error := true
+            endif
+            i_sep := i
+        else
+            b_error := true
+            break
+        endcase
+        if b_error then break
+    endloop
+    if i_sep > 0 and not b_decimals
+      if (i_len - i_sep) <> 3 then b_error := true //last thousand separator must be 3 positions before end
+    endif
+    if b_error
+        result := error-val
+    else
+        s_numeric_value := '000000000000000000' & s_numeric_value
+        s_numeric_value := copy(s_numeric_value, length(s_numeric_value) - 17)
+        a_numeric       := s_numeric_value
+        s_decimal_value := s_decimal_value & '000000000000000000'
+        s_decimal_value := copy(s_decimal_value,1, 18)
+        a_decimals      := s_decimal_value
+        if a_sign = '-'
+            result := n_value * -1
+        else
+            result := n_value
+        endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XREMOVE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+    i        : integer
+    charlist : list (alpha 1)
+    char     : alpha 1
+
+booleans
+
+end_definitions
+
+
+routine main (inputstring realstring, charstring realstring, function string optional) : realstring
+begin_routine
+    function := uppercase(trim(function))
+    if function = '' then function := 'ALL'
+
+    loop for i := 1 to length(charstring)
+        char := copy(charstring, i, 1)
+        charlist.add(char)
+    endloop
+    if charlist.count = 0 then charlist.add('')
+    if function = 'TRAIL'
+        // Examine string-expression from XLEN (inputstring) to 1,
+        // stopping when the previous character in string-expression is not in the chars string.
+        loop for i := length(inputstring) downto 1
+            char := copy(inputstring, i, 1)
+            if charlist.indexof (char) = 0
+                result := copy(inputstring, 1, i)
+                break
+            endif
+        endloop
+    elseif function = 'LEAD'
+        // Examine string-expression from 1 to XLEN (string-expression),
+        // stopping when the next character in string-expression is not in the chars string.
+        loop for i := 1 to length(inputstring)
+            char := copy(inputstring, i, 1)
+            if charlist.indexof (char) = 0
+                result := copy(inputstring, i)
+                break
+            endif
+        endloop
+    elseif function = 'ALL'
+        // Examine string-expression from 1 to XLEN (string-expression).
+        // This is the default value.
+        result := ''
+        loop for i := 1 to length(inputstring)
+            char := copy(inputstring, i, 1)
+            if charlist.indexof (char) = 0
+                if char = ''
+                    result &= ' '
+                else
+                    result &= char
+                endif
+            endif
+        endloop
+    else
+        result := inputstring
+    endif
+    xgen-result-size := length(result) // global variable for the returned string's length
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XREPLACE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    len : integer
+
+booleans
+
+end_definitions
+
+
+routine main (orgstr realstring, newstr realstring, startcol numeric 3, stopcol numeric 3 optional): realstring
+begin_routine
+    if startcol < 1
+        startcol := 1
+    endif
+    if stopcol = 0
+        stopcol := startcol + length(newstr) - 1
+    endif
+    if stopcol < startcol
+        stopcol := startcol
+    endif
+    len              := stopcol - startcol + 1
+    result           := copy(orgstr, 1, startcol - 1) & copy(newstr, 1, len) & copy(orgstr, stopcol + 1)
+    //global variable for the returned string's length
+    xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XRIGHT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  s_result : realstring
+  i, i_spaces : integer
+
+booleans
+
+end_definitions
+
+
+routine main (s_input: realstring, i_size : integer): realstring
+begin_routine
+  if i_size <= 0 then i_size := length(s_input)
+  s_input := trim(s_input, right)
+  i_spaces := i_size - length(s_input)
+  loop for i := 1 to i_spaces
+    s_result := s_result & ' '
+  endloop
+  s_result := s_result + s_input
+  result := s_result
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XSCAN' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    x : integer
+    y : integer
+
+booleans
+
+end_definitions
+
+
+routine main (origstr string, compstr string, offsetnum integer optional, stepnum integer optional): integer
+begin_routine
+    if offsetnum < 1 then offsetnum := 1
+    if offsetnum > length(origstr)
+        x := 0
+        if origstr <> ''
+            jobsummary('[XSCAN] Error: offset is larger than the string expression', true)
+        endif
+        goto(end)
+    endif
+    if stepnum < 1 then stepnum := 1
+    x := offsetnum
+    loop
+        if copy(origstr, x, length(compstr)) = compstr
+            y := 1
+            break
+        endif
+        if x > length(origstr) then break
+        x += stepnum
+    endloop
+    :end
+    if y = 0 then result := 0
+    if y = 1 then result := x
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XSUB' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s_input: realstring, i_start_col : integer, i_stop_col : integer optional): realstring
+var
+    s_resultstr : realstring
+begin_routine     
+  if i_stop_col > length(s_input) or i_stop_col = 0
+      s_resultstr := copy(s_input, i_start_col)
+  else
+      s_resultstr := copy(s_input, i_start_col, (i_stop_col - i_start_col) + 1)
+  endif
+  result := s_resultstr
+  xgen-result-size := length(result)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTIME' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>     
+
+begin_definitions
+
+const
+    ci_dayfactor    : integer value 8640000 //hundredths of seconds per day
+    ci_hourfactor   : integer value 360000 //hundredths of seconds per hour
+    ci_minutefactor : integer value 6000 //hundredths of seconds per minute
+    ci_secondfactor : integer value  100 //hundredths of seconds per second
+
+var
+    s_currformat    : alpha 2
+    i_pos           : integer
+    i_day           : integer value 0
+    i_time          : integer
+    i_formatlen     : integer
+    n_time          : numeric 8
+    timestruct      : structure redefines n_time
+      i_hh : numeric 2
+      i_mm : numeric 2
+      i_ss : numeric 2
+      i_nn : numeric 2
+    end_structure
+    n_date     : numeric 8
+    s_ccyymmdd : structure redefines n_date
+      n_cc     : numeric 2
+      s_yymmdd : structure
+        n_yy : numeric 2
+        n_mm : numeric 2
+        n_dd : numeric 2
+      end_structure
+    end_structure
+    s_ccyy : structure redefines n_date
+      n_ccyy : numeric 4
+      filler : alpha 4
+    end_structure
+    //vars used in pos routine :
+    i_slen,
+    i_max                      : integer
+
+    b_ccinformat               : boolean
+    b_yyinformat               : boolean
+    b_mminformat               : boolean
+    b_ddinformat               : boolean
+
+end_definitions
+
+
+routine main (s_time: string optional, s_format: string optional, i_addunits : integer optional, a_units: alpha 1 optional): integer
+begin_routine
+    if s_format = '' then s_format := 'CCYYMMDDZZUUSSTT' //default format
+    if s_time = '' or all ('0', s_time)
+        result := 0
+        exit
+    elseif s_time = 'TODAY'
+        //provide CCYYMMDD and/or ZZUUSSTT, but omit missing lower-order parts or set them to zero
+        //if higher-order parts haven't been specified, do supply them
+        s_ccyymmdd := today.ccyymmdd
+        if pos ('JJJ', s_format) = 0
+            if pos('DD', s_format) = 0
+                n_dd := 0
+                if pos('MM', s_format) = 0
+                    n_mm := 0
+                    if pos('YY', s_format) = 0 then n_date := 0
+                endif
+            endif
+        endif
+        if pos('HH', s_format) > 0 or pos('ZZ', s_format) > 0
+            s_time := today.hhmmssnn
+            if pos('TT', s_format) > 0
+            //ok
+            elseif pos('SS', s_format) > 0
+                s_time := copy (s_time, 1, 6)
+            elseif pos('UU', s_format) > 0
+                s_time := copy (s_time, 1, 4)
+            else
+                s_time := copy (s_time, 1, 2)
+            endif
+            s_format := copy ('ZZUUSSTT', 1, length (s_time))
+            if n_date > 0 //don't supply date if not specified so
+                s_time   := s_ccyymmdd + s_time
+                s_format := 'CCYYMMDD' + s_format
+            endif
+        else //don't supply time if not specified so (for sake of comparing dates)
+            s_time   := s_ccyymmdd
+            s_format := 'CCYYMMDD'
+        endif
+    endif //TODAY
+
+    i_formatlen := length (s_format)
+    if (copy (s_format, i_formatlen, 1) = 'B') //remove trailing Bs from format for sake of length test
+        loop while (i_formatlen > 1)
+            i_formatlen -= 1
+            if (copy (s_format, i_formatlen, 1) <> 'B') then break
+        endloop
+        s_format := copy (s_format, 1, i_formatlen)
+    endif
+
+    if numeric(s_time) and length (s_time) < i_formatlen
+        //a number may have been passed with inttostr, so that leading zeroes have been stripped off
+        s_time := copy ('0000000000000000', 1, i_formatlen - length (s_time)) & s_time
+    endif
+    if numeric(s_time) and length (s_time) > i_formatlen
+        s_time := copy (s_time, 1 + length (s_time) - i_formatlen, i_formatlen)
+    endif
+
+    result := 0
+    i_pos  := 1
+    loop while i_pos < length (s_format)
+        if copy (s_format, i_pos, 7) = 'CCYYJJJ' or copy (s_format, i_pos, 7) = 'CCYYDDD'
+            dateresult.ccyyddd := copy (s_time, i_pos, 7)
+            if not resok
+                result := 0
+                exit
+            endif
+            s_ccyymmdd   := dateresult.ccyymmdd
+            i_pos        += 7
+            b_ccinformat := true
+            b_yyinformat := true
+        elseif copy (s_format, i_pos, 5) = 'YYJJJ' or copy (s_format, i_pos, 5) = 'YYDDD'
+            dateresult.yyddd := copy (s_time, i_pos, 5)
+            if not resok
+                result := 0
+                exit
+            endif
+            s_yymmdd     := dateresult.yymmdd
+            i_pos        += 5
+            b_yyinformat := true
+        elseif copy (s_format, i_pos, 1) = '\'
+            i_pos += 1
+        else
+            s_currformat := copy(s_format, i_pos, 2)
+            sc s_currformat
+            cs 'ZZ'
+                i_time          := copy (s_time, i_pos, 2)
+                timestruct.i_hh += i_time
+                i_pos           += 2
+            cs 'HH'
+                i_time          := copy (s_time, i_pos, 2)
+                timestruct.i_hh := i_time mod 12
+                i_pos           += 2
+            cs 'UU'
+                i_time          := copy (s_time, i_pos, 2)
+                timestruct.i_mm := i_time
+                i_pos           += 2
+            cs 'SS'
+                i_time          := copy (s_time, i_pos, 2)
+                timestruct.i_ss := i_time
+                i_pos           += 2
+            cs 'TT'
+                i_time          := copy (s_time, i_pos, 2)
+                timestruct.i_nn := i_time
+                i_pos           += 2
+            cs 'AP'
+                if copy (s_time, i_pos, 2) = 'PM' then timestruct.i_hh += 12
+                i_pos += 2
+            cs 'CC'
+                n_cc         := copy (s_time, i_pos, 2)
+                i_pos        += 2
+                b_ccinformat := true
+            cs 'YY'
+                n_yy         := copy (s_time, i_pos, 2)
+                i_pos        += 2
+                b_yyinformat := true
+            cs 'MM'
+                n_mm         := copy (s_time, i_pos, 2)
+                i_pos        += 2
+                b_mminformat := true
+            cs 'DD'
+                n_dd         := copy (s_time, i_pos, 2)
+                i_pos        += 2
+                b_ddinformat := true
+            else
+                i_pos += 1
+            ec
+        endif
+    endloop
+
+    if n_yy = 0 and not b_yyinformat
+        n_yy := today.year // yy needn't be present in input
+    endif
+    if n_cc = 0 and not b_ccinformat
+        if n_yy > gn-century-cutoff
+            n_cc := 19
+        else
+            n_cc := 20
+        endif
+    endif
+    if n_mm = 0 and not b_mminformat
+        n_mm := 1 //mm needn't be present in input
+    endif
+    if n_dd = 0 and not b_ddinformat
+        n_dd := 15 //dd needn't be present in input
+    endif
+    if (n_cc > 21) or (n_cc = 21 and n_yy > 70)
+        n_cc := 21    // maximum number of days in numeric 5 (dateresult.numdays) reached
+        n_yy := 70
+    endif
+    dateresult.ccyymmdd := s_ccyymmdd
+    if not resok
+        result := 0
+        exit
+    endif
+    i_day := dateresult.daynum
+    if dateresult.ccyymmdd = today.ccyymmdd
+        //today's daynum may be the result of erroneous input (lion complies to linc)
+        if dateresult.ccyymmdd <> s_ccyymmdd then i_day := -1
+    endif
+
+    if n_time <> 0
+        i_time := i_nn + (i_ss * ci_secondfactor) + (i_mm * ci_minutefactor) + (i_hh * ci_hourfactor)
+    endif
+    if i_addunits <> 0
+        addunits(i_addunits, a_units)
+    endif
+    dateresult.ccyymmdd := n_date
+    if not resok
+        result := 0
+        exit
+    endif
+    i_day  := dateresult.daynum
+    result := (i_day * ci_dayfactor) + i_time
+end_routine
+
+routine addunits(i_units: integer, a_unittype: alpha 1)
+begin_routine
+    startcase a_unittype
+    case 'C'
+        n_cc += i_units
+    case 'Y'
+        n_ccyy += i_units
+    case 'M'
+        i_units += n_mm + (n_ccyy * 12)
+        n_mm    := i_units mod 12
+        n_ccyy  := i_units / 12
+
+        if n_mm = 0
+            n_mm   := 12
+            n_ccyy -= 1
+        endif
+    case 'D'
+        dateresult.ccyymmdd := n_date
+        dateresult.daynum   := dateresult.daynum + i_units
+        n_date              := dateresult.ccyymmdd
+    case 'H' 'Z'
+        i_time += i_units * ci_hourfactor
+    case 'U'
+        i_time += i_units * ci_minutefactor
+    case 'S'
+        i_time += i_units * ci_secondfactor
+    case 'T'
+        i_time += i_units
+    endcase
+end_routine
+
+routine pos (s_substr: realstring, s_entire: realstring): integer
+begin_routine
+    //return the start pos of the substring in the entire string
+    //return zero if not found
+    i_slen := length (s_substr)
+    i_max  := length (s_entire) - i_slen + 1
+    result := 1
+    loop while result <= i_max
+        if copy(s_entire, result, i_slen) = s_substr then exit
+        result += 1
+    endloop
+    result := 0 //not found
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTIMEFORMAT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+    ci_dayfactor  : integer value 8640000 //hundredths of seconds per day
+
+var
+    i_pos         : integer
+    i_time        : integer
+    n_units       : numeric 2
+    b_returnzeros : boolean
+    timestruct    : structure
+      i_hh : numeric 2
+      i_mm : numeric 2
+      i_ss : numeric 2
+      i_nn : numeric 2
+    end_structure
+
+booleans
+
+end_definitions
+
+routine main (i_in: integer, s_format: string): realstring
+begin_routine
+    result        := ''
+    b_returnzeros := false
+    if i_in = 0
+        b_returnzeros := true
+    elseif i_in = -1 // today
+        dateresult.ccyymmdd := today.ccyymmdd
+        timestruct          := today.hhmmssnn
+    else
+        dateresult.daynum := i_in / ci_dayfactor
+        i_time            := i_in mod ci_dayfactor
+        i_nn              := i_time mod 100
+        i_time            := i_time / 100
+        i_ss              := i_time mod 60
+        i_time            := i_time / 60
+        i_mm              := i_time mod 60
+        i_time            := i_time / 60
+        i_hh              := i_time mod 24
+        i_time            := i_time / 24
+    endif
+    i_pos := 1
+    loop while i_pos < length (s_format)
+        if copy (s_format, i_pos, 1) = '\'
+            result &= copy(s_format, i_pos + 1, 1)
+            i_pos  += 2
+        elseif copy (s_format, i_pos, 2) = 'CC'
+            if b_returnzeros
+                result &= '00'
+            else
+                result &= dateresult.cc
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 5) = 'YYJJJ'
+            if b_returnzeros
+                result &= '00000'
+            else
+                result &= dateresult.yyddd
+            endif
+            i_pos += 5
+        elseif copy (s_format, i_pos, 2) = 'YY'
+            if b_returnzeros
+                result &= '00'
+            else
+                result &= dateresult.yy
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 3) = 'JJJ'
+            if b_returnzeros
+                result &= '000'
+            else
+                result &= copy (dateresult.yyddd, 3, 3)
+            endif
+            i_pos += 3
+        elseif copy (s_format, i_pos, 3) = 'MMM'
+            if b_returnzeros
+                result := ''
+                break
+            else
+                result &= copy (dateresult.mmmddyy, 1, 3)
+            endif
+            i_pos += 3
+        elseif copy (s_format, i_pos, 2) = 'MM'
+            if b_returnzeros
+                result &= '00'
+            else
+                result &= dateresult.mm
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 5) = 'MONTH'
+            if b_returnzeros
+                result := ''
+                break
+            else
+                result &= unstring (copy(dateresult.in-alpha, 6), 1)
+            endif
+            i_pos += 5
+        elseif copy (s_format, i_pos, 3) = 'DDD'
+            if b_returnzeros
+                result &= ''
+            else
+                result &= copy (dateresult.today, 1, 3) //MON, TUE, etc
+            endif
+            i_pos += 3
+        elseif copy (s_format, i_pos, 2) = 'DD'
+            if b_returnzeros
+                result &= '00'
+            else
+                result &= dateresult.dd
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 3) = 'DAY'
+            if b_returnzeros
+                result := ''
+                break
+            else
+                result &= dateresult.today
+            endif
+            i_pos += 3
+        elseif copy (s_format, i_pos, 3) = 'DOW'
+            if b_returnzeros
+                result := ''
+                break
+            else
+                i_time := (dateresult.daynum + 2) mod 7
+                if i_time = 0 then i_time := 7
+                result &= i_time
+            endif
+            i_pos += 3
+        elseif copy (s_format, i_pos, 2) = 'HH'
+            if b_returnzeros
+                result &= '00'
+            else
+                n_units := i_hh
+                n_units := n_units mod 12
+                if n_units = 0 then n_units := 12
+                result &= n_units
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 2) = 'ZZ'
+            if b_returnzeros
+                result &= '00'
+            else
+                n_units := i_hh
+                if n_units = 24 then n_units := 00
+                result &= n_units
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 2) = 'UU'
+            if b_returnzeros
+                result &= '00'
+            else
+                n_units := i_mm
+                result  &= n_units
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 2) = 'SS'
+            if b_returnzeros
+                result &= '00'
+            else
+                n_units := i_ss
+                result  &= n_units
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 2) = 'TT'
+            if b_returnzeros
+                result &= '00'
+            else
+                n_units := i_nn
+                result  &= n_units
+            endif
+            i_pos += 2
+        elseif copy (s_format, i_pos, 2) = 'AP'
+            if b_returnzeros
+                result := ''
+                break
+            else
+                n_units := i_hh
+                if n_units < 12 then result &= 'AM' else result &= 'PM'
+            endif
+            i_pos += 2
+        else
+            result &= copy(s_format, i_pos, 1)
+            i_pos  += 1
+        endif
+    endloop
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTIMECONVERT' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_time: integer
+  b_ok  : boolean
+  i_in,
+  i_out,
+  i_len : integer
+  a_token : alpha 2
+booleans
+
+end_definitions
+
+
+routine main (s_in, s_informat, s_outformat: realstring): realstring
+begin_routine
+  i_len := length (s_in)
+  if length (s_informat) = i_len and length (s_outformat) = i_len and (i_len mod 2) = 0
+    result := shiftparts (s_in, s_informat, s_outformat)
+    if length (result) = i_len then exit
+  endif
+  i_time := xtime (s_in, s_informat)
+  result := xtimeformat (i_time, s_outformat)
+end_routine
+
+routine shiftparts (s_in, s_informat, s_outformat: realstring): realstring
+begin_routine
+  i_len := length (s_outformat)
+  loop for i_out := 1 to i_len - 1 step 2
+    a_token := copy (s_outformat, i_out, 2)
+    loop for i_in := 1 to i_len - 1 step 2
+      if a_token = copy (s_informat, i_in, 2)
+        result := result & copy (s_in, i_in, 2)
+        break
+      endif
+    endloop
+  endloop
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTIMEDIFF' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+const
+  ci_dayfactor : integer value 8640000 //hundredths of seconds per day
+  ci_hourfactor : integer value 360000 //hundredths of seconds per hour
+  ci_minutefactor : integer value 6000 //hundredths of seconds per minute
+  ci_secondfactor : integer value  100 //hundredths of seconds per second
+
+var
+  date1 : date
+  date2 : date
+
+end_definitions
+
+
+routine main (i_time1, i_time2: integer, a_units: alpha 1): integer
+begin_routine
+  if a_units in ['C', 'Y', 'A', 'M', 'D']
+    date1.daynum := i_time1 / ci_dayfactor
+    date2.daynum := i_time2 / ci_dayfactor
+  endif
+  startcase a_units
+  case 'C'
+    result := date1.cc - date2.cc
+  case 'Y' 'A'
+    result := date1.ccyy - date2.ccyy
+    if a_units = 'A'
+      if date1.mm < date2.mm
+        result -= 1
+      elseif date1.mm = date2.mm and date1.dd < date2.dd
+        result -= 1
+      endif
+    endif
+  case 'M'
+    result := ((date1.ccyy - date2.ccyy) * 12 ) + date1.mm - date2.mm
+  case 'D'
+    result := date1.daynum - date2.daynum
+  case 'H' 'Z'
+    result := (i_time1 - i_time2) / ci_hourfactor
+  case 'U'
+    result := (i_time1 - i_time2) / ci_minutefactor
+  case 'S'
+    result := (i_time1 - i_time2) / ci_secondfactor
+  case 'T'
+    result := (i_time1 - i_time2)
+  endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTRANS' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  arrfrom : alpha 1 [256]
+  arrto   : alpha 1 [256]
+  x       : integer
+  y       : integer
+  frlen   : integer
+booleans
+
+end_definitions
+
+
+routine main (instr string, fromstr string, tostr string): string
+begin_routine
+  //global variable for the returned string's length
+  xgen-result-size := length(instr)
+  result := instr
+  frlen := length (fromstr)
+
+  arrfrom[] := fromstr
+  arrto[] := tostr
+
+  loop for x := 2 to frlen //starting at 1 is useless
+    y := arrfrom.find(arrfrom[x], seq, x)
+    if y < x //note that -1 is not a possible outcome
+      sme('XTRANS error', 'No duplicate characters allowed in from-chars string')
+      result := 'XTRANS ERROR'
+      exit
+    endif
+  endloop
+
+  loop for x := 1 to xgen-result-size
+    y := arrfrom.find(copy(instr, x, 1), seq, frlen)
+    if y > -1
+      replace (result, x, arrto[y])
+    endif
+  endloop
+
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SHOW-ERROR-MESSAGE' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (a-control: alpha 1 optional): string
+begin_routine
+  result := asy-error-message
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XGEN-SEND' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i-outputpos : integer value 1
+
+booleans
+
+end_definitions
+
+if b_enforce then b-enforce-send := true
+if b_external
+  b-send-external := true
+  replace (z-dc-output, i-outputpos, s_output)
+  i-outputpos += length (s_output)
+endif
+resok := true
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XGEN-RECEIVE' description='XGEN function'>
+<OPTIONS kind='I' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+    if ret-prog-name <> asy-task-name
+        gb-screen-sent := false
+            asy-coms-in.programdesg := 0
+        ret-prog-name  := asy-task-name
+        if not gb-keep-user-area
+            setto (initial, asy-user-area)
+        else
+            asy-user-area := ret-user-area
+        endif
+    else
+        asy-user-area := ret-user-area
+        asy-coms-in.programdesg := dcilib_program
+    endif
+    z-dc-output       := ''
+        asy-coms-in.textlength := length (z-dc-input)
+    xgen_timestamp-in := today.yymmdd * 1000000 + today.hhmmssnn / 100
+    resok             := true
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTALLY' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    x      : integer
+    y      : integer
+    z      : integer
+    s_temp : string
+
+booleans
+
+end_definitions
+
+
+routine main (instr string, charstr string, posstr string optional) : integer
+begin_routine
+    posstr := uppercase(posstr)
+    if posstr = '' then posstr := 'ALL'
+    if posstr = 'TRAIL'
+        loop for x := length(instr) downto 1
+            s_temp := copy(instr, x, length(instr) - x + 1)
+            inspect(s_temp)
+                counting(y, all, charstr)
+            endinspect
+            if y <> (length(instr) - x + 1) then break
+            z := y
+        endloop
+    elseif posstr = 'LEAD'
+        loop for x := 1 to length(instr)
+            s_temp := copy(instr, 1, x)
+            inspect(s_temp)
+                counting(y, all, charstr)
+            endinspect
+            if y <> x then break
+            z := y
+        endloop
+    else
+        inspect(instr)
+            counting(x, all, charstr)
+        endinspect
+        z := x
+    endif
+    result := z
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='XTOK' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  delimiterlist : structure
+    delim1 : alpha 1
+    delim2 : alpha 1
+    delim3 : alpha 1
+    delim4 : alpha 1
+  end_structure
+  i_len : integer
+booleans
+
+end_definitions
+
+routine main (sourcestring : string, pos : integer, delimiters : realstring optional) : string
+begin_routine
+  asy-pos := pos
+  delimiterlist := delimiters
+  i_len := length (delimiters)
+  startcase i_len
+  case 0 1
+    result := unstring (sourcestring, asy-pos, delim1, false) //if empty, space is assumed
+  case 2
+    result := unstring (sourcestring, asy-pos, delim1, delim2, false)
+  case 3
+    result := unstring (sourcestring, asy-pos, delim1, delim2, delim3, false)
+  else
+    result := unstring (sourcestring, asy-pos, delim1, delim2, delim3, delim4, false)
+    if (i_len > 4)
+      sme ('XTOK: length delimiter list exceeds maximum', , 'ODT')
+    endif
+  endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SYSTEM-NAME' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main : string
+begin_routine
+    if si-repname <> ''
+        result := unstring(si-repname, 1, '_')
+    elseif si-currform <> ''
+        result := unstring(si-currform, 1, '_')
+    else
+        result := ''
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='PROGRAM-NAME' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main : string
+begin_routine
+    if si-repname <> ''
+        result := si-repname
+    elseif si-currform <> ''
+        result := si-currform
+    else
+        result := ''
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='ASY-RIGHTJUSTIFY' description='XGEN function'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+end_definitions
+
+routine main (const s_val: realstring, const i_size: integer): realstring
+var
+    i_pos : integer
+begin_routine
+    result := '                                                                                '
+    if i_size < length (s_val)
+        i_pos  := length (s_val) + 1 - i_size
+        result := copy (s_val, i_pos, i_size)
+    else
+        i_pos := i_size + 1 - length (s_val)
+        replace (result, i_pos, s_val)
+        result := copy (result, 1, i_size)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='SETTRANSSTATE' description='XGEN function'>
+<OPTIONS kind='I' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+    z-dms1-trans-state := 1
+
+</CODE>
+</OBJECT>
+
+</ROUTINES>

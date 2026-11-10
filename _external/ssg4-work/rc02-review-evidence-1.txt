@@ -1,0 +1,170 @@
+=== A1 top-level *_AMT on origin/main
+
+BSP_AMT
+--- AFBUS_AMT paths on main
+0
+--- files mentioning AFBUS on main
+39
+origin/main:.gitignore
+origin/main:BSP_AMT/Development/Common/Insertables/Sr_Sleeping/Sr_Sleeping.Core.cs
+origin/main:BSP_AMT/Development/Old/QueryXML_MsSql.result_2026-09-23-Findings.md
+origin/main:BSP_AMT/Development/Old/QueryXML_MsSql.result_2026-09-23.json
+origin/main:BSP_AMT/Development/QueryXML_MsSql.md
+origin/main:BSP_AMT/Development/Reports/Acb110/Acb110.Core.cs
+origin/main:BSP_AMT/Development/Reports/Aub029/Aub029.Core.cs
+origin/main:BSP_AMT/Development/Reports/Aub085/Aub085.Core.cs
+origin/main:BSP_AMT/Development/Reports/Aub110/Aub110.Core.cs
+origin/main:BSP_AMT/Development/Reports/Awsleep/Awsleep.Core.cs
+--- commits adding BSP_AMT/Development/_All_.sln
+d1c0ba2f7c 2026-09-25 10:13:38 +0000 Allard Peper Merged PR 14071: Release 25 Sept 2026
+=== B3
+--- BSP_AMT/Binaries/Application on main
+=== C1 log
+de1c9ff893 2026-10-23 07:21:25 +0000 Mark Truman SSG-4: generic programs for the SSG utilities (release20261022-rc.02)
+d1c0ba2f7c 2026-09-25 10:13:38 +0000 Allard Peper Merged PR 14071: Release 25 Sept 2026
+--- main
+                <AppName>AFBUS_AMT</AppName>
+                <UseUnicode>True</UseUnicode>
+--- PR HEAD
+                <AppName>AFBUS_AMT</AppName>
+                <UseUnicode>True</UseUnicode>
+                <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="CFH_COPY" />
+                <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="LOADIS" />
+                <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="UNLOADIS" />
+                <OrginalReport Name="ASSURFED_UTILIT_BABA_GN" Clone="BABA" />
+                <OrginalReport Name="ASSURFED_UTILIT_FUSBA_GN" Clone="FUSBA" />
+                <OrginalReport Name="ASSURFED_UTILIT_CHABAN_GN" Clone="CHABAN" />
+                <OrginalReport Name="ASSURFED_UTILIT_CONDIS2_GN" Clone="CONDIS2" />
+                <OrginalReport Name="ASSURFED_UTILIT_SCAN_GN" Clone="SCAN" />
+                <OrginalReport Name="ASSURFED_UTILIT_TAPELD_GN" Clone="TPF$" />
+=== D2
+== UTILIT_BABA_ASCII (main)
+# External SSG skeleton: *UTILIT.BABA/ASCII
+# Referenced by: ASSURFED_F999RUN_2PPJ11.TXT
+# ERROR: Conversion failed ΓÇö This is unexpected. DirectiveId: End  Line: 2
+param([string[]]$Parameters)
+lines: 4
+== UTILIT_CFH-COPY_ASCII (main)
+# External SSG skeleton: *UTILIT.CFH-COPY/ASCII
+# Referenced by: ASSURFED_F999RUN_AFPH12.TXT
+# ERROR: Conversion failed ΓÇö This is unexpected. DirectiveId: End  Line: 5
+param([string[]]$Parameters)
+lines: 4
+== UTILIT_CONDIS2_ASCII (main)
+# Converted from SSG source: UTILIT_CONDIS2_ASCII
+# Original reference: *UTILIT.CONDIS2/ASCII
+# Source file: ASSURFED_UTILIT_CONDIS2_ASCII.TXT
+param([string[]]$Parameters)
+
+lines: 874
+== UTILIT_CHAB100_ASCII (main)
+fatal: path 'Scripts/ASSURFED_UTILIT/UTILIT_CHAB100_ASCII.ps1' exists on disk, but not in 'origin/main'
+lines: 0
+--- PR diff stat ASSURFED_UTILIT
+ Scripts/ASSURFED_UTILIT/BabaParm.inc              |  55 ++
+ Scripts/ASSURFED_UTILIT/CfhCopyParm.inc           |  75 +++
+ Scripts/ASSURFED_UTILIT/ChabanParm.inc            |  32 +
+ Scripts/ASSURFED_UTILIT/CondisParm.inc            |  70 +++
+ Scripts/ASSURFED_UTILIT/FusbaParm.inc             |  59 ++
+ Scripts/ASSURFED_UTILIT/GnHandoff.inc             | 115 ++++
+ Scripts/ASSURFED_UTILIT/LoadisParm.inc            | 101 +++
+ Scripts/ASSURFED_UTILIT/ScanParm.inc              |  31 +
+ Scripts/ASSURFED_UTILIT/TapeldParm.inc            |  63 ++
+ Scripts/ASSURFED_UTILIT/UTILIT_BABA_ASCII.ps1     | 466 +++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII.ps1 | 455 +++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_CHAB100_ASCII.ps1  | 313 ++++++++++
+ Scripts/ASSURFED_UTILIT/UTILIT_CHABAN_ASCII.ps1   | 314 +++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1  | 189 +++---
+ Scripts/ASSURFED_UTILIT/UTILIT_FUSBA2_ASCII.ps1   | 483 ++++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_FUSBA_ASCII.ps1    | 571 ++++++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_LOADIS_ASCII.ps1   | 149 ++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_LOADIS_MULTI.ps1   | 280 ++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_SCAN_ASCII.ps1     | 617 ++++++++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_TAPELD_ASCII.ps1   | 711 +++++++++++++++++++++-
+ Scripts/ASSURFED_UTILIT/UTILIT_UNLOADIS_ASCII.ps1 | 121 +++-
+ Scripts/ASSURFED_UTILIT/UTILIT_UNLOADIS_MULTI.ps1 | 204 ++++++-
+ 22 files changed, 5349 insertions(+), 125 deletions(-)
+--- line counts on main for all 13
+Scripts/ASSURFED_UTILIT/ARCHIVE_UTILIT_TRANS2.ps1 main: 1129  pr: 1129
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_ARCHITAB2.ps1 main:   97  pr:   97
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_BABA_ASCII.ps1 main:  434  pr:  434
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_EXTEUR.ps1 main:  848  pr:  848
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_LECTIS.ps1 main:  266  pr:  266
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_MAIL.ps1 main:   16  pr:   16
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_MONTANT_SIGNE.ps1 main:   73  pr:   73
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_TRANSEXCEL.ps1 main:   12  pr:   12
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_Y2KCLR_PRD.ps1 main:   32  pr:   32
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_Y2KLST_PRD.ps1 main:   38  pr:   38
+Scripts/ASSURFED_UTILIT/ASSURFED_UTILIT_Y2KVRF.ps1 main:   36  pr:   36
+Scripts/ASSURFED_UTILIT/UTILIT_ARCHIFUSION.ps1 main:   37  pr:   37
+Scripts/ASSURFED_UTILIT/UTILIT_ARCHITAB2.ps1  main:   94  pr:   94
+Scripts/ASSURFED_UTILIT/UTILIT_BABA_ASCII.ps1 main:    4  pr:  464
+Scripts/ASSURFED_UTILIT/UTILIT_CFH-COPY_ASCII.ps1 main:    4  pr:  453
+Scripts/ASSURFED_UTILIT/UTILIT_CHAB100_ASCII.ps1 main:    0  pr:  313
+Scripts/ASSURFED_UTILIT/UTILIT_CHABAN_ASCII.ps1 main:    4  pr:  312
+Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1 main:  874  pr:  879
+Scripts/ASSURFED_UTILIT/UTILIT_EXTEUR.ps1     main:  914  pr:  914
+Scripts/ASSURFED_UTILIT/UTILIT_FUSBA2_ASCII.ps1 main:    4  pr:  481
+Scripts/ASSURFED_UTILIT/UTILIT_FUSBA_ASCII.ps1 main:    4  pr:  569
+Scripts/ASSURFED_UTILIT/UTILIT_LECTIS_ASCII.ps1 main:  364  pr:  364
+Scripts/ASSURFED_UTILIT/UTILIT_LOADIS_ASCII.ps1 main:    4  pr:  147
+Scripts/ASSURFED_UTILIT/UTILIT_LOADIS_MULTI.ps1 main:    4  pr:  278
+Scripts/ASSURFED_UTILIT/UTILIT_RECAP.ps1      main:    4  pr:    4
+Scripts/ASSURFED_UTILIT/UTILIT_SCAN_ASCII.ps1 main:    4  pr:  615
+Scripts/ASSURFED_UTILIT/UTILIT_TABAN_ASCII.ps1 main:    4  pr:    4
+Scripts/ASSURFED_UTILIT/UTILIT_TAPELD_ASCII.ps1 main:    4  pr:  709
+Scripts/ASSURFED_UTILIT/UTILIT_UNLOADIS_ASCII.ps1 main:    4  pr:  119
+Scripts/ASSURFED_UTILIT/UTILIT_UNLOADIS_MULTI.ps1 main:    4  pr:  202
+Scripts/ASSURFED_UTILIT/utilit_mail2.ps1      main:  189  pr:  189
+Scripts/ASSURFED_UTILIT/utilit_mail3.ps1      main:  108  pr:  108
+=== E2
+E:\Repos\Federale_InternalRelease\Scripts\Settings\AmtSettings.xml:3:		<AppName>AFBUS_2200COBOL</AppName>
+E:\Repos\Federale_InternalRelease\Scripts\Settings\AmtSettings.xml:20:		<UseUnicode>True</UseUnicode>
+=== E3
+feature/federale/ssg-scripts-release
+ M Scripts/Libraries/AmtPsCustomerLib.psm1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
+ M Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
+?? AmtLion/
+?? Lion.lic
+?? Scripts/SSGTRIAL/
+?? Scripts/Settings/AmtSettings.xml
+?? Scripts/Settings/AmtSettings.xml.bak-20260922-preAFBUS2200COBOL
+--- count
+26
+=== E4
+=== G4
+=== G1 markers
+0
+=== G3
+<p class="page-meta">Last updated: 2026-10-21 &nbsp;|&nbsp; AMT177 / FEDERALE_APP VM &nbsp;|&nbsp; Companion to <a href="Asset-Register.md">Asset Register</a> &amp; <a href="../SsgConverter/Fixes/SsgConverter-Fix-20260909.md">SsgConverter fix log</a></p>
+Last updated: 2026-10-22 &nbsp;|&nbsp; VM VMFEDPE08 (
+tracker mentions: rc.02=True BSP=True 15867=False MT-048=True
+runbook mentions: rc.02=False BSP=False 15867=False GNFED=False
+
+Name                                   LastWriteTime
+----                                   -------------
+261021-mt043-generic-pipeline-plan.md  10/22/2026 12:18:28 AM
+261020-mt043-cfh-copy-generic-spike.md 10/21/2026 10:50:13 PM
+261009-trial4-epic-strategy.md         10/13/2026 7:10:48 PM
+
+
+

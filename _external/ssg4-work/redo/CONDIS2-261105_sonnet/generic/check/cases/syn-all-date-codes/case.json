@@ -1,0 +1,8 @@
+{
+  "case": "syn-all-date-codes",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 80,
+  "note": "every date code D24 D42 D22A D22B D66A D66B D68 D86 (the last five are not used by real calls); two D22A fields in one record"
+}

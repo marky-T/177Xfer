@@ -1,0 +1,8 @@
+{
+  "case": "odd-otherwise-first",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "UNRESOLVED_UNISYS_SEMANTIC (T3-056: the skeleton's [*CASE] test on OTHERWISE; what 2200 does with it is not known)",
+  "records": 3,
+  "note": "OTHERWISE before any CASE; expectation = the source text as written, not a known 2200 result. OTHERWISE as first condition: as written (bare NOCASE <> 1 true) it always starts with a TAIL; the actions after it never run; no real call"
+}

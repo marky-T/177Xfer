@@ -1,0 +1,605 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=ARCHIVEF4,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHIFORMAT-F4,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=ARCHIVEF4,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=ARCHIVEF4
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-11-03 04:11
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHIFORMAT-F4,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED-UTILIT-ARCHIFORMAT-F4
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***                    -- archiformat --                       ***
+  2009-01-01 12:00  =>***            Foramt donn?es pour archivage                   ***
+  2009-01-01 12:00  =>***                        == UCS ==                           ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     :                                                     *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : N?ga  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  :                                 (99)                *
+  2009-01-01 12:00  =>* Version  :                                 (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*    INPUT : ARF4-REPORT : report de la table                 *
+  2009-01-01 12:00  =>*    INPUT : ARF4-DESCRIPT : description de la table            *
+  2009-01-01 12:00  =>*    INPUT : ARF4-UNLOAD : donn?es unload?es archiv?es        *
+  2009-01-01 12:00  =>*    OUTPUT: ARF4-FORMAT : donn?es au  format  archive       *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => PROGRAM-ID. 'ASSURFED-UTILIT-ARCHIFORMAT-F4'.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select fic-report assign to disc      ARF4-REPORT.
+  2009-01-01 12:00  =>     select fic-descript assign to disc    ARF4-DESCRIPT.
+  2009-01-01 12:00  =>     select fic-unload assign to disc      ARF4-UNLOAD.
+  2009-01-01 12:00  =>     select fic-format assign to disc      ARF4-FORMAT.
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier du report
+  2009-01-01 12:00  => FD  fic-report.
+  2009-01-01 12:00  =>  1  lgn-rep               pic x(132).
+  2009-01-01 12:00  =>* Fichier de description
+  2009-01-01 12:00  => FD  fic-descript.
+  2009-01-01 12:00  =>  1  lgn-des               pic x(132).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier d'unload des donn?es archiv?es
+  2009-01-01 12:00  => FD  fic-unload.
+  2009-01-01 12:00  =>  1  lgn-unl               pic x(135).
+  2009-01-01 12:00  =>* Fichier format? pour l'archivage
+  2009-01-01 12:00  => FD  fic-format.
+  2009-01-01 12:00  =>  1  lgn-for               pic x(136).
+  2009-01-01 12:00  => Working-storage section.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>*enregistrement type 0
+  2009-01-01 12:00  =>   1 ws-don-0.
+  2009-01-01 12:00  =>     3 ws-0-typ           pic x value "0".
+  2009-01-01 12:00  =>     3 ws-0-nm-base       pic x(6) value "ARCHIS".
+  2009-01-01 12:00  =>     3 ws-0-nm-table      pic x(30) value "TABLE-ARCH".
+  2009-01-01 12:00  =>     3 ws-0-dt-ach        pic 9(8).
+  2009-01-01 12:00  =>     3 ws-0-dt-maj.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-ss    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-aa    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-mm    pic 99.
+  2009-01-01 12:00  =>      5 ws-0-dt-maj-jj    pic 99.
+  2009-01-01 12:00  =>*enregistrement type 1
+  2009-01-01 12:00  =>   1 ws-don-1.
+  2009-01-01 12:00  =>     3 ws-1-typ           pic x value "1".
+  2009-01-01 12:00  =>     3 ws-1-nm-cle        pic x(30) value "CLE-TABLE".
+  2009-01-01 12:00  =>     3 ws-1-cle.
+  2009-01-01 12:00  =>      5 ws-1-typ-cle      pic x value "N".
+  2009-01-01 12:00  =>      5 ws-1-lg-cle       pic 99.99.
+  2009-01-01 12:00  =>*enregistrement type 2
+  2009-01-01 12:00  =>   1 ws-don-2.
+  2009-01-01 12:00  =>     3 ws-2-typ           pic x value "2".
+  2009-01-01 12:00  =>     3 ws-2-nm-chp        pic x(30).
+  2009-01-01 12:00  =>     3 ws-2-typ-chp       pic x(7).
+  2009-01-01 12:00  =>     3 ws-2-lg-chp        pic x(10).
+  2009-01-01 12:00  =>     3 ws-2-null          pic x(8).
+  2009-01-01 12:00  =>*enregistrement type 3
+  2009-01-01 12:00  =>   1 ws-don-3.
+  2009-01-01 12:00  =>     3 ws-3-typ           pic x value "3".
+  2009-01-01 12:00  =>     3 ws-3-nm-idx        pic x(30).
+  2009-01-01 12:00  =>     3 ws-3-nm-chp        pic x(30).
+  2009-01-01 12:00  =>     3 ws-3-tri           pic x(8).
+  2009-01-01 12:00  =>*enregistrement type 4
+  2009-01-01 12:00  =>   1 ws-don-4.
+  2009-01-01 12:00  =>     3 ws-4-typ           pic xx value "4A".
+  2009-01-01 12:00  =>     3 ws-4-don           pic x(135).
+  2009-01-01 12:00  =>*    3 ws-4-cle           pic x(10).
+  2009-01-01 12:00  =>*enregistrement type 9
+  2009-01-01 12:00  =>   1 ws-don-9.
+  2009-01-01 12:00  =>     3 ws-9-typ           pic x value "9".
+  2009-01-01 12:00  =>     3 ws-9-nm-base       pic x(6) value "ARCHIS".
+  2009-01-01 12:00  =>     3 ws-9-nm-table      pic x(30) value "TABLE-ARCH".
+  2009-01-01 12:00  =>     3 ws-9-dt-ach        pic 9(8).
+  2009-01-01 12:00  =>     3 ws-9-cpt-ach       pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>     3 ws-9-cpt-5         pic x(12) value "+00000000000".
+  2009-01-01 12:00  =>   1 unloadf              pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-unload        value 1.
+  2009-01-01 12:00  =>   1 table-null.
+  2009-01-01 12:00  =>     3 tnull              pic x occurs 70 times.
+  2009-01-01 12:00  =>  77 i                    pic 99.
+  2009-01-01 12:00  =>  77 i-buf                pic 99.
+  2009-01-01 12:00  =>  77 i-tot                pic 99.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*------------------ flag ---------------------------
+  2009-01-01 12:00  =>  77 fl-null              pic 9.
+  2009-01-01 12:00  =>*---------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*---------------- compteur -------------------------
+  2009-01-01 12:00  =>  77 cpt-char             pic 999.
+  2009-01-01 12:00  =>  77 cpt-ach              pic 9(11).
+  2009-01-01 12:00  =>  77 cpt-lu               pic 9(11).
+  2009-01-01 12:00  =>  77 cpt-achf             pic z(10)9.
+  2009-01-01 12:00  =>  77 cpt-luf              pic z(10)9.
+  2009-01-01 12:00  =>*----------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*------------------ POUR LA DATE ---------------------
+  2009-01-01 12:00  =>   1 dt-i.
+  2009-01-01 12:00  =>     3 aa-i               pic 9(4).
+  2009-01-01 12:00  =>     3 mm-i               pic 99.
+  2009-01-01 12:00  =>     3 jj-i               pic 99.
+  2009-01-01 12:00  =>   1 dt-fr.
+  2009-01-01 12:00  =>     3 jj-fr              pic 99.
+  2009-01-01 12:00  =>     3   pic x value '/'.
+  2009-01-01 12:00  =>     3 mm-fr              pic 99.
+  2009-01-01 12:00  =>     3   pic x value '/'.
+  2009-01-01 12:00  =>     3 aa-fr              pic 9(4).
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*-------------------
+  2009-01-01 12:00  =>   000-main.
+  2009-01-01 12:00  =>     open input fic-report fic-descript fic-unload
+  2009-01-01 12:00  =>          output fic-format
+  2009-01-01 12:00  =>     perform 100-type0 thru 100-exit
+  2009-01-01 12:00  =>     perform 101-type1 thru 101-exit
+  2009-01-01 12:00  =>     perform 102-type2 thru 102-exit
+  2009-01-01 12:00  =>     perform 103-type3 thru 103-exit
+  2009-01-01 12:00  =>     perform 104-type4 thru 104-exit
+  2009-01-01 12:00  =>     perform 105-type9 thru 105-exit
+  2009-01-01 12:00  =>     perform 106-tot thru 106-exit
+  2009-01-01 12:00  =>     close fic-report fic-descript fic-unload fic-format
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 0 ----------------
+  2009-01-01 12:00  =>  100-type0.
+  2009-01-01 12:00  =>     accept ws-0-dt-ach from date yyyymmdd
+  2009-01-01 12:00  =>*recherche de la date de cr?ation de la table
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit until lgn-rep(4:21)
+  2009-01-01 12:00  =>       = 'DD-PROCESS-TIME-STAMP'
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     move lgn-rep(7:2) to ws-0-dt-maj-aa
+  2009-01-01 12:00  =>     if ws-0-dt-maj-aa > 90
+  2009-01-01 12:00  =>       move 19 to ws-0-dt-maj-ss
+  2009-01-01 12:00  =>     else
+  2009-01-01 12:00  =>       move 20 to ws-0-dt-maj-ss
+  2009-01-01 12:00  =>     end-if
+  2009-01-01 12:00  =>     move lgn-rep(10:2) to ws-0-dt-maj-mm
+  2009-01-01 12:00  =>     move lgn-rep(13:2) to ws-0-dt-maj-jj
+  2009-01-01 12:00  =>     write lgn-for from ws-don-0
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 1 -----------------
+  2009-01-01 12:00  =>  101-type1.
+  2009-01-01 12:00  =>     move 10 to ws-1-lg-cle
+  2009-01-01 12:00  =>     write lgn-for from ws-don-1
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 2 -----------------
+  2009-01-01 12:00  =>  102-type2.
+  2009-01-01 12:00  =>     perform until lgn-rep(1:7) = 'Columns'
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit 2 times
+  2009-01-01 12:00  =>*localisation de l'emplacement de yes/no pour NULL
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'Allowed'
+  2009-01-01 12:00  =>     move cpt-char to i-buf
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     perform 201-lec-descript thru 201-exit 2 times
+  2009-01-01 12:00  =>*localisation du nom du champ
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-des tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'TION.'
+  2009-01-01 12:00  =>     add 6 to cpt-char
+  2009-01-01 12:00  =>     perform 2 times
+  2009-01-01 12:00  =>*chargement du nom et de la description des champs
+  2009-01-01 12:00  =>       move lgn-des(cpt-char:30) to ws-2-nm-chp
+  2009-01-01 12:00  =>       move lgn-des(6:7) to ws-2-typ-chp
+  2009-01-01 12:00  =>       move lgn-des(13:10) to ws-2-lg-chp
+  2009-01-01 12:00  =>       move lgn-rep to table-null
+  2009-01-01 12:00  =>       add 3 to i-buf giving i
+  2009-01-01 12:00  =>       move 0 to fl-null
+  2009-01-01 12:00  =>       add 2 to i giving i-tot
+  2009-01-01 12:00  =>*recherche 0 et ensuite 0 pour NULL
+  2009-01-01 12:00  =>       perform until i >= i-tot
+  2009-01-01 12:00  =>         if tnull(i) = 'Y'
+  2009-01-01 12:00  =>           add 1 to i
+  2009-01-01 12:00  =>           if tnull(i) = 'E'
+  2009-01-01 12:00  =>             move 1 to fl-null
+  2009-01-01 12:00  =>           end-if
+  2009-01-01 12:00  =>         end-if
+  2009-01-01 12:00  =>         add 1 to i
+  2009-01-01 12:00  =>       end-perform
+  2009-01-01 12:00  =>       if fl-null = 1
+  2009-01-01 12:00  =>         move 'NULL' to ws-2-null
+  2009-01-01 12:00  =>       else
+  2009-01-01 12:00  =>         move space to ws-2-null
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>       write lgn-for from ws-don-2
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>       perform 201-lec-descript thru 201-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 3 -----------------
+  2009-01-01 12:00  =>  103-type3.
+  2009-01-01 12:00  =>     perform until lgn-rep(1:13) = 'Primary Key :'
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>*localisation de la cl?
+  2009-01-01 12:00  =>     move 0 to cpt-char
+  2009-01-01 12:00  =>     inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                     for characters
+  2009-01-01 12:00  =>                     before initial 'PK_'
+  2009-01-01 12:00  =>     add 1 to cpt-char
+  2009-01-01 12:00  =>     move lgn-rep(cpt-char:30) to ws-3-nm-idx
+  2009-01-01 12:00  =>     perform 200-lec-report thru 200-exit 2 times
+  2009-01-01 12:00  =>     perform until lgn-rep(1:10) = space
+  2009-01-01 12:00  =>       move 0 to cpt-char
+  2009-01-01 12:00  =>       inspect lgn-rep tallying cpt-char
+  2009-01-01 12:00  =>                       for characters
+  2009-01-01 12:00  =>                       before initial ','
+  2009-01-01 12:00  =>       subtract 4 from cpt-char
+  2009-01-01 12:00  =>*chargement du nom de la cl?
+  2009-01-01 12:00  =>       move lgn-rep(5:cpt-char) to ws-3-nm-chp
+  2009-01-01 12:00  =>       add 7 to cpt-char
+  2009-01-01 12:00  =>*chargement de l'ordre de tri
+  2009-01-01 12:00  =>       move lgn-rep(cpt-char:3) to ws-3-tri
+  2009-01-01 12:00  =>       write lgn-for from ws-don-3
+  2009-01-01 12:00  =>       perform 200-lec-report thru 200-exit
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  103-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 4 -----------------
+  2009-01-01 12:00  =>  104-type4.
+  2009-01-01 12:00  =>     perform until fin-unload
+  2009-01-01 12:00  =>       perform 202-lec-unload thru 202-exit
+  2009-01-01 12:00  =>       if not fin-unload
+  2009-01-01 12:00  =>*chargement de la cl? d'archivage
+  2009-01-01 12:00  =>*d?j? r?p?t? via la jointure!!!!!
+  2009-01-01 12:00  =>*        move lgn-unl (:10) to ws-4-cle
+  2009-01-01 12:00  =>         write lgn-for from ws-don-4
+  2009-01-01 12:00  =>         add 1 to cpt-ach
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  104-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 9 -----------------
+  2009-01-01 12:00  =>  105-type9.
+  2009-01-01 12:00  =>     accept ws-9-dt-ach from date yyyymmdd
+  2009-01-01 12:00  =>*comteur du nombre d'enregistrement de type 4
+  2009-01-01 12:00  =>     move cpt-ach to ws-9-cpt-ach
+  2009-01-01 12:00  =>     write lgn-for from ws-don-9
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  105-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----------------- RAPPORT  -----------------
+  2009-01-01 12:00  =>  106-tot.
+  2009-01-01 12:00  =>     move cpt-ach to cpt-achf
+  2009-01-01 12:00  =>     move cpt-lu to cpt-luf
+  2009-01-01 12:00  =>     move ws-0-dt-ach to dt-i
+  2009-01-01 12:00  =>     move aa-i to aa-fr
+  2009-01-01 12:00  =>     move mm-i to mm-fr
+  2009-01-01 12:00  =>     move jj-i to jj-fr
+  2009-01-01 12:00  =>     display "ARCHIFORMAT          RAPPORT          "
+  2009-01-01 12:00  =>       dt-fr upon printer
+  2009-01-01 12:00  =>     display "Enregistrements lus:" cpt-luf upon printer
+  2009-01-01 12:00  =>     display "Enregistrements 4 ?crits:" cpt-achf upon printer
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  106-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DU REPORT --------------
+  2009-01-01 12:00  =>  200-lec-report.
+  2009-01-01 12:00  =>     read fic-report
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         display "fin du report" upon printer
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  200-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DU DESCRIPT ------------
+  2009-01-01 12:00  =>  201-lec-descript.
+  2009-01-01 12:00  =>     read fic-descript
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         display "fin de la description" upon printer
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  201-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*--------------- LECTURE DE L'UNLOAD --------------
+  2009-01-01 12:00  =>  202-lec-unload.
+  2009-01-01 12:00  =>     read fic-unload
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to unloadf
+  2009-01-01 12:00  =>       not at end
+  2009-01-01 12:00  =>         move lgn-unl(1:132) to ws-4-don(1:132)
+  2009-01-01 12:00  =>         move lgn-unl(134:2)
+  2009-01-01 12:00  =>           to ws-4-don(133:2)
+  2009-01-01 12:00  =>         add 1 to cpt-lu
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  202-exit.
+  2009-01-01 12:00  =>     exit.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                    -- archiformat --                       ***
+  ***            Foramt donn?es pour archivage                   ***
+  ***                        == UCS ==                           ***
+  ***------------------------------------------------------------***
+  * Type     :                                                     *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : N?ga  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 13 mars 2002                    (dd/mm/ccyy)        *
+  * Release  :                                 (99)                *
+  * Version  :                                 (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *                                                                *
+  *    INPUT : ARF4-REPORT : report de la table                 *
+  *    INPUT : ARF4-DESCRIPT : description de la table            *
+  *    INPUT : ARF4-UNLOAD : donn?es unload?es archiv?es        *
+  *    OUTPUT: ARF4-FORMAT : donn?es au  format  archive       *
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

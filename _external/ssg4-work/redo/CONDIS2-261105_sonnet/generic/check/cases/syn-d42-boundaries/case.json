@@ -1,0 +1,8 @@
+{
+  "case": "syn-d42-boundaries",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 20,
+  "note": "D42 range edges and non-digit years (UNKNOWN 6: ASCII collation assumed); last two records are short (UNKNOWN 3)"
+}

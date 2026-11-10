@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-03 14:59:43
+PASS SSG4_FUSBA_CASES regression                     --- 12 of 12 outputs byte-identical | === SSG4_FUSBA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_FUSBA_CASES\check.txt)
+=== Regress : all passed

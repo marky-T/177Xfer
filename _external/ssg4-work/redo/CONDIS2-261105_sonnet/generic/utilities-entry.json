@@ -1,0 +1,49 @@
+{
+  "utility": "CONDIS2",
+  "folder": "CONDIS2",
+  "calls": 18,
+  "check": {
+    "crosscheck": {
+      "MATCH": 17,
+      "NO-EXPANSION": 1
+    },
+    "known": "PAIJ01_UL_L85: quoted values with spaces, the per-call expansion fails in AMT's SGS code (T3-028); its parameter lines are built from the raw card file and equal the reference model's item list (check crosscheck.csv, column Model)"
+  },
+  "program": "ASSURFED_UTILIT_CONDIS2_GN",
+  "programSource": "CONDIS2/gen/ASSURFED-UTILIT-CONDIS2-GN.cob",
+  "xqt": [
+    "CONDIS2"
+  ],
+  "parmFile": "CNDPARM",
+  "parmRecordLength": 250,
+  "fixedFiles": [
+    "CNDIN",
+    "CNDOUT"
+  ],
+  "include": "CondisParm",
+  "includeSource": "CONDIS2/gen/CondisParm.ps1",
+  "skeletons": [
+    {
+      "skeleton": "UTILIT_CONDIS2_ASCII",
+      "call": "Invoke-CondisHandoff"
+    }
+  ],
+  "tests": {
+    "parameterCheck": "CONDIS2/check/Test-CondisParm.ps1",
+    "prepare": [
+      "CONDIS2/cc/Prepare-CondisCc.ps1"
+    ],
+    "ccJobs": [
+      "SSG4_CONDIS2_CASES"
+    ]
+  },
+  "regressEntry": {
+    "job": "SSG4_CONDIS2_CASES",
+    "utilities": [
+      "CONDIS2"
+    ],
+    "logPrefix": "CND2TEST",
+    "cases": "CONDIS2\\cc-cases.json"
+  },
+  "note": "Proposed entry for a catalog block; \"regressEntry\" is the block to add to the top-level \"regress\" list. Not added to utilities.json (validation redo). Not proven in CC."
+}

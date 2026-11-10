@@ -1,0 +1,7 @@
+--- BatchController: 20261105 21:12:41.172 11 Information SSG4_CONDIS2S_CASES Done Id: 1352 Queue: JOB_QUEUE1 (Execution time: 00:01:20:989)
+--- CND2TEST_135220261105211124530.log
+syn-d42-boundaries CN231O.DAT         190 B vs expected       200 B: FAIL
+t3059-bb-twomerges CN235O.DAT          40 B vs expected        60 B: FAIL
+t3059-u-midfile CN236O.DAT          64 B vs expected        96 B: FAIL
+--- 33 of 36 outputs byte-identical
+=== SSG4_CONDIS2S_CASES : 3 problem(s) (full report: E:\Repos\ssg4-work\generic\regress\SSG4_CONDIS2S_CASES\check.txt)

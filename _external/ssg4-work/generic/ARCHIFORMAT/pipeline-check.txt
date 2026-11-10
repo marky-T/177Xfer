@@ -1,0 +1,7 @@
+include: ArchiformatParm.ps1 is current (615F823677990FBB)
+F1   MATCH
+F2   MATCH
+F3   MATCH
+F4   MATCH
+F5   REJECTED: SSG-4 hand-off (ARCHI): no SGS value for [rsz,1,1,1]
+ARCHIFORMAT : 4 MATCH, 1 REJECTED, failures 0

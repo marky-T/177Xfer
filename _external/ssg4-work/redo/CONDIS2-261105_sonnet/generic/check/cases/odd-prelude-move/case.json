@@ -1,0 +1,8 @@
+{
+  "case": "odd-prelude-move",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 4,
+  "note": "MOVE/CONST before the first CASE (runs for every record), then CASE + OTHERWISE; no real call"
+}

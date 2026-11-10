@@ -1,0 +1,12 @@
+SSG-4: CONDIS2 blind program end-to-end in CC (MT-054), T3-057 deployed, pipeline fixes, review tidy-ups
+
+- CONDIS2S (Sonnet blind CONDIS2) through Check/Build/LionDev/Deliver/Deploy/CC: 32/33 byte-identical,
+  6 released-job inputs identical to the released program in CC; kept (testOnly) as the CC test bed for T3-059
+- T3-057: CONDIS2 hand-off reproduces the skeleton card checks V1-V5; deployed, CC 6/6
+- Pipeline: -Utility All skips testOnly entries; regression currency per job's own programs (T3-060, 15/15 PASS)
+- New issues: T3-058 (repeat Deliver of a partial build), T3-059 (AMT reader merges short lines)
+- Guidance: rule 11 (unset SGS variables / StrictMode) and "reproduce every FLAGABORT" in instructions + prompt
+- Tidy-ups: CONDIS2 spec wording, ARCHIFORMAT date-check classification, MT-033 R&D items, T3-014 service log
+- Runbook tab 6 validation rows; plans 261105-condis2-route-validation / 261105-condis2s-e2e
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

@@ -1,0 +1,4 @@
+Cross-check parm vs expansion: MATCH 17, NO-EXPANSION 1
+Parm vs reference model:       MATCH 18
+Parm from raw card file vs AMT label store: ERROR 1, SAME 17
+  PAIJ01_UL_L85: NO-EXPANSION | model MATCH | sgs-path ERROR: ABORT: SSG-4 hand-off (CONDIS2): PG card 1 (CASE) field 2 po the per-call expansion fails (Cannot convert value "''" to type "System.Int32". Error: "Th...); cards with quoted spaces, T3-028

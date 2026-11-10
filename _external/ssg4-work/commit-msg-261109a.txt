@@ -1,0 +1,9 @@
+Review of LECTIS (MT-056): record check change, AMT_RUNTIME_DEFECT class, C11 proven
+
+- MT-056: SSG4_LECTIS_CASES FAIL 17:35 -> check changed -> same run re-checked PASS 17:40, recorded;
+  KEYIMAGE count 0 confirmed by the independent T3-059 rule prediction
+- New difference class AMT_RUNTIME_DEFECT; evidence rule for known run-time differences (instructions + prompt)
+- LECTIS spec: C11 PROVEN_BY_UNISYS_MANUAL (SSG manual 5.2.26); KEYIMAGE reclassified
+- Workspace: chat terminal auto-approve for Select (owner: keep)
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

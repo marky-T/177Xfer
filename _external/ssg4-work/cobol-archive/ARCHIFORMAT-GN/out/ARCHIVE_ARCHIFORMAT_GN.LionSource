@@ -1,0 +1,572 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=ARCHIVEARCHIFORMATGN,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHIFORMAT-GN,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=ARCHIVEARCHIFORMATGN,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=ARCHIVEARCHIFORMATGN
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-11-03 04:11
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHIFORMAT-GN,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED-UTILIT-ARCHIFORMAT-GN
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>* SSG-4 archive work (MT-050): one ARCHIFORMAT for all calls. Key,
+  2009-01-01 12:00  =>* record length, column count and names come from the SGSPARM
+  2009-01-01 12:00  =>* file written by the skeleton hand-off; behaviour as in
+  2009-01-01 12:00  =>* Conversion\Pipeline\Generic\ARCHIFORMAT\spec.md (source:
+  2009-01-01 12:00  =>* SSG-Source\ARCHIFORMAT.TXT, UCS COBOL). The report and the
+  2009-01-01 12:00  =>* description are written by the skeleton's ECL steps first.
+  2009-01-01 12:00  =>* SGSPARM (250): TB<base 6><table 30>
+  2009-01-01 12:00  =>*                KY<key name 30><key type 1><key length 5>
+  2009-01-01 12:00  =>*                RZ<rsz 5><columns 5>
+  2009-01-01 12:00  =>* Unload record (b = k + rsz + 1 + columns) up to 3998.
+  2009-01-01 12:00  => PROGRAM-ID. 'ASSURFED-UTILIT-ARCHIFORMAT-GN'.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT PARMF ASSIGN TO DISC SGSPARM.
+  2009-01-01 12:00  =>     SELECT FIC-REPORT ASSIGN TO DISC ARFREP.
+  2009-01-01 12:00  =>     SELECT FIC-DESCRIPT ASSIGN TO DISC ARFDES.
+  2009-01-01 12:00  =>     SELECT FIC-UNLOAD ASSIGN TO DISC ARFUNL.
+  2009-01-01 12:00  =>     SELECT FIC-FORMAT ASSIGN TO DISC ARFOUT.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  PARMF
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD.
+  2009-01-01 12:00  => 01  PARM-REC.
+  2009-01-01 12:00  =>     03  P-TYPE         PIC XX.
+  2009-01-01 12:00  =>     03  P-REST         PIC X(248).
+  2009-01-01 12:00  => 01  PARM-TB-REC.
+  2009-01-01 12:00  =>     03  FILLER         PIC XX.
+  2009-01-01 12:00  =>     03  PT-BASE        PIC X(6).
+  2009-01-01 12:00  =>     03  PT-TABLE       PIC X(30).
+  2009-01-01 12:00  =>     03  FILLER         PIC X(212).
+  2009-01-01 12:00  => 01  PARM-KY-REC.
+  2009-01-01 12:00  =>     03  FILLER         PIC XX.
+  2009-01-01 12:00  =>     03  PK-NAME        PIC X(30).
+  2009-01-01 12:00  =>     03  PK-TYPE        PIC X.
+  2009-01-01 12:00  =>     03  PK-LEN         PIC 9(5).
+  2009-01-01 12:00  =>     03  FILLER         PIC X(212).
+  2009-01-01 12:00  => 01  PARM-RZ-REC.
+  2009-01-01 12:00  =>     03  FILLER         PIC XX.
+  2009-01-01 12:00  =>     03  PR-RSZ         PIC 9(5).
+  2009-01-01 12:00  =>     03  PR-COLS        PIC 9(5).
+  2009-01-01 12:00  =>     03  FILLER         PIC X(238).
+  2009-01-01 12:00  => FD  FIC-REPORT
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD.
+  2009-01-01 12:00  => 01  LGN-REP            PIC X(132).
+  2009-01-01 12:00  => FD  FIC-DESCRIPT
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD.
+  2009-01-01 12:00  => 01  LGN-DES            PIC X(132).
+  2009-01-01 12:00  => FD  FIC-UNLOAD
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD
+  2009-01-01 12:00  =>     RECORD VARYING IN SIZE FROM 1 TO 4001
+  2009-01-01 12:00  =>     DEPENDING ON WS-UNL-LEN.
+  2009-01-01 12:00  => 01  FIC-UNLOAD-REC     PIC X(4001).
+  2009-01-01 12:00  => FD  FIC-FORMAT
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD.
+  2009-01-01 12:00  => 01  LGN-FOR            PIC X(4000).
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  RECIN              PIC X(4001).
+  2009-01-01 12:00  => 01  WS-UNL             PIC X(4000).
+  2009-01-01 12:00  => 77  WS-UNL-LEN         PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  CP-LEN             PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-K                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-RSZ              PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-T                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-B                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-C                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-D                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-E                PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  =>*enregistrement type 0
+  2009-01-01 12:00  => 01  WS-DON-0.
+  2009-01-01 12:00  =>     03  WS-0-TYP       PIC X VALUE '0'.
+  2009-01-01 12:00  =>     03  WS-0-NM-BASE   PIC X(6).
+  2009-01-01 12:00  =>     03  WS-0-NM-TABLE  PIC X(30).
+  2009-01-01 12:00  =>     03  WS-0-DT-ACH    PIC 9(8).
+  2009-01-01 12:00  =>     03  WS-0-DT-MAJ.
+  2009-01-01 12:00  =>      05 WS-0-DT-MAJ-SS PIC 99.
+  2009-01-01 12:00  =>      05 WS-0-DT-MAJ-AA PIC 99.
+  2009-01-01 12:00  =>      05 WS-0-DT-MAJ-MM PIC 99.
+  2009-01-01 12:00  =>      05 WS-0-DT-MAJ-JJ PIC 99.
+  2009-01-01 12:00  =>*enregistrement type 1
+  2009-01-01 12:00  => 01  WS-DON-1.
+  2009-01-01 12:00  =>     03  WS-1-TYP       PIC X VALUE '1'.
+  2009-01-01 12:00  =>     03  WS-1-NM-CLE    PIC X(30).
+  2009-01-01 12:00  =>     03  WS-1-CLE.
+  2009-01-01 12:00  =>      05 WS-1-TYP-CLE   PIC X.
+  2009-01-01 12:00  =>      05 WS-1-LG-CLE    PIC 99.99.
+  2009-01-01 12:00  =>*enregistrement type 2
+  2009-01-01 12:00  => 01  WS-DON-2.
+  2009-01-01 12:00  =>     03  WS-2-TYP       PIC X VALUE '2'.
+  2009-01-01 12:00  =>     03  WS-2-NM-CHP    PIC X(30).
+  2009-01-01 12:00  =>     03  WS-2-TYP-CHP   PIC X(7).
+  2009-01-01 12:00  =>     03  WS-2-LG-CHP    PIC X(10).
+  2009-01-01 12:00  =>     03  WS-2-NULL      PIC X(8).
+  2009-01-01 12:00  =>*enregistrement type 3
+  2009-01-01 12:00  => 01  WS-DON-3.
+  2009-01-01 12:00  =>     03  WS-3-TYP       PIC X VALUE '3'.
+  2009-01-01 12:00  =>     03  WS-3-NM-IDX    PIC X(30).
+  2009-01-01 12:00  =>     03  WS-3-NM-CHP    PIC X(30).
+  2009-01-01 12:00  =>     03  WS-3-TRI       PIC X(8).
+  2009-01-01 12:00  =>*enregistrement type 4 (cut at a = b + 1 by the record length)
+  2009-01-01 12:00  => 01  WS-DON-4.
+  2009-01-01 12:00  =>     03  WS-4-TYP       PIC XX VALUE '4A'.
+  2009-01-01 12:00  =>     03  WS-4-DON       PIC X(3998).
+  2009-01-01 12:00  =>*enregistrement type 9
+  2009-01-01 12:00  => 01  WS-DON-9.
+  2009-01-01 12:00  =>     03  WS-9-TYP       PIC X VALUE '9'.
+  2009-01-01 12:00  =>     03  WS-9-NM-BASE   PIC X(6).
+  2009-01-01 12:00  =>     03  WS-9-NM-TABLE  PIC X(30).
+  2009-01-01 12:00  =>     03  WS-9-DT-ACH    PIC 9(8).
+  2009-01-01 12:00  =>     03  WS-9-CPT-ACH   PIC S9(11) SIGN LEADING SEPARATE.
+  2009-01-01 12:00  =>     03  WS-9-CPT-5     PIC X(12) VALUE '+00000000000'.
+  2009-01-01 12:00  => 01  UNLOADF            PIC 9 VALUE 0.
+  2009-01-01 12:00  => 01  TABLE-NULL.
+  2009-01-01 12:00  =>     03  TNULL          PIC X OCCURS 70 TIMES.
+  2009-01-01 12:00  => 77  I                  PIC 99.
+  2009-01-01 12:00  => 77  I-BUF              PIC 99.
+  2009-01-01 12:00  => 77  I-TOT              PIC 99.
+  2009-01-01 12:00  => 77  FL-NULL            PIC 9.
+  2009-01-01 12:00  => 77  CPT-CHAR           PIC 999.
+  2009-01-01 12:00  => 77  CPT-ACH            PIC 9(11) VALUE 0.
+  2009-01-01 12:00  => 77  CPT-LU             PIC 9(11) VALUE 0.
+  2009-01-01 12:00  => 77  CPT-ACHF           PIC Z(10)9.
+  2009-01-01 12:00  => 77  CPT-LUF            PIC Z(10)9.
+  2009-01-01 12:00  => 01  DT-I.
+  2009-01-01 12:00  =>     03  AA-I           PIC 9(4).
+  2009-01-01 12:00  =>     03  MM-I           PIC 99.
+  2009-01-01 12:00  =>     03  JJ-I           PIC 99.
+  2009-01-01 12:00  => 01  DT-FR.
+  2009-01-01 12:00  =>     03  JJ-FR          PIC 99.
+  2009-01-01 12:00  =>     03  FILLER         PIC X VALUE '/'.
+  2009-01-01 12:00  =>     03  MM-FR          PIC 99.
+  2009-01-01 12:00  =>     03  FILLER         PIC X VALUE '/'.
+  2009-01-01 12:00  =>     03  AA-FR          PIC 9(4).
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     OPEN INPUT PARMF.
+  2009-01-01 12:00  => PARM-LECT.
+  2009-01-01 12:00  =>     READ PARMF AT END GO TO PARM-FIN.
+  2009-01-01 12:00  =>     IF P-TYPE = 'TB'
+  2009-01-01 12:00  =>        MOVE PT-BASE TO WS-0-NM-BASE WS-9-NM-BASE
+  2009-01-01 12:00  =>        MOVE PT-TABLE TO WS-0-NM-TABLE WS-9-NM-TABLE.
+  2009-01-01 12:00  =>     IF P-TYPE = 'KY'
+  2009-01-01 12:00  =>        MOVE PK-NAME TO WS-1-NM-CLE
+  2009-01-01 12:00  =>        MOVE PK-TYPE TO WS-1-TYP-CLE
+  2009-01-01 12:00  =>        MOVE PK-LEN TO P-K.
+  2009-01-01 12:00  =>     IF P-TYPE = 'RZ'
+  2009-01-01 12:00  =>        MOVE PR-RSZ TO P-RSZ
+  2009-01-01 12:00  =>        MOVE PR-COLS TO P-T.
+  2009-01-01 12:00  =>     GO TO PARM-LECT.
+  2009-01-01 12:00  => PARM-FIN.
+  2009-01-01 12:00  =>     CLOSE PARMF.
+  2009-01-01 12:00  =>     COMPUTE P-E = P-K + P-RSZ.
+  2009-01-01 12:00  =>     COMPUTE P-D = P-E + 1.
+  2009-01-01 12:00  =>     COMPUTE P-C = P-E + 2.
+  2009-01-01 12:00  =>     COMPUTE P-B = P-E + 1 + P-T.
+  2009-01-01 12:00  =>     OPEN INPUT FIC-REPORT FIC-DESCRIPT FIC-UNLOAD
+  2009-01-01 12:00  =>          OUTPUT FIC-FORMAT.
+  2009-01-01 12:00  =>     PERFORM 100-TYPE0 THRU 100-EXIT.
+  2009-01-01 12:00  =>     PERFORM 101-TYPE1 THRU 101-EXIT.
+  2009-01-01 12:00  =>     PERFORM 102-TYPE2 THRU 102-EXIT.
+  2009-01-01 12:00  =>     PERFORM 103-TYPE3 THRU 103-EXIT.
+  2009-01-01 12:00  =>     PERFORM 104-TYPE4 THRU 104-EXIT.
+  2009-01-01 12:00  =>     PERFORM 105-TYPE9 THRU 105-EXIT.
+  2009-01-01 12:00  =>     PERFORM 106-TOT THRU 106-EXIT.
+  2009-01-01 12:00  =>     CLOSE FIC-REPORT FIC-DESCRIPT FIC-UNLOAD FIC-FORMAT.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 0 ----------------
+  2009-01-01 12:00  => 100-TYPE0.
+  2009-01-01 12:00  =>     ACCEPT WS-0-DT-ACH FROM DATE YYYYMMDD.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT UNTIL LGN-REP (4:21)
+  2009-01-01 12:00  =>       = 'DD-PROCESS-TIME-STAMP'.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT.
+  2009-01-01 12:00  =>     MOVE LGN-REP (7:2) TO WS-0-DT-MAJ-AA.
+  2009-01-01 12:00  =>     IF WS-0-DT-MAJ-AA > 90
+  2009-01-01 12:00  =>        MOVE 19 TO WS-0-DT-MAJ-SS
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE 20 TO WS-0-DT-MAJ-SS.
+  2009-01-01 12:00  =>     MOVE LGN-REP (10:2) TO WS-0-DT-MAJ-MM.
+  2009-01-01 12:00  =>     MOVE LGN-REP (13:2) TO WS-0-DT-MAJ-JJ.
+  2009-01-01 12:00  =>     WRITE LGN-FOR FROM WS-DON-0.
+  2009-01-01 12:00  => 100-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 1 -----------------
+  2009-01-01 12:00  => 101-TYPE1.
+  2009-01-01 12:00  =>     MOVE P-K TO WS-1-LG-CLE.
+  2009-01-01 12:00  =>     WRITE LGN-FOR FROM WS-DON-1.
+  2009-01-01 12:00  => 101-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 2 -----------------
+  2009-01-01 12:00  => 102-TYPE2.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT
+  2009-01-01 12:00  =>       UNTIL LGN-REP (1:7) = 'Columns'.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT 2 TIMES.
+  2009-01-01 12:00  =>     MOVE 0 TO CPT-CHAR.
+  2009-01-01 12:00  =>     INSPECT LGN-REP TALLYING CPT-CHAR
+  2009-01-01 12:00  =>                     FOR CHARACTERS
+  2009-01-01 12:00  =>                     BEFORE INITIAL 'Allowed'.
+  2009-01-01 12:00  =>     MOVE CPT-CHAR TO I-BUF.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT.
+  2009-01-01 12:00  =>     PERFORM 201-LEC-DESCRIPT THRU 201-EXIT 2 TIMES.
+  2009-01-01 12:00  =>     MOVE 0 TO CPT-CHAR.
+  2009-01-01 12:00  =>     INSPECT LGN-DES TALLYING CPT-CHAR
+  2009-01-01 12:00  =>                     FOR CHARACTERS
+  2009-01-01 12:00  =>                     BEFORE INITIAL 'TION.'.
+  2009-01-01 12:00  =>     ADD 6 TO CPT-CHAR.
+  2009-01-01 12:00  =>     PERFORM 102-COL THRU 102-COL-EXIT P-T TIMES.
+  2009-01-01 12:00  => 102-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => 102-COL.
+  2009-01-01 12:00  =>     MOVE LGN-DES (CPT-CHAR:30) TO WS-2-NM-CHP.
+  2009-01-01 12:00  =>     MOVE LGN-DES (6:7) TO WS-2-TYP-CHP.
+  2009-01-01 12:00  =>     MOVE LGN-DES (13:10) TO WS-2-LG-CHP.
+  2009-01-01 12:00  =>     MOVE LGN-REP TO TABLE-NULL.
+  2009-01-01 12:00  =>     ADD 3 TO I-BUF GIVING I.
+  2009-01-01 12:00  =>     MOVE 0 TO FL-NULL.
+  2009-01-01 12:00  =>     ADD 2 TO I GIVING I-TOT.
+  2009-01-01 12:00  =>     PERFORM 102-NULL THRU 102-NULL-EXIT UNTIL I NOT < I-TOT.
+  2009-01-01 12:00  =>     IF FL-NULL = 1
+  2009-01-01 12:00  =>        MOVE 'NULL' TO WS-2-NULL
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE SPACE TO WS-2-NULL.
+  2009-01-01 12:00  =>     WRITE LGN-FOR FROM WS-DON-2.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT.
+  2009-01-01 12:00  =>     PERFORM 201-LEC-DESCRIPT THRU 201-EXIT.
+  2009-01-01 12:00  => 102-COL-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*recherche [Y] et ensuite [E] pour NULL
+  2009-01-01 12:00  => 102-NULL.
+  2009-01-01 12:00  =>     IF TNULL (I) = 'Y'
+  2009-01-01 12:00  =>        ADD 1 TO I
+  2009-01-01 12:00  =>        IF TNULL (I) = 'E'
+  2009-01-01 12:00  =>           MOVE 1 TO FL-NULL.
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  => 102-NULL-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 3 -----------------
+  2009-01-01 12:00  => 103-TYPE3.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT
+  2009-01-01 12:00  =>       UNTIL LGN-REP (1:13) = 'Primary Key :'.
+  2009-01-01 12:00  =>     MOVE 0 TO CPT-CHAR.
+  2009-01-01 12:00  =>     INSPECT LGN-REP TALLYING CPT-CHAR
+  2009-01-01 12:00  =>                     FOR CHARACTERS
+  2009-01-01 12:00  =>                     BEFORE INITIAL 'PK_'.
+  2009-01-01 12:00  =>     ADD 1 TO CPT-CHAR.
+  2009-01-01 12:00  =>     MOVE LGN-REP (CPT-CHAR:30) TO WS-3-NM-IDX.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT 2 TIMES.
+  2009-01-01 12:00  =>     PERFORM 103-COL THRU 103-COL-EXIT
+  2009-01-01 12:00  =>       UNTIL LGN-REP (1:10) = SPACE.
+  2009-01-01 12:00  => 103-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => 103-COL.
+  2009-01-01 12:00  =>     MOVE 0 TO CPT-CHAR.
+  2009-01-01 12:00  =>     INSPECT LGN-REP TALLYING CPT-CHAR
+  2009-01-01 12:00  =>                     FOR CHARACTERS
+  2009-01-01 12:00  =>                     BEFORE INITIAL ','.
+  2009-01-01 12:00  =>     SUBTRACT 4 FROM CPT-CHAR.
+  2009-01-01 12:00  =>     MOVE LGN-REP (5:CPT-CHAR) TO WS-3-NM-CHP.
+  2009-01-01 12:00  =>     ADD 7 TO CPT-CHAR.
+  2009-01-01 12:00  =>     MOVE LGN-REP (CPT-CHAR:3) TO WS-3-TRI.
+  2009-01-01 12:00  =>     WRITE LGN-FOR FROM WS-DON-3.
+  2009-01-01 12:00  =>     PERFORM 200-LEC-REPORT THRU 200-EXIT.
+  2009-01-01 12:00  => 103-COL-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 4 -----------------
+  2009-01-01 12:00  => 104-TYPE4.
+  2009-01-01 12:00  =>     PERFORM 104-REC THRU 104-REC-EXIT UNTIL UNLOADF = 1.
+  2009-01-01 12:00  => 104-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  => 104-REC.
+  2009-01-01 12:00  =>     PERFORM 202-LEC-UNLOAD THRU 202-EXIT.
+  2009-01-01 12:00  =>     IF UNLOADF NOT = 1
+  2009-01-01 12:00  =>        WRITE LGN-FOR FROM WS-DON-4
+  2009-01-01 12:00  =>        ADD 1 TO CPT-ACH.
+  2009-01-01 12:00  => 104-REC-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*------------ ENREGISTREMENT DE TYPE 9 -----------------
+  2009-01-01 12:00  => 105-TYPE9.
+  2009-01-01 12:00  =>     ACCEPT WS-9-DT-ACH FROM DATE YYYYMMDD.
+  2009-01-01 12:00  =>     MOVE CPT-ACH TO WS-9-CPT-ACH.
+  2009-01-01 12:00  =>     WRITE LGN-FOR FROM WS-DON-9.
+  2009-01-01 12:00  => 105-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*----------------- RAPPORT  -----------------
+  2009-01-01 12:00  => 106-TOT.
+  2009-01-01 12:00  =>     MOVE CPT-ACH TO CPT-ACHF.
+  2009-01-01 12:00  =>     MOVE CPT-LU TO CPT-LUF.
+  2009-01-01 12:00  =>     MOVE WS-0-DT-ACH TO DT-I.
+  2009-01-01 12:00  =>     MOVE AA-I TO AA-FR.
+  2009-01-01 12:00  =>     MOVE MM-I TO MM-FR.
+  2009-01-01 12:00  =>     MOVE JJ-I TO JJ-FR.
+  2009-01-01 12:00  =>     DISPLAY 'ARCHIFORMAT          RAPPORT          '
+  2009-01-01 12:00  =>       DT-FR UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'Enregistrements lus:' CPT-LUF UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'Enregistrements 4 écrits:' CPT-ACHF UPON PRINTER.
+  2009-01-01 12:00  => 106-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*--------------- LECTURE DU REPORT --------------
+  2009-01-01 12:00  => 200-LEC-REPORT.
+  2009-01-01 12:00  =>     READ FIC-REPORT
+  2009-01-01 12:00  =>       AT END
+  2009-01-01 12:00  =>         DISPLAY 'fin du report' UPON PRINTER.
+  2009-01-01 12:00  => 200-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*--------------- LECTURE DU DESCRIPT ------------
+  2009-01-01 12:00  => 201-LEC-DESCRIPT.
+  2009-01-01 12:00  =>     READ FIC-DESCRIPT
+  2009-01-01 12:00  =>       AT END
+  2009-01-01 12:00  =>         DISPLAY 'fin de la description' UPON PRINTER.
+  2009-01-01 12:00  => 201-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>*--------------- LECTURE DE L'UNLOAD --------------
+  2009-01-01 12:00  => 202-LEC-UNLOAD.
+  2009-01-01 12:00  =>     MOVE SPACES TO RECIN.
+  2009-01-01 12:00  =>     READ FIC-UNLOAD INTO RECIN
+  2009-01-01 12:00  =>       AT END
+  2009-01-01 12:00  =>         MOVE 1 TO UNLOADF
+  2009-01-01 12:00  =>         GO TO 202-EXIT.
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-UNL.
+  2009-01-01 12:00  =>     MOVE WS-UNL-LEN TO CP-LEN.
+  2009-01-01 12:00  =>     IF CP-LEN > P-B
+  2009-01-01 12:00  =>        MOVE P-B TO CP-LEN.
+  2009-01-01 12:00  =>     IF CP-LEN > 0
+  2009-01-01 12:00  =>        MOVE RECIN (1:CP-LEN) TO WS-UNL (1:CP-LEN).
+  2009-01-01 12:00  =>     MOVE WS-UNL (1:P-E) TO WS-4-DON (1:P-E).
+  2009-01-01 12:00  =>     MOVE WS-UNL (P-C:P-T) TO WS-4-DON (P-D:P-T).
+  2009-01-01 12:00  =>     ADD 1 TO CPT-LU.
+  2009-01-01 12:00  => 202-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  * SSG-4 archive work (MT-050): one ARCHIFORMAT for all calls. Key,
+  * record length, column count and names come from the SGSPARM
+  * file written by the skeleton hand-off; behaviour as in
+  * Conversion\Pipeline\Generic\ARCHIFORMAT\spec.md (source:
+  * SSG-Source\ARCHIFORMAT.TXT, UCS COBOL). The report and the
+  * description are written by the skeleton's ECL steps first.
+  * SGSPARM (250): TB<base 6><table 30>
+  *                KY<key name 30><key type 1><key length 5>
+  *                RZ<rsz 5><columns 5>
+  * Unload record (b = k + rsz + 1 + columns) up to 3998.
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

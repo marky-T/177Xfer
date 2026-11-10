@@ -1,0 +1,214 @@
+﻿<!--
+  This file contains support code for AMT COBOL applications converted from an IBM z/OS COBOL environment.
+  These support routines may be Cobol programs, subprograms or copies.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='source_name' description='source_description'>
+  <OPTIONS kind='P' init='N'/>
+  <CODE>
+    Cobol code
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS tag is optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (program), S (subprogram) or C (copy). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default  
+-->
+<SOURCES>
+
+<!-- SQLCA is already added to our runtiem libraries (Asysco.Amt.Runtime.Cobol.AmtCobolSql)
+<OBJECT name='SQLCA' description='SQLCA'>
+<OPTIONS kind='C' init='N'/>
+<CODE>
+ 01 SQLCA.
+    05 SQLCAID      PIC X(8).
+    05 SQLCABC      PIC S9(9) COMP-4.
+    05 SQLCODE      PIC S9(9) COMP-4.
+    05 SQLERRM.
+       49 SQLERRML  PIC S9(4) COMP-4.
+       49 SQLERRMC  PIC X(70).
+    05 SQLERRP      PIC X(8).
+    05 SQLERRD      OCCURS 6 TIMES
+                    PIC S9(9) COMP-4.
+    05 SQLWARN.
+       10 SQLWARN0  PIC X.
+       10 SQLWARN1  PIC X.
+       10 SQLWARN2  PIC X.
+       10 SQLWARN3  PIC X.
+       10 SQLWARN4  PIC X.
+       10 SQLWARN5  PIC X.
+       10 SQLWARN6  PIC X.
+       10 SQLWARN7  PIC X.
+    05 SQLEXT.
+       10 SQLWARN8  PIC X.
+       10 SQLWARN9  PIC X.
+       10 SQLWARNA  PIC X.
+       10 SQLSTATE  PIC X(5).
+</CODE>
+</OBJECT>
+-->
+
+<OBJECT name='SQLDA' description='SQLDA'>
+<OPTIONS kind='C' init='N'/>
+<CODE>
+ 01 SQLDA.
+    05 SQLDAID PIC X(8).
+    05 SQLDABC PIC S9(9) BINARY.
+    05 SQLN    PIC S9(4) BINARY.
+    05 SQLD    PIC S9(4) BINARY.
+    05 SQLVAR  OCCURS 0 TO 750 TIMES DEPENDING ON SQLN.
+       10 SQLVAR1.
+          15 SQLTYPE PIC S9(4) BINARY.
+          15 SQLLEN  PIC S9(4) BINARY.
+          15 FILLER  REDEFINES SQLLEN.
+             20 SQLPRECISION   PIC X.
+             20 SQLSCALE       PIC X.
+          15 SQLDATA POINTER.
+          15 SQLIND  POINTER.
+          15 SQLNAME.
+             49 SQLNAMEL PIC S9(4) BINARY.
+             49 SQLNAMEC PIC X(30).
+       10 SQLVAR2 REDEFINES SQLVAR1.
+          15 SQLVAR2-RESERVED-1 PIC S9(9) BINARY.
+          15 SQLLONGLEN         REDEFINES SQLVAR2-RESERVED-1
+                                PIC S9(9) BINARY.
+          15 SQLVAR2-RESERVED-2 PIC S9(9) BINARY.
+          15 SQLDATALEN         POINTER.
+          15 SQLDATATYPE-NAME.
+             20 SQLDATATYPE-NAMEL PIC S9(4) BINARY.
+             20 SQLDATATYPE-NAMEC PIC X(30).
+</CODE>
+</OBJECT>
+
+<OBJECT name='DFHAID' description='DFHAID'>
+<OPTIONS kind='C' init='N'/>
+<CODE>
+ 01    DFHAID.
+   02  DFHNULL   PIC  X  VALUE IS X'00'.
+   02  DFHENTER  PIC  X  VALUE IS ''''.
+   02  DFHCLEAR  PIC  X  VALUE IS '_'.
+   02  DFHCLRP   PIC  X  VALUE IS '¦'.
+   02  DFHPEN    PIC  X  VALUE IS '='.
+   02  DFHOPID   PIC  X  VALUE IS 'W'.
+   02  DFHMSRE   PIC  X  VALUE IS 'X'.
+   02  DFHSTRF   PIC  X  VALUE IS 'h'.
+   02  DFHTRIG   PIC  X  VALUE IS '"'.
+   02  DFHPA1    PIC  X  VALUE IS '%'.
+   02  DFHPA2    PIC  X  VALUE IS '>'.
+   02  DFHPA3    PIC  X  VALUE IS ','.
+   02  DFHPF1    PIC  X  VALUE IS '1'.
+   02  DFHPF2    PIC  X  VALUE IS '2'.
+   02  DFHPF3    PIC  X  VALUE IS '3'.
+   02  DFHPF4    PIC  X  VALUE IS '4'.
+   02  DFHPF5    PIC  X  VALUE IS '5'.
+   02  DFHPF6    PIC  X  VALUE IS '6'.
+   02  DFHPF7    PIC  X  VALUE IS '7'.
+   02  DFHPF8    PIC  X  VALUE IS '8'.
+   02  DFHPF9    PIC  X  VALUE IS '9'.
+   02  DFHPF10   PIC  X  VALUE IS ':'.
+   02  DFHPF11   PIC  X  VALUE IS '#'.
+   02  DFHPF12   PIC  X  VALUE IS '@'.
+   02  DFHPF13   PIC  X  VALUE IS 'A'.
+   02  DFHPF14   PIC  X  VALUE IS 'B'.
+   02  DFHPF15   PIC  X  VALUE IS 'C'.
+   02  DFHPF16   PIC  X  VALUE IS 'D'.
+   02  DFHPF17   PIC  X  VALUE IS 'E'.
+   02  DFHPF18   PIC  X  VALUE IS 'F'.
+   02  DFHPF19   PIC  X  VALUE IS 'G'.
+   02  DFHPF20   PIC  X  VALUE IS 'H'.
+   02  DFHPF21   PIC  X  VALUE IS 'I'.
+   02  DFHPF22   PIC  X  VALUE IS '¢'.
+   02  DFHPF23   PIC  X  VALUE IS '.'.
+   02  DFHPF24   PIC  X  VALUE IS '<'.
+</CODE>
+</OBJECT>
+
+<OBJECT name='DFHBMSCA' description='DFHBMSCA'>
+<OPTIONS kind='C' init='N'/>
+<CODE>
+ 01      DFHBMSCA.
+   02    DFHBMPEM  PICTURE X   VALUE  IS  X'19'.
+   02    DFHBMPNL  PICTURE X   VALUE  IS  X'85'.
+   02    DFHBMPFF  PICTURE X   VALUE  IS  X'0C'.
+   02    DFHBMPCR  PICTURE X   VALUE  IS  X'0D'.
+   02    DFHBMASK  PICTURE X   VALUE  IS  '0'.
+   02    DFHBMUNP  PICTURE X   VALUE  IS  ' '.
+   02    DFHBMUNN  PICTURE X   VALUE  IS  '&'.
+   02    DFHBMPRO  PICTURE X   VALUE  IS  '-'.
+   02    DFHBMBRY  PICTURE X   VALUE  IS  'H'.
+   02    DFHBMDAR  PICTURE X   VALUE  IS  '<'.
+   02    DFHBMFSE  PICTURE X   VALUE  IS  'A'.
+   02    DFHBMPRF  PICTURE X   VALUE  IS  '/'.
+   02    DFHBMASF  PICTURE X   VALUE  IS  '1'.
+   02    DFHBMASB  PICTURE X   VALUE  IS  '8'.
+   02    DFHBMEOF  PICTURE X   VALUE  IS  X'C3'.
+   02    DFHBMCUR  PICTURE X   VALUE  IS  X'02'.
+   02    DFHBMEC   PICTURE X   VALUE  IS  X'62'.
+   02    DFHBMFLG  PICTURE X.
+       88    DFHERASE VALUES ARE X'C3', X'62'.
+       88    DFHCURSR VALUES ARE X'02', X'62'.
+   02    DFHBMDET  PICTURE X   VALUE  IS  X'FF'.
+   02    DFHBMPSO-BIN PIC 9(4) COMP VALUE 3599.
+* ABOVE VALUE 3599 = X'0E0F' ADDED BY PTM 81385 (APAR PN23267)
+   02    FILLER REDEFINES DFHBMPSO-BIN.
+     03  DFHBMPSO  PICTURE X.
+     03  DFHBMPSI  PICTURE X.
+   02    DFHSA     PICTURE X   VALUE  IS  X'88'.
+   02    DFHCOLOR  PICTURE X   VALUE  IS  X'A1'.
+   02    DFHPS     PICTURE X   VALUE  IS  X'A2'.
+   02    DFHHLT    PICTURE X   VALUE  IS  X'A0'.
+   02    DFH3270   PICTURE X   VALUE  IS  X'7B'.
+   02    DFHVAL    PICTURE X   VALUE  IS  'A'.
+   02    DFHOUTLN  PICTURE X   VALUE  IS  'B'.
+   02    DFHBKTRN  PICTURE X   VALUE  IS  X'A5'.
+   02    DFHALL    PICTURE X   VALUE  IS  X'00'.
+   02    DFHERROR  PICTURE X   VALUE  IS  X'1A'.
+* ABOVE VALUE X'3F' CHANGED BY APAR PK10639                  @01C
+   02    DFHDFT    PICTURE X   VALUE  IS  X'FF'.
+   02    DFHDFCOL  PICTURE X   VALUE  IS  X'00'.
+   02    DFHBLUE   PICTURE X   VALUE  IS  '1'.
+   02    DFHRED    PICTURE X   VALUE  IS  '2'.
+   02    DFHPINK   PICTURE X   VALUE  IS  '3'.
+   02    DFHGREEN  PICTURE X   VALUE  IS  '4'.
+   02    DFHTURQ   PICTURE X   VALUE  IS  '5'.
+   02    DFHYELLO  PICTURE X   VALUE  IS  '6'.
+   02    DFHNEUTR  PICTURE X   VALUE  IS  '7'.
+   02    DFHBASE   PICTURE X   VALUE  IS  X'00'.
+   02    DFHDFHI   PICTURE X   VALUE  IS  X'00'.
+   02    DFHBLINK  PICTURE X   VALUE  IS  '1'.
+   02    DFHREVRS  PICTURE X   VALUE  IS  '2'.
+   02    DFHUNDLN  PICTURE X   VALUE  IS  '4'.
+   02    DFHMFIL   PICTURE X   VALUE  IS  X'9C'.
+   02    DFHMENT   PICTURE X   VALUE  IS  X'02'.
+   02    DFHMFE    PICTURE X   VALUE  IS  X'86'.
+   02    DFHUNNOD  PICTURE X   VALUE  IS  '('.
+   02    DFHUNIMD  PICTURE X   VALUE  IS  'I'.
+   02    DFHUNNUM  PICTURE X   VALUE  IS  'J'.
+   02    DFHUNNUB  PICTURE X   VALUE  IS  'Q'.
+* ABOVE VALUE DFHUNNUB ADDED BY APAR PN67669
+   02    DFHUNINT  PICTURE X   VALUE  IS  'R'.
+   02    DFHUNNON  PICTURE X   VALUE  IS  ')'.
+   02    DFHPROTI  PICTURE X   VALUE  IS  'Y'.
+   02    DFHPROTN  PICTURE X   VALUE  IS  '%'.
+   02    DFHMT     PICTURE X   VALUE  IS  X'01'.
+   02    DFHMFT    PICTURE X   VALUE  IS  X'09'.
+   02    DFHMET    PICTURE X   VALUE  IS  X'03'.
+   02    DFHMFET   PICTURE X   VALUE  IS  X'7F'.
+   02    DFHDFFR   PICTURE X   VALUE  IS  X'00'.
+   02    DFHLEFT   PICTURE X   VALUE  IS  X'97'.
+   02    DFHOVER   PICTURE X   VALUE  IS  X'9C'.
+   02    DFHRIGHT  PICTURE X   VALUE  IS  X'02'.
+   02    DFHUNDER  PICTURE X   VALUE  IS  X'01'.
+   02    DFHBOX-BIN  PIC 9(4) COMP VALUE 15.
+* ABOVE VALUE 15 = X'000F' ADDED BY PTM 81385 (APAR PN23267)
+   02    FILLER REDEFINES DFHBOX-BIN.
+     03  FILLER    PICTURE X.
+     03  DFHBOX    PICTURE X.
+   02    DFHSOSI   PICTURE X   VALUE  IS  X'01'.
+   02    DFHTRANS  PICTURE X   VALUE  IS  '0'.
+   02    DFHOPAQ   PICTURE X   VALUE  IS  X'FF'.
+</CODE>
+</OBJECT>
+
+</SOURCES>

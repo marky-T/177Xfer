@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\probe-t3059\\repro-cobol\\out\\T3059_READREC.LionSource
+APPNAME = T3059READREC
+GENSET = Default from new application
+SYSOPT = FALSE

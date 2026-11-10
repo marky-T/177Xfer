@@ -1,0 +1,2982 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from an A-Series environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='N'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default
+  
+-->
+<ROUTINES>
+
+<OBJECT name='AMT_CLOSEPRINT' description='Close print file for further processing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    i_start        : integer
+    i_end          : integer
+    i_pos          : integer
+    i_length       : integer
+    n_seq          : numeric 3 value 0
+
+    b_first        : boolean
+
+    s_today        : string
+    s_temp         : string
+    s_pack         : string
+    s_path         : string
+    s_file         : string
+    s_basefilepath : string
+    s_filepath     : string
+
+booleans
+
+end_definitions
+
+
+routine main (p_print: printer, i_option: integer optional, b_remove_cr : boolean optional, s_title : string optional)
+begin_routine
+    resok  := true
+    s_file := unstring(p_print.filename, 1, '#DUMMYFILE#')
+    if (s_file <> p_print.filename)
+        // "DUMMYFILE" for printfile in script means do not generate print output
+        // delete the file, and no print request to control center
+        freeoutput (p_print, delete)
+    elseif (i_option = gc-purge)
+        freeoutput (p_print, delete)
+    elseif (i_option = gc-save)
+        // (mis)used for when the USERBACKUPNAME attribute is set to TRUE
+        // this means that the BD naming convention for backup files is overridden
+        freeoutput (p_print)
+        s_file  := p_print.filename
+        i_end   := length(s_file)
+        i_start := i_end
+        loop while i_start > 0
+            i_start -= 1
+            if copy(s_file, i_start, 1) = '.'
+                if numeric(copy(s_file, i_start + 1, i_end - i_start))
+                    // remove sequence number from (print) filename
+                    s_file := copy(s_file, 1, i_start - 1) & copy(s_file, i_end + 1)
+                    amt_fco.filemove (p_print.filename, s_file)
+                    break
+                endif
+                i_end := i_start - 1
+            endif
+            if copy(s_file, i_start, 1) = '\' then break
+            if copy(s_file, i_start, 1) = '/' then break
+        endloop
+    elseif (i_option = gc-extend)
+        // used for increasing the sequence number only
+        n_seq += 1
+        exit
+    elseif (i_option = gc-norequest)
+        freeoutput (p_print, norequest)
+    else
+        if s_title <> ''
+            s_title := trim(s_title)
+            if copy(s_title, length(s_title), 1) = '.'
+                s_title := copy(s_title, 1, length(s_title) - 1)
+            endif
+            if (copy(p_print.filename, length(p_print.filename) - 3) <> '.PRN')
+                s_title := '' // title is already set (by job)
+            endif
+        endif
+        freeoutput (p_print)
+        backupprintfile (s_title, p_print.filename)
+        n_seq += 1
+    endif
+end_routine
+
+
+routine backupprintfile (s_filetitle : string, s_filename : string)
+begin_routine
+    if amt_task_bdname = '' and n_seq = 0
+        // If DBNAME is not set, set it to the directory as found in the printfilename.
+        if (copy(s_filename, 1, length(lion.var-param.report-path)) = lion.var-param.report-path)
+            // check for special printfilename, indicating use of a bdname
+            s_temp  := copy(s_filename, length(lion.var-param.report-path) + 1)
+            s_today := today.ccyymmdd
+            if copy(s_temp, 1, 9) <> s_today & '\'
+                // A special backup dir has been specified for the print.
+                // Now the file must be copied from Dirs\Prints\...\<date>\<name>.PRN
+                // to Dirs\Files\<backup path>\jobnumber\task.mixnumber\nnn<fileID>.DAT
+                i_end := length(s_temp)
+                loop while i_end > 0
+                    i_end -= 1
+                    if copy(s_temp, i_end, 1) = '\' then break
+                endloop
+                if (i_end > 10) // if i_end <= 10, the report may have been started before midnight so that we got a different date in the path
+                    amt_task_bdname := copy(s_temp, 1, i_end - 10) // strip \<ccyymmdd>\<name>.PRN off the end
+                endif
+            endif
+        endif
+    endif
+    if amt_task_bdname <> ''
+        if (copy(s_filename, 1, length(lion.var-param.report-path)) = lion.var-param.report-path)
+            s_filename := uppercase(s_filename)
+            i_start    := length(s_filename)
+            loop while i_start > 0
+                i_start -= 1
+                if copy(s_filename, i_start, 1) = '\' then break
+                if copy(s_filename, i_start, 1) = '/' then break
+            endloop
+            s_file := copy(s_filename, i_start + 1)
+            i_end  := indexof('.', s_file)
+            s_file := copy(s_file, 1, i_end) // discard the extension
+            if s_filetitle = ''
+                s_filetitle := s_file
+            else
+                s_filetitle := add_extension(s_filetitle, false)
+            endif
+            amt_string := addbackslash(amt_task_bdname) & addbackslash(formatnum(amt_job_jobnumber))
+            amt_string &= addbackslash(formatnum(amt_task_mixnumber)) & n_seq & s_filetitle
+            amt_string := amt_filename (amt_string, false)
+            inspect (amt_string)
+                replacing (all, '/', '\')
+            endinspect
+            if not amt_fco.filecopy (s_filename, amt_string)
+                amt_jobsummary ('Failed to create BDFILE: ' & amt_string & ' from ' & s_filename, true)
+            else
+                amt_jobsummary ('BDFILE created: ' & amt_string, true)
+            endif
+        else
+            s_filepath := lion.var-param.file-path
+            i_start    := length(s_filepath)
+            loop while i_start > 0
+                i_start -= 1
+                if copy(s_filepath, i_start, 1) = '\' then break
+                if copy(s_filepath, i_start, 1) = '/' then break
+            endloop
+            s_basefilepath := uppercase(copy(s_filepath, 1, i_start))
+            s_filename     := uppercase(s_filename)
+            if (copy(s_filename, 1, length(s_basefilepath)) = s_basefilepath)
+                i_start := length(s_filename)
+                loop while i_start > 0
+                    i_start -= 1
+                    if copy(s_filename, i_start, 1) = '\' then break
+                    if copy(s_filename, i_start, 1) = '/' then break
+                endloop
+                s_file  := copy(s_filename, i_start + 1) // filename without directories
+                i_end   := length(s_file)
+                i_start := i_end
+                loop while i_start > 0
+                    i_start -= 1
+                    if copy(s_file, i_start, 1) = '.'
+                        if numeric(copy(s_file, i_start + 1, i_end - i_start))
+                            // remove sequence number from filename
+                            s_file := copy(s_file, 1, i_start - 1) & copy(s_file, i_end + 1)
+                            break
+                        endif
+                        i_end := i_start - 1
+                    endif
+                endloop
+                b_first := true
+                i_end   := 0
+                loop for i_pos := length(s_basefilepath) + 1 to length(s_filename)
+                    if copy(s_filename,i_pos,1) = '\'
+                        if b_first
+                            i_start := i_pos
+                            b_first := false
+                        else
+                            i_end := i_pos
+                        endif
+                    endif
+                    if copy(s_filename,i_pos,1) = '/'
+                        if b_first
+                            i_start := i_pos
+                            b_first := false
+                        else
+                            i_end := i_pos
+                        endif
+                    endif
+                endloop
+                i_length := length(s_basefilepath)
+                if i_end > 0
+                    s_path := copy(s_filename, i_start + 1, i_end - i_start) // path after pack
+                else
+                    s_path := ''
+                endif
+                s_pack := copy(s_filename, i_length + 1, i_start - i_length)
+                if s_filetitle = ''
+                    s_filetitle := s_file
+                else
+                    s_filetitle := add_extension(s_filetitle, false)
+                endif
+                amt_string := addbackslash(s_basefilepath) & addbackslash(s_pack) & addbackslash(amt_task_bdname)
+                amt_string &= addbackslash(formatnum(amt_job_jobnumber)) & addbackslash(formatnum(amt_task_mixnumber))
+                amt_string &= addbackslash(s_path) & n_seq & s_filetitle
+                inspect (amt_string)
+                    replacing (all, '/', '\')
+                endinspect
+                if not amt_fco.filecopy (s_filename, amt_string)
+                    amt_jobsummary ('Failed to create BDFILE: ' & amt_string & ' from ' & s_filename, true)
+                else
+                    amt_jobsummary ('BDFILE created: ' & amt_string, true)
+                endif
+            endif
+        endif
+    endif
+end_routine
+
+
+routine formatnum (i-in : integer) : string
+var resnum : numeric 7
+begin_routine
+    resnum := i-in
+    result := resnum
+end_routine
+
+
+routine addbackslash (s_in : string) : string
+begin_routine
+    if s_in <> ''
+        if (copy(s_in, length(s_in), 1) <> '\') and (copy(s_in, length(s_in), 1) <> '/')
+            result := s_in & '\'
+        else
+            result := s_in
+        endif
+    endif
+end_routine
+
+
+routine add_extension(s_filename : string, b_print : boolean) : string
+begin_routine
+    if copy(s_filename, length(s_filename) - 3, 1) <> '.'
+        if b_print
+            result := s_filename & '.PRN'
+        else
+            result := s_filename & '.DAT'
+        endif
+    else
+        if b_print
+            result := copy(s_filename, 1, length(s_filename) - 4) & '.PRN'
+        else
+            result := s_filename
+        endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_LASTRECORD' description='Return last record offset number'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (i_filesize : integer, i_recsize : integer) : integer
+begin_routine
+    i_recsize += 2 //correction for CR/LF after each record
+    result := (i_filesize / i_recsize ) - 1
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_FILENAME' description='Format Cobol filename for Lion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+var
+    i                   : integer
+    i_pos               : integer
+    s_temp              : string
+    s_usercode          : string
+    s_file              : string
+    s_pack              : string
+    s_path              : string
+
+    s_newname           : string
+    s_oldname           : string
+    s_extension         : string
+
+    b_packonly          : boolean
+    b_oldfullyqualified : boolean
+    b_prevresok         : boolean
+
+end_definitions
+
+routine main (s_filenamenew: string, b_print : boolean optional, s_filenameold : string optional, s_printid: string optional): string
+begin_routine
+
+    // Store current resok value to restore it when the function exits
+    b_prevresok := resok
+
+    // Check if the new filename is already fully qualified
+    if copy(s_filenamenew, 1, 2) = '\\' or copy(s_filenamenew, 2, 1) = ':'
+        // filenamenew is already complete
+        result := s_filenamenew
+        exit
+    endif
+
+    // Check if the old filename is fully qualified
+    b_oldfullyqualified := false
+    if copy(s_filenameold, 1, 2) = '\\' or copy(s_filenameold, 2, 1) = ':'
+        b_oldfullyqualified := true
+    endif
+
+    amt_getxmlsettings('AMT_FILENAME')
+
+    s_newname := uppercase(trim(s_filenamenew))
+    if (copy(s_newname, length(s_newname), 1) = '.')
+        s_newname := copy(s_newname, 1, length(s_newname) - 1)
+    elseif (copy(s_newname, length(s_newname) - 3, 4) = '.CSV')
+        s_extension := copy(s_newname, length(s_newname) - 3, 4)
+        s_newname   := copy(s_newname, 1, length(s_newname) - 4)
+    endif
+
+    s_oldname := uppercase(trim(s_filenameold))
+    if (copy(s_oldname, length(s_oldname), 1) = '.')
+        s_oldname := copy(s_oldname, 1, length(s_oldname) - 1)
+    endif
+    result := s_oldname
+
+    inspect (s_newname)
+        counting(i, all, '/')
+    endinspect
+    if i > 0
+        inspect (s_newname)
+            replacing (all, '/', '\')
+        endinspect
+    endif
+
+    // Get usercode if present
+    i_pos      := 1
+    s_usercode := ''
+    if copy (s_newname, i_pos, 1) = '('  // user code must be stripped off
+        i_pos      += 1
+        s_usercode := unstring (s_newname, i_pos, ')')
+        s_newname  := copy(s_newname, i_pos)
+    endif
+
+    // Get * usercode in front of file (without parenthesis) if present
+    if copy (s_newname, 1, 1) = '*' // user code must be stripped off
+        s_usercode := '*'
+        s_newname  := copy(s_newname, 2)
+    endif
+
+    // Find pack
+    i_pos      := 1
+    b_packonly := false
+    s_file     := unstring (s_newname, i_pos, ' ON ')
+    if i_pos >= length(s_newname)
+        if copy(s_file, length(s_file) - 2, 3) = ' ON'
+            s_file := copy(s_file, 1, length(s_file) - 3) // "ABC ON." Becomes "ABC"
+        elseif copy(s_file, 1, 3) = 'ON '
+            s_file     := ''
+            i_pos      := 4
+            b_packonly := true
+        else
+            i_pos  := 1
+            s_file := unstring (s_newname, i_pos, ' FROM ')
+            if (i_pos >= length(s_newname)) and
+                (copy(s_file, length(s_file) - 4, 5) = ' FROM')
+                s_file := copy(s_file, 1, length(s_file) - 5)
+            endif
+        endif
+    endif
+    if copy(s_file, length(s_file), 1) = '\'
+        s_file := copy(s_file, 1, length(s_file) - 1) // ex\abc\ -> \ex\abc
+    endif
+    if i_pos < length(s_newname)
+        s_pack := trim(copy(s_newname, i_pos))
+    else
+        s_pack := ''
+    endif
+
+    // Get the default family if no pack is specified
+    if s_pack = ''
+        if b_print
+            // For print files, use the default bdpack
+            s_pack := amt_task_printfamily
+            if s_pack = ''
+                s_pack := amt_task_bdpack
+                if s_pack = ''
+                    // No default bdpack, use the default family
+                    s_pack := amt_task_familyname
+                endif
+            endif
+        else
+            s_pack := amt_task_familyname
+        endif
+    endif
+
+    // Handling of pack/family names only for files NOT for printfiles!
+    s_path := lion.var-param.file-path
+    s_path := uppercase(s_path)
+
+    if s_oldname <> ''
+        if copy(trim(s_oldname), 1, 3) = 'ON ' and s_pack = ''
+            // s_oldname contains "ON <PACK>"
+            s_pack := copy(s_oldname, 4)
+        else
+            if s_file = '' or s_pack = '' // only change of familyname (pack) or title
+                if copy(s_oldname, 1, length(s_path)) = s_path
+                    s_temp := copy(s_oldname, length(s_path) + 1) // take missing parts from old filename
+                else
+                    s_temp := s_oldname
+                endif
+                loop for i_pos := 1 to length(s_temp)
+                    if copy(s_temp, i_pos, 1) = '\' then break
+                endloop
+                if s_file = ''
+                    s_file := copy(s_temp, i_pos + 1)
+                    if s_file = '' then s_file := s_temp
+                    if copy(s_file, length(s_file) - 3, 1) = '.'
+                        if copy(s_file, length(s_file) - 3, 4) = '.CSV'
+                            s_extension := '.CSV'
+                        endif
+                        s_file := copy(s_file, 1, length(s_file) - 4)  // remove extension from filename
+                    endif
+                endif
+                if s_pack = ''
+                    s_pack := copy(s_temp, 1, i_pos - 1)
+                    if amt_task_familyname <> ''
+                        if copy(s_oldname, length(s_oldname) - 3, 1) <> '.'
+                            // the pack that was found is the default pack
+                            // and the file has no extension so it must be a tempfile
+                            // in this case don't use the pack that was found in the oldfilename
+                            s_pack := ''
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endif
+
+    // If pack is found then translate pack name if packmapping is found                                                             
+    loop for i := 1 to 20                                                                                                            
+        if amt_trans_pack[i].amt_trans_pack_old = s_pack                                                                             
+            s_pack := amt_trans_pack[i].amt_trans_pack_new                                                                           
+            break                                                                                                                    
+        endif                                                                                                                        
+    endloop    
+
+    //add pack to file path minus last directory, except for DISK
+    s_pack := trim(s_pack)
+    if s_pack = '' or s_pack = 'DISK'
+        if b_print
+            s_pack := 'PACK'
+        else
+            if amt_task_familyname <> ''
+                s_pack := amt_task_familyname
+            else
+                s_pack := 'PACK'
+            endif
+        endif
+    endif
+    if s_usercode = ''
+        s_usercode := amt_task_usercode
+    endif
+
+    if s_file = '' then abort('AMT_FILENAME: file title is empty !!! [new: ' & s_filenamenew & ' old: ' & s_oldname & ']')
+
+    s_pack := trim(s_pack) & '\'
+    if s_usercode <> ''
+        loop for i := 1 to 20
+            if amt_trans_user[i].amt_trans_userid = s_usercode
+                s_usercode := amt_trans_user[i].amt_trans_userfolder
+                break
+            endif
+        endloop
+        if s_usercode = '*'
+            s_usercode := 'GLOBAL'
+        endif
+        s_usercode := rem_character(s_usercode, ' ') & '\'
+    endif
+    s_file := rem_character(s_file, ' ')
+    s_file := rem_character(s_file, '"')
+
+    // Store file extension and remove it from the file name
+    loop for i_pos := length(s_file) - 1 downto 1
+        s_temp := copy(s_file, i_pos, 1)
+        if s_temp = '\'
+            break
+        elseif s_temp = '.'
+            s_extension := copy(s_file, i_pos)
+            s_file      := copy(s_file, 1, i_pos - 1)
+            break
+        endif
+    endloop
+
+    if amt_use_pack then s_path &= s_pack
+    if amt_use_usercode and not (b_packonly and b_oldfullyqualified) then s_path &= s_usercode
+
+    if b_print
+        if s_printid = ''
+            s_path &= '000'
+        else
+            amt_printid_uniq += 1
+            s_path           &= amt_printid_uniq
+        endif
+    endif
+
+    s_file := s_path & s_file
+    result := add_extension(s_file, b_print)
+    resok  := b_prevresok
+
+end_routine
+
+routine add_extension(s_filename : string, b_print : boolean) : string
+begin_routine
+    if s_extension <> ''
+        result := s_filename & s_extension
+    else
+        if b_print
+            result := s_filename & '.PRN'
+        else
+            result := s_filename & '.DAT'
+        endif
+    endif
+end_routine
+
+routine rem_character(name : string, character : alpha 1) : string
+begin_routine
+    i_pos  := 0
+    s_temp := ''
+    loop
+        s_temp := s_temp & unstring(name, i_pos, character, true)
+        if i_pos > length(name) then break
+    endloop
+    result := s_temp
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GETXMLSETTINGS' description='Get xml settings like usercode/pack'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+begin_definitions
+const
+
+var
+    amtsettingspath : string
+    amtsettings     : xml
+    xmlnodes        : xmlnodes
+    settingsnode    : xmlnode
+    valuenode       : xmlnode
+    locktries,
+    attrindex,
+    userindex       : integer
+
+booleans
+
+end_definitions
+
+routine main (s_origin: string)
+begin_routine
+    if AMT_XMLSETTINGS_READ then exit
+    AMT_XMLSETTINGS_READ := true // Read only ones.
+
+    // The AmtSettings.xml file should be in <SCRIPT_PATH>\Settings\AmtSettings.xml
+    amtsettingspath := lion.var-param.job-path & '\Settings\AmtSettings.xml'
+    loop for locktries := 1 to 10
+        amtsettings.load (amtsettingspath)
+        if getlastresult = '' then break // else file is locked and retry action
+        if locktries = 10 then Abort('Error reading settings: ' + getlastresult)
+    endloop
+
+    settingsnode := amtsettings.root
+
+    if resok
+        // Get the default family
+        if amt_task_familyname = ''
+            valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/DefaultFamily')
+            if not resok
+                amt_jobsummary(s_origin + ': Could not find DefaultFamily node in AmtSettings file: ' & amtsettingspath, true)
+            else
+                amt_task_familyname := valuenode.value
+            endif
+        endif
+
+        // Get the default print family
+        if amt_task_printfamily = ''
+            valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/DefaultPrintFamily')
+            if not resok
+                amt_jobsummary(s_origin + ': Could not find DefaultPrintFamily node in AmtSettings file: ' & amtsettingspath, true)
+            else
+                amt_task_printfamily := valuenode.value
+            endif
+        endif
+
+        // Get the default usercode
+        if amt_task_usercode = ''
+            valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/DefaultUserCode')
+            if not resok
+                amt_jobsummary(s_origin+ ': Could not find DefaultUserCode node in AmtSettings file: ' & amtsettingspath, true)
+            else
+                amt_task_usercode := valuenode.value
+            endif
+        endif
+
+        // Get the default bdpack
+        if amt_task_bdpack = ''
+            valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/DefaultBDFolder')
+            if not resok
+                amt_jobsummary(s_origin + ': Could not find DefaultBDFolder node in AmtSettings file: ' & amtsettingspath, true)
+            else
+                amt_task_bdpack := valuenode.value
+            endif
+        endif
+
+        // Get the default program family
+        if amt_task_programfamily = ''
+            valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/DefaultProgramFamily')
+            if not resok
+                amt_jobsummary(s_origin + ': Could not find DefaultProgramFamily node in AmtSettings file: ' & amtsettingspath, true)
+            else
+                amt_task_programfamily := valuenode.value
+            endif
+        endif
+
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/UsePack')
+        if resok
+            amt_use_pack  := uppercase(valuenode.value) = 'TRUE'
+        endif
+
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/UseUserCode')
+        if resok
+            amt_use_usercode := uppercase(valuenode.value) = 'TRUE'
+        endif
+
+        userindex := 0
+        xmlnodes := settingsnode.selectnodes ('//Amt/AmtSettings/UserCodeMapping')
+        loop for each valuenode in xmlnodes
+            userindex += 1
+            amt_trans_user[userindex].amt_trans_userid     := ''
+            amt_trans_user[userindex].amt_trans_userapp    := ''
+            amt_trans_user[userindex].amt_trans_userfolder := ''
+            if not resok then abort('To many user code mappings')
+            loop for attrindex := 1 to valuenode.attribute.count
+                 startcase uppercase(valuenode.attribute[attrindex].name)
+                 case 'USER'
+                     amt_trans_user[userindex].amt_trans_userid := valuenode.attribute[attrindex].value
+                 case 'APPLICATION'
+                     amt_trans_user[userindex].amt_trans_userapp := valuenode.attribute[attrindex].value
+                 case 'FOLDER'
+                     amt_trans_user[userindex].amt_trans_userfolder := valuenode.attribute[attrindex].value
+                 endcase
+            endloop
+            if amt_trans_user[userindex].amt_trans_userfolder = ''
+                amt_trans_user[userindex].amt_trans_userfolder := amt_trans_user[userindex].amt_trans_userid
+            endif
+        endloop
+
+        userindex := 0                                                                                                                  
+        xmlnodes := settingsnode.selectnodes ('//Amt/AmtSettings/PackNameMapping')                                                      
+        loop for each valuenode in xmlnodes                                                                                             
+            userindex += 1                                                                                                              
+            amt_trans_pack[userindex].amt_trans_pack_old     := ''                                                                      
+            amt_trans_pack[userindex].amt_trans_packapp      := ''                                                                      
+            amt_trans_pack[userindex].amt_trans_pack_new     := ''                                                                      
+            if not resok then abort('To many pack name mappings')                                                                       
+            loop for attrindex := 1 to valuenode.attribute.count                                                                        
+                 startcase uppercase(valuenode.attribute[attrindex].name)                                                               
+                 case 'PACKNAME'                                                                                                        
+                     amt_trans_pack[userindex].amt_trans_pack_old := valuenode.attribute[attrindex].value                               
+                 case 'APPLICATION'                                                                                                     
+                     amt_trans_pack[userindex].amt_trans_packapp := valuenode.attribute[attrindex].value                                
+                 case 'NEWPACKNAME'                                                                                                     
+                     amt_trans_pack[userindex].amt_trans_pack_new := valuenode.attribute[attrindex].value                               
+                 endcase                                                                                                                
+            endloop                                                                                                                     
+            if amt_trans_pack[userindex].amt_trans_pack_new = ''                                                                        
+                amt_trans_pack[userindex].amt_trans_pack_new := amt_trans_pack[userindex].amt_trans_pack_old                            
+            endif                                                                                                                       
+        endloop
+
+        // Get the FTP test settings (optional)
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/FTPTestSettings')
+        if resok
+            amt_ftp_test := uppercase(valuenode.value) = 'TRUE'
+            if amt_ftp_test
+                // Get the FTP test protocol
+                if amt_ftp_test_protocol = ''
+                    valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/FTPTestProtocol')
+                    if not resok
+                        amt_jobsummary(s_origin + ': Could not find FTPTestProtocol node in AmtSettings file: ' & amtsettingspath, true)
+                    else
+                        amt_ftp_test_protocol := valuenode.value
+                    endif
+                endif
+                // Get the FTP test host
+                if amt_ftp_test_host = ''
+                    valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/FTPTestHost')
+                    if not resok
+                        amt_jobsummary(s_origin + ': Could not find FTPTestHost node in AmtSettings file: ' & amtsettingspath, true)
+                    else
+                        amt_ftp_test_host := valuenode.value
+                    endif
+                endif
+                // Get the FTP test user
+                if amt_ftp_test_user = ''
+                    valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/FTPTestUser')
+                    if not resok
+                        amt_jobsummary(s_origin + ': Could not find FTPTestUser node in AmtSettings file: ' & amtsettingspath, true)
+                    else
+                        amt_ftp_test_user := valuenode.value
+                    endif
+                endif
+                // Get the FTP test password
+                if amt_ftp_test_password = ''
+                    valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/FTPTestPassword')
+                    if not resok
+                        amt_jobsummary(s_origin + ': Could not find FTPTestPassword node in AmtSettings file: ' & amtsettingspath, true)
+                    else
+                        amt_ftp_test_password := valuenode.value
+                    endif
+                endif
+            endif
+        endif
+
+        // Get the EMAIL settings (optional)
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailServer')
+        if resok
+            amt_mail_server := valuenode.value
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailPort')
+        if resok
+            amt_mail_port := valuenode.value
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailLogon')
+        if resok
+            amt_mail_logon := valuenode.value
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailPassword')
+        if resok
+            amt_mail_password := valuenode.value
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailUseSSL')
+        if resok
+            amt_mail_usessl := (uppercase(valuenode.value) = 'TRUE')
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailFrom')
+        if resok
+            amt_mail_from := valuenode.value
+        endif
+        valuenode := settingsnode.selectsinglenode ('//Amt/AmtSettings/MailTestAddress')
+        if resok
+            amt_mail_test_address := valuenode.value
+        endif
+
+    else
+        amt_jobsummary(s_origin + ': Could not load AmtSettings file: ' & amtsettingspath, true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_STOP' description='Support for Cobol STOP literal command'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i : integer
+  s_input : string
+  s_uinput : string
+booleans
+
+end_definitions
+
+routine main (s_message : string)
+begin_routine
+  if si-currform <> '' //we're in an online process: input is not possible
+    sme ('AMT_STOP called from online ' & si-currform & '. Process is aborted')
+    abort (s_message)
+  endif
+  loop for i := 1 to 10
+    s_input := input (s_message)
+    s_uinput := uppercase(s_input)
+    if s_uinput = 'DS'
+      abort ('Killed by operator')
+    elseif s_uinput = 'OK'
+      break
+    elseif i = 10
+      abort ('Killed by operator')
+    else
+      sme ('Invalid input ' & s_input & ' (OK, DS)', , 'ODT')
+    endif
+  endloop
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_TIMER' description='Mimic Unisys TIMER'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  newtime  : numeric 8
+  newparts : structure redefines newtime
+    newhh : numeric 2
+    newmm : numeric 2
+    newssnn : numeric 4
+  end_structure
+  lasttime : numeric 8
+  lastresult : integer
+  duplicate  : integer
+booleans
+
+end_definitions
+
+routine main : integer
+begin_routine
+  //return the number of elapsed 2.4 millisecond intervals since midnight
+  newtime := today.hhmmssnn
+  if newtime <= lasttime
+    if (duplicate < 4)
+      result := lastresult + 1 //try to generate something unique
+      duplicate += 1
+    else
+      result := lastresult //non-unique result, but that would also be the case on MF
+    endif
+  else
+    //compute centiseconds/0.24 which equals milliseconds/2.4
+    result := (newhh * 360000 + newmm * 6000 + newssnn ) / 0.24
+    lasttime := newtime
+    duplicate := 0
+  endif
+  lastresult := result
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_FILEASSIGNED' description='Test whether filename is an AMT filename'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+routine main (s_filename: string) : boolean
+begin_routine
+    //this routine can be used to test whether a file has already been assigned by the job that invokes the program:
+    //  if not amt_fileassigned (<fileID>.filename) then namefile (...)
+    //to be true, filename must start with \\ or with a drive letter C:\, D:\ etc
+    //in any other case, it is supposed to be a mainframe-style filename, so the file hasn't been assigned yet
+    // there is one exception when the filename equals D$U$M$M$Y$ only the pack name is passed from the script.
+    // This means that the file is not really assigned, which means that the result in that case allso must be false
+    if uppercase(copy(s_filename,length(s_filename) - 13)) = 'D$U$M$M$Y$.DAT'
+        result := false
+    elseif copy (s_filename, 1, 2) = '\\' or copy (s_filename, 2, 2) = ':\'
+        result := true
+    else
+        result := false
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GETTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+ 
+begin_definitions
+var
+    o_task : task
+    o_job  : job
+
+end_definitions
+
+
+routine main
+begin_routine
+    o_task.appname := si-applicationname
+    o_task.connect()
+    if o_task.connected
+        o_job := o_task.getmyself()
+        if o_job.running
+            amt_task_mixnumber := o_job.requestid
+        endif
+        amt_task_value := o_job.taskvalue
+        amt_job_value       := o_job.gettvcustom ('JOBVALUE')
+        amt_task_string     := o_job.gettvcustom ('TASKSTRING') // Don't override the value of si-param
+
+        amt_task_sw1        := o_job.gettvswitch ('SW1') = 'TRUE'
+        amt_task_sw2        := o_job.gettvswitch ('SW2') = 'TRUE'
+        amt_task_sw3        := o_job.gettvswitch ('SW3') = 'TRUE'
+        amt_task_sw4        := o_job.gettvswitch ('SW4') = 'TRUE'
+        amt_task_sw5        := o_job.gettvswitch ('SW5') = 'TRUE'
+        amt_task_sw6        := o_job.gettvswitch ('SW6') = 'TRUE'
+        amt_task_sw7        := o_job.gettvswitch ('SW7') = 'TRUE'
+        amt_task_sw8        := o_job.gettvswitch ('SW8') = 'TRUE'
+        amt_task_status     := o_job.gettvcustom ('STATUS')
+        amt_task_chargecode := o_job.gettvswitch ('CHARGECODE')
+        amt_task_params     := o_job.gettvswitch ('PARAMS')
+        if o_job.gettvswitch ('DEVICE') <> ''
+          lgd_device  := o_job.gettvswitch ('DEVICE')
+          lgd_devicea := lgd_device
+          lgd_deviceb := lgd_device
+          lgd_devicec := lgd_device
+          lgd_deviced := lgd_device
+          lgd_devicee := lgd_device
+          lgd_devicef := lgd_device
+          lgd_deviceg := lgd_device
+          lgd_deviceh := lgd_device
+          lgd_devicei := lgd_device
+          lgd_devicej := lgd_device
+          lgd_devicek := lgd_device
+          lgd_devicel := lgd_device
+          lgd_devicem := lgd_device
+          lgd_devicen := lgd_device
+          lgd_deviceo := lgd_device
+          lgd_devicep := lgd_device
+          lgd_deviceq := lgd_device
+          lgd_devicer := lgd_device
+          lgd_devices := lgd_device
+          lgd_devicet := lgd_device
+          lgd_deviceu := lgd_device
+          lgd_devicev := lgd_device
+          lgd_devicew := lgd_device
+          lgd_devicex := lgd_device
+          lgd_devicey := lgd_device
+          lgd_devicez := lgd_device
+        endif
+        amt_job_jobnumber   := o_job.gettvcustom ('JOBNUMBER')
+        amt_joblogfile      := o_job.gettvcustom ('JOBFILENAME')
+        amt_task_bdname     := o_job.gettvcustom ('BDNAME')
+        amt_task_familyname := o_job.gettvcustom ('FAMILYNAME')
+        amt_task_printfamily   := o_job.gettvcustom ('PRINTFAMILY')
+        amt_task_programfamily := o_job.gettvcustom ('PROGRAMFAMILY')
+        amt_job_name        := o_job.gettvcustom ('JOBNAME')
+        amt_task_name       := si-repname
+        amt_task_usercode   := o_job.gettvcustom ('USERCODE')
+        amt_task_bdpack     := o_job.gettvcustom ('BDPACK')
+    else
+        amt_jobsummary('Could not connect to sysDB ' & si-repname,true)
+    endif
+
+    amt_getxmlsettings('AMT_GETTASK')
+end_routine
+                                                                                         
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GREATERTHANZERO' description='Test alpha input for being greather than zero according to EBCDIC'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+    
+var
+    ix     : integer
+    a_char : alpha 1
+    
+booleans
+    
+end_definitions
+
+//
+// Checks if a NUMERIC or ALPHA value is greater than zero (EBCDIC)
+// For an alphanumeric input value each character starting from the left to the right is checked.
+// If the input value was numeric from origin then each character starting from the right to the left is checked.
+// When the first character found is not equal to ZERO and is a numeric value then the result is TRUE.
+//
+// EXAMPLE:
+//       VALUE:  '1234'  'abcd'  'a234'  '12c4'  '123d'
+//    --------------------------------------------------
+//     NUMERIC:   TRUE    FALSE   TRUE    TRUE    FALSE
+//       ALPHA:   TRUE    FALSE   FALSE   TRUE    TRUE
+//
+
+routine main (s_value : string, b_origin_numeric : boolean optional) : boolean
+begin_routine
+    result := false
+    if (numeric (s_value)) and (length(s_value) <= 18)
+        if amt_strtoint(s_value) > 0 then result := true
+    else
+        if b_origin_numeric
+            // Check characters from Right -> Left
+            loop for ix := length(s_value) downto 1
+                a_char := copy(s_value, ix, 1)
+                if numeric (a_char)
+                    if amt_strtoint(a_char) > 0
+                        result := true
+                        break
+                    endif
+                else
+                    break
+                endif
+            endloop
+        else
+            // Check characters from Left -> Right
+            loop for ix := 1 to length(s_value)
+                a_char := copy(s_value, ix, 1)
+                if numeric (a_char)
+                    if amt_strtoint(a_char) > 0
+                        result := true
+                        break
+                    endif
+                else
+                    break
+                endif
+            endloop
+        endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_RETURNTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+begin_definitions
+
+const
+
+var
+    o_task  : task
+    o_job   : job
+    a_value : alpha 18
+end_definitions
+
+
+routine main
+begin_routine
+    o_task.appname := si-applicationname
+    o_task.connect()
+    if o_task.connected
+        o_job           := o_task.getmyself()
+
+        o_job.taskvalue := amt_task_value
+        a_value         := amt_task_status
+        o_job.settvcustom ('STATUS', a_value)
+        a_value := amt_job_value
+        o_job.settvcustom ('JOBVALUE', a_value)
+        o_job.settvcustom ('TASKSTRING', amt_task_string)
+
+        o_job.settvswitch ('SW1', amt_task_sw1)
+        o_job.settvswitch ('SW2', amt_task_sw2)
+        o_job.settvswitch ('SW3', amt_task_sw3)
+        o_job.settvswitch ('SW4', amt_task_sw4)
+        o_job.settvswitch ('SW5', amt_task_sw5)
+        o_job.settvswitch ('SW6', amt_task_sw6)
+        o_job.settvswitch ('SW7', amt_task_sw7)
+        o_job.settvswitch ('SW8', amt_task_sw8)
+
+        o_job.settvcustom ('PARAMS', amt_task_params)
+        o_job.settvcustom ('CHARGECODE', amt_task_chargecode)
+
+        si-taskvalue := o_job.taskstring
+    else
+        amt_jobsummary('Could not connect to sysDB ' & si-repname,true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_DESIGNATOR_USING_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_users             : cursorquery(coms_users)
+    cq_trancodes         : cursorquery(coms_trancodes)
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+//The AMT_GET_DESIGNATOR_USING_DESIGNATOR service function obtains a specific
+//designator from the structure represented by the designator.
+//
+//The input parameters are the following:
+//• A designator that represents the structure.
+//• A mnemonic that describes the requested integer array.
+//  The mnemonics allowed for the designators are as follows:
+//
+//    Designator                    Mnemonic
+//    All                           INSTALLATION_DATA_LINK
+//    Station, usercode, program    SECURITY
+//    Station, call                 DEVICE
+//    Call                          SERVICE
+//
+//The output parameter is a designator.
+
+routine main (const i_desg : integer, const i_desgtype : integer) : integer
+begin_routine
+    resok  := false
+    result := 0
+
+    startcase i_desgtype
+    case dcilib_installation-data-link
+        n_type := i_desg
+        startcase n_type
+        case dcilib_trancode
+            i_recno := (i_desg - dcilib_trancode) / 100
+            cq_trancodes.where (cq_trancodes.lionrecno = i_recno)
+            cq_trancodes.findfirst (recno_coms_trancodes)
+            if si-dbstatus = 0
+                cq_installation_data.where (cq_installation_data.installation_data = cq_trancodes.installation_data)
+                cq_installation_data.findfirst (ix_coms_installation_data)
+                if si-dbstatus = 0
+                    result := 100 * cq_installation_data.lionrecno + dcilib_installation-data
+                    resok  := true
+                endif
+            endif
+        case dcilib_usercode
+            i_recno := (i_desg - dcilib_usercode) / 100
+            cq_users.where (cq_users.lionrecno = i_recno)
+            cq_users.findfirst (recno_coms_users)
+            if si-dbstatus = 0
+                cq_installation_data.where (cq_installation_data.installation_data = cq_users.installation_data)
+                cq_installation_data.findfirst (ix_coms_installation_data)
+                if si-dbstatus = 0
+                    result := 100 * cq_installation_data.lionrecno + dcilib_installation-data
+                    resok  := true
+                endif
+            endif
+        else
+            amt_jobsummary ('[AMT_GET_DESIGNATOR_USING_DESIGNATOR] unknown input designator type: ' + format(n_type), true)
+            exit
+        endcase
+    else
+        amt_jobsummary ('[AMT_GET_DESIGNATOR_USING_DESIGNATOR] unknown output designator type: ' + format(i_desgtype), true)
+        exit
+    endcase
+    if result = 0
+        amt_jobsummary ('[AMT_GET_DESIGNATOR_USING_DESIGNATOR] input designator not found: ' + format (i_desg) + ' type: ' + format(i_desgtype), true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_DESIGNATOR_USING_NAME' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_users             : cursorquery(coms_users)
+    cq_trancodes         : cursorquery(coms_trancodes)
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    s_application        : string
+
+booleans
+
+end_definitions
+
+
+
+routine main (const s_name : string, const i_desgtype : integer) : integer
+begin_routine
+    resok  := false
+    result := 0
+
+    startcase i_desgtype
+    case dcilib_agenda
+        result := ret-agendadesg
+        resok  := true
+    case dcilib_installation-data
+        cq_installation_data.where (cq_installation_data.installation_data = s_name)
+        cq_installation_data.findfirst (ix_coms_installation_data)
+        if si-dbstatus = 0
+            result := 100 * cq_installation_data.lionrecno + dcilib_installation-data
+            resok  := true
+        endif
+    case dcilib_program
+        result := ret-progdesg
+        resok  := true
+    case dcilib_station
+        result := ret-stationdesg
+        resok  := true
+    case dcilib_trancode
+        s_application := si-applicationname
+        cq_trancodes.where (cq_trancodes.trancode = s_name and cq_trancodes.window = ret-window)
+        cq_trancodes.findfirst (ix_coms_trancodes)
+        if si-dbstatus = 0
+            result := 100 * cq_trancodes.lionrecno + dcilib_trancode
+            resok  := true
+        else
+            cq_trancodes.where (cq_trancodes.trancode = s_name)
+            cq_trancodes.findfirst (ix_coms_trancodes)
+            if si-dbstatus = 0
+                result := 100 * cq_trancodes.lionrecno + dcilib_trancode
+                resok  := true
+            endif
+        endif
+    case dcilib_usercode
+        cq_users.where (cq_users.comsuser = s_name)
+        cq_users.findfirst (ix_coms_users)
+        if si-dbstatus = 0
+            result := 100 * cq_users.lionrecno + dcilib_usercode
+            resok  := true
+        endif
+    else
+        amt_jobsummary ('[AMT_GET_DESIGNATOR_USING_NAME] unknown designator type: ' + format(i_desgtype), true)
+        exit
+    endcase
+    if result = 0
+        amt_jobsummary ('[AMT_GET_DESIGNATOR_USING_NAME] name not found : ' + s_name + ' designator type: ' + format(i_desgtype), true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_INTEGER_ARRAY_USING_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    ws-integers : structure
+      ws-integer : financial 11 [4] comp
+    end_structure
+
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+//The AMT_GET_INTEGER_ARRAY_USING_DESIGNATOR service function obtains an array of
+//integers from the structure represented by the designator.
+//
+//The input parameters are the following:
+//• A designator that represents the structure.
+//• A mnemonic that describes the requested integer array. The mnemonics allowed for
+//  designators are as follows:
+//
+//    Designator       Mnemonic
+//    All              INSTALLATION_INTEGER_ALL
+//    Program          MIXNUMBERS
+//
+//The output parameters are the following:
+//• An integer representing the number of integers returned in the array (i_count)
+//• An integer array containing the returned information
+
+routine main (const i_desg: integer, const i_desgtype: integer, var i_count : signed 14): string
+begin_routine
+    resok   := false
+    result  := ''
+    i_count := 0
+
+    startcase i_desgtype
+    case dcilib_installation-integer-all
+        n_type := i_desg
+        startcase n_type
+        case dcilib_installation-data
+            i_recno := (i_desg - dcilib_installation-data) / 100
+            cq_installation_data.where (cq_installation_data.lionrecno = i_recno)
+            cq_installation_data.findfirst (recno_coms_installation_data)
+            if si-dbstatus = 0
+                setto(si-hex00value, ws-integers)
+                ws-integer[1] := cq_installation_data.integer1
+                ws-integer[2] := cq_installation_data.integer2
+                ws-integer[3] := cq_installation_data.integer3
+                ws-integer[4] := cq_installation_data.integer4
+                result        := ws-integers
+                i_count       := 4
+                resok         := true
+            endif
+        else
+            amt_jobsummary ('[AMT_GET_INTEGER_ARRAY_USING_DESIGNATOR] unknown designator type: ' + format(n_type), true)
+        endcase
+    else
+        amt_jobsummary ('[AMT_GET_INTEGER_ARRAY_USING_DESIGNATOR] unknown designator type: ' + format(i_desgtype), true)
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_MFI_USING_TRANCODE' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_trancodes : cursorquery(coms_trancodes)
+
+    s_trancode   : structure
+      s_trancode5 : structure
+        s_trancode3 : structure
+          filler : alpha 3
+        end_structure
+        filler : alpha 2
+      end_structure
+    end_structure
+
+booleans
+
+end_definitions
+
+routine main (const p_coms_msg : string) : integer
+begin_routine
+    // Returns the COMS function index value from a transaction code
+    s_trancode := p_coms_msg
+    result     := find_trancode (s_trancode5)
+    if si-dbstatus <> 0
+        result := find_trancode (s_trancode3)
+        if si-dbstatus <> 0
+            result := 0
+        endif
+    endif
+end_routine
+
+routine find_trancode(p_trancode : string) : integer
+begin_routine
+    cq_trancodes.where (cq_trancodes.trancode = p_trancode and cq_trancodes.window = ret-window)
+    cq_trancodes.findfirst (ix_coms_trancodes)
+    if si-dbstatus = 0
+        result := cq_trancodes.function
+        resok  := true
+    else
+        cq_trancodes.where (cq_trancodes.trancode = p_trancode)
+        cq_trancodes.findfirst (ix_coms_trancodes)
+        if si-dbstatus = 0
+            result := cq_trancodes.function
+            resok  := true
+        endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_USER' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_users             : cursorquery(coms_users)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+routine main (const i_desg: integer, i_secdesg : integer): realstring
+begin_routine
+    resok  := false
+    result := ''
+
+    if i_desg = ret-userdesg
+        result := ret-username
+        resok  := true
+    else
+        n_type := i_desg
+        startcase n_type
+        case dcilib_usercode
+            i_recno := (i_desg - dcilib_usercode) / 100
+            cq_users.where (cq_users.lionrecno = i_recno)
+            cq_users.findfirst (recno_coms_users)
+            if si-dbstatus = 0
+                result := cq_users.comsuser
+                resok  := true
+            endif
+        else
+            amt_jobsummary ('[AMT_GET_USER] unknown designator type: ' + format(n_type), true)
+        endcase
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_STRING_USING_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+//The AMT_GET_STRING_USING_DESIGNATOR service function obtains an EBCDIC string from
+//the structure represented by the designator.
+//
+//The input parameters are the following:
+//• An entity designator that represents the structure.
+//• An entity mnemonic that describes the requested string. The allowable mnemonics are
+//  HOST-NAME; INSTALLATION_STRING_1 through INSTALLATION_STRING_4;
+//  INSTALLATION_HEX_1 and INSTALLATION_HEX_2; LANGUAGE; CONVENTION;
+//  TYPE; and SUBTYPE.
+//
+//  INSTALLATION_STRING_1 through INSTALLATION_STRING_4,
+//  INSTALLATION_HEX_1, and INSTALLATION_HEX_2 can be used to return strings
+//  that you have set up as installation data in the COMS utility.
+//
+//  The LANGUAGE and CONVENTION mnemonics provide a way of determining the
+//  language and convention attributes of the stations to which the program sends or
+//  receives messages.
+//
+//  The TYPE and SUBTYPE mnemonics provide a way of determining the type and
+//  subtype of the XATMI buffer.
+//
+//The result parameters are the following:
+//• An integer that indicates the number of valid characters in the string (i_count)
+//• An EBCDIC array indicating the returned string
+
+routine main (const i_desg: integer, const i_desgtype: integer, var i_count : signed 14): realstring
+begin_routine
+    resok   := false
+    result  := ''
+    i_count := 0
+
+    n_type  := i_desg
+    startcase n_type
+    case dcilib_installation-data
+        i_recno := (i_desg - dcilib_installation-data) / 100
+        cq_installation_data.where (cq_installation_data.lionrecno = i_recno)
+        cq_installation_data.findfirst (recno_coms_installation_data)
+        if si-dbstatus = 0
+            startcase i_desgtype
+            case dcilib_installation-string-1
+                result  := cq_installation_data.string1
+                i_count := length(result)
+                resok   := true
+            case dcilib_installation-string-2
+                result  := cq_installation_data.string2
+                i_count := length(result)
+                resok   := true
+            case dcilib_installation-string-3
+                result  := cq_installation_data.string3
+                i_count := length(result)
+                resok   := true
+            case dcilib_installation-string-4
+                result  := cq_installation_data.string4
+                i_count := length(result)
+                resok   := true
+            else
+                amt_jobsummary ('[AMT_GET_STRING_USING_DESIGNATOR] unknown designator type: ' + format(i_desgtype), true)
+            endcase
+        endif
+    else
+        amt_jobsummary ('[AMT_GET_STRING_USING_DESIGNATOR] unknown designator type: ' + format(n_type), true)
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_STATION_NAME' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (const i_desg : integer, const s_name : alpha 17, i_desig : integer, i_lsn : integer) : realstring
+begin_routine
+    resok  := false
+    result := ''
+
+    if i_desg = ret-stationdesg
+        result := ret-stationname
+        resok  := true
+    else
+        amt_jobsummary ('[AMT_GET_STATION_NAME] unknown station designator: ' + format(i_desg), true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_STATION_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (s_name : string optional): integer
+begin_routine
+    resok  := false
+    result := 0
+
+    if s_name = ret-stationname or s_name = ''
+        result := ret-stationdesg
+        resok  := true
+    else
+        amt_jobsummary ('[AMT_GET_STATION_DESIGNATOR] unknown station name: ' + s_name, true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_NAME_USING_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_users             : cursorquery(coms_users)
+    cq_trancodes         : cursorquery(coms_trancodes)
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+routine main (const i_desg : integer, const i_desgtype : integer optional) : string
+begin_routine
+    resok  := false
+    result := ''
+
+    if i_desgtype = 0
+        n_type := i_desg
+    else
+        n_type := i_desgtype
+    endif
+
+    startcase n_type
+    case dcilib_agenda
+        if i_desg = ret-agendadesg
+            result := si-currform + '_IN'
+            resok  := true
+        endif
+    case dcilib_installation-data
+        i_recno := (i_desg - dcilib_installation-data) / 100
+        cq_installation_data.where (cq_installation_data.lionrecno = i_recno)
+        cq_installation_data.findfirst (recno_coms_installation_data)
+        if si-dbstatus = 0
+            result := cq_installation_data.installation_data
+            resok  := true
+        endif
+    case dcilib_program
+        if i_desg = ret-progdesg
+            if gb-screen-sent
+                result := si-currform
+                resok  := true
+            else
+                result := si-prevform
+                resok  := true
+            endif
+        endif
+    case dcilib_station
+        if i_desg = ret-stationdesg
+            result := ret-stationname
+            resok  := true
+        endif
+    case dcilib_trancode
+        i_recno := (i_desg - dcilib_trancode) / 100
+        cq_trancodes.where (cq_trancodes.lionrecno = i_recno)
+        cq_trancodes.findfirst (recno_coms_trancodes)
+        if si-dbstatus = 0
+            result := cq_trancodes.trancode
+            resok  := true
+        endif
+    case dcilib_usercode
+        if i_desg = ret-userdesg
+            result := ret-username
+            resok  := true
+        else
+            i_recno := (i_desg - dcilib_usercode) / 100
+            cq_users.where (cq_users.lionrecno = i_recno)
+            cq_users.findfirst (recno_coms_users)
+            if si-dbstatus = 0
+                result := cq_users.comsuser
+                resok  := true
+            endif
+        endif
+    else
+        amt_jobsummary ('[AMT_GET_NAME_USING_DESIGNATOR] unknown designator type: ' + format(n_type), true)
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_GET_INTEGER_USING_DESIGNATOR' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    cq_installation_data : cursorquery(coms_installation_data)
+
+    n_type               : numeric 2
+    i_recno              : integer
+
+booleans
+
+end_definitions
+
+routine main (const i_desg: integer, const i_desgtype: integer): integer
+begin_routine
+    resok  := false
+    result := 0
+
+    n_type := i_desg
+    startcase n_type
+    case dcilib_installation-data
+        i_recno := (i_desg - dcilib_installation-data) / 100
+        cq_installation_data.where (cq_installation_data.lionrecno = i_recno)
+        cq_installation_data.findfirst (recno_coms_installation_data)
+        if si-dbstatus = 0
+            startcase i_desgtype
+            case dcilib_installation-integer-1
+                result := cq_installation_data.integer1
+                resok  := true
+            case dcilib_installation-integer-2
+                result := cq_installation_data.integer2
+                resok  := true
+            case dcilib_installation-integer-3
+                result := cq_installation_data.integer3
+                resok  := true
+            case dcilib_installation-integer-4
+                result := cq_installation_data.integer4
+                resok  := true
+            else
+                amt_jobsummary ('[AMT_GET_INTEGER_USING_DESIGNATOR] unknown designator type: ' + format(i_desgtype), true)
+            endcase
+        endif
+    case dcilib_station
+        startcase i_desgtype
+        case dcilib_lsn
+            result := amt_lsn
+            resok  := true
+        else
+            amt_jobsummary ('[AMT_GET_INTEGER_USING_DESIGNATOR] unknown designator type: ' + format(i_desgtype), true)
+        endcase
+
+    else
+        amt_jobsummary ('[AMT_GET_INTEGER_USING_DESIGNATOR] unknown designator type: ' + format(n_type), true)
+    endcase
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_STATION_TABLE_ADD' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (pa-station-table: string, pi-station: integer): integer
+begin_routine
+  //the station table concept is not used in the Lion/AMT environment.
+  //returning 1 will allow the caller to continue with its program flow normally
+  result := 1
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_STATION_TABLE_INITIALIZE' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (pa-station-table: string, pi-modulus: integer)
+begin_routine
+  //the station table concept is not used in the Lion/AMT environment.
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_STATION_TABLE_SEARCH' description='COMS service function'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (pa-station-table: string, pi-station: integer): integer
+begin_routine
+  //the station table concept is not used in the Lion/AMT environment.
+  //returning 1 will allow the caller to continue with its program flow normally
+  result := 1
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_WFL' description='Execute simple SYSTEM WFL commands'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+var
+    b_error       : boolean
+    i_waittime,
+    i_pos,
+    i_wflpos      : integer
+    o_filecontrol : filecontrol
+    s_wfl,
+    s_statement,
+    s_part,
+    s_arg         : string
+    o_task        : task // define the task object
+    o_job         : job  // define the job object
+booleans
+
+end_definitions
+
+routine main (const s_in: string)
+begin_routine
+    amt_getxmlsettings('AMT_WFL')
+    resok := true
+    s_wfl := s_in
+    if copy (s_wfl, 1, 1) = '?' then s_wfl := copy (s_wfl, 2)
+    i_wflpos := 1
+    amt_jobsummary('Processing SYSTEM WFL [' & s_wfl & ']', false, true)
+    loop
+        s_statement := unstring (s_wfl, i_wflpos, ';')
+        if i_wflpos > length (s_wfl)
+            endjob ()
+        endif
+        if s_statement = '' then break
+        b_error := true
+        i_pos   := 1
+        skipspaces (s_statement)
+        s_part := unstring (s_statement, i_pos, ' ', '=')
+        startcase s_part
+        case 'BEGIN'
+            s_part := unstring (s_statement, i_pos, ' ')
+            if s_part = 'JOB' then b_error := false
+        case 'CHANGE'
+            wflchange ()
+        case 'COPY'
+            wflcopy ()
+        case 'END' '?END'
+            s_part := unstring (s_statement, i_pos, '.')
+            if s_part = 'JOB' then b_error := false
+        case 'FAMILY'
+            b_error := false
+        case 'REMOVE'
+            wflremove ()
+        case 'RUN'
+            wflrun ()
+        case 'START'
+            wflstart ()
+        case 'SECURITY' // ignore, not applicable
+            b_error := false
+        case 'CLASS' 'QUEUE' // ignore, not applicable
+            b_error := false
+        case 'DISPLAY'
+            s_part := unstring (s_statement, i_pos, '"')
+            s_part := unstring (s_statement, i_pos, '"')
+            s_part := trim(s_part)
+            if s_part <> ''
+                amt_jobsummary(s_part, true)
+            endif
+            b_error := false
+        case 'WAIT'
+            s_part     := unstring (s_statement, i_pos, '(')
+            s_part     := unstring (s_statement, i_pos, ')')
+            i_waittime := s_part // amt_strtoint(s_part)
+            if i_waittime > 0
+                wait(i_waittime)
+            endif
+            b_error := false
+        else
+            s_arg := unstring (s_part, 1, '=')
+            if  indexof('AMT_JOBSUMMARY',s_arg) > 0 or
+                s_arg = 'PRINTDEFAULTS' or
+                s_arg = 'QUEUE'
+                b_error := false
+            endif
+        endcase
+        if b_error
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL [' & s_statement & ']', true)
+            break
+        endif
+    endloop
+end_routine
+
+routine wflchange
+var s_oldfile : string
+    s_newfile : string
+begin_routine
+    inspect (s_statement)
+        replacing (all, '/', '\')
+    endinspect
+    loop
+        s_part := getfilename ('TO ')
+        if s_part = '' then break
+        b_error   := true
+        s_oldfile := s_part
+        s_oldfile := amt_filename(s_oldfile)
+        s_newfile := getfilename (',')
+        if s_newfile = '' then break
+        s_newfile := amt_filename(s_newfile)
+        o_filecontrol.filemove (s_oldfile, s_newfile)
+        if not resok
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL - CHANGE statement', true)
+        else
+            b_error := false
+        endif
+    endloop
+end_routine
+
+routine wflcopy
+var s_oldfile : string
+    s_newfile : string
+    i_pos2    : integer
+begin_routine
+    inspect (s_statement)
+        replacing (all, '/', '\')
+    endinspect
+    loop
+        s_part := getfilename ('TO ')
+        if s_part = '' then break
+        b_error   := true
+        i_pos2    := 1
+        s_oldfile := unstring (s_part, i_pos2, ' AS ')
+        if i_pos2 >= length(s_part)
+            i_pos2    := 1
+            s_oldfile := unstring (s_part, i_pos2, ' ONTO ')
+            if i_pos2 >= length(s_part)
+                s_newfile := ''
+            else
+                s_newfile := copy(s_part, i_pos2)
+            endif
+        else
+            s_newfile := copy(s_part, i_pos2)
+        endif
+        s_oldfile := amt_filename(s_oldfile)
+        if s_newfile = ''
+            s_newfile := getfilename (',')
+        endif
+        if s_newfile = '' then break
+        s_newfile := amt_filename(s_newfile)
+        o_filecontrol.filecopy (s_oldfile, s_newfile)
+        if not resok
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL - COPY statement', true)
+        else
+            b_error := false
+        endif
+    endloop
+end_routine
+
+routine wflremove
+var s_filename : string
+begin_routine
+    inspect (s_statement)
+        replacing (all, '/', '\')
+    endinspect
+    loop
+        s_part := getfilename (',')
+        if s_part = '' then break
+        b_error    := true
+        s_filename := s_part
+        s_filename := amt_filename(s_filename)
+        o_filecontrol.filedelete (s_filename)
+        if not resok
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL - REMOVE statement', true)
+        else
+            b_error := false
+        endif
+    endloop
+end_routine
+
+routine wflrun
+var s_report : string
+    s_temp   : string
+begin_routine
+    s_report := getfilename ('(')
+    if copy(s_report, 1, 7) = 'OBJECT/' then s_report := copy (s_report, 8)
+    if copy(s_report, 1, 8) = '*OBJECT/' then s_report := copy (s_report, 9)
+    if s_report = '' then exit
+    b_error := false
+    inspect (s_report)
+        replacing (all, '/', '_')
+    endinspect
+    s_arg  := ''
+    s_part := unstring (s_statement, i_pos, ')')
+    if s_part <> ''
+        i_pos := 1
+        loop
+            skipspaces (s_part)
+            s_temp := unstring (s_part, i_pos, ',')
+            if s_temp = '' then break
+            if (length (s_temp) > 2) and (copy(s_temp, 1, 1) = '"') and (copy(s_temp, length (s_temp), 1) = '"')
+                // Remove the surrounding double quotes
+                s_temp := copy (s_temp, 2, length (s_temp) - 2)
+            endif
+            if s_arg <> ''
+                s_arg &=  ' ' & s_temp
+            else
+                s_arg &=  s_temp
+            endif
+        endloop
+    endif
+    o_task.appname := si-applicationname
+    o_task.connect ()
+    if o_task.connected
+        o_job                 := o_task.createjob ()
+        if (amt_task_usercode <> '')
+            o_job.user := amt_task_usercode
+        else
+            o_job.user := 'SYSTEM/WFL'
+        endif
+        o_job.globalparameter := s_arg
+        o_job.wait            := false
+        o_job.startdate       := today.ccyymmdd
+        o_job.starttime       := copy(today.hhmmssnn,1,4)
+        o_job.settvcustom ('BDNAME', amt_task_bdname)
+        o_job.settvcustom ('FAMILYNAME', amt_task_familyname)
+        o_job.settvcustom ('PRINTFAMILY', amt_task_printfamily)
+        o_job.settvcustom ('JOBNUMBER', format(amt_job_jobnumber))
+        o_job.addjobrequest (s_report, report)
+        if o_job.errorcode <> 0
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL [' & s_statement & ']: ' & o_job.errordescription, true)
+        else
+            amt_jobsummary ('Started report: ' & s_report, true)
+        endif
+    else
+        amt_jobsummary('ERROR: Failure processing SYSTEM WFL [' & s_statement & ']: unable to connect', true)
+    endif
+end_routine
+
+routine wflstart
+var s_path,
+    s_script,
+    s_node1,
+    s_nextpart,
+    s_starttime,
+    s_startdate,
+    s_nextstatement : string
+    i_nextpos       : integer
+    s_temp2,
+    s_temp          : string
+    ch              : alpha 1
+begin_routine
+    s_path := lion.var-param.job-path
+    skipspaces (s_statement)
+    s_script := getfilename ('(')
+    s_node1  := unstring (s_script, 1, '/')
+    if s_script = '' then exit
+    b_error := false
+    inspect (s_script)
+        replacing (all, '/', '_')
+    endinspect
+    //check if a start time (STARTTIME) is specified.
+    s_nextstatement := trim(unstring (s_wfl, i_wflpos, ';'))
+    if length(s_nextstatement) > 0
+        i_nextpos  := 1
+        s_nextpart := unstring (s_nextstatement, i_nextpos, '=')
+        if s_nextpart = 'STARTTIME'
+            s_nextpart := trim (copy (s_nextstatement, i_nextpos))
+            amt_format_starttime('STARTTIME = ' & s_nextpart, s_startdate, s_starttime)
+        endif
+    endif
+    s_arg  := ''
+    loop
+        skipspaces (s_statement)
+        if i_pos > length (s_statement) then break
+        ch := copy(s_statement, i_pos, 1)
+        if ch = ')' then break
+        if ch = '"'
+          i_Pos += 1
+          s_temp := unstring (s_statement, i_pos, '"') // Get whole literal including ")" and "," chars
+          // Removed the surrounding double quotes
+          // Replace single quotes with double quotes
+          inspect (s_temp)
+            replacing (all, '''', '"')
+          endinspect
+          // Surround parameter with single quotes
+          s_temp := '''' & s_temp & ''''
+          s_temp2 := unstring (s_statement, i_pos, ',', ')') // Skip to next , argument. Can be returning ')'
+        else
+          s_temp := unstring (s_statement, i_pos, ',', ')')
+        endif
+        if s_arg <> ''
+            s_arg &=  ' ' & s_temp
+        else
+            s_arg &=  s_temp
+        endif
+    endloop
+    o_task.appname := si-applicationname
+    o_task.connect ()
+    if o_task.connected
+        o_job                 := o_task.createjob ()
+        if (amt_task_usercode <> '')
+            o_job.user := amt_task_usercode
+        else
+            o_job.user := 'SYSTEM/WFL'
+        endif
+        o_job.scriptparameter := s_arg
+        o_job.wait            := false
+        o_job.settvcustom ('INITSTATION', si-initiator)
+        if s_startdate = ''
+            s_startdate :=  today.ccyymmdd
+        endif
+        o_job.startdate := s_startdate
+        if s_starttime = ''
+            s_starttime := copy(today.hhmmssnn,1,4)
+        endif
+        o_job.starttime := s_starttime
+        o_job.addjobrequest (s_script, script)
+        if o_job.errorcode <> 0
+            amt_jobsummary('ERROR: Failure processing SYSTEM WFL [' & s_statement & ']: ' & o_job.errordescription, true)
+        else
+            amt_jobsummary ('Started script: ' & s_script, true)
+        endif
+    else
+        amt_jobsummary('ERROR: Failure processing SYSTEM WFL [' & s_statement & ']: unable to connect', true)
+    endif
+end_routine
+
+routine skipspaces (const s_data: string)
+//while s_data[i_pos] is space, add 1 to i_pos
+begin_routine
+    loop
+        if i_pos > length (s_data) then break
+        if copy (s_data, i_pos, 1) <> ' ' then break
+        i_pos += 1
+    endloop
+end_routine
+
+routine getfilename (const s_delim: string): string
+//The next argument within s_statement is an MCP filename. Return it without user and pack.
+//So, (AMT)NODE1/NODE2/FILE ON LION is returned as NODE1/NODE2/FILE
+//Note that '/' may have been converted into '_' or '\' before calling this routine.
+var s_usercode : string
+begin_routine
+    result := ''
+    skipspaces (s_statement)
+    if copy (s_statement, i_pos, 1) = '('  //user code must be stripped off
+        s_usercode &= unstring (s_statement, i_pos, ')')
+    elseif copy (s_statement, i_pos, 1) = '*'  //user code must be stripped off
+        i_pos      += 1
+        s_usercode := '*'
+    endif
+    result &= unstring (s_statement, i_pos, s_delim)
+    result := unstring (result, 1, ' ON ')
+    result := trim(result)
+end_routine
+
+routine endjob
+//END JOB may follow the last statement immediately without ;
+//this routine strips it off if necessary
+begin_routine
+    i_pos  := 1
+    s_part := unstring (s_statement, i_pos, ' END ')
+    skipspaces (s_statement)
+    s_arg := copy (s_statement, i_pos, 3)
+    if s_arg = 'JOB' then s_statement := s_part
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_DMERROR' description='Returns TRUE is a database error has occurred (DMSTATUS.DMERROR)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (i_status: integer optional) : boolean
+begin_routine
+    if i_status = 0 then i_status := si-dbstatus
+    if resok
+        result := false
+    else
+        result := true
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_DMERRORTYPE' description='Returns database error type (DMSTATUS.DMERRORTYPE)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (i_status: integer optional): numeric 2
+begin_routine
+    if resok
+        result := 0
+    else
+        result := 99
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_DMCATEGORY' description='Returns database error category (DMSTATUS.DMCATEGORY)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (i_status: integer optional): numeric 2
+begin_routine
+  if i_status = 0 then i_status := si-dbstatus
+  if resok
+    result := 0
+  elseif i_status = 1
+    result := 1
+  elseif i_status in [2, 3]
+    result := 2
+  elseif i_status = 4
+    result := 3
+  else
+    result := 99
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_DMSTRUCTURE' description='Return database error structure (DMSTATUS.DMSTRUCTURE)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (i_status: integer optional) : integer
+begin_routine
+    if i_status = 0 then i_status := si-dbstatus
+    if resok
+        result := 0
+    else
+        result := 1
+    endif
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_FORMAT_STARTTIME' description='Convert starttime from MCP to Lion format'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+var
+    i_pos1     : integer
+    i_pos2     : integer
+    s_temp     : string
+    b_timeplus : boolean value false
+    b_dateplus : boolean value false
+    i_hh       : numeric 2
+    i_mm       : numeric 3
+    i_day      : signed 11
+    i_newdate  : numeric 8
+    s_weekday  : alpha 9
+    i_date     : numeric 8
+    i_i        : integer
+
+booleans
+
+end_definitions
+
+routine main (s_input : string, var s_startdate : string, var s_starttime : string)
+begin_routine
+    i_pos1      := 1
+    i_pos2      := 0
+    s_starttime := unstring(s_input, i_pos1, ',')
+    if i_pos1 < length(s_input)
+        i_pos2      := i_pos1 - 1
+        s_starttime := trim(copy(s_input, 10, i_pos2 - 10))
+    else
+        i_pos1      := 1
+        s_starttime := unstring(s_input, i_pos1, 'ON')
+        if i_pos1 < length(s_input)
+            i_pos2      := i_pos1 -2
+            s_starttime := trim(copy(s_input, 10, i_pos2 - 10))
+        else
+            s_starttime := trim(copy(s_input, 10))      // no date
+        endif
+    endif
+    if s_starttime = ''
+        s_starttime := copy(today.hhmmssnn,1,2) & ':' & copy(today.hhmmssnn,3,2)   // same format as input
+    endif
+    if copy(s_starttime, 1, 1) = '='
+        s_starttime := trim(copy(s_starttime, 2))
+    endif
+    if copy(s_starttime, 1, 1) = '+'
+        s_starttime := trim(copy(s_starttime, 2))
+        b_timeplus  := true
+    endif
+    if length(s_starttime) < 5
+        s_starttime := '0' & s_starttime
+    endif
+    s_starttime := copy(s_starttime,1,2)  & copy(s_starttime,4,2) // remove :
+    if i_pos2 > 0   // there is a startdate
+        s_startdate := trim(copy(s_input, i_pos1))
+        if copy(s_startdate,1,1) = '+'      // days added to today
+            i_day       := trim(copy(s_startdate, 2))
+            s_startdate := today.ccyymmdd
+            b_dateplus  := true
+        else
+            i_pos1 := 1
+            s_temp := unstring(s_startdate, i_pos1, '/')
+            if length(s_temp) = 1
+                s_temp := '0' & s_temp
+            endif
+            if i_pos1 >= length(s_startdate)   // no slashes so julian date
+                if length(s_startdate) > 5
+                    dateresult.ccyyddd := s_startdate
+                else
+                    dateresult.yyddd := s_startdate
+                endif
+            else
+                // remove slashes
+                s_startdate := trim(s_temp) & trim(unstring(s_startdate, i_pos1, '/')) & trim(copy(s_startdate,i_pos1))
+                if length(s_startdate) = 6
+                    dateresult.mmddyy := s_startdate
+                else
+                    dateresult.mmddccyy := s_startdate
+                endif
+                s_startdate := dateresult.ccyymmdd
+            endif
+        endif
+    else
+        s_startdate := today.ccyymmdd
+    endif
+    if b_timeplus
+        i_i         := copy(s_starttime,1,2)
+        i_hh        :=  i_i
+        i_i         := copy(s_starttime,3,2)
+        i_mm        := i_i
+        s_starttime := copy(today.hhmmssnn,1,4)
+        i_i         := copy(s_starttime,3,2)
+        i_mm        += i_i
+        i_i         := copy(s_starttime,1,2)
+        i_hh        += i_i
+        if i_mm > 59
+            i_mm -= 60
+            i_hh += 1
+        endif
+        if i_hh > 23
+            i_hh       -= 24
+            i_day      += 1
+            b_dateplus := true
+        endif
+        s_starttime := i_hh & copy(i_mm,2,2)
+    endif
+    if b_dateplus
+        i_date := s_startdate
+        amt_compute_dates('3', i_date, i_newdate, i_day, s_weekday)
+        s_startdate := i_newdate
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_HOSTNAME' description='Returns the hostname (production or test)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main : string
+begin_routine
+    if development
+        result := 'DEV'
+    else
+        result := 'PROD'
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_FILEID_TITLE' description='Substitute for TITLE file attribute'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+var
+    i_pos         : integer
+    i_cnt         : integer
+    i_ttlbscnt    : integer
+    i_appbscnt    : integer
+
+    b_appfound    : boolean
+
+    s_returnvalue : string
+    s_tempvalue   : string
+    s_appname     : string
+    s_path        : string
+    s_pack        : string
+
+end_definitions
+
+// This routine returns the file title in mainframe style
+routine main (ps_filename : string) : string
+begin_routine
+    if ps_filename = '' then exit
+
+    inspect (ps_filename)
+        replacing (all,'/' ,'\') // Convert to windows style slashes
+    endinspect
+
+    s_pack := ''
+    s_path := lion.var-param.file-path
+    loop for i_pos := length(s_path) - 1 downto 1
+        if copy(s_path, i_pos, 1) = '\' then break
+    endloop
+    //s_pack := copy(s_path, i_pos + 1) // Last directory is the default pack
+    //if copy(s_pack, length(s_pack), 1) = '\'
+    //    s_pack := copy(s_pack, 1, length(s_pack) - 1)
+    //endif
+    s_path      := copy(s_path, 1, i_pos)  // Remove last directory from path
+
+    i_pos       := 1
+    s_tempvalue := unstring(ps_filename, i_pos, lion.var-param.file-path)
+    if (i_pos < length(ps_filename))
+        s_returnvalue := copy(ps_filename, i_pos)
+    elseif (length(ps_filename) < length(lion.var-param.file-path))
+        s_returnvalue := ps_filename
+    else
+        // Determine the position of the appname in the extractpath
+        // (amount of backslahes) and the total amount of backslashes
+        i_pos      := 1
+        i_ttlbscnt := 0
+        i_appbscnt := 0
+        b_appfound := false
+        loop while i_pos <= length(lion.var-param.file-path)
+            s_tempvalue := unstring(lion.var-param.file-path, i_pos, '\', true)
+            if (i_pos <= length(lion.var-param.file-path)) or
+                (copy(lion.var-param.file-path, length(lion.var-param.file-path), 1) = '\')
+                i_ttlbscnt += 1
+                if not b_appfound then i_appbscnt += 1
+                if (s_tempvalue = si-applicationname) then b_appfound := true
+            endif
+        endloop
+        // Get packname from the filename
+        s_tempvalue := copy(ps_filename, length(s_path) + 1)
+        loop for i_pos := 1 to length(s_tempvalue)
+            if copy(s_tempvalue, i_pos, 1) = '\' then break
+        endloop
+        s_pack     := copy(s_tempvalue, 1, i_pos - 1)
+        // Check if the filename contains a extract path from a different application
+        // and remove the extract path
+        i_pos      := 1
+        i_cnt      := 0
+        b_appfound := false
+        loop while i_pos <= length(ps_filename)
+            s_tempvalue := unstring(ps_filename, i_pos, '\', true)
+            i_cnt       += 1
+            if i_cnt = i_ttlbscnt
+                s_returnvalue := copy(ps_filename, i_pos)
+                break
+            elseif i_cnt = i_appbscnt
+                s_appname  := s_tempvalue
+                b_appfound := true
+            endif
+        endloop
+    //if b_appfound
+    //    s_returnvalue := '(' & s_appname & ')' & s_returnvalue
+    //endif
+    endif
+
+    inspect (s_returnvalue)
+        replacing (all,'\' ,'/') // Convert to mainframe style slashes
+    endinspect
+
+    if copy(s_returnvalue, length(s_returnvalue) - 3, 1) = '.'
+        s_returnvalue := copy(s_returnvalue, 1, length(s_returnvalue) - 4) // Remove file extension
+    endif
+
+    if s_pack <> ''
+        s_returnvalue &= ' ON ' & s_pack // Add pack
+    endif
+
+    if copy(s_returnvalue, length(s_returnvalue), 1) <> '.'
+        s_returnvalue &= '.' // Add period
+    endif
+
+    result := s_returnvalue
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_RIGHTJUSTIFY' description='Right justify input value'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (const s_val: realstring, const i_size: integer): realstring
+var
+  i_pos   : integer
+begin_routine
+  result := '                                                                                '
+  i_pos := i_size + 1 - length (s_val)
+  if i_pos < 1
+    replace (result, 1, copy(s_val, -1 * i_pos + 2))
+  else
+    replace (result, i_pos, s_val)
+  endif
+  result := copy (result, 1, i_size)
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_COMPUTE_DATES' description='Add/Subtract days from dates'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    amt-date-conversion-area : structure
+      amt-request         : alpha 1
+      amt-month-day-table : structure
+        amt-filler-1  : alpha 11 value '31JANUARY  '
+        amt-filler-2  : alpha 11 value '28FEBRUARY '
+        amt-filler-3  : alpha 11 value '31MARCH    '
+        amt-filler-4  : alpha 11 value '30APRIL    '
+        amt-filler-5  : alpha 11 value '31MAY      '
+        amt-filler-6  : alpha 11 value '30JUNE     '
+        amt-filler-7  : alpha 11 value '31JULY     '
+        amt-filler-8  : alpha 11 value '31AUGUST   '
+        amt-filler-9  : alpha 11 value '30SEPTEMBER'
+        amt-filler-10 : alpha 11 value '31OCTOBER  '
+        amt-filler-11 : alpha 11 value '30NOVEMBER '
+        amt-filler-12 : alpha 11 value '31DECEMBER '
+      end_structure
+      amt-month-day-r : structure [12] redefines amt-date-conversion-area.amt-month-day-table
+        amt-days-in-mo : numeric 2
+        amt-month-name : structure
+          amt-month-abbrv : alpha 3
+          filler          : alpha 6
+        end_structure
+      end_structure
+      amt-day-names : structure
+        amt-filler-1 : alpha 9 value 'SUNDAY   '
+        amt-filler-2 : alpha 9 value 'MONDAY   '
+        amt-filler-3 : alpha 9 value 'TUESDAY  '
+        amt-filler-4 : alpha 9 value 'WEDNESDAY'
+        amt-filler-5 : alpha 9 value 'THURSDAY '
+        amt-filler-6 : alpha 9 value 'FRIDAY   '
+        amt-filler-7 : alpha 9 value 'SATURDAY '
+      end_structure
+      amt-day-name : structure [7] redefines amt-date-conversion-area.amt-day-names
+        amt-day-name-abbrv : alpha 3
+        filler             : alpha 6
+      end_structure
+      amt-day-of-week  : alpha 9
+      amt-conv-numeric : structure
+        amt-annual-days   : numeric 3 value 365
+        amt-annual-d1     : numeric 3 value 0
+        amt-t3            : numeric 4 value 0
+        amt-rem           : numeric 4 value 0
+        amt-number-days   : signed 11 value 0
+        amt-conv-function : numeric 1 value 0
+        amt-jd-tmp        : numeric 2 value 0
+        amt-jd-yr4        : numeric 4 value 0
+        amt-jd-day        : signed 11 value 0
+      end_structure
+      amt-greg-date1 : numeric 8 value 0
+      amt-gd1        : structure redefines amt-date-conversion-area.amt-greg-date1
+        gd-cent1  : numeric 2
+        gd-year1  : numeric 2
+        gd-month1 : numeric 2
+        gd-day1   : numeric 2
+      end_structure
+      amt-greg-date2 : numeric 8 value 0
+      amt-gd2        : structure redefines amt-date-conversion-area.amt-greg-date2
+        gd-cent2  : numeric 2
+        gd-year2  : numeric 2
+        gd-month2 : numeric 2
+        gd-day2   : numeric 2
+      end_structure
+      amt-jul-date1 : numeric 7 value 0
+      amt-jd1       : structure redefines amt-date-conversion-area.amt-jul-date1
+        jd-cent1 : numeric 2
+        jd-year1 : numeric 2
+        jd-day1  : numeric 3
+      end_structure
+      amt-jul-date2 : numeric 7 value 0
+      amt-jd2       : structure redefines amt-date-conversion-area.amt-jul-date2
+        jd-cent2 : numeric 2
+        jd-year2 : numeric 2
+        jd-day2  : numeric 3
+      end_structure
+      amt-jd2-r : structure redefines amt-date-conversion-area.amt-jul-date2
+        jd-ccyy : numeric 4
+        jd-ddd  : numeric 3
+      end_structure
+    end_structure
+    amt-system-date : structure
+      amt-date-10  : alpha 10
+      amt-date-10r : structure redefines amt-system-date.amt-date-10
+        sd-mm  : numeric 2
+        filler : alpha 1
+        sd-dd  : numeric 2
+        filler : alpha 1
+        sd-cc  : numeric 2
+        sd-yy  : numeric 2
+      end_structure
+      amt-date-cymd   : numeric 8
+      amt-date-cymd-r : structure redefines amt-system-date.amt-date-cymd
+        sd-cc : numeric 2
+        sd-yy : numeric 2
+        sd-mm : numeric 2
+        sd-dd : numeric 2
+      end_structure
+      amt-date-mdcy   : numeric 8
+      amt-date-mdcy-r : structure redefines amt-system-date.amt-date-mdcy
+        sd-mm : numeric 2
+        sd-dd : numeric 2
+        sd-cc : numeric 2
+        sd-yy : numeric 2
+      end_structure
+      amt-sys-jdate  : numeric 7
+      amt-sys-jdater : structure redefines amt-system-date.amt-sys-jdate
+        sd-sys-cc : numeric 2
+        sd-jyy    : numeric 2
+        sd-jdt    : numeric 3
+      end_structure
+      amt-jdate  : numeric 7
+      amt-jdater : structure redefines amt-system-date.amt-jdate
+        sd-jcc : numeric 2
+        sd-jyy : numeric 2
+        sd-jdt : numeric 3
+      end_structure
+    end_structure
+    //end of working-storage :
+    ///
+
+booleans
+    find-days                : amt-date-conversion-area.amt-request = '1'
+    find-day-of-week         : amt-date-conversion-area.amt-request = '2'
+    find-next-date           : amt-date-conversion-area.amt-request = '3'
+    find-jul-date            : amt-date-conversion-area.amt-request = '4'
+    find-greg-date           : amt-date-conversion-area.amt-request = '5'
+    find-system-ndate        : amt-date-conversion-area.amt-request = '6'
+    use-greg-date            : amt-date-conversion-area.amt-request in ['2', '3', '4', '5', '6']
+
+end_definitions
+
+routine main (l-request : alpha 1,
+var l-date-1      : numeric 8,
+var l-date-2      : numeric 8,
+var l-days        : signed 11,
+var l-day-of-week : alpha 9)
+var
+
+booleans
+
+begin_routine
+
+    goto (init-0100-dateutil)
+    :amt-exit-program
+    exit module
+
+    :init-0100-dateutil
+    :x0100-main-routine
+    //*****
+    //*    INITIALIZE INPUT
+    //*****
+    amt-greg-date1  := l-date-1
+    amt-greg-date2  := l-date-2
+    amt-request     := l-request
+    amt-number-days := l-days
+    if find-days and
+        l-date-1 > l-date-2
+        amt-greg-date2 := l-date-1
+        amt-greg-date1 := l-date-2
+    endif
+    amt-annual-days   := 365
+    amt-rem           := 0
+    amt-t3            := 0
+    amt-conv-function := 0
+    amt-jd-tmp        := 0
+    amt-jd-day        := 0
+    amt-jul-date1     := 0
+    amt-jul-date2     := 0
+    if find-jul-date
+        //**       REQUEST = "4"
+        amt-number-days := 0
+        l-days          := 0
+        l-date-2        := 0
+        l-day-of-week   := ''
+        perform (x0200-gregorian-to-julian, x0200-exit)
+        if amt-number-days = -999999
+            l-days := amt-number-days
+        else
+            l-date-2 :=  gd-cent1 * 100000 + amt-jul-date1
+        endif
+    elseif find-greg-date
+        //**       REQUEST = "5"
+        amt-number-days := 0
+        l-days          := 0
+        l-date-2        := 0
+        l-day-of-week   := ''
+        amt-jul-date2   := l-date-1
+        perform (x0400-julian-to-gregorian, x0400-exit)
+        l-date-2       := amt-greg-date2
+        amt-greg-date1 := amt-greg-date2
+    elseif find-days
+        //**       REQUEST = "1"
+        amt-number-days := 0
+        l-days          := 0
+        l-day-of-week   := ''
+        perform (x0200-gregorian-to-julian, x0200-exit)
+        if amt-number-days = -999999
+            l-days := amt-number-days
+        else
+            perform (x1000-compute-days, x1000-exit)
+            l-days        := amt-number-days
+            l-day-of-week := ''
+        endif
+    elseif find-next-date
+        //**       REQUEST = "3"
+        perform (x0200-gregorian-to-julian, x0200-exit)
+        if amt-number-days = -999999
+            l-date-1 := amt-greg-date1
+            l-date-2 := amt-greg-date2
+        else
+            perform (x3000-find-next-date, x3000-exit)
+            l-date-2       := amt-greg-date2
+            amt-greg-date1 := amt-greg-date2
+            l-day-of-week  := ''
+        endif
+    elseif find-system-ndate
+        //**       REQUEST = "6"
+        amt-date-10       := copy(today.ccyymmdd, 5, 2) + '/' + copy(today.ccyymmdd, 7, 2) + '/' + copy(today.ccyymmdd, 1, 4)
+        amt-sys-jdate     := today.yyddd
+        amt-jdater.*      := amt-sys-jdater.*
+        amt-date-mdcy-r.* := amt-date-10r.*
+        amt-date-cymd-r.* := amt-date-10r.*
+        sd-jcc            := amt-date-10r.sd-cc
+        l-date-1          := amt-date-mdcy
+        amt-greg-date1    := amt-date-cymd
+        l-date-2          := amt-jdate
+        l-days            := 0
+        l-day-of-week     := ''
+    endif
+    if use-greg-date
+        perform (x0200-gregorian-to-julian, x0200-exit)
+        if amt-greg-date1 = 99999999 or
+            amt-number-days = -999999
+            l-date-1      := amt-greg-date1
+            l-day-of-week := 'DATE ERR '
+        else
+            perform (x2000-find-day-of-week, x2000-exit)
+            l-days        := amt-t3
+            l-day-of-week := amt-day-of-week
+        endif
+    endif
+    goto (amt-exit-program)
+    ///
+    :x0200-gregorian-to-julian
+    amt-jd-yr4 :=  gd-cent1 * 100 + gd-year1
+    amt-jd-tmp := gd-year1
+    jd-year1   := gd-year1
+    perform (x0300-leap-year-test, x0300-exit)
+    amt-annual-d1 := amt-annual-days
+    jd-day1       :=  ( ( gd-month1 + 2 ) * 30.55 ) + gd-day1 - 91
+    if jd-day1 > ( amt-conv-function + 59 ) then jd-day1 :=  jd-day1 + amt-conv-function - 2
+    if gd-month1 < 1 or
+        gd-month1 > 12 or
+        gd-day1 < 1 or
+        gd-day1 > amt-days-in-mo[gd-month1]
+        amt-number-days := -999999
+        amt-greg-date1  := 99999999
+        goto (x0200-exit)
+    endif
+    if not (find-days) then goto (x0200-exit)
+    amt-jd-tmp := gd-year2
+    jd-year2   := gd-year2
+    perform (x0300-leap-year-test, x0300-exit)
+    jd-day2 :=  ( ( gd-month2 + 2 ) * 30.55 ) + gd-day2 - 91
+    if jd-day2 > ( amt-conv-function + 59 ) then jd-day2 :=  jd-day2 + amt-conv-function - 2
+    if gd-month2 < 1 or
+        gd-month2 > 12 or
+        gd-day2 < 1 or
+        gd-day2 > amt-days-in-mo[gd-month2]
+        amt-number-days := -999999
+        amt-greg-date2  := 99999999
+    endif
+    :x0200-exit
+    //Cobol EXIT
+    :x0300-leap-year-test
+    amt-rem := 0
+    amt-t3  := 0
+    if amt-jd-tmp = 0
+        amt-t3  := amt-jd-yr4 / 400 resultokto resok
+        amt-rem := amt-jd-yr4 mod 400
+        if not resok
+            amt-t3 := 0
+        endif
+    else
+        amt-t3  := amt-jd-tmp / 4 resultokto resok
+        amt-rem := amt-jd-tmp mod 4
+        if not resok
+            amt-t3 := 0
+        endif
+    endif
+    if amt-rem = 0
+        amt-days-in-mo[2] := 29
+        amt-annual-days   := 366
+        amt-conv-function := 1
+    else
+        amt-days-in-mo[2] := 28
+        amt-annual-days   := 365
+        amt-conv-function := 0
+    endif
+    :x0300-exit
+    //Cobol EXIT
+    :x0400-julian-to-gregorian
+    gd-cent2   := jd-cent2
+    gd-year2   := jd-year2
+    amt-jd-tmp := jd-year2
+    amt-jd-yr4 :=  gd-cent2 * 100 + gd-year2
+    perform (x0300-leap-year-test, x0300-exit)
+    amt-number-days := jd-day2
+    if jd-day2 > ( amt-conv-function + 59 ) then amt-number-days :=  jd-day2 + 2 - amt-conv-function
+    amt-number-days += 91
+    gd-month2       :=  amt-number-days / 30.55
+    gd-day2         :=  ( gd-month2 * 30.55 )
+    gd-day2         :=  amt-number-days - gd-day2
+    gd-month2       -= 2
+    if jd-day2 < 1 or
+        jd-day2 > amt-annual-days
+        amt-number-days := -999999
+        amt-greg-date2  := 99999999
+    endif
+    :x0400-exit
+    //Cobol EXIT
+    ///
+    :x1000-compute-days
+    if jd-year1 = jd-year2
+        amt-number-days :=  jd-day2 - jd-day1 + 1
+    else
+        //*        COMPUTE amt-NUMBER-DAYS = amt-ANNUAL-DAYS - JD-DAY1 +
+        amt-number-days :=  amt-annual-d1 - jd-day1 + jd-day2 + 1
+        amt-jd-tmp      := jd-year1 + 1
+        amt-jd-yr4      += 1
+        loop while not (amt-jd-tmp = jd-year2)
+            perform (x1100-add-other-years, x1100-exit)
+        endloop
+    endif
+    :x1000-exit
+    //Cobol EXIT
+    :x1100-add-other-years
+    perform (x0300-leap-year-test, x0300-exit)
+    amt-number-days += amt-annual-days
+    amt-jd-tmp      += 1
+    amt-jd-yr4      += 1
+    :x1100-exit
+    //Cobol EXIT
+    :x2000-find-day-of-week
+    if amt-jd-yr4 = 2000
+        amt-t3 := amt-jd-yr4 / 400
+    else
+        amt-t3 := amt-jd-tmp / 4
+    endif
+    amt-rem :=  ( amt-t3 + jd-year1 ) / 7
+    amt-rem :=  ( amt-t3 + jd-year1 ) - ( amt-rem * 7 )
+    if amt-conv-function = 0 or
+        amt-jd-yr4 = 2000
+        amt-rem += 1
+    endif
+    amt-t3 :=  jd-day1 / 7
+    amt-t3 :=  jd-day1 - ( amt-t3 * 7 )
+    amt-t3 += amt-rem
+    //*****
+    //*        IF YEAR IS > 2000, ADD 6 TO amt-T3
+    //*****
+    if amt-jd-yr4 > 2000 then amt-t3 += 6
+    if amt-t3 > 7
+        loop while not (amt-t3 < 8)
+            perform (x2100-loop-7, x2100-exit)
+        endloop
+    endif
+    if amt-t3 = 0 then amt-t3 := 7
+    if amt-t3 > 7 or
+        amt-t3 < 1
+        amt_jobsummary ('INVALID INDEX amt-T3 ' & amt-t3 & ', amt-JD-TMP ' & amt-jd-tmp & ', REQUEST ' & l-request & ', DATE1 ' & l-date-1, true)
+    endif
+    amt-day-of-week := amt-day-name[amt-t3]
+    :x2000-exit
+    //Cobol EXIT
+    :x2100-loop-7
+    amt-t3 -= 7
+    :x2100-exit
+    //Cobol EXIT
+    :x3000-find-next-date
+    amt-number-days := l-days
+    amt-jul-date2   := amt-jul-date1
+    amt-jd-day      := jd-day1
+    amt-jd-day      += amt-number-days
+    if amt-number-days > 0
+        loop while not (amt-jd-day <= amt-annual-days)
+            perform (x3100-advance-julian-date, x3100-exit)
+        endloop
+    else
+        loop while not (amt-jd-day > 0)
+            perform (x3200-diminish-julian-date, x3200-exit)
+        endloop
+    endif
+    jd-day2 := amt-jd-day
+    jd-ccyy := amt-jd-yr4
+    perform (x0400-julian-to-gregorian, x0400-exit)
+    :x3000-exit
+    //Cobol EXIT
+    :x3100-advance-julian-date
+    amt-jd-day -= amt-annual-days
+    jd-year2   += 1
+    amt-jd-tmp += 1
+    amt-jd-yr4 += 1
+    perform (x0300-leap-year-test, x0300-exit)
+    :x3100-exit
+    //Cobol EXIT
+    :x3200-diminish-julian-date
+    if jd-year2 = 0
+        jd-year2   := 99
+        amt-jd-tmp := 99
+        amt-jd-yr4 -= 1
+    else
+        jd-year2   -= 1
+        amt-jd-tmp -= 1
+        amt-jd-yr4 -= 1
+    endif
+    perform (x0300-leap-year-test, x0300-exit)
+    if amt-jd-day < 1
+        amt-jd-day += amt-annual-days
+    else
+        jd-year2 += 1
+    endif
+    :x3200-exit
+    //Cobol EXIT
+    :exit-0100-dateutil
+
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_DATE_CYYDDD' description='CCYYMMDD date format to Julian date format (CYYDDD)'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+
+end_definitions
+
+routine main (date_in: numeric 8): numeric 6
+begin_routine
+  dateresult.ccyymmdd := date_in
+  result := (dateresult.ccyyddd mod 1000000)
+end_routine
+
+</CODE>
+</OBJECT>
+
+</ROUTINES>

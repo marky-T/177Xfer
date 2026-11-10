@@ -1,0 +1,8 @@
+{
+  "case": "abort-v4-two-move",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+  "records": 0,
+  "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+}

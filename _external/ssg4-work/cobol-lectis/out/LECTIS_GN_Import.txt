@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol-lectis\\out\\LECTIS_GN.LionSource
+APPNAME = LECTISGN
+GENSET = Default from new application
+SYSOPT = FALSE

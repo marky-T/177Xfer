@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, started 2026-11-09 17:24:01
+PASS GNBUILD-LECTIS generated after                2026-11-09 17:02:03 (the build LionSource)
+PASS GNBUILD-LECTIS imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS ASSURFED_UTILIT_LECTIS_GN rebuilt and delivered          11/9/2026 5:20:56 PM 11/9/2026 5:24:22 PM ok (2 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNBUILD-LECTIS recorded as imported not recorded: a subset of the programs was delivered
+=== Deliver : all passed

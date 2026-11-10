@@ -1,0 +1,122 @@
+[
+  {
+    "Case": "REAL1",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\REAL1\\model.txt"
+  },
+  {
+    "Case": "SEQCTR",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQCTR\\model.txt"
+  },
+  {
+    "Case": "SEQWORD",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQWORD\\model.txt"
+  },
+  {
+    "Case": "SEQNOTGT",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQNOTGT\\model.txt"
+  },
+  {
+    "Case": "SEQKEYEQ",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQKEYEQ\\model.txt"
+  },
+  {
+    "Case": "SEQKEYGE",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQKEYGE\\model.txt"
+  },
+  {
+    "Case": "SEQNOLIST",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQNOLIST\\model.txt"
+  },
+  {
+    "Case": "SEQNOLC",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQNOLC\\model.txt"
+  },
+  {
+    "Case": "SEQOFF",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQOFF\\model.txt"
+  },
+  {
+    "Case": "SEQLEN100",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQLEN100\\model.txt"
+  },
+  {
+    "Case": "SEQLEN101",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQLEN101\\model.txt"
+  },
+  {
+    "Case": "SEQLEN250",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQLEN250\\model.txt"
+  },
+  {
+    "Case": "SEQLEN2100",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQLEN2100\\model.txt"
+  },
+  {
+    "Case": "SEQNOASCII",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQNOASCII\\model.txt"
+  },
+  {
+    "Case": "SEQBIG",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQBIG\\model.txt"
+  },
+  {
+    "Case": "SEQY2KIGN",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\SEQY2KIGN\\model.txt"
+  },
+  {
+    "Case": "KEYBASIC",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYBASIC\\model.txt"
+  },
+  {
+    "Case": "KEYDUP",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYDUP\\model.txt"
+  },
+  {
+    "Case": "KEYMISS",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYMISS\\model.txt"
+  },
+  {
+    "Case": "KEYOFF",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYOFF\\model.txt"
+  },
+  {
+    "Case": "KEYIMAGE",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYIMAGE\\model.txt"
+  },
+  {
+    "Case": "KEYY2K1",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYY2K1\\model.txt"
+  },
+  {
+    "Case": "KEYY2K2",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYY2K2\\model.txt"
+  },
+  {
+    "Case": "KEYY2KADJ",
+    "Ref": false,
+    "Model": "E:\\Repos\\ssg4-work\\generic\\LECTIS\\cases\\KEYY2KADJ\\model.txt"
+  }
+]

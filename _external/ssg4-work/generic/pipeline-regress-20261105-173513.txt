@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, started 2026-11-05 17:35:13
+PASS prepare        Prepare-CondisCc.ps1           inputs, job scripts and hand-offs staged
+PASS SSG4_CONDIS_CASES regression                     PASS 2026-11-03 14:38:07: --- 6 of 6 outputs byte-identical | === SSG4_CONDIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_CONDIS_CASES\check.txt)
+=== Regress : all passed

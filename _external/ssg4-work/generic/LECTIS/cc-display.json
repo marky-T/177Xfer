@@ -1,0 +1,122 @@
+[
+  {
+    "Case": "REAL1",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQCTR",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQWORD",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQNOTGT",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQKEYEQ",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQKEYGE",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQNOLIST",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQNOLC",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQOFF",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQLEN100",
+    "Keys": false,
+    "Ctr": 3
+  },
+  {
+    "Case": "SEQLEN101",
+    "Keys": false,
+    "Ctr": 3
+  },
+  {
+    "Case": "SEQLEN250",
+    "Keys": false,
+    "Ctr": 3
+  },
+  {
+    "Case": "SEQLEN2100",
+    "Keys": false,
+    "Ctr": 2
+  },
+  {
+    "Case": "SEQNOASCII",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "SEQBIG",
+    "Keys": false,
+    "Ctr": 1250
+  },
+  {
+    "Case": "SEQY2KIGN",
+    "Keys": false,
+    "Ctr": 5
+  },
+  {
+    "Case": "KEYBASIC",
+    "Keys": true,
+    "Ctr": 1
+  },
+  {
+    "Case": "KEYDUP",
+    "Keys": true,
+    "Ctr": 0
+  },
+  {
+    "Case": "KEYMISS",
+    "Keys": true,
+    "Ctr": 3
+  },
+  {
+    "Case": "KEYOFF",
+    "Keys": true,
+    "Ctr": 1
+  },
+  {
+    "Case": "KEYIMAGE",
+    "Keys": true,
+    "Ctr": 1
+  },
+  {
+    "Case": "KEYY2K1",
+    "Keys": true,
+    "Ctr": 1
+  },
+  {
+    "Case": "KEYY2K2",
+    "Keys": true,
+    "Ctr": 1
+  },
+  {
+    "Case": "KEYY2KADJ",
+    "Keys": true,
+    "Ctr": 0
+  }
+]

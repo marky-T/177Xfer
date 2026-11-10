@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-03 14:36:45
+FAIL SSG4_CHABAN_CASES regression                     --- 4 of 8 outputs byte-identical | === SSG4_CHABAN_CASES : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress\SSG4_CHABAN_CASES\check.txt)
+=== Regress : 1 failure(s)

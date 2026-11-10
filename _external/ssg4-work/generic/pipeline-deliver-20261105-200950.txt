@@ -1,0 +1,4 @@
+Stage Deliver, environment CC-Trial, started 2026-11-05 20:09:50
+PASS GNS            generated after                2026-11-05 18:09:41 (the build LionSource)
+FAIL GNS            imported since the last delivery revision unchanged (ASSURFED_UTILIT_CONDIS2_GS still 1.0.0.0): this LionSource differs from the last delivered one, so import it in LionDev and generate again
+=== Deliver : 1 failure(s)

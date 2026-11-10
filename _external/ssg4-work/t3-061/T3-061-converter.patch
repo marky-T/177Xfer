@@ -1,0 +1,116 @@
+diff --git a/SsgConverter/Source/SsgConverter/Expressions/Enums/BinaryOperator.cs b/SsgConverter/Source/SsgConverter/Expressions/Enums/BinaryOperator.cs
+index 253a6b7..0184f4b 100644
+--- a/SsgConverter/Source/SsgConverter/Expressions/Enums/BinaryOperator.cs
++++ b/SsgConverter/Source/SsgConverter/Expressions/Enums/BinaryOperator.cs
+@@ -58,6 +58,11 @@ namespace Ecl.SsgConverter.Expressions {
+     /// <summary>
+     /// Less than (<).
+     /// </summary>
+-    LessThan
++    LessThan,
++
++    /// <summary>
++    /// Multiplication (*), T3-061.
++    /// </summary>
++    Multiply
+   }
+ } // namespace Ecl.SsgConverter.Expressions
+diff --git a/SsgConverter/Source/SsgConverter/SymstreamExpressionMigrator.cs b/SsgConverter/Source/SsgConverter/SymstreamExpressionMigrator.cs
+index c59e8a3..1fac026 100644
+--- a/SsgConverter/Source/SsgConverter/SymstreamExpressionMigrator.cs
++++ b/SsgConverter/Source/SsgConverter/SymstreamExpressionMigrator.cs
+@@ -416,6 +416,8 @@ namespace Ecl.SsgConverter {
+           return PSAstOperatorType.LessThanOrEqual;
+         case BinaryOperator.LessThan:
+           return PSAstOperatorType.LessThan;
++        case BinaryOperator.Multiply:
++          return PSAstOperatorType.Multiply;
+         default:
+           throw new SymstreamException(String.Format("Unknown operator type encountered: {0}", binaryOperator));
+       }
+diff --git a/SsgConverter/Source/SsgConverter/SymstreamExpressionParser.cs b/SsgConverter/Source/SsgConverter/SymstreamExpressionParser.cs
+index c840cd2..d7d0782 100644
+--- a/SsgConverter/Source/SsgConverter/SymstreamExpressionParser.cs
++++ b/SsgConverter/Source/SsgConverter/SymstreamExpressionParser.cs
+@@ -30,6 +30,61 @@ namespace Ecl.SsgConverter {
+       return found;
+     } // FindLastAdditiveOperator
+ 
++    /// <summary>
++    /// Position of the last binary '*' outside brackets and single quotes, or -1 (T3-061). Same rule for "binary" as for '+' and '-'.
++    /// </summary>
++    private static Int32 FindLastMultiplicativeOperator (String text) {
++      Int32 depth = 0;
++      Boolean quoted = false;
++      Int32 found = -1;
++      Char previous = '\0';
++      for (Int32 i = 0; i < text.Length; i++) {
++        Char c = text[i];
++        if (c == '\'') { quoted = !quoted; }
++        else if (!quoted && c == '[') { depth++; }
++        else if (!quoted && c == ']') { depth--; }
++        else if (!quoted && depth == 0 && c == '*' && previous != '\0' && "+-*/=<>(,".IndexOf(previous) < 0) { found = i; }
++        if (!Char.IsWhiteSpace(c)) { previous = c; }
++      }
++      return found;
++    } // FindLastMultiplicativeOperator
++
++    /// <summary>
++    /// Tells whether the text is a number or one whole bracketed reference, optionally combined with + - * (T3-061).
++    /// A '*' only counts as multiplication between such operands, so an unquoted word that happens to contain a '*' stays text.
++    /// </summary>
++    private static Boolean IsArithmeticOperand (String text) {
++      Int32 depth = 0;
++      Boolean quoted = false;
++      Int32 start = 0;
++      for (Int32 i = 0; i <= text.Length; i++) {
++        Boolean atEnd = i == text.Length;
++        Char c = atEnd ? '\0' : text[i];
++        if (!atEnd) {
++          if (c == '\'') { quoted = !quoted; }
++          else if (!quoted && c == '[') { depth++; }
++          else if (!quoted && c == ']') { depth--; }
++        }
++        if (quoted) { continue; }
++        if (atEnd || (depth == 0 && (c == '+' || c == '-' || c == '*'))) {
++          String segment = text.Substring(start, i - start).Trim();
++          if (!Regex.IsMatch(segment, @"^\d+$") && !IsWholeBracketedReference(segment)) { return false; }
++          start = i + 1;
++        }
++      }
++      return depth == 0;
++    } // IsArithmeticOperand
++
++    private static Boolean IsWholeBracketedReference (String s) {
++      if (s.Length < 2 || s[0] != '[' || s[s.Length - 1] != ']') { return false; }
++      Int32 depth = 0;
++      for (Int32 i = 0; i < s.Length; i++) {
++        if (s[i] == '[') { depth++; }
++        else if (s[i] == ']') { depth--; if (depth == 0 && i < s.Length - 1) { return false; } }
++      }
++      return depth == 0;
++    } // IsWholeBracketedReference
++
+     /// <summary>
+     /// Parses a Symstream expression.
+     /// </summary>
+@@ -231,6 +286,19 @@ namespace Ecl.SsgConverter {
+           }
+         }
+       }
++      // * (binds tighter than + and -, evaluated left to right: split at the LAST binary '*', T3-061). Only between numeric operands.
++      if (text.Contains("*")) {
++        Int32 star = FindLastMultiplicativeOperator(text);
++        if (star > -1) {
++          String left = text.Substring(0, star);
++          String right = text.Substring(star + 1);
++          if (IsArithmeticOperand(left) && IsArithmeticOperand(right)) {
++            SymstreamExpression exprLeft = Parse(left.Trim(), globalVariables, localVariables, identifierOverString);
++            SymstreamExpression exprRight = Parse(right.Trim(), globalVariables, localVariables, identifierOverString);
++            return new SymstreamExpressionBinary(exprLeft, BinaryOperator.Multiply, exprRight);
++          }
++        }
++      }
+       // some string containing bracketed parts (which may be anywhere in the string)
+       // this will root out any sneeky embedded bracketed references
+       if (text.Contains("[") && !text.Contains("'") && !(text[0].Equals('[') && text[text.Length - 1].Equals(']'))) {

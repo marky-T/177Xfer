@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, started 2026-11-09 17:48:25
+PASS SSG4_LECTIS_CASES regression                     PASS 2026-11-09 17:40:48: === SSG4_LECTIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_LECTIS_CASES\check.txt) | PRN files since 17:33:40: 24, expected 24 | === prints: all checks passed | === LECTIS DISPLAY lines: PASS (23 of 24 as modelled, 1 known AMT difference(s): KEYIMAGE (T3-059))
+PASS SSG4_LECTIS_ABORT [NOCOND] regression                     PASS 2026-11-09 17:48:23: job ended in Error as expected | NOCOND PASS: abort [E3] from the hand-off=True, program not started=True, not past the Xqt=True
+PASS SSG4_LECTIS_ABORT [BADCOND] regression                     PASS 2026-11-09 17:48:25: job ended in Error as expected | BADCOND PASS: abort [L3] from the hand-off=True, program not started=True, not past the Xqt=True
+=== Regress : all passed

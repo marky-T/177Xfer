@@ -1,0 +1,47 @@
+=== D2 parse main CONDIS2
+parse errors: 68
+  line 14: Unexpected token '$+I' in expression or statement.
+  line 14: Missing closing ')' after expression in 'for' statement.
+  line 14: Unexpected token ')' in expression or statement.
+=== E1 / F2 user messages in this session transcript
+--- transcript line 82 10/22/2026 08:36:11
+lets work through these questions
+- 1. Which application DLL set FEDERALE_APP uses.
+I dont understand the question
+--- transcript line 98 10/22/2026 10:36:02
+the last release of scripts was not created as part of **FEDERALE_APP** but the release scripts now sit under **FEDERALE_APP** 
+from memoray and i may be wrong, the released software is loaded up on site then built.
+I would assume that build assign it to **FEDERALE_APP** or **FEDERALE_APP_dev** or **FEDERALE_APP_uat** depending on what they want to create. so i dont think the cobol2200 will be a
+--- transcript line 214 10/22/2026 10:53:50
+can you look at one of the federale_app reports to see what the config environment names are?
+--- transcript line 428 10/22/2026 14:35:38
+lets try just cfh-copy in **FEDERALE_APP and prove it in CC.**
+--- transcript line 767 10/22/2026 15:16:08
+1. LOADIS/UNLOADIS are mapped to this program in `CloneReports.xml` but haven't been run under FEDERALE_APP, and their skeletons aren't in this package.
+what skeletons?
+
+2. The other 6 GN programs are generated for AFBUS but not yet delivered or proven in FEDERALE_APP.
+> the cfh-copy proof is good enough
+
+3 The duplicate job rows in FEDERALE_APP's catalogue, are most probably a result of our
+--- transcript line 812 10/22/2026 15:31:31
+- **It had 7 program DLLs**, because it covered all 7 GN programs. This release covers only CFH-COPY, the one proven under FEDERALE_APP.
+NO!
+we proved 1 job ran, good enough, move all the prep'd, tested successfully in CC against 2200cobol
+--- transcript line 1055 10/22/2026 16:26:46
+[Terminal 6d7247c1-95e9-41c6-b277-cb5ef756ce06 notification: command completed. The terminal has been cleaned up.]
+Terminal output:
+m() : 'NOT FOU
+97: window.ccLoaded = 'cc-actions 3';                                           
+PS E:\Repos\SsgTrial\Conversion\Pipeline\Generic> [Convert]::ToBase64String([IO.File]::ReadAllBytes('E:\Repos\SsgTrial\Conversion\Pipeline\ControlCenter\cc-actions.js')) | 
+--- transcript line 1698 10/23/2026 13:51:56
+[Terminal 03fa20b0-b725-4ca0-8f12-fcc413b47b95 notification: command may be waiting for input — assess the output below.]
+This note is not a signal to end the turn — pick one of the actions below and continue.
+  1. If the command may still be producing output or the shell prompt has not returned, call get_terminal_output with id="03fa20b0-b725-4ca0-8f12-fcc413b47b95" to continue polling. This is t
+--- transcript line 1705 10/23/2026 13:52:08
+[Terminal 03fa20b0-b725-4ca0-8f12-fcc413b47b95 notification: command completed. The terminal has been cleaned up.]
+Terminal output:
+
+**Parameter file** `CONPARM` (250-byte lines, `gen\CondisParm.ps1`): `FI<len5>`, `FO<len5>`, `NG|CA|OT`,
+`TS<pos5><len5><value>`, `MV<in5><len5><out5><outlen5><code4>`, `CO<pos5><len5><value>`. The PG cards are read
+from the raw card file (`$SgsFilePath`), because `A

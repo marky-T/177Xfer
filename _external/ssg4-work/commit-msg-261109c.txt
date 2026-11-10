@@ -1,0 +1,14 @@
+SSG-4: T3-062 / MT-057 (stale skeleton copies); MT-058 (R&D converter moved on); LECTIS into next release
+
+- T3-062: 17 converted skeleton copies from 261012 not reconverted after converter fixes; LECTIS trial showed
+  21 changed lines (T3-061, T3-043, T3-048). Copies left unchanged (owner)
+- MT-058: R&D develop fetched (50d47170 -> 88dc012f); R&D changed the three SSG library files we fixed, so our
+  fixes must be merged before our ECL converter is rebuilt; PR 16108 / 16391 may fix T3-052 / T3-054.
+  Findings only, decision later. MT-057 now waits on MT-058
+- Update-GnSkeletonCopy.ps1 (new): regenerate a copy with a given ECL converter build; proves the method with
+  the build that made it (the 261012 build reproduces the LECTIS copy byte for byte)
+- Release notes / maintenance text: program and job counts from the catalog (were fixed at 7 / 14)
+- Tracker: skeleton copies are ours (our build); converter fixes go to R&D to approve or reject (MT-033);
+  MT-056: owner decision, LECTIS in the next release
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

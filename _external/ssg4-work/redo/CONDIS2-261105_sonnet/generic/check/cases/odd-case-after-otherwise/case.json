@@ -1,0 +1,8 @@
+{
+  "case": "odd-case-after-otherwise",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 3,
+  "note": "CASE after OTHERWISE: as written the OTHERWISE actions catch every record that is not the first CASE, counted in NB-REC-CASE-2; no real call"
+}

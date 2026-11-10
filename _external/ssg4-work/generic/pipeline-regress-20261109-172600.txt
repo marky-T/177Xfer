@@ -1,0 +1,7 @@
+Stage Regress, environment CC-Trial, started 2026-11-09 17:26:00
+PASS prepare        Prepare-LectisCc.ps1           inputs, job scripts and hand-offs staged
+PASS prepare        Prepare-LectisAbort.ps1        inputs, job scripts and hand-offs staged
+FAIL SSG4_LECTIS_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_CASES'), then -Stage Regress -Job SSG4_LECTIS_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_LECTIS_ABORT [NOCOND] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_ABORT', 'NOCOND'), then -Stage Regress -Job SSG4_LECTIS_ABORT -JobParam NOCOND -StartLine '<ccStartJob line>'
+FAIL SSG4_LECTIS_ABORT [BADCOND] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_ABORT', 'BADCOND'), then -Stage Regress -Job SSG4_LECTIS_ABORT -JobParam BADCOND -StartLine '<ccStartJob line>'
+=== Regress : 3 failure(s)

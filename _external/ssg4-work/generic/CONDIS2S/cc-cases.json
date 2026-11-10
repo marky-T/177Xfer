@@ -1,0 +1,182 @@
+[
+  {
+    "Case": "cc-BD",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN201O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-BD\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-D42",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN202O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-D42\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-DT",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN203O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-DT\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-UE",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN204O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-UE\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-UL",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN205O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-UL\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-VG",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN206O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\cc-VG\\expected\\output.dat"
+  },
+  {
+    "Case": "odd-case-after-otherwise",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN207O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\odd-case-after-otherwise\\expected\\output.dat"
+  },
+  {
+    "Case": "odd-otherwise-first",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN208O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\odd-otherwise-first\\expected\\output.dat"
+  },
+  {
+    "Case": "odd-prelude-move",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN209O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\odd-prelude-move\\expected\\output.dat"
+  },
+  {
+    "Case": "real-AUMH01_D3_L87",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN210O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-AUMH01_D3_L87\\expected\\output.dat"
+  },
+  {
+    "Case": "real-AUPA02_MJ_L68",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN211O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-AUPA02_MJ_L68\\expected\\output.dat"
+  },
+  {
+    "Case": "real-AUPA02_MJ_L95",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN212O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-AUPA02_MJ_L95\\expected\\output.dat"
+  },
+  {
+    "Case": "real-CLOA20_L83",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN213O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-CLOA20_L83\\expected\\output.dat"
+  },
+  {
+    "Case": "real-CLOA47_L326",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN214O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-CLOA47_L326\\expected\\output.dat"
+  },
+  {
+    "Case": "real-INTA01_MJ_L269",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN215O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-INTA01_MJ_L269\\expected\\output.dat"
+  },
+  {
+    "Case": "real-INTA01_MJ_L84",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN216O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-INTA01_MJ_L84\\expected\\output.dat"
+  },
+  {
+    "Case": "real-LRSJ01_L124",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN217O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-LRSJ01_L124\\expected\\output.dat"
+  },
+  {
+    "Case": "real-LRSJ01_L71",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN218O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-LRSJ01_L71\\expected\\output.dat"
+  },
+  {
+    "Case": "real-LRSJ01_L98",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN219O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-LRSJ01_L98\\expected\\output.dat"
+  },
+  {
+    "Case": "real-PAIJ01_BD_L58",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN220O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-PAIJ01_BD_L58\\expected\\output.dat"
+  },
+  {
+    "Case": "real-PAIJ01_UL_L85",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN221O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-PAIJ01_UL_L85\\expected\\output.dat"
+  },
+  {
+    "Case": "real-SINM05_L106",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN222O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-SINM05_L106\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIGD03_L1030",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN223O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-VIGD03_L1030\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIGD03_L894",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN224O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-VIGD03_L894\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIGD13_L1035",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN225O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-VIGD13_L1035\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIGD13_L899",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN226O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-VIGD13_L899\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRJ01_UE_L850",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN227O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\real-VIRJ01_UE_L850\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-all-date-codes",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN228O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-all-date-codes\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-case-no-otherwise",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN229O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-case-no-otherwise\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-const-overlap",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN230O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-const-overlap\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-d42-boundaries",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN231O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-d42-boundaries\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-quoted-spaces",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN232O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-quoted-spaces\\expected\\output.dat"
+  },
+  {
+    "Case": "syn-short-long-records",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN233O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\syn-short-long-records\\expected\\output.dat"
+  },
+  {
+    "Case": "t3059-aa-nomerge",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN234O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\t3059-aa-nomerge\\expected\\output.dat"
+  },
+  {
+    "Case": "t3059-bb-twomerges",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN235O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\t3059-bb-twomerges\\expected\\output.dat"
+  },
+  {
+    "Case": "t3059-u-midfile",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\CND2TEST\\CN236O",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\CONDIS2S\\check\\cases\\t3059-u-midfile\\expected\\output.dat"
+  }
+]

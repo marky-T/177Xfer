@@ -1,0 +1,6 @@
+Stage Build, environment CC-Trial, started 2026-11-09 17:02:02
+PASS LECTIS         program source                 ASSURFED_UTILIT_LECTIS_GN: new since the last build
+PASS COBOL converter (programs) 1 programs -> GNBUILD-LECTIS.LionSource exit 0, errors 0, warnings 4, 28 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD-LECTIS\out\GNBUILD-LECTIS.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

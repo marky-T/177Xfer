@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-03 14:44:26
+FAIL SSG4_LOADIS_ABORT [DUPLICATE] regression                     job ended in Error as expected | DUPLICATE FAIL: IS.ERROR key=False, record number=False, job aborted=True, program not started=True, not past the Xqt=True, no index left=True
+=== Regress : 1 failure(s)

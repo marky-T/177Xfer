@@ -1,0 +1,8 @@
+{
+  "case": "syn-quoted-spaces",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 8,
+  "note": "values with spaces (method 2 quoting), case-sensitive value compare, OTHERWISE with CONST only"
+}

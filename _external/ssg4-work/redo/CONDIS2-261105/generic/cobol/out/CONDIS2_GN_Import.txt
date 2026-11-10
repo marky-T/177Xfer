@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\redo\\CONDIS2-261105\\generic\\cobol\\out\\CONDIS2_GN.LionSource
+APPNAME = CONDIS2GN
+GENSET = Default from new application
+SYSOPT = FALSE

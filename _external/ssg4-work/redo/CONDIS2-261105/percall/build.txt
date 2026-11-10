@@ -1,0 +1,14 @@
+[11:52:12] Expanding 1 program(s), one call each...
+[11:52:12] (1/1) CONDIS2_ASCII : expanding...
+[11:52:12] (1/1) CONDIS2_ASCII : done in 1.7s
+[11:52:13] Converting 1 program(s) together via CobolConverterConsole (one call, can take a while)...
+[11:52:21] Converter finished.
+
+ProgramId                     Runstream                         Line CallsAvailable
+---------                     ---------                         ---- --------------
+ASSURFED-UTILIT-CONDIS2-ASCII ASSURFED_F999RUN_AUMH01_D3(P).TXT 87               18
+
+
+Application : AFBUS_2200COBOL   programs: 1
+Converter   : exit 0, errors 0, warnings 4, 39,898 bytes
+LionSource  : E:\Repos\ssg4-work\redo\CONDIS2-261105\percall\cobol\out\AFBUS_2200COBOL.LionSource

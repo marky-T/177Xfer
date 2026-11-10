@@ -1,0 +1,11 @@
+
+Program                    Generated            Built                Check                                             Delivered
+-------                    ---------            -----                -----                                             ---------
+ASSURFED_UTILIT_CONDIS2_RV 11/3/2026 8:28:19 AM 11/3/2026 8:54:02 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+ASSURFED_UTILIT_CONDIS2_RD 11/3/2026 8:28:18 AM 11/3/2026 8:54:00 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+ASSURFED_UTILIT_SCAN_RA    11/3/2026 8:28:20 AM 11/3/2026 8:54:05 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+ASSURFED_UTILIT_SCAN_RB    11/3/2026 8:28:21 AM 11/3/2026 8:54:07 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+ASSURFED_UTILIT_TAPELD_RA  11/3/2026 8:28:21 AM 11/3/2026 8:54:10 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+ASSURFED_UTILIT_TAPELD_RB  11/3/2026 8:28:21 AM 11/3/2026 8:54:12 AM ok (static reference: T3-040 input check skipped) yes, hash ok
+
+

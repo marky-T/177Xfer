@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, started 2026-11-05 20:33:53
+PASS utilities.json files and hand-off defaults    10 utilities, 15 skeleton entries checked, problems: 0
+PASS CONDIS2        cross-check vs baseline        MATCH=18 of 18 calls
+=== Check : all passed

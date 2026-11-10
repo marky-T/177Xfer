@@ -1,0 +1,6 @@
+job log: E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261103\ARCHS7_110920261103125907350.log
+job log problem lines: 0
+S7  ARS7-ARCHI       224 B written (S7: recorded, no expected file)
+S7  ARS7-NARCHI      528 B written (S7: recorded, no expected file)
+S7  report: Archisepare              Rapport             ##/##/#### |  | Enregistrement lu :      25 | Enregistrement ecrit dans ARS7-ARCHI :       3 | Enregistrement ecrit dans ARS7-NARCHI :      22
+=== SSG4_ARCHIVE_S7 : S7 recorded

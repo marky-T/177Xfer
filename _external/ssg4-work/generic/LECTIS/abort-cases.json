@@ -1,0 +1,12 @@
+[
+  {
+    "Case": "NOCOND",
+    "Source": "REJE3",
+    "Code": "E3"
+  },
+  {
+    "Case": "BADCOND",
+    "Source": "REJL3A",
+    "Code": "L3"
+  }
+]

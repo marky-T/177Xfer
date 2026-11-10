@@ -1,0 +1,8 @@
+{
+  "case": "syn-case-no-otherwise",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 60,
+  "note": "two CASE groups (the second with two AND fields), no OTHERWISE: records matching none are not written (box in the report)"
+}

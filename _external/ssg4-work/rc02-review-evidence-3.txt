@@ -1,0 +1,168 @@
+=== C3 settings in CC script folders
+== E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml exists=True
+  3: <AppName>AFBUS_2200COBOL_AMT</AppName>
+  20: <UseUnicode>False</UseUnicode>
+  58: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="CFH_COPY" />
+  59: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="LOADIS" />
+  60: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="UNLOADIS" />
+  61: <OrginalReport Name="ASSURFED_UTILIT_BABA_GN" Clone="BABA" />
+  62: <OrginalReport Name="ASSURFED_UTILIT_FUSBA_GN" Clone="FUSBA" />
+  63: <OrginalReport Name="ASSURFED_UTILIT_CHABAN_GN" Clone="CHABAN" />
+  64: <OrginalReport Name="ASSURFED_UTILIT_CONDIS2_GN" Clone="CONDIS2" />
+  65: <OrginalReport Name="ASSURFED_UTILIT_SCAN_GN" Clone="SCAN" />
+  66: <OrginalReport Name="ASSURFED_UTILIT_TAPELD_GN" Clone="TPF$" />
+== E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4FED\Settings\AmtSettings.xml exists=True
+  3: <AppName>FEDERALE_APP</AppName>
+  20: <UseUnicode>False</UseUnicode>
+  58: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="CFH_COPY" />
+  59: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="LOADIS" />
+  60: <OrginalReport Name="ASSURFED_UTILIT_CFH_COPY_GN" Clone="UNLOADIS" />
+  61: <OrginalReport Name="ASSURFED_UTILIT_BABA_GN" Clone="BABA" />
+  62: <OrginalReport Name="ASSURFED_UTILIT_FUSBA_GN" Clone="FUSBA" />
+  63: <OrginalReport Name="ASSURFED_UTILIT_CHABAN_GN" Clone="CHABAN" />
+  64: <OrginalReport Name="ASSURFED_UTILIT_CONDIS2_GN" Clone="CONDIS2" />
+  65: <OrginalReport Name="ASSURFED_UTILIT_SCAN_GN" Clone="SCAN" />
+  66: <OrginalReport Name="ASSURFED_UTILIT_TAPELD_GN" Clone="TPF$" />
+== E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4BSP\Settings\AmtSettings.xml exists=False
+=== D2 CONDIS2 main vs PR (first differing hunks)
+ Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1 | 189 ++++++++++++-----------
+ 1 file changed, 97 insertions(+), 92 deletions(-)
+diff --git a/Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1 b/Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1
+index 8c0562918b..8afbd548bb 100644
+--- a/Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1
++++ b/Scripts/ASSURFED_UTILIT/UTILIT_CONDIS2_ASCII.ps1
+@@ -4,0 +5,5 @@ param([string[]]$Parameters)
++# SSG-4 hand-off (MT-043): the generic program replaces this skeleton's expansion
++. ([ScriptBlock]::Create((Get-Content -Raw (Join-Path $PSScriptRoot 'GnHandoff.inc'))))
++. ([ScriptBlock]::Create((Get-Content -Raw (Join-Path $PSScriptRoot 'CondisParm.inc'))))
++Invoke-CondisHandoff
++return
+@@ -14 +19 @@ $NOCONST = 0
+-For ([Int32]$+I = 1; $_I -le (GetSgsValue ("PG")); $_I++) { 
++For ([Int32]$I = 1; $I -le (GetSgsValue ("PG")); $I++) { 
+@@ -151,2 +156,2 @@ DataLineOrNoStatement ("       FD  FILEIN   ")
+-DataLineOrNoStatement ("           BLOCK CONTAINS " + (GetSgsValue ("FILEIN,1,1,2")) + " RECORDS")
+-DataLineOrNoStatement ("               RECORD CONTAINS " + (GetSgsValue ("FILEIN,1,1,1")) + " CHARACTERS")
++DataLineOrNoStatement ("           BLOCK CONTAINS " + ((GetSgsValue ("FILEIN,1,1,2"))) + " RECORDS")
++DataLineOrNoStatement ("               RECORD CONTAINS " + ((GetSgsValue ("FILEIN,1,1,1"))) + " CHARACTERS")
+@@ -156 +161 @@ DataLineOrNoStatement ("       01  FSINPUT. ")
+-DataLineOrNoStatement ("            02   FILLER    PIC X(" + (GetSgsValue ("FILEIN,1,1,1")) + ").   ")
++DataLineOrNoStatement ("            02   FILLER    PIC X(" + ((GetSgsValue ("FILEIN,1,1,1"))) + ").   ")
+@@ -158,2 +163,2 @@ DataLineOrNoStatement ("       FD  FILEOUT  ")
+-DataLineOrNoStatement ("           BLOCK CONTAINS " + (GetSgsValue ("FILEOUT,1,1,2")) + " RECORDS   ")
+-DataLineOrNoStatement ("               RECORD CONTAINS " + (GetSgsValue ("FILEOUT,1,1,1")) + " CHARACTERS   ")
++DataLineOrNoStatement ("           BLOCK CONTAINS " + ((GetSgsValue ("FILEOUT,1,1,2"))) + " RECORDS   ")
++DataLineOrNoStatement ("               RECORD CONTAINS " + ((GetSgsValue ("FILEOUT,1,1,1"))) + " CHARACTERS   ")
+@@ -163 +168 @@ DataLineOrNoStatement ("       01  FSOUTPUT.")
+-DataLineOrNoStatement ("           02   FILLER     PIC X(" + (GetSgsValue ("FILEOUT,1,1,1")) + ").  ")
++DataLineOrNoStatement ("           02   FILLER     PIC X(" + ((GetSgsValue ("FILEOUT,1,1,1"))) + ").  ")
+@@ -228 +233 @@ $NOCASE = 0
+-For ([Int32]$+I = 1; $_I -le (GetSgsValue ("PG")); $_I++) { 
++For ([Int32]$I = 1; $I -le (GetSgsValue ("PG")); $I++) { 
+@@ -231 +236 @@ For ([Int32]$+I = 1; $_I -le (GetSgsValue ("PG")); $_I++) {
+-    DataLineOrNoStatement ("       01  NB-REC-CASE-" + $NOCASE + "    PIC 9(6).   ")
++    DataLineOrNoStatement ("       01  NB-REC-CASE-" + ($NOCASE) + "    PIC 9(6).   ")
+@@ -235 +240 @@ DataLineOrNoStatement ("       01  ENR-INPUT.   ")
+-DataLineOrNoStatement ("              03  FILLER                PIC X(" + (GetSgsValue ("FILEIN,1,1,1")) + ").  ")
++DataLineOrNoStatement ("              03  FILLER                PIC X(" + ((GetSgsValue ("FILEIN,1,1,1"))) + ").  ")
+@@ -240 +245 @@ $NOCASE = 0
+-For ([Int32]$+I = 1; $_I -le (GetSgsValue ("PG")); $_I++) { 
+--- who last changed CONDIS2 on main
+d1c0ba2f7c 2026-09-25 10:13:38 +0000 Allard Peper Merged PR 14071: Release 25 Sept 2026
+c116e32a11 2026-09-03 13:39:35 +0000 Sietze Koonstra Merged PR 12365: Initial release(s)
+=== E3 AmtPsCustomerLib diff
+diff --git a/Scripts/Libraries/AmtPsCustomerLib.psm1 b/Scripts/Libraries/AmtPsCustomerLib.psm1
+index 52b496a529..d86474b029 100644
+--- a/Scripts/Libraries/AmtPsCustomerLib.psm1
++++ b/Scripts/Libraries/AmtPsCustomerLib.psm1
+@@ -5,3 +5,29 @@
+ # for customer-specific functions. Add customer-specific overrides or additional
+ # functions here as needed.
+ #-------------------------------------------------------------------------------
++
++# Minimal stub: several T3 SsgConverter-generated programs (e.g. CONDIS2_ASCII,
++# TABAN_ASCII) call Log-Message for diagnostic output; it has no real implementation
++# in this bundle. AMT172's original fix (T3-011, marky-T/177Xfer branch
++# T3-LiveRun-Results-20261001) logged to host only; extended here to write into the
++# real per-job AmtPsEclLib joblog (Write-JobLog) instead, so the message actually
++# persists in the AMT joblog rather than only a transient console stream.
++# $Level arrives as the literal string "([LogMessageType]::Information)" (an
++# SsgConverter quoting quirk - LogMessageType isn't evaluated, just text) - parse the
++# severity word out of it and map to the real runtime's [LoggingSeverity] enum.
++function Log-Message {
++  param(
++    [string]$Message,
++    [string]$Level = ''
++  )
++  $severity = [LoggingSeverity]::Info
++  if ($Level -match '::\s*(\w+)') {
++    switch ($Matches[1]) {
++      'Error'   { $severity = [LoggingSeverity]::Error }
++      'Warning' { $severity = [LoggingSeverity]::Warning }
++      'Debug'   { $severity = [LoggingSeverity]::Debug }
++      default   { $severity = [LoggingSeverity]::Info }
++    }
++  }
++  Write-JobLog $Message $severity
++}
+--- wrapper diff sample
+ .../1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1    | 12 +++++++-----
+ .../1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1    | 10 ++++++----
+ 20 files changed, 129 insertions(+), 93 deletions(-)
+=== F1 RC Binaries
+
+Path                                               Length
+----                                               ------
+\Binaries\Programs\ASSURFED_UTILIT_BABA_GN.dll      23040
+\Binaries\Programs\ASSURFED_UTILIT_CFH_COPY_GN.dll  22016
+\Binaries\Programs\ASSURFED_UTILIT_CHABAN_GN.dll    16896
+\Binaries\Programs\ASSURFED_UTILIT_CONDIS2_GN.dll   41984
+\Binaries\Programs\ASSURFED_UTILIT_FUSBA_GN.dll     26624
+\Binaries\Programs\ASSURFED_UTILIT_SCAN_GN.dll      19456
+\Binaries\Programs\ASSURFED_UTILIT_TAPELD_GN.dll    19968
+
+
+=== F3 RC Reference\Cobol
+\Reference\Cobol\ASSURFED-UTILIT-BABA-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-CFH-COPY-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-CHABAN-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-CONDIS2-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-FUSBA-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-SCAN-GN.cob
+\Reference\Cobol\ASSURFED-UTILIT-TAPELD-GN.cob
+=== G1 markers in RC sources
+7
+- Program logic (C#): open Sources\CSharp\GenericPrograms.sln in Visual Studio (7 project(s), net10.0). They are the project folders the delivered
+  DLLs were built from, for the 177a runtime; the one change to the generated code is marked REBUILT-FOR-177A (generation date and time dropped
+  from the base(...) call). Set AmtRuntimeDir in Sources\CSharp\Directory.Build.props to the folder with your runtime DLLs (Asysco.Amt.*,
+  ComScript, ...), or build with -p:AmtRuntimeDir=...; the application DLLs come from AmtApplicationDir (your own AFBUS.Application/Database) and Newtonsoft.Json from Sources\CSharp\lib.
+  Built unchanged against the Federale runtime folder, the projects give the delivered DLLs byte for byte. Output goes to Binaries\Programs.
+=== F4 delivered-versions anywhere
+=== H tracker rows
+== MT-044
+MT-044 261021 Run-time settings for the SSG utilities (generic programs), set up now, to be cleared with R&D. Today each hand-off include hard-codes the program it maps the Xqt to ( $global:CloneReports set at run time). Proposal: (1) the Xqt &rarr; program map goes in the script set's AmtSettings.xml as AMT's own CloneReports entries (vendor feature, proven by the ECL pilot, job 137): CFH_COPY , LOADIS , UNLOADIS &rarr; ASSURFED_UTILIT_CFH_COPY_GN ; BABA , FUSBA , CHABAN , CONDIS2 , SCAN , TPF$ (TAPELD) &rarr; their _GN ; the hand-off only checks the entry exists. (2) Anything else we need at run time goes in our own SsgUtilities.json beside the includes (none needed yet: fixed file names a
+== MT-045
+MT-045 261022 R&D's skeleton folder has no UTILIT_CHAB100_ASCII.ps1 . FEDERALE_APP's Scripts\ASSURFED_UTILIT (R&D's converted skeletons, called by the runstreams as ../../ASSURFED_UTILIT/UTILIT_&lt;X&gt; ) holds 12 of the 13 skeletons that release release20261022-rc.02 replaces; CHAB100 is missing, so a runstream step that calls it cannot run today. rc.02 ships our CHAB100 skeleton (hand-off to ASSURFED_UTILIT_CHABAN_GN , proven in the CC-Trial regression, job 938). To do: ask R&D whether any runstream calls CHAB100 and whether the file was left out of their conversion or is named differently; note it in the install steps. open &middot; R&D question
+== MT-046
+MT-046 261022 CONFIRM with R&D before install: rc.02 replaces R&D's skeleton files. The converted runstreams call skeletons by fixed relative path ( Invoke-Ssg -Skeleton "../../ASSURFED_UTILIT/UTILIT_&lt;X&gt;" ), so the hand-off skeletons only take effect at that path under those names: back up R&D's Scripts\ASSURFED_UTILIT , copy rc.02's 13 skeletons + 9 .inc over it (12 overwritten, CHAB100 new, MT-045), roll back from the backup. Found 261022: the 12 R&D files being replaced are 4-line failed-conversion stubs ( # ERROR: Conversion failed &mdash; DirectiveId: End , CONDIS2 SymstreamExpressionPrimitive expected ; the two errors of the SsgConverter inside R&D's ECL converter), not working s
+== MT-047
+MT-047 261022 ARCHIFORMAT/ARCHISEPARE: archive utilities with no caller in the drop &mdash; where are the archive runstreams? Their SSG headers (UCS) say ARCHIFORMAT &ldquo;formats data for archiving&rdquo; and ARCHISEPARE &ldquo;separates the records to archive from those not to archive&rdquo;. No converted runstream in the drop calls them (no Invoke-Ssg to these skeletons, no rows in sgs-calls.csv ), so no generic program or hand-off was built. Run on their own they only generate COBOL text (as the SSG-3 script route showed for CFH-COPY). Ask R&D whether the archive/purge runstreams exist outside the drop or are retired; same question for the non-ASCII CFH-COPY and for UTILIT_ARCHIFUSION (
+== MT-048
+MT-048 261023 Release release20261022-rc.02 : the 7 generic programs into Federale_InternalRelease, in the repository's own layout. Pushed 2026-10-23: branch feature/federale/ssg4-generic-rc02 , commit de1c9ff893 , on main c19d495b11 (PR into main opened by the owner; R&D's weekly snapshot then carries it to Federale_Release). Found on the fresh main : the application is now BSP ( BSP_AMT , Federale.BSP.BusinessLogic ), not AFBUS, so the programs were regenerated in LionDev 177 as application BSP ( COMPANY=Federale , profile Repo-BSP , LionSource GNBSP == GNFED apart from the name). Layout ( Generic\Place-GnInRepo.ps1 ): BSP_AMT\Development\Utilities\&lt;Project&gt; (relative project files l
+== T3-039
+T3-039 261020 D Output pre-created by Asy-Cat is written in UTF-16 (MT-043 spike, VIRM01_CO). Asy-Cat "P" ("I006VRM01ATC") creates the empty file through Create-EmptyFile &rarr; CreateFileCycle(..., $global:UseUnicode, ...) . Federale's settings have UseUnicode=True , so the file gets a UTF-16 BOM, and the COBOL program then writes its records in UTF-16 with no CRLF between records: 6,852 B instead of 3,425 B. Decoded, the content is byte-identical to the reference. AFPH12 creates its output in the program ( Asg "P,U" ), so it is ASCII. This is AMT runtime and setting behaviour, so it would affect any program behind a catalogued output. To decide: compare in decoded form, or ask R&D (MT-033)
+== T3-040
+T3-040 261020 D A short-line parameter file is misread by AMT's line-sequential reader (MT-043, generic BABA). In the first BABA CC run, 2 of 7 cases (E1, R2: one 8-byte key) routed every record as if no value matched. A trace in a diagnostic build (mock only, E:\AMT_Work\BabaDiag ) showed the program read the MD line and the lines after it as one record (CRLFs inside the record), so the key-field and value lines were never seen. It depended on the file's shape: the same file with a 9-byte key (2 bytes longer) was read line by line. The program's file has PARM-REC 400 bytes and lines of 6&ndash;37 bytes. Fix (ours, no rebuild): the hand-offs write every parameter line padded to the record le
+=== E1 live programs GN dlls
+
+Name                            LastWriteTime
+----                            -------------
+ASSURFED_UTILIT_BABA_GN.dll     10/22/2026 3:32:15 PM
+ASSURFED_UTILIT_CFH_COPY_GN.dll 10/22/2026 3:32:18 PM
+ASSURFED_UTILIT_CHABAN_GN.dll   10/22/2026 3:32:21 PM
+ASSURFED_UTILIT_CONDIS2_GN.dll  10/22/2026 3:32:24 PM
+ASSURFED_UTILIT_FUSBA_GN.dll    10/22/2026 3:32:26 PM
+ASSURFED_UTILIT_SCAN_GN.dll     10/22/2026 3:32:29 PM
+ASSURFED_UTILIT_TAPELD_GN.dll   10/22/2026 3:32:32 PM
+
+

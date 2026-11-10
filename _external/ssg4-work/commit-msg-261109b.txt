@@ -1,0 +1,12 @@
+SSG-4: land T3-061; LECTIS skeleton copy regenerated (T3-062); LECTIS into next release
+
+- SsgConverter: multiplication between numeric operands (T3-061); DLLs refreshed; goldens: only LECTIS_ASCII.ps1 (2 lines)
+- LECTIS check: Y2K cases vs skeleton expansion 3 of 3 (were NO-EXPANSION), real call MATCH 1, cases 33/33
+- Update-GnSkeletonCopy.ps1 (new): regenerate a converted skeleton copy with a given ECL converter build;
+  method proven (the 261012 build reproduces the old LECTIS copy byte for byte)
+- LECTIS copy regenerated with EclConverterConsole-ours-261109: 21 lines (T3-061, T3-043, T3-048, blank lines)
+- T3-062 (17 copies from 261012 not reconverted) and MT-057 (regenerate them before the next release)
+- Release notes: program and job counts from the catalog (were fixed at 7 / 14)
+- Tracker: skeleton copies are ours (our build); converter fixes go to R&D for approval (MT-033)
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

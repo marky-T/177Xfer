@@ -1,0 +1,12 @@
+SSG-4: LECTIS as a generic program (MT-056), CC-proven
+
+Hand-made generic program ASSURFED_UTILIT_LECTIS_GN with spec, independent
+reference model, parameter writer + hand-off, parameter check (real call
+MATCH 1; 33 labelled test cases writer vs model), CC jobs SSG4_LECTIS_CASES
+(24 cases: prints 24/24, DISPLAY 23/24 + 1 known AMT difference, T3-059) and
+SSG4_LECTIS_ABORT ([E3], [L3]); catalog entry and regress steps.
+
+Tracker: MT-056, T3-061 (converter '*' in *SET, fix proven in a scratch build,
+patch not applied here); runbook inventory 11 utilities / 10 programs / 298 calls.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

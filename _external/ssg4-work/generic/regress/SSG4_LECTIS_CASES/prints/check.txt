@@ -1,0 +1,26 @@
+PRN files since 17:33:40: 24, expected 24
+REAL1: model: 15 lines match
+SEQCTR: model: 9 lines match
+SEQWORD: model: 6 lines match
+SEQNOTGT: model: 6 lines match
+SEQKEYEQ: model: 3 lines match
+SEQKEYGE: model: 9 lines match
+SEQNOLIST: model: 0 lines match
+SEQNOLC: model: 0 lines match
+SEQOFF: model: 3 lines match
+SEQLEN100: model: 9 lines match
+SEQLEN101: model: 12 lines match
+SEQLEN250: model: 15 lines match
+SEQLEN2100: model: 44 lines match
+SEQNOASCII: model: 9 lines match
+SEQBIG: model: 15 lines match
+SEQY2KIGN: model: 6 lines match
+KEYBASIC: model: 6 lines match
+KEYDUP: model: 4 lines match
+KEYMISS: model: 0 lines match
+KEYOFF: model: 4 lines match
+KEYIMAGE: model: 4 lines match
+KEYY2K1: model: 12 lines match
+KEYY2K2: model: 4 lines match
+KEYY2KADJ: model: 4 lines match
+=== prints: all checks passed

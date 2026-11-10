@@ -1,0 +1,24 @@
+Stage Build, environment Repo-BSP, started 2026-11-10 02:10:10
+PASS CFH-COPY       program source                 ASSURFED_UTILIT_CFH_COPY_GN: new since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program ASSURFED_UTILIT_CFH_COPY_GN
+PASS BABA           program source                 ASSURFED_UTILIT_BABA_GN: new since the last build
+PASS FUSBA          program source                 ASSURFED_UTILIT_FUSBA_GN: new since the last build
+PASS CHABAN         program source                 ASSURFED_UTILIT_CHABAN_GN: new since the last build
+PASS CONDIS2        program source                 ASSURFED_UTILIT_CONDIS2_GN: new since the last build
+PASS SCAN           program source                 ASSURFED_UTILIT_SCAN_GN: new since the last build
+PASS TAPELD         program source                 ASSURFED_UTILIT_TAPELD_GN: new since the last build
+PASS LECTIS         program source                 ASSURFED_UTILIT_LECTIS_GN: new since the last build
+PASS ARCHISEPARE    program source                 ASSURFED_UTILIT_ARCHISEPARE_GN: new since the last build
+PASS ARCHIFORMAT    program source                 ASSURFED_UTILIT_ARCHIFORMAT_GN: new since the last build
+PASS SCAN group     CONDIS2-RV                     reference: new since the last build
+PASS SCAN group     CONDIS2-RD                     reference: new since the last build
+PASS SCAN group     SCAN-RA                        reference: new since the last build
+PASS SCAN group     SCAN-RB                        reference: new since the last build
+PASS SCAN group     TAPELD-RA                      reference: new since the last build
+PASS SCAN group     TAPELD-RB                      reference: new since the last build
+PASS COBOL converter (programs) 10 programs -> GNBSP3.LionSource exit 0, errors 0, warnings 4, 164 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS COBOL converter (references) 6 programs -> GNBSP3-REF-notforrelease.LionSource exit 0, errors 0, warnings 4, 231 KB
+PASS LionSource (references) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBSP3\out\GNBSP3.LionSource and E:\Repos\ssg4-work\generic\build\GNBSP3-REF-notforrelease\out\GNBSP3-REF-notforrelease.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

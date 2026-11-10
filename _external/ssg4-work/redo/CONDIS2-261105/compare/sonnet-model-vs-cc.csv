@@ -1,0 +1,7 @@
+"Case","Result","Bytes","SonnetEqCC","SonnetEqOldModel"
+"D42","OK","8442","True","True"
+"DT","OK","4320","True","True"
+"BD","OK","2424","True","True"
+"UL","OK","3030","True","True"
+"UE","OK","5092","True","True"
+"VG","OK","2330","True","True"

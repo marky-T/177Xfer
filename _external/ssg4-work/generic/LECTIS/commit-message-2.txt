@@ -1,0 +1,7 @@
+LECTIS: hand-over note that no known caller uses KEYS, Y2K or NOLIST
+
+Added a "Hand-over notes (for the test team)" section to the LECTIS spec and
+the matching sentence to the MT-056 tracker row (owner decision 261109: keep
+these branches, proven with labelled test data only).
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

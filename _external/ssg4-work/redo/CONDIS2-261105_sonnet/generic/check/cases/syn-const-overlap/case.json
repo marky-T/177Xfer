@@ -1,0 +1,8 @@
+{
+  "case": "syn-const-overlap",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 20,
+  "note": "later fields overwrite earlier ones; CONST value longer than its length is cut, shorter is space padded; field running past the output record is cut"
+}

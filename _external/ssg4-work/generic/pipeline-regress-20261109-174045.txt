@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-09 17:40:45
+PASS SSG4_LECTIS_CASES regression                     === SSG4_LECTIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_LECTIS_CASES\check.txt) | PRN files since 17:33:40: 24, expected 24 | === prints: all checks passed | === LECTIS DISPLAY lines: PASS (23 of 24 as modelled, 1 known AMT difference(s): KEYIMAGE (T3-059))
+=== Regress : all passed

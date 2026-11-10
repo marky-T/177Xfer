@@ -1,0 +1,8 @@
+{
+  "case": "syn-short-long-records",
+  "label": "TEST DATA",
+  "cards": "invented",
+  "expectedClass": "DERIVED_WORKING_MODEL",
+  "records": 7,
+  "note": "records shorter and longer than FILEIN length (UNKNOWN 3): padded with spaces / cut"
+}

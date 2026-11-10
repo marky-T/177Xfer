@@ -1,0 +1,13 @@
+SSG-4: rc.03 preparation (MT-059): release docs, known issues, BSP build; T3-062/MT-057/MT-058
+
+- New-GnReleaseDocs.ps1 (new): README, RELEASE-NOTES (programs, changes since rc.02, CC proof per job,
+  known issues), INSTALL, PROGRAM-SUMMARY, COBOL reference for a release candidate (hybrid layout)
+- release-known-issues.json (new): 13 known issues / open items; also rendered by -Stage Package
+- docs/PROGRAM-SUMMARY.md: summary source in our repo, updated to 10 programs; Update-GnProgramSummary.ps1
+  excludes testOnly utilities and counts programs without callers
+- -Stage Build uses the environment's LionApp (was hard-coded AFBUS_2200COBOL); Repo-BSP builds as BSP (GNBSP3)
+- Plan 261110-rc03-utilities-plan.md: BSP, hybrid layout (top-level Utilities\ replaces Scripts_SSG)
+- T3-062 / MT-057 (stale skeleton copies), MT-058 (R&D converter moved on; findings only), MT-059
+- Update-GnSkeletonCopy.ps1 (new); release-note counts from the catalog; LECTIS into next release (MT-056)
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

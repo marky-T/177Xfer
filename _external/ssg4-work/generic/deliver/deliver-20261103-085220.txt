@@ -1,0 +1,14 @@
+
+Program                        Generated            Check
+-------                        ---------            -----
+ASSURFED_UTILIT_CFH_COPY_GN    11/3/2026 8:28:17 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_BABA_GN        11/3/2026 8:28:17 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_FUSBA_GN       11/3/2026 8:28:19 AM ok (2 varying input(s) at 4001)
+ASSURFED_UTILIT_CHABAN_GN      11/3/2026 8:28:18 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_CONDIS2_GN     11/3/2026 8:28:18 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_SCAN_GN        11/3/2026 8:28:20 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_TAPELD_GN      11/3/2026 8:28:21 AM ok (1 varying input(s) at 4001)
+ASSURFED_UTILIT_ARCHISEPARE_GN 11/3/2026 8:28:16 AM ok (2 varying input(s) at 4001)
+ASSURFED_UTILIT_ARCHIFORMAT_GN 11/3/2026 8:28:16 AM ok (3 varying input(s) at 4001)
+
+

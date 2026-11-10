@@ -1,0 +1,274 @@
+[
+  {
+    "case": "real-AUMH01_D3_L87",
+    "label": "TEST DATA",
+    "cards": "real call AUMH01 line 87",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-AUPA02_MJ_L68",
+    "label": "TEST DATA",
+    "cards": "real call AUPA02 line 68",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-AUPA02_MJ_L95",
+    "label": "TEST DATA",
+    "cards": "real call AUPA02 line 95",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-CLOA20_L83",
+    "label": "TEST DATA",
+    "cards": "real call CLOA20 line 83",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-CLOA47_L326",
+    "label": "TEST DATA",
+    "cards": "real call CLOA47 line 326",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-INTA01_MJ_L84",
+    "label": "TEST DATA",
+    "cards": "real call INTA01 line 84",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-INTA01_MJ_L269",
+    "label": "TEST DATA",
+    "cards": "real call INTA01 line 269",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-LRSJ01_L71",
+    "label": "TEST DATA",
+    "cards": "real call LRSJ01 line 71",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-LRSJ01_L98",
+    "label": "TEST DATA",
+    "cards": "real call LRSJ01 line 98",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-LRSJ01_L124",
+    "label": "TEST DATA",
+    "cards": "real call LRSJ01 line 124",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-PAIJ01_BD_L58",
+    "label": "TEST DATA",
+    "cards": "real call PAIJ01 line 58",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-PAIJ01_UL_L85",
+    "label": "TEST DATA",
+    "cards": "real call PAIJ01 line 85",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-SINM05_L106",
+    "label": "TEST DATA",
+    "cards": "real call SINM05 line 106",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-VIRJ01_UE_L850",
+    "label": "TEST DATA",
+    "cards": "real call VIRJ01 line 850",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 120,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-VIGD03_L894",
+    "label": "TEST DATA",
+    "cards": "real call VIGD03 line 894",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-VIGD03_L1030",
+    "label": "TEST DATA",
+    "cards": "real call VIGD03 line 1030",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-VIGD13_L899",
+    "label": "TEST DATA",
+    "cards": "real call VIGD13 line 899",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "real-VIGD13_L1035",
+    "label": "TEST DATA",
+    "cards": "real call VIGD13 line 1035",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+    "records": 40,
+    "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+  },
+  {
+    "case": "syn-all-date-codes",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 80,
+    "note": "every date code D24 D42 D22A D22B D66A D66B D68 D86 (the last five are not used by real calls); two D22A fields in one record"
+  },
+  {
+    "case": "syn-case-no-otherwise",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 60,
+    "note": "two CASE groups (the second with two AND fields), no OTHERWISE: records matching none are not written (box in the report)"
+  },
+  {
+    "case": "syn-const-overlap",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 20,
+    "note": "later fields overwrite earlier ones; CONST value longer than its length is cut, shorter is space padded; field running past the output record is cut"
+  },
+  {
+    "case": "syn-quoted-spaces",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 8,
+    "note": "values with spaces (method 2 quoting), case-sensitive value compare, OTHERWISE with CONST only"
+  },
+  {
+    "case": "syn-d42-boundaries",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 20,
+    "note": "D42 range edges and non-digit years (UNKNOWN 6: ASCII collation assumed); last two records are short (UNKNOWN 3)"
+  },
+  {
+    "case": "syn-short-long-records",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 7,
+    "note": "records shorter and longer than FILEIN length (UNKNOWN 3): padded with spaces / cut"
+  },
+  {
+    "case": "odd-prelude-move",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 4,
+    "note": "MOVE/CONST before the first CASE (runs for every record), then CASE + OTHERWISE; no real call"
+  },
+  {
+    "case": "odd-otherwise-first",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "UNRESOLVED_UNISYS_SEMANTIC (T3-056: the skeleton's [*CASE] test on OTHERWISE; what 2200 does with it is not known)",
+    "records": 3,
+    "note": "OTHERWISE before any CASE; expectation = the source text as written, not a known 2200 result. OTHERWISE as first condition: as written (bare NOCASE <> 1 true) it always starts with a TAIL; the actions after it never run; no real call"
+  },
+  {
+    "case": "odd-case-after-otherwise",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "DERIVED_WORKING_MODEL",
+    "records": 3,
+    "note": "CASE after OTHERWISE: as written the OTHERWISE actions catch every record that is not the first CASE, counted in NB-REC-CASE-2; no real call"
+  },
+  {
+    "case": "abort-v1-case-without-move",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v2v3-two-otherwise",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v4-two-move",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v5-two-const",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v6-unknown-card",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v7-date-length",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  },
+  {
+    "case": "abort-v7-unknown-code",
+    "label": "TEST DATA",
+    "cards": "invented",
+    "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE",
+    "records": 0,
+    "note": "the skeleton's own card check fails: the hand-off must Abort before the Xqt; nothing is produced"
+  }
+]

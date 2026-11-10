@@ -1,0 +1,2 @@
+BADCOND PASS: abort [L3] from the hand-off=True, program not started=True, not past the Xqt=True
+log: LECABRT_141520261109174654944.log

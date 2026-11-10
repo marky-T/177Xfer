@@ -1,0 +1,6 @@
+Stage Deploy, environment CC-Trial, started 2026-11-09 17:24:23
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+PASS LECTIS         UTILIT_LECTIS_ASCII.ps1        LectisParm.inc, Invoke-LectisHandoff
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 12 utilities, 17 skeleton entries checked, problems: 0
+=== Deploy : all passed

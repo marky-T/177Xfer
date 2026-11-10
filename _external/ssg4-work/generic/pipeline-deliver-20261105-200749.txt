@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, started 2026-11-05 20:07:49
+PASS GNS            generated after                2026-11-05 18:09:41 (the build LionSource)
+PASS GNS            imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS ASSURFED_UTILIT_CONDIS2_GS rebuilt and delivered          11/5/2026 8:02:47 PM 11/5/2026 8:08:10 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNS recorded as imported       not recorded: a subset of the programs was delivered
+=== Deliver : all passed

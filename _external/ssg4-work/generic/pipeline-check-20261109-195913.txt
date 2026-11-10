@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, started 2026-11-09 19:59:13
+PASS utilities.json files and hand-off defaults    12 utilities, 17 skeleton entries checked, problems: 0
+PASS LECTIS         cross-check vs baseline        MATCH=1 of 1 calls
+=== Check : all passed

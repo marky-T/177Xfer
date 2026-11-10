@@ -1,0 +1,42 @@
+EclConverter Console running with arguments: /INPUT:E:\Repos\ssg4-work\skeleton-regen\LECTIS_ASCII\input /OUTPUT:E:\Repos\ssg4-work\skeleton-regen\LECTIS_ASCII\out-b261103
+=== ECL to Powershell conversion ===
+Conversion target: Powershell
+ECL Dialect: Os2200
+Input folder : E:\Repos\ssg4-work\skeleton-regen\LECTIS_ASCII\input
+Output folder: E:\Repos\ssg4-work\skeleton-regen\LECTIS_ASCII\out-b261103
+=== Phase 2: Parsing ECL runstreams... ===
+  Parsed 2 runstreams.
+  Built runstream index with 2 entries (2 runstreams, 0 includes).
+  Classification: 1 full runstreams, 0 partial runstreams, 1 data-only elements
+=== Phase 3: Analysing... ===
+  Runtime-created elements detected: 0 (from @ELT statements).
+=== Phase 4: Migrating and generating scripts... ===
+  Migrated: 1, Skipped (data-only): 1, Errors: 0
+=== Phase 5: Converting SSG skeletons... ===
+--Warning: @ACOB: unknown processor — emitted as CallExternalProgram
+--Warning: @ACOB: unknown processor — emitted as CallExternalProgram
+--Warning: @MAP: unknown processor — emitted as CallExternalProgram
+  SSG inline conversion: 0 succeeded, 0 failed
+  SSG external conversion: 1 succeeded, 0 stubs (source not found), 0 errors
+=== DONE ===
+
+Total input lines: 368
+Total runstreams : 2
+Total includes   : 0
+  Full runstreams      : 1
+  Partial runstreams   : 0
+  Data-only (skipped)  : 1
+--- ECL Parse Statistics ---
+  Total files     : 0
+  Total statements: 362
+  @Run         : 1
+  @Qual        : 2
+  @Ssg         : 1
+  @Xqt         : 1
+  @Fin         : 1
+  @Data        : 356
+--- ECL Migration Summary ---
+  Programs executed: 1
+  Files assigned   : 0
+  Missing items    : 0
+

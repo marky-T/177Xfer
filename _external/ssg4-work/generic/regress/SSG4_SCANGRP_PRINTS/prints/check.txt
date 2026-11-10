@@ -1,4 +1,4 @@
-PRN files since 23:54:50: 12, expected 12
+PRN files since 14:37:58: 12, expected 12
 S1: == reference (17086 bytes); model: 128 lines match
 S2: == reference (17172 bytes); model: 91 lines match
 S3: model: 9 lines match

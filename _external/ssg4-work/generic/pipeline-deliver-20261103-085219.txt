@@ -1,0 +1,21 @@
+Stage Deliver, environment CC-Trial, started 2026-11-03 08:52:19
+PASS GNBUILD        generated after                2026-11-03 04:20:29 (the build LionSource)
+PASS GNBUILD        imported since the last delivery every revision is newer
+PASS ASSURFED_UTILIT_CFH_COPY_GN pre-build checks               11/3/2026 8:28:17 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_BABA_GN pre-build checks               11/3/2026 8:28:17 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_FUSBA_GN pre-build checks               11/3/2026 8:28:19 AM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CHABAN_GN pre-build checks               11/3/2026 8:28:18 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_CONDIS2_GN pre-build checks               11/3/2026 8:28:18 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_SCAN_GN pre-build checks               11/3/2026 8:28:20 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_TAPELD_GN pre-build checks               11/3/2026 8:28:21 AM ok (1 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_ARCHISEPARE_GN pre-build checks               11/3/2026 8:28:16 AM ok (2 varying input(s) at 4001)
+PASS ASSURFED_UTILIT_ARCHIFORMAT_GN pre-build checks               11/3/2026 8:28:16 AM ok (3 varying input(s) at 4001)
+PASS GNREF          generated after                2026-10-21 23:16:51 (the build LionSource)
+PASS GNREF          imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CONDIS2_RV pre-build checks               11/3/2026 8:28:19 AM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_CONDIS2_RD pre-build checks               11/3/2026 8:28:18 AM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RA pre-build checks               11/3/2026 8:28:20 AM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RB pre-build checks               11/3/2026 8:28:21 AM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RA pre-build checks               11/3/2026 8:28:21 AM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RB pre-build checks               11/3/2026 8:28:21 AM ok (static reference: T3-040 input check skipped)
+=== Deliver : all passed

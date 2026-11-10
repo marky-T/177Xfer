@@ -1,0 +1,5 @@
+
+Skeleton             Include        Call                 ParseErrors
+--------             -------        ----                 -----------
+UTILIT_CONDIS2_ASCII CondisParm.inc Invoke-CondisHandoff           0
+

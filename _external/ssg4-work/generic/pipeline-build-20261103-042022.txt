@@ -1,0 +1,23 @@
+Stage Build, environment CC-Trial, started 2026-11-03 04:20:22
+PASS CFH-COPY       program source                 ASSURFED_UTILIT_CFH_COPY_GN: unchanged since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program ASSURFED_UTILIT_CFH_COPY_GN
+PASS BABA           program source                 ASSURFED_UTILIT_BABA_GN: unchanged since the last build
+PASS FUSBA          program source                 ASSURFED_UTILIT_FUSBA_GN: unchanged since the last build
+PASS CHABAN         program source                 ASSURFED_UTILIT_CHABAN_GN: unchanged since the last build
+PASS CONDIS2        program source                 ASSURFED_UTILIT_CONDIS2_GN: unchanged since the last build
+PASS SCAN           program source                 ASSURFED_UTILIT_SCAN_GN: unchanged since the last build
+PASS TAPELD         program source                 ASSURFED_UTILIT_TAPELD_GN: unchanged since the last build
+PASS ARCHISEPARE    program source                 ASSURFED_UTILIT_ARCHISEPARE_GN: unchanged since the last build
+PASS ARCHIFORMAT    program source                 ASSURFED_UTILIT_ARCHIFORMAT_GN: CHANGED since the last build
+PASS SCAN group     CONDIS2-RV                     reference: unchanged since the last build
+PASS SCAN group     CONDIS2-RD                     reference: unchanged since the last build
+PASS SCAN group     SCAN-RA                        reference: unchanged since the last build
+PASS SCAN group     SCAN-RB                        reference: unchanged since the last build
+PASS SCAN group     TAPELD-RA                      reference: unchanged since the last build
+PASS SCAN group     TAPELD-RB                      reference: unchanged since the last build
+PASS COBOL converter (programs) 9 programs -> GNBUILD.LionSource exit 0, errors 0, warnings 4, 140 KB
+PASS LionSource (programs) vs the last imported build     677 lines differ (import it)
+PASS COBOL converter (references) 6 programs -> GNREF.LionSource exit 0, errors 0, warnings 4, 231 KB
+PASS LionSource (references) vs the last imported build     identical (nothing new to import)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource and E:\Repos\ssg4-work\generic\build\GNREF\out\GNREF.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

@@ -1,0 +1,216 @@
+[
+  {
+    "Case": "S1",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS1-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S1\\ARS1-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS1-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S1\\ARS1-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S1\\print.txt"
+  },
+  {
+    "Case": "S2",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS2-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S2\\ARS2-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS2-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S2\\ARS2-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S2\\print.txt"
+  },
+  {
+    "Case": "S3",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS3-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S3\\ARS3-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS3-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S3\\ARS3-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S3\\print.txt"
+  },
+  {
+    "Case": "S4",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS4-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S4\\ARS4-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS4-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S4\\ARS4-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S4\\print.txt"
+  },
+  {
+    "Case": "S5",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS5-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S5\\ARS5-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS5-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S5\\ARS5-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S5\\print.txt"
+  },
+  {
+    "Case": "S6",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS6-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S6\\ARS6-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS6-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S6\\ARS6-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S6\\print.txt"
+  },
+  {
+    "Case": "S8",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS8-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S8\\ARS8-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS8-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S8\\ARS8-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S8\\print.txt"
+  },
+  {
+    "Case": "S9",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ZZ-OUT-A",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S9\\ZZ-OUT-A.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ZZ-OUT-N",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S9\\ZZ-OUT-N.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S9\\print.txt"
+  },
+  {
+    "Case": "F1",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHIFORMAT",
+    "Outputs": [
+      {
+        "Name": "ARF1-FORMAT",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F1\\ARF1-FORMAT.DAT",
+        "Mask": true
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F1\\print.txt"
+  },
+  {
+    "Case": "F2",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHIFORMAT",
+    "Outputs": [
+      {
+        "Name": "ARF2-FORMAT",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F2\\ARF2-FORMAT.DAT",
+        "Mask": true
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F2\\print.txt"
+  },
+  {
+    "Case": "F3",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHIFORMAT",
+    "Outputs": [
+      {
+        "Name": "ARF3-FORMAT",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F3\\ARF3-FORMAT.DAT",
+        "Mask": true
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F3\\print.txt"
+  },
+  {
+    "Case": "F4",
+    "Qual": "ARCHTEST",
+    "Program": "ARCHIFORMAT",
+    "Outputs": [
+      {
+        "Name": "ARF4-FORMAT",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F4\\ARF4-FORMAT.DAT",
+        "Mask": true
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\F4\\print.txt"
+  },
+  {
+    "Case": "S7",
+    "Qual": "ARCHS7",
+    "Program": "ARCHISEPARE",
+    "Outputs": [
+      {
+        "Name": "ARS7-ARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S7\\ARS7-ARCHI.DAT",
+        "Mask": true
+      },
+      {
+        "Name": "ARS7-NARCHI",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S7\\ARS7-NARCHI.DAT",
+        "Mask": false
+      }
+    ],
+    "Print": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\ARCHIVE\\expected\\S7\\print.txt"
+  }
+]

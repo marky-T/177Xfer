@@ -1,0 +1,33 @@
+CONDIS2 - Part 1, per-call route (mechanical), 2026-11-05
+===========================================================
+
+Commands (from E:\Repos\SsgTrial\Conversion\Pipeline, shared scripts, not edited):
+  .\Build-AppLionSource.ps1 -Programs CONDIS2_ASCII -CallIndex 1 -WorkDir <out>\percall
+  .\Expand-AllCalls.ps1 -Program CONDIS2_ASCII -Out <out>\percall\allcalls
+
+1. Build-AppLionSource (first call only)
+   Call used     : AUMH01_D3 line 87 (ASSURFED_F999RUN_AUMH01_D3(P).TXT), 4 card lines, 1 of 18 calls available
+   Program       : ASSURFED-UTILIT-CONDIS2-ASCII  (expansion 564 lines, <out>\percall\expanded\ASSURFED-UTILIT-CONDIS2-ASCII.cob)
+   Converter     : exit 0, errors 0, warnings 4, 39,898 bytes
+   LionSource    : <out>\percall\cobol\out\AFBUS_2200COBOL.LionSource
+   Warnings (summary: 4; all environment noise, none about the program):
+     - 4 x WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]   (LionRoutines settings file)
+     - also printed, not counted: CustomerSettingsFile not specified for OS2200 environment / no settings will be saved
+   Note: one call's cards fix one layout. The other 17 calls would need their own program (card changes = rebuild).
+
+2. Expand-AllCalls (every real call)
+   Calls (rows in sgs-calls.csv for CONDIS2_ASCII) : 18
+   Expanded with a PROCEDURE DIVISION             : 17
+   Failed                                         : 1
+     PAIJ01_UL_L85: Cannot convert value "''" to type "System.Int64" at CONDIS2_ASCII.ps1:250
+       ($L1 = [Int64](GetSgsValue "PG,$I,$J,1") - 1).
+     Cause: the cards of that call hold quoted values with spaces ( CASE 74,2,''  '' 81,5,''     '' ). AMT's AddTo-SgsList splits
+     a card at every space (T3-028), so a later sub-field of the card is empty and the integer conversion fails. The expansion
+     stops at 128 lines (before the procedure division). The 17 others: 0 errors.
+   Expand-AllCalls runs the converted skeleton WITHOUT StrictMode (mock + AMT's SGS functions only), so "17 expand" is not proof that the per-call
+     skeleton runs under AMT: Invoke-Ssg runs it under Set-StrictMode -Version 2, where the unset `$CASE` in the skeleton's OTHERWISE check throws
+     (T3-056); the 6 calls with an OTHERWISE card (PAIJ01_UL, VIRJ01_UE, 4 x VIGD03/VIGD13) would stop there in the real runtime.
+   Expansion sizes (lines): 504..2609 (VIRJ01_UE_L850 = 2609, 34 CASE cards); the 17 files are in <out>\percall\allcalls.
+
+3. Not done by this part
+   No conversion of the 17 other expansions (Build-AppLionSource converts the one call it is given); no LionDev, no CC.

@@ -1,0 +1,7 @@
+Stage Deploy, environment CC-Trial, started 2026-11-03 12:24:40
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+PASS ARCHISEPARE    UTILIT_ARCHISEPARE.ps1         ArchisepareParm.inc, Invoke-ArchisepareHandoff
+PASS ARCHIFORMAT    UTILIT_ARCHIFORMAT.ps1         ArchiformatParm.inc, Invoke-ArchiformatHandoff
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 10 utilities, 15 skeleton entries checked, problems: 0
+=== Deploy : all passed

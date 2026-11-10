@@ -1,0 +1,256 @@
+=== B1 build log
+
+LastWriteTime
+-------------
+10/23/2026 7:18:18 AM
+=== Assurfed_Utilit_Baba_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Cfh_Copy_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Chaban_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Condis2_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Fusba_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Scan_Gn: exit 0, errors 0
+=== Assurfed_Utilit_Tapeld_Gn: exit 0, errors 0
+Assurfed_Utilit_Baba_Gn.dll 23040 B 07:16:58
+Assurfed_Utilit_Cfh_Copy_Gn.dll 22016 B 07:17:33
+Assurfed_Utilit_Chaban_Gn.dll 16896 B 07:17:44
+Assurfed_Utilit_Condis2_Gn.dll 41984 B 07:17:55
+Assurfed_Utilit_Fusba_Gn.dll 26624 B 07:18:04
+Assurfed_Utilit_Scan_Gn.dll 19456 B 07:18:11
+Assurfed_Utilit_Tapeld_Gn.dll 19968 B 07:18:17
+--- place-gn.txt
+Assurfed_Utilit_Cfh_Copy_Gn    placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CFH-COPY-GN.cob
+Assurfed_Utilit_Baba_Gn        placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-BABA-GN.cob
+Assurfed_Utilit_Fusba_Gn       placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-FUSBA-GN.cob
+Assurfed_Utilit_Chaban_Gn      placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CHABAN-GN.cob
+Assurfed_Utilit_Condis2_Gn     placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-CONDIS2-GN.cob
+Assurfed_Utilit_Scan_Gn        placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-SCAN-GN.cob
+Assurfed_Utilit_Tapeld_Gn      placed; base() calls without generation date/time: 1; documentation ASSURFED-UTILIT-TAPELD-GN.cob
+Scripts\ASSURFED_UTILIT: 13 skeletons + 9 includes (22 replaced, 0 new)
+Scripts\Settings\AmtSettings.xml: CloneReports 9 entries inserted before </Amt> (AppName and UseUnicode left as they are)
+_All_.sln: solution folder Utilities + 7 project(s) inserted (fixed GUIDs from the names)
+build Assurfed_Utilit_Baba_Gn: exit 0, errors 0
+build Assurfed_Utilit_Cfh_Copy_Gn: exit 0, errors 0
+build Assurfed_Utilit_Chaban_Gn: exit 0, errors 0
+build Assurfed_Utilit_Condis2_Gn: exit 0, errors 0
+build Assurfed_Utilit_Fusba_Gn: exit 0, errors 0
+build Assurfed_Utilit_Scan_Gn: exit 0, errors 0
+build Assurfed_Utilit_Tapeld_Gn: exit 0, errors 0
+=== B3 gitignore Binaries
+
+
+
+
+--- HintPath Newtonsoft in other BSP csproj on main (sample)
+
+Count Name
+----- ----
+ 6919     <Reference Include="Newtonsoft.Json">
+ 5836       <HintPath>..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+ 1079       <HintPath>..\..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+    4       <HintPath>..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+
+
+--- PR csproj HintPath
+<Reference Include="Newtonsoft.Json">
+<HintPath>..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+<Reference Include="Newtonsoft.Json">
+<HintPath>..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+--- does the worktree file exist on disk
+False
+.gitignore:511:/BSP_AMT/Binaries	BSP_AMT/Binaries/Application/Newtonsoft.Json.dll
+=== A2 app assemblies on main
+BSP_AMT/Development/AmtAppCodeAnalysisRuleSet.ruleset
+BSP_AMT/Development/AppAssemblyInfo.cs
+BSP_AMT/Development/Application
+BSP_AMT/Development/BSP.Application.sln
+BSP_AMT/Development/BSP.Database.sln
+BSP_AMT/Development/Common
+BSP_AMT/Development/Database
+BSP_AMT/Development/Dictionary
+BSP_AMT/Development/GlobalDefinitions
+BSP_AMT/Development/Old
+BSP_AMT/Development/Programs
+BSP_AMT/Development/QueryXML_MsSql.md
+BSP_AMT/Development/QueryXML_MsSql_Open_issues.md
+BSP_AMT/Development/Reports
+BSP_AMT/Development/Server
+BSP_AMT/Development/_All_.sln
+--- PR csproj references
+<Reference Include="Newtonsoft.Json">
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Libs\Asysco.Amt.Libs.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Asysco.Amt.AmtSharedDataModel\Asysco.Amt.AmtSharedDataModel.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Runtime\Asysco.Amt.Runtime.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\serializerwrappers\Asysco.Amt.SerializerWrappers.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\AmtScreens\Common\Asysco.Amt.Screens.Common.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\ComScript\ComScript\AmtComScript.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\ComScript\AmtComScriptService\AmtComScriptService.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\FTP\Asysco.Amt.Ftp.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\Application\BSP.Application.csproj">
+</ProjectReference>
+<ProjectReference Include="..\..\Database\BSP.Database.csproj">
+</ProjectReference>
+=== E2 live CloneReports
+9/30/2026 1:02:26 AM
+9/10/2026 6:19:25 PM
+Scripts/Settings/AmtSettings.xml.sample
+=== E3 timestamps
+2026-10-05 15:47  Scripts/Libraries/AmtPsCustomerLib.psm1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
+2026-10-06 17:42  Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
+2026-09-17 00:21  AmtLion/
+2026-09-24 08:24  Lion.lic
+2026-09-10 20:25  Scripts/SSGTRIAL/
+2026-09-30 01:02  Scripts/Settings/AmtSettings.xml
+2026-09-10 18:19  Scripts/Settings/AmtSettings.xml.bak-20260922-preAFBUS2200COBOL
+--- AmtPsCustomerLib diff stat
+ Scripts/Libraries/AmtPsCustomerLib.psm1 | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+=== C3 settings used by profiles
+# Environments for the generic-program pipeline. Paths follow AMT's own set-up names:
+#   SYSROOT      = the AMT system folder (machine AMTSYSTEM; CC job files use %SYSROOT%)
+#   AppName / AppBasepath = AMTSYSAPPLICATION APPNAME / APPBASEPATH (%APPROOT%; programs are %APPROOT%\programs)
+#   Basepath     = the CC Basepaths configuration set (AMTSYSBASEPATH fields), only the fields we use
+#   ScriptFolder = our folder under the Basepath ScriptPath (CC scans subfolders)
+# %SYSROOT%, %APPROOT%, %WORKROOT% are expanded by Get-GnEnvironment (GnEnvironment.ps1).
+@{
+  Work = @{
+    WorkRoot    = 'E:\Repos\ssg4-work'
+    GenericWork = '%WORKROOT%\generic'
+    SgsCards    = '%WORKROOT%\sgs-cards'
+    # all calls expanded after the T3-045 landing (2026-10-21 17:37); allcalls\expanded-fix predates it
+    Expanded    = '%WORKROOT%\allcalls\expanded-landed2'
+    MockRoot    = 'E:\AMT_Work\MockTest'
+    MockRebuild = 'E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Binaries\Programs'
+    RebuildRoot = 'E:\AMT_Work\Rebuild177a-spike'
+    LionDevelopment = 'E:\AMT_Work\Apps177\Development'
+    PackageRoot = 'E:\AMT_Work\Delivery'
+    MockRef     = 'E:\AMT_Work\MockTest\Ref'
+  }
+  Profiles = @{
+    'CC-Trial' = @{
+      Description  = 'Our trial application in the VM''s Control Center'
+      SYSROOT      = 'E:\Repos\Federale_InternalRelease\AmtTools'
+      AppName      = 'AFBUS_2200COBOL_AMT'
+      # LionDev application the generic programs are generated in (namespace Company.<LionApp>, references <LionApp>.Application/Database)
+      LionApp      = 'AFBUS_2200COBOL'
+      AppBasepath  = 'E:\Repos\AMT\Apps\AFBUS_2200COBOL_AMT\Binaries'
+      ScriptFolder = 'SSG4'
+      Basepath     = @{
+        ScriptPath  = '%SYSROOT%\Basepaths\Scripts'
+        ExtractPath = '%SYSROOT%\Basepaths\Extracts'
+        PrintPath   = '%SYSROOT%\Basepaths\Prints'
+        LogPath     = '%SYSROOT%\Basepaths\Logs'
+      }
+    }
+    'CC-Federale' = @{
+      Description  = 'Release target: the client application (shares the default Basepaths set with CC-Trial on this VM)'
+      SYSROOT      = 'E:\Repos\Federale_InternalRelease\AmtTools'
+      AppName      = 'FEDERALE_APP'
+      # to be confirmed: FEDERALE_APP's application DLLs are AFBUS.Application/Database
+      LionApp      = 'AFBUS'
+      # AFBUS generation set's Local Source folder + \Development (separate from the trial's Apps177)
+      LionDevelopment = 'E:\AMT_Work\AppsAFBUS177\Development'
+      AppBasepath  = 'E:\Repos\Federale_InternalRelease\AFBUS_AMT\Binaries'
+      # own folder: Settings\AmtSettings.xml carries AppName, so it cannot share CC-Trial's SSG4
+      ScriptFolder = 'SSG4FED'
+      Basepath     = @{
+        ScriptPath  = '%SYSROOT%\Basepaths\Scripts'
+        ExtractPath = '%SYSROOT%\Basepaths\Extracts'
+        PrintPath   = '%SYSROOT%\Basepaths\Prints'
+        LogPath     = '%SYSROOT%\Basepaths\Logs'
+      }
+    }
+    'Repo-BSP' = @{
+      Description  = 'Federale_InternalRelease main since 2026-10-20: the application is BSP (BSP_AMT, Federale.BSP.BusinessLogic); no runtime of it on this VM'
+      SYSROOT      = 'E:\Repos\Federale_InternalRelease\AmtTools'
+      AppName      = 'FEDERALE_APP'
+      LionApp      = 'BSP'
+      LionDevelopment = 'E:\AMT_Work\AppsBSP177\Development'
+      AppBasepath  = 'E:\Repos\Federale_InternalRelease-wt-ssg4\BSP_AMT\Binaries'
+      ScriptFolder = 'SSG4BSP'
+      Basepath     = @{
+        ScriptPath  = '%SYSROOT%\Basepaths\Scripts'
+        ExtractPath = '%SYSROOT%\Basepaths\Extracts'
+        PrintPath   = '%SYSROOT%\Basepaths\Prints'
+        LogPath     = '%SYSROOT%\Basepaths\Logs'
+      }
+    }
+    'Mock' = @{
+      Description  = 'Mock system (AMT_MOCKSYS, mock file controller on 18132); never Federale''s AmtTools'
+      SYSROOT      = 'E:\AMT_Work\MockSystem'
+      AppName      = 'AFBUS_2200COBOL'
+      LionApp      = 'AFBUS_2200COBOL'
+      AppBasepath  = 'E:\AMT_Work\Rebuild177a\AFBUS_2200COBOL\Binaries'
+      ScriptFolder = 'SSG4'
+      Basepath     = @{
+        ScriptPath  = 'E:\AMT_Work\MockTest\Scripts'
+        ExtractPath = 'E:\AMT_Work\MockTest\Extracts'
+        PrintPath   = 'E:\AMT_Work\MockTest\Prints'
+        LogPath     = 'E:\AMT_Work\MockTest\Logs'
+      }
+    }
+  }
+}
+=== F1/G2/F3 RC files
+
+Name              Length LastWriteTime
+----              ------ -------------
+Binaries                 10/22/2026 4:34:29 PM
+Reference                10/22/2026 4:34:29 PM
+Scripts                  10/22/2026 4:34:29 PM
+Sources                  10/22/2026 4:34:29 PM
+CloneReports.xml  652    10/22/2026 4:34:19 PM
+INSTALL.txt       2649   10/22/2026 4:34:26 PM
+MAINTENANCE.txt   2012   10/22/2026 4:34:26 PM
+manifest.csv      20734  10/22/2026 4:34:28 PM
+RELEASE-NOTES.txt 2660   10/22/2026 4:34:26 PM
+
+
+RN 4: Programs (revision in LionDev 177, built from the imported LionSources, rebuilt for the 177a runtime):
+RN 5:   ASSURFED_UTILIT_CFH_COPY_GN  rev 1.0.0.0
+RN 6:   ASSURFED_UTILIT_BABA_GN  rev 1.0.0.0
+RN 7:   ASSURFED_UTILIT_FUSBA_GN  rev 1.0.0.0
+RN 8:   ASSURFED_UTILIT_CHABAN_GN  rev 1.0.0.0
+RN 9:   ASSURFED_UTILIT_CONDIS2_GN  rev 1.0.0.0
+RN 10:   ASSURFED_UTILIT_SCAN_GN  rev 1.0.0.0
+RN 11:   ASSURFED_UTILIT_TAPELD_GN  rev 1.0.0.0
+RN 13: LionSource imported into LionDev 177 (what the programs were generated from, LionDev application AFBUS):
+RN 18:   The other 6 programs are the same COBOL (GNFED == GNBUILD apart from the application name), generated for AFBUS and not run under FEDERALE_APP; their CC proof is the CC-Trial regression below
+MT 2: - A call's cards: read at run time from the parameter file the hand-off writes. Changing a call means changing its runstream cards; nothing is rebuilt.
+MT 6:   DLLs were built from, for the 177a runtime; the one change to the generated code is marked REBUILT-FOR-177A (generation date and time dropped
+
+
+
+
+
+
+
+
+=== F4 delivered-versions
+

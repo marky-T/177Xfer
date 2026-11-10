@@ -1,0 +1,50 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. 'T3059-READREC'.
+      * T3-059 repro: reads a line-sequential file record by record and
+      * writes, per record, its number, its length and its first 60 bytes.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT FI1 ASSIGN TO DISC RDIN.
+           SELECT FO1 ASSIGN TO DISC RDOUT.
+       DATA DIVISION.
+       FILE SECTION.
+       FD  FI1
+           LABEL RECORD STANDARD
+           RECORD VARYING IN SIZE FROM 1 TO 4001
+           DEPENDING ON WS-LEN.
+       01  FI1-REC              PIC X(4001).
+       FD  FO1
+           LABEL RECORD STANDARD.
+       01  FO1-REC              PIC X(80).
+       WORKING-STORAGE SECTION.
+       77  WS-LEN               PIC 9(5) COMP VALUE 0.
+       77  WS-CP                PIC 9(5) COMP VALUE 0.
+       77  WS-CNT               PIC 9(6) VALUE 0.
+       01  WS-OUT.
+           03 WS-O-CNT          PIC 9(6).
+           03 FILLER            PIC X VALUE SPACE.
+           03 WS-O-LEN          PIC 9(5).
+           03 FILLER            PIC X VALUE SPACE.
+           03 WS-O-TXT          PIC X(60).
+       PROCEDURE DIVISION.
+       DEBUT.
+           OPEN INPUT FI1.
+           OPEN OUTPUT FO1.
+       LIRE.
+           READ FI1 AT END GO TO FIN.
+           ADD 1 TO WS-CNT.
+           MOVE WS-CNT TO WS-O-CNT.
+           MOVE WS-LEN TO WS-O-LEN.
+           MOVE SPACES TO WS-O-TXT.
+           MOVE WS-LEN TO WS-CP.
+           IF WS-CP > 60
+              MOVE 60 TO WS-CP.
+           IF WS-CP > 0
+              MOVE FI1-REC (1:WS-CP) TO WS-O-TXT (1:WS-CP).
+           WRITE FO1-REC FROM WS-OUT.
+           GO TO LIRE.
+       FIN.
+           DISPLAY 'RECORDS READ = ' WS-CNT UPON PRINTER.
+           CLOSE FI1 FO1.
+           STOP RUN.

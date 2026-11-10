@@ -1,0 +1,8 @@
+SSG-4: T3-059 reader rule derived (29-case mock probe) and confirmed in CC; MT-055 R&D ticket logged
+
+- T3-059: AMT line-sequential reader takes L bytes as one record while all records so far have length L
+  (CR LF inside kept); 29/29 mock cases + 4/4 CC predictions exact; also explains T3-040
+- CONDIS2S: three T3-059 probe cases (t3059-*), labelled test data
+- MT-033 R&D item; MT-055 R&D ticket as its own job
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

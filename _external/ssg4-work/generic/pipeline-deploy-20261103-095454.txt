@@ -1,0 +1,7 @@
+Stage Deploy, environment CC-Trial, started 2026-11-03 09:54:54
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+FAIL ARCHISEPARE    UTILIT_ARCHISEPARE.ps1         Access to the path 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT\ArchisepareParm.inc' is denied.
+FAIL ARCHIFORMAT    UTILIT_ARCHIFORMAT.ps1         Access to the path 'E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT\ArchiformatParm.inc' is denied.
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 10 utilities, 15 skeleton entries checked, problems: 0
+=== Deploy : 2 failure(s)

@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, started 2026-11-05 20:06:03
+PASS GNS            generated after                2026-11-05 18:09:41 (the build LionSource)
+PASS GNS            imported since the last delivery no earlier delivery recorded: revisions not checked
+FAIL ASSURFED_UTILIT_CONDIS2_GS rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL Deliver-GnPrograms run (GNS)                      Access to the path 'E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Development\Application\AFBUS_2200COBOL.Application.csproj' is denied.
+=== Deliver : 2 failure(s)

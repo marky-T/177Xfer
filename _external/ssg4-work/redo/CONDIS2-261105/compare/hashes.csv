@@ -1,0 +1,7 @@
+"Item","New","Rc02","Same"
+"per-call expansion (AUMH01)","CAF7B97F5B11","A55F8D4D5095","False"
+"per-call LionSource","3327E665FCAD","0D0D041BA7EE","False"
+"GN cobol vs rc.02","491233E59039","491233E59039","True"
+"GN cobol vs repo gen","491233E59039","491233E59039","True"
+"CondisParm.ps1 vs rc.02 .inc","141152C226FE","141152C226FE","True"
+"GnHandoff.ps1 vs rc.02 .inc","4543DA160519","4543DA160519","True"

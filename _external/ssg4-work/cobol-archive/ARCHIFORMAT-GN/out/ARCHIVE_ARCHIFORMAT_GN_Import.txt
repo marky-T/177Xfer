@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol-archive\\ARCHIFORMAT-GN\\out\\ARCHIVE_ARCHIFORMAT_GN.LionSource
+APPNAME = ARCHIVEARCHIFORMATGN
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,10 @@
+SSG-4: archive utilities (CC-proven), generic-utility guidance set, CONDIS2 validation
+
+- Archive utilities ARCHISEPARE/ARCHIFORMAT: specs, models, _GN COBOL, hand-offs, CC tests (MT-050); regress 15/15
+- SsgConverter T3-048 fix + regenerated goldens; Invoke-CobolConversion -Cobol85
+- Guidance set: ssg-generic-utility instructions, prompt, skill + templates; Area E; review/tracker prompts; skill wrappers
+- Runbook tabs 5 (AMT execution) and 6 (migration tools, guidance, validation)
+- CONDIS2 blind reconversion (MT-053): CC re-run 261105 6/6 byte-identical; T3-056, T3-057 logged
+- .gitignore: ARCHIVE ecl/ and sql-out/ scratch, converter run logs
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

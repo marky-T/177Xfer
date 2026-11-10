@@ -1,0 +1,8 @@
+{
+  "case": "real-SINM05_L106",
+  "label": "TEST DATA",
+  "cards": "real call SINM05 line 106",
+  "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+  "records": 40,
+  "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+}

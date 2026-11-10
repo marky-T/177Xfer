@@ -1,0 +1,315 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from any COBOL environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='N'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default  
+-->
+<ROUTINES>
+
+<OBJECT name='AMT_ALPHANUM' description='Convert alpha into integer value'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i-sign : integer
+  i-len : integer
+  a-first : alpha 1
+  a-last : alpha 1
+booleans
+
+end_definitions
+
+routine main (s_in : string) : integer
+begin_routine
+  s_in := trim(s_in)
+  result := s_in
+  if numeric(s_in) then exit
+
+  i-sign := 1
+  i-len := length(s_in)
+  a-first := copy(s_in, 1, 1)
+  a-last := copy(s_in, i-len, 1)
+  if a-first = '+'
+    s_in := copy(s_in, 2)
+  elseif a-last = '+'
+   s_in := copy(s_in, 1, i-len - 1)
+  elseif a-first = '-'
+    s_in := copy(s_in, 2)
+    i-sign := -1
+  elseif a-last = '-'
+   s_in := copy(s_in, 1, i-len - 1)
+    i-sign := -1
+  else
+    exit //result = 0
+  endif
+  result := s_in
+  result := result * i-sign
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_REM_EMPTY_DIRS' description='Removes empty directories'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+    fc           : filecontrol
+    i            : integer
+    i_start      : integer
+    i_end        : integer
+    i_slash_cnt  : integer value 0
+    i_slash_cnt2 : integer value 0
+booleans
+
+end_definitions
+
+routine main (s_dir : string)
+begin_routine
+    exit
+    if copy(lion.var-param.file-path,1,2) = '\\'  // UNC path
+        i_start := 3
+    else
+        i_start := 4    // <driveletter>:\
+    endif
+    // find the number of directories in the filepath, packid included
+    loop for i := i_start to length(lion.var-param.file-path)
+        if copy(lion.var-param.file-path, i, 1) = '\'
+            i_slash_cnt += 1
+        endif
+    endloop
+
+    if copy(s_dir,1,2) = '\\'
+        i_start := 3
+    else
+        i_start := 4
+    endif
+    // deleting of directories only allowed till pack directory
+    loop for i_end := i_start to length(s_dir)
+        if copy(s_dir, i_end, 1) = '\'
+            i_slash_cnt2 += 1
+            if i_slash_cnt2 >= i_slash_cnt then bk
+        endif
+    endloop
+
+
+    loop for i := length(s_dir) downto i_end +  1
+        if copy(s_dir,i,1) = '\'
+            if not checkremoveempty(copy(s_dir,1,i - 1)) then bk
+        endif
+    endloop
+end_routine
+
+routine checkremoveempty(dir : string) : boolean
+begin_routine
+    if fc.findfiles (dir & '\*.*') = '' and fc.finddir (dir & '\*.*') = ''
+        fc.removedir (dir)
+        result := True
+    else
+        result := False
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_BOOLTOINT' description='Convert Boolean into integer value'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+routine main (b_in : boolean, i_true : integer optional, i_false : integer optional) : integer
+begin_routine
+  if (i_true = i_false) //if no values have been specified, take default values
+    i_true := 1
+    i_false := 0
+  endif
+  if b_in
+    result := i_true
+  else
+    result := i_false
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_JOBSUMMARY' description='Pass messages to job summary file'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  s_filename  : string
+  s_timedate  : string
+  i_index     : integer
+  b_saveresok : boolean
+  //  crlf  : string value '@@0D@@0A@@'
+booleans
+
+end_definitions
+
+routine main (s_msg : string, b_ODT : boolean, b_only_jobsummary : boolean optional)
+begin_routine
+  b_saveresok := resok
+  if not b_only_jobsummary
+    if getlastresult <> '' and getlastresult <> '*****'
+      if b_ODT
+        sme('GETLASTRESULT: ' & getlastresult,,'ODT')
+      else
+        sme('GETLASTRESULT: ' & getlastresult)
+      endif
+    endif
+    if b_ODT
+      sme(s_msg,,'ODT')
+    else
+      sme(s_msg)
+    endif
+  endif
+  if amt_joblogfile <> ''
+    i_index      := 1
+    s_filename := unstring(amt_joblogfile,i_index,';')
+    s_timedate := copy(amt_joblogfile,i_index)
+    if uppercase(s_timedate) = 'NO'
+      s_msg :=  ' ' & s_msg
+    else
+      s_msg := copy(today.hhmmssnn,1,2) & ':' & copy(today.hhmmssnn,3,2) & ':' & copy(today.hhmmssnn,5,2) & ' ' & s_msg
+    endif
+    if getlastresult <> '' and getlastresult <> '*****'
+      amt_fco.writefile (s_filename , length(getlastresult), getlastresult , true)
+    endif
+    amt_fco.writefile (s_filename , length(s_msg), s_msg , true)
+  endif
+  resok := b_saveresok
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_TRANSFORM' description='Alter string characters according to a transformation rule'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_loop : integer
+  i_from : integer
+  i_to   : integer
+  a_from : alpha 1
+  a_to   : alpha 1
+booleans
+
+end_definitions
+
+routine main (s_item : realstring, s_from, s_to : string) : realstring
+begin_routine
+  result := s_item
+  i_from := length(s_from)
+  i_to := length(s_to)
+  if i_to = 1 then a_to := s_to
+  loop for i_loop := 1 to i_from
+    a_from := copy(s_from, i_loop, 1)
+    if i_to > 1 then a_to := copy(s_to, i_loop, 1)
+    inspect (result)
+      replacing (all, a_from, a_to)
+    endinspect
+  endloop
+end_routine
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_UNSTRINGFIXED' description='Unstring with length argument instead of delimiter'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+end_definitions
+
+
+routine main (s_input : realstring, var i_pos : integer, const i_len : integer, b_signed : boolean optional) : realstring
+var numerictest : string
+begin_routine
+    amt_string := copy (s_input, i_pos, i_len)
+    if not b_signed
+        result := amt_string
+    else
+        numerictest := trim(copy (amt_string, 1, length(amt_string) - 1))
+        inspect (numerictest)
+            replacing (all, ',', '0')
+        endinspect
+        if numeric(numerictest)
+            result := signed_to_string(amt_string)
+        else
+            result := amt_string
+        endif
+    endif
+    i_pos += i_len
+end_routine
+
+
+routine signed_to_string (varin: string) : string
+var
+    space_counter  : integer
+    last_char      : alpha 1
+    last_char_sign : signed 1 redefines last_char
+    last_char_num  : numeric 1
+begin_routine
+    last_char     := copy(varin, length(varin), 1)
+    last_char_num := last_char_sign
+    if numeric(last_char)
+        result := varin
+    else
+        amt_string := copy(varin, 1, length(varin) - 1) & last_char_num
+        if last_char in ['}','!','J'..'R']
+            //POS_NEG_SIGN := '-'
+            inspect (amt_string)
+                counting (space_counter, leading, ' ')
+            endinspect
+            replace(amt_string, space_counter, '-')
+            result := amt_string
+        elseif last_char in ['{','?','A'..'I']
+            // NO SIGN NEEDED FOR POSITIVE
+            // POS_NEG_SIGN := '+'
+            result := amt_string
+        else
+            // NO CONVERSION NEEDED (FOR EXAMPLE, THE LAST CHARACTER IS A SPACE)
+            result := varin
+        endif
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+</ROUTINES>

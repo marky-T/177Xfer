@@ -1,0 +1,8 @@
+{
+  "case": "real-PAIJ01_BD_L58",
+  "label": "TEST DATA",
+  "cards": "real call PAIJ01 line 58",
+  "expectedClass": "OBSERVED_IN_FEDERALE_SOURCE (cards); records are test data",
+  "records": 40,
+  "note": "cards of a real call, synthetic records with injected date values and CASE hits"
+}

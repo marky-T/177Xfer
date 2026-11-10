@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol-archive\\S6\\out\\ARCHIVE_S6.LionSource
+APPNAME = ARCHIVES6
+GENSET = Default from new application
+SYSOPT = FALSE

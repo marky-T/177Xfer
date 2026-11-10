@@ -1,0 +1,281 @@
+    
+    
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. LECTIS.  
+       AUTHOR. BOURDEAUD HUY P. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.  
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.  
+       SPECIAL-NAMES.   
+           DECIMAL-POINT IS COMMA   
+               PAGE IS SAUT.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT LECTST  ASSIGN TO DISC LECTST   
+               ACCESS MODE IS DYNAMIC   
+                    RECORD KEY IS SYMK  
+                    ORGANIZATION INDEXED.   
+           SELECT IMP ASSIGN TO PRINTER.
+           SELECT CARTE ASSIGN TO CARD-READER.  
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  LECTST
+           LABEL RECORD STANDARD
+           BLOCK CONTAINS 10 RECORDS 
+           RECORD CONTAINS 80 CHARACTERS 
+           DATA RECORD IS ZFIC ZFICH1.  
+       01  ZFIC               PIC X(80). 
+       01  ZFICH1.  
+           02 SYMK   PIC X(12).   
+           02 FILLER PIC X(68).   
+       FD  IMP  
+           LABEL RECORD OMITTED 
+           LINAGE IS 63 
+           AT TOP 6 
+           AT BOTTOM 3  
+           DATA RECORD ZPRINT.  
+       01  ZPRINT             PIC X(100).   
+       FD  CARTE
+           LABEL RECORD OMITTED 
+           DATA RECORD IS ZL1.  
+       01  ZL1. 
+           02 ZL11 PIC X(16).
+       WORKING-STORAGE SECTION. 
+       77  SW-AVANT    PIC 99 VALUE 2.   
+       77  INDEXI      PIC 99.  
+       77  INDEXO      PIC 99.  
+       01  TAB-INPUT.   
+           03  TAB-I OCCURS 80 TIMES PIC X.   
+       01  TAB-OUTPUT.  
+           03  TAB-O OCCURS 78 TIMES PIC X.   
+       01  WREC.
+           02 FILLER  PIC X(80). 
+       01  TIT. 
+           03  FILLER      PIC X(5) VALUE '***  '.  
+           03  FILLER        PIC X(14) VALUE 'RECORD NUMERO '.  
+           03  FILCO     PIC Z.ZZZ.ZZZ. 
+           03  FILLER      PIC X(5) VALUE '  ***'.  
+       01  ZPR  USAGE DISPLAY-1  VALUE ALL SPACES.  
+           03  ZP1            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP2            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP3            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP4            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP5            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP6            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP7            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP8            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP9            PIC X(100) USAGE DISPLAY-1.   
+           03  ZP10           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP11           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP12           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP13           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP14           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP15           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP16           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP17           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP18           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP19           PIC X(100) USAGE DISPLAY-1.   
+           03  ZP20           PIC X(100) USAGE DISPLAY-1.   
+       01  CTRLI PIC 9(4) VALUE ZEROES. 
+       01  CTR                PIC S9(7) VALUE 0.
+       01  SWI                PIC S9 VALUE 0.   
+       PROCEDURE DIVISION.  
+       OUVERT.  
+           OPEN OUTPUT IMP. 
+           WRITE ZPRINT FROM ZP1 BEFORE PAGE.   
+           OPEN INPUT LECTST.
+           OPEN INPUT CARTE.
+       LOOP.
+           READ CARTE AT END GO TO FIN. 
+           PERFORM FORMAT-CLE THRU FORMAT-CLE-EXIT  
+           MOVE TAB-OUTPUT TO SYMK  
+      *    display 'symk       = ' symk   upon printer  
+           READ LECTST INTO WREC INVALID KEY ADD 1 TO CTR SWI.   
+           IF SWI NOT = 1 MOVE WREC TO ZPR PERFORM IMPRES THRU FIIMPRES.
+           MOVE 0 TO SWI.   
+           GO TO LOOP.  
+       FIN. 
+           MOVE SPACES TO ZPRINT.   
+           WRITE ZPRINT BEFORE SAUT.
+           DISPLAY '** FIN DU TRAVAIL **' UPON PRINTER. 
+           DISPLAY 'NOMBRE D INVALID KEY **' CTR UPON PRINTER.  
+           CLOSE LECTST IMP. 
+           CLOSE CARTE. 
+           STOP RUN.
+       IMPRES.  
+           WRITE ZPRINT FROM ZP1 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP2 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP3 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP4 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP5 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP6 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP7 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP8 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP9 BEFORE 1.  
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP10 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP11 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP12 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP13 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP14 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP15 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP16 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP17 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP18 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP19 BEFORE 1. 
+           ADD 100 TO CTRLI.
+           IF 80 = CTRLI GO TO RAZ.  
+           IF 80 < CTRLI GO TO RAZ.  
+           WRITE ZPRINT FROM ZP20 BEFORE 1. 
+       RAZ. 
+           MOVE  SPACES TO ZP1 ZP2 ZP3 ZP4 ZP5 ZP6 ZP7 ZP8 ZP9. 
+           MOVE  SPACES TO ZP10 ZP11 ZP12 ZP13 ZP14 ZP15 ZP16 ZP17. 
+           MOVE  SPACES TO ZP18 ZP19 ZP20.  
+             MOVE ZEROES TO CTRLI.  
+           MOVE ALL '*' TO ZPRINT.  
+           WRITE ZPRINT BEFORE 1.   
+       FIIMPRES.
+           EXIT.
+      * 
+      *   formattage cl{ si Y2K 
+      * 
+       FORMAT-CLE.  
+           MOVE SPACES   TO TAB-OUTPUT. 
+           MOVE ZL1      TO TAB-INPUT.  
+           MOVE 1        TO INDEXI INDEXO.  
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT SW-AVANT TIMES.
+           IF TAB-I (INDEXI) NOT = '2'  
+              ADD 2 TO INDEXI   
+              PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 2 TIMES 
+           ELSE 
+              ADD 1 TO INDEXI   
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '0'  
+                  MOVE ';' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '1'  
+                  MOVE '_' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '2'  
+                  MOVE '|' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '3'  
+                  MOVE '~' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.
+           IF TAB-I (INDEXI) NOT = '2'  
+              ADD 2 TO INDEXI   
+              PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 2 TIMES 
+           ELSE 
+              ADD 1 TO INDEXI   
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '0'  
+                  MOVE ';' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '1'  
+                  MOVE '_' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '2'  
+                  MOVE '|' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT 
+              ELSE  
+              IF  TAB-I (INDEXI)     = '0' AND  
+                  TAB-I (INDEXI + 1) = '3'  
+                  MOVE '~' TO TAB-O (INDEXO)
+                  ADD  2   TO INDEXI
+                  ADD  1   TO INDEXO
+                  PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+           PERFORM MOVE-CHAR THRU MOVE-CHAR-EXIT.   
+       FORMAT-CLE-EXIT. 
+           EXIT.
+       MOVE-CHAR.   
+           MOVE TAB-I (INDEXI) TO TAB-O (INDEXO).   
+           ADD  1 TO INDEXI.
+           ADD  1 TO INDEXO.
+       MOVE-CHAR-EXIT.  
+           EXIT.

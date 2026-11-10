@@ -1,0 +1,17 @@
+Stage Regress, environment CC-Trial, started 2026-11-05 20:36:24
+FAIL SSG4_AFPH12_CFH_COPY regression                     PASS 2026-11-03 14:29:28 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_VIRM01_CFH_COPY regression                     PASS 2026-11-03 14:30:58 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_NEWNAME_CFH_COPY regression                     PASS 2026-11-03 14:31:45 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_VIRM01UL_CFH_COPY regression                     PASS 2026-11-03 14:32:40 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_VIRJ01PP_CFH_COPY regression                     PASS 2026-11-03 14:33:56 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_BABA_CASES regression                     PASS 2026-11-03 14:34:53 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_CHABAN_CASES regression                     PASS 2026-11-03 14:59:42 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_FUSBA_CASES regression                     PASS 2026-11-03 14:59:44 is older than the last delivery (2026-11-05 20:08:11): run again
+PASS SSG4_CONDIS_CASES regression                     PASS 2026-11-05 20:33:06: --- 6 of 6 outputs byte-identical | === SSG4_CONDIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_CONDIS_CASES\check.txt)
+FAIL SSG4_SCANGRP_PRINTS regression                     PASS 2026-11-03 14:38:58 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_LOADIS_CASES regression                     PASS 2026-11-03 14:40:02 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_LOADIS_ALL regression                     PASS 2026-11-03 14:41:31 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_LOADIS_ABORT [UNSORTED] regression                     PASS 2026-11-03 14:59:43 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_LOADIS_ABORT [DUPLICATE] regression                     PASS 2026-11-03 14:45:30 is older than the last delivery (2026-11-05 20:08:11): run again
+FAIL SSG4_ARCHIVE_CASES regression                     PASS 2026-11-03 13:01:58 is older than the last delivery (2026-11-05 20:08:11): run again
+=== Regress : 14 failure(s)

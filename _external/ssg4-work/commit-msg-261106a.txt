@@ -1,0 +1,7 @@
+Remove stray probe files committed by mistake (Trial3/8/calib-cc)
+
+Created on 261105 20:48 by a failed T3-059 probe run (pwsh -File mis-bound the arguments, so the work folder
+became the relative path "8" under Trial3). Probe data only (10-byte input, parameter file); no client data.
+The real probe output is in E:\Repos\ssg4-work\probe-t3059.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

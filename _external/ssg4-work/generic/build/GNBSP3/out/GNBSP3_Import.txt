@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\generic\\build\\GNBSP3\\out\\GNBSP3.LionSource
+APPNAME = BSP
+GENSET = Default from new application
+SYSOPT = FALSE

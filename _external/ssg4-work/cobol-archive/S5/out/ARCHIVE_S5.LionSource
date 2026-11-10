@@ -1,0 +1,481 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=ARCHIVES5,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHISEPARE-S5,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=ARCHIVES5,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=ARCHIVES5
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-11-03 04:11
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=ASSURFED-UTILIT-ARCHISEPARE-S5,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=ASSURFED-UTILIT-ARCHISEPARE-S5
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>***                  -- ARCHISEPARE --                         ***
+  2009-01-01 12:00  =>***            Separe les enregistrements a archiver           ***
+  2009-01-01 12:00  =>***                   et a ne pas archiver                     ***
+  2009-01-01 12:00  =>***                        == UCS ==                           ***
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>* Type     :                                                     *
+  2009-01-01 12:00  =>* Analyste :                                 (INITIALES)         *
+  2009-01-01 12:00  =>* Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  2009-01-01 12:00  =>* Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+  2009-01-01 12:00  =>* Release  :                                 (99)                *
+  2009-01-01 12:00  =>* Version  :                                 (999)               *
+  2009-01-01 12:00  =>*----------------------------------------------------------------*
+  2009-01-01 12:00  =>* Modifications :                                                *
+  2009-01-01 12:00  =>* Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>* _____  __/__/____  _________________________________  ______/__*
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>*                       DESCRIPTION                              *
+  2009-01-01 12:00  =>*                       ===========                              *
+  2009-01-01 12:00  =>*                                                                *
+  2009-01-01 12:00  =>*    INPUT : chercheuse : numero de sinistres a archiver         *
+  2009-01-01 12:00  =>*    INPUT : ficunload : unload de la table a archiver           *
+  2009-01-01 12:00  =>*    OUTPUT: ficarchi : enregistrements a archiver               *
+  2009-01-01 12:00  =>*    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+  2009-01-01 12:00  =>***------------------------------------------------------------***
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Identification division.
+  2009-01-01 12:00  =>*========================*
+  2009-01-01 12:00  => PROGRAM-ID. 'ASSURFED-UTILIT-ARCHISEPARE-S5'.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Environment division.
+  2009-01-01 12:00  =>*====================*
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Configuration section.
+  2009-01-01 12:00  =>*----------------------*
+  2009-01-01 12:00  => source-computer.  unisys-2200.
+  2009-01-01 12:00  => object-computer.  unisys-2200 MEMORY 3 MODULES.
+  2009-01-01 12:00  => special-names.
+  2009-01-01 12:00  =>     printer       printer
+  2009-01-01 12:00  =>     decimal-point comma.
+  2009-01-01 12:00  => Input-output section.
+  2009-01-01 12:00  =>*---------------------*
+  2009-01-01 12:00  => file-control.
+  2009-01-01 12:00  =>     select chercheuse assign to disc     ARS5-CHERCH.
+  2009-01-01 12:00  =>     select ficunload assign to disc      ARS5-UNLOAD.
+  2009-01-01 12:00  =>     select ficarchi assign to disc       ARS5-ARCHI.
+  2009-01-01 12:00  =>     select ficnarchi assign to disc      ARS5-NARCHI.
+  2009-01-01 12:00  => i-o-control.
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Data division.
+  2009-01-01 12:00  =>*==============*
+  2009-01-01 12:00  => File section.
+  2009-01-01 12:00  =>*-------------*
+  2009-01-01 12:00  =>* Fichier chercheuse
+  2009-01-01 12:00  => FD  chercheuse.
+  2009-01-01 12:00  =>  1  cle-chercheuse        pic 9(5).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>*Unload de la table a archiver
+  2009-01-01 12:00  => FD  ficunload.
+  2009-01-01 12:00  =>  1  ligne-unload.
+  2009-01-01 12:00  =>     3 filler              pic x(1).
+  2009-01-01 12:00  =>     3 cle-unload          pic 9(5).
+  2009-01-01 12:00  =>     3 filler              pic x(16).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier enregistrements a archiver
+  2009-01-01 12:00  => FD  ficarchi.
+  2009-01-01 12:00  =>  1  ligne-archi           pic x(54).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>* Fichier enregistrement a ne pas archiver
+  2009-01-01 12:00  => FD  ficnarchi.
+  2009-01-01 12:00  =>  1  ligne-narchi          pic x(22).
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => Working-storage section.
+  2009-01-01 12:00  =>*------------------------*
+  2009-01-01 12:00  =>   1 ligne-type4.
+  2009-01-01 12:00  =>     3 cd-don                    pic x value "4".
+  2009-01-01 12:00  =>     3 cd-ach                    pic x.
+  2009-01-01 12:00  =>     3 tl-cle                    pic 9(5).
+  2009-01-01 12:00  =>     3 tl-don                    pic x(22).
+  2009-01-01 12:00  =>   1 ligne-type9.
+  2009-01-01 12:00  =>     3 cd-don9                   pic x value "9".
+  2009-01-01 12:00  =>     3 nm-bas9                   pic x(6).
+  2009-01-01 12:00  =>     3 nm-tab9                   pic x(30).
+  2009-01-01 12:00  =>     3 dt-ach9                   pic x(8).
+  2009-01-01 12:00  =>     3 cptach1                   pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>     3 cptach2                   pic s9(11) sign leading separate.
+  2009-01-01 12:00  =>   1 lecrchf                     pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-lecrch               value 1.
+  2009-01-01 12:00  =>   1 lecunloadf                  pic 9 value 0.
+  2009-01-01 12:00  =>     88 fin-lecunload            value 1.
+  2009-01-01 12:00  =>*---------------- Pour le rapport ---------------------
+  2009-01-01 12:00  =>  77 cptlu                       pic 9(7).
+  2009-01-01 12:00  =>  77 cptarchi                    pic 9(7).
+  2009-01-01 12:00  =>  77 cptnarchi                   pic 9(7).
+  2009-01-01 12:00  =>  77 cptluf                      pic z(6)9.
+  2009-01-01 12:00  =>  77 cptarchif                   pic z(6)9.
+  2009-01-01 12:00  =>  77 cptnarchif                  pic z(6)9.
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>*------------------ POUR LA DATE ---------------------
+  2009-01-01 12:00  =>   1 date-i.
+  2009-01-01 12:00  =>     3 annee-i                   pic 9(4).
+  2009-01-01 12:00  =>     3 mois-i                    pic 99.
+  2009-01-01 12:00  =>     3 jour-i                    pic 99.
+  2009-01-01 12:00  =>   1 date-fr.
+  2009-01-01 12:00  =>     3 jour-fr                   pic 99.
+  2009-01-01 12:00  =>     3     pic x value '/'.
+  2009-01-01 12:00  =>     3 mois-fr                   pic 99.
+  2009-01-01 12:00  =>     3     pic x value '/'.
+  2009-01-01 12:00  =>     3 annee-fr                  pic 9(4).
+  2009-01-01 12:00  =>*------------------------------------------------------
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  =>
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  =>*-------------------
+  2009-01-01 12:00  =>   000-main.
+  2009-01-01 12:00  =>     open input chercheuse ficunload
+  2009-01-01 12:00  =>          output ficarchi ficnarchi
+  2009-01-01 12:00  =>     perform 100-lec-chercheuse thru 100-exit
+  2009-01-01 12:00  =>     perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>     perform 102-separe thru 102-exit
+  2009-01-01 12:00  =>     perform 103-date thru 103-exit
+  2009-01-01 12:00  =>     perform 104-rapport thru 104-exit
+  2009-01-01 12:00  =>     close chercheuse ficunload
+  2009-01-01 12:00  =>           ficarchi ficnarchi
+  2009-01-01 12:00  =>     stop run
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>*---------- LECTURE DU NUMERO DE CHERCHEUSE -------------------
+  2009-01-01 12:00  =>  100-lec-chercheuse.
+  2009-01-01 12:00  =>     read chercheuse
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to lecrchf
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  100-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*------------ LECTURE D'UN ENREGISTREMENT UNLOAD --------
+  2009-01-01 12:00  =>  101-lec-unload.
+  2009-01-01 12:00  =>     read ficunload
+  2009-01-01 12:00  =>       at end
+  2009-01-01 12:00  =>         move 1 to lecunloadf
+  2009-01-01 12:00  =>       not at end
+  2009-01-01 12:00  =>         add 1 to cptlu
+  2009-01-01 12:00  =>     end-read
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  101-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----- SEPARATION ENREGISTREMENT ARCHI ET NARCHI ---------
+  2009-01-01 12:00  =>  102-separe.
+  2009-01-01 12:00  =>     perform until fin-lecunload
+  2009-01-01 12:00  =>       if lecrchf not = 1
+  2009-01-01 12:00  =>         evaluate true
+  2009-01-01 12:00  =>*L'enregistrement est a archiver
+  2009-01-01 12:00  =>           when cle-chercheuse = cle-unload
+  2009-01-01 12:00  =>             move "A" to cd-ach
+  2009-01-01 12:00  =>             move cle-unload to tl-cle
+  2009-01-01 12:00  =>             move ligne-unload to tl-don
+  2009-01-01 12:00  =>             write ligne-archi from ligne-type4
+  2009-01-01 12:00  =>             add 1 to cptarchi
+  2009-01-01 12:00  =>             perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>             if cle-unload not = cle-chercheuse
+  2009-01-01 12:00  =>               perform 100-lec-chercheuse thru 100-exit
+  2009-01-01 12:00  =>             end-if
+  2009-01-01 12:00  =>*L'enregistrement ne doit pas etre archive
+  2009-01-01 12:00  =>           when cle-chercheuse > cle-unload
+  2009-01-01 12:00  =>             write ligne-narchi from ligne-unload
+  2009-01-01 12:00  =>             add 1 to cptnarchi
+  2009-01-01 12:00  =>             perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>*Decalage de cle
+  2009-01-01 12:00  =>           when cle-chercheuse < cle-unload
+  2009-01-01 12:00  =>             perform 100-lec-chercheuse
+  2009-01-01 12:00  =>         end-evaluate
+  2009-01-01 12:00  =>       else
+  2009-01-01 12:00  =>*Si la chercheuse est vide, il faut ecrire les enregistrements
+  2009-01-01 12:00  =>*  qui restent dans le fichier d'unload
+  2009-01-01 12:00  =>         write ligne-narchi from ligne-unload
+  2009-01-01 12:00  =>         add 1 to cptnarchi
+  2009-01-01 12:00  =>         perform 101-lec-unload thru 101-exit
+  2009-01-01 12:00  =>       end-if
+  2009-01-01 12:00  =>     end-perform
+  2009-01-01 12:00  =>*Pour l'enregistrement de type9
+  2009-01-01 12:00  =>     move "ARCHIS" to nm-bas9
+  2009-01-01 12:00  =>     move "TABLE-ARCH" to nm-tab9
+  2009-01-01 12:00  =>     accept date-i from date yyyymmdd
+  2009-01-01 12:00  =>     move date-i to dt-ach9
+  2009-01-01 12:00  =>     move cptarchi to cptach1
+  2009-01-01 12:00  =>                      cptach2
+  2009-01-01 12:00  =>     write ligne-archi from ligne-type9
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  102-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*---------------- DATE AU FORMAT FRANCAIS -------------
+  2009-01-01 12:00  =>  103-date.
+  2009-01-01 12:00  =>     move annee-i to annee-fr
+  2009-01-01 12:00  =>     move mois-i to mois-fr
+  2009-01-01 12:00  =>     move jour-i to jour-fr
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  103-exit.
+  2009-01-01 12:00  =>     exit.
+  2009-01-01 12:00  =>*----------- DISPLAY DU RAPPORT -------------
+  2009-01-01 12:00  =>  104-rapport.
+  2009-01-01 12:00  =>     move cptlu to cptluf
+  2009-01-01 12:00  =>     move cptarchi to cptarchif
+  2009-01-01 12:00  =>     move cptnarchi to cptnarchif
+  2009-01-01 12:00  =>     display "Archisepare              Rapport             "
+  2009-01-01 12:00  =>       date-fr upon printer
+  2009-01-01 12:00  =>     display " " upon printer
+  2009-01-01 12:00  =>     display "Enregistrement lu : " cptluf upon printer
+  2009-01-01 12:00  =>     display "Enregistrement ecrit dans ARS5-ARCHI : "
+  2009-01-01 12:00  =>       cptarchif upon printer
+  2009-01-01 12:00  =>     display "Enregistrement ecrit dans ARS5-NARCHI : "
+  2009-01-01 12:00  =>       cptnarchif upon printer
+  2009-01-01 12:00  =>     .
+  2009-01-01 12:00  =>  104-exit.
+  2009-01-01 12:00  =>     exit.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  ***------------------------------------------------------------***
+  ***                  -- ARCHISEPARE --                         ***
+  ***            Separe les enregistrements a archiver           ***
+  ***                   et a ne pas archiver                     ***
+  ***                        == UCS ==                           ***
+  ***------------------------------------------------------------***
+  * Type     :                                                     *
+  * Analyste :                                 (INITIALES)         *
+  * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+  * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+  * Release  :                                 (99)                *
+  * Version  :                                 (999)               *
+  *----------------------------------------------------------------*
+  * Modifications :                                                *
+  * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  * _____  __/__/____  _________________________________  ______/__*
+  ***------------------------------------------------------------***
+  ***------------------------------------------------------------***
+  *                       DESCRIPTION                              *
+  *                       ===========                              *
+  *                                                                *
+  *    INPUT : chercheuse : numero de sinistres a archiver         *
+  *    INPUT : ficunload : unload de la table a archiver           *
+  *    OUTPUT: ficarchi : enregistrements a archiver               *
+  *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+  ***------------------------------------------------------------***
+  *========================*
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

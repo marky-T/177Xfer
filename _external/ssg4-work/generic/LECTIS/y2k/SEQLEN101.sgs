@@ -1,0 +1,4 @@
+INPUT      LECTST,101,1
+LKEY       0,10,91
+COND CTR > 0
+ASCII
