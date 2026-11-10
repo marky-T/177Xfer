@@ -1,0 +1,9 @@
+SSG-4: /ssg-backup (Backup-SsgWork.ps1 to 177Xfer, then offer a release); rc.03 INSTALL: confirm AppName
+
+- Conversion/Pipeline/Backup-SsgWork.ps1 (new): mirror release_candidates, ssg4-work, ssg4-source into the 177Xfer
+  backup worktree (_external/), stage only those, commit, push, verify the remote tip; -WhatIf, -AllowDeletes
+- /ssg-backup prompt + skill wrapper: repository to marky-T/SSG4, outside work to 177Xfer, then offer /ssg-release or the
+  generic release-candidate plan
+- New-GnReleaseDocs.ps1: INSTALL asks to confirm AppName (main had AFBUS_AMT / UseUnicode True at the rc.02 review)
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
