@@ -11,7 +11,8 @@ The release is placed in the repository; it takes effect when the application is
    and 12 includes. R&D has no `UTILIT_CHAB100_ASCII.ps1` (MT-045). Roll back: restore R&D's files from the previous commit.
 3. **Settings — CONFIRM with R&D (MT-044).** `Scripts\Settings\AmtSettings.xml` receives the 12 `CloneReports` entries
    (Xqt name → generic program). `UseUnicode` must be `False` for the jobs that use these utilities (T3-039: `True` makes the runtime
-   pre-create UTF-16 files).
+   pre-create UTF-16 files). **CONFIRM** AppName in the same file: on main it was AFBUS_AMT (with UseUnicode True) when
+   rc.02 was reviewed (2026-10-23), while the application is BSP; neither rc.02 nor this release changes them.
 4. **Jobs.** After *Read all jobs from system*, Start Job also lists the `ASSURFED_UTILIT_*_GN` programs and the `UTILIT_*` skeletons.
    They are started only by a calling parent; started by hand they have no parameter file or cards. Leave them unactivated where possible.
 5. **Check.** Run one real runstream that calls a converted utility (PROGRAM-SUMMARY Appendix A lists them). The job log shows the
