@@ -1,0 +1,699 @@
+diff --git a/Scripts/Libraries/AmtPsCustomerLib.psm1 b/Scripts/Libraries/AmtPsCustomerLib.psm1
+index 52b496a529..d86474b029 100644
+--- a/Scripts/Libraries/AmtPsCustomerLib.psm1
++++ b/Scripts/Libraries/AmtPsCustomerLib.psm1
+@@ -5,3 +5,29 @@
+ # for customer-specific functions. Add customer-specific overrides or additional
+ # functions here as needed.
+ #-------------------------------------------------------------------------------
++
++# Minimal stub: several T3 SsgConverter-generated programs (e.g. CONDIS2_ASCII,
++# TABAN_ASCII) call Log-Message for diagnostic output; it has no real implementation
++# in this bundle. AMT172's original fix (T3-011, marky-T/177Xfer branch
++# T3-LiveRun-Results-20261001) logged to host only; extended here to write into the
++# real per-job AmtPsEclLib joblog (Write-JobLog) instead, so the message actually
++# persists in the AMT joblog rather than only a transient console stream.
++# $Level arrives as the literal string "([LogMessageType]::Information)" (an
++# SsgConverter quoting quirk - LogMessageType isn't evaluated, just text) - parse the
++# severity word out of it and map to the real runtime's [LoggingSeverity] enum.
++function Log-Message {
++  param(
++    [string]$Message,
++    [string]$Level = ''
++  )
++  $severity = [LoggingSeverity]::Info
++  if ($Level -match '::\s*(\w+)') {
++    switch ($Matches[1]) {
++      'Error'   { $severity = [LoggingSeverity]::Error }
++      'Warning' { $severity = [LoggingSeverity]::Warning }
++      'Debug'   { $severity = [LoggingSeverity]::Debug }
++      default   { $severity = [LoggingSeverity]::Info }
++    }
++  }
++  Write-JobLog $Message $severity
++}
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
+index 93fac2230a..a5bbce7563 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHIFORMAT-LIVE.ps1
+@@ -19,20 +19,22 @@ Trap {
+ 
+ Set-Jobname "T3_20_ARCHIFORMAT_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+-AddTo-SgsList 'filein ECL-FICUNLOAD'
++AddTo-SgsList 'filein ECL-FICREPORT ECL-FICDESCRIPT ECL-FICUNLOAD'
+ AddTo-SgsList 'fileout ECL-FICFORMAT'
+ AddTo-SgsList 'key CLE-TABLE,N,10'
+ AddTo-SgsList 'rsz 55'
+-AddTo-SgsList 'table 2,TABLE-ARCH,ARCHIS'
++AddTo-SgsList 'table SCHEMA1,TABLE-ARCH,ARCHIS 2'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'ARCHIFORMAT.ps1'
+ 
+-Write-Host "=== Running ARCHIFORMAT.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running ARCHIFORMAT.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
+index 48fba47e32..5766ed3fb5 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/ARCHISEPARE-LIVE.ps1
+@@ -19,20 +19,22 @@ Trap {
+ 
+ Set-Jobname "T3_20_ARCHISEPARE_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+-AddTo-SgsList 'filein ECL-FICUNLOAD'
+-AddTo-SgsList 'fileout ECL-FICNARCHI'
+-AddTo-SgsList 'key 0,10'
++AddTo-SgsList 'filein ECL-CHERCHEUSE ECL-FICUNLOAD'
++AddTo-SgsList 'fileout ECL-FICARCHI ECL-FICNARCHI'
++AddTo-SgsList 'key 10 0,10'
+ AddTo-SgsList 'rsz 40'
+ AddTo-SgsList 'tname ARCHIS,CHERCHEUSE-TABLE-ARCH'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'ARCHISEPARE.ps1'
+ 
+-Write-Host "=== Running ARCHISEPARE.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running ARCHISEPARE.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
+index b1f8f151fb..12507913a7 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/BABA_ASCII-LIVE.ps1
+@@ -19,22 +19,24 @@ Trap {
+ 
+ Set-Jobname "T3_20_BABA_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+-AddTo-SgsList 'INPUT ECL-INPUT'
+-AddTo-SgsList 'OUTPUT ECL-OUTPUT'
+ AddTo-SgsList 'KEYS 1'
+ AddTo-SgsList 'COND 0'
+ AddTo-SgsList 'SEQERROR 0'
+ AddTo-SgsList 'Y2K 0'
++AddTo-SgsList 'INPUT ECL-INPUT'
++AddTo-SgsList 'OUTPUT ECL-OUTPUT'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'BABA_ASCII.ps1'
+ 
+-Write-Host "=== Running BABA_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running BABA_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
+index e8bf6feddc..eb4cd8d755 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY-LIVE.ps1
+@@ -19,16 +19,16 @@ Trap {
+ 
+ Set-Jobname "T3_20_CFH_COPY_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+-AddTo-SgsList 'INPUT ECL-TAPEIN,80,1'
+-AddTo-SgsList 'OUTPUT ECL-TAPEOUT,80,1'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'PRINT 0'
+ AddTo-SgsList 'FIELDIN 0'
+ AddTo-SgsList 'FIELDOUT 0'
+-AddTo-SgsList 'FIXE 0,0'
++AddTo-SgsList 'FIXE 0'
+ AddTo-SgsList 'REPRISE 0'
+ AddTo-SgsList 'MAXCOPY 0'
+ AddTo-SgsList 'SUPCOM 0'
+@@ -36,12 +36,14 @@ AddTo-SgsList 'REPSIM 0'
+ AddTo-SgsList 'STARTFIELD 0'
+ AddTo-SgsList 'STARTREC 0'
+ AddTo-SgsList 'Y2K 0'
++AddTo-SgsList 'INPUT ECL-TAPEIN,80,1'
++AddTo-SgsList 'OUTPUT ECL-TAPEOUT,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'CFH-COPY.ps1'
+ 
+-Write-Host "=== Running CFH-COPY.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running CFH-COPY.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
+index c896a992d2..7bc2dc6e4d 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/CFH-COPY_ASCII-LIVE.ps1
+@@ -19,16 +19,16 @@ Trap {
+ 
+ Set-Jobname "T3_20_CFH_COPY_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+-AddTo-SgsList 'INPUT 1,80,1'
+-AddTo-SgsList 'OUTPUT 1,80,1'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'PRINT 0'
+ AddTo-SgsList 'FIELDIN 0'
+ AddTo-SgsList 'FIELDOUT 0'
+-AddTo-SgsList 'FIXE 0,0'
++AddTo-SgsList 'FIXE 0'
+ AddTo-SgsList 'REPRISE 0'
+ AddTo-SgsList 'MAXCOPY 0'
+ AddTo-SgsList 'SUPCOM 0'
+@@ -36,12 +36,14 @@ AddTo-SgsList 'REPSIM 0'
+ AddTo-SgsList 'STARTFIELD 0'
+ AddTo-SgsList 'STARTREC 0'
+ AddTo-SgsList 'Y2K 0'
++AddTo-SgsList 'INPUT ECL-TAPEIN,80,1'
++AddTo-SgsList 'OUTPUT ECL-TAPEOUT,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'CFH-COPY_ASCII.ps1'
+ 
+-Write-Host "=== Running CFH-COPY_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running CFH-COPY_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
+index 887279db16..f6453ed17d 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/CHAB100_ASCII-LIVE.ps1
+@@ -19,20 +19,22 @@ Trap {
+ 
+ Set-Jobname "T3_20_CHAB100_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+-AddTo-SgsList 'OUTPUT ECL-OUTPUT,80,1'
+ AddTo-SgsList 'LIST 0'
+ AddTo-SgsList 'MOD 0'
+ AddTo-SgsList 'NUMB 0'
++AddTo-SgsList 'OUTPUT ECL-OUTPUT,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'CHAB100_ASCII.ps1'
+ 
+-Write-Host "=== Running CHAB100_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running CHAB100_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
+index 47c33331bc..28b47b9ae1 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/CHABAN_ASCII-LIVE.ps1
+@@ -19,20 +19,22 @@ Trap {
+ 
+ Set-Jobname "T3_20_CHABAN_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+-AddTo-SgsList 'OUTPUT ECL-OUTPUT,80,1'
+ AddTo-SgsList 'LIST 0'
+ AddTo-SgsList 'MOD 0'
+ AddTo-SgsList 'NUMB 0'
++AddTo-SgsList 'OUTPUT ECL-OUTPUT,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'CHABAN_ASCII.ps1'
+ 
+-Write-Host "=== Running CHABAN_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running CHABAN_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
+index 05416f821c..9da51604cc 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/CONDIS2_ASCII-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_CONDIS2_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -30,8 +32,8 @@ AddTo-SgsList 'FILEOUT 80,10'
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'CONDIS2_ASCII.ps1'
+ 
+-Write-Host "=== Running CONDIS2_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running CONDIS2_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
+index e87c48ff50..f7cf83b694 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/EXTEUR-LIVE.ps1
+@@ -19,21 +19,23 @@ Trap {
+ 
+ Set-Jobname "T3_20_EXTEUR_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'COND 0'
+ AddTo-SgsList 'DEVOUTPUT 0'
+ AddTo-SgsList 'LONG 80'
+ AddTo-SgsList 'BLOCK 10'
+-AddTo-SgsList 'DEVISE NONE,02'
+-AddTo-SgsList 'DATIME$ 30/09/2026'
++AddTo-SgsList 'DEVISE 0,2 01,02 NONE'
++AddTo-SgsList 'DATIME$ 12:00 30/09/2026 30/09/2026'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'EXTEUR.ps1'
+ 
+-Write-Host "=== Running EXTEUR.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running EXTEUR.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
+index 9cdc84d850..5d69ce189a 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA2_ASCII-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_FUSBA2_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -29,15 +31,14 @@ AddTo-SgsList 'KEYS 0'
+ AddTo-SgsList 'SEQERROR 0'
+ AddTo-SgsList 'FIELDIN 0'
+ AddTo-SgsList 'FIELDOUT 0'
+-AddTo-SgsList 'INPUT 0'
+-AddTo-SgsList 'OUTPUT 0'
+ AddTo-SgsList 'NOLIST 0'
++AddTo-SgsList 'OUTPUT 0'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'FUSBA2_ASCII.ps1'
+ 
+-Write-Host "=== Running FUSBA2_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running FUSBA2_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
+index 5c043fc4e5..54ddd47da6 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/FUSBA_ASCII-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_FUSBA_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -29,17 +31,16 @@ AddTo-SgsList 'KEYS 0'
+ AddTo-SgsList 'SEQERROR 0'
+ AddTo-SgsList 'FIELDIN 0'
+ AddTo-SgsList 'FIELDOUT 0'
+-AddTo-SgsList 'INPUT 0'
+-AddTo-SgsList 'OUTPUT 0'
+ AddTo-SgsList 'NOLIST 0'
+ AddTo-SgsList 'ANNUL 0'
+ AddTo-SgsList 'INSERT 0'
++AddTo-SgsList 'OUTPUT 0'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'FUSBA_ASCII.ps1'
+ 
+-Write-Host "=== Running FUSBA_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running FUSBA_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
+index 59675643b1..d640abcf52 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/LECTIS_ASCII-LIVE.ps1
+@@ -19,25 +19,26 @@ Trap {
+ 
+ Set-Jobname "T3_20_LECTIS_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+-AddTo-SgsList 'INPUT FICHIN-1,120,1'
+-AddTo-SgsList 'LKEY 2,8,0 4'
++AddTo-SgsList 'LKEY 0,4,0'
+ AddTo-SgsList 'KEYS 0'
+ AddTo-SgsList 'NOLIST 0'
+ AddTo-SgsList 'UN 1'
+ AddTo-SgsList 'DEUX 0'
+ AddTo-SgsList 'TROIS 0'
+ AddTo-SgsList 'Y2K 0'
+-AddTo-SgsList 'COND 0'
++AddTo-SgsList 'INPUT FICHIN-1,120,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'LECTIS_ASCII.ps1'
+ 
+-Write-Host "=== Running LECTIS_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running LECTIS_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
+index fe5f9cbf9b..dcfea3b34c 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_ASCII-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_LOADIS_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -31,8 +33,8 @@ AddTo-SgsList 'KEYIS 0,8,12'
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'LOADIS_ASCII.ps1'
+ 
+-Write-Host "=== Running LOADIS_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running LOADIS_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
+index dd51dc5d28..b54a312ab1 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/LOADIS_MULTI-LIVE.ps1
+@@ -19,20 +19,22 @@ Trap {
+ 
+ Set-Jobname "T3_20_LOADIS_MULTI_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'SFS 0'
++AddTo-SgsList 'KEYIS 0,12,8'
+ AddTo-SgsList 'INPUT ECL-BDE1,80,1'
+ AddTo-SgsList 'OUTPUT ECL-DISQ,20,1,0'
+-AddTo-SgsList 'KEYIS 0,8,12 0,12,8'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'LOADIS_MULTI.ps1'
+ 
+-Write-Host "=== Running LOADIS_MULTI.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running LOADIS_MULTI.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
+index 93847b7721..00585b6bc9 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/RECAP-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_RECAP_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -39,8 +41,8 @@ AddTo-SgsList 'INDIC 0'
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'RECAP.ps1'
+ 
+-Write-Host "=== Running RECAP.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running RECAP.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
+index 914ab4632d..c6ff9a3476 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/SCAN_ASCII-LIVE.ps1
+@@ -19,7 +19,9 @@ Trap {
+ 
+ Set-Jobname "T3_20_SCAN_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+@@ -35,8 +37,8 @@ AddTo-SgsList 'INPUT ECL-TAPEIN,100,10'
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'SCAN_ASCII.ps1'
+ 
+-Write-Host "=== Running SCAN_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running SCAN_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
+index a064b88906..cd3ba85208 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/TABAN_ASCII-LIVE.ps1
+@@ -19,25 +19,26 @@ Trap {
+ 
+ Set-Jobname "T3_20_TABAN_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'SCHEMA 0'
+-AddTo-SgsList 'INPUT 3,80,1'
+-AddTo-SgsList 'KEYS 0'
+ AddTo-SgsList 'INDIC 0'
+ AddTo-SgsList 'CCARTE 0'
+ AddTo-SgsList 'MAXREC 0'
+ AddTo-SgsList 'UTYL2 0'
+ AddTo-SgsList 'LISTE 0'
+ AddTo-SgsList 'Y2K 0'
++AddTo-SgsList 'INPUT ECL-TAPE1,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'TABAN_ASCII.ps1'
+ 
+-Write-Host "=== Running TABAN_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running TABAN_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
+index 39c014fe89..775232f1e8 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/TAPELD_ASCII-LIVE.ps1
+@@ -19,17 +19,17 @@ Trap {
+ 
+ Set-Jobname "T3_20_TAPELD_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'SCHEMA 0'
+-AddTo-SgsList 'INPUT ECL-TAPEIN,80,1'
+-AddTo-SgsList 'OUTPUT ECL-TAPEOUT,80,1'
+ AddTo-SgsList 'PRINT 0'
+ AddTo-SgsList 'FIELDIN 0'
+ AddTo-SgsList 'FIELDOUT 0'
+-AddTo-SgsList 'FIXE 0,0'
++AddTo-SgsList 'FIXE 0'
+ AddTo-SgsList 'SUPCOM 0'
+ AddTo-SgsList 'MAXCOPY 0'
+ AddTo-SgsList 'REPSIM 0'
+@@ -39,12 +39,14 @@ AddTo-SgsList 'STITRE 0'
+ AddTo-SgsList 'FILLCTR 0'
+ AddTo-SgsList 'Y2K 0'
+ AddTo-SgsList 'EURO 0'
++AddTo-SgsList 'INPUT ECL-TAPEIN,80,1'
++AddTo-SgsList 'OUTPUT ECL-TAPEOUT,80,1'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'TAPELD_ASCII.ps1'
+ 
+-Write-Host "=== Running TAPELD_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running TAPELD_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
+index 95c4de301e..bbd50b560e 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_ASCII-LIVE.ps1
+@@ -19,21 +19,23 @@ Trap {
+ 
+ Set-Jobname "T3_20_UNLOADIS_ASCII_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
++AddTo-SgsList 'MAXREC 0'
++AddTo-SgsList 'OMITTED 0'
+ AddTo-SgsList 'INPUT ECL-INPUT,80,1'
+ AddTo-SgsList 'OUTPUT ECL-OUTPUT,80,1'
+ AddTo-SgsList 'KEYIS 1,8,1'
+-AddTo-SgsList 'MAXREC 0'
+-AddTo-SgsList 'OMITTED 0'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'UNLOADIS_ASCII.ps1'
+ 
+-Write-Host "=== Running UNLOADIS_ASCII.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running UNLOADIS_ASCII.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin
+diff --git a/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1 b/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
+index df477cba52..22051bf1b7 100644
+--- a/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
++++ b/Scripts_SSG/1_ConvertedScripts/Wrappers/UNLOADIS_MULTI-LIVE.ps1
+@@ -19,22 +19,24 @@ Trap {
+ 
+ Set-Jobname "T3_20_UNLOADIS_MULTI_LIVE"
+ Initialize $AmtSettingsFile
+-Write-Host "=== Initialize OK - live Connect-Application succeeded ===" -ForegroundColor Green
++# Write-JobLog, not Write-Host: BatchController echoes any console output verbatim as the job's
++# error and sets Status=Error (MT-023) - Write-JobLog stays silent on console under Station=BATCH.
++Write-JobLog "=== Initialize OK - live Connect-Application succeeded ==="
+ 
+ $global:SgsLabels = New-Object 'System.Collections.Generic.Dictionary[String, Object]'
+ AddTo-SgsList 'ASCII 1'
+ AddTo-SgsList 'SFS 0'
+ AddTo-SgsList 'OMITTED 0'
+ AddTo-SgsList 'MAXREC 0'
++AddTo-SgsList 'KEYIS 0,12,8'
+ AddTo-SgsList 'OUTPUT ECL-BDE1,80,1'
+ AddTo-SgsList 'INPUT ECL-DISQ,20,1'
+-AddTo-SgsList 'KEYIS 0,8,12 0,12,8'
+ 
+ # Converted SSG body, resolved from the CC Basepaths > Script path (captured by Initialize).
+ $scriptPath = Join-Path $global:AmtPath.ScriptPath 'UNLOADIS_MULTI.ps1'
+ 
+-Write-Host "=== Running UNLOADIS_MULTI.ps1 body ===" -ForegroundColor Green
++Write-JobLog "=== Running UNLOADIS_MULTI.ps1 body ==="
+ & $scriptPath -Parameters @('80')
+-Write-Host "=== Body completed without a thrown exception ===" -ForegroundColor Green
++Write-JobLog "=== Body completed without a thrown exception ==="
+ 
+ Fin

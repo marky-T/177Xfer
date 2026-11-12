@@ -1,4 +1,4 @@
---- BatchController: 20261103 14:31:24.477 11 Information SSG4_NEWNAME_CFH_COPY Done Id: 1203 Queue: JOB_QUEUE1 (Execution time: 00:00:06:063)
---- NEWNAME_120320261103143120682.log
+--- BatchController: 20261112 16:21:54.270 11 Information SSG4_NEWNAME_CFH_COPY Done Id: 1446 Queue: JOB_QUEUE1 (Execution time: 00:00:06:070)
+--- NEWNAME_144620261112162150654.log
 --- 1 of 1 outputs byte-identical
 === SSG4_NEWNAME_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_NEWNAME_CFH_COPY\check.txt)

@@ -1,0 +1,3 @@
+SSG-4: Backup-SsgWork.ps1 - leftovers inside the backup folders (from a -WhatIf run) no longer block the next run
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

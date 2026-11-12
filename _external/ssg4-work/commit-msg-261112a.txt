@@ -1,0 +1,30 @@
+MT-061: install the 11 Nov Federale drop on the sandbox; team process docs, AMITY setup prep
+
+Drop installed and proven (MT-061):
+- Federale_InternalRelease on main d4da9d0d80 (framework 8.0.26294.50), deploy steps run by
+  hand per the team's guide (no REO at first), then REO SYSTEM with the drop's own REO.
+- CC-Trial generic regression 18/18 PASS after the drop; all 8 services running.
+- New findings: T3-063 (Build-And-Publish Clear-PublishRoot wipes AmtTools\Basepaths and
+  SqlServerWrapper; restored from the recovery point), T3-064 (drop needs REO SYSTEM:
+  DPSMAX* columns; blocked TransactionServer and every batch job; fixed). T3-014 now
+  running (watch). MT-062: rebase rc.02 onto the new main (_All_.slnx). MT-024 no longer
+  reverted (publish is win-x64).
+- Asset-Register 5.1: "survives redeploy" corrected. Runbook: run record 261112.
+
+Prompts and skills:
+- New /ssg-sandbox-drop (prompt + skill): team procedure, recovery point (full AmtTools,
+  COPY_ONLY DBs as ava, not FA_AFBUS), clear the clone, install, restore Basepaths +
+  permissions, REO decision, regression, record.
+- New /ssg-amity-setup (prompt + skill) and plan 261110-amity-setup-plan.md (MT-060).
+- copilot-instructions: Federale team process section; README-DELETE-AFTER rule for every
+  backup/archive folder. ssg-backup prompt + Backup-SsgWork.ps1: same rule; tolerate
+  leftovers inside the backup folders.
+
+Docs (docs/Reference Docs/Federale-Team/, new):
+- Federale-Wiki-Rules.md, AMITY/ copies (R&D design docs + 3 skills), README.
+- Federale-VM-Deployment-Guide.md: the team's guide + comments + our reading of the script.
+- Federale-VM-Deployment-Guide-feedback-261112.md/.html: to share back with the team
+  (findings with cause/fix, recovery-point recipe, Q1-Q3).
+- Reference-Docs-Register 4b updated.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

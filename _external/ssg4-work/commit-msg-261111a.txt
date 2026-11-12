@@ -1,0 +1,12 @@
+SSG-4: Federale team reference docs + AMITY/drop jobs; backup-script fix; run record
+
+- docs/Reference Docs/Federale-Team/: summary of five Federale wiki pages (workflow, ADO ways of working,
+  project memory, sandbox VMs, skills and wiki sync) and read-only copies of R&D's AMITY docs + 3 skills
+  (amt-go-net develop 88dc012f); Reference-Docs-Register §4b; pointer in copilot-instructions.md
+- /ssg-sandbox-drop (MT-061) and /ssg-amity-setup (MT-060): prompts + skill wrappers; plan
+  261110-amity-setup-plan.md
+- Backup-SsgWork.ps1: WhatIf leftovers inside the backup folders no longer block the next run
+- Runbook run record: new Last = generic regression 261103-261109 (18 jobs); old records shifted
+- Tracker: MT-060, MT-061; MT-039 notes E:\AMT_Backup moved to E:\Temp\Archive_to_delete
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
