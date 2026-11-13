@@ -34,39 +34,41 @@ WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
 
 *** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
 
-Reading source: ASSURFED-UTILIT-ARCHIFORMAT-GN.TXT
-Reading source: ASSURFED-UTILIT-ARCHISEPARE-GN.TXT
-Reading source: ASSURFED-UTILIT-BABA-GN.TXT
-Reading source: ASSURFED-UTILIT-CFH-COPY-GN.TXT
-Reading source: ASSURFED-UTILIT-CHABAN-GN.TXT
-Reading source: ASSURFED-UTILIT-CONDIS2-GN.TXT
-Reading source: ASSURFED-UTILIT-FUSBA-GN.TXT
-Reading source: ASSURFED-UTILIT-SCAN-GN.TXT
-Reading source: ASSURFED-UTILIT-TAPELD-GN.TXT
-9 source(s) read
+Reading source: ARCHIFORMAT-GN.TXT
+Reading source: ARCHISEPARE-GN.TXT
+Reading source: BABA-GN.TXT
+Reading source: CFH-COPY-GN.TXT
+Reading source: CHABAN-GN.TXT
+Reading source: CONDIS2-GN.TXT
+Reading source: FUSBA-GN.TXT
+Reading source: LECTIS-GN.TXT
+Reading source: SCAN-GN.TXT
+Reading source: TAPELD-GN.TXT
+10 source(s) read
 
-Analyzing source: ASSURFED-UTILIT-ARCHIFORMAT-GN
-Analyzing source: ASSURFED-UTILIT-ARCHISEPARE-GN
-Analyzing source: ASSURFED-UTILIT-BABA-GN
-Analyzing source: ASSURFED-UTILIT-CFH-COPY-GN
-Analyzing source: ASSURFED-UTILIT-CHABAN-GN
-Analyzing source: ASSURFED-UTILIT-CONDIS2-GN
-Analyzing source: ASSURFED-UTILIT-FUSBA-GN
-Analyzing source: ASSURFED-UTILIT-SCAN-GN
-Analyzing source: ASSURFED-UTILIT-TAPELD-GN
+Analyzing source: ARCHIFORMAT-GN
+Analyzing source: ARCHISEPARE-GN
+Analyzing source: BABA-GN
+Analyzing source: CFH-COPY-GN
+Analyzing source: CHABAN-GN
+Analyzing source: CONDIS2-GN
+Analyzing source: FUSBA-GN
+Analyzing source: LECTIS-GN
+Analyzing source: SCAN-GN
+Analyzing source: TAPELD-GN
 
 *** PHASE: A N A L Y S I N G   S O U R C E S ***
 
 
 *** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
 
-9 source(s) processed
+10 source(s) processed
 
 *** PHASE: AFBUS_2200COBOL CONVERSION STATISTICS ***
 
 Source code counts:
                Sources   Lines     Average
-Batch          9         2395      266     
+Batch          10        2821      282     
 
 List of unresolved calls:
 Source                 No of calls
@@ -75,7 +77,7 @@ ABORT                         1
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:824
+Elapsed time:  00:00:00:820
 
 
 === Conversion Completed ===
@@ -86,7 +88,7 @@ Objects in error:  not tracked - see Errors below, which IS accurate
 Errors: 0
 Warnings: 4
 Todos: 0
-Logs: 32
+Logs: 34
 
 
 === Conversion Completed ===

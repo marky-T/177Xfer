@@ -1,0 +1,40 @@
+﻿using System.Diagnostics;
+using Asysco.Amt.Runtime.Files;
+using Asysco.Amt.Runtime.Vars;
+
+namespace Federale.BSP.BusinessLogic.Baba_Gn {
+
+  public class Fd_Fo2_Rec: AmtFileLayout {
+    #region Members
+    private Baba_Gn m_ParentObject;
+    private AmtVarAlpha m_Fo2_Rec;
+    #endregion Members
+
+    #region Properties
+
+    /// <summary>AmtVarAlpha 4000</summary>
+    public AmtVarAlpha Fo2_Rec { [DebuggerStepThrough()] get { return m_Fo2_Rec; } }
+    #endregion Properties
+
+    // Constructor
+    public Fd_Fo2_Rec (Baba_Gn parentObject) {
+      m_ParentObject = parentObject;
+      m_DataRecord = new AmtStructure();
+      {
+        m_Fo2_Rec = new AmtVarAlpha(4000, m_DataRecord);
+      }
+      AllocateStructures();
+    } // Constructor Fd_Fo2_Rec
+
+    public void Init () {
+      m_DataRecord.Initialise();
+    } // Init
+
+    public void AllocateStructures () {
+      m_DataRecord.AllocStructure();
+    } // AllocateStructures
+
+  } // Class Fd_Fo2_Rec
+
+} // Namespace Federale.BSP.BusinessLogic.Baba_Gn
+

@@ -1,4 +1,4 @@
-PRN files since 16:27:59: 24, expected 24
+PRN files since 20:03:42: 24, expected 24
 REAL1: model: 15 lines match
 SEQCTR: model: 9 lines match
 SEQWORD: model: 6 lines match

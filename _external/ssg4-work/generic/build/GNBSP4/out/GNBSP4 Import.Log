@@ -1,0 +1,18 @@
+﻿20261112 20:12 Starting
+20261112 20:12 Loading file: E:\Repos\ssg4-work\generic\build\GNBSP4\out\GNBSP4.LionSource
+20261112 20:12 File version: 6
+20261112 20:12 Exported with program version: 
+20261112 20:12 Loading application BSP under BSP
+20261112 20:12 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.2
+20261112 20:12 Loading DMS Schema:  1.0 as 1.1
+20261112 20:12 Loading Cobol Program: ARCHIFORMAT-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: ARCHISEPARE-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: BABA-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: CFH-COPY-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: CHABAN-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: CONDIS2-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: FUSBA-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: LECTIS-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: SCAN-GN 1.0 as 1.0
+20261112 20:12 Loading Cobol Program: TAPELD-GN 1.0 as 1.0
+20261112 20:12 Done in 00:00:00

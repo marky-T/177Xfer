@@ -1,3 +1,3 @@
---- BatchController: 20261112 16:27:48.622 11 Information SSG4_ARCHIVE_CASES Done Id: 1524 Queue: JOB_QUEUE1 (Execution time: 00:00:30:322)
---- ARCHTEST_152420261112162720795.log
+--- BatchController: 20261112 20:02:28.285 11 Information SSG4_ARCHIVE_CASES Done Id: 1647 Queue: JOB_QUEUE1 (Execution time: 00:00:28:311)
+--- ARCHTEST_164720261112200202305.log
 === SSG4_ARCHIVE_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_ARCHIVE_CASES\check.txt)

@@ -1,0 +1,14 @@
+Stage Check, environment CC-Trial, started 2026-11-12 19:23:15
+PASS utilities.json files and hand-off defaults    12 utilities, 17 skeleton entries checked, problems: 0
+PASS CFH-COPY       cross-check vs baseline        DIFF=1 EXPANSION-INCOMPLETE=5 MATCH=41 of 47 calls
+PASS LOADIS         offline check output           3 expected lines found
+PASS BABA           cross-check vs baseline        DIFF=3 MATCH=118 NO-PARM=1 of 122 calls
+PASS FUSBA          cross-check vs baseline        MATCH=36 of 36 calls
+PASS CHABAN         cross-check vs baseline        MATCH=31 of 31 calls
+PASS CONDIS2        cross-check vs baseline        MATCH=18 of 18 calls
+PASS SCAN           cross-check vs baseline        MATCH=19 of 19 calls
+PASS TAPELD         cross-check vs baseline        MATCH=14 of 14 calls
+PASS LECTIS         cross-check vs baseline        MATCH=1 of 1 calls
+PASS ARCHISEPARE    cross-check vs baseline        MATCH=9 REJECTED=1 of 0 calls
+FAIL ARCHIFORMAT    Test-ArchiformatParm.ps1       exit code 1 (see E:\Repos\ssg4-work\generic\ARCHIFORMAT\pipeline-check.txt)
+=== Check : 1 failure(s)

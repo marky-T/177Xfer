@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-12 19:59:06
+PASS SSG4_CONDIS_CASES regression                     --- 6 of 6 outputs byte-identical | === SSG4_CONDIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_CONDIS_CASES\check.txt)
+=== Regress : all passed

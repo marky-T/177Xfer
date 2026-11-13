@@ -1,4 +1,4 @@
-include: ArchiformatParm.ps1 is current (615F823677990FBB)
+include: ArchiformatParm.ps1 is current (F28D1B5740FEFB48)
 F1   MATCH
 F2   MATCH
 F3   MATCH

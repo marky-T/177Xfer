@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\AmtAppCodeAnalysisRuleSet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\..\..\Binaries\Programs</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Binaries\Application\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Libs\Asysco.Amt.Libs.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Asysco.Amt.AmtSharedDataModel\Asysco.Amt.AmtSharedDataModel.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\Runtime\Asysco.Amt.Runtime.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\serializerwrappers\Asysco.Amt.SerializerWrappers.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\AmtScreens\Common\Asysco.Amt.Screens.Common.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\ComScript\ComScript\AmtComScript.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\ComScript\AmtComScriptService\AmtComScriptService.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\AmtFramework\Amt.Net\Libraries\FTP\Asysco.Amt.Ftp.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\BSP.Application.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\..\Database\BSP.Database.csproj">
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fd_Fi1_Rec.cs" />
+    <Compile Include="Fd_Fi2_Rec.cs" />
+    <Compile Include="Fd_Fo1_Rec.cs" />
+    <Compile Include="Fd_Fo2_Rec.cs" />
+    <Compile Include="Fd_Parm_File_Rec.cs" />
+    <Compile Include="Fd_Parm_Key_Rec.cs" />
+    <Compile Include="Fd_Parm_Mode_Rec.cs" />
+    <Compile Include="Fd_Parm_Move_Rec.cs" />
+    <Compile Include="Fd_Parm_Rec.cs" />
+    <Compile Include="Fusba_Gn.Core.cs" />
+    <Compile Include="Fusba_Gn.cs" />
+    <Compile Include="Fusba_Gn.Files.cs" />
+    <Compile Include="Fusba_Gn_Info.cs" />
+    <Compile Include="LocalDefinitions.cs" />
+    <Content Include="Documentation\FUSBA-GN.cob" />
+    <Compile Include="PrintDefinitions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintDefinitions.Designer.cs">
+      <DependentUpon>PrintDefinitions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+</Project>

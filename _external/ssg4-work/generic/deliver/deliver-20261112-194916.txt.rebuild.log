@@ -1,0 +1,17 @@
+base(...) calls rewritten in 10 file(s)
+
+Program        Built FirstError
+-------        ----- ----------
+ARCHIFORMAT_GN  True 
+ARCHISEPARE_GN  True 
+BABA_GN         True 
+CFH_COPY_GN     True 
+CHABAN_GN       True 
+CONDIS2_GN      True 
+FUSBA_GN        True 
+LECTIS_GN       True 
+SCAN_GN         True 
+TAPELD_GN       True 
+
+
+Output: E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Binaries\Programs

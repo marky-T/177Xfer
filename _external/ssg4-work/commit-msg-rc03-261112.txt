@@ -1,0 +1,26 @@
+SSG-4 generic utilities rc.03: 10 generic programs for 11 SSG utilities
+
+Replaces Scripts_SSG (withdrawn rc.01 PowerShell bodies) with the generic SSG utility programs:
+one generic program per SSG utility, fed at run time by a parameter file that a hand-off in the
+converted skeleton writes; the step's Xqt starts the program through CloneReports.
+
+- BSP_AMT/Development/Programs: 10 C# projects (LionDev 177, application BSP), named after their
+  utility: CFH_COPY_GN (CFH-COPY, LOADIS, UNLOADIS), BABA_GN, FUSBA_GN (FUSBA, FUSBA2), CHABAN_GN
+  (CHABAN, CHAB100), CONDIS2_GN, SCAN_GN, TAPELD_GN, LECTIS_GN, ARCHISEPARE_GN, ARCHIFORMAT_GN; COBOL
+  source in each project's Documentation folder. Added to _All_.slnx, folder /Programs/.
+- Scripts/ASSURFED_UTILIT: 16 skeletons with the hand-off (13 replace R&D's converted skeletons,
+  3 new) and 12 includes (parameter writers + GnHandoff.inc).
+- Scripts/Settings/AmtSettings.xml: CloneReports, 12 entries (Xqt name -> program).
+- Utilities/: README, RELEASE-NOTES (changes since rc.02, Control Center proof, known issues),
+  INSTALL, PROGRAM-SUMMARY, Reference/Cobol.
+- Scripts_SSG/ deleted.
+
+Proof: Control Center regression in the trial application, 18 jobs PASS (outputs byte-identical to
+independent references; error cases stop before the program starts). Each project builds with
+0 errors in this branch. To confirm with R&D before merge: skeleton replacement (MT-046) and the
+CloneReports / UseUnicode settings (MT-044); see Utilities/INSTALL.md. MT-/T3- ids are internal
+references, to be superseded by ticket numbers as items are addressed.
+
+Supersedes rc.02 (feature/federale/ssg4-generic-rc02).
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

@@ -1,0 +1,24 @@
+Stage Build, environment CC-Trial, started 2026-11-12 19:24:49
+PASS CFH-COPY       program source                 CFH_COPY_GN: new since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program CFH_COPY_GN
+PASS BABA           program source                 BABA_GN: new since the last build
+PASS FUSBA          program source                 FUSBA_GN: new since the last build
+PASS CHABAN         program source                 CHABAN_GN: new since the last build
+PASS CONDIS2        program source                 CONDIS2_GN: new since the last build
+PASS SCAN           program source                 SCAN_GN: new since the last build
+PASS TAPELD         program source                 TAPELD_GN: new since the last build
+PASS LECTIS         program source                 LECTIS_GN: new since the last build
+PASS ARCHISEPARE    program source                 ARCHISEPARE_GN: new since the last build
+PASS ARCHIFORMAT    program source                 ARCHIFORMAT_GN: new since the last build
+PASS SCAN group     CONDIS2-RV                     reference: unchanged since the last build
+PASS SCAN group     CONDIS2-RD                     reference: unchanged since the last build
+PASS SCAN group     SCAN-RA                        reference: unchanged since the last build
+PASS SCAN group     SCAN-RB                        reference: unchanged since the last build
+PASS SCAN group     TAPELD-RA                      reference: unchanged since the last build
+PASS SCAN group     TAPELD-RB                      reference: unchanged since the last build
+PASS COBOL converter (programs) 10 programs -> GNBUILD.LionSource exit 0, errors 0, warnings 4, 164 KB
+PASS LionSource (programs) vs the last imported build     536 lines differ (import it)
+PASS COBOL converter (references) 6 programs -> GNREF.LionSource exit 0, errors 0, warnings 4, 231 KB
+PASS LionSource (references) vs the last imported build     identical (nothing new to import)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource and E:\Repos\ssg4-work\generic\build\GNREF\out\GNREF.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

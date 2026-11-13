@@ -1,4 +1,4 @@
   KEYIMAGE    KNOWN: T3-059: count 0000000, model 1; AMT line reader merges the images 24 and 3 bytes long into one record
 CTR forms seen: 9999999 x24
-log: LECTTEST_153720261112162805204.log
+log: LECTTEST_166020261112200347337.log
 === LECTIS DISPLAY lines: PASS (23 of 24 as modelled, 1 known AMT difference(s): KEYIMAGE (T3-059))

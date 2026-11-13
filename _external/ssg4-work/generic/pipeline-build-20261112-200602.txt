@@ -1,0 +1,24 @@
+Stage Build, environment Repo-BSP, started 2026-11-12 20:06:02
+PASS CFH-COPY       program source                 CFH_COPY_GN: new since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program CFH_COPY_GN
+PASS BABA           program source                 BABA_GN: new since the last build
+PASS FUSBA          program source                 FUSBA_GN: new since the last build
+PASS CHABAN         program source                 CHABAN_GN: new since the last build
+PASS CONDIS2        program source                 CONDIS2_GN: new since the last build
+PASS SCAN           program source                 SCAN_GN: new since the last build
+PASS TAPELD         program source                 TAPELD_GN: new since the last build
+PASS LECTIS         program source                 LECTIS_GN: new since the last build
+PASS ARCHISEPARE    program source                 ARCHISEPARE_GN: new since the last build
+PASS ARCHIFORMAT    program source                 ARCHIFORMAT_GN: new since the last build
+PASS SCAN group     CONDIS2-RV                     reference: new since the last build
+PASS SCAN group     CONDIS2-RD                     reference: new since the last build
+PASS SCAN group     SCAN-RA                        reference: new since the last build
+PASS SCAN group     SCAN-RB                        reference: new since the last build
+PASS SCAN group     TAPELD-RA                      reference: new since the last build
+PASS SCAN group     TAPELD-RB                      reference: new since the last build
+PASS COBOL converter (programs) 10 programs -> GNBSP4.LionSource exit 0, errors 0, warnings 4, 164 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS COBOL converter (references) 6 programs -> GNBSP4-REF-notforrelease.LionSource exit 0, errors 0, warnings 4, 231 KB
+PASS LionSource (references) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBSP4\out\GNBSP4.LionSource and E:\Repos\ssg4-work\generic\build\GNBSP4-REF-notforrelease\out\GNBSP4-REF-notforrelease.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

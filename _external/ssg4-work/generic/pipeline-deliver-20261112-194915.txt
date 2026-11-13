@@ -1,0 +1,24 @@
+Stage Deliver, environment CC-Trial, started 2026-11-12 19:49:15
+PASS GNBUILD        generated after                2026-11-12 19:25:05 (the build LionSource)
+PASS GNBUILD        imported since the last delivery every revision is newer
+PASS CFH_COPY_GN    rebuilt and delivered          11/12/2026 7:43:09 PM 11/12/2026 7:49:49 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS BABA_GN        rebuilt and delivered          11/12/2026 7:43:09 PM 11/12/2026 7:49:46 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS FUSBA_GN       rebuilt and delivered          11/12/2026 7:43:10 PM 11/12/2026 7:49:56 PM ok (2 varying input(s) at 4001) yes, hash ok
+PASS CHABAN_GN      rebuilt and delivered          11/12/2026 7:43:09 PM 11/12/2026 7:49:51 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS CONDIS2_GN     rebuilt and delivered          11/12/2026 7:43:09 PM 11/12/2026 7:49:53 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS SCAN_GN        rebuilt and delivered          11/12/2026 7:43:10 PM 11/12/2026 7:50:00 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS TAPELD_GN      rebuilt and delivered          11/12/2026 7:43:10 PM 11/12/2026 7:50:03 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LECTIS_GN      rebuilt and delivered          11/12/2026 7:43:10 PM 11/12/2026 7:49:58 PM ok (2 varying input(s) at 4001) yes, hash ok
+PASS ARCHISEPARE_GN rebuilt and delivered          11/12/2026 7:43:02 PM 11/12/2026 7:49:44 PM ok (2 varying input(s) at 4001) yes, hash ok
+PASS ARCHIFORMAT_GN rebuilt and delivered          11/12/2026 7:43:02 PM 11/12/2026 7:49:41 PM ok (3 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNBUILD recorded as imported   not recorded: a subset of the programs was delivered
+PASS GNREF          generated after                2026-10-21 23:16:51 (the build LionSource)
+PASS GNREF          imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CONDIS2_RV rebuilt and delivered          11/12/2026 7:43:06 PM 11/12/2026 7:50:11 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS ASSURFED_UTILIT_CONDIS2_RD rebuilt and delivered          11/12/2026 7:43:05 PM 11/12/2026 7:50:08 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS ASSURFED_UTILIT_SCAN_RA rebuilt and delivered          11/12/2026 7:43:08 PM 11/12/2026 7:50:13 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS ASSURFED_UTILIT_SCAN_RB rebuilt and delivered          11/12/2026 7:43:08 PM 11/12/2026 7:50:16 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS ASSURFED_UTILIT_TAPELD_RA rebuilt and delivered          11/12/2026 7:43:08 PM 11/12/2026 7:50:18 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS ASSURFED_UTILIT_TAPELD_RB rebuilt and delivered          11/12/2026 7:43:09 PM 11/12/2026 7:50:21 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS LionSource     GNREF recorded as imported     E:\Repos\ssg4-work\generic\build\GNREF\imported.LionSource (the next Build compares against it)
+=== Deliver : all passed

@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, started 2026-11-12 19:24:16
+PASS utilities.json files and hand-off defaults    12 utilities, 17 skeleton entries checked, problems: 0
+PASS ARCHIFORMAT    cross-check vs baseline        MATCH=4 REJECTED=1 of 0 calls
+=== Check : all passed

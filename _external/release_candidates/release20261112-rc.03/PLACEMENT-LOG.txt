@@ -1,0 +1,13 @@
+Cfh_Copy_Gn                    placed; base() calls without generation date/time: 1; documentation CFH-COPY-GN.cob
+Baba_Gn                        placed; base() calls without generation date/time: 1; documentation BABA-GN.cob
+Fusba_Gn                       placed; base() calls without generation date/time: 1; documentation FUSBA-GN.cob
+Chaban_Gn                      placed; base() calls without generation date/time: 1; documentation CHABAN-GN.cob
+Condis2_Gn                     placed; base() calls without generation date/time: 1; documentation CONDIS2-GN.cob
+Scan_Gn                        placed; base() calls without generation date/time: 1; documentation SCAN-GN.cob
+Tapeld_Gn                      placed; base() calls without generation date/time: 1; documentation TAPELD-GN.cob
+Lectis_Gn                      placed; base() calls without generation date/time: 1; documentation LECTIS-GN.cob
+Archisepare_Gn                 placed; base() calls without generation date/time: 1; documentation ARCHISEPARE-GN.cob
+Archiformat_Gn                 placed; base() calls without generation date/time: 1; documentation ARCHIFORMAT-GN.cob
+Scripts\ASSURFED_UTILIT: 16 skeletons + 12 includes (13 replaced, 15 new)
+Scripts\Settings\AmtSettings.xml: CloneReports 12 entries inserted before </Amt> (AppName and UseUnicode left as they are)
+_All_.slnx: 10 project(s) inserted in folder /Programs/ (name order; 3082 entries now)

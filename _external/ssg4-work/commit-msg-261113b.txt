@@ -1,0 +1,34 @@
+MT-063/MT-064/MT-059: short program names, Programs placement, rc.03 packaged and pushed; board candidates rechecked
+
+Program names (MT-063, owner 261112): the 10 generic programs are named after their utility,
+<U>-GN / <U>_GN (was ASSURFED-UTILIT-<U>-GN). 11 COBOL sources renamed (PROGRAM-ID only changed,
+byte-checked), 94 references in 48 files, Area E rule 5, prompt and template. ArchiformatParm.ps1
+regenerated (header hash). Check-ArchiveCc.ps1 report anchor and Build-ScanGroup.ps1 GN ids fixed.
+CC-Trial: LionDev generate, Deliver, Deploy, CC read + activate; regression 18/18 PASS (261112 20:05).
+Old long-named DLLs, jobs and the SSG4FED set archived (E:\Temp\Archive_to_delete, not in the repo).
+
+Placement (MT-064, owner 261112): Place-GnInRepo.ps1 puts the projects in
+BSP_AMT\Development\Programs and the /Programs/ folder of _All_.slnx (name order, minimal edit);
+release utilities only; skeletons from the CC-Trial set. New-GnReleaseDocs.ps1: Utilities\ documents
+name that location, rename recognised in "changes since rc.02", README note that MT/T3 ids are internal
+references. New New-GnRepoPackage.ps1: package in repository layout from origin/main through the same
+placement code (.gitignore seeded, line endings kept). PROGRAM-SUMMARY.md, environments.psd1 notes.
+
+rc.03 (MT-059): GNBSP4 generated in LionDev BSP; packaged (gate 2 passed); placed in worktree
+feature/federale/ssg4-utilities-rc03, 10 projects build 0 errors, Scripts_SSG deleted; owner pushed
+1e6a838528 to Federale_InternalRelease. Plan and runbook run record updated.
+
+Tickets (MT-065, row included here): owner decision: our Bugs hang under User Story 119872, no
+Federale Issue (fixed before the Federale pipeline); iteration = story's sprint; tag Federale; Migration
+Lead batch list as a courtesy, no gate. Recorded in ssg-todo-issues.instructions.md, /ssg-board-ticket,
+Federale-Wiki-Rules.md, board-alignment.md. board-candidates.md rechecked against R&D develop 88dc012f and
+the 11 Nov drop: T3-028, T3-051 added as ready; T3-023 part (2) only; T3-052 probably R&D Bug 118384
+(PR 16108); T3-054 fixed by R&D (PR 16391). SSG4-RnD-tickets-261113.md (story 119872 + bug drafts)
+kept as content, marked superseded as a format. T3-059 repro README made product-neutral.
+Federale-Wiki-Rules.md: PR / work-item linking corrected from the full wiki copy (rc.03 PR links to
+119872; no Federale Issue unless the work is also recorded as a Federale issue/bug).
+
+MT-066 (new): User Story 119872 + three Tasks for our SSG path now (drafts §1); a set of supporting User
+Stories for the whole conversion flow later.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

@@ -1,0 +1,3 @@
+Stage Regress, environment CC-Trial, started 2026-11-12 20:00:44
+PASS SSG4_LOADIS_ALL regression                     === SSG4_LOADIS_ALL : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_LOADIS_ALL\check.txt) | 15/15 pass
+=== Regress : all passed

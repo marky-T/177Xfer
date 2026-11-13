@@ -1,0 +1,15 @@
+SSG-4: Federale team process in our docs and instructions; team board tickets (MT-065)
+
+- docs/Reference Docs/Federale-Team/: wiki-copy (all 9 Project Federale Wiki pages, 261113, emails removed),
+  federale-migration-copy (team ticket skills create-federale-issue / create-product-workitem /
+  cobol-generator-error-analysis, memory instruction, continuity.md; .github renamed _github so VS Code
+  does not load them), amt-ops-wiki-copy (R&D bug-reporting guide); Federale-Wiki-Rules.md: full ticket
+  fields, the skills' steps and the content of each item; README + Reference-Docs-Register §4b
+- ssg-todo-issues.instructions.md: "Team board tickets" (when a T3 also goes on the Federale board,
+  Migration Lead alignment per batch or standing agreement, tracking on the T3 row); pointer in
+  copilot-instructions.md
+- /ssg-board-ticket (prompt + skill); docs/RnD-Tickets/board-candidates.md and board-alignment.md
+
+Tracker row MT-065 is left uncommitted with the other session's tracker edits.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
