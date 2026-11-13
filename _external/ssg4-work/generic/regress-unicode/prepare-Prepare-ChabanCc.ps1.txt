@@ -1,0 +1,11 @@
+UTILIT_CHABAN_ASCII.ps1 hand-off deployed, parse errors: 0
+UTILIT_CHAB100_ASCII.ps1 hand-off deployed, parse errors: 0
+E0    VIRA12_UL_L83            len   23 card  80 records 0 x 1 cards; 0 data images -> 0 record(s)
+EN    MAPA01_L350              len  132 card  80 records 0 x 2 cards; 2 data images -> 0 record(s)
+B1    BSEH02_L110              len   80 card  80 records 1 x 1 cards; 1 data images -> 1 record(s)
+R4    SINM05_L190              len  300 card  80 records 1 x 4 cards; 5 data images -> 1 record(s)
+R22   -d_TABD53_L31            len  132 card  80 records 2 x 2 cards; 3 data images -> 1 record(s)
+R5    -d_VIRD50_EN_L484        len  400 card  80 records 1 x 5 cards; 5 data images -> 1 record(s)
+R58   COCA11_L23               len   58 card  80 records 1 x 1 cards; 1 data images -> 1 record(s)
+C100  -d_EUPD01_L15            len  100 card 100 records 1 x 1 cards; 1 data images -> 1 record(s)
+SSG4_CHABAN_CASES.ps1 written, 8 steps, parse errors: 0

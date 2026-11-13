@@ -1,0 +1,6 @@
+
+Program             Generated Check
+-------             --------- -----
+CFH_COPY_GN,SCAN_GN           FAIL no generated folder E:\AMT_Work\Apps177\Development\Programs\Cfh_Copy_Gn,scan_Gn
+
+

@@ -1,0 +1,21 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 16:30:20
+PASS settings       UseUnicode                     False deployed, results for True in regress-results-unicode.csv: deploy with -UseUnicode True first
+FAIL SSG4_AFPH12_CFH_COPY regression                     not run yet: start it in CC (ccStartJob 'SSG4_AFPH12_CFH_COPY'), then -Stage Regress -Job SSG4_AFPH12_CFH_COPY -StartLine '<ccStartJob line>'
+FAIL SSG4_VIRM01_CFH_COPY regression                     not run yet: start it in CC (ccStartJob 'SSG4_VIRM01_CFH_COPY'), then -Stage Regress -Job SSG4_VIRM01_CFH_COPY -StartLine '<ccStartJob line>'
+FAIL SSG4_NEWNAME_CFH_COPY regression                     not run yet: start it in CC (ccStartJob 'SSG4_NEWNAME_CFH_COPY'), then -Stage Regress -Job SSG4_NEWNAME_CFH_COPY -StartLine '<ccStartJob line>'
+FAIL SSG4_VIRM01UL_CFH_COPY regression                     not run yet: start it in CC (ccStartJob 'SSG4_VIRM01UL_CFH_COPY'), then -Stage Regress -Job SSG4_VIRM01UL_CFH_COPY -StartLine '<ccStartJob line>'
+FAIL SSG4_VIRJ01PP_CFH_COPY regression                     not run yet: start it in CC (ccStartJob 'SSG4_VIRJ01PP_CFH_COPY'), then -Stage Regress -Job SSG4_VIRJ01PP_CFH_COPY -StartLine '<ccStartJob line>'
+FAIL SSG4_BABA_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_BABA_CASES'), then -Stage Regress -Job SSG4_BABA_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_CHABAN_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_CHABAN_CASES'), then -Stage Regress -Job SSG4_CHABAN_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_FUSBA_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_FUSBA_CASES'), then -Stage Regress -Job SSG4_FUSBA_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_CONDIS_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_CONDIS_CASES'), then -Stage Regress -Job SSG4_CONDIS_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_SCANGRP_PRINTS regression                     not run yet: start it in CC (ccStartJob 'SSG4_SCANGRP_PRINTS'), then -Stage Regress -Job SSG4_SCANGRP_PRINTS -StartLine '<ccStartJob line>'
+FAIL SSG4_LOADIS_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_LOADIS_CASES'), then -Stage Regress -Job SSG4_LOADIS_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_LOADIS_ALL regression                     not run yet: start it in CC (ccStartJob 'SSG4_LOADIS_ALL'), then -Stage Regress -Job SSG4_LOADIS_ALL -StartLine '<ccStartJob line>'
+FAIL SSG4_LOADIS_ABORT [UNSORTED] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LOADIS_ABORT', 'UNSORTED'), then -Stage Regress -Job SSG4_LOADIS_ABORT -JobParam UNSORTED -StartLine '<ccStartJob line>'
+FAIL SSG4_LOADIS_ABORT [DUPLICATE] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LOADIS_ABORT', 'DUPLICATE'), then -Stage Regress -Job SSG4_LOADIS_ABORT -JobParam DUPLICATE -StartLine '<ccStartJob line>'
+FAIL SSG4_ARCHIVE_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_ARCHIVE_CASES'), then -Stage Regress -Job SSG4_ARCHIVE_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_LECTIS_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_CASES'), then -Stage Regress -Job SSG4_LECTIS_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_LECTIS_ABORT [NOCOND] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_ABORT', 'NOCOND'), then -Stage Regress -Job SSG4_LECTIS_ABORT -JobParam NOCOND -StartLine '<ccStartJob line>'
+FAIL SSG4_LECTIS_ABORT [BADCOND] regression                     not run yet: start it in CC (ccStartJob 'SSG4_LECTIS_ABORT', 'BADCOND'), then -Stage Regress -Job SSG4_LECTIS_ABORT -JobParam BADCOND -StartLine '<ccStartJob line>'
+=== Regress : 18 failure(s)

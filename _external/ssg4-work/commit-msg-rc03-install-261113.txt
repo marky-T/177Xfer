@@ -1,0 +1,11 @@
+SSG-4 rc.03: INSTALL step 3 - UseUnicode works with True and False
+
+Both values are proven in Control Center (all 18 regression jobs pass with
+True and with False). This release leaves the shipped value as it is.
+With True, catalogued outputs pre-created by the runtime are UTF-16, with
+the same content. To confirm with R&D: the target's UseUnicode and the
+BSP application's "Define Unicode for all extract files" option.
+
+Utilities/manifest.csv: INSTALL.md hash updated.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

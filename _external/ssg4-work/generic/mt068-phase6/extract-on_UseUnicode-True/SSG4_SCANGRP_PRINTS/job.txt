@@ -1,0 +1,3 @@
+--- BatchController: 20261113 17:52:24.666 11 Information SSG4_SCANGRP_PRINTS Done Id: 1858 Queue: JOB_QUEUE1 (Execution time: 00:00:28:474)
+--- SCANGRP_185820261113175158681.log
+=== SSG4_SCANGRP_PRINTS : all checks passed (full report: E:\Repos\ssg4-work\generic\mt068-phase6\extract-on_UseUnicode-True\SSG4_SCANGRP_PRINTS\check.txt)

@@ -1,0 +1,39 @@
+job log: E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261112\ARCHTEST_164720261112200202305.log
+job log problem lines: 0
+S1  ARS1-ARCHI       224 B vs expected     224 B: PASS byte-identical (run date masked)
+S1  ARS1-NARCHI      528 B vs expected     528 B: PASS byte-identical
+S1  report       PASS (5 lines, date masked)
+S2  ARS2-ARCHI       224 B vs expected     224 B: PASS byte-identical (run date masked)
+S2  ARS2-NARCHI      528 B vs expected     528 B: PASS byte-identical
+S2  report       PASS (5 lines, date masked)
+S3  ARS3-ARCHI       224 B vs expected     224 B: PASS byte-identical (run date masked)
+S3  ARS3-NARCHI      528 B vs expected     528 B: PASS byte-identical
+S3  report       PASS (5 lines, date masked)
+S4  ARS4-ARCHI        56 B vs expected      56 B: PASS byte-identical (run date masked)
+S4  ARS4-NARCHI      600 B vs expected     600 B: PASS byte-identical
+S4  report       PASS (5 lines, date masked)
+S5  ARS5-ARCHI       112 B vs expected     112 B: PASS byte-identical (run date masked)
+S5  ARS5-NARCHI      576 B vs expected     576 B: PASS byte-identical
+S5  report       PASS (5 lines, date masked)
+S6  ARS6-ARCHI     3,736 B vs expected   3,736 B: PASS byte-identical (run date masked)
+S6  ARS6-NARCHI   19,844 B vs expected  19,844 B: PASS byte-identical
+S6  report       PASS (5 lines, date masked)
+S8  ARS8-ARCHI    16,008 B vs expected  16,008 B: PASS byte-identical (run date masked)
+S8  ARS8-NARCHI   87,340 B vs expected  87,340 B: PASS byte-identical
+S8  report       PASS (5 lines, date masked)
+S9  ZZ-OUT-A         224 B vs expected     224 B: PASS byte-identical (run date masked)
+S9  ZZ-OUT-N         528 B vs expected     528 B: PASS byte-identical
+S9  report       PASS (5 lines, date masked)
+F1  ECL step     PASS: ARF1-REPORT = report-2col.TXT (timestamp line excepted; table date 20261103); ARF1-DESCRIPT = descript-2col.TXT
+F1  ARF1-FORMAT    4,278 B vs expected   4,278 B: PASS byte-identical (run date masked; table date 20261103 from the CC DD report)
+F1  report       PASS (3 lines, date masked)
+F2  ECL step     PASS: ARF2-REPORT = report-3col.TXT (timestamp line excepted; table date 20261103); ARF2-DESCRIPT = descript-3col.TXT
+F2  ARF2-FORMAT    4,554 B vs expected   4,554 B: PASS byte-identical (run date masked; table date 20261103 from the CC DD report)
+F2  report       PASS (3 lines, date masked)
+F3  ECL step     PASS: ARF3-REPORT = report-2col.TXT (timestamp line excepted; table date 20261103); ARF3-DESCRIPT = descript-2col.TXT
+F3  ARF3-FORMAT      700 B vs expected     700 B: PASS byte-identical (run date masked; table date 20261103 from the CC DD report)
+F3  report       PASS (3 lines, date masked)
+F4  ECL step     PASS: ARF4-REPORT = report-2col.TXT (timestamp line excepted; table date 20261103); ARF4-DESCRIPT = descript-2col.TXT
+F4  ARF4-FORMAT      828 B vs expected     828 B: PASS byte-identical (run date masked; table date 20261103 from the CC DD report)
+F4  report       PASS (3 lines, date masked)
+=== SSG4_ARCHIVE_CASES : failures 0

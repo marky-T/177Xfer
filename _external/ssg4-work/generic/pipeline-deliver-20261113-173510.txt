@@ -1,0 +1,5 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-13 17:35:10
+PASS GNS            generated after                2026-11-13 17:16:01 (the build LionSource)
+PASS GNS            imported since the last delivery every revision is newer
+PASS CONDIS2_GS     pre-build checks               11/13/2026 5:33:52 PM ok (1 varying input(s) at 4001)
+=== Deliver : all passed

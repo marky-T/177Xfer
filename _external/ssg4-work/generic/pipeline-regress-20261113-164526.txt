@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 16:45:26
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+FAIL prepare        Prepare-CondisSCc.ps1          exit code 1
+FAIL SSG4_CONDIS2S_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_CONDIS2S_CASES'), then -Stage Regress -Job SSG4_CONDIS2S_CASES -StartLine '<ccStartJob line>'
+=== Regress : 2 failure(s)

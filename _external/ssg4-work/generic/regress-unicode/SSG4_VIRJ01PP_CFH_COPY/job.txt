@@ -1,0 +1,4 @@
+--- BatchController: 20261113 18:32:48.690 10 Information SSG4_VIRJ01PP_CFH_COPY Done Id: 1879 Queue: JOB_QUEUE1 (Execution time: 00:00:08:109)
+--- CFHFIX_187920261113183243138.log
+--- 1 of 1 outputs byte-identical
+=== SSG4_VIRJ01PP_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_VIRJ01PP_CFH_COPY\check.txt)

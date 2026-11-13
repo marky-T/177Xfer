@@ -1,0 +1,72 @@
+<Amt>
+  <AmtSettings>
+    <AppName>AFBUS_2200COBOL_AMT</AppName>
+    <FullAMT>True</FullAMT>
+    <IniFile>E:\Repos\Federale_InternalRelease\AmtTools\Sys.ini</IniFile>
+    <ComScript>E:\Repos\Federale_InternalRelease\AmtTools\ComScript\ComScript.dll</ComScript>
+    <ComModule>E:\Repos\Federale_InternalRelease\AmtTools\ComModule\AmtCOMModule.dll</ComModule>
+    <TransactionServer>Grpc:localhost:8032</TransactionServer>
+    <MaxWaitTime>5</MaxWaitTime>
+    <ApplicationKind>CobolOS2200</ApplicationKind>
+    <UseJobLog>True</UseJobLog>
+    <LogTimes>True</LogTimes>
+    <LoggingSeverity>Info</LoggingSeverity>
+    <LogEventError>True</LogEventError>
+    <LogEventInfo>True</LogEventInfo>
+    <LogEventWarning>True</LogEventWarning>
+    <PrintToPhysicalPrinters>False</PrintToPhysicalPrinters>
+    <DefaultDontPrint>True</DefaultDontPrint>
+    <DefaultPrinter>Default</DefaultPrinter>
+    <UseUnicode>False</UseUnicode>
+    <DeleteEmptyFolders>False</DeleteEmptyFolders>
+    <DefaultBDFolder>BD</DefaultBDFolder>
+    <TransferRoot>
+    </TransferRoot>
+    <WarningRcw2435>False</WarningRcw2435>
+    <MailLogLevel>0</MailLogLevel>
+    <MailTestAddress>
+    </MailTestAddress>
+    <MailFrom>
+    </MailFrom>
+    <MailPort>25</MailPort>
+    <MailServer>
+    </MailServer>
+    <MailLogon>
+    </MailLogon>
+    <MailPassword>
+    </MailPassword>
+    <MailUseSSL>False</MailUseSSL>
+    <MailRecipient>
+    </MailRecipient>
+    <FTPCreateFolders>True</FTPCreateFolders>
+    <FTPTestSettings>False</FTPTestSettings>
+    <FTPTestDest>
+    </FTPTestDest>
+    <FTPTestHost>
+    </FTPTestHost>
+    <FTPTestUser>
+    </FTPTestUser>
+    <FTPTestPassword>
+    </FTPTestPassword>
+    <FTPPath>
+    </FTPPath>
+    <FTPDeleteFiles>True</FTPDeleteFiles>
+    <FileControllerName>FederaleFileController</FileControllerName>
+    <BatchControllerName>FederaleBatchController</BatchControllerName>
+  </AmtSettings>
+  <CloneReports>
+    <OrginalReport Name="CFH_COPY_GN" Clone="CFH_COPY" />
+    <OrginalReport Name="CFH_COPY_GN" Clone="LOADIS" />
+    <OrginalReport Name="CFH_COPY_GN" Clone="UNLOADIS" />
+    <OrginalReport Name="BABA_GN" Clone="BABA" />
+    <OrginalReport Name="FUSBA_GN" Clone="FUSBA" />
+    <OrginalReport Name="CHABAN_GN" Clone="CHABAN" />
+    <OrginalReport Name="CONDIS2_GN" Clone="CONDIS2" />
+    <OrginalReport Name="CONDIS2_GS" Clone="CONDIS2S" />
+    <OrginalReport Name="SCAN_GN" Clone="SCAN" />
+    <OrginalReport Name="TAPELD_GN" Clone="TPF$" />
+    <OrginalReport Name="LECTIS_GN" Clone="LECTIS" />
+    <OrginalReport Name="ARCHISEPARE_GN" Clone="ARCHISEPARE" />
+    <OrginalReport Name="ARCHIFORMAT_GN" Clone="ARCHIFORMAT" />
+  </CloneReports>
+</Amt>

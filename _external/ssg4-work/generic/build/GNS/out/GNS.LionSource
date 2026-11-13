@@ -22,7 +22,7 @@
 <DMS2200 SUBSCHEMAS>
 </DMS SUBSCHEMAS>
 <COBOL PROGRAM>
-<OBJECT=ASSURFED-UTILIT-CONDIS2-GS,COBOL PROGRAM>
+<OBJECT=CONDIS2-GS,COBOL PROGRAM>
 <VERSION=1.0>
 </OBJECT>
 </COBOL PROGRAM>
@@ -95,7 +95,7 @@
   0001=ENGLISH@TRUE
 </DATA>
 <DATA=ConvertData>
-  Application converted on : 2026-11-05 18:11
+  Application converted on : 2026-11-13 17:11
   Converted by user        : MTRUMAN
   Converted by version     : 1.0
   Old system date format   : ddmmmyy
@@ -188,7 +188,7 @@ SATURDAY
 <DMS2200 SUBSCHEMAS>
 </DMS SUBSCHEMAS>
 <COBOL PROGRAM>
-<OBJECT=ASSURFED-UTILIT-CONDIS2-GS,COBOL PROGRAM>
+<OBJECT=CONDIS2-GS,COBOL PROGRAM>
 <REVDATA>
 <VERSION=1.0>
 <USER=>
@@ -198,7 +198,7 @@ SATURDAY
 <DESCRIPTION=COBOL PROGRAM>
 </REVDATA>
 <DATA=Options>
-  Name=ASSURFED-UTILIT-CONDIS2-GS
+  Name=CONDIS2-GS
   Description=COBOL PROGRAM
   Parameter=
 </DATA>
@@ -209,7 +209,7 @@ SATURDAY
   2009-01-01 12:00  =>* from the SGSPARM file written by the skeleton hand-off, see
   2009-01-01 12:00  =>* spec.md "Behaviour" step 3 and "Generic program". The date
   2009-01-01 12:00  =>* paragraphs and the report are those of the SSG skeleton.
-  2009-01-01 12:00  => PROGRAM-ID. 'ASSURFED-UTILIT-CONDIS2-GS'.
+  2009-01-01 12:00  => PROGRAM-ID. 'CONDIS2-GS'.
   2009-01-01 12:00  => ENVIRONMENT DIVISION.
   2009-01-01 12:00  => CONFIGURATION SECTION.
   2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-10.

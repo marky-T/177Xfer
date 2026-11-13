@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 18:10:51
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_AFPH12_CFH_COPY regression                     --- 1 of 1 outputs byte-identical | === SSG4_AFPH12_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_AFPH12_CFH_COPY\check.txt)
+=== Regress : all passed

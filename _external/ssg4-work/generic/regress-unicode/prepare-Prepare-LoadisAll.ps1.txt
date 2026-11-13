@@ -1,0 +1,16 @@
+LD01 LOADIS   CLOA49 L141  B010SINAUTCL  -> OUTCLOA49     len 204 key 6,8 records 21
+LD02 LOADIS   DEPM08 L56   I012ALCCPAF   -> F012ALFACCP   len 120 key 0,17 records 22
+LD03 LOADIS   DMSH02 L141  INT-POLT      -> INT-POLI      len 106 key 0,15 records 23
+LD04 LOADIS   SINH01 L138  FICHIN        -> FSCR001ATO    len 204 key 6,8 records 24
+LD05 LOADIS   STAA06 L754  FICHIN        -> FICHOUT       len 400 key 3,5 records 25
+LD06 LOADIS   VIGA50 L129  INVIGA50      -> F006GRS       len 200 key 164,26 records 26
+LD07 LOADIS   VIRA18 L89   INA           -> FOUT          len 900 key 5,7 records 27
+LD08 LOADIS   VIRD38 L87   INA           -> FOUT          len 900 key 5,7 records 28
+LD09 LOADIS   VIRD50 L312  ID50VIR997T   -> F006NOASSUR   len 100 key 0,13 records 29
+LD10 LOADIS   VIRM01 L313  I006VIR997T   -> F006NOASSUR   len 100 key 0,13 records 30
+LD11 UNLOADIS CLOA43 L473  FSCR001ATO    -> OUT           len 204 key 6,8 records 31
+LD12 UNLOADIS DEPM08 L36   F012ALFACCP   -> I012ALCCPAF   len 120 key 0,17 records 32
+LD13 UNLOADIS EXPD05 L11   FSGR001VIC    -> OUT           len 114 key 6,8 records 33
+LD14 UNLOADIS EXPD05 L27   FSCR001ATO    -> ISCR001ATO    len 204 key 6,8 records 34
+LD15 UNLOADIS VIGA50 L45   F006GRS       -> OUTVIGA50     len 200 key 164,26 records 35
+SSG4_LOADIS_ALL.ps1 written, 15 cases, parse errors: 0

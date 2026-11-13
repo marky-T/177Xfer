@@ -1,0 +1,12 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-13 17:47:21
+PASS GNBUILD        generated after                2026-11-12 19:25:05 (the build LionSource)
+FAIL GNBUILD        imported since the last delivery revision unchanged (CFH_COPY_GN still 1.0.0.0; SCAN_GN still 1.0.0.0): this LionSource differs from the last delivered one, so import it in LionDev and generate again
+PASS GNREF          generated after                2026-10-21 23:16:51 (the build LionSource)
+PASS GNREF          imported since the last delivery nothing new to import
+PASS ASSURFED_UTILIT_CONDIS2_RV pre-build checks               11/13/2026 5:33:48 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_CONDIS2_RD pre-build checks               11/13/2026 5:33:48 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RA pre-build checks               11/13/2026 5:33:50 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_SCAN_RB pre-build checks               11/13/2026 5:33:50 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RA pre-build checks               11/13/2026 5:33:51 PM ok (static reference: T3-040 input check skipped)
+PASS ASSURFED_UTILIT_TAPELD_RB pre-build checks               11/13/2026 5:33:51 PM ok (static reference: T3-040 input check skipped)
+=== Deliver : 1 failure(s)

@@ -34,10 +34,10 @@ WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
 
 *** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
 
-Reading source: ASSURFED-UTILIT-CONDIS2-GS.TXT
+Reading source: CONDIS2-GS.TXT
 1 source(s) read
 
-Analyzing source: ASSURFED-UTILIT-CONDIS2-GS
+Analyzing source: CONDIS2-GS
 
 *** PHASE: A N A L Y S I N G   S O U R C E S ***
 
@@ -55,7 +55,7 @@ Batch          1         666       666
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:639
+Elapsed time:  00:00:00:666
 
 
 === Conversion Completed ===

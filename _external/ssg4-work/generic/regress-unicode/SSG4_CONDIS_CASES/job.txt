@@ -1,0 +1,4 @@
+--- BatchController: 20261113 16:58:39.345 11 Information SSG4_CONDIS_CASES Done Id: 1724 Queue: JOB_QUEUE1 (Execution time: 00:00:18:242)
+--- CONDTEST_172420261113165823708.log
+--- 6 of 6 outputs byte-identical
+=== SSG4_CONDIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_CONDIS_CASES\check.txt)

@@ -1,0 +1,3 @@
+--- BatchController: 20261113 17:01:07.542 11 Information SSG4_LOADIS_ALL Done Id: 1751 Queue: JOB_QUEUE1 (Execution time: 00:00:36:597)
+--- LOADALL_175120261113170033521.log
+=== SSG4_LOADIS_ALL : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LOADIS_ALL\check.txt)

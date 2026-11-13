@@ -1,0 +1,5 @@
+--- BatchController: 20261113 17:51:42.043 11 Information SSG4_VIRJ01PP_CFH_COPY Done Id: 1856 Queue: JOB_QUEUE1 (Execution time: 00:00:08:076)
+--- CFHFIX_185620261113175136632.log
+  2026-11-13 17:51:37 Info: SSG-4 hand-off (CFH-COPY): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\CFHFIX\CFHPARM (14 lines); CFHIN=ina CFHOUT=OUTA; Xqt CFH_COPY -> CFH_COPY_GN
+VIRJ01PP OUTA.DAT         6,194 B vs expected     3,096 B: PASS decoded UTF-16LE BOM
+--- 1 of 1 outputs match (0 byte-identical, 1 decoded UTF-16)

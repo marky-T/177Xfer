@@ -1,0 +1,12 @@
+SSG-4: rc.03 ADO items and UseUnicode wording (MT-066, MT-068)
+
+- Tracker: follow-up User Stories 120439/120443/120446 (Related to
+  119872); Testing task 120437 updated; MT-067 (ARCHIFUSION details to
+  Eddy/Hagop, internal only); MT-047 corrected (ARCHIFUSION is a plain
+  ECL sort, not a failed conversion); MT-046 recheck; MT-068 rc.03
+  INSTALL amended and pushed (3b85cdc41f).
+- New-GnReleaseDocs.ps1: INSTALL step 3 says both UseUnicode values are
+  proven and lists the two R&D confirmations.
+- SSG4-RnD-tickets-261113.md: section 1 as plain paste text.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

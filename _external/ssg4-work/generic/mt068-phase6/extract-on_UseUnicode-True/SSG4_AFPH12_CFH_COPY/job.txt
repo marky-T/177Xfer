@@ -1,0 +1,4 @@
+--- BatchController: 20261113 17:50:15.300 11 Information SSG4_AFPH12_CFH_COPY Done Id: 1848 Queue: JOB_QUEUE1 (Execution time: 00:00:24:825)
+--- AFPH12_184820261113174955109.log
+--- 1 of 1 outputs match (0 byte-identical, 1 decoded UTF-16)
+=== SSG4_AFPH12_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\mt068-phase6\extract-on_UseUnicode-True\SSG4_AFPH12_CFH_COPY\check.txt)

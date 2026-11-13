@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 16:57:16
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_CHABAN_CASES regression                     --- 8 of 8 outputs byte-identical | === SSG4_CHABAN_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_CHABAN_CASES\check.txt)
+=== Regress : all passed

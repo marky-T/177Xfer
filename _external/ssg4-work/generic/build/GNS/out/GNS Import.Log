@@ -1,9 +1,9 @@
-﻿20261105 18:11 Starting
-20261105 18:11 Loading file: E:\Repos\ssg4-work\generic\build\GNS\out\GNS.LionSource
-20261105 18:11 File version: 6
-20261105 18:11 Exported with program version: 
-20261105 18:11 Loading application AFBUS_2200COBOL under AFBUS_2200COBOL
-20261105 18:11 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.22
-20261105 18:11 Loading DMS Schema:  1.0 as 1.22
-20261105 18:11 Loading Cobol Program: ASSURFED-UTILIT-CONDIS2-GS 1.0 as 1.0
-20261105 18:11 Done in 00:00:00
+﻿20261113 17:30 Starting
+20261113 17:30 Loading file: E:\Repos\ssg4-work\generic\build\GNS\out\GNS.LionSource
+20261113 17:30 File version: 6
+20261113 17:30 Exported with program version: 
+20261113 17:30 Loading application AFBUS_2200COBOL under AFBUS_2200COBOL
+20261113 17:30 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.26
+20261113 17:30 Loading DMS Schema:  1.0 as 1.26
+20261113 17:30 Loading Cobol Program: CONDIS2-GS 1.0 as 1.1
+20261113 17:30 Done in 00:00:00

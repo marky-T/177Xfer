@@ -1,0 +1,5 @@
+--- BatchController: 20261113 17:50:59.680 11 Information SSG4_NEWNAME_CFH_COPY Done Id: 1852 Queue: JOB_QUEUE1 (Execution time: 00:00:08:077)
+--- NEWNAME_185220261113175054137.log
+  2026-11-13 17:50:55 Info: SSG-4 hand-off (CFH-COPY): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\ASSURFED\CFHPARM (3 lines); CFHIN=ZZNEWIN CFHOUT=ZZNEWOUT; Xqt CFH_COPY -> CFH_COPY_GN
+NEWNAME ZZTESTOUT.DAT     1,202 B vs expected       600 B: PASS decoded UTF-16LE BOM
+--- 1 of 1 outputs match (0 byte-identical, 1 decoded UTF-16)

@@ -1,0 +1,19 @@
+SSG4_AFPH12_CFH_COPY           job=0
+SSG4_VIRM01_CFH_COPY           job=0
+SSG4_NEWNAME_CFH_COPY          job=0
+SSG4_VIRM01UL_CFH_COPY         job=0
+SSG4_VIRJ01PP_CFH_COPY         job=0
+SSG4_BABA_CASES                job=0
+SSG4_CHABAN_CASES              job=0
+SSG4_FUSBA_CASES               job=0
+SSG4_CONDIS_CASES              job=0
+SSG4_CONDIS2S_CASES            job=3
+SSG4_SCANGRP_PRINTS            job=0 prints=1
+SSG4_LOADIS_CASES              job=0 check=0
+SSG4_LOADIS_ALL                job=0 check=0
+SSG4_LOADIS_ABORT [UNSORTED]   job=4 check=2
+SSG4_LOADIS_ABORT [DUPLICATE]  job=4 check=0
+SSG4_ARCHIVE_CASES             job=0 check=0
+SSG4_LECTIS_CASES              job=0 prints=0 check=0
+SSG4_LECTIS_ABORT [NOCOND]     job=4 check=0
+SSG4_LECTIS_ABORT [BADCOND]    job=4 check=0

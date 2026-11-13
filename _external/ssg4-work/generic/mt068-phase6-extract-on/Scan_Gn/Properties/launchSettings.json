@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SCAN_GN": {
+      "commandName": "Executable",
+      "executablePath": "Y:\\Amt.net\\AmtBatchController\\AmtBatchControllerAgent\\bin\\Debug\\net10.0-windows\\AmtBatchControllerAgent.exe",
+      "commandLineArgs": "/RUN:SCAN_GN /APP:AFBUS_2200COBOL /MANUALLY /VS"
+    }
+  }
+}

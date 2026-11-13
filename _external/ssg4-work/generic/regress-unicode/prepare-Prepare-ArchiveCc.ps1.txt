@@ -1,0 +1,25 @@
+deployed script set: skeletons, includes and CloneReports ok
+staged ARCHTEST\ARS1-CHERCH    <- keys5-S1.DAT
+staged ARCHTEST\ARS1-UNLOAD    <- AFPH12.DAT
+staged ARCHTEST\ARS2-CHERCH    <- keys5-S1.DAT
+staged ARCHTEST\ARS2-UNLOAD    <- KEYFIRST.DAT
+staged ARCHTEST\ARS3-CHERCH    <- keys5-S1.DAT
+staged ARCHTEST\ARS3-UNLOAD    <- KEYLAST.DAT
+staged ARCHTEST\ARS4-CHERCH    <- empty.DAT
+staged ARCHTEST\ARS4-UNLOAD    <- AFPH12.DAT
+staged ARCHTEST\ARS5-CHERCH    <- keys5-S5.DAT
+staged ARCHTEST\ARS5-UNLOAD    <- AFPH12.DAT
+staged ARCHTEST\ARS6-CHERCH    <- keys4-S6.DAT
+staged ARCHTEST\ARS6-UNLOAD    <- VIRM01UL.DAT
+staged ARCHTEST\ARS8-CHERCH    <- keys4-S6.DAT
+staged ARCHTEST\ARS8-UNLOAD    <- BOUNDARY.DAT
+staged ARCHTEST\ZZ-KEYS        <- keys5-S1.DAT
+staged ARCHTEST\ZZ-DATA        <- AFPH12.DAT
+staged ARCHTEST\ARF1-UNLOAD    <- VIRM01.DAT
+staged ARCHTEST\ARF2-UNLOAD    <- VIRM01.DAT
+staged ARCHTEST\ARF4-UNLOAD    <- empty.DAT
+SSG4_ARCHIVE_CASES.ps1 written (job log prefix ARCHTEST), parse errors 0
+staged ARCHS7\ARS7-CHERCH    <- keys5-S1.DAT
+staged ARCHS7\ARS7-UNLOAD    <- BADKEY.DAT
+SSG4_ARCHIVE_S7.ps1 written (job log prefix ARCHS7), parse errors 0
+cc-archive.json: 13 cases, 22 outputs -> E:\Repos\ssg4-work\generic\ARCHIVE

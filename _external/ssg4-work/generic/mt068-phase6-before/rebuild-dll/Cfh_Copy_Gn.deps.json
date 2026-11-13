@@ -1,0 +1,67 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Cfh_Copy_Gn/1.0.0": {
+        "dependencies": {
+          "AFBUS_2200COBOL.Application": "8.0.26230.0",
+          "AFBUS_2200COBOL.Database": "8.0.26230.0",
+          "Newtonsoft.Json": "13.0.0.0"
+        },
+        "runtime": {
+          "Cfh_Copy_Gn.dll": {}
+        }
+      },
+      "AFBUS_2200COBOL.Application/8.0.26230.0": {
+        "runtime": {
+          "AFBUS_2200COBOL.Application.dll": {
+            "assemblyVersion": "8.0.26230.0",
+            "fileVersion": "1.24.0.0"
+          }
+        }
+      },
+      "AFBUS_2200COBOL.Database/8.0.26230.0": {
+        "runtime": {
+          "AFBUS_2200COBOL.Database.dll": {
+            "assemblyVersion": "8.0.26230.0",
+            "fileVersion": "1.24.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Cfh_Copy_Gn/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AFBUS_2200COBOL.Application/8.0.26230.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AFBUS_2200COBOL.Database/8.0.26230.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

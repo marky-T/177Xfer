@@ -1,0 +1,12 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 17:49:29
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS prepare        Prepare-GnRun.ps1              inputs, job scripts and hand-offs staged
+PASS prepare        Prepare-FixeCheck.ps1          inputs, job scripts and hand-offs staged
+PASS prepare        Prepare-ScanGroupCc.ps1        inputs, job scripts and hand-offs staged
+PASS SSG4_AFPH12_CFH_COPY regression                     PASS 2026-11-13 16:54:41: --- 1 of 1 outputs byte-identical | === SSG4_AFPH12_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_AFPH12_CFH_COPY\check.txt)
+PASS SSG4_VIRM01_CFH_COPY regression                     PASS 2026-11-13 16:55:25: --- 1 of 1 outputs match (0 byte-identical, 1 decoded UTF-16) | === SSG4_VIRM01_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_VIRM01_CFH_COPY\check.txt)
+PASS SSG4_NEWNAME_CFH_COPY regression                     PASS 2026-11-13 16:55:48: --- 1 of 1 outputs byte-identical | === SSG4_NEWNAME_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_NEWNAME_CFH_COPY\check.txt)
+PASS SSG4_VIRM01UL_CFH_COPY regression                     PASS 2026-11-13 16:56:08: --- 1 of 1 outputs byte-identical | === SSG4_VIRM01UL_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_VIRM01UL_CFH_COPY\check.txt)
+PASS SSG4_VIRJ01PP_CFH_COPY regression                     PASS 2026-11-13 16:56:27: --- 1 of 1 outputs byte-identical | === SSG4_VIRJ01PP_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_VIRJ01PP_CFH_COPY\check.txt)
+PASS SSG4_SCANGRP_PRINTS regression                     PASS 2026-11-13 16:59:33: === SSG4_SCANGRP_PRINTS : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_SCANGRP_PRINTS\check.txt) | PRN files since 16:59:00: 12, expected 12 | === prints: all checks passed
+=== Regress : all passed

@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 17:39:17
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS prepare        Prepare-CondisSCc.ps1          inputs, job scripts and hand-offs staged
+FAIL SSG4_CONDIS2S_CASES regression                     last run 2026-11-13 17:37:37 FAILED: --- 0 of 36 outputs byte-identical | === SSG4_CONDIS2S_CASES : 38 problem(s) (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_CONDIS2S_CASES\check.txt)
+=== Regress : 1 failure(s)

@@ -1,0 +1,18 @@
+--- BatchController: 20261113 18:33:29.262 10 Information SSG4_SCANGRP_PRINTS Done Id: 1881 Queue: JOB_QUEUE1 (Execution time: 00:00:28:475)
+--- SCANGRP_188120261113183303276.log
+  2026-11-13 18:33:03 Info: SCAN group case S1 (SCAN -d_VIRD36_MJ_L292)
+  2026-11-13 18:33:04 Info: SSG-4 hand-off (SCAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGS1\SCANPARM (2 lines); SCANIN=R006VIRD36; Xqt SCAN -> SCAN_GN
+  2026-11-13 18:33:07 Info: SCAN group case S2 (SCAN PBDA04_L132)
+  2026-11-13 18:33:07 Info: SSG-4 hand-off (SCAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGS2\SCANPARM (3 lines); SCANIN=IVIR002RAD; Xqt SCAN -> SCAN_GN
+  2026-11-13 18:33:11 Info: SCAN group case S3 (SCAN VIES01_L202)
+  2026-11-13 18:33:11 Info: SSG-4 hand-off (SCAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGS3\SCANPARM (2 lines); SCANIN=INAVIES01; Xqt SCAN -> SCAN_GN
+  2026-11-13 18:33:13 Info: SCAN group case S4 (SCAN CCSA14_L76)
+  2026-11-13 18:33:13 Info: SSG-4 hand-off (SCAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGS4\SCANPARM (3 lines); SCANIN=INA; Xqt SCAN -> SCAN_GN
+  2026-11-13 18:33:15 Info: SCAN group case T1 (TAPELD PBDA04_L805)
+  2026-11-13 18:33:15 Info: SSG-4 hand-off (TAPELD): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGT1\TAPPARM (8 lines); TAPLIN=IPBA04CBB; Xqt TPF$ -> TAPELD_GN
+  2026-11-13 18:33:19 Info: SCAN group case T2 (TAPELD VIRA12_PI_L590)
+  2026-11-13 18:33:19 Info: SSG-4 hand-off (TAPELD): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGT2\TAPPARM (17 lines); TAPLIN=IN1; Xqt TPF$ -> TAPELD_GN
+  2026-11-13 18:33:23 Info: SCAN group case T3 (TAPELD PBDA04_L339)
+  2026-11-13 18:33:24 Info: SSG-4 hand-off (TAPELD): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGT3\TAPPARM (9 lines); TAPLIN=INP; Xqt TPF$ -> TAPELD_GN
+  2026-11-13 18:33:25 Info: SCAN group case T4 (TAPELD -d_VIRD50_PI_L579)
+  2026-11-13 18:33:25 Info: SSG-4 hand-off (TAPELD): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\SGT4\TAPPARM (17 lines); TAPLIN=IN1; Xqt TPF$ -> TAPELD_GN

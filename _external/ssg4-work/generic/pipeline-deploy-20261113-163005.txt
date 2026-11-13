@@ -1,0 +1,22 @@
+Stage Deploy, environment CC-Trial, UseUnicode False, started 2026-11-13 16:30:05
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+PASS script set     UseUnicode                     False in the deployed settings (wanted False)
+PASS CFH-COPY       UTILIT_CFH-COPY_ASCII.ps1      CfhCopyParm.inc, Invoke-CfhCopyHandoff -Program 'CFH_COPY_GN' -FixedNames
+PASS LOADIS         UTILIT_LOADIS_ASCII.ps1        LoadisParm.inc, Invoke-LoadisHandoff -Mode LOADIS
+PASS LOADIS         UTILIT_LOADIS_MULTI.ps1        LoadisParm.inc, Invoke-LoadisHandoff -Mode LOADIS
+PASS LOADIS         UTILIT_UNLOADIS_ASCII.ps1      LoadisParm.inc, Invoke-LoadisHandoff -Mode UNLOADIS
+PASS LOADIS         UTILIT_UNLOADIS_MULTI.ps1      LoadisParm.inc, Invoke-LoadisHandoff -Mode UNLOADIS
+PASS BABA           UTILIT_BABA_ASCII.ps1          BabaParm.inc, Invoke-BabaHandoff
+PASS FUSBA          UTILIT_FUSBA_ASCII.ps1         FusbaParm.inc, Invoke-FusbaHandoff -Variant FUSBA
+PASS FUSBA          UTILIT_FUSBA2_ASCII.ps1        FusbaParm.inc, Invoke-FusbaHandoff -Variant FUSBA2
+PASS CHABAN         UTILIT_CHABAN_ASCII.ps1        ChabanParm.inc, Invoke-ChabanHandoff -Variant CHABAN
+PASS CHABAN         UTILIT_CHAB100_ASCII.ps1       ChabanParm.inc, Invoke-ChabanHandoff -Variant CHAB100
+PASS CONDIS2        UTILIT_CONDIS2_ASCII.ps1       CondisParm.inc, Invoke-CondisHandoff
+PASS SCAN           UTILIT_SCAN_ASCII.ps1          ScanParm.inc, Invoke-ScanHandoff
+PASS TAPELD         UTILIT_TAPELD_ASCII.ps1        TapeldParm.inc, Invoke-TapeldHandoff
+PASS LECTIS         UTILIT_LECTIS_ASCII.ps1        LectisParm.inc, Invoke-LectisHandoff
+PASS ARCHISEPARE    UTILIT_ARCHISEPARE.ps1         ArchisepareParm.inc, Invoke-ArchisepareHandoff
+PASS ARCHIFORMAT    UTILIT_ARCHIFORMAT.ps1         ArchiformatParm.inc, Invoke-ArchiformatHandoff
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 12 utilities, 17 skeleton entries checked, problems: 0
+=== Deploy : all passed

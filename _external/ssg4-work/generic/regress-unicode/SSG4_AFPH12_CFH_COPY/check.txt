@@ -1,0 +1,5 @@
+--- BatchController: 20261113 18:10:58.955 11 Information SSG4_AFPH12_CFH_COPY Done Id: 1871 Queue: JOB_QUEUE1 (Execution time: 00:00:15:533)
+--- AFPH12_18712026111318104863.log
+  2026-11-13 18:10:49 Info: SSG-4 hand-off (CFH-COPY): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\ASSURFED\CFHPARM (3 lines); CFHIN=INASC CFHOUT=OUTASC; Xqt CFH_COPY -> CFH_COPY_GN
+AFPH12 IAFB012FAI.DAT       600 B vs expected       600 B: PASS byte-identical
+--- 1 of 1 outputs byte-identical

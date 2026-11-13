@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-13 16:56:43
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_BABA_CASES regression                     --- 11 of 11 outputs byte-identical | === SSG4_BABA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_BABA_CASES\check.txt)
+=== Regress : all passed

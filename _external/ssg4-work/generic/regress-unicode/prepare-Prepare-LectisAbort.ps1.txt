@@ -1,0 +1,3 @@
+NOCOND   cards of REJE3: expect an abort [E3] before the Xqt
+BADCOND  cards of REJL3A: expect an abort [L3] before the Xqt
+SSG4_LECTIS_ABORT.ps1 written, parse errors: 0

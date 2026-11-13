@@ -1,4 +1,4 @@
-job log: E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261112\ARCHTEST_164720261112200202305.log
+job log: E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Logs\20261113\ARCHTEST_176920261113170230840.log
 job log problem lines: 0
 S1  ARS1-ARCHI       224 B vs expected     224 B: PASS byte-identical (run date masked)
 S1  ARS1-NARCHI      528 B vs expected     528 B: PASS byte-identical

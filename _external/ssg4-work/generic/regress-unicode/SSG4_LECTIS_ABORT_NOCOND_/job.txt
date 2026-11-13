@@ -1,0 +1,6 @@
+--- BatchController: 20261113 17:04:27.867 11 Information SSG4_LECTIS_ABORT Error Id: 1807 Queue: JOB_QUEUE1 (Execution time: 00:00:04:060)
+--- LECABRT_180720261113170426404.log
+  FLAG 2026-11-13 17:04:27 Msg: LECTIS-ABORT case NOCOND
+  FLAG 2026-11-13 17:04:27 Info: LECTIS-ABORT case NOCOND
+  FLAG 2026-11-13 17:04:27 Error: AFBUS_2200COBOL_AMT - LECABRT : SSG-4 hand-off (LECTIS) [E3]: no COND card (the skeleton would write IF NEXT SENTENCE)
+=== SSG4_LECTIS_ABORT : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LECTIS_ABORT_NOCOND_\check.txt)

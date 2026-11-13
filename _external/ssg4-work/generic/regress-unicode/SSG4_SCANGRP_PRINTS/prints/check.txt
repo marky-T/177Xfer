@@ -1,0 +1,11 @@
+PRN files since 18:32:58: 12, expected 12
+PRN encodings: UTF-16LE BOM x12
+S1: == reference (17086 bytes); model: 128 lines match
+S2: == reference (17172 bytes); model: 91 lines match
+S3: model: 9 lines match
+S4: model: 21 lines match
+T1: == reference (5352 bytes); model: 123 lines match
+T2: == reference (8366 bytes); model: 55 lines match
+T3: model: 11 lines match
+T4: model: 6 lines match
+=== prints: all checks passed

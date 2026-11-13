@@ -1,0 +1,6 @@
+0ARCHISTABLE-ARCH                    2026111220261103                                                                                   
+1CLE-TABLE                     N10.00                                                                                                   
+2CLE-TABLE                     CHAR   0000000010                                                                                        
+2COL-NAME-1                    CHARVAR0000000010NULL                                                                                    
+3PK_TABLE-ARCH                 CLE-TABLE                     Asc                                                                        
+9ARCHISTABLE-ARCH                    20261112+00000000000+00000000000                                                                   

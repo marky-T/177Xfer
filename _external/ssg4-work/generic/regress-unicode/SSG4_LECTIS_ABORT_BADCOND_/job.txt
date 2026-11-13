@@ -1,0 +1,6 @@
+--- BatchController: 20261113 17:04:46.033 11 Information SSG4_LECTIS_ABORT Error Id: 1808 Queue: JOB_QUEUE1 (Execution time: 00:00:04:057)
+--- LECABRT_180820261113170444511.log
+  FLAG 2026-11-13 17:04:45 Msg: LECTIS-ABORT case BADCOND
+  FLAG 2026-11-13 17:04:45 Info: LECTIS-ABORT case BADCOND
+  FLAG 2026-11-13 17:04:45 Error: AFBUS_2200COBOL_AMT - LECABRT : SSG-4 hand-off (LECTIS) [L3]: COND 'CTR > 0 AND SYMK = 'K0001'' is outside the supported form: CTR|SYMK [IS] [NOT] =|>|<|>=|<=|EQUAL|GREATER|LESS [TO|THAN] number|'word'
+=== SSG4_LECTIS_ABORT : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LECTIS_ABORT_BADCOND_\check.txt)

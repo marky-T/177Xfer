@@ -1,0 +1,7 @@
+Stage Deploy, environment CC-Trial, UseUnicode True, started 2026-11-13 16:45:44
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+PASS script set     UseUnicode                     True in the deployed settings (wanted True)
+PASS CONDIS2S       UTILIT_CONDIS2S_ASCII.ps1      CondisSParm.inc, Invoke-CondisSHandoff
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 12 utilities, 17 skeleton entries checked, problems: 0
+=== Deploy : all passed
