@@ -1,0 +1,465 @@
+EclConverter Console running with arguments: /INPUT:E:\Repos\ssg4-work\t3066\skeleton-regen\BABA_ASCII\input /OUTPUT:E:\Repos\ssg4-work\t3066\skeleton-regen\BABA_ASCII\out-t3066
+=== ECL to Powershell conversion ===
+Conversion target: Powershell
+ECL Dialect: Os2200
+Input folder : E:\Repos\ssg4-work\t3066\skeleton-regen\BABA_ASCII\input
+Output folder: E:\Repos\ssg4-work\t3066\skeleton-regen\BABA_ASCII\out-t3066
+=== Phase 2: Parsing ECL runstreams... ===
+  Parsed 2 runstreams.
+  Built runstream index with 2 entries (2 runstreams, 0 includes).
+  Classification: 1 full runstreams, 1 partial runstreams, 0 data-only elements
+=== Phase 3: Analysing... ===
+  Runtime-created elements detected: 0 (from @ELT statements).
+=== Phase 4: Migrating and generating scripts... ===
+--Warning: Orphaned data line (not consumed by preceding statement): *DEFINE    FILLADD
+--Warning: Orphaned data line (not consumed by preceding statement): *SET  FILLCTR  TO    [#1]+1
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *DEFINE    FILLSUB
+--Warning: Orphaned data line (not consumed by preceding statement): *SET  FILLCTR  TO 0-[#1]
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *DEFINE    LIMPARA
+--Warning: Orphaned data line (not consumed by preceding statement): *SET   PARALIM  TO   [#1]-1
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *DEFINE    SETSTART
+--Warning: Orphaned data line (not consumed by preceding statement): *SET   START  TO   [#1]+1
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *DEFINE    SETCVAL
+--Warning: Orphaned data line (not consumed by preceding statement): *SET   C  TO   [#1]+1
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [KEYS]  =  0
+--Warning: Orphaned data line (not consumed by preceding statement): *CREATE  SGS:  KEYS  ALL
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *EDIT ON &
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [ASCII]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): #ACOB,PECIQ  &
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): #ACOB,PECTI  &
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): TPF$.NAME$,TPF$.NAME$   &
+--Warning: Orphaned data line (not consumed by preceding statement): *EDIT OFF
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [COND] > 0
+--Warning: Orphaned data line (not consumed by preceding statement): *SET NOP TO 0
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): *CREATE  SGS:  COND CTR < 99999999
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *set case$ to 1
+--Warning: Orphaned data line (not consumed by preceding statement): *. para y2k keys pos,num,lg
+--Warning: Orphaned data line (not consumed by preceding statement): *. para def keys pos,1,4
+--Warning: Orphaned data line (not consumed by preceding statement): *set ypv to '<'
+--Warning: Orphaned data line (not consumed by preceding statement): *increment a from 1 to [Y2K]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [Y2K,A,1,1] = KEYS
+--Warning: Orphaned data line (not consumed by preceding statement): *set maxy to [KEYS]
+--Warning: Orphaned data line (not consumed by preceding statement): *increment c from 1 to [*maxy]
+--Warning: Orphaned data line (not consumed by preceding statement): *set par to 'KEYS [KEYS,C,1,1] '
+--Warning: Orphaned data line (not consumed by preceding statement): *set ncha to 2
+--Warning: Orphaned data line (not consumed by preceding statement): *increment b from 2 to [Y2K,A]
+--Warning: Orphaned data line (not consumed by preceding statement): *set ylg to 4
+--Warning: Orphaned data line (not consumed by preceding statement): *if [y2k,a,b,3] > 0
+--Warning: Orphaned data line (not consumed by preceding statement): *set ylg to [y2k,a,b,3]
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *set ych to 2
+--Warning: Orphaned data line (not consumed by preceding statement): *if [y2k,a,b,2] > 0
+--Warning: Orphaned data line (not consumed by preceding statement): *set ych to [y2k,a,b,2]
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *set ypos to [y2k,a,b,1]
+--Warning: Orphaned data line (not consumed by preceding statement): *set ynr to [*ych] - 1
+--Warning: Orphaned data line (not consumed by preceding statement): *increment d from [*ncha] to [*ynr]
+--Warning: Orphaned data line (not consumed by preceding statement): *set par to '[*par] [keys,c,d,1],[keys,c,d,2],[keys,c,d,3] '
+--Warning: Orphaned data line (not consumed by preceding statement): *set ncha to [*ncha] + 1
+--Warning: Orphaned data line (not consumed by preceding statement): *loop
+--Warning: Orphaned data line (not consumed by preceding statement): *set ytr to '[keys,c,ych,3,substr$,ypos,ylg]'
+--Warning: Orphaned data line (not consumed by preceding statement): *if [*ylg] = 2
+--Warning: Orphaned data line (not consumed by preceding statement): *if [*ytr,substr$,1,1] = 0
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '*[*ytr,substr$,2,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,1] = 1
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '_[*ytr,substr$,2,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,1] = 2
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '|[*ytr,substr$,2,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,1] = 3
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '~[*ytr,substr$,2,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *else
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to [*ytr]
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ylg] = 4
+--Warning: Orphaned data line (not consumed by preceding statement): *if [*ytr,substr$,1,3] = 200
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '[*ypv][*ytr,substr$,4,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,3] = 201
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '_[*ytr,substr$,4,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,3] = 202
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '|[*ytr,substr$,4,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *elseif [*ytr,substr$,1,3] = 203
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to '~[*ytr,substr$,4,1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *else
+--Warning: Orphaned data line (not consumed by preceding statement): *set yan to [*ytr,substr$,3,2]
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *set yls to [*ypos] - 1
+--Warning: Orphaned data line (not consumed by preceding statement): *if [*yls] = 0
+--Warning: Orphaned data line (not consumed by preceding statement): *set ytr to '[*yan]'
+--Warning: Orphaned data line (not consumed by preceding statement): *else
+--Warning: Orphaned data line (not consumed by preceding statement): *set ytr to '[keys,c,ych,3,substr$,1,yls][*yan]'
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *set yls to [*ylg] + [*YPOS]
+--Warning: Orphaned data line (not consumed by preceding statement): *set ylg1 to [keys,c,ych,3,len$] - [*yls] + 1
+--Warning: Orphaned data line (not consumed by preceding statement): *if [*ylg1] > 0
+--Warning: Orphaned data line (not consumed by preceding statement): *set ytr to '[*YTR][keys,c,ych,3,substr$,yls,ylg1]'
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *set par to '[*par] [keys,c,ych,1],[keys,c,ych,2],[*YTR]'
+--Warning: Orphaned data line (not consumed by preceding statement): *set ncha to [*ncha] + 1
+--Warning: Orphaned data line (not consumed by preceding statement): *loop
+--Warning: Orphaned data line (not consumed by preceding statement): *increment d from [*ncha] to [keys,c]
+--Warning: Orphaned data line (not consumed by preceding statement): *set par to '[*par] [keys,c,d,1],[keys,c,d,2],[keys,c,d,3] '
+--Warning: Orphaned data line (not consumed by preceding statement): *loop
+--Warning: Orphaned data line (not consumed by preceding statement): *create sgs [*par]
+--Warning: Orphaned data line (not consumed by preceding statement): *loop
+--Warning: Orphaned data line (not consumed by preceding statement): *remove sgs KEYS,1,maxy
+--Warning: Orphaned data line (not consumed by preceding statement): *endif
+--Warning: Orphaned data line (not consumed by preceding statement): *loop
+--Warning: Orphaned data line (not consumed by preceding statement): IDENTIFICATION DIVISION.
+--Warning: Orphaned data line (not consumed by preceding statement): PROGRAM-ID. EXTRACT-[INPUT,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): AUTHOR. BOURDEAUD HUY PIERRE.
+--Warning: Orphaned data line (not consumed by preceding statement): ENVIRONMENT DIVISION.
+--Warning: Orphaned data line (not consumed by preceding statement): CONFIGURATION SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+--Warning: Orphaned data line (not consumed by preceding statement): OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+--Warning: Orphaned data line (not consumed by preceding statement): SPECIAL-NAMES.     PRINTER   IS   LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): INPUT-OUTPUT SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): FILE-CONTROL.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [INPUT,1,1,1]  = CARDREADER
+--Warning: Orphaned data line (not consumed by preceding statement): SELECT TAPEIN1 ASSIGN TO CARD-READER.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  INPUTCT TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): SELECT  TAPEIN[*INPUTCT]  ASSIGN  TO
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [INPUT,1,INPUTCT]  >  3
+--Warning: Orphaned data line (not consumed by preceding statement): UNISERVO  [INPUT,1,INPUTCT,1].
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): DISC  [INPUT,1,INPUTCT,1].
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [OUTPUT,1,1,1] = PRINTER
+--Warning: Orphaned data line (not consumed by preceding statement): SELECT TAPEOUT1 ASSIGN TO PRINTER.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  OUTPUTCT  TO  [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): SELECT  TAPEOUT[*OUTPUTCT]  ASSIGN  TO
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [OUTPUT,1,OUTPUTCT]  >  3
+--Warning: Orphaned data line (not consumed by preceding statement): UNISERVO  [OUTPUT,1,OUTPUTCT,1].
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): DISC  [OUTPUT,1,OUTPUTCT,1].
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): DATA DIVISION.
+--Warning: Orphaned data line (not consumed by preceding statement): FILE SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): *CLEAR  FILLCTR
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  IMP FROM 1  BY 1  TO [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): FD  TAPEIN[*IMP]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [INPUT,1,1,1] = CARDREADER
+--Warning: Orphaned data line (not consumed by preceding statement): LABEL RECORD OMITTED
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): LABEL RECORD IS STANDARD
+--Warning: Orphaned data line (not consumed by preceding statement): BLOCK CONTAINS [INPUT,1,IMP,3] RECORDS
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): RECORD CONTAINS [INPUT,1,IMP,2] CHARACTERS
+--Warning: Orphaned data line (not consumed by preceding statement): DATA RECORD  IS REC-IN-[*IMP].
+--Warning: Orphaned data line (not consumed by preceding statement): 01  REC-IN-[*IMP].
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  CH  FROM 1  BY 1  TO [INPUT,1,IMP,2]
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT COL FROM 2 BY 1  TO [KEYS,1]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF  VALUE OF  [KEYS,1,COL,1]  =  [*CH]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF  FILLCTR  IS SET
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER                   PIC  X([*FILLCTR]).
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): 03  COMPARE-FILE-[*IMP]-FIELD-[*COL]   PIC  X([KEYS,1,COL,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *PROCESS   FILLSUB  [KEYS,1,COL,2]
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *PROCESS   FILLADD  [*FILLCTR]
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *IF  FILLCTR  IS SET
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER                   PIC  X([*FILLCTR]).
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  OUTPCT  TO  [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): FD  TAPEOUT[*OUTPCT]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF    [OUTPUT,1,1,1]  = PRINTER
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): LABEL RECORD IS STANDARD
+--Warning: Orphaned data line (not consumed by preceding statement): BLOCK CONTAINS [OUTPUT,1,OUTPCT,3] RECORDS
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): RECORD CONTAINS [OUTPUT,1,OUTPCT,2] CHARACTERS
+--Warning: Orphaned data line (not consumed by preceding statement): DATA RECORD IS REC-OUT-[*OUTPCT].
+--Warning: Orphaned data line (not consumed by preceding statement): 01  REC-OUT-[*OUTPCT]           PIC X([OUTPUT,1,OUTPCT,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): WORKING-STORAGE SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT INC  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 77  TAPE-[*INC]-CT                PIC 9(10)  COMP VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): 77  INPUT-CT                 PIC 9(10)  COMP  VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  OUTC  TO  [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 77  TAPE-[*OUTC]-OUT-CT            PIC 9(10)  COMP  VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): 77  OUTPUT-CT                PIC 9(10)  COMP  VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): 77  ELIMINATE-CT                 PIC 9(10)  COMP VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  RQS  TO [KEYS]
+--Warning: Orphaned data line (not consumed by preceding statement): 01  REQUIREMENTS-[*RQS].
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  REQ  FROM 2  BY 1  TO  [KEYS,RQS]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR,1,1,1]  =  MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): 03  REQ-ALT-[*RQS]-FLD-[*REQ]  PIC X([KEYS,RQS,REQ,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): 03  REQ-ALT-[*RQS]-FLD-[*REQ]          PIC X([KEYS,RQS,REQ,2])
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [KEYS,RQS,REQ,3] = BLANC
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE SPACE.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE  '[KEYS,RQS,REQ,3]'.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  FL  TO [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 01  COMPARE-[*FL].
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  CF  FROM  2 BY 1  TO [KEYS,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 03  COMPARE-FILE-[*FL]-FIELD-[*CF]   PIC X([KEYS,1,CF,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR,1,1,1]  =  YES   OR  [SEQERROR,1,1,1]  =  OUI  ;
+--Warning: Orphaned data line (not consumed by preceding statement): OR  [SEQERROR,1,1,1]    = YA  ;
+--Warning: Orphaned data line (not consumed by preceding statement): OR [SEQERROR,1,1,1] = MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT   FSQ  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 01  FILE-[*FSQ]-SEQ-ERROR-CT     PIC 9(5)  COMP  VALUE 0.
+--Warning: Orphaned data line (not consumed by preceding statement): 01  SEQ-COMPARE-[*FSQ].
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT   SQ  FROM 2  BY 1   TO  [KEYS,1]
+--Warning: Orphaned data line (not consumed by preceding statement): 03  COMPARE-FILE-[*FSQ]-FIELD-[*SQ]    PIC X([KEYS,1,SQ,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): 01  ABORT-IND  PIC 9(5) COMP.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [ASCII]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): 01  SEQ-ERR-LINE       USAGE  DISPLAY-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): 01  SEQ-ERR-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): 03  SEQ-FNAME                PIC X(12).
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER                   PIC X(36)
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE  ' HAS SEQUENCE ERROR BETWEEN RECORD '.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  SEQ-REC-1                PIC Z(11)9.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER                   PIC X(12)
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE  ' AND RECORD '.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  SEQ-REC-2                PIC Z(11)9.
+--Warning: Orphaned data line (not consumed by preceding statement): 01  SEQ-ERR-L2.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [ASCII]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): USAGE   DISPLAY-1
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER                   PIC X(9)
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE  'INDICATIF'.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  SEQ-REC-L2               PIC Z(11)9.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER PIC X(6)
+--Warning: Orphaned data line (not consumed by preceding statement): VALUE '  :-  '.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  COMPARE-L2               PIC X(105).
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [ASCII]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): 01  DISPLAY-LINE                          USAGE  DISPLAY-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): 01  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): 03  DISP-MESSAGE        PIC X(24).
+--Warning: Orphaned data line (not consumed by preceding statement): 03  DISP-FNAME          PIC X(12).
+--Warning: Orphaned data line (not consumed by preceding statement): 03  DISP-CT             PIC Z(11)9.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  FILLER              PIC X(84)  VALUE SPACE.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [SEQERROR,1,1,1] = MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): 01  TESTA.
+--Warning: Orphaned data line (not consumed by preceding statement): 03  SWITCHA  PIC X.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): 01  CTR PIC 9(18) COMP.
+--Warning: Orphaned data line (not consumed by preceding statement): PROCEDURE DIVISION.
+--Warning: Orphaned data line (not consumed by preceding statement): E-F-[INPUT,1,1,1] SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): DEBUT.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT OUTP TO [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): OPEN OUTPUT TAPEOUT[*OUTP].
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): OPEN-AND-FIRST-READ.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  INP  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): OPEN  INPUT  TAPEIN[*INP]. READ  TAPEIN[*INP]
+--Warning: Orphaned data line (not consumed by preceding statement): AT END  MOVE  HIGH-VALUE TO REC-IN-[*INP]
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO ENDING-ROUTINES.
+--Warning: Orphaned data line (not consumed by preceding statement): ADD 1 TO CTR.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  CORRESPONDING  REC-IN-[*INP]  TO  COMPARE-[*INP].
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  1  TO  TAPE-[*INP]-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO  SEPARATION.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  RD  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): READ-FILE-[*RD].
+--Warning: Orphaned data line (not consumed by preceding statement): READ  TAPEIN[*RD]
+--Warning: Orphaned data line (not consumed by preceding statement): AT END GO TO ENDING-ROUTINES.
+--Warning: Orphaned data line (not consumed by preceding statement): ADD 1 TO CTR.
+--Warning: Orphaned data line (not consumed by preceding statement): IF
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT I FROM 1 BY 1 TO [COND,1]
+--Warning: Orphaned data line (not consumed by preceding statement): [COND,1,I,1]
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO ECLATEMENT
+--Warning: Orphaned data line (not consumed by preceding statement): ELSE GO TO ENDING-ROUTINES.
+--Warning: Orphaned data line (not consumed by preceding statement): ECLATEMENT.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR,1,1,1]  =  YES   OR  [SEQERROR,1,1,1]  =  OUI  ;
+--Warning: Orphaned data line (not consumed by preceding statement): OR  [SEQERROR,1,1,1]    = YA  ;
+--Warning: Orphaned data line (not consumed by preceding statement): OR [SEQERROR,1,1,1] = MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE CORRESPONDING  REC-IN-[*RD]  TO  SEQ-COMPARE-[*RD].
+--Warning: Orphaned data line (not consumed by preceding statement): IF    SEQ-COMPARE-[*RD]  <   COMPARE-[*RD]
+--Warning: Orphaned data line (not consumed by preceding statement): GO  TO  ABORT-ROUTINES.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [SEQERROR,1,1,1]  = MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE '0' TO SWITCHA.
+--Warning: Orphaned data line (not consumed by preceding statement): IF SEQ-COMPARE-[*RD] = COMPARE-[*RD]
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE '1' TO SWITCHA.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE-REC-[*RD].
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  CORRESPONDING  REC-IN-[*RD]   TO  COMPARE-[*RD].
+--Warning: Orphaned data line (not consumed by preceding statement): ADD 1 TO TAPE-[*RD]-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): GO  TO  REQUIREMENTS-TEST.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  WRIT TO [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): WRITE-[*WRIT]-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): WRITE  REC-OUT-[*WRIT]  FROM  REC-IN-1.
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  1  TO  TAPE-[*WRIT]-OUT-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): GO  TO  READ-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): SEPARATION SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): REQUIREMENTS-TEST.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [SEQERROR,1,1,1] = MULTI
+--Warning: Orphaned data line (not consumed by preceding statement): IF SWITCHA NOT = '1'
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO WRITE-1-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF [OUTPUT,1] > 1
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO WRITE-2-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO READ-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [KEYS,1,1,1] = ALL
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO  WRITE-1-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): *IF    [KEYS,1,1,1]  =  R
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT TEST FROM 1 BY 1 TO [KEYS]
+--Warning: Orphaned data line (not consumed by preceding statement): INSPECT REQUIREMENTS-[*TEST]
+--Warning: Orphaned data line (not consumed by preceding statement): REPLACING ALL '<' BY ';'
+--Warning: Orphaned data line (not consumed by preceding statement): IF COMPARE-1 NOT = REQUIREMENTS-[*TEST] NEXT SENTENCE ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO TOTOK.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO ALFRED.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT TEST FROM 1 BY 1 TO [KEYS]
+--Warning: Orphaned data line (not consumed by preceding statement): INSPECT REQUIREMENTS-[*TEST]
+--Warning: Orphaned data line (not consumed by preceding statement): REPLACING ALL '<' BY ';'
+--Warning: Orphaned data line (not consumed by preceding statement): IF COMPARE-1 NOT = REQUIREMENTS-[*TEST] NEXT SENTENCE ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO ALFRED.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): TOTOK.
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO WRITE-1-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): ALFRED.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [OUTPUT,1]    >  1
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO WRITE-2-FROM-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): ADD 1 TO ELIMINATE-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): GO TO READ-FILE-1.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): ENDING-ROUTINES SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): PRINT-FILE-CTS.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  INP  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '     RECORDS  READ FROM '  TO  DISP-MESSAGE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '[INPUT,1,INP,1]'  TO  DISP-FNAME.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  TAPE-[*INP]-CT  TO  DISP-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SPACES  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  TAPE-[*INP]-CT  TO  INPUT-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): CLOSE    TAPEIN[*INP].
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '   TOTAL RECORDS READ   '  TO  DISP-MESSAGE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  INPUT-CT  TO  DISP-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SPACES  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  OUTP  TO  [OUTPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [OUTPUT,1,OUTP]  >  3
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE ALL '[OUTPUT,1,OUTP,4]'  TO  REC-OUT-[*OUTP].
+--Warning: Orphaned data line (not consumed by preceding statement): WRITE  REC-OUT-[*OUTP].
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  1  TO  TAPE-[*OUTP]-OUT-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '    RECORDS WRITTEN TO  '  TO  DISP-MESSAGE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '[OUTPUT,1,OUTP,1]'  TO  DISP-FNAME.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  TAPE-[*OUTP]-OUT-CT  TO  DISP-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SPACES  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): CLOSE    TAPEOUT[*OUTP].
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  TAPE-[*OUTP]-OUT-CT  TO  OUTPUT-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '   TOTAL RECORDS WRITTEN'  TO  DISP-MESSAGE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  OUTPUT-CT  TO  DISP-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SPACES  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): STOP RUN.
+--Warning: Orphaned data line (not consumed by preceding statement): ABORT-ROUTINES SECTION.
+--Warning: Orphaned data line (not consumed by preceding statement): SEQUENCE-ERRORS.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR]  >  0
+--Warning: Orphaned data line (not consumed by preceding statement): GO  TO
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  FC  TO  [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): FILE-[*FC]-SEQ-ERROR                                   [*FC]
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): DEPENDING  ON  ABORT-IND
+--Warning: Orphaned data line (not consumed by preceding statement): *INCREMENT  PARA  TO [INPUT,1]
+--Warning: Orphaned data line (not consumed by preceding statement): FILE-[*PARA]-SEQ-ERROR.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  '[INPUT,1,PARA,1]'  TO  SEQ-FNAME.
+--Warning: Orphaned data line (not consumed by preceding statement): SUBTRACT  1  FROM  TAPE-[*PARA]-CT  GIVING  SEQ-REC-1,
+--Warning: Orphaned data line (not consumed by preceding statement): SEQ-REC-L2.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  TAPE-[*PARA]-CT  TO  SEQ-REC-2.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SEQ-ERR-LINE  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  COMPARE-[*PARA]   TO   COMPARE-L2.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SEQ-ERR-L2        TO   DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  TAPE-[*PARA]-CT   TO   SEQ-REC-L2.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SEQ-COMPARE-[*PARA]   TO   COMPARE-L2.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SEQ-ERR-L2         TO   DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): DISPLAY  DISPLAY-LINE  UPON  LISTE.
+--Warning: Orphaned data line (not consumed by preceding statement): MOVE  SPACES  TO  DISPLAY-LINE.
+--Warning: Orphaned data line (not consumed by preceding statement): *IF   [SEQERROR,1,1]  >  1
+--Warning: Orphaned data line (not consumed by preceding statement): ADD  1  TO  FILE-[*PARA]-SEQ-ERROR-CT.
+--Warning: Orphaned data line (not consumed by preceding statement): IF  FILE-[*PARA]-SEQ-ERROR-CT  >  [SEQERROR,1,1,2]
+--Warning: Orphaned data line (not consumed by preceding statement): CALL  'ABORT'.
+--Warning: Orphaned data line (not consumed by preceding statement): GO  TO  MOVE-REC-[*PARA].
+--Warning: Orphaned data line (not consumed by preceding statement): *ELSE
+--Warning: Orphaned data line (not consumed by preceding statement): CALL  'ABORT'.
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): *LOOP
+--Warning: Orphaned data line (not consumed by preceding statement): *END
+--Warning: Orphaned data line (not consumed by preceding statement): STOP RUN.
+--Warning: Orphaned data line (not consumed by preceding statement): #MAP,N    ASSURFED*UTILITASCII.MAP,TPF$.BABA
+--Warning: Orphaned data line (not consumed by preceding statement): #SETC 0/t1
+  Migrated: 2, Skipped (data-only): 0, Errors: 0
+=== Phase 5: Converting SSG skeletons... ===
+--Warning: @MAP: unknown processor — emitted as CallExternalProgram
+  SSG inline conversion: 0 succeeded, 0 failed
+  SSG external conversion: 1 succeeded, 0 stubs (source not found), 0 errors
+=== DONE ===
+
+Total input lines: 438
+Total runstreams : 2
+Total includes   : 0
+  Full runstreams      : 1
+  Partial runstreams   : 1
+  Data-only (skipped)  : 0
+--- ECL Parse Statistics ---
+  Total files     : 0
+  Total statements: 432
+  @Run         : 1
+  @Qual        : 2
+  @Ssg         : 1
+  @Xqt         : 1
+  @Fin         : 1
+  @Data        : 425
+  @Hdg         : 1
+--- ECL Migration Summary ---
+  Programs executed: 1
+  Files assigned   : 0
+  Missing items    : 0
+

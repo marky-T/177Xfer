@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\db-probe-261116\\cobol\\out\\RECAP_MPMM02__L225.LionSource
+APPNAME = RECAPMPMM02L225
+GENSET = Default from new application
+SYSOPT = FALSE

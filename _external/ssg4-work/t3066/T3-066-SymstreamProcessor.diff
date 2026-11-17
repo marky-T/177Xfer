@@ -1,0 +1,61 @@
+diff --git a/E:/Repos/SsgTrial/SsgConverter/Source/SsgConverter/SymstreamProcessor.cs b/E:/Repos/ssg4-work/t3066/SsgConverter/Source/SsgConverter/SymstreamProcessor.cs
+index 0df88d4..ce177f5 100644
+--- a/E:/Repos/SsgTrial/SsgConverter/Source/SsgConverter/SymstreamProcessor.cs
++++ b/E:/Repos/ssg4-work/t3066/SsgConverter/Source/SsgConverter/SymstreamProcessor.cs
+@@ -302,6 +302,23 @@ namespace Ecl.SsgConverter {
+       return line.StartsWith(directivePrefix) || line.StartsWith("#") || line.StartsWith("@");
+     } // CarriesComment
+ 
++    private static readonly HashSet<String> s_InlineSourceCompilers = new HashSet<String>(StringComparer.OrdinalIgnoreCase) { "ACOB", "UCOB", "COB" };
++
++    /// <summary>
++    /// Tells whether an ECL image (# or @ form) calls a COBOL compiler with the I option, i.e. the compiler reads its source
++    /// from the images that follow in the run stream, up to @EOF (T3-066).
++    /// </summary>
++    private static Boolean IsInlineSourceCompilerCall (String eclLine) {
++      String body = eclLine.Substring(1);
++      Int32 end = 0;
++      while (end < body.Length && body[end] != ',' && !Char.IsWhiteSpace(body[end])) { end++; }
++      if (!s_InlineSourceCompilers.Contains(body.Substring(0, end))) { return false; }
++      if (end >= body.Length || body[end] != ',') { return false; }
++      Int32 optEnd = end + 1;
++      while (optEnd < body.Length && !Char.IsWhiteSpace(body[optEnd]) && body[optEnd] != ',') { optEnd++; }
++      return body.Substring(end + 1, optEnd - end - 1).IndexOf('I', StringComparison.OrdinalIgnoreCase) >= 0;
++    } // IsInlineSourceCompilerCall
++
+     /// <summary>
+     /// Assigns an SSG variable. SSG variables are global, so inside a define the assignment goes to the caller's scope.
+     /// </summary>
+@@ -2052,13 +2069,16 @@ namespace Ecl.SsgConverter {
+             m_DirectivePrefix = lines[i].Substring(2, 1);
+           }
+         }
+-      } else if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"]) && m_SystemVariables["NSIGN$"].Equals("0")) {
+-        // it is ECL, => read everything until the next directive and delegate the conversion to context
++      } else if ((lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"]) && m_SystemVariables["NSIGN$"].Equals("0")) || lines[i].StartsWith("@")) {
++        // it is ECL, => read everything until the next directive and delegate the conversion to context.
++        // A literal @ image is ECL too: SSG turns NSIGNCHAR$ into @, so both reach the generated stream as @ (T3-066).
+         List<String> eclLines = new List<String>();
++        Boolean inlineSourceFollows = false;
+         while (i < lines.Count && ((!lines[i].StartsWith(m_DirectivePrefix) && !lines[i].StartsWith("[")) || IsComment(lines[i], m_DirectivePrefix, out commentTextStart))) {
+ 
+-          if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"])) {
++          if (lines[i].StartsWith(m_SystemVariables["NSIGNCHAR$"]) || lines[i].StartsWith("@")) {
+             eclLines.Add(lines[i]);
++            inlineSourceFollows = IsInlineSourceCompilerCall(lines[i]);
+ 
+             // if this is the start of an @IPF command, read everything until LOGOFF
+             if (lines[i].StartsWith(String.Format("{0}IPF", m_SystemVariables["NSIGNCHAR$"])) && (lines[i].Length == 4 || !Char.IsLetter(lines[i][4]))) {
+@@ -2081,6 +2101,12 @@ namespace Ecl.SsgConverter {
+             eclLines.Add(lines[i].Trim());
+           }
+           i++;
++
++          // T3-066: the images after a compiler call that reads its source inline are that source (output text, up to @EOF),
++          // not ECL; the call ends with its last ';' continuation image.
++          if (inlineSourceFollows && !eclLines[eclLines.Count - 1].TrimEnd().EndsWith(";")) {
++            break;
++          }
+         }
+ 
+         PsAstInstrBlock eclBlock = m_ContentLineConverter.Convert(eclLines.AsReadOnly(), m_FileBeingMigrated);

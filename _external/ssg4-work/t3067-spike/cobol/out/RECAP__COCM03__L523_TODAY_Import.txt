@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\t3067-spike\\cobol\\out\\RECAP__COCM03__L523_TODAY.LionSource
+APPNAME = RECAPCOCM03L523TODAY
+GENSET = Default from new application
+SYSOPT = FALSE

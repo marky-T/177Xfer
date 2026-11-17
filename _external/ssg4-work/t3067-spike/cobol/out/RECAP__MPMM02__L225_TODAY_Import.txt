@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\t3067-spike\\cobol\\out\\RECAP__MPMM02__L225_TODAY.LionSource
+APPNAME = RECAPMPMM02L225TODAY
+GENSET = Default from new application
+SYSOPT = FALSE

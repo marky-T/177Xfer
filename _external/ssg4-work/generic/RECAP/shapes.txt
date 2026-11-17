@@ -1,0 +1,32 @@
+--- 19 call(s): mode ASCII, labels [ASCII INPUT OUTPUT FIELDIN FIELDOUT TOTIN TOTOUT INDIC], Y2K False, raw totals False  e.g. -d_LRSD42_L113
+    -d_LRSD42_L113 in  198 out  198 | FIELDIN 20 FIELDOUT 20 TOTIN 11 TOTOUT 11 INDIC 5 | same-len zones 20/20 totals 11/11 | min out 1 max tot 12 | EUU003 22 raw 0
+    -d_SCTD01_L151 in   80 out   80 | FIELDIN  8 FIELDOUT  8 TOTIN  5 TOTOUT  5 INDIC 3 | same-len zones 8/8 totals 5/5 | min out 3 max tot 14 | EUU003 10 raw 0
+    CLOA35_L221    in  200 out  200 | FIELDIN  9 FIELDOUT  9 TOTIN  7 TOTOUT  7 INDIC 2 | same-len zones 9/9 totals 7/7 | min out 2 max tot 12 | EUU003 14 raw 0
+    COCM03_L523    in  200 out  200 | FIELDIN 17 FIELDOUT 17 TOTIN  2 TOTOUT  2 INDIC 11 | same-len zones 17/17 totals 2/2 | min out 1 max tot 10 | EUU003 4 raw 0
+    COCM03_L585    in  200 out  200 | FIELDIN 17 FIELDOUT 17 TOTIN  2 TOTOUT  2 INDIC 11 | same-len zones 17/17 totals 2/2 | min out 1 max tot 10 | EUU003 4 raw 0
+    LRST12_L113    in  198 out  198 | FIELDIN 20 FIELDOUT 20 TOTIN 11 TOTOUT 11 INDIC 5 | same-len zones 20/20 totals 11/11 | min out 1 max tot 12 | EUU003 22 raw 0
+    MPMA03_L138    in   55 out   55 | FIELDIN  7 FIELDOUT  7 TOTIN  5 TOTOUT  5 INDIC 2 | same-len zones 7/7 totals 5/5 | min out 2 max tot 10 | EUU003 10 raw 0
+    MPMA04_L181    in   73 out   33 | FIELDIN  5 FIELDOUT  5 TOTIN  2 TOTOUT  2 INDIC 3 | same-len zones 5/5 totals 2/2 | min out 3 max tot 10 | EUU003 4 raw 0
+    MPMA04_L208    in   73 out   33 | FIELDIN  5 FIELDOUT  5 TOTIN  2 TOTOUT  2 INDIC 3 | same-len zones 5/5 totals 2/2 | min out 3 max tot 10 | EUU003 4 raw 0
+    MPMM02_L198    in   55 out   55 | FIELDIN  7 FIELDOUT  7 TOTIN  5 TOTOUT  5 INDIC 2 | same-len zones 7/7 totals 5/5 | min out 2 max tot 10 | EUU003 10 raw 0
+    MPMM02_L225    in  115 out  115 | FIELDIN 13 FIELDOUT 13 TOTIN 11 TOTOUT 11 INDIC 2 | same-len zones 13/13 totals 11/11 | min out 2 max tot 10 | EUU003 22 raw 0
+    MPMM02_L256    in   55 out   55 | FIELDIN  7 FIELDOUT  7 TOTIN  5 TOTOUT  5 INDIC 2 | same-len zones 7/7 totals 5/5 | min out 2 max tot 10 | EUU003 10 raw 0
+    MPMM03_L163    in  115 out  137 | FIELDIN 13 FIELDOUT 13 TOTIN 11 TOTOUT 11 INDIC 2 | same-len zones 2/13 totals 0/11 | min out 2 max tot 12 | EUU003 22 raw 0
+    MPMM03_L194    in   55 out   55 | FIELDIN  7 FIELDOUT  7 TOTIN  5 TOTOUT  5 INDIC 2 | same-len zones 7/7 totals 5/5 | min out 2 max tot 10 | EUU003 10 raw 0
+    MPMT01_L182    in   73 out   33 | FIELDIN  5 FIELDOUT  5 TOTIN  2 TOTOUT  2 INDIC 3 | same-len zones 5/5 totals 2/2 | min out 3 max tot 10 | EUU003 4 raw 0
+    MPMT01_L209    in   73 out   33 | FIELDIN  5 FIELDOUT  5 TOTIN  2 TOTOUT  2 INDIC 3 | same-len zones 5/5 totals 2/2 | min out 3 max tot 10 | EUU003 4 raw 0
+    SCTA02_L174    in   80 out   80 | FIELDIN  8 FIELDOUT  8 TOTIN  5 TOTOUT  5 INDIC 3 | same-len zones 8/8 totals 5/5 | min out 3 max tot 14 | EUU003 10 raw 0
+    SCTA03_L151    in   80 out   80 | FIELDIN  8 FIELDOUT  8 TOTIN  5 TOTOUT  5 INDIC 3 | same-len zones 8/8 totals 5/5 | min out 3 max tot 14 | EUU003 10 raw 0
+    SCTM01_L204    in   80 out   80 | FIELDIN  8 FIELDOUT  8 TOTIN  5 TOTOUT  5 INDIC 3 | same-len zones 8/8 totals 5/5 | min out 3 max tot 14 | EUU003 10 raw 0
+--- 7 call(s): mode ASCII, labels [INPUT OUTPUT FIELDIN FIELDOUT TOTIN TOTOUT INDIC ASCII], Y2K False, raw totals False  e.g. COCH02_D3_L73
+    COCH02_D3_L73  in  250 out  250 | FIELDIN  6 FIELDOUT  6 TOTIN  2 TOTOUT  2 INDIC 2 | same-len zones 6/6 totals 2/2 | min out 4 max tot 10 | EUU003 4 raw 0
+    VIRA12_EN_L743 in  200 out  200 | FIELDIN  1 FIELDOUT  1 TOTIN  3 TOTOUT  3 INDIC 4 | same-len zones 1/1 totals 3/3 | min out 200 max tot 12 | EUU003 6 raw 0
+    VIRA15_EN_L691 in  200 out  200 | FIELDIN  1 FIELDOUT  1 TOTIN  3 TOTOUT  3 INDIC 4 | same-len zones 1/1 totals 3/3 | min out 200 max tot 12 | EUU003 6 raw 0
+    VIRA19_EN_L692 in  200 out  200 | FIELDIN  1 FIELDOUT  1 TOTIN  3 TOTOUT  3 INDIC 4 | same-len zones 1/1 totals 3/3 | min out 200 max tot 12 | EUU003 6 raw 0
+    VIRA29_L2_L48  in   80 out   80 | FIELDIN  6 FIELDOUT  6 TOTIN  1 TOTOUT  1 INDIC 5 | same-len zones 6/6 totals 1/1 | min out 2 max tot 12 | EUU003 2 raw 0
+    VIRM01_EN_L668 in  200 out  200 | FIELDIN  1 FIELDOUT  1 TOTIN  3 TOTOUT  3 INDIC 4 | same-len zones 1/1 totals 3/3 | min out 200 max tot 12 | EUU003 6 raw 0
+    VIRM01_L2_L49  in   80 out   80 | FIELDIN  6 FIELDOUT  6 TOTIN  1 TOTOUT  1 INDIC 5 | same-len zones 6/6 totals 1/1 | min out 2 max tot 12 | EUU003 2 raw 0
+--- 1 call(s): mode ASCII, labels [INPUT OUTPUT FIELDIN FIELDOUT TOTIN TOTOUT INDIC ASCII NEURO], Y2K False, raw totals False  e.g. CCTA08_L287
+    CCTA08_L287    in  120 out  120 | FIELDIN  9 FIELDOUT  9 TOTIN  5 TOTOUT  5 INDIC 1 | same-len zones 9/9 totals 5/5 | min out 6 max tot 12 | EUU003 10 raw 0
+--- 1 call(s): mode ASCII, labels [INPUT OUTPUT FIELDIN FIELDOUT TOTIN TOTOUT INDIC NEURO ASCII], Y2K False, raw totals False  e.g. RISH02_L284
+    RISH02_L284    in  307 out  295 | FIELDIN  8 FIELDOUT  8 TOTIN  1 TOTOUT  1 INDIC 1 | same-len zones 8/8 totals 1/1 | min out 10 max tot 10 | EUU003 2 raw 0

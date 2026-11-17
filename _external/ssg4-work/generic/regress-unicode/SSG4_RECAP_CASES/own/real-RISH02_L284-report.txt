@@ -1,0 +1,5 @@
+*RECAP  FIN*
+*NB-ENREG-LUS =    24
+         13529831I
+*NB-ENREG-ECR =     8
+         13529831I

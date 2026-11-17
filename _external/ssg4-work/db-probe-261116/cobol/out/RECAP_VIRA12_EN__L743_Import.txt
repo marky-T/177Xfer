@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\db-probe-261116\\cobol\\out\\RECAP_VIRA12_EN__L743.LionSource
+APPNAME = RECAPVIRA12ENL743
+GENSET = Default from new application
+SYSOPT = FALSE

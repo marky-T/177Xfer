@@ -1,0 +1,9 @@
+PRN files since 22:08:36: 0, expected 6
+PRN encodings: 
+real-RISH02_L284: no print file
+cc-ccta08-neuro-all: no print file
+cc-cocm03-neuro-all: no print file
+cc-mpmm03-neuro-all: no print file
+cc-vira12-neuro-all: no print file
+cc-lrst12-neuro-all: no print file
+=== prints: 7 problem(s)

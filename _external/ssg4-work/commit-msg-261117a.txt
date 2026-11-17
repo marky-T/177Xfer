@@ -1,0 +1,9 @@
+PROCESS.md revised 2026-11-17: current generic-program flow added; per-call chain marked as the earlier route
+
+- New section "Current flow: generic programs": cards, /ssg-generic-utility G1-G8, skeleton copies, Invoke-GnPipeline
+  Check/Build/Deliver/Deploy/Regress, LionDev (CC-Trial and BSP Federale), Control Center, release candidate into
+  Federale_InternalRelease, PR, board tickets, /ssg-backup; sandbox drops, fix-it-now rule, status 2026-11-17
+- Earlier route kept: chain rows 7-8 marked done 2026-10-20; naming note (MT-063 <U>_GN); database gotcha updated (MT-069)
+- Where things live: generic folders, release staging and worktree, team process, folder map
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

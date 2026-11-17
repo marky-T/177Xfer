@@ -1,0 +1,7 @@
+real-RISH02_L284       RCP01  ENTREE -> SORTIE   24 records in,   8 out,  5 report lines
+cc-ccta08-neuro-all    RCP02  INACCTA08 -> OUTCCTA08   24 records in,  11 out, 13 report lines
+cc-cocm03-neuro-all    RCP03  INA -> OUTA   24 records in,   8 out,  7 report lines
+cc-mpmm03-neuro-all    RCP04  FICHIER1 -> FICHIER2   24 records in,  12 out, 25 report lines
+cc-vira12-neuro-all    RCP05  INA -> OUTA   24 records in,   9 out,  9 report lines
+cc-lrst12-neuro-all    RCP06  FICHIER1 -> FICHIER2   24 records in,   8 out, 25 report lines
+SSG4_RECAP_CASES.ps1 written, 6 steps, parse errors: 0

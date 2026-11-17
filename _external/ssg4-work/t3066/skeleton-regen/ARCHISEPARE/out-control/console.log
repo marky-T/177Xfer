@@ -1,0 +1,99 @@
+EclConverter Console running with arguments: /INPUT:E:\Repos\ssg4-work\t3066\skeleton-regen\ARCHISEPARE\input /OUTPUT:E:\Repos\ssg4-work\t3066\skeleton-regen\ARCHISEPARE\out-control
+=== ECL to Powershell conversion ===
+Conversion target: Powershell
+ECL Dialect: Os2200
+Input folder : E:\Repos\ssg4-work\t3066\skeleton-regen\ARCHISEPARE\input
+Output folder: E:\Repos\ssg4-work\t3066\skeleton-regen\ARCHISEPARE\out-control
+=== Phase 2: Parsing ECL runstreams... ===
+  Parsed 2 runstreams.
+  Built runstream index with 2 entries (2 runstreams, 0 includes).
+  Classification: 1 full runstreams, 0 partial runstreams, 1 data-only elements
+=== Phase 3: Analysing... ===
+  Runtime-created elements detected: 0 (from @ELT statements).
+=== Phase 4: Migrating and generating scripts... ===
+  Migrated: 1, Skipped (data-only): 1, Errors: 0
+=== Phase 5: Converting SSG skeletons... ===
+--Warning: @UCOB: unknown processor — emitted as CallExternalProgram
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                  -- ARCHISEPARE --                         ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***            Separe les enregistrements a archiver           ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                   et a ne pas archiver                     ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***                        == UCS ==                           ***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): * Type     :                                                     *
+--Warning: Orphaned data line (not consumed by preceding statement): * Analyste :                                 (INITIALES)         *
+--Warning: Orphaned data line (not consumed by preceding statement): * Auteur   : NEGA  NEGA SERGE                (INITIALES  NM PN)  *
+--Warning: Orphaned data line (not consumed by preceding statement): * Ecrit le : 17 avril 2001                   (dd/mm/ccyy)        *
+--Warning: Orphaned data line (not consumed by preceding statement): * Release  :                                 (99)                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Version  :                                 (999)               *
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------------------------------------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Modifications :                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): * Qui ?  Quand ?     Quoi ?                             Projet/Ph*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): * _____  __/__/____  _________________________________  ______/__*
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): *                       DESCRIPTION                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                       ===========                              *
+--Warning: Orphaned data line (not consumed by preceding statement): *                                                                *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : chercheuse : numero de sinistres a archiver         *
+--Warning: Orphaned data line (not consumed by preceding statement): *    INPUT : ficunload : unload de la table a archiver           *
+--Warning: Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficarchi : enregistrements a archiver               *
+--Warning: Orphaned data line (not consumed by preceding statement): *    OUTPUT: ficnarchi : enregistrements a ne pas archiver       *
+--Warning: Orphaned data line (not consumed by preceding statement): ***------------------------------------------------------------***
+--Warning: Orphaned data line (not consumed by preceding statement): Identification division.
+--Warning: Orphaned data line (not consumed by preceding statement): *========================*
+--Warning: Orphaned data line (not consumed by preceding statement): program-id.  ARCHISEPARE.
+--Warning: Orphaned data line (not consumed by preceding statement): Environment division.
+--Warning: Orphaned data line (not consumed by preceding statement): *====================*
+--Warning: Orphaned data line (not consumed by preceding statement): Configuration section.
+--Warning: Orphaned data line (not consumed by preceding statement): *----------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): source-computer.  unisys-2200.
+--Warning: Orphaned data line (not consumed by preceding statement): object-computer.  unisys-2200 MEMORY 3 MODULES.
+--Warning: Orphaned data line (not consumed by preceding statement): special-names.
+--Warning: Orphaned data line (not consumed by preceding statement): printer       printer
+--Warning: Orphaned data line (not consumed by preceding statement): decimal-point comma.
+--Warning: Orphaned data line (not consumed by preceding statement): Input-output section.
+--Warning: Orphaned data line (not consumed by preceding statement): *---------------------*
+--Warning: Orphaned data line (not consumed by preceding statement): file-control.
+--Warning: Orphaned data line (not consumed by preceding statement): select chercheuse assign to disc     [filein,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficunload assign to disc      [filein,1,2,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficarchi assign to disc       [fileout,1,1,1].
+--Warning: Orphaned data line (not consumed by preceding statement): select ficnarchi assign to disc      [fileout,1,2,1].
+--Warning: Orphaned data line (not consumed by preceding statement): i-o-control.
+--Warning: Orphaned data line (not consumed by preceding statement): Data division.
+--Warning: Orphaned data line (not consumed by preceding statement): *==============*
+--Warning: Orphaned data line (not consumed by preceding statement): File section.
+--Warning: Orphaned data line (not consumed by preceding statement): *-------------*
+--Warning: Orphaned data line (not consumed by preceding statement): * Fichier chercheuse
+--Warning: Orphaned data line (not consumed by preceding statement): FD  chercheuse.
+--Warning: Orphaned data line (not consumed by preceding statement): 1  cle-chercheuse        pic 9([key,1,1,2]).
+--Warning: Orphaned data line (not consumed by preceding statement): *Unload de la table a archiver
+--Warning: Orphaned data line (not consumed by preceding statement): FD  ficunload.
+  SSG inline conversion: 0 succeeded, 0 failed
+  SSG external conversion: 1 succeeded, 0 stubs (source not found), 0 errors
+=== DONE ===
+
+Total input lines: 246
+Total runstreams : 2
+Total includes   : 0
+  Full runstreams      : 1
+  Partial runstreams   : 0
+  Data-only (skipped)  : 1
+--- ECL Parse Statistics ---
+  Total files     : 0
+  Total statements: 244
+  @Run         : 1
+  @Qual        : 2
+  @Ssg         : 1
+  @Xqt         : 1
+  @Fin         : 1
+  @Data        : 238
+--- ECL Migration Summary ---
+  Programs executed: 1
+  Files assigned   : 0
+  Missing items    : 0
+

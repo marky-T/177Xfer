@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\db-probe-261116\\cobol\\out\\TABAN_ASCII_CGGA01__L76.LionSource
+APPNAME = TABANASCIICGGA01L76
+GENSET = Default from new application
+SYSOPT = FALSE

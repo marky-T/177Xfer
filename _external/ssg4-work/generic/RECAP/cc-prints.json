@@ -1,0 +1,32 @@
+[
+  {
+    "Case": "real-RISH02_L284",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-RISH02_L284\\expected\\report.txt"
+  },
+  {
+    "Case": "cc-ccta08-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-ccta08-neuro-all\\expected\\report.txt"
+  },
+  {
+    "Case": "cc-cocm03-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-cocm03-neuro-all\\expected\\report.txt"
+  },
+  {
+    "Case": "cc-mpmm03-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-mpmm03-neuro-all\\expected\\report.txt"
+  },
+  {
+    "Case": "cc-vira12-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-vira12-neuro-all\\expected\\report.txt"
+  },
+  {
+    "Case": "cc-lrst12-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-lrst12-neuro-all\\expected\\report.txt"
+  }
+]

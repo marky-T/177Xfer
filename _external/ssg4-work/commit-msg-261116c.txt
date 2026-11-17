@@ -1,0 +1,8 @@
+SSG-4: "fix it now" rule for logged issues (ssg-todo-issues step 5)
+
+A logged issue whose fix is ours and needs no shared decision (our scripts, our SsgConverter, our hand-off /
+generic-program design, our docs) is fixed in the same piece of work after the owner's go-ahead; defer only shared
+decisions (R&D converters or runtime, FEDERALE_APP, Area E shared scripts, Federale source or cards) and say who
+decides (owner 261116).
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

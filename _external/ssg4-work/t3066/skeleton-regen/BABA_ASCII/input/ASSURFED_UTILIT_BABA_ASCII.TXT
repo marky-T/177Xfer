@@ -1,0 +1,426 @@
+*DEFINE    FILLADD  
+*SET  FILLCTR  TO    [#1]+1 
+*END
+*DEFINE    FILLSUB  
+*SET  FILLCTR  TO 0-[#1]
+*END
+*DEFINE    LIMPARA  
+*SET   PARALIM  TO   [#1]-1 
+*END
+*DEFINE    SETSTART 
+*SET   START  TO   [#1]+1   
+*END
+*DEFINE    SETCVAL  
+*SET   C  TO   [#1]+1   
+*END
+*IF   [KEYS]  =  0  
+*CREATE  SGS:  KEYS  ALL
+*END
+*EDIT ON &  
+*IF   [ASCII]  >  0 
+#ACOB,PECIQ  &  
+*ELSE   
+#ACOB,PECTI  &  
+*END
+TPF$.NAME$,TPF$.NAME$   &   
+*EDIT OFF   
+*IF [COND] > 0  
+*SET NOP TO 0   
+*ELSE   
+*CREATE  SGS:  COND CTR < 99999999  
+*END
+*set case$ to 1 
+*. para y2k keys pos,num,lg 
+*. para def keys pos,1,4
+*set ypv to '<' 
+*increment a from 1 to [Y2K]
+*IF [Y2K,A,1,1] = KEYS  
+*set maxy to [KEYS] 
+*increment c from 1 to [*maxy]  
+*set par to 'KEYS [KEYS,C,1,1] '
+*set ncha to 2  
+*increment b from 2 to [Y2K,A]  
+*set ylg to 4   
+*if [y2k,a,b,3] > 0 
+*set ylg to [y2k,a,b,3] 
+*endif  
+*set ych to 2   
+*if [y2k,a,b,2] > 0 
+*set ych to [y2k,a,b,2] 
+*endif  
+*set ypos to [y2k,a,b,1]
+*set ynr to [*ych] - 1  
+*increment d from [*ncha] to [*ynr] 
+*set par to '[*par] [keys,c,d,1],[keys,c,d,2],[keys,c,d,3] '
+*set ncha to [*ncha] + 1
+*loop   
+*set ytr to '[keys,c,ych,3,substr$,ypos,ylg]'   
+*if [*ylg] = 2  
+*if [*ytr,substr$,1,1] = 0  
+*set yan to '*[*ytr,substr$,2,1]'   
+*elseif [*ytr,substr$,1,1] = 1  
+*set yan to '_[*ytr,substr$,2,1]'   
+*elseif [*ytr,substr$,1,1] = 2  
+*set yan to '|[*ytr,substr$,2,1]'   
+*elseif [*ytr,substr$,1,1] = 3  
+*set yan to '~[*ytr,substr$,2,1]'   
+*else   
+*set yan to [*ytr]  
+*endif  
+*elseif [*ylg] = 4  
+*if [*ytr,substr$,1,3] = 200
+*set yan to '[*ypv][*ytr,substr$,4,1]'  
+*elseif [*ytr,substr$,1,3] = 201
+*set yan to '_[*ytr,substr$,4,1]'   
+*elseif [*ytr,substr$,1,3] = 202
+*set yan to '|[*ytr,substr$,4,1]'   
+*elseif [*ytr,substr$,1,3] = 203
+*set yan to '~[*ytr,substr$,4,1]'   
+*else   
+*set yan to [*ytr,substr$,3,2]  
+*endif  
+*endif  
+*set yls to [*ypos] - 1 
+*if [*yls] = 0  
+*set ytr to '[*yan]'
+*else   
+*set ytr to '[keys,c,ych,3,substr$,1,yls][*yan]'
+*endif  
+*set yls to [*ylg] + [*YPOS]
+*set ylg1 to [keys,c,ych,3,len$] - [*yls] + 1   
+*if [*ylg1] > 0 
+*set ytr to '[*YTR][keys,c,ych,3,substr$,yls,ylg1]' 
+*endif  
+*set par to '[*par] [keys,c,ych,1],[keys,c,ych,2],[*YTR]'   
+*set ncha to [*ncha] + 1
+*loop   
+*increment d from [*ncha] to [keys,c]   
+*set par to '[*par] [keys,c,d,1],[keys,c,d,2],[keys,c,d,3] '
+*loop   
+*create sgs [*par]  
+*loop   
+*remove sgs KEYS,1,maxy 
+*endif  
+*loop   
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. EXTRACT-[INPUT,1,1,1].   
+       AUTHOR. BOURDEAUD HUY PIERRE.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-60EIS.  
+       OBJECT-COMPUTER. UNIVAC-1100-60EIS.  
+       SPECIAL-NAMES.     PRINTER   IS   LISTE. 
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+*IF [INPUT,1,1,1]  = CARDREADER 
+           SELECT TAPEIN1 ASSIGN TO CARD-READER.
+*ELSE   
+*INCREMENT  INPUTCT TO  [INPUT,1]   
+           SELECT  TAPEIN[*INPUTCT]  ASSIGN  TO 
+*IF   [INPUT,1,INPUTCT]  >  3   
+                              UNISERVO  [INPUT,1,INPUTCT,1].
+*ELSE   
+                    DISC  [INPUT,1,INPUTCT,1].  
+*END
+*LOOP   
+*END
+*IF [OUTPUT,1,1,1] = PRINTER
+           SELECT TAPEOUT1 ASSIGN TO PRINTER.   
+*ELSE   
+*INCREMENT  OUTPUTCT  TO  [OUTPUT,1]
+           SELECT  TAPEOUT[*OUTPUTCT]  ASSIGN  TO   
+*IF   [OUTPUT,1,OUTPUTCT]  >  3 
+                              UNISERVO  [OUTPUT,1,OUTPUTCT,1].  
+*ELSE   
+                    DISC  [OUTPUT,1,OUTPUTCT,1].
+*END
+*LOOP   
+*END
+       DATA DIVISION.   
+       FILE SECTION.
+*CLEAR  FILLCTR 
+*INCREMENT  IMP FROM 1  BY 1  TO [INPUT,1]  
+       FD  TAPEIN[*IMP] 
+*IF [INPUT,1,1,1] = CARDREADER  
+           LABEL RECORD OMITTED 
+*ELSE   
+                    LABEL RECORD IS STANDARD
+                   BLOCK CONTAINS [INPUT,1,IMP,3] RECORDS   
+*END
+                   RECORD CONTAINS [INPUT,1,IMP,2] CHARACTERS   
+                    DATA RECORD  IS REC-IN-[*IMP].  
+       01  REC-IN-[*IMP].   
+*INCREMENT  CH  FROM 1  BY 1  TO [INPUT,1,IMP,2]
+*INCREMENT COL FROM 2 BY 1  TO [KEYS,1] 
+*IF  VALUE OF  [KEYS,1,COL,1]  =  [*CH] 
+*IF  FILLCTR  IS SET
+           03  FILLER                   PIC  X([*FILLCTR]). 
+*END
+           03  COMPARE-FILE-[*IMP]-FIELD-[*COL]   PIC  X([KEYS,1,COL,2]).   
+*PROCESS   FILLSUB  [KEYS,1,COL,2]  
+*END
+*LOOP   
+*PROCESS   FILLADD  [*FILLCTR]  
+*LOOP   
+*IF  FILLCTR  IS SET
+           03  FILLER                   PIC  X([*FILLCTR]). 
+*END
+*LOOP   
+*INCREMENT  OUTPCT  TO  [OUTPUT,1]  
+       FD  TAPEOUT[*OUTPCT] 
+*IF    [OUTPUT,1,1,1]  = PRINTER
+    
+*ELSE   
+                    LABEL RECORD IS STANDARD
+                    BLOCK CONTAINS [OUTPUT,1,OUTPCT,3] RECORDS  
+*END
+                    RECORD CONTAINS [OUTPUT,1,OUTPCT,2] CHARACTERS  
+                    DATA RECORD IS REC-OUT-[*OUTPCT].   
+       01  REC-OUT-[*OUTPCT]           PIC X([OUTPUT,1,OUTPCT,2]).  
+*LOOP   
+       WORKING-STORAGE SECTION. 
+*INCREMENT INC  TO  [INPUT,1]   
+       77  TAPE-[*INC]-CT                PIC 9(10)  COMP VALUE 0.   
+*LOOP   
+       77  INPUT-CT                 PIC 9(10)  COMP  VALUE 0.   
+*INCREMENT  OUTC  TO  [OUTPUT,1]
+       77  TAPE-[*OUTC]-OUT-CT            PIC 9(10)  COMP  VALUE 0. 
+*LOOP   
+       77  OUTPUT-CT                PIC 9(10)  COMP  VALUE 0.   
+       77  ELIMINATE-CT                 PIC 9(10)  COMP VALUE 0.
+*INCREMENT  RQS  TO [KEYS]  
+       01  REQUIREMENTS-[*RQS]. 
+*INCREMENT  REQ  FROM 2  BY 1  TO  [KEYS,RQS]   
+*IF   [SEQERROR,1,1,1]  =  MULTI
+           03  REQ-ALT-[*RQS]-FLD-[*REQ]  PIC X([KEYS,RQS,REQ,2]).  
+*ELSE   
+           03  REQ-ALT-[*RQS]-FLD-[*REQ]          PIC X([KEYS,RQS,REQ,2])   
+*IF [KEYS,RQS,REQ,3] = BLANC
+               VALUE SPACE. 
+*ELSE   
+               VALUE  '[KEYS,RQS,REQ,3]'.   
+*END
+*END
+*LOOP   
+*LOOP   
+*INCREMENT  FL  TO [INPUT,1]
+       01  COMPARE-[*FL].   
+*INCREMENT  CF  FROM  2 BY 1  TO [KEYS,1]   
+           03  COMPARE-FILE-[*FL]-FIELD-[*CF]   PIC X([KEYS,1,CF,2]).   
+*LOOP   
+*LOOP   
+*IF   [SEQERROR]  >  0  
+*IF   [SEQERROR,1,1,1]  =  YES   OR  [SEQERROR,1,1,1]  =  OUI  ;
+                 OR  [SEQERROR,1,1,1]    = YA  ;
+                    OR [SEQERROR,1,1,1] = MULTI 
+*INCREMENT   FSQ  TO  [INPUT,1] 
+       01  FILE-[*FSQ]-SEQ-ERROR-CT     PIC 9(5)  COMP  VALUE 0.
+       01  SEQ-COMPARE-[*FSQ].  
+*INCREMENT   SQ  FROM 2  BY 1   TO  [KEYS,1]
+           03  COMPARE-FILE-[*FSQ]-FIELD-[*SQ]    PIC X([KEYS,1,SQ,2]). 
+*LOOP   
+*LOOP   
+       01  ABORT-IND  PIC 9(5) COMP.
+*IF   [ASCII]  >  0 
+       01  SEQ-ERR-LINE       USAGE  DISPLAY-1. 
+*ELSE   
+       01  SEQ-ERR-LINE.
+*END
+           03  SEQ-FNAME                PIC X(12).  
+           03  FILLER                   PIC X(36)   
+               VALUE  ' HAS SEQUENCE ERROR BETWEEN RECORD '.
+           03  SEQ-REC-1                PIC Z(11)9. 
+           03  FILLER                   PIC X(12)   
+               VALUE  ' AND RECORD '.   
+           03  SEQ-REC-2                PIC Z(11)9. 
+       01  SEQ-ERR-L2.  
+*IF   [ASCII]  >  0 
+                                                 USAGE   DISPLAY-1  
+*END
+           03  FILLER                   PIC X(9)
+               VALUE  'INDICATIF'.  
+           03  SEQ-REC-L2               PIC Z(11)9. 
+           03  FILLER PIC X(6)  
+               VALUE '  :-  '.  
+           03  COMPARE-L2               PIC X(105). 
+*END
+*END
+*IF   [ASCII]  >  0 
+       01  DISPLAY-LINE                          USAGE  DISPLAY-1.  
+*ELSE   
+       01  DISPLAY-LINE.
+*END
+               03  DISP-MESSAGE        PIC X(24).   
+               03  DISP-FNAME          PIC X(12).   
+               03  DISP-CT             PIC Z(11)9.  
+               03  FILLER              PIC X(84)  VALUE SPACE.  
+*IF [SEQERROR,1,1,1] = MULTI
+       01  TESTA.   
+           03  SWITCHA  PIC X.  
+*END
+       01  CTR PIC 9(18) COMP.  
+       PROCEDURE DIVISION.  
+       E-F-[INPUT,1,1,1] SECTION.   
+       DEBUT.   
+*INCREMENT OUTP TO [OUTPUT,1]   
+            OPEN OUTPUT TAPEOUT[*OUTP]. 
+*LOOP   
+       OPEN-AND-FIRST-READ. 
+*INCREMENT  INP  TO  [INPUT,1]  
+           OPEN  INPUT  TAPEIN[*INP]. READ  TAPEIN[*INP]
+             AT END  MOVE  HIGH-VALUE TO REC-IN-[*INP]  
+             GO TO ENDING-ROUTINES. 
+           ADD 1 TO CTR.
+           MOVE  CORRESPONDING  REC-IN-[*INP]  TO  COMPARE-[*INP].  
+           ADD  1  TO  TAPE-[*INP]-CT.  
+*LOOP   
+           GO TO  SEPARATION.   
+*INCREMENT  RD  TO  [INPUT,1]   
+       READ-FILE-[*RD]. 
+           READ  TAPEIN[*RD]
+           AT END GO TO ENDING-ROUTINES.
+           ADD 1 TO CTR.
+           IF   
+*INCREMENT I FROM 1 BY 1 TO [COND,1]
+           [COND,1,I,1] 
+*LOOP   
+           GO TO ECLATEMENT 
+           ELSE GO TO ENDING-ROUTINES.  
+       ECLATEMENT.  
+*IF   [SEQERROR]  >  0  
+*IF   [SEQERROR,1,1,1]  =  YES   OR  [SEQERROR,1,1,1]  =  OUI  ;
+                 OR  [SEQERROR,1,1,1]    = YA  ;
+                    OR [SEQERROR,1,1,1] = MULTI 
+           MOVE CORRESPONDING  REC-IN-[*RD]  TO  SEQ-COMPARE-[*RD]. 
+           IF    SEQ-COMPARE-[*RD]  <   COMPARE-[*RD]   
+                 GO  TO  ABORT-ROUTINES.
+*IF [SEQERROR,1,1,1]  = MULTI   
+           MOVE '0' TO SWITCHA. 
+           IF SEQ-COMPARE-[*RD] = COMPARE-[*RD] 
+           MOVE '1' TO SWITCHA. 
+*END
+       MOVE-REC-[*RD].  
+*END
+*END
+           MOVE  CORRESPONDING  REC-IN-[*RD]   TO  COMPARE-[*RD].   
+           ADD 1 TO TAPE-[*RD]-CT.  
+           GO  TO  REQUIREMENTS-TEST.   
+*LOOP   
+*INCREMENT  WRIT TO [OUTPUT,1]  
+       WRITE-[*WRIT]-FROM-FILE-1.   
+           WRITE  REC-OUT-[*WRIT]  FROM  REC-IN-1.  
+           ADD  1  TO  TAPE-[*WRIT]-OUT-CT. 
+           GO  TO  READ-FILE-1. 
+*LOOP   
+       SEPARATION SECTION.  
+       REQUIREMENTS-TEST.   
+*IF [SEQERROR,1,1,1] = MULTI
+           IF SWITCHA NOT = '1' 
+           GO TO WRITE-1-FROM-FILE-1.   
+*IF [OUTPUT,1] > 1  
+           GO TO WRITE-2-FROM-FILE-1.   
+*ELSE   
+           GO TO READ-FILE-1.   
+*END
+*END
+*IF   [KEYS,1,1,1] = ALL
+           GO TO  WRITE-1-FROM-FILE-1.  
+*ELSE   
+*IF    [KEYS,1,1,1]  =  R   
+*INCREMENT TEST FROM 1 BY 1 TO [KEYS]   
+           INSPECT REQUIREMENTS-[*TEST] 
+                   REPLACING ALL '<' BY ';' 
+           IF COMPARE-1 NOT = REQUIREMENTS-[*TEST] NEXT SENTENCE ELSE   
+                              GO TO TOTOK.  
+*LOOP   
+           GO TO ALFRED.
+*ELSE   
+*INCREMENT TEST FROM 1 BY 1 TO [KEYS]   
+           INSPECT REQUIREMENTS-[*TEST] 
+                   REPLACING ALL '<' BY ';' 
+           IF COMPARE-1 NOT = REQUIREMENTS-[*TEST] NEXT SENTENCE ELSE   
+                              GO TO ALFRED. 
+*LOOP   
+*END
+       TOTOK.   
+           GO TO WRITE-1-FROM-FILE-1.   
+       ALFRED.  
+*IF   [OUTPUT,1]    >  1
+            GO TO WRITE-2-FROM-FILE-1.  
+*ELSE   
+            ADD 1 TO ELIMINATE-CT.  
+           GO TO READ-FILE-1.   
+*END
+*END
+       ENDING-ROUTINES SECTION. 
+       PRINT-FILE-CTS.  
+*INCREMENT  INP  TO  [INPUT,1]  
+           MOVE  '     RECORDS  READ FROM '  TO  DISP-MESSAGE.  
+           MOVE  '[INPUT,1,INP,1]'  TO  DISP-FNAME. 
+           MOVE  TAPE-[*INP]-CT  TO  DISP-CT.   
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+           ADD  TAPE-[*INP]-CT  TO  INPUT-CT.   
+           CLOSE    TAPEIN[*INP].   
+*LOOP   
+           MOVE  '   TOTAL RECORDS READ   '  TO  DISP-MESSAGE.  
+           MOVE  INPUT-CT  TO  DISP-CT. 
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+*INCREMENT  OUTP  TO  [OUTPUT,1]
+*IF   [OUTPUT,1,OUTP]  >  3 
+           MOVE ALL '[OUTPUT,1,OUTP,4]'  TO  REC-OUT-[*OUTP].   
+           WRITE  REC-OUT-[*OUTP].  
+           ADD  1  TO  TAPE-[*OUTP]-OUT-CT. 
+*END
+           MOVE  '    RECORDS WRITTEN TO  '  TO  DISP-MESSAGE.  
+           MOVE  '[OUTPUT,1,OUTP,1]'  TO  DISP-FNAME.   
+           MOVE  TAPE-[*OUTP]-OUT-CT  TO  DISP-CT.  
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+           CLOSE    TAPEOUT[*OUTP]. 
+           ADD  TAPE-[*OUTP]-OUT-CT  TO  OUTPUT-CT. 
+*LOOP   
+           MOVE  '   TOTAL RECORDS WRITTEN'  TO  DISP-MESSAGE.  
+           MOVE  OUTPUT-CT  TO  DISP-CT.
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+           STOP RUN.
+       ABORT-ROUTINES SECTION.  
+       SEQUENCE-ERRORS. 
+*IF   [SEQERROR]  >  0  
+           GO  TO   
+*INCREMENT  FC  TO  [INPUT,1]   
+                    FILE-[*FC]-SEQ-ERROR                                   [*FC]
+*LOOP   
+              DEPENDING  ON  ABORT-IND  
+*INCREMENT  PARA  TO [INPUT,1]  
+       FILE-[*PARA]-SEQ-ERROR.  
+           MOVE  '[INPUT,1,PARA,1]'  TO  SEQ-FNAME. 
+           SUBTRACT  1  FROM  TAPE-[*PARA]-CT  GIVING  SEQ-REC-1,   
+                              SEQ-REC-L2.   
+           MOVE  TAPE-[*PARA]-CT  TO  SEQ-REC-2.
+           MOVE  SEQ-ERR-LINE  TO  DISPLAY-LINE.
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  COMPARE-[*PARA]   TO   COMPARE-L2. 
+           MOVE  SEQ-ERR-L2        TO   DISPLAY-LINE.   
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  TAPE-[*PARA]-CT   TO   SEQ-REC-L2. 
+           MOVE  SEQ-COMPARE-[*PARA]   TO   COMPARE-L2. 
+           MOVE  SEQ-ERR-L2         TO   DISPLAY-LINE.  
+           DISPLAY  DISPLAY-LINE  UPON  LISTE.  
+           MOVE  SPACES  TO  DISPLAY-LINE.  
+*IF   [SEQERROR,1,1]  >  1  
+           ADD  1  TO  FILE-[*PARA]-SEQ-ERROR-CT.   
+           IF  FILE-[*PARA]-SEQ-ERROR-CT  >  [SEQERROR,1,1,2]   
+               CALL  'ABORT'.   
+           GO  TO  MOVE-REC-[*PARA].
+*ELSE   
+           CALL  'ABORT'.   
+*END
+*LOOP   
+*END
+           STOP RUN.
+#MAP,N    ASSURFED*UTILITASCII.MAP,TPF$.BABA
+#SETC 0/t1  
+@HDG,N  

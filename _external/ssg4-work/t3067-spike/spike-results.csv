@@ -1,0 +1,7 @@
+"File","Compiler","Cobol85","LinesIn","LinesSpike","TodayErrors","TodayWarnings","SpikeErrors","SpikeWarnings","SpikeFirstError"
+"EXTEUR__VIRJ01_UL__L146","UCOB","True","715","697","99","7","10","5","ERROR: ERR 000245 Field DB-EU001 is expected to have sub items but none found."
+"EXTEUR__VIRJ01_UL__L146","UCOB","True","697","697","79","7","10","5","ERROR: ERR 000245 Field DB-EU001 is expected to have sub items but none found."
+"RECAP__MPMM02__L225","ACOB+COB","False","756","756","0","4","0","4",
+"RECAP__COCM03__L523","ACOB+COB","False","539","539","4","4","4","4","ERROR: ERR 000169 Picture has illegal characters [X(0)]"
+"TABAN_ASCII__CCSA09__L340","ACOB","False","301","301","0","7","0","7",
+"TABAN_ASCII__VIRA32__L74","ACOB","False","745","745","0","29","0","29",

@@ -1,0 +1,6 @@
+Stage Build, environment CC-Trial, UseUnicode True, started 2026-11-16 21:55:25
+PASS RECAP          program source                 RECAP_GN: new since the last build
+PASS COBOL converter (programs) 1 programs -> GNRECAP.LionSource exit 0, errors 0, warnings 4, 22 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNRECAP\out\GNRECAP.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

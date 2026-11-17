@@ -1,0 +1,35 @@
+SSG-4 MT-069: DB SSG utilities probe + generic RECAP (G1-G8, CC PASS without EUU003)
+
+Probe re-check and classification (RECAP / TABAN_ASCII / EXTEUR):
+- T3-066 SsgConverter: a literal @ ECL image was treated as output text (fix option A proven
+  in scratch; owner lands it with E:\Repos\ssg4-work\t3066\Apply-T3-066-T3-070.ps1).
+- T3-067 per-call scripts: no -Cobol85 for @UCOB skeletons, no ECL cut (spike MT-070 proven).
+- T3-068 RECAP PIC X(0) for a 1-byte FIELDOUT field (4 real calls).
+- T3-069 ECL converter: @USE emitted with unescaped $ (R&D, board candidate).
+- T3-070 SsgConverter: label of [NEURO,1] replaced by the same-named variable, so NEURO
+  was ignored (fix proven in scratch, lands with T3-066).
+- T3-027 / T3-037 extended (EXTEUR: only 10 of 99 errors are EU001; it is @UCOB).
+- Tier-1 mock: Asg/Use/Free primitives (additive, needed by EXTEUR after T3-066).
+- /ssg-generic-utility G4: the 4 known macros-file warnings; -Cobol85 for UCS.
+- board-candidates.md: T3-069 ready; T3-066/T3-070 with the MT-058 merge.
+
+Generic RECAP (Conversion/Pipeline/Generic/RECAP):
+- G1 Classify-RecapCalls.ps1: 28 calls, 4 shapes, all ASCII, 2 with NEURO.
+- G2 spec.md: behaviour, NEURO, V1-V8, L1-L8, assumptions A1-A10 pushed through for the
+  end-to-end proof, ACOB/SSG manual quotes Q-1..Q-7.
+- G3 RecapModel.ps1, New-RecapCases.ps1, Run-RecapModel.ps1: 59 TEST DATA cases,
+  repeatable byte for byte.
+- G4 gen/RECAP-GN.cob: CobolConverterConsole 0 errors.
+- G5 gen/RecapParm.ps1 (Xqt RECAP, RECPARM 80, RECAPIN/RECAPOUT).
+- G6 utilities.json entry + regress SSG4_RECAP_CASES.
+- G7 Test-RecapParm.ps1: 28 real calls MATCH 26 / DIFF 2 (NEURO, T3-070; 28 with the fix);
+  writer vs model 59/59; -Stage Check -Utility All passed.
+- G8 cc/Prepare-RecapCc.ps1, cc/Check-RecapCc.ps1: CC run 1894 (261116 22:08) PASS,
+  6/6 outputs byte-identical, 6/6 reports identical; cases that never call EUU003.
+  AMT writes the sign overpunch as the ACOB manual says (A7); CALL 'EUU003' is resolved
+  only when executed (A10). The other 26 shapes wait for EUU003/INFRUN/EU001/EU002 (Q1-Q3).
+
+Plan: .github/Copilot_Plans/261116-db-ssg-programs-plan.md. Tracker: MT-069, MT-070,
+T3-066..T3-070.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

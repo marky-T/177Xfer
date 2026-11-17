@@ -1,0 +1,620 @@
+*DEFINE FILUNASC
+*SET FIL4 TO [#1]-1 
+* IF FIL4 IS SET
+           03  FILLER         PIC X([*FIL4]).   
+*END
+*END
+*DEFINE FILDEUASC   
+*SET FIL5 TO [#1]-[#2]-[#3]+1   
+*IF FIL5 IS SET 
+           03  FILLER           PIC X([*FIL5]). 
+*END
+*END
+*DEFINE    FILLSET  
+*SET   FILLCTR   TO    [#1]-1   
+*END
+*DEFINE FILDEU  
+*SET FILCT2 TO [#1]-[#2]-[#3]+1 
+*END
+*DEFINE    FILLREM  
+*SET   FILLCTR   TO    [#1]+99-[#2]-[#3]
+*END
+#ERS
+*IF   [ASCII]  >  0 
+#ACOB,IB     TPF$.NAME$,.   
+*ELSE   
+*IF [LIST] > 0  
+#ACOB,IBT       TPF$.NAME$,.
+*ELSE   
+#ACOB,IBT       TPF$.NAME$,.
+*END
+*END
+*.  
+*. longueur forc{e @ 4  
+*SET YLG TO 4   
+*INCREMENT A FROM 1 TO [Y2K]
+*IF [Y2K,A,1,1] = IF
+*.  
+*. --> initialisation nouvelle carte IF 
+*.  
+*SET PAR TO 'IF'
+*SET Z1  TO [Y2K,A,2,4] 
+*SET Z2  TO [Y2K,A,2,2] 
+*SET Z4  TO [*Z2] - 1   
+*INCREMENT Z3 FROM 1 TO Z4  
+*IF [IF,Z1,Z3] > 1  
+*SET PAR TO '[*PAR] [IF,Z1,Z3,1],[IF,Z1,Z3,2]'  
+*ELSE   
+*SET PAR TO '[*PAR] [IF,Z1,Z3,1]'   
+*ENDIF  
+*LOOP   
+*. boucle sur le nombre de champs de la carte Y2K   
+*INCREMENT B FROM 2 TO [Y2K,A]  
+*. initialisations  
+*SET Z1  TO [Y2K,A,B,4] 
+*SET Z2  TO [Y2K,A,B,2] 
+*SET YCH TO 2   
+*IF [Y2K,A,B,2] > 0 
+*SET YCH TO [Y2K,A,B,2] 
+*ENDIF  
+*SET YPOS TO 1  
+*IF [Y2K,A,B,1] > 0 
+*SET YPOS TO [Y2K,A,B,1]
+*ENDIF  
+*.  
+*.boucle @ partir du premier champ @ traiter --> dernier champ carte IF 
+*.  @ traiter -1.   
+*.  
+*IF [*B] = [Y2K,A]  
+*SET V4 TO [Y2K,A]  
+*ELSE   
+*SET V4 TO [*B] + 1 
+*ENDIF  
+*IF [*B] = [Y2K,A]  
+*SET SOIF TO [IF,Z1]
+*ELSE   
+*SET V3 TO [Y2K,A,V4,2] 
+*SET SOIF TO [*V3] - 1  
+*ENDIF  
+*.  
+*INCREMENT BCL FROM Z2 TO SOIF  
+*IF [*BCL] = [Y2K,A,B,2]
+*.  
+*.traitement du champ r{f{renc{ par une carte Y2K   
+*.  
+*SET SIE  TO [*YPOS] + 2
+*SET SI3  TO [*YPOS] + 3
+*IF  [IF,Z1,BCL,1,SUBSTR$,YPOS,2] < 20  
+*SET YAN TO '[IF,Z1,BCL,1,SUBSTR$,SIE,2]'   
+*ELSEIF  [IF,Z1,BCL,1,SUBSTR$,YPOS,3] = 200 
+*SET YAN TO '([IF,Z1,BCL,1,SUBSTR$,SI3,1]'  
+*ELSEIF  [IF,Z1,BCL,1,SUBSTR$,YPOS,3] = 201 
+*SET YAN TO '_[IF,Z1,BCL,1,SUBSTR$,SI3,1]'  
+*ELSEIF  [IF,Z1,BCL,1,SUBSTR$,YPOS,3] = 202 
+*SET YAN TO '|[IF,Z1,BCL,1,SUBSTR$,SI3,1]'  
+*ELSEIF  [IF,Z1,BCL,1,SUBSTR$,YPOS,3] = 203 
+*SET YAN TO '~[IF,Z1,BCL,1,SUBSTR$,SI3,1]'  
+*ENDIF  
+*SET YLS TO [*YPOS] - 1 
+*IF [*YPOS] = 1 
+*SET YTR TO '[*YAN]'
+*ELSE   
+*SET YTR TO '[IF,Z1,BCL,1,SUBSTR$,1,YLS] [*YAN]'
+*ENDIF  
+*SET YLS TO [*YLG] + [*YPOS]
+*SET YLG1 TO [IF,Z1,BCL,1,LEN$] - [*YLS] + 1
+*IF  [*YLG1] > 0
+*SET YTR TO '[*YTR] [IF,Z1,BCL,1,SUBSTR$,YLS,YLG1]' 
+*ENDIF  
+*SET PAR TO '[*PAR] [*YTR]' 
+*ELSE   
+*IF [IF,Z1,BCL] > 1 
+*SET PAR TO '[*PAR] [IF,Z1,BCL,1],[IF,Z1,BCL,2]'
+*ELSE   
+*SET PAR TO '[*PAR] [IF,Z1,BCL,1]'  
+*ENDIF  
+*ENDIF  
+*. fin loop BCL 
+*LOOP   
+*. fin loop B   
+*LOOP   
+*CREATE SGS [*PAR]  
+*. fin carte IF 
+*ENDIF  
+*IF [Y2K,A,1,1] = NOCONT
+*IF [NOCONT,1,1] > 1
+*.  
+*. --> initialisation nouvelle carte NOCONT 
+*.  
+*SET PAR TO 'NOCONT'
+*SET Z2  TO [Y2K,A,2,2] 
+*SET Z4  TO [*Z2] - 1   
+*INCREMENT Z3 FROM 1 TO Z4  
+*SET PAR TO '[*PAR] [NOCONT,1,Z3,1],[NOCONT,1,Z3,2],[NOCONT,1,Z3,3]'
+*LOOP   
+*. boucle sur le nombre de champs de la carte Y2K   
+*INCREMENT B FROM 2 TO [Y2K,A]  
+*. initialisations  
+*SET Z2  TO [Y2K,A,B,2] 
+*SET YCH TO 1   
+*IF [Y2K,A,B,2] > 0 
+*SET YCH TO [Y2K,A,B,2] 
+*ENDIF  
+*SET YPOS TO 1  
+*IF [Y2K,A,B,1] > 0 
+*SET YPOS TO [Y2K,A,B,1]
+*ENDIF  
+*.  
+*.boucle @ partir du premier champ @ traiter --> dernier champ carte
+*.  NOCONT @ traiter -1.
+*.  
+*IF [*B] = [Y2K,A]  
+*SET V4 TO [Y2K,A]  
+*ELSE   
+*SET V4 TO [*B] + 1 
+*ENDIF  
+*IF [*B] = [Y2K,A]  
+*SET SOIF TO [NOCONT,1] 
+*ELSE   
+*SET V3 TO [Y2K,A,V4,2] 
+*SET SOIF TO [*V3] - 1  
+*ENDIF  
+*.  
+*INCREMENT BCL FROM Z2 TO SOIF  
+*IF [*BCL] = [Y2K,A,B,2]
+*.  
+*.traitement du champ r{f{renc{ par une carte Y2K   
+*.  
+*SET SIE  TO [*YPOS] + 2
+*SET SI3  TO [*YPOS] + 3
+*IF  [NOCONT,1,BCL,3,SUBSTR$,YPOS,2] < 20   
+*SET YAN TO '[NOCONT,1,BCL,3,SUBSTR$,SIE,2]'
+*ELSEIF  [NOCONT,1,BCL,3,SUBSTR$,YPOS,3] = 200  
+*SET YAN TO '([NOCONT,1,BCL,3,SUBSTR$,SI3,1]'   
+*ELSEIF  [NOCONT,1,BCL,3,SUBSTR$,YPOS,3] = 201  
+*SET YAN TO '_[NOCONT,1,BCL,3,SUBSTR$,SI3,1]'   
+*ELSEIF  [NOCONT,1,BCL,3,SUBSTR$,YPOS,3] = 202  
+*SET YAN TO '|([NOCONT,1,BCL,3,SUBSTR$,SI3,1]'  
+*ELSEIF  [NOCONT,1,BCL,3,SUBSTR$,YPOS,3] = 203  
+*SET YAN TO '~[NOCONT,1,BCL,3,SUBSTR$,SI3,1]'   
+*ENDIF  
+*SET YLS TO [*YPOS] - 1 
+*IF [*YPOS] = 1 
+*SET YTR TO '[*YAN]'
+*ELSE   
+*SET YTR TO '[NOCONT,1,BCL,3,SUBSTR$,1,YLS][*YAN]'  
+*ENDIF  
+*SET YLS TO [*YLG] + [*YPOS]
+*SET YLG1 TO [NOCONT,1,BCL,3,LEN$] - [*YLS] + 1 
+*IF  [*YLG1] > 0
+*SET YTR TO '[*YTR] [NOCONT,1,BCL,3,SUBSTR$,YLS,YLG1]'  
+*ENDIF  
+*SET PAR TO '[*PAR] [NOCONT,1,BCL,1],[NOCONT,1,BCL,2],[*YTR]'   
+*ELSE   
+*SET PAR TO '[*PAR] [NOCONT,1,BCL,1],[NOCONT,1,BCL,2],[NOCONT,1,BCL,3]' 
+*ENDIF  
+*. fin loop BCL 
+*LOOP   
+*. fin loop B   
+*LOOP   
+*CREATE SGS [*PAR]  
+*. fin carte NOCONT 
+*ENDIF  
+*ENDIF  
+*IF [Y2K,A,1,1] = INDIC 
+*SET MAXINDIC TO [INDIC]
+*INCREMENT I FROM 1 TO [INDIC]  
+*.  
+*. --> initialisation nouvelle carte INDIC  
+*.  
+*SET PAR TO 'INDIC' 
+*SET Z2  TO [Y2K,A,2,2] 
+*SET Z4  TO [*Z2] - 1   
+*INCREMENT Z3 FROM 1 TO Z4  
+*SET PAR TO '[*PAR] [INDIC,I,Z3,1],[INDIC,I,Z3,2],[INDIC,I,Z3,3]'   
+*LOOP   
+*. boucle sur le nombre de champs de la carte Y2K   
+*INCREMENT B FROM 2 TO [Y2K,A]  
+*. initialisations  
+*SET Z2  TO [Y2K,A,B,2] 
+*SET YCH TO 1   
+*IF [Y2K,A,B,2] > 0 
+*SET YCH TO [Y2K,A,B,2] 
+*ENDIF  
+*SET YPOS TO 1  
+*IF [Y2K,A,B,1] > 0 
+*SET YPOS TO [Y2K,A,B,1]
+*ENDIF  
+*.  
+*.boucle @ partir du premier champ @ traiter --> dernier champ carte
+*.  INDIC @ traiter -1. 
+*.  
+*IF [*B] = [Y2K,A]  
+*SET V4 TO [Y2K,A]  
+*ELSE   
+*SET V4 TO [*B] + 1 
+*ENDIF  
+*IF [*B] = [Y2K,A]  
+*SET SOIF TO [INDIC,I]  
+*ELSE   
+*SET V3 TO [Y2K,A,V4,2] 
+*SET SOIF TO [*V3] - 1  
+*ENDIF  
+*.  
+*INCREMENT BCL FROM Z2 TO SOIF  
+*IF [*BCL] = [Y2K,A,B,2]
+*.  
+*.traitement du champ r{f{renc{ par une carte Y2K   
+*.  
+*SET SIE  TO [*YPOS] + 2
+*SET SI3  TO [*YPOS] + 3
+*IF  [INDIC,I,BCL,3,SUBSTR$,YPOS,2] < 20
+*SET YAN TO '[INDIC,I,BCL,3,SUBSTR$,SIE,2]' 
+*ELSEIF  [INDIC,I,BCL,3,SUBSTR$,YPOS,3] = 200   
+*SET YAN TO '([INDIC,I,BCL,3,SUBSTR$,SI3,1]'
+*ELSEIF  [INDIC,I,BCL,3,SUBSTR$,YPOS,3] = 201   
+*SET YAN TO '_[INDIC,I,BCL,3,SUBSTR$,SI3,1]'
+*ELSEIF  [INDIC,I,BCL,3,SUBSTR$,YPOS,3] = 202   
+*SET YAN TO '|([INDIC,I,BCL,3,SUBSTR$,SI3,1]'   
+*ELSEIF  [INDIC,I,BCL,3,SUBSTR$,YPOS,3] = 203   
+*SET YAN TO '~[INDIC,I,BCL,3,SUBSTR$,SI3,1]'
+*ENDIF  
+*SET YLS TO [*YPOS] - 1 
+*IF [*YPOS] = 1 
+*SET YTR TO '[*YAN]'
+*ELSE   
+*SET YTR TO '[INDIC,I,BCL,3,SUBSTR$,1,YLS][*YAN]'   
+*ENDIF  
+*SET YLS TO [*YLG] + [*YPOS]
+*SET YLG1 TO [INDIC,I,BCL,3,LEN$] - [*YLS] + 1  
+*IF  [*YLG1] > 0
+*SET YTR TO '[*YTR] [INDIC,I,BCL,3,SUBSTR$,YLS,YLG1]'   
+*ENDIF  
+*SET PAR TO '[*PAR] [INDIC,I,BCL,1],[INDIC,I,BCL,2],[*YTR]' 
+*ELSE   
+*SET PAR TO '[*PAR] [INDIC,I,BCL,1],[INDIC,I,BCL,2],[INDIC,I,BCL,3]'
+*ENDIF  
+*. fin loop BCL 
+*LOOP   
+*. fin loop B   
+*LOOP   
+*CREATE SGS [*PAR]  
+*. fin loop I   
+*LOOP   
+*. fin carte INDIC  
+*ENDIF  
+*. fin loop A   
+*loop   
+*.  
+*.  Delete anciennes cartes @ modifier. 
+*.  
+*SET IFOK TO 0  
+*INCREMENT F FROM 1 TO [Y2K]
+*IF [Y2K,F,1,1] = IF
+*SET F1 TO [Y2K,F,2,4] - [*IFOK]
+*REMOVE SGS IF,F1   
+*SET IFOK TO [*IFOK] + 1
+*ELSEIF [Y2K,F,1,1] = NOCONT
+*REMOVE SGS NOCONT,1
+*ELSEIF [Y2K,F,1,1] = INDIC 
+*REMOVE SGS INDIC,1,MAXINDIC
+*ENDIF  
+*LOOP   
+
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. SCAN.
+       AUTHOR. BOURDEAUD HUY P. 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER.  UNIVAC-1100-60EIS. 
+       OBJECT-COMPUTER.  UNIVAC-1100-60EIS. 
+       SPECIAL-NAMES.  PRINTER IS LISTE.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT  TAPEIN  ASSIGN   
+*IF   [INPUT,1,1]  >  3 
+                              UNISERVO [INPUT,1,1,1].   
+*ELSE   
+                              DISC [INPUT,1,1,1].   
+*END
+           SELECT  PRT  ASSIGN  TO  PRINTER.
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  TAPEIN   
+*IF [OMITTED] > 0   
+                   LABEL RECORD IS OMITTED  
+*ELSE   
+                   LABEL RECORD IS STANDARD 
+*END
+           BLOCK CONTAINS [INPUT,1,1,3]  RECORDS
+           RECORD CONTAINS [INPUT,1,1,2]  CHARACTERS
+           DATA RECORD IS REC-IN.   
+       01  REC-IN             PIC X([INPUT,1,1,2]). 
+       FD  PRT      LABEL RECORD IS OMITTED  DATA RECORD IS PRT-LINE.   
+*IF   [ASCII]  >  0 
+       01  PRT-LINE          PIC X(100)          USAGE  DISPLAY-1.  
+*ELSE   
+       01  PRT-LINE           PIC X(100).   
+*END
+       WORKING-STORAGE SECTION. 
+       01  ZONE-LECTURE PIC X([INPUT,1,1,2]).   
+*IF [INDIC] > 0 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+       01  ZONE-LECTURE[*I] REDEFINES ZONE-LECTURE. 
+*PROCESS FILUNASC [INDIC,1,I,1] 
+               03 INDIC[*I] PIC X([INDIC,1,I,2]).   
+*PROCESS FILDEUASC [INPUT,1,1,2] [INDIC,1,I,1] [INDIC,1,I,2]
+*LOOP   
+*END
+*IF [INDIC] > 0 
+       01  W-INDIC. 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           02 IND[*I] PIC X([INDIC,1,I,2]). 
+*LOOP   
+       01  W-INDIC-1.   
+*INCREMENT I FROM 1 BY 1 TO [INDIC,1]   
+           02 IND-1[*I] PIC X([INDIC,1,I,2]).   
+*LOOP   
+*END
+       01  REC-AREA.
+*CLEAR     AA   
+*INCREMENT  A  FROM 1 BY 100  TO [INPUT,1,1,2]  
+           03  PRINT-LINE-[*A]             PIC X(100).  
+*SET       AA  TO  [*A] 
+*LOOP   
+*IF   [IF]  >  0
+*INCREMENT  RD  TO [IF] 
+*IF  [IF,RD,1,1]  =  OR 
+*SET  IFPTR  TO +2  
+*ELSE   
+*SET  IFPTR  TO  +1 
+*END
+*IF  NOT  [IF,RD,IFPTR,1]  =  R ;   
+ AND  NOT  [IF,RD,IFPTR,1]  = RECORD
+       01  REC-AREA-REDEFINES-[*RD]  REDEFINES  REC-AREA.   
+*PROCESS   FILLSET  [IF,RD,IFPTR,1] 
+*IF   FILLCTR  IS SET   
+           03  FILLER         PIC X([*FILLCTR]).
+*END
+           03  FIELD-[*RD]         PIC X([IF,RD,IFPTR,2]).  
+*PROCESS   FILLREM   [*AA]  [*FILLCTR]  [IF,RD,IFPTR,2] 
+*IF   FILLCTR  IS SET   
+           03  FILLER         PIC X([*FILLCTR]).
+*END
+*END
+*LOOP   
+*END
+*IF [NOCONT] > 0
+*IF [NOCONT,1,1] > 1
+*INCREMENT I FROM 1 BY 1 TO [NOCONT,1]  
+       01  AREARU[*I] REDEFINES REC-AREA.   
+*PROCESS FILLSET [NOCONT,1,I,1] 
+*IF FILLCTR IS SET  
+           03  FILLER      PIC X([*FILLCTR]).   
+*END
+           03  FILTSTRU[*I]   PIC X([NOCONT,1,I,2]).
+*PROCESS FILDEU [INPUT,1,1,2] [NOCONT,1,I,1] [NOCONT,1,I,2] 
+*IF FILCT2 IS SET   
+           03  FILLER      PIC X([*FILCT2]).
+*END
+*LOOP   
+       01  TSTFINA. 
+*INCREMENT K FROM 1 BY 1 TO [NOCONT,1]  
+           03  TSTFINA[*K]      PIC X([NOCONT,1,K,2])   
+*IF [NOCONT,1,K,3] = BLANC  
+               VALUE SPACES.
+*ELSE   
+               VALUE '[NOCONT,1,K,3]'.  
+*END
+*LOOP   
+       01  MOTST.   
+*INCREMENT I FROM 1 BY 1 TO [NOCONT,1]  
+           03  MOTST[*I]    PIC X([NOCONT,1,I,2]).  
+*LOOP   
+*ELSE   
+       01  TSTFINB      PIC S9(7) VALUE [NOCONT,1,1,1]. 
+*END
+*END
+       01  SKIP                         PIC  9(10)  COMP VALUE 0.   
+       01  LINE-CNT            PIC 9(10) COMP    VALUE 66.  
+       01  REC-IN-CT                    PIC  9(10)  COMP VALUE 0.   
+       01  REC-FOUND-CT                 PIC 9(10) COMP VALUE 0. 
+*IF   [ASCII] > 0   
+       01  H-LINE   USAGE DISPLAY-1.
+*ELSE   
+       01  H-LINE.  
+*END
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+           03 FILLER    PIC X(10) VALUE '1234567890'.   
+*IF   [ASCII]  >  0 
+       01  CT-LINE                               USAGE  DISPLAY-1.  
+*ELSE   
+       01  CT-LINE. 
+*END
+           03 FILLER       PIC XX  VALUE '**'.  
+           03 CT-CT        PIC ZZZZZZ9. 
+           03 FILLER        PIC XX   VALUE '**'.
+           03 FILLER          PIC X(121) VALUE SPACES.  
+*IF   [ASCII] > 0   
+       01  F-LINE  USAGE DISPLAY-1. 
+*ELSE   
+       01  F-LINE.  
+*END
+           03 FILLER        PIC XX  VALUE '**'. 
+           03 F-CT        PIC ZZZZZZ9.  
+           03 FILLER         PIC XX   VALUE '**'.   
+           03 FILLER          PIC X(08) VALUE '........'.   
+           03 FILLER          PIC X(10) VALUE '2.........'. 
+           03 FILLER          PIC X(10) VALUE '3.........'. 
+           03 FILLER          PIC X(10) VALUE '4.........'. 
+           03 FILLER          PIC X(10) VALUE '5.........'. 
+           03 FILLER          PIC X(10) VALUE '6.........'. 
+           03 FILLER          PIC X(10) VALUE '7.........'. 
+           03 FILLER          PIC X(10) VALUE '8.........'. 
+           03 FILLER          PIC X(10) VALUE '9.........'. 
+           03 FILLER          PIC X(10) VALUE '0.........'. 
+           03 FILLER          PIC X(10) VALUE '1.........'. 
+           03 FILLER          PIC X(10) VALUE '2.........'. 
+           03 FILLER          PIC X(03) VALUE '3..'.
+       01  FIVE-CT PIC 9(10) COMP VALUE 6.  
+*IF   [ASCII]  >  0 
+       01  M-LINE                                USAGE  DISPLAY-1.  
+*ELSE   
+       01  M-LINE.  
+*END
+           03  FILLER         PIC X(20) 
+               VALUE '** END SCAN **      '.
+           03  FILLER         PIC X(37) 
+               VALUE  'RECORDS READ FROM [INPUT,1,1,1] = '. 
+           03  M-CT           PIC Z(10)9.   
+           03  FILLER         PIC X(19) 
+               VALUE  ' RECORD MATCHING = '.
+           03  FN-CT          PIC Z(10)9.   
+       PROCEDURE DIVISION.  
+       OPEN-FILES SECTION.  
+       FIRST-READ.  
+           OPEN INPUT  TAPEIN.  OPEN OUTPUT  PRT.   
+       LR. READ  TAPEIN  INTO  REC-AREA  AT END  GO TO END-OUT. 
+           ADD 1 TO REC-IN-CT.  
+*IF   [IF]  >  0
+       TEST-FIELDS. 
+*CLEAR     FIELDCT  
+*CLEAR     ANDIND   
+*INCREMENT  TS  TO [IF] 
+*EDIT  ON & 
+*IF        ANDIND  IS  SET  
+              & 
+*ELSE   
+           IF  &
+*END
+*IF   [IF,TS,IFPTR,1]  =  R ;   
+ OR   [IF,TS,IFPTR,1]   = RECORD
+ REC-IN-CT &
+*ELSE   
+ FIELD-[*TS] &  
+*END
+*INCREMENT  SF  FROM 2  BY 1  TO [IF,TS]
+*IF   [IF,TS,SF,1]  =  QUOTE  OR  [IF,TS,SF,1]  =  Q
+ [IF,TS,SF,2] & 
+*ELSE   
+*IF [IF,TS,SF,1,SUBSTR$,1,1] = (
+      ';[IF,TS,SF,1,SUBSTR$,2,1]'   
+*ELSE   
+*IF [IF,TS,SF,1,SUBSTR$,1,1] = _
+      '_[IF,TS,SF,1,SUBSTR$,2,1]'   
+*ELSE   
+*IF [IF,TS,SF,1,SUBSTR$,1,1] = |
+      '|[IF,TS,SF,1,SUBSTR$,2,1]'   
+*ELSE   
+*IF [IF,TS,SF,1,SUBSTR$,1,1] = ~
+      '~[IF,TS,SF,1,SUBSTR$,2,1]'   
+*ELSE   
+ [IF,TS,SF,1] & 
+*end
+*end
+*end
+*end
+*END
+*SET  FIELDCT  TO  [*SF]
+*IF  [*FIELDCT]  >  5   
+*EDIT  OFF  
+*EDIT  ON & 
+               &
+*END
+*LOOP   
+*EDIT  OFF  
+*IF   [IF,TS,FIELDCT,1]  =  AND 
+*SET   ANDIND   
+*ELSE   
+*IF   [IF,TS,FIELDCT,1]  =  OR  
+*SET       ANDIND   
+*ELSE   
+                   GO TO FOUND-REC. 
+*CLEAR     ANDIND   
+*END
+*END
+*LOOP   
+*IF [NOCONT] > 0
+*IF [NOCONT,1,1] > 1
+*INCREMENT I FROM 1 BY 1 TO [NOCONT,1]  
+           MOVE FILTSTRU[*I] TO MOTST[*I].  
+*LOOP   
+              INSPECT TSTFINA REPLACING ALL '(' BY ';'. 
+              IF MOTST NOT < TSTFINA GO TO END-OUT. 
+*ELSE   
+           IF REC-IN-CT NOT < TSTFINB GO TO END-OUT.
+*END
+*END
+*IF [INDIC] > 0 
+           GO TO SUITE-RECHERCHE.   
+*ELSE   
+           GO TO LR.
+*END
+*END
+       SUITE-RECHERCHE. 
+*IF [INDIC] > 0 
+           MOVE REC-AREA TO ZONE-LECTURE.   
+*INCREMENT N FROM 1 BY 1 TO [INDIC] 
+*INCREMENT I FROM 1 BY 1 TO [INDIC,N]   
+           MOVE INDIC[*I] TO IND[*I]
+*IF [INDIC,N,I,3] = BLANC   
+           MOVE SPACES TO IND-1[*I].
+*ELSE   
+           MOVE '[INDIC,N,I,3]' TO IND-1[*I].   
+*END
+*LOOP   
+           INSPECT W-INDIC-1 REPLACING ALL '(' BY ';'.  
+           IF W-INDIC = W-INDIC-1 GO TO FOUND-REC.  
+*LOOP   
+           GO TO LR.
+*END
+       FOUND-REC.   
+           ADD  1  TO  REC-FOUND-CT.
+           MOVE ZERO  TO  LINE-CNT. 
+           ADD 1 TO FIVE-CT.
+           IF FIVE-CT > 9 MOVE REC-IN-CT TO F-CT
+             WRITE PRT-LINE FROM F-LINE AFTER 1 MOVE 1 TO FIVE-CT   
+            ELSE   MOVE REC-IN-CT TO CT-CT  
+             WRITE PRT-LINE FROM CT-LINE AFTER 1.   
+           ADD 1 TO LINE-CNT.   
+           MOVE  1  TO  SKIP.   
+*INCREMENT  A  FROM 1  BY 100  TO [INPUT,1,1,2] 
+           WRITE  PRT-LINE  FROM  PRINT-LINE-[*A]  AFTER ADVANCING SKIP.
+           ADD 1 TO LINE-CNT.   
+           MOVE 1 TO SKIP.  
+*LOOP   
+           MOVE SPACES  TO REC-AREA.
+           MOVE  1  TO  SKIP.     GO  TO  LR.   
+       END-OUT. 
+           MOVE  REC-IN-CT  TO  M-CT.   
+           MOVE REC-FOUND-CT  TO  FN-CT.
+           WRITE PRT-LINE  FROM  M-LINE AFTER ADVANCING 10 LINES.   
+           CLOSE  TAPEIN  PRT.  
+           STOP RUN.
+#MAP,N         ASSURFED*UTILITASCII.MAP,TPF$.SCAN   
+#HDG,N  
+*EDIT ON &  
+#HDG  & 
+*IF   [TITLE]  > 0  
+*INCREMENT  [T] TO [TITLE,1]
+ [TITLE,1,T,1] &
+*LOOP   
+*ELSE   
+*IF   [IF]  >  0
+  CONDITIONAL & 
+*ELSE   
+  TOTAL &   
+*END
+SCAN OF [INPUT,1,1,1] . &   
+*END
+*EDIT  OFF  

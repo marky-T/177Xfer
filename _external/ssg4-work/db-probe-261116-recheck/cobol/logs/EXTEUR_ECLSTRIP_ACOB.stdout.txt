@@ -1,0 +1,161 @@
+Cobol To Amt Converter 8.0.26273.50
+Copyright © Asysco software 1998 - 2026
+
+Loading settings from: E:\Repos\ssg4-work\db-probe-261116-recheck\cobol\EXTEUR_ECLSTRIP_ACOB.settings
+Applications to convert:
+  - EXTEURECLSTRIPACOB
+
+=== Conversion Started ===
+
+WARNING: CustomerSettingsFile not specified for OS2200 environment
+Starting conversion...
+
+WARNING: CustomerSettingsfile not specified, no settings will be saved. (See Options, Conversion Settings, Customer File)
+=== Conversion Started ===
+
+
+*** PHASE: C O B O L   C O N V E R S I O N   L O G G I N G ***
+
+    Application:   EXTEURECLSTRIPACOB
+    Version:       
+
+*** PHASE: L O A D I N G   C U S T O M E R   S E T T I N G S ***
+
+
+*** PHASE: L O A D I N G   P R E C O M P I L E R   M A C R O S ***
+
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
+
+*** PHASE: R E A D I N G   O S 2 2 0 0   P R O C L I B S ***
+
+
+*** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
+
+Reading source: EXTEUR.TXT
+ERROR: ERR 000245 Field DB-EU001 is expected to have sub items but none found.
+ERROR: ERR 000246 End of statement expected but REPLACE found
+ERROR: ERR 000247 End of statement expected but INVOKE found
+ERROR: ERR 000248 End of statement expected but REPLACE found
+ERROR: ERR 000315 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+ERROR: ERR 000324 Unexpected token END-IF, expected: .
+ERROR: ERR 000325 Unexpected token END-IF, expected: 
+ERROR: ERR 000369 Unexpected token END-IF, expected: .
+ERROR: ERR 000370 Unexpected token END-IF, expected: 
+ERROR: ERR 000377 Unexpected token END-IF, expected: .
+ERROR: ERR 000378 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+ERROR: ERR 000385 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000385 Operand C-PHA-EUR must be a variable.
+ERROR: ERR 000394 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000395 Operand END-IF is not declared.
+ERROR: ERR 000396 Operand END-IF must be a variable.
+ERROR: ERR 000397 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000398 Operand END-IF is not declared.
+ERROR: ERR 000399 Operand END-IF must be a variable.
+ERROR: ERR 000401 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000401 Invalid expression [C-PHA-EUR] encountered.
+ERROR: ERR 000435 End of statement expected but END-IF found
+ERROR: ERR 000453 Operand END-IF is not declared.
+ERROR: ERR 000454 Operand END-IF must be a variable.
+ERROR: ERR 000492 Unexpected token END-IF, expected: .
+ERROR: ERR 000493 Unexpected token END-IF, expected: 
+ERROR: ERR 000495 Operand END-IF is not declared.
+ERROR: ERR 000496 Operand END-IF must be a variable.
+ERROR: ERR 000495 Operand END-IF is not declared.
+ERROR: ERR 000497 Operand END-IF must be a variable.
+ERROR: ERR 000508 Unexpected token END-IF, expected: .
+ERROR: ERR 000509 Unexpected token END-IF, expected: 
+ERROR: ERR 000511 Operand END-IF is not declared.
+ERROR: ERR 000512 Operand END-IF must be a variable.
+ERROR: ERR 000511 Operand END-IF is not declared.
+ERROR: ERR 000513 Operand END-IF must be a variable.
+WARNING: WAR 000538 Compare between Alpha and Numeric item [INA.MT-S-0-1 (Numeric)] and [SPACE (Alpha)].
+ERROR: ERR 000545 Operand END-DIVIDE is not declared.
+ERROR: ERR 000546 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000551 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000552 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000551 Operand END-IF is not declared.
+ERROR: ERR 000553 Operand END-IF must be a variable.
+ERROR: ERR 000560 Operand END-DIVIDE is not declared.
+ERROR: ERR 000561 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000565 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000566 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000565 Operand END-IF is not declared.
+ERROR: ERR 000567 Operand END-IF must be a variable.
+ERROR: ERR 000565 Operand END-IF is not declared.
+ERROR: ERR 000568 Operand END-IF must be a variable.
+ERROR: ERR 000575 Operand END-DIVIDE is not declared.
+ERROR: ERR 000576 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000582 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000583 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000582 Operand END-IF is not declared.
+ERROR: ERR 000584 Operand END-IF must be a variable.
+ERROR: ERR 000582 Operand END-IF is not declared.
+ERROR: ERR 000585 Operand END-IF must be a variable.
+ERROR: ERR 000591 Operand END-DIVIDE is not declared.
+ERROR: ERR 000592 Operand END-DIVIDE must be a variable.
+ERROR: ERR 000597 Operand END-MULTIPLY is not declared.
+ERROR: ERR 000598 Operand END-MULTIPLY must be a variable.
+ERROR: ERR 000597 Operand END-IF is not declared.
+ERROR: ERR 000599 Operand END-IF must be a variable.
+ERROR: ERR 000597 Operand END-IF is not declared.
+ERROR: ERR 000600 Operand END-IF must be a variable.
+ERROR: ERR 000601 Operand END-IF is not declared.
+ERROR: ERR 000602 Operand END-IF must be a variable.
+ERROR: ERR 000601 Operand END-IF is not declared.
+ERROR: ERR 000603 Operand END-IF must be a variable.
+ERROR: ERR 000634 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+WARNING: WAR 000634 Paragraph name END-IF already exists within this section.
+ERROR: ERR 000645 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+WARNING: WAR 000645 Paragraph name END-IF already exists within this section.
+ERROR: ERR 000682 Operand END-IF is not declared.
+ERROR: ERR 000683 Operand END-IF must be a variable.
+ERROR: ERR 000682 Operand END-PERFORM is not declared.
+ERROR: ERR 000684 Operand END-PERFORM must be a variable.
+ERROR: ERR 000690 End of statement expected but END-PERFORM found
+1 source(s) read
+
+Analyzing source: EXTEUR
+ERROR: ERR 000387 Operand C-PHA-EUR is not declared.
+ERROR: ERR 000387 SQL Table/View EU001 not found
+
+*** PHASE: A N A L Y S I N G   S O U R C E S ***
+
+
+*** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
+
+1 source(s) processed
+
+*** PHASE: EXTEURECLSTRIPACOB CONVERSION STATISTICS ***
+
+Source code counts:
+               Sources   Lines     Average
+Batch          1         697       697     
+
+List of unresolved calls:
+Source                 No of calls
+MSGERR                        1
+BLOACE                        1
+
+
+*** PHASE: D O N E ***
+
+Elapsed time:  00:00:00:732
+
+
+=== Conversion Completed ===
+
+=== Conversion Summary ===
+Objects processed: not tracked by this converter (SetLogObject is never called)
+Objects in error:  not tracked - see Errors below, which IS accurate
+Errors: 79
+Warnings: 7
+Todos: 0
+Logs: 17
+
+
+=== Conversion Completed ===
+
+Conversion completed with errors.

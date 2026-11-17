@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\t3067-spike\\cobol\\out\\TABAN_ASCII__CCSA09__L340_SPIKE.LionSource
+APPNAME = TABANASCIICCSA09L340SPIKE
+GENSET = Default from new application
+SYSOPT = FALSE

@@ -1,0 +1,64 @@
+Cases made and model run twice: 413 files, byte-identical: True
+ABORT       1
+OK          41
+REJECT      15
+UNMODELLED  2
+cc-ccta08-neuro-all          OK
+cc-cocm03-neuro-all          OK
+cc-lrst12-neuro-all          OK
+cc-mpmm03-neuro-all          OK
+cc-vira12-neuro-all          OK
+real-CCTA08_L287             OK
+real-CLOA35_L221             OK
+real-COCH02_D3_L73           OK
+real-COCM03_L523             OK
+real-COCM03_L585             OK
+real-d_LRSD42_L113           OK
+real-d_SCTD01_L151           OK
+real-LRST12_L113             OK
+real-MPMA03_L138             OK
+real-MPMA04_L181             OK
+real-MPMA04_L208             OK
+real-MPMM02_L198             OK
+real-MPMM02_L225             OK
+real-MPMM02_L256             OK
+real-MPMM03_L163             OK
+real-MPMM03_L194             OK
+real-MPMT01_L182             OK
+real-MPMT01_L209             OK
+real-RISH02_L284             OK
+real-SCTA02_L174             OK
+real-SCTA03_L151             OK
+real-SCTM01_L204             OK
+real-VIRA12_EN_L743          OK
+real-VIRA15_EN_L691          OK
+real-VIRA19_EN_L692          OK
+real-VIRA29_L2_L48           OK
+real-VIRM01_EN_L668          OK
+real-VIRM01_L2_L49           OK
+reject-l1-asciifd            REJECT L1 ASCIIFD (Fieldata records) not supported
+reject-l2-cfh                REJECT L2 CFH not supported
+reject-l3-y2k                REJECT L3 Y2K not supported
+reject-l4-count              REJECT L4 TOTIN has 11 fields, TOTOUT 10
+reject-l5-outside            REJECT L5 FIELDOUT field 14 (115,2) outside the record (115)
+reject-l6-19-digits          REJECT L6 total of 19 digits (ACOB maximum 18)
+reject-l7-length             REJECT L7 record length outside INPUT 1..4001 / OUTPUT 1..4000 (INPUT 5000, OUTPUT 115)
+reject-v1-no-input           REJECT V1 CARTE INPUT MANQUANTE
+reject-v2-no-output          REJECT V2 CARTE OUTPUT MANQUANTE
+reject-v3-no-fieldin         REJECT V3 CARTE FIELDIN MANQUANTE
+reject-v4-no-fieldout        REJECT V4 CARTE FIELDOUT MANQUANTE
+reject-v5-no-totin           REJECT V5 CARTE TOTIN MANQUANTE
+reject-v6-no-totout          REJECT V6 CARTE TOTOUT MANQUANTE
+reject-v7-no-indic           REJECT V7 CARTE INDIC MANQUANTE
+reject-v8-no-ascii           REJECT V8 CARTE COMPILATEUR ABSENTE
+t-empty-input                OK
+t-long-records               OK
+t-neuro-range                OK
+t-no-neuro                   OK
+t-one-group                  OK
+t-overflow                   UNMODELLED sum 5 does not fit S9(2) (undefined, spec A7)
+t-seq-error                  ABORT sequence error at record 6
+t-short-records              OK
+t-signed-input               UNMODELLED record 6 amount 1 '000197211A' is not digits/spaces (spec A6)
+t-spaces-overlap             OK
+t-zero-totals                OK

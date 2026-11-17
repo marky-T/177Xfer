@@ -1,0 +1,12 @@
+SSG-4 MT-069: board re-check T3-020/T3-046 on develop; Euu003 calls ABRDMS
+
+- board-candidates.md: T3-020 (inline SGS cards dropped) and T3-046 (@HDG,P text as one
+  string) re-checked in R&D develop 88dc012f source: both still present (VisitSsg /
+  VisitHdg unchanged since 261009); not yet by a conversion with a develop build.
+- RECAP spec + plan: AMT's Euu003 calls ABRDMS on a SQL error (in BSP_AMT); EREABT$ only
+  appears in its commented-out UCOB variant.
+
+Team note (E:\Repos\ssg4-work\db-ssg-questions-for-team-261116.md) revised for the
+planning thread: problem first, T3 id in brackets; Q10 board list in plain words.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

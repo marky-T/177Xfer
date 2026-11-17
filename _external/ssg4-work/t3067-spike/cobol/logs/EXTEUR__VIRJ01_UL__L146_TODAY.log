@@ -1,0 +1,106 @@
+﻿2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : C O B O L   C O N V E R S I O N   L O G G I N G
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : L O A D I N G   C U S T O M E R   S E T T I N G S
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : L O A D I N G   P R E C O M P I L E R   M A C R O S
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : R E A D I N G   O S 2 2 0 0   P R O C L I B S
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:22 [0] Phase     : R E A D I N G   B A T C H   S O U R C E S
+2026-11-16 19:53:22 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Error     : ERR 000245 Field DB-EU001 is expected to have sub items but none found.
+2026-11-16 19:53:23 [0] Error     : ERR 000246 End of statement expected but REPLACE found
+2026-11-16 19:53:23 [0] Error     : ERR 000247 End of statement expected but INVOKE found
+2026-11-16 19:53:23 [0] Error     : ERR 000248 End of statement expected but REPLACE found
+2026-11-16 19:53:23 [0] Error     : ERR 000315 Paragraph END-PERFORM must not be nested within another statement. Please code a preceding period.
+2026-11-16 19:53:23 [0] Error     : ERR 000324 Unexpected token END-IF, expected: .
+2026-11-16 19:53:23 [0] Error     : ERR 000325 Unexpected token END-IF, expected: 
+2026-11-16 19:53:23 [0] Error     : ERR 000369 Unexpected token END-IF, expected: .
+2026-11-16 19:53:23 [0] Error     : ERR 000370 Unexpected token END-IF, expected: 
+2026-11-16 19:53:23 [0] Error     : ERR 000377 Unexpected token END-IF, expected: .
+2026-11-16 19:53:23 [0] Error     : ERR 000378 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-11-16 19:53:23 [0] Error     : ERR 000385 Operand C-PHA-EUR is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000385 Operand C-PHA-EUR must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000394 Operand C-PHA-EUR is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000395 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000396 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000397 Operand C-PHA-EUR is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000398 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000399 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000401 Operand C-PHA-EUR is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000401 Invalid expression [C-PHA-EUR] encountered.
+2026-11-16 19:53:23 [0] Error     : ERR 000435 End of statement expected but END-IF found
+2026-11-16 19:53:23 [0] Error     : ERR 000453 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000454 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000492 Unexpected token END-IF, expected: .
+2026-11-16 19:53:23 [0] Error     : ERR 000493 Unexpected token END-IF, expected: 
+2026-11-16 19:53:23 [0] Error     : ERR 000495 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000496 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000495 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000497 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000508 Unexpected token END-IF, expected: .
+2026-11-16 19:53:23 [0] Error     : ERR 000509 Unexpected token END-IF, expected: 
+2026-11-16 19:53:23 [0] Error     : ERR 000511 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000512 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000511 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000513 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000545 Operand END-DIVIDE is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000546 Operand END-DIVIDE must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000551 Operand END-MULTIPLY is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000552 Operand END-MULTIPLY must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000551 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000553 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000560 Operand END-DIVIDE is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000561 Operand END-DIVIDE must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000565 Operand END-MULTIPLY is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000566 Operand END-MULTIPLY must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000565 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000567 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000565 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000568 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000575 Operand END-DIVIDE is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000576 Operand END-DIVIDE must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000582 Operand END-MULTIPLY is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000583 Operand END-MULTIPLY must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000582 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000584 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000582 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000585 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000591 Operand END-DIVIDE is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000592 Operand END-DIVIDE must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000597 Operand END-MULTIPLY is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000598 Operand END-MULTIPLY must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000597 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000599 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000597 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000600 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000601 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000602 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000601 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000603 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000634 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-11-16 19:53:23 [0] Error     : ERR 000645 Paragraph END-IF must not be nested within another statement. Please code a preceding period.
+2026-11-16 19:53:23 [0] Error     : ERR 000682 Operand END-IF is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000683 Operand END-IF must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000682 Operand END-PERFORM is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000684 Operand END-PERFORM must be a variable.
+2026-11-16 19:53:23 [0] Error     : ERR 000690 End of statement expected but END-PERFORM found
+2026-11-16 19:53:23 [0] Error     : ERR 000387 Operand C-PHA-EUR is not declared.
+2026-11-16 19:53:23 [0] Error     : ERR 000387 SQL Table/View EU001 not found
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : A N A L Y S I N G   S O U R C E S
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : W R I T I N G   L I O N   O U T P U T   F I L E
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : EXTEURVIRJ01ULL146TODAY CONVERSION STATISTICS
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------
+2026-11-16 19:53:23 [0] Phase     : D O N E
+2026-11-16 19:53:23 [0] Phase     : ------------------------------------------------------------

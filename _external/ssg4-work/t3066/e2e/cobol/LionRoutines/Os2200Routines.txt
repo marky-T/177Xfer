@@ -1,0 +1,197 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from an OS2200 environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='N'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default
+  
+-->
+<ROUTINES>
+
+<OBJECT name='AMT_GETTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+var
+    amt_task_switch : boolean [24]
+    amt_option      : numeric 1 [35]
+    amt_char        : alpha 1
+    n-char          : numeric 2 comp redefines amt_char
+    amt_s_val       : string
+    amt_i_loop,
+    amt_i_sw        : integer
+    o_task          : task
+    o_job           : job
+
+end_definitions
+
+
+routine main
+begin_routine
+    amt_option[]   := 0
+    o_task.appname := si-applicationname
+    o_task.connect()
+    if o_task.connected
+        o_job := o_task.getmyself()
+        if o_job.running
+            amt_task_mixnumber := o_job.requestid
+        endif
+        amt_task_value := o_job.taskvalue
+        amt_job_value  := o_job.gettvcustom ('JOBVALUE')
+
+        loop for amt_i_sw := 1 to 24
+            amt_task_switch[amt_i_sw] := o_job.gettvswitch ('SW' & amt_i_sw) = 'T'
+        endloop
+
+        amt_qual       := o_job.gettvcustom ('QUAL')
+        amt_joblogfile := o_job.gettvcustom ('SUMM')
+        amt_s_val      := o_job.gettvcustom ('OPT')
+        if amt_s_val <> ''
+            loop for amt_i_loop := 1 to length (amt_s_val)
+                amt_char := copy (amt_s_val, amt_i_loop, 1)
+                if amt_char >= 'A' and amt_char < 'P'
+                    amt_option[n-char - 31] := 1
+                elseif amt_char >= 'P'
+                    amt_option[n-char - 25] := 1
+                endif
+            endloop
+        endif
+        amt_task_status   := o_job.gettvcustom ('STATUS')
+        amt_job_jobnumber := o_job.gettvcustom ('JOBNUMBER')
+        amt_joblogfile    := o_job.gettvcustom ('JOBFILENAME')
+        amt_job_name      := o_job.gettvcustom ('JOBNAME')
+        amt_task_name     := si-repname
+    else
+        amt_jobsummary('Could not connect to sysDB ' & si-repname, true)
+    endif
+    amt_task_switches := amt_task_switch[]
+    amt_task_sw1      := amt_task_switch[1]
+    amt_task_sw2      := amt_task_switch[2]
+    amt_task_sw3      := amt_task_switch[3]
+    amt_task_sw4      := amt_task_switch[4]
+    amt_task_sw5      := amt_task_switch[5]
+    amt_task_sw6      := amt_task_switch[6]
+    amt_task_sw7      := amt_task_switch[7]
+    amt_task_sw8      := amt_task_switch[8]
+    amt_options       := amt_option[]
+end_routine
+
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_RETURNTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+
+begin_definitions
+const
+
+var
+  amt_task_switch : boolean [24]
+  i_sw: integer
+
+booleans
+
+end_definitions
+
+
+
+routine main
+begin_routine
+  amt_task_switch[] := amt_task_switches
+  si-taskvalue := '<TASK>'
+  loop for i_sw := 1 to 24
+    if amt_task_switch[i_sw]
+      si-taskvalue &= ' <SW' & i_sw & ' value="T"/>'
+    else
+      si-taskvalue &= ' <SW' & i_sw & ' value="F"/>'
+    endif
+  endloop
+  si-taskvalue &= ' </TASK>'
+end_routine
+
+
+</CODE>
+</OBJECT>
+
+<OBJECT name='AMT_FILENAME' description='Format Cobol filename for Lion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+begin_definitions
+
+const
+
+var
+
+end_definitions
+
+{*
+change mainframe style of names to amt style
+        filler: alpha 12 value '(PRODUCTION)'
+        filler: alpha 18 value 'CAT/CURYRFL ON DBB'
+        filler: alpha 1 value '.'
+
+so the value '(PRODUCTION)CAT/CURYRFL ON DBB.'
+is changed to 'CAT/CURYRFL.DAT'
+*}
+
+routine main (s_filenamenew: string, b_print : boolean optional, s_filenameold : string optional, s_printid: string optional): string
+var
+    i_pos : integer
+    s_tmp : string
+begin_routine
+    // Check if the new filename is already fully qualified
+    if copy(s_filenamenew, 1, 2) = '\\' or copy(s_filenamenew, 2, 1) = ':'
+        // filenamenew is already complete
+        result := s_filenamenew
+        exit
+    endif
+    if s_filenamenew = ''
+      s_filenamenew := s_filenameold
+    endif
+
+    // Remove possible username
+    if copy(s_filenamenew, 1, 1) = '('
+        i_pos         := 0
+        s_tmp         := unstring (s_filenamenew, i_pos, ')')
+        s_filenamenew := copy(s_filenamenew, i_pos)
+    endif
+
+    // Remove possible " ON <pack>"
+    i_pos := 0
+    s_tmp := unstring(s_filenamenew, i_pos, ' ON ')
+    if i_pos < length(s_filenamenew)
+        s_filenamenew := copy(s_filenamenew, 1, i_pos - 4)
+    endif
+
+    // Remove possible dot at the end
+    i_pos := length(s_filenamenew)
+    if copy(s_filenamenew, i_pos, 1) = '.'
+        s_filenamenew := copy(s_filenamenew, 1, i_pos - 1)
+    endif
+
+    // add file extension 
+    if b_print
+        result := s_filenamenew & '.PRN'
+    else
+        result := s_filenamenew & '.DAT'
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+
+</ROUTINES>

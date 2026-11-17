@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\db-probe-261116\\cobol\\out\\RECAP_CCTA08__L287.LionSource
+APPNAME = RECAPCCTA08L287
+GENSET = Default from new application
+SYSOPT = FALSE

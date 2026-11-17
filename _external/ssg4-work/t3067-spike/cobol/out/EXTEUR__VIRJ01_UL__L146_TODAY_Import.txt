@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\t3067-spike\\cobol\\out\\EXTEUR__VIRJ01_UL__L146_TODAY.LionSource
+APPNAME = EXTEURVIRJ01ULL146TODAY
+GENSET = Default from new application
+SYSOPT = FALSE

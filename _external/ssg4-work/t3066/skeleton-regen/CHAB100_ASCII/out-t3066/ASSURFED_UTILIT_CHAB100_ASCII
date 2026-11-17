@@ -1,0 +1,268 @@
+*DEFINE CALUN   
+*SET  FILUN TO [#1]-1   
+*IF FILUN IS SET
+           03  FILLER                   PIC X([*FILUN]).
+*END
+*END
+*DEFINE CALDEU  
+*SET  FILDEU TO [#1]-[#2]-[#3]+1
+*IF FILDEU IS SET   
+           03  FILLER                   PIC X([*FILDEU]).   
+*END
+*END
+*DEFINE CALTROI 
+*SET    FILTROI TO [#1]-1   
+           MOVE [*FILTROI] TO NBFOIS.   
+*END
+*DEFINE  CALMAX 
+*CLEAR A
+*CLEAR B
+*DIVIDE [#1] BY +100 GIVING A,B 
+*IF B IS SET
+*SET A TO A+1   
+*END
+*INCREMENT J FROM 1 BY 1 TO [*A]
+           03  ZCAR[*J]      PIC X(100).
+*LOOP   
+*END
+*IF [ASCII] > 0 
+#ACOB,I    TPF$.CHABANA,TPF$.CHABANB
+*ELSE   
+#ACOB,IT   TPF$.CHABANA,TPF$.CHABANB
+*END
+
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID.    CHABAN.   
+       AUTHOR. BOURDEAUD HUY.   
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.   
+       SOURCE-COMPUTER. UNIVAC-1100-10. 
+       OBJECT-COMPUTER. UNIVAC-1100-10. 
+       SPECIAL-NAMES.   
+           PAGE IS SAUT.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT FIC ASSIGN TO DISC [OUTPUT,1,1,1].
+           SELECT CAR ASSIGN TO CARD-READER.
+*IF [LIST] > 0  
+           SELECT PRI ASSIGN TO PRINTER.
+*END
+       DATA DIVISION.   
+       FILE SECTION.
+       FD  FIC  
+           BLOCK [OUTPUT,1,1,3] RECORDS 
+           LABEL RECORD STANDARD
+           DATA RECORD ZFIC.
+       01  ZFIC               PIC X([OUTPUT,1,1,2]).
+       FD  CAR  
+           LABEL RECORD OMITTED 
+           DATA RECORD ZIN. 
+       01  ZIN      PIC X(100). 
+*IF [LIST] > 0  
+       FD  PRI  
+           LABEL RECORD OMITTED 
+           DATA RECORD ZPR. 
+       01  ZPR                PIC X(100).   
+*END
+       WORKING-STORAGE SECTION. 
+       01  COUNTERS  VALUE ALL ZEROES.  
+           03  CTOUT          PIC S9(7).
+           03  CTFS           PIC S9(5).
+           03  CTCAR          PIC S9(5).
+*IF [LIST] > 0  
+       01  ZPRINT   VALUE SPACES.   
+*INCREMENT N FROM 1 BY 100 TO [OUTPUT,1,1,2]
+           03  ZP[*N]         PIC X(100).   
+*LOOP   
+*END
+       01  ZOUT     VALUE SPACES.   
+*INCREMENT N FROM 1 BY 100 TO [OUTPUT,1,1,2]
+           03  ZT[*N]         PIC X(100).   
+*LOOP   
+       01  ZOUTR    REDEFINES ZOUT. 
+           03  ZTR OCCURS [OUTPUT,1,1,2] PIC X. 
+*INCREMENT I FROM 1 BY 1 TO [MOD]   
+*IF [MOD,I,1,1] > 0 
+       01  ZOU[*I] REDEFINES  ZOUT. 
+*PROCESS CALUN [MOD,I,1,1]  
+*IF [MOD,I,1,3] = A 
+           03  CHAMP[*I].   
+             05  CHMODA[*I] OCCURS [MOD,I,1,2]    PIC X.
+*ELSE   
+           03  CHMODN[*I]     PIC S9([MOD,I,1,2]).  
+*END
+*PROCESS CALDEU [OUTPUT,1,1,2] [MOD,I,1,1] [MOD,I,1,2]  
+*END
+*LOOP   
+       01  ZCAR.
+*PROCESS  CALMAX [OUTPUT,1,1,2] 
+       01  ZCPOS REDEFINES ZCAR.
+           03  ZCEM OCCURS [OUTPUT,1,1,2] PIC X.
+       01  INDEKS.  
+           03  IED            PIC S9999 VALUE 1.
+           03  IEF            PIC S9999 VALUE 1.
+           03  IRD            PIC S9999 VALUE 1.
+       01  ZTIT.
+           03  FILLER      PIC X(4) VALUE ALL '*'.  
+           03  FILLER         PIC X(2) VALUE SPACES.
+           03  FILLER         PIC X(16) VALUE 'RECORD NUMERO **'.   
+           03  FILCT          PIC Z(7). 
+       01  CTSPEC             PIC S9(7) VALUE 0.
+       01  CTTEST             PIC S9(7) VALUE 0.
+       01  NBFOIS             PIC S9(7) VALUE 0.
+       01  ZONE               PIC X VALUE SPACES.   
+       01  TABLE-ALPHA        PIC X(26) VALUE   
+                              'ABCDEFGHIJKLMNOPQRSTUVWXYZ'. 
+       01  TABALPHA REDEFINES TABLE-ALPHA.  
+           03  ALPHA OCCURS 26  PIC X.  
+       01  VALEUR             PIC S9999 VALUE 0.
+       01  VINSIX             PIC S99  VALUE 26.
+       01  ZREP               PIC S9999 VALUE 0.
+       01  DIX                PIC S99  VALUE 10.
+       01  TABLE-NUM      PIC X(10) VALUE '0123456789'. 
+       01  TABNUM  REDEFINES TABLE-NUM. 
+           03  NUMER  OCCURS 10         PIC X.  
+       01  RETOUR        PIC X VALUE SPACE. 
+       PROCEDURE DIVISION.  
+       P0.  
+           OPEN INPUT CAR OUTPUT FIC.   
+*IF [LIST] > 0  
+           OPEN OUTPUT PRI. 
+           WRITE ZPR FROM ZP1 BEFORE SAUT.  
+*END
+*INCREMENT I FROM 1 BY 1 TO [NUMB]  
+       P[*I].   
+*IF [NUMB,I,1] > 1  
+*PROCESS CALTROI [NUMB,I,1,2]   
+            PERFORM PAR[*I] NBFOIS TIMES.   
+*END
+       PAR[*I]. 
+           ADD [NUMB,I,1,1] TO CTSPEC.  
+*IF [FLDSEL,I,1,1] = 0  
+*INCREMENT J FROM 1 BY 100 TO [OUTPUT,1,1,2]
+           READ CAR INTO ZT[*J] AT END GO TO STATIS.
+           ADD 1 TO CTCAR.  
+*LOOP   
+*ELSE   
+*INCREMENT J FROM 1 BY 1 TO [NUMB,I,1,1]
+           READ CAR INTO ZCAR[*J] AT END GO TO STATIS.  
+           ADD 1 TO CTFS.   
+*LOOP   
+*INCREMENT K FROM 1 BY 1 TO [FLDSEL,I]  
+       PSEL[*I][*K].
+           MOVE [FLDSEL,I,K,1] TO IED.  
+           COMPUTE IEF = IED + ([FLDSEL,I,K,2] - 1).
+           MOVE [FLDSEL,I,K,3] TO IRD.  
+           PERFORM PARAG THRU FIPARAG.  
+*LOOP   
+*END
+           PERFORM ECRIOUT THRU FIECRIOUT.  
+*IF [MOD,I,1,1] > 0 
+*PROCESS CALTROI [MOD,I,1,5]
+           PERFORM PARMOD[*I] THRU FIPARMOD[*I] NBFOIS TIMES.   
+       PARMOD[*I].  
+*IF [MOD,I,1,3] = N 
+           ADD [MOD,I,1,4] TO CHMODN[*I].   
+*ELSE   
+           MOVE [MOD,I,1,2] TO IEF. 
+           MOVE [MOD,I,1,4] TO VALEUR.  
+       TT[*I].  
+           IF IEF = 0 MOVE ALL '*' TO CHAMP[*I] 
+                      GO TO FIPARMOD[*I].   
+           MOVE CHMODA[*I] (IEF) TO ZONE.   
+           PERFORM RECHA THRU FIRECHA.  
+           MOVE ZONE TO CHMODA[*I] (IEF).   
+           IF RETOUR = 'R' SUBTRACT 1 FROM IEF GO TO TT[*I].
+*END
+       FIPARMOD[*I].
+           MOVE SPACE TO RETOUR.
+           PERFORM ECRIOUT THRU FIECRIOUT.  
+*END
+*LOOP   
+       STATIS.  
+*IF [LIST] > 0  
+           MOVE SPACES TO ZPR.  
+           WRITE ZPR BEFORE SAUT.   
+*END
+           DISPLAY 'STATISTIQUES DE CREATION' UPON PRINTER. 
+           DISPLAY 'NOMBRE DE CARTES DONNEES LUES' UPON PRINTER.
+           ADD CTFS CTCAR GIVING CTTEST.
+           DISPLAY CTTEST UPON PRINTER. 
+           DISPLAY 'NOMBRE DE CARTES DONNEES POUR FS' CTFS  
+                                        UPON PRINTER.   
+           DISPLAY 'NOMBRE DE CARTES DONNEES CREATION' CTCAR
+                                        UPON PRINTER.   
+           DISPLAY 'NOMBRE DE RECORDS CREES' CTOUT  UPON PRINTER.   
+           IF CTSPEC = CTTEST   
+                    DISPLAY 'FIN DU TRAVAIL,TOUT EST OK' UPON PRINTER   
+           ELSE DISPLAY 'VERIFIER OUTPUT' 'IL Y AVAIT TROP PEU DE CARTES
+      -      ' DONNEES OU FS' UPON PRINTER. 
+       FIN. 
+           CLOSE FIC CAR.   
+*IF [LIST] > 0  
+           CLOSE PRI.   
+*END
+           STOP RUN.
+       ECRIOUT. 
+           WRITE ZFIC FROM ZOUT.
+           ADD 1 TO CTOUT.  
+*IF [LIST] > 0  
+           MOVE ZOUT TO ZPRINT. 
+           MOVE CTOUT TO FILCT. 
+           WRITE ZPR FROM ZTIT BEFORE 1.
+*INCREMENT P FROM 1 BY 100 TO [OUTPUT,1,1,2]
+           WRITE ZPR FROM ZP[*P] BEFORE 1.  
+*LOOP   
+           MOVE ALL '*' TO ZPR. 
+           WRITE ZPR BEFORE 1.  
+*END
+       FIECRIOUT.   
+           EXIT.
+       PARAG.   
+           MOVE ZCEM (IED) TO ZTR (IRD).
+           ADD 1 TO IED IRD.
+           IF IED NOT > IEF GO TO PARAG.
+       FIPARAG. 
+           EXIT.
+       RECHA.   
+           MOVE 0 TO IED.   
+       INC1.
+           ADD 1 TO IED.
+           IF ZONE = ALPHA (IED) GO TO CONT1.   
+           IF IED < 26 GO TO INC1.  
+           GO TO RECHN. 
+       CONT1.   
+           SUBTRACT IED FROM VINSIX GIVING ZREP.
+           IF ZREP NOT < VALEUR ADD VALEUR TO IED   
+                                MOVE ALPHA (IED) TO ZONE
+                                MOVE SPACE TO RETOUR
+                                GO TO FIRECHA.  
+           SUBTRACT ZREP FROM VALEUR GIVING IED.
+           MOVE ALPHA (IED) TO ZONE.
+           MOVE 'R' TO RETOUR.  
+           MOVE 1 TO VALEUR.
+           GO TO FIRECHA.   
+       RECHN.   
+           MOVE 0 TO IED.   
+       INC2.
+           ADD 1 TO IED.
+           IF ZONE = NUMER (IED) GO TO CONT2.   
+           IF IED < 10 GO TO INC2.  
+           MOVE '*' TO ZONE.
+           MOVE SPACE TO RETOUR.
+           GO TO FIRECHA.   
+       CONT2.   
+           SUBTRACT IED FROM DIX GIVING ZREP.   
+           IF ZREP NOT < VALEUR ADD VALEUR TO IED   
+                                MOVE NUMER (IED) TO ZONE
+                                MOVE SPACE TO RETOUR
+.                               GO TO FIRECHA.  
+           SUBTRACT ZREP FROM VALEUR GIVING IED.
+           MOVE NUMER (IED) TO ZONE.
+           MOVE 'R' TO RETOUR.  
+           MOVE 1 TO VALEUR.
+           GO TO FIRECHA.   
+       FIRECHA. 
+           EXIT.
+#MAP,N  ASSURFED*UTILITASCII.MAP,TPF$.CHABAN
+#HDG,N  

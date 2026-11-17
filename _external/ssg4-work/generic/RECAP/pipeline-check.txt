@@ -1,0 +1,5 @@
+Cross-check parm vs expansion (28 real calls): DIFF 2, MATCH 26
+  CCTA08_L287: DIFF: NE exp[] parm[1 2] 
+  RISH02_L284: DIFF: NE exp[] parm[1] 
+Extra: vs the T3-070-fixed expansions: MATCH 28
+Test cases, writer vs model (59): MATCH 59

@@ -1,0 +1,5 @@
+"Program","Call","ExpandIdentical","Exit","Errors","Warnings","Match","FirstError"
+"RECAP","MPMM02__L225","True","0/0","0/0","4/4","True",
+"RECAP","COCM03__L523","True","1/1","4/4","4/4","True","ERROR: ERR 000169 Picture has illegal characters [X(0)]"
+"TABAN_ASCII","CCSA09__L340","True","0/0","0/0","7/7","True",
+"EXTEUR","VIRJ01_UL__L146","True","1/1","99/99","7/7","True","ERROR: ERR 000249 Field DB-EU001 is expected to have sub items but none found."

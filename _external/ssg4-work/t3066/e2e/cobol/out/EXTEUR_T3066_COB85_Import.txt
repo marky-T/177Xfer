@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\t3066\\e2e\\cobol\\out\\EXTEUR_T3066_COB85.LionSource
+APPNAME = EXTEURT3066COB85
+GENSET = Default from new application
+SYSOPT = FALSE

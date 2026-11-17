@@ -1,0 +1,32 @@
+[
+  {
+    "Case": "real-RISH02_L284",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP01\\SORTIE",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-RISH02_L284\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-ccta08-neuro-all",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP02\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-ccta08-neuro-all\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-cocm03-neuro-all",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP03\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-cocm03-neuro-all\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-mpmm03-neuro-all",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP04\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-mpmm03-neuro-all\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-vira12-neuro-all",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP05\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-vira12-neuro-all\\expected\\output.dat"
+  },
+  {
+    "Case": "cc-lrst12-neuro-all",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCP06\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\cc-lrst12-neuro-all\\expected\\output.dat"
+  }
+]

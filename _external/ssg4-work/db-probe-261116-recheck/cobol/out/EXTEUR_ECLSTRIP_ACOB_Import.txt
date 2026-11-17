@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\db-probe-261116-recheck\\cobol\\out\\EXTEUR_ECLSTRIP_ACOB.LionSource
+APPNAME = EXTEURECLSTRIPACOB
+GENSET = Default from new application
+SYSOPT = FALSE
