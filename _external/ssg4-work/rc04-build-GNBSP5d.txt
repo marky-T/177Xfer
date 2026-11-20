@@ -1,0 +1,29 @@
+Stage Build, environment Repo-BSP, UseUnicode False, started 2026-11-20 08:25:26
+PASS CFH-COPY       program source                 CFH_COPY_GN: unchanged since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program CFH_COPY_GN
+PASS BABA           program source                 BABA_GN: unchanged since the last build
+PASS FUSBA          program source                 FUSBA_GN: unchanged since the last build
+PASS CHABAN         program source                 CHABAN_GN: unchanged since the last build
+PASS CONDIS2        program source                 CONDIS2_GN: unchanged since the last build
+PASS SCAN           program source                 SCAN_GN: unchanged since the last build
+PASS TAPELD         program source                 TAPELD_GN: unchanged since the last build
+PASS LECTIS         program source                 LECTIS_GN: unchanged since the last build
+PASS ARCHISEPARE    program source                 ARCHISEPARE_GN: unchanged since the last build
+PASS ARCHIFORMAT    program source                 ARCHIFORMAT_GN: unchanged since the last build
+PASS RECAP          program source                 RECAP_GN: unchanged since the last build
+PASS TABAN          program source                 TABAN_GN: unchanged since the last build
+PASS EXTEUR         program source                 EXTEUR_GN: unchanged since the last build
+PASS SCAN group     CONDIS2-RV                     reference: unchanged since the last build
+PASS SCAN group     CONDIS2-RD                     reference: unchanged since the last build
+PASS SCAN group     SCAN-RA                        reference: unchanged since the last build
+PASS SCAN group     SCAN-RB                        reference: unchanged since the last build
+PASS SCAN group     TAPELD-RA                      reference: unchanged since the last build
+PASS SCAN group     TAPELD-RB                      reference: unchanged since the last build
+PASS EUU003 test double EUU003                         reference: unchanged since the last build
+PASS COBOL converter (programs) 13 programs -> GNBSP5.LionSource exit 0, errors 0, warnings 4, 218 KB
+PASS LionSource (programs) vs the previous build          identical (nothing new to import)
+PASS COBOL converter (references) 7 programs -> GNBSP5-REF-notforrelease.LionSource exit 0, errors 0, warnings 4, 235 KB
+PASS LionSource (references) vs the previous build          identical (nothing new to import)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBSP5\out\GNBSP5.LionSource and E:\Repos\ssg4-work\generic\build\GNBSP5-REF-notforrelease\out\GNBSP5-REF-notforrelease.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-build-20261120-082526.txt

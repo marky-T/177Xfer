@@ -1,0 +1,11 @@
+SSG-4 rc.04: plan, BSP build GNBSP5, safe default for test-reference builds
+
+- Plan .github/Copilot_Plans/261120-rc04-utilities-plan.md: scope 14 utilities / 13 programs
+  (adds RECAP, TABAN, EXTEUR; known issue MT-069-EUU003), gate 1 passed; rc.03 not merged,
+  so rc.04 is cut from origin/main 7b1d42ff39 and supersedes it.
+- Invoke-GnPipeline.ps1: -RefBuildName defaults to <BuildName>-REF-notforrelease for every
+  environment except CC-Trial, so test references (incl. the EUU003 test double) are never
+  written under CC-Trial's GNREF name or offered for import into a release application.
+  Proven: Repo-BSP build without the parameter -> GNBSP5-REF-notforrelease, GNREF untouched.
+
+Co-authored-by: GitHub Copilot <copilot@github.com>

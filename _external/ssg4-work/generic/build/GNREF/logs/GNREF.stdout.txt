@@ -1,5 +1,5 @@
 Cobol To Amt Converter 8.0.26273.50
-Copyright © Asysco software 1998 - 2026
+Copyright c Asysco software 1998 - 2026
 
 Loading settings from: E:\Repos\ssg4-work\generic\build\GNREF\GNREF.settings
 Applications to convert:
@@ -40,7 +40,8 @@ Reading source: ASSURFED-UTILIT-SCAN-RA.TXT
 Reading source: ASSURFED-UTILIT-SCAN-RB.TXT
 Reading source: ASSURFED-UTILIT-TAPELD-RA.TXT
 Reading source: ASSURFED-UTILIT-TAPELD-RB.TXT
-6 source(s) read
+Reading source: EUU003.TXT
+7 source(s) read
 
 Analyzing source: ASSURFED-UTILIT-CONDIS2-RD
 Analyzing source: ASSURFED-UTILIT-CONDIS2-RV
@@ -48,24 +49,25 @@ Analyzing source: ASSURFED-UTILIT-SCAN-RA
 Analyzing source: ASSURFED-UTILIT-SCAN-RB
 Analyzing source: ASSURFED-UTILIT-TAPELD-RA
 Analyzing source: ASSURFED-UTILIT-TAPELD-RB
+Analyzing source: EUU003
 
 *** PHASE: A N A L Y S I N G   S O U R C E S ***
 
 
 *** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
 
-6 source(s) processed
+7 source(s) processed
 
 *** PHASE: AFBUS_2200COBOL CONVERSION STATISTICS ***
 
 Source code counts:
                Sources   Lines     Average
-Batch          6         3729      621     
+Batch          7         3780      540     
 
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:438
+Elapsed time:  00:00:00:452
 
 
 === Conversion Completed ===
@@ -76,7 +78,7 @@ Objects in error:  not tracked - see Errors below, which IS accurate
 Errors: 0
 Warnings: 4
 Todos: 0
-Logs: 22
+Logs: 24
 
 
 === Conversion Completed ===
