@@ -6,12 +6,12 @@
     "Console": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\console.txt",
     "Outputs": [
       {
-        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006FINVESTC",
-        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\output.dat"
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\output.dat",
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006FINVESTC"
       },
       {
-        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006ANOFINVS",
-        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\ano.dat"
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\ano.dat",
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006ANOFINVS"
       }
     ],
     "CompareOutputs": false
@@ -23,12 +23,12 @@
     "Console": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\console.txt",
     "Outputs": [
       {
-        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006FINVESTC",
-        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\output.dat"
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\output.dat",
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006FINVESTC"
       },
       {
-        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006ANOFINVS",
-        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\ano.dat"
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\ano.dat",
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006ANOFINVS"
       }
     ],
     "CompareOutputs": true

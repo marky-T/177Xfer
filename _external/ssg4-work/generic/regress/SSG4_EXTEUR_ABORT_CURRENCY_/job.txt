@@ -1,0 +1,6 @@
+--- BatchController: 20261120 00:57:05.598 11 Information SSG4_EXTEUR_ABORT Error Id: 2350 Queue: JOB_QUEUE1 (Execution time: 00:00:08:077)
+--- EXTABRT_235020261120005659857.log
+  FLAG 2026-11-20 00:57:00 Msg: EXTEUR-ABORT case CURRENCY
+  FLAG 2026-11-20 00:57:00 Info: EXTEUR-ABORT case CURRENCY
+  FLAG 2026-11-20 00:57:04 Error: AFBUS_2200COBOL_AMT - EXTABRT : The report failed with JobState "Error".
+=== SSG4_EXTEUR_ABORT : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress\SSG4_EXTEUR_ABORT_CURRENCY_\check.txt)

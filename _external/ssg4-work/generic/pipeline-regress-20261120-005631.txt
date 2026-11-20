@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:56:31
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_EXTEUR_CASES regression                     --- 12 of 12 outputs byte-identical | === SSG4_EXTEUR_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_EXTEUR_CASES\check.txt) | === EXTEUR console lines: PASS
+=== Regress : all passed

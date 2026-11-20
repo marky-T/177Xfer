@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:48:31
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_LOADIS_CASES regression                     === SSG4_LOADIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_LOADIS_CASES\check.txt) | problems: 0 (evidence in E:\Repos\ssg4-work\generic\regress\SSG4_LOADIS_CASES\own)
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-004831.txt

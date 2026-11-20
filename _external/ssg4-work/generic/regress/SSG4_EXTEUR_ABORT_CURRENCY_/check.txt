@@ -1,0 +1,6 @@
+  CURRENCY console           PASS: console lines identical (incl. the banner)
+  CURRENCY stopped           PASS: the job did not continue past the Xqt
+  CURRENCY I006FINVESTC      RECORDED: 606 bytes (G2 gate: not compared)
+  CURRENCY I006ANOFINVS      RECORDED: 0 bytes (G2 gate: not compared)
+log: EXTABRT_235020261120005659857.log
+=== EXTEUR abort CURRENCY: PASS

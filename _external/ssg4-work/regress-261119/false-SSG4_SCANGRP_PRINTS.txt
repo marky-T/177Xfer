@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:47:52
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_SCANGRP_PRINTS regression                     === SSG4_SCANGRP_PRINTS : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_SCANGRP_PRINTS\check.txt) | PRN files since 00:47:45: 12, expected 12 | === prints: all checks passed
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-004752.txt

@@ -1,0 +1,90 @@
+index present: True
+-- not-ours calls: source runstream in our pack (cards readable)?
+UTILIT_ARCHITAB2                   calls  60  scripts   3  in pack   0
+UTILIT_ARCHIFUSION                 calls  60  scripts   3  in pack   0
+RUNS_FILE_SSG                      calls  21  scripts  13  in pack   1
+repssg_ctltot                      calls  10  scripts   7  in pack   0
+DBASSG_EGUNL                       calls   9  scripts   8  in pack   0
+DBASSG_EG_DUMP                     calls   6  scripts   6  in pack   0
+DBASSG_EG_DYN                      calls   6  scripts   6  in pack   0
+DBASSG_EG_RELOAD                   calls   6  scripts   6  in pack   0
+DBASSG_EG_TOT                      calls   6  scripts   6  in pack   0
+DBASSG_EG_UP                       calls   6  scripts   3  in pack   0
+DBASSG_INUNL                       calls   4  scripts   4  in pack   0
+DBASSG_EGTOT_VAL                   calls   3  scripts   3  in pack   0
+DBASSG_EGCNT_SEL                   calls   3  scripts   3  in pack   0
+DBASSG_EGCNT_AV                    calls   3  scripts   3  in pack   0
+DBASSG_EGCNT_AP                    calls   3  scripts   3  in pack   0
+DBASSG_EGCRT_TOT                   calls   3  scripts   3  in pack   0
+DBASSG_EGARC_GENTABPROFIL          calls   3  scripts   3  in pack   0
+DBASSG_EGARC_GENDUMPFILES          calls   3  scripts   3  in pack   0
+POTIER_RFA_SSG                     calls   3  scripts   3  in pack   0
+DBASSG_EGDEL_TMP                   calls   3  scripts   3  in pack   0
+DBASSG_EGIN_PARAM                  calls   2  scripts   2  in pack   0
+_ KI                               calls   2  scripts   2  in pack   0
+DBASSG_EGAU_PARAM                  calls   2  scripts   2  in pack   0
+DBASSG_EGAC_PARAM                  calls   2  scripts   2  in pack   0
+DBASSG_EGDEL_LO                    calls   2  scripts   2  in pack   0
+utilit_trans2                      calls   1  scripts   1  in pack   0
+dbassg_egarc_tabprofilrep          calls   1  scripts   1  in pack   0
+f999controle_bsgd01                calls   1  scripts   1  in pack   0
+dbassg_egarc_sumtrktabpr           calls   1  scripts   1  in pack   0
+dbassg_egarc_splittable            calls   1  scripts   1  in pack   0
+repssg_runtot                      calls   1  scripts   1  in pack   0
+repssg_totaux1                     calls   1  scripts   1  in pack   0
+repssg_totaux2                     calls   1  scripts   1  in pack   0
+dbassg_egarc_splitsa               calls   1  scripts   1  in pack   0
+dbassg_egarc_initresenpos          calls   1  scripts   1  in pack   0
+utilit_mail2                       calls   1  scripts   1  in pack   0
+utilit_mail3                       calls   1  scripts   1  in pack   0
+valint                             calls   1  scripts   1  in pack   0
+-- script folders of not-ours calls
+  220  RUN
+    9  RUN-D
+    4  DBASSG_EGARC_GENTABPROFIL.ps1
+    3  EUDEV_REPSSG_CTLTOT.ps1
+    1  ASSURFED_UTILIT_MAIL.ps1
+    1  ASSURFED_UTILIT_TRANSEXCEL.ps1
+    1  DBASSG_EGARC_GENDUMPFILES.ps1
+    1  DBASSG_EGUNL.ps1
+    1  DBASSG_INUNL.ps1
+    1  ESYS$AF_COM_TFR_SSG2.ps1
+    1  ESYS$AF_COM_TFR_SSG3.ps1
+    1  utilit_mail2.ps1
+-- sample: lines around one DBASSG and one ARCHIFUSION call
+== DBASSG_EGUNL : RFED_F999\RUN\ASSURFED_F999RUN_ACPA08_U1.ps1 L54
+Get-Content: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:23:10
+Line |
+  23 |      $l = Get-Content -LiteralPath $p
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path
+     | 'E:\Repos\Federale_InternalRelease\RFED_F999\RUN\ASSURFED_F999RUN_ACPA08_U1.ps1' because it does not exist.
+InvalidOperation: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:25:5
+Line |
+  25 |      $l[[Math]::Max(0, $i - 6)..[Math]::Min($l.Count - 1, $i + 3)] | F .
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot index into a null array.
+== UTILIT_ARCHIFUSION : RFED_F999\RUN\ASSURFED_F999RUN_ACPA04_D3.ps1 L54
+Get-Content: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:23:10
+Line |
+  23 |      $l = Get-Content -LiteralPath $p
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path
+     | 'E:\Repos\Federale_InternalRelease\RFED_F999\RUN\ASSURFED_F999RUN_ACPA04_D3.ps1' because it does not exist.
+InvalidOperation: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:25:5
+Line |
+  25 |      $l[[Math]::Max(0, $i - 6)..[Math]::Min($l.Count - 1, $i + 3)] | F .
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot index into a null array.
+== repssg_ctltot : RFED_F999\RUN\ASSURFED_F999RUN_ACMA01_D4.ps1 L97
+Get-Content: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:23:10
+Line |
+  23 |      $l = Get-Content -LiteralPath $p
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path
+     | 'E:\Repos\Federale_InternalRelease\RFED_F999\RUN\ASSURFED_F999RUN_ACMA01_D4.ps1' because it does not exist.
+InvalidOperation: E:\Repos\ssg4-work\ssg-call-survey-261120\Check-NotOurs.ps1:25:5
+Line |
+  25 |      $l[[Math]::Max(0, $i - 6)..[Math]::Min($l.Count - 1, $i + 3)] | F .
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot index into a null array.

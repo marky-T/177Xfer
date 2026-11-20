@@ -1,0 +1,7 @@
+*RECAP  FIN*
+*NB-ENREG-LUS =    24
+           103505F
+           110558C
+*NB-ENREG-ECR =     8
+           103505F
+           110558C

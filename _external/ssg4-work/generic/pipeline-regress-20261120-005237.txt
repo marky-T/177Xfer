@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:52:37
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_RECAP_CASES regression                     --- 6 of 6 outputs byte-identical | === SSG4_RECAP_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_RECAP_CASES\check.txt) | === RECAP report lines: PASS (6 of 6 identical to the model)
+=== Regress : all passed

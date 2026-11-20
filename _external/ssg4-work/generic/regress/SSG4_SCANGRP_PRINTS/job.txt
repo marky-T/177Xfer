@@ -1,3 +1,3 @@
---- BatchController: 20261112 19:59:58.455 11 Information SSG4_SCANGRP_PRINTS Done Id: 1609 Queue: JOB_QUEUE1 (Execution time: 00:00:28:684)
---- SCANGRP_160920261112195932147.log
+--- BatchController: 20261120 00:48:15.868 11 Information SSG4_SCANGRP_PRINTS Done Id: 2178 Queue: JOB_QUEUE1 (Execution time: 00:00:28:329)
+--- SCANGRP_217820261120004749907.log
 === SSG4_SCANGRP_PRINTS : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_SCANGRP_PRINTS\check.txt)

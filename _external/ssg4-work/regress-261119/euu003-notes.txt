@@ -1,0 +1,73 @@
+* d run the same way, now invoked as Call-ExternalProgram ACOB / MAP. This is why every program in 3 reports Call-ExternalProgram calls to ACOB/MAP those are not stubs or gaps, they are stage 2 being handed off exactly as before. It also sets what runs clean means in this trial: the generator produced the right source and re
+
+*  per INDIC group (fields of the group's last record + the group's sums of the TOTIN amounts); prints the counts read/written and the grand totals, each through EUU003 unless NEURO lists it. Spec: Conversion/Pipeline/Generic/RECAP/spec.md. n/a 0 &#10003; runs223 lines | 0 unmocked lookups Added 260924 from SSG-Source/RECAP.TX
+
+* y and the group's sub-totals (4 amounts a line), then *****TOTAL GENERAL *****, the grand totals and ***TABAN FIN *** NB.ENREG.LUS= n. Each amount goes through EUU003 unless NEURO lists it (then plain Z(18)). Spec: Conversion/Pipeline/Generic/TABAN/spec.md. n/a 0 &#10003; runs215 lines | 0 unmocked lookups Added 260930 from 
+
+* ith real data and compare with an OS 2200 run 4An assumption (A1 A14) is wrongthe spec says where it would show (e.g. A7: the last byte of every total; A3: the EUU003 lines)answers to Q1 Q12; then re-run the affected G8 cases 5Calls not yet proven in Control Center: RECAP/TABAN calls that go through EUU003 (needs EUU003, INF
+
+* t, and calls Connect-Application against the live app. Running it and letting the COM cleanup complete for real is Stage B (MT-005). Do not mock $global:Com: a stub only triggers further COM property accesses (e.g. .Station in the logging path) re-mocking the whole object is Stage B. 5c AMT Control Center Run Process (Stag
+
+* for T3-008). Note the 2nd argument arrives as the literal string "([LogMessageType]::Information)", not an evaluated enum an SsgConverter quoting quirk, so any stub must accept [string]. AMT172 fixed it with a minimal no-op stub in RealRuntime/AmtPsCustomerLib.psm1 (the bundle's own designated customer-extension point, aut
+
+* o-imported by AmtPsEclLib.psm1). Applied + verified on AMT177 (261001): ported, then extended beyond AMT172's version AMT172's stub only did Write-Host (console-only, never reaches the real AMT joblog); ours parses the severity word out of the quoted LogMessageType string and calls the real
+
+* DEFAULT QUALIFIER AFLINC, USE DEFAULT VERSION PRODUCTION, END THREAD twice, GETERROR) all became C# comments; only the IF RDMS-STATUS NOT = 0 checks remain. So stubbing RSA$INIT alone would give a program that runs but does none of its database work. Same program also calls EUU003 (10 places) and ABORT, which are not in th
+
+*  TABAN CCSA09 L340: 1 + 5); the failure only shows at run time. Neither program has a query of its own: the read session (UDSSRC, qualifier AFLINC) only serves EUU003 (RECAP 22 calls in MPMM02, TABAN 2 in CCSA09). Euu003.dll exists only in FEDERALE_APP (Federale_InternalRelease\AFBUS_AMT), ABORT is not in the application, an
+
+*  . text) adds no statement, so when it is the first line the list is empty: Index was out of range, and the skeleton is written as a 4-line "Conversion failed" stub. ARCHIFORMAT starts with # . Pour date table, null et cl ; found by bisecting (Conversion\Pipeline\Generic\ARCHIVE\ecl\bisect*): a leading # . fails, the same 
+
+* [NEURO,1,Z,1]) and as a variable (*SET NEURO TO 0); the converter emitted GetSgsValue ("$NEURO,1") = "0,1", so the loop never runs and every total goes through EUU003 instead of the raw DISPLAY the card asks for. SSG: a bare name is a variable only as statement number, field, subfield or string descriptor, never the label (7
+
+* card change (RECAP CCTA08 L287, RISH02 L284; TABAN CCTA08 L241/L330/L382, CCTA09 L776/L842/L1076), e.g. RECAP CCTA08 (NEURO 1 2) now displays totals 1 2 raw (4 EUU003 blocks fewer). Combined with T3-066 = the union of both proofs. Generic route (amt-go-net-ours parser patched, separate build): only the RECAP and TABAN skelet
+
+* geType]::Information)'). Past T3-071, the "file not found" branch fails on line 14: The term 'Log-Message' is not recognized. Our Tier-1 mock has a Log-Message stub (T3-008), so this never showed there. Fix: emit AMT's own log call (e.g. Msg / Write-JobLog). Evidence: Test-RunsFileSsg-past7.ps1 (same folder; patches line 7
+
+* ry .psm1/.ps1 under RealRuntime/ and any live Binaries/Scripts/ check with Get-Item -Stream Zone.Identifier first) and T3-011 (add the same minimal Log-Message stub to our own RealRuntime/AmtPsCustomerLib.psm1). Both are pulled into E:\Repos\177Xfer\ConvertedSSG-Results-1-Live-fromAMT172Run (worktree, branch T3-LiveRun-Res
+
+* E (261001): both ported into RealRuntime/ (see 4b); Run-StageA.ps1 -Program CFH-COPY re-verified no regression, and a standalone Log-Message call confirmed the stub resolves correctly. Real deploy copy DONE (261005): found both live copies of AmtPsCustomerLib.psm1 under Federale_InternalRelease (AmtTools\Basepaths\Scripts\
+
+*  merge base is Allard s Cobol SSG.zip (16 Jul), not our 8 Sept import. The earlier notes to him also describe the first pipeline (Remove-SsgDirectives.ps1 plus stub macros) that the SSG-4 work replaces. Needed for the merge: the two zips (Cobol SSG.zip, SsgConverter-Release-20260821.zip) and the two Word notes, bundled and
+
+* s + 9 .inc over it (12 overwritten, CHAB100 new, MT-045), roll back from the backup. Found 261022: the 12 R D files being replaced are 4-line failed-conversion stubs (# ERROR: Conversion failed DirectiveId: End, CONDIS2 SymstreamExpressionPrimitive expected; the two errors of the SsgConverter inside R D's ECL converter), n
+
+* ot working skeletons: 17 of the 31 skeleton scripts in that folder are such stubs. So no runstream step calling them works today, and the replacement swaps placeholders for converted skeletons with the hand-off. Same for the settings: R D's
+
+* eton in the drop's Scripts\ASSURFED_UTILIT, converted from Federale sources, not in our 20 programs). Correction 261113: ARCHIFUSION is not a failed-conversion stub: it is a plain ECL sort that merges three archive files into one file for Archiware, and it converts cleanly (no generic program needed); it probably runs afte
+
+* ration date/time dropped from base(), COBOL in Documentation\, README.md), 51 lines added to _All_.sln (solution folder Utilities), Scripts\ASSURFED_UTILIT (12 stubs replaced, CHAB100 + 9 includes new), 11 lines of CloneReports in Scripts\Settings\AmtSettings.xml. vs main: 121 added, 14 modified, 0 deleted; all 7 projects 
+
+* e counts, expanded COBOL byte-identical (E:\Repos\ssg4-work\db-probe-261116-recheck\, classification there). Database: RECAP/TABAN only open a read session for EUU003 (T3-027); EXTEUR reads EU001.C_PHA_EUR. Every conversion s 4 warnings are the 4 comments inside PrecompilerSettings of Trial3\macros\ssg-stub.macros.xml (one e
+
+* -RecapModel.ps1): 54 test-data cases (28 real-call card sets + 11 branch + 15 must-reject), made and run twice byte-identical (373 files); RISH02 L284 needs no EUU003 and is fully predicted; all 54 cases give their intended outcome. G4 Generic/RECAP/gen/RECAP-GN.cob (329 lines, no RDMS, EUU003/ABORT as the skeleton): CobolCo
+
+* l passed (13 utilities). G8 PASS 261116 (CC job SSG4_RECAP_CASES, RECTEST run 1894, 22:08, AFBUS_2200COBOL_AMT, UseUnicode True) on the 6 cases that never call EUU003 (RISH02 L284 + 5 real-call card sets with every total on NEURO: groups, 1-byte field A1, moved+resized, whole record, 11 overlapping totals): 6/6 output files 
+
+* te-identical, 6/6 reports (84 lines) identical to the model. Shows: AMT writes and displays the sign overpunch as the ACOB manual says (A7); AMT resolves CALL 'EUU003' only when executed (LionDev warns at generation, A10). First check run failed on our test set-up only (PRN check; RECAP prints to the job log) RECAP/cc/Check-
+
+* RecapCc.ps1, same run re-checked. The other 26 real-call shapes still need EUU003 + EU001/EU002 (Q1 Q3). TABAN 261117 (printer-only totals report): G1 27 calls in 3 shapes (20 no key groups, 4 groups without / 3 with the sequence check; SEQE
+
+* 1117 (CC job SSG4_TABAN_CASES, TABTEST run 1901, 15:27, first run): 12/12 print files identical to the model (178 non-blank lines) on the cases that never call EUU003: 5 real-call shapes with every amount on NEURO, a sequence error, empty input, all-space / space-embedded amounts, zero totals, short / long records. The other
+
+*  real-call cases wait for EUU003 + EU001/EU002 (Q1 Q3). What the conversion supports and the risks left for Federale: 3b (261118). Next: EXTEUR (after Q3/Q4 and the T3-067 decision).in progres
+
+* s RECAP + TABAN G8 PASS (no-EUU003 cases); rest waits for Q1 Q3 MT-070261116Spike: choose -Cobol85 and cut ECL in the per-call route (T3-067). Opt-in scratch tool E:\Repos\ssg4-work\t3067-spike\
+
+--- EXTEUR spec: EUU003 mentions
+L127: | **A1** | The phase is `EU001.C_PHA_EUR`, one row (FA_AFBUS 261119: row `K_CLE_TAB='1'`, `400`); in CC-Trial a **test `EU001`** in the trial database (owner 261119, option a; owner creates it) | Q3 | the skeleton's `SELECT` has no `WHERE`; `Euu003` reads the same row by key `'1'` | L9 on a real run | Q3 |
+--- EXTEUR GN cob: CALL
+L2: * SSG-4 (MT-069): one EXTEUR for every call. Record length,
+L157: CALL 'ABORT'.
+L171: CALL 'ABORT'.
+--- release notes / doc generator mentions
+Deliver-GnPrograms.ps1 L46: # A program without files (e.g. the EUU003 test double) gets no Files.cs: no inputs to check.
+utilities.json L132: "known": "MT-069. DIFF 2 = CCTA08_L287 and RISH02_L284: their NEURO card is ignored by today's converted skeleton (T3-070, CONVERTER_DEFECT; fix proven, landing pending) and read c
+utilities.json L137: "tests": { "parameterCheck": "RECAP/check/Test-RecapParm.ps1", "prepare": ["RECAP/cc/Prepare-RecapCc.ps1"], "ccJobs": ["SSG4_RECAP_CASES"], "check": "RECAP/cc/Check-RecapCc.ps1", "
+utilities.json L143: "known": "MT-069. DIFF 6 = CCTA08 L241/L330/L382 and CCTA09 L776/L842/L1076: their NEURO card is ignored by today's converted skeleton (T3-070, CONVERTER_DEFECT; fix proven, landin
+utilities.json L148: "tests": { "parameterCheck": "TABAN/check/Test-TabanParm.ps1", "prepare": ["TABAN/cc/Prepare-TabanCc.ps1"], "ccJobs": ["SSG4_TABAN_CASES"], "provenInCc": "job TABTEST run 1901 (261
+utilities.json L171: "name": "EUU003 test double", "builder": "EUU003STUB/gen/Build-Euu003Stub.ps1", "utilities": ["RECAP", "TABAN"],
+utilities.json L172: "note": "MT-069, CC-Trial only: stands in for Federale's EUU003 (MT-SRT = 'STB' + sign + MT-ENE 17 digits) so the EUU003 calls of RECAP_GN/TABAN_GN run in CC. Never packaged; the r
+utilities.json L173: "programs": ["EUU003"]
+utilities.json L198: { "job": "SSG4_RECAP_EUU003STUB", "utilities": ["RECAP"], "logPrefix": "RECSTUB", "cases": "RECAP\\cc-cases-stub.json", "check": { "script": "RECAP/cc/Check-RecapCc.ps1", "args": [
+utilities.json L199: { "job": "SSG4_TABAN_EUU003STUB", "utilities": ["TABAN"], "logPrefix": "TABSTUB", "prints": "TABAN\\cc-prints-stub.json" },

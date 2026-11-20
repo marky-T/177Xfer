@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:35:19
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_VIRM01UL_CFH_COPY regression                     --- 1 of 1 outputs byte-identical | === SSG4_VIRM01UL_CFH_COPY : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_VIRM01UL_CFH_COPY\check.txt)
+=== Regress : all passed

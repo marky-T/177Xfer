@@ -1,0 +1,61 @@
+== 03-SSG-Prd (skeleton sources in the pack)
+ASSURFED_UTILIT_CONDIS(P).TXT
+ASSURFED_UTILIT_MAP(P).TXT
+ASSURFED_UTILIT_Y2KCLR_PRD(P).TXT
+ASSURFED_UTILIT_Y2KDMS(P).TXT
+ASSURFED_UTILIT_Y2KLST_PRD(P).TXT
+ASSURFED_UTILIT_Y2KUTI(P).TXT
+ASSURFED_UTILIT_Y2KVRF(P).TXT
+== Invoke-Ssg calls in Federale Scripts (R&D converted runstreams)
+calls: 598 in 241 scripts; ours: 354; not ours: 244
+-- not ours, by skeleton
+   60  ../../ASSURFED_UTILIT/UTILIT_ARCHIFUSION
+   60  ../../ASSURFED_UTILIT/UTILIT_ARCHITAB2
+   21  ../../SYS$_RUNS/RUNS_FILE_SSG
+   10  ../../EUDEV_REPSSG/repssg_ctltot
+    9  ../../DIA_DBASSG/DBASSG_EGUNL
+    6  ../../DIA_DBASSG/DBASSG_EG_UP
+    6  ../../DIA_DBASSG/DBASSG_EG_TOT
+    6  ../../DIA_DBASSG/DBASSG_EG_RELOAD
+    6  ../../DIA_DBASSG/DBASSG_EG_DYN
+    6  ../../DIA_DBASSG/DBASSG_EG_DUMP
+    4  ../../DIA_DBASSG/DBASSG_INUNL
+    3  ../../DIA_DBASSG/DBASSG_EGARC_GENDUMPFILES
+    3  ../../DIA_DBASSG/DBASSG_EGCNT_AV
+    3  ../../DIA_DBASSG/DBASSG_EGCRT_TOT
+    3  ../../DIA_DBASSG/DBASSG_EGARC_GENTABPROFIL
+    3  ../../DIA_DBASSG/DBASSG_EGDEL_TMP
+    3  ../../DIA_DBASSG/DBASSG_EGTOT_VAL
+    3  ../../SYS_POTIER/POTIER_RFA_SSG
+    3  ../../DIA_DBASSG/DBASSG_EGCNT_SEL
+    3  ../../DIA_DBASSG/DBASSG_EGCNT_AP
+    2  ../../DIA_DBASSG/DBASSG_EGIN_PARAM
+    2  ../../_ KI
+    2  ../../DIA_DBASSG/DBASSG_EGAC_PARAM
+    2  ../../DBASSG_EGDEL_LO
+    2  ../../DIA_DBASSG/DBASSG_EGAU_PARAM
+    1  ../../dbassg_egarc_tabprofilrep
+    1  ../../dbassg_egarc_sumtrktabpr
+    1  ../../dbassg_egarc_splittable
+    1  ../../dbassg_egarc_splitsa
+    1  ../../dbassg_egarc_initresenpos
+    1  ../../ASSURFED_UTILIT/utilit_trans2
+    1  ../../ASSURFED_UTILIT/utilit_mail3
+    1  ../../f999controle_bsgd01
+    1  ../../repssg_runtot
+    1  ../../repssg_totaux1
+    1  ../../repssg_totaux2
+    1  ../../ASSURFED_UTILIT/utilit_mail2
+    1  ../../valint
+-- SgsFile forms (all calls)
+  552  P`$SGS\<run>
+    5  TMPIN
+    5  TMPACC
+    5  TMPAUTO
+    4  
+    2  RINTABLES
+    2  RAUTOTABLES
+    2  RACCTABLES
+-- P$SGS files on disk
+E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\P$SGS exists: True
+E:\Repos\Federale_InternalRelease\Scripts\P$SGS exists: False

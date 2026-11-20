@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:57:02
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_EXTEUR_ABORT [CURRENCY] regression                     job ended in Error as expected | === EXTEUR abort CURRENCY: PASS
+=== Regress : all passed

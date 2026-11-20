@@ -1,0 +1,8 @@
+  real-VIRJ01_UL_L146        PASS: console lines identical
+  t-empty-input              PASS: console lines identical
+  t-short-records            PASS: console lines identical
+  t-long-records             PASS: console lines identical
+  t-small-values             PASS: console lines identical
+  t-two-amounts              PASS: console lines identical
+log: EXTTEST_234320261120005629525.log
+=== EXTEUR console lines: PASS

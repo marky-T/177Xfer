@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:52:08
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_LECTIS_ABORT [NOCOND] regression                     job ended in Error as expected | NOCOND PASS: abort [E3] from the hand-off=True, program not started=True, not past the Xqt=True
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-005208.txt

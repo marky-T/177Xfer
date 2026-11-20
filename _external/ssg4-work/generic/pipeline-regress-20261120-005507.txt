@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:55:07
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_TABAN_EUU003STUB regression                     === SSG4_TABAN_EUU003STUB : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_TABAN_EUU003STUB\check.txt) | PRN files since 00:55:00: 32, expected 32 | === prints: all checks passed
+=== Regress : all passed

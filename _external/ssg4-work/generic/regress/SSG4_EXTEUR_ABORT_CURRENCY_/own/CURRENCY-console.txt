@@ -1,0 +1,8 @@
+PHASE ACTUELLE : 400/EUR
+*---------------------------------*
+*     GRAVE ERREUR DE DEVISE      *
+*        ABORT DU PROGRAMME       *
+*        CONTACTER J-Y NAUW       *
+*       APPELER LES POMPIERS      *
+*---------------------------------*
+Invalid function call ABORT. Should be AssemblyName.ClassName.MethodName

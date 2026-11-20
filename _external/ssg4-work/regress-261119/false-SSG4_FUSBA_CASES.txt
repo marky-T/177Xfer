@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode False, started 2026-11-20 00:37:16
+PASS settings       UseUnicode                     False deployed, results for False in regress-results.csv
+PASS SSG4_FUSBA_CASES regression                     --- 12 of 12 outputs byte-identical | === SSG4_FUSBA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress\SSG4_FUSBA_CASES\check.txt)
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-003716.txt

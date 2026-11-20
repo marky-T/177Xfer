@@ -1,0 +1,36 @@
+L91: 3b &middot; Real calls &amp; open risks
+L115: Last updated: 2026-11-16 &nbsp;|&nbsp; AMT177 / FEDERALE_APP VM &nbsp;|&nbsp; Companion to Asset Register &amp; SsgConverter fix log
+L148: 1 &middot; Overview
+L345: 3 &middot; Program Status &mdash; 20 Example Programs
+L467: Added 260924 from SSG-Source/RECAP.TXT (score 164.1; no Trial3 manifest entry). Needed T3-008 (Log-Message mock, added to SsgPsMockLib.psm1). Seed selects the ASCII path (CFH=0, ASCIIFD=0, ASCII=1) with SCHEMA/Y2K/NEURO/FIELDIN/FI
+L474: Added 260930 from SSG-Source/TABAN_ASCII.TXT (score 191.5; no Trial3 manifest entry). Ran clean &mdash; 4 Call-ExternalProgram calls (Log-Message, ACOB [I], MAP [S], Hdg), 0 unmocked lookups. 261116: generic route MT-069; all 27 r
+L509: 
+L511: 3b &middot; How the conversion decides what to support: &ldquo;real calls&rdquo;, and what is left for Federale to prove
+L512: A skeleton contains more branches than Federale uses. Each generic program reproduces the branches that real calls
+L523: &ldquo;No real caller&rdquo; for a branchnone of the real calls gives the card (or card value) that switches that branch
+L526: because no real call&rsquo;s cards in production use it. Example: RECAP's 28 real calls (22 runstreams, all in the pack) all give
+L528: Converted vs supportedtwo different things. The skeleton is converted mechanically and completely (SsgConverter): every branch, used or not, becomes PowerShell; RECAP's converted skeleton UTILIT_RECAP.ps1 still holds the ASCIIFD l
+L1095: RECAP reads an RDMS database (UDSSRC), and the COBOL converter turns every database statement into a comment. The generated program stops at run time with Invalid function call RSA$INIT: CALL 'RSA$INIT' (initialise the 2200 RDMS r
+L1107: open &middot; question for R&amp;D (generic route handled)
+L1121: Card-reader input does not reach the program in the mock runtime. CHAB100_ASCII reads its data cards with SELECT CAR ASSIGN TO CARD-READER; LionDev generates m_Car.SetOptions(String.Empty, ...) (no external name). On OS 2200 the c
+L1122: &#10003; worked around for generic programs &middot; static: question for R&amp;D
+L1161: A short-line parameter file is misread by AMT's line-sequential reader (MT-043, generic BABA). In the first BABA CC run, 2 of 7 cases (E1, R2: one 8-byte key) routed every record as if no value matched. A trace in a diagnostic bui
+L1162: &#10003; fixed in all 4 generic programs &middot; verified 261020
+L1176: SSG +/- chains converted right-to-left (wrong arithmetic). SymstreamExpressionParser.Parse split at the first - (and tried - before +), so [#1]-[#2]-[#3]+1 became p0-(p1-(p2+1)) = p0&minus;p1+p2+1 and len - yls + 1 was off by 2; S
+L1236: CONDIS2: under AMT's StrictMode, a call with an OTHERWISE card would abort in the converted skeleton; our expansion harness hides it. Found at the G2 gate of the Sonnet blind rerun (MT-053). Skeleton line 29 *If [*CASE] = 0 refers
+L1266: Our converted skeleton copies (Generic\skeletons) were not reconverted after converter fixes (ours, not a conversion of new code). Found while landing T3-061 (MT-056 review). 17 of the 20 copies were made on 261012 with our ECL co
+L1286: SsgConverter treated a literal @ ECL image as output text; only # (NSIGNCHAR$) started an ECL block. SSG turns # into @ and writes both to the generated stream (78311784-010 &sect;4.3), so #UCOB and @UCOB are the same image. EXTEU
+L1296: RECAP generates PIC X(0) when an output field is 1 byte long. RECAP.TXT 155&ndash;157: *SET A2 TO [FIELDOUT,1,I,2] - 1, then ANNEE-[*I] PIC X (the century-marker byte, set by TEST-SIECLE 0&ndash;3 &rarr; ; _ | ~, lines 402&ndash;4
+L1306: SsgConverter turned the label of an SGS reference into a variable when an SSG variable has the same name, so RECAP and TABAN ignore their NEURO card. Found in RECAP G1 (MT-069): the skeletons use NEURO both as a label ([NEURO,1], 
+L1342: MT-002260908Trial3 pipeline.config.json points at a missing CobolConverterConsole.exe and globalCopyDir &mdash; blocks the Trial3 pipeline beyond -ListOnly. Evidence added 261011: AMT175's own plan recorded the same gap unresolved
+L1427: MT-043261020Run a converted runstream end to end in Control Center: ECL &rarr; Invoke-Ssg &rarr; Xqt our program. Survey 261020 (_scratch\C7-Survey.ps1, read-only): R&amp;D's converted scripts make 293 Invoke-Ssg calls on 12 of ou
+L1428: MT-044261021Run-time settings for the SSG utilities (generic programs), set up now, to be cleared with R&amp;D. Today each hand-off include hard-codes the program it maps the Xqt to ($global:CloneReports set at run time). Proposal
+L1432: MT-048261023Release release20261022-rc.02: the 7 generic programs into Federale_InternalRelease, in the repository's own layout. Pushed 2026-10-23: branch feature/federale/ssg4-generic-rc02, commit de1c9ff893, on main c19d495b11 (
+L1434: MT-050261103Archive utilities ARCHISEPARE + ARCHIFORMAT through the SSG-4 pipeline as generic programs, tested on existing SSG output. Plan: .github/Copilot_Plans/261103-archive-programs-plan.md (owner decisions: generic _GN; DD/R
+L1438: (1) Generic route reproduces rc.02 byte for byte (.cob, CondisParm.inc, GnHandoff.inc).
+L1444: MT-055261105R&amp;D ticket: AMT's line-sequential reader merges lines (T3-059, with T3-040). A job in its own right (owner 261105). Prepare and submit a self-contained ticket to R&amp;D: (1) the symptom, with the CC evidence (job 
+L1452: MT-063261112Shorten the generic program names to match their Program-ID: ARCHIFORMAT-GN, not ASSURFED-UTILIT-ARCHIFORMAT-GN. From the owner's review of rc.03 (MT-059). Applies to all 10 generic programs: today PROGRAM-ID = COBOL f
+L1453: MT-064261112rc.03 places the program projects in the application's Development\Programs folder, not a separate Utilities folder. Owner 261112, current thinking: E:\Repos\Federale_InternalRelease\AFBUS_AMT\Development\Programs, nex
+L1458: MT-069261116DB SSG utilities RECAP / TABAN / EXTEUR: plan + probe. Release caveat (261119): pushed through without Federale&rsquo;s EUU003. RECAP and TABAN are CC-proven on the cases without EUU003 (RECTEST 6/6, TABTEST 12/12) and
+L1460: MT-071261118To share with Conversion Scope / Federale: what the generic programs support, and the completeness gap. Three points from the 261118 session, captured in E:\Repos\ssg4-work\conversion-scope-for-federale-261118.md (plac
+L1498: (link any relevant T3-nnn issue). Refresh the Last updated date and

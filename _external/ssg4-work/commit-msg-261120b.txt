@@ -1,0 +1,14 @@
+SSG-4: docs sync after MT-069, UseUnicode False regression 25/25, EUU003 release caveat
+
+- Control Center regression with UseUnicode False 2026-11-20: 25 of 25 jobs PASS
+  (Ids 2134-2352), CC-Trial redeployed with True afterwards. Runbook run record added.
+- release-known-issues.json: new MT-069-EUU003 (RECAP/TABAN proven against an EUU003
+  test double, EXTEUR against a trial EU001; real Euu003 + EU001/EU002 to prove in BSP).
+- Tracker: Last updated 2026-11-20; MT-069 release-caveat box and 261119/261120 progress;
+  section 3 RECAP/TABAN/EXTEUR rows; section 3b risk 5; section 1 milestone
+  (14 utilities, 13 generic programs, 354 real calls).
+- Runbook: inventory 14 utilities (catalog program names, RECAP/TABAN/EXTEUR rows),
+  regression job list 24 (+ ARCHIVE, CONDIS2S), scale totals.
+- copilot-instructions: current status 2026-11-20.
+
+Co-authored-by: GitHub Copilot <copilot@github.com>

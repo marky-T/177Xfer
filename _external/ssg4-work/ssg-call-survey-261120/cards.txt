@@ -1,0 +1,70 @@
+-- index columns
+Name, Bytes, UtilitTemplates, OurTemplatesCalled, InPack
+index rows: 1080
+
+Name               : AFLINC_Start$_AUB005(P).TXT
+Bytes              : 286
+UtilitTemplates    : 
+OurTemplatesCalled : 
+InPack             : N
+
+Name               : AFLINC_Start$_AUB006(P).TXT
+Bytes              : 286
+UtilitTemplates    : 
+OurTemplatesCalled : 
+InPack             : N
+
+
+-- samples around calls (fixed path)
+== DBASSG_EGUNL : E:\Repos\Federale_InternalRelease\Scripts\ASSURFED_F999\RUN\ASSURFED_F999RUN_ACPA08_U1.ps1 L54
+     Add-Script ("SYS`$_RUNS\SYS`$_RUNS_REPRISE.ps1") # @ADD SYS$*RUNS.REPRISE
+     Pop-RunstreamInput
+     # @.  
+     Push-RunstreamInput @("FILE    IACCTABT1", "LABEL   LAB700")
+     Add-Script ("ESYS`$AF_COM\ESYS`$AF_COM_SYB003.ps1") # @ADD ESYS$AF*COM.SYB003
+     Pop-RunstreamInput
+     # @ . 
+     Asg "A" ("IACCTABT1")
+     Invoke-Ssg -Options "MN" -Skeleton "../../DIA_DBASSG/DBASSG_EGUNL" -SgsFile "IACCTABT1"
+     Free "" ("IACCTABT1")
+     # @.  
+== UTILIT_ARCHIFUSION : E:\Repos\Federale_InternalRelease\Scripts\ASSURFED_F999\RUN\ASSURFED_F999RUN_ACPA04_D3.ps1 L54
+     Pop-RunstreamInput
+     # @ . 
+     Push-RunstreamInput @("FILE  IACB082AC01D", "LABEL LAB020")
+     Add-Script ("ESYS`$AF_COM\ESYS`$AF_COM_SYB003.ps1") # @ADD ESYS$AF*COM.SYB003
+     Pop-RunstreamInput
+     # @ . 
+     Invoke-Ssg -Options "MN" -Skeleton "../../ASSURFED_UTILIT/UTILIT_ARCHITAB2" -SgsFile "P`$SGS\ACPA04"
+     # @ . 
+     Invoke-Ssg -Options "MN" -Skeleton "../../ASSURFED_UTILIT/UTILIT_ARCHIFUSION" -SgsFile "P`$SGS\ACPA04"
+     # @ . 
+     Time
+== repssg_ctltot : E:\Repos\Federale_InternalRelease\Scripts\ASSURFED_F999\RUN\ASSURFED_F999RUN_ACMA01_D4.ps1 L97
+     # @ . 
+   
+     Asy-Label "LAB002"
+     Msg "" ("002. Cr?ation fichier avis pour laser (Vitesse)     EGB031")
+     Push-RunstreamInput @("LAB002")
+     Add-Script ("SYS`$_RUNS\SYS`$_RUNS_REPRISE.ps1") # @ADD SYS$*RUNS.REPRISE
+     Pop-RunstreamInput
+     # @ . 
+     Invoke-Ssg -Options "MNA" -Skeleton "../../EUDEV_REPSSG/repssg_ctltot" -SgsFile "P`$SGS\ACMA01"
+     # @ . 
+     Delete "C" ("XA")
+== RUNS_FILE_SSG : E:\Repos\Federale_InternalRelease\Scripts\ASSURFED_F999\RUN\ASSURFED_F999RUN_AFPA01.ps1 L54
+     # @ . ----------------------------------------------  
+   
+     Asy-Label "LAB010"
+     Msg "N" ("010. TEST D EXISTENCE DU fichier FJOUFER")
+     # @ . 
+     Push-RunstreamInput @("LAB010")
+     Add-Script ("SYS`$_RUNS\SYS`$_RUNS_REPRISE.ps1") # @ADD SYS$*RUNS.REPRISE
+     Pop-RunstreamInput
+     Invoke-Ssg -Options "IA" -Skeleton "../../SYS$_RUNS/RUNS_FILE_SSG" -SgsFile "P`$SGS\AFPA01"
+     Time
+     # @ . ----------------------------------------------  
+-- original runstream sources on this VM for not-ours scripts?
+distinct scripts: 77
+sources found: 1
+  ASSURFED_F999RUN_VIRA05 -> E:\Repos\SsgTrial\_scratch\ecl-run4\in\ASSURFED_F999RUN_VIRA05.TXT

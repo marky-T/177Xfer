@@ -1,0 +1,66 @@
+--- BatchController: 20261120 00:56:13.077 11 Information SSG4_TABAN_EUU003STUB Done Id: 2310 Queue: JOB_QUEUE1 (Execution time: 00:01:08:755)
+--- TABSTUB_231020261120005506503.log
+  2026-11-20 00:55:07 Info: TABAN case real-CCSA09_L340
+  2026-11-20 00:55:07 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS01\TABPARM (3 lines); TABIN=ICCS9GCL2; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:08 Info: TABAN case real-CCSA09_L474
+  2026-11-20 00:55:08 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS02\TABPARM (2 lines); TABIN=FILIN; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:10 Info: TABAN case real-CCSA14_L93
+  2026-11-20 00:55:10 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS03\TABPARM (3 lines); TABIN=R171CCSA14; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:12 Info: TABAN case real-CCSM06_MP_L115
+  2026-11-20 00:55:12 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS04\TABPARM (2 lines); TABIN=I196STA726; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:14 Info: TABAN case real-CCTA08_L241
+  2026-11-20 00:55:14 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS05\TABPARM (8 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:16 Info: TABAN case real-CCTA08_L330
+  2026-11-20 00:55:16 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS06\TABPARM (8 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:18 Info: TABAN case real-CCTA08_L382
+  2026-11-20 00:55:18 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS07\TABPARM (8 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:20 Info: TABAN case real-CCTA09_L1076
+  2026-11-20 00:55:20 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS08\TABPARM (7 lines); TABIN=B008S604KS; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:22 Info: TABAN case real-CCTA09_L776
+  2026-11-20 00:55:22 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS09\TABPARM (7 lines); TABIN=B008S604CC; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:24 Info: TABAN case real-CCTA09_L842
+  2026-11-20 00:55:24 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS10\TABPARM (7 lines); TABIN=B008S604CP; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:26 Info: TABAN case real-CGGA01_L146
+  2026-11-20 00:55:26 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS11\TABPARM (2 lines); TABIN=INA; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:28 Info: TABAN case real-CGGA01_L76
+  2026-11-20 00:55:28 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS12\TABPARM (2 lines); TABIN=INA; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:30 Info: TABAN case real-CLOA47_L303
+  2026-11-20 00:55:30 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS13\TABPARM (4 lines); TABIN=IPTRESSG; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:32 Info: TABAN case real-CLOA48_L69
+  2026-11-20 00:55:32 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS14\TABPARM (4 lines); TABIN=ICLODEPTOT; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:34 Info: TABAN case real-DEPM01_L269
+  2026-11-20 00:55:35 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS15\TABPARM (3 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:36 Info: TABAN case real-DEPM01_L307
+  2026-11-20 00:55:36 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS16\TABPARM (3 lines); TABIN=FDEPANNUEL; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:38 Info: TABAN case real-PAIJ01_CU_L46
+  2026-11-20 00:55:38 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS17\TABPARM (2 lines); TABIN=INP; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:40 Info: TABAN case real-PAIJ01_CU_L87
+  2026-11-20 00:55:40 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS18\TABPARM (2 lines); TABIN=INP; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:42 Info: TABAN case real-PAIJ01_PP_L123
+  2026-11-20 00:55:43 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS19\TABPARM (4 lines); TABIN=R0091ML120DA; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:44 Info: TABAN case real-PAIJ01_PP_L88
+  2026-11-20 00:55:44 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS20\TABPARM (2 lines); TABIN=I0091ML120C; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:46 Info: TABAN case real-PBGA01_L244
+  2026-11-20 00:55:47 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS21\TABPARM (10 lines); TABIN=IPBVGRTOTN; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:48 Info: TABAN case real-PBGA01_L260
+  2026-11-20 00:55:49 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS22\TABPARM (10 lines); TABIN=IPBVGRHISN; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:51 Info: TABAN case real-VIGA50_L111
+  2026-11-20 00:55:51 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS23\TABPARM (2 lines); TABIN=INVIGA50; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:53 Info: TABAN case real-VIRA32_L108
+  2026-11-20 00:55:53 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS24\TABPARM (15 lines); TABIN=I006TERMNXAT; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:55 Info: TABAN case real-VIRA32_L147
+  2026-11-20 00:55:55 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS25\TABPARM (13 lines); TABIN=B006TERMNUM; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:57 Info: TABAN case real-VIRA32_L200
+  2026-11-20 00:55:57 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS26\TABPARM (14 lines); TABIN=B006VIRA32; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:55:59 Info: TABAN case real-VIRA32_L74
+  2026-11-20 00:55:59 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS27\TABPARM (15 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:56:01 Info: TABAN case t-neuro-range
+  2026-11-20 00:56:01 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS28\TABPARM (8 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:56:03 Info: TABAN case t-no-neuro
+  2026-11-20 00:56:03 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS29\TABPARM (15 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:56:05 Info: TABAN case t-one-group
+  2026-11-20 00:56:05 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS30\TABPARM (3 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:56:07 Info: TABAN case t-seq-error
+  2026-11-20 00:56:07 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS31\TABPARM (3 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 00:56:09 Info: TABAN case t-seqerror-yes-unsorted
+  2026-11-20 00:56:09 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TBS32\TABPARM (14 lines); TABIN=B006VIRA32; Xqt TABAN -> TABAN_GN

@@ -1,0 +1,412 @@
+TABTEST started 2026-11-20 00:54:24
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.9
+
+2026-11-20 00:54:24 
+2026-11-20 00:54:24 Amt Sort PS library version: 60.33, date: 2026-11-06
+2026-11-20 00:54:24 [Sort-Init] Initializing Sort 
+2026-11-20 00:54:24 Info:  Script Started: TABTEST
+2026-11-20 00:54:24 QUAL: TABTEST
+2026-11-20 00:54:24 QUAL Options: 
+2026-11-20 00:54:24 Msg: TABAN case cc-ccta08-neuro-all
+2026-11-20 00:54:24 Msg Options: 
+2026-11-20 00:54:24 Info:  TABAN case cc-ccta08-neuro-all
+2026-11-20 00:54:24 QUAL: TAB01
+2026-11-20 00:54:24 QUAL Options: D
+2026-11-20 00:54:24 ASG: INACCTA08
+2026-11-20 00:54:24 ASG Options: A
+2026-11-20 00:54:24 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB1)
+2026-11-20 00:54:25 FREE: SGSPARM
+2026-11-20 00:54:25 FREE Options: 
+2026-11-20 00:54:25 File not assigned or USEed: Ignored
+2026-11-20 00:54:25 FREE: TABPARM
+2026-11-20 00:54:25 FREE Options: 
+2026-11-20 00:54:25 File not assigned or USEed: Ignored
+2026-11-20 00:54:25 ASG: TABPARM
+2026-11-20 00:54:25 ASG Options: A
+2026-11-20 00:54:25 USE: SGSPARM,TABPARM
+2026-11-20 00:54:25 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB01\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:25 Msg Options: 
+2026-11-20 00:54:25 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB01\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:25 XQT: TPF$.TABAN
+2026-11-20 00:54:25 XQT Options: R, W
+2026-11-20 00:54:25 
+2026-11-20 00:54:25 End-Xqt
+2026-11-20 00:54:25 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:26 End Report. Time 00:00:00
+2026-11-20 00:54:26 Msg: prints after cc-ccta08-neuro-all
+2026-11-20 00:54:26 Msg Options: 
+2026-11-20 00:54:26 Info:  prints after cc-ccta08-neuro-all
+2026-11-20 00:54:26 Msg:   print cc-ccta08-neuro-all TABAN__005426177.IMP.PRN 476
+2026-11-20 00:54:26 Msg Options: 
+2026-11-20 00:54:26 Info:    print cc-ccta08-neuro-all TABAN__005426177.IMP.PRN 476
+2026-11-20 00:54:26 FREE: INACCTA08
+2026-11-20 00:54:26 FREE Options: 
+2026-11-20 00:54:26 Msg: TABAN case cc-depm01-neuro-all
+2026-11-20 00:54:26 Msg Options: 
+2026-11-20 00:54:26 Info:  TABAN case cc-depm01-neuro-all
+2026-11-20 00:54:26 QUAL: TAB02
+2026-11-20 00:54:26 QUAL Options: D
+2026-11-20 00:54:26 ASG: FDEPMENS
+2026-11-20 00:54:26 ASG Options: A
+2026-11-20 00:54:26 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB2)
+2026-11-20 00:54:26 FREE: SGSPARM
+2026-11-20 00:54:26 FREE Options: 
+2026-11-20 00:54:26 FREE: TABPARM
+2026-11-20 00:54:26 FREE Options: 
+2026-11-20 00:54:26 File not assigned or USEed: Ignored
+2026-11-20 00:54:26 ASG: TABPARM
+2026-11-20 00:54:26 ASG Options: A
+2026-11-20 00:54:26 USE: SGSPARM,TABPARM
+2026-11-20 00:54:26 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB02\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:26 Msg Options: 
+2026-11-20 00:54:26 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB02\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:26 XQT: TPF$.TABAN
+2026-11-20 00:54:26 XQT Options: R, W
+2026-11-20 00:54:26 
+2026-11-20 00:54:26 End-Xqt
+2026-11-20 00:54:26 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:28 End Report. Time 00:00:01
+2026-11-20 00:54:28 Msg: prints after cc-depm01-neuro-all
+2026-11-20 00:54:28 Msg Options: 
+2026-11-20 00:54:28 Info:  prints after cc-depm01-neuro-all
+2026-11-20 00:54:28 Msg:   print cc-depm01-neuro-all TABAN__005427987.IMP.PRN 1454
+2026-11-20 00:54:28 Msg Options: 
+2026-11-20 00:54:28 Info:    print cc-depm01-neuro-all TABAN__005427987.IMP.PRN 1454
+2026-11-20 00:54:28 FREE: FDEPMENS
+2026-11-20 00:54:28 FREE Options: 
+2026-11-20 00:54:28 Msg: TABAN case cc-depm01-seq-error
+2026-11-20 00:54:28 Msg Options: 
+2026-11-20 00:54:28 Info:  TABAN case cc-depm01-seq-error
+2026-11-20 00:54:28 QUAL: TAB03
+2026-11-20 00:54:28 QUAL Options: D
+2026-11-20 00:54:28 ASG: FDEPMENS
+2026-11-20 00:54:28 ASG Options: A
+2026-11-20 00:54:28 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB3)
+2026-11-20 00:54:28 FREE: SGSPARM
+2026-11-20 00:54:28 FREE Options: 
+2026-11-20 00:54:28 FREE: TABPARM
+2026-11-20 00:54:28 FREE Options: 
+2026-11-20 00:54:28 File not assigned or USEed: Ignored
+2026-11-20 00:54:28 ASG: TABPARM
+2026-11-20 00:54:28 ASG Options: A
+2026-11-20 00:54:28 USE: SGSPARM,TABPARM
+2026-11-20 00:54:28 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB03\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:28 Msg Options: 
+2026-11-20 00:54:28 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB03\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:28 XQT: TPF$.TABAN
+2026-11-20 00:54:28 XQT Options: R, W
+2026-11-20 00:54:28 
+2026-11-20 00:54:28 End-Xqt
+2026-11-20 00:54:28 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:30 End Report. Time 00:00:01
+2026-11-20 00:54:30 Msg: prints after cc-depm01-seq-error
+2026-11-20 00:54:30 Msg Options: 
+2026-11-20 00:54:30 Info:  prints after cc-depm01-seq-error
+2026-11-20 00:54:30 Msg:   print cc-depm01-seq-error TABAN__005429988.IMP.PRN 492
+2026-11-20 00:54:30 Msg Options: 
+2026-11-20 00:54:30 Info:    print cc-depm01-seq-error TABAN__005429988.IMP.PRN 492
+2026-11-20 00:54:30 FREE: FDEPMENS
+2026-11-20 00:54:30 FREE Options: 
+2026-11-20 00:54:30 Msg: TABAN case cc-paij01-neuro-all
+2026-11-20 00:54:30 Msg Options: 
+2026-11-20 00:54:30 Info:  TABAN case cc-paij01-neuro-all
+2026-11-20 00:54:30 QUAL: TAB04
+2026-11-20 00:54:30 QUAL Options: D
+2026-11-20 00:54:30 ASG: R0091ML120DA
+2026-11-20 00:54:30 ASG Options: A
+2026-11-20 00:54:30 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB4)
+2026-11-20 00:54:30 FREE: SGSPARM
+2026-11-20 00:54:30 FREE Options: 
+2026-11-20 00:54:30 FREE: TABPARM
+2026-11-20 00:54:30 FREE Options: 
+2026-11-20 00:54:30 File not assigned or USEed: Ignored
+2026-11-20 00:54:30 ASG: TABPARM
+2026-11-20 00:54:30 ASG Options: A
+2026-11-20 00:54:30 USE: SGSPARM,TABPARM
+2026-11-20 00:54:30 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB04\TABPARM (5 lines); TABIN=R0091ML120DA; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:30 Msg Options: 
+2026-11-20 00:54:30 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB04\TABPARM (5 lines); TABIN=R0091ML120DA; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:30 XQT: TPF$.TABAN
+2026-11-20 00:54:30 XQT Options: R, W
+2026-11-20 00:54:30 
+2026-11-20 00:54:30 End-Xqt
+2026-11-20 00:54:30 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:32 End Report. Time 00:00:01
+2026-11-20 00:54:32 Msg: prints after cc-paij01-neuro-all
+2026-11-20 00:54:32 Msg Options: 
+2026-11-20 00:54:32 Info:  prints after cc-paij01-neuro-all
+2026-11-20 00:54:32 Msg:   print cc-paij01-neuro-all TABAN__005432022.IMP.PRN 1386
+2026-11-20 00:54:32 Msg Options: 
+2026-11-20 00:54:32 Info:    print cc-paij01-neuro-all TABAN__005432022.IMP.PRN 1386
+2026-11-20 00:54:32 FREE: R0091ML120DA
+2026-11-20 00:54:32 FREE Options: 
+2026-11-20 00:54:32 Msg: TABAN case cc-pbga01-neuro-all
+2026-11-20 00:54:32 Msg Options: 
+2026-11-20 00:54:32 Info:  TABAN case cc-pbga01-neuro-all
+2026-11-20 00:54:32 QUAL: TAB05
+2026-11-20 00:54:32 QUAL Options: D
+2026-11-20 00:54:32 ASG: IPBVGRTOTN
+2026-11-20 00:54:32 ASG Options: A
+2026-11-20 00:54:32 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB5)
+2026-11-20 00:54:32 FREE: SGSPARM
+2026-11-20 00:54:32 FREE Options: 
+2026-11-20 00:54:32 FREE: TABPARM
+2026-11-20 00:54:32 FREE Options: 
+2026-11-20 00:54:32 File not assigned or USEed: Ignored
+2026-11-20 00:54:32 ASG: TABPARM
+2026-11-20 00:54:32 ASG Options: A
+2026-11-20 00:54:32 USE: SGSPARM,TABPARM
+2026-11-20 00:54:32 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB05\TABPARM (19 lines); TABIN=IPBVGRTOTN; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:32 Msg Options: 
+2026-11-20 00:54:32 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB05\TABPARM (19 lines); TABIN=IPBVGRTOTN; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:32 XQT: TPF$.TABAN
+2026-11-20 00:54:32 XQT Options: R, W
+2026-11-20 00:54:32 
+2026-11-20 00:54:32 End-Xqt
+2026-11-20 00:54:32 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:34 End Report. Time 00:00:01
+2026-11-20 00:54:34 Msg: prints after cc-pbga01-neuro-all
+2026-11-20 00:54:34 Msg Options: 
+2026-11-20 00:54:34 Info:  prints after cc-pbga01-neuro-all
+2026-11-20 00:54:34 Msg:   print cc-pbga01-neuro-all TABAN__005434046.IMP.PRN 714
+2026-11-20 00:54:34 Msg Options: 
+2026-11-20 00:54:34 Info:    print cc-pbga01-neuro-all TABAN__005434046.IMP.PRN 714
+2026-11-20 00:54:34 FREE: IPBVGRTOTN
+2026-11-20 00:54:34 FREE Options: 
+2026-11-20 00:54:34 Msg: TABAN case cc-vira32-neuro-all
+2026-11-20 00:54:34 Msg Options: 
+2026-11-20 00:54:34 Info:  TABAN case cc-vira32-neuro-all
+2026-11-20 00:54:34 QUAL: TAB06
+2026-11-20 00:54:34 QUAL Options: D
+2026-11-20 00:54:34 ASG: I006TERMNXT
+2026-11-20 00:54:34 ASG Options: A
+2026-11-20 00:54:34 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB6)
+2026-11-20 00:54:34 FREE: SGSPARM
+2026-11-20 00:54:34 FREE Options: 
+2026-11-20 00:54:34 FREE: TABPARM
+2026-11-20 00:54:34 FREE Options: 
+2026-11-20 00:54:34 File not assigned or USEed: Ignored
+2026-11-20 00:54:34 ASG: TABPARM
+2026-11-20 00:54:34 ASG Options: A
+2026-11-20 00:54:34 USE: SGSPARM,TABPARM
+2026-11-20 00:54:34 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB06\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:34 Msg Options: 
+2026-11-20 00:54:34 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB06\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:34 XQT: TPF$.TABAN
+2026-11-20 00:54:34 XQT Options: R, W
+2026-11-20 00:54:34 
+2026-11-20 00:54:34 End-Xqt
+2026-11-20 00:54:34 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:36 End Report. Time 00:00:01
+2026-11-20 00:54:36 Msg: prints after cc-vira32-neuro-all
+2026-11-20 00:54:36 Msg Options: 
+2026-11-20 00:54:36 Info:  prints after cc-vira32-neuro-all
+2026-11-20 00:54:36 Msg:   print cc-vira32-neuro-all TABAN__005436063.IMP.PRN 10126
+2026-11-20 00:54:36 Msg Options: 
+2026-11-20 00:54:36 Info:    print cc-vira32-neuro-all TABAN__005436063.IMP.PRN 10126
+2026-11-20 00:54:36 FREE: I006TERMNXT
+2026-11-20 00:54:36 FREE Options: 
+2026-11-20 00:54:36 Msg: TABAN case t-all-spaces
+2026-11-20 00:54:36 Msg Options: 
+2026-11-20 00:54:36 Info:  TABAN case t-all-spaces
+2026-11-20 00:54:36 QUAL: TAB07
+2026-11-20 00:54:36 QUAL Options: D
+2026-11-20 00:54:36 ASG: INACCTA08
+2026-11-20 00:54:36 ASG Options: A
+2026-11-20 00:54:36 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB7)
+2026-11-20 00:54:36 FREE: SGSPARM
+2026-11-20 00:54:36 FREE Options: 
+2026-11-20 00:54:36 FREE: TABPARM
+2026-11-20 00:54:36 FREE Options: 
+2026-11-20 00:54:36 File not assigned or USEed: Ignored
+2026-11-20 00:54:36 ASG: TABPARM
+2026-11-20 00:54:36 ASG Options: A
+2026-11-20 00:54:36 USE: SGSPARM,TABPARM
+2026-11-20 00:54:36 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB07\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:36 Msg Options: 
+2026-11-20 00:54:36 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB07\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:36 XQT: TPF$.TABAN
+2026-11-20 00:54:36 XQT Options: R, W
+2026-11-20 00:54:36 
+2026-11-20 00:54:36 End-Xqt
+2026-11-20 00:54:36 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:38 End Report. Time 00:00:01
+2026-11-20 00:54:38 Msg: prints after t-all-spaces
+2026-11-20 00:54:38 Msg Options: 
+2026-11-20 00:54:38 Info:  prints after t-all-spaces
+2026-11-20 00:54:38 Msg:   print t-all-spaces TABAN__005438068.IMP.PRN 176
+2026-11-20 00:54:38 Msg Options: 
+2026-11-20 00:54:38 Info:    print t-all-spaces TABAN__005438068.IMP.PRN 176
+2026-11-20 00:54:38 FREE: INACCTA08
+2026-11-20 00:54:38 FREE Options: 
+2026-11-20 00:54:38 Msg: TABAN case t-empty-noindic
+2026-11-20 00:54:38 Msg Options: 
+2026-11-20 00:54:38 Info:  TABAN case t-empty-noindic
+2026-11-20 00:54:38 QUAL: TAB08
+2026-11-20 00:54:38 QUAL Options: D
+2026-11-20 00:54:38 ASG: INACCTA08
+2026-11-20 00:54:38 ASG Options: A
+2026-11-20 00:54:38 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB8)
+2026-11-20 00:54:38 FREE: SGSPARM
+2026-11-20 00:54:38 FREE Options: 
+2026-11-20 00:54:38 FREE: TABPARM
+2026-11-20 00:54:38 FREE Options: 
+2026-11-20 00:54:38 File not assigned or USEed: Ignored
+2026-11-20 00:54:38 ASG: TABPARM
+2026-11-20 00:54:38 ASG Options: A
+2026-11-20 00:54:38 USE: SGSPARM,TABPARM
+2026-11-20 00:54:38 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB08\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:38 Msg Options: 
+2026-11-20 00:54:38 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB08\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:38 XQT: TPF$.TABAN
+2026-11-20 00:54:38 XQT Options: R, W
+2026-11-20 00:54:38 
+2026-11-20 00:54:38 End-Xqt
+2026-11-20 00:54:38 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:40 End Report. Time 00:00:02
+2026-11-20 00:54:40 Msg: prints after t-empty-noindic
+2026-11-20 00:54:40 Msg Options: 
+2026-11-20 00:54:40 Info:  prints after t-empty-noindic
+2026-11-20 00:54:40 Msg:   print t-empty-noindic TABAN__005440089.IMP.PRN 176
+2026-11-20 00:54:40 Msg Options: 
+2026-11-20 00:54:40 Info:    print t-empty-noindic TABAN__005440089.IMP.PRN 176
+2026-11-20 00:54:40 FREE: INACCTA08
+2026-11-20 00:54:40 FREE Options: 
+2026-11-20 00:54:40 Msg: TABAN case t-long-records
+2026-11-20 00:54:40 Msg Options: 
+2026-11-20 00:54:40 Info:  TABAN case t-long-records
+2026-11-20 00:54:40 QUAL: TAB09
+2026-11-20 00:54:40 QUAL Options: D
+2026-11-20 00:54:40 ASG: FDEPMENS
+2026-11-20 00:54:40 ASG Options: A
+2026-11-20 00:54:40 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB9)
+2026-11-20 00:54:40 FREE: SGSPARM
+2026-11-20 00:54:40 FREE Options: 
+2026-11-20 00:54:40 FREE: TABPARM
+2026-11-20 00:54:40 FREE Options: 
+2026-11-20 00:54:40 File not assigned or USEed: Ignored
+2026-11-20 00:54:40 ASG: TABPARM
+2026-11-20 00:54:40 ASG Options: A
+2026-11-20 00:54:40 USE: SGSPARM,TABPARM
+2026-11-20 00:54:40 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB09\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:40 Msg Options: 
+2026-11-20 00:54:40 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB09\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:40 XQT: TPF$.TABAN
+2026-11-20 00:54:40 XQT Options: R, W
+2026-11-20 00:54:40 
+2026-11-20 00:54:40 End-Xqt
+2026-11-20 00:54:40 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:42 End Report. Time 00:00:02
+2026-11-20 00:54:42 Msg: prints after t-long-records
+2026-11-20 00:54:42 Msg Options: 
+2026-11-20 00:54:42 Info:  prints after t-long-records
+2026-11-20 00:54:42 Msg:   print t-long-records TABAN__005442124.IMP.PRN 806
+2026-11-20 00:54:42 Msg Options: 
+2026-11-20 00:54:42 Info:    print t-long-records TABAN__005442124.IMP.PRN 806
+2026-11-20 00:54:42 FREE: FDEPMENS
+2026-11-20 00:54:42 FREE Options: 
+2026-11-20 00:54:42 Msg: TABAN case t-short-records
+2026-11-20 00:54:42 Msg Options: 
+2026-11-20 00:54:42 Info:  TABAN case t-short-records
+2026-11-20 00:54:42 QUAL: TAB10
+2026-11-20 00:54:42 QUAL Options: D
+2026-11-20 00:54:42 ASG: I006TERMNXT
+2026-11-20 00:54:42 ASG Options: A
+2026-11-20 00:54:42 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB10)
+2026-11-20 00:54:42 FREE: SGSPARM
+2026-11-20 00:54:42 FREE Options: 
+2026-11-20 00:54:42 FREE: TABPARM
+2026-11-20 00:54:42 FREE Options: 
+2026-11-20 00:54:42 File not assigned or USEed: Ignored
+2026-11-20 00:54:42 ASG: TABPARM
+2026-11-20 00:54:42 ASG Options: A
+2026-11-20 00:54:42 USE: SGSPARM,TABPARM
+2026-11-20 00:54:42 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB10\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:42 Msg Options: 
+2026-11-20 00:54:42 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB10\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:42 XQT: TPF$.TABAN
+2026-11-20 00:54:42 XQT Options: R, W
+2026-11-20 00:54:42 
+2026-11-20 00:54:42 End-Xqt
+2026-11-20 00:54:42 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:44 End Report. Time 00:00:01
+2026-11-20 00:54:44 Msg: prints after t-short-records
+2026-11-20 00:54:44 Msg Options: 
+2026-11-20 00:54:44 Info:  prints after t-short-records
+2026-11-20 00:54:44 Msg:   print t-short-records TABAN__005444149.IMP.PRN 5518
+2026-11-20 00:54:44 Msg Options: 
+2026-11-20 00:54:44 Info:    print t-short-records TABAN__005444149.IMP.PRN 5518
+2026-11-20 00:54:44 FREE: I006TERMNXT
+2026-11-20 00:54:44 FREE Options: 
+2026-11-20 00:54:44 Msg: TABAN case t-spaces-embedded
+2026-11-20 00:54:44 Msg Options: 
+2026-11-20 00:54:44 Info:  TABAN case t-spaces-embedded
+2026-11-20 00:54:44 QUAL: TAB11
+2026-11-20 00:54:44 QUAL Options: D
+2026-11-20 00:54:44 ASG: INACCTA08
+2026-11-20 00:54:44 ASG Options: A
+2026-11-20 00:54:44 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB11)
+2026-11-20 00:54:44 FREE: SGSPARM
+2026-11-20 00:54:44 FREE Options: 
+2026-11-20 00:54:44 FREE: TABPARM
+2026-11-20 00:54:44 FREE Options: 
+2026-11-20 00:54:44 File not assigned or USEed: Ignored
+2026-11-20 00:54:44 ASG: TABPARM
+2026-11-20 00:54:44 ASG Options: A
+2026-11-20 00:54:44 USE: SGSPARM,TABPARM
+2026-11-20 00:54:44 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB11\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:44 Msg Options: 
+2026-11-20 00:54:44 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB11\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:44 XQT: TPF$.TABAN
+2026-11-20 00:54:44 XQT Options: R, W
+2026-11-20 00:54:44 
+2026-11-20 00:54:44 End-Xqt
+2026-11-20 00:54:44 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:46 End Report. Time 00:00:01
+2026-11-20 00:54:46 Msg: prints after t-spaces-embedded
+2026-11-20 00:54:46 Msg Options: 
+2026-11-20 00:54:46 Info:  prints after t-spaces-embedded
+2026-11-20 00:54:46 Msg:   print t-spaces-embedded TABAN__005446160.IMP.PRN 476
+2026-11-20 00:54:46 Msg Options: 
+2026-11-20 00:54:46 Info:    print t-spaces-embedded TABAN__005446160.IMP.PRN 476
+2026-11-20 00:54:46 FREE: INACCTA08
+2026-11-20 00:54:46 FREE Options: 
+2026-11-20 00:54:46 Msg: TABAN case t-zero-totals
+2026-11-20 00:54:46 Msg Options: 
+2026-11-20 00:54:46 Info:  TABAN case t-zero-totals
+2026-11-20 00:54:46 QUAL: TAB12
+2026-11-20 00:54:46 QUAL Options: D
+2026-11-20 00:54:46 ASG: FDEPMENS
+2026-11-20 00:54:46 ASG Options: A
+2026-11-20 00:54:46 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_TABAN_ASCII (Options=IA, SgsFile=P$SGS\TAB12)
+2026-11-20 00:54:46 FREE: SGSPARM
+2026-11-20 00:54:46 FREE Options: 
+2026-11-20 00:54:46 FREE: TABPARM
+2026-11-20 00:54:46 FREE Options: 
+2026-11-20 00:54:46 File not assigned or USEed: Ignored
+2026-11-20 00:54:46 ASG: TABPARM
+2026-11-20 00:54:46 ASG Options: A
+2026-11-20 00:54:46 USE: SGSPARM,TABPARM
+2026-11-20 00:54:46 Msg: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB12\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:46 Msg Options: 
+2026-11-20 00:54:46 Info:  SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB12\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+2026-11-20 00:54:46 XQT: TPF$.TABAN
+2026-11-20 00:54:46 XQT Options: R, W
+2026-11-20 00:54:46 
+2026-11-20 00:54:46 End-Xqt
+2026-11-20 00:54:46 Starting Cobol program: TABAN_GN
+2026-11-20 00:54:48 End Report. Time 00:00:02
+2026-11-20 00:54:48 Msg: prints after t-zero-totals
+2026-11-20 00:54:48 Msg Options: 
+2026-11-20 00:54:48 Info:  prints after t-zero-totals
+2026-11-20 00:54:48 Msg:   print t-zero-totals TABAN__005448181.IMP.PRN 530
+2026-11-20 00:54:48 Msg Options: 
+2026-11-20 00:54:48 Info:    print t-zero-totals TABAN__005448181.IMP.PRN 530
+2026-11-20 00:54:48 FREE: FDEPMENS
+2026-11-20 00:54:48 FREE Options: 
+2026-11-20 00:54:48 FIN
+2026-11-20 00:54:48 
+2026-11-20 00:54:48 End Job. Start: 2026-11-20 00:54:24
+2026-11-20 00:54:48          End:   2026-11-20 00:54:48
+2026-11-20 00:54:48 Info:  Script Done: TABTEST

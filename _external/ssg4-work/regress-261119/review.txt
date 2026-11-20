@@ -1,0 +1,28 @@
+tracker Last updated: Last updated: 2026-11-16 &nbsp;|&nbsp; AMT177 / FEDERALE_APP VM &nbsp;|&nbsp; Companion to Asset Register
+EXTEUR   hits in tracker: 48
+EUU003   hits in tracker: 18
+MT-069   hits in tracker: 16
+MT-070   hits in tracker: 4
+RECSTUB  hits in tracker: 0
+T3-071   hits in tracker: 5
+max MT id: 71
+MT-069 row: MT-069261116DB SSG utilities RECAP / TABAN / EXTEUR: plan + probe. Plan .github/Copilot_Plans/261116-db-ssg-programs-plan.md. Probe (every real call expanded with its own cards, then CobolConverterConsole): RECAP 28 calls &rarr; 14 distinct, 11 clean, 3 fail T3-068 (PIC X(0)); TABAN 27 &rarr; 26, all clean; EXTEUR 1, 99 errors = 10 T3-037 + 20 T3-066 + 69 T3-067. Re-check 261116: same counts, expanded COBOL byte-identical (E:\Repos\ssg4-work\db-probe-261116-recheck\, classification there). Database: RECAP/TABAN only open a read session for EUU003 (T3-027); EXTEUR reads EU001.C_PHA_EUR. Every conversion&rsquo;s &ldquo;4 warnings&rdquo; are the 4 comments inside &lt;PrecompilerSettings&gt; of Trial3\macros\ssg-stub.macros.xml (one each, lines 41/45/50/54; proven: no converted line changes; kept by owner decision, noted in /ssg-generic-utility G4), so RECAP has 0 warnings of its own; TABAN&
+--- runbook
+EXTEUR  hits in runbook: 9
+RECAP   hits in runbook: 10
+TABAN   hits in runbook: 16
+EUU003  hits in runbook: 5
+Inventory:  Inventory (catalog, 2026-11-09) Utility Real calls Program Parameter file Skeletons G7 baseline CFH-COPY 47 ASSURFED_UTILIT_CFH_COPY_GN CFHPARM 250 1 MATCH 41, DIFF 1, EXPANSION-INCOMPLETE 5 LOADIS / UNLOADIS 10 CFH-COPY's CFHPARM 250 4 offline output check BABA 122 ASSURFED_UTILIT_BABA_GN BABPARM 400 1 MATCH 118, DIFF 3, NO-PARM 1 FUSBA 36 ASSURFED_UTILIT_FUSBA_GN FUSPARM 80 2 MATCH 36 CHABAN 31 ASSURFED_UTILIT_CHABAN_GN CHAPARM 80 2 MATCH 31 CONDIS2 18 ASSURFED_UTILIT_CONDIS2_GN CONPARM 250 1 MATCH 18 SCAN 19 ASSURFED_UTILIT_SCAN_GN SCANPARM 80 1 MATCH 19 TAPELD 14 ASSURFED_UTILIT_TAPELD_GN TAPPARM 250 1 MATCH 14 LECTIS 1 (+ 33 labelled test cases) ASSURFED_UTILIT_LECTIS_GN LECPARM 250 1 
+--- copilot-instructions status line
+2. State current position from the **Current status** section below and the most recent plan in
+4. Ask: *"Continue from <current status>, or has something changed?"* before doing work.
+## Current status - SSG-4 generic route (2026-11-05)
+- **11 utilities on 10 generic programs, 298 real calls** (LOADIS runs on CFH-COPY's program; ARCHISEPARE /
+--- utilities.json
+RECAP: program=RECAP_GN tests={"parameterCheck":"RECAP/check/Test-RecapParm.ps1","prepare":["RECAP/cc/Prepare-RecapCc.ps1"],"ccJobs":["SSG4_RECAP_CASES"],"check":"RECAP/cc/Check-RecapCc.ps1","provenInCc":"job RECTEST run 1894 (261116 22:08): 6/6 outputs + 6/6 reports identical; only cases without EUU003. 261119 against the EUU003 test double (SSG4_RECAP_EUU003STUB, RECSTUB 20:26): 33/33 outputs + 33/33 reports identical; RECTEST rerun 20:33 6/6"} | proven=
+TABAN: program=TABAN_GN tests={"parameterCheck":"TABAN/check/Test-TabanParm.ps1","prepare":["TABAN/cc/Prepare-TabanCc.ps1"],"ccJobs":["SSG4_TABAN_CASES"],"provenInCc":"job TABTEST run 1901 (261117 15:27): 12/12 prints identical to the model; only cases without EUU003. 261119 against the EUU003 test double (SSG4_TABAN_EUU003STUB, TABSTUB 20:29): 32/32 prints identical; TABTEST rerun 20:37 12/12"} | proven=
+EXTEUR: program=EXTEUR_GN tests={"parameterCheck":"EXTEUR/check/Test-ExteurParm.ps1","prepare":["EXTEUR/cc/Prepare-ExteurCc.ps1"],"ccJobs":["SSG4_EXTEUR_CASES","SSG4_EXTEUR_ABORT"],"check":"EXTEUR/cc/Check-ExteurCc.ps1","provenInCc":"261119 (trial EU001 phase 400): EXTTEST 23:00 12/12 outputs + 6/6 console line sets (from Batch.Log); EXTABRT CURRENCY 23:15 and OVERFLOW 23:16 end in error as modelled, OVERFLOW outputs byte-identical"} | proven=
+crosscheck keys: 
+--- SsgConverter examples / Tier-1 for EXTEUR
+EXTEUR.ps1 11/09/2026 19:56:21
+skeleton: UTILIT_EXTEUR.ps1 10/12/2026 11:05:17

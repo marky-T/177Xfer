@@ -1,0 +1,11 @@
+PHASE ACTUELLE : 400/EUR
+NB RECORDS LUS     : 0000000005
+NB RECORDS MAJ     : 0000000004
+NB RECORDS ERREUR  : 00000002
+*---------------------------------*
+*     GRAVE ERREUR (OVERFLOW)     *
+*        ABORT DU PROGRAMME       *
+*        CONTACTER J-Y NAUW       *
+*       APPELER LES POMPIERS      *
+*---------------------------------*
+Invalid function call ABORT. Should be AssemblyName.ClassName.MethodName
