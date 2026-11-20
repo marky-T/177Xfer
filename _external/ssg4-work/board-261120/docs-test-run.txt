@@ -1,0 +1,2 @@
+PROGRAM-SUMMARY.md: rc.04-test, as at 12 October 2026; 359 of 371 call sites, 170 runstreams
+docs written to E:\Repos\ssg4-work\board-261120\docs-test : README, RELEASE-NOTES (21 changes, 25 jobs, 14 known issues), INSTALL, PROGRAM-SUMMARY, 13 COBOL

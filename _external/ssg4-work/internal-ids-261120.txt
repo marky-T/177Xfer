@@ -1,0 +1,33 @@
+files scanned: 48; hits: 62 in 28 files
+  10  ARCHIFORMAT\gen\ArchiformatParm.ps1
+   5  EXTEUR\gen\ExteurParm.ps1
+   5  GnHandoff.ps1
+   4  TABAN\gen\TabanParm.ps1
+   4  RECAP\gen\RecapParm.ps1
+   4  LECTIS\gen\LectisParm.ps1
+   4  CONDIS2\gen\CondisParm.ps1
+   3  ARCHISEPARE\gen\ArchisepareParm.ps1
+   2  ARCHIFORMAT\gen\ARCHIFORMAT-GN.cob
+   2  TAPELD\gen\TapeldParm.ps1
+   2  CFH-COPY\gen\CfhCopyParm.ps1
+   1  ARCHISEPARE\gen\ARCHISEPARE-GN.cob
+   1  TABAN\gen\TABAN-GN.cob
+   1  SCAN\gen\ScanParm.ps1
+   1  SCAN\gen\SCAN-GN.cob
+   1  BABA\gen\BABA-GN.cob
+   1  RECAP\gen\RECAP-GN.cob
+   1  LOADIS\gen\LoadisParm.ps1
+   1  BABA\gen\BabaParm.ps1
+   1  LECTIS\gen\LECTIS-GN.cob
+   1  CFH-COPY\gen\CFH-COPY-GN.cob
+   1  FUSBA\gen\FusbaParm.ps1
+   1  FUSBA\gen\FUSBA-GN.cob
+   1  TAPELD\gen\TAPELD-GN.cob
+   1  EXTEUR\gen\EXTEUR-GN.cob
+   1  CONDIS2\gen\CONDIS2-GN.cob
+   1  CHABAN\gen\CHABAN-GN.cob
+   1  CHABAN\gen\ChabanParm.ps1
+-- ids
+MT-043 x16, T3-054 x7, MT-069 x6, T3-028 x5, MT-050 x4, T3-050 x4, T3-048 x4, T3-055 x2, T3-053 x2, T3-040 x2, MT-056 x2, MT-052 x2, T3-056 x1, T3-052 x1, MT-051 x1, MT-044 x1, T3-041 x1, T3-057 x1
+-- generated C# in the BSP generation (comments carry the COBOL text?)
+generated C# files: 142; hits: 1 in 1 files

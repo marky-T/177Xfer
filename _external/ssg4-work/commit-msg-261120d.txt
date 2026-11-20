@@ -1,0 +1,7 @@
+SSG-4: T3-059 repro rides with the code-cleanup LionDev round
+
+Owner decision 261120: T3059-READREC is generated in the code-cleanup LionDev round (no extra round);
+its 4 inputs run in Control Center, then the Bug is created before rc.04 is packaged.
+Recorded in docs/RnD-Tickets/T3-059-board.md and the rc.04 plan.
+
+Co-authored-by: GitHub Copilot <copilot@github.com>

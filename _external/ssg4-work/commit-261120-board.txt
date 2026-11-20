@@ -1,0 +1,25 @@
+SSG-4: team-board items, no internal ids in delivered text, T3-071..075 rechecks
+
+Board (driven in the owner's browser, each Save approved by the owner):
+- User Story 121355 (RECAP/TABAN/EXTEUR generic programs), Tasks 121369/121371/121372;
+  Federale Issue 121357 (EUU003, EU001/EU002 to confirm or supply).
+- Bug 121376 (AmtPsEclLib AddTo-SgsList splits quoted subfields; T3-028), Tasks 121377-121379,
+  repro attached; Repro Steps gained a "Where this runs (end-to-end)" section.
+- Bug 121384 (EclToPowerShell VisitHdg, options and heading in one string; T3-046),
+  Tasks 121388/121390/121391, repro attached.
+- Issue 120983 (inline SSG SORT merge; our T3-074): analysis comment, Related 119872/121355;
+  121355 acceptance criteria gained the end-to-end dependency.
+- Story 119872: Trials 1-4 note in the Description. Owner decision: 119872 stays rc.03;
+  the rc.04 PR links to 119872 and 121355.
+
+Repo:
+- Design rule 12: no internal register ids (T3-/MT-) in delivered code or release text;
+  board references only. New-GnReleaseDocs.ps1 prints 'board' lines; release-known-issues.json
+  carries them (T3-028 Bug 121376, T3-046 Bug 121384, T3-074 Issue 120983, MT-069 121355/121357).
+- Board-ticket rules (ssg-todo-issues, /ssg-board-ticket): Short Term Backlog, Related 119872.
+- PROGRAM-SUMMARY / Update-GnProgramSummary: 13 programs, 25 jobs.
+- Tracker: T3-028/046/074 board badges; T3-071/072 still present on develop after PR 16845,
+  T3-073 fixed in develop (PR 16845); T3-074 scope corrected to 10 merges; new T3-075
+  (converted FPGA01 does not parse: '.DES' comment kept after a *SET value).
+- docs/RnD-Tickets: board drafts (MT-069, T3-028, T3-046, T3-059) and neutral repros
+  (T3-028-repro, T3-046-repro; run.ps1 now requires -Converter/-Library).

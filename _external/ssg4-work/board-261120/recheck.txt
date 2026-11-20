@@ -1,0 +1,29 @@
+== new main
+7b1d42ff39 2026-11-19 10:04:48 +0100 Internal build
+== T3-028: AddTo-SgsList in the new main
+  L12170: ForEach ($Line in $SgsLabels -Split "`r`n") {
+  L12176: [String[]]$Parts = $Line.Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
+  L12179: [Object]$FieldsList = New-Object 'System.Collections.Generic.List[Object]'
+  L12183: [Object]$SubFieldsList = New-Object 'System.Collections.Generic.List[String]'
+  L12184: [String[]]$SubFields = $Parts[$I].Split(",")
+  L12193: [Object]$Labels = New-Object 'System.Collections.Generic.List[Object]'
+  L12198: # Don't add the label when commandline already specified it. Commandline is always leading.
+AmtPsEclLib changed since d4da9d0d80: True
+== T3-046: Hdg lines with options+text in one string, in the new main converted scripts
+files: 8; lines: 14
+origin/main:Scripts/ASSURFED_F999/RUN-D/ASSURFED_F999RUN-D_VIRD50_PI.ps1:1
+origin/main:Scripts/ASSURFED_F999/RUN/ASSURFED_F999RUN_PBDA04.ps1:4
+origin/main:Scripts/ASSURFED_F999/RUN/ASSURFED_F999RUN_PBDA07.ps1:2
+origin/main:Scripts/ASSURFED_F999/RUN-D/ASSURFED_F999RUN-D_VIRD50_PI.ps1:476:  Hdg "P LISTE PCLI CALCUL CAPITAUX"
+origin/main:Scripts/ASSURFED_F999/RUN/ASSURFED_F999RUN_PBDA04.ps1:217:  Hdg "P     MULTIPLES COUCHE HIST 31/12"
+== Hdg function in the new library (accepted forms)
+  .PARAMETER Options
+  [String] Options
+  .PARAMETER Heading
+  .PARAMETER Printcontrol
+  param (
+  [String]$Options,
+== T3-059: reader source changed since d4da9d0d80?
+
+AmtFramework/Amt.Net/Libraries/Libs/Files/[7mAmtReadFile.cs[0m
+
