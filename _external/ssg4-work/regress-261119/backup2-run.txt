@@ -1,1 +1,12 @@
 backup branch: ssg4-backup-20261023 at 55dc7f5 2026-11-20 SSG-4 backup 2026-11-20
+
+Folder                       Added Modified Deleted
+------                       ----- -------- -------
+_external/release_candidates     0        0       0
+_external/ssg4-work            387       49       0
+_external/ssg4-source            0        0       0
+
+
+SsgTrial repository: 49e8d76 2026-11-20 (## main...ssg4/main)
+backed up: 27812c4 on ssg4-backup-20261023 (436 files), remote verified
+https://github.com/marky-T/177Xfer/tree/ssg4-backup-20261023/_external
