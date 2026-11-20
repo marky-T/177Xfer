@@ -1,0 +1,10 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-19 19:56:23
+PASS GNRECAP        generated after                2026-11-16 21:55:31 (the build LionSource)
+PASS GNRECAP        imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS RECAP_GN       rebuilt and delivered          11/19/2026 7:29:05 PM 11/19/2026 7:56:49 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNRECAP recorded as imported   not recorded: a subset of the programs was delivered
+PASS GNEUUSTUB      generated after                2026-11-19 19:21:13 (the build LionSource)
+PASS GNEUUSTUB      imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS EUU003         rebuilt and delivered          11/19/2026 7:29:04 PM 11/19/2026 7:56:56 PM ok (static reference: T3-040 input check skipped) yes, hash ok
+PASS LionSource     GNEUUSTUB recorded as imported not recorded: a subset of the programs was delivered
+=== Deliver : all passed

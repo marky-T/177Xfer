@@ -1,0 +1,162 @@
+[
+  {
+    "Case": "real-CCSA09_L340",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCSA09_L340\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCSA09_L474",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCSA09_L474\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCSA14_L93",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCSA14_L93\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCSM06_MP_L115",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCSM06_MP_L115\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA08_L241",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA08_L241\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA08_L330",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA08_L330\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA08_L382",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA08_L382\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA09_L1076",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA09_L1076\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA09_L776",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA09_L776\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CCTA09_L842",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CCTA09_L842\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CGGA01_L146",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CGGA01_L146\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CGGA01_L76",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CGGA01_L76\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CLOA47_L303",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CLOA47_L303\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-CLOA48_L69",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-CLOA48_L69\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-DEPM01_L269",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-DEPM01_L269\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-DEPM01_L307",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-DEPM01_L307\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PAIJ01_CU_L46",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PAIJ01_CU_L46\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PAIJ01_CU_L87",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PAIJ01_CU_L87\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PAIJ01_PP_L123",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PAIJ01_PP_L123\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PAIJ01_PP_L88",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PAIJ01_PP_L88\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PBGA01_L244",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PBGA01_L244\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-PBGA01_L260",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-PBGA01_L260\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-VIGA50_L111",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-VIGA50_L111\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-VIRA32_L108",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-VIRA32_L108\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-VIRA32_L147",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-VIRA32_L147\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-VIRA32_L200",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-VIRA32_L200\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "real-VIRA32_L74",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\real-VIRA32_L74\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "t-neuro-range",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-neuro-range\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "t-no-neuro",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-no-neuro\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "t-one-group",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-one-group\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "t-seq-error",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-seq-error\\expected\\print-stub.txt"
+  },
+  {
+    "Case": "t-seqerror-yes-unsorted",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-seqerror-yes-unsorted\\expected\\print-stub.txt"
+  }
+]

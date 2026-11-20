@@ -1,0 +1,6 @@
+Stage Deploy, environment CC-Trial, started 2026-11-17 15:23:32
+PASS script set     settings written               E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\Settings\AmtSettings.xml
+PASS TABAN          UTILIT_TABAN_ASCII.ps1         TabanParm.inc, Invoke-TabanHandoff
+PASS GnHandoff.inc  equals GnHandoff.ps1           E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Scripts\SSG4\ASSURFED_UTILIT
+PASS settings       CloneReports == utilities.json 14 utilities, 19 skeleton entries checked, problems: 0
+=== Deploy : all passed

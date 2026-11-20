@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, started 2026-11-17 15:23:33
+PASS prepare        Prepare-TabanCc.ps1            inputs, job scripts and hand-offs staged
+FAIL SSG4_TABAN_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_TABAN_CASES'), then -Stage Regress -Job SSG4_TABAN_CASES -StartLine '<ccStartJob line>'
+=== Regress : 1 failure(s)

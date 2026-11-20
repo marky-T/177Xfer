@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 23:18:53
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_EXTEUR_ABORT [OVERFLOW] regression                     job ended in Error as expected | === EXTEUR abort OVERFLOW: PASS
+=== Regress : all passed

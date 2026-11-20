@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-19 22:53:30
+PASS GNEXTEUR       generated after                2026-11-19 22:39:06 (the build LionSource)
+PASS GNEXTEUR       imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS EXTEUR_GN      rebuilt and delivered          11/19/2026 10:52:00 PM 11/19/2026 10:53:49 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNEXTEUR recorded as imported  not recorded: a subset of the programs was delivered
+=== Deliver : all passed

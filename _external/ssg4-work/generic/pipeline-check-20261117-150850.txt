@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, started 2026-11-17 15:08:50
+PASS utilities.json files and hand-off defaults    14 utilities, 19 skeleton entries checked, problems: 0
+PASS TABAN          cross-check vs baseline        DIFF=6 MATCH=21 of 27 calls
+=== Check : all passed

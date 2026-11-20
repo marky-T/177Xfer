@@ -1,0 +1,1507 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from an IBM Cobol/CICS environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='N'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default  
+-->
+<ROUTINES>
+<OBJECT name='AMT_FORM_MAIN' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='I' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  dfhcommarea : alpha 5000
+
+booleans
+
+end_definitions
+
+amt_nextform := ''
+if not gb-screen-sent
+  amt_locdef_to_form (cics-outputmsg)
+  gb-screen-sent := true
+  exit
+endif
+setto (si-hex00value, twa)
+cwa := ret-cwa
+tctua := ret-tctua
+eibaid := amt_function_key
+amt_function_key := ''''
+amt_nextform := ''
+cics-program-level := 0
+cics-outputmsg := ''
+amt_cursorpos := 0
+asktime ()
+cics-inputmsg := amt_form_to_locdef ()
+loop while cics-inputmsg <> ''
+  eibcalen := length (commarea)
+  amt_call_trans (eibtrnid)
+endloop
+ret-cwa := cwa
+ret-tctua := tctua
+if amt_nextform = si-currform
+  amt_locdef_to_form (cics-outputmsg)
+elseif amt_nextform <> ''
+  gotoform (amt_nextform)
+  exit
+else
+  sendmessage (cics-outputmsg)
+endif
+refresh ()
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_ABEND' description='Abnormal program termination'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (routinename : string optional)
+begin_routine
+  if routinename <> ''
+    abort (routinename & ' CALLED - PROGRAM TERMINATED ABNORMALLY')
+  else
+    abort ('PROGRAM TERMINATED ABNORMALLY')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_ASKTIME' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main: integer
+begin_routine
+  dateresult.ccyymmdd := today.ccyymmdd
+  eibdate := dateresult.ccyyddd
+  eibtime := today.hhmmssnn / 100
+  result := eibdate * 1000000 + eibtime
+  eibdate -= 1900000
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_ACCEPT_DATE' description='Return current formatted date as numeric'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main(): numeric 6
+begin_routine
+  result := today.yymmdd
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CLOSEPRINT' description='Close printfile in accordance with job's file spec'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (sysout : printer, destination : string)
+begin_routine
+  if destination = '' //dummy file
+    freeoutput(sysout, delete)
+  elseif length(destination) < 5 //print file
+    freeoutput(sysout)
+  else //save as data file
+    freeoutput(sysout, norequest)
+    amt_fco.filemove(sysout.filename, lion.var-param.file-path & destination)
+  endif
+  sysout.id := ''
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_FILEDESTINATION' description='Redirect file output'>
+<OPTIONS kind='P' init='N'/>
+<PRINTLAYOUT name='PRINTREC' length='80'>
+<CODE>
+
+routine main(fileid, currentfilename, destination : string optional)
+begin_routine
+  if destination = '' //dummy file
+    if currentfilename <> '' //for input files, filename is still empty!
+      amt_fco.filedelete (currentfilename)
+    endif
+  elseif length(destination) = 1 //job has assigned this file to a printer
+    prout.ID := fileid
+    prout.title := fileid
+    prout.printer := destination
+    prout.filename := si-repname & '__' & today.hhmmssnn & '0.' & fileid &  '.PRN'
+    skip(top, prout)
+    print(printrec)
+    freeoutput(prout)
+    amt_fco.filedelete (prout.filename)
+    amt_fco.filemove (currentfilename, prout.filename)
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_GET_SQL_STATUS' description='Gets the DB2 SQL status'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  amt_sqlca ()
+
+booleans
+
+end_definitions
+
+// This routine will convert the si-dbstatus to errorcodes sqlcode and sqlstate.
+// The routine gets the SQLCA structure as a var parameter so in the future
+// other SQLCA members can be changed here also.
+// Error Codes overview:
+// execution was successful:                sqlcode = 0, sqlstate = '00000'
+// execution was successful with a warning: sqlcode > 0, sqlstate = ?
+// execution was not successful:            sqlcode < 0, sqlstate >= '07000'
+// no data was found:                       sqlcode = 100, sqlstate >= '02000'
+
+routine main (var par-sqlca : alpha 178)
+begin_routine
+  sqlca := par-sqlca
+  if resok  // Execution was successful
+    sqlcode := 0
+    sqlstate := '00000'
+  else
+    startcase si-dbstatus
+    case 0  // Unknown error occurred
+      sqlcode := -1
+      sqlstate := '07000'
+      jobsummary ('SQL Error: ' & getlastresult, true)  // log error
+    case 1  // Record not found
+      sqlcode := 100
+      sqlstate := '02000'
+    case 2 3 4 5 6  // Error situation, execution was not successful
+      sqlcode := -1
+      sqlstate := '07000'
+      jobsummary ('SQL Error: ' & getlastresult, true)  // log error
+    endcase
+  endif
+  resok := true
+  si-dbstatus := 0
+  par-sqlca := sqlca
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_BMSCURSOR' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (len: signed 4, offset: integer): boolean
+begin_routine
+  // This routine determines whether a field is to get focus.
+  // If AMT_CURSORPOS = 0, the first field with lenght indicator = -1 will get focus.
+  // Otherwise, it's for the first field with AMT_CURSORPOS < offset (= row pos * 80 + col pos + width)
+  
+  result := false
+  if amt_cursorpos = 0 
+    result := (len < 0)
+  elseif amt_cursorpos > 0
+    result := amt_cursorpos < offset
+  endif
+  if result then amt_cursorpos := -1 //return false in all next calls
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_BMSFONTCOLOR' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (att: alpha 1, i_current: integer): integer
+begin_routine
+  result := i_current
+  startcase att
+  case '1'
+    result := clblue
+  case '2'
+    result := clred
+  case '3'
+    result := clfuchsia
+  case '4'
+    result := clgreen
+  case '5'
+    result := clblue
+  case '6'
+    result := clyellow
+  case '7'
+    result := clblack
+  endcase
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_BMSHLCOLOR' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (att: alpha 1, i_current: integer): integer
+begin_routine
+  result := i_current
+  startcase att
+  case '1'
+    result := clblink
+  case '2'
+    result := clreverse
+  endcase
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_BMSPROTECT' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (att : alpha 1, b_current : boolean): boolean
+begin_routine
+  if (att in ['@00@', '@80@', '@D0@']) //preserve current state
+    result := b_current
+  elseif (att in ['@60@'..'@7F@']) or (att >= '@E0@') or  //these values are ebcdic-based
+      (att in ['@2A@', '@2D@', '@2F@', '@59@', '@5A@', '@5F@']) //these values are ascii-based
+    result := true
+  else
+    result := false
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_BMSUNDERLINE' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (att: alpha 1, b_current: boolean): boolean
+begin_routine
+  result := b_current
+  if att = '@00@' then exit
+  result := (att = '4')
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_ABEND' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_abcode: string optional)
+begin_routine
+  if p_abcode = '' then p_abcode := '????'
+  abort (p_abcode)
+end_routine
+
+</CODE>
+<!-- code may be added for rolling back VSAM changes -->
+</OBJECT>
+<OBJECT name='AMT_CICS_CANCEL' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_reqid: string)
+begin_routine
+  if si-origin <> '' then eiblk := si-param
+  amt_set_eib_error (dfhresp_normal, '@10@@0C@')
+  qdfhtemp.where (qdfhtemp.requestid = p_reqid)
+  qdfhtemp.findfirst (index-dfhtemp)
+  if si-dbstatus = 0
+    loop while si-dbstatus = 0
+      qdfhtemp.delete ()
+      qdfhtemp.where (qdfhtemp.requestid = p_reqid)
+      qdfhtemp.findnext (index-dfhtemp)
+    endloop
+  elseif si-dbstatus = 1
+    amt_set_eib_error (dfhresp_notfnd, '@10@@0C@')
+  else
+    v (dfhresp_iscinvreq, '@10@@0C@')
+  endif
+  if si-origin <> '' then si-param := eiblk
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_CHECKRESP' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  hexdigits: alpha 16 value '0123456789ABCDEF'
+  a_val: alpha 1 [16] redefines hexdigits
+  fnstruct: structure
+    i_val: numeric 4 compbinary
+  end_structure
+  s_out : structure
+    a_hex : alpha 1 [4]
+  end_structure
+  i,
+  i_pos  : integer
+
+booleans
+
+end_definitions
+
+
+routine main
+begin_routine
+  if eibresp <> dfhresp_normal
+    sme ('AMT_CICS ABEND occurred. Respcode: ' & eibresp & ' eibfn: ' & inhex (eibfn), , 'ODT')
+    cics_abend ()
+  endif
+end_routine
+
+routine inhex (p_val : alpha 2) : alpha 4
+begin_routine
+  fnstruct := p_val
+  i_pos := 4
+  loop while i_pos > 0
+    i := (i_val mod 16) + 1
+    a_hex[i_pos] := a_val[i]
+    i_val := i_val / 16
+    i_pos -= 1
+  endloop
+  result := s_out
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_DELETE' description='Handle CICS Delete on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, s_ridfld : realstring)
+begin_routine
+  i_fun := gc-vsamdelete
+  cics_vsam_handler (i_fun, s_filename, s_ridfld)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_DELETEQ_TD' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  proc_deleteq : storedproc (sp_delete_td)
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 16)
+begin_routine
+  resok := true
+  if qtddef.qname <> p_qname
+    qtddef.where (qtddef.qname = p_qname)
+    qtddef.findfirst (index-tddef, locked)
+  endif
+  if resok
+    proc_deleteq.p_qid := qtddef.lionrecno
+    proc_deleteq.execute ()
+    amt_set_eib_error (dfhresp_normal, '@08@@06@')
+  elseif si-dbstatus = 1
+    amt_set_eib_error (dfhresp_qiderr, '@08@@06@')
+  else //LOCKED
+    amt_set_eib_error (dfhresp_locked, '@08@@06@')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_DELETEQ_TS' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  proc_deleteq : storedproc (sp_delete_ts)
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 16)
+begin_routine
+  if si-origin <> '' then eiblk := si-param
+  proc_deleteq.p_qname := p_qname
+  proc_deleteq.execute ()
+  eibresp := 0
+  eibfn := '@0A@@06@'
+  if si-origin <> '' then si-param := eiblk
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_ENDBR' description='Handle CICS EndBr on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  s_ridfld_dummy : realstring
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string)
+begin_routine
+  i_fun := gc-vsamendbr
+  cics_vsam_handler (i_fun, s_filename, s_ridfld_dummy)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_LINK' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_progid: realstring, p_commarea : realstring optional, p_inputmsg : realstring optional)
+begin_routine
+  eibresp := dfhresp_normal
+  commarea := p_commarea
+  eibcalen := length (p_commarea)
+  if p_inputmsg <> '' then cics-inputmsg := p_inputmsg
+  cics-program-level += 1
+  amt_call_prog (p_progid) //sets dfhresp
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_READ' description='Handle CICS Read on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  a_data : realstring 
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, s_ridfld : realstring, b_update : boolean optional): realstring
+begin_routine
+  i_fun := gc-vsamread
+  if b_update
+    a_data := 'UPDATE'
+  endif
+  result := cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_READNEXT' description='Handle CICS ReadNext on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  a_data : realstring 
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, var s_ridfld : realstring, b_update : boolean optional): realstring
+begin_routine
+  i_fun := gc-vsamreadnext
+  if b_update
+    a_data := 'UPDATE'
+  endif
+  result := cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_READPREV' description='Handle CICS ReadPrev on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  a_data : realstring 
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, var s_ridfld : realstring, b_update : boolean optional): realstring
+begin_routine
+  i_fun := gc-vsamreadprev
+  if b_update
+    a_data := 'UPDATE'
+  endif
+  result := cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_READQ_TD' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_loop: integer
+  prev-process : numeric 12
+  prev-queue : alpha 16
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 16, p_item: integer optional): string
+begin_routine
+  result := 0
+  resok := true
+  if prev-process <> si-unique or prev-queue <> p_qname
+    qtddef.where (qtddef.qname = p_qname)
+    qtddef.findfirst (index-tddef, locked)
+    if resok then qtdq.set (index-tdq, beginning)
+    prev-queue := p_qname
+    prev-process := si-unique
+  endif
+  if resok
+    qtdq.where (qtdq.recno_tddef = qtddef.lionrecno)
+    qtdq.findnext (index-tdq)
+    if si-dbstatus = 0
+      amt_set_eib_error (dfhresp_normal, '@08@@04@')
+      result := qtdq.qdata
+      qtdq.delete ()
+    else
+      amt_set_eib_error (dfhresp_qzero, '@08@@04@')
+    endif
+  elseif si-dbstatus = 1
+    amt_set_eib_error (dfhresp_qiderr, '@08@@04@')
+  else //LOCKED
+    amt_set_eib_error (dfhresp_locked, '@08@@04@')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_READQ_TS' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_loop: integer
+
+booleans
+
+end_definitions
+
+
+
+routine main (p_qname: alpha 16, p_item: integer optional): string
+begin_routine
+  if si-origin <> '' then eiblk := si-param
+  result := 0
+  if qtsq.qname <> p_qname
+    qtsq.set (index-tsq, beginning)
+  endif
+  if p_item = 0 
+    qtsq.where (qtsq.qname = p_qname)
+    qtsq.findnext (index-tsq)
+  else
+    qtsq.where (qtsq.qname = p_qname and
+              qtsq.qitemno = p_item)
+    qtsq.findfirst (index-tsq)
+  endif
+  eibfn := '@0A@@04@'
+  if si-dbstatus = 0
+    eibresp := dfhresp_normal
+    result := qtsq.qdata
+  else
+    eibrsrce := p_qname
+    if tsqlastitem > 0
+      amt_set_eib_error (dfhresp_itemerr, '@0A@@04@')
+    else
+      amt_set_eib_error (dfhresp_qiderr, '@0A@@04@')
+    endif
+  endif
+  if si-origin <> '' then si-param := eiblk
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_RECEIVE' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_map: realstring): realstring
+begin_routine
+  eibresp := dfhresp_normal
+  result := cics-inputmsg
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_RESETBR' description='Handle CICS ResetBr on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  a_data : realstring
+
+booleans
+
+end_definitions
+
+routine main (s_filename : string, s_ridfld : realstring, b_equal : boolean optional)
+begin_routine
+  i_fun := gc-vsamresetbr
+  if b_equal
+    a_data := 'EQUAL'
+  endif
+  cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_RETRIEVE' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (var p_options: alpha 20, outputlength : integer optional): realstring
+begin_routine
+  amt_set_eib_error (dfhresp_normal, '@10@@0A@')
+  qdfhtemp.where (qdfhtemp.requestid = amt_requestid)
+  qdfhtemp.findfirst (index-dfhtemp)
+  if si-dbstatus = 0
+    result := qdfhtemp.data
+    cics-start-options := ''
+    cics-start-options.rtransid := qdfhtemp.rtransid
+    cics-start-options.rtermid := qdfhtemp.rtermid
+    cics-start-options.queue := qdfhtemp.queue
+    p_options := cics-start-options
+    if result = '' and p_options = '' then eibresp := dfhresp_notfnd
+    if (outputlength > 0) and (length (result) > outputlength)  then result := copy (result, 1, outputlength)
+    qdfhtemp.delete ()
+  elseif si-dbstatus = 1
+    amt_set_eib_error (dfhresp_enddata, '@10@@0A@')
+  else
+    amt_set_eib_error (dfhresp_invreq, '@10@@0A@')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_RETURN' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_commarea: realstring optional, p_trancode: string optional, p_inputmsg: realstring optional)
+begin_routine
+  eibresp := dfhresp_normal
+  commarea := p_commarea
+  eibcalen := length (p_commarea)
+  cics-program-level -= 1
+  if cics-program-level < 1
+    eibtrnid := p_trancode
+    cics-inputmsg := p_inputmsg
+    amt_cics_syncpoint ()
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_REWRITE' description='Handle CICS Rewrite on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  s_ridfld_dummy : realstring
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, a_data : realstring)
+begin_routine
+  i_fun := gc-vsamrewrite
+  cics_vsam_handler (i_fun, s_filename, s_ridfld_dummy, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_SEND' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_map: realstring, p_from: realstring optional, p_alarm: boolean optional, p_cursor: integer optional)
+begin_routine
+  eibresp := dfhresp_normal
+  amt_nextform := p_map
+  cics-outputmsg := p_from
+  amt_cursorpos := p_cursor
+  if p_alarm then sme ('')
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_START' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  newtask : task
+  newjob : job
+  startdate : numeric 8
+  starttime : numeric 4
+  reqid : numeric 8
+  //vars used in checktime routine:
+  days,
+  hours,
+  minutes,
+  seconds,
+  pos      : integer
+  integer-time,
+  interval : boolean
+  time     : numeric 8
+  time-r   : structure redefines time
+    time-hhmm : structure
+      time-hh: numeric 2
+      time-mm: numeric 2
+    end_structure
+    time-ss: numeric 2
+    time-nn: numeric 2
+  end_structure
+
+booleans
+
+end_definitions
+
+
+routine main (p_transid: string, p_time: string optional, p_data: realstring optional, p_reqid: string optional, p_options: string optional)
+begin_routine
+  if si-origin <> '' then eiblk := si-param
+  amt_set_eib_error (dfhresp_normal, '@10@@08@')
+  si-dbstatus := 1
+  if p_reqid <> ''
+    //If the request already exists, starting a task is not needed
+    qdfhtemp.where (qdfhtemp.requestid = p_reqid)
+    qdfhtemp.findfirst (index-dfhtemp)
+  endif
+  cics-start-options := p_options
+  if si-dbstatus = 1
+    newtask.jobname := 'STARTTASK' //getprogname (p_transid)
+    newtask.appname := si-applicationname
+    newtask.connect ()
+    if newtask.jobname = ''
+      amt_set_eib_error (dfhresp_transiderr, '@10@@08@')
+    elseif newtask.connected
+      if p_reqid = ''
+        reqid := newtask.batchid
+        p_reqid := reqid
+      endif
+      newjob := newtask.createjob ()
+      if checktime (p_time)
+        newjob.starttime := starttime
+        if startdate <> 0 then newjob.startdate := startdate
+      endif
+      if cics-start-options.termid <> ''
+        newjob.adddefaultprinter (cics-start-options.termid)
+      endif
+      newjob.sysparam := p_reqid
+      reqid := newjob.addjobrequest (newtask.jobname, report)
+    else
+      amt_set_eib_error (dfhresp_invreq, '@10@@08@')
+    endif
+  endif
+  if eibresp = dfhresp_normal
+    qdfhtemp.clear ()
+    qdfhtemp.requestid := p_reqid
+    qdfhtemp.transid := p_transid
+    qdfhtemp.data := p_data
+    qdfhtemp.rtransid := cics-start-options.rtransid
+    qdfhtemp.rtermid := cics-start-options.rtermid
+    qdfhtemp.queue := cics-start-options.queue
+    qdfhtemp.insert ()
+    eibreqid := p_reqid
+  endif
+  if si-origin <> '' then si-param := eiblk
+end_routine
+
+
+routine checktime (p_time: string): boolean
+begin_routine
+  result := false
+  if p_time = '' then exit //return false; have the task executed immediately
+  integer-time := false
+  interval := false
+  if copy(p_time, 1, 1) = '+'
+    interval := true
+    pos := 2
+  else
+    pos := 1
+  endif
+  days := 0
+  hours := unstring (p_time, pos, ':')
+  if pos > length (p_time) //we have an hhmmss formatted number
+    seconds := hours mod 100
+    minutes := (hours mod 10000) / 100
+    hours := hours / 10000
+    if not interval
+      integer-time := true
+    endif
+  else
+    minutes := unstring (p_time, pos, ':')
+    seconds := unstring (p_time, pos, ':')
+  endif
+  time := today.hhmmssnn
+  if interval
+    hours += time-hh
+    minutes += time-mm
+    seconds += time-ss
+  endif
+  if seconds > 60
+    minutes += seconds / 60
+    seconds := seconds mod 60
+  endif
+  if minutes > 60
+    hours += minutes / 60
+    minutes := minutes mod 60
+  endif
+  if hours > 24
+    days := hours / 24
+    hours := hours mod 24
+  endif
+  time-hh := hours
+  time-mm := minutes
+  time-ss := seconds
+  if integer-time //if time has been supplied as an exact number in hhmmss format, it must be within the next 18 hours
+    if (time < today.hhmmssnn)
+      days := 1
+      if (time > today.hhmmssnn - 6000000) //time is in the latest 6 hours
+        exit //return false; have the task executed immediately
+      endif
+    elseif (time > today.hhmmssnn + 18000000) //time more than 18 hours forward; supposedly in latest 6 hours
+      exit //return false; have the task executed immediately
+    endif
+  elseif not interval
+    if (time < today.hhmmssnn)
+      days := 1
+    endif
+  endif
+  result := true
+  starttime := time-hhmm
+  startdate := 0
+  if days > 0
+    dateresult.daynum := today.daynum + days
+    startdate := dateresult.ccyymmdd
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_STARTBR' description='Handle CICS StartBr on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  a_data : realstring
+
+booleans
+
+end_definitions
+
+routine main (s_filename : string, s_ridfld : realstring, b_equal : boolean optional)
+begin_routine
+  i_fun := gc-vsamstartbr
+  if b_equal
+    a_data := 'EQUAL'
+  endif
+  cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_SYNCPOINT' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (b_rollback: boolean optional)
+begin_routine
+  if b_rollback
+    rollback ()
+    fjq.execsql('ROLLBACK;')
+  else
+    commit ()
+    fjq.execsql('COMMIT;')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_UNLOCK' description='Handle CICS Unlock on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+  s_ridfld_dummy : realstring
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string)
+begin_routine
+  i_fun := gc-vsamunlock
+  cics_vsam_handler (i_fun, s_filename, s_ridfld_dummy)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_WRITE' description='Handle CICS Write on VSAM files'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_fun : numeric 2
+
+booleans
+
+end_definitions
+
+
+routine main (s_filename : string, s_ridfld : realstring, a_data : realstring)
+begin_routine
+  i_fun := gc-vsamwrite
+  cics_vsam_handler (i_fun, s_filename, s_ridfld, a_data)
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_WRITEQ_TD' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 4, p_data: string)
+var
+  i_loop: integer
+begin_routine
+  resok := true
+  if qtddef.qname <> p_qname
+    qtddef.where (qtddef.qname = p_qname)
+    qtddef.findfirst (index-tddef, locked)
+  endif
+  if resok
+    qtdq.recno_tddef := qtddef.lionrecno
+    qtdq.qdata := p_data
+    qtdq.insert ()
+    if resok
+      amt_set_eib_error (dfhresp_normal, '@08@@02@')
+    else
+      amt_set_eib_error (dfhresp_disabled, '@08@@02@')
+    endif
+  elseif si-dbstatus = 1
+    amt_set_eib_error (dfhresp_qiderr, '@08@@02@')
+  else //LOCKED
+    amt_set_eib_error (dfhresp_locked, '@08@@02@')
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_WRITEQ_TS' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_loop: integer
+  prev-process : numeric 12
+  prev-queue : alpha 16
+  proc_numitems : storedproc (sp_numitems)
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 16, p_data: string, p_item: integer optional)
+begin_routine
+  if si-origin <> '' then eiblk := si-param
+  if prev-process <> si-unique or prev-queue <> p_qname
+    prev-process := si-unique
+    prev-queue := p_qname
+    proc_numitems.p_qname := p_qname
+    proc_numitems.execute ()
+    tsqlastitem := proc_numitems.p_out
+  endif
+  if p_item = 0 //ADD RECORD TO QUEUE
+    tsqlastitem += 1
+    qtsq.qname := p_qname
+    qtsq.qitemno := tsqlastitem
+    qtsq.qdata := p_data
+    qtsq.insert ()
+  else
+    qtsq.where (qtsq.qname = p_qname and
+            qtsq.qitemno = p_item)
+    qtsq.findfirst (index-tsq, locked)
+    if si-dbstatus = 0
+      qtsq.qdata := p_data
+      qtsq.update (*)
+    endif
+  endif
+  eibfn := '@0A@@02@'
+  if si-dbstatus = 0
+    eibresp := dfhresp_normal
+  else
+    eibrsrce := p_qname
+    if p_item > 1 and tsqlastitem > 0
+      amt_set_eib_error (dfhresp_itemerr, '@0A@@02@')
+    else
+      amt_set_eib_error (dfhresp_qiderr, '@0A@@02@')
+    endif
+  endif
+  if si-origin <> '' then si-param := eiblk
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CICS_XCTL' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_commarea: realstring optional, p_inputmsg: realstring optional)
+begin_routine
+  eibresp := dfhresp_normal
+  commarea := p_commarea
+  eibcalen := length (p_commarea)
+  if p_inputmsg <> '' then cics-inputmsg := p_inputmsg
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_CURRENT_DATE' description='Return date/time string'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (i_start, i_count : integer optional) : string
+begin_routine
+  result := today.ccyymmdd & today.hhmmssnn & '00000'
+  if (i_start > 0 and i_count > 0)
+    result := copy(result, i_start, i_count)
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_FORMATTIME' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  i_pos   : integer
+  i_shift : integer
+  d_today : date
+
+booleans
+
+end_definitions
+
+
+routine main (p_val: integer, p_format: string, p_sep: alpha 1 optional): string
+begin_routine
+  if p_format = 'TIME'
+    p_val := p_val mod 1000000
+    result := p_val
+    if p_sep <> ''
+      result := copy (result, 1, 4) & p_sep & copy (result, 5)
+      result := copy (result, 1, 2) & p_sep & copy (result, 3)
+    endif
+    exit
+  endif
+  
+  dateresult.ccyyddd := p_val / 1000000
+  if p_sep <> ''
+    startcase p_format
+      case 'MMDDYYYY'
+        result := dateresult.mm-dd-ccyy
+      case 'DDMMYYYY'
+        result := dateresult.dd-mm-ccyy
+      case 'YYYYMMDD' 'FULLDATE'
+        result := dateresult.ccyy-mm-dd
+      case 'YYYYDDMM'
+        result := dateresult.dd-mm-ccyy
+        result := copy (result, 6, 4) & '-' & copy (result, 1, 5)
+      case 'YYYYDDD'
+        result := dateresult.ccyyddd
+        result := copy (result, 1, 4) & '-' & copy (result, 5, 3)
+      else //'DATE'
+        result := dateresult.yy-mm-dd
+    endcase
+    if p_sep <> '-'
+      loop for i_pos := 1 to length (result)
+        if copy (result, i_pos, 1) = '-' then replace (result, i_pos, p_sep)
+      endloop
+    endif
+  else
+    startcase p_format
+      case 'DATEFORM'
+        result := 'YYMMDD'
+      case 'DAYCOUNT'
+        result := dateresult.daynum
+      case 'DAYOFWEEK'
+        d_today.ccyymmdd := today.ccyymmdd
+        i_shift := dateresult.daynum - d_today.daynum
+        result := (today.weekdayno + i_shift - 1) mod 7
+        //NOTE: -1 CORRECTION BECAUSE SUNDAY = 1 IN LION, = 0 IN CICS
+        if result < 0 then result += 7
+      case 'DAYOFMONTH'
+        result := dateresult.dd
+      case 'MONTHOFYEAR'
+        result := dateresult.mm
+      case 'YEAR'
+        result := dateresult.ccyy
+      case 'MMDDYYYY'
+        result := dateresult.mmddccyy
+      case 'DDMMYYYY'
+        result := dateresult.ddmmccyy
+      case 'YYYYMMDD' 'FULLDATE'
+        result := dateresult.ccyymmdd
+      case 'YYYYDDMM'
+        result := dateresult.ddmmccyy
+        result := copy (result, 5, 4) & copy (result, 1, 4)
+      case 'YYYYDDD'
+        result := dateresult.ccyyddd
+      else //'DATE'
+        result := dateresult.yymmdd
+    endcase
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_RETURNTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+  o_task  : task
+  o_job   : job
+  i_upsi  : integer
+  b_upsi  : boolean [8]
+  n_upsi  : numeric 1 [8]
+
+booleans
+
+end_definitions
+
+
+routine main
+begin_routine
+    o_task.appname := si-applicationname
+    o_task.connect()
+    if o_task.connected
+        o_job      := o_task.getmyself()
+        b_upsi[] := amt_task_upsi_switches
+        loop for i_upsi := 1 to 8
+          if b_upsi[i_upsi]
+            n_upsi[i_upsi] = '1'
+          else
+            n_upsi[i_upsi] = '0'
+          endif
+        endloop
+        o_job.settvcustom ('UPSI', n_upsi[])
+    else
+        jobsummary('Could not connect to sysDB ' & si-repname,true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_GETTASK' description='Script-report interfacing'>
+<OPTIONS kind='P' init='Y'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+
+  o_task : task
+  o_job  : job
+  n_upsi : numeric 1 [8]
+
+booleans
+
+end_definitions
+
+
+routine main
+begin_routine
+    o_task.appname := si-applicationname
+    o_task.connect()
+    if o_task.connected
+        o_job := o_task.getmyself()
+
+        amt_job_name        := o_job.gettvcustom ('JOBNAME')
+        amt_job_jobnumber   := o_job.gettvcustom ('JOBNUMBER')
+        amt_job_summary     := o_job.gettvcustom ('JOBSUMMARY')
+
+        n_upsi[]        := o_job.gettvcustom ('UPSI')
+        amt_task_upsi_0 := (n_upsi[1] = 1)
+        amt_task_upsi_1 := (n_upsi[2] = 1)
+        amt_task_upsi_2 := (n_upsi[3] = 1)
+        amt_task_upsi_3 := (n_upsi[4] = 1)
+        amt_task_upsi_4 := (n_upsi[5] = 1)
+        amt_task_upsi_5 := (n_upsi[6] = 1)
+        amt_task_upsi_6 := (n_upsi[7] = 1)
+        amt_task_upsi_7 := (n_upsi[8] = 1)
+    else
+        jobsummary('Could not connect to sysDB ' & si-repname,true)
+    endif
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_NUMITEMS' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+begin_definitions
+const
+
+var
+  proc_numitems : storedproc (sp_numitems)
+
+booleans
+
+end_definitions
+
+
+routine main (p_qname: alpha 16): integer
+begin_routine
+  proc_numitems.p_qname := p_qname
+  proc_numitems.execute ()
+  result := proc_numitems.p_out
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_SET_EIB_ERROR' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+
+routine main (p_resp : financial 8, p_func : alpha 2 optional)
+begin_routine
+  eibresp := p_resp
+  if p_func <> '' then eibfn := p_func
+  fnstruc := eibfn
+  setto (si-hex00value, eibrcode)
+  if eibresp = dfhresp_normal
+    exit module
+  endif
+  
+  startcase fn1
+    case '@02@'  //ADDRESS
+      //todo 
+    case '@06@'  //READ, WRITE, DELETE...
+      if eibresp = dfhresp_filenotfound
+        eibrcode := '@01@'
+      elseif eibresp = dfhresp_locked
+        eibrcode := '@03@'
+      elseif eibresp = dfhresp_recordbusy
+        eibrcode := '@05@'
+      elseif eibresp = dfhresp_endfile
+        eibrcode := '@0F@'
+      elseif eibresp = dfhresp_ioerr
+        eibrcode := '@80@'
+      elseif eibresp = dfhresp_notfnd
+        eibrcode := '@81@'
+      elseif eibresp = dfhresp_duprec
+        eibrcode := '@82@'
+      elseif eibresp = dfhresp_notopen
+        eibrcode := '@0C@'
+      elseif eibresp = dfhresp_disabled
+        eibrcode := '@0D@'
+      endif
+    case '@08@'  //READQ TD, WRITEQ TD, DELETEQ TD
+      if eibresp = dfhresp_qzero
+        eibrcode := '@01@'
+      elseif eibresp = dfhresp_qiderr
+        eibrcode := '@02@'
+      elseif eibresp = dfhresp_locked
+        eibrcode := '@03@'
+      elseif eibresp = dfhresp_disabled
+        eibrcode := '@0D@'
+      endif
+    case '@0A@'  //READQ TS, WRITEQ TS, DELETEQ TS
+      if eibresp = dfhresp_itemerr
+        eibrcode := '@01@'
+      elseif eibresp = dfhresp_qiderr
+        eibrcode := '@02@'
+      elseif eibresp = dfhresp_lengerr
+        eibrcode := '@E1@'
+      endif
+    case '@0C@'  //GETMAIN, FREEMAIN
+      if eibresp = dfhresp_lengerr
+        eibrcode := '@E1@'
+      endif
+    case '@0E@'
+      //todo 
+    case '@10@'   //START, CANCEL, RETRIEVE...
+      if eibresp = dfhresp_iscinvreq
+        eibrcode := '@D1@'
+      elseif eibresp = dfhresp_invreq
+        eibrcode := '@FF@'
+      elseif eibresp = dfhresp_enddata
+        eibrcode := '@01@'
+      elseif eibresp = dfhresp_ioerr
+        eibrcode := '@04@'
+      elseif eibresp = dfhresp_transiderr
+        eibrcode := '@11@'
+      elseif eibresp = dfhresp_notfnd
+        eibrcode := '@81@'
+      endif
+  endcase
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_VSAMRESP' description='CICS functionality'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (p_status : integer optional, p_func : alpha 2 optional): integer
+begin_routine
+  startcase p_status
+    case 0
+      amt_set_eib_error (dfhresp_normal, p_func)
+    case 1
+      amt_set_eib_error (dfhresp_notfnd, p_func)
+    case 2 3
+      amt_set_eib_error (dfhresp_duprec, p_func)
+    case 5
+      amt_set_eib_error (dfhresp_invreq, p_func)
+    else
+      amt_set_eib_error (dfhresp_notposs, p_func)
+  endcase
+  result := eibresp
+end_routine
+
+</CODE>
+</OBJECT>
+<OBJECT name='AMT_WHEN_COMPILED' description='Created by CobolToAmt conversion'>
+<OPTIONS kind='P' init='N'/>
+<CODE>
+
+routine main (i_start, i_count : integer optional) : string
+begin_routine
+  result := si-gendate & si-gentime & '0000' & '+0000'
+          //CCYYMMDD     HHMM          SSnn     timezone
+  if (i_start > 0 and i_count > 0)
+    result := copy (result, i_start, i_count)
+  endif
+end_routine
+
+</CODE>
+</OBJECT>
+</ROUTINES>

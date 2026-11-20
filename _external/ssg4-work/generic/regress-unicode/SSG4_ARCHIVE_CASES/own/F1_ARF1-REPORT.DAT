@@ -1,0 +1,13 @@
+   DD-PROCESS-TIME-STAMP                                                                                                            
+      26 11 03                                                                                                                      
+                                                                                                                                    
+Columns                                                                                                                             
+ Col  Name               Type    Length  Null                                                                                       
+                                       Allowed                                                                                      
+   1  CLE-TABLE          CHAR       10   NO                                                                                         
+   2  COL-NAME-1         CHARVAR    10   YES                                                                                        
+                                                                                                                                    
+Primary Key : PK_TABLE-ARCH                                                                                                         
+  Column     Direction                                                                                                              
+    CLE-TABLE , Asc                                                                                                                 
+                                                                                                                                    

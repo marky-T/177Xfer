@@ -1,0 +1,51 @@
+       IDENTIFICATION DIVISION.
+      * TEST DOUBLE (MT-069): stands in for Federale's EUU003 in
+      * CC-Trial only, never released. It proves the call of
+      * RECAP-GN / TABAN-GN: MT-SRT = 'STB' + sign + MT-ENE 17 digits.
+       PROGRAM-ID. 'EUU003'.
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       SOURCE-COMPUTER. UNIVAC-1100-10.
+       OBJECT-COMPUTER. UNIVAC-1100-10.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+      * EUW002: as in RECAP-GN / TABAN-GN (SSG-Source/RECAP.TXT)
+       01  EUW002.
+           03  WS-PTR-ENE.
+               05  WS-PTR-ENE-MON-ENE.
+                   07  MT-ENE              PIC S9(17).
+                   07  MT-ENE-SGN          PIC X(01).
+                   07  MT-ENE-CHI          PIC 9(02).
+               05  WS-PTR-ENE-MON-SRT.
+                   07  LG-MAX-MON-SRT      PIC 9(03).
+                   07  CD-FMT-MON-SRT      PIC X(01).
+                   07  FILLER              PIC X(31).
+           03  WS-PTR-SRT.
+               05  WS-MON-SRT-001.
+                   07  MT-SRT              PIC X(100).
+               05  FILLER                  PIC X(110).
+           03  FILLER                      PIC X(20).
+       01  WS-OUT.
+           03  FILLER         PIC X(3) VALUE 'STB'.
+           03  WS-OUT-AMT     PIC -9(17).
+           03  FILLER         PIC X(79) VALUE SPACES.
+       LINKAGE SECTION.
+       01  WS-CMT-PGM.
+           03  NM-PGM-APL               PIC X(08).
+           03  NM-NOM-ENV               PIC X(08).
+           03  NM-NOM-COP               PIC X(08).
+           03  NM-NOM-DEM               PIC X(08).
+           03  VL-CDE-RET               PIC S9(04).
+           03  VL-MOT-CDE               PIC S9(04).
+           03  LB-MSG-RET               PIC X(30).
+           03  CD-DBG-PRG               PIC X(1).
+           03  FILLER                   PIC X(7).
+           03  VL-CHP-TSF               PIC X(3922).
+       PROCEDURE DIVISION USING WS-CMT-PGM.
+       DEBUT.
+           MOVE VL-CHP-TSF TO EUW002.
+           MOVE MT-ENE TO WS-OUT-AMT.
+           MOVE WS-OUT TO MT-SRT.
+           MOVE ZERO TO VL-CDE-RET.
+           MOVE EUW002 TO VL-CHP-TSF.
+           EXIT PROGRAM.

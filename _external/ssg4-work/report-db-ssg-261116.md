@@ -69,3 +69,15 @@ T3-020, T3-046, T3-069), each re-checked on develop `88dc012f`: all still presen
 3. **TABAN** through G1–G7 (27 calls, same `EUU003` pattern, `NEURO` in 6 calls); a no-`EUU003` G8 as for RECAP.
 4. **EXTEUR** after Q3/Q4 (EU001 in AMT; `Copbk_Eu001`), and after the T3-067 decision.
 5. Full RECAP/TABAN G8 once Q1–Q3 are answered (likely: test and release in BSP).
+
+## Update 261117: TABAN gate reached **G8 PASS** (cases without EUU003)
+
+- G1 27 calls / 3 shapes (printer-only totals report; `SEQERROR` is a presence switch). G2 spec approved
+  (`Generic/TABAN/spec.md`; new assumptions A11–A14; Q11/Q12 for Eddy added to the plan and the team note). G3 59 TEST DATA
+  cases, repeatable (329 files). G4 `TABAN-GN.cob` 0 errors. G5 `TabanParm.ps1`. G6 catalog. **G7** (approved): 27 real calls
+  MATCH 21, DIFF 6 (all `NEURO`, T3-070; 27/27 against the fixed expansions); writer vs model 59/59; `-Stage Check -Utility All` 14/14.
+- **G8** CC job `SSG4_TABAN_CASES`, run 1901 (261117 15:27): **12/12 print files identical to the model** (178 non-blank lines),
+  first run. The other real-call cases wait for `EUU003` + EU001/EU002 (Q1–Q3).
+- Tracker §3 descriptions of TABAN and RECAP replaced ("What TABAN does"). Backup `112d874` on 177Xfer (1357 files); scratch
+  converter copies moved to `E:\Temp\Archive_to_delete\ssg4-scratch-converters-261117\` (README).
+- Commits: see below once made. Next: land T3-066/T3-070 (owner); EXTEUR after Q3/Q4 and the T3-067 decision.

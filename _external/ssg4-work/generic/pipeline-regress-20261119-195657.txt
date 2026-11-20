@@ -1,0 +1,9 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 19:56:57
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS prepare        Prepare-RecapCc.ps1            inputs, job scripts and hand-offs staged
+PASS prepare        Prepare-TabanCc.ps1            inputs, job scripts and hand-offs staged
+FAIL SSG4_RECAP_CASES regression                     PASS 2026-11-16 22:10:28 is older than the last delivery (2026-11-19 19:56:49): run again
+FAIL SSG4_TABAN_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_TABAN_CASES'), then -Stage Regress -Job SSG4_TABAN_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_RECAP_EUU003STUB regression                     not run yet: start it in CC (ccStartJob 'SSG4_RECAP_EUU003STUB'), then -Stage Regress -Job SSG4_RECAP_EUU003STUB -StartLine '<ccStartJob line>'
+FAIL SSG4_TABAN_EUU003STUB regression                     not run yet: start it in CC (ccStartJob 'SSG4_TABAN_EUU003STUB'), then -Stage Regress -Job SSG4_TABAN_EUU003STUB -StartLine '<ccStartJob line>'
+=== Regress : 4 failure(s)

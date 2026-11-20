@@ -1,0 +1,15 @@
+PRN files since 20:37:06: 12, expected 12
+PRN encodings: UTF-16LE BOM x12
+cc-ccta08-neuro-all: model: 4 lines match
+cc-depm01-neuro-all: model: 25 lines match
+cc-depm01-seq-error: model: 9 lines match
+cc-paij01-neuro-all: model: 23 lines match
+cc-pbga01-neuro-all: model: 5 lines match
+cc-vira32-neuro-all: model: 53 lines match
+t-all-spaces: model: 2 lines match
+t-empty-noindic: model: 2 lines match
+t-long-records: model: 13 lines match
+t-short-records: model: 29 lines match
+t-spaces-embedded: model: 4 lines match
+t-zero-totals: model: 12 lines match
+=== prints: all checks passed

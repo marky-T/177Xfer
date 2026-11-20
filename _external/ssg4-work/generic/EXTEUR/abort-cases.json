@@ -1,0 +1,36 @@
+[
+  {
+    "Case": "CURRENCY",
+    "Source": "t-currency-error",
+    "Result": "ABORT CURRENCY record 4",
+    "Console": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\console.txt",
+    "Outputs": [
+      {
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006FINVESTC",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\output.dat"
+      },
+      {
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAC\\I006ANOFINVS",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-currency-error\\expected\\ano.dat"
+      }
+    ],
+    "CompareOutputs": false
+  },
+  {
+    "Case": "OVERFLOW",
+    "Source": "t-overflow",
+    "Result": "ABORT OVERFLOW 2 record(s)",
+    "Console": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\console.txt",
+    "Outputs": [
+      {
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006FINVESTC",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\output.dat"
+      },
+      {
+        "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXAO\\I006ANOFINVS",
+        "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-overflow\\expected\\ano.dat"
+      }
+    ],
+    "CompareOutputs": true
+  }
+]

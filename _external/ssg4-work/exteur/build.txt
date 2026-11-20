@@ -1,0 +1,7 @@
+Stage Build, environment CC-Trial, UseUnicode True, started 2026-11-19 22:38:51
+PASS EXTEUR         program source                 EXTEUR_GN: new since the last build
+PASS COBOL converter (programs) 1 programs -> GNEXTEUR.LionSource exit 0, errors 0, warnings 4, 19 KB
+PASS LionSource (programs) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNEXTEUR\out\GNEXTEUR.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-build-20261119-223851.txt

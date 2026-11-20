@@ -1,0 +1,46 @@
+cc-ccta08-neuro-all        TAB01  INACCTA08       24 records,   4 print lines, OK
+cc-depm01-neuro-all        TAB02  FDEPMENS        24 records,  25 print lines, OK
+cc-depm01-seq-error        TAB03  FDEPMENS        14 records,   9 print lines, SEQUENCE-ERROR at record 9
+cc-paij01-neuro-all        TAB04  R0091ML120DA    24 records,  23 print lines, OK
+cc-pbga01-neuro-all        TAB05  IPBVGRTOTN      24 records,   5 print lines, OK
+cc-vira32-neuro-all        TAB06  I006TERMNXT     24 records,  53 print lines, OK
+t-all-spaces               TAB07  INACCTA08        6 records,   2 print lines, OK
+t-empty-noindic            TAB08  INACCTA08        0 records,   2 print lines, OK
+t-long-records             TAB09  FDEPMENS         8 records,  13 print lines, OK
+t-short-records            TAB10  I006TERMNXT     15 records,  29 print lines, OK
+t-spaces-embedded          TAB11  INACCTA08       12 records,   4 print lines, OK
+t-zero-totals              TAB12  FDEPMENS         9 records,  12 print lines, OK
+SSG4_TABAN_CASES.ps1 written, 12 steps, parse errors: 0
+real-CCSA09_L340           TBS01  ICCS9GCL2       24 records,  21 print lines, OK
+real-CCSA09_L474           TBS02  FILIN           24 records,   3 print lines, OK
+real-CCSA14_L93            TBS03  R171CCSA14      24 records,   3 print lines, OK
+real-CCSM06_MP_L115        TBS04  I196STA726      24 records,   3 print lines, OK
+real-CCTA08_L241           TBS05  INACCTA08       24 records,   4 print lines, OK
+real-CCTA08_L330           TBS06  INACCTA08       24 records,   4 print lines, OK
+real-CCTA08_L382           TBS07  INACCTA08       24 records,   4 print lines, OK
+real-CCTA09_L1076          TBS08  B008S604KS      24 records,   4 print lines, OK
+real-CCTA09_L776           TBS09  B008S604CC      24 records,   4 print lines, OK
+real-CCTA09_L842           TBS10  B008S604CP      24 records,   4 print lines, OK
+real-CGGA01_L146           TBS11  INA             24 records,   3 print lines, OK
+real-CGGA01_L76            TBS12  INA             24 records,   3 print lines, OK
+real-CLOA47_L303           TBS13  IPTRESSG        24 records,   3 print lines, OK
+real-CLOA48_L69            TBS14  ICLODEPTOT      24 records,   3 print lines, OK
+real-DEPM01_L269           TBS15  FDEPMENS        24 records,  21 print lines, OK
+real-DEPM01_L307           TBS16  FDEPANNUEL      24 records,  25 print lines, OK
+real-PAIJ01_CU_L46         TBS17  INP             24 records,   3 print lines, OK
+real-PAIJ01_CU_L87         TBS18  INP             24 records,   3 print lines, OK
+real-PAIJ01_PP_L123        TBS19  R0091ML120DA    24 records,  25 print lines, OK
+real-PAIJ01_PP_L88         TBS20  I0091ML120C     24 records,   3 print lines, OK
+real-PBGA01_L244           TBS21  IPBVGRTOTN      24 records,   5 print lines, OK
+real-PBGA01_L260           TBS22  IPBVGRHISN      24 records,   5 print lines, OK
+real-VIGA50_L111           TBS23  INVIGA50        24 records,   3 print lines, OK
+real-VIRA32_L108           TBS24  I006TERMNXAT    24 records,  37 print lines, OK
+real-VIRA32_L147           TBS25  B006TERMNUM     24 records,   5 print lines, OK
+real-VIRA32_L200           TBS26  B006VIRA32      24 records,  53 print lines, OK
+real-VIRA32_L74            TBS27  I006TERMNXT     24 records,  41 print lines, OK
+t-neuro-range              TBS28  INACCTA08       10 records,   4 print lines, OK
+t-no-neuro                 TBS29  I006TERMNXT     10 records,  25 print lines, OK
+t-one-group                TBS30  FDEPMENS         9 records,   5 print lines, OK
+t-seq-error                TBS31  FDEPMENS        14 records,  13 print lines, SEQUENCE-ERROR at record 8
+t-seqerror-yes-unsorted    TBS32  B006VIRA32      14 records,  41 print lines, OK
+SSG4_TABAN_EUU003STUB.ps1 written, 32 steps, parse errors: 0

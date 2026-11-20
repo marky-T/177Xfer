@@ -1,0 +1,5 @@
+TYPE = PAPP
+FNAME = E:\\Repos\\ssg4-work\\cobol-taban\\out\\TABAN_GN.LionSource
+APPNAME = TABANGN
+GENSET = Default from new application
+SYSOPT = FALSE

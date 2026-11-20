@@ -12,7 +12,7 @@ for reference only.
 | Utility | Real calls | Conversion of every call (R&D CobolConverterConsole) | Database use | Generic program |
 |---|---:|---|---|---|
 | RECAP | 28 | 24 clean; 4 fail on `PIC X(0)` (a 1-byte output field) | none of its own: opens a read session (`UDSSRC`, qualifier `AFLINC`) only for `EUU003` | **built (RECAP_GN) and proven in Control Center** on every case that does not call `EUU003` (6/6 outputs byte-identical, 6/6 reports identical, run 1894) |
-| TABAN (ASCII) | 27 | 27 clean (numeric-vs-SPACE warnings only) | same as RECAP | next program to convert |
+| TABAN (ASCII) | 27 | 27 clean (numeric-vs-SPACE warnings only) | same as RECAP | **built (TABAN_GN) and proven in Control Center** on every case that does not call `EUU003` (12/12 print files identical, run 1901, 2026-11-17) |
 | EXTEUR | 1 | 10 errors, all from `INVOKE TABLE EU001 OF AFLINC FROM REPOSITORY` (was 99: the other 89 were ours, now explained and fixed or proven) | one query: `SELECT C_PHA_EUR FROM EU001` | after Q3/Q4 |
 
 **The key finding:** `EUU003` is not just formatting. AMT's `Euu003` (in **BSP_AMT** and FEDERALE_APP) calls `INFRUN` for the run
@@ -62,6 +62,8 @@ So every RECAP/TABAN grand total depends on `EU001`/`EU002` and on the program f
 | 8 | Is schema `AFLINC` right for every production run (the skeletons pick it from the run's project)? | Eddy | Yes |
 | 9 | On OS 2200, does RECAP's output carry the overpunch (`{`, `A`–`I`) in the last byte of each total, what does a zero total look like, and what happened on overflow (the manual says "undefined")? AMT matches the manual. | Eddy | Overpunch as the manual; zero `{`; low-order digits kept |
 | 10 | May we put these product problems on the board, as Bugs under User Story 119872? (1) AMT run time: a line-sequential READ can join two short lines into one record, so records are silently lost (T3-059). (2) AMT run time: SSG's built-in `INFO$` values are blanked at run time, so skeletons that choose by project generate nothing (T3-023). (3) ECL converter: inline SGS cards between `@SSG` and `@EOF` are dropped (T3-020). (4) ECL converter: `@HDG,P text` is written as one string, so the heading call aborts (T3-046). (5) ECL converter: `$` in an `@USE` name isn't escaped, so the script fails under StrictMode (T3-069). | Allard | Yes, as one batch (a courtesy, not a gate) |
+| 11 | TABAN's work fields are `PIC SH9(18)`: what does ACOB's `H` mean (it is not defined in our manual 7830 7709-002)? And what does ACOB put in a working-storage item without `VALUE` (TABAN prints one when the input is empty and there are key groups)? | Eddy | `H` is a storage form with the same values as `S9(18)`; spaces |
+| 12 | TABAN's skeleton only tests whether a `SEQERROR` card **exists**, so `SEQERROR YES` (VIRA32, 4 calls with key groups) switches the sequence check **off**, the same as `SEQERROR NON`. Is that what those runs want? | Eddy | Yes: any `SEQERROR` card means "do not check" |
 
 Status of the five, checked 2026-11-16 on R&D's develop as last fetched (`88dc012f`, 2026-11-09):
 (1) still present (Control Center run, rc.03 regression 261112); (2) still present in develop and in the 11 Nov drop

@@ -1,0 +1,63 @@
+    <div class="section-card" id="g-real-caller">
+      <h2>How the conversion decides what to support: &ldquo;real calls&rdquo;, and what is left for Federale to prove</h2>
+      <p>A skeleton contains more branches than Federale uses. Each generic program reproduces the branches that <b>real calls</b>
+        use; for the others it either refuses them or keeps them and proves them with labelled test data only. This section
+        defines the terms and lists the risks the Federale testers and business analysts have to close. Recorded 2026-11-18 (MT-069).</p>
+      <h3>Definitions</h3>
+      <table class="ref">
+        <tr><th style="width:22%">Term</th><th>Meaning</th></tr>
+        <tr><td><b>Real call</b></td><td>an <code>@SSG &hellip; *UTILIT.&lt;skeleton&gt;</code> statement in a Federale production runstream, with the SGS cards it
+          gives. Source: the index of the production runstreams (<code>ssg4-source\RunsPrd-INDEX.csv</code>, <b>1,080 runstreams</b>)
+          was scanned for <code>*UTILIT.*</code> calls: <b>170</b> contain one and form our source pack (<code>01-RunsPrd</code>, 371 <code>@SSG</code> calls); 3 more,
+          outside the pack, call archive skeletons we do not have (ARCHITAB2/ARCHIFUSION). Every call's cards are exported to
+          <code>sgs-calls.csv</code> and expanded with AMT's own SGS code.</td></tr>
+        <tr><td><b>&ldquo;No real caller&rdquo;</b> for a branch</td><td>none of the real calls gives the card (or card value) that switches that branch
+          on, so on OS 2200 it is never generated or run in production. It does <b>not</b> mean the skeleton lacks the code:
+          the branch exists in the source and in the converted skeleton, but it is not used to specify the generic program,
+          because no real call&rsquo;s cards in production use it. Example: RECAP's 28 real calls (22 runstreams, all in the pack) all give
+          <code>ASCII</code>; none gives <code>ASCIIFD</code>, <code>CFH</code> or <code>Y2K</code>.</td></tr>
+        <tr><td><b>Converted</b> vs <b>supported</b></td><td>two different things. The <b>skeleton</b> is converted mechanically and completely (SsgConverter): every branch, used or not, becomes PowerShell; RECAP's converted skeleton <code>UTILIT_RECAP.ps1</code> still holds the <code>ASCIIFD</code> logic (12 tests). The <b>generic program</b> (<code>RECAP_GN</code>, hand-made) only <b>supports</b> the branches real calls use: it has no <code>ASCIIFD</code> code, and the hand-off refuses the card (<code>L1</code>). On the generic route the converted skeleton body never runs (the deployed skeleton calls the hand-off, then <code>return</code>), so an unused branch is converted but never executed.</td></tr>
+        <tr><td><b>Refused</b> branch</td><td>the generic program's hand-off stops the job <b>before</b> the program runs (<code>Abort</code>, message naming the card
+          and the limit, e.g. <code>SSG-4 hand-off (RECAP): L3 Y2K not supported</code>). A refusal is visible; it never gives a
+          silent wrong result.</td></tr>
+        <tr><td><b>Kept, test data only</b></td><td>the branch is in the generic program and proven only with labelled test cases (no real call):
+          LECTIS (<code>KEYS</code>, <code>Y2K</code>, <code>NOLIST</code>; owner decision 261109), ARCHISEPARE / ARCHIFORMAT (no caller
+          at all, MT-047).</td></tr>
+        <tr><td><b>Assumption pushed through</b></td><td>where the behaviour on OS 2200 is not known from the source or the Unisys manuals, the spec
+          states a working assumption (A1, A2, &hellip;), why it is a reasonable bet, how a wrong one would show, and the team
+          question that confirms it (Q1&ndash;Q12, plan <code>261116-db-ssg-programs-plan.md</code>).</td></tr>
+      </table>
+      <h3>The decision, per branch of a skeleton</h3>
+      <table class="ref">
+        <tr><th style="width:34%">If the branch is&hellip;</th><th>the generic program&hellip;</th><th style="width:26%">proven by</th></tr>
+        <tr><td>used by at least one real call</td><td>reproduces it byte for byte (spec, reference model)</td><td>G7 against every real call's expansion; G8 in Control Center</td></tr>
+        <tr><td>not used by any real call, simple and testable</td><td>may keep it (owner decision per utility)</td><td>labelled test data in G8</td></tr>
+        <tr><td>not used by any real call, and not testable on AMT (Fieldata records, tape, card reader, a routine that is not in the target, &hellip;)</td><td>refuses it before the run</td><td>a must-reject test case per limit (G7)</td></tr>
+        <tr><td>a card the skeleton itself rejects (its own <code>FLAGABORT</code> / error <code>*DISPLAY</code>)</td><td>rejects it before the run with the skeleton's message (design rule 7)</td><td>a must-reject test case per check (V1&hellip;)</td></tr>
+      </table>
+      <h3>Branches refused or kept without a real caller (by utility)</h3>
+      <table class="ref">
+        <tr><th style="width:14%">Utility</th><th>Refused (no real caller)</th><th style="width:28%">Kept, test data only</th></tr>
+        <tr><td>RECAP</td><td><code>ASCIIFD</code>, <code>CFH</code>, <code>Y2K</code> (L1&ndash;L3)</td><td>&ndash;</td></tr>
+        <tr><td>TABAN</td><td>no <code>ASCII</code> (Fieldata), <code>CCARTE</code>, <code>MAXREC</code>, <code>UTYL2</code>, <code>LISTE</code>, <code>Y2K</code> (needs <code>CDTOAF</code>), card-reader or tape input (L3&ndash;L5)</td><td>&ndash;</td></tr>
+        <tr><td>SCAN</td><td><code>Y2K</code>, <code>NOCONT</code>, <code>INDIC</code>, other <code>IF</code> forms</td><td>&ndash;</td></tr>
+        <tr><td>TAPELD</td><td><code>Y2K</code>, <code>EURO</code>, <code>PRINT</code>, <code>SUPCOM</code>, <code>REPSIM</code>, <code>STARTFIELD</code>, <code>STARTREC</code>, <code>MAXCOPY</code>, numeric fields, other forms</td><td>&ndash;</td></tr>
+        <tr><td>FUSBA</td><td><code>UPDATE</code>, more than 2 inputs, <code>INSERT</code>, <code>SEQERROR</code>, <code>TRACE</code>, tape / card-reader files</td><td>&ndash;</td></tr>
+        <tr><td>BABA</td><td>tape outputs, card-reader input, printer output</td><td>&ndash;</td></tr>
+        <tr><td>CHABAN</td><td><code>FLDSEL</code> / <code>MOD</code> other than 0</td><td>&ndash;</td></tr>
+        <tr><td>LECTIS</td><td>complex <code>COND</code> forms</td><td><code>KEYS</code>, <code>Y2K</code>, <code>NOLIST</code></td></tr>
+        <tr><td>ARCHISEPARE, ARCHIFORMAT</td><td>&ndash;</td><td>everything (no real call)</td></tr>
+      </table>
+      <p>Each utility's <code>spec.md</code> (<code>Conversion\Pipeline\Generic\&lt;U&gt;\</code>) holds the exact list (Limits, V-checks), the
+        assumptions and the claim table.</p>
+      <h3>Risks left for the Federale testers and business analysts to close</h3>
+      <table class="ref">
+        <tr><th style="width:4%">#</th><th style="width:30%">Risk</th><th>What would show it</th><th style="width:30%">How to close it</th></tr>
+        <tr><td>1</td><td>A runstream <b>outside the 1,080 indexed</b> (ad-hoc job, a run built at run time, a newer drop) uses a refused branch</td><td>the job stops before the program with the <code>Lx</code> message naming the card</td><td>confirm the index is the full production set; for any such call, add the branch (new G-step) instead of guessing</td></tr>
+        <tr><td>2</td><td><b>Cards created during the run</b> (an SGS file written earlier in the same run, not inline) give values we never saw</td><td>same as 1 (refusal) or a run that differs from OS 2200</td><td>in the pack 11 calls take their cards from a file made earlier in the run (<code>NBAFPH12</code>, <code>NBCYCLEV</code>, &hellip;), all for inline skeletons, <b>none for our utilities</b>; recheck when the runstream set changes</td></tr>
+        <tr><td>3</td><td>A branch <b>kept with test data only</b> behaves differently on real data</td><td>a difference against OS 2200 output</td><td>run the business case with real data and compare with an OS 2200 run</td></tr>
+        <tr><td>4</td><td>An <b>assumption</b> (A1&hellip;A14) is wrong</td><td>the spec says where it would show (e.g. A7: the last byte of every total; A3: the <code>EUU003</code> lines)</td><td>answers to Q1&ndash;Q12; then re-run the affected G8 cases</td></tr>
+        <tr><td>5</td><td>Calls <b>not yet proven in Control Center</b>: RECAP/TABAN calls that go through <code>EUU003</code> (needs <code>EUU003</code>, <code>INFRUN</code>, <code>ABRDMS</code> and tables <code>EU001</code>/<code>EU002</code>), EXTEUR</td><td>&ndash; (not run yet)</td><td>run them where those exist (likely BSP, Q2/Q3) with real data</td></tr>
+        <tr><td>6</td><td><b>Test data is synthetic</b>: real records may hold values the cases did not (signed amounts, overflow, odd characters)</td><td>an <code>UNMODELLED</code> case is recorded, not compared (e.g. RECAP/TABAN signed input, overflow)</td><td>parallel run on a copy of production input; compare with OS 2200 output</td></tr>
+      </table>
+    </div>

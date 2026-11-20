@@ -1,0 +1,62 @@
+[
+  {
+    "Case": "cc-ccta08-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-ccta08-neuro-all\\expected\\print.txt"
+  },
+  {
+    "Case": "cc-depm01-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-depm01-neuro-all\\expected\\print.txt"
+  },
+  {
+    "Case": "cc-depm01-seq-error",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-depm01-seq-error\\expected\\print.txt"
+  },
+  {
+    "Case": "cc-paij01-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-paij01-neuro-all\\expected\\print.txt"
+  },
+  {
+    "Case": "cc-pbga01-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-pbga01-neuro-all\\expected\\print.txt"
+  },
+  {
+    "Case": "cc-vira32-neuro-all",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\cc-vira32-neuro-all\\expected\\print.txt"
+  },
+  {
+    "Case": "t-all-spaces",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-all-spaces\\expected\\print.txt"
+  },
+  {
+    "Case": "t-empty-noindic",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-empty-noindic\\expected\\print.txt"
+  },
+  {
+    "Case": "t-long-records",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-long-records\\expected\\print.txt"
+  },
+  {
+    "Case": "t-short-records",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-short-records\\expected\\print.txt"
+  },
+  {
+    "Case": "t-spaces-embedded",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-spaces-embedded\\expected\\print.txt"
+  },
+  {
+    "Case": "t-zero-totals",
+    "Ref": false,
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\TABAN\\check\\cases\\t-zero-totals\\expected\\print.txt"
+  }
+]

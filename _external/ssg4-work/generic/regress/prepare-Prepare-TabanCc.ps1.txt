@@ -1,0 +1,13 @@
+cc-ccta08-neuro-all        TAB01  INACCTA08       24 records,   4 print lines, OK
+cc-depm01-neuro-all        TAB02  FDEPMENS        24 records,  25 print lines, OK
+cc-depm01-seq-error        TAB03  FDEPMENS        14 records,   9 print lines, SEQUENCE-ERROR at record 9
+cc-paij01-neuro-all        TAB04  R0091ML120DA    24 records,  23 print lines, OK
+cc-pbga01-neuro-all        TAB05  IPBVGRTOTN      24 records,   5 print lines, OK
+cc-vira32-neuro-all        TAB06  I006TERMNXT     24 records,  53 print lines, OK
+t-all-spaces               TAB07  INACCTA08        6 records,   2 print lines, OK
+t-empty-noindic            TAB08  INACCTA08        0 records,   2 print lines, OK
+t-long-records             TAB09  FDEPMENS         8 records,  13 print lines, OK
+t-short-records            TAB10  I006TERMNXT     15 records,  29 print lines, OK
+t-spaces-embedded          TAB11  INACCTA08       12 records,   4 print lines, OK
+t-zero-totals              TAB12  FDEPMENS         9 records,  12 print lines, OK
+SSG4_TABAN_CASES.ps1 written, 12 steps, parse errors: 0

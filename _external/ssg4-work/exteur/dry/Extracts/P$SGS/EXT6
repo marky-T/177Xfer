@@ -1,0 +1,4 @@
+DEVISE    96,3  BEF,EUR
+LONG      200
+BLOCK     10
+COND MT   10,8  30,15

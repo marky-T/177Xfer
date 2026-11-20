@@ -1,0 +1,167 @@
+[
+  {
+    "Case": "real-CCTA08_L287",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS01\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-CCTA08_L287\\expected\\output.dat"
+  },
+  {
+    "Case": "real-CLOA35_L221",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS02\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-CLOA35_L221\\expected\\output.dat"
+  },
+  {
+    "Case": "real-COCH02_D3_L73",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS03\\OUT",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-COCH02_D3_L73\\expected\\output.dat"
+  },
+  {
+    "Case": "real-COCM03_L523",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS04\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-COCM03_L523\\expected\\output.dat"
+  },
+  {
+    "Case": "real-COCM03_L585",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS05\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-COCM03_L585\\expected\\output.dat"
+  },
+  {
+    "Case": "real-d_LRSD42_L113",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS06\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-d_LRSD42_L113\\expected\\output.dat"
+  },
+  {
+    "Case": "real-d_SCTD01_L151",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS07\\FILEOUT",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-d_SCTD01_L151\\expected\\output.dat"
+  },
+  {
+    "Case": "real-LRST12_L113",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS08\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-LRST12_L113\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMA03_L138",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS09\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMA03_L138\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMA04_L181",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS10\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMA04_L181\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMA04_L208",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS11\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMA04_L208\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMM02_L198",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS12\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMM02_L198\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMM02_L225",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS13\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMM02_L225\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMM02_L256",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS14\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMM02_L256\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMM03_L163",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS15\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMM03_L163\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMM03_L194",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS16\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMM03_L194\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMT01_L182",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS17\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMT01_L182\\expected\\output.dat"
+  },
+  {
+    "Case": "real-MPMT01_L209",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS18\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-MPMT01_L209\\expected\\output.dat"
+  },
+  {
+    "Case": "real-SCTA02_L174",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS19\\FILEOUT",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-SCTA02_L174\\expected\\output.dat"
+  },
+  {
+    "Case": "real-SCTA03_L151",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS20\\FILEOUT",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-SCTA03_L151\\expected\\output.dat"
+  },
+  {
+    "Case": "real-SCTM01_L204",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS21\\FILEOUT",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-SCTM01_L204\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRA12_EN_L743",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS22\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRA12_EN_L743\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRA15_EN_L691",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS23\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRA15_EN_L691\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRA19_EN_L692",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS24\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRA19_EN_L692\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRA29_L2_L48",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS25\\I006TABPROGC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRA29_L2_L48\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRM01_EN_L668",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS26\\OUTA",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRM01_EN_L668\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRM01_L2_L49",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS27\\I006TABPROGC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\real-VIRM01_L2_L49\\expected\\output.dat"
+  },
+  {
+    "Case": "t-long-records",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS28\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-long-records\\expected\\output.dat"
+  },
+  {
+    "Case": "t-neuro-range",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS29\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-neuro-range\\expected\\output.dat"
+  },
+  {
+    "Case": "t-no-neuro",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS30\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-no-neuro\\expected\\output.dat"
+  },
+  {
+    "Case": "t-one-group",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS31\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-one-group\\expected\\output.dat"
+  },
+  {
+    "Case": "t-short-records",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS32\\OUTCCTA08",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-short-records\\expected\\output.dat"
+  },
+  {
+    "Case": "t-spaces-overlap",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\RCS33\\FICHIER2",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\RECAP\\check\\cases\\t-spaces-overlap\\expected\\output.dat"
+  }
+]

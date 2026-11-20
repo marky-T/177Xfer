@@ -1,0 +1,6 @@
+
+Program         Generated Check
+-------         --------- -----
+EUU003,RECAP_GN           FAIL no generated folder E:\AMT_Work\Apps177\Development\Programs\Euu003,recap_Gn
+
+

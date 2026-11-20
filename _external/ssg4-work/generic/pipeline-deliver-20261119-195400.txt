@@ -1,0 +1,9 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-19 19:54:00
+PASS GNRECAP        generated after                2026-11-16 21:55:31 (the build LionSource)
+PASS GNRECAP        imported since the last delivery no earlier delivery recorded: revisions not checked
+PASS RECAP_GN       pre-build checks               11/19/2026 7:29:05 PM ok (1 varying input(s) at 4001)
+PASS GNEUUSTUB      generated after                2026-11-19 19:21:13 (the build LionSource)
+PASS GNEUUSTUB      imported since the last delivery no earlier delivery recorded: revisions not checked
+FAIL EUU003         pre-build checks               not in the Deliver-GnPrograms table
+FAIL Deliver-GnPrograms run (GNEUUSTUB)                Cannot find path 'E:\AMT_Work\Apps177\Development\Programs\Euu003\Euu003.Files.cs' because it does not exist.
+=== Deliver : 2 failure(s)

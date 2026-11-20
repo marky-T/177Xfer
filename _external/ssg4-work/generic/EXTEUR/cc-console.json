@@ -1,0 +1,26 @@
+[
+  {
+    "Case": "real-VIRJ01_UL_L146",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\real-VIRJ01_UL_L146\\expected\\console.txt"
+  },
+  {
+    "Case": "t-empty-input",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-empty-input\\expected\\console.txt"
+  },
+  {
+    "Case": "t-short-records",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-short-records\\expected\\console.txt"
+  },
+  {
+    "Case": "t-long-records",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-long-records\\expected\\console.txt"
+  },
+  {
+    "Case": "t-small-values",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-small-values\\expected\\console.txt"
+  },
+  {
+    "Case": "t-two-amounts",
+    "Model": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-two-amounts\\expected\\console.txt"
+  }
+]

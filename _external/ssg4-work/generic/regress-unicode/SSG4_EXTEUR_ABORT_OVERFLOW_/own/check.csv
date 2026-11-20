@@ -1,0 +1,5 @@
+"Case","Result","Note"
+"OVERFLOW console","PASS","console lines identical (incl. the banner)"
+"OVERFLOW stopped","PASS","the job did not continue past the Xqt"
+"OVERFLOW I006FINVESTC","PASS","PASS byte-identical"
+"OVERFLOW I006ANOFINVS","PASS","PASS byte-identical"

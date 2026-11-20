@@ -1,0 +1,10 @@
+Stage Build, environment CC-Trial, UseUnicode True, started 2026-11-19 19:21:07
+PASS RECAP          program source                 RECAP_GN: unchanged since the last build
+PASS EUU003 test double EUU003                         reference: new since the last build
+PASS COBOL converter (programs) 1 programs -> GNRECAP.LionSource exit 0, errors 0, warnings 4, 22 KB
+PASS LionSource (programs) vs the previous build          identical (nothing new to import)
+PASS COBOL converter (references) 1 programs -> GNEUUSTUB.LionSource exit 0, errors 0, warnings 4, 7 KB
+PASS LionSource (references) vs the previous build          first build
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNRECAP\out\GNRECAP.LionSource and E:\Repos\ssg4-work\generic\build\GNEUUSTUB\out\GNEUUSTUB.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-build-20261119-192107.txt

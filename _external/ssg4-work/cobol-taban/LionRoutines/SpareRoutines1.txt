@@ -1,0 +1,21 @@
+﻿<!--
+  This file contains support routines for Lion applications converted from an A-Series environment.
+  These support routines may be global performable, insertable, DLL or includable routines.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='routine_name' description='routine_description'>
+  <OPTIONS kind='P' init='N'/>
+  <PRINTLAYOUT name='layout_name' init='layout_length'/>
+  <CODE>
+    routine's variable definitions and/or routines and code statements
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS and PRINTLAYOUT tags are optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (performable), I (insertable), D (DLL) or C (includable). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default
+  
+-->
+<ROUTINES>
+</ROUTINES>

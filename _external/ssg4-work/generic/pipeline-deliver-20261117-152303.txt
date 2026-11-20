@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, started 2026-11-17 15:23:03
+PASS GNBUILD        generated after                2026-11-12 19:25:05 (the build LionSource)
+PASS GNBUILD        imported since the last delivery every revision is newer
+PASS TABAN_GN       rebuilt and delivered          11/17/2026 3:22:28 PM 11/17/2026 3:23:30 PM ok (1 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNBUILD recorded as imported   not recorded: a subset of the programs was delivered
+=== Deliver : all passed

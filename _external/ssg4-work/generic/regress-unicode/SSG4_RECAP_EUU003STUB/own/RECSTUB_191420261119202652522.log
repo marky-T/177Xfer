@@ -1,0 +1,1656 @@
+RECSTUB started 2026-11-19 20:26:52
+Amt PS ECL library version: 60.409, date: 2022-03-11
+PowerShell engine version: 7.6.9
+
+2026-11-19 20:26:54 
+2026-11-19 20:26:54 Amt Sort PS library version: 60.33, date: 2026-11-06
+2026-11-19 20:26:54 [Sort-Init] Initializing Sort 
+2026-11-19 20:26:54 Info:  Script Started: RECSTUB
+2026-11-19 20:26:54 QUAL: RECSTUB
+2026-11-19 20:26:54 QUAL Options: 
+2026-11-19 20:26:54 Msg: RECAP case real-CCTA08_L287
+2026-11-19 20:26:54 Msg Options: 
+2026-11-19 20:26:54 Info:  RECAP case real-CCTA08_L287
+2026-11-19 20:26:54 QUAL: RCS01
+2026-11-19 20:26:54 QUAL Options: D
+2026-11-19 20:26:54 ASG: INACCTA08
+2026-11-19 20:26:54 ASG Options: A
+2026-11-19 20:26:54 DELETE: OUTCCTA08
+2026-11-19 20:26:54 DELETE Options: C
+2026-11-19 20:26:54 ASG: OUTCCTA08
+2026-11-19 20:26:54 ASG Options: P, U
+2026-11-19 20:26:54 Ignored option P.
+2026-11-19 20:26:54 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS1)
+2026-11-19 20:26:55 FREE: SGSPARM
+2026-11-19 20:26:55 FREE Options: 
+2026-11-19 20:26:55 File not assigned or USEed: Ignored
+2026-11-19 20:26:55 FREE: RECPARM
+2026-11-19 20:26:55 FREE Options: 
+2026-11-19 20:26:55 File not assigned or USEed: Ignored
+2026-11-19 20:26:55 ASG: RECPARM
+2026-11-19 20:26:55 ASG Options: A
+2026-11-19 20:26:55 USE: SGSPARM,RECPARM
+2026-11-19 20:26:55 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS01\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:26:55 Msg Options: 
+2026-11-19 20:26:55 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS01\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:26:55 XQT: TPF$.RECAP
+2026-11-19 20:26:55 XQT Options: R, W
+2026-11-19 20:26:55 
+2026-11-19 20:26:55 End-Xqt
+2026-11-19 20:26:55 Starting Cobol program: RECAP_GN
+20:27:02 *RECAP  FIN*
+20:27:02 *NB-ENREG-LUS =    24
+20:27:02           1122219D
+20:27:02           1227256B
+20:27:02 STB 00000000011984105                                                                               
+20:27:02 STB 00000000012594979                                                                               
+20:27:02 STB 00000000012677182                                                                               
+20:27:02 *NB-ENREG-ECR =    12
+20:27:02           1122219D
+20:27:02           1227256B
+20:27:02 STB 00000000011984105                                                                               
+20:27:02 STB 00000000012594979                                                                               
+20:27:02 STB 00000000012677182                                                                               
+2026-11-19 20:27:03 End Report. Time 00:00:07
+2026-11-19 20:27:03 Msg: prints after real-CCTA08_L287
+2026-11-19 20:27:03 Msg Options: 
+2026-11-19 20:27:03 Info:  prints after real-CCTA08_L287
+2026-11-19 20:27:03 FREE: INACCTA08
+2026-11-19 20:27:03 FREE Options: 
+2026-11-19 20:27:03 FREE: OUTCCTA08
+2026-11-19 20:27:03 FREE Options: 
+2026-11-19 20:27:03 Msg: RECAP case real-CLOA35_L221
+2026-11-19 20:27:03 Msg Options: 
+2026-11-19 20:27:03 Info:  RECAP case real-CLOA35_L221
+2026-11-19 20:27:03 QUAL: RCS02
+2026-11-19 20:27:03 QUAL Options: D
+2026-11-19 20:27:03 ASG: FICHIER1
+2026-11-19 20:27:03 ASG Options: A
+2026-11-19 20:27:03 DELETE: FICHIER2
+2026-11-19 20:27:03 DELETE Options: C
+2026-11-19 20:27:03 ASG: FICHIER2
+2026-11-19 20:27:03 ASG Options: P, U
+2026-11-19 20:27:03 Ignored option P.
+2026-11-19 20:27:03 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS2)
+2026-11-19 20:27:03 FREE: SGSPARM
+2026-11-19 20:27:03 FREE Options: 
+2026-11-19 20:27:03 FREE: RECPARM
+2026-11-19 20:27:03 FREE Options: 
+2026-11-19 20:27:03 File not assigned or USEed: Ignored
+2026-11-19 20:27:03 ASG: RECPARM
+2026-11-19 20:27:03 ASG Options: A
+2026-11-19 20:27:03 USE: SGSPARM,RECPARM
+2026-11-19 20:27:03 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS02\RECPARM (35 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:03 Msg Options: 
+2026-11-19 20:27:03 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS02\RECPARM (35 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:03 XQT: TPF$.RECAP
+2026-11-19 20:27:03 XQT Options: R, W
+2026-11-19 20:27:03 
+2026-11-19 20:27:03 End-Xqt
+2026-11-19 20:27:03 Starting Cobol program: RECAP_GN
+20:27:05 *RECAP  FIN*
+20:27:05 *NB-ENREG-LUS =    24
+20:27:05 STB 00000011791526555                                                                               
+20:27:05 STB 00000012547351364                                                                               
+20:27:05 STB 00000010261957185                                                                               
+20:27:05 STB 00000012936929261                                                                               
+20:27:05 STB 00000013347619318                                                                               
+20:27:05 STB 00000011034761986                                                                               
+20:27:05 STB 00000013604990682                                                                               
+20:27:05 *NB-ENREG-ECR =    11
+20:27:05 STB 00000011791526555                                                                               
+20:27:05 STB 00000012547351364                                                                               
+20:27:05 STB 00000010261957185                                                                               
+20:27:05 STB 00000012936929261                                                                               
+20:27:05 STB 00000013347619318                                                                               
+20:27:05 STB 00000011034761986                                                                               
+20:27:05 STB 00000013604990682                                                                               
+2026-11-19 20:27:05 End Report. Time 00:00:01
+2026-11-19 20:27:05 Msg: prints after real-CLOA35_L221
+2026-11-19 20:27:05 Msg Options: 
+2026-11-19 20:27:05 Info:  prints after real-CLOA35_L221
+2026-11-19 20:27:05 FREE: FICHIER1
+2026-11-19 20:27:05 FREE Options: 
+2026-11-19 20:27:05 FREE: FICHIER2
+2026-11-19 20:27:05 FREE Options: 
+2026-11-19 20:27:05 Msg: RECAP case real-COCH02_D3_L73
+2026-11-19 20:27:05 Msg Options: 
+2026-11-19 20:27:05 Info:  RECAP case real-COCH02_D3_L73
+2026-11-19 20:27:05 QUAL: RCS03
+2026-11-19 20:27:05 QUAL Options: D
+2026-11-19 20:27:05 ASG: INA
+2026-11-19 20:27:05 ASG Options: A
+2026-11-19 20:27:05 DELETE: OUT
+2026-11-19 20:27:05 DELETE Options: C
+2026-11-19 20:27:05 ASG: OUT
+2026-11-19 20:27:05 ASG Options: P, U
+2026-11-19 20:27:05 Ignored option P.
+2026-11-19 20:27:05 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS3)
+2026-11-19 20:27:05 FREE: SGSPARM
+2026-11-19 20:27:05 FREE Options: 
+2026-11-19 20:27:05 FREE: RECPARM
+2026-11-19 20:27:05 FREE Options: 
+2026-11-19 20:27:05 File not assigned or USEed: Ignored
+2026-11-19 20:27:05 ASG: RECPARM
+2026-11-19 20:27:05 ASG Options: A
+2026-11-19 20:27:05 USE: SGSPARM,RECPARM
+2026-11-19 20:27:05 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS03\RECPARM (19 lines); RECAPIN=INA RECAPOUT=OUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:05 Msg Options: 
+2026-11-19 20:27:05 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS03\RECPARM (19 lines); RECAPIN=INA RECAPOUT=OUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:05 XQT: TPF$.RECAP
+2026-11-19 20:27:05 XQT Options: R, W
+2026-11-19 20:27:05 
+2026-11-19 20:27:05 End-Xqt
+2026-11-19 20:27:05 Starting Cobol program: RECAP_GN
+20:27:07 *RECAP  FIN*
+20:27:07 *NB-ENREG-LUS =    24
+20:27:07 STB 00000000101959484                                                                               
+20:27:07 STB 00000000119204364                                                                               
+20:27:07 *NB-ENREG-ECR =     9
+20:27:07 STB 00000000101959484                                                                               
+20:27:07 STB 00000000119204364                                                                               
+2026-11-19 20:27:07 End Report. Time 00:00:01
+2026-11-19 20:27:07 Msg: prints after real-COCH02_D3_L73
+2026-11-19 20:27:07 Msg Options: 
+2026-11-19 20:27:07 Info:  prints after real-COCH02_D3_L73
+2026-11-19 20:27:07 FREE: INA
+2026-11-19 20:27:07 FREE Options: 
+2026-11-19 20:27:07 FREE: OUT
+2026-11-19 20:27:07 FREE Options: 
+2026-11-19 20:27:07 Msg: RECAP case real-COCM03_L523
+2026-11-19 20:27:07 Msg Options: 
+2026-11-19 20:27:07 Info:  RECAP case real-COCM03_L523
+2026-11-19 20:27:07 QUAL: RCS04
+2026-11-19 20:27:07 QUAL Options: D
+2026-11-19 20:27:07 ASG: INA
+2026-11-19 20:27:07 ASG Options: A
+2026-11-19 20:27:07 DELETE: OUTA
+2026-11-19 20:27:07 DELETE Options: C
+2026-11-19 20:27:07 ASG: OUTA
+2026-11-19 20:27:07 ASG Options: P, U
+2026-11-19 20:27:07 Ignored option P.
+2026-11-19 20:27:07 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS4)
+2026-11-19 20:27:07 FREE: SGSPARM
+2026-11-19 20:27:07 FREE Options: 
+2026-11-19 20:27:07 FREE: RECPARM
+2026-11-19 20:27:07 FREE Options: 
+2026-11-19 20:27:07 File not assigned or USEed: Ignored
+2026-11-19 20:27:07 ASG: RECPARM
+2026-11-19 20:27:07 ASG Options: A
+2026-11-19 20:27:07 USE: SGSPARM,RECPARM
+2026-11-19 20:27:07 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS04\RECPARM (50 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:07 Msg Options: 
+2026-11-19 20:27:07 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS04\RECPARM (50 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:07 XQT: TPF$.RECAP
+2026-11-19 20:27:07 XQT Options: R, W
+2026-11-19 20:27:07 
+2026-11-19 20:27:07 End-Xqt
+2026-11-19 20:27:07 Starting Cobol program: RECAP_GN
+20:27:09 *RECAP  FIN*
+20:27:09 *NB-ENREG-LUS =    24
+20:27:09 STB 00000000001029010                                                                               
+20:27:09 STB 00000000001151795                                                                               
+20:27:09 *NB-ENREG-ECR =    10
+20:27:09 STB 00000000001029010                                                                               
+20:27:09 STB 00000000001151795                                                                               
+2026-11-19 20:27:09 End Report. Time 00:00:01
+2026-11-19 20:27:09 Msg: prints after real-COCM03_L523
+2026-11-19 20:27:09 Msg Options: 
+2026-11-19 20:27:09 Info:  prints after real-COCM03_L523
+2026-11-19 20:27:09 FREE: INA
+2026-11-19 20:27:09 FREE Options: 
+2026-11-19 20:27:09 FREE: OUTA
+2026-11-19 20:27:09 FREE Options: 
+2026-11-19 20:27:09 Msg: RECAP case real-COCM03_L585
+2026-11-19 20:27:09 Msg Options: 
+2026-11-19 20:27:09 Info:  RECAP case real-COCM03_L585
+2026-11-19 20:27:09 QUAL: RCS05
+2026-11-19 20:27:09 QUAL Options: D
+2026-11-19 20:27:09 ASG: INA
+2026-11-19 20:27:09 ASG Options: A
+2026-11-19 20:27:09 DELETE: OUTA
+2026-11-19 20:27:09 DELETE Options: C
+2026-11-19 20:27:09 ASG: OUTA
+2026-11-19 20:27:09 ASG Options: P, U
+2026-11-19 20:27:09 Ignored option P.
+2026-11-19 20:27:09 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS5)
+2026-11-19 20:27:09 FREE: SGSPARM
+2026-11-19 20:27:09 FREE Options: 
+2026-11-19 20:27:09 FREE: RECPARM
+2026-11-19 20:27:09 FREE Options: 
+2026-11-19 20:27:09 File not assigned or USEed: Ignored
+2026-11-19 20:27:09 ASG: RECPARM
+2026-11-19 20:27:09 ASG Options: A
+2026-11-19 20:27:09 USE: SGSPARM,RECPARM
+2026-11-19 20:27:09 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS05\RECPARM (50 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:09 Msg Options: 
+2026-11-19 20:27:09 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS05\RECPARM (50 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:09 XQT: TPF$.RECAP
+2026-11-19 20:27:09 XQT Options: R, W
+2026-11-19 20:27:09 
+2026-11-19 20:27:09 End-Xqt
+2026-11-19 20:27:09 Starting Cobol program: RECAP_GN
+20:27:11 *RECAP  FIN*
+20:27:11 *NB-ENREG-LUS =    24
+20:27:11 STB 00000000001475416                                                                               
+20:27:11 STB 00000000001106892                                                                               
+20:27:11 *NB-ENREG-ECR =    11
+20:27:11 STB 00000000001475416                                                                               
+20:27:11 STB 00000000001106892                                                                               
+2026-11-19 20:27:11 End Report. Time 00:00:01
+2026-11-19 20:27:11 Msg: prints after real-COCM03_L585
+2026-11-19 20:27:11 Msg Options: 
+2026-11-19 20:27:11 Info:  prints after real-COCM03_L585
+2026-11-19 20:27:11 FREE: INA
+2026-11-19 20:27:11 FREE Options: 
+2026-11-19 20:27:11 FREE: OUTA
+2026-11-19 20:27:11 FREE Options: 
+2026-11-19 20:27:11 Msg: RECAP case real-d_LRSD42_L113
+2026-11-19 20:27:11 Msg Options: 
+2026-11-19 20:27:11 Info:  RECAP case real-d_LRSD42_L113
+2026-11-19 20:27:11 QUAL: RCS06
+2026-11-19 20:27:11 QUAL Options: D
+2026-11-19 20:27:11 ASG: FICHIER1
+2026-11-19 20:27:11 ASG Options: A
+2026-11-19 20:27:11 DELETE: FICHIER2
+2026-11-19 20:27:11 DELETE Options: C
+2026-11-19 20:27:11 ASG: FICHIER2
+2026-11-19 20:27:11 ASG Options: P, U
+2026-11-19 20:27:11 Ignored option P.
+2026-11-19 20:27:11 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS6)
+2026-11-19 20:27:11 FREE: SGSPARM
+2026-11-19 20:27:11 FREE Options: 
+2026-11-19 20:27:11 FREE: RECPARM
+2026-11-19 20:27:11 FREE Options: 
+2026-11-19 20:27:11 File not assigned or USEed: Ignored
+2026-11-19 20:27:11 ASG: RECPARM
+2026-11-19 20:27:11 ASG Options: A
+2026-11-19 20:27:11 USE: SGSPARM,RECPARM
+2026-11-19 20:27:11 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS06\RECPARM (68 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:11 Msg Options: 
+2026-11-19 20:27:11 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS06\RECPARM (68 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:11 XQT: TPF$.RECAP
+2026-11-19 20:27:11 XQT Options: R, W
+2026-11-19 20:27:11 
+2026-11-19 20:27:11 End-Xqt
+2026-11-19 20:27:11 Starting Cobol program: RECAP_GN
+20:27:13 *RECAP  FIN*
+20:27:13 *NB-ENREG-LUS =    24
+20:27:13 STB 00000013058071012                                                                               
+20:27:13 STB 00000010870355784                                                                               
+20:27:13 STB 00000012906681091                                                                               
+20:27:13 STB 00000011038260956                                                                               
+20:27:13 STB 00000012708955545                                                                               
+20:27:13 STB 00000011158265129                                                                               
+20:27:13 STB 00000011281184726                                                                               
+20:27:13 STB 00000013337256297                                                                               
+20:27:13 STB 00000011041700935                                                                               
+20:27:13 STB 00000012535397374                                                                               
+20:27:13 STB 00000013421460346                                                                               
+20:27:13 *NB-ENREG-ECR =     8
+20:27:13 STB 00000013058071012                                                                               
+20:27:13 STB 00000010870355784                                                                               
+20:27:13 STB 00000012906681091                                                                               
+20:27:13 STB 00000011038260956                                                                               
+20:27:13 STB 00000012708955545                                                                               
+20:27:13 STB 00000011158265129                                                                               
+20:27:13 STB 00000011281184726                                                                               
+20:27:13 STB 00000013337256297                                                                               
+20:27:13 STB 00000011041700935                                                                               
+20:27:13 STB 00000012535397374                                                                               
+20:27:13 STB 00000013421460346                                                                               
+2026-11-19 20:27:13 End Report. Time 00:00:01
+2026-11-19 20:27:13 Msg: prints after real-d_LRSD42_L113
+2026-11-19 20:27:13 Msg Options: 
+2026-11-19 20:27:13 Info:  prints after real-d_LRSD42_L113
+2026-11-19 20:27:13 FREE: FICHIER1
+2026-11-19 20:27:13 FREE Options: 
+2026-11-19 20:27:13 FREE: FICHIER2
+2026-11-19 20:27:13 FREE Options: 
+2026-11-19 20:27:13 Msg: RECAP case real-d_SCTD01_L151
+2026-11-19 20:27:13 Msg Options: 
+2026-11-19 20:27:13 Info:  RECAP case real-d_SCTD01_L151
+2026-11-19 20:27:13 QUAL: RCS07
+2026-11-19 20:27:13 QUAL Options: D
+2026-11-19 20:27:13 ASG: FILEIN
+2026-11-19 20:27:13 ASG Options: A
+2026-11-19 20:27:13 DELETE: FILEOUT
+2026-11-19 20:27:13 DELETE Options: C
+2026-11-19 20:27:13 ASG: FILEOUT
+2026-11-19 20:27:13 ASG Options: P, U
+2026-11-19 20:27:13 Ignored option P.
+2026-11-19 20:27:13 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS7)
+2026-11-19 20:27:13 FREE: SGSPARM
+2026-11-19 20:27:13 FREE Options: 
+2026-11-19 20:27:13 FREE: RECPARM
+2026-11-19 20:27:13 FREE Options: 
+2026-11-19 20:27:13 File not assigned or USEed: Ignored
+2026-11-19 20:27:13 ASG: RECPARM
+2026-11-19 20:27:13 ASG Options: A
+2026-11-19 20:27:13 USE: SGSPARM,RECPARM
+2026-11-19 20:27:13 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS07\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:13 Msg Options: 
+2026-11-19 20:27:13 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS07\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:13 XQT: TPF$.RECAP
+2026-11-19 20:27:13 XQT Options: R, W
+2026-11-19 20:27:13 
+2026-11-19 20:27:13 End-Xqt
+2026-11-19 20:27:13 Starting Cobol program: RECAP_GN
+20:27:15 *RECAP  FIN*
+20:27:15 *NB-ENREG-LUS =    24
+20:27:15 STB 00000010634251949                                                                               
+20:27:15 STB 00000011391110767                                                                               
+20:27:15 STB 00000012673895548                                                                               
+20:27:15 STB 00000012241870794                                                                               
+20:27:15 STB 00000011192351266                                                                               
+20:27:15 *NB-ENREG-ECR =     9
+20:27:15 STB 00000010634251949                                                                               
+20:27:15 STB 00000011391110767                                                                               
+20:27:15 STB 00000012673895548                                                                               
+20:27:15 STB 00000012241870794                                                                               
+20:27:15 STB 00000011192351266                                                                               
+2026-11-19 20:27:15 End Report. Time 00:00:01
+2026-11-19 20:27:15 Msg: prints after real-d_SCTD01_L151
+2026-11-19 20:27:15 Msg Options: 
+2026-11-19 20:27:15 Info:  prints after real-d_SCTD01_L151
+2026-11-19 20:27:15 FREE: FILEIN
+2026-11-19 20:27:15 FREE Options: 
+2026-11-19 20:27:15 FREE: FILEOUT
+2026-11-19 20:27:15 FREE Options: 
+2026-11-19 20:27:15 Msg: RECAP case real-LRST12_L113
+2026-11-19 20:27:15 Msg Options: 
+2026-11-19 20:27:15 Info:  RECAP case real-LRST12_L113
+2026-11-19 20:27:15 QUAL: RCS08
+2026-11-19 20:27:15 QUAL Options: D
+2026-11-19 20:27:15 ASG: FICHIER1
+2026-11-19 20:27:15 ASG Options: A
+2026-11-19 20:27:15 DELETE: FICHIER2
+2026-11-19 20:27:15 DELETE Options: C
+2026-11-19 20:27:15 ASG: FICHIER2
+2026-11-19 20:27:15 ASG Options: P, U
+2026-11-19 20:27:15 Ignored option P.
+2026-11-19 20:27:15 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS8)
+2026-11-19 20:27:15 FREE: SGSPARM
+2026-11-19 20:27:15 FREE Options: 
+2026-11-19 20:27:15 FREE: RECPARM
+2026-11-19 20:27:15 FREE Options: 
+2026-11-19 20:27:15 File not assigned or USEed: Ignored
+2026-11-19 20:27:15 ASG: RECPARM
+2026-11-19 20:27:15 ASG Options: A
+2026-11-19 20:27:15 USE: SGSPARM,RECPARM
+2026-11-19 20:27:15 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS08\RECPARM (68 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:15 Msg Options: 
+2026-11-19 20:27:15 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS08\RECPARM (68 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:15 XQT: TPF$.RECAP
+2026-11-19 20:27:15 XQT Options: R, W
+2026-11-19 20:27:15 
+2026-11-19 20:27:15 End-Xqt
+2026-11-19 20:27:15 Starting Cobol program: RECAP_GN
+20:27:17 *RECAP  FIN*
+20:27:17 *NB-ENREG-LUS =    24
+20:27:17 STB 00000012931170852                                                                               
+20:27:17 STB 00000012019023775                                                                               
+20:27:17 STB 00000013072230403                                                                               
+20:27:17 STB 00000014287728998                                                                               
+20:27:17 STB 00000010304326861                                                                               
+20:27:17 STB 00000014028194912                                                                               
+20:27:17 STB 00000011711085138                                                                               
+20:27:17 STB 00000013778322070                                                                               
+20:27:17 STB 00000012328578242                                                                               
+20:27:17 STB 00000013301351443                                                                               
+20:27:17 STB 00000009588237896                                                                               
+20:27:17 *NB-ENREG-ECR =     8
+20:27:17 STB 00000012931170852                                                                               
+20:27:17 STB 00000012019023775                                                                               
+20:27:17 STB 00000013072230403                                                                               
+20:27:17 STB 00000014287728998                                                                               
+20:27:17 STB 00000010304326861                                                                               
+20:27:17 STB 00000014028194912                                                                               
+20:27:17 STB 00000011711085138                                                                               
+20:27:17 STB 00000013778322070                                                                               
+20:27:17 STB 00000012328578242                                                                               
+20:27:17 STB 00000013301351443                                                                               
+20:27:17 STB 00000009588237896                                                                               
+2026-11-19 20:27:17 End Report. Time 00:00:01
+2026-11-19 20:27:17 Msg: prints after real-LRST12_L113
+2026-11-19 20:27:17 Msg Options: 
+2026-11-19 20:27:17 Info:  prints after real-LRST12_L113
+2026-11-19 20:27:17 FREE: FICHIER1
+2026-11-19 20:27:17 FREE Options: 
+2026-11-19 20:27:17 FREE: FICHIER2
+2026-11-19 20:27:17 FREE Options: 
+2026-11-19 20:27:17 Msg: RECAP case real-MPMA03_L138
+2026-11-19 20:27:17 Msg Options: 
+2026-11-19 20:27:17 Info:  RECAP case real-MPMA03_L138
+2026-11-19 20:27:17 QUAL: RCS09
+2026-11-19 20:27:17 QUAL Options: D
+2026-11-19 20:27:17 ASG: FICHIER1
+2026-11-19 20:27:17 ASG Options: A
+2026-11-19 20:27:17 DELETE: FICHIER2
+2026-11-19 20:27:17 DELETE Options: C
+2026-11-19 20:27:17 ASG: FICHIER2
+2026-11-19 20:27:17 ASG Options: P, U
+2026-11-19 20:27:17 Ignored option P.
+2026-11-19 20:27:17 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS9)
+2026-11-19 20:27:17 FREE: SGSPARM
+2026-11-19 20:27:17 FREE Options: 
+2026-11-19 20:27:17 FREE: RECPARM
+2026-11-19 20:27:17 FREE Options: 
+2026-11-19 20:27:17 File not assigned or USEed: Ignored
+2026-11-19 20:27:17 ASG: RECPARM
+2026-11-19 20:27:17 ASG Options: A
+2026-11-19 20:27:17 USE: SGSPARM,RECPARM
+2026-11-19 20:27:17 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS09\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:17 Msg Options: 
+2026-11-19 20:27:17 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS09\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:17 XQT: TPF$.RECAP
+2026-11-19 20:27:17 XQT Options: R, W
+2026-11-19 20:27:17 
+2026-11-19 20:27:17 End-Xqt
+2026-11-19 20:27:17 Starting Cobol program: RECAP_GN
+20:27:19 *RECAP  FIN*
+20:27:19 *NB-ENREG-LUS =    24
+20:27:19 STB 00000000123276511                                                                               
+20:27:19 STB 00000000114703775                                                                               
+20:27:19 STB 00000000098927736                                                                               
+20:27:19 STB 00000000105258788                                                                               
+20:27:19 STB 00000000129224918                                                                               
+20:27:19 *NB-ENREG-ECR =     9
+20:27:19 STB 00000000123276511                                                                               
+20:27:19 STB 00000000114703775                                                                               
+20:27:19 STB 00000000098927736                                                                               
+20:27:19 STB 00000000105258788                                                                               
+20:27:19 STB 00000000129224918                                                                               
+2026-11-19 20:27:19 End Report. Time 00:00:01
+2026-11-19 20:27:19 Msg: prints after real-MPMA03_L138
+2026-11-19 20:27:19 Msg Options: 
+2026-11-19 20:27:19 Info:  prints after real-MPMA03_L138
+2026-11-19 20:27:19 FREE: FICHIER1
+2026-11-19 20:27:19 FREE Options: 
+2026-11-19 20:27:19 FREE: FICHIER2
+2026-11-19 20:27:19 FREE Options: 
+2026-11-19 20:27:19 Msg: RECAP case real-MPMA04_L181
+2026-11-19 20:27:19 Msg Options: 
+2026-11-19 20:27:19 Info:  RECAP case real-MPMA04_L181
+2026-11-19 20:27:19 QUAL: RCS10
+2026-11-19 20:27:19 QUAL Options: D
+2026-11-19 20:27:19 ASG: FICHIER1
+2026-11-19 20:27:19 ASG Options: A
+2026-11-19 20:27:19 DELETE: FICHIER2
+2026-11-19 20:27:19 DELETE Options: C
+2026-11-19 20:27:19 ASG: FICHIER2
+2026-11-19 20:27:19 ASG Options: P, U
+2026-11-19 20:27:19 Ignored option P.
+2026-11-19 20:27:19 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS10)
+2026-11-19 20:27:19 FREE: SGSPARM
+2026-11-19 20:27:19 FREE Options: 
+2026-11-19 20:27:19 FREE: RECPARM
+2026-11-19 20:27:19 FREE Options: 
+2026-11-19 20:27:19 File not assigned or USEed: Ignored
+2026-11-19 20:27:19 ASG: RECPARM
+2026-11-19 20:27:19 ASG Options: A
+2026-11-19 20:27:19 USE: SGSPARM,RECPARM
+2026-11-19 20:27:19 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS10\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:19 Msg Options: 
+2026-11-19 20:27:19 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS10\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:19 XQT: TPF$.RECAP
+2026-11-19 20:27:19 XQT Options: R, W
+2026-11-19 20:27:19 
+2026-11-19 20:27:19 End-Xqt
+2026-11-19 20:27:19 Starting Cobol program: RECAP_GN
+20:27:21 *RECAP  FIN*
+20:27:21 *NB-ENREG-LUS =    24
+20:27:21 STB 00000000127889273                                                                               
+20:27:21 STB 00000000119095649                                                                               
+20:27:21 *NB-ENREG-ECR =    11
+20:27:21 STB 00000000127889273                                                                               
+20:27:21 STB 00000000119095649                                                                               
+2026-11-19 20:27:21 End Report. Time 00:00:01
+2026-11-19 20:27:21 Msg: prints after real-MPMA04_L181
+2026-11-19 20:27:21 Msg Options: 
+2026-11-19 20:27:21 Info:  prints after real-MPMA04_L181
+2026-11-19 20:27:21 FREE: FICHIER1
+2026-11-19 20:27:21 FREE Options: 
+2026-11-19 20:27:21 FREE: FICHIER2
+2026-11-19 20:27:21 FREE Options: 
+2026-11-19 20:27:21 Msg: RECAP case real-MPMA04_L208
+2026-11-19 20:27:21 Msg Options: 
+2026-11-19 20:27:21 Info:  RECAP case real-MPMA04_L208
+2026-11-19 20:27:21 QUAL: RCS11
+2026-11-19 20:27:21 QUAL Options: D
+2026-11-19 20:27:21 ASG: FICHIER1
+2026-11-19 20:27:21 ASG Options: A
+2026-11-19 20:27:21 DELETE: FICHIER2
+2026-11-19 20:27:21 DELETE Options: C
+2026-11-19 20:27:21 ASG: FICHIER2
+2026-11-19 20:27:21 ASG Options: P, U
+2026-11-19 20:27:21 Ignored option P.
+2026-11-19 20:27:21 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS11)
+2026-11-19 20:27:21 FREE: SGSPARM
+2026-11-19 20:27:21 FREE Options: 
+2026-11-19 20:27:21 FREE: RECPARM
+2026-11-19 20:27:21 FREE Options: 
+2026-11-19 20:27:21 File not assigned or USEed: Ignored
+2026-11-19 20:27:21 ASG: RECPARM
+2026-11-19 20:27:21 ASG Options: A
+2026-11-19 20:27:21 USE: SGSPARM,RECPARM
+2026-11-19 20:27:21 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS11\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:21 Msg Options: 
+2026-11-19 20:27:21 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS11\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:21 XQT: TPF$.RECAP
+2026-11-19 20:27:21 XQT Options: R, W
+2026-11-19 20:27:21 
+2026-11-19 20:27:21 End-Xqt
+2026-11-19 20:27:21 Starting Cobol program: RECAP_GN
+20:27:23 *RECAP  FIN*
+20:27:23 *NB-ENREG-LUS =    24
+20:27:23 STB 00000000131495807                                                                               
+20:27:23 STB 00000000109986125                                                                               
+20:27:23 *NB-ENREG-ECR =    12
+20:27:23 STB 00000000131495807                                                                               
+20:27:23 STB 00000000109986125                                                                               
+2026-11-19 20:27:23 End Report. Time 00:00:01
+2026-11-19 20:27:23 Msg: prints after real-MPMA04_L208
+2026-11-19 20:27:23 Msg Options: 
+2026-11-19 20:27:23 Info:  prints after real-MPMA04_L208
+2026-11-19 20:27:23 FREE: FICHIER1
+2026-11-19 20:27:23 FREE Options: 
+2026-11-19 20:27:23 FREE: FICHIER2
+2026-11-19 20:27:23 FREE Options: 
+2026-11-19 20:27:23 Msg: RECAP case real-MPMM02_L198
+2026-11-19 20:27:23 Msg Options: 
+2026-11-19 20:27:23 Info:  RECAP case real-MPMM02_L198
+2026-11-19 20:27:23 QUAL: RCS12
+2026-11-19 20:27:23 QUAL Options: D
+2026-11-19 20:27:23 ASG: FICHIER1
+2026-11-19 20:27:23 ASG Options: A
+2026-11-19 20:27:23 DELETE: FICHIER2
+2026-11-19 20:27:23 DELETE Options: C
+2026-11-19 20:27:23 ASG: FICHIER2
+2026-11-19 20:27:23 ASG Options: P, U
+2026-11-19 20:27:23 Ignored option P.
+2026-11-19 20:27:23 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS12)
+2026-11-19 20:27:23 FREE: SGSPARM
+2026-11-19 20:27:23 FREE Options: 
+2026-11-19 20:27:23 FREE: RECPARM
+2026-11-19 20:27:23 FREE Options: 
+2026-11-19 20:27:23 File not assigned or USEed: Ignored
+2026-11-19 20:27:23 ASG: RECPARM
+2026-11-19 20:27:23 ASG Options: A
+2026-11-19 20:27:23 USE: SGSPARM,RECPARM
+2026-11-19 20:27:23 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS12\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:23 Msg Options: 
+2026-11-19 20:27:23 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS12\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:23 XQT: TPF$.RECAP
+2026-11-19 20:27:23 XQT Options: R, W
+2026-11-19 20:27:23 
+2026-11-19 20:27:23 End-Xqt
+2026-11-19 20:27:23 Starting Cobol program: RECAP_GN
+20:27:25 *RECAP  FIN*
+20:27:25 *NB-ENREG-LUS =    24
+20:27:25 STB 00000000127429964                                                                               
+20:27:25 STB 00000000136453023                                                                               
+20:27:25 STB 00000000118511257                                                                               
+20:27:25 STB 00000000107587178                                                                               
+20:27:25 STB 00000000109670055                                                                               
+20:27:25 *NB-ENREG-ECR =    14
+20:27:25 STB 00000000127429964                                                                               
+20:27:25 STB 00000000136453023                                                                               
+20:27:25 STB 00000000118511257                                                                               
+20:27:25 STB 00000000107587178                                                                               
+20:27:25 STB 00000000109670055                                                                               
+2026-11-19 20:27:25 End Report. Time 00:00:01
+2026-11-19 20:27:25 Msg: prints after real-MPMM02_L198
+2026-11-19 20:27:25 Msg Options: 
+2026-11-19 20:27:25 Info:  prints after real-MPMM02_L198
+2026-11-19 20:27:25 FREE: FICHIER1
+2026-11-19 20:27:25 FREE Options: 
+2026-11-19 20:27:25 FREE: FICHIER2
+2026-11-19 20:27:25 FREE Options: 
+2026-11-19 20:27:25 Msg: RECAP case real-MPMM02_L225
+2026-11-19 20:27:25 Msg Options: 
+2026-11-19 20:27:25 Info:  RECAP case real-MPMM02_L225
+2026-11-19 20:27:25 QUAL: RCS13
+2026-11-19 20:27:25 QUAL Options: D
+2026-11-19 20:27:25 ASG: FICHIER1
+2026-11-19 20:27:25 ASG Options: A
+2026-11-19 20:27:25 DELETE: FICHIER2
+2026-11-19 20:27:25 DELETE Options: C
+2026-11-19 20:27:25 ASG: FICHIER2
+2026-11-19 20:27:25 ASG Options: P, U
+2026-11-19 20:27:25 Ignored option P.
+2026-11-19 20:27:25 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS13)
+2026-11-19 20:27:25 FREE: SGSPARM
+2026-11-19 20:27:25 FREE Options: 
+2026-11-19 20:27:25 FREE: RECPARM
+2026-11-19 20:27:25 FREE Options: 
+2026-11-19 20:27:25 File not assigned or USEed: Ignored
+2026-11-19 20:27:25 ASG: RECPARM
+2026-11-19 20:27:25 ASG Options: A
+2026-11-19 20:27:25 USE: SGSPARM,RECPARM
+2026-11-19 20:27:25 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS13\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:25 Msg Options: 
+2026-11-19 20:27:25 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS13\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:25 XQT: TPF$.RECAP
+2026-11-19 20:27:25 XQT Options: R, W
+2026-11-19 20:27:25 
+2026-11-19 20:27:25 End-Xqt
+2026-11-19 20:27:25 Starting Cobol program: RECAP_GN
+20:27:27 *RECAP  FIN*
+20:27:27 *NB-ENREG-LUS =    24
+20:27:27 STB 00000000133344121                                                                               
+20:27:27 STB 00000000099778783                                                                               
+20:27:27 STB 00000000091317925                                                                               
+20:27:27 STB 00000000144398025                                                                               
+20:27:27 STB 00000000082260268                                                                               
+20:27:27 STB 00000000147744594                                                                               
+20:27:27 STB 00000000123248706                                                                               
+20:27:27 STB 00000000121990593                                                                               
+20:27:27 STB 00000000139836898                                                                               
+20:27:27 STB 00000000114882712                                                                               
+20:27:27 STB 00000000118660055                                                                               
+20:27:27 *NB-ENREG-ECR =    10
+20:27:27 STB 00000000133344121                                                                               
+20:27:27 STB 00000000099778783                                                                               
+20:27:27 STB 00000000091317925                                                                               
+20:27:27 STB 00000000144398025                                                                               
+20:27:27 STB 00000000082260268                                                                               
+20:27:27 STB 00000000147744594                                                                               
+20:27:27 STB 00000000123248706                                                                               
+20:27:27 STB 00000000121990593                                                                               
+20:27:27 STB 00000000139836898                                                                               
+20:27:27 STB 00000000114882712                                                                               
+20:27:27 STB 00000000118660055                                                                               
+2026-11-19 20:27:27 End Report. Time 00:00:01
+2026-11-19 20:27:27 Msg: prints after real-MPMM02_L225
+2026-11-19 20:27:27 Msg Options: 
+2026-11-19 20:27:27 Info:  prints after real-MPMM02_L225
+2026-11-19 20:27:27 FREE: FICHIER1
+2026-11-19 20:27:27 FREE Options: 
+2026-11-19 20:27:27 FREE: FICHIER2
+2026-11-19 20:27:27 FREE Options: 
+2026-11-19 20:27:27 Msg: RECAP case real-MPMM02_L256
+2026-11-19 20:27:27 Msg Options: 
+2026-11-19 20:27:27 Info:  RECAP case real-MPMM02_L256
+2026-11-19 20:27:27 QUAL: RCS14
+2026-11-19 20:27:27 QUAL Options: D
+2026-11-19 20:27:27 ASG: FICHIER1
+2026-11-19 20:27:27 ASG Options: A
+2026-11-19 20:27:27 DELETE: FICHIER2
+2026-11-19 20:27:27 DELETE Options: C
+2026-11-19 20:27:27 ASG: FICHIER2
+2026-11-19 20:27:27 ASG Options: P, U
+2026-11-19 20:27:27 Ignored option P.
+2026-11-19 20:27:27 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS14)
+2026-11-19 20:27:27 FREE: SGSPARM
+2026-11-19 20:27:27 FREE Options: 
+2026-11-19 20:27:27 FREE: RECPARM
+2026-11-19 20:27:27 FREE Options: 
+2026-11-19 20:27:27 File not assigned or USEed: Ignored
+2026-11-19 20:27:27 ASG: RECPARM
+2026-11-19 20:27:27 ASG Options: A
+2026-11-19 20:27:27 USE: SGSPARM,RECPARM
+2026-11-19 20:27:27 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS14\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:27 Msg Options: 
+2026-11-19 20:27:27 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS14\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:27 XQT: TPF$.RECAP
+2026-11-19 20:27:27 XQT Options: R, W
+2026-11-19 20:27:27 
+2026-11-19 20:27:27 End-Xqt
+2026-11-19 20:27:27 Starting Cobol program: RECAP_GN
+20:27:29 *RECAP  FIN*
+20:27:29 *NB-ENREG-LUS =    24
+20:27:29 STB 00000000141281454                                                                               
+20:27:29 STB 00000000132838603                                                                               
+20:27:29 STB 00000000145907904                                                                               
+20:27:29 STB 00000000132387616                                                                               
+20:27:29 STB 00000000130638487                                                                               
+20:27:29 *NB-ENREG-ECR =    10
+20:27:29 STB 00000000141281454                                                                               
+20:27:29 STB 00000000132838603                                                                               
+20:27:29 STB 00000000145907904                                                                               
+20:27:29 STB 00000000132387616                                                                               
+20:27:29 STB 00000000130638487                                                                               
+2026-11-19 20:27:29 End Report. Time 00:00:01
+2026-11-19 20:27:29 Msg: prints after real-MPMM02_L256
+2026-11-19 20:27:29 Msg Options: 
+2026-11-19 20:27:29 Info:  prints after real-MPMM02_L256
+2026-11-19 20:27:29 FREE: FICHIER1
+2026-11-19 20:27:29 FREE Options: 
+2026-11-19 20:27:29 FREE: FICHIER2
+2026-11-19 20:27:29 FREE Options: 
+2026-11-19 20:27:29 Msg: RECAP case real-MPMM03_L163
+2026-11-19 20:27:29 Msg Options: 
+2026-11-19 20:27:29 Info:  RECAP case real-MPMM03_L163
+2026-11-19 20:27:29 QUAL: RCS15
+2026-11-19 20:27:29 QUAL Options: D
+2026-11-19 20:27:29 ASG: FICHIER1
+2026-11-19 20:27:29 ASG Options: A
+2026-11-19 20:27:29 DELETE: FICHIER2
+2026-11-19 20:27:29 DELETE Options: C
+2026-11-19 20:27:29 ASG: FICHIER2
+2026-11-19 20:27:29 ASG Options: P, U
+2026-11-19 20:27:29 Ignored option P.
+2026-11-19 20:27:29 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS15)
+2026-11-19 20:27:29 FREE: SGSPARM
+2026-11-19 20:27:29 FREE Options: 
+2026-11-19 20:27:29 FREE: RECPARM
+2026-11-19 20:27:29 FREE Options: 
+2026-11-19 20:27:29 File not assigned or USEed: Ignored
+2026-11-19 20:27:29 ASG: RECPARM
+2026-11-19 20:27:29 ASG Options: A
+2026-11-19 20:27:29 USE: SGSPARM,RECPARM
+2026-11-19 20:27:29 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS15\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:29 Msg Options: 
+2026-11-19 20:27:29 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS15\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:29 XQT: TPF$.RECAP
+2026-11-19 20:27:29 XQT Options: R, W
+2026-11-19 20:27:29 
+2026-11-19 20:27:29 End-Xqt
+2026-11-19 20:27:29 Starting Cobol program: RECAP_GN
+20:27:31 *RECAP  FIN*
+20:27:31 *NB-ENREG-LUS =    24
+20:27:31 STB 00000000127295234                                                                               
+20:27:31 STB 00000000139189287                                                                               
+20:27:31 STB 00000000130151594                                                                               
+20:27:31 STB 00000000121521861                                                                               
+20:27:31 STB 00000000105996420                                                                               
+20:27:31 STB 00000000125779595                                                                               
+20:27:31 STB 00000000117863330                                                                               
+20:27:31 STB 00000000111489072                                                                               
+20:27:31 STB 00000000118860638                                                                               
+20:27:31 STB 00000000085402991                                                                               
+20:27:31 STB 00000000114005104                                                                               
+20:27:31 *NB-ENREG-ECR =     7
+20:27:31 STB 00000000127295234                                                                               
+20:27:31 STB 00000000139189287                                                                               
+20:27:31 STB 00000000130151594                                                                               
+20:27:31 STB 00000000121521861                                                                               
+20:27:31 STB 00000000105996420                                                                               
+20:27:31 STB 00000000125779595                                                                               
+20:27:31 STB 00000000117863330                                                                               
+20:27:31 STB 00000000111489072                                                                               
+20:27:31 STB 00000000118860638                                                                               
+20:27:31 STB 00000000085402991                                                                               
+20:27:31 STB 00000000114005104                                                                               
+2026-11-19 20:27:31 End Report. Time 00:00:01
+2026-11-19 20:27:31 Msg: prints after real-MPMM03_L163
+2026-11-19 20:27:31 Msg Options: 
+2026-11-19 20:27:31 Info:  prints after real-MPMM03_L163
+2026-11-19 20:27:31 FREE: FICHIER1
+2026-11-19 20:27:31 FREE Options: 
+2026-11-19 20:27:31 FREE: FICHIER2
+2026-11-19 20:27:31 FREE Options: 
+2026-11-19 20:27:31 Msg: RECAP case real-MPMM03_L194
+2026-11-19 20:27:31 Msg Options: 
+2026-11-19 20:27:31 Info:  RECAP case real-MPMM03_L194
+2026-11-19 20:27:31 QUAL: RCS16
+2026-11-19 20:27:31 QUAL Options: D
+2026-11-19 20:27:31 ASG: FICHIER1
+2026-11-19 20:27:31 ASG Options: A
+2026-11-19 20:27:31 DELETE: FICHIER2
+2026-11-19 20:27:31 DELETE Options: C
+2026-11-19 20:27:31 ASG: FICHIER2
+2026-11-19 20:27:31 ASG Options: P, U
+2026-11-19 20:27:31 Ignored option P.
+2026-11-19 20:27:31 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS16)
+2026-11-19 20:27:31 FREE: SGSPARM
+2026-11-19 20:27:31 FREE Options: 
+2026-11-19 20:27:31 FREE: RECPARM
+2026-11-19 20:27:31 FREE Options: 
+2026-11-19 20:27:31 File not assigned or USEed: Ignored
+2026-11-19 20:27:31 ASG: RECPARM
+2026-11-19 20:27:31 ASG Options: A
+2026-11-19 20:27:31 USE: SGSPARM,RECPARM
+2026-11-19 20:27:31 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS16\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:31 Msg Options: 
+2026-11-19 20:27:31 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS16\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:31 XQT: TPF$.RECAP
+2026-11-19 20:27:31 XQT Options: R, W
+2026-11-19 20:27:31 
+2026-11-19 20:27:31 End-Xqt
+2026-11-19 20:27:31 Starting Cobol program: RECAP_GN
+20:27:33 *RECAP  FIN*
+20:27:33 *NB-ENREG-LUS =    24
+20:27:33 STB 00000000135134718                                                                               
+20:27:33 STB 00000000099198899                                                                               
+20:27:33 STB 00000000128081122                                                                               
+20:27:33 STB 00000000129630552                                                                               
+20:27:33 STB 00000000127731649                                                                               
+20:27:33 *NB-ENREG-ECR =    11
+20:27:33 STB 00000000135134718                                                                               
+20:27:33 STB 00000000099198899                                                                               
+20:27:33 STB 00000000128081122                                                                               
+20:27:33 STB 00000000129630552                                                                               
+20:27:33 STB 00000000127731649                                                                               
+2026-11-19 20:27:33 End Report. Time 00:00:01
+2026-11-19 20:27:33 Msg: prints after real-MPMM03_L194
+2026-11-19 20:27:33 Msg Options: 
+2026-11-19 20:27:33 Info:  prints after real-MPMM03_L194
+2026-11-19 20:27:33 FREE: FICHIER1
+2026-11-19 20:27:33 FREE Options: 
+2026-11-19 20:27:33 FREE: FICHIER2
+2026-11-19 20:27:33 FREE Options: 
+2026-11-19 20:27:33 Msg: RECAP case real-MPMT01_L182
+2026-11-19 20:27:33 Msg Options: 
+2026-11-19 20:27:33 Info:  RECAP case real-MPMT01_L182
+2026-11-19 20:27:33 QUAL: RCS17
+2026-11-19 20:27:33 QUAL Options: D
+2026-11-19 20:27:33 ASG: FICHIER1
+2026-11-19 20:27:33 ASG Options: A
+2026-11-19 20:27:33 DELETE: FICHIER2
+2026-11-19 20:27:33 DELETE Options: C
+2026-11-19 20:27:33 ASG: FICHIER2
+2026-11-19 20:27:33 ASG Options: P, U
+2026-11-19 20:27:33 Ignored option P.
+2026-11-19 20:27:33 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS17)
+2026-11-19 20:27:33 FREE: SGSPARM
+2026-11-19 20:27:33 FREE Options: 
+2026-11-19 20:27:33 FREE: RECPARM
+2026-11-19 20:27:33 FREE Options: 
+2026-11-19 20:27:33 File not assigned or USEed: Ignored
+2026-11-19 20:27:33 ASG: RECPARM
+2026-11-19 20:27:33 ASG Options: A
+2026-11-19 20:27:33 USE: SGSPARM,RECPARM
+2026-11-19 20:27:33 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS17\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:33 Msg Options: 
+2026-11-19 20:27:33 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS17\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:33 XQT: TPF$.RECAP
+2026-11-19 20:27:33 XQT Options: R, W
+2026-11-19 20:27:33 
+2026-11-19 20:27:33 End-Xqt
+2026-11-19 20:27:33 Starting Cobol program: RECAP_GN
+20:27:35 *RECAP  FIN*
+20:27:35 *NB-ENREG-LUS =    24
+20:27:35 STB 00000000108406270                                                                               
+20:27:35 STB 00000000120724220                                                                               
+20:27:35 *NB-ENREG-ECR =    10
+20:27:35 STB 00000000108406270                                                                               
+20:27:35 STB 00000000120724220                                                                               
+2026-11-19 20:27:35 End Report. Time 00:00:01
+2026-11-19 20:27:35 Msg: prints after real-MPMT01_L182
+2026-11-19 20:27:35 Msg Options: 
+2026-11-19 20:27:35 Info:  prints after real-MPMT01_L182
+2026-11-19 20:27:35 FREE: FICHIER1
+2026-11-19 20:27:35 FREE Options: 
+2026-11-19 20:27:35 FREE: FICHIER2
+2026-11-19 20:27:35 FREE Options: 
+2026-11-19 20:27:35 Msg: RECAP case real-MPMT01_L209
+2026-11-19 20:27:35 Msg Options: 
+2026-11-19 20:27:35 Info:  RECAP case real-MPMT01_L209
+2026-11-19 20:27:35 QUAL: RCS18
+2026-11-19 20:27:35 QUAL Options: D
+2026-11-19 20:27:35 ASG: FICHIER1
+2026-11-19 20:27:35 ASG Options: A
+2026-11-19 20:27:35 DELETE: FICHIER2
+2026-11-19 20:27:35 DELETE Options: C
+2026-11-19 20:27:35 ASG: FICHIER2
+2026-11-19 20:27:35 ASG Options: P, U
+2026-11-19 20:27:35 Ignored option P.
+2026-11-19 20:27:35 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS18)
+2026-11-19 20:27:35 FREE: SGSPARM
+2026-11-19 20:27:35 FREE Options: 
+2026-11-19 20:27:35 FREE: RECPARM
+2026-11-19 20:27:35 FREE Options: 
+2026-11-19 20:27:35 File not assigned or USEed: Ignored
+2026-11-19 20:27:35 ASG: RECPARM
+2026-11-19 20:27:35 ASG Options: A
+2026-11-19 20:27:35 USE: SGSPARM,RECPARM
+2026-11-19 20:27:35 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS18\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:35 Msg Options: 
+2026-11-19 20:27:35 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS18\RECPARM (18 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:35 XQT: TPF$.RECAP
+2026-11-19 20:27:35 XQT Options: R, W
+2026-11-19 20:27:35 
+2026-11-19 20:27:35 End-Xqt
+2026-11-19 20:27:35 Starting Cobol program: RECAP_GN
+20:27:37 *RECAP  FIN*
+20:27:37 *NB-ENREG-LUS =    24
+20:27:37 STB 00000000116570802                                                                               
+20:27:37 STB 00000000129358489                                                                               
+20:27:37 *NB-ENREG-ECR =    11
+20:27:37 STB 00000000116570802                                                                               
+20:27:37 STB 00000000129358489                                                                               
+2026-11-19 20:27:37 End Report. Time 00:00:01
+2026-11-19 20:27:37 Msg: prints after real-MPMT01_L209
+2026-11-19 20:27:37 Msg Options: 
+2026-11-19 20:27:37 Info:  prints after real-MPMT01_L209
+2026-11-19 20:27:37 FREE: FICHIER1
+2026-11-19 20:27:37 FREE Options: 
+2026-11-19 20:27:37 FREE: FICHIER2
+2026-11-19 20:27:37 FREE Options: 
+2026-11-19 20:27:37 Msg: RECAP case real-SCTA02_L174
+2026-11-19 20:27:37 Msg Options: 
+2026-11-19 20:27:37 Info:  RECAP case real-SCTA02_L174
+2026-11-19 20:27:37 QUAL: RCS19
+2026-11-19 20:27:37 QUAL Options: D
+2026-11-19 20:27:37 ASG: FILEIN
+2026-11-19 20:27:37 ASG Options: A
+2026-11-19 20:27:37 DELETE: FILEOUT
+2026-11-19 20:27:37 DELETE Options: C
+2026-11-19 20:27:37 ASG: FILEOUT
+2026-11-19 20:27:37 ASG Options: P, U
+2026-11-19 20:27:37 Ignored option P.
+2026-11-19 20:27:37 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS19)
+2026-11-19 20:27:37 FREE: SGSPARM
+2026-11-19 20:27:37 FREE Options: 
+2026-11-19 20:27:37 FREE: RECPARM
+2026-11-19 20:27:37 FREE Options: 
+2026-11-19 20:27:37 File not assigned or USEed: Ignored
+2026-11-19 20:27:37 ASG: RECPARM
+2026-11-19 20:27:37 ASG Options: A
+2026-11-19 20:27:37 USE: SGSPARM,RECPARM
+2026-11-19 20:27:37 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS19\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:37 Msg Options: 
+2026-11-19 20:27:37 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS19\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:37 XQT: TPF$.RECAP
+2026-11-19 20:27:37 XQT Options: R, W
+2026-11-19 20:27:37 
+2026-11-19 20:27:37 End-Xqt
+2026-11-19 20:27:37 Starting Cobol program: RECAP_GN
+20:27:39 *RECAP  FIN*
+20:27:39 *NB-ENREG-LUS =    24
+20:27:39 STB 00000012922077018                                                                               
+20:27:39 STB 00000011707702235                                                                               
+20:27:39 STB 00000010001887478                                                                               
+20:27:39 STB 00000012983079967                                                                               
+20:27:39 STB 00000010288239196                                                                               
+20:27:39 *NB-ENREG-ECR =    11
+20:27:39 STB 00000012922077018                                                                               
+20:27:39 STB 00000011707702235                                                                               
+20:27:39 STB 00000010001887478                                                                               
+20:27:39 STB 00000012983079967                                                                               
+20:27:39 STB 00000010288239196                                                                               
+2026-11-19 20:27:39 End Report. Time 00:00:01
+2026-11-19 20:27:39 Msg: prints after real-SCTA02_L174
+2026-11-19 20:27:39 Msg Options: 
+2026-11-19 20:27:39 Info:  prints after real-SCTA02_L174
+2026-11-19 20:27:39 FREE: FILEIN
+2026-11-19 20:27:39 FREE Options: 
+2026-11-19 20:27:39 FREE: FILEOUT
+2026-11-19 20:27:39 FREE Options: 
+2026-11-19 20:27:39 Msg: RECAP case real-SCTA03_L151
+2026-11-19 20:27:39 Msg Options: 
+2026-11-19 20:27:39 Info:  RECAP case real-SCTA03_L151
+2026-11-19 20:27:39 QUAL: RCS20
+2026-11-19 20:27:39 QUAL Options: D
+2026-11-19 20:27:39 ASG: FILEIN
+2026-11-19 20:27:39 ASG Options: A
+2026-11-19 20:27:39 DELETE: FILEOUT
+2026-11-19 20:27:39 DELETE Options: C
+2026-11-19 20:27:39 ASG: FILEOUT
+2026-11-19 20:27:39 ASG Options: P, U
+2026-11-19 20:27:39 Ignored option P.
+2026-11-19 20:27:39 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS20)
+2026-11-19 20:27:39 FREE: SGSPARM
+2026-11-19 20:27:39 FREE Options: 
+2026-11-19 20:27:39 FREE: RECPARM
+2026-11-19 20:27:39 FREE Options: 
+2026-11-19 20:27:39 File not assigned or USEed: Ignored
+2026-11-19 20:27:39 ASG: RECPARM
+2026-11-19 20:27:39 ASG Options: A
+2026-11-19 20:27:39 USE: SGSPARM,RECPARM
+2026-11-19 20:27:39 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS20\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:39 Msg Options: 
+2026-11-19 20:27:39 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS20\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:39 XQT: TPF$.RECAP
+2026-11-19 20:27:39 XQT Options: R, W
+2026-11-19 20:27:39 
+2026-11-19 20:27:39 End-Xqt
+2026-11-19 20:27:39 Starting Cobol program: RECAP_GN
+20:27:41 *RECAP  FIN*
+20:27:41 *NB-ENREG-LUS =    24
+20:27:41 STB 00000012273228100                                                                               
+20:27:41 STB 00000010590612718                                                                               
+20:27:41 STB 00000011864215261                                                                               
+20:27:41 STB 00000010754484015                                                                               
+20:27:41 STB 00000013854395828                                                                               
+20:27:41 *NB-ENREG-ECR =     9
+20:27:41 STB 00000012273228100                                                                               
+20:27:41 STB 00000010590612718                                                                               
+20:27:41 STB 00000011864215261                                                                               
+20:27:41 STB 00000010754484015                                                                               
+20:27:41 STB 00000013854395828                                                                               
+2026-11-19 20:27:41 End Report. Time 00:00:01
+2026-11-19 20:27:41 Msg: prints after real-SCTA03_L151
+2026-11-19 20:27:41 Msg Options: 
+2026-11-19 20:27:41 Info:  prints after real-SCTA03_L151
+2026-11-19 20:27:41 FREE: FILEIN
+2026-11-19 20:27:41 FREE Options: 
+2026-11-19 20:27:41 FREE: FILEOUT
+2026-11-19 20:27:41 FREE Options: 
+2026-11-19 20:27:41 Msg: RECAP case real-SCTM01_L204
+2026-11-19 20:27:41 Msg Options: 
+2026-11-19 20:27:41 Info:  RECAP case real-SCTM01_L204
+2026-11-19 20:27:41 QUAL: RCS21
+2026-11-19 20:27:41 QUAL Options: D
+2026-11-19 20:27:41 ASG: FILEIN
+2026-11-19 20:27:41 ASG Options: A
+2026-11-19 20:27:41 DELETE: FILEOUT
+2026-11-19 20:27:41 DELETE Options: C
+2026-11-19 20:27:41 ASG: FILEOUT
+2026-11-19 20:27:41 ASG Options: P, U
+2026-11-19 20:27:41 Ignored option P.
+2026-11-19 20:27:41 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS21)
+2026-11-19 20:27:41 FREE: SGSPARM
+2026-11-19 20:27:41 FREE Options: 
+2026-11-19 20:27:41 FREE: RECPARM
+2026-11-19 20:27:41 FREE Options: 
+2026-11-19 20:27:41 File not assigned or USEed: Ignored
+2026-11-19 20:27:41 ASG: RECPARM
+2026-11-19 20:27:41 ASG Options: A
+2026-11-19 20:27:41 USE: SGSPARM,RECPARM
+2026-11-19 20:27:41 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS21\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:41 Msg Options: 
+2026-11-19 20:27:41 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS21\RECPARM (30 lines); RECAPIN=FILEIN RECAPOUT=FILEOUT; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:41 XQT: TPF$.RECAP
+2026-11-19 20:27:41 XQT Options: R, W
+2026-11-19 20:27:41 
+2026-11-19 20:27:41 End-Xqt
+2026-11-19 20:27:41 Starting Cobol program: RECAP_GN
+20:27:43 *RECAP  FIN*
+20:27:43 *NB-ENREG-LUS =    24
+20:27:43 STB 00000012904659219                                                                               
+20:27:43 STB 00000011736672825                                                                               
+20:27:43 STB 00000011713999554                                                                               
+20:27:43 STB 00000011566474675                                                                               
+20:27:43 STB 00000011674293737                                                                               
+20:27:43 *NB-ENREG-ECR =     9
+20:27:43 STB 00000012904659219                                                                               
+20:27:43 STB 00000011736672825                                                                               
+20:27:43 STB 00000011713999554                                                                               
+20:27:43 STB 00000011566474675                                                                               
+20:27:43 STB 00000011674293737                                                                               
+2026-11-19 20:27:43 End Report. Time 00:00:01
+2026-11-19 20:27:43 Msg: prints after real-SCTM01_L204
+2026-11-19 20:27:43 Msg Options: 
+2026-11-19 20:27:43 Info:  prints after real-SCTM01_L204
+2026-11-19 20:27:43 FREE: FILEIN
+2026-11-19 20:27:43 FREE Options: 
+2026-11-19 20:27:43 FREE: FILEOUT
+2026-11-19 20:27:43 FREE Options: 
+2026-11-19 20:27:43 Msg: RECAP case real-VIRA12_EN_L743
+2026-11-19 20:27:43 Msg Options: 
+2026-11-19 20:27:43 Info:  RECAP case real-VIRA12_EN_L743
+2026-11-19 20:27:43 QUAL: RCS22
+2026-11-19 20:27:43 QUAL Options: D
+2026-11-19 20:27:43 ASG: INA
+2026-11-19 20:27:43 ASG Options: A
+2026-11-19 20:27:43 DELETE: OUTA
+2026-11-19 20:27:43 DELETE Options: C
+2026-11-19 20:27:43 ASG: OUTA
+2026-11-19 20:27:43 ASG Options: P, U
+2026-11-19 20:27:43 Ignored option P.
+2026-11-19 20:27:43 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS22)
+2026-11-19 20:27:43 FREE: SGSPARM
+2026-11-19 20:27:43 FREE Options: 
+2026-11-19 20:27:43 FREE: RECPARM
+2026-11-19 20:27:43 FREE Options: 
+2026-11-19 20:27:43 File not assigned or USEed: Ignored
+2026-11-19 20:27:43 ASG: RECPARM
+2026-11-19 20:27:43 ASG Options: A
+2026-11-19 20:27:43 USE: SGSPARM,RECPARM
+2026-11-19 20:27:43 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS22\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:43 Msg Options: 
+2026-11-19 20:27:43 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS22\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:43 XQT: TPF$.RECAP
+2026-11-19 20:27:43 XQT Options: R, W
+2026-11-19 20:27:43 
+2026-11-19 20:27:43 End-Xqt
+2026-11-19 20:27:43 Starting Cobol program: RECAP_GN
+20:27:45 *RECAP  FIN*
+20:27:45 *NB-ENREG-LUS =    24
+20:27:45 STB 00000012425738154                                                                               
+20:27:45 STB 00000011900333884                                                                               
+20:27:45 STB 00000013063462142                                                                               
+20:27:45 *NB-ENREG-ECR =     8
+20:27:45 STB 00000012425738154                                                                               
+20:27:45 STB 00000011900333884                                                                               
+20:27:45 STB 00000013063462142                                                                               
+2026-11-19 20:27:45 End Report. Time 00:00:02
+2026-11-19 20:27:45 Msg: prints after real-VIRA12_EN_L743
+2026-11-19 20:27:45 Msg Options: 
+2026-11-19 20:27:45 Info:  prints after real-VIRA12_EN_L743
+2026-11-19 20:27:45 FREE: INA
+2026-11-19 20:27:45 FREE Options: 
+2026-11-19 20:27:45 FREE: OUTA
+2026-11-19 20:27:45 FREE Options: 
+2026-11-19 20:27:45 Msg: RECAP case real-VIRA15_EN_L691
+2026-11-19 20:27:45 Msg Options: 
+2026-11-19 20:27:45 Info:  RECAP case real-VIRA15_EN_L691
+2026-11-19 20:27:45 QUAL: RCS23
+2026-11-19 20:27:45 QUAL Options: D
+2026-11-19 20:27:45 ASG: INA
+2026-11-19 20:27:45 ASG Options: A
+2026-11-19 20:27:46 DELETE: OUTA
+2026-11-19 20:27:46 DELETE Options: C
+2026-11-19 20:27:46 ASG: OUTA
+2026-11-19 20:27:46 ASG Options: P, U
+2026-11-19 20:27:46 Ignored option P.
+2026-11-19 20:27:46 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS23)
+2026-11-19 20:27:46 FREE: SGSPARM
+2026-11-19 20:27:46 FREE Options: 
+2026-11-19 20:27:46 FREE: RECPARM
+2026-11-19 20:27:46 FREE Options: 
+2026-11-19 20:27:46 File not assigned or USEed: Ignored
+2026-11-19 20:27:46 ASG: RECPARM
+2026-11-19 20:27:46 ASG Options: A
+2026-11-19 20:27:46 USE: SGSPARM,RECPARM
+2026-11-19 20:27:46 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS23\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:46 Msg Options: 
+2026-11-19 20:27:46 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS23\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:46 XQT: TPF$.RECAP
+2026-11-19 20:27:46 XQT Options: R, W
+2026-11-19 20:27:46 
+2026-11-19 20:27:46 End-Xqt
+2026-11-19 20:27:46 Starting Cobol program: RECAP_GN
+20:27:47 *RECAP  FIN*
+20:27:47 *NB-ENREG-LUS =    24
+20:27:47 STB 00000011640883421                                                                               
+20:27:47 STB 00000009773199121                                                                               
+20:27:47 STB 00000010003848811                                                                               
+20:27:47 *NB-ENREG-ECR =    11
+20:27:47 STB 00000011640883421                                                                               
+20:27:47 STB 00000009773199121                                                                               
+20:27:47 STB 00000010003848811                                                                               
+2026-11-19 20:27:47 End Report. Time 00:00:01
+2026-11-19 20:27:47 Msg: prints after real-VIRA15_EN_L691
+2026-11-19 20:27:47 Msg Options: 
+2026-11-19 20:27:47 Info:  prints after real-VIRA15_EN_L691
+2026-11-19 20:27:47 FREE: INA
+2026-11-19 20:27:47 FREE Options: 
+2026-11-19 20:27:47 FREE: OUTA
+2026-11-19 20:27:47 FREE Options: 
+2026-11-19 20:27:47 Msg: RECAP case real-VIRA19_EN_L692
+2026-11-19 20:27:47 Msg Options: 
+2026-11-19 20:27:47 Info:  RECAP case real-VIRA19_EN_L692
+2026-11-19 20:27:47 QUAL: RCS24
+2026-11-19 20:27:47 QUAL Options: D
+2026-11-19 20:27:47 ASG: INA
+2026-11-19 20:27:47 ASG Options: A
+2026-11-19 20:27:47 DELETE: OUTA
+2026-11-19 20:27:47 DELETE Options: C
+2026-11-19 20:27:47 ASG: OUTA
+2026-11-19 20:27:47 ASG Options: P, U
+2026-11-19 20:27:47 Ignored option P.
+2026-11-19 20:27:48 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS24)
+2026-11-19 20:27:48 FREE: SGSPARM
+2026-11-19 20:27:48 FREE Options: 
+2026-11-19 20:27:48 FREE: RECPARM
+2026-11-19 20:27:48 FREE Options: 
+2026-11-19 20:27:48 File not assigned or USEed: Ignored
+2026-11-19 20:27:48 ASG: RECPARM
+2026-11-19 20:27:48 ASG Options: A
+2026-11-19 20:27:48 USE: SGSPARM,RECPARM
+2026-11-19 20:27:48 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS24\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:48 Msg Options: 
+2026-11-19 20:27:48 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS24\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:48 XQT: TPF$.RECAP
+2026-11-19 20:27:48 XQT Options: R, W
+2026-11-19 20:27:48 
+2026-11-19 20:27:48 End-Xqt
+2026-11-19 20:27:48 Starting Cobol program: RECAP_GN
+20:27:49 *RECAP  FIN*
+20:27:49 *NB-ENREG-LUS =    24
+20:27:49 STB 00000012758144363                                                                               
+20:27:49 STB 00000011908060839                                                                               
+20:27:49 STB 00000013752235920                                                                               
+20:27:49 *NB-ENREG-ECR =    12
+20:27:49 STB 00000012758144363                                                                               
+20:27:49 STB 00000011908060839                                                                               
+20:27:49 STB 00000013752235920                                                                               
+2026-11-19 20:27:49 End Report. Time 00:00:01
+2026-11-19 20:27:49 Msg: prints after real-VIRA19_EN_L692
+2026-11-19 20:27:49 Msg Options: 
+2026-11-19 20:27:49 Info:  prints after real-VIRA19_EN_L692
+2026-11-19 20:27:49 FREE: INA
+2026-11-19 20:27:49 FREE Options: 
+2026-11-19 20:27:49 FREE: OUTA
+2026-11-19 20:27:49 FREE Options: 
+2026-11-19 20:27:49 Msg: RECAP case real-VIRA29_L2_L48
+2026-11-19 20:27:49 Msg Options: 
+2026-11-19 20:27:49 Info:  RECAP case real-VIRA29_L2_L48
+2026-11-19 20:27:49 QUAL: RCS25
+2026-11-19 20:27:49 QUAL Options: D
+2026-11-19 20:27:49 ASG: I006TABPROGT
+2026-11-19 20:27:49 ASG Options: A
+2026-11-19 20:27:49 DELETE: I006TABPROGC
+2026-11-19 20:27:49 DELETE Options: C
+2026-11-19 20:27:49 ASG: I006TABPROGC
+2026-11-19 20:27:49 ASG Options: P, U
+2026-11-19 20:27:49 Ignored option P.
+2026-11-19 20:27:49 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS25)
+2026-11-19 20:27:50 FREE: SGSPARM
+2026-11-19 20:27:50 FREE Options: 
+2026-11-19 20:27:50 FREE: RECPARM
+2026-11-19 20:27:50 FREE Options: 
+2026-11-19 20:27:50 File not assigned or USEed: Ignored
+2026-11-19 20:27:50 ASG: RECPARM
+2026-11-19 20:27:50 ASG Options: A
+2026-11-19 20:27:50 USE: SGSPARM,RECPARM
+2026-11-19 20:27:50 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS25\RECPARM (20 lines); RECAPIN=I006TABPROGT RECAPOUT=I006TABPROGC; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:50 Msg Options: 
+2026-11-19 20:27:50 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS25\RECPARM (20 lines); RECAPIN=I006TABPROGT RECAPOUT=I006TABPROGC; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:50 XQT: TPF$.RECAP
+2026-11-19 20:27:50 XQT Options: R, W
+2026-11-19 20:27:50 
+2026-11-19 20:27:50 End-Xqt
+2026-11-19 20:27:50 Starting Cobol program: RECAP_GN
+20:27:51 *RECAP  FIN*
+20:27:51 *NB-ENREG-LUS =    24
+20:27:51 STB 00000008967527811                                                                               
+20:27:51 *NB-ENREG-ECR =     9
+20:27:51 STB 00000008967527811                                                                               
+2026-11-19 20:27:52 End Report. Time 00:00:01
+2026-11-19 20:27:52 Msg: prints after real-VIRA29_L2_L48
+2026-11-19 20:27:52 Msg Options: 
+2026-11-19 20:27:52 Info:  prints after real-VIRA29_L2_L48
+2026-11-19 20:27:52 FREE: I006TABPROGT
+2026-11-19 20:27:52 FREE Options: 
+2026-11-19 20:27:52 FREE: I006TABPROGC
+2026-11-19 20:27:52 FREE Options: 
+2026-11-19 20:27:52 Msg: RECAP case real-VIRM01_EN_L668
+2026-11-19 20:27:52 Msg Options: 
+2026-11-19 20:27:52 Info:  RECAP case real-VIRM01_EN_L668
+2026-11-19 20:27:52 QUAL: RCS26
+2026-11-19 20:27:52 QUAL Options: D
+2026-11-19 20:27:52 ASG: INA
+2026-11-19 20:27:52 ASG Options: A
+2026-11-19 20:27:52 DELETE: OUTA
+2026-11-19 20:27:52 DELETE Options: C
+2026-11-19 20:27:52 ASG: OUTA
+2026-11-19 20:27:52 ASG Options: P, U
+2026-11-19 20:27:52 Ignored option P.
+2026-11-19 20:27:52 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS26)
+2026-11-19 20:27:52 FREE: SGSPARM
+2026-11-19 20:27:52 FREE Options: 
+2026-11-19 20:27:52 FREE: RECPARM
+2026-11-19 20:27:52 FREE Options: 
+2026-11-19 20:27:52 File not assigned or USEed: Ignored
+2026-11-19 20:27:52 ASG: RECPARM
+2026-11-19 20:27:52 ASG Options: A
+2026-11-19 20:27:52 USE: SGSPARM,RECPARM
+2026-11-19 20:27:52 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS26\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:52 Msg Options: 
+2026-11-19 20:27:52 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS26\RECPARM (13 lines); RECAPIN=INA RECAPOUT=OUTA; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:52 XQT: TPF$.RECAP
+2026-11-19 20:27:52 XQT Options: R, W
+2026-11-19 20:27:52 
+2026-11-19 20:27:52 End-Xqt
+2026-11-19 20:27:52 Starting Cobol program: RECAP_GN
+20:27:53 *RECAP  FIN*
+20:27:53 *NB-ENREG-LUS =    24
+20:27:53 STB 00000012359339858                                                                               
+20:27:53 STB 00000011255269785                                                                               
+20:27:53 STB 00000011586511662                                                                               
+20:27:53 *NB-ENREG-ECR =    11
+20:27:53 STB 00000012359339858                                                                               
+20:27:53 STB 00000011255269785                                                                               
+20:27:53 STB 00000011586511662                                                                               
+2026-11-19 20:27:53 End Report. Time 00:00:01
+2026-11-19 20:27:53 Msg: prints after real-VIRM01_EN_L668
+2026-11-19 20:27:53 Msg Options: 
+2026-11-19 20:27:53 Info:  prints after real-VIRM01_EN_L668
+2026-11-19 20:27:53 FREE: INA
+2026-11-19 20:27:53 FREE Options: 
+2026-11-19 20:27:53 FREE: OUTA
+2026-11-19 20:27:53 FREE Options: 
+2026-11-19 20:27:53 Msg: RECAP case real-VIRM01_L2_L49
+2026-11-19 20:27:53 Msg Options: 
+2026-11-19 20:27:54 Info:  RECAP case real-VIRM01_L2_L49
+2026-11-19 20:27:54 QUAL: RCS27
+2026-11-19 20:27:54 QUAL Options: D
+2026-11-19 20:27:54 ASG: I006TABPROGT
+2026-11-19 20:27:54 ASG Options: A
+2026-11-19 20:27:54 DELETE: I006TABPROGC
+2026-11-19 20:27:54 DELETE Options: C
+2026-11-19 20:27:54 ASG: I006TABPROGC
+2026-11-19 20:27:54 ASG Options: P, U
+2026-11-19 20:27:54 Ignored option P.
+2026-11-19 20:27:54 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS27)
+2026-11-19 20:27:54 FREE: SGSPARM
+2026-11-19 20:27:54 FREE Options: 
+2026-11-19 20:27:54 FREE: RECPARM
+2026-11-19 20:27:54 FREE Options: 
+2026-11-19 20:27:54 File not assigned or USEed: Ignored
+2026-11-19 20:27:54 ASG: RECPARM
+2026-11-19 20:27:54 ASG Options: A
+2026-11-19 20:27:54 USE: SGSPARM,RECPARM
+2026-11-19 20:27:54 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS27\RECPARM (20 lines); RECAPIN=I006TABPROGT RECAPOUT=I006TABPROGC; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:54 Msg Options: 
+2026-11-19 20:27:54 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS27\RECPARM (20 lines); RECAPIN=I006TABPROGT RECAPOUT=I006TABPROGC; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:54 XQT: TPF$.RECAP
+2026-11-19 20:27:54 XQT Options: R, W
+2026-11-19 20:27:54 
+2026-11-19 20:27:54 End-Xqt
+2026-11-19 20:27:54 Starting Cobol program: RECAP_GN
+20:27:55 *RECAP  FIN*
+20:27:55 *NB-ENREG-LUS =    24
+20:27:55 STB 00000014344957459                                                                               
+20:27:55 *NB-ENREG-ECR =    11
+20:27:55 STB 00000014344957459                                                                               
+2026-11-19 20:27:55 End Report. Time 00:00:01
+2026-11-19 20:27:55 Msg: prints after real-VIRM01_L2_L49
+2026-11-19 20:27:55 Msg Options: 
+2026-11-19 20:27:55 Info:  prints after real-VIRM01_L2_L49
+2026-11-19 20:27:55 FREE: I006TABPROGT
+2026-11-19 20:27:55 FREE Options: 
+2026-11-19 20:27:55 FREE: I006TABPROGC
+2026-11-19 20:27:55 FREE Options: 
+2026-11-19 20:27:55 Msg: RECAP case t-long-records
+2026-11-19 20:27:55 Msg Options: 
+2026-11-19 20:27:55 Info:  RECAP case t-long-records
+2026-11-19 20:27:55 QUAL: RCS28
+2026-11-19 20:27:55 QUAL Options: D
+2026-11-19 20:27:55 ASG: INACCTA08
+2026-11-19 20:27:55 ASG Options: A
+2026-11-19 20:27:56 DELETE: OUTCCTA08
+2026-11-19 20:27:56 DELETE Options: C
+2026-11-19 20:27:56 ASG: OUTCCTA08
+2026-11-19 20:27:56 ASG Options: P, U
+2026-11-19 20:27:56 Ignored option P.
+2026-11-19 20:27:56 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS28)
+2026-11-19 20:27:56 FREE: SGSPARM
+2026-11-19 20:27:56 FREE Options: 
+2026-11-19 20:27:56 FREE: RECPARM
+2026-11-19 20:27:56 FREE Options: 
+2026-11-19 20:27:56 File not assigned or USEed: Ignored
+2026-11-19 20:27:56 ASG: RECPARM
+2026-11-19 20:27:56 ASG Options: A
+2026-11-19 20:27:56 USE: SGSPARM,RECPARM
+2026-11-19 20:27:56 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS28\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:56 Msg Options: 
+2026-11-19 20:27:56 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS28\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:56 XQT: TPF$.RECAP
+2026-11-19 20:27:56 XQT Options: R, W
+2026-11-19 20:27:56 
+2026-11-19 20:27:56 End-Xqt
+2026-11-19 20:27:56 Starting Cobol program: RECAP_GN
+20:27:57 *RECAP  FIN*
+20:27:57 *NB-ENREG-LUS =     8
+20:27:57            409015G
+20:27:57            299468B
+20:27:57 STB 00000000004733430                                                                               
+20:27:57 STB 00000000004375861                                                                               
+20:27:57 STB 00000000003981155                                                                               
+20:27:57 *NB-ENREG-ECR =     4
+20:27:57            409015G
+20:27:57            299468B
+20:27:57 STB 00000000004733430                                                                               
+20:27:57 STB 00000000004375861                                                                               
+20:27:57 STB 00000000003981155                                                                               
+2026-11-19 20:27:58 End Report. Time 00:00:02
+2026-11-19 20:27:58 Msg: prints after t-long-records
+2026-11-19 20:27:58 Msg Options: 
+2026-11-19 20:27:58 Info:  prints after t-long-records
+2026-11-19 20:27:58 FREE: INACCTA08
+2026-11-19 20:27:58 FREE Options: 
+2026-11-19 20:27:58 FREE: OUTCCTA08
+2026-11-19 20:27:58 FREE Options: 
+2026-11-19 20:27:58 Msg: RECAP case t-neuro-range
+2026-11-19 20:27:58 Msg Options: 
+2026-11-19 20:27:58 Info:  RECAP case t-neuro-range
+2026-11-19 20:27:58 QUAL: RCS29
+2026-11-19 20:27:58 QUAL Options: D
+2026-11-19 20:27:58 ASG: INACCTA08
+2026-11-19 20:27:58 ASG Options: A
+2026-11-19 20:27:58 DELETE: OUTCCTA08
+2026-11-19 20:27:58 DELETE Options: C
+2026-11-19 20:27:58 ASG: OUTCCTA08
+2026-11-19 20:27:58 ASG Options: P, U
+2026-11-19 20:27:58 Ignored option P.
+2026-11-19 20:27:58 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS29)
+2026-11-19 20:27:58 FREE: SGSPARM
+2026-11-19 20:27:58 FREE Options: 
+2026-11-19 20:27:58 FREE: RECPARM
+2026-11-19 20:27:58 FREE Options: 
+2026-11-19 20:27:58 File not assigned or USEed: Ignored
+2026-11-19 20:27:58 ASG: RECPARM
+2026-11-19 20:27:58 ASG Options: A
+2026-11-19 20:27:58 USE: SGSPARM,RECPARM
+2026-11-19 20:27:58 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS29\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:58 Msg Options: 
+2026-11-19 20:27:58 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS29\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:27:58 XQT: TPF$.RECAP
+2026-11-19 20:27:58 XQT Options: R, W
+2026-11-19 20:27:58 
+2026-11-19 20:27:58 End-Xqt
+2026-11-19 20:27:58 Starting Cobol program: RECAP_GN
+20:27:59 *RECAP  FIN*
+20:27:59 *NB-ENREG-LUS =    16
+20:27:59            724032G
+20:27:59            990609I
+20:27:59 STB 00000000006244104                                                                               
+20:27:59 STB 00000000009137840                                                                               
+20:27:59 STB 00000000009054303                                                                               
+20:27:59 *NB-ENREG-ECR =     7
+20:27:59            724032G
+20:27:59            990609I
+20:27:59 STB 00000000006244104                                                                               
+20:27:59 STB 00000000009137840                                                                               
+20:27:59 STB 00000000009054303                                                                               
+2026-11-19 20:28:00 End Report. Time 00:00:01
+2026-11-19 20:28:00 Msg: prints after t-neuro-range
+2026-11-19 20:28:00 Msg Options: 
+2026-11-19 20:28:00 Info:  prints after t-neuro-range
+2026-11-19 20:28:00 FREE: INACCTA08
+2026-11-19 20:28:00 FREE Options: 
+2026-11-19 20:28:00 FREE: OUTCCTA08
+2026-11-19 20:28:00 FREE Options: 
+2026-11-19 20:28:00 Msg: RECAP case t-no-neuro
+2026-11-19 20:28:00 Msg Options: 
+2026-11-19 20:28:00 Info:  RECAP case t-no-neuro
+2026-11-19 20:28:00 QUAL: RCS30
+2026-11-19 20:28:00 QUAL Options: D
+2026-11-19 20:28:00 ASG: INACCTA08
+2026-11-19 20:28:00 ASG Options: A
+2026-11-19 20:28:00 DELETE: OUTCCTA08
+2026-11-19 20:28:00 DELETE Options: C
+2026-11-19 20:28:00 ASG: OUTCCTA08
+2026-11-19 20:28:00 ASG Options: P, U
+2026-11-19 20:28:00 Ignored option P.
+2026-11-19 20:28:00 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS30)
+2026-11-19 20:28:00 FREE: SGSPARM
+2026-11-19 20:28:00 FREE Options: 
+2026-11-19 20:28:00 FREE: RECPARM
+2026-11-19 20:28:00 FREE Options: 
+2026-11-19 20:28:00 File not assigned or USEed: Ignored
+2026-11-19 20:28:00 ASG: RECPARM
+2026-11-19 20:28:00 ASG Options: A
+2026-11-19 20:28:00 USE: SGSPARM,RECPARM
+2026-11-19 20:28:00 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS30\RECPARM (30 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:00 Msg Options: 
+2026-11-19 20:28:00 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS30\RECPARM (30 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:00 XQT: TPF$.RECAP
+2026-11-19 20:28:00 XQT Options: R, W
+2026-11-19 20:28:00 
+2026-11-19 20:28:00 End-Xqt
+2026-11-19 20:28:00 Starting Cobol program: RECAP_GN
+20:28:01 *RECAP  FIN*
+20:28:01 *NB-ENREG-LUS =    10
+20:28:01 STB 00000000005510273                                                                               
+20:28:01 STB 00000000006165459                                                                               
+20:28:01 STB 00000000005911868                                                                               
+20:28:01 STB 00000000004875141                                                                               
+20:28:01 STB 00000000004315101                                                                               
+20:28:01 *NB-ENREG-ECR =     6
+20:28:01 STB 00000000005510273                                                                               
+20:28:01 STB 00000000006165459                                                                               
+20:28:01 STB 00000000005911868                                                                               
+20:28:01 STB 00000000004875141                                                                               
+20:28:01 STB 00000000004315101                                                                               
+2026-11-19 20:28:02 End Report. Time 00:00:01
+2026-11-19 20:28:02 Msg: prints after t-no-neuro
+2026-11-19 20:28:02 Msg Options: 
+2026-11-19 20:28:02 Info:  prints after t-no-neuro
+2026-11-19 20:28:02 FREE: INACCTA08
+2026-11-19 20:28:02 FREE Options: 
+2026-11-19 20:28:02 FREE: OUTCCTA08
+2026-11-19 20:28:02 FREE Options: 
+2026-11-19 20:28:02 Msg: RECAP case t-one-group
+2026-11-19 20:28:02 Msg Options: 
+2026-11-19 20:28:02 Info:  RECAP case t-one-group
+2026-11-19 20:28:02 QUAL: RCS31
+2026-11-19 20:28:02 QUAL Options: D
+2026-11-19 20:28:02 ASG: FICHIER1
+2026-11-19 20:28:02 ASG Options: A
+2026-11-19 20:28:02 DELETE: FICHIER2
+2026-11-19 20:28:02 DELETE Options: C
+2026-11-19 20:28:02 ASG: FICHIER2
+2026-11-19 20:28:02 ASG Options: P, U
+2026-11-19 20:28:02 Ignored option P.
+2026-11-19 20:28:02 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS31)
+2026-11-19 20:28:02 FREE: SGSPARM
+2026-11-19 20:28:02 FREE Options: 
+2026-11-19 20:28:02 FREE: RECPARM
+2026-11-19 20:28:02 FREE Options: 
+2026-11-19 20:28:02 File not assigned or USEed: Ignored
+2026-11-19 20:28:02 ASG: RECPARM
+2026-11-19 20:28:02 ASG Options: A
+2026-11-19 20:28:02 USE: SGSPARM,RECPARM
+2026-11-19 20:28:02 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS31\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:02 Msg Options: 
+2026-11-19 20:28:02 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS31\RECPARM (27 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:02 XQT: TPF$.RECAP
+2026-11-19 20:28:02 XQT Options: R, W
+2026-11-19 20:28:02 
+2026-11-19 20:28:02 End-Xqt
+2026-11-19 20:28:02 Starting Cobol program: RECAP_GN
+20:28:04 *RECAP  FIN*
+20:28:04 *NB-ENREG-LUS =     6
+20:28:04 STB 00000000026369567                                                                               
+20:28:04 STB 00000000032464029                                                                               
+20:28:04 STB 00000000045034230                                                                               
+20:28:04 STB 00000000026697429                                                                               
+20:28:04 STB 00000000039682640                                                                               
+20:28:04 *NB-ENREG-ECR =     1
+20:28:04 STB 00000000026369567                                                                               
+20:28:04 STB 00000000032464029                                                                               
+20:28:04 STB 00000000045034230                                                                               
+20:28:04 STB 00000000026697429                                                                               
+20:28:04 STB 00000000039682640                                                                               
+2026-11-19 20:28:04 End Report. Time 00:00:01
+2026-11-19 20:28:04 Msg: prints after t-one-group
+2026-11-19 20:28:04 Msg Options: 
+2026-11-19 20:28:04 Info:  prints after t-one-group
+2026-11-19 20:28:04 FREE: FICHIER1
+2026-11-19 20:28:04 FREE Options: 
+2026-11-19 20:28:04 FREE: FICHIER2
+2026-11-19 20:28:04 FREE Options: 
+2026-11-19 20:28:04 Msg: RECAP case t-short-records
+2026-11-19 20:28:04 Msg Options: 
+2026-11-19 20:28:04 Info:  RECAP case t-short-records
+2026-11-19 20:28:04 QUAL: RCS32
+2026-11-19 20:28:04 QUAL Options: D
+2026-11-19 20:28:04 ASG: INACCTA08
+2026-11-19 20:28:04 ASG Options: A
+2026-11-19 20:28:04 DELETE: OUTCCTA08
+2026-11-19 20:28:04 DELETE Options: C
+2026-11-19 20:28:04 ASG: OUTCCTA08
+2026-11-19 20:28:04 ASG Options: P, U
+2026-11-19 20:28:04 Ignored option P.
+2026-11-19 20:28:04 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS32)
+2026-11-19 20:28:04 FREE: SGSPARM
+2026-11-19 20:28:04 FREE Options: 
+2026-11-19 20:28:04 FREE: RECPARM
+2026-11-19 20:28:04 FREE Options: 
+2026-11-19 20:28:04 File not assigned or USEed: Ignored
+2026-11-19 20:28:04 ASG: RECPARM
+2026-11-19 20:28:04 ASG Options: A
+2026-11-19 20:28:04 USE: SGSPARM,RECPARM
+2026-11-19 20:28:04 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS32\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:04 Msg Options: 
+2026-11-19 20:28:04 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS32\RECPARM (32 lines); RECAPIN=INACCTA08 RECAPOUT=OUTCCTA08; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:04 XQT: TPF$.RECAP
+2026-11-19 20:28:04 XQT Options: R, W
+2026-11-19 20:28:04 
+2026-11-19 20:28:04 End-Xqt
+2026-11-19 20:28:04 Starting Cobol program: RECAP_GN
+20:28:06 *RECAP  FIN*
+20:28:06 *NB-ENREG-LUS =    14
+20:28:06            680666G
+20:28:06            754635C
+20:28:06 STB 00000000007028782                                                                               
+20:28:06 STB 00000000006061256                                                                               
+20:28:06 STB 00000000005793936                                                                               
+20:28:06 *NB-ENREG-ECR =     5
+20:28:06            680666G
+20:28:06            754635C
+20:28:06 STB 00000000007028782                                                                               
+20:28:06 STB 00000000006061256                                                                               
+20:28:06 STB 00000000005793936                                                                               
+2026-11-19 20:28:06 End Report. Time 00:00:01
+2026-11-19 20:28:06 Msg: prints after t-short-records
+2026-11-19 20:28:06 Msg Options: 
+2026-11-19 20:28:06 Info:  prints after t-short-records
+2026-11-19 20:28:06 FREE: INACCTA08
+2026-11-19 20:28:06 FREE Options: 
+2026-11-19 20:28:06 FREE: OUTCCTA08
+2026-11-19 20:28:06 FREE Options: 
+2026-11-19 20:28:06 Msg: RECAP case t-spaces-overlap
+2026-11-19 20:28:06 Msg Options: 
+2026-11-19 20:28:06 Info:  RECAP case t-spaces-overlap
+2026-11-19 20:28:06 QUAL: RCS33
+2026-11-19 20:28:06 QUAL Options: D
+2026-11-19 20:28:06 ASG: FICHIER1
+2026-11-19 20:28:06 ASG Options: A
+2026-11-19 20:28:06 DELETE: FICHIER2
+2026-11-19 20:28:06 DELETE Options: C
+2026-11-19 20:28:06 ASG: FICHIER2
+2026-11-19 20:28:06 ASG Options: P, U
+2026-11-19 20:28:06 Ignored option P.
+2026-11-19 20:28:06 Invoke-Ssg: ../../ASSURFED_UTILIT/UTILIT_RECAP (Options=IA, SgsFile=P$SGS\RCS33)
+2026-11-19 20:28:06 FREE: SGSPARM
+2026-11-19 20:28:06 FREE Options: 
+2026-11-19 20:28:06 FREE: RECPARM
+2026-11-19 20:28:06 FREE Options: 
+2026-11-19 20:28:06 File not assigned or USEed: Ignored
+2026-11-19 20:28:06 ASG: RECPARM
+2026-11-19 20:28:06 ASG Options: A
+2026-11-19 20:28:06 USE: SGSPARM,RECPARM
+2026-11-19 20:28:06 Msg: SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS33\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:06 Msg Options: 
+2026-11-19 20:28:06 Info:  SSG-4 hand-off (RECAP): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\RCS33\RECPARM (51 lines); RECAPIN=FICHIER1 RECAPOUT=FICHIER2; Xqt RECAP -> RECAP_GN
+2026-11-19 20:28:06 XQT: TPF$.RECAP
+2026-11-19 20:28:06 XQT Options: R, W
+2026-11-19 20:28:06 
+2026-11-19 20:28:06 End-Xqt
+2026-11-19 20:28:06 Starting Cobol program: RECAP_GN
+20:28:08 *RECAP  FIN*
+20:28:08 *NB-ENREG-LUS =    12
+20:28:08 STB 00000000057222332                                                                               
+20:28:08 STB 00000000064048573                                                                               
+20:28:08 STB 00000000085980318                                                                               
+20:28:08 STB 00000000050243337                                                                               
+20:28:08 STB 00000000056447482                                                                               
+20:28:08 STB 00000000052066908                                                                               
+20:28:08 STB 00000000053809787                                                                               
+20:28:08 STB 00000000062899258                                                                               
+20:28:08 STB 00000000077084324                                                                               
+20:28:08 STB 00000000051117426                                                                               
+20:28:08 STB 00000000064428441                                                                               
+20:28:08 *NB-ENREG-ECR =     5
+20:28:08 STB 00000000057222332                                                                               
+20:28:08 STB 00000000064048573                                                                               
+20:28:08 STB 00000000085980318                                                                               
+20:28:08 STB 00000000050243337                                                                               
+20:28:08 STB 00000000056447482                                                                               
+20:28:08 STB 00000000052066908                                                                               
+20:28:08 STB 00000000053809787                                                                               
+20:28:08 STB 00000000062899258                                                                               
+20:28:08 STB 00000000077084324                                                                               
+20:28:08 STB 00000000051117426                                                                               
+20:28:08 STB 00000000064428441                                                                               
+2026-11-19 20:28:08 End Report. Time 00:00:01
+2026-11-19 20:28:08 Msg: prints after t-spaces-overlap
+2026-11-19 20:28:08 Msg Options: 
+2026-11-19 20:28:08 Info:  prints after t-spaces-overlap
+2026-11-19 20:28:08 FREE: FICHIER1
+2026-11-19 20:28:08 FREE Options: 
+2026-11-19 20:28:08 FREE: FICHIER2
+2026-11-19 20:28:08 FREE Options: 
+2026-11-19 20:28:08 FIN
+2026-11-19 20:28:08 
+2026-11-19 20:28:08 End Job. Start: 2026-11-19 20:26:52
+2026-11-19 20:28:08          End:   2026-11-19 20:28:08
+2026-11-19 20:28:08 Info:  Script Done: RECSTUB

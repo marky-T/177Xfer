@@ -1,0 +1,7 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 22:53:51
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS prepare        Prepare-ExteurCc.ps1           inputs, job scripts and hand-offs staged
+FAIL SSG4_EXTEUR_CASES regression                     not run yet: start it in CC (ccStartJob 'SSG4_EXTEUR_CASES'), then -Stage Regress -Job SSG4_EXTEUR_CASES -StartLine '<ccStartJob line>'
+FAIL SSG4_EXTEUR_ABORT [CURRENCY] regression                     not run yet: start it in CC (ccStartJob 'SSG4_EXTEUR_ABORT', 'CURRENCY'), then -Stage Regress -Job SSG4_EXTEUR_ABORT -JobParam CURRENCY -StartLine '<ccStartJob line>'
+FAIL SSG4_EXTEUR_ABORT [OVERFLOW] regression                     not run yet: start it in CC (ccStartJob 'SSG4_EXTEUR_ABORT', 'OVERFLOW'), then -Stage Regress -Job SSG4_EXTEUR_ABORT -JobParam OVERFLOW -StartLine '<ccStartJob line>'
+=== Regress : 3 failure(s)

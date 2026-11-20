@@ -1,0 +1,4 @@
+--- BatchController: 20261119 23:01:05.582 11 Information SSG4_EXTEUR_CASES Done Id: 2001 Queue: JOB_QUEUE1 (Execution time: 00:00:22:948)
+--- EXTTEST_200120261119230046855.log
+--- 12 of 12 outputs byte-identical
+=== SSG4_EXTEUR_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_EXTEUR_CASES\check.txt)

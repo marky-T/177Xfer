@@ -1,0 +1,19 @@
+SSG-4: EUU003 test double, EXTEUR generic (G1-G8), full CC regression 25/25, T3-071..074
+
+- EUU003STUB: test double for EUU003 (PROGRAM-ID 'EUU003', MT-SRT = 'STB' + MT-ENE),
+  reference group in utilities.json; regress jobs SSG4_RECAP_EUU003STUB (33/33) and
+  SSG4_TABAN_EUU003STUB (32/32 prints).
+- RECAP/TABAN: stub model outputs (report-stub.txt / print-stub.txt), Prepare writes both
+  jobs, Check-RecapCc -Stub; provenInCc updated.
+- EXTEUR (new utility): spec (L1-L9, A1-A9, G2 decisions), model + 27 test cases,
+  parameter check, EXTEUR-GN.cob, ExteurParm.ps1 hand-off (EU001/EU002 phase via OpenQuery),
+  CC jobs SSG4_EXTEUR_CASES (12/12 + console) and SSG4_EXTEUR_ABORT (CURRENCY, OVERFLOW).
+- Deliver-GnPrograms.ps1 (shared): a program without Files.cs is treated as having no inputs.
+- Full CC regression 2026-11-19, UseUnicode True: 25 of 25 jobs PASS (runbook run record).
+- Tracker: T3-071..T3-074 (R&D's converted FILE/SSG skeleton and inline #SORT merge steps);
+  board-candidates.md updated.
+- Plan 261116-db-ssg-programs-plan.md updated.
+- Also included (owner's earlier changes): SsgTrial.code-workspace terminal auto-approve
+  (ForEach-Object), 261009-trial4-epic-strategy.html, Conversion/PROCESS.html.
+
+Co-authored-by: GitHub Copilot <copilot@github.com>

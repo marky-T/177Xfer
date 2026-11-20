@@ -1,0 +1,16 @@
+LD01 LOADIS   CLOA49 L141  PASS data same (4326 B) | index ok
+LD02 LOADIS   DEPM08 L56   PASS data same (2684 B) | index ok
+LD03 LOADIS   DMSH02 L141  PASS data same (2484 B) | index ok
+LD04 LOADIS   SINH01 L138  PASS data same (4944 B) | index ok
+LD05 LOADIS   STAA06 L754  PASS data same (10050 B) | index ok
+LD06 LOADIS   VIGA50 L129  PASS data same (5252 B) | index ok
+LD07 LOADIS   VIRA18 L89   PASS data same (24354 B) | index ok
+LD08 LOADIS   VIRD38 L87   PASS data same (25256 B) | index ok
+LD09 LOADIS   VIRD50 L312  PASS data same (2958 B) | index ok
+LD10 LOADIS   VIRM01 L313  PASS data same (3060 B) | index ok
+LD11 UNLOADIS CLOA43 L473  PASS data same (6386 B) | index n/a
+LD12 UNLOADIS DEPM08 L36   PASS data same (3904 B) | index n/a
+LD13 UNLOADIS EXPD05 L11   PASS data same (3828 B) | index n/a
+LD14 UNLOADIS EXPD05 L27   PASS data same (7004 B) | index n/a
+LD15 UNLOADIS VIGA50 L45   PASS data same (7070 B) | index n/a
+15/15 pass

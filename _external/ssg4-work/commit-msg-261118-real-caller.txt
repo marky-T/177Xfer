@@ -1,0 +1,16 @@
+SSG-4 MT-069: "real calls" definition and open risks for Federale (tracker 3b, runbook tab 6)
+
+- Tracker new section 3b (+ nav link): how the conversion decides what to support: definition
+  of a real call (1,080 indexed production runstreams, 170 with UTILIT calls = the pack, 371
+  calls), "no real caller", refused vs kept-with-test-data branches, the decision per branch,
+  the branches refused/kept per utility, and the risks left for the Federale testers and
+  business analysts (runstreams outside the index, run-time cards, test-data-only branches,
+  assumptions A1-A14 / Q1-Q12, calls not yet proven in CC, synthetic test data).
+- Runbook tab 6: the same section (id g-real-caller), after Design rules.
+- Tracker 3b: 'Converted vs supported' row. New ToDo MT-071 'To share with Conversion Scope /
+  Federale' (supported subset, refused branches needed later, completeness gap and options A/B/C;
+  note in ssg4-work, placement to decide).
+- RECAP / TABAN specs: "no real caller" defined at the limits; EUU002/EUU003 origin (1998
+  euro-conversion utility; EUU002 UCOB, EUU003 ACOB) recorded with the AMT evidence.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

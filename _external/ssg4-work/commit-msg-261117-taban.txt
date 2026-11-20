@@ -1,0 +1,20 @@
+SSG-4 MT-069: generic TABAN (G1-G8, CC PASS without EUU003)
+
+Generic TABAN (Conversion/Pipeline/Generic/TABAN), printer-only totals report:
+- G1 check/Classify-TabanCalls.ps1: 27 calls, 3 shapes (20 no key groups, 4 groups without /
+  3 with the sequence check); SEQERROR is a presence switch.
+- G2 spec.md (approved): behaviour, print lines, NEURO, limits L1-L9 (the skeleton has no card
+  checks of its own), assumptions (RECAP's A2/A3/A6/A8-A10 + A11-A14).
+- G3 TabanModel.ps1, New-TabanCases.ps1, Run-TabanModel.ps1: 59 TEST DATA cases, repeatable.
+- G4 gen/TABAN-GN.cob: CobolConverterConsole 0 errors (skeleton's WRITE LIGNE FROM form).
+- G5 gen/TabanParm.ps1 (Xqt TABAN, TABPARM 80, TABIN).
+- G6 utilities.json entry + regress SSG4_TABAN_CASES (prints).
+- G7 Test-TabanParm.ps1 (approved): 27 real calls MATCH 21 / DIFF 6 (NEURO, T3-070; 27 with
+  the fix); writer vs model 59/59; -Stage Check -Utility All 14/14 passed.
+- G8 cc/Prepare-TabanCc.ps1: CC run 1901 (261117 15:27) PASS first run, 12/12 print files
+  identical to the model; cases that never call EUU003.
+
+Also: tracker section 3 describes TABAN and RECAP (was "Data build / table analysis");
+MT-069 row; T3-066 row notes the moved scratch converter copies; plan Q11/Q12 for Eddy.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>

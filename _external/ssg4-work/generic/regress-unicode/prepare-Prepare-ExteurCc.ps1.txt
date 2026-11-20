@@ -1,0 +1,8 @@
+real-VIRJ01_UL_L146    EXT01   27 records in,  27 out, 0 ano, 4 console lines
+t-empty-input          EXT02    0 records in,   0 out, 0 ano, 4 console lines
+t-short-records        EXT03    9 records in,   9 out, 0 ano, 4 console lines
+t-long-records         EXT04    9 records in,   9 out, 0 ano, 4 console lines
+t-small-values         EXT05    6 records in,   6 out, 0 ano, 4 console lines
+t-two-amounts          EXT06    8 records in,   8 out, 0 ano, 4 console lines
+SSG4_EXTEUR_CASES.ps1 written, parse errors: 0
+SSG4_EXTEUR_ABORT.ps1 written, parse errors: 0

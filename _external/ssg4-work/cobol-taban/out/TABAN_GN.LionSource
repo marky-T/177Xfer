@@ -1,0 +1,588 @@
+<LION SOURCE FILE>
+<EXPORT FILE VERSION=6>
+<EXPORT PROGRAM VERSION=>
+<EXPORT DATE=20090101,120000>
+<EXPORT=APPLICATION>
+<CONTAINS>
+<APPLICATION=TABANGN,913>
+<DESCRIPTION=NEW APPLICATION>
+<SYSTEM OPTIONS>
+<VERSION=1.0>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<VERSION=1.0>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=TABAN-GN,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</CONTAINS>
+<APPLICATION=TABANGN,913>
+<SYSTEM OPTIONS>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=System>
+</REVDATA>
+<DATA=Options>
+  Name=TABANGN
+  Description=NEW APPLICATION
+  Show leading zeros=O
+  MdiSetting=0
+  FireUpForm=
+  InitialTransaction=
+  TerminalForm=TERMINALOUTPUT
+  Table Con Non Dic=Y
+  UseCOMEncryption=N
+  ReadFileSharedMode=N
+  LbxOnlyCreateInSubFolder=N
+  FileRecordEnding=CRLF
+  InitVariables=2
+  NumericEncoding=2
+  NoIndexOnLionRecno=N
+  AbortDeleteNonExistingRecord=N
+  AbortUpdateNonExistingRecord=N
+  CobolPrinting=Y
+  PrimaryKeyRecno=Y
+  Decimal char=.
+  AutomaticTableLock=N
+  UseSiDbStatus=Y
+  Index.FillFactor=80
+  RestoreSessData=N
+  ForceDecimalKey=N
+  SI-ParamSize=4000
+  SwapMessages=N
+  Unicode=N
+  UnicodeFile=N
+  LionRecNoNum18=N
+  EmbedFonts=N
+  InitInspectCounting=N
+  SingleQuote=N
+  Add_Dates_Modified_Created=N
+  IndexKeysNull=N
+  PrimLanguage=ENGLISH
+  LionRecNoAsLastKey=Y
+  CollationSequenceMsSql=
+  CollationSequenceOracle=
+  CollationSequenceDb2=
+  DbFieldTypeManually=N
+</DATA>
+<DATA=TipFiles>
+</DATA>
+<DATA=Language>
+  0001=ENGLISH@TRUE
+</DATA>
+<DATA=ConvertData>
+  Application converted on : 2026-11-17 14:11
+  Converted by user        : MTRUMAN
+  Converted by version     : 1.0
+  Old system date format   : ddmmmyy
+  Old century start year   : 0
+  Restore Sessiondata      : TRUE
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<DATA=Dates>
+  BaseYear=1957
+  ShiftingTimeFrame=50
+  CenturyStart=0
+  SiCentury=DontUseOnlySet
+  ValidDateFrom=1
+  ValidDateTill=9999
+  Allow1DigitMonth=N
+  Use Regional Month Short=Y
+  Use Regional Month Long=N
+  Use Regional Day Long=N
+  ISO 8601 weekno calculation=Y
+  Month Long Names=JANUARY
+FEBRUARY
+MARCH
+APRIL
+MAY
+JUNE
+JULY
+AUGUST
+SEPTEMBER
+OCTOBER
+NOVEMBER
+DECEMBER
+
+  Month Short Names=JAN
+FEB
+MAR
+APR
+MAY
+JUN
+JUL
+AUG
+SEP
+OCT
+NOV
+DEC
+
+  Day Long Names=SUNDAY
+MONDAY
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+
+  DbsFormatDate=CCYY-MM-DD
+  DbsFormatDateTime=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN]
+  DbsFormatDateTimeOffset=CCYY-MM-DD HH:MM:SS[.NNNNNNNNNNNN] +TZH:TZM
+  DbsFormatTime=HH:MM:SS[.NNNNNNNNNNNN]
+</DATA>
+</SYSTEM OPTIONS>
+<DMS2200 SCHEMAS>
+<OBJECT=,DMS2200 SCHEMA>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=DMS2200 SCHEMA>
+</REVDATA>
+<DATA=Options>
+  Name=
+  Description=DMS2200 schema
+  NumberOfAreas=0
+</DATA>
+</OBJECT>
+</DMS2200 SCHEMAS>
+<DMS2200 TABLES>
+</DMS2200 TABLES>
+<DMS2200 SETS>
+</DMS2200 SETS>
+<DMS2200 AREAS>
+</DMS2200 AREAS>
+<DMS2200 SUBSCHEMAS>
+</DMS SUBSCHEMAS>
+<COBOL PROGRAM>
+<OBJECT=TABAN-GN,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=TABAN-GN
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>* SSG-4 (MT-069): one TABAN for every call. Amount fields, key
+  2009-01-01 12:00  =>* parts, NEURO list and the sequence check come from the SGSPARM
+  2009-01-01 12:00  =>* file written by the skeleton hand-off; behaviour:
+  2009-01-01 12:00  =>* Generic/TABAN/spec.md. The RDMS session of the skeleton is not
+  2009-01-01 12:00  =>* kept (spec A2); EUU003 is called as in the skeleton (spec A3).
+  2009-01-01 12:00  => PROGRAM-ID. 'TABAN-GN'.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-60EIS.
+  2009-01-01 12:00  => SPECIAL-NAMES.
+  2009-01-01 12:00  =>     DECIMAL-POINT IS COMMA.
+  2009-01-01 12:00  => INPUT-OUTPUT SECTION.
+  2009-01-01 12:00  => FILE-CONTROL.
+  2009-01-01 12:00  =>     SELECT PARMF ASSIGN TO DISC SGSPARM.
+  2009-01-01 12:00  =>     SELECT FI1 ASSIGN TO DISC TABIN.
+  2009-01-01 12:00  =>     SELECT IMP ASSIGN TO PRINTER.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => FILE SECTION.
+  2009-01-01 12:00  => FD  PARMF
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD.
+  2009-01-01 12:00  => 01  PARM-REC.
+  2009-01-01 12:00  =>     03  P-TYPE         PIC XX.
+  2009-01-01 12:00  =>     03  P-POS          PIC 9(5).
+  2009-01-01 12:00  =>     03  P-LEN          PIC 9(5).
+  2009-01-01 12:00  =>     03  FILLER         PIC X(68).
+  2009-01-01 12:00  => FD  FI1
+  2009-01-01 12:00  =>     LABEL RECORD STANDARD
+  2009-01-01 12:00  =>     RECORD VARYING IN SIZE FROM 1 TO 4001
+  2009-01-01 12:00  =>     DEPENDING ON WS-IN-LEN.
+  2009-01-01 12:00  => 01  FI1-REC PIC X(4001).
+  2009-01-01 12:00  => FD  IMP   LABEL RECORD  OMITTED
+  2009-01-01 12:00  =>              LINAGE IS 63
+  2009-01-01 12:00  =>              LINES AT TOP 6
+  2009-01-01 12:00  =>              LINES AT BOTTOM 3
+  2009-01-01 12:00  =>           DATA  RECORD  IS  LIGNE.
+  2009-01-01 12:00  => 01  LIGNE   PIC  X(132) DISP-1.
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  => 01  RECIN              PIC X(4001).
+  2009-01-01 12:00  => 01  WS-IN              PIC X(4001).
+  2009-01-01 12:00  => 01  WS-KEY             PIC X(4001).
+  2009-01-01 12:00  => 01  PREV-KEY           PIC X(4001) VALUE SPACES.
+  2009-01-01 12:00  => 01  WS-RUPT            PIC X(4200).
+  2009-01-01 12:00  => 01  WS-PRT-KEY         PIC X(4001).
+  2009-01-01 12:00  => 77  WS-IN-LEN          PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-INLEN            PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  P-SEQ              PIC 9 VALUE 0.
+  2009-01-01 12:00  => 77  CP-LEN             PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  KP                 PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  KO                 PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  KEY-LEN            PIC 9(5) COMP VALUE 0.
+  2009-01-01 12:00  => 77  N-KY               PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  N-IN               PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  I                  PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  G                  PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  S                  PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  K                  PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  AP                 PIC 9(3) COMP VALUE 0.
+  2009-01-01 12:00  => 77  FIRS               PIC 9 VALUE 0.
+  2009-01-01 12:00  => 77  WS-WHICH           PIC X VALUE 'S'.
+  2009-01-01 12:00  => 77  NB-LUS             PIC 9(10) COMP VALUE 0.
+  2009-01-01 12:00  => 01  KY-TAB.
+  2009-01-01 12:00  =>     03  KY-ENT OCCURS 30.
+  2009-01-01 12:00  =>         05  KY-POS     PIC 9(5) COMP.
+  2009-01-01 12:00  =>         05  KY-LEN     PIC 9(5) COMP.
+  2009-01-01 12:00  => 01  IN-TAB.
+  2009-01-01 12:00  =>     03  IN-ENT OCCURS 30.
+  2009-01-01 12:00  =>         05  IN-POS     PIC 9(5) COMP.
+  2009-01-01 12:00  =>         05  IN-LEN     PIC 9(5) COMP.
+  2009-01-01 12:00  => 01  NE-TAB.
+  2009-01-01 12:00  =>     03  NE-FLAG        PIC X OCCURS 30.
+  2009-01-01 12:00  => 01  AMOUNTS.
+  2009-01-01 12:00  =>     03  REC-AMT        PIC S9(18) OCCURS 30.
+  2009-01-01 12:00  =>     03  SUB-AMT        PIC S9(18) OCCURS 30.
+  2009-01-01 12:00  =>     03  TOT-AMT        PIC S9(18) OCCURS 30.
+  2009-01-01 12:00  =>* an amount, right-aligned in 18 digits (skeleton LMONT<i>)
+  2009-01-01 12:00  => 01  WS-AMT             PIC S9(18).
+  2009-01-01 12:00  => 01  WS-AMT-X REDEFINES WS-AMT PIC X(18).
+  2009-01-01 12:00  => 01  WS-VAL             PIC S9(18).
+  2009-01-01 12:00  =>* one amount line (skeleton LIG-SUB<n>): FA + 4 slots
+  2009-01-01 12:00  => 01  WS-LIG.
+  2009-01-01 12:00  =>     03  WS-FA          PIC X(12).
+  2009-01-01 12:00  =>     03  WS-SLOT OCCURS 4.
+  2009-01-01 12:00  =>         05  WS-SPC     PIC X(3).
+  2009-01-01 12:00  =>         05  WS-MONT    PIC X(25).
+  2009-01-01 12:00  => 01  WS-FA-VAL          PIC X(12).
+  2009-01-01 12:00  => 01  ZONE-25            PIC Z(18).
+  2009-01-01 12:00  => 01  TIT-TOTAL.
+  2009-01-01 12:00  =>     02  FILLER  PIC  X(16)  VALUE  '***TABAN FIN ***'.
+  2009-01-01 12:00  =>     02  FILLER  PIC  X(15)  VALUE  ' NB.ENREG.LUS= '.
+  2009-01-01 12:00  =>     02  P-LUS   PIC  Z(8)9.
+  2009-01-01 12:00  =>* EUW002 and WS-CMT-PGM: as in SSG-Source/TABAN_ASCII.TXT
+  2009-01-01 12:00  => 01  EUW002.
+  2009-01-01 12:00  =>     03  WS-PTR-ENE.
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-ENE.
+  2009-01-01 12:00  =>             07  MT-ENE              PIC S9(17).
+  2009-01-01 12:00  =>             07  MT-ENE-SGN          PIC X(01).
+  2009-01-01 12:00  =>             07  MT-ENE-CHI          PIC 9(02).
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-SRT.
+  2009-01-01 12:00  =>             07  LG-MAX-MON-SRT      PIC 9(03).
+  2009-01-01 12:00  =>             07  CD-FMT-MON-SRT      PIC X(01).
+  2009-01-01 12:00  =>             07  WS-PTR-FAC-MON-SRT.
+  2009-01-01 12:00  =>                 09  FL-IMP-APO      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-EUR      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-BEF      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-PLT-SGN      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-TRD-SGN      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-SGN-FIX      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-SGN-VUE      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-CAD-PRC      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-CAD-CNV      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-IMP-PNT      PIC X(01).
+  2009-01-01 12:00  =>                 09  FL-000          PIC X(01).
+  2009-01-01 12:00  =>                 09  CD-DET-MON      PIC X(01).
+  2009-01-01 12:00  =>                 09  FILLER          PIC X(19).
+  2009-01-01 12:00  =>     03  WS-PTR-SRT.
+  2009-01-01 12:00  =>         05  WS-MON-SRT-001.
+  2009-01-01 12:00  =>             07  MT-SRT              PIC X(100).
+  2009-01-01 12:00  =>         05  WS-MON-SRT-002.
+  2009-01-01 12:00  =>             07  MT-SRT-PRC          PIC X(50).
+  2009-01-01 12:00  =>             07  MT-SRT-CNV          PIC X(50).
+  2009-01-01 12:00  =>             07  TL-PTH-GCH          PIC X(01).
+  2009-01-01 12:00  =>             07  TL-PTH-DRT          PIC X(01).
+  2009-01-01 12:00  =>         05  LG-MON-SRT              PIC 9(02).
+  2009-01-01 12:00  =>         05  LB-DVI-PRC              PIC X(03).
+  2009-01-01 12:00  =>         05  LB-DVI-CNV              PIC X(03).
+  2009-01-01 12:00  =>     03  WS-PTR-ENE-SRT.
+  2009-01-01 12:00  =>         05  FILLER                  PIC X(10).
+  2009-01-01 12:00  =>     03  WS-IFN-EUR.
+  2009-01-01 12:00  =>         05  FILLER                  PIC X(10).
+  2009-01-01 12:00  => 01  WS-CMT-PGM.
+  2009-01-01 12:00  =>     03  NM-PGM-APL               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-ENV               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-COP               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-DEM               PIC X(08).
+  2009-01-01 12:00  =>     03  VL-CDE-RET               PIC S9(04).
+  2009-01-01 12:00  =>     03  VL-MOT-CDE               PIC S9(04).
+  2009-01-01 12:00  =>     03  LB-MSG-RET               PIC X(30).
+  2009-01-01 12:00  =>     03  CD-DBG-PRG               PIC X(1).
+  2009-01-01 12:00  =>     03  FILLER                   PIC X(7).
+  2009-01-01 12:00  =>     03  VL-CHP-TSF               PIC X(3922).
+  2009-01-01 12:00  => PROCEDURE DIVISION.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     MOVE ALL 'N' TO NE-TAB.
+  2009-01-01 12:00  =>     OPEN INPUT PARMF.
+  2009-01-01 12:00  => PARM-LECT.
+  2009-01-01 12:00  =>     READ PARMF AT END GO TO PARM-FIN.
+  2009-01-01 12:00  =>     IF P-TYPE = 'HD'
+  2009-01-01 12:00  =>        MOVE P-POS TO P-INLEN
+  2009-01-01 12:00  =>        MOVE P-LEN TO P-SEQ.
+  2009-01-01 12:00  =>     IF P-TYPE = 'KY'
+  2009-01-01 12:00  =>        ADD 1 TO N-KY
+  2009-01-01 12:00  =>        MOVE P-POS TO KY-POS (N-KY)
+  2009-01-01 12:00  =>        MOVE P-LEN TO KY-LEN (N-KY).
+  2009-01-01 12:00  =>     IF P-TYPE = 'IN'
+  2009-01-01 12:00  =>        ADD 1 TO N-IN
+  2009-01-01 12:00  =>        MOVE P-POS TO IN-POS (N-IN)
+  2009-01-01 12:00  =>        MOVE P-LEN TO IN-LEN (N-IN).
+  2009-01-01 12:00  =>     IF P-TYPE = 'NE'
+  2009-01-01 12:00  =>        MOVE 'Y' TO NE-FLAG (P-POS).
+  2009-01-01 12:00  =>     GO TO PARM-LECT.
+  2009-01-01 12:00  => PARM-FIN.
+  2009-01-01 12:00  =>     CLOSE PARMF.
+  2009-01-01 12:00  =>     MOVE ZEROES TO AMOUNTS.
+  2009-01-01 12:00  =>     OPEN INPUT FI1.
+  2009-01-01 12:00  =>     OPEN OUTPUT IMP.
+  2009-01-01 12:00  =>     MOVE 'TABAN'     TO NM-PGM-APL   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'BATCH'     TO NM-NOM-ENV   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO CD-DBG-PRG   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'EUW002'    TO NM-NOM-COP   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE 'SERVICE1'  TO NM-NOM-DEM   OF WS-CMT-PGM.
+  2009-01-01 12:00  =>     MOVE SPACES      TO WS-PTR-ENE   OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'R'         TO FL-PLT-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE '2'         TO FL-TRD-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO MT-ENE-SGN   OF EUW002.
+  2009-01-01 12:00  =>     MOVE '1'         TO CD-FMT-MON-SRT  OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'Y'         TO FL-IMP-PNT      OF EUW002.
+  2009-01-01 12:00  =>     MOVE 'N'         TO FL-000          OF EUW002.
+  2009-01-01 12:00  => LECT.
+  2009-01-01 12:00  =>     MOVE SPACES TO RECIN.
+  2009-01-01 12:00  =>     READ FI1 INTO RECIN AT END GO TO FINBDE.
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-IN.
+  2009-01-01 12:00  =>     MOVE WS-IN-LEN TO CP-LEN.
+  2009-01-01 12:00  =>     IF CP-LEN > P-INLEN
+  2009-01-01 12:00  =>        MOVE P-INLEN TO CP-LEN.
+  2009-01-01 12:00  =>     IF CP-LEN > 0
+  2009-01-01 12:00  =>        MOVE RECIN (1:CP-LEN) TO WS-IN (1:CP-LEN).
+  2009-01-01 12:00  =>* amounts: not numeric -> every space becomes 0 in the record
+  2009-01-01 12:00  =>* (skeleton: MOVE ZEROES when all spaces, else PMONT<i>)
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => AMT-LOOP.
+  2009-01-01 12:00  =>     IF I > N-KY GO TO AMT-END.
+  2009-01-01 12:00  =>     PERFORM AMT-LOAD.
+  2009-01-01 12:00  =>     IF WS-AMT NOT NUMERIC
+  2009-01-01 12:00  =>        INSPECT WS-IN (KY-POS (I):KY-LEN (I))
+  2009-01-01 12:00  =>          REPLACING ALL SPACE BY '0'
+  2009-01-01 12:00  =>        PERFORM AMT-LOAD.
+  2009-01-01 12:00  =>     MOVE WS-AMT TO REC-AMT (I).
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO AMT-LOOP.
+  2009-01-01 12:00  => AMT-END.
+  2009-01-01 12:00  =>     ADD 1 TO NB-LUS.
+  2009-01-01 12:00  =>* key = the INDIC parts in card order
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-KEY.
+  2009-01-01 12:00  =>     MOVE 1 TO KP.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => KEY-LOOP.
+  2009-01-01 12:00  =>     IF I > N-IN GO TO KEY-END.
+  2009-01-01 12:00  =>     MOVE WS-IN (IN-POS (I):IN-LEN (I))
+  2009-01-01 12:00  =>       TO WS-KEY (KP:IN-LEN (I)).
+  2009-01-01 12:00  =>     ADD IN-LEN (I) TO KP.
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO KEY-LOOP.
+  2009-01-01 12:00  => KEY-END.
+  2009-01-01 12:00  =>     COMPUTE KEY-LEN = KP - 1.
+  2009-01-01 12:00  =>     IF FIRS = 0
+  2009-01-01 12:00  =>        MOVE 1 TO FIRS
+  2009-01-01 12:00  =>        GO TO CONT1.
+  2009-01-01 12:00  =>     IF N-IN = 0 GO TO LECT2.
+  2009-01-01 12:00  =>     IF P-SEQ = 1
+  2009-01-01 12:00  =>        IF PREV-KEY (1:KEY-LEN) > WS-KEY (1:KEY-LEN)
+  2009-01-01 12:00  =>           GO TO ERR-SEQ.
+  2009-01-01 12:00  =>     IF PREV-KEY (1:KEY-LEN) NOT = WS-KEY (1:KEY-LEN)
+  2009-01-01 12:00  =>        GO TO RUPT.
+  2009-01-01 12:00  => LECT2.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => LECT2-LOOP.
+  2009-01-01 12:00  =>     IF I > N-KY GO TO LECT.
+  2009-01-01 12:00  =>     ADD REC-AMT (I) TO SUB-AMT (I).
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO LECT2-LOOP.
+  2009-01-01 12:00  => RUPT.
+  2009-01-01 12:00  =>     PERFORM DO-RUPT THRU DO-RUPT-EXIT.
+  2009-01-01 12:00  => CONT1.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => CONT1-LOOP.
+  2009-01-01 12:00  =>     IF I > N-KY GO TO CONT1-END.
+  2009-01-01 12:00  =>     MOVE ZEROES TO SUB-AMT (I).
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO CONT1-LOOP.
+  2009-01-01 12:00  => CONT1-END.
+  2009-01-01 12:00  =>     MOVE WS-KEY TO PREV-KEY.
+  2009-01-01 12:00  =>     GO TO LECT2.
+  2009-01-01 12:00  => FINBDE.
+  2009-01-01 12:00  =>     IF N-IN > 0
+  2009-01-01 12:00  =>        PERFORM DO-RUPT THRU DO-RUPT-EXIT
+  2009-01-01 12:00  =>        GO TO FIN-TOTAL.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => FINBDE-LOOP.
+  2009-01-01 12:00  =>     IF I > N-KY GO TO FIN-TOTAL.
+  2009-01-01 12:00  =>     ADD SUB-AMT (I) TO TOT-AMT (I).
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO FINBDE-LOOP.
+  2009-01-01 12:00  => FIN-TOTAL.
+  2009-01-01 12:00  =>     MOVE '*****TOTAL GENERAL *****'  TO  LIGNE.
+  2009-01-01 12:00  =>     WRITE  LIGNE  AFTER PAGE.
+  2009-01-01 12:00  =>     MOVE 'T' TO WS-WHICH.
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-FA-VAL.
+  2009-01-01 12:00  =>     PERFORM AMT-LINES THRU AMT-LINES-EXIT.
+  2009-01-01 12:00  =>     MOVE  NB-LUS  TO   P-LUS.
+  2009-01-01 12:00  =>     WRITE  LIGNE  FROM  TIT-TOTAL  AFTER  3.
+  2009-01-01 12:00  => FF. CLOSE  FI1.
+  2009-01-01 12:00  =>     CLOSE  IMP.
+  2009-01-01 12:00  =>     STOP RUN.
+  2009-01-01 12:00  => ERR-SEQ.
+  2009-01-01 12:00  =>     MOVE      '**ERREUR DE SEQUENCE**'  TO  LIGNE.
+  2009-01-01 12:00  =>     WRITE  LIGNE  AFTER  5.
+  2009-01-01 12:00  =>     MOVE '*ANCIEN INDIC*' TO WS-RUPT.
+  2009-01-01 12:00  =>     MOVE PREV-KEY TO WS-PRT-KEY.
+  2009-01-01 12:00  =>     PERFORM IND-LINE THRU IND-LINE-EXIT.
+  2009-01-01 12:00  =>     MOVE '*NOUVEL INDIC*' TO WS-RUPT.
+  2009-01-01 12:00  =>     MOVE WS-KEY TO WS-PRT-KEY.
+  2009-01-01 12:00  =>     PERFORM IND-LINE THRU IND-LINE-EXIT.
+  2009-01-01 12:00  =>     GO TO FF.
+  2009-01-01 12:00  =>* a group ends: break line of the previous key, its sub-totals,
+  2009-01-01 12:00  =>* sub-totals added to the grand totals (skeleton RUPT)
+  2009-01-01 12:00  => DO-RUPT.
+  2009-01-01 12:00  =>     MOVE '***RUPTURE*** ' TO WS-RUPT.
+  2009-01-01 12:00  =>     MOVE PREV-KEY TO WS-PRT-KEY.
+  2009-01-01 12:00  =>     PERFORM IND-LINE THRU IND-LINE-EXIT.
+  2009-01-01 12:00  =>     MOVE 'S' TO WS-WHICH.
+  2009-01-01 12:00  =>     MOVE '*SOUS-TOTAL*' TO WS-FA-VAL.
+  2009-01-01 12:00  =>     PERFORM AMT-LINES THRU AMT-LINES-EXIT.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => DO-RUPT-LOOP.
+  2009-01-01 12:00  =>     IF I > N-KY GO TO DO-RUPT-EXIT.
+  2009-01-01 12:00  =>     ADD SUB-AMT (I) TO TOT-AMT (I).
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO DO-RUPT-LOOP.
+  2009-01-01 12:00  => DO-RUPT-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>* the break line: WS-RUPT (1:14) + every key part of WS-PRT-KEY
+  2009-01-01 12:00  =>* followed by one space (skeleton TIT-RUPT1, AFTER 2)
+  2009-01-01 12:00  => IND-LINE.
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-RUPT (15:4086).
+  2009-01-01 12:00  =>     MOVE 15 TO KP.
+  2009-01-01 12:00  =>     MOVE 1 TO KO.
+  2009-01-01 12:00  =>     MOVE 1 TO I.
+  2009-01-01 12:00  => IND-LOOP.
+  2009-01-01 12:00  =>     IF I > N-IN GO TO IND-WRITE.
+  2009-01-01 12:00  =>     MOVE WS-PRT-KEY (KO:IN-LEN (I)) TO WS-RUPT (KP:IN-LEN (I)).
+  2009-01-01 12:00  =>     ADD IN-LEN (I) TO KO.
+  2009-01-01 12:00  =>     ADD IN-LEN (I) TO KP.
+  2009-01-01 12:00  =>     ADD 1 TO KP.
+  2009-01-01 12:00  =>     ADD 1 TO I.
+  2009-01-01 12:00  =>     GO TO IND-LOOP.
+  2009-01-01 12:00  => IND-WRITE.
+  2009-01-01 12:00  =>     WRITE LIGNE FROM WS-RUPT AFTER 2.
+  2009-01-01 12:00  => IND-LINE-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>* the amount lines, 4 amounts a line (skeleton IMP-SUB-TOTAL /
+  2009-01-01 12:00  =>* IMP-TOTAL): NEURO -> Z(18), else EUU003; WS-WHICH S or T
+  2009-01-01 12:00  => AMT-LINES.
+  2009-01-01 12:00  =>     MOVE 17     TO MT-ENE-CHI OF EUW002.
+  2009-01-01 12:00  =>     MOVE 25     TO LG-MAX-MON-SRT OF EUW002.
+  2009-01-01 12:00  =>     MOVE 1 TO G.
+  2009-01-01 12:00  => AMT-L-GROUP.
+  2009-01-01 12:00  =>     IF G > N-KY GO TO AMT-LINES-EXIT.
+  2009-01-01 12:00  =>     MOVE SPACES TO WS-LIG.
+  2009-01-01 12:00  =>     MOVE WS-FA-VAL TO WS-FA.
+  2009-01-01 12:00  =>     MOVE 1 TO S.
+  2009-01-01 12:00  => AMT-L-SLOT.
+  2009-01-01 12:00  =>     IF S > 4 GO TO AMT-L-WRITE.
+  2009-01-01 12:00  =>     COMPUTE K = G + S - 1.
+  2009-01-01 12:00  =>     IF K > N-KY GO TO AMT-L-WRITE.
+  2009-01-01 12:00  =>     IF WS-WHICH = 'S'
+  2009-01-01 12:00  =>        MOVE SUB-AMT (K) TO WS-VAL
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE TOT-AMT (K) TO WS-VAL.
+  2009-01-01 12:00  =>     IF NE-FLAG (K) = 'Y'
+  2009-01-01 12:00  =>        MOVE WS-VAL TO ZONE-25
+  2009-01-01 12:00  =>        MOVE ZONE-25 TO WS-MONT (S)
+  2009-01-01 12:00  =>     ELSE
+  2009-01-01 12:00  =>        MOVE WS-VAL TO MT-ENE OF EUW002
+  2009-01-01 12:00  =>        MOVE EUW002 TO VL-CHP-TSF OF WS-CMT-PGM
+  2009-01-01 12:00  =>        CALL 'EUU003' USING WS-CMT-PGM
+  2009-01-01 12:00  =>        MOVE VL-CHP-TSF OF WS-CMT-PGM TO EUW002
+  2009-01-01 12:00  =>        MOVE MT-SRT OF EUW002 TO WS-MONT (S).
+  2009-01-01 12:00  =>     ADD 1 TO S.
+  2009-01-01 12:00  =>     GO TO AMT-L-SLOT.
+  2009-01-01 12:00  => AMT-L-WRITE.
+  2009-01-01 12:00  =>     WRITE LIGNE FROM WS-LIG AFTER 1.
+  2009-01-01 12:00  =>     ADD 4 TO G.
+  2009-01-01 12:00  =>     GO TO AMT-L-GROUP.
+  2009-01-01 12:00  => AMT-LINES-EXIT.
+  2009-01-01 12:00  =>     EXIT.
+  2009-01-01 12:00  =>* amount I of WS-IN, right-aligned with leading zeros in WS-AMT
+  2009-01-01 12:00  => AMT-LOAD.
+  2009-01-01 12:00  =>     MOVE ALL '0' TO WS-AMT-X.
+  2009-01-01 12:00  =>     COMPUTE AP = 19 - KY-LEN (I).
+  2009-01-01 12:00  =>     MOVE WS-IN (KY-POS (I):KY-LEN (I))
+  2009-01-01 12:00  =>       TO WS-AMT-X (AP:KY-LEN (I)).
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  * SSG-4 (MT-069): one TABAN for every call. Amount fields, key
+  * parts, NEURO list and the sequence check come from the SGSPARM
+  * file written by the skeleton hand-off; behaviour:
+  * Generic/TABAN/spec.md. The RDMS session of the skeleton is not
+  * kept (spec A2); EUU003 is called as in the skeleton (spec A3).
+  PROGRAM-ID. .
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+</COBOL PROGRAM>
+<COBOL SUBPROGRAM>
+</COBOL SUBPROGRAM>
+<COBOL COPY>
+</COBOL COPY>
+<COBOL FORM>
+</COBOL FORM>
+<COBOL FORM INCLUDABLE>
+</COBOL FORM INCLUDABLE>
+</APPLICATION>
+</EXPORT>

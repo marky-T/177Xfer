@@ -1,0 +1,4 @@
+Stage Check, environment CC-Trial, UseUnicode True, started 2026-11-19 22:21:45
+PASS utilities.json files and hand-off defaults    15 utilities, 20 skeleton entries checked, problems: 0
+PASS EXTEUR         cross-check vs baseline        MATCH=1 of 1 calls
+=== Check : all passed

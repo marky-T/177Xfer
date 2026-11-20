@@ -1,4 +1,4 @@
-PRN files since 17:03:11: 24, expected 24
+PRN files since 23:52:53: 24, expected 24
 PRN encodings: UTF-16LE BOM x24
 REAL1: model: 15 lines match
 SEQCTR: model: 9 lines match

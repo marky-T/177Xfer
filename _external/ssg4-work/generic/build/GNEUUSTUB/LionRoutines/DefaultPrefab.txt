@@ -1,0 +1,22 @@
+﻿<!--
+  This file contains support code for AMT COBOL applications converted from any COBOL environment.
+  These support routines may be Cobol programs, subprograms or copies.
+  The XML-style encoding looks like this: 
+  
+  <OBJECT name='source_name' description='source_description'>
+  <OPTIONS kind='P' init='N'/>
+  <CODE>
+    Cobol code
+  </CODE>
+  </OBJECT>
+  
+  The OPTIONS tag is optional.
+  Attributes in the OPTIONS tag:
+  kind may be P (program), S (subprogram) or C (copy). P is the default value
+  init may be Y or N (for re-initializing vars or not). N is default  
+-->
+<SOURCES>
+
+
+
+</SOURCES>

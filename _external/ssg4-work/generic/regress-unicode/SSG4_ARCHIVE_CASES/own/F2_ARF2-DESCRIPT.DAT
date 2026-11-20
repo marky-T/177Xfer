@@ -1,0 +1,5 @@
+DESCRIPTION DES CHAMPS DE TABLE-ARCH3                                                                                               
+     CHAR   0000000010           COLLECTION.CLE-TABLE                                                                               
+     INTEGER0000000004           COLLECTION.COL-NAME-1                                                                              
+     CHARVAR0000000010           COLLECTION.COL-NAME-2                                                                              
+END DESCRIPTION                                                                                                                     

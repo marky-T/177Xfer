@@ -1,0 +1,28 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 23:41:16
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+FAIL SSG4_AFPH12_CFH_COPY regression                     PASS 2026-11-13 18:11:01 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_VIRM01_CFH_COPY regression                     PASS 2026-11-13 18:11:22 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_NEWNAME_CFH_COPY regression                     PASS 2026-11-13 18:29:24 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_VIRM01UL_CFH_COPY regression                     PASS 2026-11-13 18:32:30 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_VIRJ01PP_CFH_COPY regression                     PASS 2026-11-13 18:32:51 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_BABA_CASES regression                     PASS 2026-11-13 16:56:59 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_CHABAN_CASES regression                     PASS 2026-11-13 16:57:33 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_FUSBA_CASES regression                     PASS 2026-11-13 16:58:08 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_CONDIS_CASES regression                     PASS 2026-11-13 16:58:41 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_SCANGRP_PRINTS regression                     PASS 2026-11-13 18:33:31 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LOADIS_CASES regression                     PASS 2026-11-13 17:00:03 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LOADIS_ALL regression                     PASS 2026-11-13 17:01:09 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LOADIS_ABORT [UNSORTED] regression                     PASS 2026-11-13 17:01:33 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LOADIS_ABORT [DUPLICATE] regression                     PASS 2026-11-13 17:01:53 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_ARCHIVE_CASES regression                     PASS 2026-11-13 17:03:01 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LECTIS_CASES regression                     PASS 2026-11-13 17:04:12 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LECTIS_ABORT [NOCOND] regression                     PASS 2026-11-13 17:04:31 is older than the last delivery (2026-11-17 15:23:31): run again
+FAIL SSG4_LECTIS_ABORT [BADCOND] regression                     PASS 2026-11-13 17:04:49 is older than the last delivery (2026-11-17 15:23:31): run again
+PASS SSG4_RECAP_CASES regression                     PASS 2026-11-19 20:36:59: --- 6 of 6 outputs byte-identical | === SSG4_RECAP_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_RECAP_CASES\check.txt) | === RECAP report lines: PASS (6 of 6 identical to the model)
+PASS SSG4_TABAN_CASES regression                     PASS 2026-11-19 20:37:46: === SSG4_TABAN_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_TABAN_CASES\check.txt) | PRN files since 20:37:06: 12, expected 12 | === prints: all checks passed
+PASS SSG4_RECAP_EUU003STUB regression                     PASS 2026-11-19 20:28:40: --- 33 of 33 outputs byte-identical | === SSG4_RECAP_EUU003STUB : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_RECAP_EUU003STUB\check.txt) | === RECAP report lines: PASS (33 of 33 identical to the model)
+PASS SSG4_TABAN_EUU003STUB regression                     PASS 2026-11-19 20:30:53: === SSG4_TABAN_EUU003STUB : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_TABAN_EUU003STUB\check.txt) | PRN files since 20:29:01: 32, expected 32 | === prints: all checks passed
+PASS SSG4_EXTEUR_CASES regression                     PASS 2026-11-19 23:18:56: --- 12 of 12 outputs byte-identical | === SSG4_EXTEUR_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_EXTEUR_CASES\check.txt) | === EXTEUR console lines: PASS
+PASS SSG4_EXTEUR_ABORT [CURRENCY] regression                     PASS 2026-11-19 23:18:53: job ended in Error as expected | === EXTEUR abort CURRENCY: PASS
+PASS SSG4_EXTEUR_ABORT [OVERFLOW] regression                     PASS 2026-11-19 23:18:54: job ended in Error as expected | === EXTEUR abort OVERFLOW: PASS
+=== Regress : 18 failure(s)

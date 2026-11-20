@@ -1,0 +1,11 @@
+backup branch: ssg4-backup-20261023 at 112d874 2026-11-17 SSG-4 backup 2026-11-17
+
+Folder                       Added Modified Deleted
+------                       ----- -------- -------
+_external/release_candidates     0        0       0
+_external/ssg4-work            861       52       0
+_external/ssg4-source            0        0       0
+
+
+SsgTrial repository: 4ea538b 2026-11-17 (## main...ssg4/main [ahead 1])
+WhatIf: 913 file(s) would be committed (0 deleted); nothing committed

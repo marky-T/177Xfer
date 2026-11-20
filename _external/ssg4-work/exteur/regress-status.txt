@@ -1,0 +1,7 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 23:18:56
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_EXTEUR_CASES regression                     PASS 2026-11-19 23:18:56: --- 12 of 12 outputs byte-identical | === SSG4_EXTEUR_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_EXTEUR_CASES\check.txt) | === EXTEUR console lines: PASS
+PASS SSG4_EXTEUR_ABORT [CURRENCY] regression                     PASS 2026-11-19 23:18:53: job ended in Error as expected | === EXTEUR abort CURRENCY: PASS
+PASS SSG4_EXTEUR_ABORT [OVERFLOW] regression                     PASS 2026-11-19 23:18:54: job ended in Error as expected | === EXTEUR abort OVERFLOW: PASS
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261119-231856.txt

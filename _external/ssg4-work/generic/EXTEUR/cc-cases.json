@@ -1,0 +1,62 @@
+[
+  {
+    "Case": "real-VIRJ01_UL_L146 OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT01\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\real-VIRJ01_UL_L146\\expected\\output.dat"
+  },
+  {
+    "Case": "real-VIRJ01_UL_L146 ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT01\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\real-VIRJ01_UL_L146\\expected\\ano.dat"
+  },
+  {
+    "Case": "t-empty-input OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT02\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-empty-input\\expected\\output.dat"
+  },
+  {
+    "Case": "t-empty-input ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT02\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-empty-input\\expected\\ano.dat"
+  },
+  {
+    "Case": "t-short-records OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT03\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-short-records\\expected\\output.dat"
+  },
+  {
+    "Case": "t-short-records ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT03\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-short-records\\expected\\ano.dat"
+  },
+  {
+    "Case": "t-long-records OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT04\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-long-records\\expected\\output.dat"
+  },
+  {
+    "Case": "t-long-records ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT04\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-long-records\\expected\\ano.dat"
+  },
+  {
+    "Case": "t-small-values OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT05\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-small-values\\expected\\output.dat"
+  },
+  {
+    "Case": "t-small-values ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT05\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-small-values\\expected\\ano.dat"
+  },
+  {
+    "Case": "t-two-amounts OUTA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT06\\I006FINVESTC",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-two-amounts\\expected\\output.dat"
+  },
+  {
+    "Case": "t-two-amounts ANOA",
+    "Actual": "E:\\Repos\\Federale_InternalRelease\\AmtTools\\Basepaths\\Extracts\\EXT06\\I006ANOFINVS",
+    "Expected": "E:\\Repos\\SsgTrial\\Conversion\\Pipeline\\Generic\\EXTEUR\\check\\cases\\t-two-amounts\\expected\\ano.dat"
+  }
+]
