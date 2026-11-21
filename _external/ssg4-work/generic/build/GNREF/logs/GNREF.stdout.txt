@@ -67,7 +67,7 @@ Batch          7         3780      540
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:452
+Elapsed time:  00:00:00:447
 
 
 === Conversion Completed ===

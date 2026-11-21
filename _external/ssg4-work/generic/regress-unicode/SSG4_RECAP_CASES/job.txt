@@ -1,4 +1,4 @@
---- BatchController: 20261119 20:34:17.519 11 Information SSG4_RECAP_CASES Done Id: 1981 Queue: JOB_QUEUE1 (Execution time: 00:00:16:207)
---- RECTEST_198120261119203403588.log
+--- BatchController: 20261120 18:30:11.339 11 Information SSG4_RECAP_CASES Done Id: 2522 Queue: JOB_QUEUE1 (Execution time: 00:00:18:216)
+--- RECTEST_252220261120182955432.log
 --- 6 of 6 outputs byte-identical
 === SSG4_RECAP_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_RECAP_CASES\check.txt)

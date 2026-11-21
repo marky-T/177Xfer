@@ -1,3 +1,3 @@
---- BatchController: 20261119 20:37:45.398 11 Information SSG4_TABAN_CASES Done Id: 1988 Queue: JOB_QUEUE1 (Execution time: 00:00:30:398)
---- TABTEST_198820261119203717828.log
+--- BatchController: 20261120 18:30:53.839 11 Information SSG4_TABAN_CASES Done Id: 2529 Queue: JOB_QUEUE1 (Execution time: 00:00:28:369)
+--- TABTEST_252920261120183027743.log
 === SSG4_TABAN_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_TABAN_CASES\check.txt)

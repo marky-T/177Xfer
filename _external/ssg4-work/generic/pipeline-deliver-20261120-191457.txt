@@ -1,0 +1,6 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-20 19:14:57
+PASS GNBUILD        generated after                2026-11-20 18:27:35 (the build LionSource)
+PASS GNBUILD        imported since the last delivery every revision is newer
+PASS ARCHIFORMAT_GN rebuilt and delivered          11/20/2026 7:10:55 PM 11/20/2026 7:15:25 PM ok (3 varying input(s) at 4001) yes, hash ok
+PASS LionSource     GNBUILD recorded as imported   not recorded: a subset of the programs was delivered
+=== Deliver : all passed

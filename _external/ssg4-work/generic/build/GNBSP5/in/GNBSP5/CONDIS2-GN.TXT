@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-043): one CONDIS2 for every call. Conditions
+      * User story: 119872
+      * SSG-4: one CONDIS2 for every call. Conditions
       * (PG CASE / OTHERWISE), field moves (PG MOVE, date conversions)
       * and constants (PG CONST) come from the SGSPARM file written by
       * the skeleton hand-off; see Generic\CONDIS2\spec.md.

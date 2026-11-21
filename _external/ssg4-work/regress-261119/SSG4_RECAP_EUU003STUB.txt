@@ -1,0 +1,5 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-20 18:31:11
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+PASS SSG4_RECAP_EUU003STUB regression                     --- 33 of 33 outputs byte-identical | === SSG4_RECAP_EUU003STUB : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_RECAP_EUU003STUB\check.txt) | === RECAP report lines: PASS (33 of 33 identical to the model)
+=== Regress : all passed
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-183111.txt

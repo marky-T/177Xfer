@@ -1,4 +1,4 @@
-PRN files since 20:29:01: 32, expected 32
+PRN files since 18:32:29: 32, expected 32
 PRN encodings: UTF-16LE BOM x32
 real-CCSA09_L340: model: 21 lines match
 real-CCSA09_L474: model: 3 lines match

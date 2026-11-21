@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 archive work (MT-050): one ARCHISEPARE for every call. Key
+      * User story: 119872
+      * SSG-4 archive work: one ARCHISEPARE for every call. Key
       * lengths, key offset, record length and names come from the
       * SGSPARM file written by the skeleton hand-off; behaviour as in
       * Conversion\Pipeline\Generic\ARCHISEPARE\spec.md (source:

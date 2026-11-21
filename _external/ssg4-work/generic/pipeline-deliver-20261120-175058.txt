@@ -1,0 +1,28 @@
+Stage Deliver, environment CC-Trial, UseUnicode True, started 2026-11-20 17:50:58
+PASS GNBUILD        generated after                2026-11-20 17:10:29 (the build LionSource)
+PASS GNBUILD        imported since the last delivery every revision is newer
+FAIL CFH_COPY_GN    rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL BABA_GN        rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL FUSBA_GN       rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL CHABAN_GN      rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL CONDIS2_GN     rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL SCAN_GN        rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL TAPELD_GN      rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL LECTIS_GN      rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ARCHISEPARE_GN rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ARCHIFORMAT_GN rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL RECAP_GN       rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL TABAN_GN       rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL EXTEUR_GN      rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL Deliver-GnPrograms run (GNBUILD)                  Access to the path 'E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Development\Application\AFBUS_2200COBOL.Application.csproj' is denied.
+PASS GNREF          generated after                2026-11-20 17:10:31 (the build LionSource)
+PASS GNREF          imported since the last delivery every revision is newer
+FAIL ASSURFED_UTILIT_CONDIS2_RV rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ASSURFED_UTILIT_CONDIS2_RD rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ASSURFED_UTILIT_SCAN_RA rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ASSURFED_UTILIT_SCAN_RB rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ASSURFED_UTILIT_TAPELD_RA rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL ASSURFED_UTILIT_TAPELD_RB rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL EUU003         rebuilt and delivered          not in the Deliver-GnPrograms table
+FAIL Deliver-GnPrograms run (GNREF)                    Access to the path 'E:\AMT_Work\Rebuild177a-spike\AFBUS_2200COBOL\Development\Application\AFBUS_2200COBOL.Application.csproj' is denied.
+=== Deliver : 22 failure(s)

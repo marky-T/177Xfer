@@ -1,4 +1,4 @@
---- BatchController: 20261119 20:28:10.084 11 Information SSG4_RECAP_EUU003STUB Done Id: 1914 Queue: JOB_QUEUE1 (Execution time: 00:01:24:564)
---- RECSTUB_191420261119202652522.log
+--- BatchController: 20261120 18:32:16.837 11 Information SSG4_RECAP_EUU003STUB Done Id: 2542 Queue: JOB_QUEUE1 (Execution time: 00:01:10:883)
+--- RECSTUB_254220261120183108389.log
 --- 33 of 33 outputs byte-identical
 === SSG4_RECAP_EUU003STUB : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_RECAP_EUU003STUB\check.txt)

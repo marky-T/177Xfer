@@ -74,7 +74,7 @@ Analyzing source: TAPELD-GN
 
 Source code counts:
                Sources   Lines     Average
-Batch          13        3777      290     
+Batch          13        3791      291     
 
 List of unresolved calls:
 Source                 No of calls
@@ -84,7 +84,7 @@ EUU003                        2
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:901
+Elapsed time:  00:00:00:542
 
 
 === Conversion Completed ===

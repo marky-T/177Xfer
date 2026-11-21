@@ -4,7 +4,7 @@
 <EXPORT DATE=20090101,120000>
 <EXPORT=APPLICATION>
 <CONTAINS>
-<APPLICATION=BSP,913>
+<APPLICATION=AFBUS_2200COBOL,913>
 <DESCRIPTION=NEW APPLICATION>
 <SYSTEM OPTIONS>
 <VERSION=1.0>
@@ -54,7 +54,7 @@
 </COBOL FORM INCLUDABLE>
 </APPLICATION>
 </CONTAINS>
-<APPLICATION=BSP,913>
+<APPLICATION=AFBUS_2200COBOL,913>
 <SYSTEM OPTIONS>
 <REVDATA>
 <VERSION=1.0>
@@ -65,7 +65,7 @@
 <DESCRIPTION=System>
 </REVDATA>
 <DATA=Options>
-  Name=BSP
+  Name=AFBUS_2200COBOL
   Description=NEW APPLICATION
   Show leading zeros=O
   MdiSetting=0
@@ -113,7 +113,7 @@
   0001=ENGLISH@TRUE
 </DATA>
 <DATA=ConvertData>
-  Application converted on : 2026-11-20 01:11
+  Application converted on : 2026-11-20 17:11
   Converted by user        : MTRUMAN
   Converted by version     : 1.0
   Old system date format   : ddmmmyy

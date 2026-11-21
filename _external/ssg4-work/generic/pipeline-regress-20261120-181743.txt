@@ -1,0 +1,4 @@
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-20 18:17:43
+PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
+FAIL SSG4_CONDIS2S_CASES regression                     no such step for the selected utilities (param '')
+=== Regress : 1 failure(s)

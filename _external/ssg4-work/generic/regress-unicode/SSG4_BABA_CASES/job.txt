@@ -1,4 +1,4 @@
---- BatchController: 20261119 23:48:03.654 11 Information SSG4_BABA_CASES Done Id: 2022 Queue: JOB_QUEUE1 (Execution time: 00:00:18:300)
---- BABATEST_202220261119234747627.log
+--- BatchController: 20261120 18:06:01.584 10 Information SSG4_BABA_CASES Done Id: 2364 Queue: JOB_QUEUE1 (Execution time: 00:00:18:238)
+--- BABATEST_236420261120180545582.log
 --- 11 of 11 outputs byte-identical
 === SSG4_BABA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_BABA_CASES\check.txt)

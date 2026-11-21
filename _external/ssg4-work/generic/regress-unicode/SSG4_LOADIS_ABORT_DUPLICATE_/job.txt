@@ -1,6 +1,6 @@
---- BatchController: 20261119 23:52:06.837 11 Information SSG4_LOADIS_ABORT Error Id: 2093 Queue: JOB_QUEUE1 (Execution time: 00:00:04:057)
---- LOADABRT_209320261119235205232.log
-  FLAG 2026-11-19 23:52:05 Msg: LOADIS-ABORT case DUPLICATE
-  FLAG 2026-11-19 23:52:05 Info: LOADIS-ABORT case DUPLICATE
-  FLAG 2026-11-19 23:52:06 Error: AFBUS_2200COBOL_AMT - LOADABRT : LOADIS: key of record 6 is not above the previous key (INVALID KEY)
+--- BatchController: 20261120 18:20:22.183 11 Information SSG4_LOADIS_ABORT Error Id: 2481 Queue: JOB_QUEUE1 (Execution time: 00:00:04:055)
+--- LOADABRT_248120261120182020358.log
+  FLAG 2026-11-20 18:20:20 Msg: LOADIS-ABORT case DUPLICATE
+  FLAG 2026-11-20 18:20:20 Info: LOADIS-ABORT case DUPLICATE
+  FLAG 2026-11-20 18:20:21 Error: AFBUS_2200COBOL_AMT - LOADABRT : LOADIS: key of record 6 is not above the previous key (INVALID KEY)
 === SSG4_LOADIS_ABORT : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LOADIS_ABORT_DUPLICATE_\check.txt)

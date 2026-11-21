@@ -1,0 +1,6 @@
+Stage Build, environment CC-Trial, UseUnicode True, started 2026-11-20 18:27:28
+PASS ARCHIFORMAT    program source                 ARCHIFORMAT_GN: CHANGED since the last build
+PASS COBOL converter (programs) 1 programs -> GNBUILD.LionSource exit 0, errors 0, warnings 4, 24 KB
+PASS LionSource (programs) vs the last imported build     2347 lines differ (import it)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

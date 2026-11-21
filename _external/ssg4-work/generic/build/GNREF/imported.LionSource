@@ -40,6 +40,9 @@
 <OBJECT=ASSURFED-UTILIT-TAPELD-RB,COBOL PROGRAM>
 <VERSION=1.0>
 </OBJECT>
+<OBJECT=EUU003,COBOL PROGRAM>
+<VERSION=1.0>
+</OBJECT>
 </COBOL PROGRAM>
 <COBOL SUBPROGRAM>
 </COBOL SUBPROGRAM>
@@ -110,7 +113,7 @@
   0001=ENGLISH@TRUE
 </DATA>
 <DATA=ConvertData>
-  Application converted on : 2026-11-03 04:11
+  Application converted on : 2026-11-20 17:11
   Converted by user        : MTRUMAN
   Converted by version     : 1.0
   Old system date format   : ddmmmyy
@@ -4141,6 +4144,89 @@ COBOL
   Documentation
   PROGRAM-ID. .
   ENVIRONMENT. MICHEL.
+  -MAPEND-
+  -MAP-
+  Technical issues
+  -MAPEND-
+</DATA>
+<IN FOLDER>
+COBOL
+</IN FOLDER>
+</OBJECT>
+<OBJECT=EUU003,COBOL PROGRAM>
+<REVDATA>
+<VERSION=1.0>
+<USER=>
+<DATE=20090101>
+<TIME=1200>
+<LOCKED=False>
+<DESCRIPTION=COBOL PROGRAM>
+</REVDATA>
+<DATA=Options>
+  Name=EUU003
+  Description=COBOL PROGRAM
+  Parameter=
+</DATA>
+<DATA=Code>
+  2009-01-01 12:00  => IDENTIFICATION DIVISION.
+  2009-01-01 12:00  =>* TEST DOUBLE (MT-069): stands in for Federale's EUU003 in
+  2009-01-01 12:00  =>* CC-Trial only, never released. It proves the call of
+  2009-01-01 12:00  =>* RECAP-GN / TABAN-GN: MT-SRT = 'STB' + sign + MT-ENE 17 digits.
+  2009-01-01 12:00  => PROGRAM-ID. 'EUU003'.
+  2009-01-01 12:00  => ENVIRONMENT DIVISION.
+  2009-01-01 12:00  => CONFIGURATION SECTION.
+  2009-01-01 12:00  => SOURCE-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => OBJECT-COMPUTER. UNIVAC-1100-10.
+  2009-01-01 12:00  => DATA DIVISION.
+  2009-01-01 12:00  => WORKING-STORAGE SECTION.
+  2009-01-01 12:00  =>* EUW002: as in RECAP-GN / TABAN-GN (SSG-Source/RECAP.TXT)
+  2009-01-01 12:00  => 01  EUW002.
+  2009-01-01 12:00  =>     03  WS-PTR-ENE.
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-ENE.
+  2009-01-01 12:00  =>             07  MT-ENE              PIC S9(17).
+  2009-01-01 12:00  =>             07  MT-ENE-SGN          PIC X(01).
+  2009-01-01 12:00  =>             07  MT-ENE-CHI          PIC 9(02).
+  2009-01-01 12:00  =>         05  WS-PTR-ENE-MON-SRT.
+  2009-01-01 12:00  =>             07  LG-MAX-MON-SRT      PIC 9(03).
+  2009-01-01 12:00  =>             07  CD-FMT-MON-SRT      PIC X(01).
+  2009-01-01 12:00  =>             07  FILLER              PIC X(31).
+  2009-01-01 12:00  =>     03  WS-PTR-SRT.
+  2009-01-01 12:00  =>         05  WS-MON-SRT-001.
+  2009-01-01 12:00  =>             07  MT-SRT              PIC X(100).
+  2009-01-01 12:00  =>         05  FILLER                  PIC X(110).
+  2009-01-01 12:00  =>     03  FILLER                      PIC X(20).
+  2009-01-01 12:00  => 01  WS-OUT.
+  2009-01-01 12:00  =>     03  FILLER         PIC X(3) VALUE 'STB'.
+  2009-01-01 12:00  =>     03  WS-OUT-AMT     PIC -9(17).
+  2009-01-01 12:00  =>     03  FILLER         PIC X(79) VALUE SPACES.
+  2009-01-01 12:00  => LINKAGE SECTION.
+  2009-01-01 12:00  => 01  WS-CMT-PGM.
+  2009-01-01 12:00  =>     03  NM-PGM-APL               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-ENV               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-COP               PIC X(08).
+  2009-01-01 12:00  =>     03  NM-NOM-DEM               PIC X(08).
+  2009-01-01 12:00  =>     03  VL-CDE-RET               PIC S9(04).
+  2009-01-01 12:00  =>     03  VL-MOT-CDE               PIC S9(04).
+  2009-01-01 12:00  =>     03  LB-MSG-RET               PIC X(30).
+  2009-01-01 12:00  =>     03  CD-DBG-PRG               PIC X(1).
+  2009-01-01 12:00  =>     03  FILLER                   PIC X(7).
+  2009-01-01 12:00  =>     03  VL-CHP-TSF               PIC X(3922).
+  2009-01-01 12:00  => PROCEDURE DIVISION USING WS-CMT-PGM.
+  2009-01-01 12:00  => DEBUT.
+  2009-01-01 12:00  =>     MOVE VL-CHP-TSF TO EUW002.
+  2009-01-01 12:00  =>     MOVE MT-ENE TO WS-OUT-AMT.
+  2009-01-01 12:00  =>     MOVE WS-OUT TO MT-SRT.
+  2009-01-01 12:00  =>     MOVE ZERO TO VL-CDE-RET.
+  2009-01-01 12:00  =>     MOVE EUW002 TO VL-CHP-TSF.
+  2009-01-01 12:00  =>     EXIT PROGRAM.
+</DATA>
+<DATA=Documentation>
+  -MAP-
+  Documentation
+  * TEST DOUBLE (MT-069): stands in for Federale's EUU003 in
+  * CC-Trial only, never released. It proves the call of
+  * RECAP-GN / TABAN-GN: MT-SRT = 'STB' + sign + MT-ENE 17 digits.
+  PROGRAM-ID. .
   -MAPEND-
   -MAP-
   Technical issues

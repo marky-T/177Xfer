@@ -1,0 +1,15 @@
+﻿20261120 17:31 Starting
+20261120 17:31 Loading file: E:\Repos\ssg4-work\generic\build\GNREF\out\GNREF.LionSource
+20261120 17:31 File version: 6
+20261120 17:31 Exported with program version: 
+20261120 17:31 Loading application AFBUS_2200COBOL under AFBUS_2200COBOL
+20261120 17:31 Loading Cobol Application: APPLICATION OPTIONS 1.0 as 1.35
+20261120 17:31 Loading DMS Schema:  1.0 as 1.32
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-CONDIS2-RD 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-CONDIS2-RV 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-SCAN-RA 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-SCAN-RB 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-TAPELD-RA 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: ASSURFED-UTILIT-TAPELD-RB 1.0 as 1.2
+20261120 17:31 Loading Cobol Program: EUU003 1.0 as 1.1
+20261120 17:31 Done in 00:00:00

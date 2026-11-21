@@ -1,4 +1,4 @@
-PRN files since 20:37:06: 12, expected 12
+PRN files since 18:30:21: 12, expected 12
 PRN encodings: UTF-16LE BOM x12
 cc-ccta08-neuro-all: model: 4 lines match
 cc-depm01-neuro-all: model: 25 lines match

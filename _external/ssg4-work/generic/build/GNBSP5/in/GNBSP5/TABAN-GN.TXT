@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-069): one TABAN for every call. Amount fields, key
+      * User story: 121355
+      * SSG-4: one TABAN for every call. Amount fields, key
       * parts, NEURO list and the sequence check come from the SGSPARM
       * file written by the skeleton hand-off; behaviour:
       * Generic/TABAN/spec.md. The RDMS session of the skeleton is not

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-056): one LECTIS for every call. Record length, key
+      * User story: 119872
+      * SSG-4: one LECTIS for every call. Record length, key
       * position, mode (sequential list or key lookup), the COND test
       * and the Y2K key positions come from the SGSPARM file written
       * by the skeleton hand-off (LectisParm.ps1); see spec.md. The

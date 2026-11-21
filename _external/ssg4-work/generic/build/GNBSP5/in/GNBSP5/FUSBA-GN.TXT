@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-043): one FUSBA for every FUSBA and FUSBA2 call.
+      * User story: 119872
+      * SSG-4: one FUSBA for every FUSBA and FUSBA2 call.
       * Files, key fields, mode and field moves come from the SGSPARM
       * file written by the skeleton hand-off; see
       * _scratch\spike-fusba\spec.md. File 1 = update file, file 2 =

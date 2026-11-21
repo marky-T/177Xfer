@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-069): one EXTEUR for every call. Record length,
+      * User story: 121355
+      * SSG-4: one EXTEUR for every call. Record length,
       * currency field, target and amounts come from the SGSPARM
       * file written by the skeleton hand-off (the hand-off reads the
       * phase in EU001, spec A1/A2); behaviour: Generic/EXTEUR/spec.md.

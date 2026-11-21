@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 spike (MT-043): one CFH-COPY for every call. Record shapes,
+      * User story: 119872
+      * SSG-4: one CFH-COPY for every call. Record shapes,
       * field moves and constants come from the SGSPARM file written by
       * the skeleton hand-off; see _scratch\spike-cfh\spec.md.
        PROGRAM-ID. 'CFH-COPY-GN'.

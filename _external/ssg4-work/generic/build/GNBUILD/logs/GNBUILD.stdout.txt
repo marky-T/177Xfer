@@ -35,56 +35,27 @@ WARNING: XML element [<#comment>] not understood, expected [<precompilermacro>]
 *** PHASE: R E A D I N G   B A T C H   S O U R C E S ***
 
 Reading source: ARCHIFORMAT-GN.TXT
-Reading source: ARCHISEPARE-GN.TXT
-Reading source: BABA-GN.TXT
-Reading source: CFH-COPY-GN.TXT
-Reading source: CHABAN-GN.TXT
-Reading source: CONDIS2-GN.TXT
-Reading source: EXTEUR-GN.TXT
-Reading source: FUSBA-GN.TXT
-Reading source: LECTIS-GN.TXT
-Reading source: RECAP-GN.TXT
-Reading source: SCAN-GN.TXT
-Reading source: TABAN-GN.TXT
-Reading source: TAPELD-GN.TXT
-13 source(s) read
+1 source(s) read
 
 Analyzing source: ARCHIFORMAT-GN
-Analyzing source: ARCHISEPARE-GN
-Analyzing source: BABA-GN
-Analyzing source: CFH-COPY-GN
-Analyzing source: CHABAN-GN
-Analyzing source: CONDIS2-GN
-Analyzing source: EXTEUR-GN
-Analyzing source: FUSBA-GN
-Analyzing source: LECTIS-GN
-Analyzing source: RECAP-GN
-Analyzing source: SCAN-GN
-Analyzing source: TABAN-GN
-Analyzing source: TAPELD-GN
 
 *** PHASE: A N A L Y S I N G   S O U R C E S ***
 
 
 *** PHASE: W R I T I N G   L I O N   O U T P U T   F I L E ***
 
-13 source(s) processed
+1 source(s) processed
 
 *** PHASE: AFBUS_2200COBOL CONVERSION STATISTICS ***
 
 Source code counts:
                Sources   Lines     Average
-Batch          13        3777      290     
-
-List of unresolved calls:
-Source                 No of calls
-ABORT                         4
-EUU003                        2
+Batch          1         360       360     
 
 
 *** PHASE: D O N E ***
 
-Elapsed time:  00:00:00:533
+Elapsed time:  00:00:00:673
 
 
 === Conversion Completed ===
@@ -95,7 +66,7 @@ Objects in error:  not tracked - see Errors below, which IS accurate
 Errors: 0
 Warnings: 4
 Todos: 0
-Logs: 41
+Logs: 12
 
 
 === Conversion Completed ===

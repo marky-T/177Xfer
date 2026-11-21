@@ -131,7 +131,7 @@
   0001=ENGLISH@TRUE
 </DATA>
 <DATA=ConvertData>
-  Application converted on : 2026-11-20 01:11
+  Application converted on : 2026-11-20 17:11
   Converted by user        : MTRUMAN
   Converted by version     : 1.0
   Old system date format   : ddmmmyy
@@ -240,7 +240,8 @@ SATURDAY
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 archive work (MT-050): one ARCHIFORMAT for all calls. Key,
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4 archive work: one ARCHIFORMAT for all calls. Key,
   2009-01-01 12:00  =>* record length, column count and names come from the SGSPARM
   2009-01-01 12:00  =>* file written by the skeleton hand-off; behaviour as in
   2009-01-01 12:00  =>* Conversion\Pipeline\Generic\ARCHIFORMAT\spec.md (source:
@@ -305,7 +306,8 @@ SATURDAY
   2009-01-01 12:00  => 01  LGN-FOR            PIC X(4000).
   2009-01-01 12:00  => WORKING-STORAGE SECTION.
   2009-01-01 12:00  =>* The source's 132-byte record areas. Inputs are read at 4001
-  2009-01-01 12:00  =>* (T3-040); the areas keep their last record at end of file.
+  2009-01-01 12:00  =>* bytes, as AMT's line reader can merge short lines; the areas
+  2009-01-01 12:00  =>* keep their last record at end of file.
   2009-01-01 12:00  => 01  LGN-REP            PIC X(132).
   2009-01-01 12:00  => 01  LGN-DES            PIC X(132).
   2009-01-01 12:00  => 77  WS-REP-LEN         PIC 9(5) COMP VALUE 0.
@@ -546,7 +548,7 @@ SATURDAY
   2009-01-01 12:00  =>     DISPLAY 'ARCHIFORMAT          RAPPORT          '
   2009-01-01 12:00  =>       DT-FR UPON PRINTER.
   2009-01-01 12:00  =>     DISPLAY 'Enregistrements lus:' CPT-LUF UPON PRINTER.
-  2009-01-01 12:00  =>     DISPLAY 'Enregistrements 4 écrits:' CPT-ACHF UPON PRINTER.
+  2009-01-01 12:00  =>     DISPLAY 'Enregistrements 4 ï¿½crits:' CPT-ACHF UPON PRINTER.
   2009-01-01 12:00  => 106-EXIT.
   2009-01-01 12:00  =>     EXIT.
   2009-01-01 12:00  =>*--------------- LECTURE DU REPORT --------------
@@ -601,7 +603,8 @@ SATURDAY
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 archive work (MT-050): one ARCHIFORMAT for all calls. Key,
+  * User story: 119872
+  * SSG-4 archive work: one ARCHIFORMAT for all calls. Key,
   * record length, column count and names come from the SGSPARM
   * file written by the skeleton hand-off; behaviour as in
   * Conversion\Pipeline\Generic\ARCHIFORMAT\spec.md (source:
@@ -637,7 +640,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 archive work (MT-050): one ARCHISEPARE for every call. Key
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4 archive work: one ARCHISEPARE for every call. Key
   2009-01-01 12:00  =>* lengths, key offset, record length and names come from the
   2009-01-01 12:00  =>* SGSPARM file written by the skeleton hand-off; behaviour as in
   2009-01-01 12:00  =>* Conversion\Pipeline\Generic\ARCHISEPARE\spec.md (source:
@@ -877,7 +881,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 archive work (MT-050): one ARCHISEPARE for every call. Key
+  * User story: 119872
+  * SSG-4 archive work: one ARCHISEPARE for every call. Key
   * lengths, key offset, record length and names come from the
   * SGSPARM file written by the skeleton hand-off; behaviour as in
   * Conversion\Pipeline\Generic\ARCHISEPARE\spec.md (source:
@@ -911,7 +916,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one BABA for every call. Key fields, mode,
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one BABA for every call. Key fields, mode,
   2009-01-01 12:00  =>* value sets and outputs come from the SGSPARM file written by
   2009-01-01 12:00  =>* the skeleton hand-off; see _scratch\spike-baba\spec.md.
   2009-01-01 12:00  => PROGRAM-ID. 'BABA-GN'.
@@ -1131,7 +1137,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one BABA for every call. Key fields, mode,
+  * User story: 119872
+  * SSG-4: one BABA for every call. Key fields, mode,
   * value sets and outputs come from the SGSPARM file written by
   * the skeleton hand-off; see _scratch\spike-baba\spec.md.
   PROGRAM-ID. .
@@ -1160,7 +1167,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 spike (MT-043): one CFH-COPY for every call. Record shapes,
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one CFH-COPY for every call. Record shapes,
   2009-01-01 12:00  =>* field moves and constants come from the SGSPARM file written by
   2009-01-01 12:00  =>* the skeleton hand-off; see _scratch\spike-cfh\spec.md.
   2009-01-01 12:00  => PROGRAM-ID. 'CFH-COPY-GN'.
@@ -1378,7 +1386,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 spike (MT-043): one CFH-COPY for every call. Record shapes,
+  * User story: 119872
+  * SSG-4: one CFH-COPY for every call. Record shapes,
   * field moves and constants come from the SGSPARM file written by
   * the skeleton hand-off; see _scratch\spike-cfh\spec.md.
   PROGRAM-ID. .
@@ -1407,7 +1416,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one CHABAN for every CHABAN and CHAB100 call.
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one CHABAN for every CHABAN and CHAB100 call.
   2009-01-01 12:00  =>* Builds records from the run's data images (input CHAIN, the
   2009-01-01 12:00  =>* Accept file mapped by the skeleton hand-off). Card length,
   2009-01-01 12:00  =>* output length and record counts come from SGSPARM; see
@@ -1519,7 +1529,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one CHABAN for every CHABAN and CHAB100 call.
+  * User story: 119872
+  * SSG-4: one CHABAN for every CHABAN and CHAB100 call.
   * Builds records from the run's data images (input CHAIN, the
   * Accept file mapped by the skeleton hand-off). Card length,
   * output length and record counts come from SGSPARM; see
@@ -1550,7 +1561,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one CONDIS2 for every call. Conditions
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one CONDIS2 for every call. Conditions
   2009-01-01 12:00  =>* (PG CASE / OTHERWISE), field moves (PG MOVE, date conversions)
   2009-01-01 12:00  =>* and constants (PG CONST) come from the SGSPARM file written by
   2009-01-01 12:00  =>* the skeleton hand-off; see Generic\CONDIS2\spec.md.
@@ -2227,7 +2239,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one CONDIS2 for every call. Conditions
+  * User story: 119872
+  * SSG-4: one CONDIS2 for every call. Conditions
   * (PG CASE / OTHERWISE), field moves (PG MOVE, date conversions)
   * and constants (PG CONST) come from the SGSPARM file written by
   * the skeleton hand-off; see Generic\CONDIS2\spec.md.
@@ -2257,7 +2270,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-069): one EXTEUR for every call. Record length,
+  2009-01-01 12:00  =>* User story: 121355
+  2009-01-01 12:00  =>* SSG-4: one EXTEUR for every call. Record length,
   2009-01-01 12:00  =>* currency field, target and amounts come from the SGSPARM
   2009-01-01 12:00  =>* file written by the skeleton hand-off (the hand-off reads the
   2009-01-01 12:00  =>* phase in EU001, spec A1/A2); behaviour: Generic/EXTEUR/spec.md.
@@ -2534,7 +2548,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-069): one EXTEUR for every call. Record length,
+  * User story: 121355
+  * SSG-4: one EXTEUR for every call. Record length,
   * currency field, target and amounts come from the SGSPARM
   * file written by the skeleton hand-off (the hand-off reads the
   * phase in EU001, spec A1/A2); behaviour: Generic/EXTEUR/spec.md.
@@ -2564,7 +2579,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one FUSBA for every FUSBA and FUSBA2 call.
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one FUSBA for every FUSBA and FUSBA2 call.
   2009-01-01 12:00  =>* Files, key fields, mode and field moves come from the SGSPARM
   2009-01-01 12:00  =>* file written by the skeleton hand-off; see
   2009-01-01 12:00  =>* _scratch\spike-fusba\spec.md. File 1 = update file, file 2 =
@@ -2858,7 +2874,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one FUSBA for every FUSBA and FUSBA2 call.
+  * User story: 119872
+  * SSG-4: one FUSBA for every FUSBA and FUSBA2 call.
   * Files, key fields, mode and field moves come from the SGSPARM
   * file written by the skeleton hand-off; see
   * _scratch\spike-fusba\spec.md. File 1 = update file, file 2 =
@@ -2890,7 +2907,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-056): one LECTIS for every call. Record length, key
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one LECTIS for every call. Record length, key
   2009-01-01 12:00  =>* position, mode (sequential list or key lookup), the COND test
   2009-01-01 12:00  =>* and the Y2K key positions come from the SGSPARM file written
   2009-01-01 12:00  =>* by the skeleton hand-off (LectisParm.ps1); see spec.md. The
@@ -3319,7 +3337,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-056): one LECTIS for every call. Record length, key
+  * User story: 119872
+  * SSG-4: one LECTIS for every call. Record length, key
   * position, mode (sequential list or key lookup), the COND test
   * and the Y2K key positions come from the SGSPARM file written
   * by the skeleton hand-off (LectisParm.ps1); see spec.md. The
@@ -3351,7 +3370,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-069): one RECAP for every call. Field, amount, key
+  2009-01-01 12:00  =>* User story: 121355
+  2009-01-01 12:00  =>* SSG-4: one RECAP for every call. Field, amount, key
   2009-01-01 12:00  =>* and NEURO lists come from the SGSPARM file written by the
   2009-01-01 12:00  =>* skeleton hand-off; behaviour: Generic/RECAP/spec.md. The RDMS
   2009-01-01 12:00  =>* session of the skeleton is not kept (spec A2); EUU003 is
@@ -3683,7 +3703,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-069): one RECAP for every call. Field, amount, key
+  * User story: 121355
+  * SSG-4: one RECAP for every call. Field, amount, key
   * and NEURO lists come from the SGSPARM file written by the
   * skeleton hand-off; behaviour: Generic/RECAP/spec.md. The RDMS
   * session of the skeleton is not kept (spec A2); EUU003 is
@@ -3714,7 +3735,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one SCAN for every call. Record length, the
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one SCAN for every call. Record length, the
   2009-01-01 12:00  =>* input name in the end line and the IF R < n limit come from the
   2009-01-01 12:00  =>* SGSPARM file written by the skeleton hand-off; see
   2009-01-01 12:00  =>* _scratch\spike-scan\spec.md. Print lines as the skeleton.
@@ -3864,7 +3886,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one SCAN for every call. Record length, the
+  * User story: 119872
+  * SSG-4: one SCAN for every call. Record length, the
   * input name in the end line and the IF R < n limit come from the
   * SGSPARM file written by the skeleton hand-off; see
   * _scratch\spike-scan\spec.md. Print lines as the skeleton.
@@ -3894,7 +3917,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-069): one TABAN for every call. Amount fields, key
+  2009-01-01 12:00  =>* User story: 121355
+  2009-01-01 12:00  =>* SSG-4: one TABAN for every call. Amount fields, key
   2009-01-01 12:00  =>* parts, NEURO list and the sequence check come from the SGSPARM
   2009-01-01 12:00  =>* file written by the skeleton hand-off; behaviour:
   2009-01-01 12:00  =>* Generic/TABAN/spec.md. The RDMS session of the skeleton is not
@@ -4250,7 +4274,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-069): one TABAN for every call. Amount fields, key
+  * User story: 121355
+  * SSG-4: one TABAN for every call. Amount fields, key
   * parts, NEURO list and the sequence check come from the SGSPARM
   * file written by the skeleton hand-off; behaviour:
   * Generic/TABAN/spec.md. The RDMS session of the skeleton is not
@@ -4281,7 +4306,8 @@ COBOL
 </DATA>
 <DATA=Code>
   2009-01-01 12:00  => IDENTIFICATION DIVISION.
-  2009-01-01 12:00  =>* SSG-4 (MT-043): one TAPELD (CFH-COPY to PRINTER with page
+  2009-01-01 12:00  =>* User story: 119872
+  2009-01-01 12:00  =>* SSG-4: one TAPELD (CFH-COPY to PRINTER with page
   2009-01-01 12:00  =>* titles) for every call. Record shapes, field moves and the title
   2009-01-01 12:00  =>* come from the SGSPARM file written by the skeleton hand-off; see
   2009-01-01 12:00  =>* _scratch\spike-tapeld\spec.md. Statements as the skeleton.
@@ -4431,7 +4457,8 @@ COBOL
 <DATA=Documentation>
   -MAP-
   Documentation
-  * SSG-4 (MT-043): one TAPELD (CFH-COPY to PRINTER with page
+  * User story: 119872
+  * SSG-4: one TAPELD (CFH-COPY to PRINTER with page
   * titles) for every call. Record shapes, field moves and the title
   * come from the SGSPARM file written by the skeleton hand-off; see
   * _scratch\spike-tapeld\spec.md. Statements as the skeleton.

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-043): one TAPELD (CFH-COPY to PRINTER with page
+      * User story: 119872
+      * SSG-4: one TAPELD (CFH-COPY to PRINTER with page
       * titles) for every call. Record shapes, field moves and the title
       * come from the SGSPARM file written by the skeleton hand-off; see
       * _scratch\spike-tapeld\spec.md. Statements as the skeleton.

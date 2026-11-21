@@ -1,6 +1,6 @@
---- BatchController: 20261119 23:16:31.277 11 Information SSG4_EXTEUR_ABORT Error Id: 2010 Queue: JOB_QUEUE1 (Execution time: 00:00:08:108)
---- EXTABRT_201020261119231625395.log
-  FLAG 2026-11-19 23:16:26 Msg: EXTEUR-ABORT case OVERFLOW
-  FLAG 2026-11-19 23:16:26 Info: EXTEUR-ABORT case OVERFLOW
-  FLAG 2026-11-19 23:16:29 Error: AFBUS_2200COBOL_AMT - EXTABRT : The report failed with JobState "Error".
+--- BatchController: 20261120 18:34:56.764 11 Information SSG4_EXTEUR_ABORT Error Id: 2618 Queue: JOB_QUEUE1 (Execution time: 00:00:08:130)
+--- EXTABRT_261820261120183450846.log
+  FLAG 2026-11-20 18:34:51 Msg: EXTEUR-ABORT case OVERFLOW
+  FLAG 2026-11-20 18:34:51 Info: EXTEUR-ABORT case OVERFLOW
+  FLAG 2026-11-20 18:34:55 Error: AFBUS_2200COBOL_AMT - EXTABRT : The report failed with JobState "Error".
 === SSG4_EXTEUR_ABORT : 4 problem(s) (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_EXTEUR_ABORT_OVERFLOW_\check.txt)

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-043): one CHABAN for every CHABAN and CHAB100 call.
+      * User story: 119872
+      * SSG-4: one CHABAN for every CHABAN and CHAB100 call.
       * Builds records from the run's data images (input CHAIN, the
       * Accept file mapped by the skeleton hand-off). Card length,
       * output length and record counts come from SGSPARM; see

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-069): one RECAP for every call. Field, amount, key
+      * User story: 121355
+      * SSG-4: one RECAP for every call. Field, amount, key
       * and NEURO lists come from the SGSPARM file written by the
       * skeleton hand-off; behaviour: Generic/RECAP/spec.md. The RDMS
       * session of the skeleton is not kept (spec A2); EUU003 is

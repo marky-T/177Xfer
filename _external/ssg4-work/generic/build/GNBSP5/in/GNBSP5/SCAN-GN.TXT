@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 (MT-043): one SCAN for every call. Record length, the
+      * User story: 119872
+      * SSG-4: one SCAN for every call. Record length, the
       * input name in the end line and the IF R < n limit come from the
       * SGSPARM file written by the skeleton hand-off; see
       * _scratch\spike-scan\spec.md. Print lines as the skeleton.

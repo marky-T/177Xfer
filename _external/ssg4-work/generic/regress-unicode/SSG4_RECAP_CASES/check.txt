@@ -4,5 +4,5 @@
   cc-mpmm03-neuro-all    PASS: 25 lines identical
   cc-vira12-neuro-all    PASS: 9 lines identical
   cc-lrst12-neuro-all    PASS: 25 lines identical
-log: RECTEST_198120261119203403588.log
+log: RECTEST_252220261120182955432.log
 === RECAP report lines: PASS (6 of 6 identical to the model)

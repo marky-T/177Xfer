@@ -1,4 +1,4 @@
---- BatchController: 20261119 23:49:10.413 11 Information SSG4_FUSBA_CASES Done Id: 2039 Queue: JOB_QUEUE1 (Execution time: 00:00:24:290)
---- FUSBATEST_203920261119234848480.log
+--- BatchController: 20261120 18:16:57.507 11 Information SSG4_FUSBA_CASES Done Id: 2390 Queue: JOB_QUEUE1 (Execution time: 00:00:24:296)
+--- FUSBATEST_239020261120181635645.log
 --- 12 of 12 outputs byte-identical
 === SSG4_FUSBA_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_FUSBA_CASES\check.txt)

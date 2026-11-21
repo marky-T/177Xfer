@@ -1,0 +1,28 @@
+Stage Build, environment CC-Trial, UseUnicode True, started 2026-11-20 17:09:10
+PASS CFH-COPY       program source                 CFH_COPY_GN: CHANGED since the last build
+PASS LOADIS         program source                 none: runs on CFH-COPY's program CFH_COPY_GN
+PASS BABA           program source                 BABA_GN: CHANGED since the last build
+PASS FUSBA          program source                 FUSBA_GN: CHANGED since the last build
+PASS CHABAN         program source                 CHABAN_GN: CHANGED since the last build
+PASS CONDIS2        program source                 CONDIS2_GN: CHANGED since the last build
+PASS SCAN           program source                 SCAN_GN: CHANGED since the last build
+PASS TAPELD         program source                 TAPELD_GN: CHANGED since the last build
+PASS LECTIS         program source                 LECTIS_GN: CHANGED since the last build
+PASS ARCHISEPARE    program source                 ARCHISEPARE_GN: CHANGED since the last build
+PASS ARCHIFORMAT    program source                 ARCHIFORMAT_GN: CHANGED since the last build
+PASS RECAP          program source                 RECAP_GN: CHANGED since the last build
+PASS TABAN          program source                 TABAN_GN: CHANGED since the last build
+PASS EXTEUR         program source                 EXTEUR_GN: CHANGED since the last build
+PASS SCAN group     CONDIS2-RV                     reference: unchanged since the last build
+PASS SCAN group     CONDIS2-RD                     reference: unchanged since the last build
+PASS SCAN group     SCAN-RA                        reference: unchanged since the last build
+PASS SCAN group     SCAN-RB                        reference: unchanged since the last build
+PASS SCAN group     TAPELD-RA                      reference: unchanged since the last build
+PASS SCAN group     TAPELD-RB                      reference: unchanged since the last build
+PASS EUU003 test double EUU003                         reference: unchanged since the last build
+PASS COBOL converter (programs) 13 programs -> GNBUILD.LionSource exit 0, errors 0, warnings 4, 219 KB
+PASS LionSource (programs) vs the last imported build     1667 lines differ (import it)
+PASS COBOL converter (references) 7 programs -> GNREF.LionSource exit 0, errors 0, warnings 4, 235 KB
+PASS LionSource (references) vs the last imported build     86 lines differ (import it)
+PASS LionSource     next (manual)                  LionDev: import E:\Repos\ssg4-work\generic\build\GNBUILD\out\GNBUILD.LionSource and E:\Repos\ssg4-work\generic\build\GNREF\out\GNREF.LionSource (any order), Get newest, start LionDevGenNet as administrator, generate from the repository; then -Stage Deliver
+=== Build : all passed

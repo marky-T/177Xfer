@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
-      * SSG-4 archive work (MT-050): one ARCHIFORMAT for all calls. Key,
+      * User story: 119872
+      * SSG-4 archive work: one ARCHIFORMAT for all calls. Key,
       * record length, column count and names come from the SGSPARM
       * file written by the skeleton hand-off; behaviour as in
       * Conversion\Pipeline\Generic\ARCHIFORMAT\spec.md (source:
@@ -64,7 +65,8 @@
        01  LGN-FOR            PIC X(4000).
        WORKING-STORAGE SECTION.
       * The source's 132-byte record areas. Inputs are read at 4001
-      * (T3-040); the areas keep their last record at end of file.
+      * bytes, as AMT's line reader can merge short lines; the areas
+      * keep their last record at end of file.
        01  LGN-REP            PIC X(132).
        01  LGN-DES            PIC X(132).
        77  WS-REP-LEN         PIC 9(5) COMP VALUE 0.

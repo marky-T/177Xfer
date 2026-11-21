@@ -1,5 +1,5 @@
-Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-19 23:53:00
+Stage Regress, environment CC-Trial, UseUnicode True, started 2026-11-20 18:28:13
 PASS settings       UseUnicode                     True deployed, results for True in regress-results-unicode.csv
-PASS SSG4_LECTIS_CASES regression                     === SSG4_LECTIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LECTIS_CASES\check.txt) | PRN files since 23:52:53: 24, expected 24 | === prints: all checks passed | === LECTIS DISPLAY lines: PASS (23 of 24 as modelled, 1 known AMT difference(s): KEYIMAGE (T3-059))
+PASS SSG4_LECTIS_CASES regression                     === SSG4_LECTIS_CASES : all checks passed (full report: E:\Repos\ssg4-work\generic\regress-unicode\SSG4_LECTIS_CASES\check.txt) | PRN files since 18:28:04: 24, expected 24 | === prints: all checks passed | === LECTIS DISPLAY lines: PASS (23 of 24 as modelled, 1 known AMT difference(s): KEYIMAGE (T3-059))
 === Regress : all passed
-report: E:\Repos\ssg4-work\generic\pipeline-regress-20261119-235300.txt
+report: E:\Repos\ssg4-work\generic\pipeline-regress-20261120-182813.txt

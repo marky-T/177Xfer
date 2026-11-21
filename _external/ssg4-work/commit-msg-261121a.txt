@@ -1,0 +1,25 @@
+SSG-4: no internal ids in delivered code, source-hygiene check, Bug 121462
+
+Delivered sources (design rule 12): 56 comment edits in 30 files, 0 code changes.
+- Headers: "User story: 119872" (10 generic programs, GnHandoff), "User story: 121355"
+  (RECAP/TABAN/EXTEUR; EXTEUR also "Issue: 121357").
+- Inline board lines: Bug 121376, Bug 118384, User story 120443, User story 120439,
+  Task 119872/120437; our own fixed items as plain words. ArchiformatParm.ps1 regenerated.
+- Builds: GNBSP5 and CC-Trial GNBUILD/GNREF, 0 errors; GNBSP5 vs pre-cleanup build =
+  comment lines and build stamp only. CC-Trial regression 25/25 PASS (UseUnicode True).
+- Fixed on the way: a backspace and a broken Latin-1 e-acute in ARCHIFORMAT-GN.cob,
+  both written by the cleanup script (ARCHIVE report line); file now matches HEAD
+  apart from the comment lines.
+
+Source hygiene (design rule 13): Generic\Test-GnSourceHygiene.ps1, first row of
+-Stage Check (control characters, EF BF BD, .ps1 valid UTF-8, .cob non-ASCII bytes
+unchanged since HEAD, T3-/MT- ids, COBOL column 72; -AllowTextChange <UTILITY>).
+Proven on a damaged scratch copy: 5 of 5 caught.
+
+T3-059: repro program run in Control Center (19/20, 2/3, 6/6, 4/6 records; the
+DEPENDING ON item is 4001 after every READ). Bug 121462 (Related 119872, neutral
+repro-121462.zip as READREC), Tasks 121463 / 121485 / 121486. Known issue, tracker,
+draft and plan updated. T3-052: Bug 118384 Closed (PR 16108), not yet confirmed by
+a run (our develop converter build predates it); route B stays.
+
+Co-authored-by: GitHub Copilot <copilot@github.com>

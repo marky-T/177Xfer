@@ -1,30 +1,30 @@
---- BatchController: 20261119 20:37:45.398 11 Information SSG4_TABAN_CASES Done Id: 1988 Queue: JOB_QUEUE1 (Execution time: 00:00:30:398)
---- TABTEST_198820261119203717828.log
-  2026-11-19 20:37:18 Info: TABAN case cc-ccta08-neuro-all
-  2026-11-19 20:37:19 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB01\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:21 Info: TABAN case cc-depm01-neuro-all
-  2026-11-19 20:37:21 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB02\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:23 Info: TABAN case cc-depm01-seq-error
-  2026-11-19 20:37:23 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB03\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:25 Info: TABAN case cc-paij01-neuro-all
-  2026-11-19 20:37:25 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB04\TABPARM (5 lines); TABIN=R0091ML120DA; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:27 Info: TABAN case cc-pbga01-neuro-all
-  2026-11-19 20:37:27 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB05\TABPARM (19 lines); TABIN=IPBVGRTOTN; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:29 Info: TABAN case cc-vira32-neuro-all
-  2026-11-19 20:37:29 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB06\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:31 Info: TABAN case t-all-spaces
-  2026-11-19 20:37:31 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB07\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:33 Info: TABAN case t-empty-noindic
-  2026-11-19 20:37:33 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB08\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:35 Info: TABAN case t-long-records
-  2026-11-19 20:37:35 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB09\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:37 Info: prints after t-long-records
-  2026-11-19 20:37:37 Info: print t-long-records TABAN__203737327.IMP.PRN 806
-  2026-11-19 20:37:37 Info: TABAN case t-short-records
-  2026-11-19 20:37:37 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB10\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:39 Info: prints after t-short-records
-  2026-11-19 20:37:39 Info: print t-short-records TABAN__203739348.IMP.PRN 5518
-  2026-11-19 20:37:39 Info: TABAN case t-spaces-embedded
-  2026-11-19 20:37:39 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB11\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
-  2026-11-19 20:37:41 Info: TABAN case t-zero-totals
-  2026-11-19 20:37:41 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB12\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+--- BatchController: 20261120 18:30:53.839 11 Information SSG4_TABAN_CASES Done Id: 2529 Queue: JOB_QUEUE1 (Execution time: 00:00:28:369)
+--- TABTEST_252920261120183027743.log
+  2026-11-20 18:30:28 Info: TABAN case cc-ccta08-neuro-all
+  2026-11-20 18:30:29 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB01\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:30 Info: TABAN case cc-depm01-neuro-all
+  2026-11-20 18:30:30 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB02\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:31 Info: TABAN case cc-depm01-seq-error
+  2026-11-20 18:30:31 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB03\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:33 Info: TABAN case cc-paij01-neuro-all
+  2026-11-20 18:30:33 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB04\TABPARM (5 lines); TABIN=R0091ML120DA; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:35 Info: TABAN case cc-pbga01-neuro-all
+  2026-11-20 18:30:35 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB05\TABPARM (19 lines); TABIN=IPBVGRTOTN; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:37 Info: TABAN case cc-vira32-neuro-all
+  2026-11-20 18:30:37 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB06\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:39 Info: TABAN case t-all-spaces
+  2026-11-20 18:30:39 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB07\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:41 Info: TABAN case t-empty-noindic
+  2026-11-20 18:30:42 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB08\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:43 Info: TABAN case t-long-records
+  2026-11-20 18:30:43 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB09\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:45 Info: prints after t-long-records
+  2026-11-20 18:30:45 Info: print t-long-records TABAN__183045771.IMP.PRN 806
+  2026-11-20 18:30:45 Info: TABAN case t-short-records
+  2026-11-20 18:30:46 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB10\TABPARM (27 lines); TABIN=I006TERMNXT; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:47 Info: prints after t-short-records
+  2026-11-20 18:30:47 Info: print t-short-records TABAN__183047804.IMP.PRN 5518
+  2026-11-20 18:30:47 Info: TABAN case t-spaces-embedded
+  2026-11-20 18:30:48 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB11\TABPARM (11 lines); TABIN=INACCTA08; Xqt TABAN -> TABAN_GN
+  2026-11-20 18:30:49 Info: TABAN case t-zero-totals
+  2026-11-20 18:30:49 Info: SSG-4 hand-off (TABAN): SGSPARM -> E:\Repos\Federale_InternalRelease\AmtTools\Basepaths\Extracts\TAB12\TABPARM (4 lines); TABIN=FDEPMENS; Xqt TABAN -> TABAN_GN

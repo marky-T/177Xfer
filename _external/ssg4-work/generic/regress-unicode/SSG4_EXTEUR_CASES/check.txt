@@ -4,5 +4,5 @@
   t-long-records             PASS: console lines identical
   t-small-values             PASS: console lines identical
   t-two-amounts              PASS: console lines identical
-log: EXTTEST_200120261119230046855.log
+log: EXTTEST_260920261120183400210.log
 === EXTEUR console lines: PASS
